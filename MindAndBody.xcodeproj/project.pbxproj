@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07002A601FD5ACE00000A755 /* SessionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07002A5F1FD5ACE00000A755 /* SessionsData.swift */; };
+		07002A601FD5ACE00000A755 /* SortedSessionsFinalChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07002A5F1FD5ACE00000A755 /* SortedSessionsFinalChoice.swift */; };
 		07038CC61F4C5C2A001CC6D5 /* purpleTree.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC51F4C5C2A001CC6D5 /* purpleTree.png */; };
 		07038CCC1F4C5FD8001CC6D5 /* wristRotations.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC71F4C5FD8001CC6D5 /* wristRotations.png */; };
 		07038CCD1F4C5FD8001CC6D5 /* wristRotations1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC81F4C5FD8001CC6D5 /* wristRotations1.png */; };
@@ -517,6 +517,7 @@
 		07C7E2731F52E1B6001155DF /* forwardBend.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C7E2721F52E1B6001155DF /* forwardBend.png */; };
 		07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04361E604653002066CD /* MeditationChoiceGuided.swift */; };
 		07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04381E6049DF002066CD /* MeditationGuided.swift */; };
+		07D127F61FD6FB1F00C88352 /* SortedSessionsSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D127F51FD6FB1F00C88352 /* SortedSessionsSchedule.swift */; };
 		07D5C3D91F9E32430038F143 /* ScheduleViewQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */; };
 		07DE23001FC0420200940567 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DE22FF1FC0420200940567 /* StoreKit.framework */; };
 		07DE23031FC0919200940567 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DE23021FC0919200940567 /* Subscriptions.swift */; };
@@ -1445,7 +1446,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		07002A5F1FD5ACE00000A755 /* SessionsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsData.swift; sourceTree = "<group>"; };
+		07002A5F1FD5ACE00000A755 /* SortedSessionsFinalChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedSessionsFinalChoice.swift; sourceTree = "<group>"; };
 		07038CC51F4C5C2A001CC6D5 /* purpleTree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpleTree.png; sourceTree = "<group>"; };
 		07038CC71F4C5FD8001CC6D5 /* wristRotations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wristRotations.png; sourceTree = "<group>"; };
 		07038CC81F4C5FD8001CC6D5 /* wristRotations1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wristRotations1.png; sourceTree = "<group>"; };
@@ -1941,6 +1942,7 @@
 		07C7E2721F52E1B6001155DF /* forwardBend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forwardBend.png; sourceTree = "<group>"; };
 		07CB04361E604653002066CD /* MeditationChoiceGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoiceGuided.swift; sourceTree = "<group>"; };
 		07CB04381E6049DF002066CD /* MeditationGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationGuided.swift; sourceTree = "<group>"; };
+		07D127F51FD6FB1F00C88352 /* SortedSessionsSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedSessionsSchedule.swift; sourceTree = "<group>"; };
 		07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewQuestion.swift; sourceTree = "<group>"; };
 		07DE22FF1FC0420200940567 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		07DE23021FC0919200940567 /* Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
@@ -3865,7 +3867,8 @@
 			children = (
 				077DAB141FD5FCE300CF7949 /* Movements.swift */,
 				077DAB121FD5FCD500CF7949 /* Sessions.swift */,
-				07002A5F1FD5ACE00000A755 /* SessionsData.swift */,
+				07002A5F1FD5ACE00000A755 /* SortedSessionsFinalChoice.swift */,
+				07D127F51FD6FB1F00C88352 /* SortedSessionsSchedule.swift */,
 				077DAB161FD5FE1900CF7949 /* LittleThings.swift */,
 			);
 			name = "Session Data";
@@ -8487,7 +8490,7 @@
 				0782AB571FC4F1BB00D34500 /* ScheduleWalkthrough.swift in Sources */,
 				077DAB131FD5FCD500CF7949 /* Sessions.swift in Sources */,
 				07B852621F83756C005F3781 /* ScheduleData.swift in Sources */,
-				07002A601FD5ACE00000A755 /* SessionsData.swift in Sources */,
+				07002A601FD5ACE00000A755 /* SortedSessionsFinalChoice.swift in Sources */,
 				07E1D4E11FB2250B00B53B85 /* ScheduleCreationHelp.swift in Sources */,
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,
@@ -8506,6 +8509,7 @@
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
 				077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,
+				07D127F61FD6FB1F00C88352 /* SortedSessionsSchedule.swift in Sources */,
 				077E471B1EB9DFC6005B0B22 /* PresentMenuAnimator.swift in Sources */,
 				077E47231EB9EED3005B0B22 /* DismissMenuAnimator.swift in Sources */,
 				0794A7491FBC7F550029968D /* Settings.swift in Sources */,

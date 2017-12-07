@@ -248,26 +248,26 @@ enum Register {
     // Custom Sessions
     // Warmup, Workout, Cardio, Stretching, Yoga
         // Array because indexe with ints
-    static let customSessionsRegister: [[[[Any]]]] =
+    static let customSessionsRegister: [String: [[[Any]]]] =
         [
             // Warmup - 0
             // [name] - string, [movements] - int, [sets] - int, [reps] - string
-            [],
+            "warmup": [],
             // Workout - 1
             // [name] - string, [movements] - int, [sets] - int, [reps] - string
-            [],
+            "workout": [],
             // Workout - Circuit - 2
             // [name] - string, [movements] - int, [rounds] - int, [reps] - string
-            [],
+//            "workout": [],
             // Cardio - 3
             // [name] - string, [movements] - int, [time/distance] - int
-            [],
+            "cardio": [],
             // Stretching - 4
             // [name] - string, [stretches] - int, [breaths] - int
-            [],
+            "stretching": [],
             // Yoga - 5
             // [name] - string, [stretches] - int, [poses] - int
-            []
+            "yoga": []
     ]
     // Empty Session, Warmup, Workout, Workout - circuit - [string],[int],[int],[int]
     static let emptySessionFour: [[Any]] =
@@ -276,10 +276,10 @@ enum Register {
             [],
             // Movements - Int - 1
             [],
-            // Sets - Int - 2
-            [],
-            // Reps - String? - 3
-            []
+//            // Sets - Int - 2
+//            [],
+//            // Reps - String? - 3
+//            []
     ]
     // Empty Session, Cardio, Stretching, Yoga, - [string],[int][int]
     static let emptySessionThree: [[Any]] =
@@ -288,8 +288,8 @@ enum Register {
             [],
             // Movements - Int - 1
             [],
-            // Breaths/Time - Int
-            []
+//            // Breaths/Time - Int
+//            []
     ]
     
     // --------------------------------------------------------

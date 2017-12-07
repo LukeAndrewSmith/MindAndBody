@@ -90,7 +90,7 @@ class MindBody: UIViewController {
         super.viewWillAppear(animated)
         // Checking subscription, present loading
         if Loading.shared.shouldPresentLoading {
-            Loading.shared.beginLoading()
+//            Loading.shared.beginLoading()
         }
         
         //
@@ -401,24 +401,24 @@ class MindBody: UIViewController {
     //
     // MARK: Selected Session
     @IBAction func warmupAction(_ sender: Any) {
-        SelectedSession.shared.selectedSession[0] = 0
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[0] = "warmup"
+        SelectedSession.shared.selectedSession[2] = ""
     }
     @IBAction func workoutAction(_ sender: Any) {
-        SelectedSession.shared.selectedSession[0] = 1
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[0] = "workout"
+        SelectedSession.shared.selectedSession[2] = ""
     }
     @IBAction func cardioAction(_ sender: Any) {
-        SelectedSession.shared.selectedSession[0] = 2
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[0] = "cardio"
+        SelectedSession.shared.selectedSession[2] = ""
     }
     @IBAction func stretchingAction(_ sender: Any) {
-        SelectedSession.shared.selectedSession[0] = 3
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[0] = "stretching"
+        SelectedSession.shared.selectedSession[2] = ""
     }
     @IBAction func yogaAction(_ sender: Any) {
-        SelectedSession.shared.selectedSession[0] = 4
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[0] = "yoga"
+        SelectedSession.shared.selectedSession[2] = ""
     }
     
     

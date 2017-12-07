@@ -126,24 +126,24 @@ class CircuitChoiceG: UIViewController  {
     
     // Full
     @IBAction func full(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 7
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "circuitGymFull"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "circuitSegue", sender: nil)
     }
     
     // Upper
     @IBAction func upper(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 8
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "circuitGymUpper"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "circuitSegue", sender: nil)
     }
     
     // Lower
     @IBAction func lower(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 9
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "circuitGymLower"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "circuitSegue", sender: nil)
     }

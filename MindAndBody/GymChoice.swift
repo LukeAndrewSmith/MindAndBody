@@ -129,8 +129,8 @@ class GymChoice: UIViewController  {
     //
     // MARK: Selected Session
     @IBAction func fivebyfiveAction(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 6
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "classicGym5x5"
+        SelectedSession.shared.selectedSession[2] = ""
     }
     
     

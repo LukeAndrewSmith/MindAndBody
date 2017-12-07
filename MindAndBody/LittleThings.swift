@@ -102,47 +102,58 @@ extension sessionData {
     ]
     
     // MARK:- Final Choice Navigation Titles
-    static let navigationTitles: [[String]] =
+    static let navigationTitles: [String: [String: String]] =
         [
             // Warmup
-            ["fullBody",
-             "upperBody",
-             "lowerBody",
-             "cardio"],
+            "warmup": [
+                "fullBody": "fullBody",
+                "upperBody": "upperBody",
+                "lowerBody": "lowerBody",
+                "cardio": "cardio"],
             // Workout
-            ["fullBody",
-             "upperBody",
-             "lowerBody",
-             "legs",
-             "pull",
-             "push",
-             "fullBody",
-             "upperBody",
-             "lowerBody",
-             "5x5",
-             "fullBody",
-             "upperBody",
-             "lowerBody",
-             "fullBody",
-             "upperBody",
-             "lowerBody"],
+            "workout": [
+                // Classic Gym
+                "classicGymFull": "fullBody",
+                "classicGymUpper": "upperBody",
+                "classicGymLower": "lowerBody",
+                "classicGymLegs": "legs",
+                "classicGymPull": "pull",
+                "classicGymPush": "push",
+                "classicGym5x5": "5x5",
+                // Circuit Gym
+                "circuitGymFull": "fullBody",
+                "circuitGymUpper": "upperBody",
+                "circuitGymLower": "lowerBody",
+                // Classic Bodyweight
+                "classicBodyweightFull": "fullBody",
+                "classicBodyweightUpper": "upperBody",
+                "classicBodyweightLower": "lowerBody",
+                // Circuit Bodyweight
+                "circuitBodyweightFull": "fullBody",
+                "circuitBodyweightUpper": "upperBody",
+                "circuitBodyweightLower": "lowerBody"
+            ],
             // Cardio
-            ["rowing",
-             "biking",
-             "running"],
+            "cardio": [
+                "rowing": "rowing",
+                "biking": "biking",
+                "running": "running"],
             // Stretching
-            ["general",
-             "postWorkout",
-             "postCardio"],
+            "stretching": [
+                "general": "general", // Not schedule so not separated into focuses
+                "postWorkout": "postWorkout",
+                "postCardio": "postCardio"],
             // Yoga
-            ["practices"]
+            "yoga": [
+                "practices": "practices" // Not schedule so not separated into focuses
+            ]
     ]
     
     // MARK:- Group Choices
     // Note
     // (0: - 5:) = choiceProgress[0] in schedule
     // (0-4/5) = choiceProgress[1] in schedule
-    static let sortedGroups: [Int:[[String]]] =
+    static let sortedGroups: [Int: [[String]]] =
         [
             // MARK: Mind
             0: [
@@ -267,10 +278,19 @@ extension sessionData {
                         "1. warmup",
                         "2. cardio/bodyweight workout",
                         "3. stretching",
-                        ],
+                    ],
                     // ------------
                     // Steady State
-                    // 5 | Choice 2 - 2 - To Do
+                    // Type
+                    // 5 | Choice 3 - 2 - Type
+                    [
+                        "enduranceType2",
+                        //
+                        "running",
+                        "biking",
+                        "rowing"
+                    ],
+                    // 6 | Choice 3 - 3 - To Do
                     [
                         "enduranceToDo",
                         //
@@ -278,7 +298,7 @@ extension sessionData {
                         "2. cardio",
                         "3. stretching",
                         ],
-                    // 6 | Chioce 3 - 2 - Warmup/Stretching Length,
+                    // 7 | Choice 4 - 4 - Warmup/Stretching Length,
                     [
                         "sessionLength",
                         //
@@ -324,7 +344,7 @@ extension sessionData {
                         "3. stretching",
                         ],
                     // -------------------------------
-                    // 5 | Choice 3 - length
+                    // 5 | Choice 5 - length
                     [
                         "sessionLength",
                         //
@@ -353,7 +373,14 @@ extension sessionData {
                         "gym",
                         "bodyweight"
                     ],
-                    // 2 | Choice 2 - Focus
+                    // 2 | Choice 2 - Style
+                    [
+                        "workoutStyle",
+                        //
+                        "circuit",
+                        "classic"
+                    ],
+                    // 3 | Choice 3 - Focus
                     [
                         "focus",
                         //
@@ -361,7 +388,7 @@ extension sessionData {
                         "upperBody",
                         "lowerBody"
                     ],
-                    // 3 | Choice 3 - Length
+                    // 4 | Choice 4 - Length
                     [
                         "sessionLength",
                         //
@@ -369,7 +396,7 @@ extension sessionData {
                         "20-50 min",
                         "40+ min",
                         ],
-                    // 4 | Final - To Do
+                    // 5 | Final - To Do
                     [
                         "muscleGainToDo",
                         //

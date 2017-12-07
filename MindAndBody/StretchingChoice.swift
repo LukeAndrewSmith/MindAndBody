@@ -141,22 +141,22 @@ class StretchingChoice: UIViewController  {
     var stretchingType = Int()
     // General
     @IBAction func general(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 0
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "general"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "stretchingSegue", sender: nil)
     }
     // Post-Workout
     @IBAction func postWorkout(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 1
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "postWorkout"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "stretchingSegue", sender: nil)
     }
     // Post-Cardio
     @IBAction func postCardio(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 2
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "postCardio"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "stretchingSegue", sender: nil)
     }

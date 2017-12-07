@@ -53,7 +53,8 @@ extension ScheduleScreen {
             if ScheduleVariables.shared.choiceProgress[0] == 0 && ScheduleVariables.shared.choiceProgress[1] == 5 {
                 ScheduleVariables.shared.choiceProgress[1] = 1
             // Endurance has 3 choice paths
-            } else if ScheduleVariables.shared.choiceProgress[0] == 2 && ScheduleVariables.shared.choiceProgress[1] == 5 || ScheduleVariables.shared.choiceProgress[0] == 2 && ScheduleVariables.shared.choiceProgress[1] == 3 && selectedChoiceWarmup[3] == 3 {
+            } else if ScheduleVariables.shared.choiceProgress[0] == 2 && ScheduleVariables.shared.choiceProgress[1] == 5 || ScheduleVariables.shared.choiceProgress[0] == 2 && ScheduleVariables.shared.choiceProgress[1] == 3 {
+            // TODO: && selectedChoiceWarmup[3] == 3 { ??
                 ScheduleVariables.shared.choiceProgress[1] = 1
             // Toning has two choice paths
             } else if ScheduleVariables.shared.choiceProgress[0] == 3 && ScheduleVariables.shared.choiceProgress[1] == 5 {

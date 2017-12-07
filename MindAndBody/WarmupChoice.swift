@@ -170,29 +170,29 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     var warmupType = Int()
     // Full Body
     @IBAction func fullBody(_ sender: UIButton) {
-        SelectedSession.shared.selectedSession[1] = 0
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "fullBody"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Upper Body
     @IBAction func upperBody(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 1
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "upperBody"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Lower Body
     @IBAction func lowerBody(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 2
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "lowerBody"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Cardio
     @IBAction func cardio(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 3
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "cardio"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }

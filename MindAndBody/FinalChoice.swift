@@ -27,7 +27,12 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     // && set title to presets title
     var comingFromSchedule = false
     // Title Array for if schedule
-    let scheduleTitleArray = ["warmup", "workout", "cardio", "stretching", "yoga"]
+    let scheduleTitleArray: [String: String] = [
+        "warmup": "warmup",
+        "workout": "workout",
+        "cardio": "cardio",
+        "stretching": "stretching",
+        "yoga": "yoga"]
     
     
     
@@ -77,19 +82,20 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         // Navigation Bar Title
         if comingFromSchedule == false {
-            navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]] , comment: ""))
+            let test = SelectedSession.shared.selectedSession
+            navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]! , comment: ""))
         } else {
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
             // App chooses session
-            if schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] as! Int == 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![2][0] as! Int == 0 {
                 presetsButton.alpha = 0
-                let sessionTypeString = NSLocalizedString(scheduleTitleArray[SelectedSession.shared.selectedSession[0]], comment: "")
+                let sessionTypeString = NSLocalizedString(scheduleTitleArray[SelectedSession.shared.selectedSession[0]]!, comment: "")
                 navigationBar.title = sessionTypeString + " - " + NSLocalizedString("overview", comment: "")
             // User chooses sessions
             } else {
-                navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]] , comment: ""))
+                navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]! , comment: ""))
                 // Select nothing, user wants to select somthing
-                SelectedSession.shared.selectedSession[2] = -1
+                SelectedSession.shared.selectedSession[2] = ""
             }
         }
         navigationController?.navigationBar.tintColor = Colors.light
@@ -108,27 +114,26 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         //
         // Initial Element Positions
-        if SelectedSession.shared.selectedSession[2] == -1 {
-            
+        if SelectedSession.shared.selectedSession[2] == "" {
             setConstraints(showingViews: false, animated: false)
-            //
-            // Selected Automatically from schedule
+        //
+        // Selected Automatically from schedule
         } else {
             // Cardio Type
             // If cardio
-            if SelectedSession.shared.selectedSession[0] == 2 {
-                // If time based (if section 0 in presetDictionaries (section 0 being time based sessions), contains the selected session)
-                if (sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][1][1]?[0] as! [Int]).contains(SelectedSession.shared.selectedSession[2]) {
+            if SelectedSession.shared.selectedSession[0] == "cardio" {
+                // If time based (first movement contains boolean indicator)
+                if (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]?["timeBased"] as! Bool) {
                     cardioType = 0
-                    // Else if distance based
+                // Else if distance based
                 } else {
                     cardioType = 1
                 }
             }
-            
+
             // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [sessionKey] = session, [0] titles, [0] title
-            presetsButton.setTitle("- " + NSLocalizedString(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[0][0] as! String, comment: "") + " -", for: .normal)
-            
+            presetsButton.setTitle("- " + NSLocalizedString(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]!["title"] as! String, comment: "") + " -", for: .normal)
+
             //
             self.movementsTableView.reloadData()
             let indexPath2 = NSIndexPath(row: 0, section: 0)
@@ -136,6 +141,33 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             //
             setConstraints(showingViews: true, animated: true)
         }
+        
+//        // App chooses session
+//        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![2][0] as! Int == 0 {
+//            // Cardio Type
+//            // If cardio
+//            if SelectedSession.shared.selectedSession[0] == "cardio" {
+//                // If time based (first movement contains boolean indicator)
+//                if (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]?["timeBased"] as! Bool) {
+//                    cardioType = 0
+//                    // Else if distance based
+//                } else {
+//                    cardioType = 1
+//                }
+//            }
+//
+//            // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [sessionKey] = session, [0] titles, [0] title
+//            presetsButton.setTitle("- " + NSLocalizedString(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]!["title"] as! String, comment: "") + " -", for: .normal)
+//
+//            //
+//            self.movementsTableView.reloadData()
+//            let indexPath2 = NSIndexPath(row: 0, section: 0)
+//            self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
+//            //
+//            setConstraints(showingViews: true, animated: true)
+//        } else {
+//            setConstraints(showingViews: false, animated: false)
+//        }
         
         
         //
@@ -190,7 +222,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         super.viewDidAppear(animated)
         //
         // Select
-        if SelectedSession.shared.selectedSession[2] == -1 {
+        if SelectedSession.shared.selectedSession[2] == "" {
             self.presetsButton.sendActions(for: .touchUpInside)
         }
     }
@@ -208,9 +240,9 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 self.presetsConstraint.constant = self.view.frame.size.height - 73.25
             // Hide presets button
             } else {
-                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
                 // App chooses session
-                if schedules[ScheduleVariables.shared.selectedSchedule][1][2][0] as! Int == 0 {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![2][0] as! Int == 0 {
                     self.tableConstraint1.constant = 0
                     self.presetsConstraint.constant = self.view.frame.size.height
                 // User chooses sessions
@@ -252,7 +284,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func numberOfSections(in tableView: UITableView) -> Int {
         switch tableView {
         case movementsTableView:
-            if SelectedSession.shared.selectedSession[2] == -1 {
+            if SelectedSession.shared.selectedSession[0] == "" {
                 return 0
             } else {
                 return numberOfSectionsMovements()
@@ -260,7 +292,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             
         case presetsTableView:
             // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [1] = sessions in sections, [0] section titles array
-            let numberOfSections = (sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][1][0] as! [[String]]).count
+            let numberOfSections = (sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]!).count
             return numberOfSections
         default: break
         }
@@ -274,8 +306,14 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             return titleForHeaderMovements(section: section)
             
         case presetsTableView:
-            // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [1] = sessions in sections, [0] section titles array, [section] = section title, [0] = section title (has to be in array for data structure, only ever one string in array)
-            return "    " + NSLocalizedString(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][1][0]![section][0] as! String, comment: "")
+            switch section {
+            case 0: NSLocalizedString("easy", comment: "")
+            case 1: NSLocalizedString("medium", comment: "")
+            case 2: NSLocalizedString("hard", comment: "")
+            default: return ""
+            }
+            // Old way, keeping as idea incase more than easy, medium, hard added one day
+//            return "    " + NSLocalizedString(sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![section][0], comment: "")
         default:
             break
         }
@@ -309,9 +347,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             return numberOfRowsInSectionMovements(section: section)
             
         case presetsTableView:
-            // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [1] = sessions in sections, [0] section titles array
-            let numberOfRows = (sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][1][0]?[section] as! [String]).count
-            return numberOfRows
+            return (sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![section]).count
         default: break
         }
         return 0
@@ -356,172 +392,156 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             //
             // Fill Data
             switch SelectedSession.shared.selectedSession[0] {
-            // Warmup
-            case 0:
-                let key = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1][indexPath.row] as! Int
-                cell.imageView?.tag = key
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc...
-                cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]! as String, comment: "")
-                //
-                // Get index of element
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2]] = selected session, [1] = keys
-                let indexSetsReps = (sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1] as! [Int]).index(of: key)
-                //
-                // Cell Image
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
+            case "warmup":
+                // Get key of movement
+                let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["movement"] as! String
                 
-                // SetsxReps or Length
+                // Title
+                cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: "")
+                
+                // Cell Image
+                cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
+                cell.imageView?.tag = indexPath.row
+                
+                // SetsxReps or Length of time
                 // Timed session off
                 if timedSession == 0 {
                     // Sets x Reps
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] sets array and [3] for reps
-                    cell.detailTextLabel?.text = String(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2][indexSetsReps!] as! Int) + " x " + (sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[3][indexSetsReps!] as! String)
-                    // On
+                    cell.detailTextLabel?.text = String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["sets"] as! Int) + " x " + (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["reps"] as! String)
+                // On
                 } else {
-                    // Length [4]
-                    cell.detailTextLabel?.text = String(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[4][indexSetsReps!] as! Int) + NSLocalizedString("s", comment: "")
+                    // Length of time
+                    cell.detailTextLabel?.text = String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["time"] as! Int) + NSLocalizedString("s", comment: "")
                 }
                 
-            // Workout
-            case 1:
+            case "workout":
                 switch SelectedSession.shared.selectedSession[1] {
                 // Circuit Session
-                case 7,8,9:
-                    let key = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1][indexPath.row] as! Int
-                    cell.imageView?.tag = key
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc...
-                    cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]! as String, comment: "")
-                    //
+                case "circuitGymFull", "circuitGymUpper", "circuitGymLower":
+                    // Movement key
+                    let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["movement"] as! String
+                    
+                    // Title
+                    cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: "")
+                    
                     // Cell Image
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                    cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
-                    //
+                    cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
+                    cell.imageView?.tag = indexPath.row
+                    
                     // Reps
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] sets array and [3] for reps
                     // Find n movements in round, * round to find the index for the reps (if round to, nMovements = 3, indexPAth.row == 1 then index = 1 + 3 = 4)
-                    let nMovementsInRound = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1].count
-                    let index = indexPath.row + (indexPath.section * nMovementsInRound!)
-                    cell.detailTextLabel?.text = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[3][index] as? String
+                    let numberOfRounds = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]?["rounds"] as! Int
+                    let totalMovements = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?.count
+                    let nMovementsInRound = totalMovements! / numberOfRounds
+                    let index = indexPath.row + (indexPath.section * nMovementsInRound)
+                    cell.detailTextLabel?.text = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[index]!["reps"] as? String
                     
                 // Bodyweight Circuit Session (possibility of timed session)
-                case 13,14,15:
-                    let key = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1][indexPath.row] as! Int
-                    cell.imageView?.tag = key
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc...
-                    cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]! as String, comment: "")
+                case "circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
+                    // Movement key
+                    let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["movement"] as! String
+                    
+                    // Title
+                    cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: "")
                     //
                     // Cell Image
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                    cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
-                    //
+                    cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
+                    cell.imageView?.tag = indexPath.row
+
                     // Reps or Length
                     // Timed session off
                     if timedSession == 0 {
-                        // Reps
-                        // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] sets array and [3] for reps
-                        // Find n movements in round, * round to find the index for the reps (if round to, nMovements = 3, indexPAth.row == 1 then index = 1 + 3 = 4)
-                        let nMovementsInRound = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1].count
-                        let index = indexPath.row + (indexPath.section * nMovementsInRound!)
-                        cell.detailTextLabel?.text = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[3][index] as? String
+                        // Sets x Reps
+                        cell.detailTextLabel?.text = String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["sets"] as! Int) + " x " + (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["reps"] as! String)
+                        // On
                     } else {
-                        // [4] = Length
-                        // Find n movements in round, * round to find the index for the reps (if round to, nMovements = 3, indexPAth.row == 1 then index = 1 + 3 = 4)
-                        let nMovementsInRound = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1].count
-                        let index = indexPath.row + (indexPath.section * nMovementsInRound!)
-                        cell.detailTextLabel?.text = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[4][index] as? String
+                        // Length of time
+                        cell.detailTextLabel?.text = String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["time"] as! Int) + NSLocalizedString("s", comment: "")
                     }
                     
                 // Normal Session
                 default:
-                    let key = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1][indexPath.row] as! Int
-                    cell.imageView?.tag = key
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc...
-                    cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]! as String, comment: "")
-                    //
-                    // Get index of element
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2]] = selected session, [1] = keys
-                    let indexSetsReps = (sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1] as! [Int]).index(of: key)
-                    //
+                    // Movement key
+                    let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["movement"] as! String
+                    
+                    // Title
+                    cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: "")
+                    
                     // Sets x Reps
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] sets array and [3] for reps
-                    cell.detailTextLabel?.text = String(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2][indexSetsReps!] as! Int) + " x " + (sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[3][indexSetsReps!] as! String)
-                    //
+                    cell.detailTextLabel?.text = String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["sets"] as! Int) + " x " + (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["reps"] as! String)
+                    
                     // Cell Image
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                    cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
+                    cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
+                    cell.imageView?.tag = indexPath.row
                 }
                 
-            // Cardio
-            case 2:
-                let key = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1][indexPath.row] as! Int
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc...
-                cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]! as String, comment: "")
-                //
+            case "cardio":
+                // Movement key
+                let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["movement"] as! String
+                
+                // Title
+                cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: "")
+                
                 // Time
                 if cardioType == 0 {
-                    cell.detailTextLabel?.text = timeToString(totalSeconds: sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2][indexPath.row] as! Int)
+                    cell.detailTextLabel?.text = timeToString(totalSeconds: sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["length"] as! Int)
+                //
                 } else {
-                    // Even IndexPath.rows (movement)
-                    if indexPath.row % 2 == 0 {
+                    let isMovement = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["isMovement"] as! Bool
+                    // Movement
+                    if isMovement {
                         // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] sets array
-                        cell.detailTextLabel?.text = String(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2][indexPath.row] as! Int) + "m"
+                        cell.detailTextLabel?.text = String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["length"] as! Int) + "m"
                         
-                        // Odd IndexPath.rows (pauses)
+                    // Pauses
                     } else {
-                        cell.detailTextLabel?.text = timeToString(totalSeconds: sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2][indexPath.row] as! Int)
+                        cell.detailTextLabel?.text = timeToString(totalSeconds: sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["length"] as! Int)
                     }
                 }
-                //
+
                 // Cell Image
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
+                cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
                 
-            // Stretching
-            case 3:
-                let key = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1][indexPath.row] as! Int
-                cell.imageView?.tag = key
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc...
-                cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]! as String, comment: "")
-                //
-                // Get index of element
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2]] = selected session, [1] = keys
-                let indexSetsReps = (sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1] as! [Int]).index(of: key)
-                //
+            case "stretching":
+                // Movement key
+                let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["movement"] as! String
+                
+                // Title
+                cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: "")
+                
                 // Cell Image
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
-                cell.imageView?.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
-                //
+                cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
+                cell.imageView?.tag = indexPath.row
+                
                 // Breaths or Length
                 // Timed session off
                 if timedSession == 0 {
                     // Breaths
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] breaths array
-                    cell.detailTextLabel?.text = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2][indexSetsReps!] as? String
+                    cell.detailTextLabel?.text = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["breaths"] as? String
                 } else {
                     // Length = [3]
-                    cell.detailTextLabel?.text = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[3][indexSetsReps!] as? String
+                    cell.detailTextLabel?.text = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["time"] as? String
                 }
                 
-            // Yoga
-            case 4:
-                let key = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1][indexPath.row] as! Int
-                cell.imageView?.tag = key
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc...
-                cell.textLabel?.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]! as String, comment: "")
-                //
+            case "yoga":
+                // Movement key
+                let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["pose"] as! String
+                cell.imageView?.tag = indexPath.row
+                
+                // Title
+                cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: "")
+                
                 // Breaths
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] breaths array
-                cell.detailTextLabel?.text = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2][indexPath.row] as? String
+                cell.detailTextLabel?.text = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]!["breaths"] as? String
                 //
                 // Cell Image
                 // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
                 //
                 // Image
-                // [key] = key, [0] = first image
-                let image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
+                cell.imageView?.tag = indexPath.row
+                let image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
                 // If asymmetric array contains image, flip imageview
-                if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]].contains(key) {
+                if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! {
                     let flippedImage = UIImage(cgImage: (image?.cgImage!)!, scale: (image?.scale)!, orientation: .upMirrored)
                     cell.imageView?.image =  flippedImage
                 } else {
@@ -539,12 +559,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         case presetsTableView:
             //
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            //
-            // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [1] = session sections, [1] keys
-            let sessionKey = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][1][1]?[indexPath.section][indexPath.row] as! Int
             
-            // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [sessionKey] = session, [0] titles, [0] title
-            cell.textLabel?.text = "- " + NSLocalizedString(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][sessionKey]?[0][0] as! String, comment: "") + " -"
+            cell.textLabel?.text = NSLocalizedString(sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![indexPath.section][indexPath.row], comment: "")
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -580,19 +596,20 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         case presetsTableView:
             //
             // Set SelectedSession.shared.selectedSession[2] to selected session
-            //
-            // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [1] = sessions in sections, [1] session key array
-            let selectedSessionKey: Int = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][1][1]?[indexPath.section][indexPath.row] as! Int
+            let selectedSessionKey: String = sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![indexPath.section][indexPath.row]
             //
             SelectedSession.shared.selectedSession[2] = selectedSessionKey
             
+            let test = SelectedSession.shared.selectedSession
+            
             // Cardio Type
-            if SelectedSession.shared.selectedSession[0] == 2 {
+            if SelectedSession.shared.selectedSession[0] == "cardio" {
                 cardioType = indexPath.section
             }
             
             // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [sessionKey] = session, [0] titles, [0] title
-            presetsButton.setTitle("- " + NSLocalizedString(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[0][0] as! String, comment: "") + " -", for: .normal)
+            presetsButton.setTitle("- " + NSLocalizedString(SelectedSession.shared.selectedSession[2], comment: "") + " -", for: .normal)
+
             
             //
             presetsTableView.deselectRow(at: indexPath, animated: true)
@@ -630,16 +647,16 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         //
         switch SelectedSession.shared.selectedSession[0] {
         // Warmup, Cardio, Stretching, Yoga
-        case 0,2,3,4:
+        case "warmup", "cardio", "stretching", "yoga":
             return 1
             
         // Workout
-        case 1:
+        case "workout":
             switch SelectedSession.shared.selectedSession[1] {
             // Circuit Session
-            case 7,8,9,13,14,15:
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = session, [2] = number of rounds array, [0] = number of rounds
-                return sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]![2][0] as! Int
+            case "circuitGymFull", "circuitGymUpper", "circuitGymLower","circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
+                // Number of rounds
+                return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]!["rounds"] as! Int
             // Normal Session
             default:
                 return 1
@@ -655,22 +672,22 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         //
         switch SelectedSession.shared.selectedSession[0] {
         // Warmup, Stretching
-        case 0,3:
+        case "warmup", "stretching":
             return ""
             
         // Workout
-        case 1:
+        case "workout":
             switch SelectedSession.shared.selectedSession[1] {
             // Circuit Session
-            case 7,8,9,13,14,15:
-                return NSLocalizedString("round", comment: "") + String(section + 1)  + NSLocalizedString("of", comment: "") + String(sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]![2][0] as! Int)
+            case "circuitGymFull", "circuitGymUpper", "circuitGymLower","circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
+                return NSLocalizedString("round", comment: "") + String(section + 1)  + NSLocalizedString("of", comment: "") + String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]!["rounds"] as! Int)
             // Normal Session
             default:
                 return ""
             }
             
         // Cardio, Yoga
-        case 2,4:
+        case "cardio", "yoga":
             return ""
             
         //
@@ -684,19 +701,32 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         //
         switch SelectedSession.shared.selectedSession[0] {
         // Warmup, Cardio, Stretching, Yoga
-        case 0,2,3,4:
-            return sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]![1].count
+        case "warmup", "cardio", "stretching", "yoga":
+            // Rows
+            if SelectedSession.shared.selectedSession[2] == "" {
+                return 0
+            } else {
+                let test = SelectedSession.shared.selectedSession
+                return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count
+            }
             
         // Workout
-        case 1:
-            switch SelectedSession.shared.selectedSession[1] {
-            // Circuit Session
-            case 7,8,9,13,14,15:
-                // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = session, [1] = key array
-                return (sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]![1] as! [Int]).count
-            // Normal Session
-            default:
-                return sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]![1].count
+        case "workout":
+            // Rows
+            if SelectedSession.shared.selectedSession[2] == "" {
+                return 0
+            //
+            } else {
+                switch SelectedSession.shared.selectedSession[1] {
+                // Circuit Session
+                case "circuitGymFull", "circuitGymUpper", "circuitGymLower","circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
+                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = session, [1] = key array
+                    return (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![1] as! [Int]).count
+                // Normal Session
+                default:
+                    let test = SelectedSession.shared.selectedSession
+                    return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count
+                }
             }
         //
         default:
@@ -751,18 +781,19 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         //
         // Get Cell
         let sender = extraTap.view as! UIImageView
-        let key = sender.tag
+        // indexing with sender.tag == indexPath.row
+        let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[sender.tag]!["movement"] as! String
         //
-        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
+        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count
         //
         // Image Array
         if imageCount != 1 && sender.isAnimating == false {
             var animationArray: [UIImage] = []
-            for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
+            for i in 1...imageCount! - 1 {
+                animationArray.append(getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![i])!)
             }
             sender.animationImages = animationArray
-            sender.animationDuration = Double(imageCount - 1) * 0.5
+            sender.animationDuration = Double(imageCount! - 1) * 0.5
             sender.animationRepeatCount = 1
             sender.startAnimating()
         }
@@ -781,7 +812,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // Segue
         switch SelectedSession.shared.selectedSession[0] {
         // Warmup
-        case 0:
+        case "warmup":
             // Timed Session off
             if timedSession == 0 {
                 // Warmup uses stretching Screen
@@ -791,13 +822,14 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
             }
         // Workout
-        case 1:
+        case "workout":
             switch SelectedSession.shared.selectedSession[1] {
             // Circuit Session
-            case 7,8,9:
+            case "circuitGymFull", "circuitGymUpper", "circuitGymLower":
                 performSegue(withIdentifier: "sessionSegueCircuit", sender: self)
             // Bodyweight Circuit Session
-            case 13,14,15:
+            case "circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
+                
                 // Timed Session off
                 if timedSession == 0 {
                     performSegue(withIdentifier: "sessionSegueCircuit", sender: self)
@@ -810,10 +842,10 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 performSegue(withIdentifier: "sessionSegue", sender: self)
             }
         // Cardio
-        case 2:
+        case "cardio":
             performSegue(withIdentifier: "sessionSegueCardio", sender: self)
         // Stretching
-        case 3:
+        case "stretching":
             // Timed Session off
             if timedSession == 0 {
                 performSegue(withIdentifier: "sessionSegueStretching", sender: self)
@@ -822,7 +854,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
             }
         // Yoga
-        case 4:
+        case "yoga":
             performSegue(withIdentifier: "sessionSegueYoga", sender: self)
         default:
             break

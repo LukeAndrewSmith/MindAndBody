@@ -84,8 +84,8 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     //
     //
     @IBAction func practicesAction(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 0
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "practices"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "yogaSegue", sender: nil)
     }

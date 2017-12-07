@@ -132,11 +132,11 @@ class BodyweightChoice: UIViewController  {
     // Full
     @IBAction func full(_ sender: Any) {
         if workoutType == 0 {
-            SelectedSession.shared.selectedSession[1] = 10
-            SelectedSession.shared.selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = "classicBodyweightFull"
+            SelectedSession.shared.selectedSession[2] = ""
         } else {
-            SelectedSession.shared.selectedSession[1] = 13
-            SelectedSession.shared.selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = "circuitBodyweightFull"
+            SelectedSession.shared.selectedSession[2] = ""
         }
         //
         performSegue(withIdentifier: "bodyweightSegue", sender: nil)
@@ -145,11 +145,11 @@ class BodyweightChoice: UIViewController  {
     // Upper
     @IBAction func upper(_ sender: Any) {
         if workoutType == 0 {
-            SelectedSession.shared.selectedSession[1] = 11
-            SelectedSession.shared.selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = "classicBodyweightUpper"
+            SelectedSession.shared.selectedSession[2] = ""
         } else {
-            SelectedSession.shared.selectedSession[1] = 14
-            SelectedSession.shared.selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = "circuitBodyweightUpper"
+            SelectedSession.shared.selectedSession[2] = ""
         }
         //
         performSegue(withIdentifier: "bodyweightSegue", sender: nil)
@@ -158,11 +158,11 @@ class BodyweightChoice: UIViewController  {
     // Lower
     @IBAction func lower(_ sender: Any) {
         if workoutType == 0 {
-            SelectedSession.shared.selectedSession[1] = 12
-            SelectedSession.shared.selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = "classicBodyweightLower"
+            SelectedSession.shared.selectedSession[2] = ""
         } else {
-            SelectedSession.shared.selectedSession[1] = 15
-            SelectedSession.shared.selectedSession[2] = -1
+            SelectedSession.shared.selectedSession[1] = "circuitBodyweightLower"
+            SelectedSession.shared.selectedSession[2] = ""
         }
         //
         performSegue(withIdentifier: "bodyweightSegue", sender: nil)

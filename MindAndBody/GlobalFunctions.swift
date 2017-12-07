@@ -48,22 +48,22 @@ class ReminderNotifications {
         //
         if notificationSettings![0] == 1 {
             //
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
 
             // Day view: set notifications for each day something is planned
             if schedules.count != 0 {
-                if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] as! Int == 0 {
                     // Loop week
                     for i in 0...6 {
                         // Loop day
-                        if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count != 0 {
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
                             //
                             let cal: Calendar = Calendar(identifier: .gregorian)
                             //
                             // Set morning notifications
                             let morningContent = UNMutableNotificationContent()
                             morningContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule][0][i].count) + NSLocalizedString("morningNotification2", comment: "")
+                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification2", comment: "")
                             
                             morningContent.sound = UNNotificationSound.default()
                             
@@ -115,7 +115,7 @@ class ReminderNotifications {
                     // Set monday notification
                     let mondayContent = UNMutableNotificationContent()
                     mondayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                    mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule][0][7].count) + NSLocalizedString("weekNotification2", comment: "")
+                    mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count) + NSLocalizedString("weekNotification2", comment: "")
                     
                     mondayContent.sound = UNNotificationSound.default()
                     
@@ -137,7 +137,7 @@ class ReminderNotifications {
                     // Set monday notification
                     let sundayContent = UNMutableNotificationContent()
                     sundayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                    sundayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule][0][7].count) + NSLocalizedString("weekNotification2", comment: "")
+                    sundayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count) + NSLocalizedString("weekNotification2", comment: "")
                     
                     sundayContent.sound = UNNotificationSound.default()
                     
@@ -571,9 +571,9 @@ extension UIViewController {
     func updateScheduleTracking(fromSchedule: Bool) {
         // Only relevant if coming from schedule
         if fromSchedule {
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
             // Day
-            if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] as! Int == 0 {
                 // Update day
                 var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
@@ -584,7 +584,7 @@ extension UIViewController {
                 // Reload
                 ScheduleVariables.shared.shouldReloadChoice = true
                 // Week
-            } else if schedules[ScheduleVariables.shared.selectedSchedule][1][1][0] as! Int == 1 {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] as! Int == 1 {
                 // Update week [7]
                 var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
@@ -763,12 +763,12 @@ extension UIViewController {
     // MARK: Update week goal
     func updateWeekGoal() {
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         // Find goal = number of groups planned = fullWeekArray.count
         var goal = Int()
         if schedules.count != 0 {
-            goal = schedules[ScheduleVariables.shared.selectedSchedule][0][7].count
+            goal = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count
         } else {
             goal = 1
         }

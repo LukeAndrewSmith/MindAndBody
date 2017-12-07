@@ -361,7 +361,7 @@ class sessionData {
     
     //
     // MARK:- Movements Dictionaries
-    static let movementsDictionaries: [String: [String: [String : [String]]]] =
+    static let movements: [String: [String: [String : [String]]]] =
         [
             // MARK: Warmup
             "warmup":
@@ -855,7 +855,7 @@ class sessionData {
                     ]
             ],
             // MARK: Workout
-            "Workout": [
+            "workout": [
                 // Gym ------------------------------------
                 // Legs (Quads) ---------
                 "squat":
@@ -1273,7 +1273,7 @@ class sessionData {
                         "targetArea": ["squatBody"]
                 ],
                 // Legs (Hamstrings)
-                "deadlift":
+                "bodyweightDeadlift":
                     [
                         "name": ["deadlift"],
                         "demonstration": ["bodyweightDeadlift", "bodyweightDeadlift1", "bodyweightDeadlift2", "bodyweightDeadlift3", "bodyweightDeadlift4", "bodyweightDeadlift3", "bodyweightDeadlift2", "bodyweightDeadlift1", "bodyweightDeadlift1"],
@@ -1655,7 +1655,7 @@ class sessionData {
                         "explanation": ["tricepDipEH", "tricepDipEA", "tricepDipEF"],
                         "targetArea": ["squatBody"]
                 ],
-                "bulgarianSplitSquat":
+                "bodyweightBulgarianSplitSquat":
                     [
                         "name": ["bulgarianSplitSquat"],
                         "demonstration": ["bulgarianSplitSquat", "bulgarianSplitSquat1", "bulgarianSplitSquat", "bulgarianSplitSquat1"],
@@ -1684,104 +1684,122 @@ class sessionData {
                         "targetArea": ["squatBody"]
                 ]
             ],
-            // Cardio
-            "Cardio": [
+            // MARK: Cardio
+            "cardio": [
                 // Running
                 "sprint":
                     [
                         "name": ["sprint"],
                         "demonstration": ["running"],
+                        "isMovement": ["true"]
                 ],   // Running
                 "run":
                     [
                         "name": ["run"],
                         "demonstration": ["running"],
+                        "isMovement": ["true"]
                 ],
                 "jog":
                     [
                         "name": ["jog"],
                         "demonstration": ["running"],
+                        "isMovement": ["true"]
                 ],
                 "still":
                     [
                         "name": ["still"],
                         "demonstration": ["Pause"],
+                        "isMovement": ["false"]
                 ],   // Running Pauses
                 "slowJog":
                     [
                         "name": ["slowJog"],
                         "demonstration": ["Pause"],
+                        "isMovement": ["false"]
                 ],
                 "stretch":
                     [
                         "name": ["stretch"],
                         "demonstration": ["Pause"],
+                        "isMovement": ["false"]
                 ],
                 // Biking
                 "sprintB":
                     [
                         "name": ["sprintB"],
                         "demonstration": ["rowing"],
+                        "isMovement": ["true"]
                 ],   // Bike
                 "fastB":
                     [
                         "name": ["fastB"],
                         "demonstration": ["rowing"],
+                        "isMovement": ["true"]
                 ],
                 "mediumB":
                     [
                         "name": ["mediumB"],
                         "demonstration": ["rowing"],
+                        "isMovement": ["true"]
                 ],
                 "stillB":
                     [
                         "name": ["stillB"],
                         "demonstration": ["Pause"],
+                        "isMovement": ["false"]
                 ],      // Biking Pauses
                 "slowB":
                     [
                         "name": ["slowB"],
                         "demonstration": ["Pause"],
+                        "isMovement": ["false"]
                 ],
-                "stretch":
+                "stretchB":
                     [
                         "name": ["stretch"],
                         "demonstration": ["Pause"],
+                        "isMovement": ["false"]
                 ],
                 // Rowing
                 "sprintR":
                     [
                         "name": ["sprintR"],
                         "demonstration": ["rowing"],
+                        "isMovement": ["true"]
                 ],    // Rowing
                 "fastR":
                     [
                         "name": ["fastR"],
                         "demonstration": ["rowing"],
+                        "isMovement": ["true"]
                 ],
                 "mediumR":
                     [
                         "name": ["mediumR"],
                         "demonstration": ["rowing"],
+                        "isMovement": ["true"]
                 ],
                 "stillR":
                     [
                         "name": ["stillR"],
                         "demonstration": ["Pause"],
+                        "isMovement": ["false"]
                 ],     // Rowing Pauses
                 "slowR":
                     [
                         "name": ["slowR"],
                         "demonstration": ["Pause"],
+                        "isMovement": ["false"]
                 ],
-                "stretch":
+                "stretchR":
                     [
                         "name": ["stretch"],
                         "demonstration": ["Pause"],
+                        "isMovement": ["false"]
                 ],
             ],
-            // Stretching
-            "Stretching": [
+            // MARK: Stretching
+            "stretching": [
                 // Recommended
                 "5minCardioL":
                     [
@@ -2127,7 +2145,7 @@ class sessionData {
                         "explanation": ["lateralDeltEH", "lateralDeltEA", "lateralDeltEF"],
                         "targetArea": ["lateralNeck"]
                 ],
-                "rearDelt":
+                "rearDeltStretch":
                     [
                         "name": ["rearDelt"],
                         "demonstration": ["rearDeltStretch"],
@@ -2266,8 +2284,8 @@ class sessionData {
                         "targetArea": ["squatBody"]
                 ],
             ],
-            // Yoga
-            "Yoga": [
+            // MARK: Yoga
+            "yoga": [
                 // Standing
                 "upwardsSalute":
                     [

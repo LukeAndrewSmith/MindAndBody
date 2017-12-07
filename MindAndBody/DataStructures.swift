@@ -3260,6 +3260,7 @@ enum sessionDataOld {
                     // Extra level to make sure all levels nested to same degree
                     // 1,0,0
                     [
+                    // Full
                     // 1,0,0,0
                     [
                         // 1,0,0,0,1 | Short

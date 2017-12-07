@@ -49,7 +49,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     //
     // Key Array
     // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [1] Keys Array
-    var keyArray: [Int] = []
+    var keyArray: [String] = []
     
     // STRETCHING
     // Breat
@@ -118,14 +118,18 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         //
         // Set Arrays
         if fromCustom == false {
-            keyArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1] as! [Int]
-            // Warmup
-            if SelectedSession.shared.selectedSession[0] == 0 {
-                setsArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2] as! [Int]
-                repsArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[3] as! [String]
-                // Stretching
-            } else {
-                breathsArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2] as! [Int]
+            // Loop session
+            for i in 0..<(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?.count)! {
+                //
+                keyArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["movement"] as! String)
+                // Warmup
+                if SelectedSession.shared.selectedSession[0] == "warmup" {
+                    setsArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["sets"] as! Int)
+                    repsArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["reps"] as! String)
+                    // Stretching
+                } else {
+                    breathsArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["breaths"] as! Int)
+                }
             }
         }
         
@@ -242,9 +246,9 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 {
                 // [key] = key, [0] = first image
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
+                cell.imageViewCell.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
                 // Indicator
-                if (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count > 1 {
+                if (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count > 1 {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
                 } else {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
@@ -253,9 +257,9 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 // Target Area on left
             } else {
                 // [key] = key
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key])! + toAdd)
+                cell.imageViewCell.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])! + toAdd)
                 // Indicator
-                if (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count > 1 {
+                if (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count > 1 {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
                 } else {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
@@ -275,7 +279,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             //
             // Movement
-            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: "")
+            cell.movementLabel.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0] , comment: "")
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 27)
             cell.movementLabel?.textAlignment = .center
@@ -287,7 +291,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             // String
             var setsRepsString = String()
             // Stretching
-            if SelectedSession.shared.selectedSession[0] != 0 {
+            if SelectedSession.shared.selectedSession[0] != "warmup" {
                 setsRepsString = String(breathsArray[indexPath.row]) + " " + NSLocalizedString("breathsC", comment: "")
                 // Warmup
             } else {
@@ -302,7 +306,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             // Indicate asymmetric exercises to the user
             // If asymmetric movement array contains the current movement
-            if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]].contains(keyArray[indexPath.row]) {
+            if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(keyArray[indexPath.row]))! {
                 // Append indicator
                 let length = setsRepsString.count
                 let stringToAdd = NSLocalizedString(") per side", comment: "")
@@ -479,13 +483,13 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
+        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
@@ -511,13 +515,13 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
+        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
@@ -658,7 +662,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         explanationLabel.numberOfLines = 0
         //
         let key = keyArray[selectedRow]
-        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![1], comment: ""), focusOn: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![2], comment: ""))
+        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: ""), howTo: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["explanation"]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["explanation"]![1], comment: ""), focusOn: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["explanation"]![2], comment: ""))
         explanationLabel.frame = CGRect(x: 10, y: 10, width: scrollViewExplanation.frame.size.width - 10, height: 0)
         //
         explanationLabel.sizeToFit()
@@ -706,7 +710,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! StretchingTableViewCell
         //
         let key = keyArray[indexPath.row]
-        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
+        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
         //
         if cell.imageViewCell.isAnimating == false {
             //
@@ -727,7 +731,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                     let defaultImage = settings["DefaultImage"]![0]
                     if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["targetArea"]![0] + toAdd)
                         // Indicator
                         if imageCount > 1 {
                             cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
@@ -737,7 +741,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                         // Target Area on left
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![0])
                         // Indicator
                         if imageCount > 1 {
                             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -777,7 +781,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                     let defaultImage = settings["DefaultImage"]![0]
                     if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![0])
                         // Indicator
                         if imageCount > 1 {
                             cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -787,7 +791,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                         // Target Area on left
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["targetArea"]![0] + toAdd)
                         // Indicator
                         if imageCount > 1 {
                             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")

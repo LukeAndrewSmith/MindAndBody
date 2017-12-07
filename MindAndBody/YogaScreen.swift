@@ -46,7 +46,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //
     // Key Array
     // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [1] Keys Array
-    var keyArray: [Int] = []
+    var keyArray: [String] = []
     
     // Sets
     // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] breaths array
@@ -84,10 +84,13 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //
+        // Create key/ breaths arrays
         if fromCustom == false {
-            keyArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1] as! [Int]
-            breathsArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2] as! [Int]
+            // Loop session
+            for i in 0..<(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?.count)! {
+                keyArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["pose"] as! String)
+                breathsArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["breaths"] as! Int)
+            }
         }
         
         //
@@ -97,24 +100,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         automaticYogaArray = settings["AutomaticYoga"]!
         // Progress Bar
-        // Thickness
-//        switch automaticYogaArray[0] {
-//        // Auto off
-//        case 0:
-            progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
-            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
-            //
-            finishEarly.tintColor = Colors.red
-//        // Auto on
-//        case 1:
-//            progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
-//            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
-////            progressBar.frame = CGRect(x: 44, y: 0, width: self.view.frame.size.width - 44, height: 2)
-////            progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 43)
-//            //
-//            finishEarly.removeFromSuperview()
-//        default: break
-//        }
+        progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
+        progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
+        //
+        finishEarly.tintColor = Colors.red
         
         // Rounded Edges
         // Colour
@@ -245,7 +234,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             //
             // Movement
-            cell.poseLabel.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: "")
+            cell.poseLabel.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0] , comment: "")
             //
             cell.poseLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 33)
             cell.poseLabel?.textAlignment = .center
@@ -268,9 +257,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             // Image
             // [key] = key, [0] = first image
-            let image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
+            let image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
             // If asymmetric array contains image, flip imageview
-            if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]].contains(key) {
+            if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! {
                 let flippedImage = UIImage(cgImage: (image?.cgImage!)!, scale: (image?.scale)!, orientation: .upMirrored)
                 cell.demonstrationImageView.image =  flippedImage
             } else {
@@ -279,7 +268,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 
             //
-            if (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count > 1 {
+            if (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count > 1 {
                 cell.imageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
             } else {
                 cell.imageIndicator.image = nil
@@ -452,13 +441,13 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
+        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.demonstrationImageView.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![i])!)
             }
             //
             cell.demonstrationImageView.animationImages = animationArray
@@ -478,13 +467,13 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
+        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.demonstrationImageView.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![i])!)
             }
             //
             cell.demonstrationImageView.animationImages = animationArray
@@ -629,7 +618,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         explanationLabel.numberOfLines = 0
         //
         let key = keyArray[selectedRow]
-        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![1], comment: ""), focusOn: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![2], comment: ""))
+        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: ""), howTo: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["explanation"]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["explanation"]![1], comment: ""), focusOn: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["explanation"]![2], comment: ""))
         explanationLabel.frame = CGRect(x: 10, y: 10, width: scrollViewExplanation.frame.size.width - 10, height: 0)
         //
         explanationLabel.sizeToFit()

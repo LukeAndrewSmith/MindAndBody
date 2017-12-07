@@ -43,7 +43,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     //
     // Key Array
     // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [1] Keys Array
-    var keyArray: [Int] = []
+    var keyArray: [String] = []
     
     // Length
     // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] length array
@@ -109,8 +109,11 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         // Custom?
         if fromCustom == false {
-            keyArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1] as! [Int]
-            lengthArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2] as! [Int]
+            // Loop session
+            for i in 0..<(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?.count)! {
+                keyArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["movement"] as! String)
+                lengthArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["length"] as! Int)
+            }
         } else {
             // Time based
             sessionType = 0
@@ -224,7 +227,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             // Movement
             //
-            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: "")
+            cell.movementLabel.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0] , comment: "")
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-light", size: 33)
             cell.movementLabel?.textAlignment = .center
@@ -516,17 +519,14 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 //
                 let content = UNMutableNotificationContent()
                 if i != keyArray.count {
-                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][keyArray[i]]!, comment: "")
+                    content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyArray[i]]!["name"]![0], comment: "")
                     // Sound, low if pause, high if start cardio
-                    switch keyArray[i] {
-                    // High
-                    case 0,1,2, 6,7,8, 12,13,14:
+                    if sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyArray[i]]!["isMovement"]![0] == "true" {
+                        // High == doing something
                         content.sound = UNNotificationSound(named: "Tibetan Singing Bowl (High).caf")
-                    // Low
-                    case 3,4,5, 9,10,11, 15,16,17:
+                    } else {
+                        // Low == rest
                         content.sound = UNNotificationSound(named: "Tibetan Singing Bowl (Low).caf")
-                    default:
-                        break
                     }
                 } else {
                     content.title = NSLocalizedString("cardioEnd", comment: "")
@@ -733,14 +733,13 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     var endTime = Double()
     //
     @objc func startTimer() {
-        
         //
-        let key = keyArray[selectedRow]
+        var key = keyArray[selectedRow]
         
-        // Even IndexPath.rows (movement)
-        if selectedRow % 2 == 0 {
-            
-            // Odd IndexPath.rows (pauses)
+        // Movement
+        if sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["isMovement"]![0] as! Bool == true {
+
+        // Pauses
         } else {
             
             //
@@ -760,7 +759,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             
             //
-            
             if timerValue != 0 {
                 //
                 let indexPath = NSIndexPath(row: selectedRow, section: 0)
@@ -781,13 +779,15 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 switch sessionType {
                 case 0:
                     if selectedRow != keyArray.count - 1 {
-                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key + 1]!, comment: "")
+                        key = keyArray[selectedRow + 1]
+                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["movement"]![0], comment: "")
                     } else {
                         content.title = NSLocalizedString("cardioEnd", comment: "")
                     }
                 case 1:
                     if selectedRow != keyArray.count - 1 {
-                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key + 1]!, comment: "") + " " + String(lengthArray[key + 1]) + "m"
+                        key = keyArray[selectedRow + 1]
+                        content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["movement"]![0], comment: "") + " " + String(lengthArray[selectedRow + 1]) + "m"
                     } else {
                         content.title = NSLocalizedString("cardioEnd", comment: "")
                     }

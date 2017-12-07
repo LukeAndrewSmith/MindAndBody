@@ -8,41 +8,7 @@
 
 import Foundation
 
-//
-// Custom Section
-struct scheduleData {
-    
-    // Warmup, Workout, Cardio, Stretching, Yoga
-    var customSession: [[[Any]]] =
-        [
-            // Warmup
-            // [name] - string, [movements] - int, [sets] - int, [reps] - string
-            [],
-            // Workout
-            // [name] - string, [movements] - int, [sets] - int, [reps] - string
-            [],
-            // Workout - Circuit
-            // [name] - string, [movements] - int, [rounds] - int, [reps] - string
-            [],
-            // Cardio
-            // [name] - string, [movements] - int, [time/distance] - int
-            [],
-            // Stretching
-            // [name] - string, [stretches] - int, [breaths] - int
-            [],
-            // Yoga
-            // [name] - string, [stretches] - int, [poses] - int
-            []
-    ]
-    
-    // Meditation
-    var meditationArray: [[[[Any]]]] = []
-    
-}
-
-
 enum scheduleDataStructures {
-    
     
     // MARK: Profile Data
     //
@@ -130,7 +96,7 @@ enum scheduleDataStructures {
             "toning",
             "muscleGain",
             "strength",
-            ]
+        ]
     
     static let shortenedGroupNames =
         [
@@ -172,53 +138,44 @@ enum scheduleDataStructures {
     ]
     
     // Layer 4: Final
-    static let defaultDifficultyLevels: [[Int]] =
+    static let defaultDifficultyLevels: [String: [String: Int]] =
         [
-            // Flexibility - 0
-            [
-                // Overall
-                1,
-                // Hamstrings
-                1,
-                // Hips
-                1,
-                // Back/Neck
-                1
+            // Flexibility
+            "flexibility": [
+                "overall": 1,
+                "hamstrings": 1,
+                "hips": 1,
+                "backNeck": 1
             ],
-            // Yoga - 1
-            [
-                // Yoga Level
-                1,
-                // Strength Yoga Level
-                1
+            // Yoga
+            "yoga": [
+                "yoga": 1,
+                "yogaStrength": 1
             ],
-            // Endurance - 2
-            [
-                // Endurance Level
-                1
+            // Endurance
+            "endurance": [
+                "endurance": 1
             ],
-            // Toning/Muscle/Strength - 3
-            [
-                // Workout Level
-                1,
-                // Workout Level Upper
-                1,
-                // Workout Level Lower
-                1
+            // Toning/Muscle/Strength
+            "workout": [
+                "workout": 1,
+                "workoutUpper": 1,
+                "workoutLower": 1
             ]
     ]
     
     
     // Schedules
-    static let registerSchedules: [[[[Any]]]] =
+    static let registerSchedules: [[String: [[Any]]]] =
         [
         ]
     
     // Custom schedules insert this into schedules array
-    static let emptyWeek: [[[Any]]] =
+    static let emptyWeek: [String: [[Any]]] =
         [
             // [0] Schedule --------------------
-            [
+            "schedule": [
+                // CHANGE
                 // Monday
                 [],
                 // Tuesday
@@ -234,10 +191,10 @@ enum scheduleDataStructures {
                 // Sunday
                 [],
                 // Full week list - [0][7]
-                []
+                [] // GET RID OF
             ],
             // [1] Information about schedule ------------------
-            [
+            "scheduleInformation": [
                 // Title - 0
                 [""], // String
                 // Schedule style: day [0] or full week [1], -- day plan [2], full week plan [3] - 1
@@ -250,7 +207,7 @@ enum scheduleDataStructures {
                 [0]
             ],
             // [2] Schedule creation help data --------------------
-            [
+            "scheduleCreationHelp": [
                 // Question Answers [2][0]
                 [-1, -1, -1],
                 // Goals [2][1]
@@ -289,7 +246,7 @@ enum scheduleDataStructures {
             // Sunday
             [],
             // Full week as list - 7
-            []
+//            [] // REMOVE
     ]
     
     //

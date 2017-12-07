@@ -43,7 +43,7 @@ class SelectedSession {
     //
     // Variables
     // Selected Session
-    var selectedSession: [String] = [0,0,-1]
+    var selectedSession: [String] = ["warmup", "full", ""]
 }
 
 //

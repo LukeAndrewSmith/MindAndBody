@@ -36,10 +36,13 @@ class ScheduleScreen: UIViewController {
     // Selected choices corrensponds to an array in 'sortedSession' containing (easy, medium, hard) of relevant selection to be chosen by the app based on the profile (arrays containing difficulty level for each group to select)
     // 3 seperate arrays because arrays do not quite correspond in terms of accessing relevant sessions for a number of reasons; not a mistake
     // check sortedSessions array in dataStructures to understand indexing, each session has the corresponding index written above it
-    var selectedChoiceWarmup = [0,0,0,0,0,0]
-    var selectedChoiceSession = [0,0,0,0,0,0]
-    var selectedChoiceStretching = [0,0,0,0,0,0]
-    
+    var selectedChoiceWarmup = ["", "", "", ""]
+    var selectedChoiceSession = ["", "", "", ""]
+    var selectedChoiceStretching = ["", "", "", ""]
+    // Indicators used when making the choice of session, used in updateSelectedChoice()
+    var indicator = ""
+    var indicator2 = ""
+        
     //
     // Outlets
     // Navigation Bar
@@ -164,7 +167,7 @@ class ScheduleScreen: UIViewController {
     // Schedule Selection (Bar Button Item (Top Right))
     // Edit Schedule
     @objc func editScheduleAction() {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
         //
         ActionSheet.shared.animateActionSheetDown()
         //
@@ -217,7 +220,7 @@ class ScheduleScreen: UIViewController {
         //
         } else if segue.identifier == "scheduleSegueOverview" {
             let destinationVC = segue.destination as? FinalChoice
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
             // Only say from schedule if app chooses sessions for the user
             destinationVC?.comingFromSchedule = true
             // Remove back button text

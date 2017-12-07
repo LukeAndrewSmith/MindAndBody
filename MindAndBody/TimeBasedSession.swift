@@ -53,7 +53,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // Key Array
     // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [1] Keys Array
-    var keyArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[1] as! [Int]
+    var keyArray: [String] = []
     
     // Length
     var lengthArray: [Int] = []
@@ -126,39 +126,51 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // User doesn't interact with the phone but it is still in use
         UIApplication.shared.isIdleTimerDisabled = true
         
         //
         switch SelectedSession.shared.selectedSession[0] {
         // Warmup/Bodyweight Circuit Wokrout
-        case 0,1:
-            lengthArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[4] as! [Int]
-        // Stretching
-        case 3:
-            lengthArray = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[3] as! [Int]
-        default:
-            break
-        }
-        //
-        // Special case for circuit workout
-            // Add the movements to the key array x(number of rounds) more times
-        switch SelectedSession.shared.selectedSession[1] {
-        case 13,14,15:
-            nMovementsInRound = keyArray.count
-            var enlargedKeyArray = keyArray
-            let nRounds = sessionData.presetsDictionaries[SelectedSession.shared.selectedSession[0]][SelectedSession.shared.selectedSession[1]][0][SelectedSession.shared.selectedSession[2]]?[2][0] as! Int
-            // nRounds is always greater than 1, so if 2, then 1...1 adds 1 set of keys, therefore there are two rounds
-            for _ in 1...nRounds - 1 {
-                enlargedKeyArray += keyArray
+        case "warmup", "workout":
+            // Loop session
+            for i in 0..<(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?.count)! {
+                keyArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["movement"] as! String)
+                lengthArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["time"] as! Int)
             }
-            keyArray = enlargedKeyArray
-            
+        // Stretching
+        case "stretching":
+            // Loop session
+            for i in 0..<(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?.count)! {
+                keyArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["movement"] as! String)
+                lengthArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]!["time"] as! Int)
+            }
         default:
             break
         }
         
+        
+        
+        //
+        // Special case for circuit workout
+//            // Add the movements to the key array x(number of rounds) more times
+//        switch SelectedSession.shared.selectedSession[1] {
+//        case "circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
+//            nMovementsInRound = keyArray.count
+//            var enlargedKeyArray = keyArray
+//            // Number of rounds kept in first movement dict
+//            let nRounds = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]!["rounds"] as! Int
+//            // nRounds is always greater than 1, so if 2, then 1...1 adds 1 set of keys, therefore there are two rounds
+//            for _ in 1...nRounds - 1 {
+//                enlargedKeyArray += keyArray
+//            }
+//            keyArray = enlargedKeyArray
+//
+//
+//
+//        default:
+//            break
+//        }
         
         // Device Scale for @2x and @3x of Target Area Images
         switch UIScreen.main.scale {
@@ -169,10 +181,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         default: break
         }
         
-        
         //
         view.backgroundColor = Colors.dark
-        
         
         //
         finishEarly.tintColor = Colors.red
@@ -276,9 +286,9 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             let defaultImage = settings["DefaultImage"]![0]
             if defaultImage == 0 {
                 // [key] = key, [0] = first image
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
+                cell.imageViewCell.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
                 // Indicator
-                if (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count > 1 {
+                if (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count > 1 {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
                 } else {
                     cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
@@ -287,9 +297,9 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Target Area on left
             } else {
                 // [key] = key
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key])! + toAdd)
+                cell.imageViewCell.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])! + toAdd)
                 // Indicator
-                if (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count > 1 {
+                if (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count > 1 {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
                 } else {
                     cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
@@ -309,7 +319,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             //
             // Movement
-            cell.movementLabel.text = NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: "")
+            cell.movementLabel.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0] , comment: "")
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 33)
             cell.movementLabel?.textAlignment = .center
@@ -466,13 +476,13 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
+        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
@@ -498,13 +508,13 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
+        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
@@ -532,20 +542,20 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         // Image
         // [key] = key, [0] = first image
-        let image = getUncachedImage(named: (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]?[0])!)
+        let image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
         // If asymmetric array contains image, flip imageview
-        if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]].contains(key) {
+        if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! {
             let flippedImage = UIImage(cgImage: (image?.cgImage!)!, scale: (image?.scale)!, orientation: .upMirrored)
             cell.imageViewCell.image =  flippedImage
         }
         //
-        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
+        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
             for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![i])!)
+                animationArray.append(getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![i])!)
             }
             //
             cell.imageViewCell.animationImages = animationArray
@@ -638,7 +648,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         explanationLabel.numberOfLines = 0
         //
         let key = keyArray[selectedRow]
-        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movementsDictionaries[SelectedSession.shared.selectedSession[0]][key]!, comment: ""), howTo: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![1], comment: ""), focusOn: NSLocalizedString(sessionData.explanationDictionaries[SelectedSession.shared.selectedSession[0]][key]![2], comment: ""))
+        explanationLabel.attributedText = formatExplanationText(title: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: ""), howTo: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["explanation"]![0], comment: ""), toAvoid: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["explanation"]![1], comment: ""), focusOn: NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["explanation"]![2], comment: ""))
         explanationLabel.frame = CGRect(x: 10, y: 10, width: scrollViewExplanation.frame.size.width - 10, height: 0)
         //
         explanationLabel.sizeToFit()
@@ -686,7 +696,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
         //
         let key = keyArray[indexPath.row]
-        let imageCount = (sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]!).count
+        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
         //
         if cell.imageViewCell.isAnimating == false {
             //
@@ -708,7 +718,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                     let defaultImage = settings["DefaultImage"]![0]
                     if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["targetArea"]![0] + toAdd)
                         // Indicator
                         if imageCount > 1 {
                             cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
@@ -718,7 +728,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                         // Target Area on left
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![0])
                         // Indicator
                         if imageCount > 1 {
                             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -759,7 +769,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                     let defaultImage = settings["DefaultImage"]![0]
                     if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.demonstrationDictionaries[SelectedSession.shared.selectedSession[0]][key]![0])
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![0])
                         // Indicator
                         if imageCount > 1 {
                             cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
@@ -769,7 +779,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                         // Target Area on left
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.targetAreaDictionaries[SelectedSession.shared.selectedSession[0]][key]! + toAdd)
+                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["targetArea"]![0] + toAdd)
                         // Indicator
                         if imageCount > 1 {
                             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")

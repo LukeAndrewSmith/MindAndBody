@@ -187,48 +187,48 @@ class ClassicChoiceG: UIViewController  {
     
     // Full
     @IBAction func full(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 0
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "classicGymFull"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         self.performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Upper
     @IBAction func upper(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 1
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "classicGymUpper"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Lower
     @IBAction func lower(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 2
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "classicGymLower"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Legs
     @IBAction func legs(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 3
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "classicGymLegs"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Pull
     @IBAction func pull(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 4
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "classicGymPull"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
     // Push
     @IBAction func push(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 5
-        SelectedSession.shared.selectedSession[2] = -1
+        SelectedSession.shared.selectedSession[1] = "classicGymPush"
+        SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }

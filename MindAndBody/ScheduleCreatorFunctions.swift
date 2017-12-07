@@ -16,11 +16,11 @@ extension UIViewController {
     // MARK: - Determine Number of Sessions
     func setNumberOfSessions(updating: Bool) {
         // Create/Fetch Arrays
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
         // Deduce number of sessions using '''ScheduleVariables.shared.updatedSessionsArray''', then let user edit, then set to defaults;  this is so if user is updating profile the new array can be checked against the existing schedule to see the difference
         // [nSessions, mind, flexibility, endurance, toning, muscle gain, strength]
         // [total,
-        ScheduleVariables.shared.updatedSessionsArray = [0,0,0,0,0,0,0] // Will be set to schedules[ScheduleVariables.shared.selectedSchedule][2][2]
+        ScheduleVariables.shared.updatedSessionsArray = [0,0,0,0,0,0,0] // Will be set to schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2]
         // Range of total n session and specific group sessions
         var rangeArray = [
             // Mind
@@ -49,8 +49,8 @@ extension UIViewController {
         // (Mind + Yoga) * 1.5
         var mindNumber = 0
         for i in 0...1 {
-            if schedules[ScheduleVariables.shared.selectedSchedule][2][1][i] as! Int != 0 {
-                mindNumber += schedules[ScheduleVariables.shared.selectedSchedule][2][1][i] as! Int
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][i] as! Int != 0 {
+                mindNumber += schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][i] as! Int
             }
         }
         //        mindNumber = Int(round(Double(mindNumber) * 1.25))
@@ -61,8 +61,8 @@ extension UIViewController {
         // --------------------------------------------------------------------------------------------
         // Find the total number goals (sum of all goals weightings(0-2(6 in case of mind)), the denominator when finding the ratios
         var totalNGoals = 0
-        for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][2][1].count - 1 {
-            totalNGoals += schedules[ScheduleVariables.shared.selectedSchedule][2][1][i] as! Int
+        for i in 0...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1].count - 1 {
+            totalNGoals += schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][i] as! Int
         }
         // --------------------------------------------------------------------------------------------
         // divide total n goals by total of goal answers. Ratio is then determined by specific goal answer (e.g toning) divided by the total goal answers -> (2/7)
@@ -72,12 +72,12 @@ extension UIViewController {
             ratios[0] = Double(mindNumber) / Double(totalNGoals)
         }
         // 4 as 0-3 are mind goals used above
-        for i in 2...schedules[ScheduleVariables.shared.selectedSchedule][2][1].count - 1 {
+        for i in 2...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1].count - 1 {
             // i - 1 for ratios as e.g flexibility == profileAnswer[1][2] && ratios[1] -> -1
-            if schedules[ScheduleVariables.shared.selectedSchedule][2][1][i] as! Int == 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][i] as! Int == 0 {
                 ratios[i - 1] = 0
             } else {
-                ratios[i - 1] = Double(schedules[ScheduleVariables.shared.selectedSchedule][2][1][i] as! Int) / Double(totalNGoals)
+                ratios[i - 1] = Double(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][i] as! Int) / Double(totalNGoals)
             }
         }
         
@@ -85,43 +85,43 @@ extension UIViewController {
         // MARK: Preliminary Number Groups
         // Using last 2 'Me' questions
         // Switch amount of Time  [19]
-        switch schedules[ScheduleVariables.shared.selectedSchedule][2][0][0] as! Int {
+        switch schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0] as! Int {
             // Time case :
             // -> Check against committment question [20]
         // 1-2 days
         case 0:
             // Do a little 1 - 2
-            if schedules[ScheduleVariables.shared.selectedSchedule][2][0][1] as! Int == 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1] as! Int == 0 {
                 ScheduleVariables.shared.updatedSessionsArray[0] = 2
                 // Take it easy, 1 - 3 sessions
-            } else if schedules[ScheduleVariables.shared.selectedSchedule][2][0][1] as! Int == 1 {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1] as! Int == 1 {
                 ScheduleVariables.shared.updatedSessionsArray[0] = 3
                 // Routine, 2 - 4 sessions
-            } else if schedules[ScheduleVariables.shared.selectedSchedule][2][0][1] as! Int == 2  {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1] as! Int == 2  {
                 ScheduleVariables.shared.updatedSessionsArray[0] = 4
             }
         // 3-4 days
         case 1:
             // Do a little, 2 - 4 sessions
-            if schedules[ScheduleVariables.shared.selectedSchedule][2][0][1] as! Int == 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1] as! Int == 0 {
                 ScheduleVariables.shared.updatedSessionsArray[0] = 4
                 // take it easy, 3 - 5 sessions
-            } else if schedules[ScheduleVariables.shared.selectedSchedule][2][0][1] as! Int == 1 {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1] as! Int == 1 {
                 ScheduleVariables.shared.updatedSessionsArray[0] = 5
                 // Routine, 4 - 6 sessions
-            } else if schedules[ScheduleVariables.shared.selectedSchedule][2][0][1] as! Int == 2 {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1] as! Int == 2 {
                 ScheduleVariables.shared.updatedSessionsArray[0] = 6
             }
         // 5-7 days
         case 2:
             // Do a little, 5 sessions
-            if schedules[ScheduleVariables.shared.selectedSchedule][2][0][1] as! Int == 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1] as! Int == 0 {
                 ScheduleVariables.shared.updatedSessionsArray[0] = 5
                 // take it easy, 7 sessions
-            } else if schedules[ScheduleVariables.shared.selectedSchedule][2][0][1] as! Int == 1 {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1] as! Int == 1 {
                 ScheduleVariables.shared.updatedSessionsArray[0] = 7
                 // Routine, 10 sessions
-            } else if schedules[ScheduleVariables.shared.selectedSchedule][2][0][1] as! Int == 2 {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1] as! Int == 2 {
                 ScheduleVariables.shared.updatedSessionsArray[0] = 10
             }
         default: break
@@ -142,8 +142,8 @@ extension UIViewController {
         if mindNumber != 0 {
             goalCount += 1
         }
-        for i in 2...schedules[ScheduleVariables.shared.selectedSchedule][2][1].count - 1 {
-            if schedules[ScheduleVariables.shared.selectedSchedule][2][1][i] as! Int != 0 {
+        for i in 2...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1].count - 1 {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][i] as! Int != 0 {
                 goalCount += 1
             }
         }
@@ -168,13 +168,13 @@ extension UIViewController {
             if mindNumber > 1 {
                 primarySecondaryArray[0][0] = 1
             }
-            for i in 2...schedules[ScheduleVariables.shared.selectedSchedule][2][1].count - 1 {
+            for i in 2...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1].count - 1 {
                 // i - 1 for primarySecondaryArray as e.g flexibility == profileAnswer[1][4] && primarySecondaryArray[1] -> -3
                 // Primary goals
-                if schedules[ScheduleVariables.shared.selectedSchedule][2][1][i] as! Int == 2 {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][i] as! Int == 2 {
                     primarySecondaryArray[0][i - 1] = 1
                     // Secondary goals
-                } else if schedules[ScheduleVariables.shared.selectedSchedule][2][1][i] as! Int == 1 {
+                } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][i] as! Int == 1 {
                     primarySecondaryArray[1][i - 1] = 1
                 }
             }
@@ -258,7 +258,7 @@ extension UIViewController {
                     if indexes.contains(5) {
                         // If male
                         // me questions gender
-                        if schedules[ScheduleVariables.shared.selectedSchedule][2][1] as! Int == 0 {
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1] as! Int == 0 {
                             // index 1 is strength as strength is last goal
                             let totalRatio = ratios[indexes[0]] + ratios[indexes[1]]
                             ratios[indexes[0]] = 0
@@ -274,7 +274,7 @@ extension UIViewController {
                     } else {
                         // If male
                         // me questions gender
-                        if schedules[ScheduleVariables.shared.selectedSchedule][2][1] as! Int == 0 {
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1] as! Int == 0 {
                             // index 1 is strength as strength is last goal
                             let totalRatio = ratios[indexes[0]] + ratios[indexes[1]]
                             ratios[indexes[0]] = 0
@@ -335,7 +335,7 @@ extension UIViewController {
                     if indexes.contains(5) && indexes.contains(3) {
                         // If male
                         // me questions gender
-                        if schedules[ScheduleVariables.shared.selectedSchedule][2][1] as! Int == 0 {
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1] as! Int == 0 {
                             // index 1 is strength as strength is last goal
                             let totalRatio = ratios[indexes[0]] + ratios[indexes[1]] + ratios[indexes[2]]
                             ratios[3] = 0
@@ -363,7 +363,7 @@ extension UIViewController {
                     } else {
                         // If male
                         // me questions gender
-                        if schedules[ScheduleVariables.shared.selectedSchedule][2][1] as! Int == 0 {
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1] as! Int == 0 {
                             // index 1 is strength as strength is last goal
                             let totalRatio = ratios[indexes[0]] + ratios[indexes[1]] + ratios[indexes[2]]
                             ratios[3] = 0
@@ -406,7 +406,7 @@ extension UIViewController {
                     // if woman (or other), set to toning ([0])
                     // If male
                     // me questions gender
-                    if schedules[ScheduleVariables.shared.selectedSchedule][2][1] as! Int == 0 {
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1] as! Int == 0 {
                         // index 1 is strength as strength is last goal
                         let totalRatio = ratios[indexes[0]] + ratios[indexes[1]] + ratios[indexes[2]]
                         ratios[indexes[0]] = 0
@@ -482,7 +482,7 @@ extension UIViewController {
         //        var nWorkoutGoals = 0
         //        var workoutGoals: [Int] = []
         //        for i in 4...6 {
-        //            if schedules[ScheduleVariables.shared.selectedSchedule][2][1][i] != 0 {
+        //            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][i] != 0 {
         //                nWorkoutGoals += 1
         //                nWorkoutGoals.append(i)
         //            }
@@ -491,11 +491,11 @@ extension UIViewController {
         //
         //        //
         //        // Edit strength, as strength is more specific
-        //        if schedules[ScheduleVariables.shared.selectedSchedule][2][1][6] == 1 {
+        //        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][6] == 1 {
         //            // If srength if the only workout goal, do nothing, else do something
         //            if nWorkoutGoals != 1 {
         //                if woman don't do strength workout
-        //                if schedules[ScheduleVariables.shared.selectedSchedule][2][1][1] > 0 {
+        //                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][1] > 0 {
         //
         //                    if nWorkoutGoals == 2 {
         //                        // Add workout ratios together and set to other
@@ -510,7 +510,7 @@ extension UIViewController {
         //                }
         //            }
         //        //
-        //        } else if schedules[ScheduleVariables.shared.selectedSchedule][2][1][6] == 2 {
+        //        } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![1][6] == 2 {
         //
         //        }
         ////        edit workouts for all users
@@ -565,7 +565,7 @@ extension UIViewController {
         // MARK: Update ranges
         // Session ranges
         for i in 1...ScheduleVariables.shared.updatedSessionsArray.count - 1 {
-            // i - 1 as ScheduleVariables.shared.updatedSessionsArray contains total n sessions, but schedules[ScheduleVariables.shared.selectedSchedule][2][3] does not
+            // i - 1 as ScheduleVariables.shared.updatedSessionsArray contains total n sessions, but schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3] does not
             // lower range: i*2
             // upper range: i*2 + 1
             let index = 2 * (i - 1)
@@ -573,21 +573,21 @@ extension UIViewController {
                 // Lower Range
                 // 1 if 1, -1 if > 1
                 if ScheduleVariables.shared.updatedSessionsArray[i] > 1 {
-                    schedules[ScheduleVariables.shared.selectedSchedule][2][3][index] = ScheduleVariables.shared.updatedSessionsArray[i] - 1
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] = ScheduleVariables.shared.updatedSessionsArray[i] - 1
                 } else {
-                    schedules[ScheduleVariables.shared.selectedSchedule][2][3][index] = ScheduleVariables.shared.updatedSessionsArray[i]
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] = ScheduleVariables.shared.updatedSessionsArray[i]
                 }
                 // Upper range
                 // If mind set upper range higher
                 if index == 0 {
-                    schedules[ScheduleVariables.shared.selectedSchedule][2][3][index + 1] = ScheduleVariables.shared.updatedSessionsArray[i] + 3
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] = ScheduleVariables.shared.updatedSessionsArray[i] + 3
                     // If mind set upper range higher
                 } else {
-                    schedules[ScheduleVariables.shared.selectedSchedule][2][3][index + 1] = ScheduleVariables.shared.updatedSessionsArray[i] + 2
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] = ScheduleVariables.shared.updatedSessionsArray[i] + 2
                 }
             } else {
-                schedules[ScheduleVariables.shared.selectedSchedule][2][3][index] = 0
-                schedules[ScheduleVariables.shared.selectedSchedule][2][3][index + 1] = 0
+                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] = 0
+                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] = 0
             }
         }
         
@@ -596,7 +596,7 @@ extension UIViewController {
         // TODO: BETTER EXPLANATIONS
         // NOTE IF UPDATING SESSION, THE ARRAYS SHOULDN'T BE SET HERE THE USER SHOULD BE PRESENTED THE NEW ARRAYS AND THEY DECIDE THEN
         if updating == false {
-            schedules[ScheduleVariables.shared.selectedSchedule][2][2] = ScheduleVariables.shared.updatedSessionsArray
+            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2] = ScheduleVariables.shared.updatedSessionsArray
             UserDefaults.standard.set(schedules, forKey: "schedules")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])

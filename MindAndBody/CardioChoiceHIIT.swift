@@ -95,23 +95,23 @@ class CardioChoiceHIIT: UIViewController  {
     //
     // MARK: Selected Session
     // Rowing
-    @IBAction func full(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 0
-        SelectedSession.shared.selectedSession[2] = -1
+    @IBAction func running(_ sender: Any) {
+        SelectedSession.shared.selectedSession[1] = "running"
+        SelectedSession.shared.selectedSession[2] = ""
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
     // Biking
-    @IBAction func upper(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 1
-        SelectedSession.shared.selectedSession[2] = -1
+    @IBAction func biking(_ sender: Any) {
+        SelectedSession.shared.selectedSession[1] = "biking"
+        SelectedSession.shared.selectedSession[2] = ""
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
     // Running
-    @IBAction func lower(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = 2
-        SelectedSession.shared.selectedSession[2] = -1
+    @IBAction func rowing(_ sender: Any) {
+        SelectedSession.shared.selectedSession[1] = "running"
+        SelectedSession.shared.selectedSession[2] = ""
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     

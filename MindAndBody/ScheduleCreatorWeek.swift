@@ -155,12 +155,12 @@ class CustomScheduleWeekCell: UITableViewCell {
         groupLabel.lineBreakMode = .byWordWrapping
         groupLabel.numberOfLines = 0
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
         var groupArray = [0,0,0,0,0,0]
         // Create array of nsession of groups from full week array in schedule ([0][7])
-        if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
-            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
-                groupArray[schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int] += 1
+        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count != 0 {
+            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count - 1 {
+                groupArray[schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int] += 1
             }
         }
         sessionsLabel.text = String(groupArray[row])
@@ -184,13 +184,13 @@ class CustomScheduleWeekCell: UITableViewCell {
         generator = nil
         
 //        updateFullWeek()
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
         var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         
         var shouldAppend = false
         var indexAtWhichToAdd = 0
         var shouldBreak = false
-        let count = schedules[ScheduleVariables.shared.selectedSchedule][0][7].count
+        let count = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count
         if count != 0 {
             for i in 0...count - 1 {
                 // Compare group at i and 1 after i,  if groupAti <= groupToAdd < groupAti+1, the insert at i + 1
@@ -203,8 +203,8 @@ class CustomScheduleWeekCell: UITableViewCell {
                     shouldAppend = true
                 default:
                     // Insert
-                    let groupAtI = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int
-                    let groupAtI1 = schedules[ScheduleVariables.shared.selectedSchedule][0][7][i + 1] as! Int
+                    let groupAtI = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int
+                    let groupAtI1 = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i + 1] as! Int
                     if groupAtI <= row && row < groupAtI1 {
                         indexAtWhichToAdd = i + 1
                         shouldBreak = true
@@ -221,11 +221,11 @@ class CustomScheduleWeekCell: UITableViewCell {
         
         // Append
         if shouldAppend {
-            schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(row)
+            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].append(row)
             scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[row]!)
             // Insert
         } else {
-            schedules[ScheduleVariables.shared.selectedSchedule][0][7].insert(row, at: indexAtWhichToAdd)
+            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].insert(row, at: indexAtWhichToAdd)
             scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].insert(scheduleDataStructures.scheduleTrackingArrays[row]!, at: indexAtWhichToAdd)
         }
         
@@ -236,23 +236,23 @@ class CustomScheduleWeekCell: UITableViewCell {
 //        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
         //
         // Update the array
-//        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+//        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
 //        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         // update schedules
-//        schedules[ScheduleVariables.shared.selectedSchedule][0][7].append(row)
-//        schedules[ScheduleVariables.shared.selectedSchedule][0][7] = (schedules[ScheduleVariables.shared.selectedSchedule][0][7] as! [Int]).sorted()
+//        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].append(row)
+//        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7] = (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7] as! [Int]).sorted()
 //        // Append to week tracking, start again as cannot sort
 //        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
-//        if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
-//            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
-//                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int]!)
+//        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count != 0 {
+//            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count - 1 {
+//                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int]!)
 //            }
 //        }
         // Add to first available day in the week
         for i in 0...6 {
             // If week not full (max 5 things per day in week
-            if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count < 5 {
-                schedules[ScheduleVariables.shared.selectedSchedule][0][i].append(row)
+            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count < 5 {
+                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].append(row)
                 scheduleTracking[ScheduleVariables.shared.selectedSchedule][i].append(scheduleDataStructures.scheduleTrackingArrays[row]!)
                 break
             }
@@ -280,7 +280,7 @@ class CustomScheduleWeekCell: UITableViewCell {
         generator = nil
         
         // Update the array
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[[[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
         var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         // Remove from schedules array and update userdefaults
         // Remove first instance from from Week
@@ -288,13 +288,13 @@ class CustomScheduleWeekCell: UITableViewCell {
         // Loop week
         for i in 0...6 {
             // If day isn't empty
-            if schedules[ScheduleVariables.shared.selectedSchedule][0][i].count != 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
                 // Loop day
-                for j in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][i].count - 1 {
+                for j in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count - 1 {
                     // If correct group
-                    if schedules[ScheduleVariables.shared.selectedSchedule][0][i][j] as! Int == row {
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j] as! Int == row {
                         // Remove
-                        schedules[ScheduleVariables.shared.selectedSchedule][0][i].remove(at: j)
+                        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].remove(at: j)
                         scheduleTracking[ScheduleVariables.shared.selectedSchedule][i].remove(at: j)
                         shouldBreak = true
                         break
@@ -309,11 +309,11 @@ class CustomScheduleWeekCell: UITableViewCell {
         //
         // Remove from full week array
         // If week not empty
-        if schedules[ScheduleVariables.shared.selectedSchedule][0][7].count != 0 {
-            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule][0][7].count - 1 {
-                if schedules[ScheduleVariables.shared.selectedSchedule][0][7][i] as! Int == row {
+        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count != 0 {
+            for i in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count - 1 {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int == row {
                     // Remove
-                    schedules[ScheduleVariables.shared.selectedSchedule][0][7].remove(at: i)
+                    schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].remove(at: i)
                     scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].remove(at: i)
                     break
                 }
