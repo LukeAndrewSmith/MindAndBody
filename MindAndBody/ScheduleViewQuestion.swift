@@ -74,9 +74,9 @@ class ScheduleViewQuestion: UIViewController {
     // MARK: Button actions
     // Day
     @IBAction func dayButtonAction(_ sender: Any) {
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // Set user settings for schedule style to week
-        schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] = 0
+        schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
@@ -86,32 +86,30 @@ class ScheduleViewQuestion: UIViewController {
     // Week
     @IBAction func weekButtonAction(_ sender: Any) {
         // If app schedule, go to week
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // Set user settings for schedule style to week
-        schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] = 1
+        schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         //
         // App helps create schedule, dismiss to schedule
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 0 {
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             // Fill up days in week array with sessions
-            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-            var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-            // Loop sessions array from 1 (0 is total n sessions, rest are number of session of each group)
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                // Loop sessions array from 1 (0 is total n sessions, rest are number of session of each group)
             for i in 1...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2].count - 1 {
                 // If n session not 0
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int != 0 {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2]["total"] as! Int != 0 {
                     // Loop number of sessions
-                    for _ in 1...(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int) {
+                    for _ in 1...(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2]["total"] as! Int) {
                         // Note: group is i - 1 as array includes total n session at 0
                         let group = i - 1
                         // Add to first available day in the week
                         for j in 0...6 {
                             // If week not full (max 5 things per day in week
                             if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].count < 5 {
-                                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].append(group)
-                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][j].append(scheduleDataStructures.scheduleTrackingArrays[group]!)
+                                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].append(scheduleDataStructures.scheduleGroups[group]!)
                                 break
                             }
                         }
@@ -121,9 +119,8 @@ class ScheduleViewQuestion: UIViewController {
             }
             //
             UserDefaults.standard.set(schedules, forKey: "schedules")
-            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+                // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
             //
             self.dismiss(animated: true)
         //

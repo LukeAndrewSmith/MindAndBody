@@ -8,6 +8,46 @@
 
 import Foundation
 
+class TemporaryWeekArray {
+    static let shared = TemporaryWeekArray()
+    private init() {}
+
+    // Temporary week array
+    // If viewed as week, then creates a temporary array of the full week from the schedules sotred to user defaults
+    // This array contains dictionaries with fields, group, day, index, so that the relevant group in the schedulesTracking array can be found and updated
+    // This avoids the need to store two seperate arrays for week view and day view
+    var weekArray: [[String: Any]] = []
+    // "group": ""
+    // "index0": Int // for indexing in week
+    // "index1": Int
+}
+
+extension Int {
+    func groupFromInt() -> String {
+        let groupIntAsString: [Int: String] = [
+            0: "mind",
+            1: "flexibility",
+            2: "endurance",
+            3: "toning",
+            4: "muscleGain",
+            5: "strength"]
+        return groupIntAsString[self]!
+    }
+}
+
+extension String {
+    func groupFromString() -> Int {
+        let groupStringAsInt: [String: Int] = [
+            "mind": 0,
+            "flexibility": 1,
+            "endurance": 2,
+            "toning": 3,
+            "muscleGain": 4,
+            "strength": 5]
+        return groupStringAsInt[self]!
+    }
+}
+
 enum scheduleDataStructures {
     
     // MARK: Profile Data
@@ -44,47 +84,47 @@ enum scheduleDataStructures {
         ]
     
     // Schedule creation help
+    // ENSURE IF CHANGING THAT NAMES OF QUESTIONS ETC ARE THE SAME AS THE INDEXING IN Schedules[..]["ScheduleCreationHelp"]
     static let scheduleCreationHelp: [[[String]]] =
         [
             // Schedule creation questions - 0
             [
                 // gender
-                
                 // Time/Commitment
-                ["profileQ20", "profileA201", "profileA202", "profileA203"], // // Time - 0
-                ["profileQ21", "profileA211", "profileA212", "profileA213"], // // Commitment - 1
+                ["scheduleQTime", "scheduleATime1", "scheduleATime2", "scheduleATime3"], // // Time - 0
+                ["scheduleQPriority", "scheduleAPriority1", "scheduleAPriority2", "scheduleAPriority3"], // Priority - 1
             ],
             // Goals - 1
             [
                 // Mindfulness
-                ["mindII"],
+                ["mindG"],
                 // Yoga
-                ["yogaII"],
+                ["yogaG"],
                 // Flexibility
-                ["flexibilityI"],
+                ["flexibilityG"],
                 // Endurance
-                ["enduranceI"],
+                ["enduranceG"],
                 // Toning
-                ["toningI"],
+                ["toningG"],
                 // Muscle Gain
-                ["muscleGainI"],
+                ["muscleGainG"],
                 // Strength
-                ["strengthI"],
+                ["strengthG"],
             ],
             // Groups - 2
             [
                 // Mind
-                ["mindI"],
+                ["mindG2"],
                 // Flexibility
-                ["flexibility"],
+                ["flexibilityG"],
                 // Endurance
-                ["endurance"],
+                ["enduranceG"],
                 // Toning
-                ["toning"],
+                ["toningG"],
                 // Muscle Gain
-                ["muscleGain"],
+                ["muscleGainG"],
                 // Strength
-                ["strength"],
+                ["strengthG"],
             ]
     ]
     
@@ -164,14 +204,8 @@ enum scheduleDataStructures {
             ]
     ]
     
-    
-    // Schedules
-    static let registerSchedules: [[String: [[Any]]]] =
-        [
-        ]
-    
     // Custom schedules insert this into schedules array
-    static let emptyWeek: [String: [[Any]]] =
+    static let emptyWeekOLD: [String: [[Any]]] =
         [
             // [0] Schedule --------------------
             "schedule": [
@@ -223,8 +257,14 @@ enum scheduleDataStructures {
     ]
     
     
+    // Schedules
+    static let registerSchedules: [[String: [[[String: Any]]]]] =
+        [
+    ]
+    
+    
     // Custom schedules insert this into schedules array
-    static let emptyWeekTest: [String: [[[String: Any]]]] =
+    static let emptyWeek: [String: [[[String: Any]]]] =
         [
             // [0] Schedule --------------------
             "schedule": [
@@ -260,27 +300,28 @@ enum scheduleDataStructures {
             ],
             // [2] Schedule creation help data --------------------
             "scheduleCreationHelp": [
+                // Note: in array for nesting
                 [
                     // Question answers
-                    ["timeAndEnergy": -1,
-                    "priority": -1],
+                    ["scheduleQTime": -1,
+                    "scheduleQPriority": -1],
                     // Goals
-                    ["mind": 0,
-                     "yoga": 0,
-                     "flexibility": 0,
-                     "endurance": 0,
-                     "toning": 0,
-                     "muscleGain": 0,
-                     "strength": 0,
+                    ["mindG2": 0,
+                     "yogaG": 0,
+                     "flexibilityG": 0,
+                     "enduranceG": 0,
+                     "toningG": 0,
+                     "muscleGainG": 0,
+                     "strengthG": 0,
                      "total": 0],
                     // N Sessions
-                    ["mind": 0,
-                     "yoga": 0,
-                     "flexibility": 0,
-                     "endurance": 0,
-                     "toning": 0,
-                     "muscleGain": 0,
-                     "strength": 0,
+                    ["mindG": 0,
+                     "yogaG": 0,
+                     "flexibilityG": 0,
+                     "enduranceG": 0,
+                     "toningG": 0,
+                     "muscleGainG": 0,
+                     "strengthG": 0,
                      "total": 0],
                     // Ranges
                     ["mindLower": 0,
@@ -302,121 +343,50 @@ enum scheduleDataStructures {
             ]
     ]
     
-    let empty
-    ["group": "",
-    "completedGroup": false,
-    "completed": false,
-    "": false]
-    
-    // Tracking
-    static let registerTracking: [[[[[Bool]]]]] =
-        [
-    ]
-    
-    // Empty Tracking Week
-    static let emptyTrackingWeek: [[[[Bool]]]] =
-        // Tracking App Schedule
-        [
-            // Monday
-            [],
-            // Tuesday
-            [],
-            // Wednesday
-            [],
-            // Thursday
-            [],
-            // Friday
-            [],
-            // Saturday
-            [],
-            // Sunday
-            [],
-            // Full week as list - 7
-//            [] // REMOVE
-    ]
-    
     //
     // MARK: Schedule Tracking, tracking what youve done each week, putting a tick next to what you've done in schedule if true
-    static let scheduleTrackingArrays: [Int:[[Bool]]] =
+    static let scheduleGroups: [Int:[String :Any]] =
         [
             // MARK: Mind
             // NOTE MIND HAS CHOICE OF GOING FOR A WALK, IF SELECTED WONT GO GREEN, WILL JUST TAKE BACK TO INITIAL SCREEN AND SET TO TRUE
-            0:
-                [
-                    // 0
-                    [false],
-                    // 4 | To Do Yoga - Warmup, Practice
-                    [
-                        false,
-                        false
-                    ]
-            ],
+            0: ["group": "mind",
+                 "isGroupCompleted": false,
+                 "0": false, // Warmup
+                 "1": false], // Session
             
             // Note: Choice = ["title","contents","contents"...]
             // MARK: Flexibility
-            1:
-                [
-                    // 0
-                    [false],
-                    // 4 | To Do Flexibility - Warmup, Session
-                    [
-                        false,
-                        false
-                    ]
-            ],
+            1: ["group": "mind",
+               "isGroupCompleted": false,
+               "0": false, // Warmup
+               "1": false], // Session
             
             // MARK: Endurance
-            2:
-                [
-                    // 0
-                    [false],
-                    // --------------
-                    // 4,5 , High intensity and steady state, both use same array of bool
-                    [
-                        false,
-                        false,
-                        false
-                    ],
-            ],
+            2: ["group": "mind",
+                "isGroupCompleted": false,
+                "0": false, // Warmup
+                "1": false, // Session
+                "2": false], // Stretching
             // MARK: Toning
-            3:
-                [
-                    // 0
-                    [false],
-                    // 3 | Toning To Do, warmup, session, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ],
+            3: ["group": "mind",
+               "isGroupCompleted": false,
+               "0": false, // Warmup
+                "1": false, // Session
+                "2": false], // Stretching
             
             // MARK: Muscle Gain
-            4:
-                [
-                    // 0
-                    [false],
-                    // 4 | Muscle Gain To Do - Warmup, session, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ],
-            
+            4: ["group": "mind",
+                "isGroupCompleted": false,
+                "0": false, // Warmup
+                "1": false, // Session
+                "2": false], // Stretching
             // MARK: Strength
-            5:
-                [
-                    // 0
-                    [false],
-                    // 4 | Strength To Do, Warmup, Session, Stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ]
-    ]
+            5: ["group": "mind",
+                "isGroupCompleted": false,
+                "0": false, // Warmup
+                "1": false, // Session
+                "2": false], // Stretching
+        ]
     
 }
 

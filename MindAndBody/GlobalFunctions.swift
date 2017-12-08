@@ -48,11 +48,11 @@ class ReminderNotifications {
         //
         if notificationSettings![0] == 1 {
             //
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
 
             // Day view: set notifications for each day something is planned
             if schedules.count != 0 {
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] as! Int == 0 {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
                     // Loop week
                     for i in 0...6 {
                         // Loop day
@@ -571,31 +571,48 @@ extension UIViewController {
     func updateScheduleTracking(fromSchedule: Bool) {
         // Only relevant if coming from schedule
         if fromSchedule {
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-            // Day
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] as! Int == 0 {
-                // Update day
-                var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
-                // Set
-                UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
-                // Reload
-                ScheduleVariables.shared.shouldReloadChoice = true
-                // Week
-            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] as! Int == 1 {
-                // Update week [7]
-                var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][ScheduleVariables.shared.selectedRows[0]][1][ScheduleVariables.shared.selectedRows[1]] = true
-                // Set
-                UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
-                // Reload
-                ScheduleVariables.shared.shouldReloadChoice = true
-            }
+            //
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            
+            // Indexing variables
+            // Differ if last choice or first choice
+            let indexingVariables = getIndexingVariablesForSession()
+            // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+            let index0 = indexingVariables.0
+            // index1 = Selected row in final choice (i.e warmup, session, stretching)
+            let index1 = indexingVariables.1
+            
+            // Update
+            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][index0][index1] = true
+            // Set
+            UserDefaults.standard.set(schedules, forKey: "schedules")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
+            // Reload
+            ScheduleVariables.shared.shouldReloadChoice = true
         }
+    }
+    
+    func getIndexingVariablesForSession() -> (Int, String) {
+        //
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+
+        // Indexing variables
+        // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+        var index0 = Int()
+        // index1 = Selected row in final choice (i.e warmup, session, stretching)
+        var index1 = String()
+        
+        // Day view - index is simply row
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+            index0 = ScheduleVariables.shared.selectedRows[0]
+        // Week view -  find stored index to schedule week using temporary full week array
+        } else {
+            index0 = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["index0"] as! Int
+        }
+        // -1 as title included in table so offset by 1
+        index1 = String(ScheduleVariables.shared.selectedRows[0] - 1)
+        return (index0, index1)
     }
     
     // NOTE: Func to reset schedule tracking and week tracking found in globalVariables, Schedule data, as needs to be contained in a class
@@ -763,7 +780,7 @@ extension UIViewController {
     // MARK: Update week goal
     func updateWeekGoal() {
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         // Find goal = number of groups planned = fullWeekArray.count
         var goal = Int()

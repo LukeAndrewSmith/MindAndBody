@@ -258,8 +258,9 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 // Section tag
                 slider.tag = indexPath.section
                 //
-                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-                let value = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![self.selectedSection][indexPath.section] as! Int
+                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                let indexString = scheduleDataStructures.scheduleCreationHelp[selectedSection][indexPath.section][0]
+                let value = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][indexString] as! Int
                 slider.value = Float(value)
                 
                 //
@@ -310,10 +311,11 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 // Section tag
                 slider.tag = indexPath.section
                 //
-                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
                 // NOTE TOTAL N SESSIONS, THOUGH IN SAME ARRAY, IS PRESENTED IN TITLE
-                // Therefore section + 1 to find first section value (n sessions is 0)
-                let value = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][indexPath.section + 1] as! Int
+                // schedule creation help indexed through names of groups etc, so get the string index from the originial question array, scheduleCreationHelp
+                let stringIndex = scheduleDataStructures.scheduleCreationHelp[selectedSection][indexPath.section][0]
+                let value = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][stringIndex] as! Int
                 slider.value = Float(value)
                 //
                 // Indicator Label
@@ -340,12 +342,17 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         var count = 0
         for i in 0...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection].count - 1 {
-            count += schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][i] as! Int
+            // schedule creation help indexed through names of groups etc, so get the string index from the originial question array, scheduleCreationHelp
+            let stringIndex = scheduleDataStructures.scheduleCreationHelp[selectedSection][i][0]
+            count += schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][stringIndex] as! Int
         }
+        
+        // TODO: NOT NECESSARILY THE CORRECT THING TO DO
+        // TODO: NOT SURE IF USING SLIDERS FOR NUMBER OF SESSIONS ANYMORE
         
         // If sessions not null
         if count != 0 {
@@ -357,29 +364,25 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 //
                 // MARK: Update schedules full week list
                 // add each group * n sessions to the list (e.g [mind, mind, mind, flexibility, muscle gain, muscle gain] = [0,0,0,1,4,4]
-                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-                var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
                 // reset full week list
                 schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7] = []
-                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
-                                
+                
                 //
                 // from 1, and -2 as array includes total n sessions
                 // Loop group sessions array
-                for i in 1...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2].count - 1 {
-                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int != 0 {
-                        // Loop n session of each group with more than 0 sessions
-                        for _ in 1...(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int) {
-                            // i - 1 as group number is 1 less as array includes total n sessions so is offset by 1
-                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].append(i - 1)
-                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].append(scheduleDataStructures.scheduleTrackingArrays[i - 1]!)
-                        }
-                    }
-                }
+//                for i in 1...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2].count - 1 {
+//                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int != 0 {
+//                        // Loop n session of each group with more than 0 sessions
+//                        for _ in 1...(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int) {
+//                            // i - 1 as group number is 1 less as array includes total n sessions so is offset by 1
+//                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].append(i - 1)
+//                        }
+//                    }
+//                }
                 UserDefaults.standard.set(schedules, forKey: "schedules")
-                UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                 // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                 //
                 // CHECK WHERE TO GO
                 // If not coming from schedule editing, go to scheudle help question
@@ -396,15 +399,18 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                     for i in 0...6 {
                         if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
                             for j in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count - 1 {
+                                //
+                                let groupIndex = (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j]["group"] as! String).groupFromString()
                                 // i + 1 as week before total n sessions in schedules whereas total n sessions before groups in sessions array
-                                newNSessions[schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j] as! Int + 1] += 1
+                                newNSessions[groupIndex + 1] += 1
                                 // Total n sessions count
                                 newNSessions[0] += 1
                             }
                         }
                     }
                     
-                    //
+                    // Check if schedule has changed
+                    // todo!!!!
                     if newNSessions != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2] as! [Int] {
                         scheduleHasChanged = true
                     }
@@ -450,7 +456,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: sliderValueChanged
     let step: Float = 1
     @IBAction func sliderValueChanged(sender: UISlider) {
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue
@@ -465,8 +471,9 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         // N Sessions
         // Change thumbTintColor for groups
         // Update total n sessions
+        // TODO: NOT NECESSARILY USING SLIDERS ANYMORE
         if selectedSection == 2 {
-            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][sender.tag + 1] = Int(roundedInt)
+//            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][sender.tag + 1] = Int(roundedInt)
             // Thumb Tint
             // Red, below and above suggested
             let index = indexPath.section * 2
@@ -485,14 +492,16 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             for i in 1...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2].count - 1 {
                 nSessions += schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int
             }
-            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][0] = nSessions
+//            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][0] = nSessions
             //
             let titleString = String(nSessions) + NSLocalizedString("nSessionsPerWeek", comment: "")
             sectionLabel.text = titleString
             
-            // Goals
+        // Goals
         } else {
-            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][sender.tag] = Int(roundedInt)
+            // Find question string to index schedules, as questions saved to schedules are index by the title of the question
+            let question = scheduleDataStructures.scheduleCreationHelp[selectedSection][sender.tag][0]
+            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][question] = Int(roundedInt)
         }
                 
         UserDefaults.standard.set(schedules, forKey: "schedules")
@@ -504,7 +513,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: Set Slider Gradient
     //
     func setSliderGradient(slider:UISlider, section: Int) {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // Max possible slider value
         var maxValue = Int()
         if section == 0 {
@@ -635,7 +644,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             // TODO: CALL SET N SESSIONS
             setNumberOfSessions(updating: false)
             //
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             //
             selectedSection += 1
             updateProgress()
@@ -671,7 +680,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     //
     //
     @objc func upSwipeAction() {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         if selectedSection == 0 {
             // If question has been answered
             if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedQuestion] as! Int != -1 {
@@ -875,7 +884,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     // ScheduleCreationHelpCell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         //
         cell.backgroundColor = Colors.dark
@@ -902,8 +911,10 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     
     // Cell Questions table, set answer in array to selected answer
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-        schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][row] = indexPath.row
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        // Find question string to index schedules, as questions saved to schedules are index by the title of the question
+        let question = scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][0]
+        schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][question] = indexPath.row
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])

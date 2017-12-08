@@ -189,7 +189,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
                 self.dismiss(animated: true)
             } else {
                 let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
                 let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
                 var allAnswered = true
                 for i in 0...profileAnswers.count - 1 {
@@ -199,7 +199,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
                 }
                 if allAnswered {
                     // App helps schedule creation
-                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 0 {
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
                         self.performSegue(withIdentifier: "ProfileAppHelpSegue", sender: self)
                     // Custom schedule creation
                     } else {

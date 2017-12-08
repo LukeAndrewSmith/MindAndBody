@@ -63,12 +63,6 @@ class ScheduleScreen: UIViewController {
     // StackView
     var stackArray: [UILabel] = []
     
-    // Temporary week array
-        // If viewed as week, then creates a temporary array of the full week from the schedules sotred to user defaults
-        // This array contains dictionaries with fields, group, day, index, so that the relevant group in the schedulesTracking array can be found and updated
-        // This avoids the need to store two seperate arrays for week view and day view
-    var temporaryWeekArray: [[String: Any]] = []
-    
     // Schedule creation and choices ACTION SHEET
     let scheduleChoiceTable = UITableView()
     let editScheduleButton = UIButton()
@@ -179,7 +173,7 @@ class ScheduleScreen: UIViewController {
     // Schedule Selection (Bar Button Item (Top Right))
     // Edit Schedule
     @objc func editScheduleAction() {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         ActionSheet.shared.animateActionSheetDown()
         //
@@ -232,7 +226,7 @@ class ScheduleScreen: UIViewController {
         //
         } else if segue.identifier == "scheduleSegueOverview" {
             let destinationVC = segue.destination as? FinalChoice
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             // Only say from schedule if app chooses sessions for the user
             destinationVC?.comingFromSchedule = true
             // Remove back button text

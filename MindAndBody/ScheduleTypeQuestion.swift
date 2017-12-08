@@ -55,16 +55,13 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             ScheduleVariables.shared.didCreateNewSchedule = false
             //
             // Delete Schedule
-            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-            var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-            //
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                //
             // Delete if not plus row
             // Update arrays
             schedules.remove(at: ScheduleVariables.shared.selectedSchedule)
-            scheduleTracking.remove(at: ScheduleVariables.shared.selectedSchedule)
             UserDefaults.standard.set(schedules, forKey: "schedules")
-            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-            
+                
             // Select previous schedule last schedule
             var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
             if schedules.count == 0 || selectedSchedule == 0 {
@@ -75,7 +72,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
             // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])
+            ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "selectedSchedule"])
         }
         
     }
@@ -201,12 +198,10 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             }
             // 3. Get the value from the text field, and perform actions upon OK press
             okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-                var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
                 //
                 // Append new schedule array to schedules
                 schedules.append(scheduleDataStructures.emptyWeek)
-                scheduleTracking.append(scheduleDataStructures.emptyTrackingWeek)
                 //
                 // Update selected Schedule
                     // Set selected schedule to newly created schedule (last schedule in schedules)
@@ -219,27 +214,26 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
                 let textField = alert?.textFields![0]
                 let lastIndex = schedules.count - 1
                 let title = textField?.text!
-                schedules[lastIndex]["scheduleInformation"]![0][0] = title
+                schedules[lastIndex]["scheduleInformation"]![0][0]["title"] = title
                 //
                 // Update schedule settings settings based on switches
                 // Schedule type option option
                 if self.scheduleOptionSwitch.isOn {
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] = 0
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] = 0
                 } else if self.scheduleOptionSwitch.isOn == false {
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] = 1
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] = 1
                 }
                 // Sessions choice option
                 if self.sessionsOptionSwitch.isOn {
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![2][0] = 0
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 0
                 } else if self.sessionsOptionSwitch.isOn == false {
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![2][0] = 1
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
                 }
                 //
                 // SET NEW ARRAY
                 UserDefaults.standard.set(schedules, forKey: "schedules")
-                UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                 // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule", "schedules", "scheduleTracking"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule", "schedules"])
                 //
                 // Indicate that new schedule has been created
                 ScheduleVariables.shared.didCreateNewSchedule = true
@@ -278,12 +272,12 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         // Perform relevant segue
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // PERFORM SEGUE
         // App helps create schedule
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 0 {
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             // App chooses sessions
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![2][0] as! Int == 0 && userHasFilledInProfile == false {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 && userHasFilledInProfile == false {
                 // Goes to profile
                 self.performSegue(withIdentifier: "ScheduleQuestionProfileSegue", sender: self)
             // User chooses sessions
@@ -292,9 +286,9 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
                 self.performSegue(withIdentifier: "ScheduleQuestionHelpSegue", sender: self)
             }
         // Custom Schedule
-        } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 1 {
+        } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 {
             // App chooses sessions
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![2][0] as! Int == 0 && userHasFilledInProfile == false {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 && userHasFilledInProfile == false {
                 // Goes to profile
                 self.performSegue(withIdentifier: "ScheduleQuestionProfileSegue", sender: self)
             // User chooses sessions

@@ -125,7 +125,7 @@ class ScheduleVariables {
     // ScheduleVariables.shared.choiceProgress Indicated progress through the choices to select a session
     // Note: ScheduleVariables.shared.choiceProgress[0] = -1 if first screen (i.e groups of the day/week being shown), != 0 choices being displayed and the int indicates the index of the group selected, ---- ScheduleVariables.shared.choiceProgress[1] == progress through choices
     var choiceProgress = [-1,0]
-    // Indicates which row was selected on inital choice screen, and which row was selected on final choice screen
+    // Indicates which row was selected on inital choice screen, and which row was selected on final choice screen (note: row of final choice is stored as row even though title included as row 0 so offset by 1, take into account when using)
     var selectedRows = [0,0]
     // Selected day
     var selectedDay = Int()
@@ -144,8 +144,8 @@ class ScheduleVariables {
     // Func reset schedule tracking and week tracking
     func resetWeekTracking() {
         // Use lastResetWeek in tracking progress array to reset schedule tracking bools to false and and week progress to 0
-        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         // Current mondays date in week
         let currentMondayDate = Date().firstMondayInCurrentWeek
@@ -155,21 +155,23 @@ class ScheduleVariables {
         // Reset if last reset wasn't in current week
         if lastReset != currentMondayDate {
             // Reset all bools in week tracking to false
-            if scheduleTracking.count != 0 {
+            if schedules.count != 0 {
                 // Loop scheduleTracking
-                for i in 0...scheduleTracking.count - 1 {
-                    // Loop schedule (week containing days/ full week)
-                    for j in 0...scheduleTracking[i].count - 1 {
-                        // If day/full week not empty
-                        if scheduleTracking[i][j].count != 0 {
-                            // Loop day/full week
-                            for k in 0...scheduleTracking[i][j].count - 1 {
-                                // Loop groups (should always be 0...1, see SchedulDataStructures.scheduleTrackingArrays)
-                                for l in 0...scheduleTracking[i][j][k].count - 1 {
-                                    // Will always contain something, check SchedulDataStructures.scheduleTrackingArrays
-                                    for m in 0...scheduleTracking[i][j][k][l].count - 1 {
-                                        scheduleTracking[i][j][k][l][m] = false
-                                    }
+                for i in 0..<schedules.count {
+                    // Loop week
+                    for j in 0...6 {
+                        // If day not empty
+                        if schedules[i]["schedule"]![j].count != 0 {
+                            // Loop day
+                            for k in 0..<schedules[i]["schedule"]![j].count {
+                                // Set all to false
+                                schedules[i]["schedule"]![j][k]["isGroupCompleted"] = false
+                                schedules[i]["schedule"]![j][k]["0"] = false
+                                schedules[i]["schedule"]![j][k]["1"] = false
+                                
+                                // Check if stretching part of group
+                                if schedules[i]["schedule"]![j][k]["2"] != nil {
+                                    schedules[i]["schedule"]![j][k]["2"] = false
                                 }
                             }
                         }
@@ -179,14 +181,10 @@ class ScheduleVariables {
             // Set week progress to 0
             trackingProgressDictionary["WeekProgress"] = 0
             // Set Last Reset
-            trackingProgressDictionary["LastResetWeek"] = currentMondayDate
-            // Indicate has been reset, to indicate if this func called again on a monday that it already has been reset
-//            trackingProgressDictionary[3] = true
-            //
-            UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress", "scheduleTracking"])
+            UserDefaults.standard.set(trackingProgressDictionary, forKey: "schedules")
+            UserDefaults.standard.set(schedules, forKey: "trackingProgress")
+                // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress", "schedules"])
         }
     }
 }

@@ -235,7 +235,7 @@ extension TimeBasedScreen {
             finishEarly.isEnabled = false
             
             //
-            let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[selectedRow]!["movement"] as! String
+            let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[selectedRow]["movement"] as! String
             // Title
             // Movement is not asymmetric
             if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key) == false {

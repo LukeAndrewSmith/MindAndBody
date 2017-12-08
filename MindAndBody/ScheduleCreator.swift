@@ -190,7 +190,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.row], comment: "")
         cell.layoutSubviews()
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         // add relevant groups if they are there
         if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![indexPath.row].count != 0 {
@@ -202,7 +202,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                 cell.groupLabelArray[i].clipsToBounds = true
                 //
-                cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![indexPath.row][i] as! Int], comment: "")
+                // Get group as int
+                let group = (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![indexPath.row][i]["group"] as! String).groupFromString()
+                cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[group], comment: "")
                 cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
             }
         }
@@ -216,13 +218,16 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     // MARK: General Helpers
     func setVariables() {        
         //
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // nGroups, groupsIndexes, nSessions
         // If app helps create schedule, find which groups shown
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 0 {
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             // Loop sessions array to find out what is presented
             for i in 1...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2].count - 1 {
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int != 0 {
+                //
+                // schedules[schedulesCreationHelp] indexed with strings, therefore retreive relevant string index from scheduleCreationHelp question array
+                let stringIndex = scheduleDataStructures.scheduleCreationHelp[2][i][0]
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int != 0 {
                     nGroups += 1
                     // i - 1 as totalnsession included in array
                     groupIndexes.append(i - 1)
@@ -244,14 +249,13 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Set dayTableGroupArray
             // indicates how many are of each group in the table
         //
-        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         // week
         // If app schedule, find out
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 0 {
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             for i in 0...6 {
                 if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
                     for j in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count - 1 {
-                        let indexOfGroupInLoop = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j] as! Int
+                        let indexOfGroupInLoop = (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j]["group"] as! String).groupFromString()
                         dayTableGroupArray[indexOfGroupInLoop] += 1
                     }
                 }
@@ -268,7 +272,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
 //        // Loop the groups
 //        // GROUP LOOP
 //            // Day
-//        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 0 {
+//        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
 //            for i in 0...dayTableGroupArray.count - 1 {
 //                // If the group in dayTableGroupArray has more sessions than in the schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i + 1], remove the relevant amount
 //                if dayTableGroupArray[i] > schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i + 1] as! Int {
@@ -313,29 +317,31 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
 //            // GROUP LOOP
 //            }
 //        }
-        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
     }
     
     func setGroupLabels() {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // app helps create schedule
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 0 {
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             // Set titles
             if nGroups != 0 {
                 for i in 0...nGroups - 1 {
                     //
                     let indexOfGroup = groupIndexes[i]
+                    // schedule creation help indexed through names of groups etc, so get the string index from the originial question array, scheduleCreationHelp
+                    let stringIndex = scheduleDataStructures.scheduleCreationHelp[2][indexOfGroup][0]
+                    //
                     let groupTitle = NSLocalizedString(scheduleDataStructures.groupNames[indexOfGroup], comment: "")
                     // Not selected filled in
                     var nGroupsString = String()
                     if dayTableGroupArray[indexOfGroup] == 0 {
-                        nGroupsString = "\n" + String(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][indexOfGroup + 1] as! Int) + "x"
+                        nGroupsString = "\n" + String(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int) + "x"
                     // Some selected already
-                    } else if dayTableGroupArray[indexOfGroup] != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][indexOfGroup + 1] as! Int {
-                        let number = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][indexOfGroup + 1] as! Int - dayTableGroupArray[indexOfGroup]
+                    } else if dayTableGroupArray[indexOfGroup] != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int {
+                        let number = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int - dayTableGroupArray[indexOfGroup]
                         nGroupsString = "\n" + String(number) + "x"
                     } else {
                         nGroupsString = ""
@@ -352,7 +358,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
 
                     
                     // Make label dark and green if all session of group have been chosen
-                    if dayTableGroupArray[indexOfGroup] == schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][indexOfGroup + 1] as! Int {
+                    if dayTableGroupArray[indexOfGroup] == schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int {
                         bigGroupLabelArray[i].alpha = 0.75
                         bigGroupLabelArray[i].layer.borderColor = Colors.green.withAlphaComponent(0.5).cgColor
                         bigGroupLabelArray[i].textColor = Colors.green
@@ -385,9 +391,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // For when user adds new group to week, adds to the fullweek array as well to ensure consistency
     // TODO: TESTING, UPDATE FULL WEEK
 //    func updateFullWeek() {
-//        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-//        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-//
+//        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+////
 ////        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7] = []
 ////        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7] = []
 //        var shouldAppend = false
@@ -431,10 +436,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
 //        }
 //
 //        //
-//        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-//        UserDefaults.standard.set(schedules, forKey: "schedules")
+////        UserDefaults.standard.set(schedules, forKey: "schedules")
 //        // Sync
-//        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+//        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
 //        //
 //        // Update
 //        // Loop full week
@@ -460,7 +464,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // MARK: Begin Dragging
     @objc func beginDraggingFromTop(gestureRecognizer: UIGestureRecognizer) {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
 
         let longPress = gestureRecognizer as! UILongPressGestureRecognizer
         let state = longPress.state
@@ -477,8 +481,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             indexOfDrag = longPressArray.index(of: longPress)!
             indexOfDraggedGroup = groupIndexes[indexOfDrag]
             
+            //
+            let stringIndex = scheduleDataStructures.scheduleCreationHelp[2][indexOfDraggedGroup][0]
+            
             // If there are some session left to drag from group or if custom schedule
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 1 || dayTableGroupArray[indexOfDraggedGroup] != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][indexOfDraggedGroup + 1] as! Int {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 || dayTableGroupArray[indexOfDraggedGroup] != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int {
                 // Haptic feedback
                 var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
                 generator?.prepare()
@@ -632,17 +639,14 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if dayIsFull == false {
                     // Update the array
                     //
-                    var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-                    var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                    // update dayTableGroupArray
+                    var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                        // update dayTableGroupArray
                     dayTableGroupArray[indexOfDraggedGroup] += 1
                     // update schedules
-                    schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(previousIndexPath?.row)!].append(indexOfDraggedGroup)
-                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleTrackingArrays[indexOfDraggedGroup]!)
+                    schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
                     UserDefaults.standard.set(schedules, forKey: "schedules")
-                    UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+                        // Sync
+                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                     // TODO: !!!!!
 //                    updateFullWeek()
                     // update label
@@ -665,7 +669,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // MARK: Begin Dragging from cell
     @objc func beginDraggingFromCell(gestureRecognizer: UIGestureRecognizer) {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         
         let longPress = gestureRecognizer as! UILongPressGestureRecognizer
         let state = longPress.state
@@ -678,9 +682,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Add dragging label
         case .began:
             //
-            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-            var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-            
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                
             let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
             let locationInCell = longPress.location(in: cell)
 
@@ -698,18 +701,16 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     // Get index of the group being dragged using the schedules array
                         // i.e find out which group being dragged
-                    indexOfDraggedGroup = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![indexPathForRow!.row][indexOfDrag] as! Int
+                    indexOfDraggedGroup = (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![indexPathForRow!.row][indexOfDrag]["group"] as! String).groupFromString()
                     //
                     previousIndexPath = indexPathForRow
                     
                     // Remove from schedules array and update userdefaults
                     schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(indexPathForRow?.row)!].remove(at: indexOfDrag)
-                    draggedTrackingArray = scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].remove(at: indexOfDrag)
                     //
                     UserDefaults.standard.set(schedules, forKey: "schedules")
-                    UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+                        // Sync
+                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                     // Remove the label being dragged
                     cell.groupLabelArray[indexOfDrag].tag = 0
                     cell.groupLabelArray[indexOfDrag].alpha = 0
@@ -732,7 +733,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             cell.groupLabelArray[k].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[k].clipsToBounds = true
                             //
-                            cell.groupLabelArray[k].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(indexPathForRow?.row)!][k] as! Int], comment: "")
+                            let groupIndex =  (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(indexPathForRow?.row)!][k]["group"] as! String).groupFromString()
+                            cell.groupLabelArray[k].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[groupIndex], comment: "")
                             cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                         }
                     }
@@ -745,7 +747,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     // Add dragging label and mask stack views
                     // If app helps create schedule, add to day table
-                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 0 {
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
                         draggingLabel.center = locationInView
                         dayTable.addSubview(draggingLabel)
                     // If custom schedule, add to view
@@ -756,7 +758,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     maskStackViews()
                     
                     // If custom schedule, turn createschedulebutton into bin
-                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 1 {
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 {
                         createScheduleButton.backgroundColor = Colors.red.withAlphaComponent(0.25)
                         createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
                         createScheduleButton.setTitle("", for: .normal)
@@ -782,15 +784,15 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         case .changed:
             // Keep the draggingLabel under the finger
             // If app helps create schedule, location in table
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 0 && locationInView.y > 0 && locationInView.y < dayTable.frame.maxY {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 && locationInView.y > 0 && locationInView.y < dayTable.frame.maxY {
                 draggingLabel.center = locationInView
             // If custom, location in view
-            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 1 && locationInView.y > 0 {
+            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 && locationInView.y > 0 {
                 draggingLabel.center = locationInView2
             }
             
             // If Custom schedule and press over bin (createschedulebutton)
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 1 && createScheduleButton.frame.contains(locationInView2) {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 && createScheduleButton.frame.contains(locationInView2) {
                 // Clear old cell
                 // CLEAR INDICATOR
                 if previousIndexPath != nil {
@@ -826,7 +828,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             break
                         }
                     }
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 1 {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 {
                     createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
                     createScheduleButton.setTitle("", for: .normal)
                 }
@@ -834,7 +836,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             } else if indexPathForRow != nil && indexPathForRow != previousIndexPath {
                 
                 //
-                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
                 if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(indexPathForRow?.row)!].count != 5 {
                     // Clear old cell
                     // CLEAR INDICATOR
@@ -871,7 +873,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 
             }
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 1 {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 {
                     createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
                     createScheduleButton.setTitle("", for: .normal)
                 }
@@ -895,7 +897,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         break
                     }
                 }
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 1 {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 {
                     createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
                     createScheduleButton.setTitle("", for: .normal)
                 }
@@ -906,7 +908,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         default:
             var shouldRemoveBin = true
             // If over bin
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 1 && createScheduleButton.frame.contains(locationInView2) {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 && createScheduleButton.frame.contains(locationInView2) {
                 // Haptic feedback
                 var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
                 generator?.prepare()
@@ -929,8 +931,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Note: no need to remove from any arrays as already been removed when the label was picked up
                 // However need to remove from full week array
                 //
-                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-                var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
                 // Remove last instance of the group in the full week array, this is to aim at not removing a tracked/performed group, assuming that the user logically starts doing groups from the top
                 var lastGroupInstanceIndex = Int()
                 // If not empty
@@ -946,12 +947,10 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }
                 schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].remove(at: lastGroupInstanceIndex)
-                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].remove(at: lastGroupInstanceIndex)
                 //
                 UserDefaults.standard.set(schedules, forKey: "schedules")
-                UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
                 // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                 
                 
             // If it is equal to nil, then the long press is not in a label
@@ -1013,21 +1012,17 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if dayIsFull == false {
                         // Update the array
                         //
-                        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-                        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                        // update schedules
+                        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                                // update schedules
                             // Do a check, if the user is dragging off the top of the teable (indexpathforrow == nil, set to previous indexpath(always monday))
                         if indexPathForRow != nil {
-                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(indexPathForRow?.row)!].append(indexOfDraggedGroup)
-                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][(indexPathForRow?.row)!].append(draggedTrackingArray)
+                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(indexPathForRow?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
                         } else {
-                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(previousIndexPath?.row)!].append(indexOfDraggedGroup)
-                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(draggedTrackingArray)
+                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
                         }
                         UserDefaults.standard.set(schedules, forKey: "schedules")
-                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                        // Sync
-                        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+                                // Sync
+                        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                     } else {
                         let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
 
@@ -1054,22 +1049,19 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                         // Update the array
                         //
-                        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-                        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-                        // update schedules
-                        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(previousIndexPath?.row)!].append(indexOfDraggedGroup)
-                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][(previousIndexPath?.row)!].append(draggedTrackingArray)
+                        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                                // update schedules
+                        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
                         UserDefaults.standard.set(schedules, forKey: "schedules")
-                        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-                        // Sync
-                        ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking"])
+                                // Sync
+                        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                 }
                 
                     draggingLabel.removeFromSuperview()
                     deMaskStackViews()
                 
                 // Remove bin
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![3][0] as! Int == 1 && shouldRemoveBin {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 && shouldRemoveBin {
                     createScheduleButton.setImage(nil, for: .normal)
                     createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
                     createScheduleButton.backgroundColor = Colors.green.withAlphaComponent(0.25)

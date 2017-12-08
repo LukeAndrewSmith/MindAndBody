@@ -105,7 +105,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     // Number of rows per section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         switch tableView {
         case scheduleTable:
@@ -147,7 +147,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     // Row cell customization
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Note: accessing title so cast as any
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         
         // Get cell
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
@@ -280,7 +280,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     cell.accessoryType = .checkmark
                     cell.tintColor = Colors.green
                 }
-                cell.textLabel?.text = NSLocalizedString(schedules[indexPath.row]["scheduleInformation"]![0][0] as! String, comment: "")
+                cell.textLabel?.text = NSLocalizedString(schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as! String, comment: "")
             }
             
             
@@ -319,7 +319,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
           
         // Select schedule
         case scheduleChoiceTable:
-            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             // Creat new schedule
             if indexPath.row == schedules.count {
                 // Dismiss action sheet
@@ -330,11 +330,10 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 // Select schedule
             } else {
                 // Select new schedule in user settings
-                var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
                 var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
                 selectedSchedule = indexPath.row
                 ScheduleVariables.shared.selectedSchedule = selectedSchedule
-                scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] as! Int
+                scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
                 UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule"])
@@ -371,7 +370,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     //
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         if tableView == scheduleTable {
             return false
         } else if tableView == scheduleChoiceTable {
@@ -384,8 +383,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     
     // Commit editing style
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         // Delete if not plus row
         if editingStyle == UITableViewCellEditingStyle.delete {
@@ -393,10 +391,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             updateWeekGoal()
             // Update arrays
             schedules.remove(at: indexPath.row)
-            scheduleTracking.remove(at: indexPath.row)
             UserDefaults.standard.set(schedules, forKey: "schedules")
-            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-            
+                
             // Select 1 schedule before last schedule
             var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
             if schedules.count == 0 || selectedSchedule == 0 {
@@ -404,7 +400,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 scheduleStyle = 0
             } else {
                 selectedSchedule -= 1
-                scheduleStyle = schedules[selectedSchedule]["scheduleInformation"]![1][0] as! Int
+                scheduleStyle = schedules[selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
             }
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
             ScheduleVariables.shared.selectedDay = Date().currentWeekDayFromMonday - 1
@@ -413,7 +409,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             layoutViews()
             scheduleTable.reloadData()
             // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "scheduleTracking", "selectedSchedule"])
+            ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "selectedSchedule"])
             //
             ReminderNotifications.shared.setNotifications()
             

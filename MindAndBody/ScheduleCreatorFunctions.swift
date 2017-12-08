@@ -16,7 +16,7 @@ extension UIViewController {
     // MARK: - Determine Number of Sessions
     func setNumberOfSessions(updating: Bool) {
         // Create/Fetch Arrays
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // Deduce number of sessions using '''ScheduleVariables.shared.updatedSessionsArray''', then let user edit, then set to defaults;  this is so if user is updating profile the new array can be checked against the existing schedule to see the difference
         // [nSessions, mind, flexibility, endurance, toning, muscle gain, strength]
         // [total,
@@ -564,6 +564,7 @@ extension UIViewController {
         // ----------------------------------------------
         // MARK: Update ranges
         // Session ranges
+        // TODO: UPDATE RANGES!!!!!
         for i in 1...ScheduleVariables.shared.updatedSessionsArray.count - 1 {
             // i - 1 as ScheduleVariables.shared.updatedSessionsArray contains total n sessions, but schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3] does not
             // lower range: i*2
@@ -573,21 +574,21 @@ extension UIViewController {
                 // Lower Range
                 // 1 if 1, -1 if > 1
                 if ScheduleVariables.shared.updatedSessionsArray[i] > 1 {
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] = ScheduleVariables.shared.updatedSessionsArray[i] - 1
+//                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] = ScheduleVariables.shared.updatedSessionsArray[i] - 1
                 } else {
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] = ScheduleVariables.shared.updatedSessionsArray[i]
+//                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] = ScheduleVariables.shared.updatedSessionsArray[i]
                 }
                 // Upper range
                 // If mind set upper range higher
                 if index == 0 {
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] = ScheduleVariables.shared.updatedSessionsArray[i] + 3
+//                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] = ScheduleVariables.shared.updatedSessionsArray[i] + 3
                     // If mind set upper range higher
                 } else {
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] = ScheduleVariables.shared.updatedSessionsArray[i] + 2
+//                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] = ScheduleVariables.shared.updatedSessionsArray[i] + 2
                 }
             } else {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] = 0
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] = 0
+//                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] = 0
+//                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] = 0
             }
         }
         
@@ -596,7 +597,7 @@ extension UIViewController {
         // TODO: BETTER EXPLANATIONS
         // NOTE IF UPDATING SESSION, THE ARRAYS SHOULDN'T BE SET HERE THE USER SHOULD BE PRESENTED THE NEW ARRAYS AND THEY DECIDE THEN
         if updating == false {
-            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2] = ScheduleVariables.shared.updatedSessionsArray
+//            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2] = ScheduleVariables.shared.updatedSessionsArray
             UserDefaults.standard.set(schedules, forKey: "schedules")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
@@ -645,4 +646,5 @@ extension UIViewController {
     }
     
 }
+
 

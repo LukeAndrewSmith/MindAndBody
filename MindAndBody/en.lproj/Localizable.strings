@@ -1704,6 +1704,53 @@
 
 "week" = "Nº Sessions per week";
 
+// MARK: Schedule creation help
+// Time / Committement
+"scheduleQTime" = "Do you have time and energy to work towards your physical and mental goals (time where you're able and willing to)?"; // Time
+"scheduleATime1" = "Not much (1 - 2 days a week)"; // 2 - 3???
+"scheduleATime2" = "A little (3 - 4 days a week)";  // 3 - 5????
+"scheduleATime3" = "Yes (5 - 7 days a week)";
+"scheduleQPriority" = "Are your physical and mental goals a high priority (will you be committed)?"; // Priority
+"scheduleAPriority1" = "Not really, but I'd like to do a little";
+"scheduleAPriority2" = "Yes, but I should take it easy to begin with";
+"scheduleAPriority3" = "Definitely, I will work hard towards my goals";
+
+//
+// Goals
+"mindfulnessI" = "Mindfulness";
+"calmnessI" = "Calmness";
+"contentednessI" = "Contentedness";
+
+// Used for Goals/N Sessions
+"mindG" = "Mind (mindfulness, calmness etc.)";
+"mindG2" = "Mind";
+"yogaG" = "Yoga (and all it's benifits)";
+"flexibilityG" = "Flexibility";
+"enduranceG" = "Endurance";
+"toningG" = "Toning";
+"muscleGainG" = "Muscle Gain";
+"strengthG" = "Strength";
+
+// Shortened names
+"mindS" = "M";
+"flexibilityS" = "F";
+"enduranceS" = "E";
+"toningS" = "T";
+"muscleGainS" = "MG";
+"strengthS" = "S";
+
+//
+// Groups
+"mindI" = "Mind (Yoga & Meditation)";
+"totalNumberSessionI" = "Total Nº Sessions (per week)";
+
+//
+// Quick Question
+"scheduleView" = "I would like to:";
+"scheduleView1" = "See each day of the week seperately";
+"scheduleView2" = "See the whole week as a list of all my planned sessions";
+
+
 //
 // MARK: Repeating Reminders/Notifications
 "mindBodySchedule" = "Mind & Body Schedule";
@@ -1837,49 +1884,6 @@
     "profileA192" = "Yes";
     "profileA193" = "Yes, with my eyes closed";
     "profileA194" = "Yes, with my eyes closed while looking up";
-// Time / Committement
-"profileQ20" = "Do you have time and energy to work towards your physical and mental goals (time where you're able and willing to)?"; // Time
-    "profileA201" = "Not much (1 - 2 days a week)"; // 2 - 3???
-    "profileA202" = "A little (3 - 4 days a week)";  // 3 - 5????
-    "profileA203" = "Yes (5 - 7 days a week)";
-"profileQ21" = "Are your physical and mental goals a high priority (will you be committed)?"; // Commitment
-    "profileA211" = "Not really, but I'd like to do a little";
-    "profileA212" = "Yes, but I should take it easy to begin with";
-    "profileA213" = "Definitely, I will work hard towards my goals";
-
-//
-// Goals
-"mindfulnessI" = "Mindfulness";
-"calmnessI" = "Calmness";
-"contentednessI" = "Contentedness";
-
-"mindII" = "Mind (mindfulness, calmness etc.)";
-"yogaII" = "Yoga (and all it's benifits)";
-"flexibilityI" = "Flexibility";
-"enduranceI" = "Endurance";
-"toningI" = "Toning";
-"muscleGainI" = "Muscle Gain";
-"strengthI" = "Strength";
-
-// Shortened names
-"mindS" = "M";
-"flexibilityS" = "F";
-"enduranceS" = "E";
-"toningS" = "T";
-"muscleGainS" = "MG";
-"strengthS" = "S";
-
-//
-// Groups
-"mindI" = "Mind (Yoga & Meditation)";
-"totalNumberSessionI" = "Total Nº Sessions (per week)";
-
-//
-// Quick Question
-"scheduleView" = "I would like to:";
-"scheduleView1" = "See each day of the week seperately";
-"scheduleView2" = "See the whole week as a list of all my planned sessions";
-
 
 //
 // Settings //

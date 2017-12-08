@@ -64,8 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["selectedSchedule" : 0])
         // Schedules
         UserDefaults.standard.register(defaults: ["schedules" : scheduleDataStructures.registerSchedules])
-        // Tracking
-        UserDefaults.standard.register(defaults: ["scheduleTracking" : scheduleDataStructures.registerTracking])
         // Difficulty Levels
         UserDefaults.standard.register(defaults: ["difficultyLevels" : scheduleDataStructures.defaultDifficultyLevels])
         // Profile Answers

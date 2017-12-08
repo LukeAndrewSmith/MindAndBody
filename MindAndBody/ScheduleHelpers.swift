@@ -26,10 +26,10 @@ extension ScheduleScreen {
     // MARK: Schedule Helper Functions
     func createTemporaryWeekViewArray() {
         
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         
         // Ensure empty
-        temporaryWeekArray = []
+        TemporaryWeekArray.shared.weekArray = []
         
         // Create array ordered, by first finding and adding all instances of mind, then of flexibility, then of endurance etc...
         let orderedGroupArray = ["mind", "flexibility", "endurance", "toning", "muscleGain", "strength"]
@@ -51,7 +51,7 @@ extension ScheduleScreen {
                                 "index": k,
                             ]
                             // Append
-                            temporaryWeekArray.append(groupDict)
+                            TemporaryWeekArray.shared.weekArray.append(groupDict)
                         }
                     }
                 }
@@ -63,7 +63,7 @@ extension ScheduleScreen {
     //
     // MARK: didSelectRowHandler
     func didSelectRowHandler(row: Int) {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
 
         updateSelectedChoice(row: row)
         // ------------------------------------------------------------------------------------------------
@@ -349,7 +349,7 @@ extension ScheduleScreen {
         // Function for going through choices on the schedule screen, is called when group/choice is pressed and determines what to present next
     func updateSelectedChoice(row: Int) {
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // ------------------------------------------------------------------------------------------------
         if ScheduleVariables.shared.choiceProgress[0] == -1 && row != schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count {
             let referenceArray = ["mind", "flexibility", "endurance", "toning", "muscleGain", "strength"]
@@ -1041,15 +1041,16 @@ extension ScheduleScreen {
     
     // Is group completed
     func isGroupCompleted() -> Bool {
+        
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         // Check if group is completed
-        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
         let nRows = scheduleTable.numberOfRows(inSection: 0)
         var isCompleted = true
         // Loop second array in scheduleTracking, if one if false, not completed (warmup/session/stretching)
             // -2 because title included
         for i in 0...nRows - 2 {
-            if scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][1][i] == false {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][String(i)] as! Bool == false {
                 isCompleted = false
                 break
             }
@@ -1085,10 +1086,10 @@ extension ScheduleScreen {
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         // Determine wether the swipe should be enabled
             // Only should be enabled if schedule style is day view, or if swiping back from choices
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         var shouldBeEnabled = true
         if schedules.count != 0 {
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] as! Int == 1 {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
                 shouldBeEnabled = false
             }
         }
@@ -1299,20 +1300,55 @@ extension ScheduleScreen {
     
     
     //
+    // Function return the index within the day of the gorup, and the index within the group to track
+    // Takes as parameters
+        // row = the selected row/row to update
+        // firstChoice, indicates that we might want the indexing of the first choice but that it is not == -1, i.e if you hold down the group to mark as completed is sets the first choice
+        // checkLastChoice, very specific case, if updating the other schedules, then the first choice will be set, so we need to set is firstChoice to true, but we might be updating the last choice so need an extra check
+        func getIndexingVariables(row: Int, firstChoice: Bool, checkLastChoice: Bool) -> (Int, String) {
+        // Indexing variables
+        // Differ if last choice or first choice
+        // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+        var index0 = Int()
+        // index1 = Selected row in final choice (i.e warmup, session, stretching)
+        var index1 = String()
+        
+        // If first choice
+            // if only want first choice then firstChoice && !checkLastChoice
+            // if perhaps first choice, then  firstChoice && checkLastChoice && !isLastChoice()
+            // if normal check ScheduleVariables.shared.choiceProgress[0] == -1
+        if firstChoice && !checkLastChoice || firstChoice && checkLastChoice && !isLastChoice() || ScheduleVariables.shared.choiceProgress[0] == -1 {
+            // Day view - index is simply row
+            if scheduleStyle == 0 {
+                index0 = row
+                // Week view -  find stored index to schedule week using temporary full week array
+            } else {
+                index0 = TemporaryWeekArray.shared.weekArray[row]["index0"] as! Int
+            }
+            index1 = "isGroupCompleted"
+            // If last choice
+        } else if isLastChoice() && row != 0 {
+            // Day view - index is simply row
+            if scheduleStyle == 0 {
+                index0 = ScheduleVariables.shared.selectedRows[0]
+                // Week view -  find stored index to schedule week using temporary full week array
+            } else {
+                index0 = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["index0"] as! Int
+            }
+            // -1 as title included in table so offset by 1
+            index1 = String(row - 1)
+        }
+        return (index0, index1)
+    }
+    
+    //
     // MARK: Mark as completed
         // Handler for the long touch on the cell, the user can mark as completed themselves
         // Also marks as incomplete if previously comleted, note: rename
     @IBAction func markAsCompleted(_ sender: UILongPressGestureRecognizer) {
         //
-        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
-        
-        // Mark first instance of selected group in other schedules as completed, needs to be called after userdefaults have been updated here so that there is no conflictng setting of defaults
-            // -> called at end to ensure correct calling sequence
-            // Indicated to be called through these variables, one to indicate to call, the other to indicate what to set the group as
-        var shouldMarkAsCompleted = false
-        var shouldMarkAs = false
 
         if sender.state == UIGestureRecognizerState.began {
             // Get Cell
@@ -1324,145 +1360,27 @@ extension ScheduleScreen {
             }
             
             // Indexing variables
-                // Last three indexes of schedulesTracking or schedules index
-                    // Differ if last choice or first choice
-            var index0 = Int()
-            var index1 = Int()
-            var index2 = Int()
-                        
-            // If first choice
-            if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                index0 = row!
-                index1 = 0
-                index2 = 0
-            // If last choice
-            } else if isLastChoice() && row! != 0 {
-                // Selected row in first choice
-                index0 = ScheduleVariables.shared.selectedRows[0]
-                // 1 to access group contents tracking in trackingArray
-                index1 = 1
-                // -1 as title included in table so offset by 1
-                index2 = row! - 1
-            }
+                // Differ if last choice or first choice
+            let indexingVariables = getIndexingVariables(row: row!, firstChoice: false, checkLastChoice: false)
+            // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+            let index0 = indexingVariables.0
+            // index1 = Selected row in final choice (i.e warmup, session, stretching)
+            let index1 = indexingVariables.1
             
-            //
-            // Day View
-            if scheduleStyle == 0 {
-                let selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][index0] as! Int
-                // Day
-                // [index1][index2] when in group tracking to access main page tracker, look at schedule data: scheduleDataStructures.scheduleTrackingArrays to understand
-                if scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] == false {
-                    // Update day
-                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] = true
-                    // Update week
-                    if scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count != 0 {
-                        // Loop full week
-                        for i in 0...scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count - 1 {
-                            // If correct group and false
-                            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] == false {
-                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] = true
-                                break
-                            }
-                        }
-                    }
-                    // Update Week Progress
-                    if !isLastChoice() {
-                        updateWeekProgress(add: true)
-                        // Mark first instance of group in all other schedules as completed
-                        shouldMarkAsCompleted = true
-                        shouldMarkAs = true
-                    }
-                    
-                } else {
-                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][index0][index1][index2] = false
-                    // Update week
-                    if scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count != 0 {
-                        // Loop full week
-                        for i in 0...scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count - 1 {
-                            // If correct group and true
-                            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] {
-                                scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = false
-                                break
-                            }
-                        }
-                    }
-                    // Update Week Progress
-                    if !isLastChoice() {
-                        updateWeekProgress(add: false)
-                        // Mark first instance of group in all other schedules as completed
-                        shouldMarkAsCompleted = true
-                        shouldMarkAs = false
-                    }
-                }
-            //
-            // Full Week View
-            } else if scheduleStyle == 1 {
-                let selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][index0] as! Int
-                var shouldBreak = false
-                // Week
-                if scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] == false {
-                    // Update Full Week
-                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = true
-                    // Update Day
-                    // Loop week
-                    for i in 0...6 {
-                        // If day isn't empty
-                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
-                            // Loop day
-                            for j in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count - 1 {
-                                // If correct group and false
-                                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] == false {
-                                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] = true
-                                    shouldBreak = true
-                                    break
-                                }
-                            }
-                        }
-                        if shouldBreak {
-                            break
-                        }
-                    }
-                    // Update Week Progress
-                    if !isLastChoice() {
-                        updateWeekProgress(add: true)
-                        // Mark first instance of group in all other schedules as completed
-                        shouldMarkAsCompleted = true
-                        shouldMarkAs = true
-                    }
-                } else {
-                    // Update Full Week
-                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][index0][index1][index2] = false
-                    // Update Day
-                    // Loop week
-                    for i in 0...6 {
-                        // If day isn't empty
-                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
-                            // Loop day
-                            for j in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count - 1 {
-                                // If correct group and true
-                                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] {
-                                    scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] = false
-                                    shouldBreak = true
-                                    break
-                                }
-                            }
-                        }
-                        if shouldBreak {
-                            break
-                        }
-                    }
-                    // Update Week Progress
-                    if !isLastChoice() {
-                        updateWeekProgress(add: false)
-                        shouldMarkAsCompleted = true
-                        shouldMarkAs = false
-                    }
-                }
+            // Update Tracking
+            // True/False
+            let currentBool = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][index0][index1] as! Bool
+            
+            // Update
+            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][index0][index1] = !currentBool
+            
+            // Update Week Progress
+            if !isLastChoice() {
+                updateWeekProgress(add: !currentBool)
             }
             
             // Update tracking array
-            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-            // Sync
+                // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["scheduleTracking"])
             //
             let indexPathToReload = NSIndexPath(row: row!, section: 0)
@@ -1479,131 +1397,30 @@ extension ScheduleScreen {
                 updateDayIndicatorColours()
             }
             //
-            if shouldMarkAsCompleted {
-                // Mark first instance of group in all other schedules as completed
-                markAsGroupForOtherSchedules(markAs: shouldMarkAs)
-            }
+            // Mark first instance of group in all other schedules as completed- called after to avoid conflicts storing to userdefaults
+            markAsGroupForOtherSchedules(markAs: !currentBool)
         }
-    }
-    
-    // MARK: Mark other as completed
-    // If day view, marks first instance of relevant group in full week array, - and vice versa
-    // Essentially as 2 tracking arrays per schedule, updates array corresponding to the unused manner of viewing the schedule so that if the user switches viewing styles the tracking persists
-    func markAsCompletedForOtherWeekViewStyle() {
-        //
-        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
-        //
-        let row = ScheduleVariables.shared.selectedRows[0]
-        
-        // Indexing variables
-        // Last three indexes of schedulesTracking or schedules index
-        // Differ if last choice or first choice
-        var index0 = Int()
-        var index1 = Int()
-        var index2 = Int()
-        
-        // If first choice
-        if ScheduleVariables.shared.choiceProgress[0] == -1 {
-            index0 = row
-            index1 = 0
-            index2 = 0
-            // If last choice
-        } else if isLastChoice() && row != 0 {
-            // Selected row in first choice
-            index0 = ScheduleVariables.shared.selectedRows[0]
-            // 1 to access group contents tracking in trackingArray
-            index1 = 1
-            // -1 as title included in table so offset by 1
-            index2 = row - 1
-        }
-        //
-        // Day View
-        if scheduleStyle == 0 {
-            let selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][index0] as! Int
-            // Update week
-            if scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count != 0 {
-                // Loop full week
-                for i in 0...scheduleTracking[ScheduleVariables.shared.selectedSchedule][7].count - 1 {
-                    // If correct group and false
-                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] == false {
-                        scheduleTracking[ScheduleVariables.shared.selectedSchedule][7][i][index1][index2] = true
-                        break
-                    }
-                }
-            }
-            
-            //
-            // Full Week View
-        } else if scheduleStyle == 1 {
-            let selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][index0] as! Int
-            var shouldBreak = false
-            // Update Day
-            // Loop week
-            for i in 0...6 {
-                // If day isn't empty
-                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
-                    // Loop day
-                    for j in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count - 1 {
-                        // If correct group and false
-                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j] as! Int == selectedGroup && scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] == false {
-                            scheduleTracking[ScheduleVariables.shared.selectedSchedule][i][j][index1][index2] = true
-                            shouldBreak = true
-                            break
-                        }
-                    }
-                }
-                if shouldBreak {
-                    break
-                }
-            }
-        }
-        
-        // Update tracking array
-        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["scheduleTracking"])
     }
     
     // MARK: Mark other schedules as completed
     func markAsGroupForOtherSchedules(markAs: Bool) {
         //
-        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
-        let row = ScheduleVariables.shared.selectedRows[0]
         
         // Indexing variables
-        // Last three indexes of schedulesTracking or schedules index
         // Differ if last choice or first choice
-        var index0 = Int()
-        var index1 = Int()
-        var index2 = Int()
+        let row = ScheduleVariables.shared.selectedRows[0]
+        let indexingVariables = getIndexingVariables(row: row, firstChoice: true, checkLastChoice: true)
+        // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+        let index0 = indexingVariables.0
+        // index1 = Selected row in final choice (i.e warmup, session, stretching)
+        let index1 = indexingVariables.1
         
-        // If first choice
-        if ScheduleVariables.shared.choiceProgress[0] == -1 {
-            index0 = row
-            index1 = 0
-            index2 = 0
-            // If last choice
-        } else if isLastChoice() && row != 0 {
-            // Selected row in first choice
-            index0 = ScheduleVariables.shared.selectedRows[0]
-            // 1 to access group contents tracking in trackingArray
-            index1 = 1
-            // -1 as title included in table so offset by 1
-            index2 = row - 1
-        }
         // Get selected group
-        var selectedGroup = Int()
+        var selectedGroup = String()
         // Day View
-        if scheduleStyle == 0 {
-            selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][index0] as! Int
-        // Full Week View
-        } else if scheduleStyle == 1 {
-            selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][index0] as! Int
-            
-        }
+        selectedGroup = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][index0]["group"] as! String
         
         // Mark first instance of group in all other schedules as completed
         if schedules.count != 0 {
@@ -1621,8 +1438,8 @@ extension ScheduleScreen {
                             // Loop day
                             for k in 0...schedules[i]["schedule"]![j].count - 1 {
                                 // If correct group and false
-                                if schedules[i]["schedule"]![j][k] as! Int == selectedGroup && scheduleTracking[i][j][k][index1][index2] == !markAs {
-                                    scheduleTracking[i][j][k][index1][index2] = markAs
+                                if schedules[i]["schedule"]![j][k]["group"] as! String == selectedGroup && schedules[i]["schedule"]![j][k][index1] as! Bool == !markAs {
+                                    schedules[i]["schedule"]![j][k][index1] = markAs
                                     shouldBreak = true
                                     break
                                 }
@@ -1632,24 +1449,11 @@ extension ScheduleScreen {
                             break
                         }
                     }
-                    
-                    // Loop full week week
-                    if scheduleTracking[i][7].count != 0 {
-                        // Loop full week
-                        for l in 0...scheduleTracking[i][7].count - 1 {
-                            // If correct group and false
-                            if schedules[i]["schedule"]![7][l] as! Int == selectedGroup && scheduleTracking[i][7][l][index1][index2] == !markAs {
-                                scheduleTracking[i][7][l][index1][index2] = markAs
-                                break
-                            }
-                        }
-                    }
                 }
             }
         }
         
         // Update tracking array
-        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["scheduleTracking"])
     }
@@ -1736,10 +1540,8 @@ extension ScheduleScreen {
                 //
                 // Check if group is completed for the day
                 if self.isGroupCompleted() {
-                    //
+                    // Update schedule tracking
                     self.updateGroupTracking()
-                    // Update Week Progress Only if group is completed
-                    self.updateWeekProgress(add: true)
                     //
                     UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                         self.maskView3.backgroundColor = Colors.green
@@ -1769,17 +1571,9 @@ extension ScheduleScreen {
             ScheduleVariables.shared.choiceProgress[1] = 1
             maskAction()
             //
-            // Update
-            var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-            scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
-            UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-            // Update Week Progress
-            updateWeekProgress(add: true)
+            updateGroupTracking()
             // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["scheduleTracking"])
-            // If day view, marks first instance of relevant group in full week array and vice versa
-            // -> To keep both day view and week view up to date
-            markAsCompletedForOtherWeekViewStyle()
+            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
             // Mark first instance of group in all other schedules as completed
             markAsGroupForOtherSchedules(markAs: true)
             // Set to false here so the tick doesn't get loaded before the view has appeared
@@ -1796,15 +1590,27 @@ extension ScheduleScreen {
         }
     }
     
+    // Only called for updaing full group, i.e group is completed
     func updateGroupTracking() {
-        var scheduleTracking = UserDefaults.standard.object(forKey: "scheduleTracking") as! [[[[[Bool]]]]]
-        scheduleTracking[ScheduleVariables.shared.selectedSchedule][ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows[0]][0][0] = true
-        UserDefaults.standard.set(scheduleTracking, forKey: "scheduleTracking")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["scheduleTracking"])
-        // If day view, marks first instance of relevant group in full week array and vice versa
-        // -> To keep both day view and week view up to date
-        markAsCompletedForOtherWeekViewStyle()
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
+        // Indexing variables
+        // Differ if last choice or first choice
+        let row = ScheduleVariables.shared.selectedRows[0]
+        let indexingVariables = getIndexingVariables(row: row, firstChoice: true, checkLastChoice: false)
+        // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+        let index0 = indexingVariables.0
+        // index1 = Selected row in final choice (i.e warmup, session, stretching)
+        let index1 = indexingVariables.1
+        
+        // Update
+        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][index0][index1] = true
+        // Update Week Progress
+        updateWeekProgress(add: true)
+
+        UserDefaults.standard.set(schedules, forKey: "schedules")
+        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+        
         // Mark first instance of group in all other schedules as completed
         markAsGroupForOtherSchedules(markAs: true)
         //
@@ -1815,7 +1621,7 @@ extension ScheduleScreen {
         // shouldReloadSchedule
     func reloadView() {
         // RELOAD VIEW
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         if ScheduleVariables.shared.shouldReloadSchedule {
             //
             ScheduleVariables.shared.shouldReloadSchedule = false
@@ -1834,7 +1640,7 @@ extension ScheduleScreen {
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
             //
             if schedules.count != 0 {
-                scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] as! Int
+                scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
             } else {
                 scheduleStyle = 0
             }
@@ -1950,9 +1756,9 @@ extension ScheduleScreen {
         // Check wether to present the schedule as :
         // Days
         // The whole week
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[Any]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         if schedules.count != 0 {
-            scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![1][0] as! Int
+            scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
         } else {
             scheduleStyle = 0
         }
