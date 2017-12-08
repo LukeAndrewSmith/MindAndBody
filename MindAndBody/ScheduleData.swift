@@ -191,7 +191,7 @@ enum scheduleDataStructures {
                 // Sunday
                 [],
                 // Full week list - [0][7]
-                [] // GET RID OF
+//                [] // GET RID OF
             ],
             // [1] Information about schedule ------------------
             "scheduleInformation": [
@@ -221,6 +221,92 @@ enum scheduleDataStructures {
                 [0,0,  0,0,  0,0,  0,0,  0,0,  0,0],
             ]
     ]
+    
+    
+    // Custom schedules insert this into schedules array
+    static let emptyWeekTest: [String: [[[String: Any]]]] =
+        [
+            // [0] Schedule --------------------
+            "schedule": [
+                // CHANGE
+                // Monday
+                [],
+                // Tuesday
+                [],
+                // Wednesday
+                [],
+                // Thursday
+                [],
+                // Friday
+                [],
+                // Saturday
+                [],
+                // Sunday
+                [],
+                // Full week list - [0][7]
+                //                [] // GET RID OF
+            ],
+            // [1] Information about schedule ------------------
+            "scheduleInformation": [
+                [[
+                    "title": "",
+                    // Schedule style: day [0] or full week [1], -- day plan [2], full week plan [3] - 1
+                    "scheduleStyle": 0,
+                    // Schedule type: app helps create scheudle [0], custom schedule [1] - 3
+                    "customSchedule": 0,
+                    // Session choice style: app [0] or user chooses [1] - 2
+                    "customSessionChoice": 0,
+                ]],
+            ],
+            // [2] Schedule creation help data --------------------
+            "scheduleCreationHelp": [
+                [
+                    // Question answers
+                    ["timeAndEnergy": -1,
+                    "priority": -1],
+                    // Goals
+                    ["mind": 0,
+                     "yoga": 0,
+                     "flexibility": 0,
+                     "endurance": 0,
+                     "toning": 0,
+                     "muscleGain": 0,
+                     "strength": 0,
+                     "total": 0],
+                    // N Sessions
+                    ["mind": 0,
+                     "yoga": 0,
+                     "flexibility": 0,
+                     "endurance": 0,
+                     "toning": 0,
+                     "muscleGain": 0,
+                     "strength": 0,
+                     "total": 0],
+                    // Ranges
+                    ["mindLower": 0,
+                     "mindUpper": 0,
+                     "yoga": 0,
+                     "mindUpper": 0,
+                     "flexibility": 0,
+                     "mindUpper": 0,
+                     "endurance": 0,
+                     "mindUpper": 0,
+                     "toning": 0,
+                     "mindUpper": 0,
+                     "muscleGain": 0,
+                     "mindUpper": 0,
+                     "strength": 0,
+                     "mindUpper": 0
+                    ]
+                ]
+            ]
+    ]
+    
+    let empty
+    ["group": "",
+    "completedGroup": false,
+    "completed": false,
+    "": false]
     
     // Tracking
     static let registerTracking: [[[[[Bool]]]]] =

@@ -513,7 +513,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1705"
             endingLineNumber = "1705"
-            landmarkName = "markAsCompletedAndAnimate()"
+            landmarkName = "scheduleTableScrollCheck()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -67,7 +67,7 @@ extension sessionData {
     //
     
     // MARK:- Sessions
-    static let sessions: [String: [String: [String: [Int: [String: Any]]]]] =
+    static let sessions: [String: [String: [String: [[String: Any]]]]] =
         [
             // MARK:- Warmup
             "warmup": [
@@ -78,20 +78,20 @@ extension sessionData {
                 // MARK: Full
                 "fullBody": [
                     "allMovements": [
-                        0: ["title": "allMovements",
+                        ["title": "allMovements",
                             "movement": "5minCardio",
                             "sets": 2,
                             "reps": "0",
                             "time": 2],
-                        1: ["movement": "wrist",
+                        ["movement": "wrist",
                             "sets": 2,
                             "reps": "0",
                             "time": 2],
-                        2: ["movement": "elbow",
+                        ["movement": "elbow",
                             "sets": 2,
                             "reps": "0",
                             "time": 2],
-                        3: ["movement": "shoulderR",
+                        ["movement": "shoulderR",
                             "sets": 2,
                             "reps": "0",
                             "time": 2],

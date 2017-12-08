@@ -35,7 +35,7 @@ extension ScheduleScreen {
         let orderedGroupArray = ["mind", "flexibility", "endurance", "toning", "muscleGain", "strength"]
         
         // Loop groups
-        for i in 0..<searchArray.count {
+        for i in 0..<orderedGroupArray.count {
             // Loop week
             for j in 0...6 {
                 // If day not empty
