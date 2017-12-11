@@ -737,7 +737,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         var key = keyArray[selectedRow]
         
         // Movement
-        if sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["isMovement"]![0] as! Bool == true {
+        if sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["isMovement"]![0] == "true" {
 
         // Pauses
         } else {

@@ -181,8 +181,8 @@ class ScheduleVariables {
             // Set week progress to 0
             trackingProgressDictionary["WeekProgress"] = 0
             // Set Last Reset
-            UserDefaults.standard.set(trackingProgressDictionary, forKey: "schedules")
-            UserDefaults.standard.set(schedules, forKey: "trackingProgress")
+            UserDefaults.standard.set(schedules, forKey: "schedules")
+            UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
                 // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress", "schedules"])
         }

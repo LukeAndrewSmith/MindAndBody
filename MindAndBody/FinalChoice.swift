@@ -82,7 +82,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         // Navigation Bar Title
         if comingFromSchedule == false {
-            let test = SelectedSession.shared.selectedSession
             navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]! , comment: ""))
         } else {
             let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
@@ -307,9 +306,9 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             
         case presetsTableView:
             switch section {
-            case 0: NSLocalizedString("easy", comment: "")
-            case 1: NSLocalizedString("medium", comment: "")
-            case 2: NSLocalizedString("hard", comment: "")
+            case 0: return NSLocalizedString("easy", comment: "")
+            case 1: return NSLocalizedString("medium", comment: "")
+            case 2: return NSLocalizedString("hard", comment: "")
             default: return ""
             }
             // Old way, keeping as idea incase more than easy, medium, hard added one day
@@ -452,7 +451,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     // Timed session off
                     if timedSession == 0 {
                         // Sets x Reps
-                        cell.detailTextLabel?.text = String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["sets"] as! Int) + " x " + (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["reps"] as! String)
+                        cell.detailTextLabel?.text = String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["reps"] as! String)
                         // On
                     } else {
                         // Length of time
@@ -600,8 +599,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             //
             SelectedSession.shared.selectedSession[2] = selectedSessionKey
             
-            let test = SelectedSession.shared.selectedSession
-            
             // Cardio Type
             if SelectedSession.shared.selectedSession[0] == "cardio" {
                 cardioType = indexPath.section
@@ -645,25 +642,30 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     // Number of sections in movements tableview
     func numberOfSectionsMovements() -> Int {
         //
-        switch SelectedSession.shared.selectedSession[0] {
-        // Warmup, Cardio, Stretching, Yoga
-        case "warmup", "cardio", "stretching", "yoga":
-            return 1
-            
-        // Workout
-        case "workout":
-            switch SelectedSession.shared.selectedSession[1] {
-            // Circuit Session
-            case "circuitGymFull", "circuitGymUpper", "circuitGymLower","circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
-                // Number of rounds
-                return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int
-            // Normal Session
-            default:
-                return 1
-            }
-        //
-        default:
+        if SelectedSession.shared.selectedSession[2] == "" {
             return 0
+        } else {
+            switch SelectedSession.shared.selectedSession[0] {
+            // Warmup, Cardio, Stretching, Yoga
+            case "warmup", "cardio", "stretching", "yoga":
+                return 1
+                
+            // Workout
+            case "workout":
+                switch SelectedSession.shared.selectedSession[1] {
+                // Circuit Session
+                case "circuitGymFull", "circuitGymUpper", "circuitGymLower","circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
+                    // Number of rounds
+                    let test = SelectedSession.shared.selectedSession[2]
+                    return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int
+                // Normal Session
+                default:
+                    return 1
+                }
+            //
+            default:
+                return 0
+            }
         }
     }
     
@@ -706,7 +708,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             if SelectedSession.shared.selectedSession[2] == "" {
                 return 0
             } else {
-                let test = SelectedSession.shared.selectedSession
                 return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count
             }
             
@@ -721,10 +722,10 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 // Circuit Session
                 case "circuitGymFull", "circuitGymUpper", "circuitGymLower","circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
                     // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = session, [1] = key array
-                    return (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![1] as! [Int]).count
+                    let numberOfMovementsPerRound = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count / (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int)
+                    return numberOfMovementsPerRound
                 // Normal Session
                 default:
-                    let test = SelectedSession.shared.selectedSession
                     return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count
                 }
             }

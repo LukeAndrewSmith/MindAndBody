@@ -723,15 +723,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         UserDefaults.standard.set(settings, forKey: "userSettings")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-        if sender.isOn {
-            settings["TimeBasedSessions"]![0] = 0
-        } else {
-            settings["TimeBasedSessions"]![0] = 1
-        }
-        //
-        UserDefaults.standard.set(settings, forKey: "userSettings")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
     }
     
     

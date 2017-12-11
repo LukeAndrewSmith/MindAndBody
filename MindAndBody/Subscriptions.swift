@@ -106,9 +106,9 @@ class InAppManager: NSObject {
 
     
     // MARK: Check reciept/expiry date
-    //
     // Check expiry dates
-    func checkExpiryDateAction(response: [String: AnyObject]?, action: Int) -> Bool {
+        // Posts notifications that call functions
+    func checkExpiryDateAction(response: [String: AnyObject]?, action: Int) {
         /// Retreive the full apple receipt
         let receiptKey = SwiftyReceiptValidator.ResponseKey.receipt.rawValue
         if let receipt = response![receiptKey] {
@@ -141,7 +141,6 @@ class InAppManager: NSObject {
                             DispatchQueue.main.async {
                                 NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
                             }
-                            return true
                         }
                     }
                 }
@@ -158,7 +157,6 @@ class InAppManager: NSObject {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
         }
-        return false
     }
     //
     // Check if subscription is valid

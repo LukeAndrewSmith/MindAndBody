@@ -115,7 +115,13 @@ class ReminderNotifications {
                     // Set monday notification
                     let mondayContent = UNMutableNotificationContent()
                     mondayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                    mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count) + NSLocalizedString("weekNotification2", comment: "")
+                    //
+                    var count = Int()
+                    // Loop week
+                    for i in 0...6 {
+                        count += schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
+                    }
+                    mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(count) + NSLocalizedString("weekNotification2", comment: "")
                     
                     mondayContent.sound = UNNotificationSound.default()
                     
@@ -137,7 +143,7 @@ class ReminderNotifications {
                     // Set monday notification
                     let sundayContent = UNMutableNotificationContent()
                     sundayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                    sundayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count) + NSLocalizedString("weekNotification2", comment: "")
+                    sundayContent.body = NSLocalizedString("sundayNotification", comment: "")
                     
                     sundayContent.sound = UNNotificationSound.default()
                     
@@ -569,7 +575,7 @@ extension UIViewController {
     // Schedule Tracking
         // Updates the 'finalChoice' of the group
     func updateScheduleTracking(fromSchedule: Bool) {
-        // Only relevant if coming from schedule
+        // Only relevant if coming from schedule, check here because only need to code this once instead of every time the function is called
         if fromSchedule {
             //
             var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
@@ -581,9 +587,11 @@ extension UIViewController {
             let index0 = indexingVariables.0
             // index1 = Selected row in final choice (i.e warmup, session, stretching)
             let index1 = indexingVariables.1
+            // day
+            let day = indexingVariables.2
             
             // Update
-            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][index0][index1] = true
+            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = true
             // Set
             UserDefaults.standard.set(schedules, forKey: "schedules")
             // Sync
@@ -593,7 +601,7 @@ extension UIViewController {
         }
     }
     
-    func getIndexingVariablesForSession() -> (Int, String) {
+    func getIndexingVariablesForSession() -> (Int, String, Int) {
         //
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
 
@@ -602,17 +610,21 @@ extension UIViewController {
         var index0 = Int()
         // index1 = Selected row in final choice (i.e warmup, session, stretching)
         var index1 = String()
+        //
+        var selectedDay = Int()
         
         // Day view - index is simply row
         if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
             index0 = ScheduleVariables.shared.selectedRows[0]
+            selectedDay = ScheduleVariables.shared.selectedDay
         // Week view -  find stored index to schedule week using temporary full week array
         } else {
-            index0 = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["index0"] as! Int
+            index0 = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["index"] as! Int
+            selectedDay = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["day"] as! Int
         }
-        // -1 as title included in table so offset by 1
-        index1 = String(ScheduleVariables.shared.selectedRows[0] - 1)
-        return (index0, index1)
+        //
+        index1 = String(ScheduleVariables.shared.selectedRows[1])
+        return (index0, index1, selectedDay)
     }
     
     // NOTE: Func to reset schedule tracking and week tracking found in globalVariables, Schedule data, as needs to be contained in a class
@@ -785,7 +797,10 @@ extension UIViewController {
         // Find goal = number of groups planned = fullWeekArray.count
         var goal = Int()
         if schedules.count != 0 {
-            goal = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count
+            // Loop week
+            for i in 0...6 {
+                goal += schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
+            }
         } else {
             goal = 1
         }

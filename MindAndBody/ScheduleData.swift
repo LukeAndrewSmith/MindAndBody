@@ -326,18 +326,16 @@ enum scheduleDataStructures {
                     // Ranges
                     ["mindLower": 0,
                      "mindUpper": 0,
-                     "yoga": 0,
-                     "mindUpper": 0,
-                     "flexibility": 0,
-                     "mindUpper": 0,
-                     "endurance": 0,
-                     "mindUpper": 0,
-                     "toning": 0,
-                     "mindUpper": 0,
-                     "muscleGain": 0,
-                     "mindUpper": 0,
-                     "strength": 0,
-                     "mindUpper": 0
+                     "flexibilityLower": 0,
+                     "flexibilityUpper": 0,
+                     "enduranceLower": 0,
+                     "enduranceUpper": 0,
+                     "toningLower": 0,
+                     "toningUpper": 0,
+                     "muscleGainLower": 0,
+                     "muscleGainUpper": 0,
+                     "strengthLower": 0,
+                     "strengthUpper": 0,
                     ]
                 ]
             ]

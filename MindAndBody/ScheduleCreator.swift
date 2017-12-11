@@ -927,31 +927,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.draggingLabel.removeFromSuperview()
                     self.deMaskStackViews()
                 })
-                
                 // Note: no need to remove from any arrays as already been removed when the label was picked up
-                // However need to remove from full week array
-                //
-                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-                // Remove last instance of the group in the full week array, this is to aim at not removing a tracked/performed group, assuming that the user logically starts doing groups from the top
-                var lastGroupInstanceIndex = Int()
-                // If not empty
-                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count != 0 {
-                    // Loop full week backwards
-                    for i in (0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].count - 1).reversed() {
-                        // If correct group
-                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7][i] as! Int == indexOfDraggedGroup {
-                            // Indicate index
-                            lastGroupInstanceIndex = i
-                            break
-                        }
-                    }
-                }
-                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].remove(at: lastGroupInstanceIndex)
-                //
-                UserDefaults.standard.set(schedules, forKey: "schedules")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-                
                 
             // If it is equal to nil, then the long press is not in a label
             } else if previousIndexPath != nil {

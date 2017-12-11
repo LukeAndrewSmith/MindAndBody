@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InAppManager.shared.startMonitoring()
         
         // TODO: TEST!! REMOVE
-//                ICloudFunctions.shared.removeAll()
+                ICloudFunctions.shared.removeAll()
         //
         // iCloud Oberver
         NotificationCenter.default.addObserver(

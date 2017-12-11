@@ -41,12 +41,27 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Variables
     var selectedRow = 0
     
+    
+    // Circuit Elements
+    var sessionScreenRoundIndex = 0
+    let restTitle = NSLocalizedString("rest", comment: "")
+    var restTime = Int()
+    var restMessage = String()
+    var restAlert = UIAlertController()
+    // Timer
+    // Variables
+    var didSetEndTime = false
+    var startTime = Double()
+    var endTime = Double()
+    
     //
     var fromSchedule = false
     
     //
     // Is paused
     var isPaused = false
+    
+    var isCircuit = false
     
     //
     // MARK: Variables from Session Data
@@ -75,6 +90,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     var movementProgress = 1
     // Timer value
     var timerValue = 0
+    // nRounds
+    var nRounds = 0
     // Variable for circuit workout, indicating number of movements in one round
     var nMovementsInRound = 0
     // If asymmetric movement, time both sides, this variable indicates which side is being timed
@@ -153,24 +170,27 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
         // Special case for circuit workout
-//            // Add the movements to the key array x(number of rounds) more times
-//        switch SelectedSession.shared.selectedSession[1] {
-//        case "circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
-//            nMovementsInRound = keyArray.count
+            // Add the movements to the key array x(number of rounds) more times
+        switch SelectedSession.shared.selectedSession[1] {
+        case "circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
 //            var enlargedKeyArray = keyArray
 //            // Number of rounds kept in first movement dict
-//            let nRounds = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]!["rounds"] as! Int
+            nRounds = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]["rounds"] as! Int
 //            // nRounds is always greater than 1, so if 2, then 1...1 adds 1 set of keys, therefore there are two rounds
 //            for _ in 1...nRounds - 1 {
 //                enlargedKeyArray += keyArray
 //            }
 //            keyArray = enlargedKeyArray
-//
-//
-//
-//        default:
-//            break
-//        }
+            
+            //
+            nMovementsInRound = keyArray.count / nRounds
+            
+            //
+            isCircuit = true
+            
+        default:
+            break
+        }
         
         // Device Scale for @2x and @3x of Target Area Images
         switch UIScreen.main.scale {
@@ -257,7 +277,12 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
-        case 0: return keyArray.count
+        case 0:
+            if isCircuit {
+                return nMovementsInRound
+            } else {
+                return keyArray.count
+            }
         case 1: return 1
         default: return 0
         }
@@ -409,10 +434,20 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.layer.borderWidth = 2
             cell.layer.borderColor = Colors.light.cgColor
             //
-            cell.textLabel?.text = NSLocalizedString("end", comment: "")
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 33)
             cell.textLabel?.textColor = Colors.light
             cell.textLabel?.textAlignment = .center
+            // Text
+            if isCircuit {
+                // If last round, end
+                if sessionScreenRoundIndex == nRounds - 1 {
+                    cell.textLabel?.text = NSLocalizedString("end", comment: "")
+                } else {
+                    cell.textLabel?.text = NSLocalizedString("endRound", comment: "") + " " + String(sessionScreenRoundIndex + 1)                }
+            } else {
+                cell.textLabel?.text = NSLocalizedString("end", comment: "")
+            }
+
             //
             return cell
         default: return UITableViewCell(style: .value1, reuseIdentifier: nil)
@@ -450,11 +485,34 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         case 0: break
         //
         case 1:
-            //
-            // Schedule Tracking
-            updateScheduleTracking(fromSchedule: fromSchedule)
-            //
-            self.dismiss(animated: true)
+            
+            if isCircuit {
+                //
+                if sessionScreenRoundIndex < nRounds - 1 {
+                    //
+                    removeCircle()
+                    lengthTimer.invalidate()
+                    //
+                    sessionScreenRoundIndex += 1
+                    selectedRow = 0
+                    //
+                    endRound()
+                    //
+                } else {
+                    //
+                    // Schedule Tracking
+                    updateScheduleTracking(fromSchedule: fromSchedule)
+                    //
+                    self.dismiss(animated: true)
+                }
+            } else {
+                //
+                // Schedule Tracking
+                updateScheduleTracking(fromSchedule: fromSchedule)
+                //
+                self.dismiss(animated: true)
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
         //
         default: break
         }
@@ -576,7 +634,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Next Button
     @IBAction func nextButtonAction() {
         //
-        if selectedRow < keyArray.count - 1 {
+        if !isCircuit && selectedRow < keyArray.count - 1 || isCircuit && selectedRow < nMovementsInRound - 1 {
             //
             selectedRow = selectedRow + 1
             updateProgress()
@@ -607,8 +665,20 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
             })
             // + 1
-            if selectedRow < keyArray.count - 1 {
+            if !isCircuit && selectedRow < keyArray.count - 1 || isCircuit && selectedRow < nMovementsInRound - 1 {
                 tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+            }
+            
+            // Next Round
+            if selectedRow == nMovementsInRound - 1 {
+                //
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+                //
+                UIView.animate(withDuration: 0.6, animations: {
+                    let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
+                })
             }
             //
             indicateMovementProgress()
@@ -816,7 +886,6 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         let currentPose = Float(selectedRow)
         // Total Number Poses
         let totalPoses = Float(keyArray.count - 1)
-        
         
         //
         if selectedRow > 0 {

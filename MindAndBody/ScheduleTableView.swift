@@ -112,7 +112,11 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             // First Screen, showing groups
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
                 if schedules.count != 0 {
-                    return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count
+                    if scheduleStyle == 0 {
+                        return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count
+                    } else {
+                        return TemporaryWeekArray.shared.weekArray.count
+                    }
                 } else {
                     return 0
                 }
@@ -167,8 +171,12 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
                 dayLabel.textColor = Colors.light
                 //
-                let text = sessionData.sortedGroups[schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][indexPath.row] as! Int]![0][0]
-                
+                var text = String()
+                if scheduleStyle == 0 {
+                    text = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][indexPath.row]["group"] as! String
+                } else {
+                    text = TemporaryWeekArray.shared.weekArray[indexPath.row]["group"] as! String
+                }
                 dayLabel.text = NSLocalizedString(text, comment: "")
                 dayLabel.numberOfLines = 2
                 dayLabel.sizeToFit()
@@ -194,7 +202,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     cell.accessoryType = .checkmark
                 }
                 
-                // Currently selecting a session, i.e not first screen
+            // Currently selecting a session, i.e not first screen
             } else {
                 // If title
                 if indexPath.row == 0 {
@@ -251,7 +259,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                         // CheckMark if completed
                         // - 1 as title included, so rows offset by 1
                         if indexPath.row != 0 {
-                            if isCompleted(row: indexPath.row - 1) {
+                            if isCompleted(row: indexPath.row) {
                                 choiceLabel.textColor = Colors.green
                                 cell.tintColor = Colors.green
                                 cell.accessoryType = .checkmark
@@ -308,9 +316,9 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             } else {
                 //
                 // If completed, do nothing
-                if isLastChoice() == false && isCompleted(row: indexPath.row) == false {
+                if !isLastChoice() && !isCompleted(row: indexPath.row) {
                     didSelectRowHandler(row: indexPath.row)
-                } else if isLastChoice() && isCompleted(row: indexPath.row - 1) == false {
+                } else if isLastChoice() && !isCompleted(row: indexPath.row) {
                     didSelectRowHandler(row: indexPath.row)
                 }
                 //

@@ -254,7 +254,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             // 12 months
             case 4:
                 //
-                var startDate = Date().firstDateInYear
+                let startDate = Date().firstDateInYear
                 var endDate = calendar.date(byAdding: .month, value: 11, to: startDate)
                 endDate = endDate?.firstDateInMonth
                 //
@@ -282,8 +282,10 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
 //                highlight = Highlight(x: Double(index), y: randomValue, dataSetIndex: 0)
 //            }
 //        }
-        for i in 0...chartDataOriginal.count - 1 {
-            highlight = Highlight(x: chartDataOriginal[i].key.timeIntervalSince1970, y: Double(chartDataOriginal[i].value), dataSetIndex: 0)
+        if chartDataOriginal.count != 0 {
+            for i in 0..<chartDataOriginal.count {
+                highlight = Highlight(x: chartDataOriginal[i].key.timeIntervalSince1970, y: Double(chartDataOriginal[i].value), dataSetIndex: 0)
+            }
         }
 //        chartView.highlightValue(highlight)
         

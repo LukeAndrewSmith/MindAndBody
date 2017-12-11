@@ -60,6 +60,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] rounds array, [0] = round
     var numberOfRounds = Int()
     
+    var numberOfMovementsInRound = Int()
     
     // To Add (@2x or @3x) for demonstration images
     var toAdd = String()
@@ -130,6 +131,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             }
             // Rounds in first movement
             numberOfRounds = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]["rounds"] as! Int
+            
+            numberOfMovementsInRound = keyArray.count / numberOfRounds
         }
         
         // Device Scale for @2x and @3x of Target Area Images
@@ -221,7 +224,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         switch section {
-        case 0: return keyArray.count
+        case 0:
+            return numberOfMovementsInRound
         case 1: return 1
         default: return 0
         }
@@ -294,9 +298,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Set and Reps
-            //
-            // (keyArray.count * sessionScreenRoundIndex) = first index of round
-            let indexRow = (keyArray.count * sessionScreenRoundIndex) + indexPath.row
+            // (numberOfMovementsInRound * sessionScreenRoundIndex) = first index of round
+            let indexRow = (numberOfMovementsInRound * sessionScreenRoundIndex) + indexPath.row
             cell.setsRepsLabel?.text = repsArray[indexRow]
             cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.setsRepsLabel?.textAlignment = .right
@@ -431,7 +434,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         switch indexPath.section {
         case 0:
             //
-            let height2 = 0.25/Double(keyArray.count - 1)
+            let height2 = 0.25/Double(numberOfMovementsInRound - 1)
             //
             var toMinus = CGFloat()
             if IPhoneType.shared.iPhoneType() == 2 {
@@ -461,7 +464,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         // End Round/Workout button
         case 1:
             
-            if sessionScreenRoundIndex < numberOfRounds - 1{
+            if sessionScreenRoundIndex < numberOfRounds - 1 {
                 //
                 sessionScreenRoundIndex += 1
                 selectedRow = 0
@@ -488,11 +491,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     // MARK: Next Round -------------------------------------------------------------------------------------------
     //
     let restTitle = NSLocalizedString("rest", comment: "")
-    //
     var restTime = Int()
-    //
     var restMessage = String()
-    //
     var restAlert = UIAlertController()
     //
     // Timer
@@ -509,6 +509,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             self.restAlert.dismiss(animated: true)
             //
             didSetEndTime = false
+            //
+            vibratePhone()
             //
             // Next Round
             self.tableView.beginUpdates()
@@ -670,6 +672,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             UIAlertAction in
             
             //
+            self.vibratePhone()
+
+            //
             // Dismiss Alert
             self.restAlert.dismiss(animated: true)
             timerCountDown.invalidate()
@@ -696,7 +701,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 self.updateProgress()
                 //
             }, completion: { finished in
-                self.tableView.reloadData()
                 self.tableView.reloadData()
             })
             
@@ -800,9 +804,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     // Next Button
     @IBAction func nextButtonAction() {
         //
-        if selectedRow < keyArray.count - 1 {
+        if selectedRow < numberOfMovementsInRound - 1 {
             //
-            vibratePhone()
             let indexPath0 = NSIndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
             //
@@ -839,12 +842,12 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //                self.playAnimation(row: self.selectedRow)
             })
             // + 1
-            if selectedRow < keyArray.count - 1 {
+            if selectedRow < numberOfMovementsInRound - 1 {
                 tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
             }
             
             // Next Round
-            if selectedRow == keyArray.count - 1 {
+            if selectedRow == numberOfMovementsInRound - 1 {
                 //
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()

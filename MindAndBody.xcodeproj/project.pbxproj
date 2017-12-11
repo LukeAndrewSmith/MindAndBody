@@ -111,7 +111,7 @@
 		071D4A331FC0CD1600ED779B /* SubscriptionNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */; };
 		071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071FB62B1E9283AE0081444F /* BodyweightChoice.swift */; };
 		07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07248E061F31CB5100230EAF /* GlobalVariables.swift */; };
-		072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */; };
+		072829EB1EA8A26A0090164A /* CircuitWorkoutSessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072829EA1EA8A26A0090164A /* CircuitWorkoutSessionScreen.swift */; };
 		072900001F4D713A0048A355 /* forefootBounces.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FFFC1F4D713A0048A355 /* forefootBounces.png */; };
 		072900011F4D713A0048A355 /* forefootBounces1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FFFD1F4D713A0048A355 /* forefootBounces1.png */; };
 		072900021F4D713A0048A355 /* forefootBounces2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FFFE1F4D713A0048A355 /* forefootBounces2.png */; };
@@ -1518,7 +1518,7 @@
 		071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionNotifications.swift; sourceTree = "<group>"; };
 		071FB62B1E9283AE0081444F /* BodyweightChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyweightChoice.swift; sourceTree = "<group>"; };
 		07248E061F31CB5100230EAF /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
-		072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionScreen.swift; sourceTree = "<group>"; };
+		072829EA1EA8A26A0090164A /* CircuitWorkoutSessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitWorkoutSessionScreen.swift; sourceTree = "<group>"; };
 		072900041F4D713F0048A355 /* aSkips.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aSkips.png; sourceTree = "<group>"; };
 		072900051F4D713F0048A355 /* aSkips1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aSkips1.png; sourceTree = "<group>"; };
 		072900061F4D713F0048A355 /* aSkips2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aSkips2.png; sourceTree = "<group>"; };
@@ -2848,7 +2848,7 @@
 		072829E61EA8A0C80090164A /* Circuit Workout */ = {
 			isa = PBXGroup;
 			children = (
-				072829EA1EA8A26A0090164A /* WorkoutSessionScreen.swift */,
+				072829EA1EA8A26A0090164A /* CircuitWorkoutSessionScreen.swift */,
 			);
 			name = "Circuit Workout";
 			sourceTree = "<group>";
@@ -8393,7 +8393,7 @@
 				07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */,
 				07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */,
 				077876231F92A50D005CE68A /* Profile.swift in Sources */,
-				072829EB1EA8A26A0090164A /* WorkoutSessionScreen.swift in Sources */,
+				072829EB1EA8A26A0090164A /* CircuitWorkoutSessionScreen.swift in Sources */,
 				071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */,
 				07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */,
 				074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */,

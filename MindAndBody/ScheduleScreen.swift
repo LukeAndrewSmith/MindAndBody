@@ -67,6 +67,7 @@ class ScheduleScreen: UIViewController {
     let scheduleChoiceTable = UITableView()
     let editScheduleButton = UIButton()
     let editProfileButton = UIButton()
+    let actionSheetSeparator = UIView()
     
     //
     // Very silly variable used in choices of 'endurance' group - steady state, as there is a 'time choice' after 'warmup/stretching' choice, variable indicating which one was selected
@@ -77,7 +78,7 @@ class ScheduleScreen: UIViewController {
     // Variable saying which presentation style is wanted by the user, either
     // 0 - presenting each day on the day
     // 1 - presenting the whole week at once
-    var scheduleStyle = 0
+    var scheduleStyle = Int()
     
     //
     // Walkthrough
@@ -106,17 +107,22 @@ class ScheduleScreen: UIViewController {
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Ensure dayIndicator in correct position / not visible
+        // Reload to be sure
+        setScheduleStyle()
+        //
+        // Ensure dayIndicator in correct position / not visible && if week view, update temporary full week array
         if scheduleStyle == 0 {
             dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
             self.view.layoutIfNeeded()
         } else {
             dayIndicator.alpha = 0
+            createTemporaryWeekViewArray()
         }
         // Check if reset necessary
         ScheduleVariables.shared.resetWeekTracking()
         // Reload the view if requested by previous view
         reloadView()
+        //
     }
     
     
@@ -135,11 +141,6 @@ class ScheduleScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // If week view, crete temporary week array
-        if scheduleStyle == 1 {
-            createTemporaryWeekViewArray()
-        }
-        
         // Subscriptions
         // Checking subscription is valid, (present loading during check)
         if Loading.shared.shouldPresentLoading {
@@ -152,8 +153,14 @@ class ScheduleScreen: UIViewController {
         updateWeekGoal()
         
         // Setup
+        setScheduleStyle()
         setupViews()
         layoutViews()
+        
+        // If week view, crete temporary week array
+        if scheduleStyle == 1 {
+            createTemporaryWeekViewArray()
+        }
         
         self.performSegue(withIdentifier: "InitialInfoSegue", sender: self)
     }
@@ -203,6 +210,7 @@ class ScheduleScreen: UIViewController {
         actionSheet.addSubview(scheduleChoiceTable)
         actionSheet.addSubview(editScheduleButton)
         actionSheet.addSubview(editProfileButton)
+        actionSheet.addSubview(actionSheetSeparator)
         //
         ActionSheet.shared.setupActionSheet()
         ActionSheet.shared.actionSheet.addSubview(actionSheet)
@@ -226,7 +234,6 @@ class ScheduleScreen: UIViewController {
         //
         } else if segue.identifier == "scheduleSegueOverview" {
             let destinationVC = segue.destination as? FinalChoice
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             // Only say from schedule if app chooses sessions for the user
             destinationVC?.comingFromSchedule = true
             // Remove back button text

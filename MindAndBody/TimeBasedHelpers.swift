@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 extension TimeBasedScreen {
     
@@ -147,7 +148,13 @@ extension TimeBasedScreen {
             }
         // Perform movement for:
         case 2:
-            timerValue = lengthArray[selectedRow]
+            //
+            if isCircuit {
+                let indexRow = (nMovementsInRound * sessionScreenRoundIndex) + selectedRow
+                timerValue = lengthArray[indexRow]
+            } else {
+                timerValue = lengthArray[selectedRow]
+            }
             
         default:
             break
@@ -178,13 +185,13 @@ extension TimeBasedScreen {
                 removeCircle()
                 lengthTimer.invalidate()
                 indicateMovementProgress()
-                // Movement is asymmetric and first side just finished being timed
+            // Movement is asymmetric and first side just finished being timed
             } else if asymmetricProgress == 0 {
                 asymmetricProgress += 1
                 removeCircle()
                 lengthTimer.invalidate()
                 indicateMovementProgress()
-                // Movement is asymmetric and second side just finished being timed
+            // Movement is asymmetric and second side just finished being timed
             } else if asymmetricProgress == 1 {
                 movementProgress += 1
                 removeCircle()
@@ -192,6 +199,7 @@ extension TimeBasedScreen {
                 indicateMovementProgress()
                 asymmetricProgress = 0
             }
+            //
             //
         } else {
             timerValue -= 1
@@ -260,7 +268,7 @@ extension TimeBasedScreen {
                 }
             })
         case 3:
-            if selectedRow != keyArray.count - 1 {
+            if !isCircuit && selectedRow != keyArray.count - 1 || isCircuit && (selectedRow + (sessionScreenRoundIndex * nMovementsInRound)) != keyArray.count - 1 {
                 //
                 // Special case for circuit workout
                 switch SelectedSession.shared.selectedSession[1] {
@@ -274,7 +282,13 @@ extension TimeBasedScreen {
                 default:
                     movementProgress = 0
                 }
-                nextButtonAction()
+                // Next round
+                if isCircuit && ((selectedRow - 1) % nMovementsInRound) == 0 {
+                    endRound()
+                // Next movement
+                } else {
+                    nextButtonAction()
+                }
             } else {
                 self.dismiss(animated: true)
             }
@@ -292,5 +306,251 @@ extension TimeBasedScreen {
         }
     }
     
+    
+    //
+    // MARK: Next Round -------------------------------------------------------------------------------------------
+    //
+    // Update Timer
+    @objc func updateRestTimer() {
+        //
+        if restTime == 0 {
+            //
+            endRest()
+            
+            //
+        } else {
+            restTime -= 1
+            restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+        }
+    }
+    
+    //
+    // Start Timer
+    //
+    @objc func startRestTimer() {
+        // Dates and Times
+        startTime = Date().timeIntervalSinceReferenceDate
+        //
+        if didSetEndTime == false {
+            //
+            didSetEndTime = true
+            //
+            //
+            // Rest Timer
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let restTimes = settings["RestTimes"]!
+            let duration = restTimes[1]
+            let endingTime = Int(startTime) + duration
+            //
+            endTime = Double(endingTime)
+        }
+        
+        // Set timer value
+        restTime = Int(endTime - startTime) - 1
+        
+        // Check Greater than 0
+        if restTime <= 0 {
+            restTime = 0
+            //
+            timerCountDown.invalidate()
+            self.restAlert.dismiss(animated: true)
+            //
+            didSetEndTime = false
+            //
+            // Next Round
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+            //
+            let indexPath0 = NSIndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            //
+            let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! TimeBasedTableViewCell
+            //
+            UIView.animate(withDuration: 0.6, animations: {
+                // 1
+                cell.movementLabel.alpha = 1
+                cell.explanationButton.alpha = 1
+                //
+                self.updateProgress()
+                //
+            }, completion: { finished in
+                self.tableView.reloadData()
+            })
+            
+            //
+            // Alert View
+            let titleString = "round" + String(self.sessionScreenRoundIndex + 1)
+            let title = NSLocalizedString(titleString, comment: "")
+            //let message = NSLocalizedString("resetMessage", comment: "")
+            let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+            alert.view.tintColor = Colors.light
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+            self.present(alert, animated: true, completion: {
+                //
+                let delayInSeconds = 0.7
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                    alert.dismiss(animated: true, completion: nil)
+                }
+            })
+        }
+        
+        // Set Timer
+        // Set initial time
+        restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+        
+        // Begin Timer or dismiss view
+        timerCountDown = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateRestTimer), userInfo: nil, repeats: true)
+    }
+    
+    //
+    func endRest() {
+//        timerCountDown.invalidate()
+//        self.restAlert.dismiss(animated: true)
+//        //
+//        didSetEndTime = false
+//        //
+//        vibratePhone()
+//        //
+//        // Next Round
+//        self.tableView.beginUpdates()
+//        self.tableView.endUpdates()
+//        //
+//
+////        self.updateProgress()
+////        self.tableView.reloadData()
+////        self.indicateMovementProgress()
+//        //
+//        self.selectedRow = 0
+//
+//
+//        let indexPath0 = NSIndexPath(row: 0, section: 0)
+//        self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+//        //
+//        let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! TimeBasedTableViewCell
+//        //
+//        UIView.animate(withDuration: 0.6, animations: {
+//            // 1
+//            cell.movementLabel.alpha = 1
+//            cell.explanationButton.alpha = 1
+//            //
+//            self.updateProgress()
+//            //
+//        }, completion: { finished in
+//            self.tableView.reloadData()
+//            self.indicateMovementProgress()
+//        })
+//
+//        //
+//        // Alert View
+//        let titleString = "round" + String(self.sessionScreenRoundIndex + 1)
+//        let title = NSLocalizedString(titleString, comment: "")
+//        //let message = NSLocalizedString("resetMessage", comment: "")
+//        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+//        alert.view.tintColor = Colors.light
+//        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+//        self.present(alert, animated: true, completion: {
+//            //
+//            let delayInSeconds = 0.7
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+//                alert.dismiss(animated: true, completion: nil)
+//            }
+//        })
+        
+        
+        //
+        self.vibratePhone()
+        
+        //
+        // Dismiss Alert
+        self.restAlert.dismiss(animated: true)
+        timerCountDown.invalidate()
+    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
+        
+        //
+        // Next Round
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
+        //
+        self.selectedRow = 0
+        //
+        let indexPath0 = NSIndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        //
+        let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! TimeBasedTableViewCell
+        //
+        UIView.animate(withDuration: 0.6, animations: {
+            // 1
+            cell.movementLabel.alpha = 1
+            cell.explanationButton.alpha = 1
+            //
+            self.updateProgress()
+            //
+        }, completion: { finished in
+            self.tableView.reloadData()
+            self.indicateMovementProgress()
+        })
+        
+        //
+        // Next Round Alert
+        // Alert View
+        let titleString = "round" + String(self.sessionScreenRoundIndex + 1)
+        let title = NSLocalizedString(titleString, comment: "")
+        //let message = NSLocalizedString("resetMessage", comment: "")
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.view.tintColor = Colors.light
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        self.present(alert, animated: true, completion: {
+            //
+            let delayInSeconds = 0.7
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+        })
+    }
+    
+    //
+    // End Round func
+    func endRound() {
+        // Rest Alert
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let restTimes = settings["RestTimes"]!
+        restTime = restTimes[1]
+        //
+        restMessage = "\n" + String(restTime)
+        //
+        restAlert.title = restTitle
+        restAlert.message = restMessage
+        //
+        // Timer end Notification
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("timerEnd", comment: "")
+        content.body = " "
+        content.sound = UNNotificationSound.default()
+        //
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTime), repeats: false)
+        let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+        //
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        // Timer
+        startRestTimer()
+        
+        // Rest Alert
+        restAlert = UIAlertController()
+        restAlert.view.tintColor = Colors.dark
+        restAlert.setValue(NSAttributedString(string: restTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+        let skipAction = UIAlertAction(title: NSLocalizedString("skip", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            self.endRest()
+        }
+        self.restAlert.addAction(skipAction)
+        //
+        self.present(restAlert, animated: true, completion: {
+        })
+        
+    }
+
 }
 
