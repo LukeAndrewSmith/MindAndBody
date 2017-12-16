@@ -111,7 +111,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         cell.textLabel?.textAlignment = .left
         cell.textLabel?.textColor = .black
         //
-        cell.imageView?.image = #imageLiteral(resourceName: "Background 4")
+        cell.imageView?.image = #imageLiteral(resourceName: "TestG")
         //
         let itemSize = CGSize(width: 76, height: 76)
         UIGraphicsBeginImageContextWithOptions(itemSize, false, UIScreen.main.scale)

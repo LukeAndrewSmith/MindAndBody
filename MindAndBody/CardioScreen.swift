@@ -427,6 +427,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             //
             updateProgress2()
             //
+            vibratePhone()
+            //
             //
             let indexPath = NSIndexPath(row: currentIndex, section: 0)
             //

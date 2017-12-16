@@ -38,6 +38,7 @@ extension PresentMenuAnimator : UIViewControllerAnimatedTransitioning {
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             snapshot.center.x += UIScreen.main.bounds.width * 0.75
+
         },
                        completion: { _ in
                         fromVC.view.isHidden = false

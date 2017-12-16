@@ -923,13 +923,13 @@ extension UIViewController {
             
             //
             // Flash
-            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+            UIView.animate(withDuration: 0.1, delay: 0, animations: {
                 //
                 if highlightColor != .clear {
                     walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(1)
                 }
             }, completion: {(finished: Bool) -> Void in
-                UIView.animate(withDuration: 0.2, animations: {
+                UIView.animate(withDuration: 0.1, animations: {
                     //
                     if highlightColor != .clear {
                         walkthroughHighlight.backgroundColor = highlightColor.withAlphaComponent(0.5)

@@ -112,7 +112,6 @@ class ScheduleScreen: UIViewController {
         //
         // Ensure dayIndicator in correct position / not visible && if week view, update temporary full week array
         if scheduleStyle == 0 {
-            dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
             self.view.layoutIfNeeded()
         } else {
             dayIndicator.alpha = 0

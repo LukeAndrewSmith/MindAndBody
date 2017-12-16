@@ -354,32 +354,32 @@ enum scheduleDataStructures {
             
             // Note: Choice = ["title","contents","contents"...]
             // MARK: Flexibility
-            1: ["group": "mind",
+            1: ["group": "flexibility",
                "isGroupCompleted": false,
                "0": false, // Warmup
                "1": false], // Session
             
             // MARK: Endurance
-            2: ["group": "mind",
+            2: ["group": "endurance",
                 "isGroupCompleted": false,
                 "0": false, // Warmup
                 "1": false, // Session
                 "2": false], // Stretching
             // MARK: Toning
-            3: ["group": "mind",
+            3: ["group": "toning",
                "isGroupCompleted": false,
                "0": false, // Warmup
                 "1": false, // Session
                 "2": false], // Stretching
             
             // MARK: Muscle Gain
-            4: ["group": "mind",
+            4: ["group": "muscleGain",
                 "isGroupCompleted": false,
                 "0": false, // Warmup
                 "1": false, // Session
                 "2": false], // Stretching
             // MARK: Strength
-            5: ["group": "mind",
+            5: ["group": "strength",
                 "isGroupCompleted": false,
                 "0": false, // Warmup
                 "1": false, // Session

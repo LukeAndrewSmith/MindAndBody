@@ -73,7 +73,7 @@ class MeditationScreen: UIViewController {
     // Hide Screen
     let hideScreenView = UIView()
     //
-    var brightness = UIScreen.main.brightness
+    var userBrightness = UIScreen.main.brightness
     
     // Background Sound
     var soundPlayer = AVAudioPlayer()
@@ -250,7 +250,9 @@ class MeditationScreen: UIViewController {
             ScheduleVariables.shared.shouldReloadChoice = true
             //
             if UIScreen.main.brightness == 0 {
-                UIScreen.main.brightness = brightness
+                UIApplication.shared.isStatusBarHidden = false
+                hideScreenView.removeFromSuperview()
+                UIScreen.main.brightness = userBrightness
             }
             //
             self.dismiss(animated: true)
@@ -390,7 +392,7 @@ class MeditationScreen: UIViewController {
         //
         UIApplication.shared.isStatusBarHidden = false
         hideScreenView.removeFromSuperview()
-        UIScreen.main.brightness = brightness
+        UIScreen.main.brightness = userBrightness
     }
     
     // Dismiss View
@@ -424,7 +426,7 @@ class MeditationScreen: UIViewController {
             }
             NotificationCenter.default.removeObserver(self)
             if UIScreen.main.brightness == 0 {
-                UIScreen.main.brightness = self.brightness
+                UIScreen.main.brightness = self.userBrightness
             }
             self.dismiss(animated: true)
         }

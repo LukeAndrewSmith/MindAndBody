@@ -143,14 +143,18 @@ class SubscriptionScreen: UIViewController {
     
     // Load Subscription data
     func setSubscriptionData() {
+        
+        // TODO: NOT A VERY USEFUL FUNCTION
+        
+        
         //
-        let annual = InAppManager.shared.products[0]
+//        let annual = InAppManager.shared.products[0]
         //
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.formatterBehavior = .behavior10_4
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .currency
+//        formatter.formatterBehavior = .behavior10_4
         //
-        let price = formatter.string(from: annual.price) ?? "\(annual.price)"
+//        let price = formatter.string(from: annual.price) ?? "\(annual.price)"
         //
 //        self.subscriptionButton.setTitle(price + NSLocalizedString("perYear", comment: ""), for: .normal)
     }

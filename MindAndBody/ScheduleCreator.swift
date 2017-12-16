@@ -699,6 +699,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     generator = nil
                     indexOfDrag = i
                     
+                    //
                     // Get index of the group being dragged using the schedules array
                         // i.e find out which group being dragged
                     indexOfDraggedGroup = (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![indexPathForRow!.row][indexOfDrag]["group"] as! String).groupFromString()

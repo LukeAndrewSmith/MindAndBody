@@ -61,81 +61,93 @@ extension sessionData {
     //    ]
     
     // MARK: Custom sessions templates
-    static let customTemplated: [Int: [String: Any]] =
-        [
-            // Warmup
-            0: ["title": "allMovements",
-                 "movement": "5minCardio",
-                 "sets": 2,
-                 "reps": "0",
-                 "time": 2],
-            // Workout
-            1:
-                // classic gym
-                ["title": "allMovements",
-                 "movement": "squat",
-                 "sets": 2,
-                 "reps": "0",
-                 "time": 2],
-            
-                // Circuit Gym
-                ["title": "testSession",
-                 "movement": "squat",
-                 "rounds": 2, //MARK: NOTE: first movement contains number of rounds
-                    "reps": ""],
-                //
-                ["movement": "squat",
-                "reps": ""]
-            
-                // Clasic bodyweight
-                ["title": "testSession",
-                    "movement": "bodyweightSquat",
-                    "sets": 2,
-                    "reps": "",
-                    "time": 2],
-                ],
-            
-                // Circuit bodyweight
-                ["title": "testSession",
-                    "movement": "bodyweightSquat",
-                    "rounds": 2,
-                    "reps": "",
-                    "time": 2],
-                ["movement": "bodyweightSquat",
-                    "reps": "",
-                    "time": 2],
-            
-            // Cardio
-            2:
-                ["title": "testSession",
-                    "timeBased": true,
-                    "movement": "sprintR", // Indicates if movement or pause
-                    "length": 200], // Distanct/Time
-                ["movement": "slowR",
-                    "length": 200,
-                    "time": 10],
-            
-            // Stretching
-            3:
-                ["title": "allMovements",
-                    "movement": "5minCardioL",
-                    "breaths": 10,
-                    "time": 2],
-                ["movement": "wrist",
-                    "breaths": 10,
-                    "time": 2],
-            
-            // Yoga
-            4:
-            ["title": "allMovements",
-                "pose": "upwardsSalute",
-                "breaths": 10,
-                "time": 2],
-            ["pose": "mountain",
-                "breaths": 10,
-                "time": 2],
-            
-    ]
+//    static let customTemplated: [Int: [String: Any]] =
+//        [
+//            //
+//            -2: ["title": "",
+//                "rounds": "",
+//                "timeBased": "" ],
+//
+//            // Normal Info
+//            -1: ["title": "",
+//                 "rounds": "",
+//                 "timeBased": "" ],
+//
+//
+//
+//            // Warmup
+//            0: ["title": "allMovements",
+//                 "movement": "5minCardio",
+//                 "sets": 2,
+//                 "reps": "0",
+//                 "time": 2],
+//            // Workout
+//            1:
+//                // classic gym
+//                ["title": "allMovements",
+//                 "movement": "squat",
+//                 "sets": 2,
+//                 "reps": "0",
+//                 "time": 2],
+//
+//                // Circuit Gym
+//                ["title": "testSession",
+//                 "movement": "squat",
+//                 "rounds": 2, //MARK: NOTE: first movement contains number of rounds
+//                    "reps": ""],
+//                //
+//                ["movement": "squat",
+//                "reps": ""]
+//
+//                // Clasic bodyweight
+//                ["title": "testSession",
+//                    "movement": "bodyweightSquat",
+//                    "sets": 2,
+//                    "reps": "",
+//                    "time": 2],
+//                ],
+//
+//                // Circuit bodyweight
+//                ["title": "testSession",
+//                    "movement": "bodyweightSquat",
+//                    "rounds": 2,
+//                    "reps": "",
+//                    "time": 2],
+//                ["movement": "bodyweightSquat",
+//                    "reps": "",
+//                    "time": 2],
+//
+//            // Cardio
+//            2:
+//                ["title": "testSession",
+//                    "timeBased": true,
+//                    "movement": "sprintR", // Indicates if movement or pause
+//                    "length": 200], // Distanct/Time
+//                ["movement": "slowR",
+//                    "length": 200,
+//                    "time": 10],
+//
+//            // Stretching
+//            3:
+//                ["title": "allMovements",
+//                    "movement": "5minCardioL",
+//                    "breaths": 10,
+//                    "time": 2],
+//                ["movement": "wrist",
+//                    "breaths": 10,
+//                    "time": 2],
+//
+//            // Yoga
+//            4:
+//            ["title": "allMovements",
+//                "pose": "upwardsSalute",
+//                "breaths": 10,
+//                "time": 2],
+//            ["pose": "mountain",
+//                "breaths": 10,
+//                "time": 2],
+//
+//    ]
     
     
     

@@ -537,7 +537,7 @@
         "workoutRemoveTitle" = "Remove Workout";
             //
         "numberOfRounds" = "Nº Rounds: ";
-        "notCircuitWorkout" = " (i.e not a circuit)";
+        "notCircuitWorkout" = " ";
 
             // Information Workout
         "purposeTextWorkout" = "";

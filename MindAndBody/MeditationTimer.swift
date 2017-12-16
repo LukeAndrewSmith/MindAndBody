@@ -410,6 +410,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         presetsTableView.dataSource = self
         presetsTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         presetsTableView.layer.cornerRadius = 15
+        presetsTableView.layer.borderColor = Colors.light.cgColor
+        presetsTableView.layer.borderWidth = 1
         presetsTableView.layer.masksToBounds = true
         presetsTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         //

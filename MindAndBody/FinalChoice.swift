@@ -656,7 +656,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 // Circuit Session
                 case "circuitGymFull", "circuitGymUpper", "circuitGymLower","circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
                     // Number of rounds
-                    let test = SelectedSession.shared.selectedSession[2]
                     return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int
                 // Normal Session
                 default:

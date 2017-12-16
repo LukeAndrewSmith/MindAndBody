@@ -122,7 +122,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //
+        // If not from custom, retreive data
         if fromCustom == false {
             // Loop session
             for i in 0..<(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?.count)! {
@@ -131,9 +131,11 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             }
             // Rounds in first movement
             numberOfRounds = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]["rounds"] as! Int
-            
-            numberOfMovementsInRound = keyArray.count / numberOfRounds
         }
+        
+        //
+        numberOfMovementsInRound = keyArray.count / numberOfRounds
+
         
         // Device Scale for @2x and @3x of Target Area Images
         switch UIScreen.main.scale {

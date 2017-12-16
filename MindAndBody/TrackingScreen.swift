@@ -287,7 +287,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                 highlight = Highlight(x: chartDataOriginal[i].key.timeIntervalSince1970, y: Double(chartDataOriginal[i].value), dataSetIndex: 0)
             }
         }
-//        chartView.highlightValue(highlight)
+        //
+        chartView.highlightValue(highlight)
         
         // Chart data
         let chartDataSet = LineChartDataSet(values: lineDataEntry, label: "I'm a label that isn't shown")
