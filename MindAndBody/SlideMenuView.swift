@@ -160,8 +160,9 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         self.dismiss(animated: true)
     }
     
-    
+    // Button close menu
     @IBAction func closeMenu(_ sender: Any) {
+        MenuVariables.shared.menuInteractionType = 0
         UIApplication.shared.statusBarStyle = .lightContent
         MenuVariables.shared.isNewView = false
         self.dismiss(animated: true)

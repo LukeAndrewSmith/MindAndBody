@@ -1288,12 +1288,24 @@ extension ScheduleScreen {
 
     //
     // MARK: Slide menu swipe
-    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
-        if sender.state == .began {
-            self.performSegue(withIdentifier: "openMenu", sender: nil)
+    // Edge pan
+    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
+        
+        MenuVariables.shared.menuInteractionType = 1
+
+        let translation = sender.translation(in: view)
+        
+        let progress = MenuHelper.calculateProgress(translation, viewBounds: view.bounds, direction: .Right)
+        
+        MenuHelper.mapGestureStateToInteractor(
+            sender.state,
+            progress: progress,
+            interactor: interactor){
+                self.performSegue(withIdentifier: "openMenu", sender: nil)
         }
     }
-    //
+    // Button
+    
     
     
     //
@@ -1805,11 +1817,6 @@ extension ScheduleScreen {
         //
         scheduleTable.addSubview(topView)
         
-        // Swipe
-        let rightSwipe = UIScreenEdgePanGestureRecognizer()
-        rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
-        view.addGestureRecognizer(rightSwipe)
     }
     
     // Layout views

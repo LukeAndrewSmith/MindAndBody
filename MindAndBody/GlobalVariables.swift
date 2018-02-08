@@ -111,6 +111,9 @@ class MenuVariables {
     var isNewView = Bool()
     // Check if app opening for the first time (in a session of the app)
     var isInitialAppOpen = true
+    // Menu interaction type
+        // 0 == slide, 1 == press
+    var menuInteractionType = 0
 }
 
 //

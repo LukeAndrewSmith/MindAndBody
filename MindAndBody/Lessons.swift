@@ -50,17 +50,23 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let blur2 = UIVisualEffectView()
     let blur3 = UIVisualEffectView()
     
+    // Slide menu
+    var slideMenuInteraction = UIScreenEdgePanGestureRecognizer()
     
     //
     // View did load ------------------------------------------------------------------------------------
     //
     
-    
-    
     //
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Slide Menu
+        self.tableView.addGestureRecognizer(slideMenuInteraction)
+        slideMenuInteraction.addTarget(self, action: #selector(edgePanGesture(sender:)))
+        slideMenuInteraction.edges = .left
+        
+        //
         backgroundIndex = settings["BackgroundImage"]![0]
         
         //
@@ -81,12 +87,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         topView.frame = CGRect(x: 0, y: tableView.frame.minY - tableView.bounds.height, width: tableView.bounds.width, height: tableView.bounds.height)
         //
         tableView.addSubview(topView)
-        
-        // Swipe
-        let rightSwipe = UISwipeGestureRecognizer()
-        rightSwipe.direction = .right
-        rightSwipe.addTarget(self, action: #selector(swipeGesture))
-        view.addGestureRecognizer(rightSwipe)
         
         //
         //  Navigation Bar
@@ -277,9 +277,28 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // Elements
     //
-    @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
-        self.performSegue(withIdentifier: "openMenu", sender: nil)
+    let interactor = Interactor()
+    // Edge pan
+    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
+        
+        MenuVariables.shared.menuInteractionType = 1
+
+        let translation = sender.translation(in: view)
+        
+        let progress = MenuHelper.calculateProgress(translation, viewBounds: view.bounds, direction: .Right)
+        
+        MenuHelper.mapGestureStateToInteractor(
+            sender.state,
+            progress: progress,
+            interactor: interactor){
+                self.performSegue(withIdentifier: "openMenu", sender: nil)
+        }
     }
+    // Button
+    @IBAction func slideMenuButton(_ sender: Any) {
+        MenuVariables.shared.menuInteractionType = 0
+    }
+    
     
     @IBAction func slideMenuAction(_ sender: Any) {
         self.performSegue(withIdentifier: "openMenu", sender: nil)
@@ -405,6 +424,17 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
 //
 // Slide Menu Extension
 extension Lessons: UIViewControllerTransitioningDelegate {
+    
+    // Interactive pan
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    //
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    
+    // Button
     // Present
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PresentMenuAnimator()

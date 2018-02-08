@@ -34,6 +34,9 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Button on x axis
     var timeScaleButton2 = UIButton()
     
+    // Slide menu
+    var slideMenuInteraction = UIScreenEdgePanGestureRecognizer()
+    
     //
     // Retreive trackingdictionaries from userdefaults as [String: Int] and convert to [Date: Int]
     var trackingDictionariesDates: [[Date: Int]] = []
@@ -88,6 +91,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Ensure week goal correct
         updateWeekGoal()
         
@@ -142,6 +146,11 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //
         setupChart()
+        
+        // Slide Menu
+        chartView.addGestureRecognizer(slideMenuInteraction)
+        slideMenuInteraction.addTarget(self, action: #selector(edgePanGesture(sender:)))
+        slideMenuInteraction.edges = .left
     }
     
     func setupChart() {
@@ -430,13 +439,31 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     //
-    // MARK Slide Menu ---------------------------------------------------------------------------------------------------------------------
+    // MARK: Slide Menu ---------------------------------------------------------------------------------------------------------------------
     //
-    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
-        if sender.state == .began {
-            self.performSegue(withIdentifier: "openMenu", sender: nil)
+    let interactor = Interactor()
+    // Edge pan
+    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
+        
+        MenuVariables.shared.menuInteractionType = 1
+
+        let translation = sender.translation(in: view)
+        
+        let progress = MenuHelper.calculateProgress(translation, viewBounds: view.bounds, direction: .Right)
+        
+        MenuHelper.mapGestureStateToInteractor(
+            sender.state,
+            progress: progress,
+            interactor: interactor){
+                self.performSegue(withIdentifier: "openMenu", sender: nil)
         }
     }
+    //
+    @IBAction func slideMenuButtonAction(_ sender: Any) {
+        MenuVariables.shared.menuInteractionType = 0
+    }
+    
+    
     @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
         self.performSegue(withIdentifier: "openMenu", sender: nil)
     }
@@ -620,6 +647,17 @@ public class DateValueFormatterMonth: NSObject, IAxisValueFormatter {
 //
 // MARK: Slide Menu Extension
 extension TrackingScreen: UIViewControllerTransitioningDelegate {
+    
+    // Interactive pan
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    //
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    
+    // Button
     // Present
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PresentMenuAnimator()

@@ -425,15 +425,29 @@ class MindBody: UIViewController {
     //
     // Slide Menu ---------------------------------------------------------------------------------------------------------------------
     //
-    
-    // Elements
-    //
-    @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
-        self.performSegue(withIdentifier: "openMenu", sender: nil)
+    let interactor = Interactor()
+    // Edge pan
+    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
+        
+        //
+        MenuVariables.shared.menuInteractionType = 1
+        
+        let translation = sender.translation(in: view)
+        
+        let progress = MenuHelper.calculateProgress(translation, viewBounds: view.bounds, direction: .Right)
+        
+        MenuHelper.mapGestureStateToInteractor(
+            sender.state,
+            progress: progress,
+            interactor: interactor){
+                self.performSegue(withIdentifier: "openMenu", sender: nil)
+        }
+    }
+    // Button
+    @IBAction func slideMenuButtonAction(_ sender: Any) {
+        MenuVariables.shared.menuInteractionType = 0
     }
     
-    
-    //let transitionManager = TransitionManager()
     
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -770,11 +784,21 @@ class MindBody: UIViewController {
 //
 // Slide Menu Extension
 extension MindBody: UIViewControllerTransitioningDelegate {
+    
+    // Interactive pan
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    //
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    
+    // Button
     // Present
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PresentMenuAnimator()
     }
-    
     // Dismiss
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DismissMenuAnimator()

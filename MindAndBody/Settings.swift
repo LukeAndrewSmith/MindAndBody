@@ -52,6 +52,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // Use actionSheetView and okButton from above for home screen action sheet
     
     
+    // Slide menu
+    var slideMenuInteraction = UIScreenEdgePanGestureRecognizer()
+    
     
     // View Will Appear
     override func viewWillAppear(_ animated: Bool) {
@@ -74,18 +77,17 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Slide Menu
+        self.tableView.addGestureRecognizer(slideMenuInteraction)
+        slideMenuInteraction.addTarget(self, action: #selector(edgePanGesture(sender:)))
+        slideMenuInteraction.edges = .left
+        
         //
         // Walkthrough
         let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
         if walkthroughs["Settings"] == false {
             walkthroughSettings()
         }
-        
-        // Swipe
-        let rightSwipe = UISwipeGestureRecognizer()
-        rightSwipe.direction = .right
-        rightSwipe.addTarget(self, action: #selector(swipeGesture(sender:)))
-        tableView.addGestureRecognizer(rightSwipe)
         
         // Navigation Bar
         //
@@ -956,9 +958,28 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     // Elements
     //
-    @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
-        self.performSegue(withIdentifier: "openMenu", sender: nil)
+    let interactor = Interactor()
+    // Edge pan
+    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
+        
+        MenuVariables.shared.menuInteractionType = 1
+
+        let translation = sender.translation(in: view)
+        
+        let progress = MenuHelper.calculateProgress(translation, viewBounds: view.bounds, direction: .Right)
+        
+        MenuHelper.mapGestureStateToInteractor(
+            sender.state,
+            progress: progress,
+            interactor: interactor){
+                self.performSegue(withIdentifier: "openMenu", sender: nil)
+        }
     }
+    // Button
+    @IBAction func slideMenuButton(_ sender: Any) {
+        MenuVariables.shared.menuInteractionType = 0
+    }
+    
     
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -1127,6 +1148,17 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 //
 // Slide Menu Extension
 extension Settings: UIViewControllerTransitioningDelegate {
+    
+    // Interactive pan
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    //
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    
+    // Button
     // Present
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PresentMenuAnimator()

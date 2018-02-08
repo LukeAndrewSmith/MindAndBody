@@ -55,6 +55,9 @@ class ScheduleScreen: UIViewController {
     @IBOutlet weak var dayIndicator: UIView!
     @IBOutlet weak var dayIndicatorLeading: NSLayoutConstraint!
     
+    // Slide menu interactor
+    let interactor = Interactor()
+    
     // Variables
     // Days array
     let dayArray: [String] =
@@ -226,7 +229,6 @@ class ScheduleScreen: UIViewController {
         //
         if segue.identifier == "openMenu" {
             // Remove Mask View
-            UIApplication.shared.statusBarStyle = .default
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
             }
@@ -273,11 +275,28 @@ class ScheduleScreen: UIViewController {
             
         }
     }
+    
+    // Slide menu
+    @IBAction func slideMenuButtonAction(_ sender: Any) {
+        MenuVariables.shared.menuInteractionType = 0
+    }
+    
 }
 
 //
 // Slide Menu Extension
 extension ScheduleScreen: UIViewControllerTransitioningDelegate {
+    
+    // Interactive pan
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    //
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    
+    // Button
     // Present
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PresentMenuAnimator()
