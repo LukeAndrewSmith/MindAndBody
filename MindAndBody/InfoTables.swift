@@ -55,7 +55,7 @@ class InfoTables {
 }
 
 //
-// MARK: Info Table 1
+// MARK: Info Table 1 - Mind & Body
 class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var infoTable: UITableView!
@@ -169,7 +169,7 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
 }
 
 //
-// MARK: Info Table 2
+// MARK: Info Table 2 - Schedule
 class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var infoTable: UITableView!
@@ -298,96 +298,8 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
 }
 
 //
-// MARK: Info Table 3
+// MARK: Info Table 3 - Fitness
 class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    @IBOutlet weak var infoTable: UITableView!
-    //
-    var row0Height = CGFloat()
-    //
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //
-        view.backgroundColor = .clear
-        InfoTables.shared.setupTable(tableView: infoTable)
-        infoTable.backgroundColor = Colors.light
-        infoTable.layer.borderWidth = 1
-        infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
-        //
-        row0Height = infoTable.bounds.height * (1/3)
-    }
-    
-    // Number of sections
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    // Header Height
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
-    }
-    
-    // Rows
-    // Number of rows per section
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0: return row0Height
-        case 1: return 8
-        case 2: return 44
-        case 3: return (infoTable.bounds.height * (2/3)) - 44
-        default: return 0
-        }
-    }
-    
-    // Row cell customization
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
-            let cell = UITableViewCell()
-            cell.backgroundColor = Colors.dark
-            cell.selectionStyle = .none
-            //
-            let cellImage = UIImageView()
-            cellImage.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: row0Height)
-            cellImage.contentMode = .scaleAspectFit
-            cellImage.image = #imageLiteral(resourceName: "upwardDog.png")
-            cell.addSubview(cellImage)
-            return cell
-        case 2:
-            let cell = UITableViewCell()
-            InfoTables.shared.setupTitleCell(cell: cell, title: NSLocalizedString("plans", comment: ""), infoWidth: infoTable.bounds.width)
-            return cell
-        case 3:
-            let cell = UITableViewCell()
-            cell.backgroundColor = Colors.light
-            let label = UILabel()
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            label.numberOfLines = 0
-            label.lineBreakMode = .byWordWrapping
-            label.text = NSLocalizedString("infoTable3", comment: "")
-            label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
-            label.sizeToFit()
-            label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
-            cell.addSubview(label)
-            cell.selectionStyle = .none
-            //
-            return cell
-        default:
-            let cell = UITableViewCell()
-            cell.backgroundColor = Colors.light
-            cell.selectionStyle = .none
-            //
-            return cell
-        }
-    }
-}
-
-//
-// MARK: Info Table 4
-class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var infoTable: UITableView!
     //
@@ -469,4 +381,262 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
+}
+
+//
+// MARK: Info Table 4 - Yoga
+class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet weak var infoTable: UITableView!
+    //
+    var row0Height = CGFloat()
+    //
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //
+        view.backgroundColor = .clear
+        InfoTables.shared.setupTable(tableView: infoTable)
+        infoTable.backgroundColor = Colors.light
+        infoTable.layer.borderWidth = 1
+        infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
+        //
+        row0Height = infoTable.bounds.height * (1/3)
+    }
+    
+    // Number of sections
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    // Header Height
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    // Rows
+    // Number of rows per section
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0: return row0Height
+        case 1: return 8
+        case 2: return 44
+        case 3: return (infoTable.bounds.height * (2/3)) - 44
+        default: return 0
+        }
+    }
+    
+    // Row cell customization
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            let cell = UITableViewCell()
+            cell.backgroundColor = Colors.dark
+            let cellImage = UIImageView()
+            cellImage.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: row0Height)
+            cellImage.contentMode = .scaleAspectFit
+            cellImage.image = #imageLiteral(resourceName: "upwardDog.png")
+            cell.addSubview(cellImage)
+            return cell
+        case 2:
+            let cell = UITableViewCell()
+            InfoTables.shared.setupTitleCell(cell: cell, title: NSLocalizedString("yoga", comment: ""), infoWidth: infoTable.bounds.width)
+            return cell
+        case 3:
+            let cell = UITableViewCell()
+            cell.backgroundColor = Colors.light
+            let label = UILabel()
+            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.text = NSLocalizedString("infoTable4", comment: "")
+            label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
+            label.sizeToFit()
+            label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
+            cell.addSubview(label)
+            cell.selectionStyle = .none
+            //
+            return cell
+        default:
+            let cell = UITableViewCell()
+            cell.backgroundColor = Colors.light
+            cell.selectionStyle = .none
+            //
+            return cell
+        }
+    }
+}
+    
+    //
+    // MARK: Info Table 5 - Meditation
+    class InfoTable5: UIViewController, UITableViewDelegate, UITableViewDataSource {
+        
+        @IBOutlet weak var infoTable: UITableView!
+        //
+        var row0Height = CGFloat()
+        //
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            //
+            view.backgroundColor = .clear
+            InfoTables.shared.setupTable(tableView: infoTable)
+            infoTable.backgroundColor = Colors.light
+            infoTable.layer.borderWidth = 1
+            infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
+            //
+            row0Height = infoTable.bounds.height * (1/3)
+        }
+        
+        // Number of sections
+        func numberOfSections(in tableView: UITableView) -> Int {
+            return 1
+        }
+        // Header Height
+        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 0
+        }
+        
+        // Rows
+        // Number of rows per section
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 4
+        }
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            switch indexPath.row {
+            case 0: return row0Height
+            case 1: return 8
+            case 2: return 44
+            case 3: return (infoTable.bounds.height * (2/3)) - 44
+            default: return 0
+            }
+        }
+        
+        // Row cell customization
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            switch indexPath.row {
+            case 0:
+                let cell = UITableViewCell()
+                cell.backgroundColor = Colors.dark
+                let cellImage = UIImageView()
+                cellImage.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: row0Height)
+                cellImage.contentMode = .scaleAspectFit
+                cellImage.image = #imageLiteral(resourceName: "upwardDog.png")
+                cell.addSubview(cellImage)
+                return cell
+            case 2:
+                let cell = UITableViewCell()
+                InfoTables.shared.setupTitleCell(cell: cell, title: NSLocalizedString("meditation", comment: ""), infoWidth: infoTable.bounds.width)
+                return cell
+            case 3:
+                let cell = UITableViewCell()
+                cell.backgroundColor = Colors.light
+                let label = UILabel()
+                label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+                label.numberOfLines = 0
+                label.lineBreakMode = .byWordWrapping
+                label.text = NSLocalizedString("infoTable4", comment: "")
+                label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
+                label.sizeToFit()
+                label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
+                cell.addSubview(label)
+                cell.selectionStyle = .none
+                //
+                return cell
+            default:
+                let cell = UITableViewCell()
+                cell.backgroundColor = Colors.light
+                cell.selectionStyle = .none
+                //
+                return cell
+            }
+        }
+}
+    
+    //
+    // MARK: Info Table 6 - Tracking
+    class InfoTable6: UIViewController, UITableViewDelegate, UITableViewDataSource {
+        
+        @IBOutlet weak var infoTable: UITableView!
+        //
+        var row0Height = CGFloat()
+        //
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            //
+            view.backgroundColor = .clear
+            InfoTables.shared.setupTable(tableView: infoTable)
+            infoTable.backgroundColor = Colors.light
+            infoTable.layer.borderWidth = 1
+            infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
+            //
+            row0Height = infoTable.bounds.height * (1/3)
+        }
+        
+        // Number of sections
+        func numberOfSections(in tableView: UITableView) -> Int {
+            return 1
+        }
+        // Header Height
+        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 0
+        }
+        
+        // Rows
+        // Number of rows per section
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 4
+        }
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            switch indexPath.row {
+            case 0: return row0Height
+            case 1: return 8
+            case 2: return 44
+            case 3: return (infoTable.bounds.height * (2/3)) - 44
+            default: return 0
+            }
+        }
+        
+        // Row cell customization
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            switch indexPath.row {
+            case 0:
+                let cell = UITableViewCell()
+                cell.backgroundColor = Colors.dark
+                let cellImage = UIImageView()
+                cellImage.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: row0Height)
+                cellImage.contentMode = .scaleAspectFit
+                cellImage.image = #imageLiteral(resourceName: "upwardDog.png")
+                cell.addSubview(cellImage)
+                return cell
+            case 2:
+                let cell = UITableViewCell()
+                InfoTables.shared.setupTitleCell(cell: cell, title: NSLocalizedString("tracking", comment: ""), infoWidth: infoTable.bounds.width)
+                return cell
+            case 3:
+                let cell = UITableViewCell()
+                cell.backgroundColor = Colors.light
+                let label = UILabel()
+                label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+                label.numberOfLines = 0
+                label.lineBreakMode = .byWordWrapping
+                label.text = NSLocalizedString("infoTable4", comment: "")
+                label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
+                label.sizeToFit()
+                label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
+                cell.addSubview(label)
+                cell.selectionStyle = .none
+                //
+                return cell
+            default:
+                let cell = UITableViewCell()
+                cell.backgroundColor = Colors.light
+                cell.selectionStyle = .none
+                //
+                return cell
+            }
+        }
 }

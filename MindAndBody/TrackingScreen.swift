@@ -473,8 +473,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         //
         if segue.identifier == "openMenu" {
             //
-            UIApplication.shared.statusBarStyle = .default
-            //
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
             }

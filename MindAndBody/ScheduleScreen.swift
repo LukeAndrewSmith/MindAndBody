@@ -163,8 +163,6 @@ class ScheduleScreen: UIViewController {
         if scheduleStyle == 1 {
             createTemporaryWeekViewArray()
         }
-        
-        self.performSegue(withIdentifier: "InitialInfoSegue", sender: self)
     }
     
     // MARK: viewDidLayoutSubviews

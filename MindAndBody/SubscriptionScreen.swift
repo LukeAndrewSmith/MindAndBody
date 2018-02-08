@@ -104,6 +104,9 @@ class SubscriptionScreen: UIViewController {
             self.loadingView.removeFromSuperview()
         }
         
+        okAction.setValue(Colors.green, forKey: "titleTextColor")
+        cancelAction.setValue(Colors.red, forKey: "titleTextColor")
+        
         // Add Actions
         alert.addAction(okAction)
         alert.addAction(cancelAction)
@@ -321,8 +324,6 @@ class SubscriptionScreen: UIViewController {
 
 
 class SubscriptionCell: UITableViewCell {
-    
-    
     //
     override func layoutSubviews() {
 //        topLabel.text = "• Warmups \n• Workouts \n• Stretching"

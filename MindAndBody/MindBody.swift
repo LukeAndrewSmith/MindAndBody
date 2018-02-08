@@ -454,16 +454,6 @@ class MindBody: UIViewController {
         //
         if segue.identifier == "openMenu" {
             //
-            UIApplication.shared.statusBarStyle = .default
-            
-            //            //
-            //
-            //            let toViewController = segue.destination as UIViewController
-            //
-            //            toViewController.transitioningDelegate = self.transitionManager
-            
-            // self.transitioningDelegate = transitionManager
-            
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
             }

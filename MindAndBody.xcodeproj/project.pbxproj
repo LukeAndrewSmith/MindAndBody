@@ -499,7 +499,6 @@
 		078F3870202B2AC400DC6150 /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078F386F202B2AC400DC6150 /* MenuHelper.swift */; };
 		078F3873202B2B0B00DC6150 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078F3872202B2B0B00DC6150 /* Interactor.swift */; };
 		0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872A1E7B4E2C00E7153A /* SessionScreen.swift */; };
-		07928C621F93E6D400EDA5C6 /* InitialInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07928C611F93E6D400EDA5C6 /* InitialInfoScreen.swift */; };
 		0794A7491FBC7F550029968D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794A7481FBC7F550029968D /* Settings.swift */; };
 		0794A74D1FBCC3D70029968D /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794A74C1FBCC3D70029968D /* ActionSheet.swift */; };
 		0798381E1F8A8DD9007C3CF5 /* TimeBasedSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */; };
@@ -1894,7 +1893,6 @@
 		078F386F202B2AC400DC6150 /* MenuHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHelper.swift; sourceTree = "<group>"; };
 		078F3872202B2B0B00DC6150 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		0791872A1E7B4E2C00E7153A /* SessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
-		07928C611F93E6D400EDA5C6 /* InitialInfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInfoScreen.swift; sourceTree = "<group>"; };
 		0794A7481FBC7F550029968D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		0794A74C1FBCC3D70029968D /* ActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheet.swift; sourceTree = "<group>"; };
 		0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedSession.swift; sourceTree = "<group>"; };
@@ -3681,7 +3679,6 @@
 		0778761C1F92A44B005CE68A /* Initial/Subscriptions (One time modals) */ = {
 			isa = PBXGroup;
 			children = (
-				077876211F92A4EA005CE68A /* Initial info screen */,
 				0778761F1F92A45A005CE68A /* Subscriptions */,
 			);
 			name = "Initial/Subscriptions (One time modals)";
@@ -3695,14 +3692,6 @@
 				07DE23011FC0916F00940567 /* Subscriptions Other */,
 			);
 			name = Subscriptions;
-			sourceTree = "<group>";
-		};
-		077876211F92A4EA005CE68A /* Initial info screen */ = {
-			isa = PBXGroup;
-			children = (
-				07928C611F93E6D400EDA5C6 /* InitialInfoScreen.swift */,
-			);
-			name = "Initial info screen";
 			sourceTree = "<group>";
 		};
 		077AC0CE1DA535830026895B = {
@@ -8391,7 +8380,6 @@
 				073734221FD2DE42009F5B54 /* TrackingScreen.swift in Sources */,
 				07DE23031FC0919200940567 /* Subscriptions.swift in Sources */,
 				07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */,
-				07928C621F93E6D400EDA5C6 /* InitialInfoScreen.swift in Sources */,
 				072A87721EDEC59A00684809 /* CardioChoiceHIIT.swift in Sources */,
 				07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */,
 				077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */,

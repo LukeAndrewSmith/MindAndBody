@@ -38,11 +38,15 @@ class InfoPageViewController: UIPageViewController, UIPageViewControllerDataSour
         let page2: UIViewController! = (storyboard?.instantiateViewController(withIdentifier: "InfoTable2"))! as! InfoTable2
         let page3: UIViewController! = (storyboard?.instantiateViewController(withIdentifier: "InfoTable3"))! as! InfoTable3
         let page4: UIViewController! = (storyboard?.instantiateViewController(withIdentifier: "InfoTable4"))! as! InfoTable4
+        let page5: UIViewController! = (storyboard?.instantiateViewController(withIdentifier: "InfoTable5"))! as! InfoTable5
+        let page6: UIViewController! = (storyboard?.instantiateViewController(withIdentifier: "InfoTable6"))! as! InfoTable6
 
         pages.append(page1)
         pages.append(page2)
         pages.append(page3)
         pages.append(page4)
+        pages.append(page5)
+        pages.append(page6)
         
         setViewControllers([page1], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
         
