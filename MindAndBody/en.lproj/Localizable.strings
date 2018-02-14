@@ -14,7 +14,7 @@
 "langugeOfBundle" = "English - English";
 
 // MARK: General (Didn't know/think where to classify them)
-
+// MARK: Time Related
 "minutes" = "min";
 "seconds" = "sec";
 
@@ -23,20 +23,17 @@
 "cancel" = "Cancel";
 "reset" = "Reset";
 
-"information" = "Information";
+"rest" = "Rest";
+"rest:" = "Rest:";
+"skip" = "Skip";
 
+// MARK: Sessions
 "setsReps" = "Sets x Reps:";
 
 "begin" = "Begin";
 "end" = "End";
 "endRound" = "End Round";
 "endWorkout" = "End Workout";
-
-"mandatory" = "Mandatory";
-"lowerBack" = "Lower Back";
-"shoudlers" = "Shoulders";
-
-"asNecessary" = "As Necessary";
 
 "breaths" = "Breaths";
 
@@ -48,49 +45,38 @@
 "timer" = "Timer";
 "timerEnd" = "Timer Ended";
 
-"warmupInputTitle" = "Warmup Title";
-"warmupRemoveTitle" = "Remove Warmup";
-
-"units" = "Units";
-
 "round" = "Round ";
 "of" = " of ";
-    //
 "round1" = "Round 1";
 "round2" = "Round 2";
 "round3" = "Round 3";
 "round4" = "Round 4";
 "round5" = "Round 5";
 
-"hideScreen" = "Pocket Mode\n\nTriple tap to exit";
-
-"rest" = "Rest";
-"rest:" = "Rest:";
-"skip" = "Skip";
-
 "sessionStarted" = "Session has begun!";
 
-"edit" = "Edit";
-"done" = "Done";
-
+// MARK: Custom Sessions
 "set" = "set";
 "sets" = "sets";
 "rep" = "rep";
 "reps" = "reps";
 
-"preset" = "Preset";
+"edit" = "Edit";
+"done" = "Done";
 
 "remove" = "Remove";
 "delete" = "Delete";
+
+// Other
+"lowerBack" = "Lower Back";
+"shoudlers" = "Shoulders";
+
+"preset" = "Preset";
 
 "timedSession" = "Timed Sessions";
 
 "homePage" = "Home Page";
 
-"on" = "ON";
-"off" = "OFF";
-
-//
 // MARK: Settings
 "general" = "General";
 "timedSessions" = "Timed Sessions";
@@ -98,183 +84,106 @@
 "sessions" = "Sessions";
 "iCloud" = "iCloud";
 
-//
 "differentSessions" = "Different Sessions";
 
-//
+"units" = "Units";
 "imperial" = "Imperial (lb)";
 "metric" = "Metric (kg)";
 
+"demonstration" = "Demonstration";
+"targetArea" = "Target Area";
 
-// Test
-"howTo" = "How To:";
-"toAvoid" = "Avoid:";
-"focusOn" = "Focus On:";
-    //
-"howToTest" = "This is the first bullet point\nI wonder if this works\nHow about if I write a really long sentence like this one with many words\nWhat about a short one?";
-"toAvoidTest" = "Don't do this\nDefinitely don't do this\nThis would be best to avoid";
-
+"on" = "ON";
+"off" = "OFF";
 
 "sessions" = "Sessions";
 
 
-//
-// MARK: Tracking //
+// MARK: Tracking
 "tracking" = "Tracking";
 "trackingWarning" = "No data recorded yet";
-    //
-    // Time Scales
-    "trackingScreenTimeScaleOption" = "Time Scale:";
-    //
-    "1week" = "Current Week";
-    "1month" = "Current Month";
-    "3months" = "Last 3 Months";
-    "6months" = "Last 6 Months";
-    "1year" = "Current Year";
-    "all" = "All";
 
-        //
-        // Add ons to dates 1st/2nd/3rd/th
-    "st" = "st";
-    "nd" = "nd";
-    "rd" = "rd";
-    "th" = "th";
-        //
-        // Days of week as Character
-    "mondayChar" = "Mon";
-    "tuesdayChar" = "Tues";
-    "wednesdayChar" = "Wed";
-    "thursdayChar" = "Thurs";
-    "fridayChar" = "Fri";
-    "saturdayChar" = "Sat";
-    "sundayChar" = "Sun";
-
-        //
-    "currentWeek" = "Current Week";
-        //
-    "january" = "January";
-    "february" = "February";
-    "march" = "March";
-    "april" = "April";
-    "may" = "May";
-    "june" = "June";
-    "july" = "July";
-    "august" = "August";
-    "september" = "September";
-    "october" = "October";
-    "november" = "November";
-    "december" = "December";
-
-
-
+// Time Scales
+"trackingScreenTimeScaleOption" = "Time Scale:";
 //
-// MARK: Mind & Body //
-//
-    //
-    // Alert Information //
-"alertTitle1" = "Welcome to MyGymGuide!";
-"alertMessage1" = "\nThis is the homepage; it will contain your personalised workout plan and a bar showing the weeks workouts.\n\nGet started and set your preferences in the left tab.";
+"1week" = "Current Week";
+"1month" = "Current Month";
+"3months" = "Last 3 Months";
+"6months" = "Last 6 Months";
+"1year" = "Current Year";
+"all" = "All";
+
+// Add ons to dates 1st/2nd/3rd/th
+"st" = "st";
+"nd" = "nd";
+"rd" = "rd";
+"th" = "th";
+
+// Days of week as characters (shortened not characters... bad name)
+"mondayChar" = "Mon";
+"tuesdayChar" = "Tues";
+"wednesdayChar" = "Wed";
+"thursdayChar" = "Thurs";
+"fridayChar" = "Fri";
+"saturdayChar" = "Sat";
+"sundayChar" = "Sun";
+
+"currentWeek" = "Current Week";
+
+"january" = "January";
+"february" = "February";
+"march" = "March";
+"april" = "April";
+"may" = "May";
+"june" = "June";
+"july" = "July";
+"august" = "August";
+"september" = "September";
+"october" = "October";
+"november" = "November";
+"december" = "December";
 
 
-    //
-    // Home Screen //
-        // Title //
-    "mind&body" = "Mind & Body";
+// MARK: Mind & Body
+// MARK: Home Screen
+// Title
+"mind&body" = "Mind & Body";
 
-        //
-        // Button Titles //
-    "warmup" = "Warm Up";
-    "workout" = "Workout";
-    "stretching" = "Stretching";
-    "cardio" = "Cardio";
-    "yoga" = "Yoga";
-    "meditation" = "Meditation";
-    "mindfulness" = "Mindfulness";
+// Button Titles
+"warmup" = "Warm Up";
+"workout" = "Workout";
+"stretching" = "Stretching";
+"cardio" = "Cardio";
+"yoga" = "Yoga";
+"meditation" = "Meditation";
 
-    "workoutNumber" = " Workout Number:";
+// MARK: -
+// MARK: Movements & Explanations (&& random strings relating to sessions types (Warmup,Workout...))
+// MARK: Important note for explanations
+// "movementE" + "H" = How To: ("movementEH")
+// "movementE" + "A" = Avoid:
+// "movementE" + "F" = Focus on:
+"H" = "";
+"A" = "";
+"F" = "";
+// NOTE: Put "" empty string if not used
 
+// Expanation Titles
+"howTo" = "How To:";
+"toAvoid" = "Avoid:";
+"focusOn" = "Focus On:";
 
-    "presetWarmups" = "Preset Warmups";
-    "warmupTableTitle" = "Warmup Movements";
+// MARK: Warmup
+// Warmup Misc.
+"selectWarmup" = "- Select Warmup -";
+"customWarmup" = "- Custom Warmup -";
 
-    //
-    // MARK: Warm Up //
-    //
-    "selectWarmup" = "- Select Warmup -";
-    "customWarmup" = "- Custom Warmup -";
-        // Warm Up //
-        //
+"fullBody" = "Full Body";
+"cardio" = "Cardio";
 
-    "fullBody" = "Full Body";
-    "cardio" = "Cardio";
+"movements" = "Movements";
 
-        // Information //
-    "purpose" = "Purpose";
-    "purposeText" = "The purpose of a warm up is two-fold, it prepares both mind and body for the activity to come. A warm up should be consistently performed before exercise; for gym workouts it should be 10-20mins long (a longer warm up coupled with a shorter workout is more effective than the inverse), for home workouts 5-10mins long, and for cardio 5-15mins long. In all cases the warm up should produce mild sweating, and increased mental and physical focus.";
-    "body" = "Body";
-    "bodyText" = "A warm up increases body temperature and heart rate, and subsequently blood flow, which together increase the flexibility of muscles and joints. It also reduces the chances of premature fatigue during cardiovascular activity and increases neuromuscular activation.";
-    "mind" = "Mind";
-    "mindText" = "A warm up increases the firing of nerual pathways related to exercise and muscle activation (neuromuscular activation) thus preparing the mind for exercise.\nIdeally there is also a conscious change, the warm up is a chance to relax and put aside any thoughts that might hinder the exercise through awareness of the feeling of the activation/stimulation of your muscles, through visualisation of the exercises that will be performed and by focusing the mind on the present.";
-
-
-        // Warm Up Choice Full //
-    "movements" = "Movements";
-    "warmupChoiceFullText" = "";
-
-
-
-
-        // Warm Up Choice Upper //
-
-                // Warm Up Upper Movements Array //
-                // Mandatory
-    "mandatory" = "Mandatory";
-"5minCardio" = "5min Cardio";
-                // Joint Rotations
-    "jointRotation" = "Joint Rotations";
-"wrist" = "Wrist Rotations";
-"elbow" = "Elbow Rotations";
-"shoulderR" = "Shoulder Rotations";
-"neckR" = "Neck Rotations";
-"waist" = "Waist Rotations";
-"hip" = "Hip Rotations";
-"knees" = "Knee Rotations";
-"ankles" = "Ankle Rotations";
-                // Foam/Ball Roll
-    "foamRoll" = "Foam/Ball Roll";
-"backf" = "Back Foam Roll";
-"thoracicSpine" = "Thoracic Extensions";
-"lat" = "Lat/Delt Foam Roll";
-"pecDelt" = "Pec and Delt Ball Roll";
-"rearDelt" = "Rear Delt Ball Roll";
-                // Lower Back
-    "lowerBack" = "Lower Back";
-"sideLegDrop" = "Side Leg Drop";
-"sideLegKick" = "Side Leg Kick";
-"scorpionKick" = "Scorpion Kick";
-"sideBend" = "Side Bends and Rotations";
-"catCow" = "Cat Cow";
-                // Shoulder
-    "shoulder" = "Shoulder";
-"wallSlides" = "Wall Slides";
-"superManShoulder" = "Super Man with Shoulder Slides";
-"scapula" = "Scapula Push Ups";
-"shoulderRotation" = "Shoulder Rotation";
-                // Band/Bar/Machine Assisted
-    "bandAssisted" = "Upper Body Band/Bar/Machine Assisted";
-"facePull" = "Face Pull";
-"externalRotation" = "External Rotation";
-"internalRotation" = "Internal Rotation";
-"shoulderDislocation" = "Shoulder Dislocations";
-"rearDeltFly" = "Rear Delt Fly";
-"latPullover" = "Lat Pullover";
-                // Accessory
-    "accessory" = "Accessory";
-"latStretch" = "Lat Stretch";
-"pushUp" = "Push Up";
-"pullUp" = "Pull Up";
-
-                // Warm Up Picker Array Upper
+// Warm Up Picker Array Upper
 "default" = "Default";
 "beginner" = "Beginner";
 "bodyWeight" = "Body Weight (no equipment)";
@@ -283,72 +192,393 @@
 "highIntensity" = "High Intensity";
 "quick" = "Quick";
 
+// Warm Up Screen
+"movement" = "Movement:";
+"extraInformation" = "Extra Information";
 
-// MARK: Important note for explanations
-// "movementE" + "H" = how to ("movementEH")
-// "movementE" + "A" = Avoid:
-// "movementE" + "F" = Focus on:
-"H" = "";
-"A" = "";
-"F" = "";
-// NOTE: Put "" empty string if not used
+"explanationTitle" = "Explanation";
 
-// Warm Up Upper Movements Explanations
-//
-// Mandatory
+// Explanations
+
+// Cardio
+
+
+"5minCardio" = "5min Cardio";
 "5minCardioEH" = "Any form of cardio works;\nTreadmill (brisk walk)\nStep Machine (my favourite)\nBiking\nRowing, etc.\nNOTE: Cardio at home:\nWalking up stairs\nJogging/Jumping on the spot\nAnything to get your heart pumping!";
 "5minCardioEA" = "Pushing yourself";
 "5minCardioEF" = "Relaxing the mind\nBreathing";
-//Purpose:\nThe cardio should raise the body temperature, heart rate, and blood flow which together increase the flexibility of muscles and joints.
 
 // Joint Rotations
-// Joint rotations lubricate the joints with synovial fluid which facilitates their movement and helps to prevent injury."
-// Wrist rotations
-"wristEH" = "Stand upright\nInterlock your hands and slowly rotate/roll/twist your wrists\nand/or slowly rotate/roll/twist each wrist seperately";
+"jointRotation" = "Joint Rotations";
+
+"wrist" = "Wrist Rotations";
+"wristEH" = "Stand upright\nInterlock your hands and slowly rotate/roll/twist your wrists\n(or do each wrist seperately)";
 "wristEA" = "Overextending your wrists\nRotating quickly";
-"wristEF" = "Relaxing your wrists and shoulders\nKeeping good posture";
-// Elbow rotations
-"elbowEH" = "Stand upright\nFlex and extend one elbow 5-10 times, pausing when flexed and pausing when extended\nRepeat with the other\nThen with one elbow at 90º, open your palm and point it at the ceiling, then the floor, rotating your forearm 5-10 times\nRepeat with the other";
-"elbowEA" = "During flexing/extending:\nusing momentum; make sure you pause when flexed, and extended\nOver extending/over flexing; don't tense your muscles, gently flex and extend";
-"elbowEF" = "Relaxing your shoulders\nKeeping good posture";
-// Shoulder rotations
-"shoulderEH" = "Stand upright\nRelax your shoulders\nSlowly rotate one arm in a big circle, reaching behind, up to the ceiling then forward\nRepeat both directions the recommended number of reps.\nRepeat with the other arm";
+"wristEF" = "Relaxing your wrists and shoulders\nMaintaining good posture";
+
+"elbow" = "Elbow Rotations";
+"elbowEH" = "Stand upright\nHold one arm in front of you, palm facing up and your other hand touching your elbow\nGently bring your palm towards you, through the hole created by your other arm and straighten it, with your palm now facing down.\nReturn to the starting position bringing your hand back through the hole\nRepeat with the right arm for the recommended nº reps.\nRepeat with the other arm";
+// Alternative :== "Stand upright\nGently flex and extend one elbow 5-10 times, pausing when flexed and pausing when extended\nRepeat with the other\nThen with one elbow at 90º, open your palm and point it at the ceiling, then the floor, rotating your forearm 5-10 times (not shown on video)\nRepeat with the other";
+"elbowEA" = "Using momentum; make sure you pause when extended\nStraining; don't tense your muscles, gently move your hand about.";
+"elbowEF" = "Relaxing your shoulders\nMaintaining good posture";
+
+"shoulderR" = "Shoulder Rotations";
+"shoulderEH" = "Stand upright\nRelax your shoulders\nLift one arm and reach far out to the side\nSlowly rotate your arm in very small circles, increasing the size of the circle with each rotation (not shown on video)\nYou should end up rotating in slow big circles, with your shoulder reaching behind, up to the ceiling then forward\nRepeat the big circles the recommended number of rotations (1 rotation = 1 rep)\nRepeat the movement from the beginning rotating in the other direction.\nRepeat both directions with the other arm";
 "shoulderEA" = "Overextending the shoulder, rotate in a comfortable manner\nRotating too fast; a short pause between rotations helps to avoid this\nKeeping the shoulder static; allow it to move back, up then forward";
-"shoulderEF" = "Maintaining a big circle\nKeeping good posture";
-// Neck rotations
-"neckEH" = "Important; rotate your upper neck, keeping your head extened towards the ceiling at all times\nFlex and Extend;\nRotate your chin forward towards your chest\nExtend back and look up, extending your head up to the ceiling\nRepeat 5 - 10 times\nTilt;\nLook at a point ahead at eye level, and tilt your head to one side (ear towards shoulder)\nBring it back up to the ceiling, then tilt to the other side\nRepeat 5-10 times\nTurn;\nStanding tall, turn your head towards 90º to one side\nTurn your head to the other side\nRepeat 5-10 times\nRotate;\nIf you have a healthy neck, rotate your head gently in circles 5-10 times, then repeat in the other direction, keeping as tall as possible";
-"neckEA" = "Relaxing/Dropping your head down, stand as tall as possible the whole time\nOverextending your neck (don't  do the rotations if you have a stiff neck)";
-"neckEF" = "Standing tall\nExtending your head up to the ceiling\nBeing gentle\nKeeping good posture";
-// Waist rotations
-"waistEH" = "Stand with your feet at or slightly past hip width\nPlace your hands on your hips\nMainting an active core and straight lower back, slowly rotate your hips in circles for the recommended amount of time, changing directions half way through";
-"waistEA" = "Over extending your lower back when your hips are in front of your feet\nRotating too fast\nRotating in circles too big for your flexibility, don't force past what is sensible for you";
-"waistEF" = "Keeping an active core\nStanding tall, to avoid relaxing overextending your lower back\n";
-// Hip rotations
-"hipEH" = "Stand upright (holding a support if necessary)\nShift your weight to one leg\nWith your other knee, smoothly draw a circle, your knee going behind you\nup and to the side\nin front\nthen returning to it's starting position\nRepeat 5-10 times\nRepeat with the other leg\nRecommended extras:\nPerform each leg rotating the other direction (knee going forward first)\nWith your weight on one leg, point your toe as far to the left as possible, then as far to the right, repeat 5-10 times with each leg";
+"shoulderEF" = "Maintaining good posture";
+
+"neckR" = "Neck Rotations";
+"neckEH" = "Important; rotate your upper neck, keeping your head extended towards the ceiling at all times\nFlex and Extend;\nSlowly rotate your chin forward towards your chest (flex)\nRotate your head back, extending your chin up to the ceiling (extend)\nRepeat 5 - 10 times\nTilt;\nLook forwards at a point at eye level, gently tilt your head to one side (ear towards shoulder)\nBring it back up to the ceiling, then tilt to the other side\nRepeat 5-10 times\nTurn; (not on video)\nStanding tall, turn your head towards 90º to one side\nTurn your head to the other side\nRepeat 5-10 times\nNote:\nBreath in when entering the maximum stretch to help maintain good posture";
+// Extra "If you have a healthy neck, rotate your head gently in circles 5-10 times, then repeat in the other direction, keeping as tall as possible"
+"neckEA" = "Relaxing/dropping/slumping your head down, stand as tall as possible the whole time\nOverextending your neck (don't  do the rotations if you have a stiff neck), and don't tense your neck muscles to force a stretch, let gravity do the work and stop when you feel a little stretch";
+"neckEF" = "Standing tall\nExtending your head up to the ceiling\nBeing gentle\nMaintaining good posture";
+
+"waist" = "Waist Rotations";
+"waistEH" = "Stand with your feet at or slightly past hip width\nPlace your hands on your hips\nMainting an active core and straight lower back, slowly rotate your hips in circles for the recommended nº reps\nRepeat, rotating in the other direction";
+"waistEA" = "Over extending your lower back when your hips are in front\nRotating too fast\nRotating in circles too big for your flexibility, don't force past what is sensible for you";
+"waistEF" = "Keeping an active core\nStanding tall so as to avoid overextending\nKeeping your weight in the center of your feet";
+
+"hip" = "Hip Rotations";
+"hipEH" = "Stand upright (holding a support if necessary)\nShift your weight to one leg\nWith your other legs' knee, smoothly draw a circle, your knee going behind you\nup and to the side\nin front\nthen returning to it's starting position\nBegin with little circles that increase in size with each rotation\nRepeat the maximum sized circles for the recommended nº reps\nRepeat rotating in the other direction\nRepeat with the other leg\nRecommended extra:\nStanding on one leg, point your toe as far to the left as possible, then as far to the right, repeat 5-10 times then with the other leg";
 "hipEA" = "Using momentum\nRotating in too big a circle (it's best to keep the circle small)\nForcing your hip into unnatural positions";
-"hipEF" = "Keeping good posture and keeping tall\nRelaxing and not forcing your hip";
-// Knee rotations
-"H" = "Stand upright\nShift your weight to one leg\nKeeping your knee pointing at the floor, flex it, gently bringing your ankle towards your glutes\nReturn your foot back to parrallel with the other, without putting your weight on it\nRepeat 5-10 times\nRepeat with the other leg\nRecommended extras:nWith your weight on one leg, point your toe as far to the left as possible, then as far to the right, repeat 5-10 times with each leg";
-"A" = "Tensing your hamstrings to much, the aim is to warm up the knee joint not the hamstring\nUsing momentum, slowly bring your ankle up, and pause at the bottom";
-"F" = "Keeping your knee pointed at the floor and your thighs parralel\nKeeping good posture";
-// Ankle rotations
-"anklesE" = "Movement:\nStand straight up with one leg lifted a little off the ground.\nRotate the ankle for the recommended amount of time, switching direction halfway through.\nRepeat the movement with the other ankle.\n\nNotes:\nRotate the ankles in a gentle manner, not too vigorously or quickly.\n\n\nPurpose:\nJoint rotations lubricate the joints with synovial fluid which facilitates their movement and helps to prevent injury.";
-"anklesEH" = "Stand upright\nShift your weight onto one leg\nRotate your ankle for ";
-"anklesEA" = "";
-"anklesEF" = "";
-// Wrist/Ankle Rotation
-"wristAnkleRotationE" = "Movement:\n./nProceed to lift one foot forward onto its toes, and perform circular rotations, half way through changin direction of motion.\nPerform the same with the other foot.\n\nNotes:\nDon't put much weight on your foot when performing ankle rotations.\nDon't perform either rotation too vigorously, it should be a medium speed controlled movement.\n\n\nPurpose:\nThese movements warm up the wrist and ankle joints to reduce the chance of injury when performing pressing or leg movements.";
+"hipEF" = "Maintaining good posture and standing tall\nRelaxing and not forcing your hip";
+
+"knees" = "Knee Rotations";
+"kneesEH" = "Stand upright\nShift your weight to one leg\nFlex your knee, gently bringing your heel towards your glutes\nReturn your foot back towards the ground, without putting any weight on it\nRepeat 5-10 times\nRepeat with the other leg";
+"kneesEA" = "Tensing your hamstrings too much, the aim is to warm up the knee joint not the hamstring\nUsing momentum, slowly bring your heel up, and pause at the bottom";
+"kneesEF" = "Keeping your knee pointed towards the floor and your thighs parralel\nMaintaining good posture";
+
+"ankles" = "Ankle Rotations";
+"anklesEH" = "Stand upright\nShift your weight to one leg\nPoint your toes and place them on the ground\nSlowly rotate your ankle round above your toes, without placing any weight on the foot\nRepeat for the recommended nº reps\nRepeat rotating in the other direction\nRepeat with the other ankle\nExtra: Rotate each ankle again with your foot infront of you (as in the video)";
+"anklesEA" = "Rotating too quickly\nResting any weight on the ankle your rotating\nOverextending your ankles";
+"anklesEF" = "Maintaining good posture\nRotating gently";
+
+// Foam/Ball Roll
+"foamRoll" = "Foam/Ball Roll";
+
+"backf" = "Back Foam Roll";
+"backfEH" = "Important: Keep your head extended away from your pelvis (as if you were standing tall) and keep a slightly tensed back throughout the movement\nPlace the foam roller underneath your back, just beneath your neck, around shoulder height\nBend your knees close to their maximum, placing your feet at hip width apart\nPut your arms in a position such that your elbows are in front of you, keeping your shoulders out of the way (hands on chest with keep my elbows up, hands on head with my elbows forward, etc)\nKeeping your back a little tensed and straight, breath in while slowly rolling down your back by extending your legs, until the roller reaches just above where your ribcage ends\nWhile breathing out, roll back up to shoulder height, below your neck\nRepeat for the recommended nº reps\nNote: you can pause at especially tense areas, and can rotate your whole torso to roll your lat muscles";
+"backfEA" = "Relaxing too much, you can easily put too much pressure on your spine, keep the muscles next to your spine tensed a little to protect it\nRolling too far (avoid the lower back and neck areas)\nLeaning back too far when the roller is at its lowest\nLifting your hips far off the ground, it's best even to keep them sliding on the ground or just above";
+"backfEF" = "Keeping tall\nBreathing slowly and deeply\nTensing your back a little";
+
+"thoracicSpine" = "Thoracic Extensions";
+"thoracicSpineEH" = "Place the foam roller underneath your back, about the height of the middle of your ribcage\nBend your knees close to 45º and place your feet hip width apart\nPut your arms in a position such that your elbows are in front of you, keeping your shoulders out of the way (hands on chest with keep my elbows up, hands on head with my elbows forward, etc)\nBreath in deep while extending your back backwards over the foam roller, without leaning your head/neck back, until your upper back is a little arched\nBreath out while crunching forward to return to the starting position, with your upper back a little rounded\nRepeat for the recommended nº reps\nRepeat the recommended nº sets, moving the foam roller to a slightly different position (never on your lower back or neck, always close to the middle of your ribcage)";
+"thoracicSpineEA" = "Lifting your glutes of the ground\nLeaning your neck back, try and keep it in a constant neutral position\nRelaxing your back too much, the aim is not to relax onto the roller, but to stretch your upper back, try to keep a minimum tension in your back (this is helped by good breathing)";
+"thoracicSpineEF" = "Breathing slowly and deeply\nTensing your back a little";
+
+"lat" = "Lat/Delt Foam Roll";
+"latEH" = "";
+"latEA" = "";
+"latEF" = "";
+
+"pecDelt" = "Pec and Delt Ball Roll";
+"pecDeltEH" = "";
+"pecDeltEA" = "";
+"pecDeltEF" = "";
+
+"rearDelt" = "Rear Delt Ball Roll";
+"rearDeltEH" = "";
+"rearDeltEA" = "";
+"rearDeltEF" = "";
+
+"quadf" = "Quad Foam Roll";
+"quadfEH" = "";
+"quadfEA" = "";
+"quadfEF" = "";
+
+"adductorf" = "Adductor Foam Roll";
+"adductorfEH" = "";
+"adductorfEA" = "";
+"adductorfEF" = "";
+
+"hamstringf" = "Hamstring Foam Roll";
+"hamstringfEH" = "";
+"hamstringfEA" = "";
+"hamstringfEF" = "";
+
+"glutef" = "Glute Foam/Ball Roll";
+"glutefEH" = "";
+"glutefEA" = "";
+"glutefEF" = "";
+
+"calvef" = "Calve Foam Roll";
+"calvefEH" = "";
+"calvefEA" = "";
+"calvefEF" = "";
+
+"itBand" = "IT Band Foam Roll";
+"itBandEH" = "";
+"itBandEA" = "";
+"itBandEF" = "";
+
+"standOnBall" = "Foot Ball Roll";
+"H" = "";
+"A" = "";
+"F" = "";
+
+// Glutes
+"gluteBridgewW" = "Glute Bridge";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"kneelingKickBackW" = "Kneeling Kickback";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"legsToSideSquat" = "Squat (legs to side)";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"standingGluteKickback" = "Standing Kickback";
+"H" = "";
+"A" = "";
+"F" = "";
+
+// Lower Back
+"lowerBack" = "Lower Back";
+
+//
+"sideLegDrop" = "Side Leg Drop";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"sideLegKick" = "Side Leg Kick";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"scorpionKick" = "Scorpion Kick";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"sideBend" = "Side Bends and Rotations";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"catCow" = "Cat Cow";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"legsToSideTwist" = "Seated Twist";
+"H" = "";
+"A" = "";
+"F" = "";
+
+// Upper Back
+"upperBackRotation" = "Upper Back Rotation";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"latStretch" = "Lat Stretch";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"lyingSideWindmill" = "Lying Side Windmill";
+"H" = "";
+"A" = "";
+"F" = "";
+
+// Shoulder
+"shoulder" = "Shoulder";
+
+"wallSlides" = "Wall Slides";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"wallReaches" = "Wall Reaches";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"shoulderRotationW" = "Shoulder Rotation";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"forearmWallSlides135" = "Forearm Wall Slides 135º";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"superManShoulder" = "Super Man with Shoulder Slides";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"scapulaPushup" = "Scapula Push Ups";
+"H" = "";
+"A" = "";
+"F" = "";
+
+// Band/Bar/Machine Assisted
+"bandAssisted" = "Upper Body Band/Bar/Machine Assisted";
+
+"facePull" = "Face Pull";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"externalRotation" = "External Rotation";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"internalRotation" = "Internal Rotation";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"shoulderDislocation" = "Shoulder Dislocations";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"latPullover" = "Lat Pullover";
+"H" = "";
+"A" = "";
+"F" = "";
+
+// General Mobility
+"generalMobility" = "Lower Body Mobility";
+
+"seatedKneeDrop" = "Seated Knee Drop";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"mountainClimber" = "Mountain Climber";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"groinStretch" = "Groin Stretch";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"threadTheNeedle" = "Thread The Needle";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"butterflyPose" = "Butterfly Pose";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"cossakSquat" = "Cossak Squat";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"hipHinges" = "Hip Hinges";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"lungeTwist" = "Lunge Twist";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"sideLegSwings" = "Side Leg Swings";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"frontLegSwings" = "Front Leg Swings";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"spiderManHipLiftOverheadReach" = "Hip Lift with Overhead Reach";
+"H" = "";
+"A" = "";
+"F" = "";
+
+// Dynamic Warmup Drills
+"dynamicWarmupDrills" = "Dynamic Warmup Drills";
+
+"forefootBounces" = "Forefoot Bounces";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"jumpSquat" = "Jump Squat";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"lunge" = "Lunge";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"gluteKicks" = "Glute Kicks";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"aSkips" = "A Skips";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"bSkips" = "B Skips";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"grapeVines" = "Grapevines";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"lateralBound" = "Lateral Bounds";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"straightLegBound" = "Straight Leg Bounds";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"sprints" = "Sprints";
+"H" = "";
+"A" = "";
+"F" = "";
+
+// Accessory
+"accessory" = "Accessory";
+
+"pushUp" = "Push Up";
+"H" = "";
+"A" = "";
+"F" = "";
+
+"pullUp" = "Pull Up";
+"H" = "";
+"A" = "";
+"F" = "";
 
 
-
-                // Foam/Ball Roll
-"backfE" = "Movement:\nPlace the foam roller underneath the back, around shoulder height, just below the cervical curve (neck).\nBend your knees close to their maximum and place your feet at hip width apart flat on the ground (close to your glutes).\nSlowly roll down until you reach the end of your thoracic curve (around where your ribcage ends), then roll back up to the starting position.\n1 rep is completed when your have returned to the starting position.\n\nNotes:\nYour thoracic spine should be slightly extended (arched back over the foam roller) and your glutes should maintain as much contact with the ground as possible to remove your core muscles from the exercise and allow for a better stretch in the back.\nYour arms can be in any position (where your elbows are in front of your chest not out to the side) that does not cause pain or discomfort, here are some suggestions:\n- With your palms facing towards you and your hands touching, bring your elbows close together and place your palms just behind the top of your head so that your elbows are close to your forehead (without pulling your head up with your arms)\n- Hold your elbows or your shoulders and point your elbows up, perpendicular to your chest.\n- Hold your hands straight out in front of your or above your head.\nYou can pause at points that feel especially tight along the back for a few seconds, and can also rotate your torso up to 45º in either direction as feels necessary to roll a wider range of muscles.\nDon't roll too fast.\nDon't roll too far (avoid the lower back and neck areas)\n\n\nPurpose:\nFoam rolling loosens the muscles and warms them up in preperation for the warm up and exercise, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area.";
-"thoracicSpineE" = "Movement:\nPlace the foam roller underneath your back, at the lower end of the thoracic curve (near the bottom of your ribcage).\nBend your knees close to 45º and place your feet at hip width apart flat on the ground.\nRelax the muscles of the back around the contact area of the foam roller and arch/extend (lean) back to stretch the thoracic curve keeping a constant neck position (don't lean the neck back), then slowly crunch back up by reactivating the muscles around the contact point of the foam roller (concentrate not on using your abs but on the feeling in your thoracic spine and make sure your glutes are in constant contact with the ground)\n1 rep is completed when you have returned to the starting position. With each new set, move the foam roller furthur up your thoracic spine 10-15cm or to another position that seems fit (that feels it could benifit from stretching).\n\nNotes:\nKeep your neck in a comfortable neutral position.\nYour arms can be in any position (where your elbows are in front of your chest not out to the side) that does not cause pain or discomfort, here are some suggestions:\n- With your palms facing towards you and your hand touching, bring your elbows close together and place your palms just behind the top of your head so that your elbows are close to your forehead (without pulling your head up with your arms)\n- Hold your elbows or your shoulders and point your elbows up, perpendicular to your chest.\n- Place your hands somewhere on your chest area and relax your elbows so they are close to your torso.\n\n\nPurpose:\nFoam rolling loosens the muscles and warms them up in preperation for the warm up and exercise, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area. This movement also results in a better posture of the thoracic spine and thus protects your spine during training and allows for cleaner movements (especially pressing movements)";
-"latE" = "Movement:\nLie on one side with bent legs, relax your lower leg and point the knee perpendicular to your torso, stabilize the position with your upper leg and extent your lower arm upwards on the ground with your palm facing upwards.\nPlace the foam roller underneath your upper lat (just under your rear delt).\nProceed to roll down from the top of the lat to 1/2 - 2/3 of the way down the ribcage leaning forwards or backwards on the lat as feels necessary, then roll back up to the upper lat.\n1 rep is completed when you have returned to the starting position.\nRepeat on the other lat.\n\nNotes:\nThis can be a particularly uncomfortable roll so be gentle and pause for several seconds wherever necessary.\nYou can also work your weight forward and backward several times at the rear delt (perpendicular to the direction of the roll) to work the rotator cuff area if necessary.\n\n\nPurpose:\nFoam rolling loosens the muscles and warms them up in preperation for the warm up and exercise, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area.";
-"pecDeltE" = "Movement:\nLean face forwards against a wall with a small ball (tennis. lacross etc.) around the point of connection between your delt and pec (shoulder and chest).\nWithout using excessive pressure, roll the ball all around your upper and mid pec and front delt area for 30-60 seconds each side.\nYour arm can be down parallel to your torso, outstretched 90º from your torso or above your head.\n\nNotes:\nThis can be a painful process so be gentle and pause for several seconds wherever necessary (where it feels especially tight).\n\n\nPurpose:\nBall rolling loosens the muscles and warms them up in preperation for the warm up, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area.";
-"rearDeltE" = "Movement:\nLean sideways against a wall with a small ball (tennis, lacross etc.) on your rear delt (rear shoulder).\nWithout using excessive pressure, roll the ball all around your rear delt (and possibly lateral delt).\n\nNotes:\nYou can also with your elbow at 90º and forearm parrallel to the ground rotate your shoulder gently by bringing your forearm to parrallel with the wall so as to work the rotator cuff.\nThis can be a painfull process so be gentle and pause for several seconds wherever necessary.\n\n\nPurpose:\nBall rolling loosens the muscles and warms them up in preperation for the workout, it also increases blood flow to the rolled area. This will increase your range of motion and the effectiveness of exercises geared towards the rolled area.";
+// Foam/Ball Roll
+"latE" = "Movement:\nLie on one side with bent legs, relax your lower leg and point the knee perpendicular to your torso, stabilize the position with your upper leg and extent your lower arm upwards on the ground with your palm facing upwards.\nPlace the foam roller underneath your upper lat (just under your rear delt).\nProceed to roll down from the top of the lat to 1/2 - 2/3 of the way down the ribcage leaning forwards or backwards on the lat as feels necessary, then roll back up to the upper lat.\n1 rep is completed when you have returned to the starting position.\nRepeat on the other lat.\n\nNotes:\nThis can be a particularly uncomfortable roll so be gentle and pause for several seconds wherever necessary.\nYou can also work your weight forward and backward several times at the rear delt (perpendicular to the direction of the roll) to work the rotator cuff area if necessary.";
+"pecDeltE" = "Movement:\nLean face forwards against a wall with a small ball (tennis. lacross etc.) around the point of connection between your delt and pec (shoulder and chest).\nWithout using excessive pressure, roll the ball all around your upper and mid pec and front delt area for 30-60 seconds each side.\nYour arm can be down parallel to your torso, outstretched 90º from your torso or above your head.\n\nNotes:\nThis can be a painful process so be gentle and pause for several seconds wherever necessary (where it feels especially tight).";
+"rearDeltE" = "Movement:\nLean sideways against a wall with a small ball (tennis, lacross etc.) on your rear delt (rear shoulder).\nWithout using excessive pressure, roll the ball all around your rear delt (and possibly lateral delt).\n\nNotes:\nYou can also with your elbow at 90º and forearm parrallel to the ground rotate your shoulder gently by bringing your forearm to parrallel with the wall so as to work the rotator cuff.\nThis can be a painfull process so be gentle and pause for several seconds wherever necessary.";
                 // Lower Back
-"sideLegDropE" = "Movement:\nLie on your back with your arms outstretched perpendicular to your torso.\nKeeping your legs straight, lift them straight up into the air.\nKeeping your upper torso flat to the ground and your legs together and straight, lower them to one side until they touch the ground (keeping them perpendicular to your torso), then bring them back up slowly and repeat the same on the other\n1 rep is 1 drop on each side.\n\nNotes:\nAllow your lower back to gently stretch when in the bottom position if comfortable by relaxing your lower back muscles a little (may cause cracks and pops).\nEnsure that your feet are flexed (active) throughout the movement (pull your toes back towards your legs).\nThis movement can also be done as side knee drops if your lacking the hamstring flexibility to keep your legs straight, perform the same movement but keep your knees at a 90º angle so your lower legs are parrallel to the ground.\n\n\nPurpose:\nSide leg drops stretch the lower back and warm up the core muscles.";
+"sideLegDropE" = "Movement:\nLie on your back with your arms outstretched perpendicular to your torso.\nKeeping your legs straight, lift them straight up into the air.\nKeeping your upper torso flat to the ground and your legs together and straight, lower them to one side until they touch the ground (keeping them perpendicular to your torso), then bring them back up slowly and repeat the same on the other\n1 rep is 1 drop on each side.\n\nNotes:\nAllow your lower back to gently stretch when in the bottom position if comfortable by relaxing your lower back muscles a little (may cause cracks and pops).\nEnsure that your feet are flexed (active) throughout the movement (pull your toes back towards your legs).\nThis movement can also be done as side knee drops if your lacking the hamstring flexibility to keep your legs straight, perform the same movement but keep your knees at a 90º angle so your lower legs are parrallel to the ground.";
 "sideLegKickE" = "Movement:\nLie on your back with your arms outstretched and your feet hip width apart.\n\Keeping both legs straight and your upper torso flat to the ground, swing your right foot to your left hand (try to get as close as possible) allowing your lower back to stretch, then bring it back to the start position and repeat with the other leg.\n1 rep is 1 kick on each side\n\nNotes:\nWhen swinging your leg, keep it close to the ground.\nThe movement should be one fluid continuous motion (but should not be performed too fast or vigorously).\n\n\nPurpose:\nSide leg kicks are especially good for warming up and dynamically stretching the lower back.";
 "scorpionKickE" = "Movement:\nLie on your front with your arms outstretched to perpendicular to your torso, your palms facing down, legs straight and feet hip width apart.\nWith your right foot gently swing and try to reach your left hand with your toes (allow your legs to bend a little) and then return the leg to the starting position, repeat with the other leg.\n1 rep is 1 kick on each side.\n\nNotes:\nThe movement should be one fluid continuous motion (but should not be performed to fast or vigorously)\nIt is a difficult movement so if it causes any discomfort in the lower back don't continue.\n\n\nPurpose:\nScorpion kicks are especially good for warming up and dynamically stretching the lower back.";
 "sideBendE" = "Movement:\nStand straight up with your feet at or just past shoulder width.\nKeeping a straight back (especially lower back), lean to one side reaching down with your hand past your knee as far as comfortable and hold for 1-2s then repeat on the other side.\n1 rep is 1 bend on each side.\n\nSide bends are nicely followed by torso rotations:\nHold you arms at out to your side with your elbows bent and rotate (twist) your torso to one side, try to hold in the most rotated position for half a second, return to the starting position and pause for half a second then repeat in the other direction\n1 rep is 1 rotation to each side.\n\nNotes:\nDuring side bends, keep your neck in a neutral position (constant in relation to your shoulder).\nTorso rotations can be performed seated.\nNeither movement should use any momentum which why the pauses are important.\nPerform the recomended number of reps for both the side bends and torso rotations.\n\n\nPurpose:\nBoth movements warm up the obliques and stretch the lower back.";
@@ -371,59 +601,7 @@
 "pullUpE" = "Movement:\nHang from a pull up bar with a neutral grip or a normal grip (palms facing forwards).\nTense the core muscles and bring the shoulders down (pre-activating the lats), whilst relaxing the feet.\nPull up through your elbows (imagine your pulling through your elbows not your hands, this helps concentrate on lat and back activation not bicep activation) until your head is at the height of your hands or above.\nReturn to the starting position (where your shoulders are down and lats activated).\nPerform as many times as feels necessary.\n\nNotes:\nConcentrate on activating your back, not your biceps.\nTry to avoid swinging and using momentum to help, the movement should be slow and controlled.\nHold in the top position for a little on the last rep.\nThe eccentric (downwards) movement should be slow and controlled, the concentric (upwards) shoulder be faster.\n\n\nPurpose:\nWarm up pull ups ensure that your body is ready for the various pulling movements of the workout.";
 
 
-
-
-
-        // Warm Up Choice Lower //
-    "warmupChoiceLowerText" = "";
-
-
-                // Warm Up Upper Movements Array //
-                // Mandatory
-        //        "mandatory" = "Mandatory";
-        //    "5minCardioL" = "5min Light Cardio";
-        //    "5minCardioI" = "5min Intense Cardio";
-                // Foam/Ball Roll
-        //        "foamRoll" = "Foam/Ball Roll"'
-        //    "backf" = "Back Foam Roll";
-        //   "thoracicSpine" = "Thoracic Extensions";
-"quadf" = "Quad Foam Roll";
-"adductorf" = "Adductor Foam Roll";
-"hamstringf" = "Hamstring Foam Roll";
-"glutef" = "Glute Foam/Ball Roll";
-"calvef" = "Calve Foam Roll";
-                // Lower Back
-        //        "lowerBack" = "Lower Back";
-        //    "sideLegDrop" = "Side Leg Drop";
-        //    "sideLegKick" = "Side Leg Kick";
-        //    "scorpionKick" = "Scorpion Kick";
-        //    "sideBend" = "Side Bends and Rotations";
-        //    "catCow" = "Cat Cow";
-                // General Mobility
-    "generalMobility" = "Lower Body Mobility";
-"rollBack" = "Roll Back to Hamstring";
-"hipCircles" = "Hip Circles";
-"mountainClimber" = "Mountain Climber Stretch";
-"groinStretch" = "Groin Stretch";
-"gluteBridge" = "Glute Bridge";
-"threadTheNeedle" = "Thread The Needle";
-"butterflyPose" = "Butterfly Pose";
-"cossakSquat" = "Cossak Squat";
-"hipHinges" = "Hip Hinges";
-"hamstringStretch" = "Hamstring Stretch";
-"quadStretch" = "Quad Stretch";
-"sideLegSwings" = "Side Leg Swings";
-"frontLegSwings" = "Front Leg Swings";
-"jumpSquat" = "Jump Squat";
-"lunge" = "Lunge";
-                // Accessory
-    "accessory" = "Accessory";
-         //   "wristAnkleRotation" = "Wrist & Ankle Rotations";
-         //   "wallSlides" = "Wall Slides";
-"calveStretch" = "Calf Stretch";
-
-
-                // Warm Up Picker Array Lower
+// Warm Up Picker Array Lower
     "default" = "Default";
 "beginner" = "Beginner";
 "bodyWeight" = "Body Weight (no equipment)";
@@ -462,21 +640,9 @@
 "calveStretchE" = "Movement:\nStand upright facing a wall with your arms straight in front and hands pressed against the wall at or above shoulder height.\nExtend your left leg backwards whilst keeping your right foot flat on the floor.\nPlace your left leg straight behind you at a distance that allows your heel to be in contact with the ground whilst feeling a good stretch in the calf.\nKeep your leg straight and progressively lean into the wall a little more to increase the stretch in the calf.\nRepeat with the other leg, holding for the recommeded amount of time.\n\nNotes:\nThe heel of the leg being stretched should always be in contact with the floor.\nDon't force the stretch but keep pressure applied against the wall.\nYou can also bend the knee a little to move the stretch from the gastronemous (upper larger part of the calf) to the soleus (lower part of the calf) and hold for as long as necessary.\n\n\nPurpose:\nStretching the calves increases their range of motion, facilitating a variety of leg movements (including squats) and increasing the effectiveness of calf movements.";
 
 
-
-
-        // Warm Up Choice Cardio //
+    // Warm Up Choice Cardio //
     "warmupChoiceCardioText" = "";
 
-
-                // Dynamic Warmup Drills
-    "dynamicWarmupDrills" = "Dynamic Warmup Drills";
-"gluteKicks" = "Glute Kicks";
-"aSkips" = "A Skips";
-"bSkips" = "B Skips";
-"grapeVines" = "Grapevines";
-"lateralBound" = "Lateral Bounds";
-"straightLegBound" = "Straight Leg Bounds";
-"sprints" = "Sprints";
 
                 // Dynamic Warmup Drill Explanations
 "gluteKicksE" = "Movement:\nStand straight with an active core, feet shoulder width apart and your arms bent by your sides.\nBend your right knee and kick your heel towards your glute, attempting to touch your glute with your heel.\nReturn the foot to the ground and bounce once on both feet.\nBounce again and perform the same action with your left leg, kicking the heel towards your glute.\n\nNotes:\nYou should be bouncing at a constant rate.\nKeep an active core and a straight back, with relaxed shoulders.\nBounce on your toes, you should not place your feet flat during the drill.\nThis drill can also be performed such that you bounce on both feet inbetween each kick.\n\n\nPurpose:\nThis movement increases your heart rate, and warms up relevant muscles and joints in preparation for cardio.";
@@ -486,20 +652,6 @@
 "lateralBoundE" = "Movement:\nStand straight with an active core, feet at shoulder width apart and facing perpendicular to a 25-50m stretch of space.\nExtend the front leg out to your side, then press with your back leg.\nWhen your back leg leaves the ground, jump sideways on your front leg and bring your legs together in the air.\nLand on your back leg whilst immediately extending your front leg to the side again and repeat.\nPerform the drill the recommended number of times in each direction (moving towards your left and right).\n\n\nNotes:\nAttempt to jump as far up and to the side as possible.\nKeep your legs straight in mid air.\nStay on your toes during the drill.\n\n\nPurpose:\nThis movement increases your heart rate, and warms up relevant muscles and joints in preparation for cardio.";
 "straightLegBoundE" = "Movement:\nStand straight with an active core and feet at shoulder width apart whilst facing a 25-50m stretch of space.\nThe aim of the drill is to bound forwards with straight legs\nPress into one leg and jump through extending the feet, whist keeping both legs straight.\nExtend the other leg as far forwards as possible then just as you land on the toes pull your leg back quickly using your glutes and extent the other leg forwards.\n\n\nNotes:\nDon't over extend the knees but keep the legs straight.\nUse your arms to aid the forwards motion.\nDon't externally rotate your feet (allow them to go out to the side), and keep your legs under your hips.\nIt is not necessary to try to move forwards as fast as possible, you should concentrate on activating the glutes.\n\n\nPurpose:\nThe drill is excellent for glute activation and thus prepares the glutes for the cardio.";
 "sprintsE" = "Movement:\nPerform short bursts of the type of cardio you are warming up for for the recommended time.\nThese bursts should be performed at maximum intensity whilst maintaining proper form.\nThe length of the burst will depend on the cardio and personal needs, for example running bursts will usually be a little shorter than biking or rowing bursts.\n\nNotes:\nYou should accelerate into the burst as fast as possible.\n\n\nPurpose:\nSprints are a good way to prepare your body for the cardio and to increase your heart rate.";
-
-
-
-
-
-        // Warm Up Screen //
-    "movement" = "Movement:";
-    "extraInformation" = "Extra Information";
-
-    "explanationTitle" = "Explanation";
-
-
-    "demonstration" = "Demonstration";
-    "targetArea" = "Target Area";
 
 
 
@@ -1447,6 +1599,9 @@
         // Oxygen Overload
         //
         "oxygenOverload" = "Oxygen Overload Timer";
+
+// MARK: -
+
 
 //
 // MARK: Custom

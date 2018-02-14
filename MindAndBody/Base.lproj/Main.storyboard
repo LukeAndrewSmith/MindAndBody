@@ -85,6 +85,26 @@
                                     <constraint firstAttribute="height" constant="1" id="gHH-Q7-xi3"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wa-YW-tfi">
+                                <rect key="frame" x="310" y="513.5" width="49" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="KMf-TQ-pUw"/>
+                                    <constraint firstAttribute="height" constant="49" id="RVx-lq-QMU"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="lessonsButtonAction:" destination="oDd-SZ-o1F" eventType="touchUpInside" id="k9r-gv-DOi"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14K-T1-5EB">
+                                <rect key="frame" x="338.5" y="509.5" width="24.5" height="24.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24.5" id="h7d-0b-Afk"/>
+                                    <constraint firstAttribute="width" constant="24.5" id="t0x-BV-BfH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -94,12 +114,16 @@
                             <constraint firstItem="oPE-Kh-Caj" firstAttribute="top" secondItem="G33-j5-FFf" secondAttribute="bottom" id="7Gk-TW-Mg3"/>
                             <constraint firstItem="oPE-Kh-Caj" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="8eT-Ou-Jam"/>
                             <constraint firstItem="bzt-Zq-NOh" firstAttribute="width" secondItem="Uk6-xI-8tD" secondAttribute="width" multiplier="1/7" id="Chq-l8-sFW"/>
+                            <constraint firstItem="Uk6-xI-8tD" firstAttribute="top" secondItem="5Wa-YW-tfi" secondAttribute="bottom" constant="16" id="Eh8-Ts-NM2"/>
                             <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="Uk6-xI-8tD" secondAttribute="bottom" id="HRZ-Wb-TZa"/>
                             <constraint firstItem="Uk6-xI-8tD" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="L8f-sx-BzF"/>
+                            <constraint firstItem="14K-T1-5EB" firstAttribute="top" secondItem="5Wa-YW-tfi" secondAttribute="top" constant="-4" id="QOa-5G-mJD"/>
                             <constraint firstAttribute="trailing" secondItem="oPE-Kh-Caj" secondAttribute="trailing" id="RwX-n2-cJz"/>
                             <constraint firstItem="Uk6-xI-8tD" firstAttribute="top" secondItem="oPE-Kh-Caj" secondAttribute="bottom" id="SWH-PO-ab2"/>
+                            <constraint firstAttribute="trailing" secondItem="5Wa-YW-tfi" secondAttribute="trailing" constant="16" id="b5k-xF-2Oi"/>
                             <constraint firstItem="bzt-Zq-NOh" firstAttribute="bottom" secondItem="Uk6-xI-8tD" secondAttribute="bottom" constant="-1" id="dzf-qh-ECe"/>
                             <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="oPE-Kh-Caj" secondAttribute="bottom" constant="24.5" id="hvm-Og-oex"/>
+                            <constraint firstItem="14K-T1-5EB" firstAttribute="trailing" secondItem="5Wa-YW-tfi" secondAttribute="trailing" constant="4" id="x8b-3X-3oc"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="jEJ-Yf-SbQ" appends="YES" id="o34-Op-fVb"/>
@@ -124,6 +148,8 @@
                     <connections>
                         <outlet property="dayIndicator" destination="bzt-Zq-NOh" id="2F2-SL-0CU"/>
                         <outlet property="dayIndicatorLeading" destination="6iG-BJ-b9Y" id="ael-Xe-TQG"/>
+                        <outlet property="lessonsButton" destination="5Wa-YW-tfi" id="eXY-i6-EJk"/>
+                        <outlet property="lessonsIndicator" destination="14K-T1-5EB" id="akI-eV-db2"/>
                         <outlet property="navigationBar" destination="xF1-Nx-yoQ" id="dBd-vq-1MD"/>
                         <outlet property="pageStack" destination="Uk6-xI-8tD" id="zin-Me-CB9"/>
                         <outlet property="scheduleTable" destination="oPE-Kh-Caj" id="UFV-AU-XOl"/>
@@ -5304,6 +5330,23 @@
             </objects>
             <point key="canvasLocation" x="-417" y="-2046"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="kHo-JE-xJS">
+            <objects>
+                <viewController id="e1m-NJ-qG0" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0SV-5n-XI4"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yjm-s5-Pz5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ive-lX-5bO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aGr-2E-mGy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="Back Arrow" width="30" height="30"/>
@@ -5346,7 +5389,7 @@
         <segue reference="Fhn-aO-iU6"/>
         <segue reference="y3k-i5-esE"/>
         <segue reference="izD-lx-C3k"/>
-        <segue reference="hhr-yy-04w"/>
+        <segue reference="4xc-U5-wKP"/>
         <segue reference="kIb-e7-fcP"/>
         <segue reference="0hW-vM-NHz"/>
     </inferredMetricsTieBreakers>

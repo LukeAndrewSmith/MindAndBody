@@ -769,7 +769,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
@@ -801,8 +801,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
-        //
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!        //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
             var animationArray: [UIImage] = []
@@ -1004,8 +1003,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! OverviewTableViewCell
         //
         let key = keyArray[indexPath.row]
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
-        //
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!        //
         if cell.imageViewCell.isAnimating == false {
             //
             switch extraSwipe.direction {

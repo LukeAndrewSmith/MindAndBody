@@ -117,6 +117,16 @@ class MenuVariables {
 }
 
 //
+// Tracking Variables {
+class TrackingVariables {
+    static var shared = TrackingVariables()
+    private init() {}
+    
+    //
+    var minTime = Double()
+}
+
+//
 // Schedule Variabls ---------------------------------------------------------------------------------------------------------------
 class ScheduleVariables {
     static var shared = ScheduleVariables()

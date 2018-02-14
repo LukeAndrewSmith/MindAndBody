@@ -441,7 +441,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         // Image Array
         if imageCount > 1 && cell.demonstrationImageView.isAnimating == false {
@@ -467,7 +467,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         // Image Array
         if imageCount > 1 && cell.demonstrationImageView.isAnimating == false {

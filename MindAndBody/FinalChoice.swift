@@ -784,16 +784,16 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // indexing with sender.tag == indexPath.row
         let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[sender.tag]["movement"] as! String
         //
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         // Image Array
         if imageCount != 1 && sender.isAnimating == false {
             var animationArray: [UIImage] = []
-            for i in 1...imageCount! - 1 {
+            for i in 1...imageCount - 1 {
                 animationArray.append(getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![i])!)
             }
             sender.animationImages = animationArray
-            sender.animationDuration = Double(imageCount! - 1) * 0.5
+            sender.animationDuration = Double(imageCount - 1) * 0.5
             sender.animationRepeatCount = 1
             sender.startAnimating()
         }

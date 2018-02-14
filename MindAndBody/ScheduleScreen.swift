@@ -103,6 +103,15 @@ class ScheduleScreen: UIViewController {
     var walkthroughBackgroundColor = UIColor()
     var walkthroughTextColor = UIColor()
     
+    // Test
+    @IBOutlet weak var lessonsButton: UIButton!
+    @IBOutlet weak var lessonsIndicator: UILabel!
+    //
+    var lessonsView = UIView()
+    var lessonsBackground = UIButton()
+    var isLessonsShowing = false // indicates if lessons view is presented
+    
+    
     // -----------------------------------------------------------------------------------------------
     
     //
@@ -163,7 +172,73 @@ class ScheduleScreen: UIViewController {
         if scheduleStyle == 1 {
             createTemporaryWeekViewArray()
         }
+        
+        
+        // Test
+        lessonsButton.backgroundColor = Colors.light.withAlphaComponent(0.9)
+        lessonsButton.layer.cornerRadius = 24.5
+        lessonsButton.clipsToBounds = true
+        lessonsButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 27)
+        lessonsButton.setTitle("L", for: .normal)
+        lessonsButton.setTitleColor(Colors.dark, for: .normal)
+        //
+        lessonsIndicator.backgroundColor = Colors.green.withAlphaComponent(0.97)
+        lessonsIndicator.layer.cornerRadius = 12.25
+        lessonsIndicator.clipsToBounds = true
+        lessonsIndicator.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        lessonsIndicator.text = "2"
+        lessonsIndicator.textAlignment = .center
+        lessonsIndicator.textColor = Colors.dark
+//        lessonsIndicator.removeFromSuperview()
+        //
+        lessonsView.backgroundColor = Colors.light
+        lessonsView.frame = lessonsButton.frame
+        lessonsView.layer.cornerRadius = 24.5
+        lessonsView.clipsToBounds = true
+        //
+        lessonsBackground.backgroundColor = .clear
+        lessonsBackground.addTarget(self, action: #selector(lessonsButtonAction(_:)), for: .touchUpInside)
+        lessonsBackground.frame = view.bounds
+//        lessonsBackground.backgroundColor = .green
     }
+    
+    // Test
+    @IBAction func lessonsButtonAction(_ sender: Any) {
+        // Present lessons
+        if isLessonsShowing == false {
+            isLessonsShowing = true
+            lessonsIndicator.alpha = 0
+            // Insert
+            lessonsView.frame = lessonsButton.frame
+            view.insertSubview(lessonsView, belowSubview: lessonsButton)
+            // Add background
+            view.insertSubview(lessonsBackground, belowSubview: lessonsView)
+            // Animate view
+            let width = view.bounds.width * (1/2)
+            let height = view.bounds.height * (1/2)
+            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.lessonsView.frame = CGRect(x: self.view.frame.maxX - width - 16, y: self.pageStack.frame.minY - height - 16, width: width, height: height)
+                //
+                self.lessonsButton.backgroundColor = Colors.dark
+                self.lessonsButton.setTitleColor(Colors.light, for: .normal)
+            })
+        // Dismiss lessons
+        } else {
+            isLessonsShowing = false
+            lessonsBackground.removeFromSuperview()
+            //
+            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.lessonsView.frame = self.lessonsButton.frame
+                //
+                self.lessonsButton.backgroundColor = Colors.light
+                self.lessonsButton.setTitleColor(Colors.dark, for: .normal)
+            }, completion: { finished in
+                self.lessonsView.removeFromSuperview()
+                self.lessonsIndicator.alpha = 1
+            })
+        }
+    }
+    
     
     // MARK: viewDidLayoutSubviews
     override func viewDidLayoutSubviews() {
@@ -229,6 +304,10 @@ class ScheduleScreen: UIViewController {
             // Remove Mask View
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
+            }
+            // Handle changing colour of status bar if button pressed
+            if MenuVariables.shared.menuInteractionType == 0 {
+                UIApplication.shared.statusBarStyle = .default
             }
         //
         } else if segue.identifier == "scheduleSegueOverview" {

@@ -534,7 +534,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
@@ -566,7 +566,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
@@ -607,7 +607,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.imageViewCell.image =  flippedImage
         }
         //
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
@@ -766,7 +766,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
         //
         let key = keyArray[indexPath.row]
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         if cell.imageViewCell.isAnimating == false {
             //

@@ -747,7 +747,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
@@ -779,7 +779,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         let key = keyArray[indexPath.row]
         //
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         // Image Array
         if imageCount > 1 && cell.imageViewCell.isAnimating == false {
@@ -992,7 +992,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! WorkoutOverviewTableViewCell
         //
         let key = keyArray[indexPath.row]
-        let imageCount = (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count
+        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
         if cell.imageViewCell.isAnimating == false {
             //

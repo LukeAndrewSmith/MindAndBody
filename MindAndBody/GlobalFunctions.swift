@@ -805,7 +805,11 @@ extension UIViewController {
             goal = 1
         }
         // SetWeekGoal
-        trackingProgressDictionary["WeekGoal"] = goal
+        if goal != 0 {
+            trackingProgressDictionary["WeekGoal"] = goal
+        } else {
+            trackingProgressDictionary["WeekGoal"] = 1
+        }
         //
         UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
         // Sync

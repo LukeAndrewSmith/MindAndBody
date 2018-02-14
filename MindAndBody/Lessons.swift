@@ -312,6 +312,10 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
             }
+            // Handle changing colour of status bar if button pressed
+            if MenuVariables.shared.menuInteractionType == 0 {
+                UIApplication.shared.statusBarStyle = .default
+            }
         } else {
             // Remove back button text
             let backItem = UIBarButtonItem()

@@ -33,6 +33,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     var selectedTimeScale = 0
     // Button on x axis
     var timeScaleButton2 = UIButton()
+    //
     
     // Slide menu
     var slideMenuInteraction = UIScreenEdgePanGestureRecognizer()
@@ -87,7 +88,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     //
-    // View did load --------------------------------------------------------------------------------------------------------
+    // MARK: View did load
     //
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,14 +96,16 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Ensure week goal correct
         updateWeekGoal()
         
-        // Create [[Date: Int]] from the stored [[String: Int]] (Icloud wont store [Date: Int], only [String: Int])
-        let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
-        trackingDictionariesDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionaries)
-        
         // Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         testTrackingValues()
         updateWeekTracking()
         updateTracking()
+        
+        // Create [[Date: Int]] from the stored [[String: Int]] (ICloud wont store [Date: Int], only [String: Int])
+        let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
+        trackingDictionariesDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionaries)
+        
+        
         
         // Present walkthrough 2
         let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
@@ -110,27 +113,9 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             walkthroughTracking()
         }
         
-        // Time scale table
-        timeScaleTable.dataSource = self
-        timeScaleTable.delegate = self
-        timeScaleTable.tableFooterView = UIView()
-        timeScaleTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        timeScaleTable.separatorColor = Colors.light.withAlphaComponent(0.5)
-        timeScaleTable.backgroundColor = Colors.dark
-        timeScaleTable.layer.cornerRadius = 15
-        timeScaleTable.clipsToBounds = true
-        timeScaleTable.layer.borderWidth = 1
-        timeScaleTable.layer.borderColor = Colors.light.cgColor
-        timeScaleTable.isScrollEnabled = false
-        timeScaleTable.frame = CGRect(x: 0, y: 0, width: ActionSheet.shared.actionSheet.bounds.width, height: 7 * 47)
         //
-        ActionSheet.shared.setupActionSheet()
-        ActionSheet.shared.actionSheet.addSubview(timeScaleTable)
-        let heightToAdd = timeScaleTable.bounds.height
-        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
-        ActionSheet.shared.resetCancelFrame()
+        setupTimeScaleButton()
         
-        //
         //
         // Navigation Controller
         self.navigationController?.navigationBar.barTintColor = Colors.dark
@@ -153,6 +138,29 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         slideMenuInteraction.edges = .left
     }
     
+    func setupTimeScaleButton() {
+        // Time scale table
+        timeScaleTable.dataSource = self
+        timeScaleTable.delegate = self
+        timeScaleTable.tableFooterView = UIView()
+        timeScaleTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        timeScaleTable.separatorColor = Colors.light.withAlphaComponent(0.5)
+        timeScaleTable.backgroundColor = Colors.dark
+        timeScaleTable.layer.cornerRadius = 15
+        timeScaleTable.clipsToBounds = true
+        timeScaleTable.layer.borderWidth = 1
+        timeScaleTable.layer.borderColor = Colors.light.cgColor
+        timeScaleTable.isScrollEnabled = false
+        timeScaleTable.frame = CGRect(x: 0, y: 0, width: ActionSheet.shared.actionSheet.bounds.width, height: 7 * 47)
+        //
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(timeScaleTable)
+        let heightToAdd = timeScaleTable.bounds.height
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+        ActionSheet.shared.resetCancelFrame()
+    }
+    
+    // MARK: Setup chart
     func setupChart() {
         
         // Chart
@@ -165,11 +173,13 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         chartView.noDataTextColor = Colors.light
         
         // General
+        chartView.delegate = self
         chartView.legend.enabled = false
         chartView.rightAxis.enabled = false
         chartView.pinchZoomEnabled = false
         chartView.setScaleEnabled(false)
         chartView.doubleTapToZoomEnabled = false
+        chartView.chartDescription?.enabled = false
         
         // Y Axis
         let leftAxis = chartView.leftAxis
@@ -186,6 +196,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         xAxis.axisLineColor = Colors.light
         xAxis.axisLineColor = Colors.light
         xAxis.labelTextColor = Colors.light
+        xAxis.avoidFirstLastClippingEnabled = true
         xAxis.labelFont = UIFont(name: "SFUIDisplay-thin", size: 17)!
         
         // Goal: 100 %
@@ -208,6 +219,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         setupChartData(timeScale: 0)
     }
     
+    // MARK: Setup chart data
     func setupChartData(timeScale: Int) {
         
         // Ensure no axis min/max set
@@ -216,21 +228,63 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //
         var chartDataOriginal: [(key: Date, value: Int)] = []
+        var chartDataShifted: [(key: Double, value: Int)] = [] // Shift chart data so min date is 0, this allows for correct presenting of labels
         // Data points
         switch timeScale {
         // 1 Week
         case 0:
+            
+            //
+            chartView.xAxis.granularity = 1 // 1 day
+
+            //
             chartDataOriginal = trackingDictionariesDates[0].sorted(by: { $0.key < $1.key })
-                //
-            lineDataEntry = chartDataOriginal.map{ChartDataEntry(x: $0.0.timeIntervalSince1970, y: Double($0.1))}
-                
+            //
+            // Shift chart data so min date is 0, this allows for correct presenting of labels
+            if trackingDictionariesDates[0].count != 0 {
+                TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
+                for i in 0..<chartDataOriginal.count {
+                    let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
+                    let value = chartDataOriginal[i].value
+                    //
+                    let keyValue = (key: key, value: value)
+                    chartDataShifted.append(keyValue)
+                }
+                    //
+                lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
+            }
+            //
+            let calendar = Calendar(identifier: .gregorian)
+            let startDate = Date().firstMondayInCurrentWeek
+            let endDate = calendar.date(byAdding: .day, value: 6, to: startDate)
+            //
+            chartView.xAxis.axisMinimum = 0
+            chartView.xAxis.axisMaximum = 6
             //
             chartView.xAxis.valueFormatter = DateValueFormatterDay()
+            chartView.xAxis.labelCount = 7
+            chartView.xAxis.forceLabelsEnabled = true
         // 1 Month
         case 1,2,3,4,5:
+            //
+            chartView.xAxis.granularity = 7 // 7 days in a week
+
+            //
             chartDataOriginal = trackingDictionariesDates[1].sorted(by: { $0.key < $1.key })
             //
-            lineDataEntry = chartDataOriginal.map{ChartDataEntry(x: $0.0.timeIntervalSince1970, y: Double($0.1))}
+            // Shift chart data so min date is 0, this allows for correct presenting of labels
+            if trackingDictionariesDates[1].count != 0 {
+                TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
+                for i in 0..<chartDataOriginal.count {
+                    let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
+                    let value = chartDataOriginal[i].value
+                    //
+                    let keyValue = (key: key, value: value)
+                    chartDataShifted.append(keyValue)
+                }
+                //
+                lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
+            }
             
             //
             let calendar = Calendar(identifier: .gregorian)
@@ -246,19 +300,53 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                 switch selectedTimeScale {
                 case 1:
                     startDate = Date().firstMondayInMonth
+                    chartView.xAxis.labelCount = Date().numberOfMondaysInCurrentMonth
+                    chartView.xAxis.forceLabelsEnabled = true
+                    chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
                 case 2:
                     startDate = calendar.date(byAdding: .month, value: -2, to: Date().currentDate)!
                     startDate = startDate.firstMondayInMonth
+                    // Find the number of x axis values to have
+                    var numberOfValues = 0
+                    for i in 0...2 {
+                        let month = calendar.date(byAdding: .month, value: i, to: startDate)!
+                        numberOfValues += month.numberOfMondaysInCurrentMonth
+                    }
+                    chartView.xAxis.labelCount = 4
+                    chartView.xAxis.forceLabelsEnabled = true
+                    chartView.xAxis.valueFormatter = DateValueFormatterMonth()
                 case 3:
                     startDate = calendar.date(byAdding: .month, value: -5, to: Date().currentDate)!
                     startDate = startDate.firstMondayInMonth
+                    chartView.xAxis.labelCount = 6
+                    chartView.xAxis.forceLabelsEnabled = true
+                    chartView.xAxis.valueFormatter = DateValueFormatterMonth()
                 default: break
                 }
                 //
-                chartView.xAxis.axisMinimum = startDate.timeIntervalSince1970
-                chartView.xAxis.axisMaximum = (endDate?.timeIntervalSince1970)!
+                let start = (startDate.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
+                chartView.xAxis.axisMinimum = start
+                
+                
+                let diffInDays = Calendar.current.dateComponents([.day], from: startDate, to: endDate!).day
+
                 //
-                chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
+                var numberOfDays = 0
+                for i in 0...timeScale {
+                    let calendar = Calendar.current
+                    let date = calendar.date(byAdding: .month, value: i, to: startDate.firstDateInMonth)
+                    //
+                    let range = calendar.range(of: .day, in: .month, for: date!)!
+                    let numDays = range.count
+                    //
+                    numberOfDays += numDays
+                }
+                
+                chartView.xAxis.axisMaximum = start + Double(diffInDays!)
+                //
+//                chartView.xAxis.axisMinimum = startDate.timeIntervalSince1970
+//                chartView.xAxis.axisMaximum = (endDate?.timeIntervalSince1970)!
+                //
 
             // 12 months
             case 4:
@@ -267,10 +355,12 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                 var endDate = calendar.date(byAdding: .month, value: 11, to: startDate)
                 endDate = endDate?.firstDateInMonth
                 //
-                chartView.xAxis.axisMinimum = startDate.timeIntervalSince1970
-                chartView.xAxis.axisMaximum = (endDate?.timeIntervalSince1970)!
+                chartView.xAxis.axisMinimum = 0
+                chartView.xAxis.axisMaximum = 364
                 //
-                chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
+                chartView.xAxis.valueFormatter = DateValueFormatterMonthLetter()
+                chartView.xAxis.labelCount = 12
+                chartView.xAxis.forceLabelsEnabled = true
                 
             // All
             case 5:
@@ -281,66 +371,52 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         default: break
         }
         
-        var highlight: Highlight? = nil
-        
-//        for index in 0..<12 {
-//            let randomValue = Double(arc4random_uniform(5000))
-//            values.append(ChartDataEntry(x: Double(index), y: randomValue))
-//
-//            if index == 4 {
-//                highlight = Highlight(x: Double(index), y: randomValue, dataSetIndex: 0)
-//            }
-//        }
-        if chartDataOriginal.count != 0 {
-            for i in 0..<chartDataOriginal.count {
-                highlight = Highlight(x: chartDataOriginal[i].key.timeIntervalSince1970, y: Double(chartDataOriginal[i].value), dataSetIndex: 0)
-            }
-        }
-        //
-        chartView.highlightValue(highlight)
-        
         // Chart data
         let chartDataSet = LineChartDataSet(values: lineDataEntry, label: "I'm a label that isn't shown")
         let chartData = LineChartData()
-        chartData.addDataSet(chartDataSet)
-        chartData.setDrawValues(true)
+        if trackingDictionariesDates[0].count != 0 || trackingDictionariesDates[1].count != 0 {
+            chartData.addDataSet(chartDataSet)
+            chartData.setDrawValues(true)
+        }
         chartDataSet.colors = [Colors.red]
         chartDataSet.setCircleColor(Colors.red)
         chartDataSet.circleHoleColor = Colors.red
         chartDataSet.circleRadius = 4
         chartDataSet.valueFont = UIFont(name: "SFUIDisplay-thin", size: 10)!
         chartDataSet.valueTextColor = UIColor.clear
-        //
-//        chartDataSet.setDrawHighlightIndicators(true)
+        
+        // Marker
+        let marker: XYMarkerView = XYMarkerView(color: Colors.light, font: UIFont(name: "SFUIDisplay-thin", size: 19)!, textColor: Colors.dark, insets: UIEdgeInsets(top: 3.0, left: 5.0, bottom: 8.0, right: 5.0), xAxisValueFormatter: DateValueFormatterMarker())
+        marker.minimumSize = CGSize(width: 75, height: 35)
+        chartView.marker = marker
+        
+        // Highlight
+        chartDataSet.setDrawHighlightIndicators(true)
         chartDataSet.highlightColor = Colors.light
         chartDataSet.highlightEnabled = true
         chartDataSet.drawHorizontalHighlightIndicatorEnabled = false
         chartDataSet.highlightLineWidth = 0.5
-//        chartView.highlightValue(Highlight.init(x: <#T##Double#>, dataSetIndex: <#T##Int#>, stackIndex: <#T##Int#>))
-//        chartDataSet.highli
-        
-        // Gradient fill
-        let gradientColors = [Colors.green.cgColor, UIColor.clear.cgColor] as CFArray
-        let colorLocations: [CGFloat] = [1.0, 0.0]
-        guard let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) else { print("gradient error"); return }
-        chartDataSet.fill = Fill.fillWithLinearGradient(gradient, angle: 90.0)
         
         // Axes setup
         chartView.xAxis.labelPosition = .bottom
-        chartView.xAxis.drawGridLinesEnabled = false
+        chartView.xAxis.drawGridLinesEnabled = true
+        chartView.xAxis.gridColor = Colors.light.withAlphaComponent(0.03)
         chartView.xAxis.drawAxisLineEnabled = true
         //
         chartView.data = chartData
     }
+    
+//    public func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+//    }
     
     // Return chart height
     var firstTimeOpened = true
     func returnChartHeight() -> CGFloat {
         if firstTimeOpened {
             firstTimeOpened = false
-            return self.view.bounds.height - TopBarHeights.combinedHeight
+            return self.view.bounds.height - TopBarHeights.combinedHeight - 4
         } else {
-            return self.view.bounds.height
+            return self.view.bounds.height - 4
         }
     }
     
@@ -411,23 +487,14 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // If data is available
-        if trackingDictionariesDates[0].count != 0 {
-            //
-            //
-            selectedTimeScale = indexPath.row
-            //
-            setupChartData(timeScale: selectedTimeScale)
-            // No data to display
-        } else {
-            selectedTimeScale = indexPath.row
-        }
+        //
+        selectedTimeScale = indexPath.row
+        setupChartData(timeScale: selectedTimeScale)
         //
         timeScaleTable.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
             // Dismiss action sheet
             ActionSheet.shared.animateActionSheetDown()
-            //
         })
         //
         tableView.deselectRow(at: indexPath, animated: true)
@@ -475,6 +542,10 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             //
             if let destinationViewController = segue.destination as? SlideMenuView {
                 destinationViewController.transitioningDelegate = self
+            }
+            // Handle changing colour of status bar if button pressed
+            if MenuVariables.shared.menuInteractionType == 0 {
+                UIApplication.shared.statusBarStyle = .default
             }
         } else {
             // Remove back button text
@@ -596,49 +667,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     //
-}
-
-
-//
-// MARK: Date Formatters
-// Day Name
-public class DateValueFormatterDay: NSObject, IAxisValueFormatter {
-    private let dateFormatter = DateFormatter()
-    
-    override init() {
-        super.init()
-        dateFormatter.dateFormat = "EEE"
-    }
-    
-    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
-    }
-}
-// Day Date
-public class DateValueFormatterDayDate: NSObject, IAxisValueFormatter {
-    private let dateFormatter = DateFormatter()
-    
-    override init() {
-        super.init()
-        dateFormatter.dateFormat = "dd"
-    }
-    
-    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
-    }
-}
-//
-public class DateValueFormatterMonth: NSObject, IAxisValueFormatter {
-    private let dateFormatter = DateFormatter()
-    
-    override init() {
-        super.init()
-        dateFormatter.dateFormat = "MM"
-    }
-    
-    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
-    }
 }
 
 

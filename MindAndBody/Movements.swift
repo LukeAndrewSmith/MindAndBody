@@ -73,7 +73,7 @@ class sessionData {
                     // Legs (General) ---------
                     ["bodyweightSquat", "pistolSquat", "skaterSquat", "squatJump", "sumoSquat", "lunge", "lungeJump"],
                     // Legs (Hamstrings)
-                    ["deadlift", "singleLegDeadlift"],
+                    ["bodyweightDeadlift", "singleLegDeadlift"],
                     // Legs (Glutes)
                     ["gluteBridge", "singleLegGluteBridge", "kickBack", "standingKickBack"],
                     // Legs (Calves)
@@ -899,28 +899,28 @@ class sessionData {
                         "name": ["deadlift"],
                         "demonstration": ["deadlift", "deadlift1", "deadlift2", "deadlift3", "deadlift4", "deadlift5", "deadlift6", "deadlift7", "deadlift4", "deadlift2"],
                         "explanation": ["deadliftEH", "deadliftEA", "deadliftEF"],
-                        "targetArea": ["deadlift"]
+                        "targetArea": ["deadliftBody"]
                 ],
                 "romanianDeadlift":
                     [
                         "name": ["romanianDeadlift"],
                         "demonstration": ["romanianDeadlift", "romanianDeadlift1", "romanianDeadlift2", "romanianDeadlift3", "romanianDeadlift2", "romanianDeadlift1"],
                         "explanation": ["romanianDeadliftEH", "romanianDeadliftEA", "romanianDeadliftEF"],
-                        "targetArea": ["deadlift"]
+                        "targetArea": ["deadliftBody"]
                 ],
                 "weightedHipThrust":
                     [
                         "name": ["weightedHipThrust"],
                         "demonstration": ["weightedHipThrust", "weightedHipThrust1", "weightedHipThrust", "weightedHipThrust1"],
                         "explanation": ["weightedHipThrustEH", "weightedHipThrustEA", "weightedHipThrustEF"],
-                        "targetArea": ["deadlift"]
+                        "targetArea": ["deadliftBody"]
                 ],
                 "legCurl":
                     [
                         "name": ["legCurl"],
                         "demonstration": ["legCurl", "legCurl1", "legCurl2", "legCurl3", "legCurl2", "legCurl1"],
                         "explanation": ["legCurlEH", "legCurlEA", "legCurlEF"],
-                        "targetArea": ["deadlift"]
+                        "targetArea": ["deadliftBody"]
                 ],
                 "oneLeggedDeadlift":
                     [
