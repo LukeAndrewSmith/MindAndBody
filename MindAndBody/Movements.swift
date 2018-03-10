@@ -28,11 +28,11 @@ class sessionData {
                     // Upper Back
                     ["upperBackRotation", "latStretch", "lyingSideWindmill"],
                     // Shoulder
-                    ["wallSlides", "wallReaches", "shoulderRotationW", "forearmWallSlides135", "superManShoulder", "scapulaPushup"],
+                    ["wallSlides", "wallReaches", "shoulderRotationW", "forearmWallSlides135", "superManShoulder"],
                     // Band/Bar/Machine Assisted
                     ["facePull", "externalRotation", "internalRotation", "shoulderDislocation", "latPullover"],
                     // General Mobility
-                    ["latPullover", "seatedKneeDrop", "groinStretch", "threadTheNeedle", "butterflyPose", "cossakSquat", "hipHinges", "lungeTwist", "sideLegSwings", "frontLegSwings", "spiderManHipLiftOverheadReach"],
+                    ["seatedKneeDrop", "groinStretch", "threadTheNeedle", "butterflyPose", "cossakSquat", "hipHinges", "lungeTwist", "sideLegSwings", "frontLegSwings", "spiderManHipLiftOverheadReach"],
                     // Dynamic Warmup Drills
                     ["forefootBounces", "jumpSquat", "lunge", "gluteKicks", "aSkips", "bSkips", "grapeVines", "lateralBound", "straightLegBound", "sprints"],
                     // Accessory
@@ -44,13 +44,13 @@ class sessionData {
                     // Legs (Quads) ---------
                     ["squat", "frontSquat", "legPress", "dumbellFrontSquat", "legExtensions"],
                     // Legs (Hamstrings/Glutes)
-                    ["deadlift", "romanianDeadlift", "weightedHipThrust", "legCurl", "oneLeggedDeadlift", "gluteIsolationMachine"],
+                    ["deadlift", "romanianDeadlift", "weightedHipThrust", "legCurl", "oneLeggedDeadlift"],
                     // Legs (General)
                     ["lungeDumbell", "bulgarianSplitSquat", "weightedStepUp"],
                     // Legs (Calves)
                     ["standingCalfRaise", "seatedCalfRaise"],
                     // Pull (Back) ---------
-                    ["pullDown", "kneelingPullDown", "pullDownMachine", "bentOverRowBarbell", "bentOverRowDumbell", "tBarRow", "rowMachine", "latPullover"],
+                    ["pullDown", "kneelingPullDown", "bentOverRowDumbell", "tBarRow", "rowMachine", "latPullover"],
                     // Pull (Upper Back)
                     ["facePull", "leaningBackPullDown"],
                     // Pull (Rear Delts)
@@ -60,9 +60,9 @@ class sessionData {
                     // Pull (Biceps)
                     ["hammerCurl", "hammerCurlCable", "curl"],
                     // Pull (Forearms)
-                    ["farmersCarry", "reverseBarbellCurl", "reverseBarbellCurl"],
+                    ["farmersCarry", "reverseBarbellCurl"],
                     // Push (Chest) ---------
-                    ["benchPress", "benchPressDumbell", "semiInclineDumbellPress", "chestPress", "platePress", "barbellKneelingPress", "cableFly", "dips"],
+                    ["benchPress", "benchPressDumbell", "semiInclineDumbellPress", "platePress", "barbellKneelingPress", "dips"],
                     // Push (Shoulders)
                     ["standingShoulderPressBarbell", "standingShoulderPressDumbell", "lateralRaise", "frontRaise"],
                     // Push (Triceps) // 46: !!!
@@ -71,7 +71,7 @@ class sessionData {
                     ["cleanPress"],
                     // BodyWeight ------------------------------------
                     // Legs (General) ---------
-                    ["bodyweightSquat", "pistolSquat", "skaterSquat", "squatJump", "sumoSquat", "lunge", "lungeJump"],
+                    ["bodyweightSquat", "squatJump", "pistolSquat", "skaterSquat", "sumoSquat", "lunge", "lungeJump"],
                     // Legs (Hamstrings)
                     ["bodyweightDeadlift", "singleLegDeadlift"],
                     // Legs (Glutes)
@@ -79,7 +79,7 @@ class sessionData {
                     // Legs (Calves)
                     ["calfRaise"],
                     // Pull (Back) ---------
-                    ["contralateralLimbRaises", "superMan", "backHyperextension", "doorFrameRow", "reverseSnowAngels", "scapulaPushup"],
+                    ["contralateralLimbRaises", "superMan", "backHyperextension", "doorFrameRow", "reverseSnowAngels"],
                     // Pull (Traps)
                     ["handStandTrap"],
                     // Push (Chest) ---------
@@ -91,7 +91,7 @@ class sessionData {
                     // Push (Shoulder)
                     ["downwardDogPushup", "wallPushup", "boxer", "armCircles"],
                     // Core ---------
-                    ["plank", "dynamicPlank", "sidePlankW", "pushupPlank", "lSit", "bicycleCrunch", "divingHold", "hipRaise", "legHold"],
+                    ["plank", "dynamicPlank", "sidePlankW", "pushupPlank", "lSit", "bicycleCrunch", "divingHold", "hipRaise", "legHold", "sideLegDrop"],
                     // General (Core) ---------
                     ["mountainClimbers"],
                     // General (Full Body)
@@ -109,7 +109,7 @@ class sessionData {
                     // Equiptment (Bar)
                     ["bodweightRow", "pullup", "hangingLegRaise"],
                     // Equiptment (Bench/Step)
-                    ["tricepDip", "bulgarianSplitSquat", "boxJump", "hipThrusts", "stepUp"]
+                    ["bulgarianSplitSquat", "boxJump", "hipThrusts", "stepUp"]
             ],
             "cardio":
                 [
@@ -218,7 +218,6 @@ class sessionData {
                     // Gym ------------------------------------
                     // Legs (Hamstrings/Glutes)
                     "oneLeggedDeadlift",
-                    "gluteIsolationMachine",
                     // Legs (General)
                     "bulgarianSplitSquat",
                     "weightedStepUp",
@@ -646,13 +645,6 @@ class sessionData {
                             "explanation": ["superManShoulderEH", "superManShoulderEA", "superManShoulderEF"],
                             "targetArea": ["backShoulder"]
                     ],
-                    "scapulaPushup":
-                        [
-                            "name": ["scapulaPushup"],
-                            "demonstration": ["scapulaPushup", "scapulaPushup1", "scapulaPushup", "scapulaPushup1", "scapulaPushup", "scapulaPushup1"],
-                            "explanation": ["scapulaPushupEH", "scapulaPushupEA", "scapulaPushupEF"],
-                            "targetArea": ["serratus"]
-                    ],
                     // Band/Bar/Machine Assisted
                     "facePull":
                         [
@@ -929,13 +921,6 @@ class sessionData {
                         "explanation": ["oneLeggedDeadliftEH", "oneLeggedDeadliftEA", "oneLeggedDeadliftEF"],
                         "targetArea": ["rearThigh"]
                 ],
-                "gluteIsolationMachine":
-                    [
-                        "name": ["gluteIsolationMachine"],
-                        "demonstration": ["gluteIsolationMachine", "gluteIsolationMachine1", "gluteIsolationMachine", "gluteIsolationMachine1"],
-                        "explanation": ["gluteIsolationMachineEH", "gluteIsolationMachineEA", "gluteIsolationMachineEF"],
-                        "targetArea": ["glute"]
-                ],
                 // Legs (General)
                 "lungeDumbell":
                     [
@@ -986,20 +971,6 @@ class sessionData {
                         "name": ["kneelingPullDown"],
                         "demonstration": ["kneelingPullDown", "kneelingPullDown1", "kneelingPullDown2", "kneelingPullDown3", "kneelingPullDown4", "kneelingPullDown4", "kneelingPullDown3", "kneelingPullDown2", "kneelingPullDown1"],
                         "explanation": ["kneelingPullDownEH", "kneelingPullDownEA", "kneelingPullDownEF"],
-                        "targetArea": ["backBicep"]
-                ],
-                "pullDownMachine":
-                    [
-                        "name": ["pullDownMachine"],
-                        "demonstration": ["pullDownMachine", "pullDownMachine1", "pullDownMachine", "pullDownMachine1"],
-                        "explanation": ["pullDownMachineEH", "pullDownMachineEA", "pullDownMachineEF"],
-                        "targetArea": ["backBicep"]
-                ],
-                "bentOverRowBarbell":
-                    [
-                        "name": ["bentOverRowBarbell"],
-                        "demonstration": ["bentOverRowBarbell", "bentOverRowBarbell1", "bentOverRowBarbell2", "bentOverRowBarbell3", "bentOverRowBarbell4", "bentOverRowBarbell5", "bentOverRowBarbell5", "bentOverRowBarbell4", "bentOverRowBarbell3", "bentOverRowBarbell2"],
-                        "explanation": ["bentOverRowBarbellEH", "bentOverRowBarbellEA", "bentOverRowBarbellEF"],
                         "targetArea": ["backBicep"]
                 ],
                 "bentOverRowDumbell":
@@ -1127,13 +1098,6 @@ class sessionData {
                         "explanation": ["benchPressDumbellEH", "benchPressDumbellEA", "benchPressDumbellEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
-                "chestPress":
-                    [
-                        "name": ["chestPress"],
-                        "demonstration": ["chestPress", "chestPress1", "chestPress", "chestPress1"],
-                        "explanation": ["chestPressEH", "chestPressEA", "chestPressEF"],
-                        "targetArea": ["chestFrontDeltTricep"]
-                ],
                 "platePress":
                     [
                         "name": ["platePress"],
@@ -1146,13 +1110,6 @@ class sessionData {
                         "name": ["barbellKneelingPress"],
                         "demonstration": ["barbellKneelingPress", "barbellKneelingPress1", "barbellKneelingPress", "barbellKneelingPress1"],
                         "explanation": ["barbellKneelingPressEH", "barbellKneelingPressEA", "barbellKneelingPressEF"],
-                        "targetArea": ["pecFrontDelt"]
-                ],
-                "cableFly":
-                    [
-                        "name": ["cableFly"],
-                        "demonstration": ["cableFly", "cableFly1", "cableFly2", "cableFly3", "cableFly4", "cableFly3", "cableFly2", "cableFly1", "cableFly1"],
-                        "explanation": ["cableFlyEH", "cableFlyEA", "cableFlyEF"],
                         "targetArea": ["pecFrontDelt"]
                 ],
                 "dips":
@@ -1360,13 +1317,6 @@ class sessionData {
                         "explanation": ["reverseSnowAngelsEH", "reverseSnowAngelsEA", "reverseSnowAngelsEF"],
                         "targetArea": ["squatBody"]
                 ],
-                "scapulaPushup":
-                    [
-                        "name": ["scapulaPushup"],
-                        "demonstration": ["scapulaPushup", "scapulaPushup1", "scapulaPushup", "scapulaPushup1", "scapulaPushup", "scapulaPushup1"],
-                        "explanation": ["scapulaPushupEH", "scapulaPushupEA", "scapulaPushupEF"],
-                        "targetArea": ["squatBody"]
-                ],
                 // Pull (Traps)
                 "handStandTrap":
                     [
@@ -1505,6 +1455,13 @@ class sessionData {
                         "demonstration": ["legHold"],
                         "explanation": ["legHoldEH", "legHoldEA", "legHoldEF"],
                         "targetArea": ["squatBody"]
+                ],
+                "sideLegDrop":
+                    [
+                        "name": ["sideLegDrop"],
+                        "demonstration": ["legDrop", "legDrop1", "legDrop2", "legDrop1", "legDrop", "legDrop1", "legDrop2", "legDrop1"],
+                        "explanation": ["sideLegDropEH", "sideLegDropEA", "sideLegDropEF"],
+                        "targetArea": ["core"]
                 ],
                 // General (Core) ---------
                 "mountainClimbers":
@@ -1648,13 +1605,6 @@ class sessionData {
                         "targetArea": ["squatBody"]
                 ],
                 // Equiptment (Bench/Step)
-                "tricepDip":
-                    [
-                        "name": ["tricepDip"],
-                        "demonstration": ["tricepDip", "tricepDip1", "tricepDip2", "tricepDip3", "tricepDip4", "tricepDip3", "tricepDip2", "tricepDip1"],
-                        "explanation": ["tricepDipEH", "tricepDipEA", "tricepDipEF"],
-                        "targetArea": ["squatBody"]
-                ],
                 "bodyweightBulgarianSplitSquat":
                     [
                         "name": ["bulgarianSplitSquat"],

@@ -159,6 +159,7 @@
 
 // MARK: -
 // MARK: Movements & Explanations (&& random strings relating to sessions types (Warmup,Workout...))
+// MARK: -
 // MARK: Important note for explanations
 // "movementE" + "H" = How To: ("movementEH")
 // "movementE" + "A" = Avoid:
@@ -415,10 +416,6 @@
 "A" = "";
 "F" = "";
 
-"scapulaPushup" = "Scapula Push Ups";
-"H" = "";
-"A" = "";
-"F" = "";
 
 // Band/Bar/Machine Assisted
 "bandAssisted" = "Upper Body Band/Bar/Machine Assisted";
@@ -786,7 +783,6 @@
         "weightedHipThrust" = "Weighted Hip Thrust";
         "legCurl" = "Leg Curl";
         "oneLeggedDeadlift" = "One Legged Deadlift";
-        "gluteIsolationMachine" = "Glute Isolation Machine";
             // Legs (General)
         "lungeBarbell" = "Barbell Lunge";
         "lungeDumbell" = "Dumbell Lunge";
@@ -797,9 +793,7 @@
 "pullUp" = "Pull Up";
 "pullDown" = "Pull Down";
 "kneelingPullDown" = "Kneeling Pull Down";
-"pullDownMachine" = "Pull Down Machine";
 "hammerStrengthPullDown" = "Hammer Strength Pull Down";
-"bentOverRowBarbell" = "Bent Over Barbell Row";
 "bentOverRowDumbell" = "Bent Over Dumbell Row";
 "tBarRow" = "T-Bar Row";
 "rowMachine" = "Machine Row";
@@ -831,9 +825,7 @@
 "semiInclineDumbellPress" = "Semi-Incline Dumbell Press";
 "platePress" = "Plate Press";
 "barbellKneelingPress" = "Barbell Kneeling Press";
-"cableFly" = "Cable Fly";
 "hammerStrengthPress" = "Hammer Strength Press";
-"chestPress" = "Chest Press";
             // Push (Shoulders)
 "standingShoulderPressBarbell" = "Standing Barbell Shoulder Press";
 "standingShoulderPressDumbell" = "Standing Dumbell Shoulder Press";
@@ -873,7 +865,6 @@
 "weightedHipThrustE" = "Weighted Hip Thrust";
 "legCurlE" = "Leg Curl";
 "oneLeggedDeadliftE" = "One Legged Deadlift";
-"gluteIsolationMachineE" = "Glute Isolation Machine";
             // Legs (General)
 "lungeBarbellE" = "Barbell Lunge";
 "lungeDumbellE" = "Dumbell Lunge";
@@ -884,9 +875,7 @@
 "pullUpE" = "Pull Up";
 "pullDownE" = "Pull Down";
 "kneelingPullDownE" = "Kneeling Pull Down";
-"pullDownMachineE" = "Pull Down Machine";
 "hammerStrengthPullDownE" = "Hammer Strength Pull Down";
-"bentOverRowBarbellE" = "Bent Over Barbell Row";
 "bentOverRowDumbellE" = "Bent Over Dumbell Row";
 "tBarRowE" = "T-Bar Row";
 "rowMachineE" = "Machine Row";
@@ -918,9 +907,7 @@
 "semiInclineDumbellPressE" = "Semi-Incline Dumbell Press";
 "platePressE" = "Plate Press";
 "barbellKneelingPressE" = "Barbell Kneeling Press";
-"cableFlyE" = "Cable Fly";
 "hammerStrengthPressE" = "Hammer Strength Press";
-"chestPressE" = "Chest Press";
             // Push (Shoulders)
 "standingShoulderPressBarbellE" = "Standing Barbell Shoulder Press";
 "standingShoulderPressDumbellE" = "Standing Dumbell Shoulder Press";
@@ -1602,31 +1589,449 @@
 
 // MARK: -
 
+// MARK: Session Titles
+// MARK: -
+// MARK: Workout
+
 
 //
 // MARK: Custom
 "sessionInputTitle" = "Title";
 
+// MARK: Workout, Gym, Classic
+// Full Body
+// Easy, Short
+            // Note, WGES = Workout, Gym, Easy, Short - CsF = Classic, Full Body - 1
+"WGES-CsF-1" = "Level 1, Short - 1";
+"WGES-CsF-2" = "Level 1, Short - 2";
+"WGES-CsF-3" = "Level 1, Short - 3";
+"WGES-CsF-4" = "Level 1, Short - 4";
+"WGES-CsF-5" = "Level 1, Short - 5";
+"WGES-CsF-6" = "Level 1, Short - 6";
+"WGES-CsF-7" = "Level 1, Short - 7";
+"WGES-CsF-8" = "Level 1, Short - 8";
+"WGES-CsF-9" = "Level 1, Short - 9";
+"WGES-CsF-10" = "Level 1, Short - 10";
+// Easy, Medium
+"WGEM-CsF-1" = "Level 1, Medium - 1";
+"WGEM-CsF-2" = "Level 1, Medium - 2";
+"WGEM-CsF-3" = "Level 1, Medium - 3";
+"WGEM-CsF-4" = "Level 1, Medium - 4";
+"WGEM-CsF-5" = "Level 1, Medium - 5";
+"WGEM-CsF-6" = "Level 1, Medium - 6";
+"WGEM-CsF-7" = "Level 1, Medium - 7";
+"WGEM-CsF-8" = "Level 1, Medium - 8";
+"WGEM-CsF-9" = "Level 1, Medium - 9";
+"WGEM-CsF-10" = "Level 1, Medium - 10";
+// Easy, Long
+"WGEL-CsF-1" = "Level 1, Long - 1";
+"WGEL-CsF-2" = "Level 1, Long - 2";
+"WGEL-CsF-3" = "Level 1, Long - 3";
+"WGEL-CsF-4" = "Level 1, Long - 4";
+"WGEL-CsF-5" = "Level 1, Long - 5";
+"WGEL-CsF-6" = "Level 1, Long - 6";
+"WGEL-CsF-7" = "Level 1, Long - 7";
+"WGEL-CsF-8" = "Level 1, Long - 8";
+"WGEL-CsF-9" = "Level 1, Long - 9";
+"WGEL-CsF-10" = "Level 1, Long - 10";
+
+// Average, Short
+"WGAS-CsF-1" = "Level 2, Short - 1";
+"WGAS-CsF-2" = "Level 2, Short - 2";
+"WGAS-CsF-3" = "Level 2, Short - 3";
+"WGAS-CsF-4" = "Level 2, Short - 4";
+"WGAS-CsF-5" = "Level 2, Short - 5";
+"WGAS-CsF-6" = "Level 2, Short - 6";
+"WGAS-CsF-7" = "Level 2, Short - 7";
+"WGAS-CsF-8" = "Level 2, Short - 8";
+"WGAS-CsF-9" = "Level 2, Short - 9";
+"WGAS-CsF-10" = "Level 2, Short - 10";
+// Average, Medium
+"WGAM-CsF-1" = "Level 2, Medium - 1";
+"WGAM-CsF-2" = "Level 2, Medium - 2";
+"WGAM-CsF-3" = "Level 2, Medium - 3";
+"WGAM-CsF-4" = "Level 2, Medium - 4";
+"WGAM-CsF-5" = "Level 2, Medium - 5";
+"WGAM-CsF-6" = "Level 2, Medium - 6";
+"WGAM-CsF-7" = "Level 2, Medium - 7";
+"WGAM-CsF-8" = "Level 2, Medium - 8";
+"WGAM-CsF-9" = "Level 2, Medium - 9";
+"WGAM-CsF-10" = "Level 2, Medium - 10";
+// Average, Long
+"WGAL-CsF-1" = "Level 2, Long - 1";
+"WGAL-CsF-2" = "Level 2, Long - 2";
+"WGAL-CsF-3" = "Level 2, Long - 3";
+"WGAL-CsF-4" = "Level 2, Long - 4";
+"WGAL-CsF-5" = "Level 2, Long - 5";
+"WGAL-CsF-6" = "Level 2, Long - 6";
+"WGAL-CsF-7" = "Level 2, Long - 7";
+"WGAL-CsF-8" = "Level 2, Long - 8";
+"WGAL-CsF-9" = "Level 2, Long - 9";
+"WGAL-CsF-10" = "Level 2, Long - 10";
+
+// Hard, Short
+"WGHS-CsF-1" = "Level 3, Short - 1";
+"WGHS-CsF-2" = "Level 3, Short - 2";
+"WGHS-CsF-3" = "Level 3, Short - 3";
+"WGHS-CsF-4" = "Level 3, Short - 4";
+"WGHS-CsF-5" = "Level 3, Short - 5";
+"WGHS-CsF-6" = "Level 3, Short - 6";
+"WGHS-CsF-7" = "Level 3, Short - 7";
+"WGHS-CsF-8" = "Level 3, Short - 8";
+"WGHS-CsF-9" = "Level 3, Short - 9";
+"WGHS-CsF-10" = "Level 3, Short - 10";
+"WGHS-CsF-11" = "Level 3, Short - 11";
+"WGHS-CsF-12" = "Level 3, Short - 12";
+// Hard, Medium
+"WGHM-CsF-1" = "Level 3, Medium - 1";
+"WGHM-CsF-2" = "Level 3, Medium - 2";
+"WGHM-CsF-3" = "Level 3, Medium - 3";
+"WGHM-CsF-4" = "Level 3, Medium - 4";
+"WGHM-CsF-5" = "Level 3, Medium - 5";
+"WGHM-CsF-6" = "Level 3, Medium - 6";
+"WGHM-CsF-7" = "Level 3, Medium - 7";
+"WGHM-CsF-8" = "Level 3, Medium - 8";
+"WGHM-CsF-9" = "Level 3, Medium - 9";
+"WGHM-CsF-10" = "Level 3, Medium - 10";
+"WGHM-CsF-11" = "Level 3, Medium - 11";
+"WGHM-CsF-12" = "Level 3, Medium - 12";
+// Hard, Long
+"WGHL-CsF-1" = "Level 3, Long - 1";
+"WGHL-CsF-2" = "Level 3, Long - 2";
+"WGHL-CsF-3" = "Level 3, Long - 3";
+"WGHL-CsF-4" = "Level 3, Long - 4";
+"WGHL-CsF-5" = "Level 3, Long - 5";
+"WGHL-CsF-6" = "Level 3, Long - 6";
+"WGHL-CsF-7" = "Level 3, Long - 7";
+"WGHL-CsF-8" = "Level 3, Long - 8";
+"WGHL-CsF-9" = "Level 3, Long - 9";
+"WGHL-CsF-10" = "Level 3, Long - 10";
+"WGHL-CsF-11" = "Level 3, Long - 11";
+"WGHL-CsF-12" = "Level 3, Long - 12";
+
+// Upper Body
+// Easy, Short
+"WGES-CsU-1" = "Level 1, Short - 1";
+"WGES-CsU-2" = "Level 1, Short - 2";
+"WGES-CsU-3" = "Level 1, Short - 3";
+"WGES-CsU-4" = "Level 1, Short - 4";
+"WGES-CsU-5" = "Level 1, Short - 5";
+"WGES-CsU-6" = "Level 1, Short - 6";
+"WGES-CsU-7" = "Level 1, Short - 7";
+"WGES-CsU-8" = "Level 1, Short - 8";
+"WGES-CsU-9" = "Level 1, Short - 9";
+// Easy, Medium
+"WGEM-CsU-1" = "Level 1, Medium - 1";
+"WGEM-CsU-2" = "Level 1, Medium - 2";
+"WGEM-CsU-3" = "Level 1, Medium - 3";
+"WGEM-CsU-4" = "Level 1, Medium - 4";
+"WGEM-CsU-5" = "Level 1, Medium - 5";
+"WGEM-CsU-6" = "Level 1, Medium - 6";
+"WGEM-CsU-7" = "Level 1, Medium - 7";
+"WGEM-CsU-8" = "Level 1, Medium - 8";
+"WGEM-CsU-9" = "Level 1, Medium - 9";
+// Easy, Long
+"WGEL-CsU-1" = "Level 1, Long - 1";
+"WGEL-CsU-2" = "Level 1, Long - 2";
+"WGEL-CsU-3" = "Level 1, Long - 3";
+"WGEL-CsU-4" = "Level 1, Long - 4";
+"WGEL-CsU-5" = "Level 1, Long - 5";
+"WGEL-CsU-6" = "Level 1, Long - 6";
+"WGEL-CsU-7" = "Level 1, Long - 7";
+"WGEL-CsU-8" = "Level 1, Long - 8";
+"WGEL-CsU-9" = "Level 1, Long - 9";
+
+// Average, Short
+"WGAS-CsU-1" = "Level 2, Short - 1";
+"WGAS-CsU-2" = "Level 2, Short - 2";
+"WGAS-CsU-3" = "Level 2, Short - 3";
+"WGAS-CsU-4" = "Level 2, Short - 4";
+"WGAS-CsU-5" = "Level 2, Short - 5";
+"WGAS-CsU-6" = "Level 2, Short - 6";
+"WGAS-CsU-7" = "Level 2, Short - 7";
+"WGAS-CsU-8" = "Level 2, Short - 8";
+"WGAS-CsU-9" = "Level 2, Short - 9";
+// Average, Medium
+"WGAM-CsU-1" = "Level 2, Medium - 1";
+"WGAM-CsU-2" = "Level 2, Medium - 2";
+"WGAM-CsU-3" = "Level 2, Medium - 3";
+"WGAM-CsU-4" = "Level 2, Medium - 4";
+"WGAM-CsU-5" = "Level 2, Medium - 5";
+"WGAM-CsU-6" = "Level 2, Medium - 6";
+"WGAM-CsU-7" = "Level 2, Medium - 7";
+"WGAM-CsU-8" = "Level 2, Medium - 8";
+"WGAM-CsU-9" = "Level 2, Medium - 9";
+// Average, Long
+"WGAL-CsU-1" = "Level 2, Long - 1";
+"WGAL-CsU-2" = "Level 2, Long - 2";
+"WGAL-CsU-3" = "Level 2, Long - 3";
+"WGAL-CsU-4" = "Level 2, Long - 4";
+"WGAL-CsU-5" = "Level 2, Long - 5";
+"WGAL-CsU-6" = "Level 2, Long - 6";
+"WGAL-CsU-7" = "Level 2, Long - 7";
+"WGAL-CsU-8" = "Level 2, Long - 8";
+"WGAL-CsU-9" = "Level 2, Long - 9";
+
+// Hard, Short
+"WGHS-CsU-1" = "Level 3, Short - 1";
+"WGHS-CsU-2" = "Level 3, Short - 2";
+"WGHS-CsU-3" = "Level 3, Short - 3";
+"WGHS-CsU-4" = "Level 3, Short - 4";
+"WGHS-CsU-5" = "Level 3, Short - 5";
+"WGHS-CsU-6" = "Level 3, Short - 6";
+"WGHS-CsU-7" = "Level 3, Short - 7";
+"WGHS-CsU-8" = "Level 3, Short - 8";
+"WGHS-CsU-9" = "Level 3, Short - 9";
+// Hard, Medium
+"WGHM-CsU-1" = "Level 3, Medium - 1";
+"WGHM-CsU-2" = "Level 3, Medium - 2";
+"WGHM-CsU-3" = "Level 3, Medium - 3";
+"WGHM-CsU-4" = "Level 3, Medium - 4";
+"WGHM-CsU-5" = "Level 3, Medium - 5";
+"WGHM-CsU-6" = "Level 3, Medium - 6";
+"WGHM-CsU-7" = "Level 3, Medium - 7";
+"WGHM-CsU-8" = "Level 3, Medium - 8";
+"WGHM-CsU-9" = "Level 3, Medium - 9";
+// Hard, Long
+"WGHL-CsU-1" = "Level 3, Long - 1";
+"WGHL-CsU-2" = "Level 3, Long - 2";
+"WGHL-CsU-3" = "Level 3, Long - 3";
+"WGHL-CsU-4" = "Level 3, Long - 4";
+"WGHL-CsU-5" = "Level 3, Long - 5";
+"WGHL-CsU-6" = "Level 3, Long - 6";
+"WGHL-CsU-7" = "Level 3, Long - 7";
+"WGHL-CsU-8" = "Level 3, Long - 8";
+"WGHL-CsU-9" = "Level 3, Long - 9";
+
+// Lower Body
+// Easy, Short
+"WGES-CsL-1" = "Level 1, Short - 1";
+"WGES-CsL-2" = "Level 1, Short - 2";
+"WGES-CsL-3" = "Level 1, Short - 3";
+"WGES-CsL-4" = "Level 1, Short - 4";
+"WGES-CsL-5" = "Level 1, Short - 5";
+"WGES-CsL-6" = "Level 1, Short - 6";
+"WGES-CsL-7" = "Level 1, Short - 7";
+"WGES-CsL-8" = "Level 1, Short - 8";
+"WGES-CsL-9" = "Level 1, Short - 9";
+"WGES-CsL-10" = "Level 1, Short - 10";
+// Easy, Medium
+"WGEM-CsL-1" = "Level 1, Medium - 1";
+"WGEM-CsL-2" = "Level 1, Medium - 2";
+"WGEM-CsL-3" = "Level 1, Medium - 3";
+"WGEM-CsL-4" = "Level 1, Medium - 4";
+"WGEM-CsL-5" = "Level 1, Medium - 5";
+"WGEM-CsL-6" = "Level 1, Medium - 6";
+"WGEM-CsL-7" = "Level 1, Medium - 7";
+"WGEM-CsL-8" = "Level 1, Medium - 8";
+"WGEM-CsL-9" = "Level 1, Medium - 9";
+"WGEM-CsL-10" = "Level 1, Medium - 10";
+// Easy, Long
+"WGEL-CsL-1" = "Level 1, Long - 1";
+"WGEL-CsL-2" = "Level 1, Long - 2";
+"WGEL-CsL-3" = "Level 1, Long - 3";
+"WGEL-CsL-4" = "Level 1, Long - 4";
+"WGEL-CsL-5" = "Level 1, Long - 5";
+"WGEL-CsL-6" = "Level 1, Long - 6";
+"WGEL-CsL-7" = "Level 1, Long - 7";
+"WGEL-CsL-8" = "Level 1, Long - 8";
+"WGEL-CsL-9" = "Level 1, Long - 9";
+"WGEL-CsL-10" = "Level 1, Long - 10";
+
+// Average, Short
+"WGAS-CsL-1" = "Level 2, Short - 1";
+"WGAS-CsL-2" = "Level 2, Short - 2";
+"WGAS-CsL-3" = "Level 2, Short - 3";
+"WGAS-CsL-4" = "Level 2, Short - 4";
+"WGAS-CsL-5" = "Level 2, Short - 5";
+"WGAS-CsL-6" = "Level 2, Short - 6";
+"WGAS-CsL-7" = "Level 2, Short - 7";
+"WGAS-CsL-8" = "Level 2, Short - 8";
+"WGAS-CsL-9" = "Level 2, Short - 9";
+"WGAS-CsL-10" = "Level 2, Short - 10";
+// Average, Medium
+"WGAM-CsL-1" = "Level 2, Medium - 1";
+"WGAM-CsL-2" = "Level 2, Medium - 2";
+"WGAM-CsL-3" = "Level 2, Medium - 3";
+"WGAM-CsL-4" = "Level 2, Medium - 4";
+"WGAM-CsL-5" = "Level 2, Medium - 5";
+"WGAM-CsL-6" = "Level 2, Medium - 6";
+"WGAM-CsL-7" = "Level 2, Medium - 7";
+"WGAM-CsL-8" = "Level 2, Medium - 8";
+"WGAM-CsL-9" = "Level 2, Medium - 9";
+"WGAM-CsL-10" = "Level 2, Medium - 10";
+// Average, Long
+"WGAL-CsL-1" = "Level 2, Long - 1";
+"WGAL-CsL-2" = "Level 2, Long - 2";
+"WGAL-CsL-3" = "Level 2, Long - 3";
+"WGAL-CsL-4" = "Level 2, Long - 4";
+"WGAL-CsL-5" = "Level 2, Long - 5";
+"WGAL-CsL-6" = "Level 2, Long - 6";
+"WGAL-CsL-7" = "Level 2, Long - 7";
+"WGAL-CsL-8" = "Level 2, Long - 8";
+"WGAL-CsL-9" = "Level 2, Long - 9";
+"WGAL-CsL-10" = "Level 2, Long - 10";
+
+// Hard, Short
+"WGHS-CsL-1" = "Level 3, Short - 1";
+"WGHS-CsL-2" = "Level 3, Short - 2";
+"WGHS-CsL-3" = "Level 3, Short - 3";
+"WGHS-CsL-4" = "Level 3, Short - 4";
+"WGHS-CsL-5" = "Level 3, Short - 5";
+"WGHS-CsL-6" = "Level 3, Short - 6";
+"WGHS-CsL-7" = "Level 3, Short - 7";
+"WGHS-CsL-8" = "Level 3, Short - 8";
+"WGHS-CsL-9" = "Level 3, Short - 9";
+"WGHS-CsL-10" = "Level 2, Short - 10";
+// Hard, Medium
+"WGHM-CsL-1" = "Level 3, Medium - 1";
+"WGHM-CsL-2" = "Level 3, Medium - 2";
+"WGHM-CsL-3" = "Level 3, Medium - 3";
+"WGHM-CsL-4" = "Level 3, Medium - 4";
+"WGHM-CsL-5" = "Level 3, Medium - 5";
+"WGHM-CsL-6" = "Level 3, Medium - 6";
+"WGHM-CsL-7" = "Level 3, Medium - 7";
+"WGHM-CsL-8" = "Level 3, Medium - 8";
+"WGHM-CsL-9" = "Level 3, Medium - 9";
+"WGHM-CsL-10" = "Level 2, Medium - 10";
+// Hard, Long
+"WGHL-CsL-1" = "Level 3, Long - 1";
+"WGHL-CsL-2" = "Level 3, Long - 2";
+"WGHL-CsL-3" = "Level 3, Long - 3";
+"WGHL-CsL-4" = "Level 3, Long - 4";
+"WGHL-CsL-5" = "Level 3, Long - 5";
+"WGHL-CsL-6" = "Level 3, Long - 6";
+"WGHL-CsL-7" = "Level 3, Long - 7";
+"WGHL-CsL-8" = "Level 3, Long - 8";
+"WGHL-CsL-9" = "Level 3, Long - 9";
+"WGHL-CsL-10" = "Level 2, Long - 10";
+
+
+// MARK: Workout, Gym, Circuit
+// Full Body
+// Easy, Short
+// Note, WGES = Workout, Gym, Easy, Short - CsF = Circuit, Full Body - 1
+"WGES-CsF-1" = "Level 1, Short - 1";
+"WGES-CsF-2" = "Level 1, Short - 2";
+"WGES-CsF-3" = "Level 1, Short - 3";
+"WGES-CsF-4" = "Level 1, Short - 4";
+"WGES-CsF-5" = "Level 1, Short - 5";
+// Easy, Normal
+"WGEM-CsF-1" = "Level 1, Normal - 1";
+"WGEM-CsF-2" = "Level 1, Normal - 2";
+"WGEM-CsF-3" = "Level 1, Normal - 3";
+"WGEM-CsF-4" = "Level 1, Normal - 4";
+"WGEM-CsF-5" = "Level 1, Normal - 5";
+
+// Average, Short
+"WGAS-CsF-1" = "Level 2, Short - 1";
+"WGAS-CsF-2" = "Level 2, Short - 2";
+"WGAS-CsF-3" = "Level 2, Short - 3";
+"WGAS-CsF-4" = "Level 2, Short - 4";
+"WGAS-CsF-5" = "Level 2, Short - 5";
+// Average, Normal
+"WGAM-CsF-1" = "Level 2, Normal - 1";
+"WGAM-CsF-2" = "Level 2, Normal - 2";
+"WGAM-CsF-3" = "Level 2, Normal - 3";
+"WGAM-CsF-4" = "Level 2, Normal - 4";
+"WGAM-CsF-5" = "Level 2, Normal - 5";
+
+// Hard, Short
+"WGHS-CsF-1" = "Level 3, Short - 1";
+"WGHS-CsF-2" = "Level 3, Short - 2";
+"WGHS-CsF-3" = "Level 3, Short - 3";
+"WGHS-CsF-4" = "Level 3, Short - 4";
+"WGHS-CsF-5" = "Level 3, Short - 5";
+// Hard, Normal
+"WGHM-CsF-1" = "Level 3, Normal - 1";
+"WGHM-CsF-2" = "Level 3, Normal - 2";
+"WGHM-CsF-3" = "Level 3, Normal - 3";
+"WGHM-CsF-4" = "Level 3, Normal - 4";
+"WGHM-CsF-5" = "Level 3, Normal - 5";
+
+// Upper Body
+// Easy, Short
+"WGES-CsU-1" = "Level 1, Short - 1";
+"WGES-CsU-2" = "Level 1, Short - 2";
+"WGES-CsU-3" = "Level 1, Short - 3";
+"WGES-CsU-4" = "Level 1, Short - 4";
+"WGES-CsU-5" = "Level 1, Short - 5";
+// Easy, Normal
+"WGEM-CsU-1" = "Level 1, Normal - 1";
+"WGEM-CsU-2" = "Level 1, Normal - 2";
+"WGEM-CsU-3" = "Level 1, Normal - 3";
+"WGEM-CsU-4" = "Level 1, Normal - 4";
+"WGEM-CsU-5" = "Level 1, Normal - 5";
+
+// Average, Short
+"WGAS-CsU-1" = "Level 2, Short - 1";
+"WGAS-CsU-2" = "Level 2, Short - 2";
+"WGAS-CsU-3" = "Level 2, Short - 3";
+"WGAS-CsU-4" = "Level 2, Short - 4";
+"WGAS-CsU-5" = "Level 2, Short - 5";
+// Average, Normal
+"WGAM-CsU-1" = "Level 2, Normal - 1";
+"WGAM-CsU-2" = "Level 2, Normal - 2";
+"WGAM-CsU-3" = "Level 2, Normal - 3";
+"WGAM-CsU-4" = "Level 2, Normal - 4";
+"WGAM-CsU-5" = "Level 2, Normal - 5";
+
+// Hard, Short
+"WGHS-CsU-1" = "Level 3, Short - 1";
+"WGHS-CsU-2" = "Level 3, Short - 2";
+"WGHS-CsU-3" = "Level 3, Short - 3";
+"WGHS-CsU-4" = "Level 3, Short - 4";
+"WGHS-CsU-5" = "Level 3, Short - 5";
+// Hard, Normal
+"WGHM-CsU-1" = "Level 3, Normal - 1";
+"WGHM-CsU-2" = "Level 3, Normal - 2";
+"WGHM-CsU-3" = "Level 3, Normal - 3";
+"WGHM-CsU-4" = "Level 3, Normal - 4";
+"WGHM-CsU-5" = "Level 3, Normal - 5";
+
+// Lower Body
+// Easy, Short
+"WGES-CsL-1" = "Level 1, Short - 1";
+"WGES-CsL-2" = "Level 1, Short - 2";
+"WGES-CsL-3" = "Level 1, Short - 3";
+"WGES-CsL-4" = "Level 1, Short - 4";
+"WGES-CsL-5" = "Level 1, Short - 5";
+// Easy, Normal
+"WGEM-CsL-1" = "Level 1, Normal - 1";
+"WGEM-CsL-2" = "Level 1, Normal - 2";
+"WGEM-CsL-3" = "Level 1, Normal - 3";
+"WGEM-CsL-4" = "Level 1, Normal - 4";
+"WGEM-CsL-5" = "Level 1, Normal - 5";
+
+// Average, Short
+"WGAS-CsL-1" = "Level 2, Short - 1";
+"WGAS-CsL-2" = "Level 2, Short - 2";
+"WGAS-CsL-3" = "Level 2, Short - 3";
+"WGAS-CsL-4" = "Level 2, Short - 4";
+"WGAS-CsL-5" = "Level 2, Short - 5";
+// Average, Normal
+"WGAM-CsL-1" = "Level 2, Normal - 1";
+"WGAM-CsL-2" = "Level 2, Normal - 2";
+"WGAM-CsL-3" = "Level 2, Normal - 3";
+"WGAM-CsL-4" = "Level 2, Normal - 4";
+"WGAM-CsL-5" = "Level 2, Normal - 5";
+
+// Hard, Short
+"WGHS-CsL-1" = "Level 3, Short - 1";
+"WGHS-CsL-2" = "Level 3, Short - 2";
+"WGHS-CsL-3" = "Level 3, Short - 3";
+"WGHS-CsL-4" = "Level 3, Short - 4";
+"WGHS-CsL-5" = "Level 3, Short - 5";
+// Hard, Normal
+"WGHM-CsL-1" = "Level 3, Normal - 1";
+"WGHM-CsL-2" = "Level 3, Normal - 2";
+"WGHM-CsL-3" = "Level 3, Normal - 3";
+"WGHM-CsL-4" = "Level 3, Normal - 4";
+"WGHM-CsL-5" = "Level 3, Normal - 5";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
+// MARK:-
 // MARK: Initial Screen //
 //
 "chooseBackgroundImage" = "Choose a background image";

@@ -314,7 +314,6 @@ enum sessionDataOld {
                 36: "shoulderRotationW",
                 37: "forearmWallSlides135",
                 38: "superManShoulder",
-                39: "scapulaPushup",
                 // Band/Bar/Machine Assisted
                 40: "facePull",
                 41: "externalRotation",
@@ -363,7 +362,6 @@ enum sessionDataOld {
                 7: "weightedHipThrust",
                 8: "legCurl",
                 9: "oneLeggedDeadlift",
-                10: "gluteIsolationMachine",
                 // Legs (General)
                 11: "lungeDumbell",
                 12: "bulgarianSplitSquat",
@@ -374,8 +372,6 @@ enum sessionDataOld {
                 // Pull (Back) ---------
                 16: "pullDown",
                 17: "kneelingPullDown",
-                18: "pullDownMachine",
-                19: "bentOverRowBarbell",
                 20: "bentOverRowDumbell",
                 21: "tBarRow",
                 22: "rowMachine",
@@ -399,10 +395,8 @@ enum sessionDataOld {
                 34: "benchPress",
                 35: "benchPressDumbell",
                 36: "semiInclineDumbellPress",
-                37: "chestPress",
                 38: "platePress",
                 39: "barbellKneelingPress",
-                40: "cableFly",
                 41: "dips",
                 // Push (Shoulders)
                 42: "standingShoulderPressBarbell",
@@ -440,7 +434,6 @@ enum sessionDataOld {
                 66: "backHyperextension",
                 67: "doorFrameRow",
                 68: "reverseSnowAngels",
-                69: "scapulaPushup",
                 // Pull (Traps)
                 70: "handStandTrap",
                 // Push (Chest) ---------
@@ -494,7 +487,6 @@ enum sessionDataOld {
                 106: "pullup",
                 107: "hangingLegRaise",
                 // Equiptment (Bench/Step)
-                108: "tricepDip",
                 109: "bulgarianSplitSquat",
                 110: "boxJump",
                 111: "hipThrusts",
@@ -771,7 +763,6 @@ enum sessionDataOld {
                 // Gym ------------------------------------
                 // Legs (Hamstrings/Glutes)
                 9, //: "oneLeggedDeadlift",
-                10, //: "gluteIsolationMachine",
                 // Legs (General)
                 12, //: "bulgarianSplitSquat",
                 13, //: "weightedStepUp",
@@ -962,7 +953,6 @@ enum sessionDataOld {
                 36: ["shoulderRotationW", "shoulderRotationW1", "shoulderRotationW2", "shoulderRotationW1", "shoulderRotationW", "shoulderRotationW1", "shoulderRotationW2", "shoulderRotationW1"],
                 37: ["forearmWallSlides135", "forearmWallSlides1351", "forearmWallSlides1352", "forearmWallSlides1351", "forearmWallSlides135", "forearmWallSlides1351", "forearmWallSlides1352", "forearmWallSlides1351"],
                 38: ["superManShoulder", "superManShoulder1", "superManShoulder2", "superManShoulder3", "superManShoulder4", "superManShoulder4", "superManShoulder3", "superManShoulder2", "superManShoulder1", "superManShoulder1"],
-                39: ["scapulaPushup", "scapulaPushup1", "scapulaPushup", "scapulaPushup1", "scapulaPushup", "scapulaPushup1"],
                 // Band/Bar/Machine Assisted
                 40: ["facePull", "facePull1", "facePull2", "facePull3", "facePull4", "facePull5", "facePull5", "facePull4", "facePull3", "facePull2", "facePull1"],
                 41: ["externalRotation", "externalRotation1", "externalRotation2", "externalRotation3", "externalRotation4", "externalRotation4", "externalRotation3", "externalRotation2", "externalRotation1"],
@@ -1011,7 +1001,6 @@ enum sessionDataOld {
                 7: ["weightedHipThrust", "weightedHipThrust1", "weightedHipThrust", "weightedHipThrust1"],
                 8: ["legCurl", "legCurl1", "legCurl2", "legCurl3", "legCurl2", "legCurl1"],
                 9: ["oneLeggedDeadlift", "oneLeggedDeadlift1", "oneLeggedDeadlift2", "oneLeggedDeadlift3", "oneLeggedDeadlift4", "oneLeggedDeadlift3", "oneLeggedDeadlift2", "oneLeggedDeadlift1"],
-                10: ["gluteIsolationMachine", "gluteIsolationMachine1", "gluteIsolationMachine", "gluteIsolationMachine1"],
                 // Legs (General)
                 11: ["lungeDumbell", "lungeDumbell1", "lungeDumbell2", "lungeDumbell3", "lungeDumbell4", "lungeDumbell5", "lungeDumbell6", "lungeDumbell7", "lungeDumbell1", "lungeDumbell8", "lungeDumbell9", "lungeDumbell10", "lungeDumbell11", "lungeDumbell12", "lungeDumbell13", "lungeDumbell1"],
                 12: ["bulgarianSplitSquat", "bulgarianSplitSquat1", "bulgarianSplitSquat", "bulgarianSplitSquat1"],
@@ -1022,8 +1011,6 @@ enum sessionDataOld {
                 // Pull (Back) ---------
                 16: ["pullDown", "pullDown1", "pullDown2", "pullDown3", "pullDown4", "pullDown5", "pullDown5", "pullDown4", "pullDown3", "pullDown2", "pullDown1"],
                 17: ["kneelingPullDown", "kneelingPullDown1", "kneelingPullDown2", "kneelingPullDown3", "kneelingPullDown4", "kneelingPullDown4", "kneelingPullDown3", "kneelingPullDown2", "kneelingPullDown1"],
-                18: ["pullDownMachine", "pullDownMachine1", "pullDownMachine", "pullDownMachine1"],
-                19: ["bentOverRowBarbell", "bentOverRowBarbell1", "bentOverRowBarbell2", "bentOverRowBarbell3", "bentOverRowBarbell4", "bentOverRowBarbell5", "bentOverRowBarbell5", "bentOverRowBarbell4", "bentOverRowBarbell3", "bentOverRowBarbell2"],
                 20: ["bentOverRowDumbell", "bentOverRowDumbell1", "bentOverRowDumbell2", "bentOverRowDumbell3", "bentOverRowDumbell4", "bentOverRowDumbell5", "bentOverRowDumbell5", "bentOverRowDumbell4", "bentOverRowDumbell3", "bentOverRowDumbell2"],
                 21: ["tBarRow", "tBarRow1", "tBarRow2", "tBarRow3", "tBarRow4", "tBarRow4", "tBarRow3", "tBarRow2", "tBarRow1"],
                 22: ["rowMachine", "rowMachine1", "rowMachine2", "rowMachine3", "rowMachine4", "rowMachine4", "rowMachine3", "rowMachine2", "rowMachine1"],
@@ -1047,10 +1034,7 @@ enum sessionDataOld {
                 34: ["benchPress", "benchPress1", "benchPress2", "benchPress3", "benchPress4", "benchPress5", "benchPress5", "benchPress4", "benchPress3", "benchPress2"],
                 35: ["benchPressDumbell", "benchPressDumbell4", "benchPressDumbell3", "benchPressDumbell2", "benchPressDumbell1", "benchPressDumbell1", "benchPressDumbell2", "benchPressDumbell3", "benchPressDumbell4"],
                 36: ["semiInclineDumbellPress", "semiInclineDumbellPress4", "semiInclineDumbellPress3", "semiInclineDumbellPress2", "semiInclineDumbellPress1", "semiInclineDumbellPress1", "semiInclineDumbellPress2", "semiInclineDumbellPress3", "semiInclineDumbellPress4"],
-                37: ["chestPress", "chestPress1", "chestPress", "chestPress1"],
-                38: ["platePress", "platePress1", "platePress", "platePress1"],
                 39: ["barbellKneelingPress", "barbellKneelingPress1", "barbellKneelingPress", "barbellKneelingPress1"],
-                40: ["cableFly", "cableFly1", "cableFly2", "cableFly3", "cableFly4", "cableFly3", "cableFly2", "cableFly1", "cableFly1"],
                 41: ["dips", "dips1", "dips", "dips1"],
                 // Push (Shoulders)
                 42: ["standingShoulderPressBarbell", "standingShoulderPressBarbell1", "standingShoulderPressBarbell2", "standingShoulderPressBarbell2", "standingShoulderPressBarbell1"],
@@ -1088,7 +1072,6 @@ enum sessionDataOld {
                 66: ["backHyperextension", "backHyperextension1", "backHyperextension2", "backHyperextension3", "backHyperextension4", "backHyperextension4", "backHyperextension3", "backHyperextension2", "backHyperextension1"],
                 67: ["doorFrameRow", "doorFrameRow1", "doorFrameRow2", "doorFrameRow2", "doorFrameRow1"],
                 68: ["reverseSnowAngels", "reverseSnowAngels1", "reverseSnowAngels2", "reverseSnowAngels3", "reverseSnowAngels4", "reverseSnowAngels4", "reverseSnowAngels3", "reverseSnowAngels2", "reverseSnowAngels1"],
-                69: ["scapulaPushup", "scapulaPushup1", "scapulaPushup", "scapulaPushup1", "scapulaPushup", "scapulaPushup1"],
                 // Pull (Traps)
                 70: ["handStandTrap", "handStandTrap1", "handStandTrap", "handStandTrap1"],
                 // Push (Chest) ---------
@@ -1142,7 +1125,6 @@ enum sessionDataOld {
                 106: ["pullUp", "pullUp1", "pullUp2", "pullUp3", "pullUp4", "pullUp4", "pullUp3", "pullUp2", "pullUp1"],
                 107: ["hangingLegRaises", "hangingLegRaises1", "hangingLegRaises2", "hangingLegRaises3", "hangingLegRaises4", "hangingLegRaises3", "hangingLegRaises2", "hangingLegRaises1"],
                 // Equiptment (Bench/Step)
-                108: ["tricepDip", "tricepDip1", "tricepDip2", "tricepDip3", "tricepDip4", "tricepDip3", "tricepDip2", "tricepDip1"],
                 109: ["bulgarianSplitSquat", "bulgarianSplitSquat1", "bulgarianSplitSquat", "bulgarianSplitSquat1"],
                 110: ["boxJump"],
                 111: ["hipThrusts", "hipThrusts1", "hipThrusts", "hipThrusts1"],
@@ -1751,7 +1733,6 @@ enum sessionDataOld {
                 36: ["shoulderRotationWEH", "shoulderRotationWEA", "shoulderRotationWEF"],
                 37: ["forearmWallSlides135EH", "forearmWallSlides135EA", "forearmWallSlides135EF"],
                 38: ["superManShoulderEH", "superManShoulderEA", "superManShoulderEF"],
-                39: ["scapulaPushupEH", "scapulaPushupEA", "scapulaPushupEF"],
                 // Band/Bar/Machine Assisted
                 40: ["facePullEH", "facePullEA", "facePullEF"],
                 41: ["externalRotationEH", "externalRotationEA", "externalRotationEF"],
@@ -1800,7 +1781,6 @@ enum sessionDataOld {
                 7: ["weightedHipThrustEH", "weightedHipThrustEA", "weightedHipThrustEF"],
                 8: ["legCurlEH", "legCurlEA", "legCurlEF"],
                 9: ["oneLeggedDeadliftEH", "oneLeggedDeadliftEA", "oneLeggedDeadliftEF"],
-                10: ["gluteIsolationMachineEH", "gluteIsolationMachineEA", "gluteIsolationMachineEF"],
                 // Legs (General)
                 11: ["lungeDumbellEH", "lungeDumbellEA", "lungeDumbellEF"],
                 12: ["bulgarianSplitSquatEH", "bulgarianSplitSquatEA", "bulgarianSplitSquatEF"],
@@ -1811,8 +1791,6 @@ enum sessionDataOld {
                 // Pull (Back) ---------
                 16: ["pullDownEH", "pullDownEA", "pullDownEF"],
                 17: ["kneelingPullDownEH", "kneelingPullDownEA", "kneelingPullDownEF"],
-                18: ["pullDownMachineEH", "pullDownMachineEA", "pullDownMachineEF"],
-                19: ["bentOverRowBarbellEH", "bentOverRowBarbellEA", "bentOverRowBarbellEF"],
                 20: ["bentOverRowDumbellEH", "bentOverRowDumbellEA", "bentOverRowDumbellEF"],
                 21: ["tBarRowEH", "tBarRowEA", "tBarRowEF"],
                 22: ["rowMachineEH", "rowMachineEA", "rowMachineEF"],
@@ -1836,10 +1814,8 @@ enum sessionDataOld {
                 34: ["benchPressEH", "benchPressEA", "benchPressEF"],
                 35: ["benchPressDumbellEH", "benchPressDumbellEA", "benchPressDumbellEF"],
                 36: ["semiInclineDumbellPressEH", "semiInclineDumbellPressEA", "semiInclineDumbellPressEF"],
-                37: ["chestPressEH", "chestPressEA", "chestPressEF"],
                 38: ["platePressEH", "platePressEA", "platePressEF"],
                 39: ["barbellKneelingPressEH", "barbellKneelingPressEA", "barbellKneelingPressEF"],
-                40: ["cableFlyEH", "cableFlyEA", "cableFlyEF"],
                 41: ["dipsEH", "dipsEA", "dipsEF"],
                 // Push (Shoulders)
                 42: ["standingShoulderPressBarbellEH", "standingShoulderPressBarbellEA", "standingShoulderPressBarbellEF"],
@@ -1877,7 +1853,6 @@ enum sessionDataOld {
                 66: ["backHyperextensionEH", "backHyperextensionEA", "backHyperextensionEF"],
                 67: ["doorFrameRowEH", "doorFrameRowEA", "doorFrameRowEF"],
                 68: ["reverseSnowAngelsEH", "reverseSnowAngelsEA", "reverseSnowAngelsEF"],
-                69: ["scapulaPushupEH", "scapulaPushupEA", "scapulaPushupEF"],
                 // Pull (Traps)
                 70: ["handStandTrapEH", "handStandTrapEA", "handStandTrapEF"],
                 // Push (Chest) ---------
@@ -1931,7 +1906,6 @@ enum sessionDataOld {
                 106: ["pullupEH", "pullupEA", "pullupEF"],
                 107: ["hangingLegRaiseEH", "hangingLegRaiseEA", "hangingLegRaiseEF"],
                 // Equiptment (Bench/Step)
-                108: ["tricepDipEH", "tricepDipEA", "tricepDipEF"],
                 109: ["bulgarianSplitSquatEH", "bulgarianSplitSquatEA", "bulgarianSplitSquatEF"],
                 110: ["boxJumpEH", "boxJumpEA", "boxJumpEF"],
                 111: ["hipThrustsEH", "hipThrustsEA", "hipThrustsEF"],
