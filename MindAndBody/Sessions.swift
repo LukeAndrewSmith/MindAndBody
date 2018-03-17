@@ -713,7 +713,7 @@ extension sessionData {
                        ["movement": "ballPushup",
                             "sets": 2,
                             "reps": "0"],
-                       ["movement": "bodweightRow",
+                       ["movement": "bodyweightRow",
                             "sets": 2,
                             "reps": "0"],
                        ["movement": "pullup",
@@ -801,7 +801,7 @@ extension sessionData {
                          "reps": "10-15 breaths"],
                     ],
                     // Unisex
-                    "WGES-CsF-1-U": [
+                    "WGES-CsF-1": [
                         ["movement": "squat",
                          "sets": 2,
                          "reps": "8-12"],
@@ -815,7 +815,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGES-CsF-2-U": [
+                    "WGES-CsF-2": [
                         ["movement": "dumbellFrontSquat",
                          "sets": 2,
                          "reps": "10-15"],
@@ -829,7 +829,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGES-CsF-3-U": [
+                    "WGES-CsF-3": [
                         ["movement": "legExtensions",
                          "sets": 2,
                          "reps": "10-15"],
@@ -846,7 +846,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "5-10 breaths"],
                     ],
-                    "WGES-CsF-4-U": [
+                    "WGES-CsF-4": [
                         ["movement": "squat",
                          "sets": 2,
                          "reps": "8-12"],
@@ -1017,7 +1017,7 @@ extension sessionData {
                          "reps": "10-15 breaths"],
                     ],
                     // Unisex
-                    "WGEM-CsF-1-U": [
+                    "WGEM-CsF-1": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
@@ -1034,7 +1034,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEM-CsF-2-U": [
+                    "WGEM-CsF-2": [
                         ["movement": "dumbellFrontSquat",
                          "sets": 3,
                          "reps": "10-15"],
@@ -1051,7 +1051,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEM-CsF-3-U": [
+                    "WGEM-CsF-3": [
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
@@ -1071,7 +1071,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "5-10 breaths"],
                     ],
-                    "WGEM-CsF-4-U": [
+                    "WGEM-CsF-4": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
@@ -1276,7 +1276,7 @@ extension sessionData {
                          "reps": "10-15 breaths"],
                     ],
                     // Unisex
-                    "WGEL-CsF-1-U": [
+                    "WGEL-CsF-1": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
@@ -1296,7 +1296,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEL-CsF-2-U": [
+                    "WGEL-CsF-2": [
                         ["movement": "dumbellFrontSquat",
                          "sets": 3,
                          "reps": "10-15"],
@@ -1316,7 +1316,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEL-CsF-3-U": [
+                    "WGEL-CsF-3": [
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
@@ -1339,7 +1339,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "5-10 breaths"],
                     ],
-                    "WGEL-CsF-4-U": [
+                    "WGEL-CsF-4": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
@@ -1543,7 +1543,7 @@ extension sessionData {
                     ],
                     
                     // Unisex
-                    "WGAS-CsF-1-U": [
+                    "WGAS-CsF-1": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
@@ -1557,7 +1557,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAS-CsF-2-U": [
+                    "WGAS-CsF-2": [
                         ["movement": "dumbellFrontSquat",
                          "sets": 3,
                          "reps": "10-15"],
@@ -1571,7 +1571,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAS-CsF-3-U": [
+                    "WGAS-CsF-3": [
                         ["movement": "legExtensions",
                          "sets": 2,
                          "reps": "10-15"],
@@ -1588,7 +1588,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGAS-CsF-4-U": [
+                    "WGAS-CsF-4": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
@@ -1757,7 +1757,7 @@ extension sessionData {
                          "reps": "15-20 breaths"],
                     ],
                     // Unisex
-                    "WGAM-CsF-1-U": [
+                    "WGAM-CsF-1": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
@@ -1774,7 +1774,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAM-CsF-2-U": [
+                    "WGAM-CsF-2": [
                         ["movement": "dumbellFrontSquat",
                          "sets": 3,
                          "reps": "10-15"],
@@ -1791,7 +1791,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAM-CsF-3-U": [
+                    "WGAM-CsF-3": [
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
@@ -1811,7 +1811,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGAM-CsF-4-U": [
+                    "WGAM-CsF-4": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
@@ -2014,7 +2014,7 @@ extension sessionData {
                          "reps": "15-20 breaths"],
                     ],
                     // Unisex
-                    "WGAL-CsF-1-U": [
+                    "WGAL-CsF-1": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
@@ -2034,7 +2034,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAL-CsF-2-U": [
+                    "WGAL-CsF-2": [
                         ["movement": "dumbellFrontSquat",
                          "sets": 3,
                          "reps": "10-15"],
@@ -2054,7 +2054,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAL-CsF-3-U": [
+                    "WGAL-CsF-3": [
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
@@ -2077,7 +2077,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGAL-CsF-4-U": [
+                    "WGAL-CsF-4": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
@@ -2286,11 +2286,11 @@ extension sessionData {
                          "reps": "20+ breaths"],
                     ],
                     // Unisex
-                    "WGHS-CsF-1-U": [
+                    "WGHS-CsF-1": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "pushup",
@@ -2300,7 +2300,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHS-CsF-2-U": [
+                    "WGHS-CsF-2": [
                         ["movement": "dumbellFrontSquat",
                          "sets": 3,
                          "reps": "10-15"],
@@ -2314,14 +2314,14 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHS-CsF-3-U": [
+                    "WGHS-CsF-3": [
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "legCurls",
                          "sets": 2,
                          "reps": "10-15"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "pushup",
@@ -2331,11 +2331,11 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGHS-CsF-4-U": [
+                    "WGHS-CsF-4": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "semiInclineDumbellPress",
@@ -2348,7 +2348,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHS-CsF-5-U": [
+                    "WGHS-CsF-5": [
                         ["movement": "weightedHipThrust",
                          "sets": 3,
                          "reps": "8-12"],
@@ -2367,7 +2367,7 @@ extension sessionData {
                         ["movement": "legPress",
                          "sets": 3,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "benchPress",
@@ -2454,7 +2454,7 @@ extension sessionData {
                         ["movement": "frontSquat",
                          "sets": 3,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "benchPress",
@@ -2541,11 +2541,11 @@ extension sessionData {
                          "reps": "20+ breaths"],
                     ],
                     // Unisex
-                    "WGHM-CsF-1-U": [
+                    "WGHM-CsF-1": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "pushup",
@@ -2558,7 +2558,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHM-CsF-2-U": [
+                    "WGHM-CsF-2": [
                         ["movement": "dumbellFrontSquat",
                          "sets": 3,
                          "reps": "10-15"],
@@ -2575,14 +2575,14 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHM-CsF-3-U": [
+                    "WGHM-CsF-3": [
                         ["movement": "legExtensions",
                          "sets": 2,
                          "reps": "10-15"],
                         ["movement": "legCurls",
                          "sets": 2,
                          "reps": "10-15"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "pushup",
@@ -2595,11 +2595,11 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGHM-CsF-4-U": [
+                    "WGHM-CsF-4": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "semiInclineDumbellPress",
@@ -2615,7 +2615,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHM-CsF-5-U": [
+                    "WGHM-CsF-5": [
                         ["movement": "weightedHipThrust",
                          "sets": 3,
                          "reps": "8-12"],
@@ -2637,7 +2637,7 @@ extension sessionData {
                         ["movement": "legPress",
                          "sets": 3,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "benchPress",
@@ -2742,7 +2742,7 @@ extension sessionData {
                         ["movement": "frontSquat",
                          "sets": 3,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "benchPress",
@@ -2844,14 +2844,14 @@ extension sessionData {
                          "reps": "20+ breaths"],
                     ],
                     // Unisex
-                    "WGHL-CsF-1-U": [
+                    "WGHL-CsF-1": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
                         ["movement": "weightedHipThrust",
                          "sets": 2,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "8-12"],
                         ["movement": "pushup",
@@ -2864,7 +2864,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHL-CsF-2-U": [
+                    "WGHL-CsF-2": [
                         ["movement": "dumbellFrontSquat",
                          "sets": 3,
                          "reps": "10-15"],
@@ -2884,7 +2884,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHL-CsF-3-U": [
+                    "WGHL-CsF-3": [
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
@@ -2894,7 +2894,7 @@ extension sessionData {
                         ["movement": "standingCalfRaise",
                          "sets": 2,
                          "reps": "15-20"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "8-12"],
                         ["movement": "pushup",
@@ -2907,14 +2907,14 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGHL-CsF-4-U": [
+                    "WGHL-CsF-4": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],
                         ["movement": "oneLeggedDeadlift",
                          "sets": 2,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "8-12"],
                         ["movement": "semiInclineDumbellPress",
@@ -2930,7 +2930,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHL-CsF-5-U": [
+                    "WGHL-CsF-5": [
                         ["movement": "weightedHipThrust",
                          "sets": 3,
                          "reps": "8-12"],
@@ -2958,7 +2958,7 @@ extension sessionData {
                         ["movement": "lungeDumbell",
                          "sets": 2,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "8-12"],
                         ["movement": "benchPress",
@@ -3081,7 +3081,7 @@ extension sessionData {
                         ["movement": "lungeDumbell",
                          "sets": 2,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "8-12"],
                         ["movement": "benchPress",
@@ -3116,7 +3116,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGES-CsU-3-W": [
+                    "WGES-CsU-2-W": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3131,7 +3131,7 @@ extension sessionData {
                          "reps": "10-15 breaths"],
                     ],
                     // Unisex
-                    "WGES-CsU-1-U": [
+                    "WGES-CsU-1": [
                         ["movement": "pullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3145,7 +3145,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGES-CsU-3-U": [
+                    "WGES-CsU-2": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3159,7 +3159,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGES-CsU-4-U": [
+                    "WGES-CsU-3": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3173,7 +3173,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "5-10 breaths"],
                     ],
-                    "WGES-CsU-6-U": [
+                    "WGES-CsU-4": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3188,7 +3188,7 @@ extension sessionData {
                          "reps": "10-20"],
                     ],
                     // Men
-                    "WGES-CsU-2-M": [
+                    "WGES-CsU-1-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3202,7 +3202,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-20"],
                     ],
-                    "WGES-CsU-5-M": [
+                    "WGES-CsU-2-M": [
                         ["movement": "pullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3216,7 +3216,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15"],
                     ],
-                    "WGES-CsU-7-M": [
+                    "WGES-CsU-3-M": [
                         ["movement": "latPullover",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3230,7 +3230,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGES-CsU-8-M": [
+                    "WGES-CsU-4-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3244,7 +3244,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGES-CsU-9-M": [
+                    "WGES-CsU-5-M": [
                         ["movement": "bentOverRowDumbell",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3281,7 +3281,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEM-CsU-3-W": [
+                    "WGEM-CsU-2-W": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3299,7 +3299,7 @@ extension sessionData {
                          "reps": "10-15 breaths"],
                     ],
                     // Unisex
-                    "WGEM-CsU-1-U": [
+                    "WGEM-CsU-1": [
                         ["movement": "pullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3316,7 +3316,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEM-CsU-3-U": [
+                    "WGEM-CsU-2": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3333,7 +3333,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEM-CsU-4-U": [
+                    "WGEM-CsU-3": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3350,7 +3350,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "5-10 breaths"],
                     ],
-                    "WGEM-CsU-6-U": [
+                    "WGEM-CsU-4": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3368,7 +3368,7 @@ extension sessionData {
                          "reps": "10-20"],
                     ],
                     // Men
-                    "WGEM-CsU-2-M": [
+                    "WGEM-CsU-1-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3385,7 +3385,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-20"],
                     ],
-                    "WGEM-CsU-5-M": [
+                    "WGEM-CsU-2-M": [
                         ["movement": "pullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3402,7 +3402,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15"],
                     ],
-                    "WGEM-CsU-7-M": [
+                    "WGEM-CsU-3-M": [
                         ["movement": "latPullover",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3419,7 +3419,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEM-CsU-8-M": [
+                    "WGEM-CsU-4-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3436,7 +3436,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEM-CsU-9-M": [
+                    "WGEM-CsU-5-M": [
                         ["movement": "bentOverRowDumbell",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3478,7 +3478,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEL-CsU-3-W": [
+                    "WGEL-CsU-2-W": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3499,7 +3499,7 @@ extension sessionData {
                          "reps": "10-15 breaths"],
                     ],
                     // Unisex
-                    "WGEL-CsU-1-U": [
+                    "WGEL-CsU-1": [
                         ["movement": "pullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3519,7 +3519,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEL-CsU-3-U": [
+                    "WGEL-CsU-2": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3539,7 +3539,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEL-CsU-4-U": [
+                    "WGEL-CsU-3": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3559,7 +3559,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "5-10 breaths"],
                     ],
-                    "WGEL-CsU-6-U": [
+                    "WGEL-CsU-4": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3580,7 +3580,7 @@ extension sessionData {
                          "reps": "10-20"],
                     ],
                     // Men
-                    "WGEL-CsU-2-M": [
+                    "WGEL-CsU-1-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3600,7 +3600,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-20"],
                     ],
-                    "WGEL-CsU-5-M": [
+                    "WGEL-CsU-2-M": [
                         ["movement": "pullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3620,7 +3620,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15"],
                     ],
-                    "WGEL-CsU-7-M": [
+                    "WGEL-CsU-3-M": [
                         ["movement": "latPullover",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3640,7 +3640,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEL-CsU-8-M": [
+                    "WGEL-CsU-4-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3660,7 +3660,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGEL-CsU-9-M": [
+                    "WGEL-CsU-5-M": [
                         ["movement": "rowMachine",
                          "sets": 4,
                          "reps": "8-12"],
@@ -3699,7 +3699,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAS-CsU-3-W": [
+                    "WGAS-CsU-2-W": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3714,7 +3714,7 @@ extension sessionData {
                          "reps": "15-20 breaths"],
                     ],
                     // Unisex
-                    "WGAS-CsU-1-U": [
+                    "WGAS-CsU-1": [
                         ["movement": "pullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3728,7 +3728,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAS-CsU-3-U": [
+                    "WGAS-CsU-2": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3742,7 +3742,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAS-CsU-4-U": [
+                    "WGAS-CsU-3": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3756,7 +3756,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGAS-CsU-6-U": [
+                    "WGAS-CsU-4": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3771,7 +3771,7 @@ extension sessionData {
                          "reps": "15-25"],
                     ],
                     // Men
-                    "WGAS-CsU-2-M": [
+                    "WGAS-CsU-1-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3785,7 +3785,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20"],
                     ],
-                    "WGAS-CsU-5-M": [
+                    "WGAS-CsU-2-M": [
                         ["movement": "tBarRow",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3799,7 +3799,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20"],
                     ],
-                    "WGAS-CsU-7-M": [
+                    "WGAS-CsU-3-M": [
                         ["movement": "latPullover",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3813,7 +3813,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAS-CsU-8-M": [
+                    "WGAS-CsU-4-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3827,7 +3827,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAS-CsU-9-M": [
+                    "WGAS-CsU-5-M": [
                         ["movement": "bentOverRowDumbell",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3863,7 +3863,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAM-CsU-3-W": [
+                    "WGAM-CsU-2-W": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3881,7 +3881,7 @@ extension sessionData {
                          "reps": "15-20 breaths"],
                     ],
                     // Unisex
-                    "WGAM-CsU-1-U": [
+                    "WGAM-CsU-1": [
                         ["movement": "pullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3898,7 +3898,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAM-CsU-3-U": [
+                    "WGAM-CsU-2": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3915,7 +3915,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAM-CsU-4-U": [
+                    "WGAM-CsU-3": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "10-15"],
@@ -3932,7 +3932,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGAM-CsU-6-U": [
+                    "WGAM-CsU-4": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3950,7 +3950,7 @@ extension sessionData {
                          "reps": "15-25"],
                     ],
                     // Men
-                    "WGAM-CsU-2-M": [
+                    "WGAM-CsU-1-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3967,7 +3967,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20"],
                     ],
-                    "WGAM-CsU-5-M": [
+                    "WGAM-CsU-2-M": [
                         ["movement": "tBarRow",
                          "sets": 3,
                          "reps": "8-12"],
@@ -3984,7 +3984,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20"],
                     ],
-                    "WGAM-CsU-7-M": [
+                    "WGAM-CsU-3-M": [
                         ["movement": "latPullover",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4001,7 +4001,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAM-CsU-8-M": [
+                    "WGAM-CsU-4-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4018,7 +4018,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAM-CsU-9-M": [
+                    "WGAM-CsU-5-M": [
                         ["movement": "bentOverRowDumbell",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4060,7 +4060,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAL-CsU-3-W": [
+                    "WGAL-CsU-2-W": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -4081,7 +4081,7 @@ extension sessionData {
                          "reps": "15-20 breaths"],
                     ],
                     // Unisex
-                    "WGAL-CsU-1-U": [
+                    "WGAL-CsU-1": [
                         ["movement": "pullDown",
                          "sets": 3,
                          "reps": "5-12"],
@@ -4101,7 +4101,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAL-CsU-3-U": [
+                    "WGAL-CsU-2": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "10-15"],
@@ -4121,7 +4121,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAL-CsU-4-U": [
+                    "WGAL-CsU-3": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "10-15"],
@@ -4141,7 +4141,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "10-15 breaths"],
                     ],
-                    "WGAL-CsU-6-U": [
+                    "WGAL-CsU-4": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4162,7 +4162,7 @@ extension sessionData {
                          "reps": "15-25"],
                     ],
                     // Men
-                    "WGAL-CsU-2-M": [
+                    "WGAL-CsU-1-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4182,7 +4182,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20"],
                     ],
-                    "WGAL-CsU-5-M": [
+                    "WGAL-CsU-2-M": [
                         ["movement": "tBarRow",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4202,7 +4202,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20"],
                     ],
-                    "WGAL-CsU-7-M": [
+                    "WGAL-CsU-3-M": [
                         ["movement": "latPullover",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4222,7 +4222,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAL-CsU-8-M": [
+                    "WGAL-CsU-4-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4242,7 +4242,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGAL-CsU-9-M": [
+                    "WGAL-CsU-5-M": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4284,8 +4284,8 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHS-CsU-3-W": [
-                        ["movement": "bodweightRow",
+                    "WGHS-CsU-2-W": [
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "cableExtension",
@@ -4299,7 +4299,7 @@ extension sessionData {
                          "reps": "25+ breaths"],
                     ],
                     // Unisex
-                    "WGHS-CsU-1-U": [
+                    "WGHS-CsU-1": [
                         ["movement": "pullup",
                          "sets": 3,
                          "reps": "8-15"],
@@ -4313,8 +4313,8 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHS-CsU-3-U": [
-                        ["movement": "bodweightRow",
+                    "WGHS-CsU-2": [
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "semiInclineDumbellPress",
@@ -4327,8 +4327,8 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHS-CsU-4-U": [
-                        ["movement": "bodweightRow",
+                    "WGHS-CsU-3": [
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "platePress",
@@ -4341,7 +4341,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGHS-CsU-6-U": [
+                    "WGHS-CsU-4": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4356,7 +4356,7 @@ extension sessionData {
                          "reps": "20-30"],
                     ],
                     // Men
-                    "WGHS-CsU-2-M": [
+                    "WGHS-CsU-1-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4370,7 +4370,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "20-30"],
                     ],
-                    "WGHS-CsU-5-M": [
+                    "WGHS-CsU-2-M": [
                         ["movement": "tBarRow",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4384,7 +4384,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "20+"],
                     ],
-                    "WGHS-CsU-7-M": [
+                    "WGHS-CsU-3-M": [
                         ["movement": "latPullover",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4398,7 +4398,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHS-CsU-8-M": [
+                    "WGHS-CsU-4-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4412,7 +4412,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "20+ breaths"],
                     ],
-                    "WGHS-CsU-9-M": [
+                    "WGHS-CsU-5-M": [
                         ["movement": "bentOverRowDumbell",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4448,8 +4448,8 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHM-CsU-3-W": [
-                        ["movement": "bodweightRow",
+                    "WGHM-CsU-2-W": [
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "cableExtension",
@@ -4466,7 +4466,7 @@ extension sessionData {
                          "reps": "25+ breaths"],
                     ],
                     // Unisex
-                    "WGHM-CsU-1-U": [
+                    "WGHM-CsU-1": [
                         ["movement": "pullup",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4483,8 +4483,8 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHM-CsU-3-U": [
-                        ["movement": "bodweightRow",
+                    "WGHM-CsU-2": [
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "semiInclineDumbellPress",
@@ -4500,8 +4500,8 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHM-CsU-4-U": [
-                        ["movement": "bodweightRow",
+                    "WGHM-CsU-3": [
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "platePress",
@@ -4517,7 +4517,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGHM-CsU-6-U": [
+                    "WGHM-CsU-4": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4535,7 +4535,7 @@ extension sessionData {
                          "reps": "20-30"],
                     ],
                     // Men
-                    "WGHM-CsU-2-M": [
+                    "WGHM-CsU-1-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4552,7 +4552,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "20-30"],
                     ],
-                    "WGHM-CsU-5-M": [
+                    "WGHM-CsU-2-M": [
                         ["movement": "tBarRow",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4569,7 +4569,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "20+"],
                     ],
-                    "WGHM-CsU-7-M": [
+                    "WGHM-CsU-3-M": [
                         ["movement": "latPullover",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4586,7 +4586,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHM-CsU-8-M": [
+                    "WGHM-CsU-4-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4603,7 +4603,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "20+ breaths"],
                     ],
-                    "WGHM-CsU-9-M": [
+                    "WGHM-CsU-5-M": [
                         ["movement": "bentOverRowDumbell",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4644,8 +4644,8 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHL-CsU-3-W": [
-                        ["movement": "bodweightRow",
+                    "WGHL-CsU-2-W": [
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "cableExtension",
@@ -4665,7 +4665,7 @@ extension sessionData {
                          "reps": "25+ breaths"],
                     ],
                     // Unisex
-                    "WGHL-CsU-1-U": [
+                    "WGHL-CsU-1": [
                         ["movement": "pullup",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4685,8 +4685,8 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHL-CsU-3-U": [
-                        ["movement": "bodweightRow",
+                    "WGHL-CsU-2": [
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "semiInclineDumbellPress",
@@ -4705,8 +4705,8 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHL-CsU-4-U": [
-                        ["movement": "bodweightRow",
+                    "WGHL-CsU-3": [
+                        ["movement": "bodyweightRow",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "platePress",
@@ -4725,7 +4725,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "15-20 breaths"],
                     ],
-                    "WGHL-CsU-6-U": [
+                    "WGHL-CsU-4": [
                         ["movement": "rowMachine",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4746,7 +4746,7 @@ extension sessionData {
                          "reps": "20-30"],
                     ],
                     // Men
-                    "WGHL-CsU-2-M": [
+                    "WGHL-CsU-1-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4766,7 +4766,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "20-30"],
                     ],
-                    "WGHL-CsU-5-M": [
+                    "WGHL-CsU-2-M": [
                         ["movement": "tBarRow",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4786,7 +4786,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "20+"],
                     ],
-                    "WGHL-CsU-7-M": [
+                    "WGHL-CsU-3-M": [
                         ["movement": "latPullover",
                          "sets": 3,
                          "reps": "8-12"],
@@ -4806,14 +4806,14 @@ extension sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHL-CsU-8-M": [
+                    "WGHL-CsU-4-M": [
                         ["movement": "kneelingPullDown",
                          "sets": 3,
                          "reps": "8-12"],
                         ["movement": "semiInclineDumbellPress",
                          "sets": 3,
                          "reps": "8-12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "sets": 2,
                          "reps": "8-12"],
                         ["movement": "hammerCurlCable",
@@ -4826,7 +4826,7 @@ extension sessionData {
                          "sets": 2,
                          "reps": "20+ breaths"],
                     ],
-                    "WGHL-CsU-9-M": [
+                    "WGHL-CsU-5-M": [
                         ["movement": "bentOverRowDumbell",
                          "sets": 3,
                          "reps": "8-12"],
@@ -6370,7 +6370,7 @@ extension sessionData {
                         ["rounds": 3,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lunge",
                          "reps": "12"],
                         ["movement": "pushup",
                          "reps": "10"],
@@ -6379,7 +6379,7 @@ extension sessionData {
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
-                        ["movement": "deadlift",
+                        ["movement": "lunge",
                          "reps": "10"],
                         ["movement": "pushup",
                          "reps": "8"],
@@ -6388,7 +6388,7 @@ extension sessionData {
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
-                        ["movement": "deadlift",
+                        ["movement": "lunge",
                          "reps": "10"],
                         ["movement": "pushup",
                          "reps": "6"],
@@ -6457,7 +6457,7 @@ extension sessionData {
                     ],
                     "WGES-CcF-5": [
                         // Round 1
-                        ["rounds": 3, // NOTE: first movement contains number of rounds
+                        ["rounds": 3,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
                         ["movement": "bodyweightDeadlift",
@@ -6540,7 +6540,7 @@ extension sessionData {
                         ["rounds": 5,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lunge",
                          "reps": "10"],
                         ["movement": "pushup",
                          "reps": "10"],
@@ -6549,7 +6549,7 @@ extension sessionData {
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
-                        ["movement": "deadlift",
+                        ["movement": "lunge",
                          "reps": "8"],
                         ["movement": "pushup",
                          "reps": "8"],
@@ -6558,7 +6558,7 @@ extension sessionData {
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
-                        ["movement": "deadlift",
+                        ["movement": "lunge",
                          "reps": "8"],
                         ["movement": "pushup",
                          "reps": "6"],
@@ -6567,7 +6567,7 @@ extension sessionData {
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
-                        ["movement": "deadlift",
+                        ["movement": "lunge",
                          "reps": "6"],
                         ["movement": "pushup",
                          "reps": "4"],
@@ -6576,7 +6576,7 @@ extension sessionData {
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
-                        ["movement": "deadlift",
+                        ["movement": "lunge",
                          "reps": "6"],
                         ["movement": "pushup",
                          "reps": "4"],
@@ -6739,17 +6739,17 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "12"],
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 2
                         ["movement": "squat",
                          "reps": "12"],
                         ["movement": "lungeDumbell",
-                         "reps": "21"],
-                        ["movement": "bentOverRowDumbell",
                          "reps": "12"],
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 3
@@ -6757,8 +6757,8 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                     ],
@@ -6767,7 +6767,7 @@ extension sessionData {
                         ["rounds": 3,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "pushup",
                          "reps": "12"],
@@ -6776,7 +6776,7 @@ extension sessionData {
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "pushup",
                          "reps": "10"],
@@ -6785,7 +6785,7 @@ extension sessionData {
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "pushup",
                          "reps": "8"],
@@ -6799,8 +6799,8 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 2
@@ -6808,8 +6808,8 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 3
@@ -6817,8 +6817,8 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "8"],
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                     ],
@@ -6854,7 +6854,7 @@ extension sessionData {
                     ],
                     "WGAS-CcF-5": [
                         // Round 1
-                        ["rounds": 3, // NOTE: first movement contains number of rounds
+                        ["rounds": 3,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
                         ["movement": "lungeDumbell",
@@ -6891,8 +6891,8 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "12"],
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 2
@@ -6900,8 +6900,8 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "12"],
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 3
@@ -6909,8 +6909,8 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 4
@@ -6918,8 +6918,8 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 5
@@ -6927,8 +6927,8 @@ extension sessionData {
                          "reps": "8"],
                         ["movement": "lungeDumbell",
                          "reps": "8"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "8"],
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                     ],
@@ -6937,7 +6937,7 @@ extension sessionData {
                         ["rounds": 5,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "pushup",
                          "reps": "12"],
@@ -6946,7 +6946,7 @@ extension sessionData {
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "pushup",
                          "reps": "10"],
@@ -6955,7 +6955,7 @@ extension sessionData {
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "8"],
                         ["movement": "pushup",
                          "reps": "10"],
@@ -6964,7 +6964,7 @@ extension sessionData {
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "8"],
                         ["movement": "pushup",
                          "reps": "8"],
@@ -6973,7 +6973,7 @@ extension sessionData {
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "6"],
                         ["movement": "pushup",
                          "reps": "8"],
@@ -6987,8 +6987,8 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 2
@@ -6996,8 +6996,8 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 3
@@ -7005,8 +7005,8 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "8"],
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 4
@@ -7014,8 +7014,8 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "8"],
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 5
@@ -7023,7 +7023,7 @@ extension sessionData {
                          "reps": "8"],
                         ["movement": "romanianDeadlift",
                          "reps": "8"],
-                        ["movement": "bentOverRowDumbell",
+                        ["movement": "bodyweightRow",
                          "reps": "6"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
@@ -7078,7 +7078,7 @@ extension sessionData {
                     ],
                     "WGAN-CcF-5": [
                         // Round 1
-                        ["rounds": 5, // NOTE: first movement contains number of rounds
+                        ["rounds": 5,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
                         ["movement": "lungeDumbell",
@@ -7135,7 +7135,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "pullup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7144,7 +7144,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "pullup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7153,7 +7153,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "pullup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7163,7 +7163,7 @@ extension sessionData {
                         ["rounds": 3,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "pushup",
                          "reps": "15"],
@@ -7172,7 +7172,7 @@ extension sessionData {
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "pushup",
                          "reps": "15"],
@@ -7181,7 +7181,7 @@ extension sessionData {
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "pushup",
                          "reps": "12"],
@@ -7195,7 +7195,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7204,7 +7204,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7213,7 +7213,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7250,12 +7250,12 @@ extension sessionData {
                     ],
                     "WGHS-CcF-5": [
                         // Round 1
-                        ["rounds": 3, // NOTE: first movement contains number of rounds
+                        ["rounds": 3,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7264,7 +7264,7 @@ extension sessionData {
                          "reps": "15"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7273,7 +7273,7 @@ extension sessionData {
                          "reps": "15"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7287,7 +7287,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "pullup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7296,7 +7296,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "pullup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7305,7 +7305,7 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "pullup",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7314,7 +7314,7 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "lungeDumbell",
                          "reps": "8"],
-                        ["movement": "bodweightRow",
+                        ["movement": "pullup",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7323,7 +7323,7 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "lungeDumbell",
                          "reps": "8"],
-                        ["movement": "bodweightRow",
+                        ["movement": "pullup",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7333,7 +7333,7 @@ extension sessionData {
                         ["rounds": 5,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "pushup",
                          "reps": "15"],
@@ -7342,7 +7342,7 @@ extension sessionData {
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "pushup",
                          "reps": "15"],
@@ -7351,7 +7351,7 @@ extension sessionData {
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "pushup",
                          "reps": "12"],
@@ -7360,7 +7360,7 @@ extension sessionData {
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "8"],
                         ["movement": "pushup",
                          "reps": "12"],
@@ -7369,7 +7369,7 @@ extension sessionData {
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
-                        ["movement": "deadlift",
+                        ["movement": "lungeDumbell",
                          "reps": "8"],
                         ["movement": "pushup",
                          "reps": "10"],
@@ -7383,7 +7383,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7392,7 +7392,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7401,7 +7401,7 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7410,7 +7410,7 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "romanianDeadlift",
                          "reps": "8"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7419,7 +7419,7 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "romanianDeadlift",
                          "reps": "8"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7474,12 +7474,12 @@ extension sessionData {
                     ],
                     "WGAN-CcF-5": [
                         // Round 1
-                        ["rounds": 5, // NOTE: first movement contains number of rounds
+                        ["rounds": 5,
                          "movement": "dumbellFrontSquat",
                          "reps": "15"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7488,7 +7488,7 @@ extension sessionData {
                          "reps": "15"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7497,7 +7497,7 @@ extension sessionData {
                          "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "10"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7506,7 +7506,7 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "lungeDumbell",
                          "reps": "8"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7515,7 +7515,7 @@ extension sessionData {
                          "reps": "10"],
                         ["movement": "lungeDumbell",
                          "reps": "8"],
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
@@ -7528,97 +7528,38 @@ extension sessionData {
                     // MARK: Easy
                     // MARK: Short
                     // Cc = circuit
+                    // Unisex
                     "WGES-CcU-1": [
                         // Round 1
-                        ["rounds": 3, // NOTE: first movement contains number of rounds
+                        ["rounds": 3,
                          "movement": "bentOverRowDumbell",
                          "reps": "12"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "12"],
+                        ["movement": "tricepExtensionsBodyweight",
+                         "reps": "10"],
                         ["movement": "plank",
                          "reps": "5 breaths"],
                         // Round 2
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "10"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "10"],
+                        ["movement": "tricepExtensionsBodyweight",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "5 breaths"],
                         // Round 3
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "10"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "10"],
+                        ["movement": "tricepExtensionsBodyweight",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "5 breaths"],
                     ],
                     "WGES-CcU-2": [
-                        // Round 1
-                        ["rounds": 3,
-                         "movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 2
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "10"],
-                        ["movement": "hammerCurl",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 3
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "10"],
-                        ["movement": "hammerCurl",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                    ],
-                    "WGES-CcU-3": [
-                        // Round 1
-                        ["rounds": 3,
-                         "movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "tricepExtensionsBodyweight",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 2
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "10"],
-                        ["movement": "tricepExtensionsBodyweight",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 3
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "10"],
-                        ["movement": "tricepExtensionsBodyweight",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                    ],
-                    "WGES-CcU-4": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "latPullover",
@@ -7648,7 +7589,68 @@ extension sessionData {
                         ["movement": "plank",
                          "reps": "5 breaths"],
                     ],
-                    "WGES-CcU-5": [
+                    // Men
+                    "WGES-CcU-1-M": [
+                        // Round 1
+                        ["rounds": 3, // NOTE: first movement contains number of rounds
+                         "movement": "bentOverRowDumbell",
+                         "reps": "12"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 2
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "10"],
+                        ["movement": "benchPress",
+                         "reps": "10"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 3
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "10"],
+                        ["movement": "benchPress",
+                         "reps": "10"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                    ],
+                    "WGES-CcU-2-M": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "bentOverRowDumbell",
+                         "reps": "12"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 2
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "10"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "10"],
+                        ["movement": "hammerCurl",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 3
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "10"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "10"],
+                        ["movement": "hammerCurl",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                    ],
+                    "WGES-CcU-3-M": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "tBarRow",
@@ -7680,151 +7682,56 @@ extension sessionData {
                     ],
                     
                     // MARK: Normal
+                    // Unisex
                     "WGEN-CcU-1": [
                         // Round 1
-                        ["rounds": 5, // NOTE: first movement contains number of rounds
+                        ["rounds": 5,
                          "movement": "bentOverRowDumbell",
                          "reps": "12"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "12"],
+                        ["movement": "tricepExtensionsBodyweight",
+                         "reps": "10"],
                         ["movement": "plank",
                          "reps": "5 breaths"],
                         // Round 2
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "10"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "10"],
+                        ["movement": "tricepExtensionsBodyweight",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "5 breaths"],
                         // Round 3
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "10"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "10"],
+                        ["movement": "tricepExtensionsBodyweight",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "5 breaths"],
                         // Round 4
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "8"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "8"],
+                        ["movement": "tricepExtensionsBodyweight",
+                         "reps": "6"],
                         ["movement": "plank",
                          "reps": "5 breaths"],
                         // Round 5
                         ["movement": "bentOverRowDumbell",
-                         "reps": "6"],
-                        ["movement": "benchPress",
-                         "reps": "6"],
-                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "8"],
+                        ["movement": "semiInclineDumbellPress",
+                         "reps": "8"],
+                        ["movement": "tricepExtensionsBodyweight",
                          "reps": "6"],
                         ["movement": "plank",
                          "reps": "5 breaths"],
                     ],
                     "WGEN-CcU-2": [
-                        // Round 1
-                        ["rounds": 5,
-                         "movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 2
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "10"],
-                        ["movement": "hammerCurl",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 3
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "10"],
-                        ["movement": "hammerCurl",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 4
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "8"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "8"],
-                        ["movement": "hammerCurl",
-                         "reps": "6"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 5
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "8"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "8"],
-                        ["movement": "hammerCurl",
-                         "reps": "6"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                    ],
-                    "WGEN-CcU-3": [
-                        // Round 1
-                        ["rounds": 5,
-                         "movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "tricepExtensionsBodyweight",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 2
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "10"],
-                        ["movement": "tricepExtensionsBodyweight",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 3
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "10"],
-                        ["movement": "tricepExtensionsBodyweight",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 4
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "8"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "8"],
-                        ["movement": "tricepExtensionsBodyweight",
-                         "reps": "6"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                        // Round 5
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "8"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "8"],
-                        ["movement": "tricepExtensionsBodyweight",
-                         "reps": "6"],
-                        ["movement": "plank",
-                         "reps": "5 breaths"],
-                    ],
-                    "WGEN-CcU-4": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "latPullover",
@@ -7872,7 +7779,104 @@ extension sessionData {
                         ["movement": "plank",
                          "reps": "5 breaths"],
                     ],
-                    "WGEN-CcU-5": [
+                    // Men
+                    "WGEN-CcU-1-M": [
+                        // Round 1
+                        ["rounds": 5, // NOTE: first movement contains number of rounds
+                         "movement": "bentOverRowDumbell",
+                         "reps": "12"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 2
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "10"],
+                        ["movement": "benchPress",
+                         "reps": "10"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 3
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "10"],
+                        ["movement": "benchPress",
+                         "reps": "10"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 4
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "8"],
+                        ["movement": "benchPress",
+                         "reps": "8"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 5
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "6"],
+                        ["movement": "benchPress",
+                         "reps": "6"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "6"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                    ],
+                    "WGEN-CcU-2-M": [
+                        // Round 1
+                        ["rounds": 5,
+                         "movement": "bentOverRowDumbell",
+                         "reps": "12"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 2
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "10"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "10"],
+                        ["movement": "hammerCurl",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 3
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "10"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "10"],
+                        ["movement": "hammerCurl",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 4
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "8"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "8"],
+                        ["movement": "hammerCurl",
+                         "reps": "6"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                        // Round 5
+                        ["movement": "bentOverRowDumbell",
+                         "reps": "8"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "8"],
+                        ["movement": "hammerCurl",
+                         "reps": "6"],
+                        ["movement": "plank",
+                         "reps": "5 breaths"],
+                    ],
+                    "WGEN-CcU-3-M": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "tBarRow",
@@ -7925,97 +7929,38 @@ extension sessionData {
                     // MARK:-
                     // MARK: Average
                     // MARK: Short
+                    // Unisex
                     "WGAS-CcU-1": [
                         // Round 1
-                        ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "bentOverRowDumbell",
+                        ["rounds": 3,
+                         "movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "benchPress",
-                         "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "12"],
+                        ["movement": "trianglePushup",
+                         "reps": "10"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 2
-                        ["movement": "bentOverRowDumbell",
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "benchPress",
-                         "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "12"],
+                        ["movement": "trianglePushup",
+                         "reps": "10"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 3
-                        ["movement": "bentOverRowDumbell",
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "10"],
-                        ["movement": "benchPress",
-                         "reps": "10"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "10"],
+                        ["movement": "trianglePushup",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                     ],
                     "WGAS-CcU-2": [
-                        // Round 1
-                        ["rounds": 3,
-                         "movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 2
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 3
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "10"],
-                        ["movement": "hammerCurl",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                    ],
-                    "WGAS-CcU-3": [
-                        // Round 1
-                        ["rounds": 3,
-                         "movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "trianglePushup",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 2
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "trianglePushup",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 3
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "10"],
-                        ["movement": "trianglePushup",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                    ],
-                    "WGAS-CcU-4": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "latPullover",
@@ -8045,7 +7990,68 @@ extension sessionData {
                         ["movement": "plank",
                          "reps": "10 breaths"],
                     ],
-                    "WGAS-CcU-5": [
+                    "WGAS-CcU-3": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 2
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 3
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "10"],
+                        ["movement": "hammerCurl",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                    ],
+                    // Men
+                    "WGAS-CcU-1-M": [
+                        // Round 1
+                        ["rounds": 3, // NOTE: first movement contains number of rounds
+                         "movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 2
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 3
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
+                        ["movement": "benchPress",
+                         "reps": "10"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                    ],
+                    "WGAS-CcU-2-M": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "tBarRow",
@@ -8077,151 +8083,56 @@ extension sessionData {
                     ],
                     
                     // MARK: Normal
+                    // Unisex
                     "WGAN-CcU-1": [
                         // Round 1
-                        ["rounds": 5, // NOTE: first movement contains number of rounds
-                         "movement": "bentOverRowDumbell",
+                        ["rounds": 5,
+                         "movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "benchPress",
-                         "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "12"],
+                        ["movement": "trianglePushup",
+                         "reps": "10"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 2
-                        ["movement": "bentOverRowDumbell",
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "benchPress",
-                         "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "12"],
+                        ["movement": "trianglePushup",
+                         "reps": "10"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 3
-                        ["movement": "bentOverRowDumbell",
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "10"],
-                        ["movement": "benchPress",
-                         "reps": "10"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "10"],
+                        ["movement": "trianglePushup",
+                         "reps": "8"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 4
-                        ["movement": "bentOverRowDumbell",
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "10"],
-                        ["movement": "benchPress",
-                         "reps": "10"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "10"],
+                        ["movement": "trianglePushup",
+                         "reps": "6"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                         // Round 5
-                        ["movement": "bentOverRowDumbell",
+                        ["movement": "bodyweightRow",
+                         "reps": "4"],
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "8"],
-                        ["movement": "benchPress",
-                         "reps": "8"],
-                        ["movement": "standingShoulderPressDumbell",
-                         "reps": "8"],
+                        ["movement": "trianglePushup",
+                         "reps": "6"],
                         ["movement": "plank",
                          "reps": "10 breaths"],
                     ],
                     "WGAN-CcU-2": [
-                        // Round 1
-                        ["rounds": 5,
-                         "movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 2
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 3
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "10"],
-                        ["movement": "hammerCurl",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 4
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "10"],
-                        ["movement": "hammerCurl",
-                         "reps": "6"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 5
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "8"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "8"],
-                        ["movement": "hammerCurl",
-                         "reps": "6"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                    ],
-                    "WGAN-CcU-3": [
-                        // Round 1
-                        ["rounds": 5,
-                         "movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "trianglePushup",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 2
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "trianglePushup",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 3
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "10"],
-                        ["movement": "trianglePushup",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 4
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "10"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "10"],
-                        ["movement": "trianglePushup",
-                         "reps": "6"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                        // Round 5
-                        ["movement": "bentOverRowDumbell",
-                         "reps": "8"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "8"],
-                        ["movement": "trianglePushup",
-                         "reps": "6"],
-                        ["movement": "plank",
-                         "reps": "10 breaths"],
-                    ],
-                    "WGAN-CcU-4": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "latPullover",
@@ -8269,7 +8180,104 @@ extension sessionData {
                         ["movement": "plank",
                          "reps": "10 breaths"],
                     ],
-                    "WGAN-CcU-5": [
+                    "WGAN-CcU-3": [
+                        // Round 1
+                        ["rounds": 5,
+                         "movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 2
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 3
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "10"],
+                        ["movement": "hammerCurl",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 4
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "10"],
+                        ["movement": "hammerCurl",
+                         "reps": "6"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 5
+                        ["movement": "bodyweightRow",
+                         "reps": "4"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "8"],
+                        ["movement": "hammerCurl",
+                         "reps": "6"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                    ],
+                    // Men
+                    "WGAN-CcU-1-M": [
+                        // Round 1
+                        ["rounds": 5, // NOTE: first movement contains number of rounds
+                         "movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 2
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 3
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
+                        ["movement": "benchPress",
+                         "reps": "10"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 4
+                        ["movement": "bodyweightRow",
+                         "reps": "6"],
+                        ["movement": "benchPress",
+                         "reps": "10"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                        // Round 5
+                        ["movement": "bodyweightRow",
+                         "reps": "4"],
+                        ["movement": "benchPress",
+                         "reps": "8"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "10 breaths"],
+                    ],
+                    "WGAN-CcU-2-M": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "tBarRow",
@@ -8321,97 +8329,38 @@ extension sessionData {
                     // MARK:-
                     // MARK: Hard
                     // MARK: Short
+                    // Unisex
                     "WGHS-CcU-1": [
                         // Round 1
-                        ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "bodweightRow",
+                        ["rounds": 3,
+                         "movement": "bodyweightRow",
                          "reps": "12"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
+                        ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
                         // Round 2
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "12"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
+                        ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
                         // Round 3
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "12"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
+                        ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
                     ],
                     "WGHS-CcU-2": [
-                        // Round 1
-                        ["rounds": 3,
-                         "movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "12"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 2
-                        ["movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "12"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 3
-                        ["movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "12"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                    ],
-                    "WGHS-CcU-3": [
-                        // Round 1
-                        ["rounds": 3,
-                         "movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "trianglePushup",
-                         "reps": "12"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 2
-                        ["movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "trianglePushup",
-                         "reps": "12"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 3
-                        ["movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "trianglePushup",
-                         "reps": "12"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                    ],
-                    "WGHS-CcU-4": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "latPullover",
@@ -8441,7 +8390,68 @@ extension sessionData {
                         ["movement": "plank",
                          "reps": "15 breaths"],
                     ],
-                    "WGHS-CcU-5": [
+                    "WGHS-CcU-3": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 2
+                        ["movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 3
+                        ["movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                    ],
+                    // Men
+                    "WGHS-CcU-1-M": [
+                        // Round 1
+                        ["rounds": 3, // NOTE: first movement contains number of rounds
+                         "movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 2
+                        ["movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 3
+                        ["movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                    ],
+                    "WGHS-CcU-2-M": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "tBarRow",
@@ -8473,151 +8483,56 @@ extension sessionData {
                     ],
                     
                     // MARK: Normal
+                    // Unisex
                     "WGHN-CcU-1": [
                         // Round 1
-                        ["rounds": 5, // NOTE: first movement contains number of rounds
-                         "movement": "bodweightRow",
+                        ["rounds": 5,
+                         "movement": "bodyweightRow",
                          "reps": "12"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
+                        ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
                         // Round 2
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "12"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
+                        ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
                         // Round 3
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "12"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "12"],
-                        ["movement": "standingShoulderPressDumbell",
+                        ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
                         // Round 4
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "10"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "10"],
-                        ["movement": "standingShoulderPressDumbell",
+                        ["movement": "trianglePushup",
                          "reps": "10"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
                         // Round 5
-                        ["movement": "bodweightRow",
+                        ["movement": "bodyweightRow",
                          "reps": "8"],
-                        ["movement": "benchPress",
+                        ["movement": "semiInclineDumbellPress",
                          "reps": "8"],
-                        ["movement": "standingShoulderPressDumbell",
+                        ["movement": "trianglePushup",
                          "reps": "8"],
                         ["movement": "plank",
                          "reps": "15 breaths"],
                     ],
                     "WGHN-CcU-2": [
-                        // Round 1
-                        ["rounds": 5,
-                         "movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 2
-                        ["movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 3
-                        ["movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "12"],
-                        ["movement": "hammerCurl",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 4
-                        ["movement": "bodweightRow",
-                         "reps": "10"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "10"],
-                        ["movement": "hammerCurl",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 5
-                        ["movement": "bodweightRow",
-                         "reps": "8"],
-                        ["movement": "benchPressDumbell",
-                         "reps": "8"],
-                        ["movement": "hammerCurl",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                    ],
-                    "WGHN-CcU-3": [
-                        // Round 1
-                        ["rounds": 5,
-                         "movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "trianglePushup",
-                         "reps": "12"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 2
-                        ["movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "trianglePushup",
-                         "reps": "12"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 3
-                        ["movement": "bodweightRow",
-                         "reps": "12"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "12"],
-                        ["movement": "trianglePushup",
-                         "reps": "12"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 4
-                        ["movement": "bodweightRow",
-                         "reps": "10"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "10"],
-                        ["movement": "trianglePushup",
-                         "reps": "10"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                        // Round 5
-                        ["movement": "bodweightRow",
-                         "reps": "8"],
-                        ["movement": "semiInclineDumbellPress",
-                         "reps": "8"],
-                        ["movement": "trianglePushup",
-                         "reps": "8"],
-                        ["movement": "plank",
-                         "reps": "15 breaths"],
-                    ],
-                    "WGHN-CcU-4": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "latPullover",
@@ -8665,7 +8580,104 @@ extension sessionData {
                         ["movement": "plank",
                          "reps": "15 breaths"],
                     ],
-                    "WGHN-CcU-5": [
+                    "WGHN-CcU-3": [
+                        // Round 1
+                        ["rounds": 5,
+                         "movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 2
+                        ["movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 3
+                        ["movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "12"],
+                        ["movement": "hammerCurl",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 4
+                        ["movement": "bodyweightRow",
+                         "reps": "10"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "10"],
+                        ["movement": "hammerCurl",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 5
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "benchPressDumbell",
+                         "reps": "8"],
+                        ["movement": "hammerCurl",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                    ],
+                    // Men
+                    "WGHN-CcU-1-M": [
+                        // Round 1
+                        ["rounds": 5, // NOTE: first movement contains number of rounds
+                         "movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 2
+                        ["movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 3
+                        ["movement": "bodyweightRow",
+                         "reps": "12"],
+                        ["movement": "benchPress",
+                         "reps": "12"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "12"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 4
+                        ["movement": "bodyweightRow",
+                         "reps": "10"],
+                        ["movement": "benchPress",
+                         "reps": "10"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "10"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                        // Round 5
+                        ["movement": "bodyweightRow",
+                         "reps": "8"],
+                        ["movement": "benchPress",
+                         "reps": "8"],
+                        ["movement": "standingShoulderPressDumbell",
+                         "reps": "8"],
+                        ["movement": "plank",
+                         "reps": "15 breaths"],
+                    ],
+                    "WGHN-CcU-2-M": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "tBarRow",

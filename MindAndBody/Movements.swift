@@ -107,7 +107,7 @@ class sessionData {
                     // Equiptment (Ball) ---------
                     ["ballPushup"],
                     // Equiptment (Bar)
-                    ["bodweightRow", "pullup", "hangingLegRaise"],
+                    ["bodyweightRow", "pullup", "hangingLegRaise"],
                     // Equiptment (Bench/Step)
                     ["bulgarianSplitSquat", "boxJump", "hipThrusts", "stepUp"]
             ],
@@ -1583,11 +1583,11 @@ class sessionData {
                         "targetArea": ["squatBody"]
                 ],
                 // Equiptment (Bar)
-                "bodweightRow":
+                "bodyweightRow":
                     [
-                        "name": ["bodweightRow"],
+                        "name": ["bodyweightRow"],
                         "demonstration": ["bodyweightRow", "bodyweightRow1", "bodyweightRow", "bodyweightRow1"],
-                        "explanation": ["bodweightRowEH", "bodweightRowEA", "bodweightRowEF"],
+                        "explanation": ["bodyweightRowEH", "bodyweightRowEA", "bodyweightRowEF"],
                         "targetArea": ["squatBody"]
                 ],
                 "pullup":
