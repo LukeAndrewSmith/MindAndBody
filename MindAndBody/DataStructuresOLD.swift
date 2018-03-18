@@ -269,7 +269,7 @@ enum sessionDataOld {
             // Warmup
             [
                 // Cardio
-                0: "5minCardio",
+                0: "lightCardio",
                 // Joint Rotations
                 1: "wrist",
                 2: "elbow",
@@ -519,7 +519,7 @@ enum sessionDataOld {
             // Stretching
             [
                 // Recommended
-                0: "5minCardioL",
+                0: "lightCardioL",
                 // Joint Rotations
                 1: "wrist",
                 2: "elbow",
@@ -1688,7 +1688,7 @@ enum sessionDataOld {
             // Warmup
             [
                 // Cardio
-                0: ["5minCardioEH", "5minCardioEA", "5minCardioEF"],
+                0: ["lightCardioEH", "lightCardioEA", "lightCardioEF"],
                 // Joint Rotations
                 1: ["wristEH", "wristEA", "wristEF"],
                 2: ["elbowEH", "elbowEA", "elbowEF"],
@@ -1916,7 +1916,7 @@ enum sessionDataOld {
             // Stretching
             [
                 // Recommended
-                0: ["5minCardioEH", "5minCardioEA", "5minCardioEF"],
+                0: ["lightCardioEH", "lightCardioEA", "lightCardioEF"],
                 // Joint Rotations
                 1: ["wristEH", "wristEA", "wristEF"],
                 2: ["elbowEH", "elbowEA", "elbowEF"],

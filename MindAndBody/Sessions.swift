@@ -29,16 +29,17 @@ extension sessionData {
             // MARK:-
             // MARK:- Warmup
             "warmup": [
-                // Note for warmup naming
+                // Note for warmup naming, -F means foam roller
+                // Warmup Workout Short - Full - 1 (-F)
+                //
                 // movement
                 // sets
                 // reps
                 // time
-                // MARK: Full
-                "fullBody": [
+                "workout": [
                     "allMovements": [
                         ["title": "allMovements",
-                            "movement": "5minCardio",
+                            "movement": "lightCardio",
                             "sets": 2,
                             "reps": "0",
                             "time": 2],
@@ -307,46 +308,1292 @@ extension sessionData {
                             "reps": "0",
                             "time": 2],
                     ],
-                    "testSession": [
-                       ["movement": "5minCardio",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2], // Length of time to perform the movement for, used for Time Sessions
+                    
+                    // Note for warmup naming, -F means foam roller, Wu = warmup
+                    // Warmup Workout Short - Full - 1 (-F)
+                    
+                    // MARK:-
+                    // MARK:-
+                    // MARK: Workout
+                    // MARK:-
+                    // MARK: Full
+                    // MARK:-
+                    // MARK: Short
+                    "WaWS-F-1": [
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Cardio
+                        ["movement": "forefootBounces",
+                         "sets": 1,
+                         "reps": "1 min",
+                         "time": 60],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "wallSlides",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWS-F-2": [
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Cardio
+                        ["movement": "jumpSquat",
+                         "sets": 1,
+                         "reps": "1 min",
+                         "time": 60],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "forearmWallSlides135",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWS-F-3": [
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Cardio
+                        ["movement": "gluteKicks",
+                         "sets": 1,
+                         "reps": "1 min",
+                         "time": 60],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "wallSlides",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWS-F-4": [
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Cardio
+                        ["movement": "aSkips",
+                         "sets": 1,
+                         "reps": "1 min",
+                         "time": 60],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "forearmWallSlides135",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    // MARK: Normal
+                    "WaWN-F-1": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "5 min",
+                         "time": 300],
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "wallSlides",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                        // Bounces
+                        ["movement": "forefootBounces",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWN-F-2": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "5 min",
+                         "time": 300],
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegKick",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "forearmWallSlides135",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                        // Bounces
+                        ["movement": "jumpSquat",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWN-F-3": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "5 min",
+                         "time": 300],
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "wallSlides",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                        // Bounces
+                        ["movement": "gluteKicks",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWN-F-4": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "5 min",
+                         "time": 300],
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegKick",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "forearmWallSlides135",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                        // Bounces
+                        ["movement": "aSkips",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    
+                    // MARK:-
+                    // MARK: Upper
+                    // MARK:-
+                    // MARK: Short
+                    "WaWS-U-1": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "2 min",
+                         "time": 120],
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "shoulderRotationW",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "wallSlides",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWS-U-2": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "2 min",
+                         "time": 120],
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "shoulderRotationW",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegKick",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "forearmWallSlides135",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    // MARK: Normal
+                    "WaWN-U-1": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "5 min",
+                         "time": 300],
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 20],
+                        ["movement": "shoulderRotationW",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "wallSlides",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWN-U-2": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "5 min",
+                         "time": 300],
+                        // Joint Rotations
+                        ["movement": "wrist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 20],
+                        ["movement": "shoulderRotationW",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegKick",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "forearmWallSlides135",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    
+                    // MARK:-
+                    // MARK: Lower
+                    // MARK:-
+                    // MARK: Short
+                    "WaWS-L-1": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "2 min",
+                         "time": 120],
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Glutes
+                        ["movement": "gluteBridgewW",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWS-L-2": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "2 min",
+                         "time": 120],
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegKick",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Glutes
+                        ["movement": "hipHinges",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWS-L-3": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "2 min",
+                         "time": 120],
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Glutes
+                        ["movement": "lungeTwist",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWS-L-4": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "2 min",
+                         "time": 120],
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegKick",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Glutes
+                        ["movement": "cossakSquat",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    // MARK: Normal
+                    "WaWN-L-1": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "5 min",
+                         "time": 300],
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Glutes
+                        ["movement": "gluteBridgewW",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWN-L-2": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "5 min",
+                         "time": 300],
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegKick",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Glutes
+                        ["movement": "hipHinges",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWN-L-3": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "5 min",
+                         "time": 300],
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Glutes
+                        ["movement": "lungeTwist",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaWS-L-4": [
+                        // Cardio
+                        ["movement": "lightCardio",
+                         "sets": 1,
+                         "reps": "5 min",
+                         "time": 300],
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegKick",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Glutes
+                        ["movement": "cossakSquat",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
                     ],
                 ],
-                // MARK: Upper
-                "upperBody": [
-                    "testSession": [
-                       ["movement": "5minCardio",
-                            "sets": 2,
-                            "reps": "",
-                            "time": 2],
+                
+                // MARK:-
+                // MARK:-
+                // MARK: Endurance
+                // MARK:-
+                "endurance": [
+                    // Warmup Endurance Short - 1
+
+                    // MARK: Short
+                    "WaES-1": [
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10",
+                         "time": 20],
+                        ["movement": "lungeTwist",
+                         "sets": 1,
+                         "reps": "10",
+                         "time": 20],
+                        // Dynamic
+                        ["movement": "forefootBounces",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 30],
+                        ["movement": "aSkips",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                    ],
+                    "WaES-2": [
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10",
+                         "time": 20],
+                        ["movement": "lungeTwist",
+                         "sets": 1,
+                         "reps": "10",
+                         "time": 20],
+                        // Dynamic
+                        ["movement": "jumpSquat",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 30],
+                        ["movement": "gluteKicks",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                    ],
+                    "WaES-3": [
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10",
+                         "time": 20],
+                        ["movement": "lungeTwist",
+                         "sets": 1,
+                         "reps": "10",
+                         "time": 20],
+                        // Dynamic
+                        ["movement": "aSkips",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 30],
+                        ["movement": "grapeVines",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                    ],
+                    "WaES-4": [
+                        // Joint Rotations
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10",
+                         "time": 20],
+                        ["movement": "lungeTwist",
+                         "sets": 1,
+                         "reps": "10",
+                         "time": 20],
+                        // Dynamic
+                        ["movement": "aSkips",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 30],
+                        ["movement": "lateralBound",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                    ],
+                    // MARK: Normal
+                    "WaEN-1": [
+                        // Joint Rotations
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "lungeTwist",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Plank
+                        ["movement": "plank",
+                         "sets": 1,
+                         "reps": "10 breaths",
+                         "time": 30],
+                        // Dynamic
+                        ["movement": "forefootBounces",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 30],
+                        ["movement": "aSkips",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "lateralBound",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                    ],
+                    "WaEN-2": [
+                        // Joint Rotations
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "lungeTwist",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Plank
+                        ["movement": "plank",
+                         "sets": 1,
+                         "reps": "10 breaths",
+                         "time": 30],
+                        // Dynamic
+                        ["movement": "jumpSquat",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 30],
+                        ["movement": "gluteKicks",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "grapeVines",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                    ],
+                    "WaEN-3": [
+                        // Joint Rotations
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "lungeTwist",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Plank
+                        ["movement": "plank",
+                         "sets": 1,
+                         "reps": "10 breaths",
+                         "time": 30],
+                        // Dynamic
+                        ["movement": "gluteKicks",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 30],
+                        ["movement": "aSkips",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "lateralBound",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
                     ],
                 ],
-                // MARK: Lower
-                "lowerBody": [
-                    "testSession": [
-                       ["movement": "5minCardio",
-                            "sets": 2,
-                            "reps": "",
-                            "time": 2],
+                
+                // MARK:-
+                // MARK:-
+                // MARK: Flexibility
+                // MARK:-
+                "flexibility": [
+                    // MARK: Short
+                    "WaFS-F-1": [
+                        // Joint Rotations
+                        ["movement": "neckR",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Cardio
+                        ["movement": "forefootBounces",
+                         "sets": 1,
+                         "reps": "30s",
+                         "time": 30],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                    ],
+                    "WaFS-F-2": [
+                        // Joint Rotations
+                        ["movement": "neckR",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Cardio
+                        ["movement": "aSkips",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegKick",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                    ],
+                    "WaFS-F-3": [
+                        // Joint Rotations
+                        ["movement": "neckR",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Cardio
+                        ["movement": "gluteKicks",
+                         "sets": 1,
+                         "reps": "30s",
+                         "time": 30],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                    ],
+                    // MARK: Normal
+                    "WaFS-F-1": [
+                        // Joint Rotations
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "neckR",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Cardio
+                        ["movement": "forefootBounces",
+                         "sets": 1,
+                         "reps": "30s",
+                         "time": 30],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "wallSlides",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaFS-F-2": [
+                        // Joint Rotations
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "neckR",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Cardio
+                        ["movement": "aSkips",
+                         "sets": 1,
+                         "reps": "20s",
+                         "time": 20],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegKick",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "wallSlides",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
+                    ],
+                    "WaFS-F-3": [
+                        // Joint Rotations
+                        ["movement": "elbow",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "neckR",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "waist",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "knees",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "ankles",
+                         "sets": 1,
+                         "reps": "15s",
+                         "time": 15],
+                        // Cardio
+                        ["movement": "gluteKicks",
+                         "sets": 1,
+                         "reps": "30s",
+                         "time": 30],
+                        // Back
+                        ["movement": "catCow",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        ["movement": "sideLegDrop",
+                         "sets": 1,
+                         "reps": "10-15",
+                         "time": 30],
+                        // Shoulder
+                        ["movement": "wallSlides",
+                         "sets": 1,
+                         "reps": "15-20",
+                         "time": 30],
                     ],
                 ],
-                // MARK: Cardio
-                "cardio": [
+                
+                // MARK:-
+                // MARK:-
+                // MARK: Yoga
+                // MARK:-
+                // MARK: NOT SURE!!!???
+                "yoga": [
+                    // MARK: Short
                     "testSession": [
-                       ["movement": "5minCardio",
-                            "sets": 2,
-                            "reps": "",
-                            "time": 2],
+                        ["movement": "lightCardio",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
                     ],
+                    // MARK: Normal
                 ],
             ],
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:-
-            // MARK:- Workouts
+            // MARK:- Workout
             "workout": [
                 // MARK:-
                 // MARK:-
@@ -19709,10 +20956,14 @@ extension sessionData {
             // MARK:-
             // MARK:- Stretching
             "stretching": [
+                // MARK:-
+                // MARK:-
+                // MARK: General
+                // MARK:-
                 "general": [
                     "allMovements": [
                        ["title": "allMovements",
-                            "movement": "5minCardioL",
+                            "movement": "lightCardioL",
                             "breaths": 10,
                             "time": 2],
                        ["movement": "wrist",
@@ -19920,7 +21171,6 @@ extension sessionData {
                             "time": 10], // Used for timed sessions
                     ],
                 ],
-                // MARK: !!!!!!!!!!!!!
                 "hamstring": [
                     "testSession": [
                        ["movement": "kneeToChest",
@@ -19928,15 +21178,25 @@ extension sessionData {
                             "time": 10], // Used for timed sessions
                     ],
                 ],
+                
+                // MARK:-
+                // MARK:-
                 // MARK: Post Workout
+                // MARK:-
                 "postWorkout": [
-                    "testSession": [
+                    // Stretching Workout
+                    // MARK:
+                    "SW": [
                        ["movement": "kneeToChest",
                             "breaths": 10,
                             "time": 10],
                     ],
                 ],
+                
+                // MARK:-
+                // MARK:-
                 // MARK: Post Cardio
+                // MARK:-
                 "postCardio": [
                     "testSession": [
                        ["movement": "kneeToChest",

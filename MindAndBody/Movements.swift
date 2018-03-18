@@ -16,7 +16,7 @@ class sessionData {
             "warmup":
                 [
                     // Cardio
-                    ["5minCardio"],
+                    ["lightCardio"],
                     // Joint Rotations
                     ["wrist", "elbow", "shoulderR", "neckR", "waist", "hip", "knees", "ankles"],
                     // Foam/Ball Roll
@@ -24,7 +24,7 @@ class sessionData {
                     // Glutes
                     ["gluteBridgewW", "kneelingKickBackW", "legsToSideSquat", "standingGluteKickback"],
                     // Lower Back
-                    ["sideLegDrop", "sideLegKick", "scorpionKick", "sideBend", "catCow", "legsToSideTwist"],
+                    ["sideLegDrop", "sideLegKick", "scorpionKick", "sideBend", "catCow", "legsToSideTwist", "plank"],
                     // Upper Back
                     ["upperBackRotation", "latStretch", "lyingSideWindmill"],
                     // Shoulder
@@ -123,7 +123,7 @@ class sessionData {
             "stretching":
                 [
                     // Recommended
-                    ["5minCardioL"],
+                    ["lightCardioL"],
                     // Joint Rotations
                     ["wrist", "elbow", "shoulderR", "neckR", "waist", "hip", "knees", "ankles"],
                     // Foam/Ball Roll
@@ -366,11 +366,11 @@ class sessionData {
             "warmup":
                 [
                     // Cardio
-                    "5minCardio":
+                    "lightCardio":
                         [
-                            "name": ["5minCardio"],
+                            "name": ["lightCardio"],
                             "demonstration": ["cardioWarmup"],
-                            "explanation": ["5minCardioEH", "5minCardioEA", "5minCardioEF"],
+                            "explanation": ["lightCardioEH", "lightCardioEA", "lightCardioEF"],
                             "targetArea": ["heart"]
                     ],
                     // Joint Rotations
@@ -587,6 +587,13 @@ class sessionData {
                             "explanation": ["legsToSideTwistEH", "legsToSideTwistEA", "legsToSideTwistEF"],
                             "targetArea": ["core"]
                     ], ///
+                    "plank":
+                        [
+                            "name": ["plank"],
+                            "demonstration": ["plank"],
+                            "explanation": ["plankEH", "plankEA", "plankEF"],
+                            "targetArea": ["squatBody"]
+                    ],
                     // Upper Back
                     "upperBackRotation":
                         [
@@ -1751,11 +1758,11 @@ class sessionData {
             // MARK: Stretching
             "stretching": [
                 // Recommended
-                "5minCardioL":
+                "lightCardioL":
                     [
-                        "name": ["5minCardioL"],
+                        "name": ["lightCardioL"],
                         "demonstration": ["cardioWarmup"],
-                        "explanation": ["5minCardioEH", "5minCardioEA", "5minCardioEF"],
+                        "explanation": ["lightCardioEH", "lightCardioEA", "lightCardioEF"],
                         "targetArea": ["heart"]
                 ],
                 // Joint Rotations

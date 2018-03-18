@@ -204,10 +204,10 @@
 // Cardio
 
 
-"5minCardio" = "5min Cardio";
-"5minCardioEH" = "Any form of cardio works;\nTreadmill (brisk walk)\nStep Machine (my favourite)\nBiking\nRowing, etc.\nNOTE: Cardio at home:\nWalking up stairs\nJogging/Jumping on the spot\nAnything to get your heart pumping!";
-"5minCardioEA" = "Pushing yourself";
-"5minCardioEF" = "Relaxing the mind\nBreathing";
+"lightCardio" = "5min Cardio";
+"lightCardioEH" = "Any form of cardio works;\nTreadmill (brisk walk)\nStep Machine (my favourite)\nBiking\nRowing, etc.\nNOTE: Cardio at home:\nWalking up stairs\nJogging/Jumping on the spot\nAnything to get your heart pumping!";
+"lightCardioEA" = "Pushing yourself";
+"lightCardioEF" = "Relaxing the mind\nBreathing";
 
 // Joint Rotations
 "jointRotation" = "Joint Rotations";
@@ -1037,7 +1037,7 @@
 
             // Warm Up
     "recommended" = "Recommended";
-    //       "5minCardio" = "";
+    //       "lightCardio" = "";
 
             // Foam Rolling
     //      FullBody Foam Rolling
@@ -1122,7 +1122,7 @@
 
             // Stretching Explanations
             // Warm Up
-    //       "5minCardio" = "";
+    //       "lightCardio" = "";
 
             // Foam Rolling
     //      FullBody Foam Rolling

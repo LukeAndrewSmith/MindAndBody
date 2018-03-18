@@ -353,7 +353,7 @@ extension sessionData {
                 "general": [
                     "allMovements": [
                         ["title": "allMovements",
-                         "movement": "5minCardioL",
+                         "movement": "lightCardioL",
                          "breaths": 10,
                          "time": 2],
                         ["movement": "wrist",
@@ -707,7 +707,7 @@ extension sessionData {
                 "fullBody": [
                     "allMovements": [
                         ["title": "allMovements",
-                         "movement": "5minCardio",
+                         "movement": "lightCardio",
                          "sets": 2,
                          "reps": "0",
                          "time": 2],
@@ -978,7 +978,7 @@ extension sessionData {
                     ],
                     "testSession": [
                         ["title": "testSession",
-                         "movement": "5minCardio",
+                         "movement": "lightCardio",
                          "sets": 2,
                          "reps": "0",
                          "time": 2], // Length of time to perform the movement for, used for Time Sessions
@@ -988,7 +988,7 @@ extension sessionData {
                 "upperBody": [
                     "testSession": [
                         ["title": "testSession",
-                         "movement": "5minCardio",
+                         "movement": "lightCardio",
                          "sets": 2,
                          "reps": "",
                          "time": 2],
@@ -998,7 +998,7 @@ extension sessionData {
                 "lowerBody": [
                     "testSession": [
                         ["title": "testSession",
-                         "movement": "5minCardio",
+                         "movement": "lightCardio",
                          "sets": 2,
                          "reps": "",
                          "time": 2],
@@ -1008,7 +1008,7 @@ extension sessionData {
                 "cardio": [
                     "testSession": [
                         ["title": "testSession",
-                         "movement": "5minCardio",
+                         "movement": "lightCardio",
                          "sets": 2,
                          "reps": "",
                          "time": 2],
