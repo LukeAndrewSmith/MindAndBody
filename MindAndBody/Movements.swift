@@ -123,7 +123,7 @@ class sessionData {
             "stretching":
                 [
                     // Recommended
-                    ["lightCardioL"],
+                    ["lightCardio"],
                     // Joint Rotations
                     ["wrist", "elbow", "shoulderR", "neckR", "waist", "hip", "knees", "ankles"],
                     // Foam/Ball Roll
@@ -1758,9 +1758,9 @@ class sessionData {
             // MARK: Stretching
             "stretching": [
                 // Recommended
-                "lightCardioL":
+                "lightCardio":
                     [
-                        "name": ["lightCardioL"],
+                        "name": ["lightCardio"],
                         "demonstration": ["cardioWarmup"],
                         "explanation": ["lightCardioEH", "lightCardioEA", "lightCardioEF"],
                         "targetArea": ["heart"]
