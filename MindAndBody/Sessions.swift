@@ -20893,7 +20893,342 @@ extension sessionData {
             // MARK:-
             // MARK:- Cardio
             "cardio": [
-                    // MARK: Rowing
+                // MARK: -
+                // MARK: -
+                // MARK: Running
+                "running": [
+                    // MARK: -
+                    // MARK: Session Time: Short
+                    // MARK: -
+                    // MARK: Interval Time: Short
+                    // MARK: Style 1: Steady
+                    // Short, Short, Style 1
+                    "SS1": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 2
+                        ["movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 3
+                        ["movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 4
+                        ["movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                    ],
+                    // MARK: Style 2: High Steady
+                    "SS2": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                        // 2
+                        ["movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                        // 3
+                        ["movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                        // 4
+                        ["movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                    ],
+                    // MARK: Style 3: Peak
+                    "SS3": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 2
+                        ["movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                        // 3
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 90],
+                        // 4
+                        ["movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                    ],
+                    // MARK: Style 4: Double Peak
+                    "SS4": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 2
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 90],
+                        // 3
+                        ["movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 4
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 90],
+                    ],
+                    // MARK: Style 5: Increase
+                    "SS5": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 2
+                        ["movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 3
+                        ["movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                        // 4
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 90],
+                    ],
+
+                    // MARK: -
+                    // MARK: Interval Time: Medium
+                    // Short, Short, Style 1
+                    "SS1": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 2
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 3
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 4
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 30],
+                    ],
+                    // MARK: Style 2: High Steady
+                    "SS2": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                        // 2
+                        ["movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                        // 3
+                        ["movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                        // 4
+                        ["movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                    ],
+                    // MARK: Style 3: Peak
+                    "SS3": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 2
+                        ["movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                        // 3
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 90],
+                        // 4
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 30],
+                    ],
+                    // MARK: Style 4: Double Peak
+                    "SS4": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 2
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 90],
+                        // 3
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 4
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 90],
+                    ],
+                    // MARK: Style 5: Increase
+                    "SS5": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 2
+                        ["movement": "sprint",
+                         "time": 10],
+                        ["movement": "slowJog",
+                         "time": 30],
+                        // 3
+                        ["movement": "sprint",
+                         "time": 20],
+                        ["movement": "slowJog",
+                         "time": 60],
+                        // 4
+                        ["movement": "sprint",
+                         "time": 30],
+                        ["movement": "slowJog",
+                         "time": 90],
+                    ],
+                    
+                    // MARK: -
+                    // MARK: Interval Time: Long
+                    // MARK: Style 1: Steady
+                    // MARK: Style 2: High Steady
+                    // MARK: Style 3: Peak
+                    // MARK: Style 4: Double Peak
+                    // MARK: Style 5: Increase
+
+                    
+                    // MARK: -
+                    // MARK: Session Time: Medium
+                    // MARK: -
+                    // MARK: Interval Time: Short
+                    // MARK: Style 1: Steady
+                    // MARK: Style 2: High Steady
+                    // MARK: Style 3: Peak
+                    // MARK: Style 4: Double Peak
+                    // MARK: Style 5: Increase
+                    
+                    // MARK: -
+                    // MARK: Interval Time: Medium
+                    // MARK: Style 1: Steady
+                    // MARK: Style 2: High Steady
+                    // MARK: Style 3: Peak
+                    // MARK: Style 4: Double Peak
+                    // MARK: Style 5: Increase
+                    
+                    // MARK: -
+                    // MARK: Interval Time: Long
+                    // MARK: Style 1: Steady
+                    // MARK: Style 2: High Steady
+                    // MARK: Style 3: Peak
+                    // MARK: Style 4: Double Peak
+                    // MARK: Style 5: Increase
+                    
+
+                    // MARK: -
+                    // MARK: Session Time: Long
+                    // MARK: -
+                    // MARK: Interval Time: Short
+                    // MARK: Style 1: Steady
+                    // MARK: Style 2: High Steady
+                    // MARK: Style 3: Peak
+                    // MARK: Style 4: Double Peak
+                    // MARK: Style 5: Increase
+                    
+                    // MARK: -
+                    // MARK: Interval Time: Medium
+                    // MARK: Style 1: Steady
+                    // MARK: Style 2: High Steady
+                    // MARK: Style 3: Peak
+                    // MARK: Style 4: Double Peak
+                    // MARK: Style 5: Increase
+                    
+                    // MARK: -
+                    // MARK: Interval Time: Long
+                    // MARK: Style 1: Steady
+                    // MARK: Style 2: High Steady
+                    // MARK: Style 3: Peak
+                    // MARK: Style 4: Double Peak
+                    // MARK: Style 5: Increase
+
+                    "testSession": [
+                        ["timeBased": true,
+                         "movement": "sprint",
+                         "length": 200],
+                        ["movement": "slowJog",
+                         "length": 200,
+                         "time": 10],
+                    ],
+                ],
+                // MARK: Biking
+                "biking": [
+                    "testSession": [
+                        ["timeBased": true,
+                         "movement": "sprintB",
+                         "length": 200],
+                        ["movement": "slowB",
+                         "length": 200,
+                         "time": 10],
+                    ],
+                ],
+                // MARK: Rowing
                 "rowing": [
                     "testSession": [
                        ["timeBased": true,
@@ -20920,28 +21255,6 @@ extension sessionData {
                             "length": 200,
                             "time": 10],
                        ["movement": "slowR",
-                            "length": 200,
-                            "time": 10],
-                    ],
-                ],
-                    // MARK: Biking
-                "biking": [
-                    "testSession": [
-                       ["timeBased": true,
-                            "movement": "sprintB",
-                            "length": 200],
-                       ["movement": "slowB",
-                            "length": 200,
-                            "time": 10],
-                    ],
-                ],
-                    // MARK: Running
-                "running": [
-                    "testSession": [
-                       ["timeBased": true,
-                            "movement": "sprint",
-                            "length": 200],
-                       ["movement": "slowJog",
                             "length": 200,
                             "time": 10],
                     ],
@@ -22362,10 +22675,8 @@ extension sessionData {
                 "postWorkout": [
                     // Stretching Workout Short - Full - 1 (-F)
                         // -F being foam roller
-                        // EASY??
                     
                     // MARK: Full
-                    
                     // MARK: Short
                     "SWS-F-1": [
                         // Cardio
