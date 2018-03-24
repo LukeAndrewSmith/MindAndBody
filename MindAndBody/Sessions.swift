@@ -20895,8 +20895,8 @@ extension sessionData {
             "cardio": [
                 // MARK: -
                 // MARK: -
-                // MARK: Running
-                "running": [
+                // MARK: HIIT
+                "hiit": [
                     // MARK: -
                     // MARK: Session Time: Short
                     // MARK: -
@@ -20906,253 +20906,369 @@ extension sessionData {
                     "SS1": [
                         // 1
                         ["timeBased": true,
-                         "movement": "sprint",
+                         "movement": "highIntensity",
                          "time": 10],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 30],
                         // 2
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 10],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 30],
                         // 3
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 10],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 30],
                         // 4
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 10],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 30],
                     ],
                     // MARK: Style 2: High Steady
                     "SS2": [
                         // 1
                         ["timeBased": true,
-                         "movement": "sprint",
+                         "movement": "highIntensity",
                          "time": 20],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 60],
                         // 2
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 20],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 60],
                         // 3
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 20],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 60],
                         // 4
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 20],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 60],
                     ],
                     // MARK: Style 3: Peak
                     "SS3": [
                         // 1
                         ["timeBased": true,
-                         "movement": "sprint",
+                         "movement": "highIntensity",
                          "time": 10],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 30],
                         // 2
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 20],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 60],
                         // 3
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 90],
                         // 4
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 10],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 30],
                     ],
                     // MARK: Style 4: Double Peak
                     "SS4": [
                         // 1
                         ["timeBased": true,
-                         "movement": "sprint",
+                         "movement": "highIntensity",
                          "time": 10],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 30],
                         // 2
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 90],
                         // 3
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 10],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 30],
                         // 4
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 90],
                     ],
                     // MARK: Style 5: Increase
                     "SS5": [
                         // 1
                         ["timeBased": true,
-                         "movement": "sprint",
+                         "movement": "highIntensity",
                          "time": 10],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 30],
                         // 2
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 10],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 30],
                         // 3
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 20],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 60],
                         // 4
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 90],
                     ],
 
                     // MARK: -
                     // MARK: Interval Time: Medium
                     // Short, Short, Style 1
-                    "SS1": [
+                    "SM1": [
                         // 1
                         ["timeBased": true,
-                         "movement": "sprint",
+                         "movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
-                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
                         // 2
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
-                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
                         // 3
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
-                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
                         // 4
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
-                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
                     ],
                     // MARK: Style 2: High Steady
-                    "SS2": [
+                    "SM2": [
                         // 1
                         ["timeBased": true,
-                         "movement": "sprint",
-                         "time": 20],
-                        ["movement": "slowJog",
-                         "time": 60],
+                         "movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
                         // 2
-                        ["movement": "sprint",
-                         "time": 20],
-                        ["movement": "slowJog",
-                         "time": 60],
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
                         // 3
-                        ["movement": "sprint",
-                         "time": 20],
-                        ["movement": "slowJog",
-                         "time": 60],
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
                         // 4
-                        ["movement": "sprint",
-                         "time": 20],
-                        ["movement": "slowJog",
-                         "time": 60],
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
                     ],
                     // MARK: Style 3: Peak
-                    "SS3": [
+                    "SM3": [
                         // 1
                         ["timeBased": true,
-                         "movement": "sprint",
+                         "movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
-                         "time": 30],
-                        // 2
-                        ["movement": "sprint",
-                         "time": 20],
-                        ["movement": "slowJog",
-                         "time": 60],
-                        // 3
-                        ["movement": "sprint",
-                         "time": 30],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 90],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
                         // 4
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
-                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
                     ],
                     // MARK: Style 4: Double Peak
-                    "SS4": [
+                    "SM4": [
                         // 1
                         ["timeBased": true,
-                         "movement": "sprint",
+                         "movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
-                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
                         // 2
-                        ["movement": "sprint",
-                         "time": 30],
-                        ["movement": "slowJog",
-                         "time": 90],
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
                         // 3
-                        ["movement": "sprint",
+                        ["movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
-                         "time": 30],
-                        // 4
-                        ["movement": "sprint",
-                         "time": 30],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 90],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
                     ],
                     // MARK: Style 5: Increase
-                    "SS5": [
+                    "SM5": [
                         // 1
                         ["timeBased": true,
-                         "movement": "sprint",
+                         "movement": "highIntensity",
                          "time": 30],
-                        ["movement": "slowJog",
-                         "time": 30],
-                        // 2
-                        ["movement": "sprint",
-                         "time": 10],
-                        ["movement": "slowJog",
-                         "time": 30],
-                        // 3
-                        ["movement": "sprint",
-                         "time": 20],
-                        ["movement": "slowJog",
-                         "time": 60],
-                        // 4
-                        ["movement": "sprint",
-                         "time": 30],
-                        ["movement": "slowJog",
+                        ["movement": "lowIntensity",
                          "time": 90],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
                     ],
                     
                     // MARK: -
                     // MARK: Interval Time: Long
-                    // MARK: Style 1: Steady
+                    // Short, Short, Style 1
+                    "SL1": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                    ],
                     // MARK: Style 2: High Steady
+                    "SL2": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                    ],
                     // MARK: Style 3: Peak
+                    "SL3": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                    ],
                     // MARK: Style 4: Double Peak
+                    "SL4": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                    ],
                     // MARK: Style 5: Increase
+                    "SL5": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                    ],
+
 
                     
                     // MARK: -
@@ -21160,26 +21276,522 @@ extension sessionData {
                     // MARK: -
                     // MARK: Interval Time: Short
                     // MARK: Style 1: Steady
+                    // Short, Short, Style 1
+                    "MS1": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                    ],
                     // MARK: Style 2: High Steady
+                    "MS2": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                    ],
                     // MARK: Style 3: Peak
+                    "MS3": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                    ],
                     // MARK: Style 4: Double Peak
+                    "MS4": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                    ],
                     // MARK: Style 5: Increase
+                    "MS5": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                    ],
                     
                     // MARK: -
                     // MARK: Interval Time: Medium
-                    // MARK: Style 1: Steady
+                    // Short, Short, Style 1
+                    "MM1": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                    ],
                     // MARK: Style 2: High Steady
+                    "MM2": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                    ],
                     // MARK: Style 3: Peak
+                    "MM3": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                    ],
                     // MARK: Style 4: Double Peak
+                    "MM4": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                    ],
                     // MARK: Style 5: Increase
+                    "MM5": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                    ],
                     
                     // MARK: -
                     // MARK: Interval Time: Long
-                    // MARK: Style 1: Steady
+                    // Short, Short, Style 1
+                    "ML1": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                    ],
                     // MARK: Style 2: High Steady
+                    "ML2": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                    ],
                     // MARK: Style 3: Peak
+                    "ML3": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                    ],
                     // MARK: Style 4: Double Peak
+                    "ML4": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                    ],
                     // MARK: Style 5: Increase
+                    "ML5": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                    ],
                     
 
                     // MARK: -
@@ -21187,76 +21799,1474 @@ extension sessionData {
                     // MARK: -
                     // MARK: Interval Time: Short
                     // MARK: Style 1: Steady
+                    // Short, Short, Style 1
+                    "LS1": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                    ],
                     // MARK: Style 2: High Steady
+                    "LS2": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                    ],
                     // MARK: Style 3: Peak
+                    "LS3": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                    ],
                     // MARK: Style 4: Double Peak
+                    "LS4": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                    ],
                     // MARK: Style 5: Increase
+                    "LS5": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 10],
+                        ["movement": "lowIntensity",
+                         "time": 30],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 20],
+                        ["movement": "lowIntensity",
+                         "time": 60],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                    ],
                     
                     // MARK: -
                     // MARK: Interval Time: Medium
-                    // MARK: Style 1: Steady
+                    // Short, Short, Style 1
+                    "LM1": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                    ],
                     // MARK: Style 2: High Steady
+                    "LM2": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                    ],
                     // MARK: Style 3: Peak
+                    "LM3": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                    ],
                     // MARK: Style 4: Double Peak
+                    "LM4": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                    ],
                     // MARK: Style 5: Increase
+                    "LM5": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 30],
+                        ["movement": "lowIntensity",
+                         "time": 90],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 45],
+                        ["movement": "lowIntensity",
+                         "time": 135],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                    ],
                     
                     // MARK: -
                     // MARK: Interval Time: Long
-                    // MARK: Style 1: Steady
+                    // Short, Short, Style 1
+                    "LL1": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                    ],
                     // MARK: Style 2: High Steady
+                    "LL2": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                    ],
                     // MARK: Style 3: Peak
+                    "LL3": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                    ],
                     // MARK: Style 4: Double Peak
+                    "LL4": [
+                        // 1
+                        ["timeBased": true,
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                    ],
                     // MARK: Style 5: Increase
-
-                    "testSession": [
+                    "LL5": [
+                        // 1
                         ["timeBased": true,
-                         "movement": "sprint",
-                         "length": 200],
-                        ["movement": "slowJog",
-                         "length": 200,
-                         "time": 10],
+                         "movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 2
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 3
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 4
+                        ["movement": "highIntensity",
+                         "time": 60],
+                        ["movement": "lowIntensity",
+                         "time": 180],
+                        // 5
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 6
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 7
+                        ["movement": "highIntensity",
+                         "time": 90],
+                        ["movement": "lowIntensity",
+                         "time": 270],
+                        // 8
+                        ["movement": "highIntensity",
+                         "time": 120],
+                        ["movement": "lowIntensity",
+                         "time": 360],
                     ],
                 ],
-                // MARK: Biking
-                "biking": [
-                    "testSession": [
-                        ["timeBased": true,
-                         "movement": "sprintB",
-                         "length": 200],
-                        ["movement": "slowB",
-                         "length": 200,
-                         "time": 10],
+                // MARK: -
+                // MARK: -
+                // MARK: HIIT Workout
+                "workout": [
+                    // MARK:-
+                    // MARK: Easy
+                    // MARK: Short
+                    // Cardio, bodyweight, easy, short, 1
+                    "CBES-1": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "burpee",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "jumpingJacks",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "20s",
+                         "time": 20],
+                        // Round 2
+                        ["movement": "burpee",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "jumpingJacks",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "20s",
+                         "time": 20],
+                        // Round 3
+                        ["movement": "burpee",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "jumpingJacks",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "kneeRaises",
+                         "reps": "15s",
+                         "time": 15],
                     ],
-                ],
-                // MARK: Rowing
-                "rowing": [
-                    "testSession": [
-                       ["timeBased": true,
-                            "movement": "sprintR", // Indicates if movement or pause
-                            "length": 200], // Distanct/Time
-                       ["movement": "slowR",
-                            "length": 200,
-                            "time": 10],
-                       ["movement": "sprintR",
-                            "length": 200,
-                            "time": 10],
-                       ["movement": "slowR",
-                            "length": 200,
-                            "time": 10],
+                    "CBES-2": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "lungeJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 2
+                        ["movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "lungeJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "lungeJump",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "bumKicks",
+                         "reps": "20s",
+                         "time": 20],
                     ],
-                    "testSession2": [
-                       ["timeBased": false,
-                            "movement": "sprintR",
-                            "length": 200,], // NOTE: Infomration indicating wether time based or distance based session found in first movement of session
-                       ["movement": "slowR",
-                            "length": 200,
-                            "time": 10],
-                       ["movement": "sprintR",
-                            "length": 200,
-                            "time": 10],
-                       ["movement": "slowR",
-                            "length": 200,
-                            "time": 10],
+                    "CBES-3": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 2
+                        ["movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "squatJump",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "bumKicks",
+                         "reps": "20s",
+                         "time": 20],
+                    ],
+                    // MARK: Normal
+                    "CBES-1": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "burpee",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "jumpingJacks",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "20s",
+                         "time": 20],
+                        // Round 2
+                        ["rounds": 3,
+                         "movement": "burpee",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "jumpingJacks",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "20s",
+                         "time": 20],
+                        // Round 3
+                        ["movement": "burpee",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "jumpingJacks",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "20s",
+                         "time": 20],
+                        // Round 4
+                        ["movement": "burpee",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "jumpingJacks",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "kneeRaises",
+                         "reps": "15s",
+                         "time": 15],
+                        // Round 5
+                        ["movement": "burpee",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "jumpingJacks",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "kneeRaises",
+                         "reps": "15s",
+                         "time": 15],
+                    ],
+                    "CBES-2": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "lungeJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 2
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "lungeJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "lungeJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 4
+                        ["movement": "mountainClimbers",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "lungeJump",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "bumKicks",
+                         "reps": "20s",
+                         "time": 20],
+                        // Round 5
+                        ["movement": "mountainClimbers",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "lungeJump",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "bumKicks",
+                         "reps": "20s",
+                         "time": 20],
+                    ],
+                    "CBES-3": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 2
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 4
+                        ["movement": "mountainClimbers",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "squatJump",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "bumKicks",
+                         "reps": "20s",
+                         "time": 20],
+                        // Round 5
+                        ["movement": "mountainClimbers",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "squatJump",
+                         "reps": "15s",
+                         "time": 15],
+                        ["movement": "bumKicks",
+                         "reps": "20s",
+                         "time": 20],
+                    ],
+                    
+                    // MARK: -
+                    // MARK: Average
+                    // MARK: Short
+                    "CBEN-1": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "kickThroughBurpee",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 2
+                        ["movement": "kickThroughBurpee",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 3
+                        ["movement": "kickThroughBurpee",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "kneeRaises",
+                         "reps": "20",
+                         "time": 20],
+                    ],
+                    "CBEN-2": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "lungeJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "bumKicks",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 2
+                        ["movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "lungeJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "bumKicks",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "20",
+                         "time": 20],
+                        ["movement": "lungeJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                    ],
+                    "CBEN-3": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "bumKicks",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 2
+                        ["movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "bumKicks",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                    ],
+                    // MARK: Normal
+                    "CBEN-1": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "kickThroughBurpee",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 2
+                        ["rounds": 3,
+                         "movement": "kickThroughBurpee",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 3
+                        ["movement": "kickThroughBurpee",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 4
+                        ["movement": "kickThroughBurpee",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "kneeRaises",
+                         "reps": "20",
+                         "time": 20],
+                        // Round 5
+                        ["movement": "kickThroughBurpee",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "kneeRaises",
+                         "reps": "20",
+                         "time": 20],
+                    ],
+                    "CBEN-2": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "lungeJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "bumKicks",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 2
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "lungeJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "bumKicks",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "lungeJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "bumKicks",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 4
+                        ["movement": "mountainClimbers",
+                         "reps": "20",
+                         "time": 20],
+                        ["movement": "lungeJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 5
+                        ["movement": "mountainClimbers",
+                         "reps": "20",
+                         "time": 20],
+                        ["movement": "lungeJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                    ],
+                    "CBEN-3": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "bumKicks",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 2
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "bumKicks",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "bumKicks",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 4
+                        ["movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 5
+                        ["movement": "mountainClimbers",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "squatJump",
+                         "reps": "20s",
+                         "time": 20],
+                        ["movement": "bumKicks",
+                         "reps": "30s",
+                         "time": 30],
+                    ],
+                    
+                    // MARK: -
+                    // MARK: Hard
+                    // MARK: Short
+                    "CBES-1": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "kickThroughBurpee",
+                         "reps": "60s",
+                         "time": 60],
+                        ["movement": "squatJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 2
+                        ["movement": "kickThroughBurpee",
+                         "reps": "60s",
+                         "time": 60],
+                        ["movement": "squatJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "kickThroughBurpee",
+                         "reps": "50s",
+                         "time": 50],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30",
+                         "time": 30],
+                    ],
+                    "CBES-2": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "lungeJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 2
+                        ["movement": "mountainClimbers",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "lungeJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "30",
+                         "time": 30],
+                        ["movement": "lungeJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
+                    ],
+                    "CBES-3": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "squatJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 2
+                        ["movement": "mountainClimbers",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "squatJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
+                    ],
+                    // MARK: Normal
+                    "CBES-1": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "kickThroughBurpee",
+                         "reps": "60s",
+                         "time": 60],
+                        ["movement": "squatJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 2
+                        ["rounds": 3,
+                         "movement": "kickThroughBurpee",
+                         "reps": "60s",
+                         "time": 60],
+                        ["movement": "squatJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "kickThroughBurpee",
+                         "reps": "60s",
+                         "time": 60],
+                        ["movement": "squatJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 4
+                        ["movement": "kickThroughBurpee",
+                         "reps": "50s",
+                         "time": 50],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30",
+                         "time": 30],
+                        // Round 5
+                        ["movement": "kickThroughBurpee",
+                         "reps": "50s",
+                         "time": 50],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30",
+                         "time": 30],
+                    ],
+                    "CBES-2": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "lungeJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 2
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "lungeJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "lungeJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 4
+                        ["movement": "mountainClimbers",
+                         "reps": "30",
+                         "time": 30],
+                        ["movement": "lungeJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 5
+                        ["movement": "mountainClimbers",
+                         "reps": "30",
+                         "time": 30],
+                        ["movement": "lungeJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
+                    ],
+                    "CBES-3": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "squatJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 2
+                        ["rounds": 3,
+                         "movement": "mountainClimbers",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "squatJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "mountainClimbers",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "squatJump",
+                         "reps": "40s",
+                         "time": 40],
+                        ["movement": "kneeRaises",
+                         "reps": "40s",
+                         "time": 40],
+                        // Round 4
+                        ["movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
+                        // Round 5
+                        ["movement": "mountainClimbers",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "squatJump",
+                         "reps": "30s",
+                         "time": 30],
+                        ["movement": "kneeRaises",
+                         "reps": "30s",
+                         "time": 30],
                     ],
                 ],
             ],
