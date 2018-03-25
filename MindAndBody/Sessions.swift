@@ -26618,8 +26618,8 @@ extension sessionData {
             // MARK:-
             // MARK:- Yoga
             "yoga": [
-                    // MARK: Focus
-                "practices": [
+                // MARK: Relaxing
+                "relaxing": [
                     "allMovements": [
                        ["title": "allMovements",
                             "pose": "upwardsSalute",
