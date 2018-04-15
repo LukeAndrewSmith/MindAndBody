@@ -8,7 +8,8 @@
 
 import Foundation
 
-extension sessionData {
+class sessionData {
+    // MARK: USES INITIALIZER IN A SILLY WAY
     //
     // MARK: Notes
     // Session names have to be the same as their key
@@ -20,7 +21,8 @@ extension sessionData {
             // ...-SS begin session (-W warmup, -S being stretching
             // ...-1 being workout 1 of several
 
-    // MARK: Sessions
+    
+    
     static let sessions: [String: [String: [String: [[String: Any]]]]] =
         [
             // MARK:-
@@ -309,7 +311,7 @@ extension sessionData {
                             "time": 2],
                     ],
                     
-                    // Note for warmup naming, -F means foam roller, Wu = warmup
+                    // Note for warmup naming, -F at end means foam roller, Wa = warmup
                     // Warmup Workout Short - Full - 1 (-F)
                     
                     // MARK:-
@@ -1043,7 +1045,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WaWS-L-4": [
+                    "WaWN-L-4": [
                         // Cardio
                         ["movement": "lightCardio",
                          "sets": 1,
@@ -1354,7 +1356,7 @@ extension sessionData {
                 // MARK:-
                 "flexibility": [
                     // MARK: Short
-                    "WaFS-F-1": [
+                    "WaFS-1": [
                         // Joint Rotations
                         ["movement": "neckR",
                          "sets": 1,
@@ -1383,7 +1385,7 @@ extension sessionData {
                          "reps": "10-15",
                          "time": 30],
                     ],
-                    "WaFS-F-2": [
+                    "WaFS-2": [
                         // Joint Rotations
                         ["movement": "neckR",
                          "sets": 1,
@@ -1412,7 +1414,7 @@ extension sessionData {
                          "reps": "10-15",
                          "time": 30],
                     ],
-                    "WaFS-F-3": [
+                    "WaFS-3": [
                         // Joint Rotations
                         ["movement": "neckR",
                          "sets": 1,
@@ -1442,7 +1444,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Normal
-                    "WaFS-F-1": [
+                    "WaFN-1": [
                         // Joint Rotations
                         ["movement": "elbow",
                          "sets": 1,
@@ -1484,7 +1486,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WaFS-F-2": [
+                    "WaFN-2": [
                         // Joint Rotations
                         ["movement": "elbow",
                          "sets": 1,
@@ -1526,7 +1528,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WaFS-F-3": [
+                    "WaFN-3": [
                         // Joint Rotations
                         ["movement": "elbow",
                          "sets": 1,
@@ -1568,22 +1570,6 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                ],
-                
-                // MARK:-
-                // MARK:-
-                // MARK: Yoga
-                // MARK:-
-                // MARK: NOT SURE!!!???
-                "yoga": [
-                    // MARK: Short
-                    "testSession": [
-                        ["movement": "lightCardio",
-                         "sets": 2,
-                         "reps": "0",
-                         "time": 2],
-                    ],
-                    // MARK: Normal
                 ],
             ],
             // MARK:-
@@ -7557,7 +7543,7 @@ extension sessionData {
                          "reps": "20+ breaths"],
                     ],
                 ],
-                // MARK: 5 x 5 ??
+                // MARK: 5 x 5 ?? Not for now
                 "classicGym5x5": [
                     "testSession": [
                        ["movement": "squat",
@@ -11650,7 +11636,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // Equiptment
-                    "WBAS-CsF-7-E": [
+                    "WBAS-CsF-1-E": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 3,
                          "reps": "25-35",
@@ -11668,7 +11654,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBAS-CsF-8-E": [
+                    "WBAS-CsF-2-E": [
                         ["movement": "squatJump",
                          "sets": 3,
                          "reps": "15-20",
@@ -11686,7 +11672,7 @@ extension sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    "WBAS-CsF-9-E": [
+                    "WBAS-CsF-3-E": [
                         ["movement": "bodyweightSquat",
                          "sets": 3,
                          "reps": "20-30",
@@ -11704,7 +11690,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBAS-CsF-10-E": [
+                    "WBAS-CsF-4-E": [
                         ["movement": "lunge",
                          "sets": 3,
                          "reps": "20-25",
@@ -11722,7 +11708,7 @@ extension sessionData {
                          "reps": "15-20 breaths",
                          "time": 40],
                     ],
-                    "WBAS-CsF-11-E": [
+                    "WBAS-CsF-5-E": [
                         ["movement": "singleLegDeadlift",
                          "sets": 3,
                          "reps": "20",
@@ -11899,7 +11885,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // Equiptment
-                    "WBAN-CsF-7-E": [
+                    "WBAN-CsF-1-E": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 3,
                          "reps": "25-35",
@@ -11925,7 +11911,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBAN-CsF-8-E": [
+                    "WBAN-CsF-2-E": [
                         ["movement": "squatJump",
                          "sets": 3,
                          "reps": "15-20",
@@ -11951,7 +11937,7 @@ extension sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    "WBAN-CsF-9-E": [
+                    "WBAN-CsF-3-E": [
                         ["movement": "bodyweightSquat",
                          "sets": 3,
                          "reps": "20-30",
@@ -11977,7 +11963,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBAN-CsF-10-E": [
+                    "WBAN-CsF-4-E": [
                         ["movement": "lunge",
                          "sets": 3,
                          "reps": "20-25",
@@ -12003,7 +11989,7 @@ extension sessionData {
                          "reps": "15-20 breaths",
                          "time": 40],
                     ],
-                    "WBAN-CsF-11-E": [
+                    "WBAN-CsF-5-E": [
                         ["movement": "singleLegDeadlift",
                          "sets": 3,
                          "reps": "20",
@@ -12105,7 +12091,7 @@ extension sessionData {
                          "time": 40],
                     ],
                     // Equiptment
-                    "WBHS-CsF-5-E": [
+                    "WBHS-CsF-1-E": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 3,
                          "reps": "35-40+",
@@ -12123,7 +12109,7 @@ extension sessionData {
                          "reps": "15+ breaths",
                          "time": 30],
                     ],
-                    "WBHS-CsF-6-E": [
+                    "WBHS-CsF-2-E": [
                         ["movement": "squatJump",
                          "sets": 3,
                          "reps": "20-30+",
@@ -12141,7 +12127,7 @@ extension sessionData {
                          "reps": "15-20+ breaths",
                          "time": 40],
                     ],
-                    "WBHS-CsF-7-E": [
+                    "WBHS-CsF-3-E": [
                         ["movement": "bodyweightSquat",
                          "sets": 3,
                          "reps": "20-30",
@@ -12159,7 +12145,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBHS-CsF-8-E": [
+                    "WBHS-CsF-4-E": [
                         ["movement": "lunge",
                          "sets": 3,
                          "reps": "25-35+",
@@ -12177,7 +12163,7 @@ extension sessionData {
                          "reps": "15-20 breaths",
                          "time": 40],
                     ],
-                    "WBHS-CsF-9-E": [
+                    "WBHS-CsF-5-E": [
                         ["movement": "singleLegDeadlift",
                          "sets": 3,
                          "reps": "20",
@@ -12195,7 +12181,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WBHS-CsF-10-E": [
+                    "WBHS-CsF-6-E": [
                         ["movement": "gluteBridge",
                          "sets": 3,
                          "reps": "30-40+",
@@ -12213,7 +12199,7 @@ extension sessionData {
                          "reps": "20-30",
                          "time": 40],
                     ],
-                    "WBHS-CsF-11-E": [
+                    "WBHS-CsF-7-E": [
                         ["movement": "lungeJump",
                          "sets": 3,
                          "reps": "20-30+",
@@ -12338,7 +12324,7 @@ extension sessionData {
                          "time": 40],
                     ],
                     // Equiptment
-                    "WBHN-CsF-5-E": [
+                    "WBHN-CsF-1-E": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 3,
                          "reps": "35-40+",
@@ -12364,7 +12350,7 @@ extension sessionData {
                          "reps": "15+ breaths",
                          "time": 30],
                     ],
-                    "WBHN-CsF-6-E": [
+                    "WBHN-CsF-2-E": [
                         ["movement": "squatJump",
                          "sets": 3,
                          "reps": "20-30+",
@@ -12390,7 +12376,7 @@ extension sessionData {
                          "reps": "15-20+ breaths",
                          "time": 40],
                     ],
-                    "WBHN-CsF-7-E": [
+                    "WBHN-CsF-3-E": [
                         ["movement": "bodyweightSquat",
                          "sets": 3,
                          "reps": "20-30",
@@ -12416,7 +12402,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBHN-CsF-8-E": [
+                    "WBHN-CsF-4-E": [
                         ["movement": "lunge",
                          "sets": 3,
                          "reps": "25-35+",
@@ -12442,7 +12428,7 @@ extension sessionData {
                          "reps": "15-20 breaths",
                          "time": 40],
                     ],
-                    "WBHN-CsF-9-E": [
+                    "WBHN-CsF-5-E": [
                         ["movement": "singleLegDeadlift",
                          "sets": 3,
                          "reps": "20",
@@ -12468,7 +12454,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WBHN-CsF-10-E": [
+                    "WBHN-CsF-6-E": [
                         ["movement": "gluteBridge",
                          "sets": 3,
                          "reps": "30-40+",
@@ -12494,7 +12480,7 @@ extension sessionData {
                          "reps": "20-30",
                          "time": 40],
                     ],
-                    "WBHN-CsF-11-E": [
+                    "WBHN-CsF-7-E": [
                         ["movement": "lungeJump",
                          "sets": 3,
                          "reps": "20-30+",
@@ -12600,7 +12586,7 @@ extension sessionData {
                          "time": 15],
                     ],
                     // MARK: Normal
-                    "WBES-CsU-1": [
+                    "WBEN-CsU-1": [
                         ["movement": "pushup",
                          "sets": 4,
                          "reps": "5-10",
@@ -12618,7 +12604,7 @@ extension sessionData {
                          "reps": "5-10 breaths",
                          "time": 20],
                     ],
-                    "WBES-CsU-2": [
+                    "WBEN-CsU-2": [
                         ["movement": "tricepExtensionsBodyweight",
                          "sets": 4,
                          "reps": "5-10",
@@ -12636,7 +12622,7 @@ extension sessionData {
                          "reps": "10-15",
                          "time": 20],
                     ],
-                    "WBES-CsU-3": [
+                    "WBEN-CsU-3": [
                         ["movement": "backHyperextension",
                          "sets": 4,
                          "reps": "12-15",
@@ -12654,7 +12640,7 @@ extension sessionData {
                          "reps": "10-15",
                          "time": 20],
                     ],
-                    "WBES-CsU-4": [
+                    "WBEN-CsU-4": [
                         ["movement": "reverseSnowAngels",
                          "sets": 4,
                          "reps": "12-15",
@@ -12676,7 +12662,7 @@ extension sessionData {
                     // MARK:-
                     // MARK: Average
                     // MARK: Short
-                    "WBES-CsU-1": [
+                    "WBAS-CsU-1": [
                         ["movement": "pushup",
                          "sets": 3,
                          "reps": "10-15",
@@ -12694,7 +12680,7 @@ extension sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsU-2": [
+                    "WBAS-CsU-2": [
                         ["movement": "trianglePushup",
                          "sets": 3,
                          "reps": "5-10",
@@ -12712,7 +12698,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WBES-CsU-3": [
+                    "WBAS-CsU-3": [
                         ["movement": "reverseSnowAngels",
                          "sets": 3,
                          "reps": "15-25",
@@ -12731,7 +12717,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // Equiptment
-                    "WBES-CsU-4-E": [
+                    "WBAS-CsU-1-E": [
                         ["movement": "pullup",
                          "sets": 3,
                          "reps": "5-10",
@@ -12749,7 +12735,7 @@ extension sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsU-5-E": [
+                    "WBAS-CsU-2-E": [
                         ["movement": "pullup",
                          "sets": 3,
                          "reps": "5-10",
@@ -12767,7 +12753,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WBES-CsU-6-E": [
+                    "WBAS-CsU-3-E": [
                         ["movement": "pullup",
                          "sets": 3,
                          "reps": "5-10",
@@ -12786,7 +12772,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Normal
-                    "WBES-CsU-1": [
+                    "WBAN-CsU-1": [
                         ["movement": "pushup",
                          "sets": 4,
                          "reps": "10-15",
@@ -12804,7 +12790,7 @@ extension sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsU-2": [
+                    "WBAN-CsU-2": [
                         ["movement": "trianglePushup",
                          "sets": 4,
                          "reps": "5-10",
@@ -12822,7 +12808,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WBES-CsU-3": [
+                    "WBAN-CsU-3": [
                         ["movement": "reverseSnowAngels",
                          "sets": 4,
                          "reps": "15-25",
@@ -12841,7 +12827,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // Equiptment
-                    "WBES-CsU-4-E": [
+                    "WBAN-CsU-1-E": [
                         ["movement": "pullup",
                          "sets": 4,
                          "reps": "5-10",
@@ -12859,7 +12845,7 @@ extension sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsU-5-E": [
+                    "WBAN-CsU-2-E": [
                         ["movement": "pullup",
                          "sets": 4,
                          "reps": "5-10",
@@ -12877,7 +12863,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WBES-CsU-6-E": [
+                    "WBAN-CsU-3-E": [
                         ["movement": "pullup",
                          "sets": 4,
                          "reps": "5-10",
@@ -12899,7 +12885,7 @@ extension sessionData {
                     // MARK:-
                     // MARK: Hard
                     // MARK: Short
-                    "WBES-CsU-1": [
+                    "WBHS-CsU-1": [
                         ["movement": "pushup",
                          "sets": 3,
                          "reps": "15-20+",
@@ -12917,7 +12903,7 @@ extension sessionData {
                          "reps": "15-20 breaths",
                          "time": 40],
                     ],
-                    "WBES-CsU-2": [
+                    "WBHS-CsU-2": [
                         ["movement": "reverseSnowAngels",
                          "sets": 3,
                          "reps": "25-30+",
@@ -12936,7 +12922,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // Equiptment
-                    "WBES-CsU-3-E": [
+                    "WBHS-CsU-1-E": [
                         ["movement": "pullup",
                          "sets": 3,
                          "reps": "10-15",
@@ -12954,7 +12940,7 @@ extension sessionData {
                          "reps": "20-25",
                          "time": 40],
                     ],
-                    "WBES-CsU-4-E": [
+                    "WBHS-CsU-2-E": [
                         ["movement": "pullup",
                          "sets": 3,
                          "reps": "10-15",
@@ -12972,7 +12958,7 @@ extension sessionData {
                          "reps": "20-25",
                          "time": 40],
                     ],
-                    "WBES-CsU-5-E": [
+                    "WBHS-CsU-3-E": [
                         ["movement": "pullup",
                          "sets": 3,
                          "reps": "10-15",
@@ -12990,7 +12976,7 @@ extension sessionData {
                          "reps": "15 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsU-6-E": [
+                    "WBHS-CsU-4-E": [
                         ["movement": "pullup",
                          "sets": 3,
                          "reps": "10-15",
@@ -13009,7 +12995,7 @@ extension sessionData {
                          "time": 40],
                     ],
                     // MARK: Normal
-                    "WBES-CsU-1": [
+                    "WBHN-CsU-1": [
                         ["movement": "pushup",
                          "sets": 4,
                          "reps": "15-20+",
@@ -13027,7 +13013,7 @@ extension sessionData {
                          "reps": "15-20 breaths",
                          "time": 40],
                     ],
-                    "WBES-CsU-2": [
+                    "WBHN-CsU-2": [
                         ["movement": "reverseSnowAngels",
                          "sets": 4,
                          "reps": "25-30+",
@@ -13046,7 +13032,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // Equiptment
-                    "WBES-CsU-3-E": [
+                    "WBHN-CsU-1-E": [
                         ["movement": "pullup",
                          "sets": 4,
                          "reps": "10-15",
@@ -13064,7 +13050,7 @@ extension sessionData {
                          "reps": "20-25",
                          "time": 40],
                     ],
-                    "WBES-CsU-4-E": [
+                    "WBHN-CsU-2-E": [
                         ["movement": "pullup",
                          "sets": 4,
                          "reps": "10-15",
@@ -13082,7 +13068,7 @@ extension sessionData {
                          "reps": "20-25",
                          "time": 40],
                     ],
-                    "WBES-CsU-5-E": [
+                    "WBHN-CsU-3-E": [
                         ["movement": "pullup",
                          "sets": 4,
                          "reps": "10-15",
@@ -13100,7 +13086,7 @@ extension sessionData {
                          "reps": "15 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsU-6-E": [
+                    "WBHN-CsU-4-E": [
                         ["movement": "pullup",
                          "sets": 4,
                          "reps": "10-15",
@@ -13235,7 +13221,7 @@ extension sessionData {
                     ],
                     
                     // MARK: Normal
-                    "WBES-CsL-1": [
+                    "WBEN-CsL-1": [
                         ["movement": "bodyweightSquat",
                          "sets": 4,
                          "reps": "15-20",
@@ -13253,7 +13239,7 @@ extension sessionData {
                          "reps": "5-10 breaths",
                          "time": 15],
                     ],
-                    "WBES-CsL-2": [
+                    "WBEN-CsL-2": [
                         ["movement": "squatJump",
                          "sets": 4,
                          "reps": "10-15",
@@ -13271,7 +13257,7 @@ extension sessionData {
                          "reps": "10-15",
                          "time": 20],
                     ],
-                    "WBES-CsL-3": [
+                    "WBEN-CsL-3": [
                         ["movement": "lunge",
                          "sets": 4,
                          "reps": "15-20",
@@ -13289,7 +13275,7 @@ extension sessionData {
                          "reps": "10-15",
                          "time": 20],
                     ],
-                    "WBES-CsL-4": [
+                    "WBEN-CsL-4": [
                         ["movement": "lungeJump",
                          "sets": 4,
                          "reps": "10-15",
@@ -13307,7 +13293,7 @@ extension sessionData {
                          "reps": "5 breaths",
                          "time": 15],
                     ],
-                    "WBES-CsL-5": [
+                    "WBEN-CsL-5": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 4,
                          "reps": "20-25",
@@ -13325,7 +13311,7 @@ extension sessionData {
                          "reps": "5-10 breaths",
                          "time": 15],
                     ],
-                    "WBES-CsL-6": [
+                    "WBEN-CsL-6": [
                         ["movement": "singleLegDeadlift",
                          "sets": 4,
                          "reps": "12-15",
@@ -13347,7 +13333,7 @@ extension sessionData {
                     // MARK:-
                     // MARK: Average
                     // MARK: Short
-                    "WBES-CsL-1": [
+                    "WBAS-CsL-1": [
                         ["movement": "bodyweightSquat",
                          "sets": 3,
                          "reps": "20-30",
@@ -13365,7 +13351,7 @@ extension sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsL-2": [
+                    "WBAS-CsL-2": [
                         ["movement": "squatJump",
                          "sets": 3,
                          "reps": "15-20",
@@ -13383,7 +13369,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WBES-CsL-3": [
+                    "WBAS-CsL-3": [
                         ["movement": "lunge",
                          "sets": 3,
                          "reps": "20-25",
@@ -13401,7 +13387,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WBES-CsL-4": [
+                    "WBAS-CsL-4": [
                         ["movement": "lungeJump",
                          "sets": 3,
                          "reps": "20",
@@ -13419,7 +13405,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBES-CsL-5": [
+                    "WBAS-CsL-5": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 3,
                          "reps": "25-35",
@@ -13437,7 +13423,7 @@ extension sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsL-6": [
+                    "WBAS-CsL-6": [
                         ["movement": "singleLegDeadlift",
                          "sets": 3,
                          "reps": "15-20",
@@ -13456,7 +13442,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // MARK: Normal
-                    "WBES-CsL-1": [
+                    "WBAN-CsL-1": [
                         ["movement": "bodyweightSquat",
                          "sets": 4,
                          "reps": "20-30",
@@ -13474,7 +13460,7 @@ extension sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsL-2": [
+                    "WBAN-CsL-2": [
                         ["movement": "squatJump",
                          "sets": 4,
                          "reps": "15-20",
@@ -13492,7 +13478,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WBES-CsL-3": [
+                    "WBAN-CsL-3": [
                         ["movement": "lunge",
                          "sets": 4,
                          "reps": "20-25",
@@ -13510,7 +13496,7 @@ extension sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                    "WBES-CsL-4": [
+                    "WBAN-CsL-4": [
                         ["movement": "lungeJump",
                          "sets": 4,
                          "reps": "20",
@@ -13528,7 +13514,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBES-CsL-5": [
+                    "WBAN-CsL-5": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 4,
                          "reps": "25-35",
@@ -13546,7 +13532,7 @@ extension sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsL-6": [
+                    "WBAN-CsL-6": [
                         ["movement": "singleLegDeadlift",
                          "sets": 4,
                          "reps": "15-20",
@@ -13568,7 +13554,7 @@ extension sessionData {
                     // MARK:-
                     // MARK: Hard
                     // MARK: Short
-                    "WBES-CsL-1": [
+                    "WBHS-CsL-1": [
                         ["movement": "bodyweightSquat",
                          "sets": 3,
                          "reps": "30-40+",
@@ -13586,7 +13572,7 @@ extension sessionData {
                          "reps": "15-25+ breaths",
                          "time": 40],
                     ],
-                    "WBES-CsL-2": [
+                    "WBHS-CsL-2": [
                         ["movement": "squatJump",
                          "sets": 3,
                          "reps": "20-30+",
@@ -13604,7 +13590,7 @@ extension sessionData {
                          "reps": "20-30",
                          "time": 40],
                     ],
-                    "WBES-CsL-3": [
+                    "WBHS-CsL-3": [
                         ["movement": "lunge",
                          "sets": 3,
                          "reps": "25-35+",
@@ -13622,7 +13608,7 @@ extension sessionData {
                          "reps": "20-25+",
                          "time": 40],
                     ],
-                    "WBES-CsL-4": [
+                    "WBHS-CsL-4": [
                         ["movement": "lungeJump",
                          "sets": 3,
                          "reps": "20-30+",
@@ -13640,7 +13626,7 @@ extension sessionData {
                          "reps": "20 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsL-5": [
+                    "WBHS-CsL-5": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 3,
                          "reps": "35-40+",
@@ -13658,7 +13644,7 @@ extension sessionData {
                          "reps": "15-25+ breaths",
                          "time": 40],
                     ],
-                    "WBES-CsL-6": [
+                    "WBHS-CsL-6": [
                         ["movement": "singleLegDeadlift",
                          "sets": 3,
                          "reps": "20-30+",
@@ -13677,7 +13663,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Normal
-                    "WBES-CsL-1": [
+                    "WBHN-CsL-1": [
                         ["movement": "bodyweightSquat",
                          "sets": 4,
                          "reps": "30-40+",
@@ -13695,7 +13681,7 @@ extension sessionData {
                          "reps": "15-25+ breaths",
                          "time": 40],
                     ],
-                    "WBES-CsL-2": [
+                    "WBHN-CsL-2": [
                         ["movement": "squatJump",
                          "sets": 4,
                          "reps": "20-30+",
@@ -13713,7 +13699,7 @@ extension sessionData {
                          "reps": "20-30",
                          "time": 40],
                     ],
-                    "WBES-CsL-3": [
+                    "WBHN-CsL-3": [
                         ["movement": "lunge",
                          "sets": 4,
                          "reps": "25-35+",
@@ -13731,7 +13717,7 @@ extension sessionData {
                          "reps": "20-25+",
                          "time": 40],
                     ],
-                    "WBES-CsL-4": [
+                    "WBHN-CsL-4": [
                         ["movement": "lungeJump",
                          "sets": 4,
                          "reps": "20-30+",
@@ -13749,7 +13735,7 @@ extension sessionData {
                          "reps": "20 breaths",
                          "time": 30],
                     ],
-                    "WBES-CsL-5": [
+                    "WBHN-CsL-5": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 4,
                          "reps": "35-40+",
@@ -13767,7 +13753,7 @@ extension sessionData {
                          "reps": "15-25+ breaths",
                          "time": 40],
                     ],
-                    "WBES-CsL-6": [
+                    "WBHN-CsL-6": [
                         ["movement": "singleLegDeadlift",
                          "sets": 4,
                          "reps": "20-30+",
@@ -14938,7 +14924,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // Equiptment
-                    "WBAS-CcF-7-E": [
+                    "WBAS-CcF-1-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "bodyweightDeadlift",
@@ -14980,7 +14966,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 15],
                     ],
-                    "WBAS-CcF-8-E": [
+                    "WBAS-CcF-2-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "squatJump",
@@ -15022,7 +15008,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 25],
                     ],
-                    "WBAS-CcF-9-E": [
+                    "WBAS-CcF-3-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "bodyweightSquat",
@@ -15064,7 +15050,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBAS-CcF-10-E": [
+                    "WBAS-CcF-4-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "lunge",
@@ -15106,7 +15092,7 @@ extension sessionData {
                          "reps": "15 breaths",
                          "time": 30],
                     ],
-                    "WBAS-CcF-11-E": [
+                    "WBAS-CcF-5-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "singleLegDeadlift",
@@ -15558,7 +15544,7 @@ extension sessionData {
                          "time": 15],
                     ],
                     // Equiptment
-                    "WBAN-CcF-7-E": [
+                    "WBAN-CcF-1-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "bodyweightDeadlift",
@@ -15626,7 +15612,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 15],
                     ],
-                    "WBAN-CcF-8-E": [
+                    "WBAN-CcF-2-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "squatJump",
@@ -15694,7 +15680,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 25],
                     ],
-                    "WBAN-CcF-9-E": [
+                    "WBAN-CcF-3-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "bodyweightSquat",
@@ -15762,7 +15748,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBAN-CcF-10-E": [
+                    "WBAN-CcF-4-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "lunge",
@@ -15830,7 +15816,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 25],
                     ],
-                    "WBAN-CcF-11-E": [
+                    "WBAN-CcF-5-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "singleLegDeadlift",
@@ -16071,7 +16057,7 @@ extension sessionData {
                          "time": 40],
                     ],
                     // Equiptment
-                    "WBHS-CcF-5-E": [
+                    "WBHS-CcF-1-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "bodyweightDeadlift",
@@ -16113,7 +16099,7 @@ extension sessionData {
                          "reps": "15 breaths",
                          "time": 30],
                     ],
-                    "WBHS-CcF-6-E": [
+                    "WBHS-CcF-2-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "squatJump",
@@ -16155,7 +16141,7 @@ extension sessionData {
                          "reps": "20 breaths",
                          "time": 40],
                     ],
-                    "WBHS-CcF-7-E": [
+                    "WBHS-CcF-3-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "bodyweightSquat",
@@ -16197,7 +16183,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBHS-CcF-8-E": [
+                    "WBHS-CcF-4-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "lunge",
@@ -16239,7 +16225,7 @@ extension sessionData {
                          "reps": "20 breaths",
                          "time": 40],
                     ],
-                    "WBHS-CcF-9-E": [
+                    "WBHS-CcF-5-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "singleLegDeadlift",
@@ -16281,7 +16267,7 @@ extension sessionData {
                          "reps": "20",
                          "time": 30],
                     ],
-                    "WBHS-CcF-10-E": [
+                    "WBHS-CcF-6-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "gluteBridge",
@@ -16323,7 +16309,7 @@ extension sessionData {
                          "reps": "30",
                          "time": 40],
                     ],
-                    "WBHS-CcF-11-E": [
+                    "WBHS-CcF-7-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "lungeJump",
@@ -16640,7 +16626,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // Equiptment
-                    "WBHN-CcF-5-E": [
+                    "WBHN-CcF-1-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "bodyweightDeadlift",
@@ -16708,7 +16694,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    "WBHN-CcF-6-E": [
+                    "WBHN-CcF-2-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "squatJump",
@@ -16776,7 +16762,7 @@ extension sessionData {
                          "reps": "15 breaths",
                          "time": 30],
                     ],
-                    "WBHN-CcF-7-E": [
+                    "WBHN-CcF-3-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "bodyweightSquat",
@@ -16844,7 +16830,7 @@ extension sessionData {
                          "reps": "5 breaths",
                          "time": 10],
                     ],
-                    "WBHN-CcF-8-E": [
+                    "WBHN-CcF-4-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "lunge",
@@ -16912,7 +16898,7 @@ extension sessionData {
                          "reps": "15 breaths",
                          "time": 30],
                     ],
-                    "WBHN-CcF-9-E": [
+                    "WBHN-CcF-5-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "singleLegDeadlift",
@@ -16980,7 +16966,7 @@ extension sessionData {
                          "reps": "15",
                          "time": 20],
                     ],
-                    "WBHN-CcF-10-E": [
+                    "WBHN-CcF-6-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "gluteBridge",
@@ -17048,7 +17034,7 @@ extension sessionData {
                          "reps": "20",
                          "time": 30],
                     ],
-                    "WBHN-CcF-11-E": [
+                    "WBHN-CcF-7-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "lungeJump",
@@ -17696,7 +17682,7 @@ extension sessionData {
                          "time": 15],
                     ],
                     // Equiptment
-                    "WBAS-CcU-4-E": [
+                    "WBAS-CcU-1-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "pullup",
@@ -17738,7 +17724,7 @@ extension sessionData {
                          "reps": "12 breaths",
                          "time": 15],
                     ],
-                    "WBAS-CcU-5-E": [
+                    "WBAS-CcU-2-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "pullup",
@@ -17780,7 +17766,7 @@ extension sessionData {
                          "reps": "15",
                          "time": 25],
                     ],
-                    "WBAS-CcU-6-E": [
+                    "WBAS-CcU-3-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "pullup",
@@ -18028,7 +18014,7 @@ extension sessionData {
                          "time": 10],
                     ],
                     // Equiptment
-                    "WBAN-CcU-4-E": [
+                    "WBAN-CcU-1-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "pullup",
@@ -18096,7 +18082,7 @@ extension sessionData {
                          "reps": "10 breaths",
                          "time": 10],
                     ],
-                    "WBAN-CcU-5-E": [
+                    "WBAN-CcU-2-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "pullup",
@@ -18164,7 +18150,7 @@ extension sessionData {
                          "reps": "10",
                          "time": 20],
                     ],
-                    "WBAN-CcU-6-E": [
+                    "WBAN-CcU-3-E": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "pullup",
@@ -18321,133 +18307,133 @@ extension sessionData {
                          "time": 20],
                     ],
                     // Equiptment
+                    "WBHS-CcU-1-E": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "trianglePushup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                        // Round 2
+                        ["movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "trianglePushup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "trianglePushup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                    ],
+                    "WBHS-CcU-2-E": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "walkingPushup",
+                         "reps": "20",
+                         "time": 50],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                        // Round 2
+                        ["movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "walkingPushup",
+                         "reps": "20",
+                         "time": 50],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "walkingPushup",
+                         "reps": "20",
+                         "time": 50],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                    ],
                     "WBHS-CcU-3-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "pullup",
                          "reps": "15",
                          "time": 30],
-                        ["movement": "trianglePushup",
+                        ["movement": "downwardDogPushup",
                          "reps": "15",
-                         "time": 30],
+                         "time": 40],
                         ["movement": "pushupHold",
                          "reps": "15 breaths",
                          "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
+                        ["movement": "sidePlankW",
+                         "reps": "15 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "pullup",
                          "reps": "15",
                          "time": 30],
-                        ["movement": "trianglePushup",
+                        ["movement": "downwardDogPushup",
                          "reps": "15",
-                         "time": 30],
+                         "time": 40],
                         ["movement": "pushupHold",
                          "reps": "15 breaths",
                          "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
+                        ["movement": "sidePlankW",
+                         "reps": "15 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "pullup",
                          "reps": "15",
                          "time": 30],
-                        ["movement": "trianglePushup",
+                        ["movement": "downwardDogPushup",
                          "reps": "15",
-                         "time": 30],
+                         "time": 40],
                         ["movement": "pushupHold",
                          "reps": "15 breaths",
                          "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
+                        ["movement": "sidePlankW",
+                         "reps": "15 breaths",
+                         "time": 30],
                     ],
                     "WBHS-CcU-4-E": [
-                        // Round 1
-                        ["rounds": 3,
-                         "movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "walkingPushup",
-                         "reps": "20",
-                         "time": 50],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
-                        // Round 2
-                        ["movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "walkingPushup",
-                         "reps": "20",
-                         "time": 50],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
-                        // Round 3
-                        ["movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "walkingPushup",
-                         "reps": "20",
-                         "time": 50],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
-                    ],
-                    "WBHS-CcU-5-E": [
-                        // Round 1
-                        ["rounds": 3,
-                         "movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "downwardDogPushup",
-                         "reps": "15",
-                         "time": 40],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "sidePlankW",
-                         "reps": "15 breaths",
-                         "time": 30],
-                        // Round 2
-                        ["movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "downwardDogPushup",
-                         "reps": "15",
-                         "time": 40],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "sidePlankW",
-                         "reps": "15 breaths",
-                         "time": 30],
-                        // Round 3
-                        ["movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "downwardDogPushup",
-                         "reps": "15",
-                         "time": 40],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "sidePlankW",
-                         "reps": "15 breaths",
-                         "time": 30],
-                    ],
-                    "WBHS-CcU-6-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "pullup",
@@ -18627,198 +18613,198 @@ extension sessionData {
                          "time": 10],
                     ],
                     // Equiptment
+                    "WBHN-CcU-1-E": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "trianglePushup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                        // Round 2
+                        ["movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "trianglePushup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "trianglePushup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                        // Round 4
+                        ["movement": "pullup",
+                         "reps": "10",
+                         "time": 25],
+                        ["movement": "trianglePushup",
+                         "reps": "10",
+                         "time": 20],
+                        ["movement": "pushupHold",
+                         "reps": "10 breaths",
+                         "time": 10],
+                        ["movement": "dynamicPlank",
+                         "reps": "20",
+                         "time": 30],
+                        // Round 5
+                        ["movement": "pullup",
+                         "reps": "10",
+                         "time": 25],
+                        ["movement": "trianglePushup",
+                         "reps": "10",
+                         "time": 20],
+                        ["movement": "pushupHold",
+                         "reps": "10 breaths",
+                         "time": 10],
+                        ["movement": "dynamicPlank",
+                         "reps": "20",
+                         "time": 30],
+                    ],
+                    "WBHN-CcU-2-E": [
+                        // Round 1
+                        ["rounds": 3,
+                         "movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "walkingPushup",
+                         "reps": "20",
+                         "time": 50],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                        // Round 2
+                        ["movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "walkingPushup",
+                         "reps": "20",
+                         "time": 50],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                        // Round 3
+                        ["movement": "pullup",
+                         "reps": "15",
+                         "time": 30],
+                        ["movement": "walkingPushup",
+                         "reps": "20",
+                         "time": 50],
+                        ["movement": "pushupHold",
+                         "reps": "15 breaths",
+                         "time": 15],
+                        ["movement": "dynamicPlank",
+                         "reps": "25",
+                         "time": 40],
+                        // Round 4
+                        ["movement": "pullup",
+                         "reps": "10",
+                         "time": 25],
+                        ["movement": "walkingPushup",
+                         "reps": "15",
+                         "time": 40],
+                        ["movement": "pushupHold",
+                         "reps": "10 breaths",
+                         "time": 10],
+                        ["movement": "dynamicPlank",
+                         "reps": "20",
+                         "time": 30],
+                        // Round 5
+                        ["movement": "pullup",
+                         "reps": "10",
+                         "time": 25],
+                        ["movement": "walkingPushup",
+                         "reps": "15",
+                         "time": 40],
+                        ["movement": "pushupHold",
+                         "reps": "10 breaths",
+                         "time": 10],
+                        ["movement": "dynamicPlank",
+                         "reps": "20",
+                         "time": 30],
+                    ],
                     "WBHN-CcU-3-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "pullup",
                          "reps": "15",
                          "time": 30],
-                        ["movement": "trianglePushup",
+                        ["movement": "downwardDogPushup",
                          "reps": "15",
-                         "time": 30],
+                         "time": 40],
                         ["movement": "pushupHold",
                          "reps": "15 breaths",
                          "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
+                        ["movement": "sidePlankW",
+                         "reps": "15 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "pullup",
                          "reps": "15",
                          "time": 30],
-                        ["movement": "trianglePushup",
+                        ["movement": "downwardDogPushup",
                          "reps": "15",
-                         "time": 30],
+                         "time": 40],
                         ["movement": "pushupHold",
                          "reps": "15 breaths",
                          "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
+                        ["movement": "sidePlankW",
+                         "reps": "15 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "pullup",
                          "reps": "15",
                          "time": 30],
-                        ["movement": "trianglePushup",
+                        ["movement": "downwardDogPushup",
                          "reps": "15",
-                         "time": 30],
+                         "time": 40],
                         ["movement": "pushupHold",
                          "reps": "15 breaths",
                          "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
+                        ["movement": "sidePlankW",
+                         "reps": "15 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "pullup",
                          "reps": "10",
                          "time": 25],
-                        ["movement": "trianglePushup",
+                        ["movement": "downwardDogPushup",
                          "reps": "10",
-                         "time": 20],
+                         "time": 30],
                         ["movement": "pushupHold",
                          "reps": "10 breaths",
                          "time": 10],
-                        ["movement": "dynamicPlank",
-                         "reps": "20",
-                         "time": 30],
-                        // Round 5
-                        ["movement": "pullup",
-                         "reps": "10",
-                         "time": 25],
-                        ["movement": "trianglePushup",
-                         "reps": "10",
-                         "time": 20],
-                        ["movement": "pushupHold",
+                        ["movement": "sidePlankW",
                          "reps": "10 breaths",
-                         "time": 10],
-                        ["movement": "dynamicPlank",
-                         "reps": "20",
-                         "time": 30],
+                         "time": 20],
                     ],
                     "WBHN-CcU-4-E": [
-                        // Round 1
-                        ["rounds": 3,
-                         "movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "walkingPushup",
-                         "reps": "20",
-                         "time": 50],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
-                        // Round 2
-                        ["movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "walkingPushup",
-                         "reps": "20",
-                         "time": 50],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
-                        // Round 3
-                        ["movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "walkingPushup",
-                         "reps": "20",
-                         "time": 50],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "dynamicPlank",
-                         "reps": "25",
-                         "time": 40],
-                        // Round 4
-                        ["movement": "pullup",
-                         "reps": "10",
-                         "time": 25],
-                        ["movement": "walkingPushup",
-                         "reps": "15",
-                         "time": 40],
-                        ["movement": "pushupHold",
-                         "reps": "10 breaths",
-                         "time": 10],
-                        ["movement": "dynamicPlank",
-                         "reps": "20",
-                         "time": 30],
-                        // Round 5
-                        ["movement": "pullup",
-                         "reps": "10",
-                         "time": 25],
-                        ["movement": "walkingPushup",
-                         "reps": "15",
-                         "time": 40],
-                        ["movement": "pushupHold",
-                         "reps": "10 breaths",
-                         "time": 10],
-                        ["movement": "dynamicPlank",
-                         "reps": "20",
-                         "time": 30],
-                    ],
-                    "WBHN-CcU-5-E": [
-                        // Round 1
-                        ["rounds": 3,
-                         "movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "downwardDogPushup",
-                         "reps": "15",
-                         "time": 40],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "sidePlankW",
-                         "reps": "15 breaths",
-                         "time": 30],
-                        // Round 2
-                        ["movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "downwardDogPushup",
-                         "reps": "15",
-                         "time": 40],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "sidePlankW",
-                         "reps": "15 breaths",
-                         "time": 30],
-                        // Round 3
-                        ["movement": "pullup",
-                         "reps": "15",
-                         "time": 30],
-                        ["movement": "downwardDogPushup",
-                         "reps": "15",
-                         "time": 40],
-                        ["movement": "pushupHold",
-                         "reps": "15 breaths",
-                         "time": 15],
-                        ["movement": "sidePlankW",
-                         "reps": "15 breaths",
-                         "time": 30],
-                        // Round 4
-                        ["movement": "pullup",
-                         "reps": "10",
-                         "time": 25],
-                        ["movement": "downwardDogPushup",
-                         "reps": "10",
-                         "time": 30],
-                        ["movement": "pushupHold",
-                         "reps": "10 breaths",
-                         "time": 10],
-                        ["movement": "sidePlankW",
-                         "reps": "10 breaths",
-                         "time": 20],
-                    ],
-                    "WBHN-CcU-6-E": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "pullup",
@@ -19147,7 +19133,7 @@ extension sessionData {
                          "time": 15],
                     ],
                     // MARK: Normal
-                    "WBES-CcL-1": [
+                    "WBEN-CcL-1": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "bodyweightSquat",
@@ -19215,7 +19201,7 @@ extension sessionData {
                          "reps": "5 breaths",
                          "time": 10],
                     ],
-                    "WBES-CcL-2": [
+                    "WBEN-CcL-2": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "squatJump",
@@ -19283,7 +19269,7 @@ extension sessionData {
                          "reps": "5",
                          "time": 10],
                     ],
-                    "WBES-CcL-3": [
+                    "WBEN-CcL-3": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "lunge",
@@ -19351,7 +19337,7 @@ extension sessionData {
                          "reps": "10",
                          "time": 15],
                     ],
-                    "WBES-CcL-4": [
+                    "WBEN-CcL-4": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "lungeJump",
@@ -19419,7 +19405,7 @@ extension sessionData {
                          "reps": "5 breaths",
                          "time": 15],
                     ],
-                    "WBES-CcL-5": [
+                    "WBEN-CcL-5": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "bodyweightDeadlift",
@@ -19487,7 +19473,7 @@ extension sessionData {
                          "reps": "5 breaths",
                          "time": 10],
                     ],
-                    "WBES-CcL-6": [
+                    "WBEN-CcL-6": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "singleLegDeadlift",
@@ -20477,7 +20463,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Normal
-                    "WBHS-CcL-1": [
+                    "WBHN-CcL-1": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "bodyweightSquat",
@@ -20545,7 +20531,7 @@ extension sessionData {
                          "reps": "15 breaths",
                          "time": 30],
                     ],
-                    "WBHS-CcL-2": [
+                    "WBHN-CcL-2": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "squatJump",
@@ -20613,7 +20599,7 @@ extension sessionData {
                          "reps": "20",
                          "time": 30],
                     ],
-                    "WBHS-CcL-3": [
+                    "WBHN-CcL-3": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "lunge",
@@ -20681,7 +20667,7 @@ extension sessionData {
                          "reps": "20",
                          "time": 30],
                     ],
-                    "WBHS-CcL-4": [
+                    "WBHN-CcL-4": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "lungeJump",
@@ -20749,7 +20735,7 @@ extension sessionData {
                          "reps": "15 breaths",
                          "time": 20],
                     ],
-                    "WBHS-CcL-5": [
+                    "WBHN-CcL-5": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "bodyweightDeadlift",
@@ -20817,7 +20803,7 @@ extension sessionData {
                          "reps": "15 breaths",
                          "time": 30],
                     ],
-                    "WBHS-CcL-6": [
+                    "WBHN-CcL-6": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "singleLegDeadlift",
@@ -20902,8 +20888,8 @@ extension sessionData {
                     // MARK: -
                     // MARK: Interval Time: Short
                     // MARK: Style 1: Steady
-                    // Short, Short, Style 1
-                    "SS1": [
+                    // Cardio, HIIT, Short (session time), Short (interval time), - 1 (= style 1, see spreadsheet)
+                    "CHSS-1": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -20927,7 +20913,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Style 2: High Steady
-                    "SS2": [
+                    "CHSS-2": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -20951,7 +20937,7 @@ extension sessionData {
                          "time": 60],
                     ],
                     // MARK: Style 3: Peak
-                    "SS3": [
+                    "CHSS-3": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -20975,7 +20961,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Style 4: Double Peak
-                    "SS4": [
+                    "CHSS-4": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -20999,7 +20985,7 @@ extension sessionData {
                          "time": 90],
                     ],
                     // MARK: Style 5: Increase
-                    "SS5": [
+                    "CHSS-5": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21026,7 +21012,7 @@ extension sessionData {
                     // MARK: -
                     // MARK: Interval Time: Medium
                     // Short, Short, Style 1
-                    "SM1": [
+                    "CHSM-1": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21050,7 +21036,7 @@ extension sessionData {
                          "time": 90],
                     ],
                     // MARK: Style 2: High Steady
-                    "SM2": [
+                    "CHSM-2": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21074,7 +21060,7 @@ extension sessionData {
                          "time": 135],
                     ],
                     // MARK: Style 3: Peak
-                    "SM3": [
+                    "CHSM-3": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21098,7 +21084,7 @@ extension sessionData {
                          "time": 90],
                     ],
                     // MARK: Style 4: Double Peak
-                    "SM4": [
+                    "CHSM-4": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21122,7 +21108,7 @@ extension sessionData {
                          "time": 180],
                     ],
                     // MARK: Style 5: Increase
-                    "SM5": [
+                    "CHSM-5": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21149,7 +21135,7 @@ extension sessionData {
                     // MARK: -
                     // MARK: Interval Time: Long
                     // Short, Short, Style 1
-                    "SL1": [
+                    "CHSL-1": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21173,7 +21159,7 @@ extension sessionData {
                          "time": 180],
                     ],
                     // MARK: Style 2: High Steady
-                    "SL2": [
+                    "CHSL-2": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21197,7 +21183,7 @@ extension sessionData {
                          "time": 270],
                     ],
                     // MARK: Style 3: Peak
-                    "SL3": [
+                    "CHSL-3": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21221,7 +21207,7 @@ extension sessionData {
                          "time": 180],
                     ],
                     // MARK: Style 4: Double Peak
-                    "SL4": [
+                    "CHSL-4": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21245,7 +21231,7 @@ extension sessionData {
                          "time": 360],
                     ],
                     // MARK: Style 5: Increase
-                    "SL5": [
+                    "CHSL-5": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21277,7 +21263,7 @@ extension sessionData {
                     // MARK: Interval Time: Short
                     // MARK: Style 1: Steady
                     // Short, Short, Style 1
-                    "MS1": [
+                    "CHMS-1": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21311,7 +21297,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Style 2: High Steady
-                    "MS2": [
+                    "CHMS-2": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21345,7 +21331,7 @@ extension sessionData {
                          "time": 60],
                     ],
                     // MARK: Style 3: Peak
-                    "MS3": [
+                    "CHMS-3": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21379,7 +21365,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Style 4: Double Peak
-                    "MS4": [
+                    "CHMS-4": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21413,7 +21399,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Style 5: Increase
-                    "MS5": [
+                    "CHMS-5": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21450,7 +21436,7 @@ extension sessionData {
                     // MARK: -
                     // MARK: Interval Time: Medium
                     // Short, Short, Style 1
-                    "MM1": [
+                    "CHMM-1": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21484,7 +21470,7 @@ extension sessionData {
                          "time": 90],
                     ],
                     // MARK: Style 2: High Steady
-                    "MM2": [
+                    "CHMM-2": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21518,7 +21504,7 @@ extension sessionData {
                          "time": 135],
                     ],
                     // MARK: Style 3: Peak
-                    "MM3": [
+                    "CHMM-3": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21552,7 +21538,7 @@ extension sessionData {
                          "time": 90],
                     ],
                     // MARK: Style 4: Double Peak
-                    "MM4": [
+                    "CHMM-4": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21586,7 +21572,7 @@ extension sessionData {
                          "time": 90],
                     ],
                     // MARK: Style 5: Increase
-                    "MM5": [
+                    "CHMM-5": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21623,7 +21609,7 @@ extension sessionData {
                     // MARK: -
                     // MARK: Interval Time: Long
                     // Short, Short, Style 1
-                    "ML1": [
+                    "CHML-1": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21657,7 +21643,7 @@ extension sessionData {
                          "time": 180],
                     ],
                     // MARK: Style 2: High Steady
-                    "ML2": [
+                    "CHML-2": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21691,7 +21677,7 @@ extension sessionData {
                          "time": 270],
                     ],
                     // MARK: Style 3: Peak
-                    "ML3": [
+                    "CHML-3": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21725,7 +21711,7 @@ extension sessionData {
                          "time": 180],
                     ],
                     // MARK: Style 4: Double Peak
-                    "ML4": [
+                    "CHML-4": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21759,7 +21745,7 @@ extension sessionData {
                          "time": 180],
                     ],
                     // MARK: Style 5: Increase
-                    "ML5": [
+                    "CHML-5": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21799,8 +21785,7 @@ extension sessionData {
                     // MARK: -
                     // MARK: Interval Time: Short
                     // MARK: Style 1: Steady
-                    // Short, Short, Style 1
-                    "LS1": [
+                    "CHLS-1": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21844,7 +21829,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Style 2: High Steady
-                    "LS2": [
+                    "CHLS-2": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21888,7 +21873,7 @@ extension sessionData {
                          "time": 60],
                     ],
                     // MARK: Style 3: Peak
-                    "LS3": [
+                    "CHLS-3": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21932,7 +21917,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Style 4: Double Peak
-                    "LS4": [
+                    "CHLS-4": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -21976,7 +21961,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Style 5: Increase
-                    "LS5": [
+                    "CHLS-5": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22023,7 +22008,7 @@ extension sessionData {
                     // MARK: -
                     // MARK: Interval Time: Medium
                     // Short, Short, Style 1
-                    "LM1": [
+                    "CHLM-1": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22067,7 +22052,7 @@ extension sessionData {
                          "time": 90],
                     ],
                     // MARK: Style 2: High Steady
-                    "LM2": [
+                    "CHLM-2": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22111,7 +22096,7 @@ extension sessionData {
                          "time": 135],
                     ],
                     // MARK: Style 3: Peak
-                    "LM3": [
+                    "CHLM-3": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22155,7 +22140,7 @@ extension sessionData {
                          "time": 90],
                     ],
                     // MARK: Style 4: Double Peak
-                    "LM4": [
+                    "CHLM-4": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22199,7 +22184,7 @@ extension sessionData {
                          "time": 90],
                     ],
                     // MARK: Style 5: Increase
-                    "LM5": [
+                    "CHLM-5": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22246,7 +22231,7 @@ extension sessionData {
                     // MARK: -
                     // MARK: Interval Time: Long
                     // Short, Short, Style 1
-                    "LL1": [
+                    "CHLL-1": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22290,7 +22275,7 @@ extension sessionData {
                          "time": 180],
                     ],
                     // MARK: Style 2: High Steady
-                    "LL2": [
+                    "CHLL-2": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22334,7 +22319,7 @@ extension sessionData {
                          "time": 270],
                     ],
                     // MARK: Style 3: Peak
-                    "LL3": [
+                    "CHLL-3": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22378,7 +22363,7 @@ extension sessionData {
                          "time": 180],
                     ],
                     // MARK: Style 4: Double Peak
-                    "LL4": [
+                    "CHLL-4": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22422,7 +22407,7 @@ extension sessionData {
                          "time": 180],
                     ],
                     // MARK: Style 5: Increase
-                    "LL5": [
+                    "CHLL-5": [
                         // 1
                         ["timeBased": true,
                          "movement": "highIntensity",
@@ -22574,7 +22559,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // MARK: Normal
-                    "CBES-1": [
+                    "CBEN-1": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "burpee",
@@ -22628,7 +22613,7 @@ extension sessionData {
                          "reps": "15s",
                          "time": 15],
                     ],
-                    "CBES-2": [
+                    "CBEN-2": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "mountainClimbers",
@@ -22682,7 +22667,7 @@ extension sessionData {
                          "reps": "20s",
                          "time": 20],
                     ],
-                    "CBES-3": [
+                    "CBEN-3": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "mountainClimbers",
@@ -22740,7 +22725,7 @@ extension sessionData {
                     // MARK: -
                     // MARK: Average
                     // MARK: Short
-                    "CBEN-1": [
+                    "CBAS-1": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "kickThroughBurpee",
@@ -22773,7 +22758,7 @@ extension sessionData {
                          "reps": "20",
                          "time": 20],
                     ],
-                    "CBEN-2": [
+                    "CBAS-2": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "mountainClimbers",
@@ -22806,7 +22791,7 @@ extension sessionData {
                          "reps": "30s",
                          "time": 30],
                     ],
-                    "CBEN-3": [
+                    "CBAS-3": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "mountainClimbers",
@@ -22840,7 +22825,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Normal
-                    "CBEN-1": [
+                    "CBAN-1": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "kickThroughBurpee",
@@ -22894,7 +22879,7 @@ extension sessionData {
                          "reps": "20",
                          "time": 20],
                     ],
-                    "CBEN-2": [
+                    "CBAN-2": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "mountainClimbers",
@@ -22948,7 +22933,7 @@ extension sessionData {
                          "reps": "30s",
                          "time": 30],
                     ],
-                    "CBEN-3": [
+                    "CBAN-3": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "mountainClimbers",
@@ -23006,7 +22991,7 @@ extension sessionData {
                     // MARK: -
                     // MARK: Hard
                     // MARK: Short
-                    "CBES-1": [
+                    "CBHS-1": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "kickThroughBurpee",
@@ -23039,7 +23024,7 @@ extension sessionData {
                          "reps": "30",
                          "time": 30],
                     ],
-                    "CBES-2": [
+                    "CBHS-2": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "mountainClimbers",
@@ -23072,7 +23057,7 @@ extension sessionData {
                          "reps": "30s",
                          "time": 30],
                     ],
-                    "CBES-3": [
+                    "CBHS-3": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "mountainClimbers",
@@ -23106,7 +23091,7 @@ extension sessionData {
                          "time": 30],
                     ],
                     // MARK: Normal
-                    "CBES-1": [
+                    "CBHN-1": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "kickThroughBurpee",
@@ -23160,7 +23145,7 @@ extension sessionData {
                          "reps": "30",
                          "time": 30],
                     ],
-                    "CBES-2": [
+                    "CBHN-2": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "mountainClimbers",
@@ -23214,7 +23199,7 @@ extension sessionData {
                          "reps": "30s",
                          "time": 30],
                     ],
-                    "CBES-3": [
+                    "CBHN-3": [
                         // Round 1
                         ["rounds": 3,
                          "movement": "mountainClimbers",
@@ -23868,7 +23853,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // MARK: Normal
-                    "SGEN-1": [
+                    "SGAN-1": [
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -23922,7 +23907,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SGEN-2": [
+                    "SGAN-2": [
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -23979,7 +23964,7 @@ extension sessionData {
                     
                     // MARK:-
                     // MARK:-
-                    // MARK: Hamstring
+                    // MARK: Hamstrings
                     // MARK:-
                     // MARK: Easy
                     // MARK: Short
@@ -25770,7 +25755,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // With Foam roller
-                    "SWS-FL-1-L": [
+                    "SWS-L-1-F": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 2,
@@ -25809,7 +25794,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SWS-L-2-L": [
+                    "SWS-L-2-F": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 2,
@@ -25986,7 +25971,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // With Foam roller
-                    "SWN-FL-1-L": [
+                    "SWN-L-1-F": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 5,
@@ -26031,7 +26016,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SWN-L-2-L": [
+                    "SWN-L-2-F": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 5,
@@ -26129,7 +26114,8 @@ extension sessionData {
                 // MARK:-
                 "postCardio": [
                     // MARK: Short
-                    "SWS-L-1": [
+                        // Stretching, Endurance, Short - 1
+                    "SES-1": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 2,
@@ -26162,7 +26148,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SWS-L-2": [
+                    "SES-2": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 2,
@@ -26195,7 +26181,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SWS-L-3": [
+                    "SES-3": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 2,
@@ -26229,7 +26215,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // With Foam roller
-                    "SWS-FL-1-L": [
+                    "SES-1-F": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 2,
@@ -26271,7 +26257,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SWS-L-2-L": [
+                    "SES-2-F": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 2,
@@ -26313,7 +26299,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SWS-L-3-F": [
+                    "SES-3-F": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 2,
@@ -26357,7 +26343,7 @@ extension sessionData {
                     ],
                     
                     // MARK: Normal
-                    "SWN-L-1": [
+                    "SEN-1": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 5,
@@ -26393,7 +26379,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SWN-L-2": [
+                    "SEN-2": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 5,
@@ -26429,7 +26415,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SWN-L-3": [
+                    "SEN-3": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 5,
@@ -26466,7 +26452,7 @@ extension sessionData {
                          "time": 20],
                     ],
                     // With Foam roller
-                    "SWN-FL-1-L": [
+                    "SEN-1-F": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 5,
@@ -26514,7 +26500,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SWN-L-2-L": [
+                    "SEN-2-F": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 5,
@@ -26562,7 +26548,7 @@ extension sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                    "SWN-L-3-F": [
+                    "SEN-3-F": [
                         // Cardio
                         ["movement": "lightCardio",
                          "breaths": 5,
@@ -28810,7 +28796,7 @@ extension sessionData {
                         ["pose": "crossLeg",
                          "breaths": 10],
                     ],
-                    "YNEVs-3": [
+                    "YNEM-3": [
                         ["pose": "mountain",
                          "breaths": 5],
                         ["pose": "highLungeL",
@@ -28864,7 +28850,7 @@ extension sessionData {
                         ["pose": "crossLeg",
                          "breaths": 10],
                     ],
-                    "YNEVs-4": [
+                    "YNEM-4": [
                         ["pose": "mountain",
                          "breaths": 5],
                         ["pose": "catCow",
@@ -28926,7 +28912,7 @@ extension sessionData {
                     ],
                     
                     // MARK: Long
-                    "YNEM-1": [
+                    "YNEL-1": [
                         ["pose": "upwardsSalute",
                          "breaths": 5],
                         ["pose": "treeL",
@@ -29004,7 +28990,7 @@ extension sessionData {
                         ["pose": "crossLeg",
                          "breaths": 10],
                     ],
-                    "YNEM-2": [
+                    "YNEL-2": [
                         ["pose": "upwardsSalute",
                          "breaths": 5],
                         ["pose": "warrior1L",
@@ -29078,7 +29064,7 @@ extension sessionData {
                         ["pose": "crossLeg",
                          "breaths": 10],
                     ],
-                    "YNEVs-3": [
+                    "YNEVL-3": [
                         ["pose": "mountain",
                          "breaths": 5],
                         ["pose": "highLungeL",
@@ -29152,7 +29138,7 @@ extension sessionData {
                         ["pose": "crossLeg",
                          "breaths": 10],
                     ],
-                    "YNEVs-4": [
+                    "YNEL-4": [
                         ["pose": "mountain",
                          "breaths": 5],
                         ["pose": "cow",

@@ -3770,8 +3770,8 @@
 		077DAB0E1FD5FCC200CF7949 /* Session Data */ = {
 			isa = PBXGroup;
 			children = (
-				077DAB141FD5FCE300CF7949 /* Movements.swift */,
 				077DAB121FD5FCD500CF7949 /* Sessions.swift */,
+				077DAB141FD5FCE300CF7949 /* Movements.swift */,
 				07C10F5420344B9400D70DF8 /* SessionsNew.swift */,
 				07002A5F1FD5ACE00000A755 /* SortedSessionsFinalChoice.swift */,
 				07D127F51FD6FB1F00C88352 /* SortedSessionsSchedule.swift */,

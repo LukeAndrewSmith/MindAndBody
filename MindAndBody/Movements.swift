@@ -8,7 +8,7 @@
 
 import Foundation
 
-class sessionData {
+extension sessionData {
     
     // MARK:- Full Key Arrays
     static let fullKeyArrays: [String: [[String]]] =

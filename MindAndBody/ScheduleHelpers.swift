@@ -1786,7 +1786,8 @@ extension ScheduleScreen {
         editProfileButton.tintColor = Colors.dark
         //
         actionSheetSeparator.backgroundColor = Colors.light.withAlphaComponent(0.25)
-        actionSheetSeparator.frame = CGRect(x: 5, y: (147 + 49) + 10 + 49 + 10 + 49 + 10, width: view.bounds.width - 30, height: 1)
+        let yCoord = (147 + 49) + 10 + 49 + 10 + 49 + 10
+        actionSheetSeparator.frame = CGRect(x: 5, y: yCoord, width: Int(view.bounds.width - 30), height: 1)
         actionSheetSeparator.layer.cornerRadius = 0.25
         actionSheetSeparator.clipsToBounds = true
         
