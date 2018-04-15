@@ -106,10 +106,9 @@ extension sessionData {
         [
             // Warmup
             "warmup": [
-                "fullBody": "fullBody",
-                "upperBody": "upperBody",
-                "lowerBody": "lowerBody",
-                "cardio": "cardio"],
+                "workout": "workout",
+                "cardio": "cardio",
+                "flexibility": "flexibility"],
             // Workout
             "workout": [
                 // Classic Gym

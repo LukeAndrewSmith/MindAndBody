@@ -19,14 +19,13 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
-    // Full Body
-    @IBOutlet weak var fullBody: UIButton!
-    // Upper Lower
-    @IBOutlet weak var upperBody: UIButton!
-    // Legs Pull Push
-    @IBOutlet weak var lowerBody: UIButton!
+    // Workout
+    @IBOutlet weak var workout: UIButton!
     // Cardio
     @IBOutlet weak var cardio: UIButton!
+    // Flexibility
+    @IBOutlet weak var flexibility: UIButton!
+    //
     //
     @IBOutlet weak var custom: UIButton!
     
@@ -34,11 +33,11 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     @IBOutlet weak var stackView: UIStackView!
     
     // Constraints
-    @IBOutlet weak var stackTop: NSLayoutConstraint!
+    @IBOutlet weak var workoutTop: NSLayoutConstraint!
+    //
+    @IBOutlet weak var workoutBottom: NSLayoutConstraint!
     //
     @IBOutlet weak var stackBottom: NSLayoutConstraint!
-    //
-    @IBOutlet weak var stack2: UIStackView!
     //
     @IBOutlet weak var connectionLabelWidth: NSLayoutConstraint!
     //
@@ -59,42 +58,23 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         navigationBar.title = (NSLocalizedString("warmup", comment: ""))
         
         // Button Titles
-        //
-        fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
-        fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        fullBody.layer.borderWidth = 5
-        fullBody.layer.borderColor = Colors.dark.cgColor
-        fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        fullBody.titleLabel?.textAlignment = .center
-        fullBody.setTitleColor(Colors.dark, for: .normal)
-        //
-        upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
-        upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        upperBody.layer.borderWidth = 5
-        upperBody.layer.borderColor = Colors.dark.cgColor
-        upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        upperBody.titleLabel?.textAlignment = .center
-        upperBody.setTitleColor(Colors.dark, for: .normal)
-        //
-        lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
-        lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        lowerBody.layer.borderWidth = 5
-        lowerBody.layer.borderColor = Colors.dark.cgColor
-        lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        lowerBody.titleLabel?.textAlignment = .center
-        lowerBody.setTitleColor(Colors.dark, for: .normal)
+        workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
+        workout.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        workout.setTitleColor(Colors.dark, for: .normal)
+        workout.layer.borderWidth = 5
+        workout.layer.borderColor = Colors.dark.cgColor
         //
         cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
-        cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        cardio.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        cardio.setTitleColor(Colors.dark, for: .normal)
         cardio.layer.borderWidth = 5
         cardio.layer.borderColor = Colors.dark.cgColor
-        cardio.titleLabel?.adjustsFontSizeToFitWidth = true
-        cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        cardio.titleLabel?.textAlignment = .center
-        cardio.setTitleColor(Colors.dark, for: .normal)
+        //
+        flexibility.setTitle(NSLocalizedString("flexibility", comment: ""), for: UIControlState.normal)
+        flexibility.setTitleColor(Colors.dark, for: .normal)
+        flexibility.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        flexibility.layer.borderWidth = 5
+        flexibility.layer.borderColor = Colors.dark.cgColor
         //
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         custom.layer.borderWidth = 5
@@ -113,19 +93,20 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         // Iphone 5/SE
         if IPhoneType.shared.iPhoneType() == 0 {
             //
-            stackTop.constant = 30
-            stackBottom.constant = 30
+            workoutTop.constant = 52
+            workoutBottom.constant = 52
+            stackBottom.constant = 52
             //
-            stack2.spacing = 15
-            connectionLabelTrailing.constant = 15
+            stackView.spacing = 15
             connectionLabelWidth.constant = 15
+            connectionLabelTrailing.constant = 15
         } else if IPhoneType.shared.iPhoneType() == 2 {
             //
-            stackTop.constant = 80
-            stackBottom.constant = 80
+            workoutTop.constant = 102
+            workoutBottom.constant = 102
+            stackBottom.constant = 102
+            //
         }
-        
-        
     }
     
     //
@@ -134,33 +115,26 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
-        cardio.layer.cornerRadius = (self.stackView.frame.size.height - 49) / 6
+        workout.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
+        workout.layer.masksToBounds = true
+        workout.titleLabel?.adjustsFontSizeToFitWidth = true
+        workout.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        workout.titleLabel?.numberOfLines = 0
+        workout.titleLabel?.textAlignment = .center
+        //
+        cardio.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         cardio.layer.masksToBounds = true
         cardio.titleLabel?.adjustsFontSizeToFitWidth = true
         cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         cardio.titleLabel?.numberOfLines = 0
         cardio.titleLabel?.textAlignment = .center
         //
-        lowerBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
-        lowerBody.layer.masksToBounds = true
-        lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        lowerBody.titleLabel?.numberOfLines = 0
-        lowerBody.titleLabel?.textAlignment = .center
-        //
-        upperBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
-        upperBody.layer.masksToBounds = true
-        upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        upperBody.titleLabel?.numberOfLines = 0
-        upperBody.titleLabel?.textAlignment = .center
-        //
-        fullBody.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 6
-        fullBody.layer.masksToBounds = true
-        fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        fullBody.titleLabel?.numberOfLines = 0
-        fullBody.titleLabel?.textAlignment = .center
+        flexibility.layer.cornerRadius = (self.stackView.frame.size.height) / 2
+        flexibility.layer.masksToBounds = true
+        flexibility.titleLabel?.adjustsFontSizeToFitWidth = true
+        flexibility.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        flexibility.titleLabel?.numberOfLines = 0
+        flexibility.titleLabel?.textAlignment = .center
     }
     
     //
@@ -168,30 +142,23 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     //
     // Indicate to next screen which button was pressed
     var warmupType = Int()
-    // Full Body
-    @IBAction func fullBody(_ sender: UIButton) {
-        SelectedSession.shared.selectedSession[1] = "fullBody"
-        SelectedSession.shared.selectedSession[2] = ""
-        //
-        performSegue(withIdentifier: "warmupSegue", sender: nil)
-    }
-    // Upper Body
-    @IBAction func upperBody(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "upperBody"
-        SelectedSession.shared.selectedSession[2] = ""
-        //
-        performSegue(withIdentifier: "warmupSegue", sender: nil)
-    }
-    // Lower Body
-    @IBAction func lowerBody(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "lowerBody"
+    // Wamrup
+    @IBAction func workout(_ sender: Any) {
+        SelectedSession.shared.selectedSession[1] = "workout"
         SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Cardio
     @IBAction func cardio(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "cardio"
+        SelectedSession.shared.selectedSession[1] = "endurance"
+        SelectedSession.shared.selectedSession[2] = ""
+        //
+        performSegue(withIdentifier: "warmupSegue", sender: nil)
+    }
+    // Flexibility
+    @IBAction func flexibility(_ sender: Any) {
+        SelectedSession.shared.selectedSession[1] = "flexibility"
         SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)

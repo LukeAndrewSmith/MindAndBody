@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -1451,66 +1451,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="doF-1k-deY">
-                                <rect key="frame" x="0.0" y="40" width="375" height="523"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iCi-xd-g7I">
-                                        <rect key="frame" x="107" y="0.0" width="161.5" height="161"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="iCi-xd-g7I" secondAttribute="height" id="5pp-nQ-R6C"/>
-                                        </constraints>
-                                        <state key="normal" title="Full - Body">
-                                            <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="fullBody:" destination="v85-Zl-htK" eventType="touchUpInside" id="HON-Hz-yjx"/>
-                                        </connections>
-                                    </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JvH-fp-SB1">
-                                        <rect key="frame" x="17" y="181" width="341" height="161"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riE-ZG-nMs">
-                                                <rect key="frame" x="0.0" y="0.0" width="160.5" height="161"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="riE-ZG-nMs" secondAttribute="height" id="dwJ-Pj-SVd"/>
-                                                </constraints>
-                                                <state key="normal" title="Button">
-                                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="upperBody:" destination="v85-Zl-htK" eventType="touchUpInside" id="eqj-S9-dFE"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSS-5e-GgG">
-                                                <rect key="frame" x="180.5" y="0.0" width="160.5" height="161"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="MSS-5e-GgG" secondAttribute="height" id="gI6-Hp-w98"/>
-                                                </constraints>
-                                                <state key="normal" title="Button">
-                                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="lowerBody:" destination="v85-Zl-htK" eventType="touchUpInside" id="xVZ-aC-S73"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A2e-uj-Jws">
-                                        <rect key="frame" x="107" y="362" width="161.5" height="161"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="A2e-uj-Jws" secondAttribute="height" id="FpW-Pl-U8H"/>
-                                        </constraints>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="cardio:" destination="v85-Zl-htK" eventType="touchUpInside" id="E1O-iy-k12"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXR-g3-Qhe">
-                                <rect key="frame" x="177" y="301" width="20" height="1"/>
+                                <rect key="frame" x="177.5" y="453" width="20" height="1"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="fT6-Vp-wOO"/>
@@ -1535,35 +1477,79 @@
                                     <segue destination="A7A-wz-wFE" kind="show" identifier="customSegueWarmup" id="W5e-QQ-hCd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iCi-xd-g7I">
+                                <rect key="frame" x="71.5" y="72" width="232.5" height="232"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="iCi-xd-g7I" secondAttribute="height" id="5pp-nQ-R6C"/>
+                                </constraints>
+                                <state key="normal" title="Workout">
+                                    <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="workout:" destination="v85-Zl-htK" eventType="touchUpInside" id="xDh-NX-VzT"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="T2P-NC-jtp">
+                                <rect key="frame" x="22.5" y="376" width="330" height="155"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riE-ZG-nMs">
+                                        <rect key="frame" x="0.0" y="0.0" width="155" height="155"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="riE-ZG-nMs" secondAttribute="height" id="dwJ-Pj-SVd"/>
+                                        </constraints>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cardio:" destination="v85-Zl-htK" eventType="touchUpInside" id="sEj-Zj-pMT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSS-5e-GgG">
+                                        <rect key="frame" x="175" y="0.0" width="155" height="155"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="MSS-5e-GgG" secondAttribute="height" id="gI6-Hp-w98"/>
+                                        </constraints>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="flexibility:" destination="v85-Zl-htK" eventType="touchUpInside" id="puq-KC-p4b"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.6705882353" green="0.12941176469999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="doF-1k-deY" firstAttribute="top" secondItem="mPH-4T-Ded" secondAttribute="bottom" constant="40" id="FDI-ab-FZZ"/>
-                            <constraint firstAttribute="trailing" secondItem="doF-1k-deY" secondAttribute="trailing" id="PDv-Ce-rmk"/>
-                            <constraint firstItem="EXR-g3-Qhe" firstAttribute="centerX" secondItem="6d5-NG-Su3" secondAttribute="centerX" id="RE5-pe-oNv"/>
+                            <constraint firstItem="T2P-NC-jtp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6d5-NG-Su3" secondAttribute="leading" id="AHL-S9-khM"/>
+                            <constraint firstItem="EXR-g3-Qhe" firstAttribute="centerX" secondItem="6d5-NG-Su3" secondAttribute="centerX" id="Dss-II-5el"/>
+                            <constraint firstItem="XuC-fv-ydW" firstAttribute="top" secondItem="T2P-NC-jtp" secondAttribute="bottom" constant="72" id="IYW-Ex-d4A"/>
                             <constraint firstAttribute="trailing" secondItem="SWS-kd-d6O" secondAttribute="trailing" constant="10" id="RQK-9X-gKb"/>
-                            <constraint firstItem="doF-1k-deY" firstAttribute="leading" secondItem="6d5-NG-Su3" secondAttribute="leading" id="SOZ-Z4-sej"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="T2P-NC-jtp" secondAttribute="trailing" id="RZa-JJ-OF2"/>
+                            <constraint firstItem="T2P-NC-jtp" firstAttribute="centerX" secondItem="6d5-NG-Su3" secondAttribute="centerX" id="SUE-WE-kcL"/>
+                            <constraint firstItem="T2P-NC-jtp" firstAttribute="top" secondItem="iCi-xd-g7I" secondAttribute="bottom" constant="72" id="ZvU-w0-ykZ"/>
                             <constraint firstItem="XuC-fv-ydW" firstAttribute="top" secondItem="SWS-kd-d6O" secondAttribute="bottom" constant="10" id="du2-jw-pdv"/>
-                            <constraint firstItem="EXR-g3-Qhe" firstAttribute="centerY" secondItem="riE-ZG-nMs" secondAttribute="centerY" id="jEH-dx-aGJ"/>
-                            <constraint firstItem="XuC-fv-ydW" firstAttribute="top" secondItem="doF-1k-deY" secondAttribute="bottom" constant="40" id="mL6-2F-phS"/>
+                            <constraint firstItem="iCi-xd-g7I" firstAttribute="top" secondItem="6d5-NG-Su3" secondAttribute="top" constant="72" id="kj7-eq-Qb6"/>
+                            <constraint firstItem="iCi-xd-g7I" firstAttribute="centerX" secondItem="6d5-NG-Su3" secondAttribute="centerX" id="qgK-mZ-yvy"/>
+                            <constraint firstItem="T2P-NC-jtp" firstAttribute="height" secondItem="iCi-xd-g7I" secondAttribute="height" multiplier="2/3" id="vYx-DW-wE0"/>
+                            <constraint firstItem="EXR-g3-Qhe" firstAttribute="centerY" secondItem="riE-ZG-nMs" secondAttribute="centerY" id="zPq-HS-hRS"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="wSi-Qn-Jil"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="cardio" destination="A2e-uj-Jws" id="j84-UE-EKL"/>
+                        <outlet property="cardio" destination="riE-ZG-nMs" id="SZc-FM-nmt"/>
                         <outlet property="connectionLabelTrailing" destination="u8d-lV-YIi" id="g3l-Cw-ZVA"/>
                         <outlet property="connectionLabelWidth" destination="u8d-lV-YIi" id="6gb-0c-YQG"/>
                         <outlet property="custom" destination="SWS-kd-d6O" id="k6f-5m-A1r"/>
-                        <outlet property="fullBody" destination="iCi-xd-g7I" id="pam-CY-U2s"/>
-                        <outlet property="lowerBody" destination="MSS-5e-GgG" id="lGW-uH-mnc"/>
+                        <outlet property="flexibility" destination="MSS-5e-GgG" id="iey-Sg-koh"/>
                         <outlet property="navigationBar" destination="wSi-Qn-Jil" id="xOX-7B-ml5"/>
-                        <outlet property="stack2" destination="JvH-fp-SB1" id="OLf-ZV-u8p"/>
-                        <outlet property="stackBottom" destination="mL6-2F-phS" id="0Mi-t7-5uF"/>
-                        <outlet property="stackTop" destination="FDI-ab-FZZ" id="h0y-g0-aZC"/>
-                        <outlet property="stackView" destination="doF-1k-deY" id="BfE-gp-1rI"/>
-                        <outlet property="upperBody" destination="riE-ZG-nMs" id="GEr-bm-nCe"/>
+                        <outlet property="stackBottom" destination="IYW-Ex-d4A" id="5Vo-7b-ncM"/>
+                        <outlet property="stackView" destination="T2P-NC-jtp" id="qqr-FR-IU5"/>
+                        <outlet property="workout" destination="iCi-xd-g7I" id="368-Kz-8r7"/>
+                        <outlet property="workoutBottom" destination="ZvU-w0-ykZ" id="S9W-kI-Ueq"/>
+                        <outlet property="workoutTop" destination="kj7-eq-Qb6" id="RLp-u2-YpU"/>
                         <segue destination="bRc-pd-jNj" kind="show" identifier="warmupSegue" id="bK5-Op-uet"/>
                     </connections>
                 </viewController>
@@ -5378,8 +5364,8 @@
         <segue reference="faH-ex-aMQ"/>
         <segue reference="0ea-jZ-0Du"/>
         <segue reference="tUJ-Lb-bfp"/>
-        <segue reference="DOv-zc-T1v"/>
-        <segue reference="SOr-B2-NYZ"/>
+        <segue reference="W5e-QQ-hCd"/>
+        <segue reference="bK5-Op-uet"/>
         <segue reference="zU9-Z8-ErV"/>
         <segue reference="m3z-OW-W4C"/>
         <segue reference="WE3-0F-Tbc"/>

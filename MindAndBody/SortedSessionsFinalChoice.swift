@@ -17,7 +17,7 @@ extension sessionData {
         // MARK:- Warmup
         "warmup": [
             // MARK: Full
-            "fullBody": [
+            "workout": [
                 ["allMovements",
                  // Short
                  "WaWS-F-1",
@@ -29,18 +29,16 @@ extension sessionData {
                 "WaWN-F-2",
                 "WaWN-F-3",
                 "WaWN-F-4",],
-            ],
-            // MARK: Upper
-            "upperBody": [
+                
+                // MARK: Upper
                 [// Short
                 "WaWS-U-1",
                 "WaWS-U-2",
                 // Normal
                 "WaWN-U-1",
                 "WaWN-U-2",],
-            ],
-            // MARK: Lower
-            "lowerBody": [
+                
+                // MARK: Lower
                 [// Short
                 "WaWS-L-1",
                 "WaWS-L-2",
@@ -52,6 +50,7 @@ extension sessionData {
                 "WaWN-L-3",
                 "WaWN-L-4",],
             ],
+            
             // MARK: Cardio
             "cardio": [
                 [// Short

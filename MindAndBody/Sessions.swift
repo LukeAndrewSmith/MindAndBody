@@ -21,16 +21,51 @@ class sessionData {
             // ...-SS begin session (-W warmup, -S being stretching
             // ...-1 being workout 1 of several
 
+//    func returnDict(name: String) -> [String: [String: [[String: Any]]]] {
+//        let Dicts = ["warmup": sessionData.warmup,
+//                     "workout": sessionData.workout,
+//                     "cardio": sessionData.cardio,
+//                     "stretching": sessionData.stretching,
+//                     "yoga": sessionData.yoga,]
+//        return Dicts
+//    }
     
-    
-    static let sessions: [String: [String: [String: [[String: Any]]]]] =
+    // MARK: Sessions
+    static var sessions: [String: [String: [String: [[String: Any]]]]] =
         [
+            "warmup": ["workout": sessionData.WaW,
+                       "endurance": sessionData.WaE,
+                       "flexibility": sessionData.WaF],
+            "workout": ["classicGymFull": sessionData.WoCsGF,
+                        "classicGymUpper": sessionData.WoCsGU,
+                        "classicGymLower": sessionData.WoCsGL,
+                        "circuitGymFull": sessionData.WoCcGF,
+                        "circuitGymUpper": sessionData.WoCcGU,
+                        "circuitGymLower": sessionData.WoCcGL,
+                        "classicBodyweightFull": sessionData.WoCsBF,
+                        "classicBodyweightUpper": sessionData.WoCsBU,
+                        "classicBodyweightLower": sessionData.WoCsBL,
+                        "circuitBodyweightFull": sessionData.WoCcBF,
+                        "circuitBodyweightUpper": sessionData.WoCcBU,
+                        "circuitBodyweightLower": sessionData.WoCcBL,
+            ],
+            "cardio": ["hiit": sessionData.CH,
+                       "workout": sessionData.CB,],
+            "stretching": ["general": sessionData.SG,
+                           "postWorkout": sessionData.SPw,
+                           "postCardio": sessionData.SPc,],
+            "yoga": ["relaxing": sessionData.YR,
+                     "neutral": sessionData.YN,
+                     "stimulating": sessionData.YS,],
+        ]
+    
+//    init() {
+        // perform some initialization here
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:- Warmup
-            "warmup": [
                 // Note for warmup naming, -F means foam roller
                 // Warmup Workout Short - Full - 1 (-F)
                 //
@@ -38,277 +73,277 @@ class sessionData {
                 // sets
                 // reps
                 // time
-                "workout": [
+        static let WaW: [String: [[String: Any]]] = [
                     "allMovements": [
                         ["title": "allMovements",
-                            "movement": "lightCardio",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
+                         "movement": "lightCardio",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
                         ["movement": "wrist",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
                         ["movement": "elbow",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
                         ["movement": "shoulderR",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "neckR",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "waist",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "hip",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "knees",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "ankles",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "backf",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "thoracicSpine",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "lat",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "pecDelt",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "rearDelt",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "quadf",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "adductorf",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "hamstringf",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "glutef",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "calvef",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "itBand",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "standOnBall",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "gluteBridgewW",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "kneelingKickBackW",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "legsToSideSquat",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "standingGluteKickback",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "sideLegDrop",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "sideLegKick",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "scorpionKick",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "sideBend",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "catCow",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "legsToSideTwist",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "upperBackRotation",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "latStretch",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "lyingSideWindmill",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "wallSlides",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "wallReaches",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "shoulderRotationW",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "forearmWallSlides135",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "superManShoulder",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "facePull",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "externalRotation",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "internalRotation",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "shoulderDislocation",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "latPullover",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "seatedKneeDrop",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "mountainClimber",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "groinStretch",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "threadTheNeedle",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "butterflyPose",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "cossakSquat",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "hipHinges",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "lungeTwist",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "sideLegSwings",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "frontLegSwings",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "spiderManHipLiftOverheadReach",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "forefootBounces",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "jumpSquat",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "lunge",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "gluteKicks",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "aSkips",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "bSkips",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "grapeVines",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "lateralBound",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "straightLegBound",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "sprints",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "pushUp",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
-                       ["movement": "pullUp",
-                            "sets": 2,
-                            "reps": "0",
-                            "time": 2],
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "neckR",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "waist",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "hip",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "knees",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "ankles",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "backf",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "thoracicSpine",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "lat",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "pecDelt",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "rearDelt",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "quadf",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "adductorf",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "hamstringf",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "glutef",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "calvef",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "itBand",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "standOnBall",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "gluteBridgewW",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "kneelingKickBackW",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "legsToSideSquat",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "standingGluteKickback",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "sideLegDrop",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "sideLegKick",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "scorpionKick",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "sideBend",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "catCow",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "legsToSideTwist",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "upperBackRotation",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "latStretch",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "lyingSideWindmill",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "wallSlides",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "wallReaches",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "shoulderRotationW",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "forearmWallSlides135",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "superManShoulder",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "facePull",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "externalRotation",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "internalRotation",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "shoulderDislocation",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "latPullover",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "seatedKneeDrop",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "mountainClimber",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "groinStretch",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "threadTheNeedle",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "butterflyPose",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "cossakSquat",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "hipHinges",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "lungeTwist",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "sideLegSwings",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "frontLegSwings",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "spiderManHipLiftOverheadReach",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "forefootBounces",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "jumpSquat",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "lunge",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "gluteKicks",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "aSkips",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "bSkips",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "grapeVines",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "lateralBound",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "straightLegBound",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "sprints",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "pushUp",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "pullUp",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
                     ],
                     
                     // Note for warmup naming, -F at end means foam roller, Wa = warmup
@@ -1079,15 +1114,15 @@ class sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                ],
+                ]
                 
                 // MARK:-
                 // MARK:-
                 // MARK: Endurance
                 // MARK:-
-                "endurance": [
+        static let WaE: [String: [[String: Any]]] = [
                     // Warmup Endurance Short - 1
-
+                    
                     // MARK: Short
                     "WaES-1": [
                         // Joint Rotations
@@ -1348,13 +1383,13 @@ class sessionData {
                          "reps": "10-15",
                          "time": 30],
                     ],
-                ],
+                ]
                 
                 // MARK:-
                 // MARK:-
-                // MARK: Flexibility
+                // MARK: Flexibility/Yoga
                 // MARK:-
-                "flexibility": [
+        static let WaF: [String: [[String: Any]]] = [
                     // MARK: Short
                     "WaFS-1": [
                         // Joint Rotations
@@ -1570,14 +1605,12 @@ class sessionData {
                          "reps": "15-20",
                          "time": 30],
                     ],
-                ],
-            ],
+                ]
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:- Workout
-            "workout": [
                 // MARK:-
                 // MARK:-
                 // MARK: Classic Gym
@@ -1586,388 +1619,388 @@ class sessionData {
                 // reps
                 // MARK:-
                 // MARK: Full
-                "classicGymFull": [
+    static let WoCsGF: [String: [[String: Any]]] = [
                     "allMovements": [
-                       ["title": "allMovements",
-                            "movement": "squat",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "frontSquat",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "legPress",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "dumbellFrontSquat",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "legExtensions",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "deadlift",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "romanianDeadlift",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "weightedHipThrust",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "legCurl",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "oneLeggedDeadlift",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "lungeDumbell",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "bulgarianSplitSquat",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "weightedStepUp",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "standingCalfRaise",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "seatedCalfRaise",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "pullDown",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "kneelingPullDown",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "bentOverRowDumbell",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "tBarRow",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "rowMachine",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "latPullover",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "facePull",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "leaningBackPullDown",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "bentOverBarbellRow",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "shrugDumbell",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "hammerCurl",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "hammerCurlCable",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "curl",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "farmersCarry",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "reverseBarbellCurl",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "forearmCurl",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "benchPress",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "benchPressDumbell",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "semiInclineDumbellPress",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "platePress",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "barbellKneelingPress",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "dips",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "standingShoulderPressBarbell",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "standingShoulderPressDumbell",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "lateralRaise",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "frontRaise",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "closeGripBench",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "cableExtension",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "ropeExtension",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "cleanPress",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "bodyweightSquat",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "pistolSquat",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "skaterSquat",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "squatJump",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "sumoSquat",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "lunge",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "lungeJump",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "deadlift",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "singleLegDeadlift",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "gluteBridge",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "singleLegGluteBridge",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "kickBack",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "standingKickBack",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "calfRaise",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "contralateralLimbRaises",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "superMan",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "backHyperextension",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "doorFrameRow",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "superMan",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "backHyperextension",
-                             "sets": 2,
-                             "reps": "0",
-                             "time": 2],
-                       ["movement": "handStandTrap",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "pushup",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "trianglePushup",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "dolphinPushup",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "tricepExtensionsBodyweight",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "walkingPushup",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "downwardDogPushup",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "wallPushup",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "boxer",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "armCircles",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "plank",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "dynamicPlank",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "sidePlankW",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "pushupPlank",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "lSit",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "bicycleCrunch",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "divingHold",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "hipRaise",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "legHold",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "mountainClimbers",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "burpee",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "kickThroughBurpee",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "spiderPushup",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "crabWalk",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "jumpingJacks",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "tuckJump",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "bumKicks",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "kneeRaises",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "wallSit",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "toePress",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "staticLunge",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "chestSqueeze",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "pushupHold",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "pullupHold",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "ballPushup",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "bodyweightRow",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "pullup",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "hangingLegRaise",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "bulgarianSplitSquat",
-                            "sets": 2,
-                            "reps": "0"],
-                       ["movement": "boxJump",
-                              "sets": 2,
-                              "reps": "0",
-                              "time": 2],
-                       ["movement": "hipThrusts",
-                              "sets": 2,
-                              "reps": "0",
-                              "time": 2],
-                       ["movement": "stepUp",
-                              "sets": 2,
-                              "reps": "0",
-                              "time": 2],
+                        ["title": "allMovements",
+                         "movement": "squat",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "frontSquat",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "legPress",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "dumbellFrontSquat",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "legExtensions",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "deadlift",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "romanianDeadlift",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "weightedHipThrust",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "legCurl",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "oneLeggedDeadlift",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "lungeDumbell",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "bulgarianSplitSquat",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "weightedStepUp",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "standingCalfRaise",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "seatedCalfRaise",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "pullDown",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "kneelingPullDown",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "bentOverRowDumbell",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "tBarRow",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "rowMachine",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "latPullover",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "facePull",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "leaningBackPullDown",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "bentOverBarbellRow",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "shrugDumbell",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "hammerCurl",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "hammerCurlCable",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "curl",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "farmersCarry",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "reverseBarbellCurl",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "forearmCurl",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "benchPress",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "benchPressDumbell",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "semiInclineDumbellPress",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "platePress",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "barbellKneelingPress",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "dips",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "standingShoulderPressBarbell",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "standingShoulderPressDumbell",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "lateralRaise",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "frontRaise",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "closeGripBench",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "cableExtension",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "ropeExtension",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "cleanPress",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "bodyweightSquat",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "pistolSquat",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "skaterSquat",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "squatJump",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "sumoSquat",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "lunge",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "lungeJump",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "deadlift",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "singleLegDeadlift",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "gluteBridge",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "singleLegGluteBridge",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "kickBack",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "standingKickBack",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "calfRaise",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "contralateralLimbRaises",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "superMan",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "backHyperextension",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "doorFrameRow",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "superMan",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "backHyperextension",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "handStandTrap",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "pushup",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "trianglePushup",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "dolphinPushup",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "tricepExtensionsBodyweight",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "walkingPushup",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "downwardDogPushup",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "wallPushup",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "boxer",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "armCircles",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "plank",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "dynamicPlank",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "sidePlankW",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "pushupPlank",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "lSit",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "bicycleCrunch",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "divingHold",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "hipRaise",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "legHold",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "mountainClimbers",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "burpee",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "kickThroughBurpee",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "spiderPushup",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "crabWalk",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "jumpingJacks",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "tuckJump",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "bumKicks",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "kneeRaises",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "wallSit",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "toePress",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "staticLunge",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "chestSqueeze",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "pushupHold",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "pullupHold",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "ballPushup",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "bodyweightRow",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "pullup",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "hangingLegRaise",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "bulgarianSplitSquat",
+                         "sets": 2,
+                         "reps": "0"],
+                        ["movement": "boxJump",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "hipThrusts",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
+                        ["movement": "stepUp",
+                         "sets": 2,
+                         "reps": "0",
+                         "time": 2],
                     ],
                     
                     // MARK:-
@@ -4325,11 +4358,11 @@ class sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                ],
+                ]
                 // MARK:-
                 // MARK: Upper
                 // MARK: -
-                "classicGymUpper": [
+    static let WoCsGU: [String: [[String: Any]]] = [
                     // MARK: Easy
                     // MARK: Short
                     // Women
@@ -6080,11 +6113,11 @@ class sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                ],
+                ]
                 // MARK:-
                 // MARK: Lower
                 // MARK:-
-                "classicGymLower": [
+    static let WoCsGL: [String: [[String: Any]]] = [
                     // MARK: Easy
                     // MARK: Short
                     "WGES-CsL-1": [
@@ -7542,16 +7575,7 @@ class sessionData {
                          "sets": 2,
                          "reps": "20+ breaths"],
                     ],
-                ],
-                // MARK: 5 x 5 ?? Not for now
-                "classicGym5x5": [
-                    "testSession": [
-                       ["movement": "squat",
-                        "sets": 2,
-                        "reps": ""],
-                       
-                    ],
-                ],
+                ]
                 // MARK:-
                 // MARK:-
                 // MARK: Circuit Gym
@@ -7561,7 +7585,7 @@ class sessionData {
                 // rounds (1st only)
                 // reps
                 // MARK: Full
-                "circuitGymFull": [
+    static let WoCcGF: [String: [[String: Any]]] = [
                     // MARK:-
                     // MARK: Easy
                     // MARK: Short
@@ -7569,8 +7593,8 @@ class sessionData {
                     "WGES-CcF-1": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "bodyweightDeadlift",
                          "reps": "15"],
                         ["movement": "bentOverRowDumbell",
@@ -7721,8 +7745,8 @@ class sessionData {
                     "WGEN-CcF-1": [
                         // Round 1
                         ["rounds": 5, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "bodyweightDeadlift",
                          "reps": "15"],
                         ["movement": "bentOverRowDumbell",
@@ -7913,8 +7937,8 @@ class sessionData {
                     "WGEN-CcF-5": [
                         // Round 1
                         ["rounds": 5, // NOTE: first movement contains number of rounds
-                         "movement": "dumbellFrontSquat",
-                         "reps": "15"],
+                            "movement": "dumbellFrontSquat",
+                            "reps": "15"],
                         ["movement": "bodyweightDeadlift",
                          "reps": "15"],
                         ["movement": "bentOverRowDumbell",
@@ -7966,8 +7990,8 @@ class sessionData {
                     "WGAS-CcF-1": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "bodyweightRow",
@@ -8118,8 +8142,8 @@ class sessionData {
                     "WGAN-CcF-1": [
                         // Round 1
                         ["rounds": 5, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "bodyweightRow",
@@ -8362,8 +8386,8 @@ class sessionData {
                     "WGHS-CcF-1": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "pullup",
@@ -8511,11 +8535,11 @@ class sessionData {
                     ],
                     
                     // MARK: Normal
-                    "WGAN-CcF-1": [
+                    "WGHN-CcF-1": [
                         // Round 1
                         ["rounds": 5, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "pullup",
@@ -8559,7 +8583,7 @@ class sessionData {
                         ["movement": "plank",
                          "reps": "15 breaths"],
                     ],
-                    "WGAN-CcF-2": [
+                    "WGHN-CcF-2": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "dumbellFrontSquat",
@@ -8607,7 +8631,7 @@ class sessionData {
                         ["movement": "plank",
                          "reps": "15 breaths"],
                     ],
-                    "WGAN-CcF-3": [
+                    "WGHN-CcF-3": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "lungeDumbell",
@@ -8655,7 +8679,7 @@ class sessionData {
                         ["movement": "plank",
                          "reps": "15 breaths"],
                     ],
-                    "WGAN-CcF-4": [
+                    "WGHN-CcF-4": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "oneLeggedDeadlift",
@@ -8703,7 +8727,7 @@ class sessionData {
                         ["movement": "plank",
                          "reps": "15 breaths"],
                     ],
-                    "WGAN-CcF-5": [
+                    "WGHN-CcF-5": [
                         // Round 1
                         ["rounds": 5,
                          "movement": "dumbellFrontSquat",
@@ -8751,10 +8775,10 @@ class sessionData {
                         ["movement": "plank",
                          "reps": "15 breaths"],
                     ],
-                ],
+                ]
                 // MARK:-
                 // MARK: Upper
-                "circuitGymUpper": [
+        static let WoCcGU: [String: [[String: Any]]] = [
                     // MARK:-
                     // MARK: Easy
                     // MARK: Short
@@ -8824,8 +8848,8 @@ class sessionData {
                     "WGES-CcU-1-M": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "bentOverRowDumbell",
-                         "reps": "12"],
+                            "movement": "bentOverRowDumbell",
+                            "reps": "12"],
                         ["movement": "benchPress",
                          "reps": "12"],
                         ["movement": "standingShoulderPressDumbell",
@@ -9014,8 +9038,8 @@ class sessionData {
                     "WGEN-CcU-1-M": [
                         // Round 1
                         ["rounds": 5, // NOTE: first movement contains number of rounds
-                         "movement": "bentOverRowDumbell",
-                         "reps": "12"],
+                            "movement": "bentOverRowDumbell",
+                            "reps": "12"],
                         ["movement": "benchPress",
                          "reps": "12"],
                         ["movement": "standingShoulderPressDumbell",
@@ -9255,8 +9279,8 @@ class sessionData {
                     "WGAS-CcU-1-M": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "bodyweightRow",
-                         "reps": "8"],
+                            "movement": "bodyweightRow",
+                            "reps": "8"],
                         ["movement": "benchPress",
                          "reps": "12"],
                         ["movement": "standingShoulderPressDumbell",
@@ -9463,8 +9487,8 @@ class sessionData {
                     "WGAN-CcU-1-M": [
                         // Round 1
                         ["rounds": 5, // NOTE: first movement contains number of rounds
-                         "movement": "bodyweightRow",
-                         "reps": "8"],
+                            "movement": "bodyweightRow",
+                            "reps": "8"],
                         ["movement": "benchPress",
                          "reps": "12"],
                         ["movement": "standingShoulderPressDumbell",
@@ -9655,8 +9679,8 @@ class sessionData {
                     "WGHS-CcU-1-M": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "bodyweightRow",
-                         "reps": "12"],
+                            "movement": "bodyweightRow",
+                            "reps": "12"],
                         ["movement": "benchPress",
                          "reps": "12"],
                         ["movement": "standingShoulderPressDumbell",
@@ -9863,8 +9887,8 @@ class sessionData {
                     "WGHN-CcU-1-M": [
                         // Round 1
                         ["rounds": 5, // NOTE: first movement contains number of rounds
-                         "movement": "bodyweightRow",
-                         "reps": "12"],
+                            "movement": "bodyweightRow",
+                            "reps": "12"],
                         ["movement": "benchPress",
                          "reps": "12"],
                         ["movement": "standingShoulderPressDumbell",
@@ -9956,11 +9980,11 @@ class sessionData {
                         ["movement": "plank",
                          "reps": "15 breaths"],
                     ],
-                ],
+                ]
                 
                 // MARK: -
                 // MARK: Lower
-                "circuitGymLower": [
+            static let WoCcGL: [String: [[String: Any]]] = [
                     // MARK:-
                     // MARK: Easy
                     // MARK: Short
@@ -9968,8 +9992,8 @@ class sessionData {
                     "WGES-CcL-1": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "gluteBridge",
@@ -10120,8 +10144,8 @@ class sessionData {
                     "WGEN-CcL-1": [
                         // Round 1
                         ["rounds": 5, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "gluteBridge",
@@ -10365,8 +10389,8 @@ class sessionData {
                     "WGAS-CcL-1": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "gluteBridge",
@@ -10517,8 +10541,8 @@ class sessionData {
                     "WGAN-CcL-1": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "gluteBridge",
@@ -10761,8 +10785,8 @@ class sessionData {
                     "WGHS-CcL-1": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "gluteBridge",
@@ -10913,8 +10937,8 @@ class sessionData {
                     "WGHN-CcL-1": [
                         // Round 1
                         ["rounds": 3, // NOTE: first movement contains number of rounds
-                         "movement": "squat",
-                         "reps": "12"],
+                            "movement": "squat",
+                            "reps": "12"],
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "gluteBridge",
@@ -11150,7 +11174,7 @@ class sessionData {
                         ["movement": "plank",
                          "reps": "15+ breaths"],
                     ],
-                ],
+                ]
                 // MARK:-
                 // MARK:-
                 // MARK: Classic Bodyweight
@@ -11162,31 +11186,31 @@ class sessionData {
                 // MARK: Note Bodyweight and equiptment
                 // "WBES-CsF-1" = no equiptment
                 // "WBES-CsF-1-E" = equiptment
-                    // When selecting random workout, the program will check if the user wants workouts with equiptment, and if the last letter of the workout name is an E, and will select a new one if so
+                // When selecting random workout, the program will check if the user wants workouts with equiptment, and if the last letter of the workout name is an E, and will select a new one if so
                 // MARK:-
                 // MARK: Full
                 // MARK:-
-                "classicBodyweightFull": [
+            static let WoCsBF: [String: [[String: Any]]] = [
                     // MARK: Easy
                     // MARK: Short
                     // Without equiptment
                     "WBES-CsF-1": [
-                       ["movement": "bodyweightSquat",
-                        "sets": 3,
-                        "reps": "15-20",
-                        "time": 30],
-                       ["movement": "reverseSnowAngels",
-                        "sets": 3,
-                        "reps": "12-15",
-                        "time": 25],
-                       ["movement": "pushup",
-                        "sets": 2,
-                        "reps": "5-10",
-                        "time": 20],
-                       ["movement": "sidePlankW",
-                        "sets": 2,
-                        "reps": "5 breaths",
-                        "time": 15],
+                        ["movement": "bodyweightSquat",
+                         "sets": 3,
+                         "reps": "15-20",
+                         "time": 30],
+                        ["movement": "reverseSnowAngels",
+                         "sets": 3,
+                         "reps": "12-15",
+                         "time": 25],
+                        ["movement": "pushup",
+                         "sets": 2,
+                         "reps": "5-10",
+                         "time": 20],
+                        ["movement": "sidePlankW",
+                         "sets": 2,
+                         "reps": "5 breaths",
+                         "time": 15],
                     ],
                     "WBES-CsF-2": [
                         ["movement": "squatJump",
@@ -12506,11 +12530,11 @@ class sessionData {
                          "reps": "15-20+ breaths",
                          "time": 40],
                     ],
-                ],
+                ]
                 // MARK:-
                 // MARK: Upper
                 // MARK:-
-                "classicBodyweightUpper": [
+            static let WoCsBU: [String: [[String: Any]]] = [
                     // MARK: Easy
                     // MARK: Short
                     "WBES-CsU-1": [
@@ -13104,11 +13128,11 @@ class sessionData {
                          "reps": "20-25",
                          "time": 40],
                     ],
-                ],
+                ]
                 // MARK:-
                 // MARK: Lower
                 // MARK:-
-                "classicBodyweightLower": [
+            static let WoCsBL: [String: [[String: Any]]] = [
                     // MARK: Easy
                     // MARK: Short
                     "WBES-CsL-1": [
@@ -13120,14 +13144,14 @@ class sessionData {
                          "sets": 3,
                          "reps": "15-20",
                          "time": 30],
-                       ["movement": "skaterSquat",
-                        "sets": 3,
-                        "reps": "5-10",
-                        "time": 20],
-                       ["movement": "plank",
-                        "sets": 2,
-                        "reps": "5-10 breaths",
-                        "time": 15],
+                        ["movement": "skaterSquat",
+                         "sets": 3,
+                         "reps": "5-10",
+                         "time": 20],
+                        ["movement": "plank",
+                         "sets": 2,
+                         "reps": "5-10 breaths",
+                         "time": 15],
                     ],
                     "WBES-CsL-2": [
                         ["movement": "squatJump",
@@ -13771,7 +13795,7 @@ class sessionData {
                          "reps": "20 breaths",
                          "time": 30],
                     ],
-                ],
+                ]
                 
                 // MARK:-
                 // MARK:-
@@ -13782,7 +13806,7 @@ class sessionData {
                 // reps
                 // time
                 // MARK: Full
-                "circuitBodyweightFull": [
+                static let WoCcBF: [String: [[String: Any]]] = [
                     // MARK:-
                     // MARK: Easy
                     // MARK: Short
@@ -17102,12 +17126,12 @@ class sessionData {
                          "reps": "15 breaths",
                          "time": 30],
                     ],
-                ],
+                ]
                 
                 // MARK:-
                 // MARK: Upper
                 // MARK:-
-                "circuitBodyweightUpper": [
+                static let WoCcBU: [String: [[String: Any]]] = [
                     // MARK: Easy
                     // MARK: Short
                     "WBES-CcU-1": [
@@ -18872,12 +18896,12 @@ class sessionData {
                          "reps": "20",
                          "time": 30],
                     ],
-                ],
+                ]
                 
                 // MARK:-
                 // MARK: Lower
                 // MARK:-
-                "circuitBodyweightLower": [
+                static let WoCcBL: [String: [[String: Any]]] = [
                     // MARK: Easy
                     // MARK: Short
                     "WBES-CcL-1": [
@@ -20871,18 +20895,16 @@ class sessionData {
                          "reps": "15 breaths",
                          "time": 25],
                     ],
-                ],
-            ],
+                ]
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:- Cardio
-            "cardio": [
                 // MARK: -
                 // MARK: -
                 // MARK: HIIT
-                "hiit": [
+            static let CH: [String: [[String: Any]]] = [
                     // MARK: -
                     // MARK: Session Time: Short
                     // MARK: -
@@ -21008,7 +21030,7 @@ class sessionData {
                         ["movement": "lowIntensity",
                          "time": 90],
                     ],
-
+                    
                     // MARK: -
                     // MARK: Interval Time: Medium
                     // Short, Short, Style 1
@@ -21254,8 +21276,8 @@ class sessionData {
                         ["movement": "lowIntensity",
                          "time": 360],
                     ],
-
-
+                    
+                    
                     
                     // MARK: -
                     // MARK: Session Time: Medium
@@ -22450,11 +22472,11 @@ class sessionData {
                         ["movement": "lowIntensity",
                          "time": 360],
                     ],
-                ],
+                ]
                 // MARK: -
                 // MARK: -
-                // MARK: HIIT Workout
-                "workout": [
+                // MARK: HIIT Bodyweight Workout
+                static let CB: [String: [[String: Any]]] = [
                     // MARK:-
                     // MARK: Easy
                     // MARK: Short
@@ -23253,19 +23275,17 @@ class sessionData {
                          "reps": "30s",
                          "time": 30],
                     ],
-                ],
-            ],
+                ]
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:- Stretching/Flexibility
-            "stretching": [
                 // MARK:-
                 // MARK:-
                 // MARK: General
                 // MARK:-
-                "general": [
+                static let SG: [String: [[String: Any]]] = [
                     "allMovements": [
                        ["title": "allMovements",
                             "movement": "lightCardioL",
@@ -24661,13 +24681,13 @@ class sessionData {
                          "breaths": 10,
                          "time": 30],
                     ],
-                ],
+                ]
                 
                 // MARK:-
                 // MARK:-
                 // MARK: Post Workout
                 // MARK:-
-                "postWorkout": [
+                static let SPw: [String: [[String: Any]]] = [
                     // Stretching Workout Short - Full - 1 (-F)
                         // -F being foam roller
                     
@@ -26106,13 +26126,13 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                ],
+                ]
                 
                 // MARK:-
                 // MARK:-
                 // MARK: Post Cardio
                 // MARK:-
-                "postCardio": [
+                static let SPc: [String: [[String: Any]]] = [
                     // MARK: Short
                         // Stretching, Endurance, Short - 1
                     "SES-1": [
@@ -26596,18 +26616,16 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                     ],
-                ],
-            ],
+                ]
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:-
             // MARK:- Yoga
-            "yoga": [
                 // MARK:-
                 // MARK:-
                 // MARK: Relaxing
-                "relaxing": [
+                static let YR: [String: [[String: Any]]] = [
                     "allMovements": [
                        ["title": "allMovements",
                             "pose": "upwardsSalute",
@@ -28523,12 +28541,12 @@ class sessionData {
                     // MARK: Long
                         // NOTE: Same as average
 
-                ],
+                ]
                 
                 // MARK:-
                 // MARK:-
                 // MARK: Neutral
-                "neutral": [
+                static let YN: [String: [[String: Any]]] = [
                     // MARK:-
                     // MARK: Easy
                     // MARK:-
@@ -29599,12 +29617,12 @@ class sessionData {
                     // NOTE: Same as medium
                     // MARK: Long
                     // NOTE: Same as medium
-                ],
+                ]
                 
                 // MARK:-
                 // MARK:-
                 // MARK: Stimulating
-                "stimulating": [
+                static let YS: [String: [[String: Any]]] = [
                     // MARK: -
                     // MARK: Easy
                     // MARK: Short
@@ -30158,8 +30176,7 @@ class sessionData {
                     // MARK: Short
                     // MARK: Medium
                     // MARK: Long
-                ],
-                
-            ]
-    ]
+                ]
+    
+    //}
 }
