@@ -9,7 +9,6 @@
 import Foundation
 
 class sessionData {
-    // MARK: USES INITIALIZER IN A SILLY WAY
     //
     // MARK: Notes
     // Session names have to be the same as their key
@@ -21,6 +20,7 @@ class sessionData {
             // ...-SS begin session (-W warmup, -S being stretching
             // ...-1 being workout 1 of several
 
+    
 //    func returnDict(name: String) -> [String: [String: [[String: Any]]]] {
 //        let Dicts = ["warmup": sessionData.warmup,
 //                     "workout": sessionData.workout,
@@ -30,12 +30,14 @@ class sessionData {
 //        return Dicts
 //    }
     
+    
     // MARK: Sessions
+        // Sets array like this as doesn't compile otherwise, dictionary too large, would be good to find a new way of doing it
     static var sessions: [String: [String: [String: [[String: Any]]]]] =
         [
             "warmup": ["workout": sessionData.WaW,
-                       "endurance": sessionData.WaE,
-                       "flexibility": sessionData.WaF],
+                       "cardio": sessionData.WaE, // E = endurance
+                       "stretching": sessionData.WaF], // F = flexibility
             "workout": ["classicGymFull": sessionData.WoCsGF,
                         "classicGymUpper": sessionData.WoCsGU,
                         "classicGymLower": sessionData.WoCsGL,
@@ -50,7 +52,7 @@ class sessionData {
                         "circuitBodyweightLower": sessionData.WoCcBL,
             ],
             "cardio": ["hiit": sessionData.CH,
-                       "workout": sessionData.CB,],
+                       "bodyweight": sessionData.CB,],
             "stretching": ["general": sessionData.SG,
                            "postWorkout": sessionData.SPw,
                            "postCardio": sessionData.SPc,],
@@ -59,7 +61,6 @@ class sessionData {
                      "stimulating": sessionData.YS,],
         ]
     
-//    init() {
         // perform some initialization here
             // MARK:-
             // MARK:-
@@ -23288,7 +23289,7 @@ class sessionData {
                 static let SG: [String: [[String: Any]]] = [
                     "allMovements": [
                        ["title": "allMovements",
-                            "movement": "lightCardioL",
+                            "movement": "lightCardio",
                             "breaths": 10,
                             "time": 2],
                        ["movement": "wrist",
@@ -29082,7 +29083,7 @@ class sessionData {
                         ["pose": "crossLeg",
                          "breaths": 10],
                     ],
-                    "YNEVL-3": [
+                    "YNEL-3": [
                         ["pose": "mountain",
                          "breaths": 5],
                         ["pose": "highLungeL",
@@ -29637,7 +29638,7 @@ class sessionData {
                          "breaths": 3],
                         ["pose": "fourLimbedStaff",
                          "breaths": 1],
-                        ["pose": "upwardsDog",
+                        ["pose": "upwardDog",
                          "breaths": 3],
                         ["pose": "downwardDog",
                          "breaths": 3],
@@ -29660,7 +29661,7 @@ class sessionData {
                          "breaths": 3],
                         ["pose": "fourLimbedStaff",
                          "breaths": 1],
-                        ["pose": "upwardsDog",
+                        ["pose": "upwardDog",
                          "breaths": 3],
                         ["pose": "downwardDog",
                          "breaths": 3],
@@ -29834,7 +29835,7 @@ class sessionData {
                          "breaths": 3],
                         ["pose": "fourLimbedStaff",
                          "breaths": 1],
-                        ["pose": "upwardsDog",
+                        ["pose": "upwardDog",
                          "breaths": 3],
                         ["pose": "downwardDog",
                          "breaths": 3],
@@ -29857,7 +29858,7 @@ class sessionData {
                          "breaths": 3],
                         ["pose": "fourLimbedStaff",
                          "breaths": 1],
-                        ["pose": "upwardsDog",
+                        ["pose": "upwardDog",
                          "breaths": 3],
                         ["pose": "downwardDog",
                          "breaths": 3],
@@ -29880,7 +29881,7 @@ class sessionData {
                          "breaths": 3],
                         ["pose": "fourLimbedStaff",
                          "breaths": 1],
-                        ["pose": "upwardsDog",
+                        ["pose": "upwardDog",
                          "breaths": 3],
                         ["pose": "downwardDog",
                          "breaths": 3],
@@ -30177,6 +30178,4 @@ class sessionData {
                     // MARK: Medium
                     // MARK: Long
                 ]
-    
-    //}
 }

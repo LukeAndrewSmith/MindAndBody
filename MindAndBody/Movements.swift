@@ -113,6 +113,7 @@ extension sessionData {
             ],
             "cardio":
                 [
+                    ["highIntensity", "lowIntensity"],
                     // Running
                     ["sprint", "run", "jog", "still", "slowJog", "stretch"],
                     // Biking
@@ -1645,6 +1646,19 @@ extension sessionData {
             ],
             // MARK: Cardio
             "cardio": [
+                // All
+                "highIntensity":
+                    [
+                        "name": ["highIntensity"],
+                        "demonstration": ["running"],
+                        "isMovement": ["true"]
+                ],
+                "lowIntensity":
+                    [
+                        "name": ["lowIntensity"],
+                        "demonstration": ["Pause"],
+                        "isMovement": ["true"]
+                ],
                 // Running
                 "sprint":
                     [

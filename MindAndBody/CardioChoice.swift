@@ -20,6 +20,8 @@ class CardioChoice: UIViewController  {
     
     // Hiit
     @IBOutlet weak var hiit: UIButton!
+    // Bodyweight workout
+    @IBOutlet weak var bodyweight: UIButton!
     // Custom
     @IBOutlet weak var custom: UIButton!
     
@@ -45,6 +47,15 @@ class CardioChoice: UIViewController  {
         hiit.titleLabel?.adjustsFontSizeToFitWidth = true
         hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         hiit.titleLabel?.textAlignment = .center
+        //
+        bodyweight.setTitle(NSLocalizedString("bodyweightCardio", comment: ""), for: UIControlState.normal)
+        bodyweight.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        bodyweight.setTitleColor(Colors.dark, for: .normal)
+        bodyweight.layer.borderWidth = 5
+        bodyweight.layer.borderColor = Colors.dark.cgColor
+        bodyweight.titleLabel?.adjustsFontSizeToFitWidth = true
+        bodyweight.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        bodyweight.titleLabel?.textAlignment = .center
         //
         custom.setTitle("C", for: .normal)
         custom.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
@@ -78,12 +89,26 @@ class CardioChoice: UIViewController  {
         hiit.titleLabel?.numberOfLines = 0
         hiit.titleLabel?.textAlignment = .center
         //
+        bodyweight.layer.cornerRadius = self.hiit.frame.size.height / 2
+        bodyweight.layer.masksToBounds = true
+        bodyweight.titleLabel?.adjustsFontSizeToFitWidth = true
+        bodyweight.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        bodyweight.titleLabel?.numberOfLines = 0
+        bodyweight.titleLabel?.textAlignment = .center
+    }
+    
+    // Hiit action handled in storyboard, only segues to next choice
+    
+    // Bodyweight Workout Action
+    @IBAction func bodyweight(_ sender: Any) {
+        SelectedSession.shared.selectedSession[1] = "bodyweight"
+        SelectedSession.shared.selectedSession[2] = ""
+        //
     }
     
     
     //
     // Remove back bar text
-    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
         let backItem = UIBarButtonItem()

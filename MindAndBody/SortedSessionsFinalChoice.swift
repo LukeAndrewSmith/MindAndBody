@@ -63,8 +63,8 @@ extension sessionData {
                 "WaEN-2",
                 "WaEN-3",],
             ],
-            // MARK: Flexibility/Yoga
-            "flexibility": [
+            // MARK: Stretching/Yoga
+            "stretching": [
                 [// Short
                 "WaFS-1",
                 "WaFS-2",
@@ -72,7 +72,7 @@ extension sessionData {
                 // Cardio, Normal
                 "WaFN-1",
                 "WaFN-2",
-                "WaFN-2",],
+                "WaFN-3",],
             ],
         ],
         // MARK: -
@@ -904,7 +904,7 @@ extension sessionData {
         // MARK: -
         // MARK:- Cardio
         "cardio": [
-            "cardio": [
+            "hiit": [
                 // Note currently not seperated into running/biking/rowing as only timed sessions are presented so can be used for all 3 types of cardio
                 ["allMovements",
                  // Short, Short
@@ -925,7 +925,9 @@ extension sessionData {
                 "CHSL-3",
                 "CHSL-4",
                 "CHSL-5",
+                ],
                 
+                [
                 // Medium, Short
                 "CHMS-1",
                 "CHMS-2",
@@ -944,7 +946,9 @@ extension sessionData {
                 "CHML-3",
                 "CHML-4",
                 "CHML-5",
+                ],
                 
+                [
                 // Long, Short
                 "CHLS-1",
                 "CHLS-2",
@@ -964,9 +968,10 @@ extension sessionData {
                 "CHLL-4",
                 "CHLL-5",],
             ],
-            "workout": [
+            "bodyweight": [
                 // Note currently not seperated into running/biking/rowing as only timed sessions are presented so can be used for all 3 types of cardio
-                [// Easy, Short
+                [
+                // Easy, Short
                 "CBES-1",
                 "CBES-2",
                 "CBES-3",
@@ -974,7 +979,9 @@ extension sessionData {
                 "CBEN-1",
                 "CBEN-2",
                 "CBEN-3",
+                ],
                 
+                [
                 // Average, Short
                 "CBAS-1",
                 "CBAS-2",
@@ -983,7 +990,9 @@ extension sessionData {
                 "CBAN-1",
                 "CBAN-2",
                 "CBAN-3",
+                ],
                 
+                [
                 // Hard, Short
                 "CBHS-1",
                 "CBHS-2",
@@ -1060,7 +1069,7 @@ extension sessionData {
                 [// Short
                 "SFS-1",
                 // Normal
-                "SFS-2",],
+                "SFN-1",],
             ],
             // MARK: -
             // MARK: Post Workout
@@ -1079,8 +1088,9 @@ extension sessionData {
                 "SWN-F-3",
                 "SWN-F-1-F",
                 "SWN-F-2-F",
-                "SWN-F-3-F",
+                "SWN-F-3-F",],
                 
+                [
                 // Upper, Short
                 "SWS-U-1",
                 "SWS-U-2",
@@ -1094,8 +1104,9 @@ extension sessionData {
                 "SWN-U-3",
                 "SWN-U-1-F",
                 "SWN-U-2-F",
-                "SWN-U-3-F",
+                "SWN-U-3-F",],
                 
+                [
                 // Lower, Short
                 "SWS-L-1",
                 "SWS-L-2",
@@ -1145,44 +1156,51 @@ extension sessionData {
                 "YREVs-4",
                 "YREVs-5",
                 "YREVs-6",
+                // Average, Very Short
+                "YRAVs-1",
+                "YRAVs-2",
+                // Hard, Very Short
+                ],
+                
+                [
                 // Easy, Short
                 "YRES-1",
                 "YRES-2",
                 "YRES-3",
                 "YRES-4",
                 "YRES-5",
+                // Average, Short
+                "YRAS-1",
+                "YRAS-2",
+                // Hard, Short
+                "YRHS-1",
+                ],
+                
+                [
                 // Easy, Medium
                 "YREM-1",
                 "YREM-2",
                 "YREM-3",
                 "YREM-4",
                 "YREM-5",
+                // Average, Medium
+                "YRAM-1",
+                "YRAM-2",
+                "YRAM-3",
+                // Hard, Medium
+                ],
+
+                [
                 // Easy, Long
                 "YREL-1",
                 "YREL-2",
                 "YREL-3",
                 "YREL-4",
                 "YREL-5",
-                
-                // Average, Very Short
-                "YRAVs-1",
-                "YRAVs-2",
-                // Average, Short
-                "YRAS-1",
-                "YRAS-2",
-                // Average, Medium
-                "YRAM-1",
-                "YRAM-2",
-                "YRAM-3",
-                // Easy, Long
+                // Average, Long
                 "YRAL-1",
                 "YRAL-2",
                 "YRAL-3",
-                
-                // Hard, Very Short
-                // Hard, Short
-                "YRHS-1",
-                // Hard, Medium
                 // Hard, Long
                 ],
             ],
@@ -1193,23 +1211,28 @@ extension sessionData {
                 "YNES-2",
                 "YNES-3",
                 "YNES-4",
+                // Average, Short
+                "YNAS-1",
+                "YNAS-2",
+                ],
+                
+                [
                 // Easy, Medium
                 "YNEM-1",
                 "YNEM-2",
                 "YNEM-3",
                 "YNEM-4",
+                // Average, Medium
+                "YNAM-1",
+                "YNAM-2",
+                ],
+                
+                [
                 // Easy, Long
                 "YNEL-1",
                 "YNEL-2",
                 "YNEL-3",
                 "YNEL-4",
-                
-                // Average, Short
-                "YNAS-1",
-                "YNAS-2",
-                // Average, Medium
-                "YNAM-1",
-                "YNAM-2",
                 // Average, Long
                 "YNAL-1",
                 "YNAL-2",],
@@ -1222,17 +1245,18 @@ extension sessionData {
                 "YSES-3",
                 "YSES-4",
                 "YSES-5",
+                // Average, Short
+                // Hard, Short
+                ],
+                
+                [
                 // Easy, Medium
                 "YSEM-1",
                 "YSEM-2",
                 "YSEM-3",
                 "YSEM-4",
                 "YSEM-5",
-                
-                // Average, Short
                 // Average, Medium
-                
-                // Hard, Short
                 // Hard, Medium
                 ],
             ],

@@ -108,17 +108,13 @@ extension sessionData {
             "warmup": [
                 "workout": "workout",
                 "cardio": "cardio",
-                "flexibility": "flexibility"],
+                "stretching": "stretchingYoga2"],
             // Workout
             "workout": [
                 // Classic Gym
                 "classicGymFull": "fullBody",
                 "classicGymUpper": "upperBody",
                 "classicGymLower": "lowerBody",
-                "classicGymLegs": "legs",
-                "classicGymPull": "pull",
-                "classicGymPush": "push",
-                "classicGym5x5": "5x5",
                 // Circuit Gym
                 "circuitGymFull": "fullBody",
                 "circuitGymUpper": "upperBody",
@@ -134,6 +130,8 @@ extension sessionData {
             ],
             // Cardio
             "cardio": [
+                "bodyweight": "bodyweightCardio2",
+                "hiit": "HIIT",
                 "rowing": "rowing",
                 "biking": "biking",
                 "running": "running"],
@@ -144,8 +142,56 @@ extension sessionData {
                 "postCardio": "postCardio"],
             // Yoga
             "yoga": [
-                "practices": "practices" // Not schedule so not separated into focuses
+                "relaxing": "relaxing",
+                "neutral": "neutral",
+                "stimulating": "stimulating",
             ]
+    ]
+    
+    static let headerTitles: [String: [String: [String]]] =
+        [
+            // Warmup
+            "warmup": [
+                "workout": ["fullBody", "upperBody", "lowerBody"],
+                "cardio": [""],
+                "stretching": [""]],
+            // Workout
+            "workout": [
+                // Classic Gym
+                "classicGymFull": [""],
+                "classicGymUpper": [""],
+                "classicGymLower": [""],
+                // Circuit Gym
+                "circuitGymFull": [""],
+                "circuitGymUpper": [""],
+                "circuitGymLower": [""],
+                // Classic Bodyweight
+                "classicBodyweightFull": [""],
+                "classicBodyweightUpper": [""],
+                "classicBodyweightLower": [""],
+                // Circuit Bodyweight
+                "circuitBodyweightFull": [""],
+                "circuitBodyweightUpper": [""],
+                "circuitBodyweightLower": [""]
+            ],
+            // Cardio
+            "cardio": [
+                "bodyweight": ["level1", "level2", "level3"],
+                "hiit": ["shortSession", "mediumSession", "longSession"],
+                "rowing": [""],
+                "biking": [""],
+                "running": [""]],
+            // Stretching
+            "stretching": [
+                "general": ["fullBody", "hips", "hamstrings", "backNeck", "foamRolling"], // Not schedule so not separated into focuses
+                "postWorkout": ["fullBody", "upperBody", "lowerBody"],
+                "postCardio": [""]],
+            // Yoga
+            "yoga": [
+                "relaxing": ["veryShort", "short", "medium", "long"],
+                "neutral": ["short", "medium", "long"],
+                "stimulating": ["short", "medium"],
+            ],
     ]
     
     // MARK:- Group Choices

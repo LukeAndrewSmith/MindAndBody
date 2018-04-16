@@ -70,7 +70,7 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         cardio.layer.borderWidth = 5
         cardio.layer.borderColor = Colors.dark.cgColor
         //
-        flexibility.setTitle(NSLocalizedString("flexibility", comment: ""), for: UIControlState.normal)
+        flexibility.setTitle(NSLocalizedString("stretchingYoga", comment: ""), for: UIControlState.normal)
         flexibility.setTitleColor(Colors.dark, for: .normal)
         flexibility.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         flexibility.layer.borderWidth = 5
@@ -151,14 +151,14 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     }
     // Cardio
     @IBAction func cardio(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "endurance"
+        SelectedSession.shared.selectedSession[1] = "cardio"
         SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)
     }
     // Flexibility
     @IBAction func flexibility(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "flexibility"
+        SelectedSession.shared.selectedSession[1] = "stretching"
         SelectedSession.shared.selectedSession[2] = ""
         //
         performSegue(withIdentifier: "warmupSegue", sender: nil)

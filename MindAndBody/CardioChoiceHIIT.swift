@@ -94,23 +94,24 @@ class CardioChoiceHIIT: UIViewController  {
     
     //
     // MARK: Selected Session
-    // Rowing
+    // Currently all the same, but presented in different sections none the less for the sake of it, looks nice...
+    // Running
     @IBAction func running(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "running"
+        SelectedSession.shared.selectedSession[1] = "hiit"
         SelectedSession.shared.selectedSession[2] = ""
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
     // Biking
     @IBAction func biking(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "biking"
+        SelectedSession.shared.selectedSession[1] = "hiit"
         SelectedSession.shared.selectedSession[2] = ""
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }
     
-    // Running
+    // Rowing
     @IBAction func rowing(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "running"
+        SelectedSession.shared.selectedSession[1] = "hiit"
         SelectedSession.shared.selectedSession[2] = ""
         performSegue(withIdentifier: "cardioSegue", sender: nil)
     }

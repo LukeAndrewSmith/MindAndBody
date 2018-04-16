@@ -2459,90 +2459,90 @@
 // MARK: Endurance, HIIT --------- ---------
 // Short, Short
     // NOTE: Cardio, HIIT, Short (session time), Short (interval time), - 1 (= style 1, see spreadsheet)
-"CHSS-1" = "Short (Session), Short (Intervals) - 1";
-"CHSS-2" = "Short (Session), Short (Intervals) - 2";
-"CHSS-3" = "Short (Session), Short (Intervals) - 3";
-"CHSS-4" = "Short (Session), Short (Intervals) - 4";
-"CHSS-5" = "Short (Session), Short (Intervals) - 5";
+"CHSS-1" = "Short (Intervals) - 1";
+"CHSS-2" = "Short (Intervals) - 2";
+"CHSS-3" = "Short (Intervals) - 3";
+"CHSS-4" = "Short (Intervals) - 4";
+"CHSS-5" = "Short (Intervals) - 5";
 // Short, Medium
-"CHSM-1" = "Short (Session), Medium (Intervals) - 1";
-"CHSM-2" = "Short (Session), Medium (Intervals) - 2";
-"CHSM-3" = "Short (Session), Medium (Intervals) - 3";
-"CHSM-4" = "Short (Session), Medium (Intervals) - 4";
-"CHSM-5" = "Short (Session), Medium (Intervals) - 5";
+"CHSM-1" = "Medium (Intervals) - 1";
+"CHSM-2" = "Medium (Intervals) - 2";
+"CHSM-3" = "Medium (Intervals) - 3";
+"CHSM-4" = "Medium (Intervals) - 4";
+"CHSM-5" = "Medium (Intervals) - 5";
 // Short, Long
-"CHSL-1" = "Short (Session), Long (Intervals) - 1";
-"CHSL-2" = "Short (Session), Long (Intervals) - 2";
-"CHSL-3" = "Short (Session), Long (Intervals) - 3";
-"CHSL-4" = "Short (Session), Long (Intervals) - 4";
-"CHSL-5" = "Short (Session), Long (Intervals) - 5";
+"CHSL-1" = "Long (Intervals) - 1";
+"CHSL-2" = "Long (Intervals) - 2";
+"CHSL-3" = "Long (Intervals) - 3";
+"CHSL-4" = "Long (Intervals) - 4";
+"CHSL-5" = "Long (Intervals) - 5";
 
 // Medium, Short
-"CHMS-1" = "Medium (Session), Short (Intervals) - 1";
-"CHMS-2" = "Medium (Session), Short (Intervals) - 2";
-"CHMS-3" = "Medium (Session), Short (Intervals) - 3";
-"CHMS-4" = "Medium (Session), Short (Intervals) - 4";
-"CHMS-5" = "Medium (Session), Short (Intervals) - 5";
+"CHMS-1" = "Short (Intervals) - 1";
+"CHMS-2" = "Short (Intervals) - 2";
+"CHMS-3" = "Short (Intervals) - 3";
+"CHMS-4" = "Short (Intervals) - 4";
+"CHMS-5" = "Short (Intervals) - 5";
 // Medium, Medium
-"CHMM-1" = "Medium (Session), Medium (Intervals) - 1";
-"CHMM-2" = "Medium (Session), Medium (Intervals) - 2";
-"CHMM-3" = "Medium (Session), Medium (Intervals) - 3";
-"CHMM-4" = "Medium (Session), Medium (Intervals) - 4";
-"CHMM-5" = "Medium (Session), Medium (Intervals) - 5";
+"CHMM-1" = "Medium (Intervals) - 1";
+"CHMM-2" = "Medium (Intervals) - 2";
+"CHMM-3" = "Medium (Intervals) - 3";
+"CHMM-4" = "Medium (Intervals) - 4";
+"CHMM-5" = "Medium (Intervals) - 5";
 // Medium, Long
-"CHML-1" = "Medium (Session), Long (Intervals) - 1";
-"CHML-2" = "Medium (Session), Long (Intervals) - 2";
-"CHML-3" = "Medium (Session), Long (Intervals) - 3";
-"CHML-4" = "Medium (Session), Long (Intervals) - 4";
-"CHML-5" = "Medium (Session), Long (Intervals) - 5";
+"CHML-1" = "Long (Intervals) - 1";
+"CHML-2" = "Long (Intervals) - 2";
+"CHML-3" = "Long (Intervals) - 3";
+"CHML-4" = "Long (Intervals) - 4";
+"CHML-5" = "Long (Intervals) - 5";
 
 // Long, Short
-"CHLS-1" = "Long (Session), Short (Intervals) - 1";
-"CHLS-2" = "Long (Session), Short (Intervals) - 2";
-"CHLS-3" = "Long (Session), Short (Intervals) - 3";
-"CHLS-4" = "Long (Session), Short (Intervals) - 4";
-"CHLS-5" = "Long (Session), Short (Intervals) - 5";
+"CHLS-1" = "Short (Intervals) - 1";
+"CHLS-2" = "Short (Intervals) - 2";
+"CHLS-3" = "Short (Intervals) - 3";
+"CHLS-4" = "Short (Intervals) - 4";
+"CHLS-5" = "Short (Intervals) - 5";
 // Long, Long
-"CHLM-1" = "Long (Session), Medium (Intervals) - 1";
-"CHLM-2" = "Long (Session), Medium (Intervals) - 2";
-"CHLM-3" = "Long (Session), Medium (Intervals) - 3";
-"CHLM-4" = "Long (Session), Medium (Intervals) - 4";
-"CHLM-5" = "Long (Session), Medium (Intervals) - 5";
+"CHLM-1" = "Medium (Intervals) - 1";
+"CHLM-2" = "Medium (Intervals) - 2";
+"CHLM-3" = "Medium (Intervals) - 3";
+"CHLM-4" = "Medium (Intervals) - 4";
+"CHLM-5" = "Medium (Intervals) - 5";
 // Long, Long
-"CHLL-1" = "Long (Session), Long (Intervals) - 1";
-"CHLL-2" = "Long (Session), Long (Intervals) - 2";
-"CHLL-3" = "Long (Session), Long (Intervals) - 3";
-"CHLL-4" = "Long (Session), Long (Intervals) - 4";
-"CHLL-5" = "Long (Session), Long (Intervals) - 5";
+"CHLL-1" = "Long (Intervals) - 1";
+"CHLL-2" = "Long (Intervals) - 2";
+"CHLL-3" = "Long (Intervals) - 3";
+"CHLL-4" = "Long (Intervals) - 4";
+"CHLL-5" = "Long (Intervals) - 5";
 
 // MARK: Endurance, Workout --------- ---------
 // Easy, Short
 // NOTE: Cardio, Bodyweight, Easy, Short , - 1
-"CBES-1" = "Level 1, Short - 1";
-"CBES-2" = "Level 1, Short - 2";
-"CBES-3" = "Level 1, Short - 3";
+"CBES-1" = "Short - 1";
+"CBES-2" = "Short - 2";
+"CBES-3" = "Short - 3";
 // Easy, Normal
-"CBEN-1" = "Level 1, Normal - 1";
-"CBEN-2" = "Level 1, Normal - 2";
-"CBEN-3" = "Level 1, Normal - 3";
+"CBEN-1" = "Normal - 1";
+"CBEN-2" = "Normal - 2";
+"CBEN-3" = "Normal - 3";
 
 // Average, Short
-"CBAS-1" = "Level 2, Short - 1";
-"CBAS-2" = "Level 2, Short - 2";
-"CBAS-3" = "Level 2, Short - 3";
+"CBAS-1" = "Short - 1";
+"CBAS-2" = "Short - 2";
+"CBAS-3" = "Short - 3";
 // Average, Short
-"CBAN-1" = "Level 2, Normal - 1";
-"CBAN-2" = "Level 2, Normal - 2";
-"CBAN-3" = "Level 2, Normal - 3";
+"CBAN-1" = "Normal - 1";
+"CBAN-2" = "Normal - 2";
+"CBAN-3" = "Normal - 3";
 
 // Hard, Short
-"CBHS-1" = "Level 3, Short - 1";
-"CBHS-2" = "Level 3, Short - 2";
-"CBHS-3" = "Level 3, Short - 3";
+"CBHS-1" = "Short - 1";
+"CBHS-2" = "Short - 2";
+"CBHS-3" = "Short - 3";
 // Hard, Short
-"CBHN-1" = "Level 3, Normal - 1";
-"CBHN-2" = "Level 3, Normal - 2";
-"CBHN-3" = "Level 3, Normal - 3";
+"CBHN-1" = "Normal - 1";
+"CBHN-2" = "Normal - 2";
+"CBHN-3" = "Normal - 3";
 
 // MARK: Stretching/Flexiblity --------- ---------
 // General ---------
@@ -2552,13 +2552,13 @@
 "SGES-2" = "Level 1, Short - 2";
 "SGES-3" = "Level 1, Short - 3";
 // Easy, Normal
-"SGEN-1" = "Level 2, Normal - 1";
-"SGEN-2" = "Level 2, Normal - 2";
-"SGEN-3" = "Level 2, Normal - 3";
+"SGEN-1" = "Level 1, Normal - 1";
+"SGEN-2" = "Level 1, Normal - 2";
+"SGEN-3" = "Level 1, Normal - 3";
 
 // Average, Short
-"SGAS-1" = "Level 1, Short - 1";
-"SGAS-2" = "Level 1, Short - 2";
+"SGAS-1" = "Level 2, Short - 1";
+"SGAS-2" = "Level 2, Short - 2";
 // Average, Normal
 "SGAN-1" = "Level 2, Normal - 1";
 "SGAN-2" = "Level 2, Normal - 2";
@@ -2568,11 +2568,11 @@
 "SHES-1" = "Level 1, Short - 1";
 "SHES-2" = "Level 1, Short - 2";
 // Easy, Normal
-"SHEN-1" = "Level 2, Normal - 1";
-"SHEN-2" = "Level 2, Normal - 2";
+"SHEN-1" = "Level 1, Normal - 1";
+"SHEN-2" = "Level 1, Normal - 2";
 
 // Average, Short
-"SHAS-1" = "Level 1, Short - 1";
+"SHAS-1" = "Level 2, Short - 1";
 // Average, Normal
 "SHAN-1" = "Level 2, Normal - 1";
 
@@ -2582,11 +2582,11 @@
 "SHiES-1" = "Level 1, Short - 1";
 "SHiES-2" = "Level 1, Short - 2";
 // Easy, Normal
-"SHiEN-1" = "Level 2, Normal - 1";
-"SHiEN-2" = "Level 2, Normal - 2";
+"SHiEN-1" = "Level 1, Normal - 1";
+"SHiEN-2" = "Level 1, Normal - 2";
 
 // Average, Short
-"SHiAS-1" = "Level 1, Short - 1";
+"SHiAS-1" = "Level 2, Short - 1";
 // Average, Normal
 "SHiAN-1" = "Level 2, Normal - 1";
 
@@ -2596,11 +2596,11 @@
 "SBES-1" = "Level 1, Short - 1";
 "SBES-2" = "Level 1, Short - 2";
 // Easy, Normal
-"SBEN-1" = "Level 2, Normal - 1";
-"SBEN-2" = "Level 2, Normal - 2";
+"SBEN-1" = "Level 1, Normal - 1";
+"SBEN-2" = "Level 1, Normal - 2";
 
 // Average, Short
-"SBAS-1" = "Level 1, Short - 1";
+"SBAS-1" = "Level 2, Short - 1";
 // Average, Normal
 "SBAN-1" = "Level 2, Normal - 1";
 
@@ -2608,7 +2608,7 @@
 // Short
 "SFS-1" = "Short - 1";
 // Normal
-"SFS-2" = "Normal - 1";
+"SFN-1" = "Normal - 1";
 
 // Post Workout ---------
 // Full, Short
@@ -2667,89 +2667,89 @@
 "SES-2-F" = "Short, w/Foam Roller - 2";
 "SES-3-F" = "Short, w/Foam Roller - 3";
 // Normal
-"SEN-1" = "Short - 1";
-"SEN-2" = "Short - 2";
-"SEN-3" = "Short - 3";
-"SEN-1-F" = "Short, w/Foam Roller - 1";
-"SEN-2-F" = "Short, w/Foam Roller - 2";
-"SEN-3-F" = "Short, w/Foam Roller - 3";
+"SEN-1" = "Normal - 1";
+"SEN-2" = "Normal - 2";
+"SEN-3" = "Normal - 3";
+"SEN-1-F" = "Normal, w/Foam Roller - 1";
+"SEN-2-F" = "Normal, w/Foam Roller - 2";
+"SEN-3-F" = "Normal, w/Foam Roller - 3";
 
-// MARK: Stretching/Flexiblity --------- ---------
+// MARK: Yoga --------- ---------
 // Relaxing ---------
 // Easy, Very Short
     // Yoga - Relaxing - Easy - Very Short - 1
-"YREVs-1" = "Level 1, Very Short - 1";
-"YREVs-2" = "Level 1, Very Short - 2";
-"YREVs-3" = "Level 1, Very Short - 3";
-"YREVs-4" = "Level 1, Very Short - 4";
-"YREVs-5" = "Level 1, Very Short - 5";
-"YREVs-6" = "Level 1, Very Short - 6";
+"YREVs-1" = "Level 1 - 1";
+"YREVs-2" = "Level 1 - 2";
+"YREVs-3" = "Level 1 - 3";
+"YREVs-4" = "Level 1 - 4";
+"YREVs-5" = "Level 1 - 5";
+"YREVs-6" = "Level 1 - 6";
 // Easy, Short
-"YRES-1" = "Level 1, Short - 1";
-"YRES-2" = "Level 1, Short - 2";
-"YRES-3" = "Level 1, Short - 3";
-"YRES-4" = "Level 1, Short - 4";
-"YRES-5" = "Level 1, Short - 5";
+"YRES-1" = "Level 1 - 1";
+"YRES-2" = "Level 1 - 2";
+"YRES-3" = "Level 1 - 3";
+"YRES-4" = "Level 1 - 4";
+"YRES-5" = "Level 1 - 5";
 // Easy, Medium
-"YREM-1" = "Level 1, Medium - 1";
-"YREM-2" = "Level 1, Medium - 2";
-"YREM-3" = "Level 1, Medium - 3";
-"YREM-4" = "Level 1, Medium - 4";
-"YREM-5" = "Level 1, Medium - 5";
+"YREM-1" = "Level 1 - 1";
+"YREM-2" = "Level 1 - 2";
+"YREM-3" = "Level 1 - 3";
+"YREM-4" = "Level 1 - 4";
+"YREM-5" = "Level 1 - 5";
 // Easy, Long
-"YREL-1" = "Level 1, Long - 1";
-"YREL-2" = "Level 1, Long - 2";
-"YREL-3" = "Level 1, Long - 3";
-"YREL-4" = "Level 1, Long - 4";
-"YREL-5" = "Level 1, Long - 5";
+"YREL-1" = "Level 1 - 1";
+"YREL-2" = "Level 1 - 2";
+"YREL-3" = "Level 1 - 3";
+"YREL-4" = "Level 1 - 4";
+"YREL-5" = "Level 1 - 5";
 
 // Average, Very Short
-"YRAVs-1" = "Level 2, Very Short - 1";
-"YRAVs-2" = "Level 2, Very Short - 2";
+"YRAVs-1" = "Level 2 - 1";
+"YRAVs-2" = "Level 2 - 2";
 // Average, Short
-"YRAS-1" = "Level 2, Short - 1";
-"YRAS-2" = "Level 2, Short - 2";
+"YRAS-1" = "Level 2 - 1";
+"YRAS-2" = "Level 2 - 2";
 // Average, Medium
-"YRAM-1" = "Level 2, Medium - 1";
-"YRAM-2" = "Level 2, Medium - 2";
-"YRAM-3" = "Level 2, Medium - 3";
+"YRAM-1" = "Level 2 - 1";
+"YRAM-2" = "Level 2 - 2";
+"YRAM-3" = "Level 2 - 3";
 // Easy, Long
-"YRAL-1" = "Level 2, Long - 1";
-"YRAL-2" = "Level 2, Long - 2";
-"YRAL-3" = "Level 2, Long - 3";
+"YRAL-1" = "Level 2 - 1";
+"YRAL-2" = "Level 2 - 2";
+"YRAL-3" = "Level 2 - 3";
 
 // Hard, Very Short
 // Hard, Short
-"YRHS-1" = "Level 3, Short - 1";
+"YRHS-1" = "Level 3 - 1";
 // Hard, Medium
 // Hard, Long
 
 // Neutral ---------
 // Easy, Short
-"YNES-1" = "Level 1, Short - 1";
-"YNES-2" = "Level 1, Short - 2";
-"YNES-3" = "Level 1, Short - 3";
-"YNES-4" = "Level 1, Short - 4";
+"YNES-1" = "Level 1 - 1";
+"YNES-2" = "Level 1 - 2";
+"YNES-3" = "Level 1 - 3";
+"YNES-4" = "Level 1 - 4";
 // Easy, Medium
-"YNEM-1" = "Level 1, Medium - 1";
-"YNEM-2" = "Level 1, Medium - 2";
-"YNEM-3" = "Level 1, Medium - 3";
-"YNEM-4" = "Level 1, Medium - 4";
+"YNEM-1" = "Level 1 - 1";
+"YNEM-2" = "Level 1 - 2";
+"YNEM-3" = "Level 1 - 3";
+"YNEM-4" = "Level 1 - 4";
 // Easy, Long
-"YNEL-1" = "Level 1, Long - 1";
-"YNEL-2" = "Level 1, Long - 2";
-"YNEL-3" = "Level 1, Long - 3";
-"YNEL-4" = "Level 1, Long - 4";
+"YNEL-1" = "Level 1 - 1";
+"YNEL-2" = "Level 1 - 2";
+"YNEL-3" = "Level 1 - 3";
+"YNEL-4" = "Level 1 - 4";
 
 // Average, Short
-"YNAS-1" = "Level 2, Short - 1";
-"YNAS-2" = "Level 2, Short - 2";
+"YNAS-1" = "Level 2 - 1";
+"YNAS-2" = "Level 2 - 2";
 // Average, Medium
-"YNAM-1" = "Level 2, Medium - 1";
-"YNAM-2" = "Level 2, Medium - 2";
+"YNAM-1" = "Level 2 - 1";
+"YNAM-2" = "Level 2 - 2";
 // Average, Long
-"YNAL-1" = "Level 2, Long - 1";
-"YNAL-2" = "Level 2, Long - 2";
+"YNAL-1" = "Level 2 - 1";
+"YNAL-2" = "Level 2 - 2";
 
 // Hard, Short
 // Hard, Medium
@@ -2757,17 +2757,17 @@
 
 // Stimulating ---------
 // Easy, Short
-"YSES-1" = "Level 1, Short - 1";
-"YSES-2" = "Level 1, Short - 2";
-"YSES-3" = "Level 1, Short - 3";
-"YSES-4" = "Level 1, Short - 4";
-"YSES-5" = "Level 1, Short - 5";
+"YSES-1" = "Level 1 - 1";
+"YSES-2" = "Level 1 - 2";
+"YSES-3" = "Level 1 - 3";
+"YSES-4" = "Level 1 - 4";
+"YSES-5" = "Level 1 - 5";
 // Easy, Medium
-"YSEM-1" = "Level 1, Short - 1";
-"YSEM-2" = "Level 1, Short - 2";
-"YSEM-3" = "Level 1, Short - 3";
-"YSEM-4" = "Level 1, Short - 4";
-"YSEM-5" = "Level 1, Short - 5";
+"YSEM-1" = "Level 1 - 1";
+"YSEM-2" = "Level 1 - 2";
+"YSEM-3" = "Level 1 - 3";
+"YSEM-4" = "Level 1 - 4";
+"YSEM-5" = "Level 1 - 5";
 
 // Average, Short
 // Average, Medium
@@ -2776,7 +2776,32 @@
 // Hard, Medium
 
 
+//
+// MARK: TITLES for home screen choices
+// Warmup
+"stretchingYoga" = "Stretching/\nYoga";
+"stretchingYoga2" = "Stretching/Yoga";
+// Cardio
+"bodyweightCardio" = "Bodyweight\nWorkout";
+"bodyweightCardio2" = "Bodyweight Workout";
+    //
+"shortSession" = "Short (Session)";
+"mediumSession" = "Medium (Session)";
+"longSession" = "Long (Session)";
+    //
+"level1" = "Level 1";
+"level2" = "Level 2";
+"level3" = "Level 3";
+// Stretching
+"backNeck" = "Back/Neck";
+"foamRolling" = "Foam Rolling";
+// Yoga
+"relaxing" = "Relaxing";
+"neutral" = "Neutral";
+"stimulating" = "Stimulating";
 
+"veryShort" = "Very Short";
+"medium" = "Medium";
 
 
 // MARK:-

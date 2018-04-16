@@ -25,35 +25,19 @@ class ClassicChoiceG: UIViewController  {
     @IBOutlet weak var upperBody: UIButton!
     @IBOutlet weak var lowerBody: UIButton!
     
-    // Legs Pull Push
-    @IBOutlet weak var legs: UIButton!
-    @IBOutlet weak var pull: UIButton!
-    @IBOutlet weak var push: UIButton!
     
     // Stack Views
-    @IBOutlet weak var stackView1: UIStackView!
     //
-    @IBOutlet weak var stackView2: UIStackView!
+    @IBOutlet weak var stackView: UIStackView!
     
     // Constraints
     @IBOutlet weak var fullTop: NSLayoutConstraint!
     //
     @IBOutlet weak var fullBottom: NSLayoutConstraint!
     //
-    @IBOutlet weak var stack1Bottom: NSLayoutConstraint!
-    //
-    @IBOutlet weak var stack2Bottom: NSLayoutConstraint!
-    //
-    @IBOutlet weak var connection1Width: NSLayoutConstraint!
-    //
-    @IBOutlet weak var connection2Width: NSLayoutConstraint!
-    //
-    @IBOutlet weak var connection2Trailing: NSLayoutConstraint!
-    //
-    @IBOutlet weak var connection3Width: NSLayoutConstraint!
-    //
-    @IBOutlet weak var connection3Trailing: NSLayoutConstraint!
+    @IBOutlet weak var stackBottom: NSLayoutConstraint!
     
+    @IBOutlet weak var connectionWidth: NSLayoutConstraint!
     //
     var workoutType2 = Int()
     //
@@ -70,91 +54,39 @@ class ClassicChoiceG: UIViewController  {
         
         // Button Titles
         fullBody.setTitle(NSLocalizedString("fullBody", comment: ""), for: UIControlState.normal)
-        fullBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        fullBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         fullBody.setTitleColor(Colors.dark, for: .normal)
         fullBody.layer.borderWidth = 5
         fullBody.layer.borderColor = Colors.dark.cgColor
-        fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        fullBody.titleLabel?.textAlignment = .center
-        // Change title if iPhone SE/5
-        if IPhoneType.shared.iPhoneType() == 0 {
-            upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
-            lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
-        } else {
-            upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
-            lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
-        }
         //
-        upperBody.setTitle(NSLocalizedString("upper", comment: ""), for: UIControlState.normal)
-        upperBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        upperBody.setTitle(NSLocalizedString("upperBody", comment: ""), for: UIControlState.normal)
+        upperBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         upperBody.setTitleColor(Colors.dark, for: .normal)
         upperBody.layer.borderWidth = 5
         upperBody.layer.borderColor = Colors.dark.cgColor
-        upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        upperBody.titleLabel?.textAlignment = .center
         //
-        lowerBody.setTitle(NSLocalizedString("lower", comment: ""), for: UIControlState.normal)
-        lowerBody.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
+        lowerBody.setTitle(NSLocalizedString("lowerBody", comment: ""), for: UIControlState.normal)
         lowerBody.setTitleColor(Colors.dark, for: .normal)
+        lowerBody.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         lowerBody.layer.borderWidth = 5
         lowerBody.layer.borderColor = Colors.dark.cgColor
-        lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
-        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        lowerBody.titleLabel?.textAlignment = .center
         //
-        legs.setTitle(NSLocalizedString("legs", comment: ""), for: UIControlState.normal)
-        legs.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        legs.setTitleColor(Colors.dark, for: .normal)
-        legs.layer.borderWidth = 5
-        legs.layer.borderColor = Colors.dark.cgColor
-        legs.titleLabel?.adjustsFontSizeToFitWidth = true
-        legs.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        legs.titleLabel?.textAlignment = .center
-        //
-        pull.setTitle(NSLocalizedString("pull", comment: ""), for: UIControlState.normal)
-        pull.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        pull.setTitleColor(Colors.dark, for: .normal)
-        pull.layer.borderWidth = 5
-        pull.layer.borderColor = Colors.dark.cgColor
-        pull.titleLabel?.adjustsFontSizeToFitWidth = true
-        pull.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        pull.titleLabel?.textAlignment = .center
-        //
-        push.setTitle(NSLocalizedString("push", comment: ""), for: UIControlState.normal)
-        push.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        push.setTitleColor(Colors.dark, for: .normal)
-        push.layer.borderWidth = 5
-        push.layer.borderColor = Colors.dark.cgColor
-        push.titleLabel?.adjustsFontSizeToFitWidth = true
-        push.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
-        push.titleLabel?.textAlignment = .center
         
         
         // Iphone 5/SE
         if IPhoneType.shared.iPhoneType() == 0 {
             //
-            fullTop.constant = 20
-            fullBottom.constant = 20
-            stack1Bottom.constant = 20
-            stack2Bottom.constant = 20
+            fullTop.constant = 52
+            fullBottom.constant = 52
+            stackBottom.constant = 52
             //
-            stackView1.spacing = 15
-            connection1Width.constant = 15
-            //
-            stackView2.spacing = 10
-            connection2Width.constant = 10
-            connection2Trailing.constant = 10
-            connection3Width.constant = 10
-            connection3Trailing.constant = 10
+            stackView.spacing = 15
+            connectionWidth.constant = 15
         } else if IPhoneType.shared.iPhoneType() == 2 {
             //
-            //
-            fullTop.constant = 60
-            fullBottom.constant = 60
-            stack1Bottom.constant = 60
-            stack2Bottom.constant = 60
+            fullTop.constant = 102
+            fullBottom.constant = 102
+            stackBottom.constant = 102
             //
         }
     }
@@ -165,23 +97,26 @@ class ClassicChoiceG: UIViewController  {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
-        fullBody.layer.cornerRadius = fullBody.frame.size.height / 2
+        fullBody.layer.cornerRadius = ((self.stackView.frame.size.height) * 3/2) / 2
         fullBody.layer.masksToBounds = true
+        fullBody.titleLabel?.adjustsFontSizeToFitWidth = true
+        fullBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        fullBody.titleLabel?.numberOfLines = 0
+        fullBody.titleLabel?.textAlignment = .center
         //
-        upperBody.layer.cornerRadius = stackView1.frame.size.height / 2
+        upperBody.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         upperBody.layer.masksToBounds = true
+        upperBody.titleLabel?.adjustsFontSizeToFitWidth = true
+        upperBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        upperBody.titleLabel?.numberOfLines = 0
+        upperBody.titleLabel?.textAlignment = .center
         //
-        lowerBody.layer.cornerRadius = stackView1.frame.size.height / 2
+        lowerBody.layer.cornerRadius = (self.stackView.frame.size.height) / 2
         lowerBody.layer.masksToBounds = true
-        //
-        legs.layer.cornerRadius = stackView2.frame.size.height / 2
-        legs.layer.masksToBounds = true
-        //
-        pull.layer.cornerRadius = stackView2.frame.size.height / 2
-        pull.layer.masksToBounds = true
-        //
-        push.layer.cornerRadius = stackView2.frame.size.height / 2
-        push.layer.masksToBounds = true
+        lowerBody.titleLabel?.adjustsFontSizeToFitWidth = true
+        lowerBody.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        lowerBody.titleLabel?.numberOfLines = 0
+        lowerBody.titleLabel?.textAlignment = .center
     }
     
     
@@ -209,32 +144,7 @@ class ClassicChoiceG: UIViewController  {
         performSegue(withIdentifier: "classicSegue", sender: nil)
     }
     
-    // Legs
-    @IBAction func legs(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "classicGymLegs"
-        SelectedSession.shared.selectedSession[2] = ""
-        //
-        performSegue(withIdentifier: "classicSegue", sender: nil)
-    }
-    
-    // Pull
-    @IBAction func pull(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "classicGymPull"
-        SelectedSession.shared.selectedSession[2] = ""
-        //
-        performSegue(withIdentifier: "classicSegue", sender: nil)
-    }
-    
-    // Push
-    @IBAction func push(_ sender: Any) {
-        SelectedSession.shared.selectedSession[1] = "classicGymPush"
-        SelectedSession.shared.selectedSession[2] = ""
-        //
-        performSegue(withIdentifier: "classicSegue", sender: nil)
-    }
-    
-    
-    //
+  
     // Remove back button text
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
