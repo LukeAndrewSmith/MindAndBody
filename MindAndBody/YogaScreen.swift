@@ -267,8 +267,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
 
 
-            //
-            if (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count > 1 {
+            // Indicator
+            if ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"])?.count)! > 1 {
                 cell.imageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
             } else {
                 cell.imageIndicator.image = nil

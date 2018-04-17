@@ -242,30 +242,15 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             // New image to display
             // Demonstration on left
-            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            let defaultImage = settings["DefaultImage"]![0]
-            if defaultImage == 0 {
-                // [key] = key, [0] = first image
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
-                // Indicator
-                if (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count > 1 {
-                    cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
-                } else {
-                    cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                }
-                cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                // Target Area on left
+            // [key] = key, [0] = first image
+            cell.imageViewCell.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
+            // Indicator
+            if ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"])?.count)! > 1 {
+                cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
             } else {
-                // [key] = key
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])! + toAdd)
-                // Indicator
-                if (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count > 1 {
-                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
-                } else {
-                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                }
                 cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
             }
+            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
             
             //
             cell.imageViewCell.tag = indexPath.row
@@ -496,9 +481,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            let defaultImage = settings["DefaultImage"]![0]
-            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     sender.startAnimating()
                 }
@@ -528,9 +511,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            let defaultImage = settings["DefaultImage"]![0]
-            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     cell.imageViewCell.startAnimating()
                 }
@@ -599,11 +580,18 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             UIView.animate(withDuration: 0.6, animations: {
                 //
-                self.tableView.beginUpdates()
-                self.tableView.endUpdates()
-                //
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                
+                // As progress bar is contained in the table view header, scrolling back to row 0 jumps the progress bar off the screen
+                    // Silly fix below seems to work
+                if self.selectedRow == 0 {
+                    self.tableView.beginUpdates()
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    self.tableView.endUpdates()
+                } else {
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                }
+
                 // 1
                 cell.indicatorStack.alpha = 1
                 cell.setsRepsLabel.alpha = 1
@@ -728,28 +716,14 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     
                     // New image to display
                     // Demonstration on left
-                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                    let defaultImage = settings["DefaultImage"]![0]
-                    if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["targetArea"]![0] + toAdd)
-                        // Indicator
-                        if imageCount > 1 {
-                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
-                        } else {
-                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                        }
-                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                        // Target Area on left
+                    cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["targetArea"]![0] + toAdd)
+                    // Indicator
+                    if imageCount > 1 {
+                        cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![0])
-                        // Indicator
-                        if imageCount > 1 {
-                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
-                        } else {
-                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                        }
                         cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                     }
+                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                     
                     // Move new image to right of screen
                     cell.imageViewCell.center.x = cell.center.x + cell.frame.size.width
@@ -778,28 +752,14 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     
                     // New image to display
                     // Demonstration on left
-                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                    let defaultImage = settings["DefaultImage"]![0]
-                    if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![0])
-                        // Indicator
-                        if imageCount > 1 {
-                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
-                        } else {
-                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                        }
-                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                        // Target Area on left
+                    cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![0])
+                    // Indicator
+                    if imageCount > 1 {
+                        cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["targetArea"]![0] + toAdd)
-                        // Indicator
-                        if imageCount > 1 {
-                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
-                        } else {
-                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                        }
                         cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                     }
+                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                     
                     //
                     cell.imageViewCell.center.x = cell.center.x - cell.frame.size.width

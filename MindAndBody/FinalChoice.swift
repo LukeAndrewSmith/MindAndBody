@@ -502,21 +502,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: "")
                     
                     // Time
-                    if cardioType == 0 {
-                        cell.detailTextLabel?.text = timeToString(totalSeconds: sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["time"] as! Int)
-                    //
-                    } else {
-                        let isMovement = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["isMovement"] as! Bool
-                        // Movement
-                        if isMovement {
-                            // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = selected session, [2] sets array
-                            cell.detailTextLabel?.text = String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["length"] as! Int) + "m"
-                            
-                        // Pauses
-                        } else {
-                            cell.detailTextLabel?.text = timeToString(totalSeconds: sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["length"] as! Int)
-                        }
-                    }
+                    cell.detailTextLabel?.text = timeToString(totalSeconds: sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["time"] as! Int)
 
                     // Cell Image
                     cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
@@ -552,7 +538,9 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: "")
                 
                 // Breaths
-                cell.detailTextLabel?.text = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["breaths"] as? String
+                let breaths = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["breaths"] as? Int
+                cell.detailTextLabel?.text = String(breaths!) + " " + NSLocalizedString("breaths", comment: "")
+                
                 //
                 // Cell Image
                 // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [overviewarray[indexPath.section][indexpath.row]] = key, [0] for the first image
@@ -682,6 +670,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 // Circuit Session
                 case "circuitGymFull", "circuitGymUpper", "circuitGymLower","circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower", "bodyweight":
                     // Number of rounds
+                    print(SelectedSession.shared.selectedSession[2])
                     return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int
                 // Normal Session
                 default:
@@ -879,7 +868,20 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             }
         // Cardio
         case "cardio":
-            performSegue(withIdentifier: "sessionSegueCardio", sender: self)
+            // Bodyweight circuit workout
+            if SelectedSession.shared.selectedSession[1] == "bodyweight" {
+                // Timed Session off
+                if timedSession == 0 {
+                    performSegue(withIdentifier: "sessionSegueCircuit", sender: self)
+                    // Timed Session On
+                } else {
+                    performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
+                }
+                
+            // HIIT Cardio
+            } else {
+                performSegue(withIdentifier: "sessionSegueCardio", sender: self)
+            }
         // Stretching
         case "stretching":
             // Timed Session off

@@ -186,15 +186,11 @@ enum Register {
         "AutomaticYoga": [0, -1, -1, -1], // [0], 0 == off, 1 == on
         // Rest times - 4
         "RestTimes": [5, 45, 10],
-        // Random session
-        "DifferentSessions": [1], // 0 == off, 1 == on
-        // Default Image - 5
-        "DefaultImage": [0],   // 0 == "demonstration", 1 == "targetArea"
         // Metric/Imperial - 6
         "Units": [0], // == "kg" (0), "lb" (1)
         // Notifications
         "ReminderNotifications": [1], // 0 == disabled, 1 == enabled
-        // Is icloud enabled, 0 == false, 1
+        // Is icloud enabled, 0 == false, 1 == true
         "iCloud": [0],
     ]
     

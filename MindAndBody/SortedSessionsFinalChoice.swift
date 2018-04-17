@@ -108,11 +108,11 @@ extension sessionData {
                 "WGEM-CsF-3",
                 "WGEM-CsF-4",
                 "WGEM-CsF-1-M",
-                "WGEM-CsF-1-M",
-                "WGEM-CsF-1-M",
-                "WGEM-CsF-1-M",
-                "WGEM-CsF-1-M",
-                "WGEM-CsF-1-M",
+                "WGEM-CsF-2-M",
+                "WGEM-CsF-3-M",
+                "WGEM-CsF-4-M",
+                "WGEM-CsF-5-M",
+                "WGEM-CsF-6-M",
                 // Easy, Long
                 "WGEL-CsF-1-W",
                 "WGEL-CsF-2-W",
@@ -123,11 +123,14 @@ extension sessionData {
                 "WGEL-CsF-3",
                 "WGEL-CsF-4",
                 "WGEL-CsF-1-M",
-                "WGEL-CsF-1-M",
-                "WGEL-CsF-1-M",
-                "WGEL-CsF-1-M",
-                "WGEL-CsF-1-M",
-                "WGEL-CsF-1-M",
+                "WGEL-CsF-2-M",
+                "WGEL-CsF-3-M",
+                "WGEL-CsF-4-M",
+                "WGEL-CsF-5-M",
+                "WGEL-CsF-6-M",
+                ],
+                
+                [
                 
                 // Average, Short
                 "WGAS-CsF-1-W",
@@ -174,7 +177,9 @@ extension sessionData {
                 "WGAL-CsF-4-M",
                 "WGAL-CsF-5-M",
                 "WGAL-CsF-6-M",
+                ],
                 
+                [
                 // Hard, Short
                 "WGHS-CsF-1-W",
                 "WGHS-CsF-2-W",
@@ -265,7 +270,9 @@ extension sessionData {
                 "WGEL-CsU-3-M",
                 "WGEL-CsU-4-M",
                 "WGEL-CsU-5-M",
+                ],
                 
+                [
                 // Average, Short
                 "WGAS-CsU-1-W",
                 "WGAS-CsU-2-W",
@@ -302,7 +309,9 @@ extension sessionData {
                 "WGAL-CsU-3-M",
                 "WGAL-CsU-4-M",
                 "WGAL-CsU-5-M",
+                ],
                 
+                [
                 // Hard, Short
                 "WGHS-CsU-1-W",
                 "WGHS-CsU-2-W",
@@ -375,7 +384,9 @@ extension sessionData {
                 "WGEL-CsL-8",
                 "WGEL-CsL-9",
                 "WGEL-CsL-10",
+                ],
                 
+                [
                 // Average, Short
                 "WGAS-CsL-1",
                 "WGAS-CsL-2",
@@ -409,7 +420,9 @@ extension sessionData {
                 "WGAL-CsL-8",
                 "WGAL-CsL-9",
                 "WGAL-CsL-10",
+                ],
                 
+                [
                 // Hard, Short
                 "WGHS-CsL-1",
                 "WGHS-CsL-2",
@@ -460,12 +473,14 @@ extension sessionData {
                 "WGES-CcF-4",
                 "WGES-CcF-5",
                 // Easy, Normal
-                "WGEM-CcF-1",
-                "WGEM-CcF-2",
-                "WGEM-CcF-3",
-                "WGEM-CcF-4",
-                "WGEM-CcF-5",
+                "WGEN-CcF-1",
+                "WGEN-CcF-2",
+                "WGEN-CcF-3",
+                "WGEN-CcF-4",
+                "WGEN-CcF-5",
+                ],
                 
+                [
                 // Average, Short
                 "WGAS-CcF-1",
                 "WGAS-CcF-2",
@@ -473,24 +488,26 @@ extension sessionData {
                 "WGAS-CcF-4",
                 "WGAS-CcF-5",
                 // Average, Normal
-                "WGAM-CcF-1",
-                "WGAM-CcF-2",
-                "WGAM-CcF-3",
-                "WGAM-CcF-4",
-                "WGAM-CcF-5",
+                "WGAN-CcF-1",
+                "WGAN-CcF-2",
+                "WGAN-CcF-3",
+                "WGAN-CcF-4",
+                "WGAN-CcF-5",
+                ],
                 
+                [
                 // Hard, Short
                 "WGHS-CcF-1",
                 "WGHS-CcF-2",
                 "WGHS-CcF-3",
-                "WGHS-CcF-4",
+                "WGHS-CcF -4",
                 "WGHS-CcF-5",
                 // Hard, Normal
-                "WGHM-CcF-1",
-                "WGHM-CcF-2",
-                "WGHM-CcF-3",
-                "WGHM-CcF-4",
-                "WGHM-CcF-5",],
+                "WGHN-CcF-1",
+                "WGHN-CcF-2",
+                "WGHN-CcF-3",
+                "WGHN-CcF-4",
+                "WGHN-CcF-5",],
             ],
             // MARK: Upper 8
             "circuitGymUpper": [
@@ -506,7 +523,9 @@ extension sessionData {
                 "WGEN-CcU-1-M",
                 "WGEN-CcU-2-M",
                 "WGEN-CcU-3-M",
+                ],
                 
+                [
                 // Average, Short
                 "WGAS-CcU-1",
                 "WGAS-CcU-2",
@@ -519,7 +538,9 @@ extension sessionData {
                 "WGAN-CcU-3",
                 "WGAN-CcU-1-M",
                 "WGAN-CcU-2-M",
+                ],
                 
+                [
                 // Hard, Short
                 "WGHS-CcU-1",
                 "WGHS-CcU-2",
@@ -547,7 +568,9 @@ extension sessionData {
                 "WGEN-CcL-3",
                 "WGEN-CcL-4",
                 "WGEN-CcL-5",
+                ],
                 
+                [
                 // Average, Short
                 "WGAS-CcL-1",
                 "WGAS-CcL-2",
@@ -560,7 +583,9 @@ extension sessionData {
                 "WGAN-CcL-3",
                 "WGAN-CcL-4",
                 "WGAN-CcL-5",
+                ],
                 
+                [
                 // Hard, Short
                 "WGHS-CcL-1",
                 "WGHS-CcL-2",
@@ -596,7 +621,9 @@ extension sessionData {
                 "WBEN-CsF-6",
                 "WBEN-CsF-7",
                 "WBEN-CsF-8",
+                ],
                 
+                [
                 // Average, Short
                 "WBAS-CsF-1",
                 "WBAS-CsF-2",
@@ -621,7 +648,9 @@ extension sessionData {
                 "WBAN-CsF-3-E",
                 "WBAN-CsF-4-E",
                 "WBAN-CsF-5-E",
+                ],
                 
+                [
                 // Hard, Short
                 "WBHS-CsF-1",
                 "WBHS-CsF-2",
@@ -659,7 +688,9 @@ extension sessionData {
                 "WBEN-CsU-2",
                 "WBEN-CsU-3",
                 "WBEN-CsU-4",
+                ],
                 
+                [
                 // Average, Short
                 "WBAS-CsU-1",
                 "WBAS-CsU-2",
@@ -674,7 +705,9 @@ extension sessionData {
                 "WBAN-CsU-1-E",
                 "WBAN-CsU-2-E",
                 "WBAN-CsU-3-E",
+                ],
                 
+                [
                 // Hard, Short
                 "WBHS-CsU-1",
                 "WBHS-CsU-2",
@@ -706,7 +739,9 @@ extension sessionData {
                 "WBEN-CsL-4",
                 "WBEN-CsL-5",
                 "WBEN-CsL-6",
+                ],
                 
+                [
                 // Average, Short
                 "WBAS-CsL-1",
                 "WBAS-CsL-2",
@@ -721,7 +756,9 @@ extension sessionData {
                 "WBAN-CsL-4",
                 "WBAN-CsL-5",
                 "WBAN-CsL-6",
+                ],
                 
+                [
                 // Average, Short
                 "WBHS-CsL-1",
                 "WBHS-CsL-2",
@@ -759,7 +796,9 @@ extension sessionData {
                 "WBEN-CcF-6",
                 "WBEN-CcF-7",
                 "WBEN-CcF-8",
+                ],
                 
+                [
                 // Average, Short
                 "WBAS-CcF-1",
                 "WBAS-CcF-2",
@@ -784,7 +823,9 @@ extension sessionData {
                 "WBAN-CcF-3-E",
                 "WBAN-CcF-4-E",
                 "WBAN-CcF-5-E",
+                ],
                 
+                [
                 // Hard, Short
                 "WBHS-CcF-1",
                 "WBHS-CcF-2",
@@ -822,7 +863,9 @@ extension sessionData {
                 "WBEN-CcU-2",
                 "WBEN-CcU-3",
                 "WBEN-CcU-4",
+                ],
                 
+                [
                 // Average, Short
                 "WBAS-CcU-1",
                 "WBAS-CcU-2",
@@ -837,7 +880,9 @@ extension sessionData {
                 "WBAN-CcU-1-E",
                 "WBAN-CcU-2-E",
                 "WBAN-CcU-3-E",
+                ],
                 
+                [
                 // Hard, Short
                 "WBHS-CcU-1",
                 "WBHS-CcU-2",
@@ -869,7 +914,9 @@ extension sessionData {
                 "WBEN-CcL-4",
                 "WBEN-CcL-5",
                 "WBEN-CcL-6",
+                ],
                 
+                [
                 // Average, Short
                 "WBAS-CcL-1",
                 "WBAS-CcL-2",
@@ -884,7 +931,9 @@ extension sessionData {
                 "WBAN-CcL-4",
                 "WBAN-CcL-5",
                 "WBAN-CcL-6",
+                ],
                 
+                [
                 // Hard, Short
                 "WBHS-CcL-1",
                 "WBHS-CcL-2",
@@ -906,8 +955,7 @@ extension sessionData {
         "cardio": [
             "hiit": [
                 // Note currently not seperated into running/biking/rowing as only timed sessions are presented so can be used for all 3 types of cardio
-                ["allMovements",
-                 // Short, Short
+                [// Short, Short
                 "CHSS-1",
                 "CHSS-2",
                 "CHSS-3",
@@ -986,7 +1034,7 @@ extension sessionData {
                 "CBAS-1",
                 "CBAS-2",
                 "CBAS-3",
-                // Average, Short
+                // Average, Normal
                 "CBAN-1",
                 "CBAN-2",
                 "CBAN-3",
@@ -997,7 +1045,7 @@ extension sessionData {
                 "CBHS-1",
                 "CBHS-2",
                 "CBHS-3",
-                // Hard, Short
+                // Hard, Normal
                 "CBHN-1",
                 "CBHN-2",
                 "CBHN-3",],
@@ -1029,7 +1077,7 @@ extension sessionData {
                 "SGAN-1",
                 "SGAN-2",],
                 
-                // MARK: Hips
+                // MARK: Hamstrings
                 [// Easy, Short
                 "SHES-1",
                 "SHES-2",
@@ -1041,7 +1089,7 @@ extension sessionData {
                 // Average, Normal
                 "SHAN-1",],
                 
-                // MARK: Hamstrings
+                // MARK: Hips
                 [// Easy, Short
                 "SHiES-1",
                 "SHiES-2",

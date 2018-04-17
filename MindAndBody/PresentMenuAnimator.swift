@@ -77,6 +77,7 @@ extension PresentMenuAnimator : UIViewControllerAnimatedTransitioning {
             fromVC.view.isHidden = true
             
             // Different animation for button press or pan gesture
+            //
             // Press
             if MenuVariables.shared.menuInteractionType == 0 {
                 UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -86,6 +87,7 @@ extension PresentMenuAnimator : UIViewControllerAnimatedTransitioning {
                                 fromVC.view.isHidden = false
                                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 })
+            //
             // Pan
             } else {
                 UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {

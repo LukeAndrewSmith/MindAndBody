@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/CircuitWorkoutSessionScreen.swift"
-            timestampString = "545523598.6184191"
+            timestampString = "545694114.367771"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "808"
-            endingLineNumber = "808"
+            startingLineNumber = "795"
+            endingLineNumber = "795"
             landmarkName = "nextButtonAction()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Settings.swift"
-            timestampString = "540326226.291833"
+            timestampString = "545694114.3680331"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "968"
-            endingLineNumber = "968"
+            startingLineNumber = "890"
+            endingLineNumber = "890"
             landmarkName = "edgePanGesture(sender:)"
             landmarkType = "7">
          </BreakpointContent>

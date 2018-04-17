@@ -158,21 +158,21 @@ extension sessionData {
             // Workout
             "workout": [
                 // Classic Gym
-                "classicGymFull": [""],
-                "classicGymUpper": [""],
-                "classicGymLower": [""],
+                "classicGymFull": ["level1", "level2", "level3"],
+                "classicGymUpper": ["level1", "level2", "level3"],
+                "classicGymLower": ["level1", "level2", "level3"],
                 // Circuit Gym
-                "circuitGymFull": [""],
-                "circuitGymUpper": [""],
-                "circuitGymLower": [""],
+                "circuitGymFull": ["level1", "level2", "level3"],
+                "circuitGymUpper": ["level1", "level2", "level3"],
+                "circuitGymLower": ["level1", "level2", "level3"],
                 // Classic Bodyweight
-                "classicBodyweightFull": [""],
-                "classicBodyweightUpper": [""],
-                "classicBodyweightLower": [""],
+                "classicBodyweightFull": ["level1", "level2", "level3"],
+                "classicBodyweightUpper": ["level1", "level2", "level3"],
+                "classicBodyweightLower": ["level1", "level2", "level3"],
                 // Circuit Bodyweight
-                "circuitBodyweightFull": [""],
-                "circuitBodyweightUpper": [""],
-                "circuitBodyweightLower": [""]
+                "circuitBodyweightFull": ["level1", "level2", "level3"],
+                "circuitBodyweightUpper": ["level1", "level2", "level3"],
+                "circuitBodyweightLower": ["level1", "level2", "level3"]
             ],
             // Cardio
             "cardio": [
@@ -183,7 +183,7 @@ extension sessionData {
                 "running": [""]],
             // Stretching
             "stretching": [
-                "general": ["fullBody", "hips", "hamstrings", "backNeck", "foamRolling"], // Not schedule so not separated into focuses
+                "general": ["fullBody", "hamstrings", "hips", "backNeck", "foamRolling"], // Not schedule so not separated into focuses
                 "postWorkout": ["fullBody", "upperBody", "lowerBody"],
                 "postCardio": [""]],
             // Yoga

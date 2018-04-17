@@ -2098,7 +2098,7 @@ class sessionData {
                         ["movement": "legExtensions",
                          "sets": 2,
                          "reps": "10-15"],
-                        ["movement": "legCurls",
+                        ["movement": "legCurl",
                          "sets": 2,
                          "reps": "10-15"],
                         ["movement": "rowMachine",
@@ -2320,7 +2320,7 @@ class sessionData {
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
-                        ["movement": "legCurls",
+                        ["movement": "legCurl",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "rowMachine",
@@ -2585,7 +2585,7 @@ class sessionData {
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
-                        ["movement": "legCurls",
+                        ["movement": "legCurl",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "calfRaise",
@@ -2840,7 +2840,7 @@ class sessionData {
                         ["movement": "legExtensions",
                          "sets": 2,
                          "reps": "10-15"],
-                        ["movement": "legCurls",
+                        ["movement": "legCurl",
                          "sets": 2,
                          "reps": "10-15"],
                         ["movement": "rowMachine",
@@ -2928,7 +2928,8 @@ class sessionData {
                         ["movement": "weightedStepUp",
                          "sets": 3,
                          "reps": "8-12"],
-                        ["sets": 2,
+                        ["movement": "bentOverRowDumbell",
+                         "sets": 2,
                          "reps": "8-12"],
                         ["movement": "platePress",
                          "sets": 2,
@@ -3060,7 +3061,7 @@ class sessionData {
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
-                        ["movement": "legCurls",
+                        ["movement": "legCurl",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "rowMachine",
@@ -3323,7 +3324,7 @@ class sessionData {
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
-                        ["movement": "legCurls",
+                        ["movement": "legCurl",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "calfRaise",
@@ -3583,7 +3584,7 @@ class sessionData {
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
-                        ["movement": "legCurls",
+                        ["movement": "legCurl",
                          "sets": 2,
                          "reps": "10-15"],
                         ["movement": "bodyweightRow",
@@ -3844,7 +3845,7 @@ class sessionData {
                         ["movement": "legExtensions",
                          "sets": 2,
                          "reps": "10-15"],
-                        ["movement": "legCurls",
+                        ["movement": "legCurl",
                          "sets": 2,
                          "reps": "10-15"],
                         ["movement": "bodyweightRow",
@@ -4153,7 +4154,7 @@ class sessionData {
                         ["movement": "legExtensions",
                          "sets": 3,
                          "reps": "10-15"],
-                        ["movement": "legCurls",
+                        ["movement": "legCurl",
                          "sets": 3,
                          "reps": "10-15"],
                         ["movement": "standingCalfRaise",
@@ -19160,7 +19161,7 @@ class sessionData {
                     // MARK: Normal
                     "WBEN-CcL-1": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "bodyweightSquat",
                          "reps": "20",
                          "time": 30],
@@ -19228,7 +19229,7 @@ class sessionData {
                     ],
                     "WBEN-CcL-2": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "squatJump",
                          "reps": "15",
                          "time": 20],
@@ -19296,7 +19297,7 @@ class sessionData {
                     ],
                     "WBEN-CcL-3": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "lunge",
                          "reps": "20",
                          "time": 40],
@@ -19364,7 +19365,7 @@ class sessionData {
                     ],
                     "WBEN-CcL-4": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "lungeJump",
                          "reps": "15",
                          "time": 20],
@@ -19432,7 +19433,7 @@ class sessionData {
                     ],
                     "WBEN-CcL-5": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "bodyweightDeadlift",
                          "reps": "25",
                          "time": 30],
@@ -19500,7 +19501,7 @@ class sessionData {
                     ],
                     "WBEN-CcL-6": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "singleLegDeadlift",
                          "reps": "15",
                          "time": 15],
@@ -19825,7 +19826,7 @@ class sessionData {
                     // MARK: Normal
                     "WBAN-CcL-1": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "bodyweightSquat",
                          "reps": "30",
                          "time": 50],
@@ -19893,7 +19894,7 @@ class sessionData {
                     ],
                     "WBAN-CcL-2": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "squatJump",
                          "reps": "20",
                          "time": 30],
@@ -19961,7 +19962,7 @@ class sessionData {
                     ],
                     "WBAN-CcL-3": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "lunge",
                          "reps": "25",
                          "time": 60],
@@ -20029,7 +20030,7 @@ class sessionData {
                     ],
                     "WBAN-CcL-4": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "lungeJump",
                          "reps": "20",
                          "time": 30],
@@ -20097,7 +20098,7 @@ class sessionData {
                     ],
                     "WBAN-CcL-5": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "bodyweightDeadlift",
                          "reps": "35",
                          "time": 40],
@@ -20165,7 +20166,7 @@ class sessionData {
                     ],
                     "WBAN-CcL-6": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "singleLegDeadlift",
                          "reps": "20",
                          "time": 25],
@@ -20490,7 +20491,7 @@ class sessionData {
                     // MARK: Normal
                     "WBHN-CcL-1": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "bodyweightSquat",
                          "reps": "40",
                          "time": 60],
@@ -20558,7 +20559,7 @@ class sessionData {
                     ],
                     "WBHN-CcL-2": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "squatJump",
                          "reps": "30",
                          "time": 30],
@@ -20626,7 +20627,7 @@ class sessionData {
                     ],
                     "WBHN-CcL-3": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "lunge",
                          "reps": "35",
                          "time": 70],
@@ -20694,7 +20695,7 @@ class sessionData {
                     ],
                     "WBHN-CcL-4": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "lungeJump",
                          "reps": "30",
                          "time": 40],
@@ -20762,7 +20763,7 @@ class sessionData {
                     ],
                     "WBHN-CcL-5": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "bodyweightDeadlift",
                          "reps": "40",
                          "time": 50],
@@ -20830,7 +20831,7 @@ class sessionData {
                     ],
                     "WBHN-CcL-6": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "singleLegDeadlift",
                          "reps": "30",
                          "time": 35],
@@ -22584,7 +22585,7 @@ class sessionData {
                     // MARK: Normal
                     "CBEN-1": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "burpee",
                          "reps": "30s",
                          "time": 30],
@@ -22595,8 +22596,7 @@ class sessionData {
                          "reps": "20s",
                          "time": 20],
                         // Round 2
-                        ["rounds": 3,
-                         "movement": "burpee",
+                        ["movement": "burpee",
                          "reps": "30s",
                          "time": 30],
                         ["movement": "jumpingJacks",
@@ -22638,7 +22638,7 @@ class sessionData {
                     ],
                     "CBEN-2": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "mountainClimbers",
                          "reps": "20s",
                          "time": 20],
@@ -22649,8 +22649,7 @@ class sessionData {
                          "reps": "30s",
                          "time": 30],
                         // Round 2
-                        ["rounds": 3,
-                         "movement": "mountainClimbers",
+                        ["movement": "mountainClimbers",
                          "reps": "20s",
                          "time": 20],
                         ["movement": "lungeJump",
@@ -22692,7 +22691,7 @@ class sessionData {
                     ],
                     "CBEN-3": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "mountainClimbers",
                          "reps": "20s",
                          "time": 20],
@@ -22703,8 +22702,7 @@ class sessionData {
                          "reps": "30s",
                          "time": 30],
                         // Round 2
-                        ["rounds": 3,
-                         "movement": "mountainClimbers",
+                        ["movement": "mountainClimbers",
                          "reps": "20s",
                          "time": 20],
                         ["movement": "squatJump",
@@ -22850,7 +22848,7 @@ class sessionData {
                     // MARK: Normal
                     "CBAN-1": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "kickThroughBurpee",
                          "reps": "40s",
                          "time": 40],
@@ -22861,8 +22859,7 @@ class sessionData {
                          "reps": "30s",
                          "time": 30],
                         // Round 2
-                        ["rounds": 3,
-                         "movement": "kickThroughBurpee",
+                        ["movement": "kickThroughBurpee",
                          "reps": "40s",
                          "time": 40],
                         ["movement": "squatJump",
@@ -22904,7 +22901,7 @@ class sessionData {
                     ],
                     "CBAN-2": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "mountainClimbers",
                          "reps": "30s",
                          "time": 30],
@@ -22915,8 +22912,7 @@ class sessionData {
                          "reps": "40s",
                          "time": 40],
                         // Round 2
-                        ["rounds": 3,
-                         "movement": "mountainClimbers",
+                        ["movement": "mountainClimbers",
                          "reps": "30s",
                          "time": 30],
                         ["movement": "lungeJump",
@@ -22958,7 +22954,7 @@ class sessionData {
                     ],
                     "CBAN-3": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "mountainClimbers",
                          "reps": "30s",
                          "time": 30],
@@ -22969,8 +22965,7 @@ class sessionData {
                          "reps": "40s",
                          "time": 40],
                         // Round 2
-                        ["rounds": 3,
-                         "movement": "mountainClimbers",
+                        ["movement": "mountainClimbers",
                          "reps": "30s",
                          "time": 30],
                         ["movement": "squatJump",
@@ -23116,7 +23111,7 @@ class sessionData {
                     // MARK: Normal
                     "CBHN-1": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "kickThroughBurpee",
                          "reps": "60s",
                          "time": 60],
@@ -23127,8 +23122,7 @@ class sessionData {
                          "reps": "40s",
                          "time": 40],
                         // Round 2
-                        ["rounds": 3,
-                         "movement": "kickThroughBurpee",
+                        ["movement": "kickThroughBurpee",
                          "reps": "60s",
                          "time": 60],
                         ["movement": "squatJump",
@@ -23170,7 +23164,7 @@ class sessionData {
                     ],
                     "CBHN-2": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "mountainClimbers",
                          "reps": "40s",
                          "time": 40],
@@ -23181,8 +23175,7 @@ class sessionData {
                          "reps": "40s",
                          "time": 40],
                         // Round 2
-                        ["rounds": 3,
-                         "movement": "mountainClimbers",
+                        ["movement": "mountainClimbers",
                          "reps": "40s",
                          "time": 40],
                         ["movement": "lungeJump",
@@ -23224,7 +23217,7 @@ class sessionData {
                     ],
                     "CBHN-3": [
                         // Round 1
-                        ["rounds": 3,
+                        ["rounds": 5,
                          "movement": "mountainClimbers",
                          "reps": "40s",
                          "time": 40],
@@ -23235,8 +23228,7 @@ class sessionData {
                          "reps": "40s",
                          "time": 40],
                         // Round 2
-                        ["rounds": 3,
-                         "movement": "mountainClimbers",
+                        ["movement": "mountainClimbers",
                          "reps": "40s",
                          "time": 40],
                         ["movement": "squatJump",

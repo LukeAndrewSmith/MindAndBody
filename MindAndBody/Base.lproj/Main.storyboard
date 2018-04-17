@@ -4876,6 +4876,7 @@
                             <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="slideMenuButton:" destination="C87-uf-Q8P" id="Ite-ke-TLY"/>
+                                <segue destination="BJi-pp-zkU" kind="presentation" identifier="openMenu" id="9CT-5x-VKO"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="QuestionMarkMenu" id="vdh-hA-mxM">
@@ -4890,7 +4891,6 @@
                         <outlet property="navigationBar" destination="JRG-rZ-TEm" id="Ka0-4M-FmY"/>
                         <segue destination="U5d-IN-X7D" kind="show" identifier="BackgroundImageSegue" id="GKV-bG-CaC"/>
                         <segue destination="8IA-AP-QDR" kind="show" identifier="YogaAutomaticSegue" id="6Xa-ns-zfk"/>
-                        <segue destination="BJi-pp-zkU" kind="presentation" identifier="openMenu" id="hhr-yy-04w"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DbC-9W-Xf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5321,7 +5321,7 @@
         <segue reference="faH-ex-aMQ"/>
         <segue reference="0ea-jZ-0Du"/>
         <segue reference="J6H-iJ-lim"/>
-        <segue reference="2sH-Wt-Foe"/>
+        <segue reference="9Fh-DY-FYb"/>
         <segue reference="IU0-L6-y9Z"/>
         <segue reference="JpO-YN-OFV"/>
         <segue reference="tfD-MK-KSh"/>
@@ -5332,7 +5332,7 @@
         <segue reference="Fhn-aO-iU6"/>
         <segue reference="y3k-i5-esE"/>
         <segue reference="izD-lx-C3k"/>
-        <segue reference="4xc-U5-wKP"/>
+        <segue reference="9CT-5x-VKO"/>
         <segue reference="kIb-e7-fcP"/>
         <segue reference="0hW-vM-NHz"/>
     </inferredMetricsTieBreakers>

@@ -140,7 +140,7 @@ extension sessionData {
                     // Pecs
                     ["pecStretch"],
                     // Shoulders
-                    ["shoulderRoll", "behindBackTouch", "frontDelt", "lateralDelt", "rearDelt", "rotatorCuff"],
+                    ["shoulderRoll", "behindBackTouch", "frontDelt", "lateralDelt", "rearDeltStretch", "rotatorCuff"],
                     // Hips and Glutes
                     ["squatHold", "groinStretch", "butterflyPose", "lungeStretch", "threadTheNeedle", "pigeonPose", "seatedGlute"],
                     // Calves
@@ -154,8 +154,6 @@ extension sessionData {
             ],
             "yoga":
                 [
-                    // Warmup
-                    ["pelvicTilt", "kneeToChest", "happyBaby", "headRoll", "butterfly", "catCow", "childPose", "downwardDog"],
                     // Standing
                     ["upwardsSalute", "mountain", "treeL", "treeR", "extendedToeGrabL", "extendedToeGrabR", "eagleL", "eagleR", "chair", "lordOfDanceL", "lordOfDanceR", "warrior1L", "warrior1R", "warrior2L", "warrior2R", "warrior3L", "warrior3R", "halfMoonL", "halfMoonR", "extendedTriangleL", "extendedTriangleR", "extendedSideAngleYL", "extendedSideAngleYR", "revolvedSideAngleL", "revolvedSideAngleR", "revolvedTriangleL", "revolvedTriangleR", "halfForwardBend", "forwardBend", "wideLeggedForwardBend", "intenseSideL", "intenseSideR", "gateL", "gateR", "highLungeL", "highLungeR", "lowLungeYL", "lowLungeYR", "deepSquat"],
                     // Hand/Elbows and Feet/Knees
@@ -294,7 +292,7 @@ extension sessionData {
                     "behindBackTouch",
                     "frontDelt",
                     "lateralDelt",
-                    "rearDelt",
+                    "rearDeltStretch",
                     "rotatorCuff",
                     // Hips and Glutes
                     "lungeStretch",

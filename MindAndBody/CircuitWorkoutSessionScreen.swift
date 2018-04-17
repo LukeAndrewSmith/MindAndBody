@@ -123,7 +123,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         
         // If not from custom, retreive data
-        if fromCustom == false {
+        if fromCustom == false && keyArray == [] {
             // Loop session
             for i in 0..<(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?.count)! {
                 keyArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]["movement"] as! String)
@@ -131,6 +131,12 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             }
             // Rounds in first movement
             numberOfRounds = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]["rounds"] as! Int
+            
+            //
+            // Cardio bodyweight workouts uses this screen, but accesses movements from the workout section, so this switch is necessary but ok, as all the session information has just been transferred to temporary arrays
+            if SelectedSession.shared.selectedSession[0] == "cardio" {
+                SelectedSession.shared.selectedSession[0] = "workout"
+            }
         }
         
         //
@@ -253,30 +259,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             // New image to display
             // Demonstration on left
-            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            let defaultImage = settings["DefaultImage"]![0]
-            if defaultImage == 0 {
-                // [key] = key, [0] = first image
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
-                // Indicator
-                if (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count > 1 {
-                    cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
-                } else {
-                    cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                }
-                cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                // Target Area on left
+            // [key] = key, [0] = first image
+            cell.imageViewCell.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
+            // Indicator
+            if ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"])?.count)! > 1 {
+                cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
             } else {
-                // [key] = key
-                cell.imageViewCell.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])! + toAdd)
-                // Indicator
-                if (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!).count > 1 {
-                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
-                } else {
-                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                }
                 cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
             }
+            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
             
             //
             cell.imageViewCell.tag = indexPath.row
@@ -760,9 +751,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            let defaultImage = settings["DefaultImage"]![0]
-            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     sender.startAnimating()
                 }
@@ -792,9 +781,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            let defaultImage = settings["DefaultImage"]![0]
-            if defaultImage == 0 && cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") || UserDefaults.standard.string(forKey: "targetArea") == "demonstration" && cell.rightImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
                 if imageCount != 1 {
                     cell.imageViewCell.startAnimating()
                 }
@@ -1010,28 +997,14 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     
                     // New image to display
                     // Demonstration on left
-                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                    let defaultImage = settings["DefaultImage"]![0]
-                    if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["targetArea"]![0] + toAdd)
-                        // Indicator
-                        if imageCount > 1 {
-                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
-                        } else {
-                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                        }
-                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                        // Target Area on left
+                    cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["targetArea"]![0] + toAdd)
+                    // Indicator
+                    if imageCount > 1 {
+                        cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![0])
-                        // Indicator
-                        if imageCount > 1 {
-                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
-                        } else {
-                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                        }
                         cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                     }
+                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                     
                     // Move new image to right of screen
                     cell.imageViewCell.center.x = cell.center.x + cell.frame.size.width
@@ -1060,28 +1033,14 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     
                     // New image to display
                     // Demonstration on left
-                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                    let defaultImage = settings["DefaultImage"]![0]
-                    if defaultImage == 0 {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![0])
-                        // Indicator
-                        if imageCount > 1 {
-                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
-                        } else {
-                            cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
-                        }
-                        cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                        // Target Area on left
+                    cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![0])
+                    // Indicator
+                    if imageCount > 1 {
+                        cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImagePlay")
                     } else {
-                        cell.imageViewCell.image = getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["targetArea"]![0] + toAdd)
-                        // Indicator
-                        if imageCount > 1 {
-                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImagePlayDeselected")
-                        } else {
-                            cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
-                        }
                         cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
                     }
+                    cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
                     
                     //
                     cell.imageViewCell.center.x = cell.center.x - cell.frame.size.width
@@ -1107,20 +1066,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     // Update Progress
     func updateProgress() {
         // Current Pose
-        let currentPose = Float(selectedRow)
+            // ((sessionScreenRoundIndex * 3) + sessionScreenRoundIndex) accounts for the current round
+        let currentPose = Float((sessionScreenRoundIndex * 3) + sessionScreenRoundIndex + selectedRow)
         // Total Number Poses
         let totalPoses = Float(keyArray.count - 1)
         
-        
         //
-        if selectedRow > 0 {
-            //
-            let currentProgress = currentPose / totalPoses
-            progressBar.setProgress(currentProgress, animated: true)
-        } else {
-            // Initial state
-            progressBar.setProgress(0, animated: true)
-        }
+        //
+        let currentProgress = currentPose / totalPoses
+        progressBar.setProgress(currentProgress, animated: true)
     }
     //
     
