@@ -2928,7 +2928,7 @@
 // MARK: Plans
 "plans" = "Plans";
 //
-// MARK: Schedule
+// MARK:- Schedule
 "schedule" = "Schedule";
 
 "weekOfThe" = "Week of the ";
@@ -2963,57 +2963,48 @@
 "muscleGain" = "Muscle Gain";
 "strength" = "Strength";
 
-// Choices
-// General
+// Choices -------- --------
+// General --------
 "sessionLength" = "Session Length";
 "focus" = "Focus";
 "toDo" = "To Do";
-// Mind
-"mindType" = "Mind - Type";
-"mindToDo" = "Mind - To Do";
+"1. warmup" = "1. Warmup";
+"2. session" = "2. Session";
+"2. practice" = "2. Practice";
+"3. stretching" = "3. Stretching";
+// Workout --------
+// Choice 2
+"workoutStyle" = "Workout Style";
+// Final
+"workoutToDo" = "Workout - To Do";
+// Yoga --------
+"yogaType" = "Yoga Type";
+"yogaToDo" = "Yoga - To Do";
+// Meditation --------
+"type" = "Type";
+"meditationType" = "Meditation - Type";
 // Choice 1
 "walk" = "Walk";
-"calm" = "Calm";
-"stressReduction" = "Reduce Stress";
-"strength" = "Strength";
-"energising" = "Energy";
-"focusing" = "Focus";
 // Choice 2
 "practiceLength" = "Practice Length";
-// Flexibility
+// Endurance --------
+"enduranceToDo" = "Endurance - To Do";
+"enduranceType" = "Endurance - Type";
+"enduranceType2" = "Endurance - Type - 2";
+"steadyState" = "Steady State (Without the app)";
+// Choice 1
+"highIntensityCardio" = "High Intensity Cardio (HIIT)";
+"highIntensityWorkout" = "High Intensity Bodyweight Workout";
+//
+// Choice 2
+"enduranceType" = "Endurance - Type";
+// Flexibility --------
 "flexibilityToDo" = "Flexibility - To Do";
 "flexibilityType" = "Flexibility - Type";
 // Choice 3
 "hamstrings" = "Hamstrings";
 "hips" = "Hips";
 "back/neck" = "Back/Neck";
-// Endurance
-"enduranceToDo" = "Endurance - To Do";
-"enduranceType" = "Endurance - Type";
-"enduranceType2" = "Endurance - Type - 2";
-"steadyState" = "Steady State (Without the app)";
-// Choice 2
-"enduranceType" = "Endurance - Type";
-// Toning
-"toningToDo" = "Toning - To Do";
-"toningType" = "Toning Type";
-// Choice 1
-"highIntensityCardio" = "High Intensity: Cardio";
-"highIntensityWorkout" = "High Intensity: Bodyweight Workout";
-// Muscle Gain
-"muscleGainToDo" = "Muscle Gain - To Do";
-"muscleGainType" = "Muscle Gain Type";
-// Strength
-"strengthToDo" = "Strength - To Do";
-"strengthType" = "Strength - Type";
-// Choice 1
-"short" = "Short";
-"normal" = "Normal";
-// Choice 3
-"5x51" = "5x5 - 1";
-"5x52" = "5x5 - 2";
-"accessory1" = "Accessory Workout 1";
-"accessory2" = "Accessor";
 
 // Schedule creation
 "scheduleTypeQuestion" = "I would like :";
@@ -3065,12 +3056,11 @@
 "strengthG" = "Strength";
 
 // Shortened names
-"mindS" = "M";
+"workoutS" = "W";
+"yogaS" = "Y";
+"meditationS" = "M";
 "flexibilityS" = "F";
 "enduranceS" = "E";
-"toningS" = "T";
-"muscleGainS" = "MG";
-"strengthS" = "S";
 
 //
 // Groups

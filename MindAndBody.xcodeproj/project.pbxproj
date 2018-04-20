@@ -510,7 +510,6 @@
 		07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */; };
 		07C028B41FB4D1A800CBB1ED /* ProfileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C028B31FB4D1A800CBB1ED /* ProfileHelper.swift */; };
 		07C10F53202DE1CB00D70DF8 /* TrackingClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C10F52202DE1CA00D70DF8 /* TrackingClasses.swift */; };
-		07C10F5520344B9400D70DF8 /* SessionsNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C10F5420344B9400D70DF8 /* SessionsNew.swift */; };
 		07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2D3BB1EBA88CF000770DE /* MindBody.swift */; };
 		07C7E2731F52E1B6001155DF /* forwardBend.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C7E2721F52E1B6001155DF /* forwardBend.png */; };
 		07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CB04361E604653002066CD /* MeditationChoiceGuided.swift */; };
@@ -1883,7 +1882,6 @@
 		07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		07C028B31FB4D1A800CBB1ED /* ProfileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHelper.swift; sourceTree = "<group>"; };
 		07C10F52202DE1CA00D70DF8 /* TrackingClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingClasses.swift; sourceTree = "<group>"; };
-		07C10F5420344B9400D70DF8 /* SessionsNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsNew.swift; sourceTree = "<group>"; };
 		07C2D3BB1EBA88CF000770DE /* MindBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindBody.swift; sourceTree = "<group>"; };
 		07C7E2721F52E1B6001155DF /* forwardBend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forwardBend.png; sourceTree = "<group>"; };
 		07CB04361E604653002066CD /* MeditationChoiceGuided.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoiceGuided.swift; sourceTree = "<group>"; };
@@ -3772,7 +3770,6 @@
 			children = (
 				077DAB121FD5FCD500CF7949 /* Sessions.swift */,
 				077DAB141FD5FCE300CF7949 /* Movements.swift */,
-				07C10F5420344B9400D70DF8 /* SessionsNew.swift */,
 				07002A5F1FD5ACE00000A755 /* SortedSessionsFinalChoice.swift */,
 				07D127F51FD6FB1F00C88352 /* SortedSessionsSchedule.swift */,
 				077DAB161FD5FE1900CF7949 /* LittleThings.swift */,
@@ -8239,7 +8236,6 @@
 				077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */,
 				077DAB151FD5FCE300CF7949 /* Movements.swift in Sources */,
 				07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */,
-				07C10F5520344B9400D70DF8 /* SessionsNew.swift in Sources */,
 				07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */,
 				077876231F92A50D005CE68A /* Profile.swift in Sources */,
 				072829EB1EA8A26A0090164A /* CircuitWorkoutSessionScreen.swift in Sources */,

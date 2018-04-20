@@ -21,7 +21,7 @@ extension sessionData {
 
         
         // MARK:- Workout ------------------------------- -------------------------------
-        "muscleGain": [
+        "workout": [
             // MARK: Warmups -------------------------------
             // NOTE, bodyweight and gym use the same warmup, i.e warmups currently do not include the use of equiptment
             "WaF": [

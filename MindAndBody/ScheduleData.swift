@@ -25,12 +25,11 @@ class TemporaryWeekArray {
 extension Int {
     func groupFromInt() -> String {
         let groupIntAsString: [Int: String] = [
-            0: "mind",
-            1: "flexibility",
-            2: "endurance",
-            3: "toning",
-            4: "muscleGain",
-            5: "strength"]
+            0: "workout",
+            1: "yoga",
+            2: "meditation",
+            3: "endurance",
+            4: "flexibility"]
         return groupIntAsString[self]!
     }
 }
@@ -38,12 +37,11 @@ extension Int {
 extension String {
     func groupFromString() -> Int {
         let groupStringAsInt: [String: Int] = [
-            "mind": 0,
-            "flexibility": 1,
-            "endurance": 2,
-            "toning": 3,
-            "muscleGain": 4,
-            "strength": 5]
+            "workout": 0,
+            "yoga": 1,
+            "meditation": 2,
+            "endurance": 3,
+            "flexibility": 4]
         return groupStringAsInt[self]!
     }
 }
@@ -130,28 +128,25 @@ enum scheduleDataStructures {
     
     static let groupNames =
         [
-            "mind",
+            "workout",
+            "yoga",
+            "meditation",
             "flexibility",
             "endurance",
-            "toning",
-            "muscleGain",
-            "strength",
         ]
     
     static let shortenedGroupNames =
         [
-            // Mind
-            "mindS",
+            // Workout
+            "workoutS",
+            // Yoga
+            "yogaS",
+            // Meditation
+            "meditationS",
             // Flexibility
             "flexibilityS",
             // Endurance
             "enduranceS",
-            // Toning
-            "toningS",
-            // Muscle Gain
-            "muscleGainS",
-            // Strength
-            "strengthS",
             ]
     
     //
@@ -343,48 +338,41 @@ enum scheduleDataStructures {
     
     //
     // MARK: Schedule Tracking, tracking what youve done each week, putting a tick next to what you've done in schedule if true
-    static let scheduleGroups: [Int:[String :Any]] =
+    static let scheduleGroups: [Int: [String: Any]] =
         [
-            // MARK: Mind
+            // MARK: Workout
+            0: ["group": "workout",
+                "isGroupCompleted": false,
+                "0": false, // Warmup
+                "1": false, // Session
+                "2": false], // Stretching
+            
+            // MARK: Yoga
+            1: ["group": "yoga",
+                "isGroupCompleted": false,
+                "0": false, // Warmup
+                "1": false], // Practice
+            
+            // MARK: Meditation
             // NOTE MIND HAS CHOICE OF GOING FOR A WALK, IF SELECTED WONT GO GREEN, WILL JUST TAKE BACK TO INITIAL SCREEN AND SET TO TRUE
-            0: ["group": "mind",
+            2: ["group": "meditation",
                  "isGroupCompleted": false,
                  "0": false, // Warmup
                  "1": false], // Session
             
+            // MARK: Endurance
+            3: ["group": "endurance",
+                "isGroupCompleted": false,
+                "0": false, // Warmup
+                "1": false, // Session
+                "2": false], // Stretching
+            
             // Note: Choice = ["title","contents","contents"...]
             // MARK: Flexibility
-            1: ["group": "flexibility",
-               "isGroupCompleted": false,
-               "0": false, // Warmup
-               "1": false], // Session
-            
-            // MARK: Endurance
-            2: ["group": "endurance",
+            4: ["group": "flexibility",
                 "isGroupCompleted": false,
                 "0": false, // Warmup
-                "1": false, // Session
-                "2": false], // Stretching
-            // MARK: Toning
-            3: ["group": "toning",
-               "isGroupCompleted": false,
-               "0": false, // Warmup
-                "1": false, // Session
-                "2": false], // Stretching
-            
-            // MARK: Muscle Gain
-            4: ["group": "muscleGain",
-                "isGroupCompleted": false,
-                "0": false, // Warmup
-                "1": false, // Session
-                "2": false], // Stretching
-            // MARK: Strength
-            5: ["group": "strength",
-                "isGroupCompleted": false,
-                "0": false, // Warmup
-                "1": false, // Session
-                "2": false], // Stretching
+                "1": false], // Session
         ]
-    
 }
 

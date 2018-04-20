@@ -200,44 +200,119 @@ extension sessionData {
     // (0-4/5) = choiceProgress[1] in schedule
     static let sortedGroups: [Int: [[String]]] =
         [
-            // MARK: Mind
+            // MARK: Workout
             0: [
+                // 0
+                ["workout"],
+                // 1 | Choice 1 - Type
+                [
+                    "workoutType",
+                    //
+                    "gym",
+                    "bodyweight"
+                ],
+                // 2 | Choice 2 - Style
+                [
+                    "workoutStyle",
+                    //
+                    "classic",
+                    "circuit"
+                ],
+                // 3 | Choice 3 - Focus
+                [
+                    "focus",
+                    //
+                    "fullBody",
+                    "upperBody",
+                    "lowerBody"
+                ],
+                // --------------
+                // 4 | Choice 4 - Length 1 - classic gym
+                [
+                    "sessionLength",
+                    //
+                    "Short: 10-20 min",
+                    "Medium: 20-50 min",
+                    "Long: 40+ min",
+                    ],
+                // --------------
+                // 5 | Choice 5 - Length 2 - others
+                [
+                    "sessionLength",
+                    //
+                    "Short: 10-20 min",
+                    "Normal: 20-50 min",
+                    ],
+                // 6 | Final - To Do
+                [
+                    "workoutToDo",
+                    //
+                    "1. warmup",
+                    "2. session",
+                    "3. stretching",
+                    ],
+            ],
+            
+            // MARK: Yoga
+            1: [
+                // 0
+                [ "yoga"],
+                // 1 | Choice 1 - type
+                [
+                    "yogaType",
+                    //
+                    "relaxing",
+                    "neutral",
+                    "stimulating",
+                ],
+                // --------------
+                // 2 | Choice 2 - Length 1 - relaxing
+                [
+                    "practiceLength",
+                    //
+                    "Very Short: 10-20 min",
+                    "Short: 10-20 min",
+                    "Medium: 20-40 min",
+                    "Long: 40+ min"
+                ],
+                // --------------
+                // 3 | Choice 3 - Length 1 - neutral
+                [
+                    "practiceLength",
+                    //
+                    "Short: 10-20 min",
+                    "Medium: 20-40 min",
+                    "Long: 40+ min"
+                ],
+                // --------------
+                // 4 | Choice 4 - Length 1 - stimulating
+                [
+                    "practiceLength",
+                    //
+                    "Short: 10-20 min",
+                    "Normal: 20-40 min"
+                ],
+                // 5 | Final - To Do
+                [
+                    "yogaToDo",
+                    //
+                    "1. warmup",
+                    "2. practice"
+                ],
+            ],
+            
+            // MARK: Meditation
+            2: [
                     // 0
-                    ["mind"],
+                    ["meditation"],
                     // 1 | Choice 1 - Type
                     [
-                        "mindType",
+                        "type",
                         //
-                        "yoga",
                         "meditation", // Goes to Choice 5
-                        "walk" // popup, go for a walk
+                        "walk", // popup, go for a walk
                     ],
-                    // 2 | Choice 2 - Focus
-                    [
-                        "focus",
-                        //
-                        "calm",
-                        "stressReduction",
-                        "strength",
-                        "energising",
-                        "focusing"
-                    ],
-                    // 3 | Choice 3 - Yoga Length
-                    [
-                        "practiceLength",
-                        //
-                        "10-20 min",
-                        "20-40 min",
-                        "40+ min"
-                    ],
-                    // 4 | Final - To Do
-                    [
-                        "mindToDo",
-                        //
-                        "1. warmup",
-                        "2. practice"
-                    ],
-                    // 5 | Choice 5 - Type
+                    // 2 | Final - Type
                     [
                         "meditationType",
                         //
@@ -246,46 +321,8 @@ extension sessionData {
                     ],
             ],
             
-            // Note: Choice = ["title","contents","contents"...]
-            // MARK: Flexibility
-            1: [
-                    // 0
-                    ["flexibility"],
-                    // 1 | Choice 1 - Type
-                    [
-                        "flexibilityType",
-                        //
-                        "stretching",
-                        "yoga",
-                        ],
-                    // 2 | Choice 2 - Focus
-                    [
-                        "focus",
-                        //
-                        "general",
-                        "hamstrings",
-                        "hips",
-                        "back/neck",
-                        ],
-                    // 3 | Choice 3 - Length
-                    [
-                        "sessionLength",
-                        //
-                        "10-20 min",
-                        "20-40 min",
-                        "40+ min"
-                    ],
-                    // 4 | Final - To Do
-                    [
-                        "flexibilityToDo",
-                        //
-                        "1. warmup",
-                        "2. session"
-                    ]
-            ],
-            
             // MARK: Endurance
-            2: [
+            3: [
                     // 0
                     ["endurance"],
                     // 1 | Choice 1 - Type
@@ -321,7 +358,7 @@ extension sessionData {
                         "enduranceToDo",
                         //
                         "1. warmup",
-                        "2. cardio/bodyweight workout",
+                        "2. session",
                         "3. stretching",
                     ],
                     // ------------
@@ -340,7 +377,7 @@ extension sessionData {
                         "enduranceToDo",
                         //
                         "1. warmup",
-                        "2. cardio",
+                        "2. session",
                         "3. stretching",
                         ],
                     // 7 | Choice 4 - 4 - Warmup/Stretching Length,
@@ -352,140 +389,36 @@ extension sessionData {
                         "10+ min"
                     ]
             ],
-            // MARK: Toning
-            3: [
-                    // 0
-                    ["toning"],
-                    // 1 | Choice 1 - Type
-                    [
-                        "toningType",
-                        //
-                        "bodyWeightWorkout",
-                        "highIntensityCardio",
-                        ],
-                    // -------------------------------
-                    // 2 | Choice 2 - Focus
-                    [
-                        "focus",
-                        //
-                        "fullBody",
-                        "upperBodyCore",
-                        "lowerBodyCore",
-                        ],
-                    // 3 | Choice 3 - length
-                    [
-                        "sessionLength",
-                        //
-                        "10-20 min",
-                        "20-50 min",
-                        "40+ min",
-                        ],
-                    // 4 | Final - To Do
-                    [
-                        "toningToDo",
-                        //
-                        "1. warmup",
-                        "2. session",
-                        "3. stretching",
-                        ],
-                    // -------------------------------
-                    // 5 | Choice 5 - length
-                    [
-                        "sessionLength",
-                        //
-                        "10-20 min",
-                        "20-50 min",
-                        "40+ min",
-                        ],
-                    // 6 | Final - To Do
-                    [
-                        "toningToDo",
-                        //
-                        "1. warmup",
-                        "2. session",
-                        "3. stretching",
-                        ],
-            ],
             
-            // MARK: Muscle Gain
+            // Note: Choice = ["title","contents","contents"...]
+            // MARK: Flexibility
             4: [
-                    // 0
-                    ["muscleGain"],
-                    // 1 | Choice 1 - Type
-                    [
-                        "muscleGainType",
-                        //
-                        "gym",
-                        "bodyweight"
+                // 0
+                ["flexibility"],
+                // 1 | Choice 1 - Focus
+                [
+                    "focus",
+                    //
+                    "general",
+                    "hamstrings",
+                    "hips",
+                    "back/neck",
                     ],
-                    // 2 | Choice 2 - Style
-                    [
-                        "workoutStyle",
-                        //
-                        "circuit",
-                        "classic"
-                    ],
-                    // 3 | Choice 3 - Focus
-                    [
-                        "focus",
-                        //
-                        "fullBody",
-                        "upperBody",
-                        "lowerBody"
-                    ],
-                    // 4 | Choice 4 - Length
-                    [
-                        "sessionLength",
-                        //
-                        "10-20 min",
-                        "20-50 min",
-                        "40+ min",
-                        ],
-                    // 5 | Final - To Do
-                    [
-                        "muscleGainToDo",
-                        //
-                        "1. warmup",
-                        "2. session",
-                        "3. stretching",
-                        ],
+                // 2 | Choice 2 - Length
+                [
+                    "sessionLength",
+                    //
+                    "10-20 min",
+                    "20-40 min",
+                    "40+ min"
+                ],
+                // 3 | Final - To Do
+                [
+                    "flexibilityToDo",
+                    //
+                    "1. warmup",
+                    "2. session"
+                ]
             ],
-            
-            // MARK: Strength
-            5: [
-                    // 0
-                    [ "strength"],
-                    // 1 | Choice 1 - type
-                    [
-                        "strengthType",
-                        //
-                        "gym",
-                        "bodyweight"
-                    ],
-                    // 2 | Choice 2 - Session
-                    [
-                        "session",
-                        //
-                        "5x51",
-                        "5x52",
-                        "accessory1",
-                        "accessory2"
-                    ],
-                    // 3 | Choice 3 - Length
-                    [
-                        "sessionLength",
-                        //
-                        "short",
-                        "normal"
-                    ],
-                    // 4 | Final - To Do
-                    [
-                        "strengthToDo",
-                        //
-                        "1. warmup",
-                        "2. session",
-                        "3. stretching"
-                    ],
-            ]
     ]
 }

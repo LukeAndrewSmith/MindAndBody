@@ -49,18 +49,51 @@ extension ScheduleScreen {
         // Table Counter
         // Return to choice 1 (sessions)
         if ScheduleVariables.shared.choiceProgress[1] > 1 {
-            // Meditation has two choice paths
-            if ScheduleVariables.shared.choiceProgress[0] == 0 && ScheduleVariables.shared.choiceProgress[1] == 5 {
-                ScheduleVariables.shared.choiceProgress[1] = 1
+            // Workout has 2 choice paths for the length
+            if ScheduleVariables.shared.choiceProgress[0] == 0 {
+                switch ScheduleVariables.shared.choiceProgress[1] {
+                // Go back from final choice
+                case 6:
+                    // Go back to length 1
+                    if indicator == "gym" && indicator2 == "classic" {
+                        ScheduleVariables.shared.choiceProgress[1] = 4
+                        // Go back to length 2
+                    } else {
+                        ScheduleVariables.shared.choiceProgress[1] = 5
+                    }
+                // Go back from length choice
+                case 5:
+                    // Go back to chioce 3
+                    ScheduleVariables.shared.choiceProgress[1] = 3
+                default:
+                    ScheduleVariables.shared.choiceProgress[1] -= 1
+                }
+            // Yoga has 3 choice paths for the length
+            } else if ScheduleVariables.shared.choiceProgress[0] == 1 {
+                switch ScheduleVariables.shared.choiceProgress[1] {
+                // Go back from final choice
+                case 5:
+                    // Go back to length 1
+                    switch indicator {
+                    case "relaxing":
+                        ScheduleVariables.shared.choiceProgress[1] = 2
+                    case "neutral":
+                        ScheduleVariables.shared.choiceProgress[1] = 3
+                    case "stimulating":
+                        ScheduleVariables.shared.choiceProgress[1] = 4
+                    default: break
+                    }
+                // Go back from length choice
+                case 4,3:
+                    // Go back to chioce 3
+                    ScheduleVariables.shared.choiceProgress[1] = 1
+                default:
+                    ScheduleVariables.shared.choiceProgress[1] -= 1
+                }
             // Endurance has 3 choice paths
             } else if ScheduleVariables.shared.choiceProgress[0] == 2 && ScheduleVariables.shared.choiceProgress[1] == 5 || ScheduleVariables.shared.choiceProgress[0] == 2 && ScheduleVariables.shared.choiceProgress[1] == 3 {
             // TODO: && selectedChoiceWarmup[3] == 3 { ??
                 ScheduleVariables.shared.choiceProgress[1] = 1
-            // Toning has two choice paths
-            } else if ScheduleVariables.shared.choiceProgress[0] == 3 && ScheduleVariables.shared.choiceProgress[1] == 5 {
-                ScheduleVariables.shared.choiceProgress[1] = 1
-                // Cardio has two choice paths
-            //
             } else {
                 ScheduleVariables.shared.choiceProgress[1] -= 1
             }
@@ -68,14 +101,19 @@ extension ScheduleScreen {
             maskView3.backgroundColor = .black
         // Return to choice 0 (groups)
         } else if ScheduleVariables.shared.choiceProgress[1] == 1 {
-            ScheduleVariables.shared.choiceProgress[0] = -1
-            ScheduleVariables.shared.choiceProgress[1] = 0
-            // Enable table scroll & schedule choice button & remove mask view
-            scheduleTableScrollCheck()
-            navigationBar.rightBarButtonItem?.isEnabled = true
-            removeMaskView()
-            slideRight()
+            backToBeginning()
         }
+    }
+    // Return to choice 0 (groups)
+    @objc func backToBeginning() {
+        // Return to choice 0 (groups)
+        ScheduleVariables.shared.choiceProgress[0] = -1
+        ScheduleVariables.shared.choiceProgress[1] = 0
+        // Enable table scroll & schedule choice button & remove mask view
+        scheduleTableScrollCheck()
+        navigationBar.rightBarButtonItem?.isEnabled = true
+        removeMaskView()
+        slideRight()
     }
     // Open Schedule, check if mask views necessary
     func checkMaskView() {
@@ -124,12 +162,22 @@ extension ScheduleScreen {
         view.addSubview(maskView1)
         view.addSubview(maskView2)
         view.addSubview(maskView3)
-        //
+        // Back
         maskViewBackButton.image = #imageLiteral(resourceName: "Back Arrow")
         maskViewBackButton.tintColor = Colors.light
         maskViewBackButton.sizeToFit()
         maskViewBackButton.frame = CGRect(x: 5, y: maskView1.bounds.height - maskViewBackButton.bounds.height - 11, width: maskViewBackButton.bounds.width, height: maskViewBackButton.bounds.height)
         maskView1.addSubview(maskViewBackButton)
+        // Back all the way to the beginning
+        maskViewBackToBeginningButton.setImage(#imageLiteral(resourceName: "Double Back Arrow"), for: .normal)
+        maskViewBackToBeginningButton.alpha = 0.25
+        maskViewBackToBeginningButton.tintColor = Colors.light
+        maskViewBackToBeginningButton.sizeToFit()
+        maskViewBackToBeginningButton.frame = CGRect(x: 5, y: (maskView1.bounds.height / 2) - (maskViewBackButton.bounds.height / 2), width: maskViewBackToBeginningButton.bounds.width, height: maskViewBackToBeginningButton.bounds.height)
+        maskViewBackToBeginningButton.isUserInteractionEnabled = true
+        maskViewBackToBeginningButton.addTarget(self, action: #selector(backToBeginning), for: .touchUpInside)
+        maskView1.addSubview(maskViewBackToBeginningButton)
+        maskView1.bringSubview(toFront: maskViewBackToBeginningButton)
     }
     // Remove Mask Views
     func removeMaskView() {

@@ -28,7 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InAppManager.shared.startMonitoring()
         
         // TODO: TEST!! REMOVE
-//                ICloudFunctions.shared.removeAll()
+        // ICloud
+//            ICloudFunctions.shared.removeAll()
+        // UserDefaults
+//            let domain = Bundle.main.bundleIdentifier!
+//            UserDefaults.standard.removePersistentDomain(forName: domain)
+//            UserDefaults.standard.synchronize()
         //
         // iCloud Oberver
         NotificationCenter.default.addObserver(

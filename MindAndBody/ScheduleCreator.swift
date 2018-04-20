@@ -242,9 +242,9 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         //
-        bigGroupLabelArray = [bigGroupLabel0, bigGroupLabel1, bigGroupLabel2, bigGroupLabel3, bigGroupLabel4, bigGroupLabel5]
+        bigGroupLabelArray = [bigGroupLabel0, bigGroupLabel1, bigGroupLabel2, bigGroupLabel3, bigGroupLabel4]
         //
-        longPressArray = [longPress0, longPress1, longPress2, longPress3, longPress4, longPress5]
+        longPressArray = [longPress0, longPress1, longPress2, longPress3, longPress4]
         
         // Set dayTableGroupArray
             // indicates how many are of each group in the table
@@ -369,7 +369,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Present all groups
         } else {
             // Set titles for all groups
-            for i in 0...5 {
+            for i in 0..<bigGroupLabelArray.count {
                 //
                 let groupTitle = NSLocalizedString(scheduleDataStructures.groupNames[i], comment: "")
                 // Not selected filled in
@@ -1077,7 +1077,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     //
-    // MARK: Dismiss view when finisehd
+    // MARK: Dismiss view when finished
     // TODO: THIS FUNC
 
     
@@ -1129,107 +1129,3 @@ class DayCell: UITableViewCell {
         groupLabelArray = [groupLabel0, groupLabel1, groupLabel2, groupLabel3, groupLabel4]
     }
 }
-
-//
-// MARK: Custom custom schedule week cell
-class WeekCell: UITableViewCell {
-    //
-    // Mind
-    @IBOutlet weak var mind0: UILabel!
-    @IBOutlet weak var mind1: UILabel!
-    @IBOutlet weak var mind2: UILabel!
-    @IBOutlet weak var mind3: UILabel!
-    @IBOutlet weak var mind4: UILabel!
-    @IBOutlet weak var mind5: UILabel!
-    @IBOutlet weak var mind6: UILabel!
-    //
-    @IBOutlet weak var mind7: UILabel!
-    @IBOutlet weak var mind8: UILabel!
-    @IBOutlet weak var mind9: UILabel!
-    @IBOutlet weak var mind10: UILabel!
-    @IBOutlet weak var mind11: UILabel!
-    @IBOutlet weak var mind12: UILabel!
-    @IBOutlet weak var mind13: UILabel!
-    //
-    // Flexibility
-    @IBOutlet weak var flexibility0: UILabel!
-    @IBOutlet weak var flexibility1: UILabel!
-    @IBOutlet weak var flexibility2: UILabel!
-    @IBOutlet weak var flexibility3: UILabel!
-    @IBOutlet weak var flexibility4: UILabel!
-    @IBOutlet weak var flexibility5: UILabel!
-    @IBOutlet weak var flexibility6: UILabel!
-    //
-    // Endurance
-    @IBOutlet weak var endurance0: UILabel!
-    @IBOutlet weak var endurance1: UILabel!
-    @IBOutlet weak var endurance2: UILabel!
-    @IBOutlet weak var endurance3: UILabel!
-    @IBOutlet weak var endurance4: UILabel!
-    @IBOutlet weak var endurance5: UILabel!
-    @IBOutlet weak var endurance6: UILabel!
-    //
-    // Toning
-    @IBOutlet weak var toning0: UILabel!
-    @IBOutlet weak var toning1: UILabel!
-    @IBOutlet weak var toning2: UILabel!
-    @IBOutlet weak var toning3: UILabel!
-    @IBOutlet weak var toning4: UILabel!
-    @IBOutlet weak var toning5: UILabel!
-    @IBOutlet weak var toning6: UILabel!
-    //
-    // Muscle Gain
-    @IBOutlet weak var muscleGain0: UILabel!
-    @IBOutlet weak var muscleGain1: UILabel!
-    @IBOutlet weak var muscleGain2: UILabel!
-    @IBOutlet weak var muscleGain3: UILabel!
-    @IBOutlet weak var muscleGain4: UILabel!
-    @IBOutlet weak var muscleGain5: UILabel!
-    @IBOutlet weak var muscleGain6: UILabel!
-    //
-    // Strength
-    @IBOutlet weak var strength0: UILabel!
-    @IBOutlet weak var strength1: UILabel!
-    @IBOutlet weak var strength2: UILabel!
-    @IBOutlet weak var strength3: UILabel!
-    @IBOutlet weak var strength4: UILabel!
-    @IBOutlet weak var strength5: UILabel!
-    @IBOutlet weak var strength6: UILabel!
-    
-    // Stack Views
-    @IBOutlet weak var stackView0: UIStackView!
-    @IBOutlet weak var stackView1: UIStackView!
-    @IBOutlet weak var stackView2: UIStackView!
-    @IBOutlet weak var stackView3: UIStackView!
-    @IBOutlet weak var stackView4: UIStackView!
-    @IBOutlet weak var stackView5: UIStackView!
-    @IBOutlet weak var stackView6: UIStackView!
-    
-    
-    //
-    @IBOutlet weak var totalSessions: UILabel!
-    @IBOutlet weak var bin: UIImageView!
-    @IBOutlet weak var binView: UIView!
-    
-    
-    var groupLabelArray: [[UILabel]] = []
-    
-    override func layoutSubviews() {
-        groupLabelArray =
-            [
-                // Mind
-                [mind0, mind1, mind2, mind3, mind4, mind5, mind6, mind7, mind8, mind9, mind10, mind11, mind12, mind13],
-                // Flexibility
-                [flexibility0, flexibility1, flexibility2, flexibility3, flexibility4, flexibility5, flexibility6],
-                // Endurance
-                [endurance0, endurance1, endurance2, endurance3, endurance4, endurance5, endurance6],
-                // Toning
-                [toning0, toning1, toning2, toning3, toning4, toning5, toning6],
-                // Muscle Gain
-                [muscleGain0, muscleGain1, muscleGain2, muscleGain3, muscleGain4, muscleGain5, muscleGain6],
-                // Strength
-                [strength0, strength1, strength2, strength3, strength4, strength5, strength6]
-        ]
-    }
-}
-

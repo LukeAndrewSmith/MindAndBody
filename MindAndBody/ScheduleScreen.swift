@@ -22,6 +22,7 @@ class ScheduleScreen: UIViewController {
     let maskView2 = UIButton() // bottom
     let maskView3 = UIView() // Middle (rounded corners
     let maskViewBackButton = UIImageView()
+    let maskViewBackToBeginningButton = UIButton()
     
     // TableView
     var daySwipeLeft = UISwipeGestureRecognizer()
