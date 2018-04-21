@@ -104,7 +104,8 @@ class ScheduleScreen: UIViewController {
     var walkthroughBackgroundColor = UIColor()
     var walkthroughTextColor = UIColor()
     
-    // Test
+    
+    // Lessons ---------
     @IBOutlet weak var lessonsButton: UIButton!
     @IBOutlet weak var lessonsIndicator: UILabel!
     //

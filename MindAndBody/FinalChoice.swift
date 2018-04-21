@@ -121,17 +121,12 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             // Cardio Type
             // If cardio
             if SelectedSession.shared.selectedSession[0] == "cardio" {
-                // If time based (first movement contains boolean indicator)
-                if (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["timeBased"] as! Bool) {
-                    cardioType = 0
-                // Else if distance based
-                } else {
-                    cardioType = 1
-                }
+                // Time base (used to be an option for distance based, leaving in that option through this variable)
+                cardioType = 0
             }
 
-            // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [sessionKey] = session, [0] titles, [0] title
-            presetsButton.setTitle("- " + NSLocalizedString(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]["title"] as! String, comment: "") + " -", for: .normal)
+            // Set title
+            presetsButton.setTitle("- " + NSLocalizedString(SelectedSession.shared.selectedSession[2], comment: "") + " -", for: .normal)
 
             //
             self.movementsTableView.reloadData()
@@ -523,10 +518,12 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 // Timed session off
                 if timedSession == 0 {
                     // Breaths
-                    cell.detailTextLabel?.text = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["breaths"] as? String
+                    let breaths = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["breaths"] as? Int
+                    cell.detailTextLabel?.text = String(breaths!) + " " + NSLocalizedString("breaths", comment: "")
                 } else {
                     // Length = [3]
-                    cell.detailTextLabel?.text = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["time"] as? String
+                    let breaths = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["time"] as? Int
+                    cell.detailTextLabel?.text = String(breaths!) + " " + NSLocalizedString("s", comment: "")
                 }
                 
             case "yoga":

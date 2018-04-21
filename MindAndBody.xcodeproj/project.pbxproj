@@ -504,6 +504,7 @@
 		07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */; };
 		07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A381E893E590009C9B1 /* ScheduleScreen.swift */; };
 		07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */; };
+		07A6346C208B558F00712EE2 /* LessonsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6346B208B558F00712EE2 /* LessonsHelpers.swift */; };
 		07B4E00F1F377E1E00C77807 /* TestBackground.caf in Resources */ = {isa = PBXBuildFile; fileRef = 07B4E00E1F377E1E00C77807 /* TestBackground.caf */; };
 		07B852621F83756C005F3781 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B852611F83756C005F3781 /* ScheduleData.swift */; };
 		07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreen.swift */; };
@@ -1876,6 +1877,7 @@
 		07995A381E893E590009C9B1 /* ScheduleScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleScreen.swift; sourceTree = "<group>"; };
 		07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioScreen.swift; sourceTree = "<group>"; };
 		07A464231FB88C3F00139DCD /* MindAndBody.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindAndBody.entitlements; sourceTree = "<group>"; };
+		07A6346B208B558F00712EE2 /* LessonsHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsHelpers.swift; sourceTree = "<group>"; };
 		07B4E00E1F377E1E00C77807 /* TestBackground.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestBackground.caf; sourceTree = "<group>"; };
 		07B852611F83756C005F3781 /* ScheduleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
@@ -2972,6 +2974,7 @@
 				07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */,
 				0782AB511FC4F0CE00D34500 /* ScheduleTableView.swift */,
 				07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */,
+				07A6346B208B558F00712EE2 /* LessonsHelpers.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -8277,6 +8280,7 @@
 				0798381E1F8A8DD9007C3CF5 /* TimeBasedSession.swift in Sources */,
 				07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
+				07A6346C208B558F00712EE2 /* LessonsHelpers.swift in Sources */,
 				077AC1001DA54C810026895B /* Lessons.swift in Sources */,
 				073BA9CB1F6E81B8005DB480 /* DataStructuresOLD.swift in Sources */,
 				07EFC0AC1F66CCEF0030DCE6 /* ScheduleCreator.swift in Sources */,

@@ -211,19 +211,22 @@ extension ScheduleScreen {
                 case 1:
                     // Workout
                     if row == 2 {
-                        ScheduleVariables.shared.choiceProgress[1] = 3
+                        ScheduleVariables.shared.choiceProgress[1] = 5
                         nextChoice()
                         // Steady state cardio
                     } else if row == 3 {
-                        ScheduleVariables.shared.choiceProgress[1] = 5
+                        ScheduleVariables.shared.choiceProgress[1] = 7
                         nextChoice()
                     } else {
                         ScheduleVariables.shared.choiceProgress[1] += 1
                         nextChoice()
                     }
-                    
-                // Session Choice, To Do
+                // Go straight to final choice from hiit length
                 case 4:
+                    ScheduleVariables.shared.choiceProgress[1] = 6
+                    nextChoice()
+                // Session Choice, To Do
+                case 6:
                     // Test
                     // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
@@ -240,7 +243,7 @@ extension ScheduleScreen {
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                     
                 // Final choice steady state
-                case 6:
+                case 7:
                     if row == 2 {
                         // TODO: Popup saying go do cardio - run, bike, row, swim
                     } else {
@@ -254,7 +257,7 @@ extension ScheduleScreen {
                         nextChoice()
                     }
                 // Session Choice , To do
-                case 7:
+                case 8:
                     // Test
                     // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
@@ -308,33 +311,190 @@ extension ScheduleScreen {
     // MARK: Select sessions
     // Warmup
     func selectWarmup() {
-        // TODO: SELECT 3
-        // Testing so just set to "easy"
-        selectedChoiceWarmup[3] = "easy"
         
+        var selectedWarmup: [String] = []
+        selectedWarmup.append("warmup")
+        
+        // Cases for session types
+        switch ScheduleVariables.shared.choiceProgress[0] {
+        // Workout
+        case 0:
+            selectedWarmup.append("workout")
+        // Yoga, Flexibility (same warmups)
+        case 1,4:
+            selectedWarmup.append("stretching")
+        // Endurance
+        case 3:
+            selectedWarmup.append("cardio")
+        default: break
+        }
+            
+        // No difficulty level for warmup so default is average
+        selectedChoiceWarmup[3] = "average"
+        
+        // Select Random Session
+        print(selectedChoiceWarmup)
+        let choices = sessionData.sortedSessions[selectedChoiceWarmup[0]]![selectedChoiceWarmup[1]]![selectedChoiceWarmup[2]]![selectedChoiceWarmup[3]]!
+        let random = Int(arc4random_uniform(UInt32(choices.count)))
+        selectedWarmup.append(choices[random])
         //
-        //SelectedSession.shared.selectedSession = sessionData.sortedSessions[selectedChoiceWarmup[0]]![selectedChoiceWarmup[1]]![selectedChoiceWarmup[2]]![selectedChoiceWarmup[3]]![0]
+        SelectedSession.shared.selectedSession = selectedWarmup
     }
     // Session
     func selectSession() {
-        // TODO: SELECT 3
-        // Testing so just set to "easy"
-        selectedChoiceSession[3] = "easy"
         
+        var selectedSession: [String] = []
+        
+        // Cases for session types
+        switch ScheduleVariables.shared.choiceProgress[0] {
+        // Workout
+        case 0:
+            selectedSession.append("workout")
+            selectedSession.append(selectedChoiceSession[1]) // Workout type
+        // Yoga
+        case 1:
+            selectedSession.append("yoga")
+            selectedSession.append(indicator) // relaxing, neutral, stimulating
+        // Endurance
+        case 3:
+            selectedSession.append("cardio")
+            selectedSession.append(indicator) // hiit or bodyweight
+        // Flexibility
+        case 4:
+            selectedSession.append("stretching")
+            selectedSession.append("general")
+        default: break
+        }
+        
+        // Difficulty
+        // Get difficulty levels
+        let difficultyLevels = UserDefaults.standard.object(forKey: "difficultyLevels") as! [String: [String: Int]]
+        let difficultyArray = scheduleDataStructures.difficultyArray
+        let group = ScheduleVariables.shared.choiceProgress[0].groupFromInt()
+        
+        // Cases for session types
+        switch ScheduleVariables.shared.choiceProgress[0] {
+        // Workout
+        case 0:
+            switch selectedChoiceSession[1] {
+            // Full
+            case "classicGymFull", "circuitGymFull", "classicBodyweightFull", "circuitBodyweightFull":
+                selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["workout"]!]
+            // Upper
+            case "classicGymUpper", "circuitGymUpper", "classicBodyweightUpper", "circuitBodyweightUpper":
+                selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["workoutUpper"]!]
+            // Lower
+            case "classicGymLower", "circuitGymLower", "classicBodyweightLower", "circuitBodyweightLower":
+                selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["workoutLower"]!]
+                
+            default: break
+            }
+        // Yoga
+        case 1:
+            selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["yoga"]!]
+        // Endurance
+        case 3:
+            // HIIT is not indexed through difficulty, but rather two levels of length (session and interval)
+            if indicator == "hiit" {
+                break
+            } else {
+                selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["endurance"]!]
+            }
+            
+        // Flexibility
+        case 4:
+            switch selectedChoiceSession[1] {
+            case "full":
+                selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["overall"]!]
+            case "hamstrings":
+                selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["hamstrings"]!]
+            case "hips":
+                selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["hips"]!]
+            case "backNeck":
+                selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["backNeck"]!]
+            default: break
+            }
+        default: break
+        }
+        
+        // Select Random Session
+        var randomSessionString = randomSession(selectedChoice: selectedChoiceSession)
+        
+        // WORKOUT - Checks for Women, and bodyweight pullup bar
+        dd 
+        if ScheduleVariables.shared.choiceProgress[0] == 0 {
+            // Women - only applies for gym workouts
+            if selectedChoiceSession[1].contains("Gym") {
+                // User is a woman
+                if true {
+                    // Avoid sessions that are for men
+                    while randomSessionString.contains("-M") {
+                        randomSessionString = randomSession(selectedChoice: selectedChoiceSession)
+                    }
+                // User is a man
+                } else {
+                    // Avoid sessions that are for women
+                    while randomSessionString.contains("-W") {
+                        randomSessionString = randomSession(selectedChoice: selectedChoiceSession)
+                    }
+                }
+                
+            // Equiptment - only applies for bodyweight workouts
+            } else {
+                // No equiptment (currently just a pullup bar)
+                if false {
+                    while randomSessionString.contains("-E") {
+                        randomSessionString = randomSession(selectedChoice: selectedChoiceSession)
+                    }
+                }
+                // no need for other case, any session goes
+            }
+        }
+            
+        selectedSession.append(randomSessionString)
         //
-        // Choose random session of deemed equivalent sessions
-        let count = sessionData.sortedSessions[selectedChoiceSession[0]]![selectedChoiceSession[1]]![selectedChoiceSession[2]]![selectedChoiceSession[3]]!.count
-        let random = Int(arc4random_uniform(UInt32(count)))
-        //SelectedSession.shared.selectedSession = sessionData.sortedSessions[selectedChoiceSession[0]]![selectedChoiceSession[1]]![selectedChoiceSession[2]]![selectedChoiceSession[3]]![random]
+        SelectedSession.shared.selectedSession = selectedSession
     }
-    // Stretching
+    // Stretching (Just for workout & endurance)
     func selectStretching() {
-        // TODO: SELECT 3
-        // Testing so just set to "easy"
-        selectedChoiceStretching[3] = "easy"
         
+        var selectedStretching: [String] = []
+        selectedStretching.append("stretching")
+        
+        // Cases for session types
+        switch ScheduleVariables.shared.choiceProgress[0] {
+        // Workout
+        case 0:
+            selectedStretching.append("postWorkout")
+        // Endurance
+        case 3:
+            selectedStretching.append("postCardio")
+        default: break
+        }
+        
+        // No difficulty level for warmup so default is average
+        selectedChoiceStretching[3] = "average"
+        
+        // Select Random Session
+        var randomSessionString = randomSession(selectedChoice: selectedChoiceStretching)
+        // Not foam rolling (if foam rolling on, can include non foam rolling sessions)
+        dd
+        if false {
+            // NOT Foam rolling (avoid a stretching session that ends in -F)
+            while randomSessionString.suffix(2) == "-F" {
+                randomSessionString = randomSession(selectedChoice: selectedChoiceStretching)
+            }
+        }
+        selectedStretching.append(randomSessionString)
         //
-        //SelectedSession.shared.selectedSession = sessionData.sortedSessions[selectedChoiceStretching[0]]![selectedChoiceStretching[1]]![selectedChoiceStretching[2]]![selectedChoiceStretching[3]]![0]
+        SelectedSession.shared.selectedSession = selectedStretching
+    }
+    //
+    func randomSession(selectedChoice: [String]) -> String {
+        let choices = sessionData.sortedSessions[selectedChoice[0]]![selectedChoiceStretching[1]]![selectedChoiceStretching[2]]![selectedChoiceStretching[3]]!
+        let random = Int(arc4random_uniform(UInt32(choices.count)))
+        selectedStretching.append(choices[random])
+        return
     }
     
     //
@@ -406,15 +566,15 @@ extension ScheduleScreen {
                             switch row {
                             case 1:
                                 selectedChoiceWarmup[1] = "WaF"
-                                selectedChoiceSession[1] = "GCsF"
+                                selectedChoiceSession[1] = "classicGymFull"
                                 selectedChoiceStretching[1] = "SF"
                             case 2:
                                 selectedChoiceWarmup[1] = "WaU"
-                                selectedChoiceSession[1] = "GCsU"
+                                selectedChoiceSession[1] = "classicGymUpper"
                                 selectedChoiceStretching[1] = "SU"
                             case 3:
                                 selectedChoiceWarmup[1] = "WaL"
-                                selectedChoiceSession[1] = "GCsL"
+                                selectedChoiceSession[1] = "classicGymLower"
                                 selectedChoiceStretching[1] = "SL"
                             default: break
                             }
@@ -423,15 +583,15 @@ extension ScheduleScreen {
                             switch row {
                             case 1:
                                 selectedChoiceWarmup[1] = "WaF"
-                                selectedChoiceSession[1] = "GCcF"
+                                selectedChoiceSession[1] = "circuitGymFull"
                                 selectedChoiceStretching[1] = "SF"
                             case 2:
                                 selectedChoiceWarmup[1] = "WaU"
-                                selectedChoiceSession[1] = "GCcU"
+                                selectedChoiceSession[1] = "circuitGymUpper"
                                 selectedChoiceStretching[1] = "SU"
                             case 3:
                                 selectedChoiceWarmup[1] = "WaL"
-                                selectedChoiceSession[1] = "GCcL"
+                                selectedChoiceSession[1] = "circuitGymLower"
                                 selectedChoiceStretching[1] = "SL"
                             default: break
                             }
@@ -443,15 +603,15 @@ extension ScheduleScreen {
                             switch row {
                             case 1:
                                 selectedChoiceWarmup[1] = "WaF"
-                                selectedChoiceSession[1] = "BCsF"
+                                selectedChoiceSession[1] = "classicBodyweightFull"
                                 selectedChoiceStretching[1] = "SF"
                             case 2:
                                 selectedChoiceWarmup[1] = "WaU"
-                                selectedChoiceSession[1] = "BCsU"
+                                selectedChoiceSession[1] = "classicBodyweightUpper"
                                 selectedChoiceStretching[1] = "SU"
                             case 3:
                                 selectedChoiceWarmup[1] = "WaL"
-                                selectedChoiceSession[1] = "BCsL"
+                                selectedChoiceSession[1] = "classicBodyweightLower"
                                 selectedChoiceStretching[1] = "SL"
                             default: break
                             }
@@ -460,22 +620,22 @@ extension ScheduleScreen {
                             switch row {
                             case 1:
                                 selectedChoiceWarmup[1] = "WaF"
-                                selectedChoiceSession[1] = "BCcF"
+                                selectedChoiceSession[1] = "circuitBodyweightFull"
                                 selectedChoiceStretching[1] = "SF"
                             case 2:
                                 selectedChoiceWarmup[1] = "WaU"
-                                selectedChoiceSession[1] = "BCcU"
+                                selectedChoiceSession[1] = "circuitBodyweightUpper"
                                 selectedChoiceStretching[1] = "SU"
                             case 3:
                                 selectedChoiceWarmup[1] = "WaL"
-                                selectedChoiceSession[1] = "BCcL"
+                                selectedChoiceSession[1] = "circuitBodyweightLower"
                                 selectedChoiceStretching[1] = "SL"
                             default: break
                             }
                         }
                     }
                 // Length
-                case 4:
+                case 4,5:
                     // Note, currently all the same
                     // Gym
                     if indicator == "gym" {
@@ -487,13 +647,13 @@ extension ScheduleScreen {
                                 selectedChoiceSession[2] = "short"
                                 selectedChoiceStretching[2] = "short"
                             case 2:
-                                selectedChoiceWarmup[2] = "medium"
+                                selectedChoiceWarmup[2] = "normal"
                                 selectedChoiceSession[2] = "medium"
-                                selectedChoiceStretching[2] = "medium"
+                                selectedChoiceStretching[2] = "normal"
                             case 3:
-                                selectedChoiceWarmup[2] = "long"
+                                selectedChoiceWarmup[2] = "normal"
                                 selectedChoiceSession[2] = "long"
-                                selectedChoiceStretching[2] = "long"
+                                selectedChoiceStretching[2] = "normal"
                             default: break
                             }
                             // Circuit
@@ -626,7 +786,7 @@ extension ScheduleScreen {
             // ------------------------------------------------------------------------------------------------
             // Meditation
             case 2:
-                // Not necessary for anything
+                // Not necessary
                 break
             // ------------------------------------------------------------------------------------------------
             // Endurance
@@ -640,15 +800,19 @@ extension ScheduleScreen {
                     switch row {
                     case 1:
                         // Indicate to choice 3
-                        indicator = "endurance"
+                        indicator = "hiit"
                     case 2:
+                        indicator = "bodyweight"
                         selectedChoiceWarmup[1] = "warmup"
                         selectedChoiceSession[1] = "bodyweight"
+                        selectedChoiceStretching[1] = "stretching"
+                    case 3:
+                        selectedChoiceWarmup[1] = "warmup"
                         selectedChoiceStretching[1] = "stretching"
                     default: break
                     }
                     //
-                // HIIT Rowing/Biking/Running or workout length
+                // HIIT ?Rowing/Biking/Running or workout length
                 case 2:
                     // Cardio Type
                     switch row {
@@ -669,9 +833,8 @@ extension ScheduleScreen {
                         selectedChoiceStretching[1] = "stretching"
                     default: break
                     }
-                // HIIT Length
-                case 3:
-                    // Note currently the same
+                // Length: HIIT&Bodyweight
+                case 3,5:
                     // HIIT
                     if indicator == "cardio" {
                         switch row {
@@ -680,16 +843,16 @@ extension ScheduleScreen {
                             selectedChoiceSession[2] = "short"
                             selectedChoiceStretching[2] = "short"
                         case 2:
-                            selectedChoiceWarmup[2] = "medium"
+                            selectedChoiceWarmup[2] = "normal"
                             selectedChoiceSession[2] = "medium"
-                            selectedChoiceStretching[2] = "medium"
+                            selectedChoiceStretching[2] = "normal"
                         case 3:
-                            selectedChoiceWarmup[2] = "long"
+                            selectedChoiceWarmup[2] = "normal"
                             selectedChoiceSession[2] = "long"
-                            selectedChoiceStretching[2] = "long"
+                            selectedChoiceStretching[2] = "normal"
                         default: break
                         }
-                        // Workout
+                    // Workout
                     } else {
                         switch row {
                         case 1:
@@ -704,33 +867,29 @@ extension ScheduleScreen {
                         }
                     }
                     
-                // Steady state type
-                case 5:
+                // HIIT interval Length
+                case 4:
+                    // HIIT
                     switch row {
                     case 1:
-                        selectedChoiceWarmup[1] = "runningWarmup"
-                        selectedChoiceStretching[1] = "runningStretching"
+                        selectedChoiceSession[3] = "short"
                     case 2:
-                        selectedChoiceWarmup[1] = "bikingWarmup"
-                        selectedChoiceStretching[1] = "bikingStretching"
+                        selectedChoiceSession[3] = "medium"
                     case 3:
-                        selectedChoiceWarmup[1] = "rowingWarmup"
-                        selectedChoiceStretching[1] = "rowingStretching"
+                        selectedChoiceSession[3] = "long"
                     default: break
-                    }
+                        }
+                    
                     //
                 // Steady State Length
-                case 7:
+                case 8:
                     switch row {
                     case 1:
                         selectedChoiceWarmup[2] = "short"
                         selectedChoiceStretching[2] = "short"
                     case 2:
-                        selectedChoiceWarmup[2] = "medium"
-                        selectedChoiceStretching[2] = "medium"
-                    case 3:
-                        selectedChoiceWarmup[2] = "long"
-                        selectedChoiceStretching[2] = "long"
+                        selectedChoiceWarmup[2] = "normal"
+                        selectedChoiceStretching[2] = "normal"
                     default: break
                     }
                 default:
@@ -740,65 +899,33 @@ extension ScheduleScreen {
             // Flexibility
             case 4:
                 switch ScheduleVariables.shared.choiceProgress[1] {
-                // Stretching / Yoga
+                // Focus
                 case 1:
-                    // To indicated to the next choice what this choice was
-                    indicator = ""
+                    // Note warmups the same for now
                     switch row {
                     case 1:
-                        indicator = "stretching"
+                        selectedChoiceWarmup[1] = "warmup"
+                        selectedChoiceSession[1] = "full"
                     case 2:
-                        indicator = "yoga"
+                        selectedChoiceWarmup[1] = "warmup"
+                        selectedChoiceSession[1] = "hamstrings"
+                    case 3:
+                        selectedChoiceWarmup[1] = "warmup"
+                        selectedChoiceSession[1] = "hips"
+                    case 4:
+                        selectedChoiceWarmup[1] = "warmup"
+                        selectedChoiceSession[1] = "backNeck"
                     default: break
                     }
-                // Focus
-                case 2:
-                    // Note warmups the same for now
-                    if indicator == "stretching" {
-                        switch row {
-                        case 1:
-                            selectedChoiceWarmup[1] = "generalWarmup"
-                            selectedChoiceSession[1] = "generalStretching"
-                        case 2:
-                            selectedChoiceWarmup[1] = "hamstringWarmup"
-                            selectedChoiceSession[1] = "hamstringStretching"
-                        case 3:
-                            selectedChoiceWarmup[1] = "hipsWarmup"
-                            selectedChoiceSession[1] = "hipsStretching"
-                        case 4:
-                            selectedChoiceWarmup[1] = "stretching"
-                            selectedChoiceSession[1] = "backNeckStretching"
-                        default: break
-                        }
-                    } else {
-                        switch row {
-                        case 1:
-                            selectedChoiceWarmup[1] = "generalWarmup"
-                            selectedChoiceSession[1] = "generalYoga"
-                        case 2:
-                            selectedChoiceWarmup[1] = "hamstringWarmup"
-                            selectedChoiceSession[1] = "hamstringYoga"
-                        case 3:
-                            selectedChoiceWarmup[1] = "hipsWarmup"
-                            selectedChoiceSession[1] = "hipsYoga"
-                        case 4:
-                            selectedChoiceWarmup[1] = "stretching"
-                            selectedChoiceSession[1] = "backNeckYoga"
-                        default: break
-                        }
-                    }
                 // Length
-                case 3:
+                case 2:
                     switch row {
                     case 1:
                         selectedChoiceWarmup[2] = "short"
                         selectedChoiceSession[2] = "short"
                     case 2:
-                        selectedChoiceWarmup[2] = "medium"
-                        selectedChoiceSession[2] = "medium"
-                    case 3:
-                        selectedChoiceWarmup[2] = "long"
-                        selectedChoiceSession[2] = "long"
+                        selectedChoiceWarmup[2] = "normal"
+                        selectedChoiceSession[2] = "normal"
                     default: break
                     }
                 default:
@@ -843,7 +970,7 @@ extension ScheduleScreen {
             
         // Endurance
         case 3:
-            if ScheduleVariables.shared.choiceProgress[1] == 4 || ScheduleVariables.shared.choiceProgress[1] == 7 {
+            if ScheduleVariables.shared.choiceProgress[1] == 6 || ScheduleVariables.shared.choiceProgress[1] == 7 {
                 return true
             } else {
                 return false
@@ -851,7 +978,7 @@ extension ScheduleScreen {
             
         // Flexibility
         case 4:
-            if ScheduleVariables.shared.choiceProgress[1] == 4 {
+            if ScheduleVariables.shared.choiceProgress[1] == 3 {
                 return true
             } else {
                 return false

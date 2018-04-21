@@ -91,9 +91,25 @@ extension ScheduleScreen {
                     ScheduleVariables.shared.choiceProgress[1] -= 1
                 }
             // Endurance has 3 choice paths
-            } else if ScheduleVariables.shared.choiceProgress[0] == 2 && ScheduleVariables.shared.choiceProgress[1] == 5 || ScheduleVariables.shared.choiceProgress[0] == 2 && ScheduleVariables.shared.choiceProgress[1] == 3 {
-            // TODO: && selectedChoiceWarmup[3] == 3 { ??
-                ScheduleVariables.shared.choiceProgress[1] = 1
+            } else if ScheduleVariables.shared.choiceProgress[0] == 3 {
+                switch ScheduleVariables.shared.choiceProgress[1] {
+                case 6:
+                    switch indicator {
+                    case "bodyweight":
+                        ScheduleVariables.shared.choiceProgress[1] -= 1
+                    case "hiit":
+                        ScheduleVariables.shared.choiceProgress[1] = 4
+                    default: break
+                    }
+                //
+                // Steady State/Bodyweight skip back to first choice
+                case 5,7:
+                    ScheduleVariables.shared.choiceProgress[1] = 1
+                    
+                default:
+                    ScheduleVariables.shared.choiceProgress[1] -= 1
+                }
+            // Normal
             } else {
                 ScheduleVariables.shared.choiceProgress[1] -= 1
             }
@@ -228,6 +244,9 @@ extension ScheduleScreen {
             snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
             snapShot2?.center.x = self.view.center.x
             //
+            // Removes or displays lessons
+            self.displayLessons()
+            //
         }, completion: { finished in
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
@@ -272,6 +291,9 @@ extension ScheduleScreen {
             //
             snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
             snapShot2?.center.x = self.view.center.x
+            //
+            // Removes or displays lessons
+            self.displayLessons()
             //
         }, completion: { finished in
             snapShot1?.removeFromSuperview()

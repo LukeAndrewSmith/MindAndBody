@@ -76,7 +76,7 @@ extension sessionData {
             ],
             // MARK: Sessions -------------------------------
             // MARK: Classic Gym
-            "GCsF": [
+            "classicGymFull": [
                 // Short
                 "short": [
                     // Easy
@@ -228,7 +228,7 @@ extension sessionData {
                              "WGHL-CsF-7-M",],
                 ],
             ],
-            "GCsU": [
+            "classicGymUpper": [
                 // Short
                 "short": [
                     // Easy
@@ -347,7 +347,7 @@ extension sessionData {
                              "WGHL-CsU-5-M",],
                 ],
             ],
-            "GCsL": [
+            "classicGymLower": [
                 // Short
                 "short": [
                     // Easy
@@ -458,7 +458,7 @@ extension sessionData {
                 ],
             ],
             // MARK: Circuit Gym
-            "GCcF": [
+            "circuitGymFull": [
                 // Short
                 "short": [
                     // Easy
@@ -502,7 +502,7 @@ extension sessionData {
                              "WGHN-CcF-5",],
                 ],
             ],
-            "GCcU": [
+            "circuitGymUpper": [
                 // Short
                 "short": [
                     // Easy
@@ -546,7 +546,7 @@ extension sessionData {
                              "WGHN-CcU-2-M",],
                 ],
             ],
-            "GCcL": [
+            "circuitGymLower": [
                 // Short
                 "short": [
                     // Easy
@@ -591,7 +591,7 @@ extension sessionData {
                 ],
             ],
             // MARK: Classic Bodyweight
-            "BCsF": [
+            "classicBodyweightFull": [
                 // Short
                 "short": [
                     // Easy
@@ -665,7 +665,7 @@ extension sessionData {
                              "WBHN-CsF-7-E",],
                 ],
             ],
-            "BCsU": [
+            "classicBodyweightUpper": [
                 // Short
                 "short": [
                     // Easy
@@ -711,7 +711,7 @@ extension sessionData {
                              "WBHN-CsU-4-E",],
                 ],
             ],
-            "BCsL": [
+            "classicBodyweightLower": [
                 // Short
                 "short": [
                     // Easy
@@ -762,7 +762,7 @@ extension sessionData {
                 ],
             ],
             // MARK: Circuit Bodyweight
-            "BCcF": [
+            "circuitBodyweightFull": [
                 // Short
                 "short": [
                     // Easy
@@ -836,7 +836,7 @@ extension sessionData {
                              "WBHN-CcF-7-E",],
                 ],
             ],
-            "BCcU": [
+            "circuitBodyweightUpper": [
                 // Short
                 "short": [
                     // Easy
@@ -882,7 +882,7 @@ extension sessionData {
                              "WBHN-CcU-4-E",],
                 ],
             ],
-            "BCcL": [
+            "circuitBodyweightLower": [
                 // Short
                 "short": [
                     // Easy
@@ -1473,6 +1473,7 @@ extension sessionData {
                 ],
             ],
             // MARK: Stretching Sessions -------------------------------
+                // Note average and hard difficulties are the same
             // MARK: Full
             "full": [
                 // Short
@@ -1490,6 +1491,15 @@ extension sessionData {
                                 "SGAS-1",
                                 "SGAS-2",
                                 ],
+                    // Hard
+                    "hard": [// Easy
+                        "SGES-1",
+                        "SGES-2",
+                        "SGES-3",
+                        // Average
+                        "SGAS-1",
+                        "SGAS-2",
+                    ],
                 ],
                 // Normal
                 "normal": [
@@ -1505,6 +1515,14 @@ extension sessionData {
                                 // Average
                                 "SGAN-1",
                                 "SGAN-2",],
+                    // Hard
+                    "hard": [// Easy
+                        "SGEN-1",
+                        "SGEN-2",
+                        "SGEN-3",
+                        // Average
+                        "SGAN-1",
+                        "SGAN-2",],
                 ],
             ],
             // MARK: Hamstrings
@@ -1520,6 +1538,12 @@ extension sessionData {
                                 "SHES-2",
                                 // Average
                                 "SHAS-1",],
+                    // Hard
+                    "hard": [// Easy
+                        "SHES-1",
+                        "SHES-2",
+                        // Average
+                        "SHAS-1",],
                 ],
                 // Normal
                 "normal": [
@@ -1532,6 +1556,12 @@ extension sessionData {
                                 "SHEN-2",
                                 // Average
                                 "SHAN-1",],
+                    // Hard
+                    "hard": [// Easy
+                        "SHEN-1",
+                        "SHEN-2",
+                        // Average
+                        "SHAN-1",],
                 ],
             ],
             // MARK: Hips
@@ -1547,6 +1577,12 @@ extension sessionData {
                                 "SHiES-2",
                                 // Average
                                 "SHiAS-1",],
+                    // Hard
+                    "hard": [// Easy
+                        "SHiES-1",
+                        "SHiES-2",
+                        // Average
+                        "SHiAS-1",],
                 ],
                 // Normal
                 "normal": [
@@ -1559,6 +1595,12 @@ extension sessionData {
                                 "SHiEN-2",
                                 // Average
                                 "SHiAN-1",],
+                    // Hard
+                    "hard": [// Easy
+                        "SHiEN-1",
+                        "SHiEN-2",
+                        // Average
+                        "SHiAN-1",],
                 ],
             ],
             // MARK: BackNeck
@@ -1574,6 +1616,12 @@ extension sessionData {
                                 "SBES-2",
                                 // Average
                                 "SBAS-1",],
+                    // Hard
+                    "hard": [// Easy
+                        "SBES-1",
+                        "SBES-2",
+                        // Average
+                        "SBAS-1",],
                 ],
                 // Normal
                 "normal": [
@@ -1586,19 +1634,28 @@ extension sessionData {
                                 "SBEN-2",
                                 // Average
                                 "SBAN-1",],
+                    // Hard
+                    "hard": [// Easy
+                        "SBEN-1",
+                        "SBEN-2",
+                        // Average
+                        "SBAN-1",],
                 ],
             ],
             // MARK: Foam Rolling
+                // Note all difficulties are the same
             "foamRoll": [
                 // Short
                 "short": [
-                    // Average
+                    "easy": ["SFS-1",],
                     "average": ["SFS-1",],
+                    "hard": ["SFS-1",],
                 ],
                 // Normal
                 "normal": [
-                    // Average
+                    "easy": ["SFN-1",],
                     "average": ["SFN-1",],
+                    "hard": ["SFN-1",],
                 ],
             ],
         ],

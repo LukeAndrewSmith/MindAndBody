@@ -343,50 +343,58 @@ extension sessionData {
                         "biking",
                         "rowing"
                     ],
-                    // --------------
-                    // High Intensity, workout skips to here
-                    // 3 | Chioce 1 - 3 - Length
+                    // High Intensity,
+                    // 3 | Choice 1 - 3 - Length
                     [
                         "sessionLength",
                         //
-                        "10-20 min",
-                        "20-40 min",
-                        "40+ min"
+                        "Short: 10-20 min",
+                        "Medium: 20-40 min",
+                        "Long: 40+ min"
                     ],
-                    // 4 | Final - to do
+                    // High Intensity,
+                    // 4 | Choice 1 - 4 - Length
+                    [
+                        "intervalLength",
+                        //
+                        "Short: 10-20s",
+                        "Medium: 20-40s",
+                        "Long: 40+ s"
+                    ],
+                    // --------------
+                    // High Intensity Bodyweight workout
+                    // 5 | Chioce 2 - 2 - Length
+                    [
+                        "sessionLength",
+                        //
+                        "Short: 10-20 min",
+                        "Normal: 20-40 min"
+                    ],
+                    // 6 | Final - to do
                     [
                         "enduranceToDo",
                         //
-                        "1. warmup",
-                        "2. session",
-                        "3. stretching",
+                        "1. Warmup",
+                        "2. Session",
+                        "3. Stretching",
                     ],
                     // ------------
                     // Steady State
                     // Type
-                    // 5 | Choice 3 - 2 - Type
-                    [
-                        "enduranceType2",
-                        //
-                        "running",
-                        "biking",
-                        "rowing"
-                    ],
-                    // 6 | Choice 3 - 3 - To Do
+                    // 7 | Choice 3 - 3 - To Do
                     [
                         "enduranceToDo",
                         //
                         "1. warmup",
                         "2. session",
                         "3. stretching",
-                        ],
-                    // 7 | Choice 4 - 4 - Warmup/Stretching Length,
+                    ],
+                    // 8 | Choice 3 - 4 - Warmup/Stretching Length,
                     [
-                        "sessionLength",
+                        "length",
                         //
-                        "5 min",
-                        "5-10 min",
-                        "10+ min"
+                        "Short: 5 min",
+                        "Normal: 5-10 min"
                     ]
             ],
             
@@ -408,9 +416,8 @@ extension sessionData {
                 [
                     "sessionLength",
                     //
-                    "10-20 min",
-                    "20-40 min",
-                    "40+ min"
+                    "Short: 10-20 min",
+                    "Normal: 20-40 min"
                 ],
                 // 3 | Final - To Do
                 [

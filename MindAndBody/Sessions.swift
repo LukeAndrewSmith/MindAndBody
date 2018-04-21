@@ -32,7 +32,7 @@ class sessionData {
     
     
     // MARK: Sessions
-        // Sets array like this as doesn't compile otherwise, dictionary too large, would be good to find a new way of doing it
+        // Set arrays like this as doesn't compile otherwise, dictionary too large, would be good to find a new way of storing it
     static var sessions: [String: [String: [String: [[String: Any]]]]] =
         [
             "warmup": ["workout": sessionData.WaW,

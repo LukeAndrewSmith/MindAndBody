@@ -173,8 +173,10 @@ enum scheduleDataStructures {
     ]
     
     // Layer 4: Final
+        // Every session has an average difficulty, and those with only one difficulty call it average, so this should never crash and therefore is the default
     static let defaultDifficultyLevels: [String: [String: Int]] =
         [
+            // Scale of 0 to 3
             // Flexibility
             "flexibility": [
                 "overall": 1,
@@ -185,7 +187,6 @@ enum scheduleDataStructures {
             // Yoga
             "yoga": [
                 "yoga": 1,
-                "yogaStrength": 1
             ],
             // Endurance
             "endurance": [
@@ -198,6 +199,13 @@ enum scheduleDataStructures {
                 "workoutLower": 1
             ]
     ]
+    
+    static let difficultyArray =
+        [
+            "easy",
+            "average",
+            "hard"
+        ]
     
     // Custom schedules insert this into schedules array
     static let emptyWeekOLD: [String: [[Any]]] =

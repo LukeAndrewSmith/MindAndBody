@@ -949,7 +949,6 @@
         "hiit" = "HIIT";
         "regular" = "Regular";
 
-
             // Information
             //
 "purposeTextCardio" = "";
@@ -1059,7 +1058,7 @@
     "sides" = "Sides (Obliques)";
 "sideLean" = "Side Lean";
 "extendedSideAngle" = "Extended Side Angle";
-"seatedSide" = "Half-Straddle Side Lean";
+"seatedSide" = "Half-V Side Lean";
 
             // Neck
     "neck" = "Neck";
@@ -1114,7 +1113,7 @@
 
             // Quads
     "quads" = "Quads";
-"lungeStretchWall" = "Lunge Stretch Against a Wall";
+"lungeStretchWall" = "Lunge Stretch Wall";
 "quadStretch" = "Quad Stretch";
 
 
@@ -1202,7 +1201,7 @@
         "guided" = "Guided";
         "custom" = "Custom";
             "yogaTableTitle" = "Preset Practices";
-            "length" = "Practice Length";
+            "practiceLength" = "Practice Length";
             "presetPractices" = "Preset Practices";
         "practices" = "Practices";
             "customPractices" = "Custom Practices";
@@ -2992,6 +2991,7 @@
 "enduranceType" = "Endurance - Type";
 "enduranceType2" = "Endurance - Type - 2";
 "steadyState" = "Steady State (Without the app)";
+"intervalLength" = "Interval Length";
 // Choice 1
 "highIntensityCardio" = "High Intensity Cardio (HIIT)";
 "highIntensityWorkout" = "High Intensity Bodyweight Workout";
