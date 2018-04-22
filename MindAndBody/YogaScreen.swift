@@ -410,8 +410,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     // couldn't load file :(
                 }
                 
-                //
-                task?.cancel()
+                // Cancel Dispatch
+                if task != nil {
+                    task?.cancel()
+                }
                 //
                 UIApplication.shared.isIdleTimerDisabled = false
             }
@@ -734,8 +736,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             
             // Alert View
-            let title = NSLocalizedString("finishEarly", comment: "")
-            let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+            let title = NSLocalizedString("pauseYoga", comment: "")
+            let message = NSLocalizedString("pauseMessageYoga", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.view.tintColor = Colors.dark
             alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
@@ -743,59 +745,55 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .natural
             alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-            // Action
-            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
-                UIAlertAction in
-                
-//                // Play Ending Bell
-//                let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
-//                //
-//                do {
-//                    let bell = try AVAudioPlayer(contentsOf: url)
-//                    self.soundPlayer = bell
-//                    bell.play()
-//                } catch {
-//                    // couldn't load file :(
-//                }
-//                //
-//                UIApplication.shared.isIdleTimerDisabled = false
+            // Actions
+            // Dismiss
+            let finishEarlyAction = UIAlertAction(title: NSLocalizedString("finishEarly", comment: ""), style: .default) { _ in
                 self.dismiss(animated: true)
             }
-            let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
-                UIAlertAction in
+            // Dismiss alert
+            let pauseAction = UIAlertAction(title: NSLocalizedString("pause", comment: ""), style: .default) { _ in }
+            // Continue
+            let continuePracticeAction = UIAlertAction(title: NSLocalizedString("continuePractice", comment: ""), style: .default) { _ in
+                self.continuePracticeFunc()
             }
-            //
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
+
+            // Add actions
+            alert.addAction(finishEarlyAction)
+            alert.addAction(pauseAction)
+            alert.addAction(continuePracticeAction)
             //
             self.present(alert, animated: true, completion: nil)
         
             
         // Play / Continue Practice
         } else {
-            //
-            finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-            finishEarly.tintColor = Colors.red
-            //
-            //
-            if automaticYogaArray[3] != -1 {
-                // Play Initial Bell
-                let url = Bundle.main.url(forResource: bellsArray[automaticYogaArray[3]], withExtension: "caf")!
-                //
-                do {
-                    let bell = try AVAudioPlayer(contentsOf: url)
-                    soundPlayer = bell
-                    bell.play()
-                } catch {
-                    // couldn't load file :(
-                }
-            }
-            //
-            // Creat Dispatch
-            createDispatch()
+            continuePracticeFunc()
         }
     }
     
+    // Continue practice
+    func continuePracticeFunc() {
+        //
+        finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
+        finishEarly.tintColor = Colors.red
+        //
+        //
+        if automaticYogaArray[3] != -1 {
+            // Play Initial Bell
+            let url = Bundle.main.url(forResource: bellsArray[automaticYogaArray[3]], withExtension: "caf")!
+            //
+            do {
+                let bell = try AVAudioPlayer(contentsOf: url)
+                soundPlayer = bell
+                bell.play()
+            } catch {
+                // couldn't load file :(
+            }
+        }
+        //
+        // Creat Dispatch
+        createDispatch()
+    }
     
     //
     func automaticYoga() {

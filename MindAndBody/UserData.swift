@@ -183,7 +183,7 @@ enum Register {
         // Time Based Sessions - 2
         "TimeBasedSessions": [0], // 0 == Off, 1 = on
         // Yoga Automatic - 3
-        "AutomaticYoga": [0, -1, -1, -1], // [0], 0 == off, 1 == on
+        "AutomaticYoga": [0, 30, 10, 1], // [0], 0 == off, 1 == on  // Defaults: 5.0s breaths, 2.0s indicator transition, tibet singing bowl transition
         // Rest times - 4
         "RestTimes": [5, 45, 10],
         // Metric/Imperial - 6

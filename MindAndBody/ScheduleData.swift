@@ -131,8 +131,8 @@ enum scheduleDataStructures {
             "workout",
             "yoga",
             "meditation",
-            "flexibility",
             "endurance",
+            "flexibility",
         ]
     
     static let shortenedGroupNames =
@@ -143,10 +143,10 @@ enum scheduleDataStructures {
             "yogaS",
             // Meditation
             "meditationS",
-            // Flexibility
-            "flexibilityS",
             // Endurance
             "enduranceS",
+            // Flexibility
+            "flexibilityS",
             ]
     
     //
@@ -207,59 +207,6 @@ enum scheduleDataStructures {
             "hard"
         ]
     
-    // Custom schedules insert this into schedules array
-    static let emptyWeekOLD: [String: [[Any]]] =
-        [
-            // [0] Schedule --------------------
-            "schedule": [
-                // CHANGE
-                // Monday
-                [],
-                // Tuesday
-                [],
-                // Wednesday
-                [],
-                // Thursday
-                [],
-                // Friday
-                [],
-                // Saturday
-                [],
-                // Sunday
-                [],
-                // Full week list - [0][7]
-//                [] // GET RID OF
-            ],
-            // [1] Information about schedule ------------------
-            "scheduleInformation": [
-                // Title - 0
-                [""], // String
-                // Schedule style: day [0] or full week [1], -- day plan [2], full week plan [3] - 1
-                [0],
-                // Session choice style: app [0] or user chooses [1] - 2
-                    // Always 0 for plans
-                [0],
-                // Schedule type: app helps create scheudle [0], custom schedule [1] - 3
-                    // Always 0 for plans
-                [0]
-            ],
-            // [2] Schedule creation help data --------------------
-            "scheduleCreationHelp": [
-                // Question Answers [2][0]
-                [-1, -1, -1],
-                // Goals [2][1]
-                [0,0,0,0,0,0,0],
-                //0,1,2,3,4,5,6
-                // Sessions
-                // 0 = total, 1 - 6 = mind - strength [2][2]
-                [0,0,0,0,0,0,0],
-                // Ranges (could be put in seperate array with arrays for each range but not in the mood to do so) [2][2]
-                // note no range for total sessions
-                [0,0,  0,0,  0,0,  0,0,  0,0,  0,0],
-            ]
-    ]
-    
-    
     // Schedules
     static let registerSchedules: [[String: [[[String: Any]]]]] =
         [
@@ -299,6 +246,13 @@ enum scheduleDataStructures {
                     "customSchedule": 0,
                     // Session choice style: app [0] or user chooses [1] - 2
                     "customSessionChoice": 0,
+                    //
+                    // Equipment to use - 4
+                        // 0 == don't use, 1 == use
+                    // Foam Roller
+                    "foamRoller": 0,
+                    // Pullup Bar
+                    "pullupBar": 0,
                 ]],
             ],
             // [2] Schedule creation help data --------------------

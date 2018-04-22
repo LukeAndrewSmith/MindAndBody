@@ -63,10 +63,10 @@ extension sessionData {
                     // Isometric
                     "isometricL",
                     "isometricU", //!!!!!!!!!
-                    // Equiptment
-                    "equiptmentB",
-                    "equiptmentBa",
-                    "equiptmentBe"
+                    // Equipment
+                    "equipmentB",
+                    "equipmentBa",
+                    "equipmentBe"
             ],
             // Cardio
             "cardio": [

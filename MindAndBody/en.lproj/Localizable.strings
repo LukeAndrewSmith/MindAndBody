@@ -752,10 +752,10 @@
     "isometricL" = "Isometric (Legs)";
     "isometricC" = "Isometric (Push)";
 
-        // With Equiptment
-    "equiptmentB" = "Equiptment (Ball)";
-    "equiptmentBa" = "Equiptment (Bar)";
-    "equiptmentBe" = "Equiptment (Bench)";
+        // With Equipment
+    "equipmentB" = "Equipment (Ball)";
+    "equipmentBa" = "Equipment (Bar)";
+    "equipmentBe" = "Equipment (Bench)";
 
 
         // Classic Workout //
@@ -1566,12 +1566,14 @@
                 "generalStretchD" = "General Stretching";
 
 
-
                 // Guided Screen
+                "pauseYoga" = "Pause";
                 "finishEarly" = "Finish Early";
                 "finishEarlyMessage" = "\nAre you sure you want to finish early?";
-
-                "finishEarlyMessageYoga" = "\nDo you want to finish early?";
+                "pauseMessageYoga" = "\nYou can finish early, pause (and dismiss this question), or continue the practice";
+                "pause" = "Pause";
+                "finishEarly" = "Finish Early";
+                "continuePractice" = "Continue Practice";
 
         // Timer
         //
@@ -2800,6 +2802,7 @@
 "stimulating" = "Stimulating";
 
 "veryShort" = "Very Short";
+"short" = "Short";
 "medium" = "Medium";
 
 
@@ -2927,7 +2930,8 @@
 // MARK: Plans
 "plans" = "Plans";
 //
-// MARK:- Schedule
+// MARK: -
+// MARK: Schedule
 "schedule" = "Schedule";
 
 "weekOfThe" = "Week of the ";
@@ -3006,6 +3010,10 @@
 "hips" = "Hips";
 "back/neck" = "Back/Neck";
 
+// Endurance popup
+"endurancePopupTitle" = "Steady state";
+"endurancePopupMessage" = "\nUp to you to do your steady state cardio (run, bike, row, swim etc..), press done when complete.";
+
 // Schedule creation
 "scheduleTypeQuestion" = "I would like :";
 "scheduleOptionText" = "The app to help me create my schedule";
@@ -3027,6 +3035,12 @@
     "yes" = "Yes";
 
 "week" = "Nº Sessions per week";
+// Equipment
+"foamRoller" = "Foam Roller";
+"forStretching" = "For stretching sessions";
+"pullupBar" = "Pullup Bar";
+"forBodyweight" = "For bodyweight workouts";
+
 
 // MARK: Schedule creation help
 // Time / Committement
@@ -3082,6 +3096,7 @@
 "afternoonNotification" = "Have you worked towards your goals as planned today?"; // 5 o'clock
 //
 "weekNotification2" = " sessions planned for this week";
+"eveningNotification" = "Have you acheived your goals today?";
 "sundayNotification" = "Have you worked towards your goals as planned this week?";
 // Breathing reminders
 "breathe" = "Breathe";

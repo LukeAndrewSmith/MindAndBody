@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: TEST!! REMOVE
         // ICloud
 //            ICloudFunctions.shared.removeAll()
-        // UserDefaults
 //            let domain = Bundle.main.bundleIdentifier!
 //            UserDefaults.standard.removePersistentDomain(forName: domain)
 //            UserDefaults.standard.synchronize()
@@ -128,6 +127,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+            // Enable or disable features based on authorization.
+        }
+        application.registerForRemoteNotifications()
+        
+        //
         NSSetUncaughtExceptionHandler { exception in
             print(exception)
             print(exception.callStackSymbols)

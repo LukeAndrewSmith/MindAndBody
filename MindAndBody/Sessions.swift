@@ -11185,17 +11185,17 @@ class sessionData {
                 // sets
                 // reps
                 // time
-                // MARK: Note Bodyweight and equiptment
-                // "WBES-CsF-1" = no equiptment
-                // "WBES-CsF-1-E" = equiptment
-                // When selecting random workout, the program will check if the user wants workouts with equiptment, and if the last letter of the workout name is an E, and will select a new one if so
+                // MARK: Note Bodyweight and equipment
+                // "WBES-CsF-1" = no equipment
+                // "WBES-CsF-1-E" = equipment
+                // When selecting random workout, the program will check if the user wants workouts with equipment, and if the last letter of the workout name is an E, and will select a new one if so
                 // MARK:-
                 // MARK: Full
                 // MARK:-
             static let WoCsBF: [String: [[String: Any]]] = [
                     // MARK: Easy
                     // MARK: Short
-                    // Without equiptment
+                    // Without equipment
                     "WBES-CsF-1": [
                         ["movement": "bodyweightSquat",
                          "sets": 3,
@@ -11661,7 +11661,7 @@ class sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBAS-CsF-1-E": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 3,
@@ -11910,7 +11910,7 @@ class sessionData {
                          "reps": "10-15 breaths",
                          "time": 30],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBAN-CsF-1-E": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 3,
@@ -12116,7 +12116,7 @@ class sessionData {
                          "reps": "15-25+ breaths",
                          "time": 40],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBHS-CsF-1-E": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 3,
@@ -12349,7 +12349,7 @@ class sessionData {
                          "reps": "15-25+ breaths",
                          "time": 40],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBHN-CsF-1-E": [
                         ["movement": "bodyweightDeadlift",
                          "sets": 3,
@@ -12742,7 +12742,7 @@ class sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBAS-CsU-1-E": [
                         ["movement": "pullup",
                          "sets": 3,
@@ -12852,7 +12852,7 @@ class sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBAN-CsU-1-E": [
                         ["movement": "pullup",
                          "sets": 4,
@@ -12947,7 +12947,7 @@ class sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBHS-CsU-1-E": [
                         ["movement": "pullup",
                          "sets": 3,
@@ -13057,7 +13057,7 @@ class sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBHN-CsU-1-E": [
                         ["movement": "pullup",
                          "sets": 4,
@@ -14949,7 +14949,7 @@ class sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBAS-CcF-1-E": [
                         // Round 1
                         ["rounds": 3,
@@ -15569,7 +15569,7 @@ class sessionData {
                          "reps": "10 breaths",
                          "time": 15],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBAN-CcF-1-E": [
                         // Round 1
                         ["rounds": 5,
@@ -16082,7 +16082,7 @@ class sessionData {
                          "reps": "25 breaths",
                          "time": 40],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBHS-CcF-1-E": [
                         // Round 1
                         ["rounds": 3,
@@ -16651,7 +16651,7 @@ class sessionData {
                          "reps": "15 breaths",
                          "time": 30],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBHN-CcF-1-E": [
                         // Round 1
                         ["rounds": 5,
@@ -17707,7 +17707,7 @@ class sessionData {
                          "reps": "8 breaths",
                          "time": 15],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBAS-CcU-1-E": [
                         // Round 1
                         ["rounds": 3,
@@ -18039,7 +18039,7 @@ class sessionData {
                          "reps": "5 breaths",
                          "time": 10],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBAN-CcU-1-E": [
                         // Round 1
                         ["rounds": 5,
@@ -18332,7 +18332,7 @@ class sessionData {
                          "reps": "10 breaths",
                          "time": 20],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBHS-CcU-1-E": [
                         // Round 1
                         ["rounds": 3,
@@ -18638,7 +18638,7 @@ class sessionData {
                          "reps": "5 breaths",
                          "time": 10],
                     ],
-                    // Equiptment
+                    // Equipment
                     "WBHN-CcU-1-E": [
                         // Round 1
                         ["rounds": 3,

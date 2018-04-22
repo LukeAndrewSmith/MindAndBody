@@ -505,6 +505,7 @@
 		07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A381E893E590009C9B1 /* ScheduleScreen.swift */; };
 		07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */; };
 		07A6346C208B558F00712EE2 /* LessonsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6346B208B558F00712EE2 /* LessonsHelpers.swift */; };
+		07A6346F208C999000712EE2 /* ScheduleEquipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6346E208C999000712EE2 /* ScheduleEquipment.swift */; };
 		07B4E00F1F377E1E00C77807 /* TestBackground.caf in Resources */ = {isa = PBXBuildFile; fileRef = 07B4E00E1F377E1E00C77807 /* TestBackground.caf */; };
 		07B852621F83756C005F3781 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B852611F83756C005F3781 /* ScheduleData.swift */; };
 		07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreen.swift */; };
@@ -1878,6 +1879,7 @@
 		07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioScreen.swift; sourceTree = "<group>"; };
 		07A464231FB88C3F00139DCD /* MindAndBody.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindAndBody.entitlements; sourceTree = "<group>"; };
 		07A6346B208B558F00712EE2 /* LessonsHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsHelpers.swift; sourceTree = "<group>"; };
+		07A6346E208C999000712EE2 /* ScheduleEquipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEquipment.swift; sourceTree = "<group>"; };
 		07B4E00E1F377E1E00C77807 /* TestBackground.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestBackground.caf; sourceTree = "<group>"; };
 		07B852611F83756C005F3781 /* ScheduleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
@@ -4607,6 +4609,7 @@
 			isa = PBXGroup;
 			children = (
 				07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */,
+				07A6346E208C999000712EE2 /* ScheduleEquipment.swift */,
 			);
 			name = "Schedule Editing";
 			sourceTree = "<group>";
@@ -8251,6 +8254,7 @@
 				078F3873202B2B0B00DC6150 /* Interactor.swift in Sources */,
 				0789ED061F79A6EA000EB739 /* UserData.swift in Sources */,
 				07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */,
+				07A6346F208C999000712EE2 /* ScheduleEquipment.swift in Sources */,
 				078674FE1FB84F7000C6B74C /* ICloudStorage.swift in Sources */,
 				0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */,
 				07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */,

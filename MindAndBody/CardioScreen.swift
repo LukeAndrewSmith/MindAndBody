@@ -29,7 +29,7 @@ var timerCountDown2 = Timer()
 //
 // Cardio Screen Class ------------------------------------------------------------------------------------
 //
-class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, UNUserNotificationCenterDelegate {
     
     
     //
@@ -58,6 +58,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     let bellsArray: [String] =
         ["Tibetan Chimes", "Tibetan Singing Bowl (Low)", "Tibetan Singing Bowl (Low)(x4)", "Tibetan Singing Bowl (Low)(Singing)", "Tibetan Singing Bowl (High)", "Tibetan Singing Bowl (High)(x4)", "Tibetan Singing Bowl (High)(Singing)", "Australian Rain Stick", "Australian Rain Stick (x2)", "Australian Rain Stick (2 sticks)", "Wind Chimes", "Gambang (Wood)(Up)", "Gambang (Wood)(Down)", "Gambang (Metal)", "Indonesian Frog", "Cow Bell (Small)", "Cow Bell (Big)"]
     
+    var soundPlayer: AVAudioPlayer!
+
     
     //
     // Outlets -----------------------------------------------------------------------------------------------------------
@@ -105,6 +107,9 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         //
         view.backgroundColor = Colors.dark
+        //
+        // Set current notification center to self to handle playing sound
+        UNUserNotificationCenter.current().delegate = self
         
         //
         // Custom?
@@ -225,6 +230,12 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             //
             cell.selectionStyle = .none
             
+            // Next Swipe
+            let nextSwipe = UISwipeGestureRecognizer()
+            nextSwipe.direction = .up
+            nextSwipe.addTarget(self, action: #selector(nextButtonAction))
+            cell.addGestureRecognizer(nextSwipe)
+            
             // Movement
             //
             cell.movementLabel.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0] , comment: "")
@@ -235,13 +246,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.movementLabel?.numberOfLines = 0
             cell.movementLabel?.lineBreakMode = .byWordWrapping
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
-            
-            
-            //
-            // Next Swipe
-            let nextSwipe = UISwipeGestureRecognizer()
-            nextSwipe.direction = .up
-            nextSwipe.addTarget(self, action: #selector(nextButtonAction))
             
             
             // Timer / Distance info
@@ -365,6 +369,12 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             //
             // Schedule Tracking
             updateScheduleTracking(fromSchedule: fromSchedule)
+            // Cancel notificaitons
+            if self.sessionType == 0 {
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: self.arrayOfNotifications)
+            } else {
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
+            }
             // Dismiss
             self.dismiss(animated: true)
         //
@@ -427,8 +437,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             //
             updateProgress2()
             //
-            vibratePhone()
-            //
             //
             let indexPath = NSIndexPath(row: currentIndex, section: 0)
             //
@@ -468,6 +476,16 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         didEnterBackground = true
     }
     
+    // Handle foreground notifications
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // Update the app interface directly.
+        vibratePhone()
+        // Play a sound.
+        completionHandler(UNNotificationPresentationOptions.sound)
+    }
+    
     
     //
     // Time Base
@@ -490,9 +508,13 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     var timerValue2Remainder = Double()
     
     //
+    var task1: DispatchWorkItem?
+    // Next button actions (thus vibrations that need to be cancelled if finish early)
+    var task2: DispatchWorkItem?
+
+    //
     //
     @objc func startAllTimers() {
-        //
         //
         startTime = Date().timeIntervalSinceReferenceDate
         
@@ -523,9 +545,11 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 if i != keyArray.count {
                     content.title = NSLocalizedString("begin", comment: "") + " " + NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyArray[i]]!["name"]![0], comment: "")
                     // Sound, low if pause, high if start cardio
-                    if sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyArray[i]]!["isMovement"]![0] == "true" {
+                    // All high intensity is even
+                    if i % 2 == 0 {
                         // High == doing something
                         content.sound = UNNotificationSound(named: "Tibetan Singing Bowl (High).caf")
+                    // All low intensity is odd
                     } else {
                         // Low == rest
                         content.sound = UNNotificationSound(named: "Tibetan Singing Bowl (Low).caf")
@@ -557,10 +581,13 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         if timerValue2 != 0 {
             //
-            let delayInSeconds = timerValue2Remainder
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            task1 = DispatchWorkItem {
                 timerCountDown2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer2), userInfo: nil, repeats: true)
             }
+            //
+            let delayInSeconds = timerValue2Remainder
+            let dispatchTime = DispatchTime.now() + delayInSeconds
+            DispatchQueue.main.asyncAfter(deadline:  dispatchTime, execute: task1!)
             //
         } else
             if timerValue2 == 0 {
@@ -574,9 +601,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             firstCall = false
         }
         //
-        //
-        let delayInSeconds = timerValue2Remainder
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        // Background task
+        task2 = DispatchWorkItem {
             if self.didEnterBackground {
                 //
                 // new current index
@@ -594,6 +620,9 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
             }
         }
+        let delayInSeconds = timerValue2Remainder
+        let dispatchTime = DispatchTime.now() + delayInSeconds
+        DispatchQueue.main.asyncAfter(deadline:  dispatchTime, execute: task2!)
     }
     
     //
@@ -703,7 +732,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         //
         if selectedRow < keyArray.count - 1 {
-            vibratePhone()
             //
             selectedRow = selectedRow + 1
             //
@@ -897,6 +925,16 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
+    // Cancel tasks
+    func cancelTasks() {
+        // Cancel Dispatch of next actions (and thus vibrations)
+        if task2 != nil {
+            task2?.cancel()
+        }
+        if task1 != nil {
+            task1?.cancel()
+        }
+    }
     
     
     
@@ -1007,7 +1045,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         // Alert View
         let title = NSLocalizedString("finishEarly", comment: "")
-        let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+        let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
@@ -1020,6 +1058,9 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Action
         let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
             UIAlertAction in
+            //
+            self.cancelTasks()
+            
             //
             if timerCountDown.isValid {
                 timerCountDown.invalidate()
@@ -1035,7 +1076,6 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             } else {
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
             }
-            
             
             //
             self.dismiss(animated: true)

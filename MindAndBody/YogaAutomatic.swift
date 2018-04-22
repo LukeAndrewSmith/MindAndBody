@@ -664,10 +664,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         default: break
         }
-        //
-        if settings["AutomaticYoga"]![1] != -1 && settings["AutomaticYoga"]![2] != -1 {
-            navigationItem.hidesBackButton = false
-        }
         
         ActionSheet.shared.animateActionSheetDown()
         //
@@ -682,10 +678,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if sender.isOn {
             //
             settings["AutomaticYoga"]![0] = 1
-            
-            if settings["AutomaticYoga"]![1] == -1 && settings["AutomaticYoga"]![2] == -1 {
-                navigationItem.hidesBackButton = true
-            }
             //
             // Off view
             UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -704,9 +696,6 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         } else {
             //
             settings["AutomaticYoga"]![0] = 0
-            //
-            navigationItem.hidesBackButton = false
-            
             //
             //
             offView.alpha = 0

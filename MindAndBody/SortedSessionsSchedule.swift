@@ -23,7 +23,7 @@ extension sessionData {
         // MARK:- Workout ------------------------------- -------------------------------
         "workout": [
             // MARK: Warmups -------------------------------
-            // NOTE, bodyweight and gym use the same warmup, i.e warmups currently do not include the use of equiptment
+            // NOTE, bodyweight and gym use the same warmup, i.e warmups currently do not include the use of equipment
             "WaF": [
                 // Short
                 "short": [

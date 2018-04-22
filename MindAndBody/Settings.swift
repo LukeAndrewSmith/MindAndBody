@@ -805,7 +805,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             if sender.isOn {
                 ReminderNotifications.shared.setNotifications()
             } else {
-                ReminderNotifications.shared.setNotifications()
+                ReminderNotifications.shared.cancelNotifications()
             }
         }
     }

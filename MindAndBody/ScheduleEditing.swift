@@ -38,6 +38,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 "sessionChoosing",
                 "viewFullWeek",
                 "appHelpsCreateSchedule",
+                "equipment",
                 "sessionsOfSchedule",
                 "rearrangeSchedule"
             ],
@@ -47,6 +48,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 "sessionChoosing",
                 "viewFullWeek",
                 "appHelpsCreateSchedule",
+                "equipment",
                 "schedule"
             ]
     ]
@@ -197,9 +199,9 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         // Iphone 5/SE layout
         if IPhoneType.shared.iPhoneType() == 0 {
-            return 62
+            return 52
         } else {
-            return 72
+            return 62
         }
     }
     
@@ -319,8 +321,11 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             // 4. Present the alert.
             self.present(alert, animated: true, completion: nil)
             //
-        // N Sessions / Schedule
+        // Equipment
         case 4:
+            self.performSegue(withIdentifier: "EquipmentSegue", sender: self)
+        // N Sessions / Schedule
+        case 5:
             // App scheudle, n sessions
             if scheduleType == 0 {
                 self.performSegue(withIdentifier: "OverviewSessionsSegue", sender: self)
@@ -335,7 +340,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         // App schedule: Reorder Schedule
-        case 5:
+        case 56:
             // View each day
             if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
                 self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)

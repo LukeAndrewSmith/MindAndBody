@@ -245,7 +245,7 @@ extension ScheduleScreen {
                 // Final choice steady state
                 case 7:
                     if row == 2 {
-                        // TODO: Popup saying go do cardio - run, bike, row, swim
+                        endurancePopup()
                     } else {
                         if row == 1 {
                             steadyStateChoice = 0
@@ -305,6 +305,66 @@ extension ScheduleScreen {
                 break
             }
         }
+    }
+    
+    // Popup for steady state, saying go for run and press ok when done
+    func endurancePopup() {
+        //
+        // Alert View
+        let title = NSLocalizedString("endurancePopupTitle", comment: "")
+        let message = NSLocalizedString("endurancePopupMessage", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = Colors.dark
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        
+        //
+        // Action
+        let okAction = UIAlertAction(title: "Done", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            //
+            // Indexing variables
+            // Differ if last choice or first choice
+            let indexingVariables = self.getIndexingVariables(row: 2, firstChoice: false, checkLastChoice: false)
+            // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+            let index0 = indexingVariables.0
+            // index1 = Selected row in final choice (i.e warmup, session, stretching)
+            let index1 = indexingVariables.1
+            //
+            let day = indexingVariables.2
+            //
+            // Update Tracking
+            // True/False
+            let currentBool = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] as! Bool
+            
+            // Update
+            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
+            
+            // Update Week Progress
+            if !self.isLastChoice() {
+                self.updateWeekProgress(add: !currentBool)
+            }
+            
+            UserDefaults.standard.set(schedules, forKey: "schedules")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+            //
+            let indexPathToReload = NSIndexPath(row: 2, section: 0)
+            self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        //
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        //
+        self.present(alert, animated: true, completion: nil)
     }
     
     //
@@ -421,12 +481,15 @@ extension ScheduleScreen {
         var randomSessionString = randomSession(selectedChoice: selectedChoiceSession)
         
         // WORKOUT - Checks for Women, and bodyweight pullup bar
-        dd 
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        //
         if ScheduleVariables.shared.choiceProgress[0] == 0 {
             // Women - only applies for gym workouts
             if selectedChoiceSession[1].contains("Gym") {
                 // User is a woman
-                if true {
+                    // Gender is second question, female or other == 1 or 2 (we give 'other' female workouts for now)
+                if profileAnswers[1] > 0 {
                     // Avoid sessions that are for men
                     while randomSessionString.contains("-M") {
                         randomSessionString = randomSession(selectedChoice: selectedChoiceSession)
@@ -439,10 +502,10 @@ extension ScheduleScreen {
                     }
                 }
                 
-            // Equiptment - only applies for bodyweight workouts
+            // Equipment - only applies for bodyweight workouts
             } else {
-                // No equiptment (currently just a pullup bar)
-                if false {
+                // No equipment (currently just a pullup bar)
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["pullupBar"] as! Int == 0 {
                     while randomSessionString.contains("-E") {
                         randomSessionString = randomSession(selectedChoice: selectedChoiceSession)
                     }
@@ -478,10 +541,15 @@ extension ScheduleScreen {
         // Select Random Session
         var randomSessionString = randomSession(selectedChoice: selectedChoiceStretching)
         // Not foam rolling (if foam rolling on, can include non foam rolling sessions)
-        dd
-        if false {
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 0 {
             // NOT Foam rolling (avoid a stretching session that ends in -F)
             while randomSessionString.suffix(2) == "-F" {
+                randomSessionString = randomSession(selectedChoice: selectedChoiceStretching)
+            }
+        } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 1 {
+            // Foam rolling (get only stretching session that end in -F)
+            while randomSessionString.suffix(2) != "-F" {
                 randomSessionString = randomSession(selectedChoice: selectedChoiceStretching)
             }
         }
@@ -491,10 +559,9 @@ extension ScheduleScreen {
     }
     //
     func randomSession(selectedChoice: [String]) -> String {
-        let choices = sessionData.sortedSessions[selectedChoice[0]]![selectedChoiceStretching[1]]![selectedChoiceStretching[2]]![selectedChoiceStretching[3]]!
+        let choices = sessionData.sortedSessions[selectedChoice[0]]![selectedChoice[1]]![selectedChoice[2]]![selectedChoice[3]]!
         let random = Int(arc4random_uniform(UInt32(choices.count)))
-        selectedStretching.append(choices[random])
-        return
+        return choices[random]
     }
     
     //

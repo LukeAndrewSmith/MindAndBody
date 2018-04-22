@@ -67,10 +67,10 @@ enum sessionDataOld {
                 // Isometric
                 "isometricL",
                 "isometricU", //!!!!!!!!!
-                // Equiptment
-                "equiptmentB",
-                "equiptmentBa",
-                "equiptmentBe"
+                // Equipment
+                "equipmentB",
+                "equipmentBa",
+                "equipmentBe"
             ],
             // Cardio
             [
@@ -200,11 +200,11 @@ enum sessionDataOld {
                 [98, 99, 100],
                 // Isometric (Upper Body)
                 [101, 102, 103],
-                // Equiptment (Ball) ---------
+                // Equipment (Ball) ---------
                 [104],
-                // Equiptment (Bar)
+                // Equipment (Bar)
                 [105, 106, 107],
-                // Equiptment (Bench/Step)
+                // Equipment (Bench/Step)
                 [108, 109, 110, 111, 112]
             ],
             // Cardio ??
@@ -480,13 +480,13 @@ enum sessionDataOld {
                 101: "chestSqueeze",
                 102: "pushupHold",
                 103: "pullupHold",
-                // Equiptment (Ball) ---------
+                // Equipment (Ball) ---------
                 104: "ballPushup",
-                // Equiptment (Bar)
+                // Equipment (Bar)
                 105: "bodweightRow",
                 106: "pullup",
                 107: "hangingLegRaise",
-                // Equiptment (Bench/Step)
+                // Equipment (Bench/Step)
                 109: "bulgarianSplitSquat",
                 110: "boxJump",
                 111: "hipThrusts",
@@ -788,7 +788,7 @@ enum sessionDataOld {
                 67, //: "doorFrameRow",
                 // Core ---------
                 82, //: "sidePlankW",
-                // Equiptment (Bench/Step)
+                // Equipment (Bench/Step)
                 109, //: "bulgarianSplitSquat",
                 112, //: "stepUp"
             ],
@@ -1118,13 +1118,13 @@ enum sessionDataOld {
                 101: ["chestSqueeze"],
                 102: ["pushupHold"],
                 103: ["pullUp"],
-                // Equiptment (Ball) ---------
+                // Equipment (Ball) ---------
                 104: ["ballPushup", "ballPushup1", "ballPushup", "ballPushup1"],
-                // Equiptment (Bar)
+                // Equipment (Bar)
                 105: ["bodyweightRow", "bodyweightRow1", "bodyweightRow", "bodyweightRow1"],
                 106: ["pullUp", "pullUp1", "pullUp2", "pullUp3", "pullUp4", "pullUp4", "pullUp3", "pullUp2", "pullUp1"],
                 107: ["hangingLegRaises", "hangingLegRaises1", "hangingLegRaises2", "hangingLegRaises3", "hangingLegRaises4", "hangingLegRaises3", "hangingLegRaises2", "hangingLegRaises1"],
-                // Equiptment (Bench/Step)
+                // Equipment (Bench/Step)
                 109: ["bulgarianSplitSquat", "bulgarianSplitSquat1", "bulgarianSplitSquat", "bulgarianSplitSquat1"],
                 110: ["boxJump"],
                 111: ["hipThrusts", "hipThrusts1", "hipThrusts", "hipThrusts1"],
@@ -1577,13 +1577,13 @@ enum sessionDataOld {
                 101: "squatBody",
                 102: "squatBody",
                 103: "squatBody",
-                // Equiptment (Ball) ---------
+                // Equipment (Ball) ---------
                 104: "squatBody",
-                // Equiptment (Bar)
+                // Equipment (Bar)
                 105: "squatBody",
                 106: "squatBody",
                 107: "squatBody",
-                // Equiptment (Bench/Step)
+                // Equipment (Bench/Step)
                 108: "squatBody",
                 109: "squatBody",
                 110: "squatBody",
@@ -1899,13 +1899,13 @@ enum sessionDataOld {
                 101: ["chestSqueezeEH", "chestSqueezeEA", "chestSqueezeEF"],
                 102: ["pushupHoldEH", "pushupHoldEA", "pushupHoldEF"],
                 103: ["pullupHoldEH", "pullupHoldEA", "pullupHoldEF"],
-                // Equiptment (Ball) ---------
+                // Equipment (Ball) ---------
                 104: ["ballPushupEH", "ballPushupEA", "ballPushupEF"],
-                // Equiptment (Bar)
+                // Equipment (Bar)
                 105: ["bodweightRowEH", "bodweightRowEA", "bodweightRowEF"],
                 106: ["pullupEH", "pullupEA", "pullupEF"],
                 107: ["hangingLegRaiseEH", "hangingLegRaiseEA", "hangingLegRaiseEF"],
-                // Equiptment (Bench/Step)
+                // Equipment (Bench/Step)
                 109: ["bulgarianSplitSquatEH", "bulgarianSplitSquatEA", "bulgarianSplitSquatEF"],
                 110: ["boxJumpEH", "boxJumpEA", "boxJumpEF"],
                 111: ["hipThrustsEH", "hipThrustsEA", "hipThrustsEF"],

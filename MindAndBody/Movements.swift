@@ -104,11 +104,11 @@ extension sessionData {
                     ["wallSit", "toePress", "staticLunge"],
                     // Isometric (Upper Body)
                     ["chestSqueeze", "pushupHold", "pullupHold"],
-                    // Equiptment (Ball) ---------
+                    // Equipment (Ball) ---------
                     ["ballPushup"],
-                    // Equiptment (Bar)
+                    // Equipment (Bar)
                     ["bodyweightRow", "pullup", "hangingLegRaise"],
-                    // Equiptment (Bench/Step)
+                    // Equipment (Bench/Step)
                     ["bulgarianSplitSquat", "boxJump", "hipThrusts", "stepUp"]
             ],
             "cardio":
@@ -244,7 +244,7 @@ extension sessionData {
                     "doorFrameRow",
                     // Core ---------
                     "sidePlankW",
-                    // Equiptment (Bench/Step)
+                    // Equipment (Bench/Step)
                     "bulgarianSplitSquat",
                     "stepUp"
             ],
@@ -1582,7 +1582,7 @@ extension sessionData {
                         "explanation": ["pullupHoldEH", "pullupHoldEA", "pullupHoldEF"],
                         "targetArea": ["squatBody"]
                 ],
-                // Equiptment (Ball) ---------
+                // Equipment (Ball) ---------
                 "ballPushup":
                     [
                         "name": ["ballPushup"],
@@ -1590,7 +1590,7 @@ extension sessionData {
                         "explanation": ["ballPushupEH", "ballPushupEA", "ballPushupEF"],
                         "targetArea": ["squatBody"]
                 ],
-                // Equiptment (Bar)
+                // Equipment (Bar)
                 "bodyweightRow":
                     [
                         "name": ["bodyweightRow"],
@@ -1612,7 +1612,7 @@ extension sessionData {
                         "explanation": ["hangingLegRaiseEH", "hangingLegRaiseEA", "hangingLegRaiseEF"],
                         "targetArea": ["squatBody"]
                 ],
-                // Equiptment (Bench/Step)
+                // Equipment (Bench/Step)
                 "bodyweightBulgarianSplitSquat":
                     [
                         "name": ["bulgarianSplitSquat"],

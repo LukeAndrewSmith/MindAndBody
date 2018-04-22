@@ -46,19 +46,20 @@ class ReminderNotifications {
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         let notificationSettings = settings["ReminderNotifications"]
         //
+        let cal: Calendar = Calendar.current
+        //
+        // Double check notifications are on
         if notificationSettings![0] == 1 {
             //
             let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
 
-            // Day view: set notifications for each day something is planned
             if schedules.count != 0 {
+                // Day view: set notifications for each day something is planned
                 if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
                     // Loop week
                     for i in 0...6 {
-                        // Loop day
+                        // Check day
                         if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
-                            //
-                            let cal: Calendar = Calendar(identifier: .gregorian)
                             //
                             // Set morning notifications
                             let morningContent = UNMutableNotificationContent()
@@ -78,15 +79,17 @@ class ReminderNotifications {
                             
                             // Set trigger
                             let morningTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
-                            let morningRequest = UNNotificationRequest(identifier: "morningReminderNotification", content: morningContent, trigger: morningTrigger)
+                            let identifier = "morningReminderNotification" + String(i)
+                            let morningRequest = UNNotificationRequest(identifier: identifier, content: morningContent, trigger: morningTrigger)
                             //
                             UNUserNotificationCenter.current().add(morningRequest, withCompletionHandler: nil)
+
                             
                             //
                             // Set evening notifications
                             let eveningContent = UNMutableNotificationContent()
                             eveningContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                            eveningContent.body = NSLocalizedString("sundayNotification", comment: "")
+                            eveningContent.body = NSLocalizedString("eveningNotification", comment: "")
                             
                             eveningContent.sound = UNNotificationSound.default()
                             
@@ -94,23 +97,47 @@ class ReminderNotifications {
                             let date = Date().firstMondayInCurrentWeek
                             let eveningDateToSchedule = cal.date(byAdding: .day, value: i, to: date)
                             // Get 5 in evening
-                            let eveningDateToScheduleWithTime: Date = cal.date(bySettingHour: 17, minute: 0, second: 0, of: eveningDateToSchedule!)!
+                            let eveningDateToScheduleWithTime: Date = cal.date(bySettingHour: 19, minute: 0, second: 0, of: eveningDateToSchedule!)!
                             
-                            // Get trigger daye
+                            // Get trigger date
                             let eveningTriggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: eveningDateToScheduleWithTime)
                             
                             // Set trigger
                             let eveningTrigger = UNCalendarNotificationTrigger(dateMatching: eveningTriggerDate, repeats: true)
-                            let eveningRequest = UNNotificationRequest(identifier: "morningReminderNotification", content: eveningContent, trigger: eveningTrigger)
+                            let identifier2 = "eveningReminderNotification" + String(i)
+                            let eveningRequest = UNNotificationRequest(identifier: identifier2, content: eveningContent, trigger: eveningTrigger)
                             //
                             UNUserNotificationCenter.current().add(eveningRequest, withCompletionHandler: nil)
                         }
+                        
+                        //
+
+                        //
+                        // Set sunday notification
+                        let sundayContent = UNMutableNotificationContent()
+                        sundayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
+                        sundayContent.body = NSLocalizedString("sundayNotification", comment: "")
+                        
+                        sundayContent.sound = UNNotificationSound.default()
+                        
+                        // Get day of week
+                        let mondayDate = Date().firstMondayInCurrentWeek
+                        let sundayDateToSchedule = cal.date(byAdding: .day, value: 6, to: mondayDate)
+                        // Get 7 in sunday
+                        let sundayDateToScheduleWithTime: Date = cal.date(bySettingHour: 19, minute: 0, second: 0, of: sundayDateToSchedule!)!
+                        
+                        // Get trigger day
+                        let sundayTriggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: sundayDateToScheduleWithTime)
+                        
+                        // Set trigger
+                        let sundayTrigger = UNCalendarNotificationTrigger(dateMatching: sundayTriggerDate, repeats: true)
+                        let sundayRequest = UNNotificationRequest(identifier: "sundayReminderNotification", content: sundayContent, trigger: sundayTrigger)
+                        //
+                        UNUserNotificationCenter.current().add(sundayRequest, withCompletionHandler: nil)
                     }
                 // Week view: set notifications for each day ??
                 } else {
                     UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-                    //
-                    let cal: Calendar = Calendar(identifier: .gregorian)
                     //
                     // Set monday notification
                     let mondayContent = UNMutableNotificationContent()
@@ -121,7 +148,7 @@ class ReminderNotifications {
                     for i in 0...6 {
                         count += schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
                     }
-                    mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(count) + NSLocalizedString("weekNotification2", comment: "")
+                    mondayContent.body = NSLocalizedString("mondayNotification", comment: "") + String(count) + NSLocalizedString("weekNotification2", comment: "")
                     
                     mondayContent.sound = UNNotificationSound.default()
                     
@@ -140,7 +167,7 @@ class ReminderNotifications {
                     UNUserNotificationCenter.current().add(mondayRequest, withCompletionHandler: nil)
                     
                     //
-                    // Set monday notification
+                    // Set sunday notification
                     let sundayContent = UNMutableNotificationContent()
                     sundayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
                     sundayContent.body = NSLocalizedString("sundayNotification", comment: "")
@@ -150,14 +177,14 @@ class ReminderNotifications {
                     // Get day of week
                     let sundayDateToSchedule = cal.date(byAdding: .day, value: 6, to: mondayDate)
                     // Get 7 in sunday
-                    let sundayDateToScheduleWithTime: Date = cal.date(bySettingHour: 17, minute: 0, second: 0, of: sundayDateToSchedule!)!
+                    let sundayDateToScheduleWithTime: Date = cal.date(bySettingHour: 19, minute: 0, second: 0, of: sundayDateToSchedule!)!
                     
                     // Get trigger day
                     let sundayTriggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: sundayDateToScheduleWithTime)
                     
                     // Set trigger
                     let sundayTrigger = UNCalendarNotificationTrigger(dateMatching: sundayTriggerDate, repeats: true)
-                    let sundayRequest = UNNotificationRequest(identifier: "morningReminderNotification", content: sundayContent, trigger: sundayTrigger)
+                    let sundayRequest = UNNotificationRequest(identifier: "sundayReminderNotification", content: sundayContent, trigger: sundayTrigger)
                     //
                     UNUserNotificationCenter.current().add(sundayRequest, withCompletionHandler: nil)
                 }
