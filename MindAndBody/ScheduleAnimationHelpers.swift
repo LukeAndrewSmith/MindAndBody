@@ -119,6 +119,9 @@ extension ScheduleScreen {
         } else if ScheduleVariables.shared.choiceProgress[1] == 1 {
             backToBeginning()
         }
+        //
+        // Check wether to remove extra back button
+        backToBeginningButtonAddRemove()
     }
     // Return to choice 0 (groups)
     @objc func backToBeginning() {
@@ -130,6 +133,8 @@ extension ScheduleScreen {
         navigationBar.rightBarButtonItem?.isEnabled = true
         removeMaskView()
         slideRight()
+        //
+        backToBeginningButtonAddRemove()
     }
     // Open Schedule, check if mask views necessary
     func checkMaskView() {
@@ -184,17 +189,49 @@ extension ScheduleScreen {
         maskViewBackButton.sizeToFit()
         maskViewBackButton.frame = CGRect(x: 5, y: maskView1.bounds.height - maskViewBackButton.bounds.height - 11, width: maskViewBackButton.bounds.width, height: maskViewBackButton.bounds.height)
         maskView1.addSubview(maskViewBackButton)
-        // Back all the way to the beginning
-        maskViewBackToBeginningButton.setImage(#imageLiteral(resourceName: "Double Back Arrow"), for: .normal)
-        maskViewBackToBeginningButton.alpha = 0.25
-        maskViewBackToBeginningButton.tintColor = Colors.light
-        maskViewBackToBeginningButton.sizeToFit()
-        maskViewBackToBeginningButton.frame = CGRect(x: 5, y: (maskView1.bounds.height / 2) - (maskViewBackButton.bounds.height / 2), width: maskViewBackToBeginningButton.bounds.width, height: maskViewBackToBeginningButton.bounds.height)
-        maskViewBackToBeginningButton.isUserInteractionEnabled = true
-        maskViewBackToBeginningButton.addTarget(self, action: #selector(backToBeginning), for: .touchUpInside)
-        maskView1.addSubview(maskViewBackToBeginningButton)
-        maskView1.bringSubview(toFront: maskViewBackToBeginningButton)
     }
+    
+    // Func to add back to begginning button at second choice
+    func backToBeginningButtonAddRemove() {
+        // ADD
+        // Mask view does not contain back to beginning button && past second choice
+        if !maskView1.subviews.contains(maskViewBackToBeginningButton) && ScheduleVariables.shared.choiceProgress[1] > 1 {
+            // Back all the way to the beginning
+            maskViewBackToBeginningButton.setImage(#imageLiteral(resourceName: "Double Back Arrow"), for: .normal)
+            maskViewBackToBeginningButton.alpha = 0
+            maskViewBackToBeginningButton.tintColor = Colors.light
+            maskViewBackToBeginningButton.sizeToFit()
+            maskViewBackToBeginningButton.frame = CGRect(x: 5, y: maskView1.bounds.height - maskViewBackToBeginningButton.bounds.height - 11, width: maskViewBackToBeginningButton.bounds.width, height: maskViewBackToBeginningButton.bounds.height)
+            maskViewBackToBeginningButton.isUserInteractionEnabled = true
+            maskViewBackToBeginningButton.addTarget(self, action: #selector(backToBeginning), for: .touchUpInside)
+            maskView1.addSubview(maskViewBackToBeginningButton)
+            maskView1.bringSubview(toFront: maskViewBackButton) // Put behind button already there
+            //
+            // Animate on
+            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                //
+                self.maskViewBackButton.frame = CGRect(x: 5 + self.maskViewBackToBeginningButton.bounds.width + 5, y: self.maskView1.bounds.height - self.maskViewBackButton.bounds.height - 11, width: self.maskViewBackButton.bounds.width, height: self.maskViewBackButton.bounds.height)
+                //
+                self.maskViewBackToBeginningButton.alpha = 1
+                //
+            }, completion: { finished in
+            })
+        // REMOVE
+        } else if maskView1.subviews.contains(maskViewBackToBeginningButton) && ScheduleVariables.shared.choiceProgress[1] <= 1 {
+            //
+            // Animate on
+            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                //
+                self.maskViewBackButton.frame = CGRect(x: 5, y: self.maskView1.bounds.height - self.maskViewBackButton.bounds.height - 11, width: self.maskViewBackButton.bounds.width, height: self.maskViewBackButton.bounds.height)
+                //
+                self.maskViewBackToBeginningButton.alpha = 0
+                //
+            }, completion: { finished in
+                self.maskViewBackToBeginningButton.removeFromSuperview()
+            })
+        }
+    }
+    
     // Remove Mask Views
     func removeMaskView() {
         //

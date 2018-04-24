@@ -258,11 +258,40 @@ class ScheduleScreen: UIViewController {
     // Edit Schedule
     @objc func editScheduleAction() {
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        //
-        ActionSheet.shared.animateActionSheetDown()
-        //
+        // There is a schedule to edit
         if schedules.count != 0 {
             self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
+            ActionSheet.shared.animateActionSheetDown()
+        // There is no schedule to edit - popup indicating so
+        } else {
+            ActionSheet.shared.actionSheet.alpha = 0
+            ActionSheet.shared.actionSheetBackgroundView.alpha = 0
+            ActionSheet.shared.actionSheetBackgroundView.isEnabled = false
+            //
+            // Alert View
+            let title = NSLocalizedString("scheduleEditTitle", comment: "")
+            let message = NSLocalizedString("scheduleEditMessage", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.view.tintColor = Colors.dark
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            //
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .natural
+            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+            
+            //
+            // Action
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+                ActionSheet.shared.actionSheet.alpha = 1
+                ActionSheet.shared.actionSheetBackgroundView.alpha = 1
+                ActionSheet.shared.actionSheetBackgroundView.isEnabled = true
+            }
+            //
+            alert.addAction(okAction)
+            //
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+            //self.present(alert, animated: true, completion: nil)
         }
     }
     

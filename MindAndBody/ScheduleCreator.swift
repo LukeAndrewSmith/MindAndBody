@@ -95,7 +95,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     var groupIndexes = [Int]()
     
     let dayArray = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
-    
+    let dayArrayShort = ["mondayChar", "tuesdayChar", "wednesdayChar", "thursdayChar", "fridayChar", "saturdayChar", "sundayChar",]
+
     //
     // View did load --------------------------------------------------------------------------------------------------------
     //
@@ -121,6 +122,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             longPressArray[i].minimumPressDuration = 0
             longPressArray[i].addTarget(self, action: #selector(beginDraggingFromTop(gestureRecognizer:)))
             bigGroupLabelArray[i].addGestureRecognizer(longPressArray[i])
+        }
+        
+        // Iphone 5/SE layout, smaller text for endurance
+        if IPhoneType.shared.iPhoneType() == 0 {
+            bigGroupLabelArray[3].font = UIFont(name: "SFUIDisplay-thin", size: 21)
         }
         
         // Dragging
@@ -187,7 +193,14 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath) as! DayCell
         cell.selectionStyle = .none
         //
-        cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.row], comment: "")
+        // Iphone 5/SE layout
+        if IPhoneType.shared.iPhoneType() == 0 {
+            // Short names
+            cell.dayLabel.text = NSLocalizedString(dayArrayShort[indexPath.row], comment: "")
+        } else if IPhoneType.shared.iPhoneType() == 2 {
+            cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.row], comment: "")
+
+        }
         cell.layoutSubviews()
         //
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]

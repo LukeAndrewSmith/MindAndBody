@@ -304,6 +304,9 @@ extension ScheduleScreen {
             default:
                 break
             }
+            
+            // Check wether to add extra back button
+            backToBeginningButtonAddRemove()
         }
     }
     
