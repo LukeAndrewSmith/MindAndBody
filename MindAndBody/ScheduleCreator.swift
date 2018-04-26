@@ -197,7 +197,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         if IPhoneType.shared.iPhoneType() == 0 {
             // Short names
             cell.dayLabel.text = NSLocalizedString(dayArrayShort[indexPath.row], comment: "")
-        } else if IPhoneType.shared.iPhoneType() == 2 {
+        } else {
             cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.row], comment: "")
 
         }

@@ -3095,6 +3095,7 @@
 "mindBodySchedule" = "Mind & Body Schedule";
 "morningNotification1" = "You have "; // nSession
 "morningNotification2" = " sessions planned for today"; // 7 o'clock
+"morningNotification21" = " session planned for today";
 "afternoonNotification" = "Have you worked towards your goals as planned today?"; // 5 o'clock
 //
 "weekNotification2" = " sessions planned for this week";

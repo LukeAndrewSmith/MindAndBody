@@ -281,9 +281,6 @@ extension ScheduleScreen {
             snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
             snapShot2?.center.x = self.view.center.x
             //
-            // Removes or displays lessons
-            self.displayLessons()
-            //
         }, completion: { finished in
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
@@ -328,9 +325,6 @@ extension ScheduleScreen {
             //
             snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
             snapShot2?.center.x = self.view.center.x
-            //
-            // Removes or displays lessons
-            self.displayLessons()
             //
         }, completion: { finished in
             snapShot1?.removeFromSuperview()

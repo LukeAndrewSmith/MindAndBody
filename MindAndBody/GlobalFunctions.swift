@@ -41,6 +41,7 @@ class ReminderNotifications {
     // Sets morning and/or everning repeating notifiations
         // Could be called reset, as clears before setting
     func setNotifications() {
+        // Reset
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         //
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -59,20 +60,32 @@ class ReminderNotifications {
                     // Loop week
                     for i in 0...6 {
                         // Check day
-                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
+                        let dayCount = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
+                        if dayCount != 0 {
                             //
                             // Set morning notifications
                             let morningContent = UNMutableNotificationContent()
                             morningContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification2", comment: "")
+                            // Session not plural
+                            if dayCount == 1 {
+                                morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification21", comment: "")
+                            // Sessions plural
+                            } else {
+                                morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification2", comment: "")
+                            }
                             
                             morningContent.sound = UNNotificationSound.default()
+                            
+                            // App Badge Counter
+                            morningContent.badge = dayCount as NSNumber
                             
                             // Get day of week
                             let morningDate = Date().firstMondayInCurrentWeek
                             let morningDateToSchedule = cal.date(byAdding: .day, value: i, to: morningDate)
                             // Get 7 in morning
-                            let dateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: morningDateToSchedule!)!
+                            //let dateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: morningDateToSchedule!)!
+                            let dateToScheduleWithTime: Date = cal.date(bySettingHour: 17, minute: 30, second: 0, of: morningDateToSchedule!)!
+
                             
                             // Get trigger daye
                             let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: dateToScheduleWithTime)
@@ -81,33 +94,9 @@ class ReminderNotifications {
                             let morningTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
                             let identifier = "morningReminderNotification" + String(i)
                             let morningRequest = UNNotificationRequest(identifier: identifier, content: morningContent, trigger: morningTrigger)
+                            
                             //
                             UNUserNotificationCenter.current().add(morningRequest, withCompletionHandler: nil)
-
-                            
-                            //
-                            // Set evening notifications
-                            let eveningContent = UNMutableNotificationContent()
-                            eveningContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                            eveningContent.body = NSLocalizedString("eveningNotification", comment: "")
-                            
-                            eveningContent.sound = UNNotificationSound.default()
-                            
-                            // Get day of week
-                            let date = Date().firstMondayInCurrentWeek
-                            let eveningDateToSchedule = cal.date(byAdding: .day, value: i, to: date)
-                            // Get 5 in evening
-                            let eveningDateToScheduleWithTime: Date = cal.date(bySettingHour: 19, minute: 0, second: 0, of: eveningDateToSchedule!)!
-                            
-                            // Get trigger date
-                            let eveningTriggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: eveningDateToScheduleWithTime)
-                            
-                            // Set trigger
-                            let eveningTrigger = UNCalendarNotificationTrigger(dateMatching: eveningTriggerDate, repeats: true)
-                            let identifier2 = "eveningReminderNotification" + String(i)
-                            let eveningRequest = UNNotificationRequest(identifier: identifier2, content: eveningContent, trigger: eveningTrigger)
-                            //
-                            UNUserNotificationCenter.current().add(eveningRequest, withCompletionHandler: nil)
                         }
                         
                         //
@@ -195,6 +184,46 @@ class ReminderNotifications {
     // removes all pending notifications (as there should only be repeating notifications that are pending, if ever notifications used more, this should be changed to only cancel repeating notifiations
     func cancelNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+    
+    // Update badges func
+        // Note
+            // Current Bool = False if False -> True, True if True -> False
+    func updateBadges(day: Int, currentBool: Bool) {
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+
+        // Update badge
+        // If current day || or || If not current day but current day is empty (Description below)
+        // Note: Date().currentWeekDayFromMonday returns 1 for monday, but in schedule monday is 0 so - 1
+        if day == (Date().currentWeekDayFromMonday - 1) || day != (Date().currentWeekDayFromMonday - 1) && schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day].count == 0 {
+            // True -> False, decrement badge
+            if currentBool {
+                updateBadgeCounter(increment: true)
+                // False -> True, increment badge
+            } else {
+                ReminderNotifications.shared.updateBadgeCounter(increment: false)
+            }
+            
+            // If not current day but current day is empty:
+            // This indicates that if something is completed, the user has probably missed a day and is doing it the next day on the empty day
+            // The badges are set in the morning of a day when there is something to be done, and updated throughout the day. If the user does nothing the badges stay there until the next day there is something and the badges are updated in the morning, or if they do something on an empty day as described above.
+            // This is not perfect but its ok for now
+        }
+    }
+    
+    // Update Badge Counter
+    func updateBadgeCounter(increment: Bool) {
+        // Increment
+        if increment {
+            UIApplication.shared.applicationIconBadgeNumber += 1
+            // Decrement
+        } else {
+            if UIApplication.shared.applicationIconBadgeNumber < 2 {
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            } else {
+                UIApplication.shared.applicationIconBadgeNumber -= 1
+            }
+        }
     }
 }
 
@@ -619,6 +648,9 @@ extension UIViewController {
             
             // Update
             schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = true
+            // Update Badges
+                // currentBool == False as False -> True
+            ReminderNotifications.shared.updateBadges(day: day, currentBool: false)
             // Set
             UserDefaults.standard.set(schedules, forKey: "schedules")
             // Sync

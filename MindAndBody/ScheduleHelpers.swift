@@ -347,6 +347,8 @@ extension ScheduleScreen {
             
             // Update
             schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
+            // Update Badges
+            ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
             
             // Update Week Progress
             if !self.isLastChoice() {
@@ -1107,6 +1109,7 @@ extension ScheduleScreen {
                     break
                 }
             }
+        // Just checks on part of the group
         } else {
             return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][ScheduleVariables.shared.selectedRows[0]]["isGroupCompleted"] as! Bool
         }
@@ -1300,7 +1303,8 @@ extension ScheduleScreen {
             }
             // Select indicator
             stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
-            selectDay(day: ScheduleVariables.shared.selectedDay)
+            //selectDay(day: ScheduleVariables.shared.selectedDay)
+            animateDayIndicatorToDay()
             
             // Animate
             scheduleTable.reloadData()
@@ -1448,14 +1452,17 @@ extension ScheduleScreen {
             //
             let day = indexingVariables.2
             
+            // if first or last choiec
             if index1 != "notFirstOrLastChoice" {
                 // Update Tracking
                 // True/False
                 let currentBool = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] as! Bool
                 
+                // UPDATES
                 // Update
                 schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
-                
+                // Update Badges
+                ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
                 // Update Week Progress
                 if !isLastChoice() {
                     updateWeekProgress(add: !currentBool)
@@ -1491,6 +1498,7 @@ extension ScheduleScreen {
                     updateDayIndicatorColours()
                 }
                 
+                // Only called if is last choice
                 if shouldUpdateArraysAgain {
                     UserDefaults.standard.set(schedules, forKey: "schedules")
                     // Sync
@@ -1723,6 +1731,9 @@ extension ScheduleScreen {
         
         // Update
         schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = true
+        // Update Badges
+            // currentBool == False as False -> True
+        ReminderNotifications.shared.updateBadges(day: day, currentBool: false)
         // Update Week Progress
         updateWeekProgress(add: true)
 
