@@ -426,28 +426,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/ScheduleCreationHelp.swift"
-            timestampString = "546702265.2705261"
+            timestampString = "546714165.4878269"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "276"
             endingLineNumber = "276"
             landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MindAndBody/ScheduleCreatorFunctions.swift"
-            timestampString = "546708421.558996"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
-            landmarkName = "setNumberOfSessions(updating:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -3047,9 +3047,10 @@
 // MARK: Schedule creation help
 // Time / Committement
 "scheduleQTime" = "Do you have time and energy to work towards your goals (time where you're able and willing to)?"; // Time
-"scheduleATime1" = "Not much (1 - 2 days a week)"; // 2 - 3???
-"scheduleATime2" = "A little (3 - 4 days a week)";  // 3 - 5????
-"scheduleATime3" = "Yes (5 - 7 days a week)";
+"scheduleATime1" = "Not much (1 - 2 days a week)";
+"scheduleATime2" = "A little (2 - 3 days a week)";
+"scheduleATime3" = "Some (3 - 5 days a week)";
+"scheduleATime4" = "Yes (5 - 7 days a week)";
 "scheduleQPriority" = "Are your goals a high priority (will you be committed)?"; // Priority
 "scheduleAPriority1" = "Not really, but I'd like to do a little";
 "scheduleAPriority2" = "Yes, but I should take it easy to begin with";
@@ -3086,6 +3087,9 @@
 "meditationS" = "M";
 "flexibilityS" = "F";
 "enduranceS" = "E";
+
+// Schedule creator indication
+"scheduleCreatorIndication" = "Drag & Drop";
 
 //
 // Groups

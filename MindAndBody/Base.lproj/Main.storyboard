@@ -612,10 +612,17 @@
                                     <action selector="createScheduleButtonAction:" destination="MvL-yD-EMG" eventType="touchUpInside" id="i3Y-TN-m5k"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBc-oy-0mh">
+                                <rect key="frame" x="325" y="243.5" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Pq4-yp-zjE" secondAttribute="trailing" constant="4" id="8vx-n8-P6j"/>
+                            <constraint firstAttribute="trailing" secondItem="eBc-oy-0mh" secondAttribute="trailing" constant="8" id="DaB-P3-IFC"/>
                             <constraint firstItem="swz-92-i1A" firstAttribute="top" secondItem="GZx-Jt-X2Q" secondAttribute="bottom" id="EgI-gq-e8F"/>
                             <constraint firstAttribute="trailing" secondItem="4MM-ms-QAM" secondAttribute="trailing" id="G2r-fv-ceK"/>
                             <constraint firstItem="C0r-gO-Few" firstAttribute="leading" secondItem="K2Y-Bu-j3L" secondAttribute="leading" id="Iaa-wO-W3P"/>
@@ -626,6 +633,7 @@
                             <constraint firstItem="Pq4-yp-zjE" firstAttribute="top" secondItem="biQ-vA-1IL" secondAttribute="bottom" constant="4" id="WCc-yJ-qlf"/>
                             <constraint firstItem="Pq4-yp-zjE" firstAttribute="leading" secondItem="K2Y-Bu-j3L" secondAttribute="leading" constant="4" id="XXw-PS-BJb"/>
                             <constraint firstItem="GZx-Jt-X2Q" firstAttribute="leading" secondItem="K2Y-Bu-j3L" secondAttribute="leading" id="aqR-gu-erZ"/>
+                            <constraint firstItem="C0r-gO-Few" firstAttribute="top" secondItem="eBc-oy-0mh" secondAttribute="bottom" constant="8" id="gfW-qZ-qmQ"/>
                             <constraint firstAttribute="trailing" secondItem="GZx-Jt-X2Q" secondAttribute="trailing" id="mmr-RW-iGL"/>
                             <constraint firstItem="4MM-ms-QAM" firstAttribute="top" secondItem="C0r-gO-Few" secondAttribute="bottom" id="vtt-9Z-YXj"/>
                         </constraints>
@@ -645,6 +653,7 @@
                         <outlet property="groupStack" destination="Pq4-yp-zjE" id="RGa-76-VXX"/>
                         <outlet property="groupStack1" destination="vkN-0u-ghg" id="0rM-Pz-GUR"/>
                         <outlet property="groupStack2" destination="Jlz-7E-qYU" id="eiD-xQ-Y4P"/>
+                        <outlet property="indicationLabel" destination="eBc-oy-0mh" id="XrM-u1-df7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rHM-Hl-UU2" userLabel="First Responder" sceneMemberID="firstResponder"/>

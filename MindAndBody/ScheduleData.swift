@@ -323,15 +323,6 @@ enum scheduleDataStructures {
                         "meditationG": 0,
                         "enduranceG": 0,
                         "flexibilityG": 0,
-//                    "generalFitnessG": 0,
-//                     "muscleGainG": 0,
-//                     "toningG": 0,
-//                     "strengthG": 0,
-//                     "weightLossG": 0,
-//                     "enduranceG": 0,
-//                     "flexibilityG": 0,
-//                     "yogaG": 0,
-//                     "mindG": 0
                     ],
                     // Question answers
                     
@@ -353,22 +344,12 @@ enum scheduleDataStructures {
                 ["meditationG"], // - 2
                 ["enduranceG"], // - 3
                 ["flexibilityG"], // - 4
-                
-//                ["generalFitnessG"], // - 0
-//                ["muscleGainG"], // - 1
-//                ["toningG"], // - 2
-//                ["strengthG"], // - 3
-//                ["weightLossG"], // - 4
-//                ["enduranceG"], // - 5
-//                ["flexibilityG"], // - 6
-//                ["yogaG"], // - 7
-//                ["mindG"], // - 8
             ],
             // Schedule creation questions - 1
             [
                 // gender
                 // Time/Commitment
-                ["scheduleQTime", "scheduleATime1", "scheduleATime2", "scheduleATime3"], // // Time - 0
+                ["scheduleQTime", "scheduleATime1", "scheduleATime2", "scheduleATime3", "scheduleATime4"], // // Time - 0
                 ["scheduleQPriority", "scheduleAPriority1", "scheduleAPriority2", "scheduleAPriority3"], // Priority - 1
             ],
     ]

@@ -313,8 +313,9 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         //
-        if selectedSection == 0 {
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        // If first section and last row
+        if selectedSection == 0 && indexPath.row == 1 {
             //
             // Count goals, making sure that there are actually some goals set
             var count = 0

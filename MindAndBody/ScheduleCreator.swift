@@ -36,6 +36,10 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var createScheduleButton: UIButton!
     @IBOutlet weak var createScheduleButtonHeight: NSLayoutConstraint!
     
+    // Indication
+    @IBOutlet weak var indicationLabel: UILabel!
+    
+    
     //
     // Stack Views
     @IBOutlet weak var groupStack: UIStackView!
@@ -110,6 +114,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // BackgroundImage
         addBackgroundImage(withBlur: true, fullScreen: true)
         
+        // Indication Label
+        indicationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        indicationLabel.textColor = Colors.light
+        indicationLabel.text = NSLocalizedString("scheduleCreatorIndication", comment: "")
+
         //
         // Tables
         // Day Table
@@ -236,11 +245,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // If app helps create schedule, find which groups shown
         if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             // Loop sessions array to find out what is presented
-            for i in 1...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2].count - 1 {
+            for i in 1..<schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0].count {
                 //
                 // schedules[schedulesCreationHelp] indexed with strings, therefore retreive relevant string index from scheduleCreationHelp question array
-                let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[2][i][0]
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int != 0 {
+                let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[0][i][0]
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][stringIndex] as! Int != 0 {
                     nGroups += 1
                     // i - 1 as totalnsession included in array
                     groupIndexes.append(i - 1)
@@ -345,16 +354,16 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     let indexOfGroup = groupIndexes[i]
                     // schedule creation help indexed through names of groups etc, so get the string index from the originial question array, scheduleCreationHelp
-                    let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[2][indexOfGroup][0]
+                    let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[0][indexOfGroup][0]
                     //
                     let groupTitle = NSLocalizedString(scheduleDataStructures.groupNames[indexOfGroup], comment: "")
                     // Not selected filled in
                     var nGroupsString = String()
                     if dayTableGroupArray[indexOfGroup] == 0 {
-                        nGroupsString = "\n" + String(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int) + "x"
+                        nGroupsString = "\n" + String(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][stringIndex] as! Int) + "x"
                     // Some selected already
-                    } else if dayTableGroupArray[indexOfGroup] != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int {
-                        let number = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int - dayTableGroupArray[indexOfGroup]
+                    } else if dayTableGroupArray[indexOfGroup] != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][stringIndex] as! Int {
+                        let number = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][stringIndex] as! Int - dayTableGroupArray[indexOfGroup]
                         nGroupsString = "\n" + String(number) + "x"
                     } else {
                         nGroupsString = ""
@@ -371,7 +380,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
 
                     
                     // Make label dark and green if all session of group have been chosen
-                    if dayTableGroupArray[indexOfGroup] == schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int {
+                    if dayTableGroupArray[indexOfGroup] == schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][stringIndex] as! Int {
                         bigGroupLabelArray[i].alpha = 0.75
                         bigGroupLabelArray[i].layer.borderColor = Colors.green.withAlphaComponent(0.5).cgColor
                         bigGroupLabelArray[i].textColor = Colors.green
@@ -495,10 +504,10 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             indexOfDraggedGroup = groupIndexes[indexOfDrag]
             
             //
-            let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[2][indexOfDraggedGroup][0]
+            let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[0][indexOfDraggedGroup][0]
             
             // If there are some session left to drag from group or if custom schedule
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 || dayTableGroupArray[indexOfDraggedGroup] != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 || dayTableGroupArray[indexOfDraggedGroup] != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][stringIndex] as! Int {
                 // Haptic feedback
                 var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
                 generator?.prepare()
