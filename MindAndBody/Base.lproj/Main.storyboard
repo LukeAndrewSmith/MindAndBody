@@ -279,6 +279,7 @@
                         <segue destination="FRW-Nq-DUv" kind="show" identifier="OverviewSessionsSegue" id="KLr-4k-hco"/>
                         <segue destination="PFs-MA-8Ud" kind="show" identifier="OverviewScheduleWeekSegue" id="na3-42-cEE"/>
                         <segue destination="NRn-Cn-qYs" kind="show" identifier="EquipmentSegue" id="54L-er-yGs"/>
+                        <segue destination="d1w-hu-wYA" kind="show" identifier="OverviewProfileSegue" id="IQI-W2-saz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LY6-xg-RtF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2886,13 +2887,13 @@
                                         <rect key="frame" x="8" y="57" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Theme" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BC-Ha-gWL">
-                                                <rect key="frame" x="0.0" y="0.0" width="61.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="51" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Self-Acceptance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZf-CZ-07t">
-                                                <rect key="frame" x="69.5" y="0.0" width="102.5" height="20.5"/>
+                                                <rect key="frame" x="59" y="0.0" width="113" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4500,24 +4501,6 @@
             </objects>
             <point key="canvasLocation" x="3118" y="-4840"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Dcx-Qi-LUb">
-            <objects>
-                <viewController id="7OQ-X4-8Se" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="74D-Kw-zDD"/>
-                        <viewControllerLayoutGuide type="bottom" id="HZq-9X-TY8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="jQO-4U-1sZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MaU-aA-zdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3884" y="-2782"/>
-        </scene>
         <!--Schedule Type Question-->
         <scene sceneID="mpP-51-TNf">
             <objects>
@@ -4725,12 +4708,13 @@
                         <outlet property="questionsTable" destination="jIz-MS-glW" id="ON1-F8-ES9"/>
                         <outlet property="sectionLabel" destination="lWz-JN-HCo" id="YZT-gU-DIy"/>
                         <segue destination="JCR-Wc-eVJ" kind="show" identifier="ScheduleHelpQuestionSegue" id="NR1-hM-oZr"/>
-                        <segue destination="MvL-yD-EMG" kind="show" identifier="ScheduleHelpCreationSegue" id="Zez-2a-8yw"/>
+                        <segue destination="MvL-yD-EMG" kind="show" identifier="ScheduleHelpCreationSegueDay" id="Zez-2a-8yw"/>
+                        <segue destination="PFs-MA-8Ud" kind="show" identifier="ScheduleHelpCreationSegueWeek" id="npA-9Z-BPH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vMd-m9-SDl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5105" y="-3946"/>
+            <point key="canvasLocation" x="5006" y="-3948"/>
         </scene>
         <!--Schedule Creator Week-->
         <scene sceneID="oCa-5y-7Hp">
@@ -5196,101 +5180,6 @@
             </objects>
             <point key="canvasLocation" x="-1823" y="-2046"/>
         </scene>
-        <!--Schedule View Question-->
-        <scene sceneID="8au-y1-Gam">
-            <objects>
-                <viewController id="7G7-u5-GPb" customClass="ScheduleViewQuestion" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eEG-Sb-kMl"/>
-                        <viewControllerLayoutGuide type="bottom" id="TPw-3D-lRs"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qf9-JW-XaO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RaI-BR-6xe">
-                                <rect key="frame" x="0.0" y="20" width="375" height="88"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="88" id="fIR-OL-ix4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="27"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Nk8-uz-pjI">
-                                <rect key="frame" x="16" y="109" width="343" height="558"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4u-ap-UnT">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="279"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="dayButtonAction:" destination="7G7-u5-GPb" eventType="touchUpInside" id="OU0-Ku-vTg"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDn-mR-sYx">
-                                        <rect key="frame" x="0.0" y="279" width="343" height="279"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="weekButtonAction:" destination="7G7-u5-GPb" eventType="touchUpInside" id="aa9-uf-usr"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmG-69-I40">
-                                <rect key="frame" x="0.0" y="108" width="375" height="1"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="K7o-DK-mSa"/>
-                                </constraints>
-                            </view>
-                            <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MjO-0t-Pny">
-                                <rect key="frame" x="24" y="387.5" width="327" height="1"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="9K1-ak-sHH"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yrk-qD-ikA">
-                                <rect key="frame" x="16" y="49" width="30" height="30"/>
-                                <color key="tintColor" red="0.74117647060000003" green="0.2470588235" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="Back Arrow"/>
-                                <connections>
-                                    <action selector="backButtonAction:" destination="7G7-u5-GPb" eventType="touchUpInside" id="YOz-kv-qmV"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="MjO-0t-Pny" firstAttribute="centerY" secondItem="Nk8-uz-pjI" secondAttribute="centerY" id="1dL-3D-Wow"/>
-                            <constraint firstAttribute="trailing" secondItem="RaI-BR-6xe" secondAttribute="trailing" id="5Nu-ff-PXi"/>
-                            <constraint firstItem="RaI-BR-6xe" firstAttribute="leading" secondItem="qf9-JW-XaO" secondAttribute="leading" id="5RP-Kq-q4i"/>
-                            <constraint firstItem="Nk8-uz-pjI" firstAttribute="top" secondItem="bmG-69-I40" secondAttribute="bottom" id="DAN-XC-gST"/>
-                            <constraint firstItem="RaI-BR-6xe" firstAttribute="top" secondItem="eEG-Sb-kMl" secondAttribute="bottom" id="FOs-1z-agi"/>
-                            <constraint firstAttribute="trailing" secondItem="Nk8-uz-pjI" secondAttribute="trailing" constant="16" id="G5V-s3-yvb"/>
-                            <constraint firstItem="MjO-0t-Pny" firstAttribute="leading" secondItem="qf9-JW-XaO" secondAttribute="leadingMargin" constant="8" id="MHA-GR-m3a"/>
-                            <constraint firstItem="Yrk-qD-ikA" firstAttribute="centerY" secondItem="RaI-BR-6xe" secondAttribute="centerY" id="URp-Eq-JzR"/>
-                            <constraint firstAttribute="trailing" secondItem="bmG-69-I40" secondAttribute="trailing" id="XG7-t8-FSe"/>
-                            <constraint firstItem="bmG-69-I40" firstAttribute="leading" secondItem="qf9-JW-XaO" secondAttribute="leading" id="a9o-5x-gzI"/>
-                            <constraint firstItem="bmG-69-I40" firstAttribute="top" secondItem="RaI-BR-6xe" secondAttribute="bottom" id="h8Q-Cl-txB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MjO-0t-Pny" secondAttribute="trailing" constant="8" id="lnu-Z4-LR1"/>
-                            <constraint firstItem="Nk8-uz-pjI" firstAttribute="leading" secondItem="qf9-JW-XaO" secondAttribute="leading" constant="16" id="qR4-ig-piJ"/>
-                            <constraint firstItem="TPw-3D-lRs" firstAttribute="top" secondItem="Nk8-uz-pjI" secondAttribute="bottom" id="sZT-Bc-yMr"/>
-                            <constraint firstItem="Yrk-qD-ikA" firstAttribute="leading" secondItem="qf9-JW-XaO" secondAttribute="leadingMargin" id="z5Q-eL-gsG"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="3J8-Ca-Z5l"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <connections>
-                        <outlet property="backButton" destination="Yrk-qD-ikA" id="J0a-pG-9zL"/>
-                        <outlet property="dayViewButton" destination="f4u-ap-UnT" id="6zr-de-DlR"/>
-                        <outlet property="titleLabel" destination="RaI-BR-6xe" id="q4n-ao-j0N"/>
-                        <outlet property="weekViewButton" destination="kDn-mR-sYx" id="MYA-12-Sra"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MTy-Ve-T8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3118" y="-2781"/>
-        </scene>
         <!--Tracking Screen Old-->
         <scene sceneID="5pl-Sz-CQ0">
             <objects>
@@ -5407,23 +5296,6 @@
             </objects>
             <point key="canvasLocation" x="-417" y="-2046"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="kHo-JE-xJS">
-            <objects>
-                <viewController id="e1m-NJ-qG0" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0SV-5n-XI4"/>
-                        <viewControllerLayoutGuide type="bottom" id="Yjm-s5-Pz5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ive-lX-5bO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aGr-2E-mGy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <resources>
         <image name="Back Arrow" width="30" height="30"/>
@@ -5452,7 +5324,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SXY-HC-FeY"/>
-        <segue reference="na3-42-cEE"/>
+        <segue reference="npA-9Z-BPH"/>
         <segue reference="KLr-4k-hco"/>
         <segue reference="J6H-iJ-lim"/>
         <segue reference="9Fh-DY-FYb"/>
@@ -5465,7 +5337,7 @@
         <segue reference="aak-rT-dwz"/>
         <segue reference="Fhn-aO-iU6"/>
         <segue reference="y3k-i5-esE"/>
-        <segue reference="izD-lx-C3k"/>
+        <segue reference="IQI-W2-saz"/>
         <segue reference="M72-ar-DyO"/>
         <segue reference="Zez-2a-8yw"/>
         <segue reference="NR1-hM-oZr"/>

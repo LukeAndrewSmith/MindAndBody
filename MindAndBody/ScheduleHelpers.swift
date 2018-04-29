@@ -31,7 +31,7 @@ extension ScheduleScreen {
         // Ensure empty
         TemporaryWeekArray.shared.weekArray = []
         
-        // Create array ordered, by first finding and adding all instances of mind, then of flexibility, then of endurance etc...
+        // Create array ordered, by first finding and adding all instances of workout, then of yoga, then of meditation etc...
         let orderedGroupArray = ["workout", "yoga", "meditation", "endurance", "flexibility"]
         
         // Loop groups
@@ -44,7 +44,7 @@ extension ScheduleScreen {
                     for k in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].count {
                         // If correct group
                         if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j][k]["group"] as! String == orderedGroupArray[i] {
-                            // Create group dict
+                            // Create group dict that references this one
                             let groupDict: [String: Any] = [
                                 "group": orderedGroupArray[i],
                                 "day": j,
@@ -350,14 +350,15 @@ extension ScheduleScreen {
             // Update Badges
             ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
             
-            // Update Week Progress
-            if !self.isLastChoice() {
-                self.updateWeekProgress(add: !currentBool)
-            }
-            
             UserDefaults.standard.set(schedules, forKey: "schedules")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+            
+            // Update Tracking
+            self.updateWeekProgress()
+            self.updateTracking()
+            self.updateWeekTracking()
+            
             //
             let indexPathToReload = NSIndexPath(row: 2, section: 0)
             self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
@@ -398,7 +399,6 @@ extension ScheduleScreen {
         selectedChoiceWarmup[3] = "average"
         
         // Select Random Session
-        print(selectedChoiceWarmup)
         let choices = sessionData.sortedSessions[selectedChoiceWarmup[0]]![selectedChoiceWarmup[1]]![selectedChoiceWarmup[2]]![selectedChoiceWarmup[3]]!
         let random = Int(arc4random_uniform(UInt32(choices.count)))
         selectedWarmup.append(choices[random])
@@ -486,7 +486,7 @@ extension ScheduleScreen {
         var randomSessionString = randomSession(selectedChoice: selectedChoiceSession)
         
         // WORKOUT - Checks for Women, and bodyweight pullup bar
-        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         if ScheduleVariables.shared.choiceProgress[0] == 0 {
@@ -494,7 +494,7 @@ extension ScheduleScreen {
             if selectedChoiceSession[1].contains("Gym") {
                 // User is a woman
                     // Gender is second question, female or other == 1 or 2 (we give 'other' female workouts for now)
-                if profileAnswers[1] > 0 {
+                if profileAnswers["gender"]! > 0 {
                     // Avoid sessions that are for men
                     while randomSessionString.contains("-M") {
                         randomSessionString = randomSession(selectedChoice: selectedChoiceSession)
@@ -1086,6 +1086,7 @@ extension ScheduleScreen {
     }
     
     // Is group completed
+        // If on the last choice, this function checks if and element of a group (checkAll=false)/all the elements of a group have been performed (checkAll=true)
     func isGroupCompleted(checkAll: Bool) -> Bool {
         
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
@@ -1094,11 +1095,15 @@ extension ScheduleScreen {
         let nRows = scheduleTable.numberOfRows(inSection: 0)
         var isCompleted = true
         //
+        // Get day/index in day for the two different schedule styles
         var day = Int()
+        var indexInDay = Int()
         if scheduleStyle == 0 {
             day = ScheduleVariables.shared.selectedDay
+            indexInDay = ScheduleVariables.shared.selectedRows[0]
         } else {
             day = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["day"] as! Int
+            indexInDay = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["index"] as! Int
         }
         // Loop second array in scheduleTracking, if one if false, not completed (warmup/session/stretching)
             // -2 because title included
@@ -1111,7 +1116,7 @@ extension ScheduleScreen {
             }
         // Just checks on part of the group
         } else {
-            return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][ScheduleVariables.shared.selectedRows[0]]["isGroupCompleted"] as! Bool
+            return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["isGroupCompleted"] as! Bool
         }
         //
         return isCompleted
@@ -1376,7 +1381,7 @@ extension ScheduleScreen {
         // row = the selected row/row to update
         // firstChoice, indicates that we might want the indexing of the first choice but that it is not == -1, i.e if you hold down the group to mark as completed is sets the first choice
         // checkLastChoice, very specific case, if updating the other schedules, then the first choice will be set, so we need to set is firstChoice to true, but we might be updating the last choice so need an extra check
-        func getIndexingVariables(row: Int, firstChoice: Bool, checkLastChoice: Bool) -> (Int, String, Int) {
+    func getIndexingVariables(row: Int, firstChoice: Bool, checkLastChoice: Bool) -> (Int, String, Int) {
         // Indexing variables
         // Differ if last choice or first choice
         // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
@@ -1395,13 +1400,13 @@ extension ScheduleScreen {
             if scheduleStyle == 0 {
                 index0 = row
                 selectedDay = ScheduleVariables.shared.selectedDay
-                // Week view -  find stored index to schedule week using temporary full week array
+            // Week view -  find stored index to schedule week using temporary full week array
             } else {
                 index0 = TemporaryWeekArray.shared.weekArray[row]["index"] as! Int
                 selectedDay = TemporaryWeekArray.shared.weekArray[row]["day"] as! Int
             }
             index1 = "isGroupCompleted"
-            // If last choice
+        // If last choice
         } else if isLastChoice() && row != 0 {
             // Day view - index is simply row
             if scheduleStyle == 0 {
@@ -1452,6 +1457,8 @@ extension ScheduleScreen {
             //
             let day = indexingVariables.2
             
+            
+            
             // if first or last choiec
             if index1 != "notFirstOrLastChoice" {
                 // Update Tracking
@@ -1461,19 +1468,22 @@ extension ScheduleScreen {
                 // UPDATES
                 // Update
                 schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
-                // Update Badges
-                ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
-                // Update Week Progress
-                if !isLastChoice() {
-                    updateWeekProgress(add: !currentBool)
-                }
-                
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+                // Update Badges
+                ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
+                // Update Week Progress & Tracking
+                updateWeekProgress()
+                updateTracking()
+                updateWeekTracking()
+                
                 //
                 let indexPathToReload = NSIndexPath(row: row!, section: 0)
                 scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+                
+                let schedules2 = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+
                 
                 //
                 // Box indicator round todo, done here because userdefaults set above && check if full group needs to be completed
@@ -1482,18 +1492,15 @@ extension ScheduleScreen {
                     if isGroupCompleted(checkAll: true) {
                         maskView3.backgroundColor = Colors.green
                         //
-                        if !isGroupCompleted(checkAll: false) {
-                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = true
-                            shouldUpdateArraysAgain = true
-                        }
+                        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = true
+                        shouldUpdateArraysAgain = true
                     } else {
                         maskView3.backgroundColor = Colors.red
                         //
-                        if isGroupCompleted(checkAll: false) {
-                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = false
-                            shouldUpdateArraysAgain = true
-                        }
+                        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = false
+                        shouldUpdateArraysAgain = true
                     }
+                // Update day indicators
                 } else {
                     updateDayIndicatorColours()
                 }
@@ -1503,6 +1510,10 @@ extension ScheduleScreen {
                     UserDefaults.standard.set(schedules, forKey: "schedules")
                     // Sync
                     ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+                    // Update Tracking
+                    updateWeekProgress()
+                    updateTracking()
+                    updateWeekTracking()
                 }
                 
                 //
@@ -1652,11 +1663,13 @@ extension ScheduleScreen {
     
     // MARK: - Reload Functions
     // MARK: Reload Choice
-        // shouldReloadChoice
+        // if shouldReloadChoice == true then this function is executed
+        // Once having completed a session from the schedule, this function gets called upon return to the schedule, if the group is complete then the tracking is updated, and the schedule is animated back to the initial choice of groups
     func markAsCompletedAndAnimate() {
         // MARK AS COMPLETED
         if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.selectedRows[1] != 72 {
             //
+            // Delay so looks nice
             DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                 // Reload the finalChoiceScreen Session after a delay
                 let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
@@ -1671,7 +1684,7 @@ extension ScheduleScreen {
                     //
                     UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                         self.maskView3.backgroundColor = Colors.green
-                        // Slide back to initial choice when completed
+                    // Slide back to initial choice when completed
                     }, completion: { finished in
                         DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                             ScheduleVariables.shared.choiceProgress[1] = 1
@@ -1715,6 +1728,7 @@ extension ScheduleScreen {
     }
     
     // Only called for updaing full group, i.e group is completed
+        // Updates the tracking of a full group, setting to true
     func updateGroupTracking() {
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         
@@ -1734,8 +1748,10 @@ extension ScheduleScreen {
         // Update Badges
             // currentBool == False as False -> True
         ReminderNotifications.shared.updateBadges(day: day, currentBool: false)
-        // Update Week Progress
-        updateWeekProgress(add: true)
+        // Update Tracking
+        updateWeekProgress()
+        updateTracking()
+        updateWeekTracking()
 
         UserDefaults.standard.set(schedules, forKey: "schedules")
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])

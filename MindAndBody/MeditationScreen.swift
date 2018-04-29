@@ -246,7 +246,7 @@ class MeditationScreen: UIViewController {
             //
             //
             // Schedule Tracking
-            //            updateScheduleTracking(fromSchedule: fromSchedule)
+            updateScheduleTracking(fromSchedule: fromSchedule)
             ScheduleVariables.shared.shouldReloadChoice = true
             //
             if UIScreen.main.brightness == 0 {

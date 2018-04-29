@@ -228,7 +228,7 @@ class CustomScheduleWeekCell: UITableViewCell {
         // Remove first instance from from Week
         var shouldBreak = false
         // Loop week
-        for i in 0...6 {
+        for i in (0...6).reversed() {
             // If day isn't empty
             if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
                 // Loop day

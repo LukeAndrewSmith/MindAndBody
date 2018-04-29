@@ -56,7 +56,8 @@ class ReminderNotifications {
 
             if schedules.count != 0 {
                 // Day view: set notifications for each day something is planned
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+                let scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+                if scheduleStyle == 0 {
                     // Loop week
                     for i in 0...6 {
                         // Check day
@@ -74,6 +75,7 @@ class ReminderNotifications {
                                 morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification2", comment: "")
                             }
                             
+                            // Sound
                             morningContent.sound = UNNotificationSound.default()
                             
                             // App Badge Counter
@@ -83,8 +85,7 @@ class ReminderNotifications {
                             let morningDate = Date().firstMondayInCurrentWeek
                             let morningDateToSchedule = cal.date(byAdding: .day, value: i, to: morningDate)
                             // Get 7 in morning
-                            //let dateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: morningDateToSchedule!)!
-                            let dateToScheduleWithTime: Date = cal.date(bySettingHour: 17, minute: 30, second: 0, of: morningDateToSchedule!)!
+                            let dateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: morningDateToSchedule!)!
 
                             
                             // Get trigger daye
@@ -137,17 +138,23 @@ class ReminderNotifications {
                     for i in 0...6 {
                         count += schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
                     }
-                    mondayContent.body = NSLocalizedString("mondayNotification", comment: "") + String(count) + NSLocalizedString("weekNotification2", comment: "")
-                    
+                    mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(count) + NSLocalizedString("weekNotification2", comment: "")
                     mondayContent.sound = UNNotificationSound.default()
+                    
+                    // App Badge Counter
+                    mondayContent.badge = count as NSNumber
                     
                     // Get day of week
                     let mondayDate = Date().firstMondayInCurrentWeek
                     // Get 7 in monday
-                    let mondayDateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: mondayDate)!
+//                    let mondayDateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: mondayDate)!
                     
                     // Get trigger day
+//                    let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: mondayDateToScheduleWithTime)
+                    let DateToSchedule = cal.date(byAdding: .day, value: 4, to: mondayDate)
+                    let mondayDateToScheduleWithTime: Date = cal.date(bySettingHour: 15, minute: 6, second: 0, of: DateToSchedule!)!
                     let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: mondayDateToScheduleWithTime)
+
                     
                     // Set trigger
                     let mondayTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
@@ -177,8 +184,46 @@ class ReminderNotifications {
                     //
                     UNUserNotificationCenter.current().add(sundayRequest, withCompletionHandler: nil)
                 }
-            }
-        }
+                
+                
+                // Update current badge count, only useful if user switches between scheduleStyles, i.e from view full week to view each day and vice versa, or for when this gets reset in the middle of a day
+                // View each day
+                if scheduleStyle == 0 {
+                    // Date().currentWeekDayFromMonday returns monday = 1, in schedule we want monday = 0 so -1
+                    let currentDay = Date().currentWeekDayFromMonday - 1
+                    var currentCount: Int = 0
+                    // Loop current day counting how much has been done
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![currentDay].count != 0 {
+                        for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![currentDay].count {
+                            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![currentDay][j]["isGroupCompleted"] as! Bool == false {
+                                currentCount += 1
+                            }
+
+                        }
+                    }
+                    UIApplication.shared.applicationIconBadgeNumber = currentCount
+                // View full week
+                } else {
+                    // Date().currentWeekDayFromMonday returns monday = 1, in schedule we want monday = 0 so -1
+                    var currentCount: Int = 0
+                    // Loop week
+                    for i in 0...6 {
+                        // If day not empty
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
+                            // Loop day counting how much has been done
+                            for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count {
+                                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j]["isGroupCompleted"] as! Bool == false {
+                                    currentCount += 1
+                                }
+                                
+                            }
+                        }
+                    }
+                    UIApplication.shared.applicationIconBadgeNumber = currentCount
+                }
+                
+            } // end schedules.count
+        } // end notificationSettings![0] == 1
     }
     
     // removes all pending notifications (as there should only be repeating notifications that are pending, if ever notifications used more, this should be changed to only cancel repeating notifiations
@@ -190,24 +235,49 @@ class ReminderNotifications {
         // Note
             // Current Bool = False if False -> True, True if True -> False
     func updateBadges(day: Int, currentBool: Bool) {
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        // Get schedule style
+        var scheduleStyle = Int()
+        if schedules.count != 0 {
+            scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+        } else {
+            scheduleStyle = 0
+        }
 
         // Update badge
-        // If current day || or || If not current day but current day is empty (Description below)
-        // Note: Date().currentWeekDayFromMonday returns 1 for monday, but in schedule monday is 0 so - 1
-        if day == (Date().currentWeekDayFromMonday - 1) || day != (Date().currentWeekDayFromMonday - 1) && schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day].count == 0 {
-            // True -> False, decrement badge
+        // Day View, scheduleStyle 0
+        if scheduleStyle == 0 {
+            // If current day
+            // Note: Date().currentWeekDayFromMonday returns 1 for monday, but in schedule monday is 0 so - 1
+            if day == (Date().currentWeekDayFromMonday - 1) {
+                // True -> False, increment badge
+                if currentBool {
+                    updateBadgeCounter(increment: true)
+                // False -> True, decrement badge
+                } else {
+                    updateBadgeCounter(increment: false)
+                }
+            // If not current day but current day is empty (Description below)
+            } else if day != (Date().currentWeekDayFromMonday - 1) && schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(Date().currentWeekDayFromMonday - 1)].count == 0 {
+                // If not current day but current day is empty:
+                // This indicates that if something is completed, the user has probably missed a day and is doing it the next day on the empty day, only allow decrementing
+                // The badges are set in the morning of a day when there is something to be done, and updated throughout the day. If the user does nothing the badges stay there until the next day there is something and the badges are updated in the morning, or if they do something on an empty day as described above.
+                // This is not perfect but its ok for now
+                
+                // False -> True, decrement badge
+                if !currentBool {
+                    updateBadgeCounter(increment: false)
+                }
+            }
+        // Week View, scheduleStyle 1
+        } else {
+            // True -> False, increment badge
             if currentBool {
                 updateBadgeCounter(increment: true)
-                // False -> True, increment badge
+                // False -> True, decrement badge
             } else {
-                ReminderNotifications.shared.updateBadgeCounter(increment: false)
+                updateBadgeCounter(increment: false)
             }
-            
-            // If not current day but current day is empty:
-            // This indicates that if something is completed, the user has probably missed a day and is doing it the next day on the empty day
-            // The badges are set in the morning of a day when there is something to be done, and updated throughout the day. If the user does nothing the badges stay there until the next day there is something and the badges are updated in the morning, or if they do something on an empty day as described above.
-            // This is not perfect but its ok for now
         }
     }
     
@@ -608,27 +678,71 @@ extension UIViewController {
     }
     
     // ----------------------------------------------------------------------------------------------------------------
-    // MARK: Update Tracking Progress
+    // MARK: Update Tracking ---------
     //
-    // Week Progress
-    func updateWeekProgress(add: Bool) {
-        // Reset if last reset wasn't is current week
+    // MARK: Week Progress
+    func updateWeekProgress() {
+        // Reset if last reset wasn't in current week
         ScheduleVariables.shared.resetWeekTracking()
         //
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         // Increment Progress
-        if add {
-            trackingProgressDictionary["WeekProgress"] = trackingProgressDictionary["WeekProgress"] as! Int + 1
-        } else {
-            trackingProgressDictionary["WeekProgress"] = trackingProgressDictionary["WeekProgress"] as! Int - 1
+        
+        // Recalculate progress each time to be absolutely sure!!!
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        var completedCount: Int = 0
+        if schedules.count != 0 {
+            // Loop week
+            for i in 0...6 {
+                // If day isn't empty
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
+                    // Loop day
+                    for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count {
+                        //
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j]["isGroupCompleted"] as! Bool == true {
+                            completedCount += 1
+                        }
+                    }
+                }
+            }
         }
+        // Update value
+        trackingProgressDictionary["WeekProgress"] = completedCount
+        // Updates
         UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
     }
-   
     
-    // Schedule Tracking
+    //
+    // MARK: Week goal
+    func updateWeekGoal() {
+        //
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
+        // Find goal = number of groups planned = fullWeekArray.count
+        var goal = Int()
+        if schedules.count != 0 {
+            // Loop week
+            for i in 0...6 {
+                goal += schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
+            }
+        } else {
+            goal = 1
+        }
+        // SetWeekGoal
+        if goal != 0 {
+            trackingProgressDictionary["WeekGoal"] = goal
+        } else {
+            trackingProgressDictionary["WeekGoal"] = 1
+        }
+        //
+        UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
+    }
+    
+    // MARK: Schedule Tracking
         // Updates the 'finalChoice' of the group
     func updateScheduleTracking(fromSchedule: Bool) {
         // Only relevant if coming from schedule, check here because only need to code this once instead of every time the function is called
@@ -689,7 +803,7 @@ extension UIViewController {
     // NOTE: Func to reset schedule tracking and week tracking found in globalVariables, Schedule data, as needs to be contained in a class
     // TODO: TURN THIS ENTIRE DOCUMENT INTO SEVERAL CLASSES CONTAINING A SHARED, AND THE FUNCTIONS, SO FUNCTIONS CAN BE CALLED MORE LEGIBLY BY CLASS.SHARED.FUNCTION
     // ----------------------------------------------------------------------------------------------------------------
-    // Update Tracking Arrays
+    // MARK: Update Tracking Arrays ---------
     //
     // MARK: Monday  - Sunday
     func updateWeekTracking() {
@@ -699,6 +813,7 @@ extension UIViewController {
         // Convert to [Date: Int]
         var trackingDictionaries: [[Date: Int]] = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionariesString)
         //
+        //let calendar = Calendar(identifier: .iso8601)
         let calendar = Calendar(identifier: .gregorian)
         // Current Date
         let currentDate = Date().currentDate
@@ -739,11 +854,11 @@ extension UIViewController {
                 // Update missed days with 0
                 var startDate = keys.last!
                 let startValue = trackingDictionaries[0][startDate]!
-                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
+                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!.setToMidnight()
                 // Loop last adding previous value to dates
                 while startDate <= endDate {
                     trackingDictionaries[0].updateValue(startValue, forKey: startDate)
-                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!.setToMidnight()
                 }
                 // Update today
                 trackingDictionaries[0].updateValue(currentProgress, forKey: currentDate)
@@ -762,11 +877,11 @@ extension UIViewController {
                 //
                 // Update missed days with 0
                 var startDate = currentMondayDate
-                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!
+                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!.setToMidnight()
                 // Loop adding 0 to dates
                 while startDate <= endDate {
                     trackingDictionaries[0].updateValue(0, forKey: startDate)
-                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!.setToMidnight()
                 }
                 // Update today
                 trackingDictionaries[0].updateValue(currentProgress, forKey: currentDate)
@@ -819,7 +934,7 @@ extension UIViewController {
         // Current week doesn't exist
         } else {
             // Last updated week was last week |or| first week ever updated
-            if keys.count == 0 || keys.last! == calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate) {
+            if keys.count == 0 || keys.last! == calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate)?.setToMidnight() {
                 // Create current weeks progress
                 trackingDictionaries[1].updateValue(currentProgress, forKey: currentMondayDate)
                 
@@ -827,12 +942,15 @@ extension UIViewController {
             } else {
                 //
                 // Update missed weeks with 0
-                var startDate = keys.last!
+                var startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: keys.last!)!.setToMidnight()
+                //var startDate = calendar.date(byAdding: .hour, value: 168, to: keys.last!)!
+
                 // Loop adding 0 to dates
                 while startDate < currentMondayDate {
                     trackingDictionaries[1].updateValue(0, forKey: startDate)
                     // For some reason adding a week adds an extra hour here but not in other places, so add on a weeks worth of hours
-                    startDate = calendar.date(byAdding: .hour, value: 168, to: startDate)!
+                    startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!.setToMidnight()
+                    //startDate = calendar.date(byAdding: .hour, value: 168, to: startDate)!.setToMidnight()
                 }
                 // Update today
                 trackingDictionaries[1].updateValue(currentProgress, forKey: currentMondayDate)
@@ -847,35 +965,9 @@ extension UIViewController {
         ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
     }
     
-    //
-    // MARK: Update week goal
-    func updateWeekGoal() {
-        //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
-        // Find goal = number of groups planned = fullWeekArray.count
-        var goal = Int()
-        if schedules.count != 0 {
-            // Loop week
-            for i in 0...6 {
-                goal += schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
-            }
-        } else {
-            goal = 1
-        }
-        // SetWeekGoal
-        if goal != 0 {
-            trackingProgressDictionary["WeekGoal"] = goal
-        } else {
-            trackingProgressDictionary["WeekGoal"] = 1
-        }
-        //
-        UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
-    }
     
-    //
+    
+    // MARK: ---------
     // MARK: Walkthrough
     //
     //
@@ -1064,6 +1156,18 @@ extension UITableViewCell {
 
 // MARK:- Date
 extension Date {
+    
+    // Ensure date is set to midnight
+    func setToMidnight() -> Date {
+        // Get date to set to midnight
+        var dateAtMidnight = self
+        // Set to midnight
+        let cal = Calendar.current
+        dateAtMidnight = cal.date(bySettingHour: 0, minute: 0, second: 0, of: dateAtMidnight)!
+        // Return
+        return dateAtMidnight
+    }
+    
     
     var currentDate: Date {
         var components = Calendar(identifier: .iso8601).dateComponents([.year, .month, .weekOfMonth, .day], from: self)

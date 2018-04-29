@@ -328,7 +328,23 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         case 5:
             // App scheudle, n sessions
             if scheduleType == 0 {
-                self.performSegue(withIdentifier: "OverviewSessionsSegue", sender: self)
+                // Check if profile is complete
+                let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
+                var isComplete = true
+                for i in 0..<scheduleDataStructures.profileQASorted.count {
+                    if profileAnswers[scheduleDataStructures.profileQASorted[i]]! == -1 {
+                        isComplete = false
+                        break
+                    }
+                }
+                // If profile is not completed, go to profile first
+                    // Profile not complete if one of the answers is still the default -1
+                if !isComplete {
+                    self.performSegue(withIdentifier: "OverviewProfileSegue", sender: self)
+                // If profile is completed, go straight to schedule creation
+                } else {
+                    self.performSegue(withIdentifier: "OverviewSessionsSegue", sender: self)
+                }
             // Custom schedule, schedule
             } else {
                 // View each day
@@ -340,7 +356,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         // App schedule: Reorder Schedule
-        case 56:
+        case 6:
             // View each day
             if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
                 self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
@@ -485,16 +501,22 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // MARK: Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Going to schedule creator (profile)
-        if segue.identifier == "OverviewSessionsSegue" {
+        switch segue.identifier {
+        // Going to schedule creator
+        case "OverviewSessionsSegue":
             let destinationVC = segue.destination as? ScheduleCreationHelp
             destinationVC?.comingFromScheduleEditing = true
-        } else if segue.identifier == "OverviewScheduleSegue" {
+        // Goin to profile (before schedule creator as not filled in yet)
+        case "OverviewProfileSegue":
+            let destinationVC = segue.destination as? Profile
+            destinationVC?.comingFromSchedule = true
+        case "OverviewScheduleSegue":
             let destinationVC = segue.destination as? ScheduleCreator
             destinationVC?.fromScheduleEditing = true
-        } else if segue.identifier == "OverviewScheduleWeekSegue" {
+        case "OverviewScheduleWeekSegue":
             let destinationVC = segue.destination as! ScheduleCreatorWeek
             destinationVC.comingFromScheduleEditing = true
+        default: break
         }
     }
     

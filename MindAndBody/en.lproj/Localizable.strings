@@ -3019,7 +3019,7 @@
 // Schedule creation
 "scheduleTypeQuestion" = "I would like :";
 "scheduleOptionText" = "The app to help me create my schedule";
-"sessionsOptionText" = "The app to choose sessions for me based on my profile";
+"sessionsOptionText" = "The app to choose sessions for me based on my profile\n(Very strongly recommended!)";
 
 // Schedule Overview
 "scheduleOverview" = "Schedule Overview";
@@ -3046,11 +3046,11 @@
 
 // MARK: Schedule creation help
 // Time / Committement
-"scheduleQTime" = "Do you have time and energy to work towards your physical and mental goals (time where you're able and willing to)?"; // Time
+"scheduleQTime" = "Do you have time and energy to work towards your goals (time where you're able and willing to)?"; // Time
 "scheduleATime1" = "Not much (1 - 2 days a week)"; // 2 - 3???
 "scheduleATime2" = "A little (3 - 4 days a week)";  // 3 - 5????
 "scheduleATime3" = "Yes (5 - 7 days a week)";
-"scheduleQPriority" = "Are your physical and mental goals a high priority (will you be committed)?"; // Priority
+"scheduleQPriority" = "Are your goals a high priority (will you be committed)?"; // Priority
 "scheduleAPriority1" = "Not really, but I'd like to do a little";
 "scheduleAPriority2" = "Yes, but I should take it easy to begin with";
 "scheduleAPriority3" = "Definitely, I will work hard towards my goals";
@@ -3062,14 +3062,23 @@
 "contentednessI" = "Contentedness";
 
 // Used for Goals/N Sessions
+"workoutG" = "Workout (Muscle Gain, Toning, Strength etc.)";
+"yogaG" = "Yoga (And all it's benifits)";
+"meditationG" = "Meditation (Mindfulness, Calmness etc.)";
+"enduranceG" = "Endurance";
+"flexibilityG" = "Flexibility (Not using yoga)";
+
+
+"generalFitnessG" = "General Fitness";
+"muscleGainG" = "Muscle Gain";
+"toningG" = "Toning";
+"strengthG" = "Strength";
+"weightLossG" = "Weight Loss";
+//"enduranceG" = "Endurance";
+//"flexibilityG" = "Flexibility";
+//"yogaG" = "Yoga (and all it's benifits)";
 "mindG" = "Mind (mindfulness, calmness etc.)";
 "mindG2" = "Mind";
-"yogaG" = "Yoga (and all it's benifits)";
-"flexibilityG" = "Flexibility";
-"enduranceG" = "Endurance";
-"toningG" = "Toning";
-"muscleGainG" = "Muscle Gain";
-"strengthG" = "Strength";
 
 // Shortened names
 "workoutS" = "W";
@@ -3113,6 +3122,9 @@
 "saveProfile" = "Save Profile";
 "profileNotCompleteWarning" = "You have not answered every question, please go back and answers all unanswered questions";
 
+"noGoalsChosenWarning" = "You have not chosen any goals, please choose at least one goal before proceeding";
+
+
     //
     // Title //
     "profile" = "Profile";
@@ -3121,7 +3133,7 @@
     //
     // Section Titles //
     "goals" = "Goals";
-    "goalsI" = "My Goals (scale: 0 - 2)";
+    "goalsI" = "My Goals (scale: 0 - 3)";
     "me" = "Me";
     "groups" = "Group";
     "time" = "Time";
@@ -3145,86 +3157,97 @@
 // Questions
     // Answer
 // Age
-"profileQ1" = "Age"; // Age
+"profileQAge" = "Age"; // Age
 // Gender
-"profileQ2" = "Gender"; // Gender
-    "profileA21" = "Male";
-    "profileA22" = "Female";
-    "profileA23" = "Other";
-// Experience
-"profileQ3" = "Are you experienced in yoga?"; // Experience: Yoga
-    "profileA31" = "No";
-    "profileA32" = "Fairly";
-    "profileA33" = "Yes";
-"profileQ4" = "Are you experienced in working out?"; // Experience: Workout
-    "profileA41" = "No";
-    "profileA42" = "Fairly";
-    "profileA43" = "Yes";
-"profileQ5" = "Do you do much cardio (running, biking etc..)?"; // Experience: Cardio, amount
-    "profileA51" = "Hardly any (A few times a year)";
-    "profileA52" = "Occasionally (A few times a month)";
-    "profileA53" = "Lots (A few times a week)";
+"profileQGender" = "Gender"; // Gender
+    "profileAGender1" = "Male";
+    "profileAGender2" = "Female";
+    "profileAGender3" = "Other";
+// Workout/Strength
+"profileQWorkoutExperience" = "Are you experienced in working out?"; // Experience: Workout
+    "profileAWorkoutExperience1" = "No";
+    "profileAWorkoutExperience2" = "Fairly";
+    "profileAWorkoutExperience3" = "Yes";
+"profileQWorkoutPushup" = "Can you do 15 slow pushups?"; // Strength: Pushup
+    "profileAWorkoutPushup1" = "No";
+    "profileAWorkoutPushup2" = "Not very easily";
+    "profileAWorkoutPushup3" = "Yes, comfortably";
+"profileQWorkoutPullup" = "Can you do 10 full pullups?"; // Strength: Pullup
+    "profileAWorkoutPullup1" = "No";
+    "profileAWorkoutPullup2" = "Not very easily";
+    "profileAWorkoutPullup3" = "Yes, comfortably";
+"profileQWorkoutSquat" = "Can you do 50 consecutive bodyweight squats?"; // Strength: Squat
+    "profileAWorkoutSquat1" = "No";
+    "profileAWorkoutSquat2" = "Not very easily";
+    "profileAWorkoutSquat3" = "Yes, comfortably";
+"profileQWorkoutWeights" = "Are you experienced in weightlifting?"; // Strength: Squat
+    "profileAWorkoutWeights1" = "No";
+    "profileAWorkoutWeights2" = "Fairly";
+    "profileAWorkoutWeights3" = "Yes";
+"profileQWorkoutOpinion" = "Would you consider yourself strong?"; // Strength: Question
+    "profileAWorkoutOpinion1" = "Not at all";
+    "profileAWorkoutOpinion2" = "Not really";
+    "profileAWorkoutOpinion3" = "Yes";
+
 // Endurance
-"profileQ6" = "Can you do 30min of cardio at a constant, swift pace (swift for you)?"; // Endurance ability
-    "profileA61" = "No";
-    "profileA62" = "Not comfortably";
-    "profileA63" = "Yes, comfortably";
-"profileQ7" = "Would you consider yourself fit?"; // Endurance opinion
-    "profileA71" = "No";
-    "profileA72" = "Fairly (I wouldn't say I'm unfit)";
-    "profileA73" = "Yes (I like my sport)";
-// Strength
-"profileQ8" = "Can you do 15 pushups?"; // Strength: Pushup
-    "profileA81" = "No";
-    "profileA82" = "Not very easily";
-    "profileA83" = "Yes, comfortably";
-"profileQ9" = "Can you do 10 pullups?"; // Strength: Pullup
-    "profileA91" = "No";
-    "profileA92" = "Not very easily";
-    "profileA93" = "Yes, comfortably";
-"profileQ10" = "Can you do 50 consecutive bodyweight squats?"; // Strength: Pullup
-    "profileA101" = "No";
-    "profileA102" = "Not very easily";
-    "profileA103" = "Yes, comfortably";
-"profileQ11" = "Would you consider yourself strong?"; // Strength: Question
-    "profileA111" = "Not at all";
-    "profileA112" = "Not really";
-    "profileA113" = "Yes";
+"profileQEnduranceExperience" = "Do you do much cardio (running, biking etc..)?"; // Experience: Cardio, amount
+    "profileAEnduranceExperience1" = "Hardly any (A number of times a year)";
+    "profileAEnduranceExperience2" = "Occasionally (A number of times a month)";
+    "profileAEnduranceExperience3" = "Lots (A number of times a week)";
+"profileQEnduranceStairs" = "Are you out of breath having walked up several flights of stairs at a reasonable pace?"; // Endurance ability
+    "profileAEnduranceStairs1" = "Yes";
+    "profileAEnduranceStairs2" = "A little";
+    "profileAEnduranceStairs3" = "No";
+"profileQEnduranceAbility" = "Can you do 30min of cardio at a constant, swift pace (swift for you)?"; // Endurance ability
+    "profileAEnduranceAbility1" = "No";
+    "profileAEnduranceAbility2" = "Not comfortably";
+    "profileAEnduranceAbility3" = "Yes, comfortably";
+"profileQEnduranceOpinion" = "Would you consider yourself fit?"; // Endurance opinion
+    "profileAEnduranceOpinion1" = "No";
+    "profileAEnduranceOpinion2" = "Fairly (I wouldn't say I'm unfit)";
+    "profileAEnduranceOpinion3" = "Yes (I like my sport)";
+
+
+// Yoga
+"profileQYogaExperience" = "Are you experienced in yoga?"; // Experience: Yoga
+    "profileAYogaExperience1" = "No";
+    "profileAYogaExperience2" = "Fairly";
+    "profileAYogaExperience3" = "Yes";
+
 // Flexibility
-"profileQ12" = "Can you touch your toes with straight (slightly bent) legs?"; // Hamstrings
-    "profileA121" = "No";
-    "profileA122" = "Nearly";
-    "profileA123" = "Yes";
-"profileQ13" = "Are your knees close to the ground doing the butterfly (heels as close to your groin as comfortable)?"; // Hips
-    "profileA131" = "No";
-    "profileA132" = "Fairly (the height of a fist to a first with your thumb sticking up off the ground)";
-    "profileA133" = "Yes (the height of a fist or less)";
-"profileQ14" = "Can you squat (hips below knees) comfortably?"; // Hips/Ankles
-    "profileA141" = "No";
-    "profileA142" = "Nearly (I have to put in effort to stay balanced)";
-    "profileA143" = "Yes";
-"profileQ15" = "Can you sit on your heels?"; // Kneels
-    "profileA151" = "No";
-    "profileA152" = "Not comfortably";
-    "profileA153" = "Yes, comfortably";
-"profileQ16" = "Does your back bend backwards?"; // Back
-    "profileA161" = "No (it's stiff or I have back pains)";
-    "profileA162" = "A little (but I tend to avoid bending it back)";
-    "profileA163" = "Yes";
-"profileQ17" = "Does your lower back rotate?"; // Back
-    "profileA171" = "No (it's stiff or I have back pains)";
-    "profileA172" = "A little (but I tend to avoid rotating it)";
-    "profileA173" = "Yes";
-"profileQ18" = "Does your neck rotate freely?"; // Neck
-    "profileA181" = "No (it's stiff or I have neck pains)";
-    "profileA182" = "A little (but I tend to avoid rotating it)";
-    "profileA183" = "Yes";
+"profileQFlexibilityHamstrings" = "Can you touch your toes with straight (slightly bent) legs?"; // Hamstrings
+    "profileAFlexibilityHamstrings1" = "No";
+    "profileAFlexibilityHamstrings2" = "Nearly";
+    "profileAFlexibilityHamstrings3" = "Yes";
+"profileQFlexibilityHips" = "Are your knees close to the ground doing the butterfly (heels as close to your groin as comfortable)?"; // Hips
+    "profileAFlexibilityHips1" = "No";
+    "profileAFlexibilityHips2" = "Fairly (the height of a fist to a first with your thumb sticking up off the ground)";
+    "profileAFlexibilityHips3" = "Yes (the height of a fist or less)";
+"profileQFlexibilityHipsAnkles" = "Can you squat (hips below knees) comfortably?"; // Hips/Ankles
+    "profileAFlexibilityHipsAnkles1" = "No";
+    "profileAFlexibilityHipsAnkles2" = "Nearly (I have to put in effort to stay balanced)";
+    "profileAFlexibilityHipsAnkles3" = "Yes";
+"profileQFlexibilityKnees" = "Can you sit on your heels?"; // Kneels
+    "profileAFlexibilityKnees1" = "No";
+    "profileAFlexibilityKnees2" = "Not comfortably";
+    "profileAFlexibilityKnees3" = "Yes, comfortably";
+"profileQFlexibilityBackBackward" = "Does your back bend backwards?"; // Back
+    "profileAFlexibilityBackBackward1" = "No (it's stiff or I have back pains)";
+    "profileAFlexibilityBackBackward2" = "A little (but I tend to avoid bending it back)";
+    "profileAFlexibilityBackBackward3" = "Yes";
+"profileQFlexibilityBackSideways" = "Does your lower back rotate?"; // Back
+    "profileAFlexibilityBackSideways1" = "No (it's stiff or I have back pains)";
+    "profileAFlexibilityBackSideways2" = "A little (but I tend to avoid rotating it)";
+    "profileAFlexibilityBackSideways3" = "Yes";
+"profileQFlexibilityNeck" = "Does your neck rotate freely?"; // Neck
+    "profileAFlexibilityNeck1" = "No (it's stiff or I have neck pains)";
+    "profileAFlexibilityNeck2" = "A little (but I tend to avoid rotating it)";
+    "profileAFlexibilityNeck3" = "Yes";
 // Balance
-"profileQ19" = "Can you stand stand on one leg for 10s?"; // Balance
-    "profileA191" = "No";
-    "profileA192" = "Yes";
-    "profileA193" = "Yes, with my eyes closed";
-    "profileA194" = "Yes, with my eyes closed while looking up";
+"profileQFlexibilityBalance" = "Can you stand stand on one leg for 10s?"; // Balance
+    "profileAFlexibilityBalance1" = "No";
+    "profileAFlexibilityBalance2" = "Yes";
+    "profileAFlexibilityBalance3" = "Yes, with my eyes closed";
 
 //
 // Settings //

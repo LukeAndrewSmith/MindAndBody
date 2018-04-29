@@ -56,7 +56,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         //
         UIApplication.shared.statusBarStyle = .lightContent
         //
-        sectionLabel.text = NSLocalizedString("me", comment: "")
+        sectionLabel.text = NSLocalizedString("goalsI", comment: "")
         //
         // BackgroundImage
         addBackgroundImage(withBlur: true, fullScreen: true)
@@ -65,7 +65,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         questionsTable.tableFooterView = UIView()
         questionsTable.separatorStyle = .none
         questionsTable.backgroundColor = .clear
-        questionsTable.isScrollEnabled = false
+        questionsTable.isScrollEnabled = true
         //
         // Progress Bar
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
@@ -102,30 +102,30 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        // Me
+        // Goals
         if selectedSection == 0 {
-            return 1
-            // Goals/Session
+            return scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count
+        // Questions and answers
         } else {
-            return scheduleDataStructures.scheduleCreationHelp[selectedSection].count
+            return 1
         }
     }
     
     // Header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        // Me
+        // Goals
         if selectedSection == 0 {
-            return ""
-            // Goals/Session
+            return NSLocalizedString(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][section][0], comment: "")
+        // Questions and answers
         } else {
-            return NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][section][0], comment: "")
+            return ""
         }
     }
     
     // Header Customization
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        //
-        if selectedSection != 0 {
+        // Goals
+        if selectedSection == 0 {
             // Header
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 22)!
@@ -148,17 +148,17 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         //
         if tableView == questionsTable {
-            // Me
+            // Goals
             if selectedSection == 0 {
-                return 0
-                // Goals/Session
-            } else {
-                let height = questionsTable.bounds.height / CGFloat(scheduleDataStructures.scheduleCreationHelp[selectedSection].count * 2 + 1)
+                let height = questionsTable.bounds.height / CGFloat(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count * 2 + 1)
                 if height >= 45 {
                     return height
                 } else {
                     return 45
                 }
+            // Questions and answers
+            } else {
+                return 0
             }
         }
         return 0
@@ -169,19 +169,20 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
         if tableView == questionsTable {
-            // Me
+            // Goals
             if selectedSection == 0 {
-                let count = scheduleDataStructures.scheduleCreationHelp[0].count
-                return count
-                // Goals/Session
-            } else {
                 // If last section, add extra cell for completion
                 // Goals -> nSessions, nSessions -> Schedule Creator
-                if section == scheduleDataStructures.scheduleCreationHelp[selectedSection].count - 1 {
+                if section == scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count - 1 {
                     return 2
                 } else {
                     return 1
                 }
+            // Questions and answers
+            } else {
+                // + 1 for save cell
+                let count = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count + 1
+                return count
             }
         }
         return 0
@@ -191,15 +192,27 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
         if tableView == questionsTable {
+            // Goals
             if selectedSection == 0 {
-                return questionsTable.bounds.height
-            } else {
-                let height = questionsTable.bounds.height / CGFloat(scheduleDataStructures.scheduleCreationHelp[selectedSection].count * 2 + 1)
+                let height = questionsTable.bounds.height / CGFloat(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count * 2 + 1)
                 if height >= 45 {
                     return height
                 } else {
                     return 45
                 }
+            // Questions and answers
+            } else {
+                //
+                if indexPath.row < scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count - 1 {
+                    return questionsTable.bounds.height
+                // Last question, make space for save profile cell
+                } else if indexPath.row == scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count - 1 {
+                    return questionsTable.bounds.height - 49
+                    // Last row, save profile cell
+                } else if indexPath.row == scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count {
+                    return 49
+                }
+                return 0
             }
         }
         return 0
@@ -211,30 +224,8 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         //
         // Switch, me, goals, sessions
         switch selectedSection {
-        // Questions
-        case 0:
-            // Question Table
-            if tableView == questionsTable && indexPath.row == selectedQuestion {
-                switch indexPath.row {
-                // Answer Table with image (flexibility questions)
-                default:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleCreationHelpCell", for: indexPath) as! ScheduleCreationHelpCell
-                    cell.row = indexPath.row
-                    cell.answerImageArray = scheduleDataStructures.answerImageArray
-                    cell.selectedQuestion = selectedQuestion
-                    cell.selectedSection = selectedSection
-                    cell.answerTableView.reloadData()
-                    cell.delegate = self
-                    return cell
-                    //
-                }
-            }
-            let cell = UITableViewCell()
-            cell.backgroundColor = .clear
-            return cell
-            //
         // Goals
-        case 1:
+        case 0:
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             // Sliders
             // Only row 1 in final section, for next section, rest are in seperate sections, row 0
@@ -254,12 +245,12 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
                 // Values
                 slider.minimumValue = 0
-                slider.maximumValue = 2
+                slider.maximumValue = 3
                 // Section tag
                 slider.tag = indexPath.section
                 //
                 let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-                let indexString = scheduleDataStructures.scheduleCreationHelp[selectedSection][indexPath.section][0]
+                let indexString = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][indexPath.section][0]
                 let value = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][indexString] as! Int
                 slider.value = Float(value)
                 
@@ -279,156 +270,148 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.textLabel?.textAlignment = .center
             }
             return cell
-            //
-        // Session
-        case 2:
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            // Sliders
-            // Only row 1 in final section, for next section, rest are in seperate sections, row 0
-            if indexPath.row != 1 {
-                //
-                cell.selectionStyle = .none
-                cell.backgroundColor = .clear
-                //
-                // Slider
-                let slider = UISlider()
-                cell.addSubview(slider)
-                slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
-                // Frame
-                slider.frame = CGRect(x: 45, y: (cell.bounds.height - slider.frame.height) / 2, width: view.frame.size.width - 60, height: slider.frame.height)
-                // Values
-                // mind
-                if indexPath.section == 0 {
-                    slider.minimumValue = 0
-                    slider.maximumValue = 14
-                } else {
-                    slider.minimumValue = 0
-                    slider.maximumValue = 10
+        // Questions
+        case 1:
+            if indexPath.row < scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count {
+                // Question Table
+                if tableView == questionsTable && indexPath.row == selectedQuestion {
+                    switch indexPath.row {
+                    // Answer Table with image (flexibility questions)
+                    default:
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleCreationHelpCell", for: indexPath) as! ScheduleCreationHelpCell
+                        cell.row = indexPath.row
+                        cell.selectedQuestion = selectedQuestion
+                        cell.selectedSection = selectedSection
+                        cell.answerTableView.reloadData()
+                        cell.delegate = self
+                        return cell
+                        //
+                    }
                 }
-                
-                // Colours
-                setSliderGradient(slider: slider, section: indexPath.section)
-                // Section tag
-                slider.tag = indexPath.section
-                //
-                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-                // NOTE TOTAL N SESSIONS, THOUGH IN SAME ARRAY, IS PRESENTED IN TITLE
-                // schedule creation help indexed through names of groups etc, so get the string index from the originial question array, scheduleCreationHelp
-                let stringIndex = scheduleDataStructures.scheduleCreationHelp[selectedSection][indexPath.section][0]
-                let value = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][stringIndex] as! Int
-                slider.value = Float(value)
-                //
-                // Indicator Label
-                cell.textLabel?.text = String(value)
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.textLabel?.textColor = Colors.light
-                //
-                // Next Section -> Create schedule
-            } else {
+                let cell = UITableViewCell()
+                cell.backgroundColor = .clear
+                return cell
+            // Last row, save profile cell
+            } else if indexPath.row == scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count {
+                let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
                 // Indicator Label
                 cell.backgroundColor = Colors.green.withAlphaComponent(0.25)
-                cell.textLabel?.text = NSLocalizedString("createSchedule", comment: "")
+                cell.textLabel?.text = NSLocalizedString("saveProfile", comment: "")
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                 cell.textLabel?.textColor = Colors.light
                 cell.textLabel?.textAlignment = .center
+                return cell
             }
-            return cell
+        
         default:
             return UITableViewCell()
         }
+        return UITableViewCell()
     }
     
     // Main table
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        //
-        var count = 0
-        for i in 0...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection].count - 1 {
-            // schedule creation help indexed through names of groups etc, so get the string index from the originial question array, scheduleCreationHelp
-            let stringIndex = scheduleDataStructures.scheduleCreationHelp[selectedSection][i][0]
-            count += schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][stringIndex] as! Int
-        }
-        
-        // TODO: NOT NECESSARILY THE CORRECT THING TO DO
-        // TODO: NOT SURE IF USING SLIDERS FOR NUMBER OF SESSIONS ANYMORE
-        
-        // If sessions not null
-        if count != 0 {
-            // Groups -> Sessions
-            if selectedSection == 1 {
-                nextQuestion()
-            // Sessions -> either scheduleviewquestion or scheduleediting
-            } else if selectedSection == 2 {
+        if selectedSection == 0 {
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            //
+            // Count goals, making sure that there are actually some goals set
+            var count = 0
+            for i in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection].count {
+                count += schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][i][0]] as! Int
+            }
+            
+            // If goals not empty
+            if count != 0 {
+                // Groups -> Questions
+                if selectedSection == 0 {
+                    nextQuestion()
+                }
+            // Goals empty, alert user
+            } else {
                 //
-                // MARK: Update schedules full week list
-                // add each group * n sessions to the list (e.g [mind, mind, mind, flexibility, muscle gain, muscle gain] = [0,0,0,1,4,4]
-                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-                // reset full week list
-                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7] = []
+                // Alert
+                let title = NSLocalizedString("noGoalsChosenWarning", comment: "")
+                let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+                alert.view.tintColor = Colors.dark
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
                 
-                //
-                // from 1, and -2 as array includes total n sessions
-                // Loop group sessions array
-//                for i in 1...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2].count - 1 {
-//                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int != 0 {
-//                        // Loop n session of each group with more than 0 sessions
-//                        for _ in 1...(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int) {
-//                            // i - 1 as group number is 1 less as array includes total n sessions so is offset by 1
-//                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![7].append(i - 1)
-//                        }
-//                    }
-//                }
-                UserDefaults.standard.set(schedules, forKey: "schedules")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-                //
-                // CHECK WHERE TO GO
-                // If not coming from schedule editing, go to scheudle help question
-                if comingFromScheduleEditing == false {
+                // Reset app action
+                let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                }
+                // Add Actions
+                alert.addAction(okAction)
+                
+                // Present Alert
+                self.present(alert, animated: true, completion: nil)
+            }
+        // Last cell, save
+        } else if indexPath.row == scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count {
+            //
+            // Set number of sessions
+            setNumberOfSessions(updating: false)
+            
+            //
+            // Make sure no question is unanswered
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            var allAnswered = true
+            for i in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection].count {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][i][0]] as! Int == -1 {
+                    allAnswered = false
+                    break
+                }
+            }
+            
+            //
+            // If all questions answered, go to next screen
+                // -> either scheduleviewquestion or scheduleediting
+            if allAnswered {
+                // If not coming from schedule editing, go to scheudle help question first to see wether user wants to see schedule as full week, or as seperate days
+                if !comingFromScheduleEditing {
                     self.performSegue(withIdentifier: "ScheduleHelpQuestionSegue", sender: self)
-                // Schedule editing
-                        // -> either pop or go to schedule creator
+                    
+                // Coming from schedule editingSchedule editing
+                // -> either pop or go to schedule creator
                 } else {
                     //
-                    // If nothing changed, pop, else go to schedule creator
-                    var scheduleHasChanged = false
-                    var newNSessions = [0,0,0,0,0,0,0]
-                    //
-                    for i in 0...6 {
-                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
-                            for j in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count - 1 {
-                                //
-                                let groupIndex = (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j]["group"] as! String).groupFromString()
-                                // i + 1 as week before total n sessions in schedules whereas total n sessions before groups in sessions array
-                                newNSessions[groupIndex + 1] += 1
-                                // Total n sessions count
-                                newNSessions[0] += 1
-                            }
-                        }
-                    }
-                    
-                    // Check if schedule has changed
-                    // todo!!!!
-                    if newNSessions != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2] as! [Int] {
-                        scheduleHasChanged = true
-                    }
-                    //
-                    // GO TO
-                    if scheduleHasChanged {
-                        self.performSegue(withIdentifier: "ScheduleHelpCreationSegue", sender: self)
+                    // Schedule is viewed as days
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+                        self.performSegue(withIdentifier: "ScheduleHelpCreationSegueDay", sender: self)
+                    // Schedule is viewed as week
                     } else {
-                        self.navigationController?.popViewController(animated: true)
+                        self.performSegue(withIdentifier: "ScheduleHelpCreationSegueWeek", sender: self)
                     }
                 }
+            //
+            // If not all questions are answered, alert user
+            } else {
+                //
+                // Alert
+                let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
+                let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+                alert.view.tintColor = Colors.dark
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
+                
+                // Reset app action
+                let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                }
+                // Add Actions
+                alert.addAction(okAction)
+                
+                // Present Alert
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
     
+    
     // Mask cells under clear header
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if selectedSection > 0 {
+        // Goals
+        if selectedSection == 0 {
             for cell in questionsTable.visibleCells {
                 let hiddenFrameHeight = scrollView.contentOffset.y + 49 - cell.frame.origin.y + 2
                 if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
@@ -468,110 +451,14 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = questionsTable.cellForRow(at: indexPath as IndexPath)
         cell?.textLabel?.text = String(Int(roundedValue))
         //
-        // N Sessions
-        // Change thumbTintColor for groups
-        // Update total n sessions
-        // TODO: NOT NECESSARILY USING SLIDERS ANYMORE
-        if selectedSection == 2 {
-//            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][sender.tag + 1] = Int(roundedInt)
-            // Thumb Tint
-            // Red, below and above suggested
-            let index = indexPath.section * 2
-            let rangeLower = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] as! Int
-            let rangeUpper = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] as! Int
-            // Value within range -> Green
-            if roundedInt >= rangeLower && roundedInt <= rangeUpper {
-                sender.thumbTintColor = Colors.green
-                // Value out of range -> Red
-            } else {
-                sender.thumbTintColor = Colors.red
-            }
-            //
-            // Total n sessions
-            var nSessions = 0
-            for i in 1...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2].count - 1 {
-                nSessions += schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][i] as! Int
-            }
-//            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][0] = nSessions
-            //
-            let titleString = String(nSessions) + NSLocalizedString("nSessionsPerWeek", comment: "")
-            sectionLabel.text = titleString
-            
         // Goals
-        } else {
-            // Find question string to index schedules, as questions saved to schedules are index by the title of the question
-            let question = scheduleDataStructures.scheduleCreationHelp[selectedSection][sender.tag][0]
-            schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][question] = Int(roundedInt)
-        }
-                
+        // Find question string to index schedules, as questions saved to schedules are index by the title of the question
+        let question = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][sender.tag][0]
+        schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][question] = Int(roundedInt)
+        
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-    }
-    
-    //
-    // MARK: Set Slider Gradient
-    //
-    func setSliderGradient(slider:UISlider, section: Int) {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        // Max possible slider value
-        var maxValue = Int()
-        if section == 0 {
-            maxValue = 14
-        } else {
-            maxValue = 10
-        }
-        //
-        // Gradient Layer
-        let tgl = CAGradientLayer()
-        let frame = CGRect(x: 0.0, y: 0.0, width: slider.bounds.width, height: 2 )
-        tgl.frame = frame
-        //
-        // Locations
-        var locationsArray = [Double]()
-        let index = section * 2
-        let rangeLower = Double(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] as! Int) / Double(maxValue)
-        var rangeLower1 = Double()
-        var rangeLower2 = Double()
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] as! Int != 0 {
-            rangeLower1 = rangeLower - 0.01
-            rangeLower2 = rangeLower + 0.01
-        } else {
-            rangeLower1 = 0
-            rangeLower1 = 0.01
-        }
-        let rangeUpper = Double(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] as! Int) / Double(maxValue)
-        var rangeUpper1 = Double()
-        var rangeUpper2 = Double()
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] as! Int != 0 {
-            rangeUpper1 = rangeUpper - 0.01
-            rangeUpper2 = rangeUpper + 0.01
-        } else {
-            rangeUpper1 = 0.02
-            rangeUpper2 = 0.03
-        }
-        locationsArray = [0, rangeLower1,rangeLower2, rangeUpper1,rangeUpper2, 1]
-        //
-        tgl.colors = [Colors.red.cgColor,Colors.red.cgColor,Colors.green.cgColor,Colors.green.cgColor,Colors.red.cgColor,Colors.red.cgColor]
-        tgl.locations = locationsArray as [NSNumber]
-        tgl.endPoint = CGPoint(x: 1.0, y:  1.0)
-        tgl.startPoint = CGPoint(x: 0.0, y:  1.0)
-        //
-        // Button color
-        // If within range
-        if (schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][section + 1] as! Int) > (schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index] as! Int) - 1 && (schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][section + 1] as! Int) < (schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![3][index + 1] as! Int) {
-            slider.thumbTintColor = Colors.green
-        } else {
-            slider.thumbTintColor = Colors.red
-        }
-        
-        UIGraphicsBeginImageContextWithOptions(tgl.frame.size, false, 0.0)
-        tgl.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        slider.setMinimumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
-        slider.setMaximumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
     }
     
     
@@ -583,7 +470,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         let currentQuestion = Float(selectedQuestion) + Float(selectedSection)
         // Total Number questions
         // + 2 for goals and n sessions
-        let questionCount = Float(scheduleDataStructures.scheduleCreationHelp[0].count + 2)
+        let questionCount = Float(scheduleDataStructures.scheduleCreationHelpSorted[0].count + 2)
         //
         if selectedQuestion > 0 {
             //
@@ -598,31 +485,32 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     //
     func nextQuestion() {
         // Me Section
-        // Next Question
-        if selectedSection == 0 && selectedQuestion != scheduleDataStructures.scheduleCreationHelp[selectedSection].count - 1 {
-            selectedQuestion += 1
-            updateProgress()
-            let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
-            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
-            // -> Goals Section
-        } else if selectedQuestion == scheduleDataStructures.scheduleCreationHelp[selectedSection].count - 1 && selectedSection == 0 {
-            questionsTable.removeGestureRecognizer(downSwipe)
-            sectionLabel.addGestureRecognizer(downTap)
-            //
-            sectionLabel.text = NSLocalizedString("goalsI", comment: "")
-            selectedSection += 1
-            updateProgress()
-            questionsTable.isScrollEnabled = true
+        if selectedSection == 0 {
             //
             // Animate as if normal scroll
             // Snapshot of before and after, animated '2 off screen and 1 on screen' to '2 on screen and 1 off screen'
             let snapShot1 = questionsTable.snapshotView(afterScreenUpdates: false)
             snapShot1?.center.y = questionsTable.center.y
             view.insertSubview(snapShot1!, aboveSubview: questionsTable)
+
+                // Sandwitched in animation to get updating at the right time
+                questionsTable.isScrollEnabled = false
+                questionsTable.addGestureRecognizer(downSwipe)
+                sectionLabel.removeGestureRecognizer(downTap)
+                selectedSection += 1
+                updateProgress()
+                questionsTable.reloadData()
+                let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
+                questionsTable.reloadRows(at: [indexPath as IndexPath], with: .automatic)
+                questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                //
+                sectionLabel.text = NSLocalizedString("me", comment: "")
+
+
             // Reload
             questionsTable.reloadData()
-            let indexPath = NSIndexPath(row: 0, section: 0)
-            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            let indexPath2 = NSIndexPath(row: 0, section: 0)
+            questionsTable.scrollToRow(at: indexPath2 as IndexPath, at: UITableViewScrollPosition.top, animated: false)
             let snapShot2 = questionsTable.snapshotView(afterScreenUpdates: true)
             questionsTable.alpha = 0
             snapShot2?.center.y = questionsTable.center.y + questionsTable.bounds.height
@@ -636,44 +524,12 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 snapShot2?.removeFromSuperview()
                 self.questionsTable.alpha = 1
             })
-            
-        // -> NSession Section
-        } else {
-            //
-            // MARK: CALL FUNCTIONS THAT SET DIFFICULTY LEVELS AND N SESSIONS
-            // TODO: CALL SET N SESSIONS
-            setNumberOfSessions(updating: false)
-            //
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-            //
-            selectedSection += 1
+        // Next Question
+        } else if selectedSection > 0 && selectedQuestion != scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count - 1 {
+            selectedQuestion += 1
             updateProgress()
-            questionsTable.isScrollEnabled = true
-            //
-            let titleString = String(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2][0] as! Int) + NSLocalizedString("nSessionsPerWeek", comment: "")
-            sectionLabel.text = titleString
-            //
-            // Animate as if normal scroll down
-            let snapShot1 = questionsTable.snapshotView(afterScreenUpdates: false)
-            snapShot1?.center.y = questionsTable.center.y
-            view.insertSubview(snapShot1!, aboveSubview: questionsTable)
-            // Reload
-            questionsTable.reloadData()
-            let indexPath = NSIndexPath(row: 0, section: 0)
-            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-            let snapShot2 = questionsTable.snapshotView(afterScreenUpdates: true)
-            questionsTable.alpha = 0
-            snapShot2?.center.y = questionsTable.center.y + questionsTable.bounds.height
-            view.insertSubview(snapShot2!, aboveSubview: questionsTable)
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime3, animations: {
-                snapShot1?.center.y -= self.questionsTable.bounds.height
-                snapShot2?.center.y = self.questionsTable.center.y
-            }, completion: { finished in
-                snapShot1?.removeFromSuperview()
-                snapShot2?.removeFromSuperview()
-                self.questionsTable.alpha = 1
-            })
+            let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
+            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
         }
     }
     
@@ -681,58 +537,61 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     //
     @objc func upSwipeAction() {
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        if selectedSection == 0 {
+        // Questions
+        if selectedSection > 0 {
             // If question has been answered
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedQuestion] as! Int != -1 {
-                // Me Section
-//                // Next Question
-//                selectedQuestion += 1
-//                updateProgress()
-//                let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
-//                questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
-//                // -> Goals Section
-                nextQuestion()
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][0]] as! Int != -1 {
+                // If not last question, go to next question
+                if selectedQuestion != scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count - 1 {
+                    nextQuestion()
+                }
             }
         }
     }
     
     //
     @objc func previousQuestion() {
-        // Me
-        if selectedSection == 0 {
+        // Questions
+        if selectedSection > 0 {
+            // Previous question
             if selectedQuestion > 0 {
                 selectedQuestion -= 1
                 updateProgress()
                 let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
                 questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
+            // Questions -> Goals
+            } else {
+                questionsTable.removeGestureRecognizer(downSwipe)
+                sectionLabel.addGestureRecognizer(downTap)
                 //
-                // Section title
-                if selectedSection == 0 {
-                    sectionLabel.text = NSLocalizedString("me", comment: "")
-                } else if selectedSection == 1 {
-                    sectionLabel.text = NSLocalizedString("goals", comment: "")
-                }
+                sectionLabel.text = NSLocalizedString("goalsI", comment: "")
+                selectedSection -= 1
+                updateProgress()
+                questionsTable.isScrollEnabled = true
+                //
+                // Animate as if normal scroll
+                // Snapshot of before and after, animated '2 off screen and 1 on screen' to '2 on screen and 1 off screen'
+                let snapShot1 = questionsTable.snapshotView(afterScreenUpdates: false)
+                snapShot1?.center.y = questionsTable.center.y
+                view.insertSubview(snapShot1!, aboveSubview: questionsTable)
+                // Reload
+                questionsTable.reloadData()
+                let indexPath = NSIndexPath(row: 0, section: 0)
+                questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                let snapShot2 = questionsTable.snapshotView(afterScreenUpdates: true)
+                questionsTable.alpha = 0
+                snapShot2?.center.y = questionsTable.center.y - questionsTable.bounds.height
+                view.insertSubview(snapShot2!, aboveSubview: questionsTable)
+                //
+                UIView.animate(withDuration: AnimationTimes.animationTime3, animations: {
+                    snapShot1?.center.y += self.questionsTable.bounds.height
+                    snapShot2?.center.y = self.questionsTable.center.y
+                }, completion: { finished in
+                    snapShot1?.removeFromSuperview()
+                    snapShot2?.removeFromSuperview()
+                    self.questionsTable.alpha = 1
+                })
             }
-        // Goals -> Me
-        } else if selectedSection == 1 {
-            questionsTable.isScrollEnabled = false
-            questionsTable.addGestureRecognizer(downSwipe)
-            sectionLabel.removeGestureRecognizer(downTap)
-            selectedSection -= 1
-            updateProgress()
-            questionsTable.reloadData()
-            let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
-            questionsTable.reloadRows(at: [indexPath as IndexPath], with: .automatic)
-            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-            //
-            sectionLabel.text = NSLocalizedString("me", comment: "")
-            
-        // Sessions -> Goals
-        } else {
-            selectedSection -= 1
-            updateProgress()
-            questionsTable.reloadData()
-            sectionLabel.text = NSLocalizedString("goals", comment: "")
         }
     }
     
@@ -778,7 +637,6 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     // Passed data
     var row = Int()
     var questionsTableHeight = CGFloat()
-    var answerImageArray: [String] = []
     var selectedQuestion = Int()
     var selectedSection = Int()
     
@@ -797,8 +655,10 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 2
         questionLabel.adjustsFontSizeToFitWidth = true
+        //
+        let image = scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["image"]![0]
         // Demonstration Image View
-        if answerImageArray[row] == "" {
+        if image == "" {
             // Hide image
             answerImageLeading.constant = elementStack.bounds.width / 2
             answerImageTrailing.constant = elementStack.bounds.width / 2
@@ -809,7 +669,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
             answerImageView.backgroundColor = Colors.dark
             answerImageView.layer.cornerRadius = 15
             answerImageView.clipsToBounds = true
-            answerImageView.image = getUncachedImage(named: answerImageArray[row])
+            answerImageView.image = getUncachedImage(named: image)
         }
         // Table View
         answerTableView.dataSource = self
@@ -824,14 +684,14 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         answerTableView.clipsToBounds = true
         answerTableView.isScrollEnabled = false
         //
-        questionLabel.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][row][0], comment: "")
+        questionLabel.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][row][0], comment: "")
         questionLabel.sizeToFit()
         questionLabel.frame.size.width = elementStack.bounds.width
         //
-        if answerImageArray[row] != "" && elementStack.bounds.height > questionsTableHeight {
+        if image != "" && elementStack.bounds.height > questionsTableHeight {
             answerImageTrailing.constant = (elementStack.bounds.width * 0.25) / 2
             answerImageLeading.constant = (elementStack.bounds.width * 0.25) / 2
-        }
+        }        
     }
     
     //
@@ -847,7 +707,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let font = UIFont(name: "SFUIDisplay-thin", size: 23)
         // + 1 as question inclueded in array
-        let height = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][indexPath.row + 1], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
+        let height = NSLocalizedString(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][indexPath.row + 1], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
         //
         setTableHeight()
         //
@@ -862,10 +722,10 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     //
     func setTableHeight() {
         var tableHeightConstant: CGFloat = 0
-        for i in 1...scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion].count - 1 {
+        for i in 1...scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion].count - 1 {
             let font = UIFont(name: "SFUIDisplay-thin", size: 23)
             // + 1 as question inclueded in array
-            let height = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
+            let height = NSLocalizedString(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
             if height > 49 {
                 tableHeightConstant += (49 * 1.5)
             } else {
@@ -878,7 +738,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion].count - 1
+        return scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion].count - 1
     }
     
     // ScheduleCreationHelpCell
@@ -894,15 +754,18 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.lineBreakMode = .byWordWrapping
         // row + 1 as question included with answers
-        cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][indexPath.row + 1], comment: "")
+        cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][indexPath.row + 1], comment: "")
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         // Select answer
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][row] as! Int != -1 && indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][selectedQuestion] as! Int {
+            // If answer not -1, and row is correct
+        // MARK: NOT SURE
+        //schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][row][0]] as! Int != -1 && indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][selectedQuestion]
+        if indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][row][0]] as! Int {
             cell.textLabel?.textColor = Colors.green
         }
         // If last cell hide seperator
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        if indexPath.row == (scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion].count - 2) {
+        if indexPath.row == (scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion].count - 2) {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         }
         //
@@ -913,7 +776,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // Find question string to index schedules, as questions saved to schedules are index by the title of the question
-        let question = scheduleDataStructures.scheduleCreationHelp[selectedSection][selectedQuestion][0]
+        let question = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][0]
         schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][question] = indexPath.row
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync

@@ -262,11 +262,11 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     // Segues
     func performSegueFunction() {
         // Check if user has filled in profile
-        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
         var userHasFilledInProfile = true
         // Loop profile answers
-        for i in 0...profileAnswers.count - 1 {
-            if profileAnswers[i] == -1 {
+        for i in 0..<scheduleDataStructures.profileQASorted.count {
+            if profileAnswers[scheduleDataStructures.profileQASorted[i]] == -1 {
                 userHasFilledInProfile = false
                 break
             }

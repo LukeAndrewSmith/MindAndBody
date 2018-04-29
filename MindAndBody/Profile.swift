@@ -156,7 +156,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
                 cell.row = indexPath.row
-                cell.answerImageArray = scheduleDataStructures.answerImageArray
                 cell.selectedQuestion = selectedQuestion
                 cell.answerTableView.reloadData()
                 cell.delegate = self
@@ -186,16 +185,45 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         // If last row
         if indexPath.row == scheduleDataStructures.profileQA.count {
             if comingFromSchedule {
-                self.dismiss(animated: true)
-            } else {
-                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-                let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
+                let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
                 var allAnswered = true
-                for i in 0...profileAnswers.count - 1 {
-                    if profileAnswers[i] == -1 {
+                for i in 0...scheduleDataStructures.profileQASorted.count - 1 {
+                    if profileAnswers[scheduleDataStructures.profileQASorted[i]] == -1 {
                         allAnswered = false
+                        break
                     }
                 }
+                if allAnswered {
+                    self.dismiss(animated: true)
+                } else {
+                    //
+                    // Alert Saying you havent answered all the questions
+                    let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
+                    let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+                    alert.view.tintColor = Colors.dark
+                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
+                    
+                    // Reset app action
+                    let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
+                        UIAlertAction in
+                    }
+                    // Add Actions
+                    alert.addAction(okAction)
+                    
+                    // Present Alert
+                    self.present(alert, animated: true, completion: nil)
+                }
+            } else {
+                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
+                var allAnswered = true
+                for i in 0...scheduleDataStructures.profileQASorted.count - 1 {
+                    if profileAnswers[scheduleDataStructures.profileQASorted[i]] == -1 {
+                        allAnswered = false
+                        break
+                    }
+                }
+                
                 if allAnswered {
                     // App helps schedule creation
                     if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
@@ -255,9 +283,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     //
     @objc func upSwipeAction() {
-        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
         // If question has been answered
-        if profileAnswers[selectedQuestion] != -1 {
+        if profileAnswers[scheduleDataStructures.profileQASorted[selectedQuestion]] != -1 {
             nextQuestion()
         }
     }
@@ -336,12 +364,12 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         agePicker.dataSource = self
         agePicker.layer.cornerRadius = 15
         agePicker.clipsToBounds = true
-        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
-        switch profileAnswers[row] {
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
+        switch profileAnswers[scheduleDataStructures.profileQASorted[row]] {
         case -1:
             agePicker.selectRow(0, inComponent: 0, animated: true)
         default:
-            agePicker.selectRow(profileAnswers[row], inComponent: 0, animated: true)
+            agePicker.selectRow(profileAnswers[scheduleDataStructures.profileQASorted[row]]!, inComponent: 0, animated: true)
         }
         // Ok Button
         okButton.backgroundColor = Colors.light
@@ -351,7 +379,7 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         okButton.layer.cornerRadius = 15
         okButton.clipsToBounds = true
         //
-        questionLabel.text = NSLocalizedString(scheduleDataStructures.profileQA[row][0], comment: "")
+        questionLabel.text = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["Q"]![0], comment: "")
         questionLabel.sizeToFit()
         questionLabel.frame.size.width = elementStack.bounds.width
         //
@@ -368,7 +396,9 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if selectedQuestion != 0 {
             // -1 as question included with answers
-            return scheduleDataStructures.profileQA[selectedSection][selectedQuestion].count - 1
+            //return scheduleDataStructures.profileQA[selectedSection][selectedQuestion].count - 1
+            // TODO:- NOT SURE !!!!!!!!!!!!!
+            return scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["Q"]!.count - 1
         } else {
             return ageAnswer.count
         }
@@ -394,8 +424,8 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
     
     //
     @IBAction func okButtonAction(_ sender: Any) {
-        var profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
-        profileAnswers[selectedQuestion] = agePicker.selectedRow(inComponent: 0)
+        var profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
+        profileAnswers[scheduleDataStructures.profileQASorted[selectedQuestion]] = agePicker.selectedRow(inComponent: 0)
         UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["profileAnswers"])
@@ -425,7 +455,6 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     // Passed data
     var row = Int()
     var questionsTableHeight = CGFloat()
-    var answerImageArray: [String] = []
     var selectedQuestion = Int()
     var selectedSection = Int()
     
@@ -444,8 +473,10 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 2
         questionLabel.adjustsFontSizeToFitWidth = true
+        //
+        let image = scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["image"]![0]
         // Demonstration Image View
-        if answerImageArray[row] == "" {
+        if image == "" {
             // Hide image
             //            answerImageView.removeFromSuperview()
             answerImageLeading.constant = elementStack.bounds.width / 2
@@ -460,7 +491,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
             answerImageView.backgroundColor = Colors.dark
             answerImageView.layer.cornerRadius = 15
             answerImageView.clipsToBounds = true
-            answerImageView.image = getUncachedImage(named: answerImageArray[row])
+            answerImageView.image = getUncachedImage(named: image)
         }
         // Table View
         answerTableView.dataSource = self
@@ -475,11 +506,11 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         answerTableView.clipsToBounds = true
         answerTableView.isScrollEnabled = false
         //
-        questionLabel.text = NSLocalizedString(scheduleDataStructures.profileQA[row][0], comment: "")
+        questionLabel.text = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["Q"]![0], comment: "")
         questionLabel.sizeToFit()
         questionLabel.frame.size.width = elementStack.bounds.width
         //
-        if answerImageArray[row] != "" && elementStack.bounds.height > questionsTableHeight {
+        if image != "" && elementStack.bounds.height > questionsTableHeight {
             answerImageTrailing.constant = (elementStack.bounds.width * 0.25) / 2
             answerImageLeading.constant = (elementStack.bounds.width * 0.25) / 2
         }
@@ -497,8 +528,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        // + 1 as question inclueded in array
-        let height = NSLocalizedString(scheduleDataStructures.profileQA[selectedQuestion][indexPath.row + 1], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
+        let height = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]![indexPath.row], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
         //
         setTableHeight()
         //
@@ -513,9 +543,9 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     //
     func setTableHeight() {
         var tableHeightConstant: CGFloat = 0
-        for i in 1...scheduleDataStructures.profileQA[selectedQuestion].count - 1 {
+        for i in 0..<scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]!.count {
             let font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            let height = NSLocalizedString(scheduleDataStructures.profileQA[selectedQuestion][i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
+            let height = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]![i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
             if height > 49 {
                 tableHeightConstant += (49 * 1.5)
             } else {
@@ -529,12 +559,12 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scheduleDataStructures.profileQA[selectedQuestion].count - 1
+        return scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
         //
         cell.backgroundColor = Colors.dark
         cell.tintColor = Colors.green
@@ -543,15 +573,15 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.lineBreakMode = .byWordWrapping
         // row + 1 as question included with answers
-        cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.profileQA[selectedQuestion][indexPath.row + 1], comment: "")
+        cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]![indexPath.row], comment: "")
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
         // Select answer
-        if profileAnswers[row] != -1 && indexPath.row == profileAnswers[selectedQuestion] {
+        if profileAnswers[scheduleDataStructures.profileQASorted[row]] != -1 && indexPath.row == profileAnswers[scheduleDataStructures.profileQASorted[selectedQuestion]] {
             cell.textLabel?.textColor = Colors.green
         }
         // If last cell hide seperator
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        if indexPath.row == (scheduleDataStructures.profileQA[selectedQuestion].count - 2) {
+        if indexPath.row == (scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]!.count - 1) {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         }
         //
@@ -559,8 +589,8 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [Int]
-        profileAnswers[row] = indexPath.row
+        var profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
+        profileAnswers[scheduleDataStructures.profileQASorted[row]] = indexPath.row
         UserDefaults.standard.set(profileAnswers, forKey: "profileAnswers")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["profileAnswers"])
@@ -575,12 +605,13 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
                 // this is incase 
             var allAnswered = true
             for i in 0...profileAnswers.count - 1 {
-                if profileAnswers[i] == -1 {
+                if profileAnswers[scheduleDataStructures.profileQASorted[i]] == -1 {
                     allAnswered = false
                 }
             }
+            // Each time a question is answered and all the questions have been answered, the difficulty levels are updated
             if allAnswered {
-                // TODO: Call set difficulty levels
+                // Call set difficulty levels
                 ProfileFunctions.shared.setDifficultyLevels()
             }
             //

@@ -238,16 +238,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     //
                     // Normal
                     //
-                    // BORDER TEST
-                    //                    if isLastChoice() == false {
                     let text = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][indexPath.row]
                     choiceLabel.text = NSLocalizedString(text, comment: "")
-                    // Last Choice, indicator by color border round the outside, red when incomplete, green when complete
-                    //                    } else {
-                    // insert border
-                    // PROBABLY SHOULDN'T BE DONE HERE, BUT IN NEXT CHOICE FUNCTION
-                    //                    }
-                    //
                     choiceLabel.numberOfLines = 2
                     choiceLabel.sizeToFit()
                     choiceLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
@@ -354,8 +346,9 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     ActionSheet.shared.animateActionSheetDown()
                     //
                 })
-                //
+                // Tracking
                 updateWeekGoal()
+                // Notifications
                 ReminderNotifications.shared.setNotifications()
             }
             tableView.deselectRow(at: indexPath, animated: true)
@@ -396,7 +389,6 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         // Delete if not plus row
         if editingStyle == UITableViewCellEditingStyle.delete {
             //
-            updateWeekGoal()
             // Update arrays
             schedules.remove(at: indexPath.row)
             UserDefaults.standard.set(schedules, forKey: "schedules")
@@ -418,7 +410,9 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             scheduleTable.reloadData()
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "selectedSchedule"])
-            //
+            // Tracking
+            updateWeekGoal()
+            // Set Notifications
             ReminderNotifications.shared.setNotifications()
             
             //

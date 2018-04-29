@@ -239,7 +239,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             for i in 1...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2].count - 1 {
                 //
                 // schedules[schedulesCreationHelp] indexed with strings, therefore retreive relevant string index from scheduleCreationHelp question array
-                let stringIndex = scheduleDataStructures.scheduleCreationHelp[2][i][0]
+                let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[2][i][0]
                 if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int != 0 {
                     nGroups += 1
                     // i - 1 as totalnsession included in array
@@ -345,7 +345,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     let indexOfGroup = groupIndexes[i]
                     // schedule creation help indexed through names of groups etc, so get the string index from the originial question array, scheduleCreationHelp
-                    let stringIndex = scheduleDataStructures.scheduleCreationHelp[2][indexOfGroup][0]
+                    let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[2][indexOfGroup][0]
                     //
                     let groupTitle = NSLocalizedString(scheduleDataStructures.groupNames[indexOfGroup], comment: "")
                     // Not selected filled in
@@ -495,7 +495,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             indexOfDraggedGroup = groupIndexes[indexOfDrag]
             
             //
-            let stringIndex = scheduleDataStructures.scheduleCreationHelp[2][indexOfDraggedGroup][0]
+            let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[2][indexOfDraggedGroup][0]
             
             // If there are some session left to drag from group or if custom schedule
             if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 || dayTableGroupArray[indexOfDraggedGroup] != schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2][stringIndex] as! Int {

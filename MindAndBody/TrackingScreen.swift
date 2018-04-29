@@ -70,7 +70,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         //
         var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
         trackingDictionaries[0] = [:]
-        trackingDictionaries[0].updateValue(20, forKey: TrackingHelpers.shared.dateToString(date: Date().firstMondayInMonth))
+        trackingDictionaries[0].updateValue(20, forKey: TrackingHelpers.shared.dateToString(date: Date().firstMondayInCurrentWeek))
         
         //
         trackingDictionaries[1] = [:]
@@ -78,9 +78,9 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
         //
         trackingDictionaries[1].updateValue(70, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
-        trackingDictionaries[1].updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
-        trackingDictionaries[1].updateValue(70, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
-        trackingDictionaries[1].updateValue(80, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
+//        trackingDictionaries[1].updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
+//        trackingDictionaries[1].updateValue(70, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
+//        trackingDictionaries[1].updateValue(80, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
         
         UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
         ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
@@ -96,7 +96,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Ensure week goal correct
         updateWeekGoal()
         
-        // Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // MARK: Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         testTrackingValues()
         updateWeekTracking()
         updateTracking()
@@ -253,10 +253,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                     //
                 lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
             }
-            //
-            let calendar = Calendar(identifier: .gregorian)
-            let startDate = Date().firstMondayInCurrentWeek
-            let endDate = calendar.date(byAdding: .day, value: 6, to: startDate)
             //
             chartView.xAxis.axisMinimum = 0
             chartView.xAxis.axisMaximum = 6

@@ -134,7 +134,9 @@ class ScheduleVariables {
     //
     // Variables
     // Used in profile, when creating schedule, uses this to create then adds to userdata after (this is so that update schedule can compare new to old to find whats different and tell the user)
-    var updatedSessionsArray = [0,0,0,0,0,0,0]
+    var temporaryNSessions = 0
+    // [workout, yoga, meditation, endurance, flexibility]
+    var temporarySessionsArray = [0,0,0,0,0]
     // ScheduleVariables.shared.choiceProgress Indicated progress through the choices to select a session
     // Note: ScheduleVariables.shared.choiceProgress[0] = -1 if first screen (i.e groups of the day/week being shown), != 0 choices being displayed and the int indicates the index of the group selected, ---- ScheduleVariables.shared.choiceProgress[1] == progress through choices
     var choiceProgress = [-1,0]
@@ -157,9 +159,8 @@ class ScheduleVariables {
     // Func reset schedule tracking and week tracking
     func resetWeekTracking() {
         // Use lastResetWeek in tracking progress array to reset schedule tracking bools to false and and week progress to 0
-        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
+        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         // Current mondays date in week
         let currentMondayDate = Date().firstMondayInCurrentWeek
         // Last Reset = monday of last week reset
@@ -167,6 +168,7 @@ class ScheduleVariables {
         
         // Reset if last reset wasn't in current week
         if lastReset != currentMondayDate {
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             // Reset all bools in week tracking to false
             if schedules.count != 0 {
                 // Loop scheduleTracking
@@ -194,9 +196,11 @@ class ScheduleVariables {
             // Set week progress to 0
             trackingProgressDictionary["WeekProgress"] = 0
             // Set Last Reset
+            trackingProgressDictionary["LastResetWeek"] = currentMondayDate
+            // Update
             UserDefaults.standard.set(schedules, forKey: "schedules")
             UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-                // Sync
+            // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress", "schedules"])
         }
     }

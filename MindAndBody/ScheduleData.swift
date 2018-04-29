@@ -51,80 +51,95 @@ enum scheduleDataStructures {
     // MARK: Profile Data
     //
     // Questions & Answers
-    static let profileQA: [[String]] =
+    static let profileQA: [String: [String: [String]]] =
         [
             // Age - GOOD
-            ["profileQ1"], // Age - 0
+            "age": ["Q": ["profileQAge"],
+                    "A": [""],
+                    "image": [""]],
+            
             // Gender - GOOD
-            ["profileQ2", "profileA21", "profileA22", "profileA23"], // Gender - 1
-            // Experience - GOOD
-            ["profileQ3", "profileA31", "profileA32", "profileA33"], // Yoga - 2
-            ["profileQ4", "profileA41", "profileA42", "profileA43"], // Workout - 3
-            ["profileQ5", "profileA51", "profileA52", "profileA53"], // Cardio (Endurance) (Amount) - 4
-            // Endurance - GOOD
-            ["profileQ6", "profileA61", "profileA62", "profileA63"], // Endurance (Ability) - 5
-            ["profileQ7", "profileA71", "profileA72", "profileA73"], // Endurance (Opinion) - 6
+            "gender": ["Q": ["profileQGender"],
+                       "A": ["profileAGender1", "profileAGender2", "profileAGender3"],
+                       "image": [""]],
+            
             // Strength
-            ["profileQ8", "profileA81", "profileA82", "profileA83"], // Pushup - 7
-            ["profileQ9", "profileA91", "profileA92", "profileA93"], // Pullup - 8
-            ["profileQ10", "profileA101", "profileA102", "profileA103"], // Squat - 9
-            ["profileQ11", "profileA111", "profileA112", "profileA113"], // Strength (Opinion) - 10
+            "workoutExperience": ["Q": ["profileQWorkoutExperience"],
+                                  "A": ["profileAWorkoutExperience1", "profileAWorkoutExperience2", "profileAWorkoutExperience3"],
+                                  "image": [""]],
+            "workoutPushup": ["Q": ["profileQWorkoutPushup"],
+                              "A": ["profileAWorkoutPushup1", "profileAWorkoutPushup2", "profileAWorkoutPushup3"],
+                              "image": ["pushUp"]],
+            "workoutPullup": ["Q": ["profileQWorkoutPullup"],
+                              "A": ["profileAWorkoutPullup1", "profileAWorkoutPullup2", "profileAWorkoutPullup3"],
+                              "image": ["pullUp"]],
+            "workoutSquat": ["Q": ["profileQWorkoutSquat"],
+                             "A": ["profileAWorkoutSquat1", "profileAWorkoutSquat2", "profileAWorkoutSquat3"],
+                             "image": ["bodyweightSquat"]],
+            "workoutWeights": ["Q": ["profileQWorkoutWeights"],
+                               "A": ["profileAWorkoutWeights1", "profileAWorkoutWeights2", "profileAWorkoutWeights3"],
+                               "image": [""]],
+            "workoutOpinion": ["Q": ["profileQWorkoutOpinion"],
+                               "A": ["profileAWorkoutOpinion1", "profileAWorkoutOpinion2", "profileAWorkoutOpinion3"],
+                               "image": [""]],
+            
+            // Endurance - GOOD
+            "enduranceExperience": ["Q": ["profileQEnduranceExperience"], // How much
+                                    "A": ["profileAEnduranceExperience1", "profileAEnduranceExperience2", "profileAEnduranceExperience3"],
+                                    "image": [""]],
+            "enduranceStairs": ["Q": ["profileQEnduranceStairs"], // Flight of staris
+                                 "A": ["profileAEnduranceStairs1", "profileAEnduranceStairs2", "profileAEnduranceStairs3"],
+                                 "image": [""]],
+            "enduranceAbility": ["Q": ["profileQEnduranceAbility"], // 30 min cardio
+                                 "A": ["profileAEnduranceAbility1", "profileAEnduranceAbility2", "profileAEnduranceAbility3"],
+                                 "image": [""]],
+            
+            
+            "enduranceOpinion": ["Q": ["profileQEnduranceOpinion"],
+                                 "A": ["profileAEnduranceOpinion1", "profileAEnduranceOpinion2", "profileAEnduranceOpinion3"],
+                                 "image": [""]],
+            
+            // Yoga - TODO
+            "yogaExperience": ["Q": ["profileQYogaExperience"],
+                               "A": ["profileAYogaExperience1", "profileAYogaExperience2", "profileAYogaExperience3"],
+                               "image": [""]],
+            
             // Flexibility - GOOD
-            ["profileQ12", "profileA121", "profileA122", "profileA123"], // Hamstrings - 11
-            ["profileQ13", "profileA131", "profileA132", "profileA133"], // Hips - 12
-            ["profileQ14", "profileA141", "profileA142", "profileA143"], // Hips/Ankles - 13
-            ["profileQ15", "profileA151", "profileA152", "profileA153"], // Knees - 14
-            ["profileQ16", "profileA161", "profileA162", "profileA163"], // Back (Backward) - 15
-            ["profileQ17", "profileA171", "profileA172", "profileA173"], // Back (Lower - sideways) - 16
-            ["profileQ18", "profileA181", "profileA182", "profileA183"], // Neck - 17
+            "flexibilityHamstrings": ["Q": ["profileQFlexibilityHamstrings"],
+                            "A": ["profileAFlexibilityHamstrings1", "profileAFlexibilityHamstrings2", "profileAFlexibilityHamstrings3"],
+                            "image": ["standingHamstring"]],
+            "flexibilityHips": ["Q": ["profileQFlexibilityHips"],
+                            "A": ["profileAFlexibilityHips1", "profileAFlexibilityHips2", "profileAFlexibilityHips3"],
+                            "image": ["butterfly"]],
+            "flexibilityHipsAnkles": ["Q": ["profileQFlexibilityHipsAnkles"],
+                            "A": ["profileAFlexibilityHipsAnkles1", "profileAFlexibilityHipsAnkles2", "profileAFlexibilityHipsAnkles3"],
+                            "image": ["deepSquat"]],
+            "flexibilityKnees": ["Q": ["profileQFlexibilityKnees"],
+                            "A": ["profileAFlexibilityKnees1", "profileAFlexibilityKnees2", "profileAFlexibilityKnees3"],
+                            "image": ["hero"]],
+            "flexibilityBackBackward": ["Q": ["profileQFlexibilityBackBackward"],
+                            "A": ["profileAFlexibilityBackBackward1", "profileAFlexibilityBackBackward2", "profileAFlexibilityBackBackward3"],
+                            "image": ["upwardDog"]],
+            "flexibilityBackSideways": ["Q": ["profileQFlexibilityBackSideways"],
+                            "A": ["profileAFlexibilityBackSideways1", "profileAFlexibilityBackSideways2", "profileAFlexibilityBackSideways3"],
+                            "image": ["legDrop"]],
+            "flexibilityNeck": ["Q": ["profileQFlexibilityNeck"],
+                            "A": ["profileAFlexibilityNeck1", "profileAFlexibilityNeck2", "profileAFlexibilityNeck3"],
+                            "image": ["neckRotatorStretch"]],
             // Balance - GOOD
-            ["profileQ19", "profileA191", "profileA192", "profileA193"], // Balance - 18
+            "flexibilityBalance": ["Q": ["profileQFlexibilityBalance"],
+                                   "A": ["profileAFlexibilityBalance1", "profileAFlexibilityBalance2", "profileAFlexibilityBalance3"],
+                                   "image": ["tree"]],
         ]
     
-    // Schedule creation help
-    // ENSURE IF CHANGING THAT NAMES OF QUESTIONS ETC ARE THE SAME AS THE INDEXING IN Schedules[..]["ScheduleCreationHelp"]
-    static let scheduleCreationHelp: [[[String]]] =
-        [
-            // Schedule creation questions - 0
-            [
-                // gender
-                // Time/Commitment
-                ["scheduleQTime", "scheduleATime1", "scheduleATime2", "scheduleATime3"], // // Time - 0
-                ["scheduleQPriority", "scheduleAPriority1", "scheduleAPriority2", "scheduleAPriority3"], // Priority - 1
-            ],
-            // Goals - 1
-            [
-                // Mindfulness
-                ["mindG"],
-                // Yoga
-                ["yogaG"],
-                // Flexibility
-                ["flexibilityG"],
-                // Endurance
-                ["enduranceG"],
-                // Toning
-                ["toningG"],
-                // Muscle Gain
-                ["muscleGainG"],
-                // Strength
-                ["strengthG"],
-            ],
-            // Groups - 2
-            [
-                // Mind
-                ["mindG2"],
-                // Flexibility
-                ["flexibilityG"],
-                // Endurance
-                ["enduranceG"],
-                // Toning
-                ["toningG"],
-                // Muscle Gain
-                ["muscleGainG"],
-                // Strength
-                ["strengthG"],
-            ]
-    ]
+    static let profileQASorted: [String] =
+        ["age", "gender",
+         "workoutExperience", "workoutPushup", "workoutPullup", "workoutSquat", "workoutWeights", "workoutOpinion",
+         "enduranceExperience", "enduranceStairs", "enduranceAbility", "enduranceOpinion",
+         "yogaExperience",
+         "flexibilityHamstrings", "flexibilityHips", "flexibilityHipsAnkles", "flexibilityKnees", "flexibilityBackBackward", "flexibilityBackSideways", "flexibilityNeck", "flexibilityBalance",
+         ]
+    
     
     static let groupNames =
         [
@@ -150,18 +165,52 @@ enum scheduleDataStructures {
             ]
     
     //
-    static let answerImageArray = ["", "", "", "", "", "", "", "pushUp", "pullUp", "bodyweightSquat", "", "standingHamstring", "butterfly", "deepSquat", "hero", "upwardDog", "legDrop", "neckRotatorStretch", "tree", "", "", "", "", "", ""]
-    
-    
-    //
     // Data
     // Note: All scales 0,1,2
     // Note: All scales default to 1
     // Layer 1, Questions
-    // sees profileQA above for indexing
-    static let defaultProfileAnswers: [Int] =
-        [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
-    
+    // sees profileQASorted above for indexing
+    //static let defaultProfileAnswers: [Int] =
+    //    [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
+    static let defaultProfileAnswers: [String: Int] =
+        [
+            // Age - GOOD
+            "age": -1, // Age - 0
+            
+            // Gender - GOOD
+            "gender": -1, // Gender - 1
+            
+            // Strength
+            "workoutExperience": -1, // Workout - 3 - 2
+            "workoutPushup": -1, // Pushup - 7 - 4
+            "workoutPullup": -1, // Pullup - 8 - 5
+            "workoutSquat": -1, // Squat - 9 - 6
+            "workoutWeights": -1, // Squat - 9 - 6
+            "workoutOpinion": -1, // Strength (Opinion) - 10 - 7
+            
+            // Endurance - GOOD
+            "enduranceExperience": -1, // Cardio (Endurance) (Amount) - 4 - 8
+            "enduranceStairs": -1, // Endurance (Ability) - 5 - 9
+            "enduranceAbility": -1, // Endurance (Ability) - 5 - 9
+            "enduranceOpinion": -1, // Endurance (Opinion) - 6 - 10
+            
+            // Yoga - TODO
+            "yogaExperience": -1, // Yoga - 2 - 11
+            
+            // Flexibility - GOOD
+            "flexibilityHamstrings": -1, // Hamstrings - 11
+            "flexibilityHips": -1, // Hips - 12
+            "flexibilityHipsAnkles": -1, // Hips/Ankles - 13
+            "flexibilityKnees": -1, // Knees - 14
+            "flexibilityBackBackward": -1, // Back (Backward) - 15
+            "flexibilityBackSideways":-1, // Back (Lower - sideways) - 16
+            "flexibilityNeck": -1, // Neck - 17
+            // Balance - GOOD
+            "flexibilityBalance": -1, // Balance - 18
+            
+            // Meditation - TODO
+            // EXTRA
+    ]
     //
     static let registerScheduleHelpArray: [[[Int]]] =
         []
@@ -176,7 +225,11 @@ enum scheduleDataStructures {
 
     
     // Layer 4: Final
-        // Every session has an average difficulty, and those with only one difficulty call it average, so this should never crash and therefore is the default
+        // Every session has an average difficulty, and those with only one difficulty call it average, so having the default at 1 (average) should never crash
+    // Difficulty:
+        // 0 - Easy
+        // 1 - Average
+        // 2 - Hard
     static let defaultDifficultyLevels: [String: [String: Int]] =
         [
             // Scale of 0 to 3
@@ -241,13 +294,14 @@ enum scheduleDataStructures {
             ],
             // [1] Information about schedule ------------------
             "scheduleInformation": [
+                // Note in array for nesting
                 [[
                     "title": "",
-                    // Schedule style: day [0] or full week [1], -- day plan [2], full week plan [3] - 1
+                    // Schedule style: day [0] or full week [1], - 1
                     "scheduleStyle": 0,
-                    // Schedule type: app helps create scheudle [0], custom schedule [1] - 3
+                    // Schedule type: app helps create scheudle [0], custom schedule [1] - 2
                     "customSchedule": 0,
-                    // Session choice style: app [0] or user chooses [1] - 2
+                    // Session choice style: app [0] or user chooses [1] - 3
                     "customSessionChoice": 0,
                     //
                     // Equipment to use - 4
@@ -262,43 +316,61 @@ enum scheduleDataStructures {
             "scheduleCreationHelp": [
                 // Note: in array for nesting
                 [
-                    // Question answers
-                    ["scheduleQTime": -1,
-                    "scheduleQPriority": -1],
                     // Goals
-                    ["mindG2": 0,
-                     "yogaG": 0,
-                     "flexibilityG": 0,
-                     "enduranceG": 0,
-                     "toningG": 0,
-                     "muscleGainG": 0,
-                     "strengthG": 0,
-                     "total": 0],
-                    // N Sessions
-                    ["mindG": 0,
-                     "yogaG": 0,
-                     "flexibilityG": 0,
-                     "enduranceG": 0,
-                     "toningG": 0,
-                     "muscleGainG": 0,
-                     "strengthG": 0,
-                     "total": 0],
-                    // Ranges
-                    ["mindLower": 0,
-                     "mindUpper": 0,
-                     "flexibilityLower": 0,
-                     "flexibilityUpper": 0,
-                     "enduranceLower": 0,
-                     "enduranceUpper": 0,
-                     "toningLower": 0,
-                     "toningUpper": 0,
-                     "muscleGainLower": 0,
-                     "muscleGainUpper": 0,
-                     "strengthLower": 0,
-                     "strengthUpper": 0,
-                    ]
+                    [
+                        "workoutG": 0,
+                        "yogaG": 0,
+                        "meditationG": 0,
+                        "enduranceG": 0,
+                        "flexibilityG": 0,
+//                    "generalFitnessG": 0,
+//                     "muscleGainG": 0,
+//                     "toningG": 0,
+//                     "strengthG": 0,
+//                     "weightLossG": 0,
+//                     "enduranceG": 0,
+//                     "flexibilityG": 0,
+//                     "yogaG": 0,
+//                     "mindG": 0
+                    ],
+                    // Question answers
+                    
+                    // Time & Commitment
+                    ["scheduleQTime": -1,
+                     "scheduleQPriority": -1],
                 ]
             ]
+    ]
+    
+    // Schedule creation help
+    // ENSURE IF CHANGING THAT NAMES OF QUESTIONS ETC ARE THE SAME AS THE INDEXING IN Schedules[..]["ScheduleCreationHelp"]
+    static let scheduleCreationHelpSorted: [[[String]]] =
+        [
+            // Goals - 0
+            [
+                ["workoutG"], // - 0
+                ["yogaG"], // - 1
+                ["meditationG"], // - 2
+                ["enduranceG"], // - 3
+                ["flexibilityG"], // - 4
+                
+//                ["generalFitnessG"], // - 0
+//                ["muscleGainG"], // - 1
+//                ["toningG"], // - 2
+//                ["strengthG"], // - 3
+//                ["weightLossG"], // - 4
+//                ["enduranceG"], // - 5
+//                ["flexibilityG"], // - 6
+//                ["yogaG"], // - 7
+//                ["mindG"], // - 8
+            ],
+            // Schedule creation questions - 1
+            [
+                // gender
+                // Time/Commitment
+                ["scheduleQTime", "scheduleATime1", "scheduleATime2", "scheduleATime3"], // // Time - 0
+                ["scheduleQPriority", "scheduleAPriority1", "scheduleAPriority2", "scheduleAPriority3"], // Priority - 1
+            ],
     ]
     
     //
