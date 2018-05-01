@@ -149,7 +149,7 @@ class ScheduleScreen: UIViewController {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         // Subscriptions
         // Checking subscription is valid, (present loading during check)
         if Loading.shared.shouldPresentLoading {

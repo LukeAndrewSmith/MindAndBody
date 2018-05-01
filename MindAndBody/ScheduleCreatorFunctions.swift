@@ -22,160 +22,11 @@ extension UIViewController {
         // Initialise arrays
         // [workout, yoga, meditation, endurance, flexibility]
         ScheduleVariables.shared.temporarySessionsArray = [0,0,0,0,0]
-        // Range of total n session and specific group sessions
-        var rangeArray = [
-            // Mind
-            [0,0],
-            // Flexibility
-            [0,0],
-            // Endurance
-            [0,0],
-            // Toning
-            [0,0],
-            // Muscle Gain
-            [0,0],
-            // Strength
-            [0,0],
-        ]
         // ratios of goal (weighting/importance)
         // ratios indexing == [workout, yoga, meditation, endurance, flexibility]
         var ratios: [Double] = [0,0,0,0,0]
         var goals: [Int] = [0,0,0,0,0]
-        
-        // MARK: Determind Goals as groups:
-        // --------------------------------------------------------------------------------------------
-        // Find the total number goals (sum of all goals weightings(0-2(6 in case of mind)), the denominator when finding the ratios
-//        var goalsNumbersArray: [Int] = [0,0,0,0,0]
-//        for i in 0..<ratios.count {
-//            switch i {
-//            // Workout
-//            case 0:
-//                // Create array of goals related to workout
-//                    // Use this array to determine the what to set the goal for the workout group to be
-//                goalsNumbersArray = [
-//                    // Muscle gain
-//                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][1][0]] as! Int,
-//                    // Toning
-//                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][2][0]] as! Int,
-//                    // Strength
-//                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][3][0]] as! Int]
-//                // If max is 3, set to 3
-//                if goalsNumbersArray.max()! == 3 {
-//                    goals[i] = goalsNumbersArray.max()!
-//                // If max isn't 3
-//                } else if goalsNumbersArray.max()! != 0 {
-//                    // Check number of ones
-//                    var nOnes = 0
-//                    for i in 0..<goalsNumbersArray.count {
-//                        if goals[i] == 1 {
-//                            nOnes += 1
-//                        }
-//                    }
-//                    // If number of ones is >= 3, set goal to 3, if not set to one
-//                        // As if this is the case then 3 goals are related to workout, so the workout goal should be increased
-//                    if nOnes >= 3 {
-//                        goals[i] = 3
-//                    } else {
-//                        goals[i] = 1
-//                    }
-//
-//                }
-//            // Yoga
-//            case 1:
-//                // TODO: NOTE SURE, COULD JUST SET TO YOGAGOAL
-//                let yogaGoal = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][7][0]] as! Int
-//                let mindGoal = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][8][0]] as! Int
-//                // If yoga goal is 3, set yoga straight to 3
-//                if yogaGoal == 3 {
-//                    goals[i] = 3
-//                // Else, check what it should be
-//                } else {
-//                    // If yoga 1 and mind 1 or 3, set to 3
-//                    if yogaGoal == 1 && mindGoal > 0 {
-//                        goals[i] = 3
-//                    // Else set to
-//                    } else {
-//                        goals[i] = yogaGoal
-//                    }
-//                }
-//            // Meditation
-//            case 2:
-//                // Set straight to mind goal
-//                goals[i] = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][8][0]] as! Int
-//            // Endurance
-//            case 3:
-//                // Create array of goals related to endurance
-//                // Use this array to determine the what to set the goal for the workout group to be
-//                goalsNumbersArray = [
-//                    // Weight Loss
-//                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][1][0]] as! Int,
-//                    // Endurance
-//                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][2][0]] as! Int]
-//                // If max is 3, set to 3
-//                if goalsNumbersArray.max()! == 3 {
-//                    goals[i] = goalsNumbersArray.max()!
-//                // If max isn't 3
-//                } else if goalsNumbersArray.max()! != 0 {
-//                    // Check number of ones
-//                    var nOnes = 0
-//                    for i in 0..<goalsNumbersArray.count {
-//                        if goals[i] == 1 {
-//                            nOnes += 1
-//                        }
-//                    }
-//                    // If number of ones is >= 3, set goal to 3, if not set to one
-//                        // As if this is the case then 3 goals are related to endurance, so the workout goal should be increased
-//                    if nOnes >= 3 {
-//                        goals[i] = 3
-//                    } else {
-//                        goals[i] = 1
-//                    }
-//                }
-//            // Flexibility
-//            case 4:
-//                let yoga = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][7][0]] as! Int
-//                let mind = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][8][0]] as! Int
-//                let flexibility = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][6][0]] as! Int
-//                // If yoga & mind >= 3, & flexibility 3, set to 1
-//                if yoga + mind >= 3 && flexibility == 3 {
-//                    goals[i] = 1
-//                // Else set to flexibility
-//                } else {
-//                    goals[i] = flexibility
-//                }
-//            default: break
-//            }
-//        }
-//
-//        // Workout/Endurance: general fitness goal edit
-//            // If general fitness is a goal, check/edit workout/endurance
-//        let generalFitness = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][0][0]] as! Int
-//        // If general fitness is a goal and workout or endurance is 0, check if should increase
-//        if generalFitness != 0 && (ScheduleVariables.shared.temporarySessionsArray[0] == 0 || ScheduleVariables.shared.temporarySessionsArray[3] == 0) {
-//            // If both are zero
-//                // Set both to 1 if general fitness goal == 3
-//                // If general fitness goal == 1, do the same for now
-//            if ScheduleVariables.shared.temporarySessionsArray[0] == 0 && ScheduleVariables.shared.temporarySessionsArray[3] == 0 {
-//                // Set both to 1 if general fitness goal == 3
-//                if generalFitness == 3 {
-//                    ScheduleVariables.shared.temporarySessionsArray[0] = 1
-//                    ScheduleVariables.shared.temporarySessionsArray[3] = 1
-//                // If general fitness goal == 1, do the same for now
-//                } else {
-//                    // TODO: COULD CHOOSE RANDOM
-//                    ScheduleVariables.shared.temporarySessionsArray[0] = 1
-//                    ScheduleVariables.shared.temporarySessionsArray[3] = 1
-//                }
-//            // If only one is 0
-//                // increase
-//            } else {
-//                if ScheduleVariables.shared.temporarySessionsArray[0] == 0 {
-//                    ScheduleVariables.shared.temporarySessionsArray[0] = 1
-//                } else if ScheduleVariables.shared.temporarySessionsArray[3] == 0 {
-//                    ScheduleVariables.shared.temporarySessionsArray[3] = 1
-//                }
-//            }
-//        }
+    
         
         // Create goals
         for i in 0..<goals.count {
@@ -843,7 +694,6 @@ extension UIViewController {
 //        } else {
 //            
 //        }
-//        UserDefaults.standard.synchronize()
 //        
 //        
 //        

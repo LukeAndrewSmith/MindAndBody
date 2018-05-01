@@ -204,8 +204,6 @@ class BackgroundImageCollection: UICollectionViewController {
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         //
-        UserDefaults.standard.synchronize()
-        //
         collectionView.reloadData()
     }
 }

@@ -716,7 +716,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     UIAlertAction in
                     
                     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-                    UserDefaults.standard.synchronize()
                     ICloudFunctions.shared.removeAll()
                     
                     // Alert View

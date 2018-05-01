@@ -115,7 +115,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         addBackgroundImage(withBlur: true, fullScreen: true)
         
         // Indication Label
-        indicationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        indicationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 20)
         indicationLabel.textColor = Colors.light
         indicationLabel.text = NSLocalizedString("scheduleCreatorIndication", comment: "")
 

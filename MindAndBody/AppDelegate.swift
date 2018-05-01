@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        ICloudFunctions.shared.removeAll()
 //        let domain = Bundle.main.bundleIdentifier!
 //        UserDefaults.standard.removePersistentDomain(forName: domain)
-//        UserDefaults.standard.synchronize()
         
         
         //
@@ -91,6 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Walkthroughs
         UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughDictionary])
+        
         
         // Push everything to iCloud
         let check = NSUbiquitousKeyValueStore.default.object(forKey: "walkthroughs")
@@ -163,6 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             settings["AutomaticYoga"]![0] = 0
         }
         UserDefaults.standard.set(settings, forKey: "userSettings")
+        
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
