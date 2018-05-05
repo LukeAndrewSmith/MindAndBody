@@ -3180,11 +3180,18 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="012-1d-8yV">
-                                                    <rect key="frame" x="141.5" y="330.5" width="93.5" height="23"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
+                                                    <rect key="frame" x="142.5" y="330.5" width="90" height="23"/>
+                                                    <gestureRecognizers/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMc-AE-wXL">
+                                                    <rect key="frame" x="142" y="303" width="90" height="50"/>
+                                                    <connections>
+                                                        <action selector="weightButton:" destination="bTr-Zb-a1u" eventType="touchUpInside" id="ElF-7e-92U"/>
+                                                    </connections>
+                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ujc-DX-HXP">
                                                     <rect key="frame" x="320" y="349" width="55" height="55"/>
                                                     <constraints>
@@ -3218,19 +3225,24 @@
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstItem="Ujc-DX-HXP" firstAttribute="leading" secondItem="HRs-0d-j9h" secondAttribute="trailing" id="4wb-5n-00n"/>
+                                                <constraint firstItem="sMc-AE-wXL" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="7bE-KT-LbL"/>
                                                 <constraint firstItem="Ph9-9z-aWa" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="CA0-ft-JuY"/>
                                                 <constraint firstItem="HRs-0d-j9h" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="HwU-gP-SlW"/>
+                                                <constraint firstItem="sMc-AE-wXL" firstAttribute="top" secondItem="Ph9-9z-aWa" secondAttribute="top" id="JlT-uM-O70"/>
                                                 <constraint firstItem="012-1d-8yV" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="MFS-LK-Sdy"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aYQ-8x-smf" secondAttribute="trailing" id="OoC-up-RJQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ujc-DX-HXP" secondAttribute="trailing" id="SvG-bT-RO1"/>
                                                 <constraint firstItem="aYQ-8x-smf" firstAttribute="height" secondItem="CWE-s5-9gl" secondAttribute="height" multiplier="3/4" id="UEd-Dd-iUf"/>
                                                 <constraint firstItem="0Ea-Pl-qcE" firstAttribute="top" secondItem="aYQ-8x-smf" secondAttribute="bottom" constant="-15" id="V5l-I4-VRg"/>
                                                 <constraint firstItem="Ph9-9z-aWa" firstAttribute="centerY" secondItem="CWE-s5-9gl" secondAttribute="centerY" multiplier="25/16" id="WnQ-IX-BGB"/>
+                                                <constraint firstItem="sMc-AE-wXL" firstAttribute="width" secondItem="012-1d-8yV" secondAttribute="width" id="Y8e-nl-kXF"/>
                                                 <constraint firstItem="HRs-0d-j9h" firstAttribute="centerY" secondItem="CWE-s5-9gl" secondAttribute="centerY" multiplier="30/16" id="fUE-kH-qo4"/>
                                                 <constraint firstItem="aYQ-8x-smf" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="g2L-mH-crG"/>
                                                 <constraint firstItem="aYQ-8x-smf" firstAttribute="top" secondItem="CWE-s5-9gl" secondAttribute="top" id="gOx-MB-6mb"/>
+                                                <constraint firstItem="sMc-AE-wXL" firstAttribute="bottom" secondItem="012-1d-8yV" secondAttribute="bottom" id="qij-Th-W9m"/>
                                                 <constraint firstItem="012-1d-8yV" firstAttribute="centerY" secondItem="CWE-s5-9gl" secondAttribute="centerY" multiplier="27/16" id="shr-kq-hPZ"/>
                                                 <constraint firstItem="0Ea-Pl-qcE" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="vZU-PO-meG"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ujc-DX-HXP" secondAttribute="bottom" id="vmg-dI-xow"/>
@@ -3597,8 +3609,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
-                                                    <rect key="frame" x="141.5" y="369" width="93.5" height="23"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
+                                                    <rect key="frame" x="142.5" y="369" width="90" height="23"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3819,8 +3831,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5O-yZ-uLf">
-                                                    <rect key="frame" x="141.5" y="367.5" width="93.5" height="23"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="19"/>
+                                                    <rect key="frame" x="142.5" y="367.5" width="90" height="23"/>
+                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

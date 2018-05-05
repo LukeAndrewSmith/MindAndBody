@@ -2624,7 +2624,7 @@
 		07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeQuestion.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoice.swift; sourceTree = "<group>"; };
 		07FE380D1DF9B3A200E7EA20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		07FE380F1DF9B3C700E7EA20 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		07FE380F1DF9B3C700E7EA20 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.storyboard; sourceTree = "<group>"; };
 		07FFA30E1F4C614B00E9B0C1 /* cardioWarmup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardioWarmup.png; sourceTree = "<group>"; };
 		07FFA3121F4C615400E9B0C1 /* legsToSideSquat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = legsToSideSquat.png; sourceTree = "<group>"; };
 		07FFA3131F4C615400E9B0C1 /* legsToSideSquat1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = legsToSideSquat1.png; sourceTree = "<group>"; };
@@ -2732,42 +2732,42 @@
 				078F409F1F4B793700B4F566 /* Demonstration Images */,
 				07E464BF1F4ECD5800A5AF49 /* Target Area Images */,
 			);
-			name = Images;
+			path = Images;
 			sourceTree = "<group>";
 		};
 		07038CC21F4C5BFD001CC6D5 /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
 				07FFA3921F4C993700E9B0C1 /* iceland.png */,
-				07FFA39A1F4C997100E9B0C1 /* sunWater.png */,
-				07038CC51F4C5C2A001CC6D5 /* purpleTree.png */,
-				07FFA39C1F4C997400E9B0C1 /* water.png */,
-				07FFA3981F4C994E00E9B0C1 /* mountainsRedBlue.png */,
 				07FFA39E1F4CA1F900E9B0C1 /* magicWood.png */,
 				07FFA3A01F4CA1FD00E9B0C1 /* mountains.png */,
+				07FFA3981F4C994E00E9B0C1 /* mountainsRedBlue.png */,
+				07038CC51F4C5C2A001CC6D5 /* purpleTree.png */,
+				07FFA39A1F4C997100E9B0C1 /* sunWater.png */,
+				07FFA39C1F4C997400E9B0C1 /* water.png */,
 			);
-			name = Backgrounds;
+			path = Backgrounds;
 			sourceTree = "<group>";
 		};
 		07094BE71FB0D129003DB553 /* Main Screens */ = {
 			isa = PBXGroup;
 			children = (
-				077AC0FD1DA54C0C0026895B /* MindBody (choices/sessions etc.) */,
-				075A0DB91E8D68800008E014 /* Schedule */,
-				075A0DBA1E8D688D0008E014 /* Tracking */,
 				077AC0FE1DA54C500026895B /* Lessons */,
+				077AC0FD1DA54C0C0026895B /* MindBody (choices-sessions etc.) */,
+				075A0DB91E8D68800008E014 /* Schedule */,
 				07995A371E86A83A0009C9B1 /* Settings */,
+				075A0DBA1E8D688D0008E014 /* Tracking */,
 			);
-			name = "Main Screens";
+			path = "Main Screens";
 			sourceTree = "<group>";
 		};
-		07094BE81FB0D17F003DB553 /* Audio/Visual */ = {
+		07094BE81FB0D17F003DB553 /* Audio-Visual */ = {
 			isa = PBXGroup;
 			children = (
-				078C59541EC893EA00FA1890 /* Sounds */,
 				07038CC11F4C5BF2001CC6D5 /* Images */,
+				078C59541EC893EA00FA1890 /* Sounds */,
 			);
-			name = Audio/Visual;
+			path = "Audio-Visual";
 			sourceTree = "<group>";
 		};
 		0719F2B31E50F8D100AC6729 /* Meditation Screens */ = {
@@ -2775,7 +2775,7 @@
 			children = (
 				07520BB31E9F894C00FA682E /* MeditationScreen.swift */,
 			);
-			name = "Meditation Screens";
+			path = "Meditation Screens";
 			sourceTree = "<group>";
 		};
 		071B93511E60459600865FC5 /* Guided Meditation */ = {
@@ -2784,7 +2784,7 @@
 				07CB04361E604653002066CD /* MeditationChoiceGuided.swift */,
 				07CB04381E6049DF002066CD /* MeditationGuided.swift */,
 			);
-			name = "Guided Meditation";
+			path = "Guided Meditation";
 			sourceTree = "<group>";
 		};
 		072829E61EA8A0C80090164A /* Circuit Workout */ = {
@@ -2792,7 +2792,7 @@
 			children = (
 				072829EA1EA8A26A0090164A /* CircuitWorkoutSessionScreen.swift */,
 			);
-			name = "Circuit Workout";
+			path = "Circuit Workout";
 			sourceTree = "<group>";
 		};
 		0728F3E11E1C2D7C00EA409B /* Warmup */ = {
@@ -2800,19 +2800,19 @@
 			children = (
 				07F912071DC2D1240004C924 /* WarmupChoice.swift */,
 			);
-			name = Warmup;
+			path = Warmup;
 			sourceTree = "<group>";
 		};
 		072900521F4D716B0048A355 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				072900541F4D71730048A355 /* Stretching/Warmup */,
-				072900531F4D71700048A355 /* Workout/Warmup */,
+				072900541F4D71730048A355 /* Stretching-Warmup */,
+				072900531F4D71700048A355 /* Workout-Warmup */,
 			);
-			name = Shared;
+			path = Shared;
 			sourceTree = "<group>";
 		};
-		072900531F4D71700048A355 /* Workout/Warmup */ = {
+		072900531F4D71700048A355 /* Workout-Warmup */ = {
 			isa = PBXGroup;
 			children = (
 				07702B741F4D754C000E1DB8 /* bodyweightRow */,
@@ -2828,10 +2828,10 @@
 				07702B6A1F4D7544000E1DB8 /* pushUp */,
 				07702B681F4D7541000E1DB8 /* standingGluteKickback */,
 			);
-			name = Workout/Warmup;
+			path = "Workout-Warmup";
 			sourceTree = "<group>";
 		};
-		072900541F4D71730048A355 /* Stretching/Warmup */ = {
+		072900541F4D71730048A355 /* Stretching-Warmup */ = {
 			isa = PBXGroup;
 			children = (
 				07702B511F4D72E4000E1DB8 /* butterflyPoseS */,
@@ -2841,7 +2841,7 @@
 				07702B4D1F4D72DF000E1DB8 /* legDrop */,
 				07702B4A1F4D72DD000E1DB8 /* threadTheNeedleS */,
 			);
-			name = Stretching/Warmup;
+			path = "Stretching-Warmup";
 			sourceTree = "<group>";
 		};
 		0729F6721F8C118C00C9F810 /* Custom */ = {
@@ -2849,7 +2849,7 @@
 			children = (
 				077BC6941F725DCB00B9E798 /* FinalChoiceCustom.swift */,
 			);
-			name = Custom;
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		0729FFDF1F4D71110048A355 /* frontLegSwings */ = {
@@ -2862,18 +2862,18 @@
 				0729FFE41F4D71260048A355 /* frontLegSwings4.png */,
 				0729FFE51F4D71260048A355 /* frontLegSwings5.png */,
 			);
-			name = frontLegSwings;
+			path = frontLegSwings;
 			sourceTree = "<group>";
 		};
 		072CD2AD1EBA41AE002E2CD6 /* Functions */ = {
 			isa = PBXGroup;
 			children = (
-				077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */,
 				077E47221EB9EED3005B0B22 /* DismissMenuAnimator.swift */,
-				078F386F202B2AC400DC6150 /* MenuHelper.swift */,
 				078F3872202B2B0B00DC6150 /* Interactor.swift */,
+				078F386F202B2AC400DC6150 /* MenuHelper.swift */,
+				077E471A1EB9DFC6005B0B22 /* PresentMenuAnimator.swift */,
 			);
-			name = Functions;
+			path = Functions;
 			sourceTree = "<group>";
 		};
 		07520BB51E9FB80C00FA682E /* Meditation Timer */ = {
@@ -2881,36 +2881,36 @@
 			children = (
 				071C4FB21E98D6D800328D18 /* MeditationTimer.swift */,
 			);
-			name = "Meditation Timer";
+			path = "Meditation Timer";
 			sourceTree = "<group>";
 		};
 		07530C971E96716300BD33EC /* Choice Screens */ = {
 			isa = PBXGroup;
 			children = (
+				076A9D0C1E23B1F900DC8F42 /* Cardio */,
 				0729F6721F8C118C00C9F810 /* Custom */,
-				073BA9C61F6E7CCA005DB480 /* FinalChoice.swift */,
+				076A9D0E1E23B20300DC8F42 /* Meditation */,
+				076A9D0B1E23B1F300DC8F42 /* Stretching */,
 				0728F3E11E1C2D7C00EA409B /* Warmup */,
 				076A9D0A1E23B1ED00DC8F42 /* Workout */,
-				076A9D0C1E23B1F900DC8F42 /* Cardio */,
-				076A9D0B1E23B1F300DC8F42 /* Stretching */,
 				076A9D0D1E23B1FF00DC8F42 /* Yoga */,
-				076A9D0E1E23B20300DC8F42 /* Meditation */,
+				073BA9C61F6E7CCA005DB480 /* FinalChoice.swift */,
 			);
-			name = "Choice Screens";
+			path = "Choice Screens";
 			sourceTree = "<group>";
 		};
 		07530C981E96717B00BD33EC /* Session Screens */ = {
 			isa = PBXGroup;
 			children = (
-				079187271E7B4DCD00E7153A /* Workout */,
-				072829E61EA8A0C80090164A /* Circuit Workout */,
 				076C68441ED58D18009160C2 /* Cardio */,
-				076C68431ED58D0E009160C2 /* Stretching/Warmup */,
-				0798381F1F8A8DDF007C3CF5 /* Time Based */,
-				07BDFEFE1EB1E69700B131D7 /* Yoga Screen */,
+				072829E61EA8A0C80090164A /* Circuit Workout */,
 				0719F2B31E50F8D100AC6729 /* Meditation Screens */,
+				076C68431ED58D0E009160C2 /* Stretching-Warmup */,
+				0798381F1F8A8DDF007C3CF5 /* Time Based */,
+				079187271E7B4DCD00E7153A /* Workout */,
+				07BDFEFE1EB1E69700B131D7 /* Yoga Screen */,
 			);
-			name = "Session Screens";
+			path = "Session Screens";
 			sourceTree = "<group>";
 		};
 		0757326C1E660A1F003DA77E /* Screen */ = {
@@ -2919,48 +2919,48 @@
 				0757326A1E64D8A3003DA77E /* InformationScreen1.swift */,
 				0757326F1E660AEC003DA77E /* InformationScreenAnatomy.swift */,
 			);
-			name = Screen;
+			path = Screen;
 			sourceTree = "<group>";
 		};
 		075A0DB91E8D68800008E014 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				07995A381E893E590009C9B1 /* ScheduleScreen.swift */,
 				07686A8C1F84398000C278CC /* Helpers */,
-				07E1D4DD1FB0DDE100B53B85 /* Schedule Editing */,
 				07F8EDD81FA5DB4900C452F4 /* Profile Editing */,
 				07D5C3D31F9E31B20038F143 /* Schedule Creation */,
+				07E1D4DD1FB0DDE100B53B85 /* Schedule Editing */,
+				07995A381E893E590009C9B1 /* ScheduleScreen.swift */,
 			);
-			name = Schedule;
+			path = Schedule;
 			sourceTree = "<group>";
 		};
 		075A0DBA1E8D688D0008E014 /* Tracking */ = {
 			isa = PBXGroup;
 			children = (
-				073734211FD2DE42009F5B54 /* TrackingScreen.swift */,
 				07C10F52202DE1CA00D70DF8 /* TrackingClasses.swift */,
+				073734211FD2DE42009F5B54 /* TrackingScreen.swift */,
 			);
-			name = Tracking;
+			path = Tracking;
 			sourceTree = "<group>";
 		};
 		07686A8C1F84398000C278CC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */,
 				07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */,
 				0782AB511FC4F0CE00D34500 /* ScheduleTableView.swift */,
-				07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */,
 			);
-			name = Helpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		076A9D0A1E23B1ED00DC8F42 /* Workout */ = {
 			isa = PBXGroup;
 			children = (
-				07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */,
-				07E98F0D1EA8F86D00C98ED5 /* Gym */,
 				07E98F0E1EA8F8E100C98ED5 /* BodyWeight */,
+				07E98F0D1EA8F86D00C98ED5 /* Gym */,
+				07DEE6FA1E0AC47F003B89AB /* WorkoutChoice.swift */,
 			);
-			name = Workout;
+			path = Workout;
 			sourceTree = "<group>";
 		};
 		076A9D0B1E23B1F300DC8F42 /* Stretching */ = {
@@ -2968,7 +2968,7 @@
 			children = (
 				07DEE6F21E0AADAC003B89AB /* StretchingChoice.swift */,
 			);
-			name = Stretching;
+			path = Stretching;
 			sourceTree = "<group>";
 		};
 		076A9D0C1E23B1F900DC8F42 /* Cardio */ = {
@@ -2977,7 +2977,7 @@
 				07DEE6F41E0AADC3003B89AB /* CardioChoice.swift */,
 				072A87711EDEC59A00684809 /* CardioChoiceHIIT.swift */,
 			);
-			name = Cardio;
+			path = Cardio;
 			sourceTree = "<group>";
 		};
 		076A9D0D1E23B1FF00DC8F42 /* Yoga */ = {
@@ -2985,25 +2985,25 @@
 			children = (
 				07DEE6F61E0AADE6003B89AB /* YogaChoice.swift */,
 			);
-			name = Yoga;
+			path = Yoga;
 			sourceTree = "<group>";
 		};
 		076A9D0E1E23B20300DC8F42 /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
-				07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */,
-				07520BB51E9FB80C00FA682E /* Meditation Timer */,
 				071B93511E60459600865FC5 /* Guided Meditation */,
+				07520BB51E9FB80C00FA682E /* Meditation Timer */,
+				07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */,
 			);
-			name = Meditation;
+			path = Meditation;
 			sourceTree = "<group>";
 		};
-		076C68431ED58D0E009160C2 /* Stretching/Warmup */ = {
+		076C68431ED58D0E009160C2 /* Stretching-Warmup */ = {
 			isa = PBXGroup;
 			children = (
 				076C68451ED58D65009160C2 /* StretchingScreen.swift */,
 			);
-			name = Stretching/Warmup;
+			path = "Stretching-Warmup";
 			sourceTree = "<group>";
 		};
 		076C68441ED58D18009160C2 /* Cardio */ = {
@@ -3011,7 +3011,7 @@
 			children = (
 				07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */,
 			);
-			name = Cardio;
+			path = Cardio;
 			sourceTree = "<group>";
 		};
 		07702B4A1F4D72DD000E1DB8 /* threadTheNeedleS */ = {
@@ -3019,7 +3019,7 @@
 			children = (
 				07702B661F4D7365000E1DB8 /* threadTheNeedleS.png */,
 			);
-			name = threadTheNeedleS;
+			path = threadTheNeedleS;
 			sourceTree = "<group>";
 		};
 		07702B4D1F4D72DF000E1DB8 /* legDrop */ = {
@@ -3029,7 +3029,7 @@
 				07702B611F4D7360000E1DB8 /* legDrop1.png */,
 				07702B621F4D7360000E1DB8 /* legDrop2.png */,
 			);
-			name = legDrop;
+			path = legDrop;
 			sourceTree = "<group>";
 		};
 		07702B4E1F4D72E1000E1DB8 /* groinStretch */ = {
@@ -3037,7 +3037,7 @@
 			children = (
 				07702B5E1F4D7358000E1DB8 /* groinStretch.png */,
 			);
-			name = groinStretch;
+			path = groinStretch;
 			sourceTree = "<group>";
 		};
 		07702B4F1F4D72E3000E1DB8 /* catCowS */ = {
@@ -3048,7 +3048,7 @@
 				07702B581F4D7352000E1DB8 /* catCowS2.png */,
 				07702B591F4D7352000E1DB8 /* catCowS3.png */,
 			);
-			name = catCowS;
+			path = catCowS;
 			sourceTree = "<group>";
 		};
 		07702B501F4D72E4000E1DB8 /* calveStretch */ = {
@@ -3056,7 +3056,7 @@
 			children = (
 				07702B541F4D734C000E1DB8 /* calveStretch.png */,
 			);
-			name = calveStretch;
+			path = calveStretch;
 			sourceTree = "<group>";
 		};
 		07702B511F4D72E4000E1DB8 /* butterflyPoseS */ = {
@@ -3064,7 +3064,7 @@
 			children = (
 				07702B521F4D7340000E1DB8 /* butterflyPoseS.png */,
 			);
-			name = butterflyPoseS;
+			path = butterflyPoseS;
 			sourceTree = "<group>";
 		};
 		07702B681F4D7541000E1DB8 /* standingGluteKickback */ = {
@@ -3075,7 +3075,7 @@
 				07702BF71F4D760A000E1DB8 /* standingGluteKickback2.png */,
 				07702BF81F4D760A000E1DB8 /* standingGluteKickback3.png */,
 			);
-			name = standingGluteKickback;
+			path = standingGluteKickback;
 			sourceTree = "<group>";
 		};
 		07702B6A1F4D7544000E1DB8 /* pushUp */ = {
@@ -3087,7 +3087,7 @@
 				07702BEA1F4D75FD000E1DB8 /* pushUp3.png */,
 				07702BEB1F4D75FD000E1DB8 /* pushUp4.png */,
 			);
-			name = pushUp;
+			path = pushUp;
 			sourceTree = "<group>";
 		};
 		07702B6B1F4D7545000E1DB8 /* pullUp */ = {
@@ -3099,7 +3099,7 @@
 				07702BE01F4D75F5000E1DB8 /* pullUp3.png */,
 				07702BE11F4D75F5000E1DB8 /* pullUp4.png */,
 			);
-			name = pullUp;
+			path = pullUp;
 			sourceTree = "<group>";
 		};
 		07702B6C1F4D7546000E1DB8 /* mountainClimber */ = {
@@ -3112,7 +3112,7 @@
 				07702BD51F4D75EE000E1DB8 /* mountainClimber4.png */,
 				07702BD61F4D75EE000E1DB8 /* mountainClimber5.png */,
 			);
-			name = mountainClimber;
+			path = mountainClimber;
 			sourceTree = "<group>";
 		};
 		07702B6D1F4D7547000E1DB8 /* lunge */ = {
@@ -3127,7 +3127,7 @@
 				07702BC71F4D75E7000E1DB8 /* lunge6.png */,
 				07702BC81F4D75E7000E1DB8 /* lunge7.png */,
 			);
-			name = lunge;
+			path = lunge;
 			sourceTree = "<group>";
 		};
 		07702B6E1F4D7548000E1DB8 /* latPullover */ = {
@@ -3138,7 +3138,7 @@
 				07702BBB1F4D75DE000E1DB8 /* latPullover2.png */,
 				07702BBC1F4D75DE000E1DB8 /* latPullover3.png */,
 			);
-			name = latPullover;
+			path = latPullover;
 			sourceTree = "<group>";
 		};
 		07702B6F1F4D7548000E1DB8 /* kneelingHipRotations-KickBack */ = {
@@ -3146,6 +3146,7 @@
 			children = (
 				07702BA31F4D75D7000E1DB8 /* kneelingHipRotations.png */,
 				07702BA41F4D75D7000E1DB8 /* kneelingHipRotations1.png */,
+				07702BAD1F4D75D7000E1DB8 /* kneelingHipRotations10.png */,
 				07702BA51F4D75D7000E1DB8 /* kneelingHipRotations2.png */,
 				07702BA61F4D75D7000E1DB8 /* kneelingHipRotations3.png */,
 				07702BA71F4D75D7000E1DB8 /* kneelingHipRotations4.png */,
@@ -3154,9 +3155,8 @@
 				07702BAA1F4D75D7000E1DB8 /* kneelingHipRotations7.png */,
 				07702BAB1F4D75D7000E1DB8 /* kneelingHipRotations8.png */,
 				07702BAC1F4D75D7000E1DB8 /* kneelingHipRotations9.png */,
-				07702BAD1F4D75D7000E1DB8 /* kneelingHipRotations10.png */,
 			);
-			name = "kneelingHipRotations-KickBack";
+			path = "kneelingHipRotations-KickBack";
 			sourceTree = "<group>";
 		};
 		07702B701F4D7549000E1DB8 /* jumpSquat */ = {
@@ -3169,7 +3169,7 @@
 				07702B9B1F4D75CC000E1DB8 /* jumpSquat4.png */,
 				07702B9C1F4D75CC000E1DB8 /* jumpSquat5.png */,
 			);
-			name = jumpSquat;
+			path = jumpSquat;
 			sourceTree = "<group>";
 		};
 		07702B711F4D754A000E1DB8 /* gluteBridgeW */ = {
@@ -3180,7 +3180,7 @@
 				07702B911F4D75C6000E1DB8 /* gluteBridgeW2.png */,
 				07702B921F4D75C6000E1DB8 /* gluteBridgeW3.png */,
 			);
-			name = gluteBridgeW;
+			path = gluteBridgeW;
 			sourceTree = "<group>";
 		};
 		07702B721F4D754B000E1DB8 /* facePull */ = {
@@ -3193,7 +3193,7 @@
 				07702B871F4D75C1000E1DB8 /* facePull4.png */,
 				07702B881F4D75C1000E1DB8 /* facePull5.png */,
 			);
-			name = facePull;
+			path = facePull;
 			sourceTree = "<group>";
 		};
 		07702B731F4D754B000E1DB8 /* bumKicks */ = {
@@ -3205,7 +3205,7 @@
 				07702B7C1F4D75BB000E1DB8 /* bumKicks3.png */,
 				07702B7D1F4D75BB000E1DB8 /* bumKicks4.png */,
 			);
-			name = bumKicks;
+			path = bumKicks;
 			sourceTree = "<group>";
 		};
 		07702B741F4D754C000E1DB8 /* bodyweightRow */ = {
@@ -3214,7 +3214,7 @@
 				07702B751F4D75B5000E1DB8 /* bodyweightRow.png */,
 				07702B761F4D75B5000E1DB8 /* bodyweightRow1.png */,
 			);
-			name = bodyweightRow;
+			path = bodyweightRow;
 			sourceTree = "<group>";
 		};
 		07702BFD1F4D7B50000E1DB8 /* Cardio */ = {
@@ -3224,54 +3224,54 @@
 				07702BFE1F4D7B6E000E1DB8 /* rowing.png */,
 				07702C001F4D7B78000E1DB8 /* running.png */,
 			);
-			name = Cardio;
+			path = Cardio;
 			sourceTree = "<group>";
 		};
 		07702C021F4D9251000E1DB8 /* Stretching */ = {
 			isa = PBXGroup;
 			children = (
-				07702C2B1F4D929B000E1DB8 /* upwardsDog */,
-				07702C2A1F4D929A000E1DB8 /* extendedPuppy */,
+				07702C151F4D9285000E1DB8 /* behindBackTouch */,
+				07702C181F4D9287000E1DB8 /* bicepStretch */,
 				07702C291F4D9299000E1DB8 /* childPose */,
-				07702C281F4D9298000E1DB8 /* staffPose */,
-				07702C271F4D9297000E1DB8 /* pelvicTilt */,
-				07702C261F4D9296000E1DB8 /* kneeToChest */,
-				07702C251F4D9296000E1DB8 /* seatedTwist */,
-				07702C241F4D9295000E1DB8 /* legsWall */,
-				07702C231F4D9294000E1DB8 /* sideLean */,
+				07702C0A1F4D927C000E1DB8 /* downWardsDogS */,
+				07702C2A1F4D929A000E1DB8 /* extendedPuppy */,
 				07702C221F4D928F000E1DB8 /* extendedSideAngle */,
-				07702C211F4D928E000E1DB8 /* seatedSide */,
+				07702C1A1F4D9289000E1DB8 /* forearmStretch */,
+				07702C141F4D9284000E1DB8 /* frontDelt */,
+				07702C1B1F4D928A000E1DB8 /* headRoll */,
+				07702C261F4D9296000E1DB8 /* kneeToChest */,
+				07702C131F4D9284000E1DB8 /* lateralDelt */,
+				07702C241F4D9295000E1DB8 /* legsWall */,
+				07702C0F1F4D9280000E1DB8 /* lungeStretch */,
+				07702C071F4D9279000E1DB8 /* lungeStretchWall */,
+				07702C1D1F4D928B000E1DB8 /* neckRotator */,
+				07702C171F4D9287000E1DB8 /* pecStretch */,
+				07702C271F4D9297000E1DB8 /* pelvicTilt */,
+				07702C0E1F4D9280000E1DB8 /* pigeonPoseS */,
+				07702C061F4D9277000E1DB8 /* quadStretch */,
+				07702C121F4D9283000E1DB8 /* rearDelt */,
 				07702C201F4D928E000E1DB8 /* rearNeck */,
 				07702C1F1F4D928D000E1DB8 /* rearNeckHand */,
-				07702C1E1F4D928C000E1DB8 /* seatedLateral */,
-				07702C1D1F4D928B000E1DB8 /* neckRotator */,
-				07702C1C1F4D928B000E1DB8 /* scalene */,
-				07702C1B1F4D928A000E1DB8 /* headRoll */,
-				07702C1A1F4D9289000E1DB8 /* forearmStretch */,
-				07702C191F4D9288000E1DB8 /* tricepStretch */,
-				07702C181F4D9287000E1DB8 /* bicepStretch */,
-				07702C171F4D9287000E1DB8 /* pecStretch */,
-				07702C161F4D9286000E1DB8 /* shoulderRoll */,
-				07702C151F4D9285000E1DB8 /* behindBackTouch */,
-				07702C141F4D9284000E1DB8 /* frontDelt */,
-				07702C131F4D9284000E1DB8 /* lateralDelt */,
-				07702C121F4D9283000E1DB8 /* rearDelt */,
 				07702C111F4D9282000E1DB8 /* rotatorCuff */,
-				07702C101F4D9281000E1DB8 /* squatHold */,
-				07702C0F1F4D9280000E1DB8 /* lungeStretch */,
-				07702C0E1F4D9280000E1DB8 /* pigeonPoseS */,
+				07702C1C1F4D928B000E1DB8 /* scalene */,
 				07702C0D1F4D927F000E1DB8 /* seatedGlute */,
+				07702C1E1F4D928C000E1DB8 /* seatedLateral */,
+				07702C211F4D928E000E1DB8 /* seatedSide */,
+				07702C251F4D9296000E1DB8 /* seatedTwist */,
+				07702C161F4D9286000E1DB8 /* shoulderRoll */,
+				07702C231F4D9294000E1DB8 /* sideLean */,
+				07702C091F4D927B000E1DB8 /* singleLegHamstring */,
+				07702C101F4D9281000E1DB8 /* squatHold */,
+				07702C281F4D9298000E1DB8 /* staffPose */,
 				07702C0C1F4D927E000E1DB8 /* standingHamstring */,
 				07702C0B1F4D927D000E1DB8 /* standingSingleLegHamstring */,
-				07702C0A1F4D927C000E1DB8 /* downWardsDogS */,
-				07702C091F4D927B000E1DB8 /* singleLegHamstring */,
-				07702C081F4D927A000E1DB8 /* twoLegHamstring */,
-				07702C071F4D9279000E1DB8 /* lungeStretchWall */,
-				07702C061F4D9277000E1DB8 /* quadStretch */,
 				07702C051F4D9271000E1DB8 /* sumoSquatTwist */,
 				07702C041F4D9270000E1DB8 /* tinyFencerStretch */,
+				07702C191F4D9288000E1DB8 /* tricepStretch */,
+				07702C081F4D927A000E1DB8 /* twoLegHamstring */,
+				07702C2B1F4D929B000E1DB8 /* upwardsDog */,
 			);
-			name = Stretching;
+			path = Stretching;
 			sourceTree = "<group>";
 		};
 		07702C041F4D9270000E1DB8 /* tinyFencerStretch */ = {
@@ -3279,7 +3279,7 @@
 			children = (
 				07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */,
 			);
-			name = tinyFencerStretch;
+			path = tinyFencerStretch;
 			sourceTree = "<group>";
 		};
 		07702C051F4D9271000E1DB8 /* sumoSquatTwist */ = {
@@ -3287,7 +3287,7 @@
 			children = (
 				07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */,
 			);
-			name = sumoSquatTwist;
+			path = sumoSquatTwist;
 			sourceTree = "<group>";
 		};
 		07702C061F4D9277000E1DB8 /* quadStretch */ = {
@@ -3295,7 +3295,7 @@
 			children = (
 				07702C7E1F4D9433000E1DB8 /* quadStretch.png */,
 			);
-			name = quadStretch;
+			path = quadStretch;
 			sourceTree = "<group>";
 		};
 		07702C071F4D9279000E1DB8 /* lungeStretchWall */ = {
@@ -3303,7 +3303,7 @@
 			children = (
 				07702C7C1F4D942E000E1DB8 /* lungeStretchWall.png */,
 			);
-			name = lungeStretchWall;
+			path = lungeStretchWall;
 			sourceTree = "<group>";
 		};
 		07702C081F4D927A000E1DB8 /* twoLegHamstring */ = {
@@ -3311,7 +3311,7 @@
 			children = (
 				07702C7A1F4D9424000E1DB8 /* twoLegHamstring.png */,
 			);
-			name = twoLegHamstring;
+			path = twoLegHamstring;
 			sourceTree = "<group>";
 		};
 		07702C091F4D927B000E1DB8 /* singleLegHamstring */ = {
@@ -3319,7 +3319,7 @@
 			children = (
 				07702C781F4D941D000E1DB8 /* singleLegHamstring.png */,
 			);
-			name = singleLegHamstring;
+			path = singleLegHamstring;
 			sourceTree = "<group>";
 		};
 		07702C0A1F4D927C000E1DB8 /* downWardsDogS */ = {
@@ -3327,7 +3327,7 @@
 			children = (
 				07702C761F4D9418000E1DB8 /* downWardsDogS.png */,
 			);
-			name = downWardsDogS;
+			path = downWardsDogS;
 			sourceTree = "<group>";
 		};
 		07702C0B1F4D927D000E1DB8 /* standingSingleLegHamstring */ = {
@@ -3335,7 +3335,7 @@
 			children = (
 				07702C741F4D9414000E1DB8 /* standingSingleLegHamstring.png */,
 			);
-			name = standingSingleLegHamstring;
+			path = standingSingleLegHamstring;
 			sourceTree = "<group>";
 		};
 		07702C0C1F4D927E000E1DB8 /* standingHamstring */ = {
@@ -3343,7 +3343,7 @@
 			children = (
 				07702C721F4D940F000E1DB8 /* standingHamstring.png */,
 			);
-			name = standingHamstring;
+			path = standingHamstring;
 			sourceTree = "<group>";
 		};
 		07702C0D1F4D927F000E1DB8 /* seatedGlute */ = {
@@ -3351,7 +3351,7 @@
 			children = (
 				07702C701F4D940A000E1DB8 /* seatedGlute.png */,
 			);
-			name = seatedGlute;
+			path = seatedGlute;
 			sourceTree = "<group>";
 		};
 		07702C0E1F4D9280000E1DB8 /* pigeonPoseS */ = {
@@ -3359,7 +3359,7 @@
 			children = (
 				07702C6E1F4D93FE000E1DB8 /* pigeonPoseS.png */,
 			);
-			name = pigeonPoseS;
+			path = pigeonPoseS;
 			sourceTree = "<group>";
 		};
 		07702C0F1F4D9280000E1DB8 /* lungeStretch */ = {
@@ -3367,7 +3367,7 @@
 			children = (
 				07702C6C1F4D93F7000E1DB8 /* lungeStretch.png */,
 			);
-			name = lungeStretch;
+			path = lungeStretch;
 			sourceTree = "<group>";
 		};
 		07702C101F4D9281000E1DB8 /* squatHold */ = {
@@ -3375,7 +3375,7 @@
 			children = (
 				07702C6A1F4D93F1000E1DB8 /* squatHold.png */,
 			);
-			name = squatHold;
+			path = squatHold;
 			sourceTree = "<group>";
 		};
 		07702C111F4D9282000E1DB8 /* rotatorCuff */ = {
@@ -3383,7 +3383,7 @@
 			children = (
 				07702C681F4D93EB000E1DB8 /* rotatorCuff.png */,
 			);
-			name = rotatorCuff;
+			path = rotatorCuff;
 			sourceTree = "<group>";
 		};
 		07702C121F4D9283000E1DB8 /* rearDelt */ = {
@@ -3391,7 +3391,7 @@
 			children = (
 				07702C661F4D93E6000E1DB8 /* rearDeltStretch.png */,
 			);
-			name = rearDelt;
+			path = rearDelt;
 			sourceTree = "<group>";
 		};
 		07702C131F4D9284000E1DB8 /* lateralDelt */ = {
@@ -3399,7 +3399,7 @@
 			children = (
 				07702C641F4D93DE000E1DB8 /* lateralDeltStretch.png */,
 			);
-			name = lateralDelt;
+			path = lateralDelt;
 			sourceTree = "<group>";
 		};
 		07702C141F4D9284000E1DB8 /* frontDelt */ = {
@@ -3407,7 +3407,7 @@
 			children = (
 				07702C621F4D93D8000E1DB8 /* frontDeltStretch.png */,
 			);
-			name = frontDelt;
+			path = frontDelt;
 			sourceTree = "<group>";
 		};
 		07702C151F4D9285000E1DB8 /* behindBackTouch */ = {
@@ -3415,7 +3415,7 @@
 			children = (
 				07702C601F4D93D4000E1DB8 /* behindBackTouch.png */,
 			);
-			name = behindBackTouch;
+			path = behindBackTouch;
 			sourceTree = "<group>";
 		};
 		07702C161F4D9286000E1DB8 /* shoulderRoll */ = {
@@ -3426,7 +3426,7 @@
 				07702C5A1F4D93C6000E1DB8 /* shoulderRoll2.png */,
 				07702C5B1F4D93C6000E1DB8 /* shoulderRoll3.png */,
 			);
-			name = shoulderRoll;
+			path = shoulderRoll;
 			sourceTree = "<group>";
 		};
 		07702C171F4D9287000E1DB8 /* pecStretch */ = {
@@ -3434,7 +3434,7 @@
 			children = (
 				07702C561F4D93C0000E1DB8 /* pecStretch.png */,
 			);
-			name = pecStretch;
+			path = pecStretch;
 			sourceTree = "<group>";
 		};
 		07702C181F4D9287000E1DB8 /* bicepStretch */ = {
@@ -3442,7 +3442,7 @@
 			children = (
 				07702C541F4D93BB000E1DB8 /* bicepStretch.png */,
 			);
-			name = bicepStretch;
+			path = bicepStretch;
 			sourceTree = "<group>";
 		};
 		07702C191F4D9288000E1DB8 /* tricepStretch */ = {
@@ -3450,7 +3450,7 @@
 			children = (
 				07702C521F4D93B7000E1DB8 /* tricepStretch.png */,
 			);
-			name = tricepStretch;
+			path = tricepStretch;
 			sourceTree = "<group>";
 		};
 		07702C1A1F4D9289000E1DB8 /* forearmStretch */ = {
@@ -3458,7 +3458,7 @@
 			children = (
 				07702C501F4D93B3000E1DB8 /* forearmStretch.png */,
 			);
-			name = forearmStretch;
+			path = forearmStretch;
 			sourceTree = "<group>";
 		};
 		07702C1B1F4D928A000E1DB8 /* headRoll */ = {
@@ -3466,7 +3466,7 @@
 			children = (
 				07702C4E1F4D93AD000E1DB8 /* headRoll.png */,
 			);
-			name = headRoll;
+			path = headRoll;
 			sourceTree = "<group>";
 		};
 		07702C1C1F4D928B000E1DB8 /* scalene */ = {
@@ -3474,7 +3474,7 @@
 			children = (
 				07702C4C1F4D93A3000E1DB8 /* scalene.png */,
 			);
-			name = scalene;
+			path = scalene;
 			sourceTree = "<group>";
 		};
 		07702C1D1F4D928B000E1DB8 /* neckRotator */ = {
@@ -3482,7 +3482,7 @@
 			children = (
 				07702C4A1F4D939D000E1DB8 /* neckRotatorStretch.png */,
 			);
-			name = neckRotator;
+			path = neckRotator;
 			sourceTree = "<group>";
 		};
 		07702C1E1F4D928C000E1DB8 /* seatedLateral */ = {
@@ -3490,7 +3490,7 @@
 			children = (
 				07702C481F4D9395000E1DB8 /* seatedLateral.png */,
 			);
-			name = seatedLateral;
+			path = seatedLateral;
 			sourceTree = "<group>";
 		};
 		07702C1F1F4D928D000E1DB8 /* rearNeckHand */ = {
@@ -3498,7 +3498,7 @@
 			children = (
 				07702C461F4D9391000E1DB8 /* rearNeckHand.png */,
 			);
-			name = rearNeckHand;
+			path = rearNeckHand;
 			sourceTree = "<group>";
 		};
 		07702C201F4D928E000E1DB8 /* rearNeck */ = {
@@ -3506,7 +3506,7 @@
 			children = (
 				07702C441F4D938B000E1DB8 /* rearNeckStretch.png */,
 			);
-			name = rearNeck;
+			path = rearNeck;
 			sourceTree = "<group>";
 		};
 		07702C211F4D928E000E1DB8 /* seatedSide */ = {
@@ -3514,7 +3514,7 @@
 			children = (
 				07702C421F4D9386000E1DB8 /* seatedSide.png */,
 			);
-			name = seatedSide;
+			path = seatedSide;
 			sourceTree = "<group>";
 		};
 		07702C221F4D928F000E1DB8 /* extendedSideAngle */ = {
@@ -3522,7 +3522,7 @@
 			children = (
 				07702C401F4D9383000E1DB8 /* extendedSideAngleS.png */,
 			);
-			name = extendedSideAngle;
+			path = extendedSideAngle;
 			sourceTree = "<group>";
 		};
 		07702C231F4D9294000E1DB8 /* sideLean */ = {
@@ -3530,7 +3530,7 @@
 			children = (
 				07702C3E1F4D937D000E1DB8 /* sideLean.png */,
 			);
-			name = sideLean;
+			path = sideLean;
 			sourceTree = "<group>";
 		};
 		07702C241F4D9295000E1DB8 /* legsWall */ = {
@@ -3538,7 +3538,7 @@
 			children = (
 				07702C3C1F4D936D000E1DB8 /* legsWall.png */,
 			);
-			name = legsWall;
+			path = legsWall;
 			sourceTree = "<group>";
 		};
 		07702C251F4D9296000E1DB8 /* seatedTwist */ = {
@@ -3546,7 +3546,7 @@
 			children = (
 				07702C3A1F4D9368000E1DB8 /* seatedTwist.png */,
 			);
-			name = seatedTwist;
+			path = seatedTwist;
 			sourceTree = "<group>";
 		};
 		07702C261F4D9296000E1DB8 /* kneeToChest */ = {
@@ -3554,7 +3554,7 @@
 			children = (
 				07702C381F4D9363000E1DB8 /* kneeToChest.png */,
 			);
-			name = kneeToChest;
+			path = kneeToChest;
 			sourceTree = "<group>";
 		};
 		07702C271F4D9297000E1DB8 /* pelvicTilt */ = {
@@ -3563,7 +3563,7 @@
 				07702C341F4D935F000E1DB8 /* pelvicTilt.png */,
 				07702C351F4D935F000E1DB8 /* pelvicTilt1.png */,
 			);
-			name = pelvicTilt;
+			path = pelvicTilt;
 			sourceTree = "<group>";
 		};
 		07702C281F4D9298000E1DB8 /* staffPose */ = {
@@ -3571,7 +3571,7 @@
 			children = (
 				07702C321F4D9359000E1DB8 /* staffPoseS.png */,
 			);
-			name = staffPose;
+			path = staffPose;
 			sourceTree = "<group>";
 		};
 		07702C291F4D9299000E1DB8 /* childPose */ = {
@@ -3579,7 +3579,7 @@
 			children = (
 				07702C301F4D9354000E1DB8 /* childPoseS.png */,
 			);
-			name = childPose;
+			path = childPose;
 			sourceTree = "<group>";
 		};
 		07702C2A1F4D929A000E1DB8 /* extendedPuppy */ = {
@@ -3587,7 +3587,7 @@
 			children = (
 				07702C2E1F4D9350000E1DB8 /* extendedPuppyS.png */,
 			);
-			name = extendedPuppy;
+			path = extendedPuppy;
 			sourceTree = "<group>";
 		};
 		07702C2B1F4D929B000E1DB8 /* upwardsDog */ = {
@@ -3595,35 +3595,36 @@
 			children = (
 				07702C2C1F4D9347000E1DB8 /* upwardsDogS.png */,
 			);
-			name = upwardsDog;
+			path = upwardsDog;
 			sourceTree = "<group>";
 		};
-		0778761C1F92A44B005CE68A /* Initial/Subscriptions (One time modals) */ = {
+		0778761C1F92A44B005CE68A /* Initial-Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
 				0778761F1F92A45A005CE68A /* Subscriptions */,
 			);
-			name = "Initial/Subscriptions (One time modals)";
+			path = "Initial-Subscriptions";
 			sourceTree = "<group>";
 		};
 		0778761F1F92A45A005CE68A /* Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
-				07DE23041FC0A47400940567 /* SubscriptionScreen.swift */,
 				077B0EDD1FC2C349008F3503 /* Info Tables */,
 				07DE23011FC0916F00940567 /* Subscriptions Other */,
+				07DE23041FC0A47400940567 /* SubscriptionScreen.swift */,
 			);
-			name = Subscriptions;
+			path = Subscriptions;
 			sourceTree = "<group>";
 		};
 		077AC0CE1DA535830026895B = {
 			isa = PBXGroup;
 			children = (
-				077AC0D91DA535830026895B /* MindAndBody */,
-				077AC0F01DA535840026895B /* MindAndBodyTests */,
-				077AC0D81DA535830026895B /* Products */,
 				07A464241FB8C0D800139DCD /* Frameworks */,
+				077AC0D91DA535830026895B /* MindAndBody */,
+				077AC1061DA792EC0026895B /* SF Font */,
+				077AC0F01DA535840026895B /* MindAndBodyTests */,
 				A35CEEA69746A747B1A770FB /* Pods */,
+				077AC0D81DA535830026895B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3639,22 +3640,21 @@
 		077AC0D91DA535830026895B /* MindAndBody */ = {
 			isa = PBXGroup;
 			children = (
-				07A464231FB88C3F00139DCD /* MindAndBody.entitlements */,
-				07FE380E1DF9B3A200E7EA20 /* Localizable.strings */,
 				077AC0DA1DA535830026895B /* AppDelegate.swift */,
+				07FE380E1DF9B3A200E7EA20 /* Localizable.strings */,
 				077AC0E01DA535840026895B /* Main.storyboard */,
-				0782AB551FC4F1A200D34500 /* Walkthroughs */,
 				07094BE71FB0D129003DB553 /* Main Screens */,
-				077E47151EB9DC54005B0B22 /* Slide Menu */,
 				0789ED091F79A71E000EB739 /* Global */,
-				077DAB0E1FD5FCC200CF7949 /* Session Data */,
 				0789ED0A1F79A725000EB739 /* Data */,
-				0778761C1F92A44B005CE68A /* Initial/Subscriptions (One time modals) */,
-				07094BE81FB0D17F003DB553 /* Audio/Visual */,
+				0778761C1F92A44B005CE68A /* Initial-Subscriptions */,
+				077DAB0E1FD5FCC200CF7949 /* Session Data */,
+				077E47151EB9DC54005B0B22 /* Slide Menu */,
+				0782AB551FC4F1A200D34500 /* Walkthroughs */,
+				07094BE81FB0D17F003DB553 /* Audio-Visual */,
 				077AC0E31DA535840026895B /* Assets.xcassets */,
-				077AC0E51DA535840026895B /* LaunchScreen.storyboard */,
 				077AC0E81DA535840026895B /* Info.plist */,
-				077AC1061DA792EC0026895B /* SF Font */,
+				077AC0E51DA535840026895B /* LaunchScreen.storyboard */,
+				07A464231FB88C3F00139DCD /* MindAndBody.entitlements */,
 			);
 			path = MindAndBody;
 			sourceTree = "<group>";
@@ -3662,38 +3662,38 @@
 		077AC0F01DA535840026895B /* MindAndBodyTests */ = {
 			isa = PBXGroup;
 			children = (
-				077AC0F11DA535840026895B /* MindAndBodyTests.swift */,
 				077AC0F31DA535840026895B /* Info.plist */,
+				077AC0F11DA535840026895B /* MindAndBodyTests.swift */,
 			);
 			path = MindAndBodyTests;
 			sourceTree = "<group>";
 		};
-		077AC0FD1DA54C0C0026895B /* MindBody (choices/sessions etc.) */ = {
+		077AC0FD1DA54C0C0026895B /* MindBody (choices-sessions etc.) */ = {
 			isa = PBXGroup;
 			children = (
-				07C2D3BB1EBA88CF000770DE /* MindBody.swift */,
 				07530C971E96716300BD33EC /* Choice Screens */,
 				07530C981E96717B00BD33EC /* Session Screens */,
+				07C2D3BB1EBA88CF000770DE /* MindBody.swift */,
 			);
-			name = "MindBody (choices/sessions etc.)";
+			path = "MindBody (choices-sessions etc.)";
 			sourceTree = "<group>";
 		};
 		077AC0FE1DA54C500026895B /* Lessons */ = {
 			isa = PBXGroup;
 			children = (
-				077AC0FF1DA54C810026895B /* Lessons.swift */,
 				0757326C1E660A1F003DA77E /* Screen */,
+				077AC0FF1DA54C810026895B /* Lessons.swift */,
 			);
-			name = Lessons;
+			path = Lessons;
 			sourceTree = "<group>";
 		};
 		077AC1061DA792EC0026895B /* SF Font */ = {
 			isa = PBXGroup;
 			children = (
-				077AC1381DA793A00026895B /* SF-UI-Text */,
 				077AC11B1DA793750026895B /* SF-UI-Display */,
+				077AC1381DA793A00026895B /* SF-UI-Text */,
 			);
-			name = "SF Font";
+			path = "SF Font";
 			sourceTree = "<group>";
 		};
 		077AC11B1DA793750026895B /* SF-UI-Display */ = {
@@ -3709,7 +3709,7 @@
 				077AC1101DA7936E0026895B /* SF-UI-Display-Thin.otf */,
 				077AC1111DA7936E0026895B /* SF-UI-Display-Ultralight.otf */,
 			);
-			name = "SF-UI-Display";
+			path = "SF-UI-Display";
 			sourceTree = "<group>";
 		};
 		077AC1381DA793A00026895B /* SF-UI-Text */ = {
@@ -3730,7 +3730,7 @@
 				077AC1281DA793950026895B /* SF-UI-Text-Ultrathin.otf */,
 				077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */,
 			);
-			name = "SF-UI-Text";
+			path = "SF-UI-Text";
 			sourceTree = "<group>";
 		};
 		077B0EDD1FC2C349008F3503 /* Info Tables */ = {
@@ -3739,19 +3739,19 @@
 				0748C2E01FC2DC4F0087992D /* InfoPageController.swift */,
 				077B0EE01FC2C35A008F3503 /* InfoTables.swift */,
 			);
-			name = "Info Tables";
+			path = "Info Tables";
 			sourceTree = "<group>";
 		};
 		077DAB0E1FD5FCC200CF7949 /* Session Data */ = {
 			isa = PBXGroup;
 			children = (
-				077DAB121FD5FCD500CF7949 /* Sessions.swift */,
+				077DAB161FD5FE1900CF7949 /* LittleThings.swift */,
 				077DAB141FD5FCE300CF7949 /* Movements.swift */,
+				077DAB121FD5FCD500CF7949 /* Sessions.swift */,
 				07002A5F1FD5ACE00000A755 /* SortedSessionsFinalChoice.swift */,
 				07D127F51FD6FB1F00C88352 /* SortedSessionsSchedule.swift */,
-				077DAB161FD5FE1900CF7949 /* LittleThings.swift */,
 			);
-			name = "Session Data";
+			path = "Session Data";
 			sourceTree = "<group>";
 		};
 		077E47151EB9DC54005B0B22 /* Slide Menu */ = {
@@ -3760,7 +3760,7 @@
 				072CD2AD1EBA41AE002E2CD6 /* Functions */,
 				077E471E1EB9E221005B0B22 /* SlideMenuView.swift */,
 			);
-			name = "Slide Menu";
+			path = "Slide Menu";
 			sourceTree = "<group>";
 		};
 		0782AB551FC4F1A200D34500 /* Walkthroughs */ = {
@@ -3768,28 +3768,28 @@
 			children = (
 				0782AB561FC4F1BB00D34500 /* ScheduleWalkthrough.swift */,
 			);
-			name = Walkthroughs;
+			path = Walkthroughs;
 			sourceTree = "<group>";
 		};
 		0789ED091F79A71E000EB739 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				07248E061F31CB5100230EAF /* GlobalVariables.swift */,
-				07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */,
 				0794A74C1FBCC3D70029968D /* ActionSheet.swift */,
+				07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */,
+				07248E061F31CB5100230EAF /* GlobalVariables.swift */,
 				078674FD1FB84F7000C6B74C /* ICloudStorage.swift */,
 			);
-			name = Global;
+			path = Global;
 			sourceTree = "<group>";
 		};
 		0789ED0A1F79A725000EB739 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				073BA9CA1F6E81B8005DB480 /* DataStructuresOLD.swift */,
-				0789ED051F79A6EA000EB739 /* UserData.swift */,
 				07B852611F83756C005F3781 /* ScheduleData.swift */,
+				0789ED051F79A6EA000EB739 /* UserData.swift */,
 			);
-			name = Data;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		078C59541EC893EA00FA1890 /* Sounds */ = {
@@ -3798,59 +3798,59 @@
 				07B4E00B1F3774E500C77807 /* Background Sounds */,
 				07B4E00A1F3774DB00C77807 /* Bells */,
 			);
-			name = Sounds;
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		078F409F1F4B793700B4F566 /* Demonstration Images */ = {
 			isa = PBXGroup;
 			children = (
-				078F40C11F4C286E00B4F566 /* FoamRoll/JointRotations */,
+				07702BFD1F4D7B50000E1DB8 /* Cardio */,
+				078F40C11F4C286E00B4F566 /* FoamRoll-JointRotations */,
+				072900521F4D716B0048A355 /* Shared */,
+				07702C021F4D9251000E1DB8 /* Stretching */,
 				078F40A01F4B795700B4F566 /* Warmup */,
 				07E45E661F4DB0D200A5AF49 /* Workout */,
-				07702BFD1F4D7B50000E1DB8 /* Cardio */,
-				07702C021F4D9251000E1DB8 /* Stretching */,
-				072900521F4D716B0048A355 /* Shared */,
 				07E45E651F4DB0CA00A5AF49 /* Yoga */,
 			);
-			name = "Demonstration Images";
+			path = "Demonstration Images";
 			sourceTree = "<group>";
 		};
 		078F40A01F4B795700B4F566 /* Warmup */ = {
 			isa = PBXGroup;
 			children = (
-				078F40A11F4C271500B4F566 /* cardioWarmup */,
-				078F40A41F4C273600B4F566 /* legsToSideSquat */,
-				078F40BD1F4C27AD00B4F566 /* sideLegKick */,
-				078F40BC1F4C27AC00B4F566 /* scorpionKick */,
-				078F40BB1F4C27AC00B4F566 /* sideBend */,
-				078F40BA1F4C27AB00B4F566 /* legsToSideTwist */,
-				078F40B91F4C27AA00B4F566 /* upperBackRotation */,
-				078F40B81F4C27A900B4F566 /* latStretch */,
-				078F40B71F4C27A900B4F566 /* lyingSideWindmill */,
-				078F40B61F4C27A800B4F566 /* wallSlides */,
-				078F40B51F4C27A700B4F566 /* wallReaches */,
-				078F40B41F4C27A700B4F566 /* shoulderRotationW */,
-				078F40B31F4C27A600B4F566 /* forearmWallSlides135 */,
-				078F40B21F4C27A500B4F566 /* superManShoulder */,
-				078F40B11F4C27A500B4F566 /* externalRotation */,
-				078F40B01F4C27A400B4F566 /* internalRotation */,
-				078F40AF1F4C27A200B4F566 /* shoulderDislocation */,
-				078F40AE1F4C27A100B4F566 /* seatedKneeDrop */,
-				078F40AD1F4C27A000B4F566 /* cossakSquat */,
-				078F40AC1F4C279F00B4F566 /* hipHinges */,
-				078F40AB1F4C279F00B4F566 /* lungeTwist */,
-				078F40AA1F4C279E00B4F566 /* sideLegSwings */,
-				0729FFDF1F4D71110048A355 /* frontLegSwings */,
-				078F40A91F4C279600B4F566 /* spiderManOverheadReach */,
-				078F40A81F4C279500B4F566 /* forefootBounces */,
 				078F40A71F4C276600B4F566 /* aSkips */,
 				078F40A61F4C276200B4F566 /* bSkips */,
+				078F40A11F4C271500B4F566 /* cardioWarmup */,
+				078F40AD1F4C27A000B4F566 /* cossakSquat */,
+				078F40B11F4C27A500B4F566 /* externalRotation */,
+				078F40B31F4C27A600B4F566 /* forearmWallSlides135 */,
+				078F40A81F4C279500B4F566 /* forefootBounces */,
+				0729FFDF1F4D71110048A355 /* frontLegSwings */,
 				078F40A51F4C274A00B4F566 /* grapVines */,
+				078F40AC1F4C279F00B4F566 /* hipHinges */,
+				078F40B01F4C27A400B4F566 /* internalRotation */,
+				078F40B81F4C27A900B4F566 /* latStretch */,
 				078F40BE1F4C283F00B4F566 /* lateralBound */,
-				078F40C01F4C284100B4F566 /* straightLegBound */,
+				078F40A41F4C273600B4F566 /* legsToSideSquat */,
+				078F40BA1F4C27AB00B4F566 /* legsToSideTwist */,
+				078F40AB1F4C279F00B4F566 /* lungeTwist */,
+				078F40B71F4C27A900B4F566 /* lyingSideWindmill */,
+				078F40BC1F4C27AC00B4F566 /* scorpionKick */,
+				078F40AE1F4C27A100B4F566 /* seatedKneeDrop */,
+				078F40AF1F4C27A200B4F566 /* shoulderDislocation */,
+				078F40B41F4C27A700B4F566 /* shoulderRotationW */,
+				078F40BB1F4C27AC00B4F566 /* sideBend */,
+				078F40BD1F4C27AD00B4F566 /* sideLegKick */,
+				078F40AA1F4C279E00B4F566 /* sideLegSwings */,
+				078F40A91F4C279600B4F566 /* spiderManOverheadReach */,
 				078F40BF1F4C284000B4F566 /* sprints */,
+				078F40C01F4C284100B4F566 /* straightLegBound */,
+				078F40B21F4C27A500B4F566 /* superManShoulder */,
+				078F40B91F4C27AA00B4F566 /* upperBackRotation */,
+				078F40B51F4C27A700B4F566 /* wallReaches */,
+				078F40B61F4C27A800B4F566 /* wallSlides */,
 			);
-			name = Warmup;
+			path = Warmup;
 			sourceTree = "<group>";
 		};
 		078F40A11F4C271500B4F566 /* cardioWarmup */ = {
@@ -3858,7 +3858,7 @@
 			children = (
 				07FFA30E1F4C614B00E9B0C1 /* cardioWarmup.png */,
 			);
-			name = cardioWarmup;
+			path = cardioWarmup;
 			sourceTree = "<group>";
 		};
 		078F40A41F4C273600B4F566 /* legsToSideSquat */ = {
@@ -3870,7 +3870,7 @@
 				07FFA3151F4C615400E9B0C1 /* legsToSideSquat3.png */,
 				07FFA3161F4C615400E9B0C1 /* legsToSideSquat4.png */,
 			);
-			name = legsToSideSquat;
+			path = legsToSideSquat;
 			sourceTree = "<group>";
 		};
 		078F40A51F4C274A00B4F566 /* grapVines */ = {
@@ -3878,7 +3878,7 @@
 			children = (
 				072900281F4D714F0048A355 /* grapeVines.png */,
 			);
-			name = grapVines;
+			path = grapVines;
 			sourceTree = "<group>";
 		};
 		078F40A61F4C276200B4F566 /* bSkips */ = {
@@ -3886,6 +3886,8 @@
 			children = (
 				072900101F4D71460048A355 /* bSkips.png */,
 				072900111F4D71460048A355 /* bSkips1.png */,
+				0729001A1F4D71460048A355 /* bSkips10.png */,
+				0729001B1F4D71460048A355 /* bSkips11.png */,
 				072900121F4D71460048A355 /* bSkips2.png */,
 				072900131F4D71460048A355 /* bSkips3.png */,
 				072900141F4D71460048A355 /* bSkips4.png */,
@@ -3894,10 +3896,8 @@
 				072900171F4D71460048A355 /* bSkips7.png */,
 				072900181F4D71460048A355 /* bSkips8.png */,
 				072900191F4D71460048A355 /* bSkips9.png */,
-				0729001A1F4D71460048A355 /* bSkips10.png */,
-				0729001B1F4D71460048A355 /* bSkips11.png */,
 			);
-			name = bSkips;
+			path = bSkips;
 			sourceTree = "<group>";
 		};
 		078F40A71F4C276600B4F566 /* aSkips */ = {
@@ -3910,7 +3910,7 @@
 				072900081F4D713F0048A355 /* aSkips4.png */,
 				072900091F4D713F0048A355 /* aSkips5.png */,
 			);
-			name = aSkips;
+			path = aSkips;
 			sourceTree = "<group>";
 		};
 		078F40A81F4C279500B4F566 /* forefootBounces */ = {
@@ -3921,7 +3921,7 @@
 				0729FFFE1F4D713A0048A355 /* forefootBounces2.png */,
 				0729FFFF1F4D713A0048A355 /* forefootBounces3.png */,
 			);
-			name = forefootBounces;
+			path = forefootBounces;
 			sourceTree = "<group>";
 		};
 		078F40A91F4C279600B4F566 /* spiderManOverheadReach */ = {
@@ -3936,7 +3936,7 @@
 				0729FFF21F4D712F0048A355 /* spiderManOverheadReach6.png */,
 				0729FFF31F4D712F0048A355 /* spiderManOverheadReach7.png */,
 			);
-			name = spiderManOverheadReach;
+			path = spiderManOverheadReach;
 			sourceTree = "<group>";
 		};
 		078F40AA1F4C279E00B4F566 /* sideLegSwings */ = {
@@ -3949,7 +3949,7 @@
 				0729FFD71F4D71020048A355 /* sideLegSwings4.png */,
 				0729FFD81F4D71020048A355 /* sideLegSwings5.png */,
 			);
-			name = sideLegSwings;
+			path = sideLegSwings;
 			sourceTree = "<group>";
 		};
 		078F40AB1F4C279F00B4F566 /* lungeTwist */ = {
@@ -3957,6 +3957,12 @@
 			children = (
 				0729FFB31F4D70F50048A355 /* lungeTwist.png */,
 				0729FFB41F4D70F50048A355 /* lungeTwist1.png */,
+				0729FFBD1F4D70F50048A355 /* lungeTwist10.png */,
+				0729FFBE1F4D70F50048A355 /* lungeTwist11.png */,
+				0729FFBF1F4D70F50048A355 /* lungeTwist12.png */,
+				0729FFC01F4D70F50048A355 /* lungeTwist13.png */,
+				0729FFC11F4D70F50048A355 /* lungeTwist14.png */,
+				0729FFC21F4D70F50048A355 /* lungeTwist15.png */,
 				0729FFB51F4D70F50048A355 /* lungeTwist2.png */,
 				0729FFB61F4D70F50048A355 /* lungeTwist3.png */,
 				0729FFB71F4D70F50048A355 /* lungeTwist4.png */,
@@ -3965,14 +3971,8 @@
 				0729FFBA1F4D70F50048A355 /* lungeTwist7.png */,
 				0729FFBB1F4D70F50048A355 /* lungeTwist8.png */,
 				0729FFBC1F4D70F50048A355 /* lungeTwist9.png */,
-				0729FFBD1F4D70F50048A355 /* lungeTwist10.png */,
-				0729FFBE1F4D70F50048A355 /* lungeTwist11.png */,
-				0729FFBF1F4D70F50048A355 /* lungeTwist12.png */,
-				0729FFC01F4D70F50048A355 /* lungeTwist13.png */,
-				0729FFC11F4D70F50048A355 /* lungeTwist14.png */,
-				0729FFC21F4D70F50048A355 /* lungeTwist15.png */,
 			);
-			name = lungeTwist;
+			path = lungeTwist;
 			sourceTree = "<group>";
 		};
 		078F40AC1F4C279F00B4F566 /* hipHinges */ = {
@@ -3984,7 +3984,7 @@
 				0729FFAC1F4D70EC0048A355 /* hipHinges3.png */,
 				0729FFAD1F4D70EC0048A355 /* hipHinges4.png */,
 			);
-			name = hipHinges;
+			path = hipHinges;
 			sourceTree = "<group>";
 		};
 		078F40AD1F4C27A000B4F566 /* cossakSquat */ = {
@@ -3999,7 +3999,7 @@
 				0729FF9D1F4D70E40048A355 /* cossakSquat6.png */,
 				0729FF9E1F4D70E40048A355 /* cossakSquat7.png */,
 			);
-			name = cossakSquat;
+			path = cossakSquat;
 			sourceTree = "<group>";
 		};
 		078F40AE1F4C27A100B4F566 /* seatedKneeDrop */ = {
@@ -4011,7 +4011,7 @@
 				07FFA38B1F4C61D700E9B0C1 /* seatedKneeDrop3.png */,
 				07FFA38C1F4C61D700E9B0C1 /* seatedKneeDrop4.png */,
 			);
-			name = seatedKneeDrop;
+			path = seatedKneeDrop;
 			sourceTree = "<group>";
 		};
 		078F40AF1F4C27A200B4F566 /* shoulderDislocation */ = {
@@ -4022,7 +4022,7 @@
 				07FFA3821F4C61CD00E9B0C1 /* shoulderDislocation2.png */,
 				07FFA3831F4C61CD00E9B0C1 /* shoulderDislocation3.png */,
 			);
-			name = shoulderDislocation;
+			path = shoulderDislocation;
 			sourceTree = "<group>";
 		};
 		078F40B01F4C27A400B4F566 /* internalRotation */ = {
@@ -4034,7 +4034,7 @@
 				07FFA3791F4C61C800E9B0C1 /* internalRotation3.png */,
 				07FFA37A1F4C61C800E9B0C1 /* internalRotation4.png */,
 			);
-			name = internalRotation;
+			path = internalRotation;
 			sourceTree = "<group>";
 		};
 		078F40B11F4C27A500B4F566 /* externalRotation */ = {
@@ -4046,7 +4046,7 @@
 				07FFA36F1F4C61BE00E9B0C1 /* externalRotation3.png */,
 				07FFA3701F4C61BE00E9B0C1 /* externalRotation4.png */,
 			);
-			name = externalRotation;
+			path = externalRotation;
 			sourceTree = "<group>";
 		};
 		078F40B21F4C27A500B4F566 /* superManShoulder */ = {
@@ -4058,7 +4058,7 @@
 				07FFA3651F4C61B300E9B0C1 /* superManShoulder3.png */,
 				07FFA3661F4C61B300E9B0C1 /* superManShoulder4.png */,
 			);
-			name = superManShoulder;
+			path = superManShoulder;
 			sourceTree = "<group>";
 		};
 		078F40B31F4C27A600B4F566 /* forearmWallSlides135 */ = {
@@ -4068,7 +4068,7 @@
 				07FFA35D1F4C61A900E9B0C1 /* forearmWallSlides1351.png */,
 				07FFA35E1F4C61A900E9B0C1 /* forearmWallSlides1352.png */,
 			);
-			name = forearmWallSlides135;
+			path = forearmWallSlides135;
 			sourceTree = "<group>";
 		};
 		078F40B41F4C27A700B4F566 /* shoulderRotationW */ = {
@@ -4078,7 +4078,7 @@
 				07FFA3571F4C61A300E9B0C1 /* shoulderRotationW1.png */,
 				07FFA3581F4C61A300E9B0C1 /* shoulderRotationW2.png */,
 			);
-			name = shoulderRotationW;
+			path = shoulderRotationW;
 			sourceTree = "<group>";
 		};
 		078F40B51F4C27A700B4F566 /* wallReaches */ = {
@@ -4088,7 +4088,7 @@
 				07FFA3511F4C619A00E9B0C1 /* wallReaches1.png */,
 				07FFA3521F4C619A00E9B0C1 /* wallReaches2.png */,
 			);
-			name = wallReaches;
+			path = wallReaches;
 			sourceTree = "<group>";
 		};
 		078F40B61F4C27A800B4F566 /* wallSlides */ = {
@@ -4098,7 +4098,7 @@
 				07FFA34B1F4C619400E9B0C1 /* wallSlides1.png */,
 				07FFA34C1F4C619400E9B0C1 /* wallSlides2.png */,
 			);
-			name = wallSlides;
+			path = wallSlides;
 			sourceTree = "<group>";
 		};
 		078F40B71F4C27A900B4F566 /* lyingSideWindmill */ = {
@@ -4110,7 +4110,7 @@
 				07FFA3431F4C618B00E9B0C1 /* lyingSideWindmill3.png */,
 				07FFA3441F4C618B00E9B0C1 /* lyingSideWindmill4.png */,
 			);
-			name = lyingSideWindmill;
+			path = lyingSideWindmill;
 			sourceTree = "<group>";
 		};
 		078F40B81F4C27A900B4F566 /* latStretch */ = {
@@ -4118,7 +4118,7 @@
 			children = (
 				07FFA33E1F4C618200E9B0C1 /* latStretch.png */,
 			);
-			name = latStretch;
+			path = latStretch;
 			sourceTree = "<group>";
 		};
 		078F40B91F4C27AA00B4F566 /* upperBackRotation */ = {
@@ -4128,7 +4128,7 @@
 				07FFA3391F4C617B00E9B0C1 /* upperBackRotation1.png */,
 				07FFA33A1F4C617B00E9B0C1 /* upperBackRotation2.png */,
 			);
-			name = upperBackRotation;
+			path = upperBackRotation;
 			sourceTree = "<group>";
 		};
 		078F40BA1F4C27AB00B4F566 /* legsToSideTwist */ = {
@@ -4140,7 +4140,7 @@
 				07FFA3311F4C617200E9B0C1 /* legsToSideTwist3.png */,
 				07FFA3321F4C617200E9B0C1 /* legsToSideTwist4.png */,
 			);
-			name = legsToSideTwist;
+			path = legsToSideTwist;
 			sourceTree = "<group>";
 		};
 		078F40BB1F4C27AC00B4F566 /* sideBend */ = {
@@ -4150,7 +4150,7 @@
 				07FFA3291F4C616D00E9B0C1 /* sideBend1.png */,
 				07FFA32A1F4C616D00E9B0C1 /* sideBend2.png */,
 			);
-			name = sideBend;
+			path = sideBend;
 			sourceTree = "<group>";
 		};
 		078F40BC1F4C27AC00B4F566 /* scorpionKick */ = {
@@ -4160,7 +4160,7 @@
 				07FFA3231F4C616500E9B0C1 /* scorpionKick1.png */,
 				07FFA3241F4C616500E9B0C1 /* scorpionKick2.png */,
 			);
-			name = scorpionKick;
+			path = scorpionKick;
 			sourceTree = "<group>";
 		};
 		078F40BD1F4C27AD00B4F566 /* sideLegKick */ = {
@@ -4170,7 +4170,7 @@
 				07FFA31D1F4C615C00E9B0C1 /* sideLegKick1.png */,
 				07FFA31E1F4C615C00E9B0C1 /* sideLegKick2.png */,
 			);
-			name = sideLegKick;
+			path = sideLegKick;
 			sourceTree = "<group>";
 		};
 		078F40BE1F4C283F00B4F566 /* lateralBound */ = {
@@ -4187,7 +4187,7 @@
 				072900321F4D71550048A355 /* lateralBound8.png */,
 				072900331F4D71550048A355 /* lateralBound9.png */,
 			);
-			name = lateralBound;
+			path = lateralBound;
 			sourceTree = "<group>";
 		};
 		078F40BF1F4C284000B4F566 /* sprints */ = {
@@ -4195,7 +4195,7 @@
 			children = (
 				072900501F4D71650048A355 /* sprints.png */,
 			);
-			name = sprints;
+			path = sprints;
 			sourceTree = "<group>";
 		};
 		078F40C01F4C284100B4F566 /* straightLegBound */ = {
@@ -4211,34 +4211,34 @@
 				072900451F4D715D0048A355 /* straightLegBound7.png */,
 				072900461F4D715D0048A355 /* straightLegBound8.png */,
 			);
-			name = straightLegBound;
+			path = straightLegBound;
 			sourceTree = "<group>";
 		};
-		078F40C11F4C286E00B4F566 /* FoamRoll/JointRotations */ = {
+		078F40C11F4C286E00B4F566 /* FoamRoll-JointRotations */ = {
 			isa = PBXGroup;
 			children = (
-				078F40D61F4C28BE00B4F566 /* wristRotations */,
-				078F40D51F4C28BD00B4F566 /* elbowRotations */,
-				078F40D41F4C28BD00B4F566 /* shoulderRotations */,
-				078F40D31F4C28BC00B4F566 /* neckRotations */,
-				078F40C31F4C28AB00B4F566 /* waistRotations */,
-				078F40D21F4C28BC00B4F566 /* hipRotations */,
-				078F40D11F4C28BB00B4F566 /* kneeRotations */,
+				078F40C91F4C28B600B4F566 /* adductorFoam */,
 				078F40D01F4C28BA00B4F566 /* ankleRotations */,
 				078F40CF1F4C28BA00B4F566 /* backFoam */,
-				078F40CE1F4C28B900B4F566 /* thoracicSpineFoam */,
-				078F40CD1F4C28B900B4F566 /* latFoam */,
-				078F40CC1F4C28B800B4F566 /* pecDeltFoam */,
-				078F40CB1F4C28B700B4F566 /* rearDeltFoam */,
-				078F40CA1F4C28B700B4F566 /* quadFoam */,
-				078F40C91F4C28B600B4F566 /* adductorFoam */,
-				078F40C81F4C28B500B4F566 /* hamstringFoam */,
-				078F40C71F4C28B500B4F566 /* gluteFoam */,
 				078F40C61F4C28B400B4F566 /* calveFoam */,
+				078F40D51F4C28BD00B4F566 /* elbowRotations */,
+				078F40C71F4C28B500B4F566 /* gluteFoam */,
+				078F40C81F4C28B500B4F566 /* hamstringFoam */,
+				078F40D21F4C28BC00B4F566 /* hipRotations */,
 				078F40C51F4C28B300B4F566 /* itBand */,
+				078F40D11F4C28BB00B4F566 /* kneeRotations */,
+				078F40CD1F4C28B900B4F566 /* latFoam */,
+				078F40D31F4C28BC00B4F566 /* neckRotations */,
+				078F40CC1F4C28B800B4F566 /* pecDeltFoam */,
+				078F40CA1F4C28B700B4F566 /* quadFoam */,
+				078F40CB1F4C28B700B4F566 /* rearDeltFoam */,
+				078F40D41F4C28BD00B4F566 /* shoulderRotations */,
 				078F40C41F4C28B300B4F566 /* standingOnBall */,
+				078F40CE1F4C28B900B4F566 /* thoracicSpineFoam */,
+				078F40C31F4C28AB00B4F566 /* waistRotations */,
+				078F40D61F4C28BE00B4F566 /* wristRotations */,
 			);
-			name = FoamRoll/JointRotations;
+			path = "FoamRoll-JointRotations";
 			sourceTree = "<group>";
 		};
 		078F40C31F4C28AB00B4F566 /* waistRotations */ = {
@@ -4252,7 +4252,7 @@
 				07038CF81F4C5FFA001CC6D5 /* waistRotations5.png */,
 				07038CF91F4C5FFA001CC6D5 /* waistRotations6.png */,
 			);
-			name = waistRotations;
+			path = waistRotations;
 			sourceTree = "<group>";
 		};
 		078F40C41F4C28B300B4F566 /* standingOnBall */ = {
@@ -4260,7 +4260,7 @@
 			children = (
 				07038D891F4C6088001CC6D5 /* standingOnBall.png */,
 			);
-			name = standingOnBall;
+			path = standingOnBall;
 			sourceTree = "<group>";
 		};
 		078F40C51F4C28B300B4F566 /* itBand */ = {
@@ -4271,7 +4271,7 @@
 				07038D831F4C6081001CC6D5 /* itBandFoam2.png */,
 				07038D841F4C6081001CC6D5 /* itBandFoam3.png */,
 			);
-			name = itBand;
+			path = itBand;
 			sourceTree = "<group>";
 		};
 		078F40C61F4C28B400B4F566 /* calveFoam */ = {
@@ -4284,7 +4284,7 @@
 				07038D791F4C6079001CC6D5 /* calveFoam4.png */,
 				07038D7A1F4C6079001CC6D5 /* calveFoam5.png */,
 			);
-			name = calveFoam;
+			path = calveFoam;
 			sourceTree = "<group>";
 		};
 		078F40C71F4C28B500B4F566 /* gluteFoam */ = {
@@ -4296,7 +4296,7 @@
 				07038D6E1F4C6070001CC6D5 /* gluteFoam3.png */,
 				07038D6F1F4C6070001CC6D5 /* gluteFoam4.png */,
 			);
-			name = gluteFoam;
+			path = gluteFoam;
 			sourceTree = "<group>";
 		};
 		078F40C81F4C28B500B4F566 /* hamstringFoam */ = {
@@ -4308,7 +4308,7 @@
 				07038D641F4C6067001CC6D5 /* hamstringFoam3.png */,
 				07038D651F4C6067001CC6D5 /* hamstringFoam4.png */,
 			);
-			name = hamstringFoam;
+			path = hamstringFoam;
 			sourceTree = "<group>";
 		};
 		078F40C91F4C28B600B4F566 /* adductorFoam */ = {
@@ -4319,7 +4319,7 @@
 				07038D5B1F4C605B001CC6D5 /* adductorFoam2.png */,
 				07038D5C1F4C605B001CC6D5 /* adductorFoam3.png */,
 			);
-			name = adductorFoam;
+			path = adductorFoam;
 			sourceTree = "<group>";
 		};
 		078F40CA1F4C28B700B4F566 /* quadFoam */ = {
@@ -4333,7 +4333,7 @@
 				07038D501F4C604D001CC6D5 /* quadFoam5.png */,
 				07038D511F4C604D001CC6D5 /* quadFoam6.png */,
 			);
-			name = quadFoam;
+			path = quadFoam;
 			sourceTree = "<group>";
 		};
 		078F40CB1F4C28B700B4F566 /* rearDeltFoam */ = {
@@ -4341,7 +4341,7 @@
 			children = (
 				07038D491F4C6044001CC6D5 /* rearDeltFoam.png */,
 			);
-			name = rearDeltFoam;
+			path = rearDeltFoam;
 			sourceTree = "<group>";
 		};
 		078F40CC1F4C28B800B4F566 /* pecDeltFoam */ = {
@@ -4349,7 +4349,7 @@
 			children = (
 				07038D471F4C603B001CC6D5 /* pecDeltFoam.png */,
 			);
-			name = pecDeltFoam;
+			path = pecDeltFoam;
 			sourceTree = "<group>";
 		};
 		078F40CD1F4C28B900B4F566 /* latFoam */ = {
@@ -4361,7 +4361,7 @@
 				07038D401F4C6032001CC6D5 /* latFoam3.png */,
 				07038D411F4C6032001CC6D5 /* latFoam4.png */,
 			);
-			name = latFoam;
+			path = latFoam;
 			sourceTree = "<group>";
 		};
 		078F40CE1F4C28B900B4F566 /* thoracicSpineFoam */ = {
@@ -4374,7 +4374,7 @@
 				07038D351F4C6029001CC6D5 /* thoracicSpineFoam4.png */,
 				07038D361F4C6029001CC6D5 /* thoracicSpineFoam5.png */,
 			);
-			name = thoracicSpineFoam;
+			path = thoracicSpineFoam;
 			sourceTree = "<group>";
 		};
 		078F40CF1F4C28BA00B4F566 /* backFoam */ = {
@@ -4386,7 +4386,7 @@
 				07038D2A1F4C6020001CC6D5 /* backFoam3.png */,
 				07038D2B1F4C6020001CC6D5 /* backFoam4.png */,
 			);
-			name = backFoam;
+			path = backFoam;
 			sourceTree = "<group>";
 		};
 		078F40D01F4C28BA00B4F566 /* ankleRotations */ = {
@@ -4398,7 +4398,7 @@
 				07038D201F4C6018001CC6D5 /* ankleRotations3.png */,
 				07038D211F4C6018001CC6D5 /* ankleRotations4.png */,
 			);
-			name = ankleRotations;
+			path = ankleRotations;
 			sourceTree = "<group>";
 		};
 		078F40D11F4C28BB00B4F566 /* kneeRotations */ = {
@@ -4411,7 +4411,7 @@
 				07038D151F4C600E001CC6D5 /* kneeRotations4.png */,
 				07038D161F4C600E001CC6D5 /* kneeRotations5.png */,
 			);
-			name = kneeRotations;
+			path = kneeRotations;
 			sourceTree = "<group>";
 		};
 		078F40D21F4C28BC00B4F566 /* hipRotations */ = {
@@ -4426,7 +4426,7 @@
 				07038D071F4C6002001CC6D5 /* hipRotations6.png */,
 				07038D081F4C6002001CC6D5 /* hipRotations7.png */,
 			);
-			name = hipRotations;
+			path = hipRotations;
 			sourceTree = "<group>";
 		};
 		078F40D31F4C28BC00B4F566 /* neckRotations */ = {
@@ -4438,7 +4438,7 @@
 				07038CEC1F4C5FF1001CC6D5 /* neckRotations3.png */,
 				07038CED1F4C5FF1001CC6D5 /* neckRotations4.png */,
 			);
-			name = neckRotations;
+			path = neckRotations;
 			sourceTree = "<group>";
 		};
 		078F40D41F4C28BD00B4F566 /* shoulderRotations */ = {
@@ -4452,7 +4452,7 @@
 				07038CE01F4C5FE9001CC6D5 /* shoulderRotations5.png */,
 				07038CE11F4C5FE9001CC6D5 /* shoulderRotations6.png */,
 			);
-			name = shoulderRotations;
+			path = shoulderRotations;
 			sourceTree = "<group>";
 		};
 		078F40D51F4C28BD00B4F566 /* elbowRotations */ = {
@@ -4464,7 +4464,7 @@
 				07038CD41F4C5FE0001CC6D5 /* elbowRotations3.png */,
 				07038CD51F4C5FE0001CC6D5 /* elbowRotations4.png */,
 			);
-			name = elbowRotations;
+			path = elbowRotations;
 			sourceTree = "<group>";
 		};
 		078F40D61F4C28BE00B4F566 /* wristRotations */ = {
@@ -4476,7 +4476,7 @@
 				07038CCA1F4C5FD8001CC6D5 /* wristRotations3.png */,
 				07038CCB1F4C5FD8001CC6D5 /* wristRotations4.png */,
 			);
-			name = wristRotations;
+			path = wristRotations;
 			sourceTree = "<group>";
 		};
 		079187271E7B4DCD00E7153A /* Workout */ = {
@@ -4484,26 +4484,26 @@
 			children = (
 				0791872A1E7B4E2C00E7153A /* SessionScreen.swift */,
 			);
-			name = Workout;
+			path = Workout;
 			sourceTree = "<group>";
 		};
 		0798381F1F8A8DDF007C3CF5 /* Time Based */ = {
 			isa = PBXGroup;
 			children = (
-				0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */,
 				077206811F90C52000818088 /* TimeBasedHelpers.swift */,
+				0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */,
 			);
-			name = "Time Based";
+			path = "Time Based";
 			sourceTree = "<group>";
 		};
 		07995A371E86A83A0009C9B1 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				0794A7481FBC7F550029968D /* Settings.swift */,
 				07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */,
+				0794A7481FBC7F550029968D /* Settings.swift */,
 				074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */,
 			);
-			name = Settings;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		07A464241FB8C0D800139DCD /* Frameworks */ = {
@@ -4519,25 +4519,25 @@
 		07B4E00A1F3774DB00C77807 /* Bells */ = {
 			isa = PBXGroup;
 			children = (
-				076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */,
-				076C680F1ED1BFAD009160C2 /* Tibetan Singing Bowl (Low).caf */,
-				076C68101ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(x4).caf */,
-				076C68111ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf */,
-				076C68121ED1BFAD009160C2 /* Tibetan Singing Bowl (High).caf */,
-				076C68131ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(x4).caf */,
-				076C68141ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(Singing).caf */,
-				076C68151ED1BFAD009160C2 /* Australian Rain Stick.caf */,
-				076C68161ED1BFAD009160C2 /* Australian Rain Stick (x2).caf */,
 				076C68171ED1BFAD009160C2 /* Australian Rain Stick (2 sticks).caf */,
-				076C68181ED1BFAD009160C2 /* Wind Chimes.caf */,
-				076C68191ED1BFAD009160C2 /* Gambang (Wood)(Up).caf */,
-				076C681A1ED1BFAD009160C2 /* Gambang (Wood)(Down).caf */,
-				076C681B1ED1BFAD009160C2 /* Gambang (Metal).caf */,
-				076C681C1ED1BFAD009160C2 /* Indonesian Frog.caf */,
-				076C681D1ED1BFAD009160C2 /* Cow Bell (Small).caf */,
+				076C68161ED1BFAD009160C2 /* Australian Rain Stick (x2).caf */,
+				076C68151ED1BFAD009160C2 /* Australian Rain Stick.caf */,
 				076C681E1ED1BFAD009160C2 /* Cow Bell (Big).caf */,
+				076C681D1ED1BFAD009160C2 /* Cow Bell (Small).caf */,
+				076C681B1ED1BFAD009160C2 /* Gambang (Metal).caf */,
+				076C681A1ED1BFAD009160C2 /* Gambang (Wood)(Down).caf */,
+				076C68191ED1BFAD009160C2 /* Gambang (Wood)(Up).caf */,
+				076C681C1ED1BFAD009160C2 /* Indonesian Frog.caf */,
+				076C680E1ED1BFAD009160C2 /* Tibetan Chimes.caf */,
+				076C68141ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(Singing).caf */,
+				076C68131ED1BFAD009160C2 /* Tibetan Singing Bowl (High)(x4).caf */,
+				076C68121ED1BFAD009160C2 /* Tibetan Singing Bowl (High).caf */,
+				076C68111ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(Singing).caf */,
+				076C68101ED1BFAD009160C2 /* Tibetan Singing Bowl (Low)(x4).caf */,
+				076C680F1ED1BFAD009160C2 /* Tibetan Singing Bowl (Low).caf */,
+				076C68181ED1BFAD009160C2 /* Wind Chimes.caf */,
 			);
-			name = Bells;
+			path = Bells;
 			sourceTree = "<group>";
 		};
 		07B4E00B1F3774E500C77807 /* Background Sounds */ = {
@@ -4545,7 +4545,7 @@
 			children = (
 				07B4E00E1F377E1E00C77807 /* TestBackground.caf */,
 			);
-			name = "Background Sounds";
+			path = "Background Sounds";
 			sourceTree = "<group>";
 		};
 		07BDFEFE1EB1E69700B131D7 /* Yoga Screen */ = {
@@ -4553,30 +4553,30 @@
 			children = (
 				07BE8C081E8BDF9500A851EF /* YogaScreen.swift */,
 			);
-			name = "Yoga Screen";
+			path = "Yoga Screen";
 			sourceTree = "<group>";
 		};
 		07D5C3D31F9E31B20038F143 /* Schedule Creation */ = {
 			isa = PBXGroup;
 			children = (
-				07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */,
 				07E1D4E01FB2250B00B53B85 /* ScheduleCreationHelp.swift */,
-				07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */,
 				07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */,
-				0798925D1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift */,
 				0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */,
+				0798925D1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift */,
+				07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */,
+				07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */,
 			);
-			name = "Schedule Creation";
+			path = "Schedule Creation";
 			sourceTree = "<group>";
 		};
 		07DE23011FC0916F00940567 /* Subscriptions Other */ = {
 			isa = PBXGroup;
 			children = (
+				071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */,
 				07DE23021FC0919200940567 /* Subscriptions.swift */,
 				07DE23061FC0AB3300940567 /* SwiftReceiptValidator.swift */,
-				071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */,
 			);
-			name = "Subscriptions Other";
+			path = "Subscriptions Other";
 			sourceTree = "<group>";
 		};
 		07E1D4DD1FB0DDE100B53B85 /* Schedule Editing */ = {
@@ -4585,95 +4585,95 @@
 				07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */,
 				07A6346E208C999000712EE2 /* ScheduleEquipment.swift */,
 			);
-			name = "Schedule Editing";
+			path = "Schedule Editing";
 			sourceTree = "<group>";
 		};
 		07E45E651F4DB0CA00A5AF49 /* Yoga */ = {
 			isa = PBXGroup;
 			children = (
-				07E45EAF1F4DB26B00A5AF49 /* upwardSalute */,
-				07E45EAE1F4DB26B00A5AF49 /* mountain */,
-				07E45EAD1F4DB26A00A5AF49 /* tree */,
-				07E45EAC1F4DB26900A5AF49 /* extenededToeGrab */,
-				07E45EAB1F4DB26400A5AF49 /* eagle */,
+				07E45E861F4DB24600A5AF49 /* boat */,
+				07E45E8D1F4DB25200A5AF49 /* bridge */,
+				07E45E831F4DB24400A5AF49 /* butterfly */,
+				07E45E941F4DB25700A5AF49 /* cat */,
+				07E45E921F4DB25500A5AF49 /* catCow */,
 				07E45EAA1F4DB26300A5AF49 /* chair */,
+				07E45E901F4DB25400A5AF49 /* childsPose */,
+				07E45E701F4DB23900A5AF49 /* cobra */,
+				07E45E781F4DB23E00A5AF49 /* corpse */,
+				07E45E931F4DB25600A5AF49 /* cow */,
+				07E45E851F4DB24500A5AF49 /* cowFace */,
+				07E45E891F4DB24800A5AF49 /* crossLegged */,
+				07E45E9A1F4DB25A00A5AF49 /* deepSquat */,
+				07E45E991F4DB25900A5AF49 /* dolphin */,
+				07E45FE71F4DB55300A5AF49 /* dolphinPlank */,
+				07E45E981F4DB25900A5AF49 /* downwardDog */,
+				07E45EAB1F4DB26400A5AF49 /* eagle */,
+				07E45E8B1F4DB25100A5AF49 /* extendedPuppy */,
+				07E45EA31F4DB25F00A5AF49 /* extendedSideAngle */,
+				07E45EA41F4DB26000A5AF49 /* extendedTriangle */,
+				07E45EAC1F4DB26900A5AF49 /* extenededToeGrab */,
+				07E45E871F4DB24700A5AF49 /* fireLog */,
+				07E45E771F4DB23D00A5AF49 /* fish */,
+				07E45E6A1F4DB23500A5AF49 /* forearmStand */,
+				07E45E961F4DB25800A5AF49 /* fourLimbedStaff */,
+				07E45F761F4DB4F300A5AF49 /* fowardBend */,
+				07E45E7A1F4DB23F00A5AF49 /* frontSplit */,
+				07E45E9D1F4DB25C00A5AF49 /* gate */,
+				07E45E971F4DB25800A5AF49 /* halfDownwardDog */,
+				07E45EA01F4DB25D00A5AF49 /* halfForwardBend */,
+				07E45E911F4DB25500A5AF49 /* halfMonkey */,
+				07E45EA51F4DB26000A5AF49 /* halfMoon */,
+				07E45E7E1F4DB24100A5AF49 /* halfVForwardBend */,
+				07E45E7D1F4DB24100A5AF49 /* halfVSideBend */,
+				07E45E6C1F4DB23600A5AF49 /* handStand */,
+				07E45E761F4DB23C00A5AF49 /* happyBaby */,
+				07E45E6B1F4DB23500A5AF49 /* headStand */,
+				07E45E841F4DB24500A5AF49 /* hero */,
+				07E45E9C1F4DB25B00A5AF49 /* highLunge */,
+				07E45E9E1F4DB25C00A5AF49 /* intenseSide */,
+				07E45E741F4DB23B00A5AF49 /* legRaiseToe */,
 				07E45EA91F4DB26300A5AF49 /* lordOfTheDance */,
+				07E45E881F4DB24700A5AF49 /* lotus */,
+				07E45E9B1F4DB25B00A5AF49 /* lowLunge */,
+				07E45E751F4DB23C00A5AF49 /* lyingButterfly */,
+				07E45E7C1F4DB24000A5AF49 /* marichi1 */,
+				07E45E7B1F4DB23F00A5AF49 /* marichi3 */,
+				07E45EAE1F4DB26B00A5AF49 /* mountain */,
+				07E45E6E1F4DB23700A5AF49 /* pigeon */,
+				07E45E711F4DB23900A5AF49 /* plow */,
+				07E45EA21F4DB25F00A5AF49 /* revolvedSideAngle */,
+				07E45EA11F4DB25E00A5AF49 /* revolvedTriangle */,
+				07E45E811F4DB24300A5AF49 /* seatedForwardBend */,
+				07E45E721F4DB23A00A5AF49 /* shoulderStand */,
+				07E45E951F4DB25700A5AF49 /* sidePlank */,
+				07E45E791F4DB23E00A5AF49 /* sideSplit */,
+				07E45E6F1F4DB23800A5AF49 /* sphinx */,
+				07E45E6D1F4DB23700A5AF49 /* spineRolling */,
+				07E45E821F4DB24300A5AF49 /* staff */,
+				07E45E731F4DB23A00A5AF49 /* threadTheNeedle */,
+				07E45EAD1F4DB26A00A5AF49 /* tree */,
+				07E45E8E1F4DB25300A5AF49 /* upwardBow */,
+				07E45E8A1F4DB25000A5AF49 /* upwardDog */,
+				07E45E8C1F4DB25100A5AF49 /* upwardPlank */,
+				07E45EAF1F4DB26B00A5AF49 /* upwardSalute */,
+				07E45E801F4DB24200A5AF49 /* vForwardBend */,
+				07E45E7F1F4DB24200A5AF49 /* vSideBend */,
 				07E45EA81F4DB26200A5AF49 /* warrior1 */,
 				07E45EA71F4DB26100A5AF49 /* warrior2 */,
 				07E45EA61F4DB26100A5AF49 /* warrior3 */,
-				07E45EA51F4DB26000A5AF49 /* halfMoon */,
-				07E45EA41F4DB26000A5AF49 /* extendedTriangle */,
-				07E45EA31F4DB25F00A5AF49 /* extendedSideAngle */,
-				07E45EA21F4DB25F00A5AF49 /* revolvedSideAngle */,
-				07E45EA11F4DB25E00A5AF49 /* revolvedTriangle */,
-				07E45EA01F4DB25D00A5AF49 /* halfForwardBend */,
-				07E45F761F4DB4F300A5AF49 /* fowardBend */,
 				07E45E9F1F4DB25D00A5AF49 /* wideLeggedForwardBend */,
-				07E45E9E1F4DB25C00A5AF49 /* intenseSide */,
-				07E45E9D1F4DB25C00A5AF49 /* gate */,
-				07E45E9C1F4DB25B00A5AF49 /* highLunge */,
-				07E45E9B1F4DB25B00A5AF49 /* lowLunge */,
-				07E45E9A1F4DB25A00A5AF49 /* deepSquat */,
-				07E45E991F4DB25900A5AF49 /* dolphin */,
-				07E45E981F4DB25900A5AF49 /* downwardDog */,
-				07E45E971F4DB25800A5AF49 /* halfDownwardDog */,
-				07E45FE71F4DB55300A5AF49 /* dolphinPlank */,
-				07E45E961F4DB25800A5AF49 /* fourLimbedStaff */,
-				07E45E951F4DB25700A5AF49 /* sidePlank */,
-				07E45E941F4DB25700A5AF49 /* cat */,
-				07E45E931F4DB25600A5AF49 /* cow */,
-				07E45E921F4DB25500A5AF49 /* catCow */,
-				07E45E911F4DB25500A5AF49 /* halfMonkey */,
-				07E45E901F4DB25400A5AF49 /* childsPose */,
 				07E45E8F1F4DB25300A5AF49 /* wildThing */,
-				07E45E8E1F4DB25300A5AF49 /* upwardBow */,
-				07E45E8D1F4DB25200A5AF49 /* bridge */,
-				07E45E8C1F4DB25100A5AF49 /* upwardPlank */,
-				07E45E8B1F4DB25100A5AF49 /* extendedPuppy */,
-				07E45E8A1F4DB25000A5AF49 /* upwardDog */,
-				07E45E891F4DB24800A5AF49 /* crossLegged */,
-				07E45E881F4DB24700A5AF49 /* lotus */,
-				07E45E871F4DB24700A5AF49 /* fireLog */,
-				07E45E861F4DB24600A5AF49 /* boat */,
-				07E45E851F4DB24500A5AF49 /* cowFace */,
-				07E45E841F4DB24500A5AF49 /* hero */,
-				07E45E831F4DB24400A5AF49 /* butterfly */,
-				07E45E821F4DB24300A5AF49 /* staff */,
-				07E45E811F4DB24300A5AF49 /* seatedForwardBend */,
-				07E45E801F4DB24200A5AF49 /* vForwardBend */,
-				07E45E7F1F4DB24200A5AF49 /* vSideBend */,
-				07E45E7E1F4DB24100A5AF49 /* halfVForwardBend */,
-				07E45E7D1F4DB24100A5AF49 /* halfVSideBend */,
-				07E45E7C1F4DB24000A5AF49 /* marichi1 */,
-				07E45E7B1F4DB23F00A5AF49 /* marichi3 */,
-				07E45E7A1F4DB23F00A5AF49 /* frontSplit */,
-				07E45E791F4DB23E00A5AF49 /* sideSplit */,
-				07E45E781F4DB23E00A5AF49 /* corpse */,
-				07E45E771F4DB23D00A5AF49 /* fish */,
-				07E45E761F4DB23C00A5AF49 /* happyBaby */,
-				07E45E751F4DB23C00A5AF49 /* lyingButterfly */,
-				07E45E741F4DB23B00A5AF49 /* legRaiseToe */,
-				07E45E731F4DB23A00A5AF49 /* threadTheNeedle */,
-				07E45E721F4DB23A00A5AF49 /* shoulderStand */,
-				07E45E711F4DB23900A5AF49 /* plow */,
-				07E45E701F4DB23900A5AF49 /* cobra */,
-				07E45E6F1F4DB23800A5AF49 /* sphinx */,
-				07E45E6E1F4DB23700A5AF49 /* pigeon */,
-				07E45E6D1F4DB23700A5AF49 /* spineRolling */,
-				07E45E6C1F4DB23600A5AF49 /* handStand */,
-				07E45E6B1F4DB23500A5AF49 /* headStand */,
-				07E45E6A1F4DB23500A5AF49 /* forearmStand */,
 			);
-			name = Yoga;
+			path = Yoga;
 			sourceTree = "<group>";
 		};
 		07E45E661F4DB0D200A5AF49 /* Workout */ = {
 			isa = PBXGroup;
 			children = (
-				07E461541F4DD55300A5AF49 /* Gym */,
 				07E461551F4DD55500A5AF49 /* Bodyweight */,
+				07E461541F4DD55300A5AF49 /* Gym */,
 			);
-			name = Workout;
+			path = Workout;
 			sourceTree = "<group>";
 		};
 		07E45E6A1F4DB23500A5AF49 /* forearmStand */ = {
@@ -4687,7 +4687,7 @@
 				07E4614B1F4DB71900A5AF49 /* forearmStand5.png */,
 				07E4614C1F4DB71900A5AF49 /* forearmStand6.png */,
 			);
-			name = forearmStand;
+			path = forearmStand;
 			sourceTree = "<group>";
 		};
 		07E45E6B1F4DB23500A5AF49 /* headStand */ = {
@@ -4703,7 +4703,7 @@
 				07E4613B1F4DB71200A5AF49 /* headStand7.png */,
 				07E4613C1F4DB71200A5AF49 /* headStand8.png */,
 			);
-			name = headStand;
+			path = headStand;
 			sourceTree = "<group>";
 		};
 		07E45E6C1F4DB23600A5AF49 /* handStand */ = {
@@ -4719,7 +4719,7 @@
 				07E461291F4DB70800A5AF49 /* handStand7.png */,
 				07E4612A1F4DB70800A5AF49 /* handStand8.png */,
 			);
-			name = handStand;
+			path = handStand;
 			sourceTree = "<group>";
 		};
 		07E45E6D1F4DB23700A5AF49 /* spineRolling */ = {
@@ -4731,7 +4731,7 @@
 				07E4611B1F4DB6FE00A5AF49 /* spineRolling3.png */,
 				07E4611C1F4DB6FE00A5AF49 /* spineRolling4.png */,
 			);
-			name = spineRolling;
+			path = spineRolling;
 			sourceTree = "<group>";
 		};
 		07E45E6E1F4DB23700A5AF49 /* pigeon */ = {
@@ -4747,7 +4747,7 @@
 				07E4610D1F4DB6F400A5AF49 /* pigeon7.png */,
 				07E4610E1F4DB6F400A5AF49 /* pigeon8.png */,
 			);
-			name = pigeon;
+			path = pigeon;
 			sourceTree = "<group>";
 		};
 		07E45E6F1F4DB23800A5AF49 /* sphinx */ = {
@@ -4755,7 +4755,7 @@
 			children = (
 				07E461041F4DB6EE00A5AF49 /* sphinx.png */,
 			);
-			name = sphinx;
+			path = sphinx;
 			sourceTree = "<group>";
 		};
 		07E45E701F4DB23900A5AF49 /* cobra */ = {
@@ -4767,7 +4767,7 @@
 				07E460FD1F4DB6EB00A5AF49 /* cobra3.png */,
 				07E460FE1F4DB6EB00A5AF49 /* cobra4.png */,
 			);
-			name = cobra;
+			path = cobra;
 			sourceTree = "<group>";
 		};
 		07E45E711F4DB23900A5AF49 /* plow */ = {
@@ -4779,7 +4779,7 @@
 				07E460F31F4DB6E000A5AF49 /* plow3.png */,
 				07E460F41F4DB6E000A5AF49 /* plow4.png */,
 			);
-			name = plow;
+			path = plow;
 			sourceTree = "<group>";
 		};
 		07E45E721F4DB23A00A5AF49 /* shoulderStand */ = {
@@ -4794,7 +4794,7 @@
 				07E460E61F4DB6D900A5AF49 /* shoulderStand6.png */,
 				07E460E71F4DB6D900A5AF49 /* shoulderStand7.png */,
 			);
-			name = shoulderStand;
+			path = shoulderStand;
 			sourceTree = "<group>";
 		};
 		07E45E731F4DB23A00A5AF49 /* threadTheNeedle */ = {
@@ -4807,7 +4807,7 @@
 				07E460D81F4DB6D200A5AF49 /* threadTheNeedle4.png */,
 				07E460D91F4DB6D200A5AF49 /* threadTheNeedle5.png */,
 			);
-			name = threadTheNeedle;
+			path = threadTheNeedle;
 			sourceTree = "<group>";
 		};
 		07E45E741F4DB23B00A5AF49 /* legRaiseToe */ = {
@@ -4815,7 +4815,7 @@
 			children = (
 				07E460D21F4DB6C900A5AF49 /* legRaiseToe.png */,
 			);
-			name = legRaiseToe;
+			path = legRaiseToe;
 			sourceTree = "<group>";
 		};
 		07E45E751F4DB23C00A5AF49 /* lyingButterfly */ = {
@@ -4827,7 +4827,7 @@
 				07E460CB1F4DB6C200A5AF49 /* lyingButterfly3.png */,
 				07E460CC1F4DB6C200A5AF49 /* lyingButterfly4.png */,
 			);
-			name = lyingButterfly;
+			path = lyingButterfly;
 			sourceTree = "<group>";
 		};
 		07E45E761F4DB23C00A5AF49 /* happyBaby */ = {
@@ -4835,7 +4835,7 @@
 			children = (
 				07E460C61F4DB6BA00A5AF49 /* happyBaby.png */,
 			);
-			name = happyBaby;
+			path = happyBaby;
 			sourceTree = "<group>";
 		};
 		07E45E771F4DB23D00A5AF49 /* fish */ = {
@@ -4848,7 +4848,7 @@
 				07E460BE1F4DB6B400A5AF49 /* fish4.png */,
 				07E460BF1F4DB6B400A5AF49 /* fish5.png */,
 			);
-			name = fish;
+			path = fish;
 			sourceTree = "<group>";
 		};
 		07E45E781F4DB23E00A5AF49 /* corpse */ = {
@@ -4856,7 +4856,7 @@
 			children = (
 				07E460B81F4DB6A900A5AF49 /* corpse.png */,
 			);
-			name = corpse;
+			path = corpse;
 			sourceTree = "<group>";
 		};
 		07E45E791F4DB23E00A5AF49 /* sideSplit */ = {
@@ -4864,7 +4864,7 @@
 			children = (
 				07E460B61F4DB6A200A5AF49 /* sideSplit.png */,
 			);
-			name = sideSplit;
+			path = sideSplit;
 			sourceTree = "<group>";
 		};
 		07E45E7A1F4DB23F00A5AF49 /* frontSplit */ = {
@@ -4872,7 +4872,7 @@
 			children = (
 				07E460B41F4DB69C00A5AF49 /* frontSplit.png */,
 			);
-			name = frontSplit;
+			path = frontSplit;
 			sourceTree = "<group>";
 		};
 		07E45E7B1F4DB23F00A5AF49 /* marichi3 */ = {
@@ -4887,7 +4887,7 @@
 				07E460AA1F4DB69400A5AF49 /* marichi36.png */,
 				07E460AB1F4DB69400A5AF49 /* marichi37.png */,
 			);
-			name = marichi3;
+			path = marichi3;
 			sourceTree = "<group>";
 		};
 		07E45E7C1F4DB24000A5AF49 /* marichi1 */ = {
@@ -4902,7 +4902,7 @@
 				07E4609A1F4DB68C00A5AF49 /* marichi16.png */,
 				07E4609B1F4DB68C00A5AF49 /* marichi17.png */,
 			);
-			name = marichi1;
+			path = marichi1;
 			sourceTree = "<group>";
 		};
 		07E45E7D1F4DB24100A5AF49 /* halfVSideBend */ = {
@@ -4915,7 +4915,7 @@
 				07E4608C1F4DB68100A5AF49 /* halfVSideBend4.png */,
 				07E4608D1F4DB68100A5AF49 /* halfVSideBend5.png */,
 			);
-			name = halfVSideBend;
+			path = halfVSideBend;
 			sourceTree = "<group>";
 		};
 		07E45E7E1F4DB24100A5AF49 /* halfVForwardBend */ = {
@@ -4929,7 +4929,7 @@
 				07E4607F1F4DB67800A5AF49 /* halfVForwardBend5.png */,
 				07E460801F4DB67800A5AF49 /* halfVForwardBend6.png */,
 			);
-			name = halfVForwardBend;
+			path = halfVForwardBend;
 			sourceTree = "<group>";
 		};
 		07E45E7F1F4DB24200A5AF49 /* vSideBend */ = {
@@ -4942,7 +4942,7 @@
 				07E460721F4DB67100A5AF49 /* vSideBend4.png */,
 				07E460731F4DB67100A5AF49 /* vSideBend5.png */,
 			);
-			name = vSideBend;
+			path = vSideBend;
 			sourceTree = "<group>";
 		};
 		07E45E801F4DB24200A5AF49 /* vForwardBend */ = {
@@ -4950,7 +4950,7 @@
 			children = (
 				07E4606C1F4DB66A00A5AF49 /* vForwardBend.png */,
 			);
-			name = vForwardBend;
+			path = vForwardBend;
 			sourceTree = "<group>";
 		};
 		07E45E811F4DB24300A5AF49 /* seatedForwardBend */ = {
@@ -4958,7 +4958,7 @@
 			children = (
 				07E4606A1F4DB66600A5AF49 /* seatedForwardBend.png */,
 			);
-			name = seatedForwardBend;
+			path = seatedForwardBend;
 			sourceTree = "<group>";
 		};
 		07E45E821F4DB24300A5AF49 /* staff */ = {
@@ -4966,7 +4966,7 @@
 			children = (
 				07E460681F4DB65B00A5AF49 /* staff.png */,
 			);
-			name = staff;
+			path = staff;
 			sourceTree = "<group>";
 		};
 		07E45E831F4DB24400A5AF49 /* butterfly */ = {
@@ -4974,7 +4974,7 @@
 			children = (
 				07E460661F4DB65400A5AF49 /* butterfly.png */,
 			);
-			name = butterfly;
+			path = butterfly;
 			sourceTree = "<group>";
 		};
 		07E45E841F4DB24500A5AF49 /* hero */ = {
@@ -4982,7 +4982,7 @@
 			children = (
 				07E460641F4DB64E00A5AF49 /* hero.png */,
 			);
-			name = hero;
+			path = hero;
 			sourceTree = "<group>";
 		};
 		07E45E851F4DB24500A5AF49 /* cowFace */ = {
@@ -4990,7 +4990,7 @@
 			children = (
 				07E460621F4DB64A00A5AF49 /* cowFace.png */,
 			);
-			name = cowFace;
+			path = cowFace;
 			sourceTree = "<group>";
 		};
 		07E45E861F4DB24600A5AF49 /* boat */ = {
@@ -4998,7 +4998,7 @@
 			children = (
 				07E460601F4DB64500A5AF49 /* boat.png */,
 			);
-			name = boat;
+			path = boat;
 			sourceTree = "<group>";
 		};
 		07E45E871F4DB24700A5AF49 /* fireLog */ = {
@@ -5006,7 +5006,7 @@
 			children = (
 				07E4605E1F4DB63F00A5AF49 /* fireLog.png */,
 			);
-			name = fireLog;
+			path = fireLog;
 			sourceTree = "<group>";
 		};
 		07E45E881F4DB24700A5AF49 /* lotus */ = {
@@ -5014,7 +5014,7 @@
 			children = (
 				07E4605C1F4DB63B00A5AF49 /* lotus.png */,
 			);
-			name = lotus;
+			path = lotus;
 			sourceTree = "<group>";
 		};
 		07E45E891F4DB24800A5AF49 /* crossLegged */ = {
@@ -5022,7 +5022,7 @@
 			children = (
 				07E4605A1F4DB63500A5AF49 /* crossLegged.png */,
 			);
-			name = crossLegged;
+			path = crossLegged;
 			sourceTree = "<group>";
 		};
 		07E45E8A1F4DB25000A5AF49 /* upwardDog */ = {
@@ -5034,7 +5034,7 @@
 				07E460531F4DB62B00A5AF49 /* upwardDog3.png */,
 				07E460541F4DB62B00A5AF49 /* upwardDog4.png */,
 			);
-			name = upwardDog;
+			path = upwardDog;
 			sourceTree = "<group>";
 		};
 		07E45E8B1F4DB25100A5AF49 /* extendedPuppy */ = {
@@ -5047,7 +5047,7 @@
 				07E460481F4DB62300A5AF49 /* extendedPuppy4.png */,
 				07E460491F4DB62300A5AF49 /* extendedPuppy5.png */,
 			);
-			name = extendedPuppy;
+			path = extendedPuppy;
 			sourceTree = "<group>";
 		};
 		07E45E8C1F4DB25100A5AF49 /* upwardPlank */ = {
@@ -5060,7 +5060,7 @@
 				07E4603C1F4DB61900A5AF49 /* upwardPlank4.png */,
 				07E4603D1F4DB61900A5AF49 /* upwardPlank5.png */,
 			);
-			name = upwardPlank;
+			path = upwardPlank;
 			sourceTree = "<group>";
 		};
 		07E45E8D1F4DB25200A5AF49 /* bridge */ = {
@@ -5071,7 +5071,7 @@
 				07E460321F4DB5FC00A5AF49 /* bridge2.png */,
 				07E460331F4DB5FC00A5AF49 /* bridge3.png */,
 			);
-			name = bridge;
+			path = bridge;
 			sourceTree = "<group>";
 		};
 		07E45E8E1F4DB25300A5AF49 /* upwardBow */ = {
@@ -5084,7 +5084,7 @@
 				07E460281F4DB5F300A5AF49 /* upwardBow4.png */,
 				07E460291F4DB5F300A5AF49 /* upwardBow5.png */,
 			);
-			name = upwardBow;
+			path = upwardBow;
 			sourceTree = "<group>";
 		};
 		07E45E8F1F4DB25300A5AF49 /* wildThing */ = {
@@ -5098,7 +5098,7 @@
 				07E4601B1F4DB5EE00A5AF49 /* wildThing5.png */,
 				07E4601C1F4DB5EE00A5AF49 /* wildThing6.png */,
 			);
-			name = wildThing;
+			path = wildThing;
 			sourceTree = "<group>";
 		};
 		07E45E901F4DB25400A5AF49 /* childsPose */ = {
@@ -5109,7 +5109,7 @@
 				07E460101F4DB5E800A5AF49 /* childPose2.png */,
 				07E460111F4DB5E800A5AF49 /* childPose3.png */,
 			);
-			name = childsPose;
+			path = childsPose;
 			sourceTree = "<group>";
 		};
 		07E45E911F4DB25500A5AF49 /* halfMonkey */ = {
@@ -5121,7 +5121,7 @@
 				07E460071F4DB5D900A5AF49 /* halfMonkey3.png */,
 				07E460081F4DB5D900A5AF49 /* halfMonkey4.png */,
 			);
-			name = halfMonkey;
+			path = halfMonkey;
 			sourceTree = "<group>";
 		};
 		07E45E921F4DB25500A5AF49 /* catCow */ = {
@@ -5131,7 +5131,7 @@
 				07E45FFF1F4DB5D300A5AF49 /* catCow2.png */,
 				07E460001F4DB5D300A5AF49 /* catCow3.png */,
 			);
-			name = catCow;
+			path = catCow;
 			sourceTree = "<group>";
 		};
 		07E45E931F4DB25600A5AF49 /* cow */ = {
@@ -5139,7 +5139,7 @@
 			children = (
 				07E45FFC1F4DB5C800A5AF49 /* cow.png */,
 			);
-			name = cow;
+			path = cow;
 			sourceTree = "<group>";
 		};
 		07E45E941F4DB25700A5AF49 /* cat */ = {
@@ -5147,7 +5147,7 @@
 			children = (
 				07E45FF81F4DB5AA00A5AF49 /* cat.png */,
 			);
-			name = cat;
+			path = cat;
 			sourceTree = "<group>";
 		};
 		07E45E951F4DB25700A5AF49 /* sidePlank */ = {
@@ -5159,7 +5159,7 @@
 				07E45FF11F4DB5A300A5AF49 /* sidePlank3.png */,
 				07E45FF21F4DB5A300A5AF49 /* sidePlank4.png */,
 			);
-			name = sidePlank;
+			path = sidePlank;
 			sourceTree = "<group>";
 		};
 		07E45E961F4DB25800A5AF49 /* fourLimbedStaff */ = {
@@ -5167,7 +5167,7 @@
 			children = (
 				07E45FEC1F4DB59200A5AF49 /* fourLimbedStaff.png */,
 			);
-			name = fourLimbedStaff;
+			path = fourLimbedStaff;
 			sourceTree = "<group>";
 		};
 		07E45E971F4DB25800A5AF49 /* halfDownwardDog */ = {
@@ -5179,7 +5179,7 @@
 				07E45FE01F4DB54C00A5AF49 /* halfDownwardDog3.png */,
 				07E45FE11F4DB54C00A5AF49 /* halfDownwardDog4.png */,
 			);
-			name = halfDownwardDog;
+			path = halfDownwardDog;
 			sourceTree = "<group>";
 		};
 		07E45E981F4DB25900A5AF49 /* downwardDog */ = {
@@ -5191,7 +5191,7 @@
 				07E45FD61F4DB54500A5AF49 /* downwardDog3.png */,
 				07E45FD71F4DB54500A5AF49 /* downwardDog4.png */,
 			);
-			name = downwardDog;
+			path = downwardDog;
 			sourceTree = "<group>";
 		};
 		07E45E991F4DB25900A5AF49 /* dolphin */ = {
@@ -5202,7 +5202,7 @@
 				07E45FCD1F4DB53E00A5AF49 /* dolphin2.png */,
 				07E45FCE1F4DB53E00A5AF49 /* dolphin3.png */,
 			);
-			name = dolphin;
+			path = dolphin;
 			sourceTree = "<group>";
 		};
 		07E45E9A1F4DB25A00A5AF49 /* deepSquat */ = {
@@ -5215,7 +5215,7 @@
 				07E45FC31F4DB52F00A5AF49 /* deepSquat4.png */,
 				07E45FC41F4DB52F00A5AF49 /* deepSquat5.png */,
 			);
-			name = deepSquat;
+			path = deepSquat;
 			sourceTree = "<group>";
 		};
 		07E45E9B1F4DB25B00A5AF49 /* lowLunge */ = {
@@ -5229,7 +5229,7 @@
 				07E45FB61F4DB52900A5AF49 /* lowLunge5.png */,
 				07E45FB71F4DB52900A5AF49 /* lowLunge6.png */,
 			);
-			name = lowLunge;
+			path = lowLunge;
 			sourceTree = "<group>";
 		};
 		07E45E9C1F4DB25B00A5AF49 /* highLunge */ = {
@@ -5243,7 +5243,7 @@
 				07E45FA81F4DB52300A5AF49 /* highLunge5.png */,
 				07E45FA91F4DB52300A5AF49 /* highLunge6.png */,
 			);
-			name = highLunge;
+			path = highLunge;
 			sourceTree = "<group>";
 		};
 		07E45E9D1F4DB25C00A5AF49 /* gate */ = {
@@ -5251,7 +5251,7 @@
 			children = (
 				07E45FA11F4DB51900A5AF49 /* gate.png */,
 			);
-			name = gate;
+			path = gate;
 			sourceTree = "<group>";
 		};
 		07E45E9E1F4DB25C00A5AF49 /* intenseSide */ = {
@@ -5264,7 +5264,7 @@
 				07E45F991F4DB51500A5AF49 /* intenseSide4.png */,
 				07E45F9A1F4DB51500A5AF49 /* intenseSide5.png */,
 			);
-			name = intenseSide;
+			path = intenseSide;
 			sourceTree = "<group>";
 		};
 		07E45E9F1F4DB25D00A5AF49 /* wideLeggedForwardBend */ = {
@@ -5278,7 +5278,7 @@
 				07E45F8C1F4DB50F00A5AF49 /* wideLeggedForwardBend5.png */,
 				07E45F8D1F4DB50F00A5AF49 /* wideLeggedForwardBend6.png */,
 			);
-			name = wideLeggedForwardBend;
+			path = wideLeggedForwardBend;
 			sourceTree = "<group>";
 		};
 		07E45EA01F4DB25D00A5AF49 /* halfForwardBend */ = {
@@ -5293,7 +5293,7 @@
 				07E45F6C1F4DB4DA00A5AF49 /* halfForwardBend6.png */,
 				07E45F6D1F4DB4DA00A5AF49 /* halfForwardBend7.png */,
 			);
-			name = halfForwardBend;
+			path = halfForwardBend;
 			sourceTree = "<group>";
 		};
 		07E45EA11F4DB25E00A5AF49 /* revolvedTriangle */ = {
@@ -5307,7 +5307,7 @@
 				07E45F5D1F4DB4D000A5AF49 /* revolvedTriangle5.png */,
 				07E45F5E1F4DB4D000A5AF49 /* revolvedTriangle6.png */,
 			);
-			name = revolvedTriangle;
+			path = revolvedTriangle;
 			sourceTree = "<group>";
 		};
 		07E45EA21F4DB25F00A5AF49 /* revolvedSideAngle */ = {
@@ -5321,7 +5321,7 @@
 				07E45F4F1F4DB4C700A5AF49 /* revolvedSideAngle5.png */,
 				07E45F501F4DB4C700A5AF49 /* revolvedSideAngle6.png */,
 			);
-			name = revolvedSideAngle;
+			path = revolvedSideAngle;
 			sourceTree = "<group>";
 		};
 		07E45EA31F4DB25F00A5AF49 /* extendedSideAngle */ = {
@@ -5335,7 +5335,7 @@
 				07E45F411F4DB4C200A5AF49 /* extendedSideAngle5.png */,
 				07E45F421F4DB4C200A5AF49 /* extendedSideAngle6.png */,
 			);
-			name = extendedSideAngle;
+			path = extendedSideAngle;
 			sourceTree = "<group>";
 		};
 		07E45EA41F4DB26000A5AF49 /* extendedTriangle */ = {
@@ -5348,7 +5348,7 @@
 				07E45F341F4DB4B900A5AF49 /* extendedTriangle4.png */,
 				07E45F351F4DB4B900A5AF49 /* extendedTriangle5.png */,
 			);
-			name = extendedTriangle;
+			path = extendedTriangle;
 			sourceTree = "<group>";
 		};
 		07E45EA51F4DB26000A5AF49 /* halfMoon */ = {
@@ -5363,7 +5363,7 @@
 				07E45F261F4DB4B200A5AF49 /* halfMoon6.png */,
 				07E45F271F4DB4B200A5AF49 /* halfMoon7.png */,
 			);
-			name = halfMoon;
+			path = halfMoon;
 			sourceTree = "<group>";
 		};
 		07E45EA61F4DB26100A5AF49 /* warrior3 */ = {
@@ -5377,7 +5377,7 @@
 				07E45F171F4DB4AA00A5AF49 /* warrior35.png */,
 				07E45F181F4DB4AA00A5AF49 /* warrior36.png */,
 			);
-			name = warrior3;
+			path = warrior3;
 			sourceTree = "<group>";
 		};
 		07E45EA71F4DB26100A5AF49 /* warrior2 */ = {
@@ -5390,7 +5390,7 @@
 				07E45F0A1F4DB4A000A5AF49 /* warrior24.png */,
 				07E45F0B1F4DB4A000A5AF49 /* warrior25.png */,
 			);
-			name = warrior2;
+			path = warrior2;
 			sourceTree = "<group>";
 		};
 		07E45EA81F4DB26200A5AF49 /* warrior1 */ = {
@@ -5403,7 +5403,7 @@
 				07E45EFE1F4DB49500A5AF49 /* warrior14.png */,
 				07E45EFF1F4DB49500A5AF49 /* warrior15.png */,
 			);
-			name = warrior1;
+			path = warrior1;
 			sourceTree = "<group>";
 		};
 		07E45EA91F4DB26300A5AF49 /* lordOfTheDance */ = {
@@ -5418,7 +5418,7 @@
 				07E45EF01F4DB48F00A5AF49 /* lordOfDance6.png */,
 				07E45EF11F4DB48F00A5AF49 /* lordOfDance7.png */,
 			);
-			name = lordOfTheDance;
+			path = lordOfTheDance;
 			sourceTree = "<group>";
 		};
 		07E45EAA1F4DB26300A5AF49 /* chair */ = {
@@ -5431,7 +5431,7 @@
 				07E45EE21F4DB48600A5AF49 /* chair4.png */,
 				07E45EE31F4DB48600A5AF49 /* chair5.png */,
 			);
-			name = chair;
+			path = chair;
 			sourceTree = "<group>";
 		};
 		07E45EAB1F4DB26400A5AF49 /* eagle */ = {
@@ -5446,7 +5446,7 @@
 				07E45ED41F4DB47D00A5AF49 /* eagle6.png */,
 				07E45ED51F4DB47D00A5AF49 /* eagle7.png */,
 			);
-			name = eagle;
+			path = eagle;
 			sourceTree = "<group>";
 		};
 		07E45EAC1F4DB26900A5AF49 /* extenededToeGrab */ = {
@@ -5459,7 +5459,7 @@
 				07E45EC61F4DB47700A5AF49 /* extendedToeGrab4.png */,
 				07E45EC71F4DB47700A5AF49 /* extendedToeGrab5.png */,
 			);
-			name = extenededToeGrab;
+			path = extenededToeGrab;
 			sourceTree = "<group>";
 		};
 		07E45EAD1F4DB26A00A5AF49 /* tree */ = {
@@ -5473,7 +5473,7 @@
 				07E45EB91F4DB46B00A5AF49 /* tree5.png */,
 				07E45EBA1F4DB46B00A5AF49 /* tree6.png */,
 			);
-			name = tree;
+			path = tree;
 			sourceTree = "<group>";
 		};
 		07E45EAE1F4DB26B00A5AF49 /* mountain */ = {
@@ -5481,7 +5481,7 @@
 			children = (
 				07E45EB21F4DB46400A5AF49 /* mountain.png */,
 			);
-			name = mountain;
+			path = mountain;
 			sourceTree = "<group>";
 		};
 		07E45EAF1F4DB26B00A5AF49 /* upwardSalute */ = {
@@ -5489,7 +5489,7 @@
 			children = (
 				07E45EB01F4DB45700A5AF49 /* upwardSalute.png */,
 			);
-			name = upwardSalute;
+			path = upwardSalute;
 			sourceTree = "<group>";
 		};
 		07E45F761F4DB4F300A5AF49 /* fowardBend */ = {
@@ -5504,7 +5504,7 @@
 				07E45F7D1F4DB50400A5AF49 /* forwardBend6.png */,
 				07E45F7E1F4DB50400A5AF49 /* forwardBend7.png */,
 			);
-			name = fowardBend;
+			path = fowardBend;
 			sourceTree = "<group>";
 		};
 		07E45FE71F4DB55300A5AF49 /* dolphinPlank */ = {
@@ -5512,112 +5512,112 @@
 			children = (
 				07E45FE81F4DB56C00A5AF49 /* dolphinPlank.png */,
 			);
-			name = dolphinPlank;
+			path = dolphinPlank;
 			sourceTree = "<group>";
 		};
 		07E461541F4DD55300A5AF49 /* Gym */ = {
 			isa = PBXGroup;
 			children = (
-				07E461871F4DD59900A5AF49 /* squat */,
-				07E461861F4DD59600A5AF49 /* frontSquat */,
-				07E461851F4DD59500A5AF49 /* legPress */,
-				07E461841F4DD59500A5AF49 /* dumbellFrontSquat */,
-				07E461831F4DD59400A5AF49 /* legExtensions */,
-				07E461821F4DD59300A5AF49 /* deadlift */,
-				07E461811F4DD59300A5AF49 /* romanianDeadlift */,
-				07E461801F4DD59200A5AF49 /* weightedHipThrust */,
-				07E4617F1F4DD59200A5AF49 /* legCurl */,
-				07E4617E1F4DD59100A5AF49 /* oneLeggedDeadlift */,
-				07E4617C1F4DD59000A5AF49 /* lungeDumbell */,
-				07E4617B1F4DD59000A5AF49 /* bulgarianSplitSquat */,
-				07E4617A1F4DD58F00A5AF49 /* standingCalfRaise */,
-				07E461791F4DD58E00A5AF49 /* seatedCalfRaise */,
-				07E461781F4DD58D00A5AF49 /* pullDown */,
-				07E461771F4DD58D00A5AF49 /* kneelingPullDown */,
-				07E461741F4DD58B00A5AF49 /* bentOverRowDumbell */,
-				07E461731F4DD58A00A5AF49 /* tBarRow */,
-				07E461721F4DD58A00A5AF49 /* rowMachine */,
-				07E461711F4DD58900A5AF49 /* leaningBackPullDown */,
-				07E461701F4DD58800A5AF49 /* bentOverBarbellRow */,
-				07E4616F1F4DD58700A5AF49 /* shrugDumbell */,
-				07E4616E1F4DD58600A5AF49 /* hammerCurl */,
-				07E4616D1F4DD57E00A5AF49 /* hammerCurlCable */,
-				07E4616C1F4DD57E00A5AF49 /* curl */,
-				07E4616B1F4DD57D00A5AF49 /* farmersCarry */,
-				07E4616A1F4DD57C00A5AF49 /* reverseBarbellCurl */,
-				07E461691F4DD57C00A5AF49 /* forearmCurl */,
+				07E461631F4DD57800A5AF49 /* barbellKneelinPress */,
 				07E461681F4DD57B00A5AF49 /* benchPress */,
 				07E461671F4DD57B00A5AF49 /* benchPressDumbell */,
-				07E461661F4DD57A00A5AF49 /* semiInclineDumbellPress */,
-				07E461641F4DD57900A5AF49 /* platePress */,
-				07E461631F4DD57800A5AF49 /* barbellKneelinPress */,
+				07E461701F4DD58800A5AF49 /* bentOverBarbellRow */,
+				07E461741F4DD58B00A5AF49 /* bentOverRowDumbell */,
+				07E4617B1F4DD59000A5AF49 /* bulgarianSplitSquat */,
+				07E4615A1F4DD57200A5AF49 /* cableExtension */,
+				07E461581F4DD57000A5AF49 /* cleanPress */,
+				07E4615B1F4DD57300A5AF49 /* closeGripBench */,
+				07E4616C1F4DD57E00A5AF49 /* curl */,
+				07E461821F4DD59300A5AF49 /* deadlift */,
 				07E461611F4DD57700A5AF49 /* dips */,
+				07E461841F4DD59500A5AF49 /* dumbellFrontSquat */,
+				07E4616B1F4DD57D00A5AF49 /* farmersCarry */,
+				07E461691F4DD57C00A5AF49 /* forearmCurl */,
+				07E4615D1F4DD57400A5AF49 /* frontRaise */,
+				07E461861F4DD59600A5AF49 /* frontSquat */,
+				07E4616E1F4DD58600A5AF49 /* hammerCurl */,
+				07E4616D1F4DD57E00A5AF49 /* hammerCurlCable */,
+				07E461771F4DD58D00A5AF49 /* kneelingPullDown */,
+				07E4615E1F4DD57500A5AF49 /* lateralRaise */,
+				07E461711F4DD58900A5AF49 /* leaningBackPullDown */,
+				07E4617F1F4DD59200A5AF49 /* legCurl */,
+				07E461831F4DD59400A5AF49 /* legExtensions */,
+				07E461851F4DD59500A5AF49 /* legPress */,
+				07E4617C1F4DD59000A5AF49 /* lungeDumbell */,
+				07E4617E1F4DD59100A5AF49 /* oneLeggedDeadlift */,
+				07E461641F4DD57900A5AF49 /* platePress */,
+				07E461781F4DD58D00A5AF49 /* pullDown */,
+				07E4616A1F4DD57C00A5AF49 /* reverseBarbellCurl */,
+				07E461811F4DD59300A5AF49 /* romanianDeadlift */,
+				07E461591F4DD57100A5AF49 /* ropeExtension */,
+				07E461721F4DD58A00A5AF49 /* rowMachine */,
+				07E461791F4DD58E00A5AF49 /* seatedCalfRaise */,
+				07E461661F4DD57A00A5AF49 /* semiInclineDumbellPress */,
+				07E4616F1F4DD58700A5AF49 /* shrugDumbell */,
+				07E461871F4DD59900A5AF49 /* squat */,
+				07E4617A1F4DD58F00A5AF49 /* standingCalfRaise */,
 				07E4615F1F4DD57500A5AF49 /* standingShoulderPressBarbell */,
 				07E461601F4DD57600A5AF49 /* standingShoulderPressDumbell */,
-				07E4615E1F4DD57500A5AF49 /* lateralRaise */,
-				07E4615D1F4DD57400A5AF49 /* frontRaise */,
-				07E4615B1F4DD57300A5AF49 /* closeGripBench */,
-				07E4615A1F4DD57200A5AF49 /* cableExtension */,
-				07E461591F4DD57100A5AF49 /* ropeExtension */,
-				07E461581F4DD57000A5AF49 /* cleanPress */,
+				07E461731F4DD58A00A5AF49 /* tBarRow */,
+				07E461801F4DD59200A5AF49 /* weightedHipThrust */,
 			);
-			name = Gym;
+			path = Gym;
 			sourceTree = "<group>";
 		};
 		07E461551F4DD55500A5AF49 /* Bodyweight */ = {
 			isa = PBXGroup;
 			children = (
-				07E461B91F4DD7C600A5AF49 /* bodyweightSquat */,
-				07E461B81F4DD7C500A5AF49 /* pistolSquat */,
-				07E461B71F4DD7C500A5AF49 /* skaterSquat */,
-				07E461B61F4DD7C400A5AF49 /* sumoSquat */,
-				07E461B51F4DD7C400A5AF49 /* lungeJump */,
+				07E461A31F4DD7B900A5AF49 /* armCircles */,
+				07E461AE1F4DD7C000A5AF49 /* backHyperextension */,
+				07E4618E1F4DD7A400A5AF49 /* ballPushup */,
+				07E4619D1F4DD7AE00A5AF49 /* bicycleCrunch */,
 				07E461B41F4DD7C300A5AF49 /* bodyweightDeadlift */,
+				07E461B91F4DD7C600A5AF49 /* bodyweightSquat */,
+				07E4618A1F4DD7A100A5AF49 /* boxJump */,
+				07E461A41F4DD7B900A5AF49 /* boxer */,
+				07E464BA1F4DDECF00A5AF49 /* bulgarianSplitSquatBodyweight */,
+				07E461991F4DD7AC00A5AF49 /* burpee */,
+				07E461B11F4DD7C100A5AF49 /* calfRaise */,
+				07E461901F4DD7A600A5AF49 /* chestSqueeze */,
+				07E461B01F4DD7C100A5AF49 /* contralateralLimbRaises */,
+				07E461961F4DD7AA00A5AF49 /* crabWalk */,
+				07E4619C1F4DD7AE00A5AF49 /* divingHold */,
+				07E461A91F4DD7BD00A5AF49 /* dolphinPushup */,
+				07E461AD1F4DD7BF00A5AF49 /* doorFrameRow */,
+				07E461A61F4DD7BB00A5AF49 /* downwardDogPushup */,
+				07E461A11F4DD7B700A5AF49 /* dynamicPlank */,
+				07E461AB1F4DD7BE00A5AF49 /* handStandTrap */,
+				07E4618D1F4DD7A400A5AF49 /* hangingLegRaise */,
+				07E4619B1F4DD7AD00A5AF49 /* hipRaise */,
+				07E461891F4DD79F00A5AF49 /* hipThrusts */,
+				07E461951F4DD7A900A5AF49 /* jumpingJacks */,
+				07E461981F4DD7AB00A5AF49 /* kickThroughBurpee */,
+				07E461931F4DD7A800A5AF49 /* kneeRaises */,
+				07E4619E1F4DD7AF00A5AF49 /* lSit */,
+				07E4619A1F4DD7AC00A5AF49 /* legHold */,
+				07E461B51F4DD7C400A5AF49 /* lungeJump */,
+				07E461B81F4DD7C500A5AF49 /* pistolSquat */,
+				07E461A21F4DD7B800A5AF49 /* plank */,
+				07E4618F1F4DD7A500A5AF49 /* pushupHold */,
+				07E4619F1F4DD7AF00A5AF49 /* pushupPlank */,
+				07E461AC1F4DD7BE00A5AF49 /* reverseSnowAngels */,
+				07E461A01F4DD7B600A5AF49 /* sidePlank */,
 				07E461B31F4DD7C300A5AF49 /* singleLegDeadlift */,
 				07E461B21F4DD7C200A5AF49 /* singleLegGluteBridge */,
-				07E461B11F4DD7C100A5AF49 /* calfRaise */,
-				07E461B01F4DD7C100A5AF49 /* contralateralLimbRaises */,
-				07E461AF1F4DD7C000A5AF49 /* superMan */,
-				07E461AE1F4DD7C000A5AF49 /* backHyperextension */,
-				07E461AD1F4DD7BF00A5AF49 /* doorFrameRow */,
-				07E461AC1F4DD7BE00A5AF49 /* reverseSnowAngels */,
-				07E461AB1F4DD7BE00A5AF49 /* handStandTrap */,
-				07E461AA1F4DD7BD00A5AF49 /* trianglePushup */,
-				07E461A91F4DD7BD00A5AF49 /* dolphinPushup */,
-				07E461A81F4DD7BC00A5AF49 /* tricepExtensionBodyweight */,
-				07E461A71F4DD7BB00A5AF49 /* walkingPushup */,
-				07E461A61F4DD7BB00A5AF49 /* downwardDogPushup */,
-				07E461A51F4DD7BA00A5AF49 /* wallPushup */,
-				07E461A41F4DD7B900A5AF49 /* boxer */,
-				07E461A31F4DD7B900A5AF49 /* armCircles */,
-				07E461A21F4DD7B800A5AF49 /* plank */,
-				07E461A11F4DD7B700A5AF49 /* dynamicPlank */,
-				07E461A01F4DD7B600A5AF49 /* sidePlank */,
-				07E4619F1F4DD7AF00A5AF49 /* pushupPlank */,
-				07E4619E1F4DD7AF00A5AF49 /* lSit */,
-				07E4619D1F4DD7AE00A5AF49 /* bicycleCrunch */,
-				07E4619C1F4DD7AE00A5AF49 /* divingHold */,
-				07E4619B1F4DD7AD00A5AF49 /* hipRaise */,
-				07E4619A1F4DD7AC00A5AF49 /* legHold */,
-				07E461991F4DD7AC00A5AF49 /* burpee */,
-				07E461981F4DD7AB00A5AF49 /* kickThroughBurpee */,
+				07E461B71F4DD7C500A5AF49 /* skaterSquat */,
 				07E461971F4DD7AA00A5AF49 /* spiderPushup */,
-				07E461961F4DD7AA00A5AF49 /* crabWalk */,
-				07E461951F4DD7A900A5AF49 /* jumpingJacks */,
-				07E461941F4DD7A800A5AF49 /* tuckJump */,
-				07E461931F4DD7A800A5AF49 /* kneeRaises */,
-				07E461921F4DD7A700A5AF49 /* wallSit */,
-				07E461911F4DD7A600A5AF49 /* toePress */,
-				07E461901F4DD7A600A5AF49 /* chestSqueeze */,
-				07E4618F1F4DD7A500A5AF49 /* pushupHold */,
-				07E4618E1F4DD7A400A5AF49 /* ballPushup */,
-				07E4618D1F4DD7A400A5AF49 /* hangingLegRaise */,
-				07E464BA1F4DDECF00A5AF49 /* bulgarianSplitSquatBodyweight */,
-				07E4618A1F4DD7A100A5AF49 /* boxJump */,
-				07E461891F4DD79F00A5AF49 /* hipThrusts */,
 				07E461881F4DD79D00A5AF49 /* stepUp */,
+				07E461B61F4DD7C400A5AF49 /* sumoSquat */,
+				07E461AF1F4DD7C000A5AF49 /* superMan */,
+				07E461911F4DD7A600A5AF49 /* toePress */,
+				07E461AA1F4DD7BD00A5AF49 /* trianglePushup */,
+				07E461A81F4DD7BC00A5AF49 /* tricepExtensionBodyweight */,
+				07E461941F4DD7A800A5AF49 /* tuckJump */,
+				07E461A71F4DD7BB00A5AF49 /* walkingPushup */,
+				07E461A51F4DD7BA00A5AF49 /* wallPushup */,
+				07E461921F4DD7A700A5AF49 /* wallSit */,
 			);
-			name = Bodyweight;
+			path = Bodyweight;
 			sourceTree = "<group>";
 		};
 		07E461581F4DD57000A5AF49 /* cleanPress */ = {
@@ -5631,7 +5631,7 @@
 				07E463391F4DDB9B00A5AF49 /* cleanPress5.png */,
 				07E4633A1F4DDB9B00A5AF49 /* cleanPress6.png */,
 			);
-			name = cleanPress;
+			path = cleanPress;
 			sourceTree = "<group>";
 		};
 		07E461591F4DD57100A5AF49 /* ropeExtension */ = {
@@ -5642,7 +5642,7 @@
 				07E4632E1F4DDB9500A5AF49 /* ropeExtensions2.png */,
 				07E4632F1F4DDB9500A5AF49 /* ropeExtensions3.png */,
 			);
-			name = ropeExtension;
+			path = ropeExtension;
 			sourceTree = "<group>";
 		};
 		07E4615A1F4DD57200A5AF49 /* cableExtension */ = {
@@ -5653,7 +5653,7 @@
 				07E463261F4DDB8C00A5AF49 /* cableExtension2.png */,
 				07E463271F4DDB8C00A5AF49 /* cableExtension3.png */,
 			);
-			name = cableExtension;
+			path = cableExtension;
 			sourceTree = "<group>";
 		};
 		07E4615B1F4DD57300A5AF49 /* closeGripBench */ = {
@@ -5666,7 +5666,7 @@
 				07E4631C1F4DDB7B00A5AF49 /* closeGripBench4.png */,
 				07E4631D1F4DDB7B00A5AF49 /* closeGripBench5.png */,
 			);
-			name = closeGripBench;
+			path = closeGripBench;
 			sourceTree = "<group>";
 		};
 		07E4615D1F4DD57400A5AF49 /* frontRaise */ = {
@@ -5678,7 +5678,7 @@
 				07E463111F4DDB5900A5AF49 /* frontRaise3.png */,
 				07E463121F4DDB5900A5AF49 /* frontRaise4.png */,
 			);
-			name = frontRaise;
+			path = frontRaise;
 			sourceTree = "<group>";
 		};
 		07E4615E1F4DD57500A5AF49 /* lateralRaise */ = {
@@ -5690,7 +5690,7 @@
 				07E463071F4DDB4E00A5AF49 /* lateralRaise3.png */,
 				07E463081F4DDB4E00A5AF49 /* lateralRaise4.png */,
 			);
-			name = lateralRaise;
+			path = lateralRaise;
 			sourceTree = "<group>";
 		};
 		07E4615F1F4DD57500A5AF49 /* standingShoulderPressBarbell */ = {
@@ -5700,7 +5700,7 @@
 				07E462F91F4DDB3A00A5AF49 /* standingShoulderPressBarbell1.png */,
 				07E462FA1F4DDB3A00A5AF49 /* standingShoulderPressBarbell2.png */,
 			);
-			name = standingShoulderPressBarbell;
+			path = standingShoulderPressBarbell;
 			sourceTree = "<group>";
 		};
 		07E461601F4DD57600A5AF49 /* standingShoulderPressDumbell */ = {
@@ -5710,7 +5710,7 @@
 				07E462FF1F4DDB4300A5AF49 /* standingShoulderPressDumbell1.png */,
 				07E463001F4DDB4300A5AF49 /* standingShoulderPressDumbell2.png */,
 			);
-			name = standingShoulderPressDumbell;
+			path = standingShoulderPressDumbell;
 			sourceTree = "<group>";
 		};
 		07E461611F4DD57700A5AF49 /* dips */ = {
@@ -5719,7 +5719,7 @@
 				07E462F41F4DDB2C00A5AF49 /* dips.png */,
 				07E462F51F4DDB2C00A5AF49 /* dips1.png */,
 			);
-			name = dips;
+			path = dips;
 			sourceTree = "<group>";
 		};
 		07E461631F4DD57800A5AF49 /* barbellKneelinPress */ = {
@@ -5728,7 +5728,7 @@
 				07E462E61F4DDAFE00A5AF49 /* barbellKneelingPress.png */,
 				07E462E71F4DDAFE00A5AF49 /* barbellKneelingPress1.png */,
 			);
-			name = barbellKneelinPress;
+			path = barbellKneelinPress;
 			sourceTree = "<group>";
 		};
 		07E461641F4DD57900A5AF49 /* platePress */ = {
@@ -5737,7 +5737,7 @@
 				07E462E21F4DDAF800A5AF49 /* platePress.png */,
 				07E462E31F4DDAF800A5AF49 /* platePress1.png */,
 			);
-			name = platePress;
+			path = platePress;
 			sourceTree = "<group>";
 		};
 		07E461661F4DD57A00A5AF49 /* semiInclineDumbellPress */ = {
@@ -5749,7 +5749,7 @@
 				07E462D71F4DDAEC00A5AF49 /* semiInclineDumbellPress3.png */,
 				07E462D81F4DDAEC00A5AF49 /* semiInclineDumbellPress4.png */,
 			);
-			name = semiInclineDumbellPress;
+			path = semiInclineDumbellPress;
 			sourceTree = "<group>";
 		};
 		07E461671F4DD57B00A5AF49 /* benchPressDumbell */ = {
@@ -5761,7 +5761,7 @@
 				07E462CD1F4DDAE600A5AF49 /* benchPressDumbell3.png */,
 				07E462CE1F4DDAE600A5AF49 /* benchPressDumbell4.png */,
 			);
-			name = benchPressDumbell;
+			path = benchPressDumbell;
 			sourceTree = "<group>";
 		};
 		07E461681F4DD57B00A5AF49 /* benchPress */ = {
@@ -5774,7 +5774,7 @@
 				07E462C21F4DDADD00A5AF49 /* benchPress4.png */,
 				07E462C31F4DDADD00A5AF49 /* benchPress5.png */,
 			);
-			name = benchPress;
+			path = benchPress;
 			sourceTree = "<group>";
 		};
 		07E461691F4DD57C00A5AF49 /* forearmCurl */ = {
@@ -5784,7 +5784,7 @@
 				07E462B91F4DDABB00A5AF49 /* forearmCurl1.png */,
 				07E462BA1F4DDABB00A5AF49 /* forearmCurl2.png */,
 			);
-			name = forearmCurl;
+			path = forearmCurl;
 			sourceTree = "<group>";
 		};
 		07E4616A1F4DD57C00A5AF49 /* reverseBarbellCurl */ = {
@@ -5793,7 +5793,7 @@
 				07E462B41F4DDAAE00A5AF49 /* reverseBarbellCurl.png */,
 				07E462B51F4DDAAE00A5AF49 /* reverseBarbellCurl1.png */,
 			);
-			name = reverseBarbellCurl;
+			path = reverseBarbellCurl;
 			sourceTree = "<group>";
 		};
 		07E4616B1F4DD57D00A5AF49 /* farmersCarry */ = {
@@ -5801,7 +5801,7 @@
 			children = (
 				07E462B21F4DDAA700A5AF49 /* farmersCarry.png */,
 			);
-			name = farmersCarry;
+			path = farmersCarry;
 			sourceTree = "<group>";
 		};
 		07E4616C1F4DD57E00A5AF49 /* curl */ = {
@@ -5814,7 +5814,7 @@
 				07E462AA1F4DDA9C00A5AF49 /* curl4.png */,
 				07E462AB1F4DDA9C00A5AF49 /* curl5.png */,
 			);
-			name = curl;
+			path = curl;
 			sourceTree = "<group>";
 		};
 		07E4616D1F4DD57E00A5AF49 /* hammerCurlCable */ = {
@@ -5825,7 +5825,7 @@
 				07E462A01F4DDA9500A5AF49 /* hammerCurlCable2.png */,
 				07E462A11F4DDA9500A5AF49 /* hammerCurlCable3.png */,
 			);
-			name = hammerCurlCable;
+			path = hammerCurlCable;
 			sourceTree = "<group>";
 		};
 		07E4616E1F4DD58600A5AF49 /* hammerCurl */ = {
@@ -5838,7 +5838,7 @@
 				07E462961F4DDA8E00A5AF49 /* hammerCurl4.png */,
 				07E462971F4DDA8E00A5AF49 /* hammerCurl5.png */,
 			);
-			name = hammerCurl;
+			path = hammerCurl;
 			sourceTree = "<group>";
 		};
 		07E4616F1F4DD58700A5AF49 /* shrugDumbell */ = {
@@ -5847,7 +5847,7 @@
 				07E4628E1F4DDA8700A5AF49 /* shrugDumbell.png */,
 				07E4628F1F4DDA8700A5AF49 /* shrugDumbell1.png */,
 			);
-			name = shrugDumbell;
+			path = shrugDumbell;
 			sourceTree = "<group>";
 		};
 		07E461701F4DD58800A5AF49 /* bentOverBarbellRow */ = {
@@ -5856,7 +5856,7 @@
 				07E4628A1F4DDA8100A5AF49 /* bentOverBarbellRow.png */,
 				07E4628B1F4DDA8100A5AF49 /* bentOverBarbellRow1.png */,
 			);
-			name = bentOverBarbellRow;
+			path = bentOverBarbellRow;
 			sourceTree = "<group>";
 		};
 		07E461711F4DD58900A5AF49 /* leaningBackPullDown */ = {
@@ -5868,7 +5868,7 @@
 				07E462831F4DDA7800A5AF49 /* leaningBackPullDown3.png */,
 				07E462841F4DDA7800A5AF49 /* leaningBackPullDown4.png */,
 			);
-			name = leaningBackPullDown;
+			path = leaningBackPullDown;
 			sourceTree = "<group>";
 		};
 		07E461721F4DD58A00A5AF49 /* rowMachine */ = {
@@ -5880,7 +5880,7 @@
 				07E462791F4DDA6C00A5AF49 /* rowMachine3.png */,
 				07E4627A1F4DDA6C00A5AF49 /* rowMachine4.png */,
 			);
-			name = rowMachine;
+			path = rowMachine;
 			sourceTree = "<group>";
 		};
 		07E461731F4DD58A00A5AF49 /* tBarRow */ = {
@@ -5892,7 +5892,7 @@
 				07E4626F1F4DDA5B00A5AF49 /* tBarRow3.png */,
 				07E462701F4DDA5B00A5AF49 /* tBarRow4.png */,
 			);
-			name = tBarRow;
+			path = tBarRow;
 			sourceTree = "<group>";
 		};
 		07E461741F4DD58B00A5AF49 /* bentOverRowDumbell */ = {
@@ -5905,7 +5905,7 @@
 				07E462641F4DDA4B00A5AF49 /* bentOverRowDumbell4.png */,
 				07E462651F4DDA4B00A5AF49 /* bentOverRowDumbell5.png */,
 			);
-			name = bentOverRowDumbell;
+			path = bentOverRowDumbell;
 			sourceTree = "<group>";
 		};
 		07E461771F4DD58D00A5AF49 /* kneelingPullDown */ = {
@@ -5917,7 +5917,7 @@
 				07E462491F4DDA2700A5AF49 /* kneelingPullDown3.png */,
 				07E4624A1F4DDA2700A5AF49 /* kneelingPullDown4.png */,
 			);
-			name = kneelingPullDown;
+			path = kneelingPullDown;
 			sourceTree = "<group>";
 		};
 		07E461781F4DD58D00A5AF49 /* pullDown */ = {
@@ -5930,7 +5930,7 @@
 				07E4623E1F4DDA1F00A5AF49 /* pullDown4.png */,
 				07E4623F1F4DDA1F00A5AF49 /* pullDown5.png */,
 			);
-			name = pullDown;
+			path = pullDown;
 			sourceTree = "<group>";
 		};
 		07E461791F4DD58E00A5AF49 /* seatedCalfRaise */ = {
@@ -5939,7 +5939,7 @@
 				07E462361F4DDA1800A5AF49 /* seatedCalfRaise.png */,
 				07E462371F4DDA1800A5AF49 /* seatedCalfRaise1.png */,
 			);
-			name = seatedCalfRaise;
+			path = seatedCalfRaise;
 			sourceTree = "<group>";
 		};
 		07E4617A1F4DD58F00A5AF49 /* standingCalfRaise */ = {
@@ -5948,7 +5948,7 @@
 				07E462321F4DDA1100A5AF49 /* standingCalfRaise.png */,
 				07E462331F4DDA1100A5AF49 /* standingCalfRaise1.png */,
 			);
-			name = standingCalfRaise;
+			path = standingCalfRaise;
 			sourceTree = "<group>";
 		};
 		07E4617B1F4DD59000A5AF49 /* bulgarianSplitSquat */ = {
@@ -5957,7 +5957,7 @@
 				07E4622E1F4DDA0700A5AF49 /* bulgarianSplitSquat.png */,
 				07E4622F1F4DDA0700A5AF49 /* bulgarianSplitSquat1.png */,
 			);
-			name = bulgarianSplitSquat;
+			path = bulgarianSplitSquat;
 			sourceTree = "<group>";
 		};
 		07E4617C1F4DD59000A5AF49 /* lungeDumbell */ = {
@@ -5965,6 +5965,10 @@
 			children = (
 				07E462121F4DD9FE00A5AF49 /* lungeDumbell.png */,
 				07E462131F4DD9FE00A5AF49 /* lungeDumbell1.png */,
+				07E4621C1F4DD9FE00A5AF49 /* lungeDumbell10.png */,
+				07E4621D1F4DD9FE00A5AF49 /* lungeDumbell11.png */,
+				07E4621E1F4DD9FE00A5AF49 /* lungeDumbell12.png */,
+				07E4621F1F4DD9FE00A5AF49 /* lungeDumbell13.png */,
 				07E462141F4DD9FE00A5AF49 /* lungeDumbell2.png */,
 				07E462151F4DD9FE00A5AF49 /* lungeDumbell3.png */,
 				07E462161F4DD9FE00A5AF49 /* lungeDumbell4.png */,
@@ -5973,12 +5977,8 @@
 				07E462191F4DD9FE00A5AF49 /* lungeDumbell7.png */,
 				07E4621A1F4DD9FE00A5AF49 /* lungeDumbell8.png */,
 				07E4621B1F4DD9FE00A5AF49 /* lungeDumbell9.png */,
-				07E4621C1F4DD9FE00A5AF49 /* lungeDumbell10.png */,
-				07E4621D1F4DD9FE00A5AF49 /* lungeDumbell11.png */,
-				07E4621E1F4DD9FE00A5AF49 /* lungeDumbell12.png */,
-				07E4621F1F4DD9FE00A5AF49 /* lungeDumbell13.png */,
 			);
-			name = lungeDumbell;
+			path = lungeDumbell;
 			sourceTree = "<group>";
 		};
 		07E4617E1F4DD59100A5AF49 /* oneLeggedDeadlift */ = {
@@ -5990,7 +5990,7 @@
 				07E462071F4DD9E300A5AF49 /* oneLeggedDeadlift3.png */,
 				07E462081F4DD9E300A5AF49 /* oneLeggedDeadlift4.png */,
 			);
-			name = oneLeggedDeadlift;
+			path = oneLeggedDeadlift;
 			sourceTree = "<group>";
 		};
 		07E4617F1F4DD59200A5AF49 /* legCurl */ = {
@@ -6001,7 +6001,7 @@
 				07E461FE1F4DD9DD00A5AF49 /* legCurl2.png */,
 				07E461FF1F4DD9DD00A5AF49 /* legCurl3.png */,
 			);
-			name = legCurl;
+			path = legCurl;
 			sourceTree = "<group>";
 		};
 		07E461801F4DD59200A5AF49 /* weightedHipThrust */ = {
@@ -6010,7 +6010,7 @@
 				07E461F81F4DD9D700A5AF49 /* weightedHipThrust.png */,
 				07E461F91F4DD9D700A5AF49 /* weightedHipThrust1.png */,
 			);
-			name = weightedHipThrust;
+			path = weightedHipThrust;
 			sourceTree = "<group>";
 		};
 		07E461811F4DD59300A5AF49 /* romanianDeadlift */ = {
@@ -6021,7 +6021,7 @@
 				07E461F21F4DD9CF00A5AF49 /* romanianDeadlift2.png */,
 				07E461F31F4DD9CF00A5AF49 /* romanianDeadlift3.png */,
 			);
-			name = romanianDeadlift;
+			path = romanianDeadlift;
 			sourceTree = "<group>";
 		};
 		07E461821F4DD59300A5AF49 /* deadlift */ = {
@@ -6036,7 +6036,7 @@
 				07E461E61F4DD9C700A5AF49 /* deadlift6.png */,
 				07E461E71F4DD9C700A5AF49 /* deadlift7.png */,
 			);
-			name = deadlift;
+			path = deadlift;
 			sourceTree = "<group>";
 		};
 		07E461831F4DD59400A5AF49 /* legExtensions */ = {
@@ -6047,7 +6047,7 @@
 				07E461DA1F4DD9C000A5AF49 /* legExtensions2.png */,
 				07E461DB1F4DD9C000A5AF49 /* legExtensions3.png */,
 			);
-			name = legExtensions;
+			path = legExtensions;
 			sourceTree = "<group>";
 		};
 		07E461841F4DD59500A5AF49 /* dumbellFrontSquat */ = {
@@ -6056,7 +6056,7 @@
 				07E461D41F4DD9B700A5AF49 /* dumbellFrontSquat.png */,
 				07E461D51F4DD9B700A5AF49 /* dumbellFrontSquat1.png */,
 			);
-			name = dumbellFrontSquat;
+			path = dumbellFrontSquat;
 			sourceTree = "<group>";
 		};
 		07E461851F4DD59500A5AF49 /* legPress */ = {
@@ -6068,7 +6068,7 @@
 				07E461CD1F4DD9B100A5AF49 /* legPress3.png */,
 				07E461CE1F4DD9B100A5AF49 /* legPress4.png */,
 			);
-			name = legPress;
+			path = legPress;
 			sourceTree = "<group>";
 		};
 		07E461861F4DD59600A5AF49 /* frontSquat */ = {
@@ -6079,7 +6079,7 @@
 				07E461C41F4DD9AA00A5AF49 /* frontSquat2.png */,
 				07E461C51F4DD9AA00A5AF49 /* frontSquat3.png */,
 			);
-			name = frontSquat;
+			path = frontSquat;
 			sourceTree = "<group>";
 		};
 		07E461871F4DD59900A5AF49 /* squat */ = {
@@ -6090,7 +6090,7 @@
 				07E461BC1F4DD9A500A5AF49 /* squat2.png */,
 				07E461BD1F4DD9A500A5AF49 /* squat3.png */,
 			);
-			name = squat;
+			path = squat;
 			sourceTree = "<group>";
 		};
 		07E461881F4DD79D00A5AF49 /* stepUp */ = {
@@ -6101,7 +6101,7 @@
 				07E464B41F4DDEBE00A5AF49 /* stepUp2.png */,
 				07E464B51F4DDEBE00A5AF49 /* stepUp3.png */,
 			);
-			name = stepUp;
+			path = stepUp;
 			sourceTree = "<group>";
 		};
 		07E461891F4DD79F00A5AF49 /* hipThrusts */ = {
@@ -6110,7 +6110,7 @@
 				07E464AE1F4DDEB700A5AF49 /* hipThrusts.png */,
 				07E464AF1F4DDEB700A5AF49 /* hipThrusts1.png */,
 			);
-			name = hipThrusts;
+			path = hipThrusts;
 			sourceTree = "<group>";
 		};
 		07E4618A1F4DD7A100A5AF49 /* boxJump */ = {
@@ -6118,7 +6118,7 @@
 			children = (
 				07E464AC1F4DDEB000A5AF49 /* boxJump.png */,
 			);
-			name = boxJump;
+			path = boxJump;
 			sourceTree = "<group>";
 		};
 		07E4618D1F4DD7A400A5AF49 /* hangingLegRaise */ = {
@@ -6130,7 +6130,7 @@
 				07E4649B1F4DDE9400A5AF49 /* hangingLegRaises3.png */,
 				07E4649C1F4DDE9400A5AF49 /* hangingLegRaises4.png */,
 			);
-			name = hangingLegRaise;
+			path = hangingLegRaise;
 			sourceTree = "<group>";
 		};
 		07E4618E1F4DD7A400A5AF49 /* ballPushup */ = {
@@ -6139,7 +6139,7 @@
 				07E464941F4DDE8900A5AF49 /* ballPushup.png */,
 				07E464951F4DDE8900A5AF49 /* ballPushup1.png */,
 			);
-			name = ballPushup;
+			path = ballPushup;
 			sourceTree = "<group>";
 		};
 		07E4618F1F4DD7A500A5AF49 /* pushupHold */ = {
@@ -6147,7 +6147,7 @@
 			children = (
 				07E464921F4DDE8300A5AF49 /* pushupHold.png */,
 			);
-			name = pushupHold;
+			path = pushupHold;
 			sourceTree = "<group>";
 		};
 		07E461901F4DD7A600A5AF49 /* chestSqueeze */ = {
@@ -6155,7 +6155,7 @@
 			children = (
 				07E464901F4DDE7F00A5AF49 /* chestSqueeze.png */,
 			);
-			name = chestSqueeze;
+			path = chestSqueeze;
 			sourceTree = "<group>";
 		};
 		07E461911F4DD7A600A5AF49 /* toePress */ = {
@@ -6163,7 +6163,7 @@
 			children = (
 				07E4648E1F4DDE7A00A5AF49 /* toePress.png */,
 			);
-			name = toePress;
+			path = toePress;
 			sourceTree = "<group>";
 		};
 		07E461921F4DD7A700A5AF49 /* wallSit */ = {
@@ -6171,7 +6171,7 @@
 			children = (
 				07E4648C1F4DDE7100A5AF49 /* wallSit.png */,
 			);
-			name = wallSit;
+			path = wallSit;
 			sourceTree = "<group>";
 		};
 		07E461931F4DD7A800A5AF49 /* kneeRaises */ = {
@@ -6183,7 +6183,7 @@
 				07E464851F4DDE6800A5AF49 /* kneeRaises3.png */,
 				07E464861F4DDE6800A5AF49 /* kneeRaises4.png */,
 			);
-			name = kneeRaises;
+			path = kneeRaises;
 			sourceTree = "<group>";
 		};
 		07E461941F4DD7A800A5AF49 /* tuckJump */ = {
@@ -6194,7 +6194,7 @@
 				07E4647C1F4DDE5000A5AF49 /* tuckJump2.png */,
 				07E4647D1F4DDE5000A5AF49 /* tuckJump3.png */,
 			);
-			name = tuckJump;
+			path = tuckJump;
 			sourceTree = "<group>";
 		};
 		07E461951F4DD7A900A5AF49 /* jumpingJacks */ = {
@@ -6206,7 +6206,7 @@
 				07E464731F4DDE4A00A5AF49 /* jumpingJacks3.png */,
 				07E464741F4DDE4A00A5AF49 /* jumpingJacks4.png */,
 			);
-			name = jumpingJacks;
+			path = jumpingJacks;
 			sourceTree = "<group>";
 		};
 		07E461961F4DD7AA00A5AF49 /* crabWalk */ = {
@@ -6220,7 +6220,7 @@
 				07E464671F4DDE2B00A5AF49 /* crabWalk5.png */,
 				07E464681F4DDE2B00A5AF49 /* crabWalk6.png */,
 			);
-			name = crabWalk;
+			path = crabWalk;
 			sourceTree = "<group>";
 		};
 		07E461971F4DD7AA00A5AF49 /* spiderPushup */ = {
@@ -6234,7 +6234,7 @@
 				07E464591F4DDE1F00A5AF49 /* spiderPushup5.png */,
 				07E4645A1F4DDE1F00A5AF49 /* spiderPushup6.png */,
 			);
-			name = spiderPushup;
+			path = spiderPushup;
 			sourceTree = "<group>";
 		};
 		07E461981F4DD7AB00A5AF49 /* kickThroughBurpee */ = {
@@ -6251,7 +6251,7 @@
 				07E464481F4DDE1A00A5AF49 /* kickThroughBurpee8.png */,
 				07E464491F4DDE1A00A5AF49 /* kickThroughBurpee9.png */,
 			);
-			name = kickThroughBurpee;
+			path = kickThroughBurpee;
 			sourceTree = "<group>";
 		};
 		07E461991F4DD7AC00A5AF49 /* burpee */ = {
@@ -6265,7 +6265,7 @@
 				07E464371F4DDE1200A5AF49 /* burpee5.png */,
 				07E464381F4DDE1200A5AF49 /* burpee6.png */,
 			);
-			name = burpee;
+			path = burpee;
 			sourceTree = "<group>";
 		};
 		07E4619A1F4DD7AC00A5AF49 /* legHold */ = {
@@ -6273,7 +6273,7 @@
 			children = (
 				07E464301F4DDE0900A5AF49 /* legHold.png */,
 			);
-			name = legHold;
+			path = legHold;
 			sourceTree = "<group>";
 		};
 		07E4619B1F4DD7AD00A5AF49 /* hipRaise */ = {
@@ -6282,7 +6282,7 @@
 				07E4642C1F4DDDD400A5AF49 /* hipRaise.png */,
 				07E4642D1F4DDDD400A5AF49 /* hipRaise1.png */,
 			);
-			name = hipRaise;
+			path = hipRaise;
 			sourceTree = "<group>";
 		};
 		07E4619C1F4DD7AE00A5AF49 /* divingHold */ = {
@@ -6290,7 +6290,7 @@
 			children = (
 				07E4642A1F4DDDC900A5AF49 /* divingHold.png */,
 			);
-			name = divingHold;
+			path = divingHold;
 			sourceTree = "<group>";
 		};
 		07E4619D1F4DD7AE00A5AF49 /* bicycleCrunch */ = {
@@ -6302,7 +6302,7 @@
 				07E464231F4DDDB800A5AF49 /* bicycleCrunch3.png */,
 				07E464241F4DDDB800A5AF49 /* bicycleCrunch4.png */,
 			);
-			name = bicycleCrunch;
+			path = bicycleCrunch;
 			sourceTree = "<group>";
 		};
 		07E4619E1F4DD7AF00A5AF49 /* lSit */ = {
@@ -6310,7 +6310,7 @@
 			children = (
 				07E4641E1F4DDDB100A5AF49 /* lSit.png */,
 			);
-			name = lSit;
+			path = lSit;
 			sourceTree = "<group>";
 		};
 		07E4619F1F4DD7AF00A5AF49 /* pushupPlank */ = {
@@ -6318,7 +6318,7 @@
 			children = (
 				07E4641C1F4DDD3600A5AF49 /* pushupPlank.png */,
 			);
-			name = pushupPlank;
+			path = pushupPlank;
 			sourceTree = "<group>";
 		};
 		07E461A01F4DD7B600A5AF49 /* sidePlank */ = {
@@ -6326,7 +6326,7 @@
 			children = (
 				07E4641A1F4DDD2C00A5AF49 /* sidePlankW.png */,
 			);
-			name = sidePlank;
+			path = sidePlank;
 			sourceTree = "<group>";
 		};
 		07E461A11F4DD7B700A5AF49 /* dynamicPlank */ = {
@@ -6335,7 +6335,7 @@
 				07E464161F4DDCD500A5AF49 /* dynamicPlank.png */,
 				07E464171F4DDCD500A5AF49 /* dynamicPlank1.png */,
 			);
-			name = dynamicPlank;
+			path = dynamicPlank;
 			sourceTree = "<group>";
 		};
 		07E461A21F4DD7B800A5AF49 /* plank */ = {
@@ -6343,7 +6343,7 @@
 			children = (
 				07E464141F4DDCCC00A5AF49 /* plank.png */,
 			);
-			name = plank;
+			path = plank;
 			sourceTree = "<group>";
 		};
 		07E461A31F4DD7B900A5AF49 /* armCircles */ = {
@@ -6351,7 +6351,7 @@
 			children = (
 				07E464121F4DDCC700A5AF49 /* armCircles.png */,
 			);
-			name = armCircles;
+			path = armCircles;
 			sourceTree = "<group>";
 		};
 		07E461A41F4DD7B900A5AF49 /* boxer */ = {
@@ -6363,7 +6363,7 @@
 				07E4640B1F4DDCBB00A5AF49 /* boxer3.png */,
 				07E4640C1F4DDCBB00A5AF49 /* boxer4.png */,
 			);
-			name = boxer;
+			path = boxer;
 			sourceTree = "<group>";
 		};
 		07E461A51F4DD7BA00A5AF49 /* wallPushup */ = {
@@ -6371,7 +6371,7 @@
 			children = (
 				07E464061F4DDCB400A5AF49 /* wallPushup.png */,
 			);
-			name = wallPushup;
+			path = wallPushup;
 			sourceTree = "<group>";
 		};
 		07E461A61F4DD7BB00A5AF49 /* downwardDogPushup */ = {
@@ -6387,7 +6387,7 @@
 				07E463FB1F4DDCAE00A5AF49 /* downwardDogPushup7.png */,
 				07E463FC1F4DDCAE00A5AF49 /* downwardDogPushup8.png */,
 			);
-			name = downwardDogPushup;
+			path = downwardDogPushup;
 			sourceTree = "<group>";
 		};
 		07E461A71F4DD7BB00A5AF49 /* walkingPushup */ = {
@@ -6403,7 +6403,7 @@
 				07E463E91F4DDCA700A5AF49 /* walkingPushup7.png */,
 				07E463EA1F4DDCA700A5AF49 /* walkingPushup8.png */,
 			);
-			name = walkingPushup;
+			path = walkingPushup;
 			sourceTree = "<group>";
 		};
 		07E461A81F4DD7BC00A5AF49 /* tricepExtensionBodyweight */ = {
@@ -6412,7 +6412,7 @@
 				07E463DE1F4DDC9F00A5AF49 /* tricepExtensionsBodyweight.png */,
 				07E463DF1F4DDC9F00A5AF49 /* tricepExtensionsBodyweight1.png */,
 			);
-			name = tricepExtensionBodyweight;
+			path = tricepExtensionBodyweight;
 			sourceTree = "<group>";
 		};
 		07E461A91F4DD7BD00A5AF49 /* dolphinPushup */ = {
@@ -6424,7 +6424,7 @@
 				07E463D71F4DDC9800A5AF49 /* dolphinPushup3.png */,
 				07E463D81F4DDC9800A5AF49 /* dolphinPushup4.png */,
 			);
-			name = dolphinPushup;
+			path = dolphinPushup;
 			sourceTree = "<group>";
 		};
 		07E461AA1F4DD7BD00A5AF49 /* trianglePushup */ = {
@@ -6436,7 +6436,7 @@
 				07E463CD1F4DDC9200A5AF49 /* trianglePushup3.png */,
 				07E463CE1F4DDC9200A5AF49 /* trianglePushup4.png */,
 			);
-			name = trianglePushup;
+			path = trianglePushup;
 			sourceTree = "<group>";
 		};
 		07E461AB1F4DD7BE00A5AF49 /* handStandTrap */ = {
@@ -6445,7 +6445,7 @@
 				07E463C61F4DDC8C00A5AF49 /* handStandTrap.png */,
 				07E463C71F4DDC8C00A5AF49 /* handStandTrap1.png */,
 			);
-			name = handStandTrap;
+			path = handStandTrap;
 			sourceTree = "<group>";
 		};
 		07E461AC1F4DD7BE00A5AF49 /* reverseSnowAngels */ = {
@@ -6457,7 +6457,7 @@
 				07E463BF1F4DDC8100A5AF49 /* reverseSnowAngels3.png */,
 				07E463C01F4DDC8100A5AF49 /* reverseSnowAngels4.png */,
 			);
-			name = reverseSnowAngels;
+			path = reverseSnowAngels;
 			sourceTree = "<group>";
 		};
 		07E461AD1F4DD7BF00A5AF49 /* doorFrameRow */ = {
@@ -6467,7 +6467,7 @@
 				07E463B71F4DDC6A00A5AF49 /* doorFrameRow1.png */,
 				07E463B81F4DDC6A00A5AF49 /* doorFrameRow2.png */,
 			);
-			name = doorFrameRow;
+			path = doorFrameRow;
 			sourceTree = "<group>";
 		};
 		07E461AE1F4DD7C000A5AF49 /* backHyperextension */ = {
@@ -6479,7 +6479,7 @@
 				07E463AF1F4DDC6100A5AF49 /* backHyperextension3.png */,
 				07E463B01F4DDC6100A5AF49 /* backHyperextension4.png */,
 			);
-			name = backHyperextension;
+			path = backHyperextension;
 			sourceTree = "<group>";
 		};
 		07E461AF1F4DD7C000A5AF49 /* superMan */ = {
@@ -6487,7 +6487,7 @@
 			children = (
 				07E463AA1F4DDC5900A5AF49 /* superMan.png */,
 			);
-			name = superMan;
+			path = superMan;
 			sourceTree = "<group>";
 		};
 		07E461B01F4DD7C100A5AF49 /* contralateralLimbRaises */ = {
@@ -6500,7 +6500,7 @@
 				07E463A21F4DDC5500A5AF49 /* contralateralLimbRaises4.png */,
 				07E463A31F4DDC5500A5AF49 /* contralateralLimbRaises5.png */,
 			);
-			name = contralateralLimbRaises;
+			path = contralateralLimbRaises;
 			sourceTree = "<group>";
 		};
 		07E461B11F4DD7C100A5AF49 /* calfRaise */ = {
@@ -6509,7 +6509,7 @@
 				07E4639A1F4DDC4D00A5AF49 /* calfRaise.png */,
 				07E4639B1F4DDC4D00A5AF49 /* calfRaise1.png */,
 			);
-			name = calfRaise;
+			path = calfRaise;
 			sourceTree = "<group>";
 		};
 		07E461B21F4DD7C200A5AF49 /* singleLegGluteBridge */ = {
@@ -6520,7 +6520,7 @@
 				07E463941F4DDC4700A5AF49 /* singleLegGluteBridge2.png */,
 				07E463951F4DDC4700A5AF49 /* singleLegGluteBridge3.png */,
 			);
-			name = singleLegGluteBridge;
+			path = singleLegGluteBridge;
 			sourceTree = "<group>";
 		};
 		07E461B31F4DD7C300A5AF49 /* singleLegDeadlift */ = {
@@ -6532,7 +6532,7 @@
 				07E4638B1F4DDC3B00A5AF49 /* singleLegDeadlift3.png */,
 				07E4638C1F4DDC3B00A5AF49 /* singleLegDeadlift4.png */,
 			);
-			name = singleLegDeadlift;
+			path = singleLegDeadlift;
 			sourceTree = "<group>";
 		};
 		07E461B41F4DD7C300A5AF49 /* bodyweightDeadlift */ = {
@@ -6544,7 +6544,7 @@
 				07E463811F4DDBFB00A5AF49 /* bodyweightDeadlift3.png */,
 				07E463821F4DDBFB00A5AF49 /* bodyweightDeadlift4.png */,
 			);
-			name = bodyweightDeadlift;
+			path = bodyweightDeadlift;
 			sourceTree = "<group>";
 		};
 		07E461B51F4DD7C400A5AF49 /* lungeJump */ = {
@@ -6559,7 +6559,7 @@
 				07E463741F4DDBF400A5AF49 /* lungeJump6.png */,
 				07E463751F4DDBF400A5AF49 /* lungeJump7.png */,
 			);
-			name = lungeJump;
+			path = lungeJump;
 			sourceTree = "<group>";
 		};
 		07E461B61F4DD7C400A5AF49 /* sumoSquat */ = {
@@ -6571,7 +6571,7 @@
 				07E463671F4DDBE900A5AF49 /* sumoSquat3.png */,
 				07E463681F4DDBE900A5AF49 /* sumoSquat4.png */,
 			);
-			name = sumoSquat;
+			path = sumoSquat;
 			sourceTree = "<group>";
 		};
 		07E461B71F4DD7C500A5AF49 /* skaterSquat */ = {
@@ -6583,7 +6583,7 @@
 				07E4635D1F4DDBE200A5AF49 /* skaterSquat3.png */,
 				07E4635E1F4DDBE200A5AF49 /* skaterSquat4.png */,
 			);
-			name = skaterSquat;
+			path = skaterSquat;
 			sourceTree = "<group>";
 		};
 		07E461B81F4DD7C500A5AF49 /* pistolSquat */ = {
@@ -6596,7 +6596,7 @@
 				07E463521F4DDBDA00A5AF49 /* pistolSquat4.png */,
 				07E463531F4DDBDA00A5AF49 /* pistolSquat5.png */,
 			);
-			name = pistolSquat;
+			path = pistolSquat;
 			sourceTree = "<group>";
 		};
 		07E461B91F4DD7C600A5AF49 /* bodyweightSquat */ = {
@@ -6609,7 +6609,7 @@
 				07E463461F4DDBD200A5AF49 /* bodyweightSquat4.png */,
 				07E463471F4DDBD200A5AF49 /* bodyweightSquat5.png */,
 			);
-			name = bodyweightSquat;
+			path = bodyweightSquat;
 			sourceTree = "<group>";
 		};
 		07E464BA1F4DDECF00A5AF49 /* bulgarianSplitSquatBodyweight */ = {
@@ -6618,19 +6618,19 @@
 				07E464BB1F4DE00B00A5AF49 /* bulgarianSplitSquatBodyweight.png */,
 				07E464BC1F4DE00B00A5AF49 /* bulgarianSplitSquatBodyweight1.png */,
 			);
-			name = bulgarianSplitSquatBodyweight;
+			path = bulgarianSplitSquatBodyweight;
 			sourceTree = "<group>";
 		};
 		07E464BF1F4ECD5800A5AF49 /* Target Area Images */ = {
 			isa = PBXGroup;
 			children = (
+				07E464C21F4ECD7F00A5AF49 /* Joints */,
+				07E464C01F4ECD6400A5AF49 /* Lower Body */,
+				07E464C11F4ECD6A00A5AF49 /* Upper Body */,
 				07E464C71F4ED1C100A5AF49 /* heart@2x.png */,
 				07E464C81F4ED1C100A5AF49 /* heart@3x.png */,
-				07E464C11F4ECD6A00A5AF49 /* Upper Body */,
-				07E464C01F4ECD6400A5AF49 /* Lower Body */,
-				07E464C21F4ECD7F00A5AF49 /* Joints */,
 			);
-			name = "Target Area Images";
+			path = "Target Area Images";
 			sourceTree = "<group>";
 		};
 		07E464C01F4ECD6400A5AF49 /* Lower Body */ = {
@@ -6640,6 +6640,8 @@
 				07E464EC1F4ED1E400A5AF49 /* adductor@3x.png */,
 				07E464ED1F4ED1E400A5AF49 /* calf@2x.png */,
 				07E464EE1F4ED1E400A5AF49 /* calf@3x.png */,
+				072953B51F4EE35400B2F21C /* deadliftBody@2x.png */,
+				072953B61F4EE35400B2F21C /* deadliftBody@3x.png */,
 				07E464F11F4ED1E400A5AF49 /* gastrocnemius@2x.png */,
 				07E464F21F4ED1E400A5AF49 /* gastrocnemius@3x.png */,
 				07E464F31F4ED1E400A5AF49 /* glute@2x.png */,
@@ -6662,17 +6664,16 @@
 				07E465041F4ED1E400A5AF49 /* rearThigh@3x.png */,
 				07E465051F4ED1E400A5AF49 /* soleus@2x.png */,
 				07E465061F4ED1E400A5AF49 /* soleus@3x.png */,
-				072953B51F4EE35400B2F21C /* deadliftBody@2x.png */,
-				072953B61F4EE35400B2F21C /* deadliftBody@3x.png */,
 				072953B91F4EE37200B2F21C /* squatBody@2x.png */,
 				072953BA1F4EE37200B2F21C /* squatBody@3x.png */,
 			);
-			name = "Lower Body";
+			path = "Lower Body";
 			sourceTree = "<group>";
 		};
 		07E464C11F4ECD6A00A5AF49 /* Upper Body */ = {
 			isa = PBXGroup;
 			children = (
+				072953401F4ED58400B2F21C /* FrontDelt@3x.png */,
 				0729532D1F4ED58400B2F21C /* back@2x.png */,
 				0729532E1F4ED58400B2F21C /* back@3x.png */,
 				0729532F1F4ED58400B2F21C /* backBicep@2x.png */,
@@ -6692,13 +6693,12 @@
 				0729533D1F4ED58400B2F21C /* forearm@2x.png */,
 				0729533E1F4ED58400B2F21C /* forearm@3x.png */,
 				0729533F1F4ED58400B2F21C /* frontDelt@2x.png */,
-				072953401F4ED58400B2F21C /* FrontDelt@3x.png */,
 				072953411F4ED58400B2F21C /* frontLateralDelt@2x.png */,
 				072953421F4ED58400B2F21C /* frontLateralDelt@3x.png */,
-				072953431F4ED58400B2F21C /* lat@2x.png */,
-				072953441F4ED58400B2F21C /* lat@3x.png */,
 				072953451F4ED58400B2F21C /* lat2@2x.png */,
 				072953461F4ED58400B2F21C /* lat2@3x.png */,
+				072953431F4ED58400B2F21C /* lat@2x.png */,
+				072953441F4ED58400B2F21C /* lat@3x.png */,
 				072953471F4ED58400B2F21C /* latDelt@2x.png */,
 				072953481F4ED58400B2F21C /* latDelt@3x.png */,
 				072953491F4ED58400B2F21C /* lateralDelt@2x.png */,
@@ -6715,10 +6715,10 @@
 				072953541F4ED58400B2F21C /* pec@3x.png */,
 				072953551F4ED58400B2F21C /* pecFrontDelt@2x.png */,
 				072953561F4ED58400B2F21C /* pecFrontDelt@3x.png */,
-				072953571F4ED58400B2F21C /* rearDelt@2x.png */,
-				072953581F4ED58400B2F21C /* rearDelt@3x.png */,
 				072953591F4ED58400B2F21C /* rearDelt2@2x.png */,
 				0729535A1F4ED58400B2F21C /* rearDelt2@3x.png */,
+				072953571F4ED58400B2F21C /* rearDelt@2x.png */,
+				072953581F4ED58400B2F21C /* rearDelt@3x.png */,
 				0729535B1F4ED58400B2F21C /* rearNeck@2x.png */,
 				0729535C1F4ED58400B2F21C /* rearNeck@3x.png */,
 				0729535D1F4ED58400B2F21C /* rectus@2x.png */,
@@ -6740,14 +6740,12 @@
 				0729536D1F4ED58400B2F21C /* upperBackShoulder@2x.png */,
 				0729536E1F4ED58400B2F21C /* upperBackShoulder@3x.png */,
 			);
-			name = "Upper Body";
+			path = "Upper Body";
 			sourceTree = "<group>";
 		};
 		07E464C21F4ECD7F00A5AF49 /* Joints */ = {
 			isa = PBXGroup;
 			children = (
-				072953BD1F4EEA0800B2F21C /* neckJoint@2x.png */,
-				072953BE1F4EEA0800B2F21C /* neckJoint@3x.png */,
 				07E464CB1F4ED1D000A5AF49 /* ankle@2x.png */,
 				07E464CC1F4ED1D000A5AF49 /* ankle@3x.png */,
 				07E464CD1F4ED1D000A5AF49 /* elbow@2x.png */,
@@ -6756,6 +6754,8 @@
 				07E464D01F4ED1D000A5AF49 /* hip@3x.png */,
 				07E464D11F4ED1D000A5AF49 /* knee@2x.png */,
 				07E464D21F4ED1D000A5AF49 /* knee@3x.png */,
+				072953BD1F4EEA0800B2F21C /* neckJoint@2x.png */,
+				072953BE1F4EEA0800B2F21C /* neckJoint@3x.png */,
 				07E464D51F4ED1D000A5AF49 /* shoulderJoint@2x.png */,
 				07E464D61F4ED1D000A5AF49 /* shoulderJoint@3x.png */,
 				07E464D71F4ED1D000A5AF49 /* waist@2x.png */,
@@ -6763,26 +6763,26 @@
 				07E464D91F4ED1D000A5AF49 /* wrist@2x.png */,
 				07E464DA1F4ED1D000A5AF49 /* wrist@3x.png */,
 			);
-			name = Joints;
+			path = Joints;
 			sourceTree = "<group>";
 		};
 		07E98F0D1EA8F86D00C98ED5 /* Gym */ = {
 			isa = PBXGroup;
 			children = (
-				077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */,
-				07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */,
 				077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */,
+				07DEE6F01E0AAD2E003B89AB /* ClassicChoiceG.swift */,
+				077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */,
 			);
-			name = Gym;
+			path = Gym;
 			sourceTree = "<group>";
 		};
 		07E98F0E1EA8F8E100C98ED5 /* BodyWeight */ = {
 			isa = PBXGroup;
 			children = (
-				076C68411ED497AD009160C2 /* BodyweightChoiceCC.swift */,
 				071FB62B1E9283AE0081444F /* BodyweightChoice.swift */,
+				076C68411ED497AD009160C2 /* BodyweightChoiceCC.swift */,
 			);
-			name = BodyWeight;
+			path = BodyWeight;
 			sourceTree = "<group>";
 		};
 		07F8EDD81FA5DB4900C452F4 /* Profile Editing */ = {
@@ -6791,7 +6791,7 @@
 				077876221F92A50D005CE68A /* Profile.swift */,
 				07C028B31FB4D1A800CBB1ED /* ProfileHelper.swift */,
 			);
-			name = "Profile Editing";
+			path = "Profile Editing";
 			sourceTree = "<group>";
 		};
 		A35CEEA69746A747B1A770FB /* Pods */ = {
@@ -8345,6 +8345,7 @@
 				07FE380F1DF9B3C700E7EA20 /* fr */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		077AC0E51DA535840026895B /* LaunchScreen.storyboard */ = {
@@ -8353,6 +8354,7 @@
 				077AC0E61DA535840026895B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		07FE380E1DF9B3A200E7EA20 /* Localizable.strings */ = {
@@ -8361,6 +8363,7 @@
 				07FE380D1DF9B3A200E7EA20 /* en */,
 			);
 			name = Localizable.strings;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

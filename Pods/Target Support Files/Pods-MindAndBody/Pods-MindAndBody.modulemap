@@ -1,0 +1,6 @@
+framework module Pods_MindAndBody {
+  umbrella header "Pods-MindAndBody-umbrella.h"
+
+  export *
+  module * { export * }
+}
