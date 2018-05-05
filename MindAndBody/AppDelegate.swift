@@ -29,9 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: TEST!! REMOVE
         // ICloud/UserDefaults Reset
-//        ICloudFunctions.shared.removeAll()
-//        let domain = Bundle.main.bundleIdentifier!
-//        UserDefaults.standard.removePersistentDomain(forName: domain)
+        ICloudFunctions.shared.removeAll()
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
         
         
         //
@@ -87,6 +87,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["customSessions" : Register.customSessionsRegister])
         // Meditation Array
         UserDefaults.standard.register(defaults: ["meditationTimer" : Register.meditationArrayRegister])
+        // Weights
+        UserDefaults.standard.register(defaults: ["movementWeights" : Register.weightRegister()])
+
         //
         // Walkthroughs
         UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughDictionary])

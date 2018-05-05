@@ -3258,6 +3258,7 @@
                                             <outlet property="movementLabel" destination="Ph9-9z-aWa" id="e9h-1x-47f"/>
                                             <outlet property="rightImageIndicator" destination="5tG-C5-rN7" id="yn5-6I-O0A"/>
                                             <outlet property="setsRepsLabel" destination="012-1d-8yV" id="Tgu-4S-WdA"/>
+                                            <outlet property="weightButton" destination="sMc-AE-wXL" id="nKM-XF-3Sh"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EndTableViewCell" rowHeight="72" id="lKV-eT-L1p" customClass="EndTableViewCell" customModule="MindAndBody" customModuleProvider="target">

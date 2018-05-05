@@ -70,6 +70,86 @@ class ProfileFunctions {
         UserDefaults.standard.set(difficultyLevels, forKey: "difficultyLevels")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["difficultyLevels"])
+        
+        
+        // Check for setting weight suggestions
+        
+        // Weights
+        let movementWeights = UserDefaults.standard.object(forKey: "movementWeights") as! [String: Int]
+        let weightRegister = Register.weightRegister()
+        // If weighted movements default, i.e user has not changed them, set based on profile
+        if movementWeights == weightRegister {
+            // select correct row
+            var lower: [String: Int] = [:]
+            var upper: [String: Int] = [:]
+            // Male
+            if profileAnswers["gender"] == 0 {
+                // Lower
+                switch difficultyLevels["workout"]!["workoutLower"] {
+                case 0:
+                    lower = Register.WRML1
+                case 1:
+                    lower = Register.WRML2
+                case 2:
+                    if profileAnswers["workoutExperience"] != 2 {
+                        lower = Register.WRML2
+                    } else {
+                        lower = Register.WRML3
+                    }
+                default: break
+                }
+                // Upper
+                switch difficultyLevels["workout"]!["workoutUpper"] {
+                case 0:
+                    upper = Register.WRMU1
+                case 1:
+                    upper = Register.WRMU2
+                case 2:
+                    if profileAnswers["workoutExperience"] != 2 {
+                        upper = Register.WRMU2
+                    } else {
+                        upper = Register.WRMU3
+                    }
+                default: break
+                }
+            // Female/Other
+            } else {
+                // Lower
+                switch difficultyLevels["workout"]!["workoutLower"] {
+                case 0:
+                    lower = Register.WRML1
+                case 1:
+                    lower = Register.WRML2
+                case 2:
+                    if profileAnswers["workoutExperience"] != 2 {
+                        lower = Register.WRML2
+                    } else {
+                        lower = Register.WRML3
+                    }
+                default: break
+                }
+                // Upper
+                switch difficultyLevels["workout"]!["workoutUpper"] {
+                case 0:
+                    upper = Register.WRMU1
+                case 1:
+                    upper = Register.WRMU2
+                case 2:
+                    if profileAnswers["workoutExperience"] != 2 {
+                        upper = Register.WRMU2
+                    } else {
+                        upper = Register.WRMU3
+                    }
+                default: break
+                }
+            }
+            //
+            let newWeightDict = lower.merging(upper) { (current, _) in current }
+            //
+            UserDefaults.standard.set(newWeightDict, forKey: "movementWeights")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["movementWeights"])
+        }
     }
     
     // Round down from .5

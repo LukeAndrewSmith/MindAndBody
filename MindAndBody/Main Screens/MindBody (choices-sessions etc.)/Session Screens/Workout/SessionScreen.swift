@@ -32,6 +32,7 @@ class OverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var explanationButton: UIButton!
     //
     // CountdownLabel, if timed workout
+    @IBOutlet weak var weightButton: UIButton!
     
 }
 
@@ -105,8 +106,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     let unitIndicatorLabel = UILabel()
     //
-    var weightArray: [Float] = []
-    
+    var units = 0 // 0 == metric, 1 == imperial
     
     // Progress Bar
     let progressBar = UIProgressView()
@@ -246,23 +246,14 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         unitIndicatorLabel.textColor = Colors.light
         // Units
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        let units = settings["Units"]![0]
+        units = settings["Units"]![0]
         // Metric
         if units == 0 {
-            // Weight Array
-            let weightArrayInt = Array(0...120)
-            weightArray = weightArrayInt.map { Float($0) * 2.5 }
-            //
             unitIndicatorLabel.text = NSLocalizedString("kg", comment: "")
         // Imperial
         } else {
-            // Weight Array
-            let weightArrayInt = Array(0...140)
-            weightArray = weightArrayInt.map { Float($0) * 5 }
-            //
             unitIndicatorLabel.text = NSLocalizedString("lb", comment: "")
         }
-        
     }
     
     
@@ -391,11 +382,24 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     unit = NSLocalizedString("lb", comment: "")
                 }
                 // Weight
-                
                 //
-                setsRepsString = setsString + " x " + repsArray[indexPath.row] + "  |  " + "20" + unit
+                var movementWeights = UserDefaults.standard.object(forKey: "movementWeights") as! [String: Int]
+                // Presents sets x reps, and weight
+                let key = keyArray[indexPath.row]
+                let rowIndex = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
+                weightPicker.selectRow(movementWeights[rowIndex]!, inComponent: 0, animated: false)
+                var weight = Float()
+                // Metric
+                if units == 0 {
+                    weight = sessionData.weightsMetric()[movementWeights[rowIndex]!]
+                // Imperial
+                } else {
+                    weight = sessionData.weightsImperial()[movementWeights[rowIndex]!]
+                }
+                setsRepsString = setsString + " x " + repsArray[indexPath.row] + "  |  " + String(weight) + unit
             // Unweighted movement
             } else {
+                // Present sets x reps
                 setsRepsString = setsString + " x " + repsArray[indexPath.row]
             }
             // Indicate asymmetric exercises to the user
@@ -516,6 +520,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.setsRepsLabel.alpha = 0
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.weightButton.isEnabled = false
             //
             case selectedRow:
                 cell.indicatorStack.alpha = 1
@@ -523,6 +528,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
+                cell.weightButton.isEnabled = true
                 //cell.demonstrationImageView.isUserInteractionEnabled = true
             //
             case selectedRow + 1:
@@ -535,6 +541,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.weightButton.isEnabled = false
                 //cell.demonstrationImageView.isUserInteractionEnabled = false
             //
             default:
@@ -544,6 +551,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
+                cell.weightButton.isEnabled = true
             }
             
             //
@@ -616,59 +624,68 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // MARK: Weight Action
     @IBAction func weightButton(_ sender: Any) {
-        let indexPathForRow = IndexPath(row: selectedRow, section: 0)
-        let cell = tableView.cellForRow(at: indexPathForRow ) as! OverviewTableViewCell
-        
+        // Get movement
+        let key = keyArray[selectedRow]
+        let movement = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
         //
-        actionSheetView.addSubview(weightPicker)
-        actionSheetView.addSubview(unitIndicatorLabel)
-        actionSheetView.bringSubview(toFront: unitIndicatorLabel)
-        //
-        // TODO
-        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        let restTimes = settings["RestTimes"]!
-        // View
-        let restWidth = UIScreen.main.bounds.width - 20
-        let restHeight = CGFloat(147 + 49)
-        actionSheetView.frame = CGRect(x: 10, y: view.frame.maxY, width: restWidth, height: restHeight)
-        UIApplication.shared.keyWindow?.insertSubview(actionSheetView, aboveSubview: tableView)
-        // selected row
-        //let rowIndex = restTimesArray.index(of: restTimes[selectedRow])
-        //weightPicker.selectRow(rowIndex!, inComponent: 0, animated: false)
-        //
-        // picker
-        weightPicker.frame = CGRect(x: 0, y: 0, width: actionSheetView.frame.size.width, height: 147)
-        // ok
-        okButton.frame = CGRect(x: 0, y: 147, width: actionSheetView.frame.size.width, height: 49)
-        //
-        self.unitIndicatorLabel.frame = CGRect(x: (actionSheetView.frame.size.width / 2 + 40), y: (self.weightPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-        //
-        self.actionSheetView.frame = CGRect(x: 0, y: 0, width: restWidth, height: restHeight)
-        
-        // picker
-        self.weightPicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
-        // ok
-        self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
-        // Sets Indicator Label
-        self.unitIndicatorLabel.frame = CGRect(x: (self.actionSheetView.frame.size.width / 2 + 40), y: (self.weightPicker.frame.size.height / 2) - 15, width: 50, height: 30)
-        //
-        ActionSheet.shared.setupActionSheet()
-        ActionSheet.shared.actionSheet.addSubview(actionSheetView)
-        let heightToAdd = actionSheetView.bounds.height
-        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
-        ActionSheet.shared.resetCancelFrame()
-        ActionSheet.shared.animateActionSheetUp()
+        if sessionData.weightedWorkoutMovements.contains(movement) {
+            let indexPathForRow = IndexPath(row: selectedRow, section: 0)
+            let cell = tableView.cellForRow(at: indexPathForRow ) as! OverviewTableViewCell
+            
+            //
+            actionSheetView.addSubview(weightPicker)
+            actionSheetView.addSubview(unitIndicatorLabel)
+            actionSheetView.bringSubview(toFront: unitIndicatorLabel)
+            //
+            var movementWeights = UserDefaults.standard.object(forKey: "movementWeights") as! [String: Int]
+            // View
+            let weightWidth = UIScreen.main.bounds.width - 20
+            let weightHeight = CGFloat(147 + 49)
+            actionSheetView.frame = CGRect(x: 10, y: view.frame.maxY, width: weightWidth, height: weightHeight)
+            UIApplication.shared.keyWindow?.insertSubview(actionSheetView, aboveSubview: tableView)
+            //
+            // select correct row
+            weightPicker.selectRow(movementWeights[movement]!, inComponent: 0, animated: false)
+            //
+            // picker
+            weightPicker.frame = CGRect(x: 0, y: 0, width: actionSheetView.frame.size.width, height: 147)
+            // ok
+            okButton.frame = CGRect(x: 0, y: 147, width: actionSheetView.frame.size.width, height: 49)
+            //
+            self.unitIndicatorLabel.frame = CGRect(x: (actionSheetView.frame.size.width / 2 + 40), y: (self.weightPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+            //
+            self.actionSheetView.frame = CGRect(x: 0, y: 0, width: weightWidth, height: weightHeight)
+            
+            // picker
+            self.weightPicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
+            // ok
+            self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
+            // Sets Indicator Label
+            self.unitIndicatorLabel.frame = CGRect(x: (self.actionSheetView.frame.size.width / 2 + 40), y: (self.weightPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+            //
+            ActionSheet.shared.setupActionSheet()
+            ActionSheet.shared.actionSheet.addSubview(actionSheetView)
+            let heightToAdd = actionSheetView.bounds.height
+            ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+            ActionSheet.shared.resetCancelFrame()
+            ActionSheet.shared.animateActionSheetUp()
+        }
     }
     //
     // MARK: Weight Ok button action
     @objc func okButtonAction(_ sender: Any) {
-        // Rest time
-//        var movementWeights = UserDefaults.standard.object(forKey: "movementWeights") as! [String: [Int]]
-//        //
-//        movementWeights["RestTimes"]![selectedRow] = restTimesArray[weightPicker.selectedRow(inComponent: 0)]
-//        UserDefaults.standard.set(movementWeights, forKey: "movementWeights")
-//        // Sync
-//        ICloudFunctions.shared.pushToICloud(toSync: ["movementWeights"])
+        
+        // Weights
+        var movementWeights = UserDefaults.standard.object(forKey: "movementWeights") as! [String: Int]
+        //
+        // select correct row
+        let key = keyArray[selectedRow]
+        let rowIndex = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
+        movementWeights[rowIndex] = weightPicker.selectedRow(inComponent: 0)
+        //
+        UserDefaults.standard.set(movementWeights, forKey: "movementWeights")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["movementWeights"])
         //
         
         ActionSheet.shared.animateActionSheetDown()
@@ -685,19 +702,31 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // Number of rows
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return weightArray.count
+        // Metric
+        if units == 0 {
+            return sessionData.weightsMetric().count
+        // Imperial
+        } else {
+            return sessionData.weightsImperial().count
+        }
     }
     
     // View for row
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         //
-        let secondsLabel = UILabel()
-        secondsLabel.text = String(weightArray[row])
-        secondsLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
-        secondsLabel.textColor = Colors.light
+        let weightLabel = UILabel()
+        // Metric
+        if units == 0 {
+            weightLabel.text = String(sessionData.weightsMetric()[row])
+        // Imperial
+        } else {
+            weightLabel.text = String(sessionData.weightsImperial()[row])
+        }
+        weightLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+        weightLabel.textColor = Colors.light
         //
-        secondsLabel.textAlignment = .center
-        return secondsLabel
+        weightLabel.textAlignment = .center
+        return weightLabel
         //
     }
     
@@ -996,6 +1025,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
+                cell.weightButton.isEnabled = true
                 //
                 // -1
                 cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! OverviewTableViewCell
@@ -1004,6 +1034,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 0
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.weightButton.isEnabled = false
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
             }, completion: { finished in
@@ -1051,6 +1082,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
+                cell.weightButton.isEnabled = true
                 // - 1
                 if self.selectedRow > 0 {
                     cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! OverviewTableViewCell
@@ -1059,6 +1091,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     cell.movementLabel.alpha = 0
                     cell.buttonView.alpha = 0
                     cell.explanationButton.alpha = 0
+                    cell.weightButton.isEnabled = false
                 }
                 // + 1
                 cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! OverviewTableViewCell
@@ -1068,6 +1101,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.weightButton.isEnabled = false
                 //
             })
         }

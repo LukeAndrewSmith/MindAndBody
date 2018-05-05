@@ -394,6 +394,20 @@ extension sessionData {
             "cleanPress",
     ]
     
+    static let maxWeight = 120
+    
+    // Weights
+    static let weightsMetric = { () -> [Float] in
+        let weightArrayInt = Array(0...maxWeight)
+        let weightArray = weightArrayInt.map { Float($0) * 2.5 }
+        return weightArray
+    }
+    //
+    static let weightsImperial = { () -> [Float] in
+        let weightArrayInt = Array(0...maxWeight)
+        let weightArray = weightArrayInt.map { Float($0) * 5 }
+        return weightArray
+    }
     
     //
     // MARK:- Movements Dictionaries
