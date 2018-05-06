@@ -3021,13 +3021,19 @@
 "scheduleOptionText" = "The app to help me create my schedule";
 "sessionsOptionText" = "The app to choose sessions for me based on my profile\n(Very strongly recommended!)";
 
+// Schedule Style
+"scheduleView" = "I would like to have:";
+"scheduleView1" = "A plan for each day of the week";
+"scheduleView2" = "No plan, just a list of all my sessions for the week";
+
+
 // Schedule Overview
 "scheduleOverview" = "Schedule Overview";
 "save" = "Save";
 //
 "name" = "Name";
 "sessionChoosing" = "App chooses sessions:";
-"viewFullWeek" = "View schedule as week:";
+"planEachDay" = "Plan each weekday:";
 "appHelpsCreateSchedule" = "App helps create schedule:";
 "appHelpsCreateScheduleShort" = "App helps create sched.:";
 "sessionsOfSchedule" = "Edit schedule content";
@@ -3042,6 +3048,9 @@
 "forStretching" = "For stretching sessions";
 "pullupBar" = "Pullup Bar";
 "forBodyweight" = "For bodyweight workouts";
+
+// App chooses sessions warning
+"appChoosesSessionsWarning" = "\nPlease fill in your profile so the app can choose sessions for you.";
 
 
 // MARK: Schedule creation help
@@ -3095,13 +3104,6 @@
 // Groups
 "mindI" = "Mind (Yoga & Meditation)";
 "totalNumberSessionI" = "Total Nº Sessions (per week)";
-
-//
-// Quick Question
-"scheduleView" = "I would like to:";
-"scheduleView1" = "See each day of the week seperately";
-"scheduleView2" = "See the whole week as a list of all my planned sessions";
-
 
 //
 // MARK: Repeating Reminders/Notifications

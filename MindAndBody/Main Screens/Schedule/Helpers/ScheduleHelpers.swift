@@ -24,40 +24,6 @@ extension ScheduleScreen {
     //
     //
     // MARK: Schedule Helper Functions
-    func createTemporaryWeekViewArray() {
-        
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        
-        // Ensure empty
-        TemporaryWeekArray.shared.weekArray = []
-        
-        // Create array ordered, by first finding and adding all instances of workout, then of yoga, then of meditation etc...
-        let orderedGroupArray = ["workout", "yoga", "meditation", "endurance", "flexibility"]
-        
-        // Loop groups
-        for i in 0..<orderedGroupArray.count {
-            // Loop week
-            for j in 0...6 {
-                // If day not empty
-                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].count != 0 {
-                    // Loop day
-                    for k in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].count {
-                        // If correct group
-                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j][k]["group"] as! String == orderedGroupArray[i] {
-                            // Create group dict that references this one
-                            let groupDict: [String: Any] = [
-                                "group": orderedGroupArray[i],
-                                "day": j,
-                                "index": k,
-                            ]
-                            // Append
-                        TemporaryWeekArray.shared.weekArray.append(groupDict)
-                        }
-                    }
-                }
-            }
-        }
-    }
     
     
     //
@@ -172,7 +138,7 @@ extension ScheduleScreen {
                     nextChoice()
                 }
                 
-            // Mind
+            // Meditation
             case 2:
                 // Session Choice
                 switch ScheduleVariables.shared.choiceProgress[1] {
@@ -798,26 +764,26 @@ extension ScheduleScreen {
                     default: break
                     }
                     
+                    // Warmup
+                    selectedChoiceWarmup[1] = "warmup"
+
+                    
                 // Length 1 - Relaxing
                 case 2:
                     //
                     switch row {
                     case 1:
-                        selectedChoiceWarmup[2] = "veryShort"
+                        selectedChoiceWarmup[2] = "short"
                         selectedChoiceSession[2] = "veryShort"
-                        selectedChoiceStretching[2] = "veryShort"
                     case 2:
                         selectedChoiceWarmup[2] = "short"
                         selectedChoiceSession[2] = "short"
-                        selectedChoiceStretching[2] = "short"
                     case 3:
-                        selectedChoiceWarmup[2] = "medium"
+                        selectedChoiceWarmup[2] = "normal"
                         selectedChoiceSession[2] = "medium"
-                        selectedChoiceStretching[2] = "medium"
                     case 4:
-                        selectedChoiceWarmup[2] = "long"
+                        selectedChoiceWarmup[2] = "normal"
                         selectedChoiceSession[2] = "long"
-                        selectedChoiceStretching[2] = "long"
                     default: break
                     }
                 // Length 2 - Neutral
@@ -827,15 +793,12 @@ extension ScheduleScreen {
                     case 1:
                         selectedChoiceWarmup[2] = "short"
                         selectedChoiceSession[2] = "short"
-                        selectedChoiceStretching[2] = "short"
                     case 2:
-                        selectedChoiceWarmup[2] = "medium"
+                        selectedChoiceWarmup[2] = "short"
                         selectedChoiceSession[2] = "medium"
-                        selectedChoiceStretching[2] = "medium"
                     case 3:
-                        selectedChoiceWarmup[2] = "long"
+                        selectedChoiceWarmup[2] = "short"
                         selectedChoiceSession[2] = "long"
-                        selectedChoiceStretching[2] = "long"
                     default: break
                     }
                 // Length 3 - Stimulating
@@ -845,11 +808,9 @@ extension ScheduleScreen {
                     case 1:
                         selectedChoiceWarmup[2] = "short"
                         selectedChoiceSession[2] = "short"
-                        selectedChoiceStretching[2] = "short"
                     case 2:
-                        selectedChoiceWarmup[2] = "normal"
+                        selectedChoiceWarmup[2] = "short"
                         selectedChoiceSession[2] = "normal"
-                        selectedChoiceStretching[2] = "normal"
                     default: break
                     }
                 default:
@@ -1109,7 +1070,8 @@ extension ScheduleScreen {
             // -2 because title included
         if checkAll {
             for i in 0...nRows - 2 {
-                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][ScheduleVariables.shared.selectedRows[0]][String(i)] as! Bool == false {
+                print(ScheduleVariables.shared.selectedRows[0])
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay][String(i)] as! Bool == false {
                     isCompleted = false
                     break
                 }
@@ -1365,8 +1327,6 @@ extension ScheduleScreen {
     //
     // MARK: selectDay
     func selectDay(day: Int) {
-        
-        
         // Select indicator
         stackArray[day].alpha = 1
         
@@ -1439,6 +1399,7 @@ extension ScheduleScreen {
             let cell = sender.view
             let row = cell?.tag
             
+            // If first choice
             // indicate to reset first choice
             var shouldResetSelectedRows = false
             // Set selected row to ScheduleVariables.shared.selectedRow[0]
@@ -1455,9 +1416,7 @@ extension ScheduleScreen {
             // index1 = Selected row in final choice (i.e warmup, session, stretching)
             let index1 = indexingVariables.1
             //
-            let day = indexingVariables.2
-            
-            
+            let day = indexingVariables.2            
             
             // if first or last choiec
             if index1 != "notFirstOrLastChoice" {
@@ -1481,9 +1440,7 @@ extension ScheduleScreen {
                 //
                 let indexPathToReload = NSIndexPath(row: row!, section: 0)
                 scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
-                
-                let schedules2 = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-
+            
                 
                 //
                 // Box indicator round todo, done here because userdefaults set above && check if full group needs to be completed
@@ -1520,8 +1477,12 @@ extension ScheduleScreen {
                 // Mark first instance of group in all other schedules as completed- called after to avoid conflicts storing to userdefaults
                 if isGroupCompleted(checkAll: false) {
                     markAsGroupForOtherSchedules(markAs: !currentBool)
+                    // Animate back to initial choice
+                    markAsCompletedAndAnimate()
+                    backToBeginning()
                 }
                 
+                // ScheduleVariables.shared.choiceProgress[0] was updated just for the duration of the mark as complete function, reset back to -1 now completed
                 // Reset first choice to -1 to indicate still on schedule home screen
                 if shouldResetSelectedRows {
                     ScheduleVariables.shared.choiceProgress[0] = -1
@@ -1988,6 +1949,19 @@ extension ScheduleScreen {
         
         //
         scheduleTableScrollCheck()
+    }
+    
+    //
+    func checkSelectedDay() {
+        // If see each day
+        if scheduleStyle == 0 {
+            //
+            if ScheduleVariables.shared.lastDayOpened != Date().currentDate {
+                // Reload
+                layoutViews()
+                ScheduleVariables.shared.lastDayOpened = Date().currentDate
+            }
+        }
     }
     
     func setScheduleStyle() {

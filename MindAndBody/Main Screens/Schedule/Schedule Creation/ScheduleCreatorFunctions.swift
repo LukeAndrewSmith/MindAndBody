@@ -171,16 +171,16 @@ extension UIViewController {
             // Take it easy, 7 sessions
             case 1:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 9
+                    ScheduleVariables.shared.temporaryNSessions = 8
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 7
+                    ScheduleVariables.shared.temporaryNSessions = 6
                 }
             // Routine, 10 sessions
             case 2:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 13
-                } else {
                     ScheduleVariables.shared.temporaryNSessions = 10
+                } else {
+                    ScheduleVariables.shared.temporaryNSessions = 8
                 }
             default: break
             }
@@ -192,13 +192,12 @@ extension UIViewController {
         // Now we have a preliminary total number of session, we can create n sessions for each goal
         // Encorporating age, gender, and last two 'Me' questions ------ not done yet
         
-        ScheduleVariables.shared.temporarySessionsArray = [0,0,0,0,0] // which one to use
+        ScheduleVariables.shared.temporarySessionsArray = [0,0,0,0,0]
         var temporaryTemporaySessionsArray: [Double] = [0,0,0,0,0]
         
         // Number of sessions is equal to the total number of sessions * the ratio, then rounded to a sensible number
         for i in 0..<ratios.count {
             // Avoid /0
-            //ScheduleVariables.shared.temporarySessionsArray[i]
             temporaryTemporaySessionsArray[i] = Double(ScheduleVariables.shared.temporaryNSessions) * ratios[i]
         }
         
@@ -207,16 +206,13 @@ extension UIViewController {
         // -------------------------------------------------------------------------
         // MARK: Round number of sessions
         for i in 0..<temporaryTemporaySessionsArray.count {
-            // Round up for yoga or flexibility, from 1.25
-            if i == 1 || i == 4 && floor(temporaryTemporaySessionsArray[i]) >= 0.25 {
-                temporaryTemporaySessionsArray[i] = ceil(temporaryTemporaySessionsArray[i])
+            // Round up for yoga or flexibility, from .25
+            if (i == 1 || i == 4) && temporaryTemporaySessionsArray[i].truncatingRemainder(dividingBy: 1) >= 0.25 {
+                ScheduleVariables.shared.temporarySessionsArray[i] = Int(ceil(temporaryTemporaySessionsArray[i]))
+            } else {
+                ScheduleVariables.shared.temporarySessionsArray[i] = Int(temporaryTemporaySessionsArray[i].rounded())
             }
-            temporaryTemporaySessionsArray[i] = temporaryTemporaySessionsArray[i].rounded()
         }
-        
-        // Round up for yoga, flexibility from .25
-        
-        
     }
     
 }

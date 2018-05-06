@@ -155,6 +155,14 @@ class ScheduleVariables {
     var didCreateNewSchedule = false
     
     
+    //
+    // Last Day
+    // Checks if last day on the app was opened was yesterday, if so the schedule is animated to the correct day, and this flag is set to today
+    // Ensures that on the first open of the app on any day, the correct day on the schedule is presented
+    var lastDayOpened: Date? = nil
+    //Date().firstMondayInCurrentWeek
+    
+    
     // Note, this function should be somewhere else
     // Func reset schedule tracking and week tracking
     func resetWeekTracking() {
@@ -204,4 +212,5 @@ class ScheduleVariables {
             ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress", "schedules"])
         }
     }
+    
 }

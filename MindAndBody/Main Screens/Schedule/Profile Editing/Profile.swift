@@ -40,7 +40,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     var selectedQuestion = 0
     
     // schedule
-    var comingFromSchedule = false
+    var comingFromSchedule = false // false indicates that this is a schedule creation
+                                   // true indicates user is editing just the profile from the schedule
+    var comingFromScheduleEditing = false
     
     //
     // Age
@@ -55,7 +57,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         UIApplication.shared.statusBarStyle = .lightContent
         //
         sectionLabel.text = NSLocalizedString("profile", comment: "")
-        if comingFromSchedule == false {
+        if !comingFromSchedule || comingFromScheduleEditing {
             dismissViewButton.imageView?.image = #imageLiteral(resourceName: "Back Arrow")
         }
         //
@@ -194,7 +196,11 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
                     }
                 }
                 if allAnswered {
-                    self.dismiss(animated: true)
+                    if comingFromSchedule {
+                        self.dismiss(animated: true)
+                    } else if comingFromScheduleEditing {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
                 } else {
                     //
                     // Alert Saying you havent answered all the questions

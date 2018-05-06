@@ -129,10 +129,10 @@ extension ScheduleScreen {
         ScheduleVariables.shared.choiceProgress[0] = -1
         ScheduleVariables.shared.choiceProgress[1] = 0
         // Enable table scroll & schedule choice button & remove mask view
-        scheduleTableScrollCheck()
         navigationBar.rightBarButtonItem?.isEnabled = true
         removeMaskView()
         slideRight()
+        scheduleTableScrollCheck()
         //
         backToBeginningButtonAddRemove()
     }

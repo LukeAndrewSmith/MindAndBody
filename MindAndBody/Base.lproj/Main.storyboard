@@ -610,6 +610,7 @@
                                 </state>
                                 <connections>
                                     <action selector="createScheduleButtonAction:" destination="MvL-yD-EMG" eventType="touchUpInside" id="i3Y-TN-m5k"/>
+                                    <segue destination="NRn-Cn-qYs" kind="show" identifier="ScheduleCreatorEquiptmentSegue1" id="Cuf-BJ-N12"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBc-oy-0mh">
@@ -817,7 +818,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVs-fu-lXl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7584.8000000000002" y="-4876.011994002999"/>
+            <point key="canvasLocation" x="7444" y="-3944"/>
         </scene>
         <!--view4-->
         <scene sceneID="Qf8-wT-bjo">
@@ -2896,13 +2897,13 @@
                                         <rect key="frame" x="8" y="57" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Theme" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BC-Ha-gWL">
-                                                <rect key="frame" x="0.0" y="0.0" width="51" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="61.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Self-Acceptance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZf-CZ-07t">
-                                                <rect key="frame" x="59" y="0.0" width="113" height="20.5"/>
+                                                <rect key="frame" x="69.5" y="0.0" width="102.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4736,7 +4737,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vMd-m9-SDl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5006" y="-3948"/>
+            <point key="canvasLocation" x="5102" y="-3949"/>
         </scene>
         <!--Schedule Creator Week-->
         <scene sceneID="oCa-5y-7Hp">
@@ -4868,6 +4869,7 @@
                                 </state>
                                 <connections>
                                     <action selector="doneButtonAction:" destination="PFs-MA-8Ud" eventType="touchUpInside" id="Yxv-Z2-TC6"/>
+                                    <segue destination="NRn-Cn-qYs" kind="show" identifier="ScheduleCreatorEquiptmentSegue2" id="qei-mg-QTj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -5361,7 +5363,8 @@
         <segue reference="y3k-i5-esE"/>
         <segue reference="IQI-W2-saz"/>
         <segue reference="M72-ar-DyO"/>
-        <segue reference="Zez-2a-8yw"/>
+        <segue reference="Cuf-BJ-N12"/>
+        <segue reference="kIb-e7-fcP"/>
         <segue reference="NR1-hM-oZr"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -20,6 +20,43 @@ class TemporaryWeekArray {
     // "group": ""
     // "index0": Int // for indexing in week
     // "index1": Int
+    
+    //
+    // All sessions are stored in schedule week, if schedule is viewed as full week, temporary array is made to stor them in the correct order to present, saves having extra array in schedule
+    func createTemporaryWeekViewArray() {
+        
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
+        // Ensure empty
+        TemporaryWeekArray.shared.weekArray = []
+        
+        // Create array ordered, by first finding and adding all instances of workout, then of yoga, then of meditation etc...
+        let orderedGroupArray = ["workout", "yoga", "meditation", "endurance", "flexibility"]
+        
+        // Loop groups
+        for i in 0..<orderedGroupArray.count {
+            // Loop week
+            for j in 0...6 {
+                // If day not empty
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].count != 0 {
+                    // Loop day
+                    for k in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].count {
+                        // If correct group
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j][k]["group"] as! String == orderedGroupArray[i] {
+                            // Create group dict that references this one
+                            let groupDict: [String: Any] = [
+                                "group": orderedGroupArray[i],
+                                "day": j,
+                                "index": k,
+                                ]
+                            // Append
+                            TemporaryWeekArray.shared.weekArray.append(groupDict)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension Int {
@@ -289,8 +326,6 @@ enum scheduleDataStructures {
                 [],
                 // Sunday
                 [],
-                // Full week list - [0][7]
-                //                [] // GET RID OF
             ],
             // [1] Information about schedule ------------------
             "scheduleInformation": [

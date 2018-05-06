@@ -120,18 +120,21 @@ class ScheduleScreen: UIViewController {
         // Reload to be sure
         setScheduleStyle()
         //
+        // Check if necessary to go to current day
+        checkSelectedDay()
+        //
         // Ensure dayIndicator in correct position / not visible && if week view, update temporary full week array
         if scheduleStyle == 0 {
             self.view.layoutIfNeeded()
+        // Week view
         } else {
             dayIndicator.alpha = 0
-            createTemporaryWeekViewArray()
+            TemporaryWeekArray.shared.createTemporaryWeekViewArray()
         }
         // Check if reset necessary
         ScheduleVariables.shared.resetWeekTracking()
         // Reload the view if requested by previous view
         reloadView()
-        //
     }
     
     
@@ -160,16 +163,16 @@ class ScheduleScreen: UIViewController {
         
         // Ensure week goal correct
         updateWeekGoal()
-        
+
         // Setup
         setScheduleStyle()
-        setupViews()
-        layoutViews()
-        
         // If week view, crete temporary week array
         if scheduleStyle == 1 {
-            createTemporaryWeekViewArray()
+            TemporaryWeekArray.shared.createTemporaryWeekViewArray()
         }
+        setupViews()
+        layoutViews()
+        reloadView()
     }
     
     // MARK: viewDidLayoutSubviews

@@ -60,6 +60,12 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
         view.addGestureRecognizer(rightSwipe)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Ensure temporary week array created
+        TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+    }
+    
     //
     // Table View --------------------------------------------------------------------------------------------------------
     //
@@ -102,11 +108,14 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func doneButtonAction(_ sender: Any) {
         // Ensure notifications correct
         ReminderNotifications.shared.setNotifications()
+        // Ensure temporary week array created
+        TemporaryWeekArray.shared.createTemporaryWeekViewArray()
         //
         if comingFromScheduleEditing {
             self.navigationController?.popViewController(animated: true)
+        // Go to schedule equiptment question
         } else {
-            self.dismiss(animated: true)
+            self.performSegue(withIdentifier: "ScheduleCreatorEquiptmentSegue2", sender: self)
         }
     }
     
@@ -129,6 +138,9 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
         if segue.identifier == "ScheduleHelpCreationSegue" {
             let destinationVC = segue.destination as! ScheduleCreator
             destinationVC.fromScheduleEditing = true
+        } else if segue.identifier == "ScheduleCreatorEquiptmentSegue2" {
+            let destinationVC = segue.destination as! ScheduleEquipment
+            destinationVC.isScheduleCreation = true
         }
     }
 }

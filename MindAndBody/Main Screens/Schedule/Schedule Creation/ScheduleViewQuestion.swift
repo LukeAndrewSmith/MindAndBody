@@ -93,38 +93,40 @@ class ScheduleViewQuestion: UIViewController {
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         //
-        // App helps create schedule, dismiss to schedule
+        // App helps create schedule, first create preliminary number of groups
         if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             // Fill up days in week array with sessions
             var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-                // Loop sessions array from 1 (0 is total n sessions, rest are number of session of each group)
-            for i in 1...schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![2].count - 1 {
-                // If n session not 0
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2]["total"] as! Int != 0 {
-                    // Loop number of sessions
-                    for _ in 1...(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][2]["total"] as! Int) {
-                        // Note: group is i - 1 as array includes total n session at 0
-                        let group = i - 1
+            // Loop sessions array - therefore loop groups
+            for i in 0..<ScheduleVariables.shared.temporarySessionsArray.count {
+                // If n session not 0 for a group
+                if ScheduleVariables.shared.temporarySessionsArray[i] != 0 {
+                    // Loop number of sessions, appending to week
+                    for _ in 0..<ScheduleVariables.shared.temporarySessionsArray[i] {
                         // Add to first available day in the week
                         for j in 0...6 {
-                            // If week not full (max 5 things per day in week
+                            // If day not full (max 5 things per day in week)
+                                // Note, i is the group
                             if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].count < 5 {
-                                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].append(scheduleDataStructures.scheduleGroups[group]!)
+                                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![j].append(scheduleDataStructures.scheduleGroups[i]!)
                                 break
                             }
                         }
-                       // Not already added to full week array [7] in scheduleCreationHelp
                     }
                 }
             }
             //
             UserDefaults.standard.set(schedules, forKey: "schedules")
-                // Sync
+            // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
             //
-            self.dismiss(animated: true)
+            // Create temporary week view array, as week is viewed as full week
+            TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+            //
+            // Then go to schedule editor to let them finalise the schedule
+            self.performSegue(withIdentifier: "ScheduleWeekCreatorSegue", sender: self)
         //
-        // If custom schedule, go to schedule creator
+        // If custom schedule, go straight to schedule creator
         } else {
             self.performSegue(withIdentifier: "ScheduleWeekCreatorSegue", sender: self)
         }

@@ -4568,6 +4568,7 @@
 				0798925D1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift */,
 				07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */,
 				07D5C3D81F9E32430038F143 /* ScheduleViewQuestion.swift */,
+				07A6346E208C999000712EE2 /* ScheduleEquipment.swift */,
 			);
 			path = "Schedule Creation";
 			sourceTree = "<group>";
@@ -4586,7 +4587,6 @@
 			isa = PBXGroup;
 			children = (
 				07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */,
-				07A6346E208C999000712EE2 /* ScheduleEquipment.swift */,
 			);
 			path = "Schedule Editing";
 			sourceTree = "<group>";

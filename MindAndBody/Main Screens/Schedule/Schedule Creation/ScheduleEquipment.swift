@@ -22,6 +22,9 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     
+    // If schedule is being created
+    var isScheduleCreation = false
+    
     // Stored here and not in scheudle data as images didnt want to be stored in an array
     let equiptmentArray: [[String: Any]] =
         [
@@ -115,8 +118,12 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     // Done
     @IBAction func doneButtonAction(_ sender: Any) {
-        //
-        self.navigationController?.popViewController(animated: true)
+        // If schedule is being created, dismiss, as this was last question
+        if isScheduleCreation {
+            self.dismiss(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     //

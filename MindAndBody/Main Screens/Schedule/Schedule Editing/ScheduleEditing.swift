@@ -25,33 +25,53 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //
     var appChoosesSessionsOnOffSwitch = UISwitch()
-    var viewFullWeekSwitch = UISwitch()
+    var planEachDaySwitch = UISwitch()
     var appHelpsCreateScheduleSwitch = UISwitch()
     
     //
-    let scheduleOverviewArrays: [[String]] =
+    let scheduleOverviewArrays: [String] =
         [
-            // App helps create schedule
-                // 1 extra row, for n sessions
-            [
-                "name",
-                "sessionChoosing",
-                "viewFullWeek",
-                "appHelpsCreateSchedule",
-                "equipment",
-                "sessionsOfSchedule",
-                "rearrangeSchedule"
-            ],
-            // Custom schedule
-            [
-                "name",
-                "sessionChoosing",
-                "viewFullWeek",
-                "appHelpsCreateSchedule",
-                "equipment",
-                "schedule"
-            ]
-    ]
+            "name",
+            "sessionChoosing",
+            "planEachDay",
+            "appHelpsCreateSchedule",
+            "equipment",
+            "schedule",
+        ]
+    
+    //
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Ensure app chooses sessions only if profile is complete
+        if !isProfileComplete() {
+            // If app chooses sessions, revert
+            if appChoosesSessionsOnOffSwitch.isOn {
+                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
+                appChoosesSessionsOnOffSwitch.isOn = false
+                // Update
+                UserDefaults.standard.set(schedules, forKey: "schedules")
+                // Sync
+                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+            }
+        }
+    }
+
+    // func check profile
+    func isProfileComplete() -> Bool {
+        //
+        // Check if profile is complete
+        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
+        var isComplete = true
+        for i in 0..<scheduleDataStructures.profileQASorted.count {
+            if profileAnswers[scheduleDataStructures.profileQASorted[i]]! == -1 {
+                isComplete = false
+                break
+            }
+        }
+        return isComplete
+    }
     
     // View did load
     override func viewDidLoad() {
@@ -64,7 +84,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        rearrangeScheduleHidden()
     }
     
     // Set Variables
@@ -110,19 +129,19 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 appChoosesSessionsOnOffSwitch.isOn = false
             }
             // View Full week switch
-            viewFullWeekSwitch.onTintColor = Colors.green
-            viewFullWeekSwitch.tintColor = Colors.red
-            viewFullWeekSwitch.backgroundColor = Colors.red
-            viewFullWeekSwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
-            viewFullWeekSwitch.clipsToBounds = true
-            viewFullWeekSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
+            planEachDaySwitch.onTintColor = Colors.green
+            planEachDaySwitch.tintColor = Colors.red
+            planEachDaySwitch.backgroundColor = Colors.red
+            planEachDaySwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
+            planEachDaySwitch.clipsToBounds = true
+            planEachDaySwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
             // Set inital value
             // On
             if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
-                viewFullWeekSwitch.isOn = false
+                planEachDaySwitch.isOn = true
                 // Off
             } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
-                viewFullWeekSwitch.isOn = true
+                planEachDaySwitch.isOn = false
             }
             // App Helps Create Schedule switch
             appHelpsCreateScheduleSwitch.onTintColor = Colors.green
@@ -145,7 +164,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         saveButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
         saveButton.setTitle(NSLocalizedString("save", comment: ""), for: .normal)
         //
-        rearrangeScheduleHidden()
     }
     
     //
@@ -191,7 +209,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
-        return scheduleOverviewArrays[scheduleType].count
+        return scheduleOverviewArrays.count
     }
     
     // Height for row
@@ -210,7 +228,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         // Text label
-        cell.textLabel?.text = NSLocalizedString(scheduleOverviewArrays[scheduleType][indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(scheduleOverviewArrays[indexPath.row], comment: "")
         cell.textLabel?.textAlignment = NSTextAlignment.left
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
@@ -237,8 +255,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // View full week
         case 2:
             cell.selectionStyle = .none
-            cell.addSubview(viewFullWeekSwitch)
-            viewFullWeekSwitch.center = CGPoint(x: view.bounds.width - (viewFullWeekSwitch.bounds.width / 2) - 16, y: 72 / 2)
+            cell.addSubview(planEachDaySwitch)
+            planEachDaySwitch.center = CGPoint(x: view.bounds.width - (planEachDaySwitch.bounds.width / 2) - 16, y: 72 / 2)
             
         // App helps create schedule
         case 3:
@@ -250,21 +268,11 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.addSubview(appHelpsCreateScheduleSwitch)
             appHelpsCreateScheduleSwitch.center = CGPoint(x: view.bounds.width - (appHelpsCreateScheduleSwitch.bounds.width / 2) - 16, y: 72 / 2)
             
-        // N Sessions / Schedule
+        // Equiptment
         case 4:
-            // App scheudle, n sessions
-            if scheduleType == 0 {
-                cell.accessoryType = .disclosureIndicator
-            // Custom schedule, schedule
-            } else {
-                cell.accessoryType = .disclosureIndicator
-            }
-        // Reorder Schedule
+            cell.accessoryType = .disclosureIndicator
+        // Schedule
         case 5:
-            if scheduleType == 0 && schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
-                cell.isHidden = true
-                cell.isUserInteractionEnabled = false
-            }
             cell.accessoryType = .disclosureIndicator
         default: break
         }
@@ -326,44 +334,14 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.performSegue(withIdentifier: "EquipmentSegue", sender: self)
         // N Sessions / Schedule
         case 5:
-            // App scheudle, n sessions
-            if scheduleType == 0 {
-                // Check if profile is complete
-                let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
-                var isComplete = true
-                for i in 0..<scheduleDataStructures.profileQASorted.count {
-                    if profileAnswers[scheduleDataStructures.profileQASorted[i]]! == -1 {
-                        isComplete = false
-                        break
-                    }
-                }
-                // If profile is not completed, go to profile first
-                    // Profile not complete if one of the answers is still the default -1
-                if !isComplete {
-                    self.performSegue(withIdentifier: "OverviewProfileSegue", sender: self)
-                // If profile is completed, go straight to schedule creation
-                } else {
-                    self.performSegue(withIdentifier: "OverviewSessionsSegue", sender: self)
-                }
-            // Custom schedule, schedule
-            } else {
-                // View each day
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
-                    self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
-                // View full week
-                } else {
-                    self.performSegue(withIdentifier: "OverviewScheduleWeekSegue", sender: self)
-                }
-            }
-        // App schedule: Reorder Schedule
-        case 6:
             // View each day
             if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
                 self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
-                // View full week
+            // View full week
             } else {
                 self.performSegue(withIdentifier: "OverviewScheduleWeekSegue", sender: self)
-            }        default: break
+            }
+        default: break
         }
         //
         tableView.deselectRow(at: indexPath, animated: true)
@@ -379,23 +357,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    // Check if rearrange schedule
-    func rearrangeScheduleHidden() {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        // If app helps create schedule && view as full week then cannot rearrange schedule (schedule is presented in linear manner), therefore hide rearrange schedule row
-        if scheduleType == 0 && schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
-            let indexPath = IndexPath(row: 5, section: 0)
-            let rearrangeCell = scheduleOverviewTable.cellForRow(at: indexPath)
-            rearrangeCell?.isHidden = true
-            rearrangeCell?.isUserInteractionEnabled = false
-        } else {
-            let indexPath = IndexPath(row: 5, section: 0)
-            let rearrangeCell = scheduleOverviewTable.cellForRow(at: indexPath)
-            rearrangeCell?.isHidden = false
-            rearrangeCell?.isUserInteractionEnabled = true
-        }
-    }
-    
     //
     // Watch for switch changed
     @objc func switchValueChanged(sender: UISwitch) {
@@ -404,23 +365,46 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             // App chooses sessions
             if sender.isOn {
                 schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 0
+                // If profile is not completed, go to profile
+                // Profile not complete if one of the answers is still the default -1
+                if !isProfileComplete() {
+                    // Alert View
+                    let title = NSLocalizedString("profile", comment: "")
+                    let message = NSLocalizedString("appChoosesSessionsWarning", comment: "")
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    alert.view.tintColor = Colors.dark
+                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                    //
+                    let paragraphStyle = NSMutableParagraphStyle()
+                    paragraphStyle.alignment = .natural
+                    alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                    // Action
+                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                        UIAlertAction in
+                        // Go to profile
+                        self.performSegue(withIdentifier: "OverviewProfileSegue", sender: self)
+                    }
+                    alert.addAction(okAction)
+                    //
+                    self.present(alert, animated: true, completion: nil)
+                }
             // User chooses sessions
             } else {
                 schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
             }
-        } else if sender == viewFullWeekSwitch {
+        } else if sender == planEachDaySwitch {
             // Schedule style -> full week
             if sender.isOn {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
+                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
             // Schedule style -> see each day
             } else {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
+                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
             }
         } else if sender == appHelpsCreateScheduleSwitch {
             // App chooses sessions
             if sender.isOn {
                 schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] = 0
-                // User chooses sessions
+            // User chooses sessions
             } else {
                 schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] = 1
             }
@@ -432,8 +416,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         if sender == appHelpsCreateScheduleSwitch {
             scheduleType = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int
             scheduleOverviewTable.reloadData()
-        } else if sender == viewFullWeekSwitch {
-            rearrangeScheduleHidden()
+        } else if sender == planEachDaySwitch {
             ReminderNotifications.shared.setNotifications()
         }
     }
@@ -509,7 +492,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Goin to profile (before schedule creator as not filled in yet)
         case "OverviewProfileSegue":
             let destinationVC = segue.destination as? Profile
-            destinationVC?.comingFromSchedule = true
+            destinationVC?.comingFromScheduleEditing = true
         case "OverviewScheduleSegue":
             let destinationVC = segue.destination as? ScheduleCreator
             destinationVC?.fromScheduleEditing = true
