@@ -1575,6 +1575,10 @@
                 "finishEarly" = "Finish Early";
                 "continuePractice" = "Continue Practice";
 
+                "pauseMessageSession" = "\nYou can finish early, pause (and dismiss this question), or continue the practice";
+                "continueSession" = "Continue Session";
+
+
         // Timer
         //
         // Choice
@@ -3227,7 +3231,7 @@
     "profileAFlexibilityHamstrings3" = "Yes";
 "profileQFlexibilityHips" = "Are your knees close to the ground doing the butterfly (heels as close to your groin as comfortable)?"; // Hips
     "profileAFlexibilityHips1" = "No";
-    "profileAFlexibilityHips2" = "Fairly (the height of a fist to a first with your thumb sticking up off the ground)";
+    "profileAFlexibilityHips2" = "Fairly (around the height of a fist with your thumb sticking up off the ground)";
     "profileAFlexibilityHips3" = "Yes (the height of a fist or less)";
 "profileQFlexibilityHipsAnkles" = "Can you squat (hips below knees) comfortably?"; // Hips/Ankles
     "profileAFlexibilityHipsAnkles1" = "No";

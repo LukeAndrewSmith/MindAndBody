@@ -24,9 +24,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     var scheduleType = Int()
     
     //
-    var appChoosesSessionsOnOffSwitch = UISwitch()
+    var appChoosesSessionsSwitch = UISwitch()
     var planEachDaySwitch = UISwitch()
-    var appHelpsCreateScheduleSwitch = UISwitch()
     
     //
     let scheduleOverviewArrays: [String] =
@@ -34,7 +33,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             "name",
             "sessionChoosing",
             "planEachDay",
-            "appHelpsCreateSchedule",
             "equipment",
             "schedule",
         ]
@@ -46,10 +44,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Ensure app chooses sessions only if profile is complete
         if !isProfileComplete() {
             // If app chooses sessions, revert
-            if appChoosesSessionsOnOffSwitch.isOn {
+            if appChoosesSessionsSwitch.isOn {
                 var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
                 schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
-                appChoosesSessionsOnOffSwitch.isOn = false
+                appChoosesSessionsSwitch.isOn = false
                 // Update
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 // Sync
@@ -114,25 +112,26 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Switches
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             // App chooses sessions switch
-            appChoosesSessionsOnOffSwitch.onTintColor = Colors.green
-            appChoosesSessionsOnOffSwitch.tintColor = Colors.red
-            appChoosesSessionsOnOffSwitch.backgroundColor = Colors.red
-            appChoosesSessionsOnOffSwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
-            appChoosesSessionsOnOffSwitch.clipsToBounds = true
-            appChoosesSessionsOnOffSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
+        
+            appChoosesSessionsSwitch.onTintColor = Colors.green
+            appChoosesSessionsSwitch.tintColor = Colors.red
+            appChoosesSessionsSwitch.backgroundColor = Colors.red
+            appChoosesSessionsSwitch.layer.cornerRadius = appChoosesSessionsSwitch.bounds.height / 2
+            appChoosesSessionsSwitch.clipsToBounds = true
+            appChoosesSessionsSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
             // Set inital value
             // On
             if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
-                appChoosesSessionsOnOffSwitch.isOn = true
+                appChoosesSessionsSwitch.isOn = true
             // Off
             } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 1 {
-                appChoosesSessionsOnOffSwitch.isOn = false
+                appChoosesSessionsSwitch.isOn = false
             }
             // View Full week switch
             planEachDaySwitch.onTintColor = Colors.green
             planEachDaySwitch.tintColor = Colors.red
             planEachDaySwitch.backgroundColor = Colors.red
-            planEachDaySwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
+            planEachDaySwitch.layer.cornerRadius = appChoosesSessionsSwitch.bounds.height / 2
             planEachDaySwitch.clipsToBounds = true
             planEachDaySwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
             // Set inital value
@@ -142,21 +141,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Off
             } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
                 planEachDaySwitch.isOn = false
-            }
-            // App Helps Create Schedule switch
-            appHelpsCreateScheduleSwitch.onTintColor = Colors.green
-            appHelpsCreateScheduleSwitch.tintColor = Colors.red
-            appHelpsCreateScheduleSwitch.backgroundColor = Colors.red
-            appHelpsCreateScheduleSwitch.layer.cornerRadius = appChoosesSessionsOnOffSwitch.bounds.height / 2
-            appHelpsCreateScheduleSwitch.clipsToBounds = true
-            appHelpsCreateScheduleSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
-            // Set inital value
-            // On
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
-                appHelpsCreateScheduleSwitch.isOn = true
-                // Off
-            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 {
-                appHelpsCreateScheduleSwitch.isOn = false
             }
         
         //
@@ -249,30 +233,28 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         case 1:
             // App chooses
             cell.selectionStyle = .none
-            cell.addSubview(appChoosesSessionsOnOffSwitch)
-            appChoosesSessionsOnOffSwitch.center = CGPoint(x: view.bounds.width - (appChoosesSessionsOnOffSwitch.bounds.width / 2) - 16, y: 72 / 2)
+            cell.addSubview(appChoosesSessionsSwitch)
+            if IPhoneType.shared.iPhoneType() == 0 {
+                appChoosesSessionsSwitch.center = CGPoint(x: view.bounds.width - (appChoosesSessionsSwitch.bounds.width / 2) - 16, y: 52 / 2)
+            } else {
+                appChoosesSessionsSwitch.center = CGPoint(x: view.bounds.width - (appChoosesSessionsSwitch.bounds.width / 2) - 16, y: 62 / 2)
+            }
 
         // View full week
         case 2:
             cell.selectionStyle = .none
             cell.addSubview(planEachDaySwitch)
-            planEachDaySwitch.center = CGPoint(x: view.bounds.width - (planEachDaySwitch.bounds.width / 2) - 16, y: 72 / 2)
-            
-        // App helps create schedule
-        case 3:
-            // Iphone 5/SE layout, title too long
             if IPhoneType.shared.iPhoneType() == 0 {
-                cell.textLabel?.text = NSLocalizedString("appHelpsCreateScheduleShort", comment: "")
+                planEachDaySwitch.center = CGPoint(x: view.bounds.width - (planEachDaySwitch.bounds.width / 2) - 16, y: 52 / 2)
+            } else {
+                planEachDaySwitch.center = CGPoint(x: view.bounds.width - (planEachDaySwitch.bounds.width / 2) - 16, y: 62 / 2)
             }
-            cell.selectionStyle = .none
-            cell.addSubview(appHelpsCreateScheduleSwitch)
-            appHelpsCreateScheduleSwitch.center = CGPoint(x: view.bounds.width - (appHelpsCreateScheduleSwitch.bounds.width / 2) - 16, y: 72 / 2)
             
         // Equiptment
-        case 4:
+        case 3:
             cell.accessoryType = .disclosureIndicator
         // Schedule
-        case 5:
+        case 4:
             cell.accessoryType = .disclosureIndicator
         default: break
         }
@@ -330,10 +312,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.present(alert, animated: true, completion: nil)
             //
         // Equipment
-        case 4:
+        case 3:
             self.performSegue(withIdentifier: "EquipmentSegue", sender: self)
         // N Sessions / Schedule
-        case 5:
+        case 4:
             // View each day
             if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
                 self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
@@ -361,7 +343,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Watch for switch changed
     @objc func switchValueChanged(sender: UISwitch) {
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        if sender == appChoosesSessionsOnOffSwitch {
+        if sender == appChoosesSessionsSwitch {
             // App chooses sessions
             if sender.isOn {
                 schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 0
@@ -400,23 +382,13 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             } else {
                 schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
             }
-        } else if sender == appHelpsCreateScheduleSwitch {
-            // App chooses sessions
-            if sender.isOn {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] = 0
-            // User chooses sessions
-            } else {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] = 1
-            }
         }
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-                
-        if sender == appHelpsCreateScheduleSwitch {
-            scheduleType = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int
-            scheduleOverviewTable.reloadData()
-        } else if sender == planEachDaySwitch {
+        
+        // Reset notifications
+        if sender == planEachDaySwitch {
             ReminderNotifications.shared.setNotifications()
         }
     }

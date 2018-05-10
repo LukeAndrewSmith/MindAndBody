@@ -24642,7 +24642,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                     ],
                     // MARK: Normal
                     "SFN-1": [
@@ -24666,7 +24666,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         ["movement": "adductorf",
                          "breaths": 10,
                          "time": 30],
@@ -24812,7 +24812,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -24896,7 +24896,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         // Dynamic/Back
                         ["movement": "extendedPuppy",
                          "breaths": 10,
@@ -25085,7 +25085,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -25183,7 +25183,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -25782,7 +25782,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -25821,7 +25821,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         // Dynamic/Back
                         ["movement": "extendedPuppy",
                          "breaths": 10,
@@ -25860,7 +25860,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -25998,7 +25998,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         ["movement": "adductorf",
                          "breaths": 10,
                          "time": 30],
@@ -26043,7 +26043,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         ["movement": "adductorf",
                          "breaths": 10,
                          "time": 30],
@@ -26088,7 +26088,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         ["movement": "adductorf",
                          "breaths": 10,
                          "time": 30],
@@ -26129,10 +26129,6 @@ class sessionData {
                     // MARK: Short
                         // Stretching, Endurance, Short - 1
                     "SES-1": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 2,
-                         "time": 120],
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -26162,10 +26158,6 @@ class sessionData {
                          "time": 20],
                     ],
                     "SES-2": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 2,
-                         "time": 120],
                         // Dynamic/Back
                         ["movement": "extendedPuppy",
                          "breaths": 10,
@@ -26195,10 +26187,6 @@ class sessionData {
                          "time": 20],
                     ],
                     "SES-3": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 2,
-                         "time": 120],
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -26229,10 +26217,6 @@ class sessionData {
                     ],
                     // With Foam roller
                     "SES-1-F": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 2,
-                         "time": 120],
                         // Foam Rolling
                         ["movement": "glutef",
                          "breaths": 10,
@@ -26242,7 +26226,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         ["movement": "calvef",
                          "breaths": 10,
                          "time": 30],
@@ -26271,10 +26255,6 @@ class sessionData {
                          "time": 20],
                     ],
                     "SES-2-F": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 2,
-                         "time": 120],
                         // Foam Rolling
                         ["movement": "glutef",
                          "breaths": 10,
@@ -26313,10 +26293,6 @@ class sessionData {
                          "time": 20],
                     ],
                     "SES-3-F": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 2,
-                         "time": 120],
                         // Foam Rolling
                         ["movement": "glutef",
                          "breaths": 10,
@@ -26326,7 +26302,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         ["movement": "calvef",
                          "breaths": 10,
                          "time": 30],
@@ -26357,10 +26333,6 @@ class sessionData {
                     
                     // MARK: Normal
                     "SEN-1": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 5,
-                         "time": 300],
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -26393,10 +26365,6 @@ class sessionData {
                          "time": 20],
                     ],
                     "SEN-2": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 5,
-                         "time": 300],
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -26429,10 +26397,6 @@ class sessionData {
                          "time": 20],
                     ],
                     "SEN-3": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 5,
-                         "time": 300],
                         // Dynamic/Back
                         ["movement": "catCow",
                          "breaths": 10,
@@ -26466,10 +26430,6 @@ class sessionData {
                     ],
                     // With Foam roller
                     "SEN-1-F": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 5,
-                         "time": 300],
                         // Foam Rolling
                         ["movement": "glutef",
                          "breaths": 10,
@@ -26479,7 +26439,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         ["movement": "adductorf",
                          "breaths": 10,
                          "time": 30],
@@ -26514,10 +26474,6 @@ class sessionData {
                          "time": 20],
                     ],
                     "SEN-2-F": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 5,
-                         "time": 300],
                         // Foam Rolling
                         ["movement": "glutef",
                          "breaths": 10,
@@ -26562,10 +26518,6 @@ class sessionData {
                          "time": 20],
                     ],
                     "SEN-3-F": [
-                        // Cardio
-                        ["movement": "lightCardio",
-                         "breaths": 5,
-                         "time": 300],
                         // Foam Rolling
                         ["movement": "glutef",
                          "breaths": 10,
@@ -26575,7 +26527,7 @@ class sessionData {
                          "time": 30],
                         ["movement": "quadf",
                          "breaths": 10,
-                         "time": 30],
+                         "time": 45],
                         ["movement": "adductorf",
                          "breaths": 10,
                          "time": 30],

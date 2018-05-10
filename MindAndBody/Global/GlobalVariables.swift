@@ -156,6 +156,19 @@ class ScheduleVariables {
     
     
     //
+    // Selected Choices
+    // Selected choices corrensponds to an array in 'sortedSession' containing (easy, medium, hard) of relevant selection to be chosen by the app based on the profile (arrays containing difficulty level for each group to select)
+    // 3 seperate arrays because arrays do not quite correspond in terms of accessing relevant sessions for a number of reasons; not a mistake
+    // check sortedSessions array in dataStructures to understand indexing, each session has the corresponding index written above it
+    var selectedChoiceWarmup = ["", "", "", ""]
+    var selectedChoiceSession = ["", "", "", ""]
+    var selectedChoiceStretching = ["", "", "", ""]
+    // Indicators used when making the choice of session, used in updateSelectedChoice()
+    var indicator = ""
+    var indicator2 = ""
+    
+    
+    //
     // Last Day
     // Checks if last day on the app was opened was yesterday, if so the schedule is animated to the correct day, and this flag is set to today
     // Ensures that on the first open of the app on any day, the correct day on the schedule is presented

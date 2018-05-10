@@ -185,7 +185,7 @@ enum Register {
         // Yoga Automatic - 3
         "AutomaticYoga": [0, 30, 10, 1], // [0], 0 == off, 1 == on  // Defaults: 5.0s breaths, 2.0s indicator transition, tibet singing bowl transition
         // Rest times - 4
-        "RestTimes": [5, 45, 10],
+        "RestTimes": [0, 45, 10],
         // Metric/Imperial - 6
         "Units": [0], // == "kg" (0), "lb" (1)
         // Notifications

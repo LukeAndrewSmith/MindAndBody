@@ -219,15 +219,22 @@ extension TimeBasedScreen {
         switch movementProgress {
         // Rest time
         case 0:
-            cell.indicatorLabel.text = " "
-            finishEarly.isEnabled = false
-            cell.timeLabel.text = NSLocalizedString("rest", comment: "")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
-                cell.indicatorLabel.text = NSLocalizedString("rest", comment: "")
-                self.startTimer()
-                self.finishEarly.isEnabled = true
-                self.playBell(bell: 0)
-            })
+            let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            let restTimes = settings["RestTimes"]!
+            if restTimes[0] == 0 {
+                movementProgress += 1
+                indicateMovementProgress()
+            } else {
+                cell.indicatorLabel.text = " "
+                finishEarly.isEnabled = false
+                cell.timeLabel.text = NSLocalizedString("rest", comment: "")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                    cell.indicatorLabel.text = NSLocalizedString("rest", comment: "")
+                    self.startTimer()
+                    self.finishEarly.isEnabled = true
+                    self.playBell(bell: 0)
+                })
+            }
         case 1:
             cell.indicatorLabel.text = " "
             finishEarly.isEnabled = false
@@ -290,6 +297,10 @@ extension TimeBasedScreen {
                     nextButtonAction()
                 }
             } else {
+                //
+                // Schedule Tracking
+                updateScheduleTracking(fromSchedule: fromSchedule)
+                //
                 self.dismiss(animated: true)
             }
         default:

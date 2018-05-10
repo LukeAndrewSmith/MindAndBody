@@ -30,6 +30,8 @@ class OverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonView: UIView!
     // Explanation
     @IBOutlet weak var explanationButton: UIButton!
+    // Timer
+    @IBOutlet weak var timerButton: UIButton!
     //
     // CountdownLabel, if timed workout
     @IBOutlet weak var weightButton: UIButton!
@@ -430,7 +432,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             // Explanation
             cell.explanationButton.tintColor = Colors.light
-            
+            cell.timerButton.tintColor = Colors.light
+
             //
             // Button Stuff
             //
@@ -497,7 +500,13 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let explanationTap = UITapGestureRecognizer()
             explanationTap.numberOfTapsRequired = 1
             explanationTap.addTarget(self, action: #selector(expandExplanation))
-            cell.explanationButton.addGestureRecognizer(explanationTap)
+        cell.explanationButton.addGestureRecognizer(explanationTap)
+            
+            // Timer
+            let timerTap = UITapGestureRecognizer()
+            timerTap.numberOfTapsRequired = 1
+            timerTap.addTarget(self, action: #selector(timerAction))
+        cell.timerButton.addGestureRecognizer(timerTap)
             
             // Left Image Swift
             let imageSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
@@ -1180,6 +1189,17 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             self.explanationLabel.removeFromSuperview()
             //
         })
+    }
+    
+    @IBAction func timerAction(_ sender: Any) {
+        //
+        StopClock.shared.setupStopClock(time: 10)
+//        let heightToAdd = setsRepsView.bounds.height
+//        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+//        ActionSheet.shared.resetCancelFrame()
+        StopClock.shared.resetOptionFrames()
+        StopClock.shared.animatestopClockUp()
+        
     }
     
     

@@ -242,29 +242,12 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
 
-        //
-        // nGroups, groupsIndexes, nSessions
-        // If app helps create schedule, find which groups shown
-//        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
-//            // Loop sessions array to find out what is presented
-//            for i in 1..<schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0].count {
-//                //
-//                // schedules[schedulesCreationHelp] indexed with strings, therefore retreive relevant string index from scheduleCreationHelp question array
-//                let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[0][i][0]
-//                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][stringIndex] as! Int != 0 {
-//                    nGroups += 1
-//                    // i - 1 as totalnsession included in array
-//                    groupIndexes.append(i - 1)
-//                }
-//            }
-//        // If custom schedule, all groups shown
-//        } else {
-            for i in 0...5 {
-                nGroups += 1
-                // i - 1 as totalnsession included in array
-                groupIndexes.append(i)
-            }
-//        }
+        // Show group
+        for i in 0...5 {
+            nGroups += 1
+            // i - 1 as totalnsession included in array
+            groupIndexes.append(i)
+        }
         //
         bigGroupLabelArray = [bigGroupLabel0, bigGroupLabel1, bigGroupLabel2, bigGroupLabel3, bigGroupLabel4]
         //
@@ -961,7 +944,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Ensure notifications correct
         ReminderNotifications.shared.setNotifications()
         //
-        // Return to schedule overview
+        // Return to sc  hedule overview
         if fromScheduleEditing {
             self.navigationController?.popToRootViewController(animated: true)
         //

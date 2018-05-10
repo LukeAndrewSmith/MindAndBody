@@ -55,7 +55,7 @@ extension ScheduleScreen {
                 // Go back from final choice
                 case 6:
                     // Go back to length 1
-                    if indicator == "gym" && indicator2 == "classic" {
+                    if ScheduleVariables.shared.indicator == "gym" && ScheduleVariables.shared.indicator2 == "classic" {
                         ScheduleVariables.shared.choiceProgress[1] = 4
                         // Go back to length 2
                     } else {
@@ -74,7 +74,7 @@ extension ScheduleScreen {
                 // Go back from final choice
                 case 5:
                     // Go back to length 1
-                    switch indicator {
+                    switch ScheduleVariables.shared.indicator {
                     case "relaxing":
                         ScheduleVariables.shared.choiceProgress[1] = 2
                     case "neutral":
@@ -94,7 +94,7 @@ extension ScheduleScreen {
             } else if ScheduleVariables.shared.choiceProgress[0] == 3 {
                 switch ScheduleVariables.shared.choiceProgress[1] {
                 case 6:
-                    switch indicator {
+                    switch ScheduleVariables.shared.indicator {
                     case "bodyweight":
                         ScheduleVariables.shared.choiceProgress[1] -= 1
                     case "hiit":

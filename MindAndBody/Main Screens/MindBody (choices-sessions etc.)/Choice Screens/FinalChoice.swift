@@ -964,6 +964,18 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             let destinationVC = segue.destination as! SessionScreen
             //
             destinationVC.fromSchedule = comingFromSchedule
+        // Circuit
+        case "sessionSegueCircuit"?:
+            //
+            let destinationVC = segue.destination as! CircuitWorkoutScreen
+            //
+            destinationVC.fromSchedule = comingFromSchedule
+        // Time based
+        case "sessionSegueTimeBased"?:
+            //
+            let destinationVC = segue.destination as! TimeBasedScreen
+            //
+            destinationVC.fromSchedule = comingFromSchedule
         // Yoga
         case "sessionSegueYoga"?:
             //

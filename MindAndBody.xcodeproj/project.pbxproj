@@ -450,6 +450,7 @@
 		07702C831F4D943B000E1DB8 /* tinyFencerStretch.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */; };
 		077206821F90C52000818088 /* TimeBasedHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077206811F90C52000818088 /* TimeBasedHelpers.swift */; };
 		077876231F92A50D005CE68A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077876221F92A50D005CE68A /* Profile.swift */; };
+		0778FAA720A34F390032698A /* StopClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0778FAA620A34F390032698A /* StopClock.swift */; };
 		077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077AC0DA1DA535830026895B /* AppDelegate.swift */; };
 		077AC0E21DA535840026895B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E01DA535840026895B /* Main.storyboard */; };
 		077AC0E41DA535840026895B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 077AC0E31DA535840026895B /* Assets.xcassets */; };
@@ -1798,6 +1799,7 @@
 		07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tinyFencerStretch.png; sourceTree = "<group>"; };
 		077206811F90C52000818088 /* TimeBasedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedHelpers.swift; sourceTree = "<group>"; };
 		077876221F92A50D005CE68A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		0778FAA620A34F390032698A /* StopClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopClock.swift; sourceTree = "<group>"; };
 		077AC0D71DA535830026895B /* MindAndBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindAndBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		077AC0DA1DA535830026895B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		077AC0E11DA535840026895B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -3776,10 +3778,11 @@
 		0789ED091F79A71E000EB739 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				0794A74C1FBCC3D70029968D /* ActionSheet.swift */,
 				07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */,
 				07248E061F31CB5100230EAF /* GlobalVariables.swift */,
 				078674FD1FB84F7000C6B74C /* ICloudStorage.swift */,
+				0794A74C1FBCC3D70029968D /* ActionSheet.swift */,
+				0778FAA620A34F390032698A /* StopClock.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -8258,6 +8261,7 @@
 				077206821F90C52000818088 /* TimeBasedHelpers.swift in Sources */,
 				0782AB521FC4F0CE00D34500 /* ScheduleTableView.swift in Sources */,
 				07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */,
+				0778FAA720A34F390032698A /* StopClock.swift in Sources */,
 				073734221FD2DE42009F5B54 /* TrackingScreen.swift in Sources */,
 				07DE23031FC0919200940567 /* Subscriptions.swift in Sources */,
 				07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */,

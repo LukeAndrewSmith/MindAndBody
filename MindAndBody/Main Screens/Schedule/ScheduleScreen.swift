@@ -15,6 +15,9 @@ import UIKit
 //
 class ScheduleScreen: UIViewController {
     
+    static var shared = ScheduleScreen()
+
+    
     // MARK: - Variables/Outlets
     // Schedule Animation Helpers
     let mask = CAGradientLayer()
@@ -32,17 +35,7 @@ class ScheduleScreen: UIViewController {
     //
     var okAction = UIAlertAction()
  
-    //
-    // Selected Choices
-    // Selected choices corrensponds to an array in 'sortedSession' containing (easy, medium, hard) of relevant selection to be chosen by the app based on the profile (arrays containing difficulty level for each group to select)
-    // 3 seperate arrays because arrays do not quite correspond in terms of accessing relevant sessions for a number of reasons; not a mistake
-    // check sortedSessions array in dataStructures to understand indexing, each session has the corresponding index written above it
-    var selectedChoiceWarmup = ["", "", "", ""]
-    var selectedChoiceSession = ["", "", "", ""]
-    var selectedChoiceStretching = ["", "", "", ""]
-    // Indicators used when making the choice of session, used in updateSelectedChoice()
-    var indicator = ""
-    var indicator2 = ""
+    // Important variables selected choices in other class - ScheduleVariables
         
     //
     // Outlets
@@ -173,6 +166,9 @@ class ScheduleScreen: UIViewController {
         setupViews()
         layoutViews()
         reloadView()
+        
+        // Register for receiving did enter foreground notification
+        NotificationCenter.default.addObserver(self, selector: #selector(checkSelectedDay), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
     // MARK: viewDidLayoutSubviews

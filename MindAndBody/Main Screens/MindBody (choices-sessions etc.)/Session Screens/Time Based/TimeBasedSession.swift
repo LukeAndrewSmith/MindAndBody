@@ -895,10 +895,9 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.indicatorStack.alpha = 1
             cell.explanationButton.alpha = 1
             
-            //
             // Alert View
-            let title = NSLocalizedString("finishEarly", comment: "")
-            let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+            let title = NSLocalizedString("pauseYoga", comment: "")
+            let message = NSLocalizedString("pauseMessageSession", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.view.tintColor = Colors.dark
             alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
@@ -906,21 +905,26 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .natural
             alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-        
-            //
-            // Action
-            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
-                UIAlertAction in
-                //
-                //
+            // Actions
+            // Dismiss
+            let finishEarlyAction = UIAlertAction(title: NSLocalizedString("finishEarly", comment: ""), style: .default) { _ in
                 self.dismiss(animated: true)
             }
-            let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
-                UIAlertAction in
+            // Dismiss alert
+            let pauseAction = UIAlertAction(title: NSLocalizedString("pause", comment: ""), style: .default) { _ in }
+            // Continue
+            let continuePracticeAction = UIAlertAction(title: NSLocalizedString("continueSession", comment: ""), style: .default) { _ in
+                // Cell Detail
+                cell.indicatorStack.alpha = 0
+                cell.explanationButton.alpha = 0
+                self.continueSession()
+                
             }
-            //
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
+            
+            // Add actions
+            alert.addAction(finishEarlyAction)
+            alert.addAction(pauseAction)
+            alert.addAction(continuePracticeAction)
             //
             self.present(alert, animated: true, completion: nil)
             
@@ -929,16 +933,21 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Cell Detail
             cell.indicatorStack.alpha = 0
             cell.explanationButton.alpha = 0
-            // Return to initial image
-            let rightSwipe = UISwipeGestureRecognizer()
-            rightSwipe.direction = .right
-            handleSwipes(extraSwipe: rightSwipe)
-            //
-            isPaused = false
-            finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
-            finishEarly.tintColor = Colors.red
-            indicateMovementProgress()
+            continueSession()
         }
+    }
+    
+    //
+    func continueSession() {
+        // Return to initial image
+        let rightSwipe = UISwipeGestureRecognizer()
+        rightSwipe.direction = .right
+        handleSwipes(extraSwipe: rightSwipe)
+        //
+        isPaused = false
+        finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
+        finishEarly.tintColor = Colors.red
+        indicateMovementProgress()
     }
     
     

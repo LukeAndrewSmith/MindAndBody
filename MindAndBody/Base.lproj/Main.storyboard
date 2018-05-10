@@ -610,11 +610,10 @@
                                 </state>
                                 <connections>
                                     <action selector="createScheduleButtonAction:" destination="MvL-yD-EMG" eventType="touchUpInside" id="i3Y-TN-m5k"/>
-                                    <segue destination="NRn-Cn-qYs" kind="show" identifier="ScheduleCreatorEquiptmentSegue1" id="Cuf-BJ-N12"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBc-oy-0mh">
-                                <rect key="frame" x="325" y="243.5" width="42" height="20.5"/>
+                                <rect key="frame" x="251.5" y="243.5" width="119.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -623,7 +622,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Pq4-yp-zjE" secondAttribute="trailing" constant="4" id="8vx-n8-P6j"/>
-                            <constraint firstAttribute="trailing" secondItem="eBc-oy-0mh" secondAttribute="trailing" constant="8" id="DaB-P3-IFC"/>
                             <constraint firstItem="swz-92-i1A" firstAttribute="top" secondItem="GZx-Jt-X2Q" secondAttribute="bottom" id="EgI-gq-e8F"/>
                             <constraint firstAttribute="trailing" secondItem="4MM-ms-QAM" secondAttribute="trailing" id="G2r-fv-ceK"/>
                             <constraint firstItem="C0r-gO-Few" firstAttribute="leading" secondItem="K2Y-Bu-j3L" secondAttribute="leading" id="Iaa-wO-W3P"/>
@@ -633,9 +631,11 @@
                             <constraint firstItem="4MM-ms-QAM" firstAttribute="leading" secondItem="K2Y-Bu-j3L" secondAttribute="leading" id="UhL-tC-yxq"/>
                             <constraint firstItem="Pq4-yp-zjE" firstAttribute="top" secondItem="biQ-vA-1IL" secondAttribute="bottom" constant="4" id="WCc-yJ-qlf"/>
                             <constraint firstItem="Pq4-yp-zjE" firstAttribute="leading" secondItem="K2Y-Bu-j3L" secondAttribute="leading" constant="4" id="XXw-PS-BJb"/>
+                            <constraint firstItem="eBc-oy-0mh" firstAttribute="centerX" secondItem="sXo-Z6-bXU" secondAttribute="centerX" id="ZRe-tL-Ytc"/>
                             <constraint firstItem="GZx-Jt-X2Q" firstAttribute="leading" secondItem="K2Y-Bu-j3L" secondAttribute="leading" id="aqR-gu-erZ"/>
                             <constraint firstItem="C0r-gO-Few" firstAttribute="top" secondItem="eBc-oy-0mh" secondAttribute="bottom" constant="8" id="gfW-qZ-qmQ"/>
                             <constraint firstAttribute="trailing" secondItem="GZx-Jt-X2Q" secondAttribute="trailing" id="mmr-RW-iGL"/>
+                            <constraint firstItem="eBc-oy-0mh" firstAttribute="width" secondItem="sXo-Z6-bXU" secondAttribute="width" id="tTi-QV-1PP"/>
                             <constraint firstItem="4MM-ms-QAM" firstAttribute="top" secondItem="C0r-gO-Few" secondAttribute="bottom" id="vtt-9Z-YXj"/>
                         </constraints>
                     </view>
@@ -655,6 +655,7 @@
                         <outlet property="groupStack1" destination="vkN-0u-ghg" id="0rM-Pz-GUR"/>
                         <outlet property="groupStack2" destination="Jlz-7E-qYU" id="eiD-xQ-Y4P"/>
                         <outlet property="indicationLabel" destination="eBc-oy-0mh" id="XrM-u1-df7"/>
+                        <segue destination="NRn-Cn-qYs" kind="show" identifier="ScheduleCreatorEquiptmentSegue1" id="aWq-hZ-Auo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rHM-Hl-UU2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3202,7 +3203,7 @@
                                                     <state key="normal" image="QuestionMarkM"/>
                                                 </button>
                                                 <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="HRs-0d-j9h">
-                                                    <rect key="frame" x="54" y="358" width="266" height="43"/>
+                                                    <rect key="frame" x="55" y="358" width="265" height="43"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42.880000000000003" id="iRE-Rq-og5"/>
@@ -3225,6 +3226,14 @@
                                                         <constraint firstAttribute="height" constant="15" id="so4-bg-mPq"/>
                                                     </constraints>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWj-bk-xv2">
+                                                    <rect key="frame" x="320" y="294" width="55" height="55"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="55" id="RvP-qG-11a"/>
+                                                        <constraint firstAttribute="height" constant="55" id="V9x-Mx-z9d"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Timer"/>
+                                                </button>
                                             </subviews>
                                             <gestureRecognizers/>
                                             <constraints>
@@ -3240,9 +3249,11 @@
                                                 <constraint firstItem="0Ea-Pl-qcE" firstAttribute="top" secondItem="aYQ-8x-smf" secondAttribute="bottom" constant="-15" id="V5l-I4-VRg"/>
                                                 <constraint firstItem="Ph9-9z-aWa" firstAttribute="centerY" secondItem="CWE-s5-9gl" secondAttribute="centerY" multiplier="25/16" id="WnQ-IX-BGB"/>
                                                 <constraint firstItem="sMc-AE-wXL" firstAttribute="width" secondItem="012-1d-8yV" secondAttribute="width" id="Y8e-nl-kXF"/>
+                                                <constraint firstItem="Ujc-DX-HXP" firstAttribute="top" secondItem="sWj-bk-xv2" secondAttribute="bottom" id="cGa-GN-18G"/>
                                                 <constraint firstItem="HRs-0d-j9h" firstAttribute="centerY" secondItem="CWE-s5-9gl" secondAttribute="centerY" multiplier="30/16" id="fUE-kH-qo4"/>
                                                 <constraint firstItem="aYQ-8x-smf" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="g2L-mH-crG"/>
                                                 <constraint firstItem="aYQ-8x-smf" firstAttribute="top" secondItem="CWE-s5-9gl" secondAttribute="top" id="gOx-MB-6mb"/>
+                                                <constraint firstAttribute="trailing" secondItem="sWj-bk-xv2" secondAttribute="trailing" id="ofP-Ya-qyx"/>
                                                 <constraint firstItem="sMc-AE-wXL" firstAttribute="bottom" secondItem="012-1d-8yV" secondAttribute="bottom" id="qij-Th-W9m"/>
                                                 <constraint firstItem="012-1d-8yV" firstAttribute="centerY" secondItem="CWE-s5-9gl" secondAttribute="centerY" multiplier="27/16" id="shr-kq-hPZ"/>
                                                 <constraint firstItem="0Ea-Pl-qcE" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="vZU-PO-meG"/>
@@ -3259,6 +3270,7 @@
                                             <outlet property="movementLabel" destination="Ph9-9z-aWa" id="e9h-1x-47f"/>
                                             <outlet property="rightImageIndicator" destination="5tG-C5-rN7" id="yn5-6I-O0A"/>
                                             <outlet property="setsRepsLabel" destination="012-1d-8yV" id="Tgu-4S-WdA"/>
+                                            <outlet property="timerButton" destination="sWj-bk-xv2" id="Anr-z0-11M"/>
                                             <outlet property="weightButton" destination="sMc-AE-wXL" id="nKM-XF-3Sh"/>
                                         </connections>
                                     </tableViewCell>
@@ -4869,7 +4881,6 @@
                                 </state>
                                 <connections>
                                     <action selector="doneButtonAction:" destination="PFs-MA-8Ud" eventType="touchUpInside" id="Yxv-Z2-TC6"/>
-                                    <segue destination="NRn-Cn-qYs" kind="show" identifier="ScheduleCreatorEquiptmentSegue2" id="qei-mg-QTj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -4899,6 +4910,7 @@
                         <outlet property="doneButton" destination="NWn-SH-hZz" id="cmp-oG-sfZ"/>
                         <outlet property="sectionLabel" destination="LX1-eN-XZR" id="ClE-rS-dE7"/>
                         <outlet property="weekTable" destination="7lU-O2-0pR" id="4hn-BJ-JyX"/>
+                        <segue destination="NRn-Cn-qYs" kind="show" identifier="ScheduleCreatorEquiptmentSegue1" id="OOV-Kp-GfI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Tb-cc-KbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5342,6 +5354,7 @@
         <image name="QuestionMarkM" width="30" height="30"/>
         <image name="QuestionMarkMenu" width="30" height="30"/>
         <image name="SlideMenu" width="30" height="30"/>
+        <image name="Timer" width="30" height="30"/>
         <image name="TrackingClock" width="30" height="30"/>
         <image name="Tricep" width="375" height="375"/>
         <image name="WeekView" width="187" height="333"/>
@@ -5363,7 +5376,7 @@
         <segue reference="y3k-i5-esE"/>
         <segue reference="IQI-W2-saz"/>
         <segue reference="M72-ar-DyO"/>
-        <segue reference="Cuf-BJ-N12"/>
+        <segue reference="aWq-hZ-Auo"/>
         <segue reference="kIb-e7-fcP"/>
         <segue reference="NR1-hM-oZr"/>
     </inferredMetricsTieBreakers>

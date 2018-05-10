@@ -43,7 +43,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     var selectedRow = Int()
     
     //
-    let restTimesArray: [Int] = [1, 5, 10, 15, 20, 30, 45, 60, 90, 120]
+    let restTimesArray: [Int] = [0, 5, 10, 15, 20, 30, 45, 60, 90, 120]
     
     // Home screen Array
     var homeScreenArray: [String] = ["sessions", "schedule", "menu"]

@@ -95,18 +95,5 @@ class ActionSheet {
             }
         }
     }
-    
-    
-//    //
-//    ActionSheet.shared.setupActionSheet()
-//    ActionSheet.shared.actionSheet.addSubview(scheduleChoiceTable)
-//    ActionSheet.shared.actionSheet.addSubview(editScheduleButton)
-//    ActionSheet.shared.actionSheet.addSubview(editProfileButton)
-//    let heightToAdd = scheduleChoiceTable.bounds.height + 20 + editScheduleButton.bounds.height + 20 + editProfileButton.bounds.height
-//    ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
-//    ActionSheet.shared.resetCancelFrame()
-//
-//
-//    ActionSheet.shared.animateActionSheetDown()
 
 }
