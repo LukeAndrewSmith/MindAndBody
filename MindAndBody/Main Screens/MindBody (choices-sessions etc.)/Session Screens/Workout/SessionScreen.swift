@@ -432,6 +432,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             // Explanation
             cell.explanationButton.tintColor = Colors.light
+            // Timer
             cell.timerButton.tintColor = Colors.light
 
             //
@@ -529,6 +530,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.setsRepsLabel.alpha = 0
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
                 cell.weightButton.isEnabled = false
             //
             case selectedRow:
@@ -537,6 +539,11 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
+                if isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                } else {
+                    cell.timerButton.alpha = 0
+                }
                 cell.weightButton.isEnabled = true
                 //cell.demonstrationImageView.isUserInteractionEnabled = true
             //
@@ -550,6 +557,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
                 cell.weightButton.isEnabled = false
                 //cell.demonstrationImageView.isUserInteractionEnabled = false
             //
@@ -560,6 +568,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
+                if isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
                 cell.weightButton.isEnabled = true
             }
             
@@ -1034,6 +1045,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
+                if self.isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
                 cell.weightButton.isEnabled = true
                 //
                 // -1
@@ -1043,6 +1057,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 0
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
                 cell.weightButton.isEnabled = false
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
@@ -1091,6 +1106,9 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
+                if self.isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
                 cell.weightButton.isEnabled = true
                 // - 1
                 if self.selectedRow > 0 {
@@ -1100,6 +1118,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     cell.movementLabel.alpha = 0
                     cell.buttonView.alpha = 0
                     cell.explanationButton.alpha = 0
+                    cell.timerButton.alpha = 0
                     cell.weightButton.isEnabled = false
                 }
                 // + 1
@@ -1110,6 +1129,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
                 cell.weightButton.isEnabled = false
                 //
             })
@@ -1193,13 +1213,37 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBAction func timerAction(_ sender: Any) {
         //
-        StopClock.shared.setupStopClock(time: 10)
-//        let heightToAdd = setsRepsView.bounds.height
-//        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
-//        ActionSheet.shared.resetCancelFrame()
-        StopClock.shared.resetOptionFrames()
-        StopClock.shared.animatestopClockUp()
-        
+        if isTimedMovement() {
+            if !didSetEndTime {
+               let time = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[selectedRow]["time"] as! Int
+                StopClock.shared.setupStopClock(time: time)
+                StopClock.shared.resetOptionFrames()
+                StopClock.shared.animatestopClockUp()
+            } else {
+                //
+                // Alert View
+                let title = NSLocalizedString("setTimer", comment: "")
+                let message = NSLocalizedString("setTimerWarning", comment: "")
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.view.tintColor = Colors.dark
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                //
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = .natural
+                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                
+                //
+                // Action
+                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    //
+                }
+                //
+                alert.addAction(okAction)
+                //
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     
@@ -1318,7 +1362,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         // Alert View
         let title = NSLocalizedString("finishEarly", comment: "")
-        let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+        let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
@@ -1349,7 +1393,16 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
     }
     
-    
+    // Check whether timed movement
+    func isTimedMovement() -> Bool {
+        let setsRepsString = repsArray[selectedRow]
+        // seconds/breaths
+        if setsRepsString.hasSuffix("s") {
+            return true
+        } else {
+            return false
+        }
+    }
     
     //
     // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 class StopClock {
     static var shared = StopClock()
@@ -29,6 +30,8 @@ class StopClock {
         var endTime = Double()
         //
         var length = Int()
+    
+    var isPresented = false
 
     var startClockButton = UIButton()
     var cancelClockButton = UIButton()
@@ -65,7 +68,7 @@ class StopClock {
         startButton.frame = CGRect(x: 0, y: stopClock.bounds.height - 40, width: stopClock.bounds.width, height: 49)
         startButton.layer.cornerRadius = startButton.bounds.height / 2
         startButton.clipsToBounds = true
-        startButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
+        startButton.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
         stopClock.addSubview(startButton)
         //
         stopClockView.backgroundColor = Colors.dark
@@ -92,50 +95,72 @@ class StopClock {
         stopClock.frame.size = CGSize(width: UIScreen.main.bounds.width - 20, height: (UIScreen.main.bounds.width - 20) + 20 + (2*49))
     }
     
-    
+    @objc func startButtonAction() {
+        // If not timing, begin
+        if !didSetEndTime {
+            //
+            startTimer()
+            //
+            // Notification
+            let content = UNMutableNotificationContent()
+            content.title = NSLocalizedString("setOver", comment: "")
+            content.sound = UNNotificationSound.default()
+            //
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(length), repeats: false)
+            let request = UNNotificationRequest(identifier: "stopClock", content: content, trigger: trigger)
+            //
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        }
+    }
     
     @objc func startTimer() {
         //
-        if timerCountDown.isValid {
-            timerCountDown.invalidate()
-        }
-        //
-        startTime = Date().timeIntervalSinceReferenceDate
-        //
-        if didSetEndTime == false {
-            if false {
-                //didEnterBackground {
-                //endTime = startTime + Double(timerValue) - length
+        if isPresented {
+            if timerCountDown.isValid {
+                timerCountDown.invalidate()
+            }
+            //
+            NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+            //
+            startTime = Date().timeIntervalSinceReferenceDate
+            //
+            if didSetEndTime == false {
+                if false {
+                    //didEnterBackground {
+                    //endTime = startTime + Double(timerValue) - length
+                } else {
+                    endTime = startTime + Double(length)
+                }
+                //
+                didSetEndTime = true
+            }
+            //
+            if endTime > startTime {
+                timerValue = Int(endTime - startTime)
             } else {
-                endTime = startTime + Double(length)
+                timerValue = 0
+                animateStopClockDown()
             }
-            //
-            didSetEndTime = true
-        }
-        //
-        if endTime > startTime {
-            timerValue = Int(endTime - startTime)
-        } else {
-            timerValue = 0
-        }
-        
-        //
-        if timerValue != 0 {
-            //
-            stopClockLabel.text = timeFormatted(totalSeconds: timerValue)
             
             //
-            if animationAdded == false {
-                addCircle()
-                startAnimation()
+            if timerValue != 0 {
+                //
+                stopClockLabel.text = timeFormatted(totalSeconds: timerValue)
+                
+                //
+                if animationAdded == false {
+                    addCircle()
+                    startAnimation()
+                }
+                timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+                
             }
-            timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
-            
         }
     }
     
     
     func animatestopClockUp() {
+        isPresented = true
         //
         // Initial Conditions
         stopClockBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0)
@@ -175,10 +200,12 @@ class StopClock {
     
     @objc func animateStopClockDown() {
         //
+        isPresented = false
+        //
         // Ensure timer cancelled
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["stopClock"])
         didSetEndTime = false
         timerCountDown.invalidate()
-        removeCircle()
         if animationAdded {
             timerShapeLayer.removeAllAnimations()
             timerShapeLayer.removeFromSuperlayer()

@@ -42,6 +42,10 @@
 "restOver" = "Rest over";
 "nextSet" = "Begin next set";
 
+"setOver" = "Set over";
+"setTimer" = "Set Timer";
+"setTimerWarning" = "\nCurrently resting, can't begin a set.";
+
 "timer" = "Timer";
 "timerEnd" = "Timer Ended";
 

@@ -28,6 +28,8 @@ class StretchingTableViewCell: UITableViewCell {
     @IBOutlet weak var setsRepsLabel: UILabel!
     // Explanation
     @IBOutlet weak var explanationButton: UIButton!
+    // Timer
+    @IBOutlet weak var timerButton: UIButton!
 }
 
 //
@@ -315,10 +317,11 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
             //
             
-            
             //
             // Explanation
             cell.explanationButton.tintColor = Colors.light
+            // Timer
+            cell.timerButton.tintColor = Colors.light
             
             //
             // Gestures
@@ -341,6 +344,12 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             explanationTap.addTarget(self, action: #selector(expandExplanation))
             cell.explanationButton.addGestureRecognizer(explanationTap)
             
+            // Timer
+            let timerTap = UITapGestureRecognizer()
+            timerTap.numberOfTapsRequired = 1
+            timerTap.addTarget(self, action: #selector(timerAction))
+            cell.timerButton.addGestureRecognizer(timerTap)
+            
             // Left Image Swift
             let imageSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
@@ -361,12 +370,18 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.movementLabel.alpha = 0
                 cell.setsRepsLabel.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
             //
             case selectedRow:
                 cell.indicatorStack.alpha = 1
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                if isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                } else {
+                    cell.timerButton.alpha = 0
+                }
                 //cell.demonstrationImageView.isUserInteractionEnabled = true
             //
             case selectedRow + 1:
@@ -378,6 +393,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
                 //cell.demonstrationImageView.isUserInteractionEnabled = false
             //
             default:
@@ -386,6 +402,9 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                if isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
             }
             
             //
@@ -545,6 +564,9 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                if self.isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
                 //
                 // -1
                 cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! StretchingTableViewCell
@@ -552,6 +574,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
                 //
                 self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
             }, completion: { finished in
@@ -597,6 +620,9 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                if self.isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
                 // - 1
                 if self.selectedRow > 0 {
                     cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! StretchingTableViewCell
@@ -604,6 +630,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     cell.setsRepsLabel.alpha = 0
                     cell.movementLabel.alpha = 0
                     cell.explanationButton.alpha = 0
+                    cell.timerButton.alpha = 0
                 }
                 // + 1
                 cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! StretchingTableViewCell
@@ -612,6 +639,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
                 //
             })
         }
@@ -689,6 +717,16 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         })
     }
     
+    @IBAction func timerAction(_ sender: Any) {
+        //
+        if isTimedMovement() {
+            // Warmup & Stretching
+            let time = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[selectedRow]["time"] as! Int
+            StopClock.shared.setupStopClock(time: time)
+            StopClock.shared.resetOptionFrames()
+            StopClock.shared.animatestopClockUp()
+        }
+    }
     
     //
     // Handle Swipes
@@ -802,13 +840,29 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     //
     
+    // Check whether timed movement
+    func isTimedMovement() -> Bool {
+        // Warmup
+        if SelectedSession.shared.selectedSession[0] == "warmup" {
+            let setsRepsString = repsArray[selectedRow]
+            if setsRepsString.hasSuffix("s") {
+                return true
+            } else {
+                return false
+            }
+        // Stretching
+        } else {
+            return true
+        }
+    }
+    
     //
     @IBAction func finishEarlyAction(_ sender: Any) {
         // Invalidate
         //
         // Alert View
         let title = NSLocalizedString("finishEarly", comment: "")
-        let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+        let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")

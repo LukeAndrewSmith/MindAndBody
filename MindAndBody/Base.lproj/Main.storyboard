@@ -2898,13 +2898,13 @@
                                         <rect key="frame" x="8" y="57" width="172" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Theme" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BC-Ha-gWL">
-                                                <rect key="frame" x="0.0" y="0.0" width="61.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="51" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Self-Acceptance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZf-CZ-07t">
-                                                <rect key="frame" x="69.5" y="0.0" width="102.5" height="20.5"/>
+                                                <rect key="frame" x="59" y="0.0" width="113" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3659,6 +3659,16 @@
                                                         <constraint firstAttribute="width" constant="30" id="reI-k1-vJ3"/>
                                                     </constraints>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24c-5j-iUR">
+                                                    <rect key="frame" x="320" y="295" width="55" height="55"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="55" id="57C-z8-WTg"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="9Ju-hx-eoH"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="RGx-Mh-dt8"/>
+                                                        <constraint firstAttribute="height" constant="55" id="TwY-Yy-8DT"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Timer"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="pB9-i1-d5Y" firstAttribute="top" secondItem="5tM-Fs-tkx" secondAttribute="bottom" constant="-15" id="0Q2-xu-McQ"/>
@@ -3667,6 +3677,8 @@
                                                 <constraint firstItem="AOR-jO-oQj" firstAttribute="centerY" secondItem="v8f-f7-OK1" secondAttribute="centerY" multiplier="30/16" id="KoB-Sw-P4a"/>
                                                 <constraint firstItem="AOR-jO-oQj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NB9-03-fUy" secondAttribute="bottom" id="R8k-y5-aPC"/>
                                                 <constraint firstItem="5tM-Fs-tkx" firstAttribute="height" secondItem="v8f-f7-OK1" secondAttribute="height" multiplier="13/16" id="Ry3-WK-evW"/>
+                                                <constraint firstAttribute="trailing" secondItem="24c-5j-iUR" secondAttribute="trailing" id="Yua-Xx-pMd"/>
+                                                <constraint firstItem="u08-q7-MDY" firstAttribute="top" secondItem="24c-5j-iUR" secondAttribute="bottom" id="bhU-A3-e1h"/>
                                                 <constraint firstItem="5tM-Fs-tkx" firstAttribute="centerX" secondItem="v8f-f7-OK1" secondAttribute="centerX" id="ceE-lH-9Y9"/>
                                                 <constraint firstItem="NB9-03-fUy" firstAttribute="centerX" secondItem="v8f-f7-OK1" secondAttribute="centerX" id="dOJ-Ad-Jp2"/>
                                                 <constraint firstItem="5tM-Fs-tkx" firstAttribute="top" secondItem="v8f-f7-OK1" secondAttribute="top" id="hAp-cQ-tmR"/>
@@ -3683,6 +3695,7 @@
                                             <outlet property="movementLabel" destination="NB9-03-fUy" id="HCb-M4-TKP"/>
                                             <outlet property="rightImageIndicator" destination="TKd-bS-SMp" id="Yiz-Pd-KfW"/>
                                             <outlet property="setsRepsLabel" destination="AOR-jO-oQj" id="z3O-qS-fCH"/>
+                                            <outlet property="timerButton" destination="24c-5j-iUR" id="KXu-ih-IFk"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EndRoundTableViewCell" rowHeight="72" id="D5Y-Tw-tcv" customClass="EndRoundTableViewCell" customModule="MindAndBody" customModuleProvider="target">
@@ -3875,17 +3888,29 @@
                                                         <constraint firstAttribute="width" constant="30" id="Sxy-TP-GbL"/>
                                                     </constraints>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIY-cl-Hpc">
+                                                    <rect key="frame" x="320" y="294" width="55" height="55"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="55" id="2R8-li-4zA"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="aND-ow-qxB"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="d5Y-8w-M5U"/>
+                                                        <constraint firstAttribute="width" constant="55" id="rIp-D3-Mii"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Timer"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="POy-oA-8ma" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d0d-1U-YoD" secondAttribute="leading" id="261-df-Hre"/>
                                                 <constraint firstItem="r5O-yZ-uLf" firstAttribute="centerY" secondItem="d0d-1U-YoD" secondAttribute="centerY" multiplier="30/16" id="5pe-9v-O4p"/>
                                                 <constraint firstItem="POy-oA-8ma" firstAttribute="centerX" secondItem="d0d-1U-YoD" secondAttribute="centerX" id="7CD-WB-kpr"/>
                                                 <constraint firstAttribute="bottom" secondItem="EdY-jj-zVA" secondAttribute="bottom" id="7oH-2S-MZY"/>
+                                                <constraint firstAttribute="trailing" secondItem="UIY-cl-Hpc" secondAttribute="trailing" id="8mh-Lq-OI3"/>
                                                 <constraint firstItem="POy-oA-8ma" firstAttribute="top" secondItem="d0d-1U-YoD" secondAttribute="top" id="CbW-o2-JnM"/>
                                                 <constraint firstItem="Yay-Qc-P2r" firstAttribute="centerX" secondItem="d0d-1U-YoD" secondAttribute="centerX" id="DtQ-cf-Fe9"/>
                                                 <constraint firstItem="r5O-yZ-uLf" firstAttribute="centerX" secondItem="d0d-1U-YoD" secondAttribute="centerX" id="Enm-Lx-Ggx"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="POy-oA-8ma" secondAttribute="trailing" id="GpF-Ol-BlP"/>
                                                 <constraint firstItem="POy-oA-8ma" firstAttribute="height" secondItem="d0d-1U-YoD" secondAttribute="height" multiplier="13/16" id="Tcn-bk-TZB"/>
+                                                <constraint firstItem="EdY-jj-zVA" firstAttribute="top" secondItem="UIY-cl-Hpc" secondAttribute="bottom" id="UTc-bu-e1F"/>
                                                 <constraint firstItem="Yay-Qc-P2r" firstAttribute="top" secondItem="POy-oA-8ma" secondAttribute="bottom" constant="-15" id="WdE-qm-ZAe"/>
                                                 <constraint firstItem="Kz8-mk-fSQ" firstAttribute="centerX" secondItem="d0d-1U-YoD" secondAttribute="centerX" id="oNp-dW-GIE"/>
                                                 <constraint firstAttribute="trailing" secondItem="EdY-jj-zVA" secondAttribute="trailing" id="vqG-yW-wgj"/>
@@ -3900,6 +3925,7 @@
                                             <outlet property="movementLabel" destination="Kz8-mk-fSQ" id="gm3-oZ-dZ6"/>
                                             <outlet property="rightImageIndicator" destination="wTZ-zv-wap" id="NOt-yF-gzn"/>
                                             <outlet property="setsRepsLabel" destination="r5O-yZ-uLf" id="Rg5-aT-jbY"/>
+                                            <outlet property="timerButton" destination="UIY-cl-Hpc" id="2Iy-Rm-gd8"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EndTableViewCell" rowHeight="72" id="WLy-5j-lJD" customClass="EndTableViewCell" customModule="MindAndBody" customModuleProvider="target">

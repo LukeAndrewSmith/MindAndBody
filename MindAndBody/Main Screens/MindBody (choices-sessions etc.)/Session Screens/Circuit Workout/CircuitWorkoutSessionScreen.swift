@@ -28,6 +28,9 @@ class WorkoutOverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var setsRepsLabel: UILabel!
     // Explanation Button
     @IBOutlet weak var explanationButton: UIButton!
+    // Timer
+    @IBOutlet weak var timerButton: UIButton!
+    
 }
 
 
@@ -332,14 +335,11 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
             //
             
-            
-            
-            
-            
             //
             // Explanation
             cell.explanationButton.tintColor = Colors.light
-            
+            // Timer
+            cell.timerButton.tintColor = Colors.light
             
             //
             // Gestures
@@ -362,6 +362,12 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             explanationTap.addTarget(self, action: #selector(expandExplanation))
             cell.explanationButton.addGestureRecognizer(explanationTap)
             
+            // Timer
+            let timerTap = UITapGestureRecognizer()
+            timerTap.numberOfTapsRequired = 1
+            timerTap.addTarget(self, action: #selector(timerAction))
+            cell.timerButton.addGestureRecognizer(timerTap)
+            
             // Left Image Swift
             let imageSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
             imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
@@ -383,13 +389,18 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
-            //
+                if isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                } else {
+                    cell.timerButton.alpha = 0
+            }            //
             default:
                 //
                 cell.indicatorStack.alpha = 0
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
             }
             
             //
@@ -519,6 +530,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                if self.self.isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
                 //
                 self.updateProgress()
                 //
@@ -596,6 +610,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                if self.isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
                 //
                 self.updateProgress()
                 //
@@ -690,6 +707,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                if self.isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
                 //
                 self.updateProgress()
                 //
@@ -817,12 +837,16 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                if self.isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
                 //
                 // -1
                 cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! WorkoutOverviewTableViewCell
                 cell.indicatorStack.alpha = 0
                 cell.setsRepsLabel.alpha = 0
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
                 //
                 //self.tableView.reloadRows(at: [indexPath2 as IndexPath], with: UITableViewRowAnimation.none)
                 
@@ -874,6 +898,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
+                if self.isTimedMovement() {
+                    cell.timerButton.alpha = 1
+                }
                 // - 1
                 if self.selectedRow > 0 {
                     cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! WorkoutOverviewTableViewCell
@@ -881,6 +908,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     cell.setsRepsLabel.alpha = 0
                     cell.movementLabel.alpha = 0
                     cell.explanationButton.alpha = 0
+                    cell.timerButton.alpha = 0
                 }
                 // + 1
                 cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! WorkoutOverviewTableViewCell
@@ -888,6 +916,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 0
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 0
+                cell.timerButton.alpha = 0
                 //
             })
             //
@@ -970,6 +999,40 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         })
     }
     
+    @IBAction func timerAction(_ sender: Any) {
+        //
+        if isTimedMovement() {
+            if !didSetEndTime {
+                let time = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[selectedRow]["time"] as! Int
+                StopClock.shared.setupStopClock(time: time)
+                StopClock.shared.resetOptionFrames()
+                StopClock.shared.animatestopClockUp()
+            } else {
+                //
+                // Alert View
+                let title = NSLocalizedString("setTimer", comment: "")
+                let message = NSLocalizedString("setTimerWarning", comment: "")
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.view.tintColor = Colors.dark
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                //
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = .natural
+                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                
+                //
+                // Action
+                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    //
+                }
+                //
+                alert.addAction(okAction)
+                //
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
     
     //
     // Handle Swipes
@@ -1078,12 +1141,23 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     }
     //
     
+    // Check whether timed movement
+    func isTimedMovement() -> Bool {
+        let setsRepsString = repsArray[selectedRow]
+        // seconds/breaths
+        if setsRepsString.hasSuffix("s") {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     //
     @IBAction func finishEarlyAction(_ sender: Any) {
         //
         // Alert View
         let title = NSLocalizedString("finishEarly", comment: "")
-        let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+        let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")

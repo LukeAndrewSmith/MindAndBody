@@ -831,7 +831,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             // Alert View
             let title = NSLocalizedString("finishEarly", comment: "")
-            let message = NSLocalizedString("finishEarlyMessageYoga", comment: "")
+            let message = NSLocalizedString("finishEarlyMessage", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.view.tintColor = Colors.dark
             alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")

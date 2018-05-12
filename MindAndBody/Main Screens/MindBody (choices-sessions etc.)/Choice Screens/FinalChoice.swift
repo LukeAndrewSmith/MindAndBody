@@ -523,7 +523,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 } else {
                     // Length = [3]
                     let breaths = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[indexPath.row]["time"] as? Int
-                    cell.detailTextLabel?.text = String(breaths!) + " " + NSLocalizedString("s", comment: "")
+                    cell.detailTextLabel?.text = String(breaths!) + " " + NSLocalizedString("breaths", comment: "")
                 }
                 
             case "yoga":
