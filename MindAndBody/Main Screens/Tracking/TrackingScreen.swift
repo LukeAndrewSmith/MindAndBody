@@ -66,7 +66,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func testTrackingValues() {
-        let calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
         //
         var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
         trackingDictionaries[0] = [:]
@@ -97,9 +98,9 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         updateWeekGoal()
         
         // MARK: Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        testTrackingValues()
-        updateWeekTracking()
-        updateTracking()
+//        testTrackingValues()
+//        updateWeekTracking()
+//        updateTracking()
         
         // Create [[Date: Int]] from the stored [[String: Int]] (ICloud wont store [Date: Int], only [String: Int])
         let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
@@ -283,7 +284,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             
             //
-            let calendar = Calendar(identifier: .gregorian)
+            var calendar = Calendar(identifier: .gregorian)
+            calendar.timeZone = TimeZone(abbreviation: "UTC")!
             // Set Start and end dates for 1,3,6,12 months && set date formatter
             switch timeScale {
             // 1,3,6 months
@@ -308,7 +310,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                         let month = calendar.date(byAdding: .month, value: i, to: startDate)!
                         numberOfValues += month.numberOfMondaysInCurrentMonth
                     }
-                    chartView.xAxis.labelCount = 4
+                    chartView.xAxis.labelCount = 3
                     chartView.xAxis.forceLabelsEnabled = true
                     chartView.xAxis.valueFormatter = DateValueFormatterMonth()
                 case 3:

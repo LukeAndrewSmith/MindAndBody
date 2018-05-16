@@ -1489,27 +1489,47 @@
         // Guided
             // Choice
             "introduction" = "Introduction";
-            "view" = "Point of View";
-            "self" = "Self";
-            "sleep" = "Sleep";
-            "yogaMeditation" = "Yoga Meditation";
+            "techniquesB" = "Techniques (Breathing)";
+            "techniquesV" = "Techniques (Visualisation)";
 
             // Sessions
-            "scale" = "Scale";
-            "perspective" = "Perspective";
-            "lettingGo" = "Letting Go";
-            "acceptance" = "Acceptance";
-            "wandering" = "Wandering";
-            "oneness" = "Oneness";
-            "duality" = "Duality";
-            "effort" = "Effort";
-            "bodyScan" = "Body Scan";
-            "unwind" = "Unwind";
-            "lotusStretch" = "Lotus Stretching";
-            "generalStretch" = "General Stretching";
-
             "guidedSessions" = "Guided Sessions";
 
+// Titles
+// Introduction
+"introduction1" = "First Steps";
+"introduction2" = "Breathing";
+"introduction3" = "Visualisation";
+"introduction4" = "Mindfulness";
+// Breathing
+"squareBreathing" = "Square Breathing";
+"breathCounting" = "Breath Counting";
+"oxygenPurge" = "Oxygen Purge";
+"breathRetention" = "Breath Retention";
+"nostrilBreathing" = "Nostril Breathing";
+// Visualisation
+"bodyScan" = "Body Scan";
+"tummoInnerFire" = "Tummo (Inner Fire)";
+"self" = "Self";
+"earth" = "Perspective";
+
+// Explanations
+// Introduction
+"introduction1E" = "General Introduction:\nRegular meditation brings a wide variety benifits, ranging from contentedness to an increased ability to concentrate. With a little practice it will become natural to you, and you will be able to explore it's effects and benifits.\nI consider it important to become independant in meditation to get the most out of it. By independant I mean to have developed a number of techniques, recognized their effects on yourself, and to have the ability to practice them without aid. This introduction section serves therefore to explain the fundamentals and to get you started, and the other sections present a variety of techniques to explore.\n\nFirst Steps:\nA useful (and old) manner of describing meditation is as such, the training of your monkey mind. Your monkey mind representing the chatter of your brain";
+"introduction2E" = "Breathing";
+"introduction3E" = "Visualisation";
+"introduction4E" = "Mindfulness";
+// Breathing
+"squareBreathingE" = "Square Breathing";
+"breathCountingE" = "Breath Counting";
+"oxygenPurgeE" = "Oxygen Purge";
+"breathRetentionE" = "Breath Retention";
+"nostrilBreathingE" = "Nostril Breathing";
+// Visualisation
+"bodyScanE" = "Body Scan";
+"tummoInnerFireE" = "Tummo (Inner Fire)";
+"selfE" = "Self";
+"earthE" = "Perspective";
 
             // Info Screen
             "detail" = "Details";

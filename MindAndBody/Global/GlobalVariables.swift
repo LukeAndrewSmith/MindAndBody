@@ -114,6 +114,11 @@ class MenuVariables {
     // Menu interaction type
         // 0 == slide, 1 == press
     var menuInteractionType = 0
+    
+    // Each time going to screen from menu, view loads twice, causes little design issue for walkthough so this variables ensures walkthrough is only presented on the seconds load
+        // Issue is that the walkthrough is presented before the view has animated into the right place
+        // Only used in settings as only place the issue is noticable due to black walkthrough screen, and seeing as viewdidload might be called many times, this isn't the safest fix but works for now
+    var secondLoad = false
 }
 
 //

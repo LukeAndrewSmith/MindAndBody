@@ -4936,7 +4936,7 @@
                         <outlet property="doneButton" destination="NWn-SH-hZz" id="cmp-oG-sfZ"/>
                         <outlet property="sectionLabel" destination="LX1-eN-XZR" id="ClE-rS-dE7"/>
                         <outlet property="weekTable" destination="7lU-O2-0pR" id="4hn-BJ-JyX"/>
-                        <segue destination="NRn-Cn-qYs" kind="show" identifier="ScheduleCreatorEquiptmentSegue1" id="OOV-Kp-GfI"/>
+                        <segue destination="NRn-Cn-qYs" kind="show" identifier="ScheduleCreatorEquiptmentSegue2" id="OOV-Kp-GfI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Tb-cc-KbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5402,7 +5402,7 @@
         <segue reference="y3k-i5-esE"/>
         <segue reference="IQI-W2-saz"/>
         <segue reference="M72-ar-DyO"/>
-        <segue reference="aWq-hZ-Auo"/>
+        <segue reference="OOV-Kp-GfI"/>
         <segue reference="kIb-e7-fcP"/>
         <segue reference="NR1-hM-oZr"/>
     </inferredMetricsTieBreakers>

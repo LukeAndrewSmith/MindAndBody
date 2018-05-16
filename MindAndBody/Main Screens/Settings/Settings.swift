@@ -36,7 +36,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     // switches
     let timedSessionSwitch = UISwitch()
-    let iCloudSwitch = UISwitch()
     let remindersSwitch = UISwitch()
     
     //
@@ -84,9 +83,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         //
         // Walkthrough
         let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-        if walkthroughs["Settings"] == false {
+        if walkthroughs["Settings"] == false && MenuVariables.shared.secondLoad {
             walkthroughSettings()
+            MenuVariables.shared.secondLoad = false
         }
+        MenuVariables.shared.secondLoad = true
         
         // Navigation Bar
         //
@@ -130,7 +131,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         //
         // Switches
         setupSwitch(switchToSetup: timedSessionSwitch)
-        setupSwitch(switchToSetup: iCloudSwitch)
         setupSwitch(switchToSetup: remindersSwitch)
     }
     
@@ -192,9 +192,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 1: return NSLocalizedString("timedSessions", comment: "")
         case 2: return NSLocalizedString("restTimes", comment: "")
         case 3: return NSLocalizedString("sessions", comment: "")
-        case 4: return NSLocalizedString("iCloud", comment: "")
-        case 5: return NSLocalizedString("reminders", comment: "")
-        case 6: return NSLocalizedString("reset", comment: "")
+        case 4: return NSLocalizedString("reminders", comment: "")
+        case 5: return NSLocalizedString("reset", comment: "")
         default: return ""
         }
     }
@@ -226,12 +225,10 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         case 2: return 3
             // Sessions
         case 3: return 1
-            // ICloud
-        case 4: return 1
             // Reminders
-        case 5: return 1
+        case 4: return 1
             // Reset
-        case 6: return 2
+        case 5: return 2
         default: break
         }
         return 0
@@ -404,30 +401,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             return cell
             
-        // iCloud
-        case 4:
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            cell.backgroundColor = Colors.light
-            cell.selectionStyle = .none
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-            cell.textLabel?.text = NSLocalizedString("iCloudStorage", comment: "")
-            //
-            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            let iCloud = settings["iCloud"]![0]
-            if iCloud == 1 {
-                iCloudSwitch.isOn = true
-            } else {
-                iCloudSwitch.isOn = false
-            }
-            // on off
-            cell.addSubview(iCloudSwitch)
-            iCloudSwitch.center = CGPoint(x: view.bounds.width - 16 - (iCloudSwitch.bounds.width / 2), y: cell.bounds.height / 2)
-            
-            //
-            return cell
-        
         // Reminders
-        case 5:
+        case 4:
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             cell.backgroundColor = Colors.light
             cell.selectionStyle = .none
@@ -450,7 +425,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             return cell
             
         // Reset
-        case 6:
+        case 5:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
             cell.backgroundColor = Colors.light
@@ -634,7 +609,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
       
         // Reset
-        case 6:
+        case 5:
             //
             // Reset Walkthrough
             if indexPath.row == 0 {
@@ -764,28 +739,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             UserDefaults.standard.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-            
-        // iCloud
-        } else if sender == iCloudSwitch {
-            var settings: [String: [Int]] = [:]
-            if sender.isOn {
-                // Pull to ensure up to date
-                ICloudFunctions.shared.pullToDefaults()
-                settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                settings["iCloud"]![0] = 1
-                UserDefaults.standard.set(settings, forKey: "userSettings")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-                ICloudFunctions.shared.pushToICloud(toSync: [""])
-            } else {
-                // Pull to ensure up to date
-                settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                settings["iCloud"]![0] = 0
-                //
-                UserDefaults.standard.set(settings, forKey: "userSettings")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-            }
             
         // Reminders
         // Morning reminders

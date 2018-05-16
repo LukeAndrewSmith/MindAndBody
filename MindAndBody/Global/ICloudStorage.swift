@@ -19,55 +19,23 @@ class ICloudFunctions {
     static let keyArray = ["userSettings", "selectedSchedule", "schedules", "difficultyLevels", "profileAnswers", "trackingDictionaries", "trackingProgress", "customSessions", "movementWeights", "meditationTimer", "walkthroughs", "userHasValidSubscription"]
 
     //
-    // Check if user wants to use icloud
-    func ICloudEnabled() -> Bool {
-        // Test is very silly, seems to force it to update and find something in i
-//        let test = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") as! [String: [Int]]
-        //
-        // Check iCloud if exists incase first opening on new device
-        if let iCloudSettings = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") {
-//        if NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") != nil {
-//            let iCloudSettings = NSUbiquitousKeyValueStore.default.object(forKey: "userSettings") as! [String: [Int]]
-            if (iCloudSettings as! [String: [Int]])["iCloud"]![0] == 1 {
-                return true
-            } else {
-                return false
-            }
-        // Fall back on userdefaults
-        } else {
-            if UserDefaults.standard.object(forKey: "userSettings") != nil {
-                let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-                if settings["iCloud"]![0] == 1 {
-                    return true
-                } else {
-                    return false
-                }
-            } else {
-                return false
-            }
-        }
-    }
-    
-    //
     // MARK: Update ICloud (NSUbiquitousKeys)
     // Pushes user defaults to icloud
     func pushToICloud(toSync: [String]) {
-        if ICloudEnabled() {
-            var endCount = 0
-            var toSync = toSync
-            // Sync all
-            if toSync[0] == "" {
-                endCount = ICloudFunctions.keyArray.count - 1
-                toSync = ICloudFunctions.keyArray
-            // Sync specific
-            } else {
-                endCount = toSync.count - 1
-            }
-            //
-            for i in 0...endCount {
-                let defaultToPush = UserDefaults.standard.object(forKey: toSync[i])
-                NSUbiquitousKeyValueStore.default.set(defaultToPush, forKey: toSync[i])
-            }
+        var endCount = 0
+        var toSync = toSync
+        // Sync all
+        if toSync[0] == "" {
+            endCount = ICloudFunctions.keyArray.count - 1
+            toSync = ICloudFunctions.keyArray
+        // Sync specific
+        } else {
+            endCount = toSync.count - 1
+        }
+        //
+        for i in 0...endCount {
+            let defaultToPush = UserDefaults.standard.object(forKey: toSync[i])
+            NSUbiquitousKeyValueStore.default.set(defaultToPush, forKey: toSync[i])
         }
     }
     
@@ -76,15 +44,12 @@ class ICloudFunctions {
     // Mutates user defaults
     @objc func pullToDefaults() {
         //
-        if ICloudEnabled() {
-            //
-            NSUbiquitousKeyValueStore.default.synchronize()
-            //
-            for i in 0...ICloudFunctions.keyArray.count - 1 {
-                let defaultToPull = NSUbiquitousKeyValueStore.default.object(forKey: ICloudFunctions.keyArray[i])
-                if defaultToPull != nil {
-                    UserDefaults.standard.set(defaultToPull, forKey: ICloudFunctions.keyArray[i])
-                }
+        NSUbiquitousKeyValueStore.default.synchronize()
+        //
+        for i in 0...ICloudFunctions.keyArray.count - 1 {
+            let defaultToPull = NSUbiquitousKeyValueStore.default.object(forKey: ICloudFunctions.keyArray[i])
+            if defaultToPull != nil {
+                UserDefaults.standard.set(defaultToPull, forKey: ICloudFunctions.keyArray[i])
             }
         }
     }

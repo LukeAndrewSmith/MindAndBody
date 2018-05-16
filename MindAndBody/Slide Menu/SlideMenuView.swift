@@ -32,7 +32,6 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
             "schedule",
             "tracking",
             "lessons",
-            //            "profile",
             "settings"
     ]
     
@@ -102,20 +101,14 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
         //
-//        if indexPath.row != MenuVariables.shared.menuIndex {
-            MenuVariables.shared.isNewView = true
-            MenuVariables.shared.menuIndex = indexPath.row
-//        } else {
-//            MenuVariables.shared.isNewView = false
-//        }
-        
+        MenuVariables.shared.isNewView = true
+        MenuVariables.shared.menuIndex = indexPath.row
         //
         self.dismiss(animated: true) {
             var toVC = UIViewController()
             let viewNamesArray: [String] = ["view0", "view1", "view2", "view3", "view4"]
+            //
             //
             switch MenuVariables.shared.menuIndex {
             case 0:
@@ -137,6 +130,7 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
             }
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.window?.rootViewController = toVC
+            //
         }
         
         //
@@ -144,7 +138,6 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         //
         tableView.deselectRow(at: indexPath, animated: true)
         
-        //
     }
     
     

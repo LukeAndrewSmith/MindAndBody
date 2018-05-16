@@ -60,60 +60,48 @@ class MeditationGuided: UIViewController {
     // Sessions Titles
     let guidedSessions =
         [
-            ["introduction", "breathing"],
-            ["scale", "perspective"],
-            ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
-            ["bodyScan", "unwind"],
-            ["lotusStretch", "generalStretch"]
-    ]
+            ["introduction1", "introduction2", "introduction3", "introduction4"],
+            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
+            ["bodyScan", "tummoInnerFire", "self", "earth"],
+        ]
     // Theme
     let themeArray =
         [
-            ["introduction", "breathing"],
-            ["scale", "perspective"],
-            ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
-            ["bodyScan", "unwind"],
-            ["lotusStretch", "generalStretch"]
-    ]
+            ["introduction1", "introduction2", "introduction3", "introduction4"],
+            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
+            ["bodyScan", "tummoInnerFire", "self", "earth"],
+        ]
     // Aim
     let aimArray =
         [
-            ["comprehension", "calm"],
-            ["comfort", "creativity"],
-            ["relaxation", "relaxation", "recreation", "harmony", "harmony", "motivation"],
-            ["trance", "disentangle"],
-            ["relaxation", "relaxation"]
-    ]
+            ["introduction1", "introduction2", "introduction3", "introduction4"],
+            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
+            ["bodyScan", "tummoInnerFire", "self", "earth"],
+            ]
     // Focus
     let focusArray =
         [
-            ["understanding", "body"],
-            ["conscious", "subconscious"],
-            ["freedom", "relaxation", "recreation", "individuality", "interdependence", "energy"],
-            ["admission", "clarity"],
-            ["acceptance", "acceptance"]
-    ]
+            ["introduction1", "introduction2", "introduction3", "introduction4"],
+            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
+            ["bodyScan", "tummoInnerFire", "self", "earth"],
+            ]
     // Duration
     let durationArray =
         [
-            ["12min", "10min"],
-            ["13min", "8min"],
-            ["20min", "12min", "10min", "10min", "10min", "10min"],
-            ["20min", "10min"],
-            ["20min", "20min"]
-    ]
+            ["introduction1", "introduction2", "introduction3", "introduction4"],
+            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
+            ["bodyScan", "tummoInnerFire", "self", "earth"],
+            ]
     // Image
     
     
     // Discussion
     let discussionArray =
         [
-            ["introductionD", "breathingD"],
-            ["scaleD", "perspectiveD"],
-            ["lettingGoD", "acceptanceD", "wanderingD", "onenessD", "dualityD", "effortD"],
-            ["bodyScanD", "unwindD"],
-            ["lotusStretchD", "generalStretchD"]
-    ]
+            ["introduction1E", "introduction2E", "introduction3E", "introduction4E"],
+            ["squareBreathingE", "breathCountingE", "oxygenPurgeE", "breathRetentionE", "nostrilBreathingE"],
+            ["bodyScanE", "tummoInnerFireE", "selfE", "earthE"],
+            ]
     
     
     //
@@ -198,6 +186,7 @@ class MeditationGuided: UIViewController {
         let attributedText = NSMutableAttributedString(string: NSLocalizedString(discussionArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: ""))
         let paragraphStyleE = NSMutableParagraphStyle()
         paragraphStyleE.alignment = .natural
+        paragraphStyleE.lineSpacing = 2
         //
         attributedText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyleE, range: NSMakeRange(0, attributedText.length))
         //

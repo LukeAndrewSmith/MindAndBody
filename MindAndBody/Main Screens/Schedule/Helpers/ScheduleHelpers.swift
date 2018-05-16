@@ -142,20 +142,8 @@ extension ScheduleScreen {
             case 2:
                 // Session Choice
                 switch ScheduleVariables.shared.choiceProgress[1] {
-                // First choice - yoga, meditation, walk
-                case 1:
-                    // Go to Meditation screen
-                    if row == 1 {
-                        // Meditation
-                        ScheduleVariables.shared.choiceProgress[1] += 1
-                        nextChoice()
-                    // Walk, popup
-                    } else if row == 2 {
-                        ScheduleVariables.shared.selectedRows[1] = 72
-                        // TODO: popup for walk
-                    }
                 // Select meditation style - timer, 'guided'
-                case 2:
+                case 1:
                     ScheduleVariables.shared.selectedRows[1] = 72
                     // Timer
                     if row == 1 {
@@ -326,7 +314,7 @@ extension ScheduleScreen {
             self.updateWeekTracking()
             
             //
-            let indexPathToReload = NSIndexPath(row: 2, section: 0)
+            let indexPathToReload = NSIndexPath(row: 1, section: 0)
             self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
@@ -995,7 +983,7 @@ extension ScheduleScreen {
             
         // Meditation
         case 2:
-            if ScheduleVariables.shared.choiceProgress[1] == 2 {
+            if ScheduleVariables.shared.choiceProgress[1] == 1 {
                 return true
             } else {
                 return false
@@ -1666,7 +1654,7 @@ extension ScheduleScreen {
                     })
                 }
             })
-        // Meditation/Walk
+        // Meditation
         } else if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.selectedRows[1] == 72 {
             //
             // Go to initial choice

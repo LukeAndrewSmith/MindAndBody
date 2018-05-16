@@ -29,12 +29,12 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     // Guided Sessions
     let guidedSessions =
         [
-            ["introduction", "breathing"],
-            ["scale", "perspective"],
-            ["lettingGo", "acceptance", "wandering", "oneness", "duality", "effort"],
-            ["bodyScan", "unwind"],
-            ["lotusStretch", "generalStretch"]
+            ["introduction1", "introduction2", "introduction3", "introduction4"],
+            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
+            ["bodyScan", "tummoInnerFire", "self", "earth"],
     ]
+    
+    let guidedTitles = ["introduction", "techniquesB", "techniquesV"]
     
     
     //
@@ -67,20 +67,12 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     //
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return guidedSessions.count
     }
     
     // Title for header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0: return NSLocalizedString("introduction", comment: "")
-        case 1: return NSLocalizedString("view", comment: "")
-        case 2: return NSLocalizedString("self", comment: "")
-        case 3: return NSLocalizedString("sleep", comment: "")
-        case 4: return NSLocalizedString("yogaMeditation", comment: "")
-        default: break
-        }
-        return ""
+        return NSLocalizedString(guidedTitles[section], comment: "")
     }
     
     // Number of rows

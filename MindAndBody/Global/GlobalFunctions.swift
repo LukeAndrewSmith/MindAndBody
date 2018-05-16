@@ -147,12 +147,8 @@ class ReminderNotifications {
                     // Get day of week
                     let mondayDate = Date().firstMondayInCurrentWeek
                     // Get 7 in monday
-//                    let mondayDateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: mondayDate)!
-                    
+                    let mondayDateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: mondayDate)!
                     // Get trigger day
-//                    let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: mondayDateToScheduleWithTime)
-                    let DateToSchedule = cal.date(byAdding: .day, value: 4, to: mondayDate)
-                    let mondayDateToScheduleWithTime: Date = cal.date(bySettingHour: 15, minute: 6, second: 0, of: DateToSchedule!)!
                     let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: mondayDateToScheduleWithTime)
 
                     
@@ -169,7 +165,8 @@ class ReminderNotifications {
                     sundayContent.body = NSLocalizedString("sundayNotification", comment: "")
                     
                     sundayContent.sound = UNNotificationSound.default()
-                    
+                    mondayContent.badge = 0
+
                     // Get day of week
                     let sundayDateToSchedule = cal.date(byAdding: .day, value: 6, to: mondayDate)
                     // Get 7 in sunday
@@ -813,8 +810,8 @@ extension UIViewController {
         // Convert to [Date: Int]
         var trackingDictionaries: [[Date: Int]] = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionariesString)
         //
-        //let calendar = Calendar(identifier: .iso8601)
-        let calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
         // Current Date
         let currentDate = Date().currentDate
         // Get Mondays date
@@ -854,11 +851,12 @@ extension UIViewController {
                 // Update missed days with 0
                 var startDate = keys.last!
                 let startValue = trackingDictionaries[0][startDate]!
-                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!.setToMidnight()
+                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!.setToMidnightUTC()
                 // Loop last adding previous value to dates
                 while startDate <= endDate {
                     trackingDictionaries[0].updateValue(startValue, forKey: startDate)
-                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!.setToMidnight()
+                    // Increment and ensure that midnight utc
+                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!.setToMidnightUTC()
                 }
                 // Update today
                 trackingDictionaries[0].updateValue(currentProgress, forKey: currentDate)
@@ -877,11 +875,11 @@ extension UIViewController {
                 //
                 // Update missed days with 0
                 var startDate = currentMondayDate
-                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!.setToMidnight()
+                let endDate = calendar.date(byAdding: .day, value: -1, to: currentDate)!.setToMidnightUTC()
                 // Loop adding 0 to dates
                 while startDate <= endDate {
                     trackingDictionaries[0].updateValue(0, forKey: startDate)
-                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!.setToMidnight()
+                    startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!.setToMidnightUTC()
                 }
                 // Update today
                 trackingDictionaries[0].updateValue(currentProgress, forKey: currentDate)
@@ -906,7 +904,8 @@ extension UIViewController {
         // Convert to [Date: Int]
         var trackingDictionaries: [[Date: Int]] = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionariesString)
         //
-        let calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
         // Get Mondays date
         let currentMondayDate = Date().firstMondayInCurrentWeek
         //
@@ -934,23 +933,21 @@ extension UIViewController {
         // Current week doesn't exist
         } else {
             // Last updated week was last week |or| first week ever updated
-            if keys.count == 0 || keys.last! == calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate)?.setToMidnight() {
+            if keys.count == 0 || keys.last! == calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate)?.setToMidnightUTC() {
                 // Create current weeks progress
                 trackingDictionaries[1].updateValue(currentProgress, forKey: currentMondayDate)
                 
             // Skipped weeks
             } else {
                 //
-                // Update missed weeks with 0
-                var startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: keys.last!)!.setToMidnight()
-                //var startDate = calendar.date(byAdding: .hour, value: 168, to: keys.last!)!
+                // Update missed weeks with 0, starting with week after last updated value
+                var startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: keys.last!)!.setToMidnightUTC()
 
                 // Loop adding 0 to dates
                 while startDate < currentMondayDate {
                     trackingDictionaries[1].updateValue(0, forKey: startDate)
                     // For some reason adding a week adds an extra hour here but not in other places, so add on a weeks worth of hours
-                    startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!.setToMidnight()
-                    //startDate = calendar.date(byAdding: .hour, value: 168, to: startDate)!.setToMidnight()
+                    startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!.setToMidnightUTC()
                 }
                 // Update today
                 trackingDictionaries[1].updateValue(currentProgress, forKey: currentMondayDate)
@@ -1157,30 +1154,35 @@ extension UITableViewCell {
 // MARK:- Date
 extension Date {
     
-    // Ensure date is set to midnight
-    func setToMidnight() -> Date {
+    // Ensure date is set to midnight UTC
+    func setToMidnightUTC() -> Date {
         // Get date to set to midnight
         var dateAtMidnight = self
         // Set to midnight
-        let cal = Calendar.current
-        dateAtMidnight = cal.date(bySettingHour: 0, minute: 0, second: 0, of: dateAtMidnight)!
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        dateAtMidnight = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: dateAtMidnight)!
         // Return
         return dateAtMidnight
     }
     
     
     var currentDate: Date {
-        var components = Calendar(identifier: .iso8601).dateComponents([.year, .month, .weekOfMonth, .day], from: self)
-        components.timeZone = TimeZone(abbreviation: "UTC")
-        // Making a Date from week components gives the first day of the week, hence Monday
-        let currentDate = Calendar(identifier: .iso8601).date(from: components)
-        return currentDate!
+        let currentDateMidnight = self.setToMidnightUTC()
+//        var components = Calendar(identifier: .gregorian).dateComponents([.year, .month, .weekOfMonth, .day], from: self)
+//        components.timeZone = TimeZone(abbreviation: "UTC")
+//        let currentDate = Calendar(identifier: .gregorian).date(from: components)
+//        currentDate?.setToMidnightUTC()
+        return currentDateMidnight
     }
     
     //
     // Day in week of date from monday, monday being 1
     var currentWeekDayFromMonday: Int {
-        var currentWeekDay = Calendar(identifier: .gregorian).component(.weekday, from: Date())
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        
+        var currentWeekDay = calendar.component(.weekday, from: Date())
         if currentWeekDay == 1 {
             currentWeekDay = 7
         } else if currentWeekDay > 1 {
@@ -1192,73 +1194,91 @@ extension Date {
     //
     // First Monday in current week as Date
     var firstMondayInCurrentWeek: Date {
-        var components = Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        
+        var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
         components.timeZone = TimeZone(abbreviation: "UTC")
         // Making a Date from week components gives the first day of the week, hence Monday
-        let mondaysDate = Calendar(identifier: .iso8601).date(from: components)
+        let mondaysDate = calendar.date(from: components)?.setToMidnightUTC()
         return mondaysDate!
     }
     
     //
-    // First Monday in month
+    // First MONDAY in month
     var firstMondayInMonth: Date {
-        var components = Calendar(identifier: .iso8601).dateComponents([.year, .month], from: self)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        
+        var components = calendar.dateComponents([.year, .month], from: self)
         components.timeZone = TimeZone(abbreviation: "UTC")
         
         // First day of the month
-        let firstDate = Calendar(identifier: .iso8601).date(from: components)
-        let firstComponents = Calendar(identifier: .iso8601).dateComponents([.year, .month, .weekday], from: firstDate!)
+        let firstDate = calendar.date(from: components)
+        let firstComponents = calendar.dateComponents([.year, .month, .weekday], from: firstDate!)
         
-        // Convert from Sunday=1 to Monday=1 day numbering
+        // Convert from Sunday=6 to Monday=1 day numbering
         let addWeekdays = 7 - ((firstComponents.weekday! + 5) % 7)
         // Jump forwards to next Monday if we arent already there
         var mondaysDate = firstDate
         if addWeekdays != 7 {
-            mondaysDate = Calendar(identifier: .iso8601).date(byAdding: .day, value: addWeekdays, to: firstDate!)
+            mondaysDate = calendar.date(byAdding: .day, value: addWeekdays, to: firstDate!)
         }
+        mondaysDate = mondaysDate?.setToMidnightUTC()
         return mondaysDate!
     }
     
     //
     // Number of Mondays in month
     var numberOfMondaysInCurrentMonth: Int {
-        var components = Calendar(identifier: .iso8601).dateComponents([.year, .month], from: self)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
         
+        var components = calendar.dateComponents([.year, .month], from: self)
+       
         // First monday in month:
         components.weekday = 2
         components.weekdayOrdinal = 1
-        let first = Calendar(identifier: .iso8601).date(from: components)
+        let first = calendar.date(from: components)
         
         // Last monday in month:
         components.weekdayOrdinal = -1
-        let last = Calendar(identifier: .iso8601).date(from: components)
+        let last = calendar.date(from: components)
         
         // Difference in weeks:
-        let weeks = Calendar(identifier: .iso8601).dateComponents([.weekOfMonth], from: first!, to: last!)
+        let weeks = calendar.dateComponents([.weekOfMonth], from: first!, to: last!)
         return weeks.weekOfMonth! + 1
     }
     
     //
     // First day in month
     var firstDateInMonth: Date {
-        var components = Calendar(identifier: .iso8601).dateComponents([.year, .month], from: self)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        
+        var components = calendar.dateComponents([.year, .month], from: self)
         components.timeZone = TimeZone(abbreviation: "UTC")
         
         // First day of the month
-        let firstDateInCurrentMonth = Calendar(identifier: .iso8601).date(from: components)
+        var firstDateInCurrentMonth = calendar.date(from: components)
+        firstDateInCurrentMonth = firstDateInCurrentMonth?.setToMidnightUTC()
         //
         return firstDateInCurrentMonth!
     }
     
     //
     var firstDateInYear: Date {
-        var components = Calendar(identifier: .iso8601).dateComponents([.year], from: self)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        
+        var components = calendar.dateComponents([.year], from: self)
         components.timeZone = TimeZone(abbreviation: "UTC")
         
-        // First day of the month
-        let firstDateInCurrentMonth = Calendar(identifier: .iso8601).date(from: components)
+        // First day of the year
+        var firstDateInCurrentYear = calendar.date(from: components)
+        firstDateInCurrentYear = firstDateInCurrentYear?.setToMidnightUTC()
         //
-        return firstDateInCurrentMonth!
+        return firstDateInCurrentYear!
     }
     
 }

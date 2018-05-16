@@ -305,19 +305,12 @@ extension sessionData {
             2: [
                     // 0
                     ["meditation"],
-                    // 1 | Choice 1 - Type
-                    [
-                        "type",
-                        //
-                        "meditation", // Goes to Choice 5
-                        "walk", // popup, go for a walk
-                    ],
-                    // 2 | Final - Type
+                    // 1 | Final - Type
                     [
                         "meditationType",
                         //
                         "meditationTimer",
-                        "guidedMeditation", // Goes to Choice 5
+                        "guidedMeditation",
                     ],
             ],
             

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Schedule/Helpers/ScheduleHelpers.swift"
-            timestampString = "547848152.40992"
+            timestampString = "548157576.954211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1451"
-            endingLineNumber = "1451"
+            startingLineNumber = "1439"
+            endingLineNumber = "1439"
             landmarkName = "markAsCompleted(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Schedule/Helpers/ScheduleHelpers.swift"
-            timestampString = "547848152.410457"
+            timestampString = "548157576.954968"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1958"
-            endingLineNumber = "1958"
+            startingLineNumber = "1946"
+            endingLineNumber = "1946"
             landmarkName = "checkSelectedDay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,12 +42,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Global/StopClock.swift"
-            timestampString = "547848152.410524"
+            timestampString = "548157576.955089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "117"
             endingLineNumber = "117"
             landmarkName = "startTimer()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/Global/GlobalFunctions.swift"
+            timestampString = "548157576.955205"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "915"
+            endingLineNumber = "915"
+            landmarkName = "updateTracking()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

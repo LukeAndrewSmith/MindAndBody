@@ -85,6 +85,7 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
             let didTransitionComplete = !transitionContext.transitionWasCancelled
             if didTransitionComplete {
                 // 3
+                //
                 if MenuVariables.shared.isNewView == false {
                     snapshot.removeFromSuperview()
                     snapshot1.removeFromSuperview()

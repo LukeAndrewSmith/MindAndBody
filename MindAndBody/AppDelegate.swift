@@ -97,9 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Push everything to iCloud
         let check = NSUbiquitousKeyValueStore.default.object(forKey: "walkthroughs")
-        if ICloudFunctions.shared.ICloudEnabled() && check == nil {
-            ICloudFunctions.shared.pushToICloud(toSync: [""])
-        }
+        ICloudFunctions.shared.pushToICloud(toSync: [""])
         
         //
         // Set Home Screen
