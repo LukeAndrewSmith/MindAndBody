@@ -198,26 +198,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
                 if allAnswered {
                     if comingFromSchedule {
                         self.dismiss(animated: true)
-                    } else if comingFromScheduleEditing {
-                        self.navigationController?.popToRootViewController(animated: true)
                     }
                 } else {
-                    //
-                    // Alert Saying you havent answered all the questions
-                    let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
-                    let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
-                    alert.view.tintColor = Colors.dark
-                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
-                    
-                    // Reset app action
-                    let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
-                        UIAlertAction in
-                    }
-                    // Add Actions
-                    alert.addAction(okAction)
-                    
-                    // Present Alert
-                    self.present(alert, animated: true, completion: nil)
+                    unansweredQuestionsAlert()
                 }
             } else {
                 let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
@@ -231,34 +214,42 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
                 }
                 
                 if allAnswered {
-                    // App helps schedule creation
-                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
-                        self.performSegue(withIdentifier: "ProfileAppHelpSegue", sender: self)
-                    // Custom schedule creation
+                    if comingFromScheduleEditing {
+                        self.navigationController?.popToRootViewController(animated: true)
                     } else {
-                        self.performSegue(withIdentifier: "ProfileCustomSegue", sender: self)
+                        // App helps schedule creation
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
+                            self.performSegue(withIdentifier: "ProfileAppHelpSegue", sender: self)
+                        // Custom schedule creation
+                        } else {
+                            self.performSegue(withIdentifier: "ProfileCustomSegue", sender: self)
+                        }
                     }
                 } else {
-                    //
-                    // Alert View asking if you really want to delete
-                    let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
-                    let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
-                    alert.view.tintColor = Colors.dark
-                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
-                    
-                    // Reset app action
-                    let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
-                        UIAlertAction in
-                    }
-                    // Add Actions
-                    alert.addAction(okAction)
-                    
-                    // Present Alert
-                    self.present(alert, animated: true, completion: nil)
+                    unansweredQuestionsAlert()
                 }
             }
             
         }
+    }
+    
+    //
+    func unansweredQuestionsAlert() {
+        // Alert View asking if you really want to delete
+        let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        alert.view.tintColor = Colors.dark
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
+        
+        // Reset app action
+        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        // Add Actions
+        alert.addAction(okAction)
+        
+        // Present Alert
+        self.present(alert, animated: true, completion: nil)
     }
     
     //

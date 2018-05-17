@@ -464,6 +464,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Goin to profile (before schedule creator as not filled in yet)
         case "OverviewProfileSegue":
             let destinationVC = segue.destination as? Profile
+            destinationVC?.comingFromSchedule = true
             destinationVC?.comingFromScheduleEditing = true
         case "OverviewScheduleSegue":
             let destinationVC = segue.destination as? ScheduleCreator

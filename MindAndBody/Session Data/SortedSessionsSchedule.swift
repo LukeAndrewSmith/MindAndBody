@@ -1278,7 +1278,7 @@ extension sessionData {
                             ],
                 ],
                 // Medium
-                "medium": [
+                "normal": [
                     // Easy
                     "easy": ["YSEM-1",
                              "YSEM-2",

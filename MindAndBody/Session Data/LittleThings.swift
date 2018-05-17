@@ -296,7 +296,7 @@ extension sessionData {
                 [
                     "yogaToDo",
                     //
-                    "1. warmup",
+                    "1. warmup (optional)",
                     "2. practice"
                 ],
             ],

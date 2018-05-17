@@ -1475,8 +1475,6 @@
             "meditationBeginMessage" = "\nEnsure you have selected a duration.";
 
 
-
-
             // Information
             "meditationPurposeText" = "";
             "meditationBodyText" = "";
@@ -1485,6 +1483,9 @@
             // Guided Information
             "guidedMeditation" = "Guided Meditation";
             "guidedInformation" = "";
+
+            // Bells
+            //"Tibetan Chimes", "Tibetan Singing Bowl (Low)", "Tibetan Singing Bowl (Low)(x4)", "Tibetan Singing Bowl (Low)(Singing)", "Tibetan Singing Bowl (High)", "Tibetan Singing Bowl (High)(x4)", "Tibetan Singing Bowl (High)(Singing)", "Australian Rain Stick", "Australian Rain Stick (x2)", "Australian Rain Stick (2 sticks)", "Wind Chimes", "Gambang (Wood)(Up)", "Gambang (Wood)(Down)", "Gambang (Metal)", "Indonesian Frog", "Cow Bell (Small)", "Cow Bell (Big)"
 
         // Guided
             // Choice
@@ -1515,7 +1516,7 @@
 
 // Explanations
 // Introduction
-"introduction1E" = "General Introduction:\nRegular meditation brings a wide variety benifits, ranging from contentedness to an increased ability to concentrate. With a little practice it will become natural to you, and you will be able to explore it's effects and benifits.\nI consider it important to become independant in meditation to get the most out of it. By independant I mean to have developed a number of techniques, recognized their effects on yourself, and to have the ability to practice them without aid. This introduction section serves therefore to explain the fundamentals and to get you started, and the other sections present a variety of techniques to explore.\n\nFirst Steps:\nA useful (and old) manner of describing meditation is as such, the training of your monkey mind. Your monkey mind representing the chatter of your brain";
+"introduction1E" = "General Introduction:\nMeditation brings a wide variety benifits, ranging from contentedness to an increased ability to concentrate. With a little practice it will become natural, and you will be able to explore it's effects and benefits.\nI consider it important to become independant in meditation to get the most out of it. By independant I mean to have developed a number of techniques, recognized their effects on yourself, and to have the ability to practice them without aid. This introduction section therefore serves to explain the fundamentals and to get you started, whilst the other sections present a variety of techniques to explore.\n\nFirst Steps:\nA useful (and old) manner of describing meditation is simply as the taming of you monkey mind. You monkey mind represents the general noise of the brain, and meditation aims at developing the ability to sit above this, observe it, calm it, and be aware of the moment. Meditation entails giving a simple job to the monkey mind to do, for example to observe your breath. Breathing is important in meditation as it provides something to focus on that requires little thought, it should be observed and relaxed into. The difficulty in the beginning is keeping to this goal of being aware of, and regulating your breathing without getting distracted, often as a beginner your mind will wander off and do other things. Thus the ability to see when this is happenning, and bring your mind back to your breathing is important. Bells are useful as a reminder to return your awareness to your breathing. I recommend you perform this meditation several times till you are comfortable with is aims before you more on to the next section. You can tailor the meditation with the choices above.\n\nPractice:\nThis meditation practice is short, with an aim of focusing on breathing. Correct breathing entails breathing into your stomach, that is to say not delibarately expanding your chest, but rather your stomach (as you will be breathing with the diaphragm)\n• Close your eyes.\n• Take deep, slow and relaxed breaths into your stomach of at least 5s inhale and 5s exhale\n• Listen to the sound of your breath, to the feeling of the movement of air, and the movement of your body\n• At every bell, ensure you are focusing on your breath";
 "introduction2E" = "Breathing";
 "introduction3E" = "Visualisation";
 "introduction4E" = "Mindfulness";
@@ -3002,6 +3003,7 @@
 "focus" = "Focus";
 "toDo" = "To Do";
 "1. warmup" = "1. Warmup";
+"1. warmup (optional)" = "1. Warmup (Optional)";
 "2. session" = "2. Session";
 "2. practice" = "2. Practice";
 "3. stretching" = "3. Stretching";

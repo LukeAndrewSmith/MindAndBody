@@ -826,10 +826,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     //
     // MARK: Slide Menu ---------------------------------------------------------------------------------------------------------------------
     //
-    @IBAction func slideMenuPresent() {
-        self.performSegue(withIdentifier: "openMenu", sender: nil)
-    }
-    
     // Elements
     //
     let interactor = Interactor()

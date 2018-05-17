@@ -528,11 +528,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         MenuVariables.shared.menuInteractionType = 0
     }
     
-    
-    @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
-        self.performSegue(withIdentifier: "openMenu", sender: nil)
-    }
-    
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //

@@ -169,6 +169,12 @@ class ScheduleScreen: UIViewController {
         
         // Register for receiving did enter foreground notification
         NotificationCenter.default.addObserver(self, selector: #selector(checkSelectedDay), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        
+        //
+        // Long press for cheating groups; ability to mark session as complete
+        let markAsCompletedGesture = UILongPressGestureRecognizer()
+        markAsCompletedGesture.addTarget(self, action: #selector(markAsCompleted))
+        scheduleTable.addGestureRecognizer(markAsCompletedGesture)
     }
     
     // MARK: viewDidLayoutSubviews

@@ -22,31 +22,23 @@ class MeditationGuided: UIViewController {
     @IBOutlet weak var beginButton: UIButton!
     
     // Image
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var bellTitle: UILabel!
+    @IBOutlet weak var bellImage: UIImageView!
+    
+    // Time
+    @IBOutlet weak var durationTitle: UILabel!
+    @IBOutlet weak var durationIndicator: UILabel!
+    @IBOutlet weak var durationDecrease: UIButton!
+    @IBOutlet weak var durationIncrease: UIButton!
+    
     
     // Detail
     @IBOutlet weak var detailView: UIView!
-    @IBOutlet weak var detailTitle: UILabel!
+    @IBOutlet weak var separator: UIView!
     
     // Discussion
     @IBOutlet weak var discussionScrollView: UIScrollView!
     @IBOutlet weak var discussionTitle: UILabel!
-    
-    // Details
-    //
-    // Theme
-    @IBOutlet weak var themeTitle: UILabel!
-    @IBOutlet weak var theme: UILabel!
-    // Aim
-    @IBOutlet weak var aimTitle: UILabel!
-    @IBOutlet weak var aim: UILabel!
-    // Focus
-    @IBOutlet weak var focusTitle: UILabel!
-    @IBOutlet weak var focus: UILabel!
-    // Duration
-    @IBOutlet weak var durationTitle: UILabel!
-    @IBOutlet weak var duration: UILabel!
-    
     
     // Passed from previous VC
     //var guidedTitle = String()
@@ -58,51 +50,109 @@ class MeditationGuided: UIViewController {
     // Content Arrays -------------------------------------------------------------------------------------------
     //
     // Sessions Titles
-    let guidedSessions =
+    var practiceDict: [[[String: Any]]] =
+    [
+        // Introduction
         [
-            ["introduction1", "introduction2", "introduction3", "introduction4"],
-            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
-            ["bodyScan", "tummoInnerFire", "self", "earth"],
-        ]
-    // Theme
-    let themeArray =
+            // Intro 1
+            ["title": "introduction1",
+             "discussion": "introduction1E",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+            // Intro 2
+            ["title": "introduction2",
+             "discussion": "introduction2E",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+            // Intro 3
+            ["title": "introduction3",
+             "discussion": "introduction3E",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+            // Intro 4
+            ["title": "introduction4",
+             "discussion": "introduction4E",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+        ],
+        // Breathing
         [
-            ["introduction1", "introduction2", "introduction3", "introduction4"],
-            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
-            ["bodyScan", "tummoInnerFire", "self", "earth"],
-        ]
-    // Aim
-    let aimArray =
+            // Intro 1
+            ["title": "squareBreathing",
+             "discussion": "squareBreathingE",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+            // Intro 1
+            ["title": "breathCounting",
+             "discussion": "breathCountingE",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+            // Intro 1
+            ["title": "oxygenPurge",
+             "discussion": "oxygenPurgeE",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+            // Intro 1
+            ["title": "breathRetention",
+             "discussion": "breathRetentionE",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+            // Intro 1
+            ["title": "nostrilBreathing",
+             "discussion": "nostrilBreathingE",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+        ],
+        // Visualisation
         [
-            ["introduction1", "introduction2", "introduction3", "introduction4"],
-            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
-            ["bodyScan", "tummoInnerFire", "self", "earth"],
-            ]
-    // Focus
-    let focusArray =
-        [
-            ["introduction1", "introduction2", "introduction3", "introduction4"],
-            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
-            ["bodyScan", "tummoInnerFire", "self", "earth"],
-            ]
-    // Duration
-    let durationArray =
-        [
-            ["introduction1", "introduction2", "introduction3", "introduction4"],
-            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
-            ["bodyScan", "tummoInnerFire", "self", "earth"],
-            ]
-    // Image
-    
-    
-    // Discussion
-    let discussionArray =
-        [
-            ["introduction1E", "introduction2E", "introduction3E", "introduction4E"],
-            ["squareBreathingE", "breathCountingE", "oxygenPurgeE", "breathRetentionE", "nostrilBreathingE"],
-            ["bodyScanE", "tummoInnerFireE", "selfE", "earthE"],
-            ]
-    
+            // Intro 1
+            ["title": "bodyScan",
+             "discussion": "bodyScanE",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+            // Intro 1
+            ["title": "tummoInnerFire",
+             "discussion": "tummoInnerFireE",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+            // Intro 1
+            ["title": "self",
+             "discussion": "selfE",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+            // Intro 1
+            ["title": "earth",
+             "discussion": "earthE",
+             "duration": 120,
+             "bell": "tibetanChimes",
+             "numberOfBells": 10,
+             ],
+        ],
+    ]
     
     //
     // View did load -------------------------------------------------------------------------------------------
@@ -116,61 +166,12 @@ class MeditationGuided: UIViewController {
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
         beginButton.backgroundColor = Colors.green
         beginButton.setTitleColor(Colors.dark, for: .normal)
-        
-        // View Elements
-        //
-        // Description
-        detailView.backgroundColor = Colors.dark
-        //
-        detailTitle.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
-        detailTitle.text = NSLocalizedString("detail", comment: "")
-        //
-        imageView.backgroundColor = Colors.dark
-        imageView.layer.cornerRadius = 3
-        imageView.layer.masksToBounds = true
-        //
-        imageView.image = #imageLiteral(resourceName: "TestG")
-        
-        
-        // Content
-        //
-        
+       
         // Navigation Bar Title
-        navigationBar.title = NSLocalizedString(guidedSessions[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: "")
+        navigationBar.title = NSLocalizedString(practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["title"] as! String, comment: "")
         
-        // Details
-        //
-        // Theme
-        //
-        themeTitle.text = NSLocalizedString("theme", comment: "")
-        //
-        theme.text = NSLocalizedString(themeArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: "")
-        theme.adjustsFontSizeToFitWidth = true
-        
-        // Aim
-        //
-        aimTitle.text = NSLocalizedString("aim", comment: "")
-        //
-        aim.text = NSLocalizedString(aimArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: "")
-        aim.adjustsFontSizeToFitWidth = true
-        
-        // Focus
-        //
-        focusTitle.text = NSLocalizedString("focus", comment: "")
-        //
-        focus.text = NSLocalizedString(focusArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: "")
-        focus.adjustsFontSizeToFitWidth = true
-        
-        // Duration
-        //
-        durationTitle.text = NSLocalizedString("duration", comment: "")
-        //
-        duration.text = NSLocalizedString(durationArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: "")
-        duration.adjustsFontSizeToFitWidth = true
-        
-        // Image
-        //
-        
+        // Setup
+        setupView()
         
         // Discussion
         //
@@ -183,7 +184,7 @@ class MeditationGuided: UIViewController {
         
         // Text
         let discussionLabel = UILabel()
-        let attributedText = NSMutableAttributedString(string: NSLocalizedString(discussionArray[selectedSessionMeditation[0]][selectedSessionMeditation[1]], comment: ""))
+        let attributedText = NSMutableAttributedString(string: NSLocalizedString(practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["discussion"] as! String, comment: ""))
         let paragraphStyleE = NSMutableParagraphStyle()
         paragraphStyleE.alignment = .natural
         paragraphStyleE.lineSpacing = 2
@@ -192,7 +193,7 @@ class MeditationGuided: UIViewController {
         //
         discussionLabel.attributedText = attributedText
         //
-        discussionLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        discussionLabel.font = UIFont(name: "SFUIDisplay-light", size: 20)
         discussionLabel.textColor = .black
         discussionLabel.textAlignment = .natural
         discussionLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -206,6 +207,37 @@ class MeditationGuided: UIViewController {
         self.discussionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     }
     
+    func setupView() {
+        // View
+        detailView.backgroundColor = Colors.dark
+        separator.backgroundColor = .black
+        separator.alpha = 0.5
+
+        // Duration
+        // Title
+        durationTitle.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        durationTitle.textColor = Colors.light
+        durationTitle.text = NSLocalizedString("duration", comment: "")
+        // Indicator
+        durationIndicator.font = UIFont(name: "SFUIDisplay-thin", size: 43)
+        durationIndicator.textColor = Colors.light
+        durationIndicator.text = "00:00"
+        //durationTitle.text =
+        // Buttons
+        durationIncrease.tintColor = Colors.light
+        durationDecrease.tintColor = Colors.light
+        
+        // Bells
+        // Title
+        bellTitle.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        bellTitle.textColor = Colors.light
+        bellTitle.text = NSLocalizedString("bells", comment: "")
+        // Image
+        bellImage.backgroundColor = Colors.dark
+        bellImage.layer.cornerRadius = 3
+        bellImage.layer.masksToBounds = true
+        bellImage.image = #imageLiteral(resourceName: "Tibetan Bowl Big")
+    }
     
     //
     // Begin Button ----------------------------------------------------------------------------------

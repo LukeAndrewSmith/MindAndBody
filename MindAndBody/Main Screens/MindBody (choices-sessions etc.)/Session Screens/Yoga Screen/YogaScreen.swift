@@ -533,6 +533,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if automaticYogaArray[0] == 1 {
                 UIApplication.shared.isIdleTimerDisabled = false
                 // Tracking
+                updateScheduleTracking(fromSchedule: fromSchedule)
+                //
                 self.dismiss(animated: true)
             }
         }

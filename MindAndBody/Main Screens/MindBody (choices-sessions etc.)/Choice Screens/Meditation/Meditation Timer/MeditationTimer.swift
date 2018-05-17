@@ -1787,7 +1787,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.detailTextLabel?.textColor = Colors.light
                 cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
                 //
-                cell.textLabel?.text = NSLocalizedString(bellsArray[intervalBellsArray[indexPath.row][0]], comment: "")
+                cell.textLabel?.text = NSLocalizedString(bellsArray[intervalBellsArray[indexPath.row][0]]+"S", comment: "")
                 cell.imageView?.image = bellsImages[intervalBellsArray[indexPath.row][0]]
                 //
                 cell.selectionStyle = .none

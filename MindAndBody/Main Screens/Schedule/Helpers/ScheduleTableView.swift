@@ -158,11 +158,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         //
         switch tableView {
         case scheduleTable:
-            // Long tap; ability to mark session as complete
-            let markAsCompletedGesture = UILongPressGestureRecognizer()
+            //
             cell.tag = indexPath.row
-            markAsCompletedGesture.addTarget(self, action: #selector(markAsCompleted))
-            cell.addGestureRecognizer(markAsCompletedGesture)
             
             // First Screen, showing groups
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
@@ -294,7 +291,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         //
         return cell
     }
-    
+        
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //

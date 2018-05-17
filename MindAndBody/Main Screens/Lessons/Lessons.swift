@@ -299,11 +299,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         MenuVariables.shared.menuInteractionType = 0
     }
     
-    
-    @IBAction func slideMenuAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "openMenu", sender: nil)
-    }
-    
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
