@@ -70,7 +70,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     var updateTimer = Timer()
-    var soundPlayer: AVAudioPlayer!
+    var soundPlayer: AVAudioPlayer?
     
 
     //
@@ -727,8 +727,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             finishEarly.tintColor = Colors.green
             //
             if soundPlayer != nil {
-                if soundPlayer.isPlaying {
-                    soundPlayer.stop()
+                if (soundPlayer?.isPlaying)! {
+                    soundPlayer?.stop()
                 }
             }
             //

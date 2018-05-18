@@ -136,7 +136,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         //        let currentCell = tableView.cellForRow(at: indexPath) as UITableViewCell!
         //        guidedTitleText = (currentCell?.textLabel!.text)!
         //
-        performSegue(withIdentifier: "meditationGuided", sender: nil)
+        performSegue(withIdentifier: "meditationGuidedChoice2", sender: nil)
     }
     
     
@@ -145,7 +145,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Pass Info
-        if (segue.identifier == "meditationGuided") {
+        if (segue.identifier == "meditationGuidedChoice2") {
             //
             let destinationVC = segue.destination as! MeditationGuided
             destinationVC.selectedSessionMeditation = selectedSessionMeditation

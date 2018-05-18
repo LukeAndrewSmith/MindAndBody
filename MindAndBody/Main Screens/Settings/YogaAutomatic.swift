@@ -645,8 +645,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         case 2:
             //
             if BellPlayer.shared.bellPlayer != nil {
-                if BellPlayer.shared.bellPlayer.isPlaying {
-                    BellPlayer.shared.bellPlayer.stop()
+                if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                    BellPlayer.shared.bellPlayer?.stop()
                 }
             }
             //

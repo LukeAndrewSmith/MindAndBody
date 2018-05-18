@@ -25,6 +25,7 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
     // Stack
     @IBOutlet weak var stackView: UIStackView!
     
+    var comingFromSchedule = false
     
     //
     // View did load -------------------------------------------------------------------------------------------------------
@@ -85,7 +86,6 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
-        
     }
     
 }

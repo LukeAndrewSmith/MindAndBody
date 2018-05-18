@@ -226,8 +226,8 @@ class StopClock {
         //
         // To cancel meditation bell table sounds
         if BellPlayer.shared.bellPlayer != nil {
-            if BellPlayer.shared.bellPlayer.isPlaying {
-                BellPlayer.shared.bellPlayer.stop()
+            if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                BellPlayer.shared.bellPlayer?.stop()
             }
         }
     }

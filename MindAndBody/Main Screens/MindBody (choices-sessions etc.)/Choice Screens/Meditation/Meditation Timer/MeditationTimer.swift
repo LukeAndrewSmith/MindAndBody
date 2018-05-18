@@ -19,8 +19,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     
     // Bells Arrays
-    let bellsArray: [String] =
-        ["Tibetan Chimes", "Tibetan Singing Bowl (Low)", "Tibetan Singing Bowl (Low)(x4)", "Tibetan Singing Bowl (Low)(Singing)", "Tibetan Singing Bowl (High)", "Tibetan Singing Bowl (High)(x4)", "Tibetan Singing Bowl (High)(Singing)", "Australian Rain Stick", "Australian Rain Stick (x2)", "Australian Rain Stick (2 sticks)", "Wind Chimes", "Gambang (Wood)(Up)", "Gambang (Wood)(Down)", "Gambang (Metal)", "Indonesian Frog", "Cow Bell (Small)", "Cow Bell (Big)"]
+    let bellsArray = BellsFunctions.shared.bellsArray
     let bellsImages: [UIImage] =
         [#imageLiteral(resourceName: "Tibetan Chimes"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Wind Chimes"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Small"), #imageLiteral(resourceName: "Indonesian Frog"), #imageLiteral(resourceName: "Cow Bell"), #imageLiteral(resourceName: "Cow Bell Big")]
     
@@ -430,8 +429,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         tableViewBells.backgroundView = tableViewBackground3
         tableViewBells.tableFooterView = UIView()
-        // TableView Cell action items
-        //
         tableViewBells.backgroundColor = Colors.dark
         tableViewBells.delegate = self
         tableViewBells.dataSource = self
@@ -448,8 +445,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         tableViewIntervalBells.backgroundView = tableViewBackground4
         tableViewIntervalBells.tableFooterView = UIView()
-        // TableView Cell action items
-        //
         tableViewIntervalBells.backgroundColor = Colors.dark
         tableViewIntervalBells.delegate = self
         tableViewIntervalBells.dataSource = self
@@ -639,30 +634,30 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             case 2:
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying {
-                        BellPlayer.shared.bellPlayer.stop()
+                    if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                        BellPlayer.shared.bellPlayer?.stop()
                     }
                 }
             case 3:
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying {
-                        BellPlayer.shared.bellPlayer.stop()
+                    if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                        BellPlayer.shared.bellPlayer?.stop()
                     }
                 }
             //
             case 4:
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying {
-                        BellPlayer.shared.bellPlayer.stop()
+                    if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                        BellPlayer.shared.bellPlayer?.stop()
                     }
                 }
             case 5:
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying {
-                        BellPlayer.shared.bellPlayer.stop()
+                    if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                        BellPlayer.shared.bellPlayer?.stop()
                     }
                 }
             default: break
@@ -723,8 +718,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 didChangeStartingBell = false
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying {
-                        BellPlayer.shared.bellPlayer.stop()
+                    if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                        BellPlayer.shared.bellPlayer?.stop()
                     }
                 }
                 //
@@ -751,8 +746,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying {
-                        BellPlayer.shared.bellPlayer.stop()
+                    if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                        BellPlayer.shared.bellPlayer?.stop()
                     }
                 }
                 //
@@ -769,8 +764,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 intervalBellStage = 2
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying {
-                        BellPlayer.shared.bellPlayer.stop()
+                    if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                        BellPlayer.shared.bellPlayer?.stop()
                     }
                 }
                 //
@@ -914,8 +909,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 didChangeEndingBell = false
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying {
-                        BellPlayer.shared.bellPlayer.stop()
+                    if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                        BellPlayer.shared.bellPlayer?.stop()
                     }
                 }
                 //
@@ -941,8 +936,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 didChangeBackgroundSound = false
                 //
                 if BellPlayer.shared.bellPlayer != nil {
-                    if BellPlayer.shared.bellPlayer.isPlaying {
-                        BellPlayer.shared.bellPlayer.stop()
+                    if (BellPlayer.shared.bellPlayer?.isPlaying)! {
+                        BellPlayer.shared.bellPlayer?.stop()
                     }
                 }
                 //
@@ -1916,7 +1911,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     self.presetsDetail.text = meditationArray[self.selectedPreset]["Name"]![0][0] as? String
                     //
-                    tableView.deselectRow(at: indexPath, animated: true)
+                    tableView.deselectRow(at: indexPath, animated: false)
                     
                     //
                     // Dismiss Table
@@ -2138,7 +2133,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             do {
                 let bell = try AVAudioPlayer(contentsOf: url)
                 BellPlayer.shared.bellPlayer = bell
-                BellPlayer.shared.bellPlayer.numberOfLoops = -1
+                BellPlayer.shared.bellPlayer?.numberOfLoops = -1
                 bell.play()
             } catch {
                 // couldn't load file :(

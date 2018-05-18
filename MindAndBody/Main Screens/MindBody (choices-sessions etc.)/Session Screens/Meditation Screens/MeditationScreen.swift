@@ -31,11 +31,16 @@ class MeditationScreen: UIViewController {
     //
     var selectedPreset = Int()
     
+    // For guided meditation
+    var durationOfPractice = Int()
+    var bellChosen = String()
+    var bellFrequency = Int()
+    
+    
     //
     var audioPlayerArray: [AVAudioPlayer] = []
     
     // Variables
-    var didSetEndTime = false
     var startTime = Double()
     var endTime = Double()
     
@@ -76,7 +81,7 @@ class MeditationScreen: UIViewController {
     var userBrightness = UIScreen.main.brightness
     
     // Background Sound
-    var soundPlayer = AVAudioPlayer()
+    var soundPlayer: AVAudioPlayer?
     
     var fromSchedule = false
     
@@ -94,8 +99,12 @@ class MeditationScreen: UIViewController {
         // Initial Conditions
         //
         // Determine wether hours or not
-        if meditationArray[selectedPreset]["Duration"]?[0][0] as! Int > 3599 {
-            isHours = true
+        if selectedPreset != -1 {
+            if meditationArray[selectedPreset]["Duration"]?[0][0] as! Int > 3599 {
+                isHours = true
+            } else {
+                isHours = false
+            }
         } else {
             isHours = false
         }
@@ -107,6 +116,18 @@ class MeditationScreen: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        // Enable audio in background for Meditation Bells/Sounds
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: .mixWithOthers)
+            print("Playback OK")
+            try AVAudioSession.sharedInstance().setActive(true)
+            print("Session is Active")
+        } catch {
+            print(error)
+        }
+        
         //
         // Colours
         //
@@ -119,7 +140,7 @@ class MeditationScreen: UIViewController {
             timerLabel.textColor = Colors.dark
             hideScreen.tintColor = Colors.dark
         // All White
-        case 0,2,3,4,5,6:
+        case 0,2,4,5,6:
             timerLabel.textColor = Colors.light
             hideScreen.tintColor = Colors.light
         //
@@ -142,6 +163,13 @@ class MeditationScreen: UIViewController {
         
         // Begin Timer
         startTimer()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Set back to false
+        BellPlayer.shared.didSetEndTime = false
     }
     
     //
@@ -228,6 +256,7 @@ class MeditationScreen: UIViewController {
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
+    //
     // Update Timer
     @objc func updateTimer() {
         //
@@ -236,14 +265,13 @@ class MeditationScreen: UIViewController {
             //
             timerCountDown.invalidate()
             // Stop sounds
-            if meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
-                if self.soundPlayer.isPlaying {
-                    self.soundPlayer.stop()
+            if selectedPreset != -1 && meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
+                if (self.soundPlayer?.isPlaying)! {
+                    self.soundPlayer?.stop()
                 }
             }
             //
             NotificationCenter.default.removeObserver(self)
-            //
             //
             // Schedule Tracking
             updateScheduleTracking(fromSchedule: fromSchedule)
@@ -264,20 +292,19 @@ class MeditationScreen: UIViewController {
             } else {
                 timerLabel.text = timeFormatted(totalSeconds: timerValue)
             }
-            //
         }
     }
     
     //
     // Start Timer
-    //
     @objc func startTimer() {
         // Dates and Times
         startTime = Date().timeIntervalSinceReferenceDate
         //
-        if didSetEndTime == false {
+        // Meditation Timer
+        if selectedPreset != -1 && BellPlayer.shared.didSetEndTime == false {
             //
-            didSetEndTime = true
+            BellPlayer.shared.didSetEndTime = true
             //
             let duration = meditationArray[selectedPreset]["Duration"]?[0][0] as! Int
             endTime = startTime + Double(duration)
@@ -332,14 +359,57 @@ class MeditationScreen: UIViewController {
                 do {
                     let bell = try AVAudioPlayer(contentsOf: url)
                     soundPlayer = bell
-                    soundPlayer.numberOfLoops = -1
+                    soundPlayer?.numberOfLoops = -1
                     bell.play()
                 } catch {
                     // couldn't load file :(
                 }
             }
+            
+        // Meditation Guided
+        } else if selectedPreset == -1 && BellPlayer.shared.didSetEndTime == false {
+            //
+            endTime = startTime + Double(durationOfPractice)
+            BellPlayer.shared.didSetEndTime = true
+            //
+            // Bells
+            // Perform delays
+            var bellTime = 0
+            //var bellTime = startTime
+            while bellTime < durationOfPractice {
+                // Bells
+                // Delay bell
+                let delayInSeconds = bellTime
+                bellTime += bellFrequency
+                // Play with delay
+                let url = Bundle.main.url(forResource: bellChosen, withExtension: "caf")!
+                do {
+                    let audioPlayer = try AVAudioPlayer(contentsOf: url)
+                    audioPlayerArray.append(audioPlayer)
+                    audioPlayer.play(atTime: audioPlayer.deviceCurrentTime + Double(delayInSeconds))
+                } catch {
+                    // couldn't load file :(
+                }
+            }
+            
+            //
+            // Ending Bell
+            // Requires different audio player to continue playing after view is dismissed
+            //
+            // Delay bell
+            
+            let url = Bundle.main.url(forResource: bellChosen, withExtension: "caf")!
+            //
+            do {
+                endingBellPlayer = try AVAudioPlayer(contentsOf: url)
+                audioPlayerArray.append(endingBellPlayer)
+                endingBellPlayer.play(atTime: endingBellPlayer.deviceCurrentTime + Double(durationOfPractice))
+            } catch {
+                // couldn't load file :(
+            }
         }
         
+        // Same for both guided and timer
         // Set timer value
         timerValue = Int(endTime - startTime)
         
@@ -412,16 +482,32 @@ class MeditationScreen: UIViewController {
             UIAlertAction in
             // Cancel Timer
             timerCountDown.invalidate()
-            // Stop sounds
-            if self.meditationArray[self.selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
-                if self.soundPlayer.isPlaying {
-                    self.soundPlayer.stop()
+            // Timer
+            if self.selectedPreset != -1 {
+                // Stop sounds
+                if self.meditationArray[self.selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
+                    if (self.soundPlayer?.isPlaying)! {
+                        self.soundPlayer?.stop()
+                    }
                 }
-            }
-            // Cancel Work Items
-            if self.audioPlayerArray.count != 0 {
-                for i in 0...self.audioPlayerArray.count - 1 {
-                    self.audioPlayerArray[i].stop()
+                // Cancel Work Items
+                if self.audioPlayerArray.count != 0 {
+                    for i in 0...self.audioPlayerArray.count - 1 {
+                        self.audioPlayerArray[i].stop()
+                    }
+                }
+            // Guided
+            } else {
+                if self.soundPlayer != nil {
+                    if (self.soundPlayer?.isPlaying)! {
+                        self.soundPlayer?.stop()
+                    }
+                }
+                // Cancel Work Items
+                if self.audioPlayerArray.count != 0 {
+                    for i in 0...self.audioPlayerArray.count - 1 {
+                        self.audioPlayerArray[i].stop()
+                    }
                 }
             }
             NotificationCenter.default.removeObserver(self)

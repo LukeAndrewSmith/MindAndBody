@@ -29595,8 +29595,6 @@ class sessionData {
                         ["pose": "mountain",
                          "breaths": 3],
                         //
-                        ["pose": "mountain",
-                         "breaths": 3],
                         ["pose": "upwardsSalute",
                          "breaths": 3],
                         ["pose": "forwardBend",
@@ -29792,8 +29790,6 @@ class sessionData {
                         ["pose": "mountain",
                          "breaths": 3],
                         //
-                        ["pose": "mountain",
-                         "breaths": 3],
                         ["pose": "upwardsSalute",
                          "breaths": 3],
                         ["pose": "forwardBend",
@@ -29815,8 +29811,6 @@ class sessionData {
                         ["pose": "mountain",
                          "breaths": 3],
                         //
-                        ["pose": "mountain",
-                         "breaths": 3],
                         ["pose": "upwardsSalute",
                          "breaths": 3],
                         ["pose": "forwardBend",

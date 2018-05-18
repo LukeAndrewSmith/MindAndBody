@@ -95,7 +95,10 @@ class BellPlayer {
     private init() {}
     //
     // Name possibly misleading, as also used for background sounds in meditation timer
-    var bellPlayer: AVAudioPlayer!
+    var bellPlayer: AVAudioPlayer?
+    
+    // Meditation Timer didSetEndTime
+    var didSetEndTime = false
 }
 
 //

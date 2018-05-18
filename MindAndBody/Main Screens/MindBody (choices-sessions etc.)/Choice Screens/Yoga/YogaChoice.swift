@@ -29,6 +29,12 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     //
     @IBOutlet weak var stackView: UIStackView!
     
+    // Constraints
+    @IBOutlet weak var relaxingTop: NSLayoutConstraint!
+    @IBOutlet weak var relaxingBottom: NSLayoutConstraint!
+    @IBOutlet weak var stackBottom: NSLayoutConstraint!
+    
+    
     //
     // View did load -----------------------------------------------------------------------------------------------------
     //
@@ -73,7 +79,21 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         custom.layer.masksToBounds = true
         custom.titleLabel?.numberOfLines = 0
         //
-        
+        // Iphone 5/SE
+        if IPhoneType.shared.iPhoneType() == 0 {
+            //
+            relaxingTop.constant = 52
+            relaxingBottom.constant = 52
+            stackBottom.constant = 52
+            //
+            stackView.spacing = 15
+        } else if IPhoneType.shared.iPhoneType() == 2 {
+            //
+            relaxingTop.constant = 102
+            relaxingBottom.constant = 102
+            stackBottom.constant = 102
+            //
+        }
     }
     
     

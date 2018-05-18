@@ -439,6 +439,40 @@ public class Reachability {
     }
 }
 
+// Bells -> Images
+class BellsFunctions {
+    
+    static var shared = BellsFunctions()
+    private init() {}
+    
+    let bellsArray: [String] =
+        ["tibetanChimes", "tibetanBowlL", "tibetanBowlL4", "tibetanBowlLS", "tibetanBowlH", "tibetanBowlH4", "tibetanBowlHS", "rainStick", "rainStick2", "rainStick2S", "windChimes", "gambangWU", "gambangWD", "gambangM", "indonesianFrog", "cowBellS", "cowBellB"]
+    
+    let conversionDict: [String: UIImage] =
+        ["tibetanChimes": #imageLiteral(resourceName: "Tibetan Chimes"),
+         "tibetanBowlL": #imageLiteral(resourceName: "Tibetan Bowl Big"),
+         "tibetanBowlL4":#imageLiteral(resourceName: "Tibetan Bowl Big"),
+         "tibetanBowlLS":#imageLiteral(resourceName: "Tibetan Bowl Big"),
+         "tibetanBowlH":#imageLiteral(resourceName: "Tibetan Bowl Small"),
+         "tibetanBowlH4":#imageLiteral(resourceName: "Tibetan Bowl Small"),
+         "tibetanBowlHS":#imageLiteral(resourceName: "Tibetan Bowl Small"),
+         "rainStick":#imageLiteral(resourceName: "Australian Rain Stick"),
+         "rainStick2":#imageLiteral(resourceName: "Australian Rain Stick"),
+         "rainStick2S":#imageLiteral(resourceName: "Australian Rain Stick"),
+         "windChimes":#imageLiteral(resourceName: "Wind Chimes"),
+         "gambangWU":#imageLiteral(resourceName: "Indonesian Xylophone Big"),
+         "gambangWD":#imageLiteral(resourceName: "Indonesian Xylophone Big"),
+         "gambangM":#imageLiteral(resourceName: "Indonesian Xylophone Small"),
+         "indonesianFrog":#imageLiteral(resourceName: "Indonesian Frog"),
+         "cowBellS":#imageLiteral(resourceName: "Cow Bell"),
+         "cowBellB":#imageLiteral(resourceName: "Cow Bell Big")]
+    
+    // Get Image from bell name
+    func bellToImage(name: String) -> UIImage {
+        return conversionDict[name]!
+    }
+}
+
 //
 // MARK: - Global Function as extensions
 //
