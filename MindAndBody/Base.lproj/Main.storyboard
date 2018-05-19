@@ -2965,6 +2965,7 @@
                         <outlet property="detailView" destination="2Af-vL-N3g" id="nd1-RD-k07"/>
                         <outlet property="discussionScrollView" destination="trD-le-zG6" id="Dcx-dP-0b1"/>
                         <outlet property="discussionTitle" destination="6J9-bT-AtL" id="DEd-DK-HQD"/>
+                        <outlet property="discussionTitleTopConstraint" destination="Vtq-Qp-MJr" id="Jev-Iq-dQI"/>
                         <outlet property="durationDecrease" destination="Oa7-9U-h7o" id="CzE-3a-Xrj"/>
                         <outlet property="durationIncrease" destination="XsS-bV-UGQ" id="WIi-Tk-Fy5"/>
                         <outlet property="durationIndicator" destination="Ngp-FR-RQ0" id="3Y5-nq-7MA"/>

@@ -29,12 +29,13 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     // Guided Sessions
     let guidedSessions =
         [
+            ["introductionG"],
             ["introduction1", "introduction2", "introduction3", "introduction4"],
-            ["squareBreathing", "breathCounting", "oxygenPurge", "breathRetention", "nostrilBreathing"],
+            ["squareBreathing", "breathCounting", "purging", "nostrilBreathing"],
             ["bodyScan", "tummoInnerFire", "self", "earth"],
     ]
     
-    let guidedTitles = ["introduction", "techniquesB", "techniquesV"]
+    let guidedTitles = ["introductionG", "introduction", "techniquesB", "techniquesV"]
     
     
     //

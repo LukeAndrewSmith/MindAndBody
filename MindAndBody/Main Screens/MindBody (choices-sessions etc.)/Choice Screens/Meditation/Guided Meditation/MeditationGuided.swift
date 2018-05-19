@@ -49,6 +49,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Discussion
     @IBOutlet weak var discussionScrollView: UIScrollView!
     @IBOutlet weak var discussionTitle: UILabel!
+    @IBOutlet weak var discussionTitleTopConstraint: NSLayoutConstraint!
     
     // Passed from previous VC
     //var guidedTitle = String()
@@ -62,6 +63,15 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
     // Sessions Titles
     var practiceDict: [[[String: Any]]] =
     [
+        // General introduction
+        [
+            ["title": "introductionG",
+             "discussion": "introductionGE",
+             "duration": 60,
+             "bell": "tibetanBowlL",
+             "bellFrequency": 30,
+             ],
+        ],
         // Introduction
         [
             // Intro 1
@@ -74,21 +84,21 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
             // Intro 2
             ["title": "introduction2",
              "discussion": "introduction2E",
-             "duration": 120,
+             "duration": 300,
              "bell": "tibetanBowlL",
              "bellFrequency": 30,
              ],
             // Intro 3
             ["title": "introduction3",
              "discussion": "introduction3E",
-             "duration": 120,
+             "duration": 300,
              "bell": "tibetanBowlL",
              "bellFrequency": 30,
              ],
             // Intro 4
             ["title": "introduction4",
              "discussion": "introduction4E",
-             "duration": 120,
+             "duration": 300,
              "bell": "tibetanBowlL",
              "bellFrequency": 30,
              ],
@@ -98,37 +108,30 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
             // Intro 1
             ["title": "squareBreathing",
              "discussion": "squareBreathingE",
-             "duration": 120,
+             "duration": 180,
              "bell": "tibetanBowlL",
-             "bellFrequency": 30,
+             "bellFrequency": 00,
              ],
             // Intro 1
             ["title": "breathCounting",
              "discussion": "breathCountingE",
-             "duration": 120,
+             "duration": 300,
              "bell": "tibetanBowlL",
-             "bellFrequency": 30,
+             "bellFrequency": 0,
              ],
             // Intro 1
-            ["title": "oxygenPurge",
-             "discussion": "oxygenPurgeE",
-             "duration": 120,
+            ["title": "purging",
+             "discussion": "purgingE",
+             "duration": 180,
              "bell": "tibetanBowlL",
-             "bellFrequency": 30,
-             ],
-            // Intro 1
-            ["title": "breathRetention",
-             "discussion": "breathRetentionE",
-             "duration": 120,
-             "bell": "tibetanBowlL",
-             "bellFrequency": 30,
+             "bellFrequency": 0,
              ],
             // Intro 1
             ["title": "nostrilBreathing",
              "discussion": "nostrilBreathingE",
-             "duration": 120,
+             "duration": 300,
              "bell": "tibetanBowlL",
-             "bellFrequency": 30,
+             "bellFrequency": 0,
              ],
         ],
         // Visualisation
@@ -177,7 +180,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         view.backgroundColor = Colors.light
         
         // Begin Button Title
-        beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
+        beginButton.setTitle(NSLocalizedString("begin", comment: ""), for: .normal)
         beginButton.backgroundColor = Colors.green
         beginButton.setTitleColor(Colors.dark, for: .normal)
        
@@ -219,6 +222,14 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         discussionScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: discussionLabel.frame.size.height + 20)
         //
         self.discussionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        
+        if selectedSessionMeditation[0] == 0 {
+            detailView.alpha = 0
+            detailView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 0)
+            detailView.isUserInteractionEnabled = false
+            beginButton.setTitle(NSLocalizedString("back", comment: ""), for: .normal)
+            discussionTitleTopConstraint.constant = -(self.view.bounds.height * (1/4)) + 24.5
+        }
     }
     
     func setupView() {
@@ -285,8 +296,15 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         // Frequency
         bellFrequency.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)
         bellFrequency.setTitleColor(Colors.light, for: .normal)
-        let frequencyTitle = NSLocalizedString("every:", comment: "") + " " + String(practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bellFrequency"] as! Int) + "s"
-        bellFrequency.setTitle(frequencyTitle, for: .normal)
+        // No bells
+        if practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bellFrequency"] as! Int == 0 {
+            practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bellFrequency"] = 0
+            bellFrequency.setTitle(NSLocalizedString(frequencyArray[0], comment: ""), for: .normal)
+        // Bells
+        } else {
+            let frequencyTitle = NSLocalizedString("every:", comment: "") + " " + String(practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bellFrequency"] as! Int) + "s"
+            bellFrequency.setTitle(frequencyTitle, for: .normal)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -580,13 +598,17 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
     //
     // Begin Button
     @IBAction func beginButton(_ sender: Any) {
-        // Perform segue
-        self.performSegue(withIdentifier: "meditationGuidedTimerSegue", sender: self)
-        //
-        // Return to beginning
-        let delayInSeconds = 1.0
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-            _ = self.navigationController?.popToRootViewController(animated: false)
+        if selectedSessionMeditation[0] == 0 {
+            _ = self.navigationController?.popViewController(animated: true)
+        } else {
+            // Perform segue
+            self.performSegue(withIdentifier: "meditationGuidedTimerSegue", sender: self)
+            //
+            // Return to beginning
+            let delayInSeconds = 1.0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                _ = self.navigationController?.popToRootViewController(animated: false)
+            }
         }
     }
     
