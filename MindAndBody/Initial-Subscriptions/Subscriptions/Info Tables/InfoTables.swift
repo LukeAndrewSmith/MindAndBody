@@ -365,7 +365,7 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
             label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             label.numberOfLines = 0
             label.lineBreakMode = .byWordWrapping
-            label.text = NSLocalizedString("infoTable4", comment: "")
+            label.text = NSLocalizedString("infoTable3", comment: "")
             label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
             label.sizeToFit()
             label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
@@ -537,7 +537,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
                 label.numberOfLines = 0
                 label.lineBreakMode = .byWordWrapping
-                label.text = NSLocalizedString("infoTable4", comment: "")
+                label.text = NSLocalizedString("infoTable5", comment: "")
                 label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
                 label.sizeToFit()
                 label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
@@ -623,7 +623,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
                 label.numberOfLines = 0
                 label.lineBreakMode = .byWordWrapping
-                label.text = NSLocalizedString("infoTable4", comment: "")
+                label.text = NSLocalizedString("infoTable6", comment: "")
                 label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
                 label.sizeToFit()
                 label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)

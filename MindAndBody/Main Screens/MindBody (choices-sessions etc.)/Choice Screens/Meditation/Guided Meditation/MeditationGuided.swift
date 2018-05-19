@@ -143,27 +143,27 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
              "bell": "tibetanBowlL",
              "bellFrequency": 30,
              ],
-            // Intro 1
-            ["title": "tummoInnerFire",
-             "discussion": "tummoInnerFireE",
-             "duration": 120,
-             "bell": "tibetanBowlL",
-             "bellFrequency": 30,
-             ],
-            // Intro 1
-            ["title": "self",
-             "discussion": "selfE",
-             "duration": 120,
-             "bell": "tibetanBowlL",
-             "bellFrequency": 30,
-             ],
-            // Intro 1
-            ["title": "earth",
-             "discussion": "earthE",
-             "duration": 120,
-             "bell": "tibetanBowlL",
-             "bellFrequency": 30,
-             ],
+//            // Intro 1
+//            ["title": "tummoInnerFire",
+//             "discussion": "tummoInnerFireE",
+//             "duration": 120,
+//             "bell": "tibetanBowlL",
+//             "bellFrequency": 30,
+//             ],
+//            // Intro 1
+//            ["title": "self",
+//             "discussion": "selfE",
+//             "duration": 120,
+//             "bell": "tibetanBowlL",
+//             "bellFrequency": 30,
+//             ],
+//            // Intro 1
+//            ["title": "earth",
+//             "discussion": "earthE",
+//             "duration": 120,
+//             "bell": "tibetanBowlL",
+//             "bellFrequency": 30,
+//             ],
         ],
     ]
     

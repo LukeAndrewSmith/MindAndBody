@@ -54,7 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //
         // Check if the user has a valid subscription
-//        SubscriptionsCheck.shared.checkSubscription()
+        // Subscription Check 1
+        SubscriptionsCheck.shared.checkSubscription()
         
         //
         // Register Defaults --------------------------------------------------------------------------------

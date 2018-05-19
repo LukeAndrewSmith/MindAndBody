@@ -149,7 +149,8 @@ class ScheduleScreen: UIViewController {
         // Subscriptions
         // Checking subscription is valid, (present loading during check)
         if Loading.shared.shouldPresentLoading {
-//            Loading.shared.beginLoading()
+            // Subscription Check 2
+            Loading.shared.beginLoading()
         }
         // Check subscription -> Present Subscription Screen (if not valid)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)

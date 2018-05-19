@@ -26,7 +26,7 @@ extension sessionData {
                     // Lower Back
                     ["sideLegDrop", "sideLegKick", "scorpionKick", "sideBend", "catCow", "legsToSideTwist", "plank"],
                     // Upper Back
-                    ["upperBackRotation", "latStretch", "lyingSideWindmill"],
+                    ["upperBackRotation", "latStretch"],
                     // Shoulder
                     ["wallSlides", "wallReaches", "shoulderRotationW", "forearmWallSlides135", "superManShoulder"],
                     // Band/Bar/Machine Assisted
@@ -201,7 +201,6 @@ extension sessionData {
                     // Upper Back
                     "upperBackRotation", ///
                     "latStretch", ///
-                    "lyingSideWindmill", ///
                     // Shoulder
                     "shoulderRotationW",
                     // Band/Bar/Machine Assisted
@@ -659,13 +658,6 @@ extension sessionData {
                             "demonstration": ["latStretch"],
                             "explanation": ["latStretchEH", "latStretchEA", "latStretchEF"],
                             "targetArea": ["lat"]
-                    ], ///
-                    "lyingSideWindmill":
-                        [
-                            "name": ["lyingSideWindmill"],
-                            "demonstration": ["lyingSideWindmill", "lyingSideWindmill1", "lyingSideWindmill2", "lyingSideWindmill3", "lyingSideWindmill4", "lyingSideWindmill1", "lyingSideWindmill2", "lyingSideWindmill3", "lyingSideWindmill4"],
-                            "explanation": ["lyingSideWindmillEH", "lyingSideWindmillEA", "lyingSideWindmillEF"],
-                            "targetArea": ["upperBackShoulder"]
                     ], ///
                     // Shoulder
                     "wallSlides":

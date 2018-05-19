@@ -32,7 +32,8 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
             ["introductionG"],
             ["introduction1", "introduction2", "introduction3", "introduction4"],
             ["squareBreathing", "breathCounting", "purging", "nostrilBreathing"],
-            ["bodyScan", "tummoInnerFire", "self", "earth"],
+            ["bodyScan",],
+            //"tummoInnerFire", "self", "earth"],
     ]
     
     let guidedTitles = ["introductionG", "introduction", "techniquesB", "techniquesV"]
