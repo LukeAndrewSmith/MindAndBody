@@ -65,23 +65,46 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    
+    func testCurrentProgress(total: Int, current: Int) -> Int {
+        let weekProgress: Double = Double(current)
+        let weekGoal: Double = Double(total)
+        let currentProgressDivision: Double = (weekProgress / weekGoal) * 100.0
+        let currentProgress = Int(currentProgressDivision)
+        return currentProgress
+    }
+    
     func testTrackingValues() {
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         //
         var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
         trackingDictionaries[0] = [:]
-        trackingDictionaries[0].updateValue(20, forKey: TrackingHelpers.shared.dateToString(date: Date().firstMondayInCurrentWeek))
+        let firstMonday = Date().firstMondayInCurrentWeek
+        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 1), forKey: TrackingHelpers.shared.dateToString(date: firstMonday))
+        let tue = calendar.date(byAdding: .day, value: 1, to: firstMonday)
+        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 1), forKey: TrackingHelpers.shared.dateToString(date: tue!))
+        let wed = calendar.date(byAdding: .day, value: 2, to: firstMonday)
+        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 3), forKey: TrackingHelpers.shared.dateToString(date: wed!))
+        let thur = calendar.date(byAdding: .day, value: 2, to: firstMonday)
+        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 3), forKey: TrackingHelpers.shared.dateToString(date: thur!))
+        let fri = calendar.date(byAdding: .day, value: 4, to: firstMonday)
+        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 4), forKey: TrackingHelpers.shared.dateToString(date: fri!))
+        let sat = calendar.date(byAdding: .day, value: 5, to: firstMonday)
+        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 6), forKey: TrackingHelpers.shared.dateToString(date: sat!))
+        let sun = calendar.date(byAdding: .day, value: 6, to: firstMonday)
+        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 6), forKey: TrackingHelpers.shared.dateToString(date: sun!))
         
         //
         trackingDictionaries[1] = [:]
-        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().currentDate)!
-        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
+//        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().setToMidnightUTC())!
+//        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
+        var firstMondayLastMonth = Date().firstMondayInMonth
         //
-        trackingDictionaries[1].updateValue(70, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
-//        trackingDictionaries[1].updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
-//        trackingDictionaries[1].updateValue(70, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
-//        trackingDictionaries[1].updateValue(80, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
+        trackingDictionaries[1].updateValue(100, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
+        trackingDictionaries[1].updateValue(85, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
+        trackingDictionaries[1].updateValue(95, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
+        trackingDictionaries[1].updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
         
         UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
         ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
@@ -98,7 +121,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         updateWeekGoal()
         
         // MARK: Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        testTrackingValues()
+        testTrackingValues()
 //        updateWeekTracking()
 //        updateTracking()
         
@@ -284,7 +307,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             
             //
-            var calendar = Calendar(identifier: .gregorian)
+            var calendar = Calendar(identifier: .iso8601)
             calendar.timeZone = TimeZone(abbreviation: "UTC")!
             // Set Start and end dates for 1,3,6,12 months && set date formatter
             switch timeScale {
@@ -292,7 +315,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             case 1,2,3:
                 //
                 //
-                var startDate = Date().currentDate
+                var startDate = Date().setToMidnightUTC()
                 let endDate = calendar.date(byAdding: .weekOfYear, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
                 
                 switch selectedTimeScale {
@@ -302,7 +325,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                     chartView.xAxis.forceLabelsEnabled = true
                     chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
                 case 2:
-                    startDate = calendar.date(byAdding: .month, value: -2, to: Date().currentDate)!
+                    startDate = calendar.date(byAdding: .month, value: -2, to: Date().setToMidnightUTC())!
                     startDate = startDate.firstMondayInMonth
                     // Find the number of x axis values to have
                     var numberOfValues = 0
@@ -314,7 +337,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                     chartView.xAxis.forceLabelsEnabled = true
                     chartView.xAxis.valueFormatter = DateValueFormatterMonth()
                 case 3:
-                    startDate = calendar.date(byAdding: .month, value: -5, to: Date().currentDate)!
+                    startDate = calendar.date(byAdding: .month, value: -5, to: Date().setToMidnightUTC())!
                     startDate = startDate.firstMondayInMonth
                     chartView.xAxis.labelCount = 6
                     chartView.xAxis.forceLabelsEnabled = true

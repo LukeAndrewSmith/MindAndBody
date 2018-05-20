@@ -140,7 +140,8 @@ class SubscriptionScreen: UIViewController {
 //            Colors.light.withAlphaComponent(0.25)
         
         // Page Control
-        InfoPageControl.shared.setupPageControl(x: view.center.x, y: subscriptionButton.frame.minY - 12)
+        // Should use subscriptionButton.frame.minY rather than hardcoding (41 - 82) but doesn't seem to work on iphone5 without
+        InfoPageControl.shared.setupPageControl(x: view.center.x, y: view.bounds.height - (41 - 82) - 12)
         view.addSubview(InfoPageControl.shared.pageControl)
     }
     

@@ -155,6 +155,14 @@ class ScheduleScreen: UIViewController {
         // Check subscription -> Present Subscription Screen (if not valid)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
         
+        if SubscriptionsCheck.shared.isValid {
+            // Present schedule walkthrough
+            let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+            if walkthroughs["Schedule"] == false {
+                walkthroughSchedule()
+            }
+        }
+        
         // Ensure week goal correct
         updateWeekGoal()
 

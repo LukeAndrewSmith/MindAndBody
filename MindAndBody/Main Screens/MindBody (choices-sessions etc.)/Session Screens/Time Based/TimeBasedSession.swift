@@ -995,7 +995,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     // 0 for low bell, 1 for high bell
     func playBell(bell: Int) {
         if bell == 0 {
-            let url = Bundle.main.url(forResource: "Tibetan Singing Bowl (Low)", withExtension: "caf")!
+            let url = Bundle.main.url(forResource: "tibetanBowlL", withExtension: "caf")!
             //
             do {
                 soundPlayer = try AVAudioPlayer(contentsOf: url)
@@ -1004,7 +1004,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // couldn't load file :(
             }
         } else {
-            let url = Bundle.main.url(forResource: "Tibetan Singing Bowl (High)", withExtension: "caf")!
+            let url = Bundle.main.url(forResource: "tibetanBowlH", withExtension: "caf")!
             //
             do {
                 soundPlayer = try AVAudioPlayer(contentsOf: url)

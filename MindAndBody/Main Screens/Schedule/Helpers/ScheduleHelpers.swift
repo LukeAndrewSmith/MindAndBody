@@ -1794,11 +1794,6 @@ extension ScheduleScreen {
         // Set status bar to light
         UIApplication.shared.statusBarStyle = .lightContent
         //
-        // Present schedule walkthrough
-        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-        if walkthroughs["Schedule"] == false {
-            walkthroughSchedule()
-        }
         
         // table    // buttons // spaces
         // Schedule choice
@@ -1973,12 +1968,12 @@ extension ScheduleScreen {
         // If see each day
         if scheduleStyle == 0 {
             //
-            if ScheduleVariables.shared.lastDayOpened != Date().currentDate {
+            if ScheduleVariables.shared.lastDayOpened != Date().setToMidnightUTC() {
                 // Reload
                 ScheduleVariables.shared.selectedDay = Date().currentWeekDayFromMonday - 1
                 ScheduleVariables.shared.shouldReloadSchedule = true
                 reloadView()
-                ScheduleVariables.shared.lastDayOpened = Date().currentDate
+                ScheduleVariables.shared.lastDayOpened = Date().setToMidnightUTC()
             }
         }
     }

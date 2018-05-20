@@ -27,16 +27,92 @@ class InfoTables {
     }
     
     // Setup Image Cell
-    func setupImageCell(cell: UITableViewCell, image: UIImage, infoWidth: CGFloat, rowHeight: CGFloat) {
+    func setupImageCell3(cell: UITableViewCell, imageL: UIImage, imageM: UIImage, imageR: UIImage, infoWidth: CGFloat, rowHeight: CGFloat) {
         cell.backgroundColor = Colors.dark
         cell.selectionStyle = .none
+        cell.clipsToBounds = true
         //
-        let cellImage = UIImageView()
-        cellImage.frame = CGRect(x: 0, y: 0, width: infoWidth, height: rowHeight)
-        cellImage.contentMode = .scaleAspectFit
-        cellImage.image = image
-        cellImage.backgroundColor = Colors.dark
-        cell.addSubview(cellImage)
+        let imageHeight = rowHeight - 16
+        let imageWidth = imageHeight * (9/16)
+        //
+        let imageHeight2 = rowHeight - (16*2 + 8)
+        let imageWidth2 = imageHeight2 * (9/16)
+        //
+        let imageCenter = infoWidth / 2
+        //
+        let middleImage = UIImageView()
+        middleImage.frame = CGRect(x: imageCenter - (imageWidth / 2), y: rowHeight - imageHeight, width: imageWidth, height: imageHeight)
+        middleImage.contentMode = .scaleAspectFit
+        middleImage.image = imageM
+        middleImage.backgroundColor = Colors.dark
+        middleImage.layer.shadowColor = UIColor.black.cgColor
+        middleImage.layer.shadowRadius = 8
+        middleImage.layer.shadowOffset = CGSize.zero
+        middleImage.layer.shadowOpacity = 0.72
+        //
+        let rightImage = UIImageView()
+        rightImage.frame = CGRect(x: middleImage.frame.maxX - (imageWidth2 * (1/18)), y: rowHeight - imageHeight2, width: imageWidth2, height: imageHeight2)
+        rightImage.contentMode = .scaleAspectFit
+        rightImage.image = imageR
+        rightImage.backgroundColor = Colors.dark
+        rightImage.layer.shadowColor = UIColor.black.cgColor
+        rightImage.layer.shadowRadius = 8
+        rightImage.layer.shadowOffset = CGSize.zero
+        rightImage.layer.shadowOpacity = 0.72
+        //
+        let leftImage = UIImageView()
+        leftImage.frame = CGRect(x: middleImage.frame.minX - (imageWidth2 * (17/18)), y: rowHeight - imageHeight2, width: imageWidth2, height: imageHeight2)
+        leftImage.contentMode = .scaleAspectFit
+        leftImage.image = imageL
+        leftImage.backgroundColor = Colors.dark
+        leftImage.layer.shadowColor = UIColor.black.cgColor
+        leftImage.layer.shadowRadius = 8
+        leftImage.layer.shadowOffset = CGSize.zero
+        leftImage.layer.shadowOpacity = 0.72
+        //
+        cell.addSubview(leftImage)
+        cell.addSubview(rightImage)
+        cell.addSubview(middleImage)
+    }
+    
+    // Setup Image Cell
+    func setupImageCell2(cell: UITableViewCell, imageL: UIImage, imageR: UIImage, infoWidth: CGFloat, rowHeight: CGFloat) {
+        cell.backgroundColor = Colors.dark
+        cell.selectionStyle = .none
+        cell.clipsToBounds = true
+        
+        let imageHeight = rowHeight - 16
+        let imageWidth = imageHeight * (9/16)
+        //
+        let imageHeight2 = rowHeight - (16*2 + 8)
+        let imageWidth2 = imageHeight2 * (9/16)
+        //
+        let totalWidth = imageWidth + (imageWidth2 * (17/18))
+        let leftGap = (infoWidth - totalWidth) / 2
+        
+        //
+        let rightImage = UIImageView()
+        rightImage.frame = CGRect(x: leftGap + (imageWidth2 * (17/18)), y: rowHeight - imageHeight, width: imageWidth, height: imageHeight)
+        rightImage.contentMode = .scaleAspectFit
+        rightImage.image = imageR
+        rightImage.backgroundColor = Colors.dark
+        rightImage.layer.shadowColor = UIColor.black.cgColor
+        rightImage.layer.shadowRadius = 8
+        rightImage.layer.shadowOffset = CGSize.zero
+        rightImage.layer.shadowOpacity = 0.72
+        //
+        let leftImage = UIImageView()
+        leftImage.frame = CGRect(x: leftGap, y: rowHeight - imageHeight2, width: imageWidth2, height: imageHeight2)
+        leftImage.contentMode = .scaleAspectFit
+        leftImage.image = imageL
+        leftImage.backgroundColor = Colors.dark
+        leftImage.layer.shadowColor = UIColor.black.cgColor
+        leftImage.layer.shadowRadius = 8
+        leftImage.layer.shadowOffset = CGSize.zero
+        leftImage.layer.shadowOpacity = 0.72
+        //
+        cell.addSubview(leftImage)
+        cell.addSubview(rightImage)
     }
     
     // Setup Title Cell
@@ -52,6 +128,30 @@ class InfoTables {
         separator.frame = CGRect(x: 8, y: 43, width: infoWidth - 16, height: 1)
         cell.addSubview(separator)
     }
+    
+    // Setup explanation cell
+    func setupExplanationCell(cell: UITableViewCell, explanation: String, infoWidth: CGFloat, cellHeight: CGFloat) {
+        //
+        cell.backgroundColor = Colors.light
+        cell.selectionStyle = .none
+        
+        let explanationLabel = UILabel()
+        explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+        explanationLabel.numberOfLines = 0
+        explanationLabel.lineBreakMode = .byWordWrapping
+        explanationLabel.frame.size = CGSize(width: infoWidth - 32, height: 0)
+        explanationLabel.text = explanation
+        explanationLabel.sizeToFit()
+        
+        //
+        let infoScroll = UIScrollView()
+        infoScroll.frame = CGRect(x: 16, y: 8, width: infoWidth - 32, height: cellHeight - 16)
+        infoScroll.backgroundColor = Colors.light
+        infoScroll.addSubview(explanationLabel)
+        infoScroll.contentSize = CGSize(width: infoWidth - 32, height: explanationLabel.bounds.height)
+        infoScroll.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        cell.addSubview(infoScroll)
+    }
 }
 
 //
@@ -62,16 +162,24 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     var row0Height = CGFloat()
+    var explanationRowHeight = CGFloat()
     //
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         //
         view.backgroundColor = .clear
         InfoTables.shared.setupTable(tableView: infoTable)
         infoTable.layer.borderWidth = 1
         infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
         //
-        row0Height = infoTable.bounds.height * (1/3)
+        row0Height = infoTable.bounds.height * (4/9)
+        explanationRowHeight = infoTable.bounds.height - 8 - 44 - row0Height
+        
+        print(infoTable.bounds.height)
+        print(row0Height)
+        print(explanationRowHeight)
+        print(row0Height + 8 + 44 + explanationRowHeight)
     }
     
     // Number of sections
@@ -94,7 +202,7 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case 0: return row0Height
         case 1: return 8
         case 2: return 44
-        case 3: return (infoTable.bounds.height * (2/3)) - 44
+        case 3: return explanationRowHeight
         default: return 0
         }
     }
@@ -114,12 +222,12 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
             titleImage.tintColor = Colors.light
             titleImage.alpha = 0.72
             titleImage.contentMode = .scaleAspectFit
-            titleImage.center = CGPoint(x: cell.center.x, y: aThirdRowHeight * (7/8))
+            titleImage.center = CGPoint(x: infoTable.bounds.width / 2, y: aThirdRowHeight * (7/8))
             cell.addSubview(titleImage)
             // Title
             let titleLabel = UILabel()
             titleLabel.frame.size = CGSize(width: infoTable.bounds.width, height: row0Height * (2/3))
-            titleLabel.center = CGPoint(x: cell.center.x, y: ((aThirdRowHeight * 2) / 2) + aThirdRowHeight)
+            titleLabel.center = CGPoint(x: infoTable.bounds.width / 2, y: ((aThirdRowHeight * 2) / 2) + aThirdRowHeight)
             titleLabel.text = "Mind & Body"
             titleLabel.font = UIFont(name: "SFUIDisplay-thin", size: 43)
             titleLabel.textColor = Colors.light
@@ -131,7 +239,12 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case 2:
             let cell = UITableViewCell()
             cell.selectionStyle = .none
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+            // Iphone 5
+            if IPhoneType.shared.iPhoneType() == 0 {
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+            } else {
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+            }
             cell.textLabel?.text = "Fitness | Yoga | Meditation"
             cell.textLabel?.textAlignment = .center
             cell.backgroundColor = Colors.light
@@ -143,19 +256,20 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = UITableViewCell()
-            cell.selectionStyle = .none
+            //
             cell.backgroundColor = Colors.light
-//            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-//            cell.textLabel?.text = NSLocalizedString("infoTable1", comment: "")
-            let label = UILabel()
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            label.numberOfLines = 0
-            label.lineBreakMode = .byWordWrapping
-            label.text = NSLocalizedString("infoTable1", comment: "")
-            label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
-            label.sizeToFit()
-            label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
-            cell.addSubview(label)
+            cell.selectionStyle = .none
+            //
+            let explanationLabel = UILabel()
+            explanationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+            explanationLabel.numberOfLines = 0
+            explanationLabel.lineBreakMode = .byWordWrapping
+            explanationLabel.frame = CGRect(x: 16, y: 8, width: infoTable.bounds.width - 32, height: explanationRowHeight)
+            explanationLabel.text = NSLocalizedString("infoTable1", comment: "")
+            explanationLabel.sizeToFit()
+            explanationLabel.frame = CGRect(x: 16, y: 8, width: infoTable.bounds.width - 32, height: explanationLabel.bounds.height)
+            cell.addSubview(explanationLabel)
+            //
             return cell
         default:
             let cell = UITableViewCell()
@@ -176,9 +290,10 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     var row0Height = CGFloat()
+    var explanationRowHeight = CGFloat()
     //
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         //
         view.backgroundColor = .clear
         InfoTables.shared.setupTable(tableView: infoTable)
@@ -187,7 +302,8 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
         infoTable.layer.borderWidth = 1
         infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
         //
-        row0Height = infoTable.bounds.height * (1/3)
+        row0Height = infoTable.bounds.height * (4/9)
+        explanationRowHeight = infoTable.bounds.height - 8 - 44 - row0Height
     }
     
     // Number of sections
@@ -211,7 +327,7 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Spcing cell
         case 1: return 8
         case 2: return 44
-        case 3: return (infoTable.bounds.height * (2/3)) - 44
+        case 3: return explanationRowHeight
         default: return 0
         }
     }
@@ -221,52 +337,7 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colors.dark
-            cell.selectionStyle = .none
-            cell.clipsToBounds = true
-            //
-            let imageWidth = infoTable.bounds.width * (4/9)
-            let imageHeight = imageWidth * (16/9)
-            //
-            let rightImage = UIImageView()
-            let imageWidth2 = infoTable.bounds.width * (1/3)
-            //
-            let imageCenter = infoTable.bounds.width / 2
-            //
-            let middleImage = UIImageView()
-            middleImage.frame = CGRect(x: imageCenter - (imageWidth / 2), y: row0Height * (1/8), width: imageWidth, height: imageHeight)
-            middleImage.contentMode = .scaleAspectFit
-            middleImage.image = #imageLiteral(resourceName: "DayView")
-            middleImage.backgroundColor = Colors.dark
-            middleImage.layer.shadowColor = UIColor.black.cgColor
-            middleImage.layer.shadowRadius = 8
-            middleImage.layer.shadowOffset = CGSize.zero
-            middleImage.layer.shadowOpacity = 0.72
-            //
-            let imageHeight2 = imageWidth2 * (16/9)
-            rightImage.frame = CGRect(x: middleImage.frame.maxX - (imageWidth2 * (1/3)), y: row0Height * (2/8), width: imageWidth2, height: imageHeight2)
-            rightImage.contentMode = .scaleAspectFit
-            rightImage.image = #imageLiteral(resourceName: "ScheduleFinalChoice")
-            rightImage.backgroundColor = Colors.dark
-            rightImage.layer.shadowColor = UIColor.black.cgColor
-            rightImage.layer.shadowRadius = 8
-            rightImage.layer.shadowOffset = CGSize.zero
-            rightImage.layer.shadowOpacity = 0.72
-            //
-            let leftImage = UIImageView()
-            leftImage.frame = CGRect(x: middleImage.frame.minX - (imageWidth2 * (2/3)), y: row0Height * (2/8), width: imageWidth2, height: imageHeight2)
-            leftImage.contentMode = .scaleAspectFit
-            leftImage.image = #imageLiteral(resourceName: "ScheduleChoice")
-            leftImage.backgroundColor = Colors.dark
-            leftImage.layer.shadowColor = UIColor.black.cgColor
-            leftImage.layer.shadowRadius = 8
-            leftImage.layer.shadowOffset = CGSize.zero
-            leftImage.layer.shadowOpacity = 0.72
-            //
-            cell.addSubview(leftImage)
-            cell.addSubview(rightImage)
-            cell.addSubview(middleImage)
-            //
+            InfoTables.shared.setupImageCell3(cell: cell, imageL: #imageLiteral(resourceName: "ScheduleCreator"), imageM: #imageLiteral(resourceName: "DayView"), imageR: #imageLiteral(resourceName: "ScheduleFinalChoice"), infoWidth: infoTable.bounds.width, rowHeight: row0Height)
             return cell
         case 2:
             let cell = UITableViewCell()
@@ -274,18 +345,7 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colors.light
-            let label = UILabel()
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            label.numberOfLines = 0
-            label.lineBreakMode = .byWordWrapping
-            label.text = NSLocalizedString("infoTable2", comment: "")
-            label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
-            label.sizeToFit()
-            label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
-            cell.addSubview(label)
-            cell.selectionStyle = .none
-            //
+            InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable2", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
             return cell
         default:
             let cell = UITableViewCell()
@@ -304,9 +364,10 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var infoTable: UITableView!
     //
     var row0Height = CGFloat()
+    var explanationRowHeight = CGFloat()
     //
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         //
         view.backgroundColor = .clear
         InfoTables.shared.setupTable(tableView: infoTable)
@@ -314,7 +375,8 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
         infoTable.layer.borderWidth = 1
         infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
         //
-        row0Height = infoTable.bounds.height * (1/3)
+        row0Height = infoTable.bounds.height * (4/9)
+        explanationRowHeight = infoTable.bounds.height - 8 - 44 - row0Height
     }
     
     // Number of sections
@@ -337,7 +399,7 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case 0: return row0Height
         case 1: return 8
         case 2: return 44
-        case 3: return (infoTable.bounds.height * (2/3)) - 44
+        case 3: return explanationRowHeight
         default: return 0
         }
     }
@@ -347,12 +409,7 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colors.dark
-            let cellImage = UIImageView()
-            cellImage.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: row0Height)
-            cellImage.contentMode = .scaleAspectFit
-            cellImage.image = #imageLiteral(resourceName: "upwardDog.png")
-            cell.addSubview(cellImage)
+            InfoTables.shared.setupImageCell3(cell: cell, imageL: #imageLiteral(resourceName: "BodyweightWorkout"), imageM: #imageLiteral(resourceName: "ClassicWorkout"), imageR: #imageLiteral(resourceName: "EnduranceSession"), infoWidth: infoTable.bounds.width, rowHeight: row0Height)
             return cell
         case 2:
             let cell = UITableViewCell()
@@ -360,18 +417,7 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colors.light
-            let label = UILabel()
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            label.numberOfLines = 0
-            label.lineBreakMode = .byWordWrapping
-            label.text = NSLocalizedString("infoTable3", comment: "")
-            label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
-            label.sizeToFit()
-            label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
-            cell.addSubview(label)
-            cell.selectionStyle = .none
-            //
+            InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable3", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
             return cell
         default:
             let cell = UITableViewCell()
@@ -390,9 +436,10 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var infoTable: UITableView!
     //
     var row0Height = CGFloat()
+    var explanationRowHeight = CGFloat()
     //
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         //
         view.backgroundColor = .clear
         InfoTables.shared.setupTable(tableView: infoTable)
@@ -400,7 +447,8 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
         infoTable.layer.borderWidth = 1
         infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
         //
-        row0Height = infoTable.bounds.height * (1/3)
+        row0Height = infoTable.bounds.height * (4/9)
+        explanationRowHeight = infoTable.bounds.height - 8 - 44 - row0Height
     }
     
     // Number of sections
@@ -423,7 +471,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case 0: return row0Height
         case 1: return 8
         case 2: return 44
-        case 3: return (infoTable.bounds.height * (2/3)) - 44
+        case 3: return explanationRowHeight
         default: return 0
         }
     }
@@ -433,12 +481,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colors.dark
-            let cellImage = UIImageView()
-            cellImage.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: row0Height)
-            cellImage.contentMode = .scaleAspectFit
-            cellImage.image = #imageLiteral(resourceName: "upwardDog.png")
-            cell.addSubview(cellImage)
+            InfoTables.shared.setupImageCell2(cell: cell, imageL: #imageLiteral(resourceName: "TimedYogaPractice"), imageR: #imageLiteral(resourceName: "YogaPractice"), infoWidth: infoTable.bounds.width, rowHeight: row0Height)
             return cell
         case 2:
             let cell = UITableViewCell()
@@ -446,18 +489,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = UITableViewCell()
-            cell.backgroundColor = Colors.light
-            let label = UILabel()
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-            label.numberOfLines = 0
-            label.lineBreakMode = .byWordWrapping
-            label.text = NSLocalizedString("infoTable4", comment: "")
-            label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
-            label.sizeToFit()
-            label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
-            cell.addSubview(label)
-            cell.selectionStyle = .none
-            //
+            InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable4", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
             return cell
         default:
             let cell = UITableViewCell()
@@ -476,9 +508,10 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
         @IBOutlet weak var infoTable: UITableView!
         //
         var row0Height = CGFloat()
+        var explanationRowHeight = CGFloat()
         //
-        override func viewDidLoad() {
-            super.viewDidLoad()
+        override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
             //
             view.backgroundColor = .clear
             InfoTables.shared.setupTable(tableView: infoTable)
@@ -486,7 +519,8 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             infoTable.layer.borderWidth = 1
             infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
             //
-            row0Height = infoTable.bounds.height * (1/3)
+            row0Height = infoTable.bounds.height * (4/9)
+            explanationRowHeight = infoTable.bounds.height - 8 - 44 - row0Height
         }
         
         // Number of sections
@@ -509,7 +543,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             case 0: return row0Height
             case 1: return 8
             case 2: return 44
-            case 3: return (infoTable.bounds.height * (2/3)) - 44
+            case 3: return explanationRowHeight
             default: return 0
             }
         }
@@ -519,12 +553,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 let cell = UITableViewCell()
-                cell.backgroundColor = Colors.dark
-                let cellImage = UIImageView()
-                cellImage.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: row0Height)
-                cellImage.contentMode = .scaleAspectFit
-                cellImage.image = #imageLiteral(resourceName: "upwardDog.png")
-                cell.addSubview(cellImage)
+                InfoTables.shared.setupImageCell3(cell: cell, imageL: #imageLiteral(resourceName: "GuidedMeditation"), imageM: #imageLiteral(resourceName: "MeditationTimer"), imageR: #imageLiteral(resourceName: "MeditationScreen"), infoWidth: infoTable.bounds.width, rowHeight: row0Height)
                 return cell
             case 2:
                 let cell = UITableViewCell()
@@ -532,18 +561,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 return cell
             case 3:
                 let cell = UITableViewCell()
-                cell.backgroundColor = Colors.light
-                let label = UILabel()
-                label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-                label.numberOfLines = 0
-                label.lineBreakMode = .byWordWrapping
-                label.text = NSLocalizedString("infoTable5", comment: "")
-                label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
-                label.sizeToFit()
-                label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
-                cell.addSubview(label)
-                cell.selectionStyle = .none
-                //
+                InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable5", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
                 return cell
             default:
                 let cell = UITableViewCell()
@@ -562,9 +580,10 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
         @IBOutlet weak var infoTable: UITableView!
         //
         var row0Height = CGFloat()
+        var explanationRowHeight = CGFloat()
         //
-        override func viewDidLoad() {
-            super.viewDidLoad()
+        override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
             //
             view.backgroundColor = .clear
             InfoTables.shared.setupTable(tableView: infoTable)
@@ -572,7 +591,8 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             infoTable.layer.borderWidth = 1
             infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
             //
-            row0Height = infoTable.bounds.height * (1/3)
+            row0Height = infoTable.bounds.height * (4/9)
+            explanationRowHeight = infoTable.bounds.height - 8 - 44 - row0Height
         }
         
         // Number of sections
@@ -595,7 +615,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             case 0: return row0Height
             case 1: return 8
             case 2: return 44
-            case 3: return (infoTable.bounds.height * (2/3)) - 44
+            case 3: return explanationRowHeight
             default: return 0
             }
         }
@@ -605,12 +625,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 let cell = UITableViewCell()
-                cell.backgroundColor = Colors.dark
-                let cellImage = UIImageView()
-                cellImage.frame = CGRect(x: 0, y: 0, width: infoTable.bounds.width, height: row0Height)
-                cellImage.contentMode = .scaleAspectFit
-                cellImage.image = #imageLiteral(resourceName: "upwardDog.png")
-                cell.addSubview(cellImage)
+                InfoTables.shared.setupImageCell3(cell: cell, imageL: #imageLiteral(resourceName: "TrackingTimeScales"), imageM: #imageLiteral(resourceName: "MonthTracking"), imageR: #imageLiteral(resourceName: "WeekTracking"), infoWidth: infoTable.bounds.width, rowHeight: row0Height)
                 return cell
             case 2:
                 let cell = UITableViewCell()
@@ -618,18 +633,7 @@ class InfoTable4: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 return cell
             case 3:
                 let cell = UITableViewCell()
-                cell.backgroundColor = Colors.light
-                let label = UILabel()
-                label.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-                label.numberOfLines = 0
-                label.lineBreakMode = .byWordWrapping
-                label.text = NSLocalizedString("infoTable6", comment: "")
-                label.frame.size = CGSize(width: infoTable.bounds.width - 32, height: 0)
-                label.sizeToFit()
-                label.frame = CGRect(x: 16, y: 8, width: label.bounds.width, height: label.bounds.height)
-                cell.addSubview(label)
-                cell.selectionStyle = .none
-                //
+                InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable6", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
                 return cell
             default:
                 let cell = UITableViewCell()

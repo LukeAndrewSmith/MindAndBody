@@ -55,8 +55,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     
     // Bells Arrays
-    let bellsArray: [String] =
-        ["Tibetan Chimes", "Tibetan Singing Bowl (Low)", "Tibetan Singing Bowl (Low)(x4)", "Tibetan Singing Bowl (Low)(Singing)", "Tibetan Singing Bowl (High)", "Tibetan Singing Bowl (High)(x4)", "Tibetan Singing Bowl (High)(Singing)", "Australian Rain Stick", "Australian Rain Stick (x2)", "Australian Rain Stick (2 sticks)", "Wind Chimes", "Gambang (Wood)(Up)", "Gambang (Wood)(Down)", "Gambang (Metal)", "Indonesian Frog", "Cow Bell (Small)", "Cow Bell (Big)"]
+    let bellsArray: [String] = BellsFunctions.shared.bellsArray
     
     var soundPlayer: AVAudioPlayer!
 
@@ -548,16 +547,16 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                     // All high intensity is even
                     if i % 2 == 0 {
                         // High == doing something
-                        content.sound = UNNotificationSound(named: "Tibetan Singing Bowl (High).caf")
+                        content.sound = UNNotificationSound(named: "tibetanBowlH.caf")
                     // All low intensity is odd
                     } else {
                         // Low == rest
-                        content.sound = UNNotificationSound(named: "Tibetan Singing Bowl (Low).caf")
+                        content.sound = UNNotificationSound(named: "tibetanBowlL.caf")
                     }
                 } else {
                     content.title = NSLocalizedString("cardioEnd", comment: "")
                     // Sound
-                    content.sound = UNNotificationSound(named: "Tibetan Singing Bowl (Low).caf")
+                    content.sound = UNNotificationSound(named: "tibetanBowlL.caf")
                 }
                 content.body = " "
                 

@@ -612,7 +612,7 @@
                                     <action selector="createScheduleButtonAction:" destination="MvL-yD-EMG" eventType="touchUpInside" id="i3Y-TN-m5k"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBc-oy-0mh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBc-oy-0mh">
                                 <rect key="frame" x="251.5" y="243.5" width="119.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -5105,7 +5105,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZqW-8e-seX">
-                                <rect key="frame" x="24" y="0.0" width="327" height="484"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="484"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="iiL-BA-Svk" id="Fxa-gx-Bm9"/>
@@ -5116,8 +5116,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZqW-8e-seX" firstAttribute="top" secondItem="fYv-Yi-nQt" secondAttribute="top" id="81B-xL-YNU"/>
-                            <constraint firstItem="ZqW-8e-seX" firstAttribute="leading" secondItem="fYv-Yi-nQt" secondAttribute="leading" constant="24" id="EGA-jw-wuS"/>
-                            <constraint firstAttribute="trailing" secondItem="ZqW-8e-seX" secondAttribute="trailing" constant="24" id="Fnw-08-su9"/>
+                            <constraint firstItem="ZqW-8e-seX" firstAttribute="leading" secondItem="fYv-Yi-nQt" secondAttribute="leading" constant="16" id="EGA-jw-wuS"/>
+                            <constraint firstAttribute="trailing" secondItem="ZqW-8e-seX" secondAttribute="trailing" constant="16" id="Fnw-08-su9"/>
                             <constraint firstItem="mlr-jc-rhc" firstAttribute="top" secondItem="ZqW-8e-seX" secondAttribute="bottom" id="qd2-dX-IO5"/>
                         </constraints>
                     </view>
@@ -5142,7 +5142,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zgc-2I-dvu">
-                                <rect key="frame" x="24" y="0.0" width="327" height="484"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="484"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="DdA-AH-yWh" id="Kzr-Ir-wUk"/>
@@ -5152,9 +5152,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="zgc-2I-dvu" firstAttribute="leading" secondItem="6qF-fR-fxM" secondAttribute="leading" constant="16" id="7Bd-Fh-BUv"/>
                             <constraint firstItem="kds-Yk-44k" firstAttribute="top" secondItem="zgc-2I-dvu" secondAttribute="bottom" id="EQ5-D9-i4p"/>
-                            <constraint firstAttribute="trailing" secondItem="zgc-2I-dvu" secondAttribute="trailing" constant="24" id="OjI-Wc-a8c"/>
-                            <constraint firstItem="zgc-2I-dvu" firstAttribute="leading" secondItem="6qF-fR-fxM" secondAttribute="leading" constant="24" id="iXN-yn-aFg"/>
+                            <constraint firstAttribute="trailing" secondItem="zgc-2I-dvu" secondAttribute="trailing" constant="16" id="OjI-Wc-a8c"/>
                             <constraint firstItem="zgc-2I-dvu" firstAttribute="top" secondItem="6qF-fR-fxM" secondAttribute="top" id="tWl-Jr-56A"/>
                         </constraints>
                     </view>
@@ -5179,7 +5179,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Alf-eJ-ZDD">
-                                <rect key="frame" x="24" y="0.0" width="327" height="484"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="484"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="4td-NY-vLn" id="uaS-If-g4h"/>
@@ -5189,8 +5189,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Alf-eJ-ZDD" firstAttribute="leading" secondItem="xMa-n9-KYT" secondAttribute="leading" constant="24" id="8zz-A5-KKv"/>
-                            <constraint firstAttribute="trailing" secondItem="Alf-eJ-ZDD" secondAttribute="trailing" constant="24" id="CGY-jY-I6V"/>
+                            <constraint firstItem="Alf-eJ-ZDD" firstAttribute="leading" secondItem="xMa-n9-KYT" secondAttribute="leading" constant="16" id="8zz-A5-KKv"/>
+                            <constraint firstAttribute="trailing" secondItem="Alf-eJ-ZDD" secondAttribute="trailing" constant="16" id="CGY-jY-I6V"/>
                             <constraint firstItem="wt6-1g-9iR" firstAttribute="top" secondItem="Alf-eJ-ZDD" secondAttribute="bottom" id="Jz4-Nd-yPF"/>
                             <constraint firstItem="Alf-eJ-ZDD" firstAttribute="top" secondItem="xMa-n9-KYT" secondAttribute="top" id="XIr-PQ-OQl"/>
                         </constraints>
@@ -5216,7 +5216,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M6p-Fp-wKe">
-                                <rect key="frame" x="24" y="0.0" width="327" height="484"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="484"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="bjA-wt-hxn" id="eX0-oa-G7u"/>
@@ -5226,8 +5226,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="M6p-Fp-wKe" firstAttribute="leading" secondItem="o2s-5F-D2A" secondAttribute="leading" constant="24" id="3zr-rc-DE2"/>
-                            <constraint firstAttribute="trailing" secondItem="M6p-Fp-wKe" secondAttribute="trailing" constant="24" id="En1-ze-JDL"/>
+                            <constraint firstItem="M6p-Fp-wKe" firstAttribute="leading" secondItem="o2s-5F-D2A" secondAttribute="leading" constant="16" id="3zr-rc-DE2"/>
+                            <constraint firstAttribute="trailing" secondItem="M6p-Fp-wKe" secondAttribute="trailing" constant="16" id="En1-ze-JDL"/>
                             <constraint firstItem="chp-jz-tPo" firstAttribute="top" secondItem="M6p-Fp-wKe" secondAttribute="bottom" id="p9L-NK-aWi"/>
                             <constraint firstItem="M6p-Fp-wKe" firstAttribute="top" secondItem="o2s-5F-D2A" secondAttribute="top" id="uUk-4m-JY4"/>
                         </constraints>
@@ -5295,7 +5295,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n6X-tH-UgK">
-                                <rect key="frame" x="24" y="0.0" width="327" height="484"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="484"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="oi1-J6-a7V" id="unM-2c-7yI"/>
@@ -5306,9 +5306,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="n6X-tH-UgK" firstAttribute="top" secondItem="UvP-WN-nwh" secondAttribute="top" id="0lm-Of-uQz"/>
-                            <constraint firstItem="n6X-tH-UgK" firstAttribute="leading" secondItem="UvP-WN-nwh" secondAttribute="leading" constant="24" id="572-A8-iTR"/>
+                            <constraint firstItem="n6X-tH-UgK" firstAttribute="leading" secondItem="UvP-WN-nwh" secondAttribute="leading" constant="16" id="572-A8-iTR"/>
                             <constraint firstItem="t9l-CG-NaX" firstAttribute="top" secondItem="n6X-tH-UgK" secondAttribute="bottom" id="QTD-tm-9f0"/>
-                            <constraint firstAttribute="trailing" secondItem="n6X-tH-UgK" secondAttribute="trailing" constant="24" id="Xdf-6B-yvF"/>
+                            <constraint firstAttribute="trailing" secondItem="n6X-tH-UgK" secondAttribute="trailing" constant="16" id="Xdf-6B-yvF"/>
                         </constraints>
                     </view>
                     <connections>
@@ -5332,7 +5332,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J4r-Dt-zme">
-                                <rect key="frame" x="24" y="0.0" width="327" height="484"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="484"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="wDx-tj-P1F" id="Xq6-Fn-DDx"/>
@@ -5343,9 +5343,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="J4r-Dt-zme" firstAttribute="top" secondItem="PcE-4w-jcF" secondAttribute="top" id="89K-Ye-iPb"/>
-                            <constraint firstItem="J4r-Dt-zme" firstAttribute="leading" secondItem="PcE-4w-jcF" secondAttribute="leading" constant="24" id="hao-Yb-bdk"/>
+                            <constraint firstItem="J4r-Dt-zme" firstAttribute="leading" secondItem="PcE-4w-jcF" secondAttribute="leading" constant="16" id="hao-Yb-bdk"/>
                             <constraint firstItem="uUI-Ha-OpX" firstAttribute="top" secondItem="J4r-Dt-zme" secondAttribute="bottom" id="pKe-Az-7yp"/>
-                            <constraint firstAttribute="trailing" secondItem="J4r-Dt-zme" secondAttribute="trailing" constant="24" id="xv2-Z3-4xD"/>
+                            <constraint firstAttribute="trailing" secondItem="J4r-Dt-zme" secondAttribute="trailing" constant="16" id="xv2-Z3-4xD"/>
                         </constraints>
                     </view>
                     <connections>
@@ -5401,7 +5401,7 @@
         <segue reference="bzi-ZW-PZ7"/>
         <segue reference="IQI-W2-saz"/>
         <segue reference="M72-ar-DyO"/>
-        <segue reference="OOV-Kp-GfI"/>
+        <segue reference="aWq-hZ-Auo"/>
         <segue reference="kIb-e7-fcP"/>
         <segue reference="NR1-hM-oZr"/>
     </inferredMetricsTieBreakers>

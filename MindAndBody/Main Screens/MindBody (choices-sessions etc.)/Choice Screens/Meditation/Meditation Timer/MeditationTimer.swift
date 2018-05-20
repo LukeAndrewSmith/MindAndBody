@@ -355,7 +355,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         view.insertSubview(beginBlur, belowSubview: beginButton)
         //
         beginButton.setTitle(NSLocalizedString("begin", comment: ""), for: .normal)
-        beginButton.setTitleColor(Colors.light, for: .normal)
+        beginButton.setTitleColor(Colors.dark, for: .normal)
         beginButton.backgroundColor = Colors.green
         
         

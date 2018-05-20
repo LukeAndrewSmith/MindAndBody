@@ -362,6 +362,15 @@ class SubscriptionsCheck {
         } else {
             Loading.shared.shouldPresentLoading = false
             isValid = UserDefaults.standard.object(forKey: "userHasValidSubscription") as! Bool
+            if isValid {
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                }
+            }
         }
     }
 }
@@ -844,10 +853,10 @@ extension UIViewController {
         // Convert to [Date: Int]
         var trackingDictionaries: [[Date: Int]] = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionariesString)
         //
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         // Current Date
-        let currentDate = Date().currentDate
+        let currentDate = Date().setToMidnightUTC()
         // Get Mondays date
         let currentMondayDate = Date().firstMondayInCurrentWeek
         //
@@ -938,7 +947,7 @@ extension UIViewController {
         // Convert to [Date: Int]
         var trackingDictionaries: [[Date: Int]] = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionariesString)
         //
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         // Get Mondays date
         let currentMondayDate = Date().firstMondayInCurrentWeek
@@ -1193,30 +1202,21 @@ extension Date {
         // Get date to set to midnight
         var dateAtMidnight = self
         // Set to midnight
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         dateAtMidnight = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: dateAtMidnight)!
         // Return
         return dateAtMidnight
     }
     
-    
-    var currentDate: Date {
-        let currentDateMidnight = self.setToMidnightUTC()
-//        var components = Calendar(identifier: .gregorian).dateComponents([.year, .month, .weekOfMonth, .day], from: self)
-//        components.timeZone = TimeZone(abbreviation: "UTC")
-//        let currentDate = Calendar(identifier: .gregorian).date(from: components)
-//        currentDate?.setToMidnightUTC()
-        return currentDateMidnight
-    }
-    
     //
     // Day in week of date from monday, monday being 1
     var currentWeekDayFromMonday: Int {
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
-        
-        var currentWeekDay = calendar.component(.weekday, from: Date())
+        // component gives us 1 for sunday through to 7 for monday, we want 1 for monday so shift
+        var currentWeekDay = calendar.component(.weekday, from: Date().setToMidnightUTC())
+        // 0 is monday but we want 1 and monday so shift
         if currentWeekDay == 1 {
             currentWeekDay = 7
         } else if currentWeekDay > 1 {
@@ -1228,7 +1228,7 @@ extension Date {
     //
     // First Monday in current week as Date
     var firstMondayInCurrentWeek: Date {
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         
         var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
@@ -1241,7 +1241,7 @@ extension Date {
     //
     // First MONDAY in month
     var firstMondayInMonth: Date {
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         
         var components = calendar.dateComponents([.year, .month], from: self)
@@ -1251,7 +1251,7 @@ extension Date {
         let firstDate = calendar.date(from: components)
         let firstComponents = calendar.dateComponents([.year, .month, .weekday], from: firstDate!)
         
-        // Convert from Sunday=6 to Monday=1 day numbering
+        // Convert from Sunday=1 to Monday=1 day numbering
         let addWeekdays = 7 - ((firstComponents.weekday! + 5) % 7)
         // Jump forwards to next Monday if we arent already there
         var mondaysDate = firstDate
@@ -1265,7 +1265,7 @@ extension Date {
     //
     // Number of Mondays in month
     var numberOfMondaysInCurrentMonth: Int {
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         
         var components = calendar.dateComponents([.year, .month], from: self)
@@ -1287,7 +1287,7 @@ extension Date {
     //
     // First day in month
     var firstDateInMonth: Date {
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         
         var components = calendar.dateComponents([.year, .month], from: self)
@@ -1302,7 +1302,7 @@ extension Date {
     
     //
     var firstDateInYear: Date {
-        var calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         
         var components = calendar.dateComponents([.year], from: self)

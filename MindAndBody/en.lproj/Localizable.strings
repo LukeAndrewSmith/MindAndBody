@@ -835,6 +835,10 @@
 "abRollout" = "Ab Rollout";
 
 
+//
+"bodyweightSquat" = "Bodyweight Squat";
+"reverseSnowAngels" = "Reverse Snow Angels";
+
             // Movement Explanations
             //
             // Legs (Quads)
@@ -2933,7 +2937,7 @@
 // Can cancel message
 "canCancelTitle" = "Are You Sure?";
 "canCancelMessage" = "\nYou can cancel at any time from your phone's settings during the trial, without having to pay anything.";
-"ohGoOnThen" = "Oh go on then, i'll give it a go";
+"ohGoOnThen" = "Oh go on then, I'll give it a go";
 "yesImSure" = "Yes I'm sure, I only like free things";
 // Subscrtioption failed to retreive
 "retreivalFailed" = "Can't retreive subscription";
@@ -2957,18 +2961,19 @@
 "termsAndConditions" = "Terms & Conditions";
 "termsAndConditionsDetail" = "The Mind & Body subscription grants you access to use the Mind & Body App for a year. The subscription will automatically renew within 24 hours of the end of the year unless cancelled. You will be charged through your iTunes account. You can manage your subscription in Account Settings. By purchasing the subscription via in-app purchases, you agree to the Apple App Store terms and conditions.";
 // Info Tables
-"infoTable1" = "\nDo your mind & body justice by getting into a solid routine\n\nSwipe left to find out more...";
+"infoTable1" = "Do your mind & body justice\n\nSwipe left to find out more...";
 //"Aim:\nDo your mind & body justice\nHow:\nProvide you the aid needed, leave you the responsibility required\nMethods:\nPlans, schedules, tracking, customisation";
 // Schedule
-"infoTable2" = "Create personalised weekly schedules in line with your goals, abilities and time. Each time you work towards a goal you have choice to do so in various ways, allowing you to never get bored and to do what feels best in the moment.";
+"infoTable2" = "Get into a routine. The app can help you create weekly schedules in line with your goals, abilities and time, or can let you create custom ones. When working towards a goal, you make some choices to tailor your session to your current feeling (e.g Workout -> Gym/Bodyweight -> Short/Medium/Long), then the app selects the best session for you. This allows you to have the many benifits of a routine, whilst avoiding their potential monotony.";
+
 //
 // Fitness
 "fitness" = "Fitness";
-"infoTable3" = "The app provides sets, reps, weight suggestions, demonstrations, explanations and timers and fully timed workouts (so you can avoid touching your phone). A wide variety of gym/bodyweight workouts and endurance sessions of different lengths, difficulties and aims means it has something for everyone. Warmup and stretching sessions are also presented to ensure optimum results.";
+"infoTable3" = "The app provides sets, reps and weight suggestions, demonstrations, explanations, timers and fully timed sessions (so you can avoid touching your phone). A wide variety of gym/bodyweight workouts (circuit and classic) and endurance sessions of different lengths, difficulties and aims means it has something for everyone. Warmup and stretching sessions are also presented to ensure optimum results.";
 // Yoga
-"infoTable4" = "The app has yoga sessions of varying difficulty and are split into three main categories, relaxing, neutral and stimulating. The sessions are logical, flow nicely and keep to their purpose. All sessions can be followed without touching the phone, using 'timed sessoin', you set your average breath length and let the app do the rest. Explanations and demonstrations are also given for all poses.";
+"infoTable4" = "The app has yoga sessions of varying difficulty that are split into three main categories; relaxing, neutral and stimulating. The sessions are logical and flow nicely, and can all be followed without touching the phone, using 'timed sessions': you set your average breath length and let the app do the rest. Explanations and demonstrations are also given for all poses.";
 // Meditation
-"infoTable5" = "The app has a meditation timer, in which you set duration, bells and background sounds, and also has some 'guided' meditation. The guided meditation does not talk to you and meditate for you, rather it gives a detailed explanation and teaches you to be independant. There is an introduction section, and some other sections presenting various techniques.";
+"infoTable5" = "The app has a meditation timer in which you set duration, bells and background sounds, and also has 'guided' meditation. The guided meditation provides detailed written explanations, thereby teaches independence in meditation. There is an introduction section and some other sections presenting various techniques.";
 // Tracking
 "infoTable6" = "Simple tracking will help you keep to your goals. The app records how much you acheive of what you planned and presents graphs to this effect.";
 

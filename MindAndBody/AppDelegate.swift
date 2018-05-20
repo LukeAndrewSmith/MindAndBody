@@ -29,9 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: TEST!! REMOVE
         // ICloud/UserDefaults Reset
-//        ICloudFunctions.shared.removeAll()
-//        let domain = Bundle.main.bundleIdentifier!
-//        UserDefaults.standard.removePersistentDomain(forName: domain)
+        ICloudFunctions.shared.removeAll()
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
         
         
         //
@@ -51,11 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSUbiquitousKeyValueStore.default.synchronize()
             ICloudFunctions.shared.pullToDefaults()
         }
-        
-        //
-        // Check if the user has a valid subscription
-        // Subscription Check 1
-        SubscriptionsCheck.shared.checkSubscription()
         
         //
         // Register Defaults --------------------------------------------------------------------------------
@@ -97,8 +92,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Push everything to iCloud
-        let check = NSUbiquitousKeyValueStore.default.object(forKey: "walkthroughs")
         ICloudFunctions.shared.pushToICloud(toSync: [""])
+        
+        //
+        // Check if the user has a valid subscription
+        // Subscription Check 1
+        SubscriptionsCheck.shared.checkSubscription()
         
         //
         // Set Home Screen
@@ -169,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Indicate to the schedule the date of last opening
         // This is no persisted, if the app isn't quit, and the last day opened is not today, the schedule selects the correct day
-        ScheduleVariables.shared.lastDayOpened = Date().currentDate
+        ScheduleVariables.shared.lastDayOpened = Date().setToMidnightUTC()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
