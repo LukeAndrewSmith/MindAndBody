@@ -888,7 +888,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     //
     // Components
-    var walkthroughTexts = ["settings0", "settings1", "settings2"]
+    var walkthroughTexts = ["settings0", "settings1", "settings2", "settings3"]
     var highlightSize: CGSize? = nil
     var highlightCenter: CGPoint? = nil
     // Corner radius, 0 = height / 2 && 1 = width / 2
@@ -926,11 +926,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
             walkthroughHighlight.layer.borderColor = Colors.dark.cgColor
             // Highlight
-            walkthroughHighlight.frame.size = CGSize(width: 125, height: 47 * 2)
-            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 2) + 44
-            walkthroughHighlight.center = CGPoint(x: (125 / 2) + 7.5, y: homepageMaxY)
+
+            let section = tableView.rect(forSection: 0)
+            walkthroughHighlight.frame = CGRect(x: 8, y: section.minY + 47 + 44, width: view.bounds.width - 16, height: 44)
+            walkthroughHighlight.center.y += TopBarHeights.combinedHeight
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 4
-            
+
             //
             // Flash
             //
@@ -951,9 +952,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Timed Sessions
         case 1:
             //
-            highlightSize = CGSize(width: 175, height: 47 * 2)
-            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 3) + (44 * 2)
-            highlightCenter = CGPoint(x: (175 / 2) + 7.5, y: homepageMaxY)
+            let section = tableView.rect(forSection: 1)
+            highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 22)
+            highlightCenter?.y += TopBarHeights.combinedHeight
+            
+            //
             highlightCornerRadius = 2
             //
             labelFrame = 0
@@ -969,9 +973,35 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Automatic yoga
         case 2:
             //
-            highlightSize = CGSize(width: 175, height: 47 * 2)
-            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 4) + (44 * 3)
-            highlightCenter = CGPoint(x: (175 / 2) + 7.5, y: homepageMaxY)
+            let section = tableView.rect(forSection: 1)
+            highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 44 + 22)
+            highlightCenter?.y += TopBarHeights.combinedHeight
+            
+            //
+            highlightCornerRadius = 2
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+        // Reminders
+        case 3:
+            
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 4), at: .top, animated: false)
+            //
+            let section = tableView.rect(forSection: 4)
+            highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 22 - tableView.contentOffset.y)
+            highlightCenter?.y += TopBarHeights.combinedHeight
+            
+            //
             highlightCornerRadius = 2
             //
             labelFrame = 0
@@ -986,6 +1016,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
         //
         default:
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             UIView.animate(withDuration: 0.4, animations: {
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
@@ -997,6 +1028,13 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             })
         }
+    }
+    
+    // Get frame
+    func frameForRow(row: Int, section: Int) -> CGRect {
+        let y = TopBarHeights.combinedHeight + CGFloat(((section + 1) * 47) + (section * 20)) + CGFloat(row * 44)
+        let rect = CGRect(x: 8, y: y, width: view.bounds.width - 16, height: 44)
+        return rect
     }
     
     

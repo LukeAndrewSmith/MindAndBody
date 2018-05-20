@@ -34,6 +34,13 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         "stretching": "stretching",
         "yoga": "yoga"]
     
+    let presetsButtonTitleDict = [
+        "warmup": "selectWarmup",
+        "workout": "selectWorkout",
+        "cardio": "selectCardio",
+        "stretching": "selectStretching",
+        "yoga": "selectPractice"]
+    
     
     
     //
@@ -115,6 +122,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // Initial Element Positions
         if SelectedSession.shared.selectedSession[2] == "" {
             setConstraints(showingViews: false, animated: false)
+            presetsButton.setTitle("- " + NSLocalizedString(SelectedSession.shared.selectedSession[2], comment: "") + " -", for: .normal)
         //
         // Selected Automatically from schedule
         } else {
@@ -135,34 +143,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             //
             setConstraints(showingViews: true, animated: true)
         }
-        
-//        // App chooses session
-//        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
-//            // Cardio Type
-//            // If cardio
-//            if SelectedSession.shared.selectedSession[0] == "cardio" {
-//                // If time based (first movement contains boolean indicator)
-//                if (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["timeBased"] as! Bool) {
-//                    cardioType = 0
-//                    // Else if distance based
-//                } else {
-//                    cardioType = 1
-//                }
-//            }
-//
-//            // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [sessionKey] = session, [0] titles, [0] title
-//            presetsButton.setTitle("- " + NSLocalizedString(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]!["title"] as! String, comment: "") + " -", for: .normal)
-//
-//            //
-//            self.movementsTableView.reloadData()
-//            let indexPath2 = NSIndexPath(row: 0, section: 0)
-//            self.movementsTableView.scrollToRow(at: indexPath2 as IndexPath, at: .top, animated: true)
-//            //
-//            setConstraints(showingViews: true, animated: true)
-//        } else {
-//            setConstraints(showingViews: false, animated: false)
-//        }
-        
         
         //
         // TableView Backgrounds

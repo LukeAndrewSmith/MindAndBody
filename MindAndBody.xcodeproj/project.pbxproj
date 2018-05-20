@@ -2948,6 +2948,7 @@
 		07686A8C1F84398000C278CC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0782AB561FC4F1BB00D34500 /* ScheduleWalkthrough.swift */,
 				07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */,
 				07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */,
 				0782AB511FC4F0CE00D34500 /* ScheduleTableView.swift */,
@@ -3651,7 +3652,6 @@
 				0778761C1F92A44B005CE68A /* Initial-Subscriptions */,
 				077DAB0E1FD5FCC200CF7949 /* Session Data */,
 				077E47151EB9DC54005B0B22 /* Slide Menu */,
-				0782AB551FC4F1A200D34500 /* Walkthroughs */,
 				07094BE81FB0D17F003DB553 /* Audio-Visual */,
 				077AC0E31DA535840026895B /* Assets.xcassets */,
 				077AC0E81DA535840026895B /* Info.plist */,
@@ -3763,14 +3763,6 @@
 				077E471E1EB9E221005B0B22 /* SlideMenuView.swift */,
 			);
 			path = "Slide Menu";
-			sourceTree = "<group>";
-		};
-		0782AB551FC4F1A200D34500 /* Walkthroughs */ = {
-			isa = PBXGroup;
-			children = (
-				0782AB561FC4F1BB00D34500 /* ScheduleWalkthrough.swift */,
-			);
-			path = Walkthroughs;
 			sourceTree = "<group>";
 		};
 		0789ED091F79A71E000EB739 /* Global */ = {

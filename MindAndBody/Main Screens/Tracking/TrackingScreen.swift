@@ -627,7 +627,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width - 15, height: 20)
-            walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: TopBarHeights.combinedHeight + 12.25 + ((view.bounds.height - 73.5) * (25/125)))
+            walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: TopBarHeights.combinedHeight + 2.5 + ((view.bounds.height - 73.5) * (25/125)))
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //
@@ -651,9 +651,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         case 1:
             //
             highlightSize = CGSize(width: 36, height: 36)
-            let barButtonItem = self.navigationItem.rightBarButtonItem!
-            let buttonItemView = barButtonItem.value(forKey: "view") as? UIView
-            highlightCenter = CGPoint(x: (buttonItemView?.center.x)!, y: (buttonItemView?.center.y)! + TopBarHeights.statusBarHeight)
+            highlightCenter = CGPoint(x: view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + TopBarHeights.statusBarHeight)
             highlightCornerRadius = 0
             //
             labelFrame = 0

@@ -183,7 +183,7 @@ enum Register {
         // Time Based Sessions - 2
         "TimeBasedSessions": [0], // 0 == Off, 1 = on
         // Yoga Automatic - 3
-        "AutomaticYoga": [0, 30, 10, 1], // [0], 0 == off, 1 == on  // Defaults: 5.0s breaths, 2.0s indicator transition, tibet singing bowl transition
+        "AutomaticYoga": [0, 30, 6, 1], // [0], 0 == off, 1 == on  // Defaults: 5.0s breaths, 7s indicator transition, tibet singing bowl transition // Note numbers are indexes to array
         // Rest times - 4
         "RestTimes": [0, 45, 10],
         // Metric/Imperial - 6

@@ -167,7 +167,6 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        //
         view.backgroundColor = .clear
         InfoTables.shared.setupTable(tableView: infoTable)
         infoTable.layer.borderWidth = 1
@@ -175,11 +174,6 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         row0Height = infoTable.bounds.height * (4/9)
         explanationRowHeight = infoTable.bounds.height - 8 - 44 - row0Height
-        
-        print(infoTable.bounds.height)
-        print(row0Height)
-        print(explanationRowHeight)
-        print(row0Height + 8 + 44 + explanationRowHeight)
     }
     
     // Number of sections
@@ -194,12 +188,12 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Rows
     // Number of rows per section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return 4
+       return 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
-        case 0: return row0Height
+        case 0: return infoTable.bounds.height
         case 1: return 8
         case 2: return 44
         case 3: return explanationRowHeight
@@ -212,27 +206,49 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             //
-            let aThirdRowHeight = row0Height * (1/3)
             let cell = UITableViewCell()
             cell.selectionStyle = .none
             // Image
             let titleImage = UIImageView()
-            titleImage.frame.size = CGSize(width: aThirdRowHeight, height: aThirdRowHeight)
+            titleImage.frame.size = CGSize(width: infoTable.bounds.height / 3, height: infoTable.bounds.height * (1/3))
             titleImage.image = #imageLiteral(resourceName: "Loading").withRenderingMode(.alwaysTemplate)
             titleImage.tintColor = Colors.light
             titleImage.alpha = 0.72
             titleImage.contentMode = .scaleAspectFit
-            titleImage.center = CGPoint(x: infoTable.bounds.width / 2, y: aThirdRowHeight * (7/8))
+            titleImage.center = CGPoint(x: infoTable.bounds.width / 2, y: infoTable.bounds.height * (5/18))
             cell.addSubview(titleImage)
             // Title
             let titleLabel = UILabel()
             titleLabel.frame.size = CGSize(width: infoTable.bounds.width, height: row0Height * (2/3))
-            titleLabel.center = CGPoint(x: infoTable.bounds.width / 2, y: ((aThirdRowHeight * 2) / 2) + aThirdRowHeight)
+            titleLabel.center = CGPoint(x: infoTable.bounds.width / 2, y: infoTable.bounds.height * (5/9))
             titleLabel.text = "Mind & Body"
             titleLabel.font = UIFont(name: "SFUIDisplay-thin", size: 43)
             titleLabel.textColor = Colors.light
             titleLabel.textAlignment = .center
             cell.addSubview(titleLabel)
+            // Detail Label
+            let detailLabel = UILabel()
+            detailLabel.frame.size = CGSize(width: infoTable.bounds.width, height: row0Height * (2/3))
+            detailLabel.center = CGPoint(x: infoTable.bounds.width / 2, y: infoTable.bounds.height * (13/18))
+            detailLabel.text = "Fitness | Yoga | Meditation"
+            // Iphone 5
+            if IPhoneType.shared.iPhoneType() == 0 {
+                detailLabel.font = UIFont(name: "SFUIDisplay-thin", size: 24)
+            } else {
+                detailLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+            }
+            detailLabel.textColor = Colors.light
+            detailLabel.textAlignment = .center
+            cell.addSubview(detailLabel)
+            // Swipe Label
+            let swipeLabel = UILabel()
+            swipeLabel.frame.size = CGSize(width: infoTable.bounds.width, height: 35)
+            swipeLabel.center = CGPoint(x: infoTable.bounds.width / 2, y: infoTable.bounds.height - 17.5)
+            swipeLabel.text = NSLocalizedString("swipeLeft", comment: "")
+            swipeLabel.font = UIFont(name: "SFUIDisplay-thin", size: 17)
+            swipeLabel.textColor = Colors.light
+            swipeLabel.textAlignment = .center
+            cell.addSubview(swipeLabel)
             //
             cell.backgroundColor = Colors.dark
             return cell
@@ -241,7 +257,7 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             // Iphone 5
             if IPhoneType.shared.iPhoneType() == 0 {
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 24)
             } else {
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
             }

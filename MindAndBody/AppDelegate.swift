@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Check if the user has a valid subscription
         // Subscription Check 1
-        SubscriptionsCheck.shared.checkSubscription()
+//        SubscriptionsCheck.shared.checkSubscription()
         
         //
         // Set Home Screen

@@ -34,6 +34,11 @@ class SubscriptionScreen: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseCancelled(notification:)), name: SubscriptionNotifiations.purchaseCancelledNotification, object: nil)
         
         //
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Setup views
         setupView()
     }
     
@@ -140,8 +145,7 @@ class SubscriptionScreen: UIViewController {
 //            Colors.light.withAlphaComponent(0.25)
         
         // Page Control
-        // Should use subscriptionButton.frame.minY rather than hardcoding (41 - 82) but doesn't seem to work on iphone5 without
-        InfoPageControl.shared.setupPageControl(x: view.center.x, y: view.bounds.height - (41 - 82) - 12)
+        InfoPageControl.shared.setupPageControl(x: view.center.x, y: subscriptionButton.frame.minY - 12)
         view.addSubview(InfoPageControl.shared.pageControl)
     }
     

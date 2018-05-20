@@ -87,7 +87,7 @@ class ScheduleScreen: UIViewController {
     var didSetWalkthrough = false
     //
     // Components
-    var walkthroughTexts = ["schedule0", "schedule1", "schedule2", "schedule3"]
+    var walkthroughTexts = ["schedule0", "schedule1", "schedule2", "schedule3", "schedule4", "schedule5", "schedule6", "schedule7", "schedule8", "schedule9", "schedule10", "schedule11"]
     var highlightSize: CGSize? = nil
     var highlightCenter: CGPoint? = nil
     // Corner radius, 0 = height / 2 && 1 = width / 2
@@ -150,18 +150,20 @@ class ScheduleScreen: UIViewController {
         // Checking subscription is valid, (present loading during check)
         if Loading.shared.shouldPresentLoading {
             // Subscription Check 2
-            Loading.shared.beginLoading()
+//            Loading.shared.beginLoading()
         }
         // Check subscription -> Present Subscription Screen (if not valid)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
         
-        if SubscriptionsCheck.shared.isValid {
+        
+        // NOTE TEST nina
+//        if SubscriptionsCheck.shared.isValid {
             // Present schedule walkthrough
             let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
             if walkthroughs["Schedule"] == false {
                 walkthroughSchedule()
             }
-        }
+//        }
         
         // Ensure week goal correct
         updateWeekGoal()

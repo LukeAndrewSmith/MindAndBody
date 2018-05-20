@@ -765,9 +765,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
             walkthroughHighlight.layer.borderColor = Colors.dark.cgColor
             // Highlight
-            walkthroughHighlight.frame.size = CGSize(width: 225, height: 47 * 2)
-            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 2) + 44
-            walkthroughHighlight.center = CGPoint(x: (225 / 2) + 7.5, y: homepageMaxY)
+            let section = tableViewAutomatic.rect(forSection: 1)
+            walkthroughHighlight.frame = CGRect(x: 8, y: section.minY + 47, width: view.bounds.width - 16, height: 44)
+            walkthroughHighlight.center.y += TopBarHeights.combinedHeight
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 4
             
             //
@@ -790,9 +790,11 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Transition time
         case 1:
             //
-            highlightSize = CGSize(width: 175, height: 47 * 2)
-            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 3) + (44 * 2)
-            highlightCenter = CGPoint(x: (175 / 2) + 7.5, y: homepageMaxY)
+            let section = tableViewAutomatic.rect(forSection: 1)
+            highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 44 + 22)
+            highlightCenter?.y += TopBarHeights.combinedHeight
+            //
             highlightCornerRadius = 2
             //
             labelFrame = 0
@@ -809,9 +811,11 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Transition indicator
         case 2:
             //
-            highlightSize = CGSize(width: 200, height: 47 * 2)
-            let homepageMaxY = TopBarHeights.combinedHeight + (47 * 4) + (44 * 3)
-            highlightCenter = CGPoint(x: (200 / 2) + 7.5, y: homepageMaxY)
+            let section = tableViewAutomatic.rect(forSection: 1)
+            highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 44 + 44 + 22)
+            highlightCenter?.y += TopBarHeights.combinedHeight
+            //
             highlightCornerRadius = 2
             //
             labelFrame = 0
