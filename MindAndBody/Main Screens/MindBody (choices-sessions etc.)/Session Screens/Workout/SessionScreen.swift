@@ -949,6 +949,12 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     
     

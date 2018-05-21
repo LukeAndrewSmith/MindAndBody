@@ -168,6 +168,9 @@ class MeditationScreen: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        // Remove observers
+        NotificationCenter.default.removeObserver(self)
+
         // Set back to false
         BellPlayer.shared.didSetEndTime = false
     }

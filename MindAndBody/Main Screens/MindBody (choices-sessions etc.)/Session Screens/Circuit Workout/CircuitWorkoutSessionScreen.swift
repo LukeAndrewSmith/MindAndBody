@@ -191,6 +191,12 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     // TableView ---------------------------------------------------------------------------------------------------------------------
     //

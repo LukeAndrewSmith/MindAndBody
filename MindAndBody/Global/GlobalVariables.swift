@@ -231,6 +231,10 @@ class ScheduleVariables {
             UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress", "schedules"])
+            // Reload schedule
+            ScheduleVariables.shared.shouldReloadSchedule = true
+            // Reset notifications
+            ReminderNotifications.shared.setNotifications()
         }
     }
     

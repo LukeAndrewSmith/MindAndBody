@@ -1744,7 +1744,7 @@ extension ScheduleScreen {
     
     // MARK: Reload View
         // shouldReloadSchedule
-    func reloadView() {
+    @objc func reloadView() {
         // RELOAD VIEW
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         if ScheduleVariables.shared.shouldReloadSchedule {

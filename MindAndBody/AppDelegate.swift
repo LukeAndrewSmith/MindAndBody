@@ -99,6 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Subscription Check 1
 //        SubscriptionsCheck.shared.checkSubscription()
         
+        // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
+        ScheduleVariables.shared.resetWeekTracking()
+        
         //
         // Set Home Screen
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -178,14 +181,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+        // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
+        ScheduleVariables.shared.resetWeekTracking()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
-        // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
-        ScheduleVariables.shared.resetWeekTracking()
-        
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

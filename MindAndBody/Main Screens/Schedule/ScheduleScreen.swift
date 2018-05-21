@@ -124,8 +124,6 @@ class ScheduleScreen: UIViewController {
             dayIndicator.alpha = 0
             TemporaryWeekArray.shared.createTemporaryWeekViewArray()
         }
-        // Check if reset necessary
-        ScheduleVariables.shared.resetWeekTracking()
         // Reload the view if requested by previous view
         reloadView()
     }
@@ -145,6 +143,9 @@ class ScheduleScreen: UIViewController {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Check if reset necessary
+        ScheduleVariables.shared.resetWeekTracking()
         
         // Subscriptions
         // Checking subscription is valid, (present loading during check)
@@ -178,8 +179,11 @@ class ScheduleScreen: UIViewController {
         layoutViews()
         reloadView()
         
-        // Register for receiving did enter foreground notification
+        // Register for receiving did enter foreground notifications
+        // check selected day
         NotificationCenter.default.addObserver(self, selector: #selector(checkSelectedDay), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        // reload view
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         
         //
         // Long press for cheating groups; ability to mark session as complete
@@ -188,6 +192,12 @@ class ScheduleScreen: UIViewController {
         scheduleTable.addGestureRecognizer(markAsCompletedGesture)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: viewDidLayoutSubviews
     override func viewDidLayoutSubviews() {
         if scheduleStyle == 0 {
