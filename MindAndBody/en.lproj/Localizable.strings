@@ -181,6 +181,8 @@
 "selectWarmup" = "- Select Warmup -";
 "customWarmup" = "- Custom Warmup -";
 
+"select" = "Select";
+
 "fullBody" = "Full Body";
 "cardio" = "Cardio";
 
@@ -248,7 +250,7 @@
 "hipEA" = "Using momentum\nRotating in too big a circle (it's best to keep the circle small)\nForcing your hip into unnatural positions";
 "hipEF" = "Maintaining good posture and standing tall\nRelaxing and not forcing your hip";
 
-"knees" = "Knee Rotations";
+"knees" = "Knee Bends";
 "kneesEH" = "Stand upright\nShift your weight to one leg\nFlex your knee, gently bringing your heel towards your glutes\nReturn your foot back towards the ground, without putting any weight on it\nRepeat 5-10 times\nRepeat with the other leg";
 "kneesEA" = "Tensing your hamstrings too much, the aim is to warm up the knee joint not the hamstring\nUsing momentum, slowly bring your heel up, and pause at the bottom";
 "kneesEF" = "Keeping your knee pointed towards the floor and your thighs parralel\nMaintaining good posture";
@@ -2919,12 +2921,6 @@
 "customSessionsI" = "• Creation of custom sessions and schedules";
 "bulletPointTemplate" = "• ";
 
-// Popups
-"notificationsPopup" = "Notifications";
-"notificationsPopupMessage" = "\nAllow notifications for timers, rest timers and reminders to work in the app.";
-"iCloudPopup" = "iCloud";
-"iCloudPopupMessage" = "\nAllow icloud if you plan on using the app on multiple devices and wish for your data to be shared between them.";
-
 // Settings
 "iCloudStorage" = "iCloud storage";
 
@@ -3183,6 +3179,7 @@
 "profileNotCompleteWarning" = "You have not answered every question, please go back and answers all unanswered questions";
 
 "noGoalsChosenWarning" = "You have not chosen any goals, please choose at least one goal before proceeding";
+"saveGoals" = "Save Goals";
 
 
     //
@@ -3463,34 +3460,22 @@
 //
     // Mind Body
         // Mind Body
-        "mindBody0" = "Walkthrough:\nExplanations of highlighted objects appear on the first viewing of most screens.";
-        "mindBody1" = "Mind & Body\nThis app is for those willing to make an effort and able to make decisions, to work with the app. It helps you create a schedule to work towards your goals based on a profile you make. The schedule presents several manners in which to work towards a goal on any given day allowing you to do so in the effective manner for the day.";
-        "mindBody2" = "Menu:\nAccess the menu to navigate the app.";
-        "mindBody3" = "Screens:\nNavigate the main screens of the app from the menu.";
-        "mindBody4" = "Profile:\nFill in your profile to be presented a schedule.";
-        "mindBody5" = "Schedule:\nYour schedule presents a weekly plan and takes you directly to your sessions.\nIt will be the default screen when opening the app.";
-        "mindBody6" = "Sessions:\nAll sessions are found here, and custom sessions can be made here.\nNote:\nThis screen is mainly for people who wish to use the app without the schedule, as the schedule takes you directly to the sessions.";
-        "mindBody7" = "Tracking:\nWhat you've done as a percentage of what you planned is viewed here.";
-        "mindBody8" = "Lessons:\nUseful lessons regarding mind & body are found here. I advise to read them at least once to get the most out of the app and the sessions.";
-        "mindBody9" = "Settings:\nPersonalise the app, changing the background image, choosing your homescreen (either sessions, menu or schedule) and more...";
-        "mindBody10" = "Recap:\nFill in your profile, get a schedule, and follow it!\n(Feel free to wander round the app first to see if you actually like it)";
+        "customWalkthrough" = "You can create custom sessions here.";
 
         // Schedule
-        "schedule0" = "Walkthrough:\nExplanations appear on the first viewing of most screens.";
+        "schedule0" = "Walkthrough:\nExplanations appear on the first viewing of most screens. Tap anywhere to continue.";
         "schedule1" = "Schedule Screen:\nYour schedules, once made, will be found here.";
         "schedule2" = "Schedules:\nCreate, select and edit schedules from here. You also edit your profile here. Your profile is what enables the app to choose sessions for you, so update it whenever you feel you've improved.";
-        "schedule3" = "Menu:\nAccess the menu to navigate to other screens in the app.";
-        "schedule4" = "Screens:\nNavigate the main screens of the app from the menu.";
-        "schedule5" = "Profile:\nFill in your profile to be presented a schedule.";
-        "schedule6" = "Schedule:\nYour schedule presents a weekly plan and takes you directly to your sessions.\nIt will be the default screen when opening the app.";
-        "schedule7" = "Sessions:\nAll sessions are found here, and custom sessions can be made here.\nNote:\nThis screen is mainly for people who wish to use the app without the schedule, as the schedule takes you directly to the sessions.";
-        "schedule8" = "Tracking:\nWhat you've done as a percentage of what you planned is viewed here.";
-        "schedule9" = "Lessons:\nUseful lessons regarding mind & body are found here. I advise to read them at least once to get the most out of the app and the sessions.";
-        "schedule10" = "Settings:\nPersonalise the app, changing the background image, choosing your homescreen (either sessions, menu or schedule) and more...";
-        "schedule11" = "Recap:\nFill in your profile, get a schedule, and follow it!\n(Feel free to wander round the app first to see if you actually like it)";
+        "schedule3" = "Menu:\nAccess the menu to navigate the main screens of the app.";
+        "schedule4" = "Sessions:\nAll sessions (Workout, Yoga etc.) are sorted here, and custom sessions can be made here.\nNote: This screen is mainly for people who wish to use the app without the schedule, as the schedule takes you directly to the sessions best for you.";
+        "schedule5" = "Schedule:\nWhere we just came from. Your home in the app.";
+        "schedule6" = "Tracking:\nWhat you've done as a percentage of what you planned is viewed here.";
+        "schedule7" = "Lessons:\nUseful lessons regarding mind & body are found here. They are presented in the schedule at revelant times, and can help you to get the most out of the app.";
+        "schedule8" = "Settings:\nPersonalise the app, changing the background image, choosing units etc...";
+        "schedule9" = "What now:\nHow about creating a schedule. All you need to do then is follow it, check tracking every now and again, and maybe change some settings.";
 
         // Tracking
-        "tracking0" = "Goal:\nThe green line is at 100%, it represents the amount you planned on doing.\nYou can touch the graph to see specific percentage.";
+        "tracking0" = "Goal:\nThe green line is at 100%, it represents the amount you planned.\nYou can touch the graph to see specific percentage.";
         "tracking1" = "Time Scale:\nChange the time scale to see a week, a month, a years worth of data.";
 
         // Profile
@@ -3508,11 +3493,11 @@
 
         // Settings
         "settings0" = "Homepage:\nThe default screen of the app";
-        "settings1" = "Timed Sessions:\nYou can put down your phone and simply follow what the app says.\nNOTE:Perform non timed sessions until you have a good understanding of the movements regularly presented (by reading their explanations).";
+        "settings1" = "Timed Sessions:\nYou can put down your phone and simply follow what the app says.\nNOTE: Perform non timed sessions until you have a good understanding of the movements regularly presented (by reading their explanations).";
         "settings2" = "Automatic Yoga:\nTimed sessions for yoga, you have to set your average breath length to enable it.\nNOTE: Perform non timed yoga first, reading the explanations of each pose until you are comfortable with the techniques.";
         "settings3" = "Reminders:\nThe app sends a reminder indicating the number of sessions planned for the day at 7am. It also asks on sunday at 7pm if you have acheived your goals, a question worth reflecting upon.";
         // Automatic Yoga
-        "automaticYoga0" = "Averga Breath Length:\nThe length of your average breath when doing yoga, a breath being both inhale and exhale. It can be calculated by timing 10-30 breaths and dividing the time by the number of breaths.";
+        "automaticYoga0" = "Averga Breath Length:\nThe length of your average breath when doing yoga, a breath being both inhale and exhale. It can be calculated by timing 10-30 breaths and then dividing by the number of breaths.";
         "automaticYoga1" = "Transition Time:\nThe average length of time you'd like to have to change pose.";
         "automaticYoga2" = "Transition Indicator:\nA sound to indicate when to change pose.";
 

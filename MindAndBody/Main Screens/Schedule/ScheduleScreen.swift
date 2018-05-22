@@ -8,12 +8,13 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 
 //
 // Schedule Class -----------------------------------------------------------------------------------------------------------------------------
 //
-class ScheduleScreen: UIViewController {
+class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     static var shared = ScheduleScreen()
 
@@ -87,7 +88,7 @@ class ScheduleScreen: UIViewController {
     var didSetWalkthrough = false
     //
     // Components
-    var walkthroughTexts = ["schedule0", "schedule1", "schedule2", "schedule3", "schedule4", "schedule5", "schedule6", "schedule7", "schedule8", "schedule9", "schedule10", "schedule11"]
+    var walkthroughTexts = ["schedule0", "schedule1", "schedule2", "schedule3", "schedule4", "schedule5", "schedule6", "schedule7", "schedule8", "schedule9"]
     var highlightSize: CGSize? = nil
     var highlightCenter: CGPoint? = nil
     // Corner radius, 0 = height / 2 && 1 = width / 2
@@ -156,13 +157,20 @@ class ScheduleScreen: UIViewController {
         // Check subscription -> Present Subscription Screen (if not valid)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
         
-        
+
         // NOTE TEST nina
 //        if SubscriptionsCheck.shared.isValid {
+            //
+            // Register for notifications
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+                // Enable or disable features based on authorization.
+            }
+            //
             // Present schedule walkthrough
             let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
             if walkthroughs["Schedule"] == false {
-                walkthroughSchedule()
+                    self.walkthroughSchedule()
             }
 //        }
         

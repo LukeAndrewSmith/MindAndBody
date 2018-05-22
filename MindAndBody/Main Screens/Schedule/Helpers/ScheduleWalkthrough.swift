@@ -93,7 +93,7 @@ extension ScheduleScreen {
             walkthroughProgress = self.walkthroughProgress + 1
             
             
-        // Menu
+        // Menu Button
         case 3:
             //
             highlightSize = CGSize(width: 36, height: 36)
@@ -110,14 +110,14 @@ extension ScheduleScreen {
             //
             walkthroughProgress = self.walkthroughProgress + 1
             
-        // Main App Screens
+        // Sessions
         case 4:
             //
             self.performSegue(withIdentifier: "openMenu", sender: nil)
             //
             // (72 is row height for slide menu)
-            highlightSize = CGSize(width: 44, height: 72 * 6)
-            highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + 216)
+            highlightSize = CGSize(width: 44, height: 44)
+            highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + (72 / 2))
             highlightCornerRadius = 1
             //
             labelFrame = 0
@@ -125,14 +125,69 @@ extension ScheduleScreen {
             walkthroughBackgroundColor = Colors.dark
             walkthroughTextColor = Colors.light
             //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
             //
             walkthroughProgress = self.walkthroughProgress + 1
             
             
-        // Profile
+        // Schedule
         case 5:
+            //
+            highlightSize = CGSize(width: 44, height: 44)
+            highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + (72 * 1.5))
+            highlightCornerRadius = 1
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // TRACKING CURRENTLY
+        // Lessons
+        case 6:
+            //
+            highlightSize = CGSize(width: 44, height: 44)
+            highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + (72 * 2.5))
+            highlightCornerRadius = 1
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // Lessons
+        case 7:
+            //
+            highlightSize = CGSize(width: 44, height: 44)
+            highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + (72 * 3.5))
+            highlightCornerRadius = 1
+            //
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+            
+        // Settings
+        case 8:
             //
             highlightSize = CGSize(width: 44, height: 44)
             highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + (72 * 4.5))
@@ -149,111 +204,37 @@ extension ScheduleScreen {
             walkthroughProgress = self.walkthroughProgress + 1
             
             
-        // Schedule
-        case 6:
-            //
-            highlightSize = CGSize(width: 44, height: 44)
-            highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + (72 * 1.5))
-            highlightCornerRadius = 1
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.dark
-            walkthroughTextColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        // Home
-        case 7:
-            //
-            highlightSize = CGSize(width: 44, height: 44)
-            highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + (72 / 2))
-            highlightCornerRadius = 1
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.dark
-            walkthroughTextColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        // Tracking
-        case 8:
-            //
-            highlightSize = CGSize(width: 44, height: 44)
-            highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + (72 * 2.5))
-            highlightCornerRadius = 1
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.dark
-            walkthroughTextColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        // Lessons
+        // What now
         case 9:
-            //
-            highlightSize = CGSize(width: 44, height: 44)
-            highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + (72 * 3.5))
-            highlightCornerRadius = 1
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.dark
-            walkthroughTextColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
+            
+            // Reset colors to white theme
+            walkthroughLabel.textColor = Colors.dark
+            walkthroughLabel.backgroundColor = Colors.light
+            walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             
             //
-            walkthroughProgress = self.walkthroughProgress + 1
+            MenuVariables.shared.menuInteractionType = 0
+            UIApplication.shared.statusBarStyle = .lightContent
+            MenuVariables.shared.isNewView = false
+            self.dismiss(animated: true)
             
-            
-        // Settings
-        case 10:
-            //
-            highlightSize = CGSize(width: 44, height: 44)
-            highlightCenter = CGPoint(x: CGFloat(30), y: TopBarHeights.combinedHeight + (72 * 5.5))
-            highlightCornerRadius = 1
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.dark
-            walkthroughTextColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
+            UIApplication.shared.keyWindow?.bringSubview(toFront: walkthroughView)
             
             //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-        // Recap
-        case 11:
+            self.highlightSize = CGSize(width: 36, height: 36)
+            self.highlightCenter = CGPoint(x: self.view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + TopBarHeights.statusBarHeight)
+            self.highlightCornerRadius = 1
             //
-            highlightSize = CGSize(width: 44, height: 432)
-            highlightCenter = CGPoint(x: CGFloat(30), y: 216 + TopBarHeights.combinedHeight)
-            highlightCornerRadius = 1
+            self.labelFrame = 0
             //
-            labelFrame = 0
+            self.walkthroughBackgroundColor = Colors.light
+            self.walkthroughTextColor = Colors.dark
             //
-            walkthroughBackgroundColor = Colors.dark
-            walkthroughTextColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.6, walkthroughProgress: walkthroughProgress)
+            self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
             
             //
-            walkthroughProgress = self.walkthroughProgress + 1
+            self.walkthroughProgress = self.walkthroughProgress + 1
         //
         default:
             UIView.animate(withDuration: 0.4, animations: {

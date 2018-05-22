@@ -289,6 +289,7 @@ class StopClock {
         //
         if timerValue == 0 {
             // Cancelling timer handeled in animatesstopClockDown
+            Vibrate.shared.vibratePhone()
             animateStopClockDown()
             //
         } else if timerValue == 1 {

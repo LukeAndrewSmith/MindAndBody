@@ -230,17 +230,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
                                 <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2T-vz-G1J">
-                                <rect key="frame" x="323.5" y="20" width="43.5" height="43.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="y2T-vz-G1J" secondAttribute="height" id="OUX-Ob-kcB"/>
-                                </constraints>
-                                <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="QuestionMarkMenu"/>
-                                <connections>
-                                    <action selector="questionMarkButtonAction:" destination="zdz-XK-58W" eventType="touchUpInside" id="3La-tU-9Xh"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -259,20 +248,16 @@
                             <constraint firstAttribute="trailing" secondItem="XrA-0V-rOp" secondAttribute="trailing" id="TKv-L5-OUA"/>
                             <constraint firstItem="5Zr-G6-sbh" firstAttribute="top" secondItem="b7r-BL-TX3" secondAttribute="bottom" id="TwL-5T-gaF"/>
                             <constraint firstItem="ayl-9a-AQv" firstAttribute="top" secondItem="Thw-DF-qDx" secondAttribute="bottom" id="U7I-Et-Zae"/>
-                            <constraint firstItem="XrA-0V-rOp" firstAttribute="top" secondItem="y2T-vz-G1J" secondAttribute="bottom" id="Yaw-KB-Ee6"/>
                             <constraint firstItem="b7r-BL-TX3" firstAttribute="leading" secondItem="xGb-Yf-CDT" secondAttribute="leading" id="jCz-cz-IaG"/>
-                            <constraint firstItem="y2T-vz-G1J" firstAttribute="top" secondItem="AZe-pp-qdr" secondAttribute="bottom" id="kUS-76-J1s"/>
                             <constraint firstAttribute="trailing" secondItem="AZe-pp-qdr" secondAttribute="trailing" id="pn9-Tg-0vk"/>
                             <constraint firstItem="RoA-Q5-Hee" firstAttribute="leading" secondItem="xGb-Yf-CDT" secondAttribute="leading" constant="8" id="rV9-b7-gY6"/>
                             <constraint firstAttribute="trailing" secondItem="b7r-BL-TX3" secondAttribute="trailing" id="weU-LM-otZ"/>
-                            <constraint firstAttribute="trailing" secondItem="y2T-vz-G1J" secondAttribute="trailing" constant="8" id="x8I-jc-kfN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uuv-Dv-ozu"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="fakeNavigationBarLabel" destination="b7r-BL-TX3" id="mqI-Xw-Y9u"/>
-                        <outlet property="questionMarkButton" destination="y2T-vz-G1J" id="igP-Jg-wks"/>
                         <outlet property="saveButton" destination="Thw-DF-qDx" id="Zqi-Iv-f86"/>
                         <outlet property="scheduleOverviewTable" destination="5Zr-G6-sbh" id="cvy-XY-fR4"/>
                         <segue destination="MvL-yD-EMG" kind="show" identifier="OverviewScheduleSegue" id="gRr-Mf-DSK"/>
@@ -5385,7 +5370,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SXY-HC-FeY"/>
-        <segue reference="npA-9Z-BPH"/>
+        <segue reference="na3-42-cEE"/>
         <segue reference="KLr-4k-hco"/>
         <segue reference="J6H-iJ-lim"/>
         <segue reference="2sH-Wt-Foe"/>
@@ -5401,8 +5386,8 @@
         <segue reference="bzi-ZW-PZ7"/>
         <segue reference="IQI-W2-saz"/>
         <segue reference="M72-ar-DyO"/>
-        <segue reference="aWq-hZ-Auo"/>
-        <segue reference="kIb-e7-fcP"/>
+        <segue reference="54L-er-yGs"/>
+        <segue reference="gRr-Mf-DSK"/>
         <segue reference="NR1-hM-oZr"/>
     </inferredMetricsTieBreakers>
 </document>

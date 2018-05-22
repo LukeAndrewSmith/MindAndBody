@@ -487,7 +487,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // Update the app interface directly.
-        vibratePhone()
+        Vibrate.shared.vibratePhone()
         // Play a sound.
         completionHandler(UNNotificationPresentationOptions.sound)
     }

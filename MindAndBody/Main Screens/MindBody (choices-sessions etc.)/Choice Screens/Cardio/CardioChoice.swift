@@ -31,6 +31,8 @@ class CardioChoice: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Walkthrough
+        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
         
         // Colours
         view.backgroundColor = Colors.light
@@ -115,5 +117,6 @@ class CardioChoice: UIViewController  {
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
+    
 }
 

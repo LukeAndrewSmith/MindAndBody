@@ -49,6 +49,8 @@ class WorkoutChoice: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Walkthrough
+        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
         
         // Colours
         view.backgroundColor = Colors.light

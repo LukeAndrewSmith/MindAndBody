@@ -500,11 +500,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                if imageCount != 1 {
-                    sender.startAnimating()
-                }
-            }
+            sender.startAnimating()
         }
     }
     
@@ -530,11 +526,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                if imageCount != 1 {
-                    cell.imageViewCell.startAnimating()
-                }
-            }
+            cell.imageViewCell.startAnimating()
         }
     }
     

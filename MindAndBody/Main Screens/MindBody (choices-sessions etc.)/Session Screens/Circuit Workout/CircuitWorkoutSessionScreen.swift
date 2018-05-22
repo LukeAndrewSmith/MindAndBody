@@ -520,7 +520,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             didSetEndTime = false
             //
-            vibratePhone()
+            Vibrate.shared.vibratePhone()
             //
             // Next Round
             self.tableView.beginUpdates()
@@ -688,7 +688,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             UIAlertAction in
             
             //
-            self.vibratePhone()
+            Vibrate.shared.vibratePhone()
 
             //
             // Dismiss Alert
@@ -777,11 +777,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                if imageCount != 1 {
-                    sender.startAnimating()
-                }
-            }
+            sender.startAnimating()
         }
     }
     
@@ -807,11 +803,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                if imageCount != 1 {
-                    cell.imageViewCell.startAnimating()
-                }
-            }
+            cell.imageViewCell.startAnimating()
         }
     }
     

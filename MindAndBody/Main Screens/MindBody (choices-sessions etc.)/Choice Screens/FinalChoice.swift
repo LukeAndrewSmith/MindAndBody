@@ -122,7 +122,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // Initial Element Positions
         if SelectedSession.shared.selectedSession[2] == "" {
             setConstraints(showingViews: false, animated: false)
-            presetsButton.setTitle("- " + NSLocalizedString(SelectedSession.shared.selectedSession[2], comment: "") + " -", for: .normal)
+            presetsButton.setTitle("- " + NSLocalizedString("select", comment: "") + " " + NSLocalizedString(SelectedSession.shared.selectedSession[0], comment: "") + " -", for: .normal)
         //
         // Selected Automatically from schedule
         } else {

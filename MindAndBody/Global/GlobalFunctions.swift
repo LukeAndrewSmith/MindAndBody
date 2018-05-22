@@ -33,6 +33,22 @@ class IPhoneType {
     }
 }
 
+// Vibrate
+class Vibrate {
+    static var shared = Vibrate()
+    private init() {}
+    
+    //
+    // Vibrate Phone
+    func vibratePhone() {
+        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate) {
+            // do what you'd like now that the sound has completed playing
+        }
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+}
+
 // Notification
 class ReminderNotifications {
     static var shared = ReminderNotifications()
@@ -479,6 +495,108 @@ class BellsFunctions {
     // Get Image from bell name
     func bellToImage(name: String) -> UIImage {
         return conversionDict[name]!
+    }
+}
+
+// For initial choice question from Sessions screen, as this is where the 'C' button from which you can create custom sessions is found on multiple screens
+    // Walkthrough used by multiple screens so put in seperate class
+class CustomWalkthrough {
+    
+    static var shared = CustomWalkthrough()
+    private init() {}
+    
+    //
+    var walkthroughProgress = 0
+    var walkthroughView = UIView()
+    var walkthroughHighlight = UIView()
+    var walkthroughLabel = UILabel()
+    var nextButton = UIButton()
+    
+    var didSetWalkthrough = false
+    
+    //
+    // Components
+    var walkthroughTexts = ["customWalkthrough"]
+    var highlightSize: CGSize? = nil
+    var highlightCenter: CGPoint? = nil
+    // Corner radius, 0 = height / 2 && 1 = width / 2
+    var highlightCornerRadius = 0
+    var labelFrame = 0
+    //
+    var walkthroughBackgroundColor = UIColor()
+    var walkthroughTextColor = UIColor()
+    
+    //
+    // Walkthrough
+    func beginWalkthrough(viewController: UIViewController, customButton: UIButton) {
+        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+        if walkthroughs["CustomSessions"] == false {
+            walkthroughCustom(viewController: viewController, customButton: customButton)
+        }
+    }
+    
+    // Walkthrough
+    @objc func walkthroughCustom(viewController: UIViewController, customButton: UIButton) {
+        
+        //
+        if didSetWalkthrough == false {
+            //
+            nextButton.addTarget(self, action: #selector(walkthroughCustom), for: .touchUpInside)
+            walkthroughView = viewController.setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
+            didSetWalkthrough = true
+        }
+        
+        //
+        //
+        switch walkthroughProgress {
+            // First has to be done differently
+        // Homepage
+        case 0:
+            //
+            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
+            walkthroughLabel.sizeToFit()
+            walkthroughLabel.frame = CGRect(x: 13, y: viewController.view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: viewController.view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            walkthroughLabel.center.y -= TopBarHeights.combinedHeight
+            
+            // Colour
+            walkthroughLabel.textColor = Colors.light
+            walkthroughLabel.backgroundColor = Colors.dark
+            walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colors.dark.cgColor
+            // Highlight
+            walkthroughHighlight.frame = customButton.frame
+            walkthroughHighlight.center.y += TopBarHeights.combinedHeight
+            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
+            
+            //
+            // Flash
+            //
+            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
+                //
+                self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(1)
+            }, completion: {(finished: Bool) -> Void in
+                UIView.animate(withDuration: 0.2, animations: {
+                    //
+                    self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
+                }, completion: nil)
+            })
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+        //
+        default:
+            UIView.animate(withDuration: 0.4, animations: {
+                self.walkthroughView.alpha = 0
+            }, completion: { finished in
+                self.walkthroughView.removeFromSuperview()
+                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+                walkthroughs["Settings"] = true
+                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
+                // Sync
+                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+            })
+        }
     }
 }
 
@@ -1134,17 +1252,6 @@ extension UIViewController {
             
         })
     }
-    
-    //
-    // Vibrate Phone
-    func vibratePhone() {
-        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate) {
-            // do what you'd like now that the sound has completed playing
-        }
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-    }
-    
     //
 }
 

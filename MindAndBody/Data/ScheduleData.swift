@@ -344,7 +344,7 @@ enum scheduleDataStructures {
                     // Foam Roller
                     "foamRoller": 0,
                     // Pullup Bar
-                    "pullupBar": 0,
+                    "pullupBar": 1,
                 ]],
             ],
             // [2] Schedule creation help data --------------------

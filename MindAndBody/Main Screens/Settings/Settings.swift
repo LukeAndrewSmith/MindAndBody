@@ -637,8 +637,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     for i in 0...(keys.count - 1) {
                         walkthroughs[keys[i]] = false
                     }
-                    // Should only be presented once
-                    walkthroughs["NotificationsPopup"] = true
+                    // Set
                     UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                     // Sync
                     ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])

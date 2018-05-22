@@ -14,7 +14,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // Using fake navigation bar as can;t get hiding the navigation bar on subsequent screens to work as desired
     @IBOutlet weak var fakeNavigationBarLabel: UILabel!
-    @IBOutlet weak var questionMarkButton: UIButton!
     @IBOutlet weak var scheduleOverviewTable: UITableView!
     
     @IBOutlet weak var saveButton: UIButton!
@@ -98,7 +97,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         // Navigation Bar
         fakeNavigationBarLabel.text = NSLocalizedString("scheduleOverview", comment: "")
-        questionMarkButton.tintColor = Colors.light
         //
         // BackgroundImage
         addBackgroundImage(withBlur: true, fullScreen: true)
@@ -448,11 +446,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.present(alert, animated: true, completion: nil)
     }
     
-    // Question mark button = Show walkthrough for view again
-    @IBAction func questionMarkButtonAction(_ sender: Any) {
-        // Call walkthrough function
-    }
-    
     //
     // MARK: Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -464,7 +457,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Goin to profile (before schedule creator as not filled in yet)
         case "OverviewProfileSegue":
             let destinationVC = segue.destination as? Profile
-            destinationVC?.comingFromSchedule = true
             destinationVC?.comingFromScheduleEditing = true
         case "OverviewScheduleSegue":
             let destinationVC = segue.destination as? ScheduleCreator

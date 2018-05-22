@@ -167,7 +167,7 @@ extension TimeBasedScreen {
         addCircle()
         startAnimation()
         lengthTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        vibratePhone()
+        Vibrate.shared.vibratePhone()
     }
     
     //
@@ -420,7 +420,7 @@ extension TimeBasedScreen {
 //        //
 //        didSetEndTime = false
 //        //
-//        vibratePhone()
+//        Vibrate.shared.vibratePhone()
 //        //
 //        // Next Round
 //        self.tableView.beginUpdates()
@@ -469,7 +469,7 @@ extension TimeBasedScreen {
         
         
         //
-        self.vibratePhone()
+        Vibrate.shared.vibratePhone()
         
         //
         // Dismiss Alert

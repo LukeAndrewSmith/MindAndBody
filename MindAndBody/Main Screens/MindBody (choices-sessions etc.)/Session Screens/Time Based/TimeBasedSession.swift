@@ -532,11 +532,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                if imageCount != 1 {
-                    sender.startAnimating()
-                }
-            }
+            sender.startAnimating()
         }
     }
     
@@ -562,11 +558,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                if imageCount != 1 {
-                    cell.imageViewCell.startAnimating()
-                }
-            }
+            cell.imageViewCell.startAnimating()
         }
     }
     
@@ -601,11 +593,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                if imageCount != 1 {
-                    cell.imageViewCell.startAnimating()
-                }
-            }
+            cell.imageViewCell.startAnimating()
         }
     }
     

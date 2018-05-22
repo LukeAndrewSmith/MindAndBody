@@ -200,26 +200,24 @@ enum Register {
     // Walkthrough
     static let registerWalkthroughDictionary: [String: Bool] =
         [
-            // Notifications popup - 0
-            "NotificationsPopup": false,
-            // Mind Body, homescreen, - 1
-            "HomeScreen": false,
-            // Final Choice, - 2
+            // Final Choice
             "FinalChoice": false,
-            // Session - 3
+            // Session
             "Sessions": false,
-            // Session 2 - 4
+            // Session 2
             "Session2": false,
-            // Schedule - 5
+            // Schedule
             "Schedule": false,
-            // Tracking - 6
+            // Tracking
             "Tracking": false,
-            // Profile - 7
+            // Profile
             "Profile": false,
-            // Settings - 8
+            // Settings
             "Settings": false,
-            // Automatic Yoga - 12
-            "AutomaticYoga": false
+            // Automatic Yoga
+            "AutomaticYoga": false,
+            // Custom Session (i.e on sessions screen, first choice is where you access custom workouts etc)
+            "CustomSessions": false,
     ]
     
     // --------------------------------------------------------

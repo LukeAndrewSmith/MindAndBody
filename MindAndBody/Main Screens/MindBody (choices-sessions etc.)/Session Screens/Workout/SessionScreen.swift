@@ -877,7 +877,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.view.layoutIfNeeded()
             }
             //
-            vibratePhone()
+            Vibrate.shared.vibratePhone()
             timerCountDown.invalidate()
             didSetEndTime = false
             isTiming = false
@@ -941,7 +941,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             self.view.layoutIfNeeded()
         }
         //
-        vibratePhone()
+        Vibrate.shared.vibratePhone()
         timerCountDown.invalidate()
         didSetEndTime = false
         isTiming = false
@@ -987,11 +987,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                if imageCount != 1 {
-                    sender.startAnimating()
-                }
-            }
+            sender.startAnimating()
         }
     }
     
@@ -1016,11 +1012,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
             cell.imageViewCell.animationRepeatCount = 1
             //
-            if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
-                if imageCount != 1 {
-                    cell.imageViewCell.startAnimating()
-                }
-            }
+            cell.imageViewCell.startAnimating()
         }
     }
     

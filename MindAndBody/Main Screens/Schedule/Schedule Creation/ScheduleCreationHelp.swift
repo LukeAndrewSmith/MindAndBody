@@ -296,7 +296,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
                 // Indicator Label
                 cell.backgroundColor = Colors.green.withAlphaComponent(0.25)
-                cell.textLabel?.text = NSLocalizedString("saveProfile", comment: "")
+                cell.textLabel?.text = NSLocalizedString("saveGoals", comment: "")
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                 cell.textLabel?.textColor = Colors.light
                 cell.textLabel?.textAlignment = .center
