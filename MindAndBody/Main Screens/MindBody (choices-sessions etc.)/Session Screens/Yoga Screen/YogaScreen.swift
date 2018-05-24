@@ -149,7 +149,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 //
                 // MARK: Walkthrough
                 let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-                if walkthroughs["Session2"] == false {
+                // Walkthrough if not automatic yoga
+                if walkthroughs["Session2"] == false && self.automaticYogaArray[0] != 1 {
                     self.walkthroughSession()
                 }
             }
@@ -877,7 +878,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     // Components
-    var walkthroughTexts = ["session03", "session12", "session32", "session7", "session8", "session9", "session10", "session11"]
+    var walkthroughTexts = ["session02", "session2", "session42", "sessionBlank", "session5", "session62", "session72"]
     var highlightSize: CGSize? = nil
     var highlightCenter: CGPoint? = nil
     // Corner radius, 0 = height / 2 && 1 = width / 2
@@ -911,12 +912,12 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         switch walkthroughProgress {
             // First has to be done differently
-        // Movement
+        // Sets x Reps
         case 0:
             //
             walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
             walkthroughLabel.sizeToFit()
-            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + TopBarHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
             walkthroughLabel.textColor = Colors.dark
@@ -924,12 +925,15 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
             walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
-            walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
-            walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (13/8)) + 2)
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
+            walkthroughHighlight.frame.size = CGSize(width: cell.breathsLabel.frame.width + 16, height: cell.breathsLabel.frame.height + 4)
+            walkthroughHighlight.center = cell.breathsLabel.center
+            walkthroughHighlight.center.y += toMinus
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //
             // Flash
+            
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
@@ -945,14 +949,17 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             walkthroughProgress = self.walkthroughProgress + 1
             
             
-        // Sets x Reps
+        // Demonstration
         case 1:
             //
-            highlightSize = CGSize(width: view.bounds.width / 2, height: 33)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (11/6)) + 2)
-            highlightCornerRadius = 0
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
+            highlightSize = cell.imageIndicator.frame.size
+            highlightCenter = cell.imageIndicator.center
+            highlightCenter?.y += toMinus
             //
-            labelFrame = 0
+            highlightCornerRadius = 0
+            // Top of view
+            labelFrame = 1
             //
             walkthroughBackgroundColor = Colors.light
             walkthroughTextColor = Colors.dark
@@ -964,14 +971,17 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             walkthroughProgress = self.walkthroughProgress + 1
             
             
-        // Demonstration
+        // Explanation
         case 2:
             //
-            highlightSize = CGSize(width: view.bounds.width * (7/8), height: (cellHeight * (7/8)))
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2)
-            highlightCornerRadius = 3
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
+            highlightSize = cell.explanationButton.frame.size
+            highlightCenter = cell.explanationButton.center
+            highlightCenter?.y += toMinus
             //
-            labelFrame = 0
+            highlightCornerRadius = 0
+            // Top
+            labelFrame = 1
             //
             walkthroughBackgroundColor = Colors.light
             walkthroughTextColor = Colors.dark
@@ -982,49 +992,17 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             walkthroughProgress = self.walkthroughProgress + 1
             
-      
-            
-        // Return to demonstration and Explanation
+        // Explanation open demonstration
         case 3:
-           
-            //
-            self.highlightSize = CGSize(width: 45, height: 45)
-            self.highlightCenter = CGPoint(x: self.view.bounds.width - 25 - 7.5, y: TopBarHeights.statusBarHeight + cellHeight - 25 - 7.5)
-            self.highlightCornerRadius = 0
-            //
-            self.labelFrame = 0
-            //
-            self.walkthroughBackgroundColor = Colors.light
-            self.walkthroughTextColor = Colors.dark
-            self.highlightColor = Colors.light
-            //
-            self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-            
-            //
-            self.walkthroughProgress = self.walkthroughProgress + 1
-            
-        // Explanation open and Next Movement
-        case 4:
             backgroundViewExplanation.isEnabled = false
             expandExplanation()
             //
-            highlightSize = CGSize(width: 45, height: 45)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + (view.bounds.height / 2))
-            highlightCornerRadius = 0
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
-            highlightColor = .clear
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             //
             self.walkthroughProgress = self.walkthroughProgress + 1
             //
             // Next Movement
             nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.8, execute: {
                 //
                 self.nextButton.isEnabled = true
                 self.backgroundViewExplanation.isEnabled = true
@@ -1032,11 +1010,15 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.retractExplanation(self)
                 
                 //
-                self.highlightSize = CGSize(width: self.view.bounds.width, height: 4)
-                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
-                self.highlightCornerRadius = 0
+                // Explanation explanation
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
+                self.highlightSize = CGSize(width: 0, height: 0)
+                self.highlightCenter = cell.explanationButton.center
+                self.highlightCenter?.y += toMinus
                 //
-                self.labelFrame = 0
+                self.highlightCornerRadius = 0
+                // Top
+                self.labelFrame = 1
                 //
                 self.walkthroughBackgroundColor = Colors.light
                 self.walkthroughTextColor = Colors.dark
@@ -1048,9 +1030,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             })
             
             
-        // Progress
-        // Case 6 not 5 as + 1 to walkthroughprogress twice in case 4 for label reasons (need an empty label)
-        case 6:
+            
+        // Next pose && Progress
+        // 5 as +1 twice in previous case
+        case 5:
             //
             walkthroughLabel.alpha = 0
             //
@@ -1076,32 +1059,56 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
                     //
                 }, completion: { finished in
-                    self.nextButton.isEnabled = true
-                    //
                     upSwipe.removeFromSuperview()
-                    //
-                    self.walkthroughLabel.alpha = 1
-                    //
-                    self.highlightSize = CGSize(width: self.view.bounds.width, height: 8)
-                    self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
-                    self.highlightCornerRadius = 0
-                    //
-                    self.labelFrame = 0
-                    //
-                    self.walkthroughBackgroundColor = Colors.light
-                    self.walkthroughTextColor = Colors.dark
-                    self.highlightColor = Colors.light
-                    //
-                    self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-                    //
-                    self.walkthroughProgress = self.walkthroughProgress + 1
-                    
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+                        //
+                        let downSwipe = UIView()
+                        downSwipe.frame.size = CGSize(width: 50, height: 50)
+                        downSwipe.backgroundColor = Colors.light
+                        downSwipe.layer.cornerRadius = 25
+                        downSwipe.clipsToBounds = true
+                        downSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
+                        downSwipe.center.x = self.view.bounds.width / 2
+                        UIApplication.shared.keyWindow?.insertSubview(downSwipe, aboveSubview: self.walkthroughView)
+                        // Perform swipe action
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+                            self.backButtonAction()
+                        })
+                        // Animate swipe demonstration
+                        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                            //
+                            downSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
+                            //
+                        }, completion: { finished in
+                            self.nextButton.isEnabled = true
+                            //
+                            downSwipe.removeFromSuperview()
+                            //
+                            self.walkthroughLabel.alpha = 1
+                            //
+                            // PROGRESS
+                            self.highlightSize = CGSize(width: self.view.bounds.width, height: 8)
+                            self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
+                            self.highlightCornerRadius = 0
+                            //
+                            self.labelFrame = 0
+                            //
+                            self.walkthroughBackgroundColor = Colors.light
+                            self.walkthroughTextColor = Colors.dark
+                            self.highlightColor = Colors.light
+                            //
+                            self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
+                            //
+                            self.walkthroughProgress = self.walkthroughProgress + 1
+                            
+                        })
+                    })
                 })
             })
             
             
         // Finish Early
-        case 7:
+        case 6:
             //
             highlightSize = CGSize(width: 36, height: 36)
             highlightCenter = CGPoint(x: 27, y: TopBarHeights.statusBarHeight + 2 + 5 + 22)
@@ -1122,8 +1129,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         //
         default:
-            //
-            backButtonAction()
             //
             UIView.animate(withDuration: 0.4, animations: {
                 self.walkthroughView.alpha = 0

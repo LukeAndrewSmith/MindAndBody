@@ -44,7 +44,7 @@ class EndRoundTableViewCell: UITableViewCell {
 //
 // Session Screen Overview Class ------------------------------------------------------------------------------------
 //
-class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     //
     // MARK: Variables from Session Data
@@ -83,6 +83,17 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     //
     // Table View
     @IBOutlet weak var tableView: UITableView!
+    
+    
+    //
+    // Weight choice elements
+    var actionSheetView = UIView()
+    var weightPicker = UIPickerView()
+    var okButton = UIButton()
+    //
+    let unitIndicatorLabel = UILabel()
+    //
+    var units = 0 // 0 == metric, 1 == imperial
     
     // Progress Bar
     let progressBar = UIProgressView()
@@ -163,8 +174,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         finishEarly.tintColor = Colors.red
         
         
-        // self.present(alert, animated: true, completion: (() -> Void)?)
-        
         // Progress Bar
         // Thickness
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
@@ -189,6 +198,37 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         // Watch for enter foreground
         NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        
+        //
+        // Weight (Action Sheet)
+        // view
+        actionSheetView.backgroundColor = Colors.dark
+        actionSheetView.layer.cornerRadius = 15
+        actionSheetView.layer.masksToBounds = true
+        // picker
+        weightPicker.backgroundColor = Colors.dark
+        weightPicker.delegate = self
+        weightPicker.dataSource = self
+        // ok
+        okButton.backgroundColor = Colors.light
+        okButton.setTitleColor(Colors.green, for: .normal)
+        okButton.setTitle(NSLocalizedString("save", comment: ""), for: .normal)
+        okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
+        actionSheetView.addSubview(okButton)
+        // Units
+        unitIndicatorLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        unitIndicatorLabel.textColor = Colors.light
+        // Units
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        units = settings["Units"]![0]
+        // Metric
+        if units == 0 {
+            unitIndicatorLabel.text = NSLocalizedString("kg", comment: "")
+            // Imperial
+        } else {
+            unitIndicatorLabel.text = NSLocalizedString("lb", comment: "")
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -291,7 +331,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Movement
-            cell.movementLabel.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0] , comment: "")
+            let movement = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
+            cell.movementLabel.text = NSLocalizedString(movement, comment: "")
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 23)
             cell.movementLabel?.textAlignment = .center
@@ -302,7 +343,45 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             // Set and Reps
             // (numberOfMovementsInRound * sessionScreenRoundIndex) = first index of round
             let indexRow = (numberOfMovementsInRound * sessionScreenRoundIndex) + indexPath.row
-            cell.setsRepsLabel?.text = repsArray[indexRow]
+            //
+            // Sets x Reps (Note: not actually any sets for circuit workouts)
+            // String
+            var setsRepsString = String()
+            // Weighted
+            if sessionData.weightedWorkoutMovements.contains(movement) {
+                // Units
+                var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                let units = settings["Units"]![0]
+                var unit = String()
+                // Metric
+                if units == 0 {
+                    unit = NSLocalizedString("kg", comment: "")
+                    // Imperial
+                } else {
+                    unit = NSLocalizedString("lb", comment: "")
+                }
+                // Weight
+                //
+                var movementWeights = UserDefaults.standard.object(forKey: "movementWeights") as! [String: Int]
+                // Presents sets x reps, and weight
+                let key = keyArray[indexPath.row]
+                let rowIndex = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
+                weightPicker.selectRow(movementWeights[rowIndex]!, inComponent: 0, animated: false)
+                var weight = Float()
+                // Metric
+                if units == 0 {
+                    weight = sessionData.weightsMetric()[movementWeights[rowIndex]!]
+                    // Imperial
+                } else {
+                    weight = sessionData.weightsImperial()[movementWeights[rowIndex]!]
+                }
+                setsRepsString = repsArray[indexRow] + "  |  " + String(weight) + unit
+                // Unweighted movement
+            } else {
+                // Present sets x reps
+                setsRepsString = repsArray[indexRow]
+            }
+            cell.setsRepsLabel?.text = setsRepsString
             cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.setsRepsLabel?.textAlignment = .right
             cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
@@ -334,7 +413,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             } else {
                 cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
                 cell.setsRepsLabel?.textColor = Colors.light
-                cell.setsRepsLabel?.text = repsString
             }
             
             cell.setsRepsLabel?.textAlignment = .center
@@ -494,6 +572,120 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         default: break
         }
+    }
+    
+    //
+    // MARK: Weight Action
+    @IBAction func weightButton(_ sender: Any) {
+        // Get movement
+        let key = keyArray[selectedRow]
+        let movement = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
+        //
+        if sessionData.weightedWorkoutMovements.contains(movement) {
+            let indexPathForRow = IndexPath(row: selectedRow, section: 0)
+            let cell = tableView.cellForRow(at: indexPathForRow ) as! WorkoutOverviewTableViewCell
+            
+            //
+            actionSheetView.addSubview(weightPicker)
+            actionSheetView.addSubview(unitIndicatorLabel)
+            actionSheetView.bringSubview(toFront: unitIndicatorLabel)
+            //
+            var movementWeights = UserDefaults.standard.object(forKey: "movementWeights") as! [String: Int]
+            // View
+            let weightWidth = UIScreen.main.bounds.width - 20
+            let weightHeight = CGFloat(147 + 49)
+            actionSheetView.frame = CGRect(x: 10, y: view.frame.maxY, width: weightWidth, height: weightHeight)
+            UIApplication.shared.keyWindow?.insertSubview(actionSheetView, aboveSubview: tableView)
+            //
+            // select correct row
+            weightPicker.selectRow(movementWeights[movement]!, inComponent: 0, animated: false)
+            //
+            // picker
+            weightPicker.frame = CGRect(x: 0, y: 0, width: actionSheetView.frame.size.width, height: 147)
+            // ok
+            okButton.frame = CGRect(x: 0, y: 147, width: actionSheetView.frame.size.width, height: 49)
+            //
+            self.unitIndicatorLabel.frame = CGRect(x: (actionSheetView.frame.size.width / 2 + 40), y: (self.weightPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+            //
+            self.actionSheetView.frame = CGRect(x: 0, y: 0, width: weightWidth, height: weightHeight)
+            
+            // picker
+            self.weightPicker.frame = CGRect(x: 0, y: 0, width: self.actionSheetView.frame.size.width, height: 147)
+            // ok
+            self.okButton.frame = CGRect(x: 0, y: 147, width: self.actionSheetView.frame.size.width, height: 49)
+            // Sets Indicator Label
+            self.unitIndicatorLabel.frame = CGRect(x: (self.actionSheetView.frame.size.width / 2 + 40), y: (self.weightPicker.frame.size.height / 2) - 15, width: 50, height: 30)
+            //
+            ActionSheet.shared.setupActionSheet()
+            ActionSheet.shared.actionSheet.addSubview(actionSheetView)
+            let heightToAdd = actionSheetView.bounds.height
+            ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+            ActionSheet.shared.resetCancelFrame()
+            ActionSheet.shared.animateActionSheetUp()
+        }
+    }
+    //
+    // MARK: Weight Ok button action
+    @objc func okButtonAction(_ sender: Any) {
+        
+        // Weights
+        var movementWeights = UserDefaults.standard.object(forKey: "movementWeights") as! [String: Int]
+        //
+        // select correct row
+        let key = keyArray[selectedRow]
+        let rowIndex = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
+        movementWeights[rowIndex] = weightPicker.selectedRow(inComponent: 0)
+        //
+        UserDefaults.standard.set(movementWeights, forKey: "movementWeights")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["movementWeights"])
+        //
+        
+        ActionSheet.shared.animateActionSheetDown()
+        //
+        tableView.reloadData()
+    }
+    //
+    // MARK: Picker View ----------------------------------------------------------------------------------------------------
+    //
+    // Number of components
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // Number of rows
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        // Metric
+        if units == 0 {
+            return sessionData.weightsMetric().count
+            // Imperial
+        } else {
+            return sessionData.weightsImperial().count
+        }
+    }
+    
+    // View for row
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        //
+        let weightLabel = UILabel()
+        // Metric
+        if units == 0 {
+            weightLabel.text = String(sessionData.weightsMetric()[row])
+            // Imperial
+        } else {
+            weightLabel.text = String(sessionData.weightsImperial()[row])
+        }
+        weightLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
+        weightLabel.textColor = Colors.light
+        //
+        weightLabel.textAlignment = .center
+        return weightLabel
+        //
+    }
+    
+    // Row height
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 30
     }
     
     
@@ -1001,6 +1193,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         if isTimedMovement() {
             if !didSetEndTime {
+                print(SelectedSession.shared.selectedSession)
                 let time = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[selectedRow]["time"] as! Int
                 StopClock.shared.setupStopClock(time: time)
                 StopClock.shared.resetOptionFrames()
@@ -1201,7 +1394,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     
     //
     // Components
-    var walkthroughTexts = ["session0", "session1", "session3", "session4", "session5", "session6", "session7", "session8", "session9", "session102", "session11"]
+    var walkthroughTexts = ["session0", "session2", "session3", "sessionsBlank", "sessionsBlank", "session4", "sessionBlank", "session5", "session62", "session7"]
     var highlightSize: CGSize? = nil
     var highlightCenter: CGPoint? = nil
     // Corner radius, 0 = height / 2 && 1 = width / 2
@@ -1235,12 +1428,12 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         switch walkthroughProgress {
             // First has to be done differently
-        // Movement
+        // Sets x Reps
         case 0:
             //
             walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
             walkthroughLabel.sizeToFit()
-            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + TopBarHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
             walkthroughLabel.textColor = Colors.dark
@@ -1248,12 +1441,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
             walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
-            walkthroughHighlight.frame.size = CGSize(width: view.bounds.width / 2, height: 36)
-            walkthroughHighlight.center = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (28/16)) + 2)
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
+            walkthroughHighlight.frame.size = CGSize(width: cell.setsRepsLabel.frame.width + 16, height: cell.setsRepsLabel.frame.height + 4)
+            walkthroughHighlight.center = cell.setsRepsLabel.center
+            walkthroughHighlight.center.y += toMinus
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //
             // Flash
+            
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
@@ -1269,14 +1465,17 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             walkthroughProgress = self.walkthroughProgress + 1
             
             
-        // Sets x Reps
+        // Demonstration
         case 1:
             //
-            highlightSize = CGSize(width: view.bounds.width / 3, height: 33)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight / 2) * (30/16)) + 2)
-            highlightCornerRadius = 0
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
+            highlightSize = cell.indicatorStack.frame.size
+            highlightCenter = cell.indicatorStack.center
+            highlightCenter?.y += toMinus
             //
-            labelFrame = 0
+            highlightCornerRadius = 0
+            // Top of view
+            labelFrame = 1
             //
             walkthroughBackgroundColor = Colors.light
             walkthroughTextColor = Colors.dark
@@ -1288,11 +1487,36 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             walkthroughProgress = self.walkthroughProgress + 1
             
             
-        // Demonstration
+        // Target Area Explanation
         case 2:
             //
-            highlightSize = CGSize(width: view.bounds.width * (7/8), height: (cellHeight * (13/16)))
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (13/16)) / 2) + 2)
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
+            highlightSize = cell.indicatorStack.frame.size
+            highlightCenter = cell.indicatorStack.center
+            highlightCenter?.y += toMinus
+            //
+            highlightCornerRadius = 0
+            // Top
+            labelFrame = 1
+            //
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
+            //
+            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+        // Target Area Swipe and return
+        case 3:
+            
+            // Get rid of explanation
+            //
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
+            highlightSize = CGSize(width: 0, height: 0)
+            highlightCenter = cell.indicatorStack.center
+            highlightCenter?.y += toMinus
             highlightCornerRadius = 3
             //
             labelFrame = 0
@@ -1301,41 +1525,16 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             walkthroughTextColor = Colors.dark
             highlightColor = Colors.light
             //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
+            nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
             
             
-        // Indicator
-        case 3:
-            //
-            highlightSize = CGSize(width: 30, height: 15)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (13/16))) - (15 / 2))
-            highlightCornerRadius = 0
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
-            highlightColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-            
-        // Target Area
-        case 4:
             // Swipe demonstration
             let leftSwipe = UIView()
             leftSwipe.frame.size = CGSize(width: 50, height: 50)
             leftSwipe.backgroundColor = Colors.light
             leftSwipe.layer.cornerRadius = 25
             leftSwipe.clipsToBounds = true
-            leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
+            leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
             leftSwipe.center.x = view.bounds.width * (7/8)
             UIApplication.shared.keyWindow?.insertSubview(leftSwipe, aboveSubview: walkthroughView)
             // Perform swipe action
@@ -1354,33 +1553,23 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 self.nextButton.isEnabled = true
                 //
                 leftSwipe.removeFromSuperview()
-                
-                //
-                self.highlightSize = CGSize(width: self.view.bounds.width * (7/8), height: (cellHeight * (13/16)))
-                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + ((cellHeight * (13/16)) / 2) + 2)
-                self.highlightCornerRadius = 3
-                //
-                self.labelFrame = 0
-                //
-                self.walkthroughBackgroundColor = Colors.light
-                self.walkthroughTextColor = Colors.dark
-                self.highlightColor = Colors.light
-                //
-                self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-                
                 //
                 self.walkthroughProgress = self.walkthroughProgress + 1
+                self.walkthroughSession()
             })
             
             
         // Return to demonstration and Explanation
-        case 5:
+        case 4:
             //
-            highlightSize = CGSize(width: 30, height: 15)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 2 + ((cellHeight * (13/16))) - (15 / 2))
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
+            highlightSize = cell.indicatorStack.frame.size
+            highlightCenter = cell.indicatorStack.center
+            highlightCenter?.y += toMinus
+            //
             highlightCornerRadius = 0
-            //
-            labelFrame = 0
+            // Top
+            labelFrame = 1
             //
             walkthroughBackgroundColor = Colors.light
             walkthroughTextColor = Colors.dark
@@ -1400,7 +1589,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 rightSwipe.backgroundColor = Colors.light
                 rightSwipe.layer.cornerRadius = 25
                 rightSwipe.clipsToBounds = true
-                rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (3/4)) / 2) + 2
+                rightSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
                 rightSwipe.center.x = self.view.bounds.width * (1/8)
                 UIApplication.shared.keyWindow?.insertSubview(rightSwipe, aboveSubview: self.walkthroughView)
                 // Perform swipe action
@@ -1420,11 +1609,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     rightSwipe.removeFromSuperview()
                     
                     //
-                    self.highlightSize = CGSize(width: 45, height: 45)
-                    self.highlightCenter = CGPoint(x: self.view.bounds.width - 25 - 2.5, y: TopBarHeights.statusBarHeight + cellHeight - 25 - 2.5)
-                    self.highlightCornerRadius = 0
+                    // Explanation explanation
+                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
+                    self.highlightSize = cell.explanationButton.frame.size
+                    self.highlightCenter = cell.explanationButton.center
+                    self.highlightCenter?.y += toMinus
                     //
-                    self.labelFrame = 0
+                    self.highlightCornerRadius = 0
+                    // Top
+                    self.labelFrame = 1
                     //
                     self.walkthroughBackgroundColor = Colors.light
                     self.walkthroughTextColor = Colors.dark
@@ -1439,28 +1632,17 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             
             // Explanation open and Next Movement
-        // Case 7 not 6 as + 1 to walkthroughprogress twice in case 5 for label reasons (need an empty label)
-        case 7:
+        // Case 6 not 5 as + 1 to walkthroughprogress twice in case 4 for label reasons (need an empty label)
+        case 6:
             backgroundViewExplanation.isEnabled = false
             expandExplanation()
             //
-            highlightSize = CGSize(width: 45, height: 45)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: TopBarHeights.statusBarHeight + (view.bounds.height / 2))
-            highlightCornerRadius = 0
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
-            highlightColor = .clear
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             //
             self.walkthroughProgress = self.walkthroughProgress + 1
             //
             // Next Movement
             nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.8, execute: {
                 //
                 self.nextButton.isEnabled = true
                 self.backgroundViewExplanation.isEnabled = true
@@ -1468,11 +1650,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 self.retractExplanation(self)
                 
                 //
-                self.highlightSize = CGSize(width: self.view.bounds.width, height: 4)
-                self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
-                self.highlightCornerRadius = 0
+                // Explanation explanation
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
+                self.highlightSize = CGSize(width: 0, height: 0)
+                self.highlightCenter = cell.explanationButton.center
+                self.highlightCenter?.y += toMinus
                 //
-                self.labelFrame = 0
+                self.highlightCornerRadius = 0
+                // Top
+                self.labelFrame = 1
                 //
                 self.walkthroughBackgroundColor = Colors.light
                 self.walkthroughTextColor = Colors.dark
@@ -1485,8 +1671,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             
             // Progress
-        // Case 9 not 8 as + 1 to walkthroughprogress twice in case 7 for label reasons (need an empty label)
-        case 9:
+        // Case 8 not 7 as + 1 to walkthroughprogress twice in case 6 for label reasons (need an empty label)
+        case 8:
             //
             walkthroughLabel.alpha = 0
             //
@@ -1512,32 +1698,55 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
                     //
                 }, completion: { finished in
-                    self.nextButton.isEnabled = true
-                    //
                     upSwipe.removeFromSuperview()
-                    //
-                    self.walkthroughLabel.alpha = 1
-                    //
-                    self.highlightSize = CGSize(width: self.view.bounds.width, height: 8)
-                    self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
-                    self.highlightCornerRadius = 0
-                    //
-                    self.labelFrame = 0
-                    //
-                    self.walkthroughBackgroundColor = Colors.light
-                    self.walkthroughTextColor = Colors.dark
-                    self.highlightColor = Colors.light
-                    //
-                    self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-                    //
-                    self.walkthroughProgress = self.walkthroughProgress + 1
-                    
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+                        //
+                        let downSwipe = UIView()
+                        downSwipe.frame.size = CGSize(width: 50, height: 50)
+                        downSwipe.backgroundColor = Colors.light
+                        downSwipe.layer.cornerRadius = 25
+                        downSwipe.clipsToBounds = true
+                        downSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
+                        downSwipe.center.x = self.view.bounds.width / 2
+                        UIApplication.shared.keyWindow?.insertSubview(downSwipe, aboveSubview: self.walkthroughView)
+                        // Perform swipe action
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+                            self.backButtonAction()
+                        })
+                        // Animate swipe demonstration
+                        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                            //
+                            downSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
+                            //
+                        }, completion: { finished in
+                            self.nextButton.isEnabled = true
+                            //
+                            downSwipe.removeFromSuperview()
+                            //
+                            self.walkthroughLabel.alpha = 1
+                            //
+                            self.highlightSize = CGSize(width: self.view.bounds.width, height: 8)
+                            self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
+                            self.highlightCornerRadius = 0
+                            //
+                            self.labelFrame = 0
+                            //
+                            self.walkthroughBackgroundColor = Colors.light
+                            self.walkthroughTextColor = Colors.dark
+                            self.highlightColor = Colors.light
+                            //
+                            self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
+                            //
+                            self.walkthroughProgress = self.walkthroughProgress + 1
+                            
+                        })
+                    })
                 })
             })
             
             
         // Finish Early
-        case 10:
+        case 9:
             //
             highlightSize = CGSize(width: 36, height: 36)
             highlightCenter = CGPoint(x: 27, y: TopBarHeights.statusBarHeight + 2 + 5 + 22)
@@ -1558,8 +1767,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
         //
         default:
-            //
-            backButtonAction()
             //
             UIView.animate(withDuration: 0.4, animations: {
                 self.walkthroughView.alpha = 0

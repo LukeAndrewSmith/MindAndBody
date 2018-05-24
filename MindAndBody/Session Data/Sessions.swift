@@ -7598,7 +7598,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "squat",
                          "reps": "10"],
@@ -7607,7 +7608,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "squat",
                          "reps": "10"],
@@ -7616,7 +7618,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcF-2": [
                         // Round 1
@@ -7628,7 +7631,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -7637,7 +7641,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -7646,7 +7651,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcF-3": [
                         // Round 1
@@ -7658,7 +7664,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "lungeDumbell",
                          "reps": "10"],
@@ -7667,7 +7674,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "lungeDumbell",
                          "reps": "10"],
@@ -7676,7 +7684,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcF-4": [
                         // Round 1
@@ -7688,7 +7697,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -7697,7 +7707,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -7706,7 +7717,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcF-5": [
                         // Round 1
@@ -7718,7 +7730,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -7727,7 +7740,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -7736,7 +7750,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     
                     // MARK: Normal
@@ -7750,7 +7765,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "squat",
                          "reps": "10"],
@@ -7759,7 +7775,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "squat",
                          "reps": "10"],
@@ -7768,7 +7785,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "squat",
                          "reps": "8"],
@@ -7777,7 +7795,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "squat",
                          "reps": "6"],
@@ -7786,7 +7805,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcF-2": [
                         // Round 1
@@ -7798,7 +7818,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -7807,7 +7828,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -7816,7 +7838,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -7825,7 +7848,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "4"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -7834,7 +7858,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "4"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcF-3": [
                         // Round 1
@@ -7846,7 +7871,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "lungeDumbell",
                          "reps": "10"],
@@ -7855,7 +7881,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "lungeDumbell",
                          "reps": "10"],
@@ -7864,7 +7891,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "lungeDumbell",
                          "reps": "8"],
@@ -7873,7 +7901,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "lungeDumbell",
                          "reps": "8"],
@@ -7882,7 +7911,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcF-4": [
                         // Round 1
@@ -7894,7 +7924,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -7903,7 +7934,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -7912,7 +7944,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "singleLegDeadlift",
                          "reps": "8"],
@@ -7921,7 +7954,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "singleLegDeadlift",
                          "reps": "6"],
@@ -7930,7 +7964,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "4"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcF-5": [
                         // Round 1
@@ -7942,7 +7977,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -7951,7 +7987,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -7960,7 +7997,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -7969,7 +8007,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
@@ -7995,7 +8034,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "squat",
                          "reps": "12"],
@@ -8004,7 +8044,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "squat",
                          "reps": "10"],
@@ -8013,7 +8054,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcF-2": [
                         // Round 1
@@ -8025,7 +8067,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
@@ -8034,7 +8077,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -8043,7 +8087,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcF-3": [
                         // Round 1
@@ -8055,7 +8100,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "lungeDumbell",
                          "reps": "12"],
@@ -8064,7 +8110,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "lungeDumbell",
                          "reps": "10"],
@@ -8073,7 +8120,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcF-4": [
                         // Round 1
@@ -8085,7 +8133,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "oneLeggedDeadlift",
                          "reps": "12"],
@@ -8094,7 +8143,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "oneLeggedDeadlift",
                          "reps": "10"],
@@ -8103,7 +8153,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcF-5": [
                         // Round 1
@@ -8115,7 +8166,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
@@ -8124,7 +8176,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -8133,7 +8186,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     
                     // MARK: Normal
@@ -8147,7 +8201,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "squat",
                          "reps": "12"],
@@ -8156,7 +8211,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "squat",
                          "reps": "10"],
@@ -8165,7 +8221,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "squat",
                          "reps": "10"],
@@ -8174,7 +8231,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "squat",
                          "reps": "8"],
@@ -8183,7 +8241,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcF-2": [
                         // Round 1
@@ -8195,7 +8254,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
@@ -8204,7 +8264,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -8213,7 +8274,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -8222,7 +8284,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -8231,7 +8294,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcF-3": [
                         // Round 1
@@ -8243,7 +8307,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "lungeDumbell",
                          "reps": "12"],
@@ -8252,7 +8317,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "lungeDumbell",
                          "reps": "10"],
@@ -8261,7 +8327,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "lungeDumbell",
                          "reps": "10"],
@@ -8270,7 +8337,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "lungeDumbell",
                          "reps": "8"],
@@ -8279,7 +8347,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcF-4": [
                         // Round 1
@@ -8291,7 +8360,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "oneLeggedDeadlift",
                          "reps": "12"],
@@ -8300,7 +8370,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "oneLeggedDeadlift",
                          "reps": "10"],
@@ -8309,7 +8380,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "oneLeggedDeadlift",
                          "reps": "10"],
@@ -8318,7 +8390,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "oneLeggedDeadlift",
                          "reps": "8"],
@@ -8327,7 +8400,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcF-5": [
                         // Round 1
@@ -8339,7 +8413,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
@@ -8348,7 +8423,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -8357,7 +8433,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -8366,7 +8443,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
@@ -8375,7 +8453,8 @@ class sessionData {
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     
                     // MARK:-
@@ -8391,7 +8470,8 @@ class sessionData {
                         ["movement": "pullup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "squat",
                          "reps": "12"],
@@ -8400,7 +8480,8 @@ class sessionData {
                         ["movement": "pullup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "squat",
                          "reps": "12"],
@@ -8409,7 +8490,8 @@ class sessionData {
                         ["movement": "pullup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcF-2": [
                         // Round 1
@@ -8421,7 +8503,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "15"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
@@ -8430,7 +8513,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "15"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
@@ -8439,7 +8523,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcF-3": [
                         // Round 1
@@ -8451,7 +8536,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "lungeDumbell",
                          "reps": "12"],
@@ -8460,7 +8546,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "lungeDumbell",
                          "reps": "12"],
@@ -8469,7 +8556,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcF-4": [
                         // Round 1
@@ -8481,7 +8569,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "15"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "oneLeggedDeadlift",
                          "reps": "12"],
@@ -8490,7 +8579,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "15"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "oneLeggedDeadlift",
                          "reps": "12"],
@@ -8499,7 +8589,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcF-5": [
                         // Round 1
@@ -8511,7 +8602,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
@@ -8520,7 +8612,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
@@ -8529,7 +8622,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     
                     // MARK: Normal
@@ -8543,7 +8637,8 @@ class sessionData {
                         ["movement": "pullup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "squat",
                          "reps": "12"],
@@ -8552,7 +8647,8 @@ class sessionData {
                         ["movement": "pullup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "squat",
                          "reps": "10"],
@@ -8561,7 +8657,8 @@ class sessionData {
                         ["movement": "pullup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "squat",
                          "reps": "10"],
@@ -8570,7 +8667,8 @@ class sessionData {
                         ["movement": "pullup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "squat",
                          "reps": "10"],
@@ -8579,7 +8677,8 @@ class sessionData {
                         ["movement": "pullup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcF-2": [
                         // Round 1
@@ -8591,7 +8690,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "15"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
@@ -8600,7 +8700,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "15"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -8609,7 +8710,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -8618,7 +8720,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -8627,7 +8730,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcF-3": [
                         // Round 1
@@ -8639,7 +8743,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "lungeDumbell",
                          "reps": "12"],
@@ -8648,7 +8753,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "lungeDumbell",
                          "reps": "10"],
@@ -8657,7 +8763,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "lungeDumbell",
                          "reps": "10"],
@@ -8666,7 +8773,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "lungeDumbell",
                          "reps": "10"],
@@ -8675,7 +8783,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcF-4": [
                         // Round 1
@@ -8687,7 +8796,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "15"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "oneLeggedDeadlift",
                          "reps": "12"],
@@ -8696,7 +8806,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "15"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "oneLeggedDeadlift",
                          "reps": "10"],
@@ -8705,7 +8816,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "oneLeggedDeadlift",
                          "reps": "10"],
@@ -8714,7 +8826,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "oneLeggedDeadlift",
                          "reps": "10"],
@@ -8723,7 +8836,8 @@ class sessionData {
                         ["movement": "pushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcF-5": [
                         // Round 1
@@ -8735,7 +8849,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "15"],
@@ -8744,7 +8859,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -8753,7 +8869,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -8762,7 +8879,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -8771,7 +8889,8 @@ class sessionData {
                         ["movement": "bodyweightRow",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                 ]
                 // MARK:-
@@ -8792,7 +8911,8 @@ class sessionData {
                         ["movement": "tricepExtensionsBodyweight",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -8801,7 +8921,8 @@ class sessionData {
                         ["movement": "tricepExtensionsBodyweight",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -8810,7 +8931,8 @@ class sessionData {
                         ["movement": "tricepExtensionsBodyweight",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcU-2": [
                         // Round 1
@@ -8822,7 +8944,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "latPullover",
                          "reps": "10"],
@@ -8831,7 +8954,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "latPullover",
                          "reps": "10"],
@@ -8840,7 +8964,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     // Men
                     "WGES-CcU-1-M": [
@@ -8853,7 +8978,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -8862,7 +8988,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -8871,7 +8998,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcU-2-M": [
                         // Round 1
@@ -8883,7 +9011,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -8892,7 +9021,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -8901,7 +9031,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcU-3-M": [
                         // Round 1
@@ -8913,7 +9044,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "tBarRow",
                          "reps": "10"],
@@ -8922,7 +9054,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "tBarRow",
                          "reps": "10"],
@@ -8931,7 +9064,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     
                     // MARK: Normal
@@ -8946,7 +9080,8 @@ class sessionData {
                         ["movement": "tricepExtensionsBodyweight",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -8955,7 +9090,8 @@ class sessionData {
                         ["movement": "tricepExtensionsBodyweight",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -8964,7 +9100,8 @@ class sessionData {
                         ["movement": "tricepExtensionsBodyweight",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
@@ -8973,7 +9110,8 @@ class sessionData {
                         ["movement": "tricepExtensionsBodyweight",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
@@ -8982,7 +9120,8 @@ class sessionData {
                         ["movement": "tricepExtensionsBodyweight",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcU-2": [
                         // Round 1
@@ -8994,7 +9133,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "latPullover",
                          "reps": "12"],
@@ -9003,7 +9143,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "latPullover",
                          "reps": "10"],
@@ -9012,7 +9153,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "latPullover",
                          "reps": "10"],
@@ -9021,7 +9163,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "latPullover",
                          "reps": "8"],
@@ -9030,7 +9173,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     // Men
                     "WGEN-CcU-1-M": [
@@ -9043,7 +9187,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -9052,7 +9197,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -9061,7 +9207,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
@@ -9070,7 +9217,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "bentOverRowDumbell",
                          "reps": "6"],
@@ -9079,7 +9227,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcU-2-M": [
                         // Round 1
@@ -9091,7 +9240,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -9100,7 +9250,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "bentOverRowDumbell",
                          "reps": "10"],
@@ -9109,7 +9260,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
@@ -9118,7 +9270,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "bentOverRowDumbell",
                          "reps": "8"],
@@ -9127,7 +9280,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcU-3-M": [
                         // Round 1
@@ -9139,7 +9293,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "tBarRow",
                          "reps": "10"],
@@ -9148,7 +9303,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "tBarRow",
                          "reps": "10"],
@@ -9157,7 +9313,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "tBarRow",
                          "reps": "8"],
@@ -9166,7 +9323,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "tBarRow",
                          "reps": "8"],
@@ -9175,7 +9333,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     
                     
@@ -9193,7 +9352,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "8"],
@@ -9202,7 +9362,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "6"],
@@ -9211,7 +9372,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcU-2": [
                         // Round 1
@@ -9223,7 +9385,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "latPullover",
                          "reps": "12"],
@@ -9232,7 +9395,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "latPullover",
                          "reps": "10"],
@@ -9241,7 +9405,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcU-3": [
                         // Round 1
@@ -9253,7 +9418,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "8"],
@@ -9262,7 +9428,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "6"],
@@ -9271,7 +9438,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     // Men
                     "WGAS-CcU-1-M": [
@@ -9284,7 +9452,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "8"],
@@ -9293,7 +9462,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "6"],
@@ -9302,7 +9472,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcU-2-M": [
                         // Round 1
@@ -9314,7 +9485,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "tBarRow",
                          "reps": "12"],
@@ -9323,7 +9495,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "tBarRow",
                          "reps": "10"],
@@ -9332,7 +9505,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     
                     // MARK: Normal
@@ -9347,7 +9521,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "8"],
@@ -9356,7 +9531,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "6"],
@@ -9365,7 +9541,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "bodyweightRow",
                          "reps": "6"],
@@ -9374,7 +9551,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "bodyweightRow",
                          "reps": "4"],
@@ -9383,7 +9561,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcU-2": [
                         // Round 1
@@ -9395,7 +9574,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "latPullover",
                          "reps": "12"],
@@ -9404,7 +9584,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "latPullover",
                          "reps": "10"],
@@ -9413,7 +9594,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "latPullover",
                          "reps": "10"],
@@ -9422,7 +9604,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "latPullover",
                          "reps": "8"],
@@ -9431,7 +9614,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcU-3": [
                         // Round 1
@@ -9443,7 +9627,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "8"],
@@ -9452,7 +9637,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "6"],
@@ -9461,7 +9647,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "bodyweightRow",
                          "reps": "6"],
@@ -9470,7 +9657,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "bodyweightRow",
                          "reps": "4"],
@@ -9479,7 +9667,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     // Men
                     "WGAN-CcU-1-M": [
@@ -9492,7 +9681,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "8"],
@@ -9501,7 +9691,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "6"],
@@ -9510,7 +9701,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "bodyweightRow",
                          "reps": "6"],
@@ -9519,7 +9711,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "bodyweightRow",
                          "reps": "4"],
@@ -9528,7 +9721,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcU-2-M": [
                         // Round 1
@@ -9540,7 +9734,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "tBarRow",
                          "reps": "12"],
@@ -9549,7 +9744,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "tBarRow",
                          "reps": "10"],
@@ -9558,7 +9754,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "tBarRow",
                          "reps": "8"],
@@ -9567,7 +9764,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "tBarRow",
                          "reps": "8"],
@@ -9576,7 +9774,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     
                     // MARK:-
@@ -9593,7 +9792,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9602,7 +9802,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9611,7 +9812,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcU-2": [
                         // Round 1
@@ -9623,7 +9825,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "latPullover",
                          "reps": "12"],
@@ -9632,7 +9835,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "latPullover",
                          "reps": "12"],
@@ -9641,7 +9845,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcU-3": [
                         // Round 1
@@ -9653,7 +9858,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9662,7 +9868,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9671,7 +9878,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     // Men
                     "WGHS-CcU-1-M": [
@@ -9684,7 +9892,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9693,7 +9902,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9702,7 +9912,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcU-2-M": [
                         // Round 1
@@ -9714,7 +9925,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "tBarRow",
                          "reps": "12"],
@@ -9723,7 +9935,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "tBarRow",
                          "reps": "12"],
@@ -9732,7 +9945,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     
                     // MARK: Normal
@@ -9747,7 +9961,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9756,7 +9971,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9765,7 +9981,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "bodyweightRow",
                          "reps": "10"],
@@ -9774,7 +9991,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "bodyweightRow",
                          "reps": "8"],
@@ -9783,7 +10001,8 @@ class sessionData {
                         ["movement": "trianglePushup",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcU-2": [
                         // Round 1
@@ -9795,7 +10014,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "latPullover",
                          "reps": "12"],
@@ -9804,7 +10024,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "latPullover",
                          "reps": "12"],
@@ -9813,7 +10034,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "latPullover",
                          "reps": "10"],
@@ -9822,7 +10044,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "latPullover",
                          "reps": "8"],
@@ -9831,7 +10054,8 @@ class sessionData {
                         ["movement": "ropeExtension",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcU-3": [
                         // Round 1
@@ -9843,7 +10067,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9852,7 +10077,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9861,7 +10087,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "bodyweightRow",
                          "reps": "10"],
@@ -9870,7 +10097,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "bodyweightRow",
                          "reps": "8"],
@@ -9879,7 +10107,8 @@ class sessionData {
                         ["movement": "hammerCurl",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     // Men
                     "WGHN-CcU-1-M": [
@@ -9892,7 +10121,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9901,7 +10131,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "bodyweightRow",
                          "reps": "12"],
@@ -9910,7 +10141,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "bodyweightRow",
                          "reps": "10"],
@@ -9919,7 +10151,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "bodyweightRow",
                          "reps": "8"],
@@ -9928,7 +10161,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcU-2-M": [
                         // Round 1
@@ -9940,7 +10174,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "tBarRow",
                          "reps": "12"],
@@ -9949,7 +10184,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "tBarRow",
                          "reps": "12"],
@@ -9958,7 +10194,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "tBarRow",
                          "reps": "10"],
@@ -9967,7 +10204,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "tBarRow",
                          "reps": "8"],
@@ -9976,7 +10214,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15 breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                 ]
                 
@@ -9997,7 +10236,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "squat",
                          "reps": "10"],
@@ -10006,7 +10246,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "squat",
                          "reps": "8"],
@@ -10015,7 +10256,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcL-2": [
                         // Round 1
@@ -10027,7 +10269,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -10036,7 +10279,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
@@ -10045,7 +10289,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcL-3": [
                         // Round 1
@@ -10057,7 +10302,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "deadlift",
                          "reps": "10"],
@@ -10066,7 +10312,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "deadlift",
                          "reps": "8"],
@@ -10075,7 +10322,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcL-4": [
                         // Round 1
@@ -10087,7 +10335,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
@@ -10096,7 +10345,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "romanianDeadlift",
                          "reps": "8"],
@@ -10105,7 +10355,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGES-CcL-5": [
                         // Round 1
@@ -10117,7 +10368,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -10126,7 +10378,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "singleLegDeadlift",
                          "reps": "8"],
@@ -10135,7 +10388,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     
                     // MARK: Normal
@@ -10149,7 +10403,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "squat",
                          "reps": "10"],
@@ -10158,7 +10413,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "squat",
                          "reps": "8"],
@@ -10167,7 +10423,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "squat",
                          "reps": "8"],
@@ -10176,7 +10433,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "squat",
                          "reps": "6"],
@@ -10185,7 +10443,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcL-2": [
                         // Round 1
@@ -10197,7 +10456,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -10206,7 +10466,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
@@ -10215,7 +10476,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
@@ -10224,7 +10486,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "6"],
@@ -10233,7 +10496,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcL-3": [
                         // Round 1
@@ -10245,7 +10509,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "deadlift",
                          "reps": "10"],
@@ -10254,7 +10519,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "deadlift",
                          "reps": "8"],
@@ -10263,7 +10529,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "deadlift",
                          "reps": "8"],
@@ -10272,7 +10539,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "deadlift",
                          "reps": "6"],
@@ -10281,7 +10549,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcL-4": [
                         // Round 1
@@ -10293,7 +10562,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
@@ -10302,7 +10572,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "romanianDeadlift",
                          "reps": "8"],
@@ -10311,7 +10582,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "romanianDeadlift",
                          "reps": "8"],
@@ -10320,7 +10592,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "romanianDeadlift",
                          "reps": "6"],
@@ -10329,7 +10602,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     "WGEN-CcL-5": [
                         // Round 1
@@ -10341,7 +10615,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 2
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -10350,7 +10625,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 3
                         ["movement": "singleLegDeadlift",
                          "reps": "8"],
@@ -10359,7 +10635,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 4
                         ["movement": "singleLegDeadlift",
                          "reps": "8"],
@@ -10368,7 +10645,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                         // Round 5
                         ["movement": "singleLegDeadlift",
                          "reps": "6"],
@@ -10377,7 +10655,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "6"],
                         ["movement": "plank",
-                         "reps": "5 breaths"],
+                         "reps": "5 breaths",
+                         "time": 30],
                     ],
                     
                     
@@ -10394,7 +10673,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "squat",
                          "reps": "12"],
@@ -10403,7 +10683,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "squat",
                          "reps": "10"],
@@ -10412,7 +10693,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcL-2": [
                         // Round 1
@@ -10424,7 +10706,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -10433,7 +10716,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -10442,7 +10726,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcL-3": [
                         // Round 1
@@ -10454,7 +10739,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "deadlift",
                          "reps": "12"],
@@ -10463,7 +10749,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "deadlift",
                          "reps": "10"],
@@ -10472,7 +10759,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcL-4": [
                         // Round 1
@@ -10484,7 +10772,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
@@ -10493,7 +10782,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
@@ -10502,7 +10792,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAS-CcL-5": [
                         // Round 1
@@ -10514,7 +10805,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "singleLegDeadlift",
                          "reps": "12"],
@@ -10523,7 +10815,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -10532,7 +10825,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     
                     // MARK: Normal
@@ -10546,7 +10840,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "squat",
                          "reps": "12"],
@@ -10555,7 +10850,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "squat",
                          "reps": "10"],
@@ -10564,7 +10860,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "squat",
                          "reps": "10"],
@@ -10573,7 +10870,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "squat",
                          "reps": "8"],
@@ -10582,7 +10880,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcL-2": [
                         // Round 1
@@ -10594,7 +10893,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -10603,7 +10903,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -10612,7 +10913,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -10621,7 +10923,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
@@ -10630,7 +10933,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcL-3": [
                         // Round 1
@@ -10642,7 +10946,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "deadlift",
                          "reps": "12"],
@@ -10651,7 +10956,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "deadlift",
                          "reps": "10"],
@@ -10660,7 +10966,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "deadlift",
                          "reps": "10"],
@@ -10669,7 +10976,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "deadlift",
                          "reps": "8"],
@@ -10678,7 +10986,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcL-4": [
                         // Round 1
@@ -10690,7 +10999,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
@@ -10699,7 +11009,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
@@ -10708,7 +11019,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
@@ -10717,7 +11029,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "romanianDeadlift",
                          "reps": "8"],
@@ -10726,7 +11039,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     "WGAN-CcL-5": [
                         // Round 1
@@ -10738,7 +11052,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 2
                         ["movement": "singleLegDeadlift",
                          "reps": "12"],
@@ -10747,7 +11062,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 3
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -10756,7 +11072,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 4
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -10765,7 +11082,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                         // Round 5
                         ["movement": "singleLegDeadlift",
                          "reps": "8"],
@@ -10774,7 +11092,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "10 breaths"],
+                         "reps": "10 breaths",
+                         "time": 60],
                     ],
                     
                     // MARK:-
@@ -10790,7 +11109,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "squat",
                          "reps": "12"],
@@ -10799,7 +11119,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "squat",
                          "reps": "12"],
@@ -10808,7 +11129,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcL-2": [
                         // Round 1
@@ -10820,7 +11142,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -10829,7 +11152,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -10838,7 +11162,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcL-3": [
                         // Round 1
@@ -10850,7 +11175,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "deadlift",
                          "reps": "12"],
@@ -10859,7 +11185,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "deadlift",
                          "reps": "12"],
@@ -10868,7 +11195,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcL-4": [
                         // Round 1
@@ -10880,7 +11208,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
@@ -10889,7 +11218,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
@@ -10898,7 +11228,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHS-CcL-5": [
                         // Round 1
@@ -10910,7 +11241,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "singleLegDeadlift",
                          "reps": "12"],
@@ -10919,7 +11251,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -10928,7 +11261,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     
                     // MARK: Normal
@@ -10942,7 +11276,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "squat",
                          "reps": "12"],
@@ -10951,7 +11286,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "squat",
                          "reps": "12"],
@@ -10960,7 +11296,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "squat",
                          "reps": "10"],
@@ -10969,7 +11306,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "squat",
                          "reps": "8"],
@@ -10978,7 +11316,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcL-2": [
                         // Round 1
@@ -10990,7 +11329,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -10999,7 +11339,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
@@ -11008,7 +11349,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
@@ -11017,7 +11359,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
@@ -11026,7 +11369,8 @@ class sessionData {
                         ["movement": "lungeDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcL-3": [
                         // Round 1
@@ -11038,7 +11382,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "deadlift",
                          "reps": "12"],
@@ -11047,7 +11392,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "deadlift",
                          "reps": "12"],
@@ -11056,7 +11402,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "deadlift",
                          "reps": "10"],
@@ -11065,7 +11412,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "deadlift",
                          "reps": "8"],
@@ -11074,7 +11422,8 @@ class sessionData {
                         ["movement": "gluteBridge",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcL-4": [
                         // Round 1
@@ -11086,7 +11435,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
@@ -11095,7 +11445,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "romanianDeadlift",
                          "reps": "12"],
@@ -11104,7 +11455,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "romanianDeadlift",
                          "reps": "10"],
@@ -11113,7 +11465,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "romanianDeadlift",
                          "reps": "8"],
@@ -11122,7 +11475,8 @@ class sessionData {
                         ["movement": "dumbellFrontSquat",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                     "WGHN-CcL-5": [
                         // Round 1
@@ -11134,7 +11488,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 2
                         ["movement": "singleLegDeadlift",
                          "reps": "12"],
@@ -11143,7 +11498,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 3
                         ["movement": "singleLegDeadlift",
                          "reps": "12"],
@@ -11152,7 +11508,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "12"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 4
                         ["movement": "singleLegDeadlift",
                          "reps": "10"],
@@ -11161,7 +11518,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "10"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                         // Round 5
                         ["movement": "singleLegDeadlift",
                          "reps": "8"],
@@ -11170,7 +11528,8 @@ class sessionData {
                         ["movement": "standingShoulderPressDumbell",
                          "reps": "8"],
                         ["movement": "plank",
-                         "reps": "15+ breaths"],
+                         "reps": "15 breaths",
+                         "time": 90],
                     ],
                 ]
                 // MARK:-

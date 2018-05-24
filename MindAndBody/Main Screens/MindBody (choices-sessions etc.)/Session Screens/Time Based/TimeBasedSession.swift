@@ -173,15 +173,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Add the movements to the key array x(number of rounds) more times
         switch SelectedSession.shared.selectedSession[1] {
         case "circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
-//            var enlargedKeyArray = keyArray
-//            // Number of rounds kept in first movement dict
+            // Number of rounds kept in first movement dict
             nRounds = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[0]["rounds"] as! Int
-//            // nRounds is always greater than 1, so if 2, then 1...1 adds 1 set of keys, therefore there are two rounds
-//            for _ in 1...nRounds - 1 {
-//                enlargedKeyArray += keyArray
-//            }
-//            keyArray = enlargedKeyArray
-            
             //
             nMovementsInRound = keyArray.count / nRounds
             
@@ -206,9 +199,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
         finishEarly.tintColor = Colors.red
-        
-        // self.present(alert, animated: true, completion: (() -> Void)?)
-        
+                
         // Progress Bar
         // Thickness
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)

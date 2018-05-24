@@ -3652,11 +3652,18 @@
                                                     </constraints>
                                                     <state key="normal" image="Timer"/>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcq-Kh-Ru8">
+                                                    <rect key="frame" x="142.5" y="341.5" width="90" height="50.5"/>
+                                                    <connections>
+                                                        <action selector="weightButton:" destination="tIh-Sp-rUW" eventType="touchUpInside" id="jbh-bN-6oe"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="pB9-i1-d5Y" firstAttribute="top" secondItem="5tM-Fs-tkx" secondAttribute="bottom" constant="-15" id="0Q2-xu-McQ"/>
                                                 <constraint firstItem="NB9-03-fUy" firstAttribute="centerY" secondItem="v8f-f7-OK1" secondAttribute="centerY" multiplier="28/16" id="D4I-53-FXI"/>
                                                 <constraint firstAttribute="bottom" secondItem="u08-q7-MDY" secondAttribute="bottom" id="FNC-IN-Rxd"/>
+                                                <constraint firstItem="Wcq-Kh-Ru8" firstAttribute="centerX" secondItem="v8f-f7-OK1" secondAttribute="centerX" id="HGI-fc-p1r"/>
                                                 <constraint firstItem="AOR-jO-oQj" firstAttribute="centerY" secondItem="v8f-f7-OK1" secondAttribute="centerY" multiplier="30/16" id="KoB-Sw-P4a"/>
                                                 <constraint firstItem="AOR-jO-oQj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NB9-03-fUy" secondAttribute="bottom" id="R8k-y5-aPC"/>
                                                 <constraint firstItem="5tM-Fs-tkx" firstAttribute="height" secondItem="v8f-f7-OK1" secondAttribute="height" multiplier="13/16" id="Ry3-WK-evW"/>
@@ -3667,7 +3674,10 @@
                                                 <constraint firstItem="5tM-Fs-tkx" firstAttribute="top" secondItem="v8f-f7-OK1" secondAttribute="top" id="hAp-cQ-tmR"/>
                                                 <constraint firstItem="pB9-i1-d5Y" firstAttribute="centerX" secondItem="v8f-f7-OK1" secondAttribute="centerX" id="hPc-hU-RJS"/>
                                                 <constraint firstItem="AOR-jO-oQj" firstAttribute="centerX" secondItem="v8f-f7-OK1" secondAttribute="centerX" id="i3M-lY-7Vw"/>
+                                                <constraint firstItem="Wcq-Kh-Ru8" firstAttribute="bottom" secondItem="AOR-jO-oQj" secondAttribute="bottom" id="kT7-gA-Pd8"/>
                                                 <constraint firstAttribute="trailing" secondItem="u08-q7-MDY" secondAttribute="trailing" id="rlx-8c-BTE"/>
+                                                <constraint firstItem="Wcq-Kh-Ru8" firstAttribute="width" secondItem="AOR-jO-oQj" secondAttribute="width" id="uPK-f8-ubg"/>
+                                                <constraint firstItem="Wcq-Kh-Ru8" firstAttribute="top" secondItem="NB9-03-fUy" secondAttribute="top" id="xTe-ij-bSU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -4183,7 +4193,7 @@
                                     <constraint firstAttribute="height" constant="73.5" id="fc2-6L-Ufk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="23"/>
-                                <state key="normal" title="- Select Warmup -">
+                                <state key="normal">
                                     <color key="titleColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -5372,15 +5382,15 @@
         <segue reference="SXY-HC-FeY"/>
         <segue reference="na3-42-cEE"/>
         <segue reference="KLr-4k-hco"/>
-        <segue reference="J6H-iJ-lim"/>
+        <segue reference="tUJ-Lb-bfp"/>
         <segue reference="2sH-Wt-Foe"/>
         <segue reference="dk4-de-Awg"/>
-        <segue reference="JpO-YN-OFV"/>
-        <segue reference="tfD-MK-KSh"/>
-        <segue reference="5ms-mh-HWc"/>
+        <segue reference="zU9-Z8-ErV"/>
+        <segue reference="m3z-OW-W4C"/>
+        <segue reference="WE3-0F-Tbc"/>
         <segue reference="VgF-8Y-fer"/>
-        <segue reference="xvj-fF-Qps"/>
-        <segue reference="Xte-T3-9AO"/>
+        <segue reference="NBb-3X-dfT"/>
+        <segue reference="5BM-ai-zL4"/>
         <segue reference="1Vx-ie-BLc"/>
         <segue reference="Fhn-aO-iU6"/>
         <segue reference="bzi-ZW-PZ7"/>
