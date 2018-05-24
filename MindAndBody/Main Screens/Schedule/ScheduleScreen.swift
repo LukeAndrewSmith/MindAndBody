@@ -63,6 +63,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     // Schedule creation and choices ACTION SHEET
     let scheduleChoiceTable = UITableView()
+    let scheduleView = UIView()
+    let createScheduleButton = UIButton()
     let editScheduleButton = UIButton()
     let editProfileButton = UIButton()
     let actionSheetSeparator = UIView()
@@ -259,6 +261,13 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         }
     }
     
+    @objc func createScheduleAction()  {
+        // Dismiss action sheet
+        ActionSheet.shared.animateActionSheetDown()
+        //
+        self.performSegue(withIdentifier: "ScheduleCreationSegue", sender: self)
+    }
+    
     // Edit Profile
     @objc func editProfileAction() {
         //
@@ -274,11 +283,14 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         //
         let actionSheet = UIView()
         //
-        let height = scheduleChoiceTable.bounds.height + 10 + editScheduleButton.bounds.height + 10 + editProfileButton.bounds.height + 10
+        let height = scheduleChoiceTable.bounds.height + createScheduleButton.bounds.height + editScheduleButton.bounds.height + 10 + editProfileButton.bounds.height
+            //+ 10
         actionSheet.frame.size = CGSize(width: view.bounds.width - 20, height: height)
         actionSheet.layer.cornerRadius = editScheduleButton.bounds.height / 2
-        actionSheet.addSubview(scheduleChoiceTable)
-        actionSheet.addSubview(editScheduleButton)
+//        actionSheet.addSubview(scheduleChoiceTable)
+//        actionSheet.addSubview(createScheduleButton)
+//        actionSheet.addSubview(editScheduleButton)
+        actionSheet.addSubview(scheduleView)
         actionSheet.addSubview(editProfileButton)
         actionSheet.addSubview(actionSheetSeparator)
         //

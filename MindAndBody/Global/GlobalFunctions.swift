@@ -202,8 +202,7 @@ class ReminderNotifications {
                 // Update current badge count, only useful if user switches between scheduleStyles, i.e from view full week to view each day and vice versa, or for when this gets reset in the middle of a day
                 // View each day
                 if scheduleStyle == 0 {
-                    // Date().currentWeekDayFromMonday returns monday = 1, in schedule we want monday = 0 so -1
-                    let currentDay = Date().currentWeekDayFromMonday - 1
+                    let currentDay = Date().weekDayFromMonday
                     var currentCount: Int = 0
                     // Loop current day counting how much has been done
                     if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![currentDay].count != 0 {
@@ -217,7 +216,6 @@ class ReminderNotifications {
                     UIApplication.shared.applicationIconBadgeNumber = currentCount
                 // View full week
                 } else {
-                    // Date().currentWeekDayFromMonday returns monday = 1, in schedule we want monday = 0 so -1
                     var currentCount: Int = 0
                     // Loop week
                     for i in 0...6 {
@@ -261,8 +259,7 @@ class ReminderNotifications {
         // Day View, scheduleStyle 0
         if scheduleStyle == 0 {
             // If current day
-            // Note: Date().currentWeekDayFromMonday returns 1 for monday, but in schedule monday is 0 so - 1
-            if day == (Date().currentWeekDayFromMonday - 1) {
+            if day == (Date().weekDayFromMonday) {
                 // True -> False, increment badge
                 if currentBool {
                     updateBadgeCounter(increment: true)
@@ -271,7 +268,7 @@ class ReminderNotifications {
                     updateBadgeCounter(increment: false)
                 }
             // If not current day but current day is empty (Description below)
-            } else if day != (Date().currentWeekDayFromMonday - 1) && schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(Date().currentWeekDayFromMonday - 1)].count == 0 {
+            } else if day != (Date().weekDayFromMonday) && schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(Date().weekDayFromMonday)].count == 0 {
                 // If not current day but current day is empty:
                 // This indicates that if something is completed, the user has probably missed a day and is doing it the next day on the empty day, only allow decrementing
                 // The badges are set in the morning of a day when there is something to be done, and updated throughout the day. If the user does nothing the badges stay there until the next day there is something and the badges are updated in the morning, or if they do something on an empty day as described above.
@@ -1318,16 +1315,17 @@ extension Date {
     
     //
     // Day in week of date from monday, monday being 1
-    var currentWeekDayFromMonday: Int {
+    var weekDayFromMonday: Int {
         var calendar = Calendar(identifier: .iso8601)
-        calendar.timeZone = TimeZone(abbreviation: "UTC")!
-        // component gives us 1 for sunday through to 7 for monday, we want 1 for monday so shift
-        var currentWeekDay = calendar.component(.weekday, from: Date().setToMidnightUTC())
-        // 0 is monday but we want 1 and monday so shift
+        // Only time we don't use "UTC" time zone as we want users current day in week
+        calendar.timeZone = TimeZone.current
+        // component gives us 1 for sunday through to 7 for monday, we want 0 for monday so shift
+        var currentWeekDay = calendar.component(.weekday, from: self)
+        // 2 is monday but we want 0 and monday so shift by 2
         if currentWeekDay == 1 {
-            currentWeekDay = 7
+            currentWeekDay = 6
         } else if currentWeekDay > 1 {
-            currentWeekDay -= 1
+            currentWeekDay -= 2
         }
         return currentWeekDay
     }

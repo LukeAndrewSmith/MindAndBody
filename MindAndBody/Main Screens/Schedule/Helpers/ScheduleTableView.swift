@@ -42,7 +42,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 return weekOfThe + firstMondayWithOrdinal!
             }
         case scheduleChoiceTable:
-            return NSLocalizedString("chooseCreateSchedule", comment: "")
+            return NSLocalizedString("chooseSchedule", comment: "")
         default:
             return ""
         }
@@ -125,7 +125,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 return sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count
             }
         case scheduleChoiceTable:
-            return schedules.count + 1
+            return schedules.count
         default:
             return 0
         }
@@ -262,24 +262,14 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         case scheduleChoiceTable:
             let selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
             //
-            switch indexPath.row {
-            case schedules.count:
-                cell.imageView?.image = #imageLiteral(resourceName: "Plus")
-                cell.tintColor = Colors.light
-                //
-                cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1)
-                cell.imageView?.transform = CGAffineTransform(scaleX: -1,y: 1)
-            default:
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
-                cell.textLabel?.textAlignment = .left
-                cell.textLabel?.textColor = Colors.light
-                if indexPath.row == selectedSchedule {
-                    cell.accessoryType = .checkmark
-                    cell.tintColor = Colors.green
-                }
-                cell.textLabel?.text = NSLocalizedString(schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as! String, comment: "")
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+            cell.textLabel?.textAlignment = .left
+            cell.textLabel?.textColor = Colors.light
+            if indexPath.row == selectedSchedule {
+                cell.accessoryType = .checkmark
+                cell.tintColor = Colors.green
             }
-            
+            cell.textLabel?.text = NSLocalizedString(schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as! String, comment: "")
             
         //
         default:
@@ -317,37 +307,28 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         // Select schedule
         case scheduleChoiceTable:
             var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-            // Creat new schedule
-            if indexPath.row == schedules.count {
+            // Select schedule
+            // Select new schedule in user settings
+            var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
+            selectedSchedule = indexPath.row
+            ScheduleVariables.shared.selectedSchedule = selectedSchedule
+            scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+            UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule"])
+            // Reload table
+            layoutViews()
+            scheduleChoiceTable.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
+                self.scheduleTable.reloadData()
                 // Dismiss action sheet
                 ActionSheet.shared.animateActionSheetDown()
                 //
-                self.performSegue(withIdentifier: "ScheduleCreationSegue", sender: self)
-                //
-                // Select schedule
-            } else {
-                // Select new schedule in user settings
-                var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
-                selectedSchedule = indexPath.row
-                ScheduleVariables.shared.selectedSchedule = selectedSchedule
-                scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
-                UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule"])
-                // Reload table
-                layoutViews()
-                scheduleChoiceTable.reloadData()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
-                    self.scheduleTable.reloadData()
-                    // Dismiss action sheet
-                    ActionSheet.shared.animateActionSheetDown()
-                    //
-                })
-                // Tracking
-                updateWeekGoal()
-                // Notifications
-                ReminderNotifications.shared.setNotifications()
-            }
+            })
+            // Tracking
+            updateWeekGoal()
+            // Notifications
+            ReminderNotifications.shared.setNotifications()
             tableView.deselectRow(at: indexPath, animated: true)
             
         default:
@@ -368,13 +349,10 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     //
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         if tableView == scheduleTable {
             return false
         } else if tableView == scheduleChoiceTable {
-            if indexPath.row != schedules.count {
-                return true
-            }
+            return true
         }
         return false
     }
@@ -400,7 +378,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 scheduleStyle = schedules[selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
             }
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
-            ScheduleVariables.shared.selectedDay = Date().currentWeekDayFromMonday - 1
+            ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
             // Reload table
             layoutViews()

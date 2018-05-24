@@ -1557,7 +1557,6 @@ extension ScheduleScreen {
         // If scheduleStyle == day update pageStack, if not do nothing
         if scheduleStyle == 0 {
             for i in 0...6 {
-            //Date().currentWeekDayFromMonday - 1 {
                 let isCompleted = isDayCompleted(day: i)
                 // True, green
                 if isCompleted == 0 {
@@ -1794,35 +1793,61 @@ extension ScheduleScreen {
         // Set status bar to light
         UIApplication.shared.statusBarStyle = .lightContent
         //
+        // table   // buttons // spaces
         
-        // table    // buttons // spaces
+        let tableHeight: CGFloat = (47*2.5) + 49 // 47 is height of a row in the table
+            //147 + 49 // (49 for header)
+        let buttonHeight: CGFloat = 49
+        
+        let elementWidth = view.bounds.width - 20
+        
+        // Schedule View
+        scheduleView.backgroundColor = Colors.dark
+        scheduleView.frame = CGRect(x: 0, y: 0, width: elementWidth, height: tableHeight + (2 * buttonHeight) + 1)
+        scheduleView.layer.cornerRadius = CGFloat(buttonHeight / 2)
+        scheduleView.clipsToBounds = true
+        scheduleView.layer.borderWidth = 1
+        scheduleView.layer.borderColor = Colors.light.cgColor
+        // Important order for the shadow on editSchedule button to be in front of scheduleChoiceTable but behind editScheduleButton
+        scheduleView.addSubview(scheduleChoiceTable)
+        scheduleView.addSubview(editScheduleButton)
+        scheduleView.addSubview(createScheduleButton)
         // Schedule choice
         scheduleChoiceTable.backgroundColor = Colors.dark
         scheduleChoiceTable.delegate = self
         scheduleChoiceTable.dataSource = self
-        scheduleChoiceTable.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 20, height: 147 + 49)
+        scheduleChoiceTable.frame = CGRect(x: 0, y: 0, width: elementWidth, height: tableHeight)
         scheduleChoiceTable.tableFooterView = UIView()
         scheduleChoiceTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        scheduleChoiceTable.layer.cornerRadius = 15
-        scheduleChoiceTable.clipsToBounds = true
         scheduleChoiceTable.layer.borderWidth = 1
         scheduleChoiceTable.layer.borderColor = Colors.light.cgColor
         // Edit schedule
         editScheduleButton.addTarget(self, action: #selector(editScheduleAction), for: .touchUpInside)
         editScheduleButton.setTitle(NSLocalizedString("editSchedule", comment: ""), for: .normal)
         editScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        editScheduleButton.frame = CGRect(x: 0, y: (147 + 49) + 10, width: view.bounds.width - 20, height: 49)
-        editScheduleButton.layer.cornerRadius = 49 / 2
-        editScheduleButton.clipsToBounds = true
+        editScheduleButton.frame = CGRect(x: 0, y: tableHeight, width: elementWidth, height: 49)
         editScheduleButton.setTitleColor(Colors.dark, for: .normal)
         editScheduleButton.backgroundColor = Colors.light
         editScheduleButton.setImage(#imageLiteral(resourceName: "Calendar"), for: .normal)
         editScheduleButton.tintColor = Colors.dark
+        editScheduleButton.layer.shadowColor = UIColor.black.cgColor
+        editScheduleButton.layer.shadowOpacity = 0.72
+        editScheduleButton.layer.shadowRadius = 8
+        editScheduleButton.layer.shadowOffset = CGSize.zero
+        // Create Schedule
+        createScheduleButton.addTarget(self, action: #selector(createScheduleAction), for: .touchUpInside)
+        createScheduleButton.setTitle(NSLocalizedString("createSchedule", comment: ""), for: .normal)
+        createScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        createScheduleButton.frame = CGRect(x: 0, y: tableHeight + buttonHeight + 1, width: elementWidth, height: buttonHeight)
+        createScheduleButton.setTitleColor(Colors.dark, for: .normal)
+        createScheduleButton.backgroundColor = Colors.light
+        createScheduleButton.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
+        createScheduleButton.tintColor = Colors.dark
         // Edit profile
         editProfileButton.addTarget(self, action: #selector(editProfileAction), for: .touchUpInside)
         editProfileButton.setTitle(NSLocalizedString("editProfile", comment: ""), for: .normal)
         editProfileButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        editProfileButton.frame = CGRect(x: 0, y: (147 + 49) + 10 + 49 + 10, width: view.bounds.width - 20, height: 49)
+        editProfileButton.frame = CGRect(x: 0, y: scheduleView.frame.height + 10, width: view.bounds.width - 20, height: 49)
         editProfileButton.layer.cornerRadius = 49 / 2
         editProfileButton.clipsToBounds = true
         editProfileButton.setTitleColor(Colors.dark, for: .normal)
@@ -1830,11 +1855,11 @@ extension ScheduleScreen {
         editProfileButton.setImage(#imageLiteral(resourceName: "Profile"), for: .normal)
         editProfileButton.tintColor = Colors.dark
         //
-        actionSheetSeparator.backgroundColor = Colors.light.withAlphaComponent(0.25)
-        let yCoord = (147 + 49) + 10 + 49 + 10 + 49 + 10
-        actionSheetSeparator.frame = CGRect(x: 5, y: yCoord, width: Int(view.bounds.width - 30), height: 1)
-        actionSheetSeparator.layer.cornerRadius = 0.25
-        actionSheetSeparator.clipsToBounds = true
+//        actionSheetSeparator.backgroundColor = Colors.light.withAlphaComponent(0.25)
+//        let yCoord = (tableHeight + 49) + 10 + 49 + 10 + 49 + 10
+//        actionSheetSeparator.frame = CGRect(x: 5, y: yCoord, width: Int(view.bounds.width - 30), height: 1)
+//        actionSheetSeparator.layer.cornerRadius = 0.25
+//        actionSheetSeparator.clipsToBounds = true
         
         //
         addBackgroundImage(withBlur: true, fullScreen: false)
@@ -1929,10 +1954,10 @@ extension ScheduleScreen {
         
         //
         // Select Today
-        // Get current day as index, currentWeekDay - 1 as week starts at 0 in array
+        // Get current day as index
         if scheduleStyle == 0 {
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                ScheduleVariables.shared.selectedDay = Date().currentWeekDayFromMonday - 1
+                ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
                 stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
                 dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
                 self.view.layoutIfNeeded()
@@ -1970,7 +1995,7 @@ extension ScheduleScreen {
             //
             if ScheduleVariables.shared.lastDayOpened != Date().setToMidnightUTC() {
                 // Reload
-                ScheduleVariables.shared.selectedDay = Date().currentWeekDayFromMonday - 1
+                ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
                 ScheduleVariables.shared.shouldReloadSchedule = true
                 reloadView()
                 ScheduleVariables.shared.lastDayOpened = Date().setToMidnightUTC()

@@ -2986,6 +2986,7 @@
 "weekOfThe" = "Week of the ";
 
 "chooseCreateSchedule" = "Choose/Create Schedule";
+"chooseSchedule" = "Choose Schedule";
 "editSchedule" = "Edit Schedule";
     "scheduleEditTitle" = "No Schedule to edit!";
     "scheduleEditMessage" = "\nCreate a schedule first, press the plus in the table just above the 'Edit Schedule' button";
