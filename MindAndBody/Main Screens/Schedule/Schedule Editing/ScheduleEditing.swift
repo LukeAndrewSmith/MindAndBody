@@ -24,14 +24,16 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //
     var appChoosesSessionsSwitch = UISwitch()
-    var planEachDaySwitch = UISwitch()
+    var scheduleStyleSegment = UISegmentedControl()
+    
+    var heightForRow = CGFloat()
     
     //
     let scheduleOverviewArrays: [String] =
         [
             "name",
             "sessionChoosing",
-            "planEachDay",
+            "view",
             "equipment",
             "schedule",
         ]
@@ -107,39 +109,44 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         scheduleOverviewTable.tableFooterView = UIView()
         scheduleOverviewTable.separatorColor = Colors.light.withAlphaComponent(0.27)
         scheduleOverviewTable.isScrollEnabled = false
-        // Switches
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-            // App chooses sessions switch
         
-            appChoosesSessionsSwitch.onTintColor = Colors.green
-            appChoosesSessionsSwitch.tintColor = Colors.red
-            appChoosesSessionsSwitch.backgroundColor = Colors.red
-            appChoosesSessionsSwitch.layer.cornerRadius = appChoosesSessionsSwitch.bounds.height / 2
-            appChoosesSessionsSwitch.clipsToBounds = true
-            appChoosesSessionsSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
-            // Set inital value
-            // On
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
-                appChoosesSessionsSwitch.isOn = true
-            // Off
-            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 1 {
-                appChoosesSessionsSwitch.isOn = false
-            }
-            // View Full week switch
-            planEachDaySwitch.onTintColor = Colors.green
-            planEachDaySwitch.tintColor = Colors.red
-            planEachDaySwitch.backgroundColor = Colors.red
-            planEachDaySwitch.layer.cornerRadius = appChoosesSessionsSwitch.bounds.height / 2
-            planEachDaySwitch.clipsToBounds = true
-            planEachDaySwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
-            // Set inital value
-            // On
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
-                planEachDaySwitch.isOn = true
-                // Off
-            } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
-                planEachDaySwitch.isOn = false
-            }
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
+        // App chooses sessions switch
+        appChoosesSessionsSwitch.onTintColor = Colors.green
+        appChoosesSessionsSwitch.tintColor = Colors.red
+        appChoosesSessionsSwitch.backgroundColor = Colors.red
+        appChoosesSessionsSwitch.layer.cornerRadius = appChoosesSessionsSwitch.bounds.height / 2
+        appChoosesSessionsSwitch.clipsToBounds = true
+        appChoosesSessionsSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
+        // Set inital value
+        // On
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+            appChoosesSessionsSwitch.isOn = true
+        // Off
+        } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 1 {
+            appChoosesSessionsSwitch.isOn = false
+        }
+    
+        // Schedule Style Segmented Control
+        let week = NSLocalizedString("weekStyle", comment: "")
+        let day = NSLocalizedString("dayStyle", comment: "")
+        let items = [week, day]
+        scheduleStyleSegment = UISegmentedControl(items: items)
+        scheduleStyleSegment.setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "SFUIDisplay-thin", size: 23), NSAttributedStringKey.foregroundColor: Colors.light], for: .normal)
+        scheduleStyleSegment.layer.borderWidth = 1
+        scheduleStyleSegment.layer.borderColor = Colors.light.withAlphaComponent(0.72).cgColor
+        scheduleStyleSegment.backgroundColor = Colors.dark.withAlphaComponent(0.23)
+        scheduleStyleSegment.tintColor = Colors.light.withAlphaComponent(0.72)
+        scheduleStyleSegment.addTarget(self, action: #selector(segmentHandler), for: .valueChanged)
+        //
+        // Schedule style = Day
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+            scheduleStyleSegment.selectedSegmentIndex = 1
+        // Schedule style = Week
+        } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
+            scheduleStyleSegment.selectedSegmentIndex = 0
+        }
         
         //
         // Done Button
@@ -199,9 +206,11 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         // Iphone 5/SE layout
         if IPhoneType.shared.iPhoneType() == 0 {
-            return 52
+            heightForRow = 52
+            return heightForRow
         } else {
-            return 62
+            heightForRow = 62
+            return heightForRow
         }
     }
     
@@ -241,12 +250,15 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // View full week
         case 2:
             cell.selectionStyle = .none
-            cell.addSubview(planEachDaySwitch)
-            if IPhoneType.shared.iPhoneType() == 0 {
-                planEachDaySwitch.center = CGPoint(x: view.bounds.width - (planEachDaySwitch.bounds.width / 2) - 16, y: 52 / 2)
-            } else {
-                planEachDaySwitch.center = CGPoint(x: view.bounds.width - (planEachDaySwitch.bounds.width / 2) - 16, y: 62 / 2)
-            }
+            cell.layoutIfNeeded()
+            
+            let minX = cell.textLabel?.frame.maxX
+            let labelHeight = cell.textLabel?.bounds.height
+            scheduleStyleSegment.frame = CGRect(x: minX! + 32, y: (heightForRow - labelHeight!) / 2, width: view.bounds.width - 32 - 16 - minX!, height: labelHeight!)
+            // heightForRow - 32
+            scheduleStyleSegment.layer.cornerRadius = (heightForRow - 32) * (1/4)
+            scheduleStyleSegment.clipsToBounds = true
+            cell.addSubview(scheduleStyleSegment)
             
         // Equiptment
         case 3:
@@ -372,21 +384,30 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             } else {
                 schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
             }
-        } else if sender == planEachDaySwitch {
-            // Schedule style -> full week
-            if sender.isOn {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
-            // Schedule style -> see each day
-            } else {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
-            }
         }
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-        
-        // Reset notifications
-        if sender == planEachDaySwitch {
+    }
+    
+    @objc func segmentHandler(sender: UISegmentedControl) {
+        if sender == scheduleStyleSegment {
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            switch sender.selectedSegmentIndex {
+                // Week selected
+                case 0:
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
+                // Day selected
+                case 1:
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
+                default:
+                    break
+            }
+            UserDefaults.standard.set(schedules, forKey: "schedules")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+            
+            // Reset notifications
             ReminderNotifications.shared.setNotifications()
         }
     }

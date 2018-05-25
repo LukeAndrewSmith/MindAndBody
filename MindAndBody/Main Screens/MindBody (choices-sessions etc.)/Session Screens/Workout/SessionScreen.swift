@@ -606,7 +606,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         case 0:
             var toMinus = CGFloat()
             if IPhoneType.shared.iPhoneType() == 2 {
-                toMinus = TopBarHeights.statusBarHeight + 2 + 34
+                toMinus = TopBarHeights.statusBarHeight + 2 + TopBarHeights.homeIndicatorHeight
             } else {
                 toMinus = TopBarHeights.statusBarHeight + 2
             }
@@ -1433,7 +1433,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         var toMinus = CGFloat()
         if IPhoneType.shared.iPhoneType() == 2 {
-            toMinus = TopBarHeights.statusBarHeight + 2 + 34
+            toMinus = TopBarHeights.statusBarHeight + 2 + TopBarHeights.homeIndicatorHeight
         } else {
             toMinus = TopBarHeights.statusBarHeight + 2
         }

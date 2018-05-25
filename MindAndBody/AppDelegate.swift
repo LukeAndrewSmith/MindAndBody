@@ -28,12 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: TEST!! REMOVE
         // ICloud/UserDefaults Reset
-//        ICloudFunctions.shared.removeAll()
-//        let domain = Bundle.main.bundleIdentifier!
-//        UserDefaults.standard.removePersistentDomain(forName: domain)
-//        
-        print(Date().firstMondayInCurrentWeek.weekDayFromMonday)
-        print(Date().weekDayFromMonday)
+        ICloudFunctions.shared.removeAll()
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
         
         //
         // iCloud Oberver

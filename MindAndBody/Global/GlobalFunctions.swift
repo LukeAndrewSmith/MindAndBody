@@ -562,6 +562,7 @@ class CustomWalkthrough {
             walkthroughHighlight.layer.borderColor = Colors.dark.cgColor
             // Highlight
             walkthroughHighlight.frame = customButton.frame
+            walkthroughHighlight.center = customButton.center
             walkthroughHighlight.center.y += TopBarHeights.combinedHeight
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
@@ -1184,7 +1185,12 @@ extension UIViewController {
         walkthroughLabel.sizeToFit()
         switch walkthroughLabelFrame {
         case 0:
-            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            // Iphone X
+            if IPhoneType.shared.iPhoneType() == 2 {
+                walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13 - TopBarHeights.homeIndicatorHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            } else {
+                walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            }
         case 1:
             walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + TopBarHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
         default:

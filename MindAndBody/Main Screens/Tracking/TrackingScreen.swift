@@ -52,7 +52,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         var yValue = CGFloat()
         // iPhone X
         if IPhoneType.shared.iPhoneType() == 2 {
-            yValue = view.frame.maxY - 49 - 34
+            yValue = view.frame.maxY - 49 - TopBarHeights.homeIndicatorHeight
             // Normal iPhone
         } else {
             yValue = view.frame.maxY - 49
@@ -427,17 +427,23 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         chartView.data = chartData
     }
     
-//    public func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-//    }
-    
     // Return chart height
     var firstTimeOpened = true
     func returnChartHeight() -> CGFloat {
         if firstTimeOpened {
             firstTimeOpened = false
-            return self.view.bounds.height - TopBarHeights.combinedHeight - 4
+            if IPhoneType.shared.iPhoneType() == 2 {
+                return self.view.bounds.height - TopBarHeights.combinedHeight - 4 - TopBarHeights.homeIndicatorHeight
+            } else {
+                return self.view.bounds.height - TopBarHeights.combinedHeight - 4
+            }
+            
         } else {
-            return self.view.bounds.height - 4
+            if IPhoneType.shared.iPhoneType() == 2 {
+                return self.view.bounds.height - 4 - TopBarHeights.homeIndicatorHeight
+            } else {
+                return self.view.bounds.height - 4
+            }
         }
     }
     

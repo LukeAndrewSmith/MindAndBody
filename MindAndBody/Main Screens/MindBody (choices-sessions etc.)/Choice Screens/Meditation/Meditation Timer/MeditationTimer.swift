@@ -792,8 +792,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 // iPhone X
                 var toMinus = CGFloat()
-                if UIScreen.main.nativeBounds.height == 2436 {
-                    toMinus = 10 + 34
+                if IPhoneType.shared.iPhoneType() == 2 {
+                    toMinus = 10 + TopBarHeights.homeIndicatorHeight
                 } else {
                     toMinus = 10
                 }
@@ -1923,7 +1923,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             //
                             if IPhoneType.shared.iPhoneType() == 2 {
-                                self.presetsConstraint.constant = -34
+                                self.presetsConstraint.constant = -TopBarHeights.homeIndicatorHeight
                             } else {
                                 self.presetsConstraint.constant = 0
                             }
@@ -1982,7 +1982,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         //
                         if IPhoneType.shared.iPhoneType() == 2 {
-                            self.presetsConstraint.constant = -34
+                            self.presetsConstraint.constant = -TopBarHeights.homeIndicatorHeight
                         } else {
                             self.presetsConstraint.constant = 0
                         }
@@ -2070,7 +2070,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // iPhone X
                 var toMinus = CGFloat()
                 if UIScreen.main.nativeBounds.height == 2436 {
-                    toMinus = 10 + 34
+                    toMinus = 10 + TopBarHeights.homeIndicatorHeight
                 } else {
                     toMinus = 10
                 }

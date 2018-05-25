@@ -3151,6 +3151,11 @@
 // Schedule creator indication
 "scheduleCreatorIndication" = "Drag & Drop";
 
+// Editing
+"view" = "View:";
+"weekStyle" = "Week";
+"dayStyle" = "Days";
+
 //
 // Groups
 "mindI" = "Mind (Yoga & Meditation)";

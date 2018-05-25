@@ -526,7 +526,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             var toMinus = CGFloat()
             if IPhoneType.shared.iPhoneType() == 2 {
-                toMinus = TopBarHeights.statusBarHeight + 2 + 34
+                toMinus = TopBarHeights.statusBarHeight + 2 + TopBarHeights.homeIndicatorHeight
             } else {
                 toMinus = TopBarHeights.statusBarHeight + 2
             }
@@ -1411,7 +1411,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         var toMinus = CGFloat()
         if IPhoneType.shared.iPhoneType() == 2 {
-            toMinus = TopBarHeights.statusBarHeight + 2 + 34
+            toMinus = TopBarHeights.statusBarHeight + 2 + TopBarHeights.homeIndicatorHeight
         } else {
             toMinus = TopBarHeights.statusBarHeight + 2
         }
