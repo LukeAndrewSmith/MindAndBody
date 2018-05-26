@@ -131,11 +131,11 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         header.backgroundColor = .clear
         header.backgroundView = UIView()
         
-        let seperator = CALayer()
-        seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
-        seperator.backgroundColor = Colors.light.cgColor
-        seperator.opacity = 0.5
-        header.layer.addSublayer(seperator)
+        let separator = CALayer()
+        separator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
+        separator.backgroundColor = Colors.light.cgColor
+        separator.opacity = 0.5
+        header.layer.addSublayer(separator)
     }
     
     // Header Height

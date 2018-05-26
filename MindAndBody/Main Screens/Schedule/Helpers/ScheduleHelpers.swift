@@ -1060,11 +1060,19 @@ extension ScheduleScreen {
         // Loop second array in scheduleTracking, if one if false, not completed (warmup/session/stretching)
             // -2 because title included
         if checkAll {
-            for i in 0...nRows - 2 {
-                print(ScheduleVariables.shared.selectedRows[0])
-                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay][String(i)] as! Bool == false {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["group"] as! String == "yoga" {
+                // Yoga warmup optional, so is completed if session is finished
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["1"] as! Bool == false {
                     isCompleted = false
-                    break
+                }
+            // Normal case
+            } else {
+                for i in 0...nRows - 2 {
+                    print(ScheduleVariables.shared.selectedRows[0])
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay][String(i)] as! Bool == false {
+                        isCompleted = false
+                        break
+                    }
                 }
             }
         // Just checks on part of the group
@@ -1855,11 +1863,17 @@ extension ScheduleScreen {
         editProfileButton.setImage(#imageLiteral(resourceName: "Profile"), for: .normal)
         editProfileButton.tintColor = Colors.dark
         //
-//        actionSheetSeparator.backgroundColor = Colors.light.withAlphaComponent(0.25)
-//        let yCoord = (tableHeight + 49) + 10 + 49 + 10 + 49 + 10
-//        actionSheetSeparator.frame = CGRect(x: 5, y: yCoord, width: Int(view.bounds.width - 30), height: 1)
-//        actionSheetSeparator.layer.cornerRadius = 0.25
-//        actionSheetSeparator.clipsToBounds = true
+        
+        // Separator
+        separator.frame = CGRect(x: 27, y: ((UIScreen.main.bounds.height - (TopBarHeights.statusBarHeight + CGFloat(TopBarHeights.navigationBarHeight)) - 24.5) / 4) - 1, width: view.bounds.width - 54, height: 1)
+        separator.backgroundColor = Colors.light.withAlphaComponent(0.5)
+        view.insertSubview(separator, aboveSubview: scheduleTable)
+        
+        let testView = UIView()
+        testView.backgroundColor = UIColor.white
+        testView.frame.size = CGSize(width: 50, height: 50)
+        testView.center = view.center
+//        view.insertSubview(testView, aboveSubview: scheduleTable)
         
         //
         addBackgroundImage(withBlur: true, fullScreen: false)

@@ -31,7 +31,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // TableView
     var daySwipeLeft = UISwipeGestureRecognizer()
     var daySwipeRight = UISwipeGestureRecognizer()
-    let seperator = CALayer()
+    let separator = UIView()
     let headerLabel = UILabel()
     //
     var okAction = UIAlertAction()
@@ -67,8 +67,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     let createScheduleButton = UIButton()
     let editScheduleButton = UIButton()
     let editProfileButton = UIButton()
-    let actionSheetSeparator = UIView()
-    
+
     //
     // Very silly variable used in choices of 'endurance' group - steady state, as there is a 'time choice' after 'warmup/stretching' choice, variable indicating which one was selected
         // 'warmup/stretching' choice usually last choice
@@ -154,14 +153,14 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         // Checking subscription is valid, (present loading during check)
         if Loading.shared.shouldPresentLoading {
             // Subscription Check 2
-//            Loading.shared.beginLoading()
+            Loading.shared.beginLoading()
         }
         // Check subscription -> Present Subscription Screen (if not valid)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
         
 
         // NOTE TEST nina
-//        if SubscriptionsCheck.shared.isValid {
+        if SubscriptionsCheck.shared.isValid {
             //
             // Register for notifications
             let center = UNUserNotificationCenter.current()
@@ -174,7 +173,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             if walkthroughs["Schedule"] == false {
                     self.walkthroughSchedule()
             }
-//        }
+        }
         
         // Ensure week goal correct
         updateWeekGoal()
@@ -292,7 +291,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
 //        actionSheet.addSubview(editScheduleButton)
         actionSheet.addSubview(scheduleView)
         actionSheet.addSubview(editProfileButton)
-        actionSheet.addSubview(actionSheetSeparator)
+
         //
         ActionSheet.shared.setupActionSheet()
         ActionSheet.shared.actionSheet.addSubview(actionSheet)

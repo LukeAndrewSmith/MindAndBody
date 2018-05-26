@@ -57,17 +57,10 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 30)!
             header.textLabel?.textAlignment = .center
             header.textLabel?.textColor = Colors.light
-            
             //
             header.backgroundColor = .clear
             header.backgroundView = UIView()
-            
             //
-            // Seperator
-            seperator.frame = CGRect(x: 27, y: header.bounds.height - 1, width: view.bounds.width - 54, height: 1)
-            seperator.backgroundColor = Colors.light.cgColor
-            seperator.opacity = 0.5
-            header.layer.addSublayer(seperator)
         case scheduleChoiceTable:
             // Header
             let header = view as! UITableViewHeaderFooterView
@@ -81,10 +74,6 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             header.backgroundView = background
         default: break
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        seperator.removeFromSuperlayer()
     }
     
     // Header Height
@@ -215,16 +204,16 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     cell.selectionStyle = .none
                     //
                     // Title Underline
-                    let seperator = CALayer()
-                    seperator.frame = CGRect(x: view.bounds.width / 4, y: 72 - 1, width: view.bounds.width / 2, height: 1)
-                    seperator.backgroundColor = Colors.light.cgColor
-                    seperator.opacity = 0.25
-                    cell.layer.addSublayer(seperator)
+                    let separator = CALayer()
+                    separator.frame = CGRect(x: view.bounds.width / 4, y: 72 - 1, width: view.bounds.width / 2, height: 1)
+                    separator.backgroundColor = Colors.light.cgColor
+                    separator.opacity = 0.25
+                    cell.layer.addSublayer(separator)
                     //
                     // Color if last choice
                     if isLastChoice() {
                         cell.textLabel?.textColor = Colors.green
-                        seperator.backgroundColor = Colors.green.cgColor
+                        separator.backgroundColor = Colors.green.cgColor
                     }
                     // Else if selection
                 } else {

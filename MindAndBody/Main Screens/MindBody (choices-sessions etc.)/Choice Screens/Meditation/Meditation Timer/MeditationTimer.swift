@@ -118,7 +118,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     let blur4 = UIVisualEffectView()
     
     //
-    let seperatorLine = UIVisualEffectView()
+    let separatorLine = UIVisualEffectView()
     
     //
     let beginBlur = UIVisualEffectView()
@@ -182,7 +182,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         beginButtonBottom.constant = -445
         //
-        seperatorLine.alpha = 0
+        separatorLine.alpha = 0
         //
     
     }
@@ -563,15 +563,15 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         beginBlur.frame = beginButton.bounds
         beginBlur.center = beginButton.center
         
-        // Seperator
+        // separator
         let height = duration.frame.minY - presets.frame.maxY
-        let seperatorEffect = UIBlurEffect(style: .regular)
-        seperatorLine.effect = seperatorEffect
-        seperatorLine.isUserInteractionEnabled = false
-        seperatorLine.frame = CGRect(x: 11, y: presets.frame.maxY + (height / 2), width: view.frame.size.width - 22, height: 1)
-        seperatorLine.layer.cornerRadius = 0.5
-        seperatorLine.layer.masksToBounds = true
-        view.insertSubview(seperatorLine, aboveSubview: backgroundBlur)
+        let separatorEffect = UIBlurEffect(style: .regular)
+        separatorLine.effect = separatorEffect
+        separatorLine.isUserInteractionEnabled = false
+        separatorLine.frame = CGRect(x: 11, y: presets.frame.maxY + (height / 2), width: view.frame.size.width - 22, height: 1)
+        separatorLine.layer.cornerRadius = 0.5
+        separatorLine.layer.masksToBounds = true
+        view.insertSubview(separatorLine, aboveSubview: backgroundBlur)
         
         //
         // Selection Elements
@@ -1934,7 +1934,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                             self.backgroundConstraint.constant = 0
                             //
                             self.beginButtonBottom.constant = 0
-                            self.seperatorLine.alpha = 1
+                            self.separatorLine.alpha = 1
                             self.view.layoutIfNeeded()
                         }, completion: { finished in
                             //
@@ -1993,7 +1993,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                         self.backgroundConstraint.constant = 0
                         //
                         self.beginButtonBottom.constant = 0
-                        self.seperatorLine.alpha = 1
+                        self.separatorLine.alpha = 1
                         self.view.layoutIfNeeded()
                     }, completion: { finished in
                         //
@@ -2224,7 +2224,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // If no more meditations
                 if meditationArray.count == 0 {
                     //
-                    if seperatorLine.alpha != 0 {
+                    if separatorLine.alpha != 0 {
                         UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             // Initial Positions and States
                             //
@@ -2240,7 +2240,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                             //
                             self.beginButtonBottom.constant = -445
                             //
-                            self.seperatorLine.alpha = 0
+                            self.separatorLine.alpha = 0
                             //
                         })
                     }

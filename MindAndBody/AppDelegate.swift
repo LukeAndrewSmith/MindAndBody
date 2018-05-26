@@ -28,9 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: TEST!! REMOVE
         // ICloud/UserDefaults Reset
-        ICloudFunctions.shared.removeAll()
-        let domain = Bundle.main.bundleIdentifier!
-        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        ICloudFunctions.shared.removeAll()
+//        let domain = Bundle.main.bundleIdentifier!
+//        UserDefaults.standard.removePersistentDomain(forName: domain)
         
         //
         // iCloud Oberver
@@ -95,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Check if the user has a valid subscription
         // Subscription Check 1
-//        SubscriptionsCheck.shared.checkSubscription()
+        SubscriptionsCheck.shared.checkSubscription()
         
         // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
         ScheduleVariables.shared.resetWeekTracking()

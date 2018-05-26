@@ -158,7 +158,7 @@ class CustomScheduleEquipmentCell: UITableViewCell {
     @IBOutlet weak var equipmentLabel: UILabel!
     @IBOutlet weak var equipmentDetail: UILabel!
     @IBOutlet weak var equipmentSwitch: UISwitch!
-    // Custom separator set in storyboard as seperators dissapear for some reason when using custom cells layoutsubviews method
+    // Custom separator set in storyboard as separators dissapear for some reason when using custom cells layoutsubviews method
     @IBOutlet weak var separator: UIView!
     
     //

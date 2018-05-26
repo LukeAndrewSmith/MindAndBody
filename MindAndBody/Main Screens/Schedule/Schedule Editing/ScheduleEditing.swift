@@ -129,7 +129,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     
         // Schedule Style Segmented Control
-        let week = NSLocalizedString("weekStyle", comment: "")
+         let week = NSLocalizedString("weekStyle", comment: "")
         let day = NSLocalizedString("dayStyle", comment: "")
         let items = [week, day]
         scheduleStyleSegment = UISegmentedControl(items: items)
@@ -182,11 +182,11 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         header.backgroundColor = .clear
         header.backgroundView = UIView()
         
-        let seperator = CALayer()
-        seperator.frame = CGRect(x: 16, y: header.frame.size.height - 1, width: view.frame.size.width - 32, height: 1)
-        seperator.backgroundColor = Colors.light.cgColor
-        seperator.opacity = 0.5
-        header.layer.addSublayer(seperator)
+        let separator = CALayer()
+        separator.frame = CGRect(x: 16, y: header.frame.size.height - 1, width: view.frame.size.width - 32, height: 1)
+        separator.backgroundColor = Colors.light.cgColor
+        separator.opacity = 0.5
+        header.layer.addSublayer(separator)
     }
     
     // Header Height

@@ -352,7 +352,7 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         questionLabel.backgroundColor = Colors.dark
         questionLabel.lineBreakMode = .byWordWrapping
         questionLabel.textAlignment = .center
-        questionLabel.numberOfLines = 2
+        questionLabel.numberOfLines = 0
         questionLabel.adjustsFontSizeToFitWidth = true
         // Answer Elements 1 - Age Picker
         // picker
@@ -378,7 +378,6 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         //
         questionLabel.text = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["Q"]![0], comment: "")
         questionLabel.sizeToFit()
-        questionLabel.frame.size.width = elementStack.bounds.width
         //
     }
     
@@ -468,7 +467,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         questionLabel.backgroundColor = Colors.dark
         questionLabel.lineBreakMode = .byWordWrapping
         questionLabel.textAlignment = .center
-        questionLabel.numberOfLines = 2
+        questionLabel.numberOfLines = 0
         questionLabel.adjustsFontSizeToFitWidth = true
         //
         let image = scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["image"]![0]
@@ -505,7 +504,6 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         //
         questionLabel.text = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["Q"]![0], comment: "")
         questionLabel.sizeToFit()
-        questionLabel.frame.size.width = elementStack.bounds.width
         //
         if image != "" && elementStack.bounds.height > questionsTableHeight {
             answerImageTrailing.constant = (elementStack.bounds.width * 0.25) / 2
@@ -529,7 +527,9 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         //
         setTableHeight()
         //
-        if height > 49 {
+        if height > (49 * 1.5) {
+            return 49 * 2
+        } else if height > 49 {
             return 49 * 1.5
         } else {
             return 49
@@ -543,7 +543,9 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         for i in 0..<scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]!.count {
             let font = UIFont(name: "SFUIDisplay-thin", size: 23)
             let height = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]![i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
-            if height > 49 {
+            if height > (49 * 1.5) {
+                tableHeightConstant += (49 * 2)
+            } else if height > 49 {
                 tableHeightConstant += (49 * 1.5)
             } else {
                 tableHeightConstant += 49
@@ -576,7 +578,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         if profileAnswers[scheduleDataStructures.profileQASorted[row]] != -1 && indexPath.row == profileAnswers[scheduleDataStructures.profileQASorted[selectedQuestion]] {
             cell.textLabel?.textColor = Colors.green
         }
-        // If last cell hide seperator
+        // If last cell hide separator
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         if indexPath.row == (scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]!.count - 1) {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)

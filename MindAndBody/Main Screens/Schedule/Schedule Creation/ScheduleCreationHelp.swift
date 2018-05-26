@@ -134,12 +134,12 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             header.backgroundColor = .clear
             header.backgroundView = UIView()
             //
-            let seperator = CALayer()
-            if header.layer.sublayers?.contains(seperator) == false {
-                seperator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
-                seperator.backgroundColor = Colors.light.cgColor
-                seperator.opacity = 0.5
-                header.layer.addSublayer(seperator)
+            let separator = CALayer()
+            if header.layer.sublayers?.contains(separator) == false {
+                separator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
+                separator.backgroundColor = Colors.light.cgColor
+                separator.opacity = 0.5
+                header.layer.addSublayer(separator)
             }
         }
     }
@@ -654,7 +654,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         questionLabel.backgroundColor = Colors.dark
         questionLabel.lineBreakMode = .byWordWrapping
         questionLabel.textAlignment = .center
-        questionLabel.numberOfLines = 2
+        questionLabel.numberOfLines = 0
         questionLabel.adjustsFontSizeToFitWidth = true
         //
         let image = scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["image"]![0]
@@ -712,7 +712,9 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         //
         setTableHeight()
         //
-        if height > 49 {
+        if height > (49 * 1.5) {
+            return 49 * 2
+        } else if height > 49 {
             return 49 * 1.5
         } else {
             return 49
@@ -727,7 +729,9 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
             let font = UIFont(name: "SFUIDisplay-thin", size: 23)
             // + 1 as question inclueded in array
             let height = NSLocalizedString(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
-            if height > 49 {
+            if height > (49 * 1.5) {
+                tableHeightConstant += (49 * 2)
+            } else if height > 49 {
                 tableHeightConstant += (49 * 1.5)
             } else {
                 tableHeightConstant += 49
@@ -764,7 +768,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         if indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][row][0]] as! Int {
             cell.textLabel?.textColor = Colors.green
         }
-        // If last cell hide seperator
+        // If last cell hide separator
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         if indexPath.row == (scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion].count - 2) {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
