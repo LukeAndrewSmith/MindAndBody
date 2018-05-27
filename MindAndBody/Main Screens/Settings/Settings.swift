@@ -959,7 +959,13 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             highlightCornerRadius = 2
             //
-            labelFrame = 0
+            // Iphone 5/SE, explanation at top of screen
+            if IPhoneType.shared.iPhoneType() == 0 {
+                labelFrame = 1
+            // Other, explanation at bottom of screen
+            } else if IPhoneType.shared.iPhoneType() == 2 {
+                labelFrame = 0
+            }
             //
             walkthroughBackgroundColor = Colors.dark
             walkthroughTextColor = Colors.light
@@ -980,7 +986,13 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             highlightCornerRadius = 2
             //
-            labelFrame = 0
+            // Iphone 5/SE, explanation at top of screen
+            if IPhoneType.shared.iPhoneType() == 0 {
+                labelFrame = 1
+                // Other, explanation at bottom of screen
+            } else if IPhoneType.shared.iPhoneType() == 2 {
+                labelFrame = 0
+            }
             //
             walkthroughBackgroundColor = Colors.dark
             walkthroughTextColor = Colors.light
@@ -1003,7 +1015,13 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             highlightCornerRadius = 2
             //
-            labelFrame = 0
+            // Iphone 5/SE, explanation at top of screen
+            if IPhoneType.shared.iPhoneType() == 0 {
+                labelFrame = 1
+                // Other, explanation at bottom of screen
+            } else if IPhoneType.shared.iPhoneType() == 2 {
+                labelFrame = 0
+            }
             //
             walkthroughBackgroundColor = Colors.dark
             walkthroughTextColor = Colors.light

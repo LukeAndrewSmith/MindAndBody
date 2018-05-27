@@ -74,42 +74,42 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         return currentProgress
     }
     
-    func testTrackingValues() {
-        var calendar = Calendar(identifier: .iso8601)
-        calendar.timeZone = TimeZone(abbreviation: "UTC")!
-        //
-        var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
-        trackingDictionaries[0] = [:]
-        let firstMonday = Date().firstMondayInCurrentWeek
-        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 1), forKey: TrackingHelpers.shared.dateToString(date: firstMonday))
-        let tue = calendar.date(byAdding: .day, value: 1, to: firstMonday)
-        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 1), forKey: TrackingHelpers.shared.dateToString(date: tue!))
-        let wed = calendar.date(byAdding: .day, value: 2, to: firstMonday)
-        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 3), forKey: TrackingHelpers.shared.dateToString(date: wed!))
-        let thur = calendar.date(byAdding: .day, value: 2, to: firstMonday)
-        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 3), forKey: TrackingHelpers.shared.dateToString(date: thur!))
-        let fri = calendar.date(byAdding: .day, value: 4, to: firstMonday)
-        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 4), forKey: TrackingHelpers.shared.dateToString(date: fri!))
-        let sat = calendar.date(byAdding: .day, value: 5, to: firstMonday)
-        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 6), forKey: TrackingHelpers.shared.dateToString(date: sat!))
-        let sun = calendar.date(byAdding: .day, value: 6, to: firstMonday)
-        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 6), forKey: TrackingHelpers.shared.dateToString(date: sun!))
-        
-        //
-        trackingDictionaries[1] = [:]
-//        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().setToMidnightUTC())!
-//        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
-        var firstMondayLastMonth = Date().firstMondayInMonth
-        //
-        trackingDictionaries[1].updateValue(100, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
-        trackingDictionaries[1].updateValue(85, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
-        trackingDictionaries[1].updateValue(95, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
-        trackingDictionaries[1].updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
-        
-        UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
-        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
-        
-    }
+//    func testTrackingValues() {
+//        var calendar = Calendar(identifier: .iso8601)
+//        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+//        //
+//        var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
+//        trackingDictionaries[0] = [:]
+//        let firstMonday = Date().firstMondayInCurrentWeek
+//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 1), forKey: TrackingHelpers.shared.dateToString(date: firstMonday))
+//        let tue = calendar.date(byAdding: .day, value: 1, to: firstMonday)
+//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 1), forKey: TrackingHelpers.shared.dateToString(date: tue!))
+//        let wed = calendar.date(byAdding: .day, value: 2, to: firstMonday)
+//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 3), forKey: TrackingHelpers.shared.dateToString(date: wed!))
+//        let thur = calendar.date(byAdding: .day, value: 2, to: firstMonday)
+//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 3), forKey: TrackingHelpers.shared.dateToString(date: thur!))
+//        let fri = calendar.date(byAdding: .day, value: 4, to: firstMonday)
+//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 4), forKey: TrackingHelpers.shared.dateToString(date: fri!))
+//        let sat = calendar.date(byAdding: .day, value: 5, to: firstMonday)
+//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 6), forKey: TrackingHelpers.shared.dateToString(date: sat!))
+//        let sun = calendar.date(byAdding: .day, value: 6, to: firstMonday)
+//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 6), forKey: TrackingHelpers.shared.dateToString(date: sun!))
+//
+//        //
+//        trackingDictionaries[1] = [:]
+////        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().setToMidnightUTC())!
+////        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
+//        var firstMondayLastMonth = Date().firstMondayInMonth
+//        //
+//        trackingDictionaries[1].updateValue(100, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
+//        trackingDictionaries[1].updateValue(85, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
+//        trackingDictionaries[1].updateValue(95, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
+//        trackingDictionaries[1].updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
+//
+//        UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
+//        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
+//
+//    }
     
     //
     // MARK: View did load
@@ -121,7 +121,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         updateWeekGoal()
         
         // MARK: Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        testTrackingValues()
+//        testTrackingValues()
 //        updateWeekTracking()
 //        updateTracking()
         

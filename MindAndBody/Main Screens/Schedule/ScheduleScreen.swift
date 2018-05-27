@@ -160,20 +160,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         
 
         // NOTE TEST nina
-        if SubscriptionsCheck.shared.isValid {
-            //
-            // Register for notifications
-            let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-                // Enable or disable features based on authorization.
-            }
-            //
-            // Present schedule walkthrough
-            let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-            if walkthroughs["Schedule"] == false {
-                    self.walkthroughSchedule()
-            }
-        }
+        beginWalkthrough()
+        NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.didDismissSubscriptionScreen, object: nil)
+        
         
         // Ensure week goal correct
         updateWeekGoal()
@@ -213,6 +202,23 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             pageStack.layoutSubviews()
             dayIndicatorLeading.constant = self.stackArray[ScheduleVariables.shared.selectedDay].frame.minX
 //            animateDayIndicatorToDay()
+        }
+    }
+    
+    // Begin walkthrough
+    @objc func beginWalkthrough() {
+        if SubscriptionsCheck.shared.isValid {
+            // Register for notifications
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+                // Enable or disable features based on authorization.
+            }
+            //
+            // Present schedule walkthrough
+            let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+            if walkthroughs["Schedule"] == false {
+                self.walkthroughSchedule()
+            }
         }
     }
 

@@ -339,8 +339,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // MARK: Begin Dragging
     @objc func beginDraggingFromTop(gestureRecognizer: UIGestureRecognizer) {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-
+        
         let longPress = gestureRecognizer as! UILongPressGestureRecognizer
         let state = longPress.state
         let locationInView = longPress.location(in: self.view)
@@ -355,10 +354,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Get the index of the long press
             indexOfDrag = longPressArray.index(of: longPress)!
             indexOfDraggedGroup = groupIndexes[indexOfDrag]
-            
-            //
-            let stringIndex = scheduleDataStructures.scheduleCreationHelpSorted[0][indexOfDraggedGroup][0]
-            
+                        
             // Begin drag
             // Haptic feedback
             var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
@@ -516,8 +512,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     UserDefaults.standard.set(schedules, forKey: "schedules")
                         // Sync
                     ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-                    // TODO: !!!!!
-//                    updateFullWeek()
                     // update label
                     setGroupLabels()
                 }

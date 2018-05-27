@@ -24,4 +24,6 @@ class SubscriptionNotifiations: NSObject {
     static let didCheckSubscription = Notification.Name("DidCheckSubscriptionNotification")
     //
     static let connectionTimedOutNotification = Notification.Name("ConnectionTimedOutNotification")
+    //
+    static let didDismissSubscriptionScreen = Notification.Name("RestoreSuccessfulNotification")
 }

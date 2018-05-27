@@ -110,7 +110,7 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.equipmentDetail.lineBreakMode = .byWordWrapping
         cell.equipmentDetail.text = NSLocalizedString(equiptmentArray[indexPath.row]["description"] as! String, comment: "")
         //
-        cell.equipmentImage.image = equiptmentArray[indexPath.row]["image"] as! UIImage
+        cell.equipmentImage.image = equiptmentArray[indexPath.row]["image"] as? UIImage
         //
         return cell
     }

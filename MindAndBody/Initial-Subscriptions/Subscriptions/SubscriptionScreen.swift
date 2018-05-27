@@ -67,6 +67,7 @@ class SubscriptionScreen: UIViewController {
     @objc func handlePurchaseSuccessfull(notification: Notification) {
         DispatchQueue.main.async { [weak self] in
             self?.loadingView.removeFromSuperview()
+            NotificationCenter.default.post(name: SubscriptionNotifiations.didDismissSubscriptionScreen, object: nil)
             self?.dismiss(animated: true)
         }
     }
