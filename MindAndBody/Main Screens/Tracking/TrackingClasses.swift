@@ -25,7 +25,6 @@ public class DateValueFormatterDay: NSObject, IAxisValueFormatter {
         let timeIntervalDeShifted = (value * 3600 * 24) + TrackingVariables.shared.minTime
         let date2 = Date(timeIntervalSince1970: timeIntervalDeShifted)
         return dateFormatter.string(from: date2)
-        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
     }
 }
 // Day Date
@@ -307,7 +306,6 @@ public class XYMarkerView: BalloonMarker {
     public override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         // De shift x value time
         let timeIntervalDeShifted = (entry.x * 3600 * 24) + TrackingVariables.shared.minTime
-        let date2 = Date(timeIntervalSince1970: timeIntervalDeShifted)
         
         let string = ""
             + xAxisValueFormatter.stringForValue(timeIntervalDeShifted, axis: XAxis())

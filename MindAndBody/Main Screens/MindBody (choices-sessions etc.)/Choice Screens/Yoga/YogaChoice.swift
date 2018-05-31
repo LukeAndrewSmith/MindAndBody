@@ -41,9 +41,6 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Walkthrough
-        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
-        
         // Colours
         view.backgroundColor = Colors.light
         
@@ -126,6 +123,9 @@ class YogaChoice: UIViewController, UIScrollViewDelegate  {
         stimulating.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         stimulating.titleLabel?.numberOfLines = 0
         stimulating.titleLabel?.textAlignment = .center
+        
+        // Walkthrough
+        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
     }
     
     

@@ -122,8 +122,8 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // MARK: Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //        testTrackingValues()
-//        updateWeekTracking()
-//        updateTracking()
+        updateWeekTracking()
+        updateTracking()
         
         // Create [[Date: Int]] from the stored [[String: Int]] (ICloud wont store [Date: Int], only [String: Int])
         let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]

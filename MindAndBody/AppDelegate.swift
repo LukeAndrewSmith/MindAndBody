@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        ICloudFunctions.shared.removeAll()
 //        let domain = Bundle.main.bundleIdentifier!
 //        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        ReminderNotifications.shared.cancelNotifications()
         
         //
         // iCloud Oberver

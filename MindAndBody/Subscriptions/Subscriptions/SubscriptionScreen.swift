@@ -67,8 +67,8 @@ class SubscriptionScreen: UIViewController {
     @objc func handlePurchaseSuccessfull(notification: Notification) {
         DispatchQueue.main.async { [weak self] in
             self?.loadingView.removeFromSuperview()
-            NotificationCenter.default.post(name: SubscriptionNotifiations.didDismissSubscriptionScreen, object: nil)
             self?.dismiss(animated: true)
+            NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
         }
     }
     
@@ -136,14 +136,10 @@ class SubscriptionScreen: UIViewController {
         subscriptionButton.titleLabel?.numberOfLines = 0
         subscriptionButton.titleLabel?.textAlignment = .center
         subscriptionButton.layer.cornerRadius = 15
-//            subscriptionButton.bounds.height / 2
         subscriptionButton.layer.masksToBounds = true
         subscriptionButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
         checkSubscriptionButton.setTitle(NSLocalizedString("alreadyHaveSubscription", comment: ""), for: .normal)
-//        checkSubscriptionButton.layer.cornerRadius = checkSubscriptionButton.bounds.height / 2
-//        checkSubscriptionButton.layer.masksToBounds = true
         checkSubscriptionButton.backgroundColor = .clear
-//            Colors.light.withAlphaComponent(0.25)
         
         // Page Control
         InfoPageControl.shared.setupPageControl(x: view.center.x, y: subscriptionButton.frame.minY - 12)
@@ -154,8 +150,6 @@ class SubscriptionScreen: UIViewController {
     func setSubscriptionData() {
         
         // TODO: NOT A VERY USEFUL FUNCTION
-        
-        
         //
 //        let annual = InAppManager.shared.products[0]
         //
@@ -282,6 +276,7 @@ class SubscriptionScreen: UIViewController {
     @objc func dismissRestoreAlertSuccess() {
         loadingView.removeFromSuperview()
         self.dismiss(animated: true)
+        NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
     }
     
     @objc func dismissLoadingWhatever() {

@@ -20,14 +20,25 @@ class IPhoneType {
     private init() {}
     
     func iPhoneType() -> Int {
-        // 0 == iPhone5
-        if UIScreen.main.nativeBounds.height < 1334 {
-            return 0
-        // iPhone X
-        } else if UIScreen.main.nativeBounds.height == 2436 {
-            return 2
-        // Normal
-        } else {
+        // Device
+        switch UIDevice.current.userInterfaceIdiom {
+        // Phone
+        case .phone:
+            // 0 == iPhone5
+            if UIScreen.main.nativeBounds.height < 1334 {
+                return 0
+            // 2 == iPhoneX
+            } else if UIScreen.main.nativeBounds.height == 2436 {
+                return 2
+            // 1 == normal
+            } else {
+                return 1
+            }
+        // iPad
+        case .pad:
+            return 3
+        // Uh, oh! What could it be?
+        default:
             return 1
         }
     }
@@ -239,7 +250,10 @@ class ReminderNotifications {
     
     // removes all pending notifications (as there should only be repeating notifications that are pending, if ever notifications used more, this should be changed to only cancel repeating notifiations
     func cancelNotifications() {
+        // Cancel Notifications
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        // Remove badges
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     // Update badges func
@@ -377,7 +391,9 @@ class SubscriptionsCheck {
             isValid = UserDefaults.standard.object(forKey: "userHasValidSubscription") as! Bool
             if isValid {
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+                    // nina
+                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                    NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
                 }
             } else {
                 DispatchQueue.main.async {
@@ -589,7 +605,7 @@ class CustomWalkthrough {
             }, completion: { finished in
                 self.walkthroughView.removeFromSuperview()
                 var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-                walkthroughs["Settings"] = true
+                walkthroughs["CustomSessions"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
@@ -1344,6 +1360,19 @@ extension Date {
         
         var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
         components.timeZone = TimeZone(abbreviation: "UTC")
+        // Making a Date from week components gives the first day of the week, hence Monday
+        let mondaysDate = calendar.date(from: components)?.setToMidnightUTC()
+        return mondaysDate!
+    }
+    
+    //
+    // First Monday in current week as Date
+    var firstMondayInCurrentWeekCurrentTimeZone: Date {
+        var calendar = Calendar(identifier: .iso8601)
+        calendar.timeZone = TimeZone.current
+
+        var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        components.timeZone = TimeZone.current
         // Making a Date from week components gives the first day of the week, hence Monday
         let mondaysDate = calendar.date(from: components)?.setToMidnightUTC()
         return mondaysDate!

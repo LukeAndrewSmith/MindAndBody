@@ -221,20 +221,25 @@ extension ScheduleScreen {
             
             UIApplication.shared.keyWindow?.bringSubview(toFront: walkthroughView)
             
-            //
-            self.highlightSize = CGSize(width: 36, height: 36)
-            self.highlightCenter = CGPoint(x: self.view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + TopBarHeights.statusBarHeight)
-            self.highlightCornerRadius = 1
-            //
-            self.labelFrame = 0
-            //
-            self.walkthroughBackgroundColor = Colors.light
-            self.walkthroughTextColor = Colors.dark
-            //
-            self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
+                //
+                UIApplication.shared.keyWindow?.bringSubview(toFront: self.walkthroughView)
+                //
+                self.highlightSize = CGSize(width: 36, height: 36)
+                self.highlightCenter = CGPoint(x: self.view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + TopBarHeights.statusBarHeight)
+                self.highlightCornerRadius = 1
+                //
+                self.labelFrame = 0
+                //
+                self.walkthroughBackgroundColor = Colors.light
+                self.walkthroughTextColor = Colors.dark
+                //
+                self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
+                
+                //
+                self.walkthroughProgress = self.walkthroughProgress + 1
+            }
             
-            //
-            self.walkthroughProgress = self.walkthroughProgress + 1
         //
         default:
             UIView.animate(withDuration: 0.4, animations: {

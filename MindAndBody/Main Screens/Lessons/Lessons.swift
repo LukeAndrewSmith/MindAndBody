@@ -78,15 +78,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         // BackgroundImage
         addBackgroundImage(withBlur: true, fullScreen: false)
         
-        // Tableview top view
-        let topView = UIVisualEffectView()
-        let topViewE = UIBlurEffect(style: .dark)
-        topView.effect = topViewE
-        topView.isUserInteractionEnabled = false
-        //
-        topView.frame = CGRect(x: 0, y: tableView.frame.minY - tableView.bounds.height, width: tableView.bounds.width, height: tableView.bounds.height)
-        //
-        tableView.addSubview(topView)
+       
         
         //
         //  Navigation Bar
@@ -94,6 +86,18 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         navigationBar.title = NSLocalizedString("lessons", comment: "")
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.navigationController?.navigationBar.tintColor = Colors.light
+    }
+    
+    //
+    override func viewDidLayoutSubviews() {
+        // Tableview top view
+        let topView = UIVisualEffectView()
+        let topViewE = UIBlurEffect(style: .dark)
+        topView.effect = topViewE
+        topView.isUserInteractionEnabled = false
+        topView.frame = CGRect(x: 0, y: tableView.frame.minY - tableView.bounds.height, width: tableView.bounds.width, height: tableView.bounds.height)
+        //
+        tableView.addSubview(topView)
     }
     
     

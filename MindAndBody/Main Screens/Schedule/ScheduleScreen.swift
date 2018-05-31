@@ -32,6 +32,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var daySwipeLeft = UISwipeGestureRecognizer()
     var daySwipeRight = UISwipeGestureRecognizer()
     let separator = UIView()
+    var separatorY: CGFloat {
+        return ((UIScreen.main.bounds.height - CGFloat(TopBarHeights.combinedHeight) - 24.5) / 4) - 1
+    }
     let headerLabel = UILabel()
     //
     var okAction = UIAlertAction()
@@ -60,7 +63,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     let dayArrayChar = ["mondayLetter","tuesdayLetter","wednesdayLetter","thursdayLetter","fridayLetter","saturdayLetter","sundayLetter"]
     // StackView
     var stackArray: [UILabel] = []
-    
+    var stackFontUnselected = UIFont(name: "SFUIDisplay-thin", size: 17)
+    var stackFontSelected = UIFont(name: "SFUIDisplay-medium", size: 17)
+
     // Schedule creation and choices ACTION SHEET
     let scheduleChoiceTable = UITableView()
     let scheduleView = UIView()
@@ -79,6 +84,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // 1 - presenting the whole week at once
     var scheduleStyle = Int()
     
+    // Should watch for walkthrough when coming back
+    var goingToSubscriptionsScreen = false
+
     //
     // Walkthrough
     var walkthroughProgress = 0
@@ -146,6 +154,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)
+        NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
+        
         // Check if reset necessary
         ScheduleVariables.shared.resetWeekTracking()
         
@@ -158,15 +169,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         // Check subscription -> Present Subscription Screen (if not valid)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
         
-
-        // NOTE TEST nina
-        beginWalkthrough()
-        NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.didDismissSubscriptionScreen, object: nil)
-        
-        
         // Ensure week goal correct
         updateWeekGoal()
-
+        
         // Setup
         setScheduleStyle()
         // If week view, crete temporary week array
@@ -194,20 +199,34 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         super.viewWillDisappear(animated)
         //
         NotificationCenter.default.removeObserver(self)
+        if goingToSubscriptionsScreen {
+            NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
+        }
     }
 
     // MARK: viewDidLayoutSubviews
     override func viewDidLayoutSubviews() {
+        //
         if scheduleStyle == 0 {
             pageStack.layoutSubviews()
             dayIndicatorLeading.constant = self.stackArray[ScheduleVariables.shared.selectedDay].frame.minX
-//            animateDayIndicatorToDay()
         }
+        //
+        // Schedule Tableview top view (set here so it's layed out correctly)
+        let topView = UIVisualEffectView()
+        let topViewE = UIBlurEffect(style: .dark)
+        topView.effect = topViewE
+        topView.isUserInteractionEnabled = false
+        //
+        topView.frame = CGRect(x: 0, y: scheduleTable.frame.minY - scheduleTable.bounds.height, width: scheduleTable.bounds.width, height: scheduleTable.bounds.height)
+        //
+        scheduleTable.addSubview(topView)
     }
     
     // Begin walkthrough
     @objc func beginWalkthrough() {
-        if SubscriptionsCheck.shared.isValid {
+        // Valid subscription and walkthrough hasn't already been called
+        if SubscriptionsCheck.shared.isValid && walkthroughProgress == 0 {
             // Register for notifications
             let center = UNUserNotificationCenter.current()
             center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
@@ -285,16 +304,13 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     // Schedule Button (Bar button item)
     @IBAction func scheduleButton(_ sender: Any) {
-        //
+        // Local
         let actionSheet = UIView()
         //
         let height = scheduleChoiceTable.bounds.height + createScheduleButton.bounds.height + editScheduleButton.bounds.height + 10 + editProfileButton.bounds.height
             //+ 10
-        actionSheet.frame.size = CGSize(width: view.bounds.width - 20, height: height)
+        actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionWidth, height: height)
         actionSheet.layer.cornerRadius = editScheduleButton.bounds.height / 2
-//        actionSheet.addSubview(scheduleChoiceTable)
-//        actionSheet.addSubview(createScheduleButton)
-//        actionSheet.addSubview(editScheduleButton)
         actionSheet.addSubview(scheduleView)
         actionSheet.addSubview(editProfileButton)
 
@@ -360,8 +376,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             let destinationNC = segue.destination as? ScheduleTypeQuestionNavigation
             let destinationVC = destinationNC?.viewControllers.first as? ScheduleTypeQuestion
             destinationVC?.comingFromSchedule = true
-        } else if segue.identifier == "" {
-            
+        } else if segue.identifier == "SubscriptionsSegue" {
+            goingToSubscriptionsScreen = true
         }
     }
     

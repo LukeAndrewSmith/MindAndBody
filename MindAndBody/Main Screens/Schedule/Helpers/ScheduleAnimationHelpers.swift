@@ -245,7 +245,9 @@ extension ScheduleScreen {
             self.maskView3.removeFromSuperview()
         })
     }
+    
     // Table View ------------------------------------
+    // FOR SLIDING THROUGH GROUP CHOICES
     // Tableview slide left (next table)
     func slideLeft() {
         //
@@ -264,16 +266,15 @@ extension ScheduleScreen {
         let snapShotY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
         // Snapshots
         let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
+        snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
+        UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
         //
         scheduleTable.reloadData()
         //
         let snapShot2 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
-        //
-        snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
         snapShot2?.center = CGPoint(x: view.center.x + view.frame.size.width, y: snapShotY)
+        UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, belowSubview: snapShot1!)
         //
-        UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
-        UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, aboveSubview: self.view)
         scheduleTable.isHidden = true
         // Animate new and old image to left
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -290,6 +291,8 @@ extension ScheduleScreen {
         })
         //
     }
+    
+    // FOR SLIDING THROUGH GROUP CHOICES
     // Tableview slide Right (previous table)
     func slideRight() {
         //
@@ -308,16 +311,15 @@ extension ScheduleScreen {
         let snapShotY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
         // Snapshots
         let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
+        snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
+        UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
         //
         scheduleTable.reloadData()
         //
         let snapShot2 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
-        //
-        snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
         snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
-        //
-        UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
-        UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, aboveSubview: self.view)
+        UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, belowSubview: snapShot1!)
+        
         scheduleTable.isHidden = true
         //
         // Animate new and old image to left
@@ -335,7 +337,6 @@ extension ScheduleScreen {
         })
     }
 
-    
     //
     // Mask cells under clear header (unrelated to above functions)
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -345,6 +346,15 @@ extension ScheduleScreen {
                 if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                     maskCell(cell: cell, margin: Float(hiddenFrameHeight))
                 }
+            }
+            // Animate Separator
+            let currentY = scrollView.contentOffset.y
+            if currentY < 0 {
+                //"scrolling down"
+                separator.center.y = separatorY - currentY
+            // Reset
+            } else if currentY < 10 {
+                separator.center.y = separatorY
             }
         }
     }

@@ -49,9 +49,6 @@ class WorkoutChoice: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Walkthrough
-        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
-        
         // Colours
         view.backgroundColor = Colors.light
         
@@ -110,6 +107,9 @@ class WorkoutChoice: UIViewController  {
         home.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         home.titleLabel?.numberOfLines = 0
         home.titleLabel?.textAlignment = .center
+        
+        // Walkthrough
+        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
     }
     
     //

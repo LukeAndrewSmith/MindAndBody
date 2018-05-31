@@ -179,8 +179,8 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         presetsTableView.layer.borderColor = Colors.light.cgColor
         presetsTableView.layer.borderWidth = 1
         //
-        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88 - 49 - 20
-        let tableWidth = UIScreen.main.bounds.width - 20
+        let tableHeight = ActionSheet.shared.actionTableHeight - 49 - 20
+        let tableWidth = ActionSheet.shared.actionWidth
         self.presetsTableView.frame = CGRect(x: 0, y: 0, width: tableWidth, height: tableHeight)
         //
         ActionSheet.shared.setupActionSheet()

@@ -65,7 +65,12 @@ extension DismissMenuAnimator : UIViewControllerAnimatedTransitioning {
             snapshot.removeFromSuperview()
             //
             snapshot2 = toVC.view.snapshotView(afterScreenUpdates: true)!
-            snapshot2.center.x += UIScreen.main.bounds.width * 0.75
+            var multiplier: CGFloat = 2/3
+            // iPad has smaller menu
+            if IPhoneType.shared.iPhoneType() == 3 {
+                multiplier = 1/3
+            }
+            snapshot2.center.x += UIScreen.main.bounds.width * multiplier
             snapshot2.layer.shadowOpacity = 1
             snapshot2.layer.shadowRadius = 15
             keyWindow?.addSubview(snapshot2)

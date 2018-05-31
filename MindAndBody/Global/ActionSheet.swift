@@ -22,6 +22,35 @@ class ActionSheet {
     var actionSheetBackgroundView = UIButton()
     var cancelButton = UIButton()
     
+    var xPos = CGFloat()
+    var actionWidth: CGFloat {
+        var width: CGFloat = 0
+        // iPad
+        if IPhoneType.shared.iPhoneType() == 3 {
+            width = 423
+            xPos = (UIScreen.main.bounds.width - width) / 2
+            // iPhones
+        } else {
+            width = UIScreen.main.bounds.width - 20
+            xPos = 10
+        }
+        return width
+    }
+    
+    // Tall height for tables, different for ipad
+    var actionTableHeight: CGFloat {
+        // Accomodates for bigger screens
+        var height = CGFloat()
+        // If smaller than iphone x, use first height, if not use smaller height
+        if UIScreen.main.nativeBounds.height < 2436 {
+            height = UIScreen.main.bounds.height - CGFloat(TopBarHeights.combinedHeight) - 49 - 88
+        } else {
+            height = UIScreen.main.bounds.height / 2
+        }
+        
+        return height
+    }
+    
     //
     func setupActionSheet() {
         //
@@ -40,7 +69,7 @@ class ActionSheet {
         actionSheet.addSubview(cancelButton)
         actionSheetBackgroundView.addSubview(actionSheet)
         //
-        actionSheet.frame.size = CGSize(width: UIScreen.main.bounds.width - 20, height: 49 + 10)
+        actionSheet.frame.size = CGSize(width: actionWidth, height: 49 + 10)
         cancelButton.frame = CGRect(x: 0, y: actionSheet.bounds.height - 10, width: actionSheet.bounds.width, height: 49)
         cancelButton.addTarget(self, action: #selector(animateActionSheetDown), for: .touchUpInside)
         actionSheetBackgroundView.addTarget(self, action: #selector(animateActionSheetDown), for: .touchUpInside)
@@ -56,7 +85,7 @@ class ActionSheet {
         //
         // Initial Conditions
         actionSheetBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0)
-        actionSheet.frame = CGRect(x: 10, y: UIScreen.main.bounds.height, width: actionSheet.bounds.width, height: actionSheet.bounds.height)
+        actionSheet.frame = CGRect(x: xPos, y: UIScreen.main.bounds.height, width: actionSheet.bounds.width, height: actionSheet.bounds.height)
         UIApplication.shared.keyWindow?.addSubview(actionSheetBackgroundView)
         UIApplication.shared.keyWindow?.bringSubview(toFront: actionSheetBackgroundView)
         //
@@ -65,9 +94,9 @@ class ActionSheet {
             //
             // iPhone X
             if UIScreen.main.nativeBounds.height == 2436 {
-                self.actionSheet.frame = CGRect(x: 10, y: UIScreen.main.bounds.height - self.actionSheet.bounds.height - 10 - TopBarHeights.homeIndicatorHeight, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
+                self.actionSheet.frame = CGRect(x: self.xPos, y: UIScreen.main.bounds.height - self.actionSheet.bounds.height - 10 - TopBarHeights.homeIndicatorHeight, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
             } else {
-                self.actionSheet.frame = CGRect(x: 10, y: UIScreen.main.bounds.height - self.actionSheet.bounds.height - 10, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
+                self.actionSheet.frame = CGRect(x: self.xPos, y: UIScreen.main.bounds.height - self.actionSheet.bounds.height - 10, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
             }
             //
             self.actionSheetBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -79,7 +108,7 @@ class ActionSheet {
         // Animate
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             //
-            self.actionSheet.frame = CGRect(x: 10, y: UIScreen.main.bounds.height, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
+            self.actionSheet.frame = CGRect(x: self.xPos, y: UIScreen.main.bounds.height, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
                 self.actionSheetBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0)
             //
         }, completion: { finished in

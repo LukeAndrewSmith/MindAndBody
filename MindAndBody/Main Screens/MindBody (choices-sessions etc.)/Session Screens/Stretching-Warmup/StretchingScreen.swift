@@ -922,12 +922,16 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
     @objc func walkthroughSession() {
         //
         var toMinus = CGFloat()
+        let toAdd = TopBarHeights.statusBarHeight + 2
         if IPhoneType.shared.iPhoneType() == 2 {
             toMinus = TopBarHeights.statusBarHeight + 2 + TopBarHeights.homeIndicatorHeight
         } else {
             toMinus = TopBarHeights.statusBarHeight + 2
         }
         let cellHeight = (UIScreen.main.bounds.height - toMinus) * 7/8
+        
+        let delayLong = 1.5
+        let delayShort = 0.6
         
         //
         if didSetWalkthrough == false {
@@ -956,7 +960,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! StretchingTableViewCell
             walkthroughHighlight.frame.size = CGSize(width: cell.setsRepsLabel.frame.width + 16, height: cell.setsRepsLabel.frame.height + 4)
             walkthroughHighlight.center = cell.setsRepsLabel.center
-            walkthroughHighlight.center.y += toMinus
+            walkthroughHighlight.center.y += toAdd
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //
@@ -983,7 +987,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! StretchingTableViewCell
             highlightSize = cell.indicatorStack.frame.size
             highlightCenter = cell.indicatorStack.center
-            highlightCenter?.y += toMinus
+            highlightCenter?.y += toAdd
             //
             highlightCornerRadius = 0
             // Top of view
@@ -1005,7 +1009,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! StretchingTableViewCell
             highlightSize = cell.indicatorStack.frame.size
             highlightCenter = cell.indicatorStack.center
-            highlightCenter?.y += toMinus
+            highlightCenter?.y += toAdd
             //
             highlightCornerRadius = 0
             // Top
@@ -1026,10 +1030,11 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             // Get rid of explanation
             //
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! StretchingTableViewCell
-            highlightSize = CGSize(width: 0, height: 0)
+            highlightSize = cell.indicatorStack.frame.size
             highlightCenter = cell.indicatorStack.center
-            highlightCenter?.y += toMinus
-            highlightCornerRadius = 3
+            highlightCenter?.y += toAdd
+            //
+            highlightCornerRadius = 0
             //
             labelFrame = 0
             //
@@ -1048,26 +1053,30 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             leftSwipe.clipsToBounds = true
             leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
             leftSwipe.center.x = view.bounds.width * (7/8)
-            UIApplication.shared.keyWindow?.insertSubview(leftSwipe, aboveSubview: walkthroughView)
+            //
+            nextButton.isEnabled = false
+            //
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort - 0.2, execute: {
+                UIApplication.shared.keyWindow?.insertSubview(leftSwipe, aboveSubview: self.walkthroughView)
+                // Animate swipe demonstration
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    //
+                    leftSwipe.center.x = self.view.bounds.width * (1/8)
+                    //
+                }, completion: { finished in
+                    self.nextButton.isEnabled = true
+                    //
+                    leftSwipe.removeFromSuperview()
+                    //
+                    self.walkthroughProgress = self.walkthroughProgress + 1
+                    self.walkthroughSession()
+                })
+            })
             // Perform swipe action
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                 let leftSwipeSimulate = UISwipeGestureRecognizer()
                 leftSwipeSimulate.direction = .left
                 self.handleSwipes(extraSwipe: leftSwipeSimulate)
-            })
-            // Animate swipe demonstration
-            nextButton.isEnabled = false
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                leftSwipe.center.x = self.view.bounds.width * (1/8)
-                //
-            }, completion: { finished in
-                self.nextButton.isEnabled = true
-                //
-                leftSwipe.removeFromSuperview()
-                //
-                self.walkthroughProgress = self.walkthroughProgress + 1
-                self.walkthroughSession()
             })
             
             
@@ -1077,7 +1086,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! StretchingTableViewCell
             highlightSize = cell.indicatorStack.frame.size
             highlightCenter = cell.indicatorStack.center
-            highlightCenter?.y += toMinus
+            highlightCenter?.y += toAdd
             //
             highlightCornerRadius = 0
             // Top
@@ -1094,7 +1103,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             // Swipe demonstration
             nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                 //
                 let rightSwipe = UIView()
                 rightSwipe.frame.size = CGSize(width: 50, height: 50)
@@ -1125,7 +1134,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! StretchingTableViewCell
                     self.highlightSize = cell.explanationButton.frame.size
                     self.highlightCenter = cell.explanationButton.center
-                    self.highlightCenter?.y += toMinus
+                    self.highlightCenter?.y += toAdd
                     //
                     self.highlightCornerRadius = 0
                     // Top
@@ -1154,7 +1163,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             // Next Movement
             nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.8, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayLong, execute: {
                 //
                 self.nextButton.isEnabled = true
                 self.backgroundViewExplanation.isEnabled = true
@@ -1166,7 +1175,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! StretchingTableViewCell
                 self.highlightSize = CGSize(width: 0, height: 0)
                 self.highlightCenter = cell.explanationButton.center
-                self.highlightCenter?.y += toMinus
+                self.highlightCenter?.y += toAdd
                 //
                 self.highlightCornerRadius = 0
                 // Top
@@ -1190,7 +1199,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             // Swipe demonstration
             nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                 //
                 let upSwipe = UIView()
                 upSwipe.frame.size = CGSize(width: 50, height: 50)
@@ -1211,7 +1220,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     //
                 }, completion: { finished in
                     upSwipe.removeFromSuperview()
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                         //
                         let downSwipe = UIView()
                         downSwipe.frame.size = CGSize(width: 50, height: 50)

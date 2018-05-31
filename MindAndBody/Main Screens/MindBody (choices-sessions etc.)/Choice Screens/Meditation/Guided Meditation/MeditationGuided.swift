@@ -355,8 +355,8 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         selectedBell = bellsArray.index(of: practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bell"] as! String)!
         //
         // View
-        let selectionWidth = self.view.frame.size.width - 20
-        let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+        let selectionWidth = ActionSheet.shared.actionWidth
+        let selectionHeight = ActionSheet.shared.actionTableHeight
         selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: selectionWidth, height: selectionHeight)
         // Tableview
         selectionView.addSubview(tableViewBells)
@@ -384,7 +384,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         choosingBells = false
         //
         // View
-        let selectionWidth = self.view.frame.size.width - 20
+        let selectionWidth = ActionSheet.shared.actionWidth
         let selectionHeight = CGFloat(147 + 49)
         //
         UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
@@ -400,7 +400,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.minutesLabel.center.x = self.pickerViewDuration.frame.minX + (self.pickerViewDuration.frame.size.width * (3.55/6))
         //
         // Select Rows if duration already set
-        var frequency = practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bellFrequency"] as! Int
+        let frequency = practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bellFrequency"] as! Int
         var frequencyString = String()
         if frequency == 0 {
             frequencyString = frequencyArray[0]

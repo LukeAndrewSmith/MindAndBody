@@ -293,7 +293,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             backgroundSound.setTitleColor(Colors.dark, for: .normal)
             backgroundSoundDetail.textColor = Colors.dark
         // All White
-        case 0,3,4:
+        case 0,4:
             presets.setTitleColor(Colors.light, for: .normal)
             presetsDetail.textColor = Colors.light
             duration.setTitleColor(Colors.light, for: .normal)
@@ -1139,16 +1139,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBAction func presetsAction(_ sender: Any) {
         selectedItem = 0
         //
-        self.duration.isEnabled = false
-        self.startingBell.isEnabled = false
-        self.intervalBells.isEnabled = false
-        self.endingBell.isEnabled = false
-        self.backgroundSound.isEnabled = false
-        //
         presetsTableView.reloadData()
         //
-        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88 - 49 - 20
-        let tableWidth = UIScreen.main.bounds.width - 20
+        let tableHeight = ActionSheet.shared.actionTableHeight - 49 - 20
+        let tableWidth = ActionSheet.shared.actionWidth
         self.presetsTableView.frame = CGRect(x: 0, y: 0, width: tableWidth, height: tableHeight)
         //
         ActionSheet.shared.setupActionSheet()
@@ -1167,7 +1161,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         okButton.isEnabled = true
         //
         // View
-        let selectionWidth = self.view.frame.size.width - 20
+        let selectionWidth = ActionSheet.shared.actionWidth
         let selectionHeight = CGFloat(147 + 49)
         //
         UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
@@ -1225,8 +1219,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             tableViewBells.reloadData()
             //
             // View
-            let selectionWidth = self.view.frame.size.width - 20
-            let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+            let selectionWidth = ActionSheet.shared.actionWidth
+            let selectionHeight = ActionSheet.shared.actionTableHeight
             selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: selectionWidth, height: selectionHeight)
             // Tableview
             selectionView.addSubview(tableViewBells)
@@ -1293,8 +1287,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             tableViewIntervalBells.reloadData()
             //
             // View
-            let selectionWidth = self.view.frame.size.width - 20
-            let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+            let selectionWidth = ActionSheet.shared.actionWidth
+            let selectionHeight = ActionSheet.shared.actionTableHeight
             selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: selectionWidth, height: selectionHeight)
             // Tableview
             selectionView.addSubview(tableViewIntervalBells)
@@ -1353,8 +1347,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             tableViewBells.reloadData()
             //
             // View
-            let selectionWidth = self.view.frame.size.width - 20
-            let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+            let selectionWidth = ActionSheet.shared.actionWidth
+            let selectionHeight = ActionSheet.shared.actionTableHeight
             selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: selectionWidth, height: selectionHeight)
             // Tableview
             selectionView.addSubview(tableViewBells)
@@ -1423,8 +1417,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             tableViewBackgroundSounds.reloadData()
             //
             // View
-            let selectionWidth = self.view.frame.size.width - 20
-            let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+            let selectionWidth = ActionSheet.shared.actionWidth
+            let selectionHeight = ActionSheet.shared.actionTableHeight
             selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: selectionWidth, height: selectionHeight)
             // Tableview
             selectionView.addSubview(tableViewBackgroundSounds)
@@ -2102,7 +2096,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.backgroundViewSelection2.center.x = self.view.center.x
                     //
                     let selectionWidth = self.view.frame.size.width - 20
-                    let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88
+                    let selectionHeight = ActionSheet.shared.actionTableHeight
                     self.selectionView2.frame = CGRect(x: 10, y: self.view.frame.maxY - self.selectionView2.bounds.height - toMinus, width: selectionWidth, height: selectionHeight)
                     //
                     self.selectionView2.alpha = 1

@@ -23,8 +23,6 @@ class MindBody: UIViewController {
     //
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
-    // View Indicator
-    @IBOutlet weak var viewIndicator: UIBarButtonItem!
     // Tracking
     @IBOutlet weak var slideMenu: UIBarButtonItem!
     
@@ -63,6 +61,22 @@ class MindBody: UIViewController {
     //
     @IBOutlet weak var yogaBottom: NSLayoutConstraint!
     @IBOutlet weak var meditationBottom: NSLayoutConstraint!
+    
+    //
+    @IBOutlet weak var warmupLeft: NSLayoutConstraint!
+    @IBOutlet weak var workoutLeft: NSLayoutConstraint!
+    @IBOutlet weak var workoutRight: NSLayoutConstraint!
+    @IBOutlet weak var cardioLeft: NSLayoutConstraint!
+    @IBOutlet weak var stretchingRight: NSLayoutConstraint!
+    @IBOutlet weak var yogaLeft: NSLayoutConstraint!
+    @IBOutlet weak var yogaRight: NSLayoutConstraint!
+    @IBOutlet weak var meditationLeft: NSLayoutConstraint!
+    @IBOutlet weak var meditationRight: NSLayoutConstraint!
+    // Separators
+    @IBOutlet weak var topLeft: NSLayoutConstraint!
+    @IBOutlet weak var topRight: NSLayoutConstraint!
+    @IBOutlet weak var bottomLeft: NSLayoutConstraint!
+    @IBOutlet weak var bottomRight: NSLayoutConstraint!
     
     
     
@@ -156,7 +170,6 @@ class MindBody: UIViewController {
         //
         // Navigation Items
         slideMenu.tintColor = Colors.light
-        //viewIndicator.tintColor = Colors.light
         //
         
         self.tabBarController?.tabBar.tintColor = Colors.light
@@ -231,7 +244,7 @@ class MindBody: UIViewController {
             Meditation.backgroundColor = Colors.dark.withAlphaComponent(0.72)
         }
         
-        // Iphone 5/SE layout
+        // iPhone 5/SE layout
         if IPhoneType.shared.iPhoneType() == 0 {
             //
             wamupBottom.constant = 15
@@ -243,6 +256,7 @@ class MindBody: UIViewController {
             //
             yogaBottom.constant = 15
             meditationBottom.constant = 15
+        // iPhoneX Layout
         } else if IPhoneType.shared.iPhoneType() == 2 {
             //
             wamupBottom.constant = 35
@@ -254,6 +268,35 @@ class MindBody: UIViewController {
             //
             yogaBottom.constant = 40
             meditationBottom.constant = 40
+        // iPad Layout
+        } else if IPhoneType.shared.iPhoneType() == 3 {
+            //
+            //
+            bodyTop.constant = 20
+            bodyBottom.constant = 15
+            mindTop.constant = 15
+            mindBottom.constant = 13
+            //
+            yogaBottom.constant = 40
+            meditationBottom.constant = 40
+            //
+            wamupBottom.constant = 30
+            workoutLeft.constant = 72
+            //
+            let const: CGFloat = 72
+            warmupLeft.constant = const
+            workoutRight.constant = const
+            cardioLeft.constant = const
+            stretchingRight.constant = const
+            yogaLeft.constant = const
+            yogaRight.constant = const
+            meditationLeft.constant = const
+            meditationRight.constant = const
+            //
+            topLeft.constant = const
+            topRight.constant = const
+            bottomLeft.constant = const
+            bottomRight.constant = const
         }
         
     }

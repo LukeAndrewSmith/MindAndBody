@@ -252,9 +252,14 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = .none
             cell.layoutIfNeeded()
             
+            // minX good for
             let minX = cell.textLabel?.frame.maxX
             let labelHeight = cell.textLabel?.bounds.height
-            scheduleStyleSegment.frame = CGRect(x: minX! + 32, y: (heightForRow - labelHeight!) / 2, width: view.bounds.width - 32 - 16 - minX!, height: labelHeight!)
+            var width = view.bounds.width - 32 - 16 - minX!
+            if width > 323 {
+                width = 323
+            }
+            scheduleStyleSegment.frame = CGRect(x: view.frame.maxX - width - 16, y: (heightForRow - labelHeight!) / 2, width: width, height: labelHeight!)
             // heightForRow - 32
             scheduleStyleSegment.layer.cornerRadius = (heightForRow - 32) * (1/4)
             scheduleStyleSegment.clipsToBounds = true

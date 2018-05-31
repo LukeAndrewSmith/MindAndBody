@@ -1130,35 +1130,25 @@ extension ScheduleScreen {
                 
                 // Deselect all ScheduleVariables.shared.indicators
                 for i in 0...(stackArray.count - 1) {
-                    stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
+                    stackArray[i].font = stackFontUnselected
                 }
                 // Select ScheduleVariables.shared.indicator
-                stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
+                stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
                 animateDayIndicatorToDay()
                 
                 // Animate
-                //
                 // Snapshot before update
                 let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-                view.addSubview(snapShot1!)
-                view.bringSubview(toFront: snapShot1!)
-                //
-                // Snapshot after update
+                view.insertSubview(snapShot1!, aboveSubview: scheduleTable)
+                // Move table and reload
+                scheduleTable.center.x = view.center.x + self.view.frame.size.width
                 scheduleTable.reloadData()
-                let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-                snapShot2?.center.x = view.center.x + self.view.frame.size.width
-                view.addSubview(snapShot2!)
-                view.bringSubview(toFront: snapShot2!)
-                //
-                scheduleTable.isHidden = true
                 //
                 UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                     snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
-                    snapShot2?.center.x = self.view.center.x
+                    self.scheduleTable.center.x = self.view.center.x
                 }, completion: { finish in
-                    self.scheduleTable.isHidden = false
                     snapShot1?.removeFromSuperview()
-                    snapShot2?.removeFromSuperview()
                 })
                 
             //
@@ -1172,10 +1162,10 @@ extension ScheduleScreen {
                 
                 // Deselect all indicators
                 for i in 0...(stackArray.count - 1) {
-                    stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
+                    stackArray[i].font = stackFontUnselected
                 }
                 // Select indicator
-                stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
+                stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
                 selectDay(day: ScheduleVariables.shared.selectedDay)
                 animateDayIndicatorToDay()
                 
@@ -1183,25 +1173,17 @@ extension ScheduleScreen {
                 //
                 // Snapshot before update
                 let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-                view.addSubview(snapShot1!)
-                view.bringSubview(toFront: snapShot1!)
-                //
-                // Snapshot after update
+                view.insertSubview(snapShot1!, aboveSubview: scheduleTable)
+                // Move table and reload
+                scheduleTable.center.x = view.center.x - self.view.frame.size.width
                 scheduleTable.reloadData()
-                let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-                snapShot2?.center.x = view.center.x - self.view.frame.size.width
-                view.addSubview(snapShot2!)
-                view.bringSubview(toFront: snapShot2!)
-                //
-                scheduleTable.isHidden = true
                 //
                 UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
                     snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
-                    snapShot2?.center.x = self.view.center.x
+                    self.scheduleTable.center.x = self.view.center.x
                 }, completion: { finish in
                     self.scheduleTable.isHidden = false
                     snapShot1?.removeFromSuperview()
-                    snapShot2?.removeFromSuperview()
                 })
                 
             }
@@ -1225,10 +1207,10 @@ extension ScheduleScreen {
             
             // Deselect all indicators
             for i in 0...(stackArray.count - 1) {
-                stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
+                stackArray[i].font = stackFontUnselected
             }
             // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
+            stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
             animateDayIndicatorToDay()
 
             // Animate
@@ -1265,10 +1247,10 @@ extension ScheduleScreen {
             
             // Deselect all indicators
             for i in 0...(stackArray.count - 1) {
-                stackArray[i].font = UIFont(name: "SFUIDisplay-thin", size: 17)
+                stackArray[i].font = stackFontUnselected
             }
             // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
+            stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
             //selectDay(day: ScheduleVariables.shared.selectedDay)
             animateDayIndicatorToDay()
             
@@ -1791,6 +1773,7 @@ extension ScheduleScreen {
     @objc func subscriptionCheckCompleted() {
         Loading.shared.shouldPresentLoading = false
         Loading.shared.endLoading()
+        print(SubscriptionsCheck.shared.isValid)
         if !SubscriptionsCheck.shared.isValid {
             self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
         }
@@ -1807,7 +1790,7 @@ extension ScheduleScreen {
             //147 + 49 // (49 for header)
         let buttonHeight: CGFloat = 49
         
-        let elementWidth = view.bounds.width - 20
+        let elementWidth = ActionSheet.shared.actionWidth
         
         // Schedule View
         scheduleView.backgroundColor = Colors.dark
@@ -1855,7 +1838,7 @@ extension ScheduleScreen {
         editProfileButton.addTarget(self, action: #selector(editProfileAction), for: .touchUpInside)
         editProfileButton.setTitle(NSLocalizedString("editProfile", comment: ""), for: .normal)
         editProfileButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        editProfileButton.frame = CGRect(x: 0, y: scheduleView.frame.height + 10, width: view.bounds.width - 20, height: 49)
+        editProfileButton.frame = CGRect(x: 0, y: scheduleView.frame.height + 10, width: elementWidth, height: 49)
         editProfileButton.layer.cornerRadius = 49 / 2
         editProfileButton.clipsToBounds = true
         editProfileButton.setTitleColor(Colors.dark, for: .normal)
@@ -1865,7 +1848,7 @@ extension ScheduleScreen {
         //
         
         // Separator
-        separator.frame = CGRect(x: 27, y: ((UIScreen.main.bounds.height - (TopBarHeights.statusBarHeight + CGFloat(TopBarHeights.navigationBarHeight)) - 24.5) / 4) - 1, width: view.bounds.width - 54, height: 1)
+        separator.frame = CGRect(x: 27, y: separatorY, width: view.bounds.width - 54, height: 1)
         separator.backgroundColor = Colors.light.withAlphaComponent(0.5)
         view.insertSubview(separator, aboveSubview: scheduleTable)
         
@@ -1892,15 +1875,6 @@ extension ScheduleScreen {
         scheduleTable.backgroundColor = .clear
         scheduleTable.tableFooterView = UIView()
         scheduleTable.separatorStyle = .none
-        // Tableview top view
-        let topView = UIVisualEffectView()
-        let topViewE = UIBlurEffect(style: .dark)
-        topView.effect = topViewE
-        topView.isUserInteractionEnabled = false
-        //
-        topView.frame = CGRect(x: 0, y: scheduleTable.frame.minY - scheduleTable.bounds.height, width: scheduleTable.bounds.width, height: scheduleTable.bounds.height)
-        //
-        scheduleTable.addSubview(topView)
         
     }
     
@@ -1937,7 +1911,7 @@ extension ScheduleScreen {
                 let dayLabel = UILabel()
                 dayLabel.textColor = Colors.light
                 dayLabel.textAlignment = .center
-                dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 17)
+                dayLabel.font = stackFontUnselected
                 dayLabel.text = NSLocalizedString(dayArrayChar[i], comment: "")
                 dayLabel.sizeToFit()
                 dayLabel.tag = i
@@ -1972,11 +1946,11 @@ extension ScheduleScreen {
         if scheduleStyle == 0 {
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
                 ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
-                stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-light", size: 17)
+                stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
                 dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
                 self.view.layoutIfNeeded()
             } else {
-                stackArray[ScheduleVariables.shared.selectedDay].font = UIFont(name: "SFUIDisplay-thin", size: 17)
+                stackArray[ScheduleVariables.shared.selectedDay].font = stackFontUnselected
                 dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
                 self.pageStack.layoutIfNeeded()
                 maskView(animated: false)

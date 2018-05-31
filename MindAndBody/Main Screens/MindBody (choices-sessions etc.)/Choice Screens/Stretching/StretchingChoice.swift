@@ -49,8 +49,6 @@ class StretchingChoice: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Walkthrough
-        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
         
         // Colours
         view.backgroundColor = Colors.light
@@ -134,6 +132,9 @@ class StretchingChoice: UIViewController  {
         postCardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         postCardio.titleLabel?.numberOfLines = 0
         postCardio.titleLabel?.textAlignment = .center
+        
+        // Walkthrough
+        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
     }
     
     

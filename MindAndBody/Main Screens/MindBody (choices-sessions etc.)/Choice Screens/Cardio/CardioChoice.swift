@@ -25,14 +25,12 @@ class CardioChoice: UIViewController  {
     // Custom
     @IBOutlet weak var custom: UIButton!
     
+    @IBOutlet weak var stackView: UIStackView!
     //
     // View did load -----------------------------------------------------------------------------------------------------------
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Walkthrough
-        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
         
         // Colours
         view.backgroundColor = Colors.light
@@ -84,19 +82,22 @@ class CardioChoice: UIViewController  {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //
-        hiit.layer.cornerRadius = self.hiit.frame.size.height / 2
+        hiit.layer.cornerRadius = ((self.stackView.frame.size.height) - 40) / 4
         hiit.layer.masksToBounds = true
         hiit.titleLabel?.adjustsFontSizeToFitWidth = true
         hiit.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         hiit.titleLabel?.numberOfLines = 0
         hiit.titleLabel?.textAlignment = .center
         //
-        bodyweight.layer.cornerRadius = self.hiit.frame.size.height / 2
+        bodyweight.layer.cornerRadius = (self.stackView.frame.size.height - 40) / 4
         bodyweight.layer.masksToBounds = true
         bodyweight.titleLabel?.adjustsFontSizeToFitWidth = true
         bodyweight.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         bodyweight.titleLabel?.numberOfLines = 0
         bodyweight.titleLabel?.textAlignment = .center
+        
+        // Walkthrough
+        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
     }
     
     // Hiit action handled in storyboard, only segues to next choice

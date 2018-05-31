@@ -894,12 +894,16 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @objc func walkthroughSession() {
         //
         var toMinus = CGFloat()
+        var toAdd = TopBarHeights.statusBarHeight + 2
         if IPhoneType.shared.iPhoneType() == 2 {
             toMinus = TopBarHeights.statusBarHeight + 2 + TopBarHeights.homeIndicatorHeight
         } else {
             toMinus = TopBarHeights.statusBarHeight + 2
         }
         let cellHeight = (UIScreen.main.bounds.height - toMinus) * 7/8
+        
+        let delayLong = 1.5
+        let delayShort = 0.6
         
         //
         if didSetWalkthrough == false {
@@ -928,7 +932,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
             walkthroughHighlight.frame.size = CGSize(width: cell.breathsLabel.frame.width + 16, height: cell.breathsLabel.frame.height + 4)
             walkthroughHighlight.center = cell.breathsLabel.center
-            walkthroughHighlight.center.y += toMinus
+            walkthroughHighlight.center.y += toAdd
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //
@@ -955,7 +959,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
             highlightSize = cell.imageIndicator.frame.size
             highlightCenter = cell.imageIndicator.center
-            highlightCenter?.y += toMinus
+            highlightCenter?.y += toAdd
             //
             highlightCornerRadius = 0
             // Top of view
@@ -977,7 +981,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
             highlightSize = cell.explanationButton.frame.size
             highlightCenter = cell.explanationButton.center
-            highlightCenter?.y += toMinus
+            highlightCenter?.y += toAdd
             //
             highlightCornerRadius = 0
             // Top
@@ -1002,7 +1006,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             // Next Movement
             nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.8, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayLong, execute: {
                 //
                 self.nextButton.isEnabled = true
                 self.backgroundViewExplanation.isEnabled = true
@@ -1014,7 +1018,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
                 self.highlightSize = CGSize(width: 0, height: 0)
                 self.highlightCenter = cell.explanationButton.center
-                self.highlightCenter?.y += toMinus
+                self.highlightCenter?.y += toAdd
                 //
                 self.highlightCornerRadius = 0
                 // Top
@@ -1039,7 +1043,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             // Swipe demonstration
             nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                 //
                 let upSwipe = UIView()
                 upSwipe.frame.size = CGSize(width: 50, height: 50)
@@ -1060,7 +1064,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     //
                 }, completion: { finished in
                     upSwipe.removeFromSuperview()
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                         //
                         let downSwipe = UIView()
                         downSwipe.frame.size = CGSize(width: 50, height: 50)

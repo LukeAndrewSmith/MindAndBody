@@ -21,6 +21,9 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
     // Outlets ----------------------------------------------------------------------------------
     //
     @IBOutlet weak var menuTable: UITableView!
+    @IBOutlet weak var tableWidth: NSLayoutConstraint!
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var buttonWidth: NSLayoutConstraint!
     
     
     //
@@ -57,6 +60,16 @@ class SlideMenuView: UIViewController, UITableViewDataSource, UITableViewDelegat
         menuTable.tableFooterView = UIView()
         menuTable.backgroundColor = Colors.light
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // iPad has smaller menu
+        if IPhoneType.shared.iPhoneType() == 3 {
+            // Add or remove a third to adjust to ipad
+            buttonWidth.constant = view.bounds.width * (1/3)
+            tableWidth.constant = -(view.bounds.width * (1/3))
+        }
     }
     
     //

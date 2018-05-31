@@ -483,7 +483,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let homeScreen = settings["HomeScreen"]![0]
                 // View
-                let homeWidth = UIScreen.main.bounds.width - 20
+                let homeWidth = ActionSheet.shared.actionWidth
                 let homeHeight = CGFloat(147 + 49)
                 actionSheetView.frame = CGRect(x: 10, y: view.frame.maxY, width: homeWidth, height: homeHeight)
                 UIApplication.shared.keyWindow?.insertSubview(actionSheetView, aboveSubview: tableView)
@@ -547,7 +547,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             let restTimes = settings["RestTimes"]!
             // View
-            let restWidth = UIScreen.main.bounds.width - 20
+            let restWidth = ActionSheet.shared.actionWidth
             let restHeight = CGFloat(147 + 49)
             actionSheetView.frame = CGRect(x: 10, y: view.frame.maxY, width: restWidth, height: restHeight)
             UIApplication.shared.keyWindow?.insertSubview(actionSheetView, aboveSubview: tableView)
@@ -691,6 +691,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     
                     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
                     ICloudFunctions.shared.removeAll()
+                    ReminderNotifications.shared.cancelNotifications()
                     
                     // Alert View
                     let title = NSLocalizedString("resetTitle", comment: "")

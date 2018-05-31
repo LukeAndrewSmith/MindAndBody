@@ -649,9 +649,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let movement = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
         //
         if sessionData.weightedWorkoutMovements.contains(movement) {
-            let indexPathForRow = IndexPath(row: selectedRow, section: 0)
-            let cell = tableView.cellForRow(at: indexPathForRow ) as! OverviewTableViewCell
-            
             //
             actionSheetView.addSubview(weightPicker)
             actionSheetView.addSubview(unitIndicatorLabel)
@@ -659,7 +656,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             var movementWeights = UserDefaults.standard.object(forKey: "movementWeights") as! [String: Int]
             // View
-            let weightWidth = UIScreen.main.bounds.width - 20
+            let weightWidth = ActionSheet.shared.actionWidth
             let weightHeight = CGFloat(147 + 49)
             actionSheetView.frame = CGRect(x: 10, y: view.frame.maxY, width: weightWidth, height: weightHeight)
             UIApplication.shared.keyWindow?.insertSubview(actionSheetView, aboveSubview: tableView)
@@ -1213,6 +1210,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         if isTimedMovement() {
             if !didSetEndTime {
+                print(SelectedSession.shared.selectedSession)
                let time = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[selectedRow]["time"] as! Int
                 StopClock.shared.setupStopClock(time: time)
                 StopClock.shared.resetOptionFrames()
@@ -1393,12 +1391,17 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // Check whether timed movement
     func isTimedMovement() -> Bool {
-        let setsRepsString = repsArray[selectedRow]
-        // seconds/breaths
-        if setsRepsString.hasSuffix("s") {
-            return true
-        } else {
+        // Classic gym workouts have no timing
+        if SelectedSession.shared.selectedSession[1].hasPrefix("classicGym") {
             return false
+        } else {
+            let setsRepsString = repsArray[selectedRow]
+            // seconds/breaths
+            if setsRepsString.hasSuffix("s") {
+                return true
+            } else {
+                return false
+            }
         }
     }
     
@@ -1432,12 +1435,16 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @objc func walkthroughSession() {
         //
         var toMinus = CGFloat()
+        let toAdd = TopBarHeights.statusBarHeight + 2
         if IPhoneType.shared.iPhoneType() == 2 {
             toMinus = TopBarHeights.statusBarHeight + 2 + TopBarHeights.homeIndicatorHeight
         } else {
             toMinus = TopBarHeights.statusBarHeight + 2
         }
         let cellHeight = (UIScreen.main.bounds.height - toMinus) * 7/8
+        
+        let delayLong = 1.5
+        let delayShort = 0.6
         
         //
         if didSetWalkthrough == false {
@@ -1466,7 +1473,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! OverviewTableViewCell
             walkthroughHighlight.frame.size = CGSize(width: cell.setsRepsLabel.frame.width + 16, height: cell.setsRepsLabel.frame.height + 4)
             walkthroughHighlight.center = cell.setsRepsLabel.center
-            walkthroughHighlight.center.y += toMinus
+            walkthroughHighlight.center.y += toAdd
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //
@@ -1493,7 +1500,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! OverviewTableViewCell
             highlightSize = CGSize(width: cell.buttonView.frame.width, height: cell.buttonView.frame.height + 8)
             highlightCenter = cell.buttonView.center
-            highlightCenter?.y += toMinus
+            highlightCenter?.y += toAdd
             //
             highlightCornerRadius = 0
             // Top of view
@@ -1515,7 +1522,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! OverviewTableViewCell
             highlightSize = cell.indicatorStack.frame.size
             highlightCenter = cell.indicatorStack.center
-            highlightCenter?.y += toMinus
+            highlightCenter?.y += toAdd
             //
             highlightCornerRadius = 0
             // Top of view
@@ -1537,7 +1544,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! OverviewTableViewCell
             highlightSize = cell.indicatorStack.frame.size
             highlightCenter = cell.indicatorStack.center
-            highlightCenter?.y += toMinus
+            highlightCenter?.y += toAdd
             //
             highlightCornerRadius = 0
             // Top
@@ -1560,7 +1567,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! OverviewTableViewCell
             highlightSize = CGSize(width: 0, height: 0)
             highlightCenter = cell.indicatorStack.center
-            highlightCenter?.y += toMinus
+            highlightCenter?.y += toAdd
             highlightCornerRadius = 3
             //
             labelFrame = 0
@@ -1580,26 +1587,30 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             leftSwipe.clipsToBounds = true
             leftSwipe.center.y = TopBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
             leftSwipe.center.x = view.bounds.width * (7/8)
-            UIApplication.shared.keyWindow?.insertSubview(leftSwipe, aboveSubview: walkthroughView)
+            //
+            nextButton.isEnabled = false
+            //
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort - 0.2, execute: {
+                UIApplication.shared.keyWindow?.insertSubview(leftSwipe, aboveSubview: self.walkthroughView)
+                // Animate swipe demonstration
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    //
+                    leftSwipe.center.x = self.view.bounds.width * (1/8)
+                    //
+                }, completion: { finished in
+                    self.nextButton.isEnabled = true
+                    //
+                    leftSwipe.removeFromSuperview()
+                    //
+                    self.walkthroughProgress = self.walkthroughProgress + 1
+                    self.walkthroughSession()
+                })
+            })
             // Perform swipe action
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                 let leftSwipeSimulate = UISwipeGestureRecognizer()
                 leftSwipeSimulate.direction = .left
                 self.handleSwipes(extraSwipe: leftSwipeSimulate)
-            })
-            // Animate swipe demonstration
-            nextButton.isEnabled = false
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                //
-                leftSwipe.center.x = self.view.bounds.width * (1/8)
-                //
-            }, completion: { finished in
-                self.nextButton.isEnabled = true
-                //
-                leftSwipe.removeFromSuperview()
-                //
-                self.walkthroughProgress = self.walkthroughProgress + 1
-                self.walkthroughSession()
             })
             
             
@@ -1609,7 +1620,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! OverviewTableViewCell
             highlightSize = cell.indicatorStack.frame.size
             highlightCenter = cell.indicatorStack.center
-            highlightCenter?.y += toMinus
+            highlightCenter?.y += toAdd
             //
             highlightCornerRadius = 0
             // Top
@@ -1626,7 +1637,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             // Swipe demonstration
             nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                 //
                 let rightSwipe = UIView()
                 rightSwipe.frame.size = CGSize(width: 50, height: 50)
@@ -1657,7 +1668,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! OverviewTableViewCell
                     self.highlightSize = cell.explanationButton.frame.size
                     self.highlightCenter = cell.explanationButton.center
-                    self.highlightCenter?.y += toMinus
+                    self.highlightCenter?.y += toAdd
                     //
                     self.highlightCornerRadius = 0
                     // Top
@@ -1686,7 +1697,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             // Next Movement
             nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.8, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayLong, execute: {
                 //
                 self.nextButton.isEnabled = true
                 self.backgroundViewExplanation.isEnabled = true
@@ -1698,7 +1709,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! OverviewTableViewCell
                 self.highlightSize = CGSize(width: 0, height: 0)
                 self.highlightCenter = cell.explanationButton.center
-                self.highlightCenter?.y += toMinus
+                self.highlightCenter?.y += toAdd
                 //
                 self.highlightCornerRadius = 0
                 // Top
@@ -1733,7 +1744,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 upSwipe.center.x = self.view.bounds.width / 2
                 UIApplication.shared.keyWindow?.insertSubview(upSwipe, aboveSubview: self.walkthroughView)
                 // Perform swipe action
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                     self.nextButtonAction()
                 })
                 // Animate swipe demonstration
@@ -1743,7 +1754,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     //
                 }, completion: { finished in
                     upSwipe.removeFromSuperview()
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4, execute: {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                         //
                         let downSwipe = UIView()
                         downSwipe.frame.size = CGSize(width: 50, height: 50)

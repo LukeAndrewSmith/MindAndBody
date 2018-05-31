@@ -1051,7 +1051,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             setsRepsPicker.reloadAllComponents()
             // okButton
             //
-            setsRepsView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
+            setsRepsView.frame = CGRect(x: 0, y: 0, width: ActionSheet.shared.actionWidth, height: 147 + 49)
             //
             okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
 
@@ -1445,8 +1445,8 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     // Prests
     @IBAction func presetsAction(_ sender: Any) {
         //
-        let tableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 88 - 49 - 20
-        let tableWidth = UIScreen.main.bounds.width - 20
+        let tableHeight = ActionSheet.shared.actionTableHeight - 49 - 20
+        let tableWidth = ActionSheet.shared.actionWidth
         self.presetsTableView.frame = CGRect(x: 0, y: 0, width: tableWidth, height: tableHeight)
         //
         ActionSheet.shared.setupActionSheet()
@@ -1840,10 +1840,10 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     @IBAction func addMovementAction(_ sender: Any) {
         //
-        let height = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 49 - 49 - 20
+        let height = ActionSheet.shared.actionTableHeight
         //
         UIApplication.shared.keyWindow?.insertSubview(movementsTableView, aboveSubview: view)
-        movementsTableView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 20, height: height)
+        movementsTableView.frame = CGRect(x: 0, y: 0, width: ActionSheet.shared.actionWidth, height: height)
         //
         ActionSheet.shared.setupActionSheet()
         ActionSheet.shared.actionSheet.addSubview(movementsTableView)
@@ -1864,7 +1864,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         // selected number of rows
         setsRepsPicker.selectRow(roundsPickerArray.index(of: (customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset][2][0] as! Int))!, inComponent: 0, animated: true)
         //
-        self.setsRepsView.frame = CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width - 20, height: 147 + 49)
+        self.setsRepsView.frame = CGRect(x: 20, y: 0, width: ActionSheet.shared.actionWidth, height: 147 + 49)
         // picker
         self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
         self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)

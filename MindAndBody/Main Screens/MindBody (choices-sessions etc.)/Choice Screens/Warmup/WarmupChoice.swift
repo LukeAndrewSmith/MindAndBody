@@ -51,9 +51,6 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Walkthrough
-        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
-        
         // Colours
         view.backgroundColor = Colors.light
         
@@ -138,6 +135,9 @@ class WarmupChoice: UIViewController, UIScrollViewDelegate  {
         flexibility.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         flexibility.titleLabel?.numberOfLines = 0
         flexibility.titleLabel?.textAlignment = .center
+        
+        // Walkthrough
+        CustomWalkthrough.shared.beginWalkthrough(viewController: self, customButton: custom)
     }
     
     //

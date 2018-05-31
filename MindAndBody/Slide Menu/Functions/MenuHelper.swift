@@ -18,7 +18,16 @@ enum Direction {
 
 struct MenuHelper {
     
-    static let menuWidth:CGFloat = 0.75
+    static var menuWidth: CGFloat {
+        var width = CGFloat()
+        // Ipad
+        if IPhoneType.shared.iPhoneType() == 3 {
+            width = 1/3
+        } else {
+            width = 2/3
+        }
+        return width
+    }
     
     static let percentThreshold:CGFloat = 0.3
     

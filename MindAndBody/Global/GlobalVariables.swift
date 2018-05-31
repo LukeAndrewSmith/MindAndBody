@@ -190,13 +190,13 @@ class ScheduleVariables {
         // Use lastResetWeek in tracking progress array to reset schedule tracking bools to false and and week progress to 0
         //
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
-        // Current mondays date in week
-        let currentMondayDate = Date().firstMondayInCurrentWeek
+        // Current mondays date in week (is set to midnight in func)
+        let currentMondayDate = Date().firstMondayInCurrentWeekCurrentTimeZone
         // Last Reset = monday of last week reset
         let lastReset = trackingProgressDictionary["LastResetWeek"] as! Date
         
         // Reset if last reset wasn't in current week
-        if lastReset != currentMondayDate {
+        if lastReset < currentMondayDate {
             var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             // Reset all bools in week tracking to false
             if schedules.count != 0 {

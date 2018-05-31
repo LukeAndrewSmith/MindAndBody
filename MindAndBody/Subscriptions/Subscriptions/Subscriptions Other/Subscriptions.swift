@@ -123,34 +123,37 @@ class InAppManager: NSObject {
                         // Check expiry date
                         // Valid subscription
                         if isValidSubscription(expiryDate: expiryDate) {
-                            // Broadcast success notification
-                            if action == 0 {
-                                DispatchQueue.main.async {
-                                    NotificationCenter.default.post(name: SubscriptionNotifiations.restoreSuccessfulNotification, object: nil)
-                                }
-                            }
                             // Valid subscription found
                             UserDefaults.standard.set(true, forKey: "userHasValidSubscription")
                             ICloudFunctions.shared.pushToICloud(toSync: ["userHasValidSubscription"])
                             SubscriptionsCheck.shared.isValid = true
                             Loading.shared.shouldPresentLoading = false
+                            // Broadcast success notification
+                            // Action == 0 implies we are on the subscription screen, and if successful, want to dismiss it
+                            if action == 0 {
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: SubscriptionNotifiations.restoreSuccessfulNotification, object: nil)
+                                }
+                            }
                             DispatchQueue.main.async {
                                 NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
-                            }
-                        // No valid subscription
-                        } else {
-                            // If no valid subscription found
-                            DispatchQueue.main.async {
-                                NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
-                            }
-                            UserDefaults.standard.set(false, forKey: "userHasValidSubscription")
-                            ICloudFunctions.shared.pushToICloud(toSync: ["userHasValidSubscription"])
-                            SubscriptionsCheck.shared.isValid = false
-                            Loading.shared.shouldPresentLoading = false
-                            DispatchQueue.main.async {
-                                NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                                NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
                             }
                         }
+                    }
+                }
+                // No valid subscription
+                if !SubscriptionsCheck.shared.isValid {
+                    // If no valid subscription found
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+                    }
+                    UserDefaults.standard.set(false, forKey: "userHasValidSubscription")
+                    ICloudFunctions.shared.pushToICloud(toSync: ["userHasValidSubscription"])
+                    SubscriptionsCheck.shared.isValid = false
+                    Loading.shared.shouldPresentLoading = false
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
                     }
                 }
             }

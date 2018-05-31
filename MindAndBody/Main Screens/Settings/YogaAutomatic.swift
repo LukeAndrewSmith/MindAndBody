@@ -388,7 +388,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     pickerView.reloadAllComponents()
                     // View
                     //
-                    let selectionWidth = UIScreen.main.bounds.width - 20
+                    let selectionWidth = ActionSheet.shared.actionWidth
                     let selectionHeight = CGFloat(147 + 49)
                     //
                     UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
@@ -432,7 +432,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     pickerView.reloadAllComponents()
                     // View
                     //
-                    let selectionWidth = UIScreen.main.bounds.width - 20
+                    let selectionWidth = ActionSheet.shared.actionWidth
                     let selectionHeight = CGFloat(147 + 49)
                     //
                     UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
@@ -481,8 +481,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     tableViewBells.reloadData()
                     // View
                     //
-                    let selectionWidth = UIScreen.main.bounds.width - 20
-                    let selectionHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - (self.navigationController?.navigationBar.frame.size.height)! - 47 - 88
+                    let selectionWidth = ActionSheet.shared.actionWidth
+                    let selectionHeight = ActionSheet.shared.actionTableHeight
                     //
                     UIApplication.shared.keyWindow?.insertSubview(selectionView, aboveSubview: view)
                     selectionView.frame = CGRect(x: 10, y: view.frame.maxY, width: selectionWidth, height: selectionHeight)
