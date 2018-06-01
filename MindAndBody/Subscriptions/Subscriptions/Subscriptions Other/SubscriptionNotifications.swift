@@ -15,10 +15,9 @@ class SubscriptionNotifiations: NSObject {
     
     static let sessionIdSetNotification = Notification.Name("SessionIdSetNotification")
     static let productsLoadedNotification = Notification.Name("ProductsLoadedNotification")
-    static let restoreSuccessfulNotification = Notification.Name("RestoreSuccessfulNotification")
     static let restoreFailedNotification = Notification.Name("RestoreFailedNotification")
     static let restoreFinishedNotification = Notification.Name("RestoreFinishedNotification")
-    static let purchaseSuccessfulNotification = Notification.Name("PurchaseSuccessfulNotification")
+    static let purchaseRestoreSuccessfulNotification = Notification.Name("PurchaseRestoreSuccessfulNotification")
     static let purchaseCancelledNotification = Notification.Name("PurchaseCancelledNotification")
     //
     static let didCheckSubscription = Notification.Name("DidCheckSubscriptionNotification")

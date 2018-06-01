@@ -1886,7 +1886,7 @@ extension ScheduleScreen {
         if scheduleStyle == 0 {
             scheduleTableBottom.constant = 24.5
             pageStack.isUserInteractionEnabled = true
-            // week
+        // week
         } else if scheduleStyle == 1 {
             scheduleTableBottom.constant = 0
             pageStack.isUserInteractionEnabled = false
@@ -1894,7 +1894,7 @@ extension ScheduleScreen {
         
         // Day indicator
         if scheduleStyle == 0 {
-            dayIndicator.alpha = 0.72
+            dayIndicator.alpha = 0.97
         } else {
             dayIndicator.alpha = 0
         }

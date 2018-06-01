@@ -371,10 +371,21 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             // 12 months
             case 4:
+                // nina
                 //
-                let startDate = Date().firstDateInYear
-                var endDate = calendar.date(byAdding: .month, value: 11, to: startDate)
-                endDate = endDate?.firstDateInMonth
+                // Shift chart data so min date is 0, this allows for correct presenting of labels
+                if trackingDictionariesDates[1].count != 0 {
+                    TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
+                    for i in 0..<chartDataOriginal.count {
+                        let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
+                        let value = chartDataOriginal[i].value
+                        //
+                        let keyValue = (key: key, value: value)
+                        chartDataShifted.append(keyValue)
+                    }
+                    //
+                    lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
+                }
                 //
                 chartView.xAxis.axisMinimum = 0
                 chartView.xAxis.axisMaximum = 364

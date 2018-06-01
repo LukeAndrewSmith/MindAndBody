@@ -380,7 +380,7 @@ class SubscriptionsCheck {
     
     var isValid = false
     //
-    // Check subscriptions
+    // Check subscriptions, called from AppDelegate when first opening, to see if need to present subscription screen
     func checkSubscription() {
         // If internet, check subscription with apple
         if Reachability.isConnectedToNetwork() {

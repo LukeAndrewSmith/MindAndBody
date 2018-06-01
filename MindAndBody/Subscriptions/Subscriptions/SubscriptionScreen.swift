@@ -27,12 +27,17 @@ class SubscriptionScreen: UIViewController {
         // Load products
         InAppManager.shared.loadProducts()
         
-        //
-        NotificationCenter.default.addObserver(self, selector: #selector(handleOptionsLoaded(notification:)), name: SubscriptionNotifiations.productsLoadedNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseSuccessfull(notification:)), name: SubscriptionNotifiations.purchaseSuccessfulNotification, object: nil)
+        // Purchase/Restore success
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseRestoreAlertSuccess), name: SubscriptionNotifiations.purchaseRestoreSuccessfulNotification, object: nil)
+        // Purchase
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseCancelled), name: SubscriptionNotifiations.purchaseCancelledNotification, object: nil)
+        // Restore
+        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.failedToRestore), name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissLoadingWhatever), name: SubscriptionNotifiations.restoreFinishedNotification, object: nil)
+        // Load options
+        NotificationCenter.default.addObserver(self, selector: #selector(handleOptionsLoaded), name: SubscriptionNotifiations.productsLoadedNotification, object: nil)
+        // Connection error
         NotificationCenter.default.addObserver(self, selector: #selector(removeLoadingPresentError), name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseCancelled(notification:)), name: SubscriptionNotifiations.purchaseCancelledNotification, object: nil)
-        
         //
     }
     
@@ -57,14 +62,14 @@ class SubscriptionScreen: UIViewController {
     }
     
     // Subscription handlers
-    @objc func handleOptionsLoaded(notification: Notification) {
+    @objc func handleOptionsLoaded() {
         DispatchQueue.main.async { [weak self] in
             self?.setSubscriptionData()
             self?.loadingView.removeFromSuperview()
         }
     }
     
-    @objc func handlePurchaseSuccessfull(notification: Notification) {
+    @objc func handlePurchaseSuccessfull() {
         DispatchQueue.main.async { [weak self] in
             self?.loadingView.removeFromSuperview()
             self?.dismiss(animated: true)
@@ -72,7 +77,13 @@ class SubscriptionScreen: UIViewController {
         }
     }
     
-    @objc func handlePurchaseCancelled(notification: Notification) {
+    @objc func handlePurchaseRestoreAlertSuccess() {
+        loadingView.removeFromSuperview()
+        self.dismiss(animated: true)
+        NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
+    }
+    
+    @objc func handlePurchaseCancelled() {
         //
         // Tell the user they can cancel anytime
         let title = NSLocalizedString("canCancelTitle", comment: "")
@@ -260,10 +271,6 @@ class SubscriptionScreen: UIViewController {
         //
         addLoadingView()
         //
-        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissRestoreAlertSuccess), name: SubscriptionNotifiations.restoreSuccessfulNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.failedToRestore), name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissLoadingWhatever), name: SubscriptionNotifiations.restoreFinishedNotification, object: nil)
-        //
         InAppManager.shared.restoreSubscription()
         //
         DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
@@ -271,12 +278,6 @@ class SubscriptionScreen: UIViewController {
                 self.removeLoadingPresentError()
             }
         })
-    }
-    
-    @objc func dismissRestoreAlertSuccess() {
-        loadingView.removeFromSuperview()
-        self.dismiss(animated: true)
-        NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
     }
     
     @objc func dismissLoadingWhatever() {

@@ -94,7 +94,7 @@ class InAppManager: NSObject {
         // Validate receipt
         SwiftyReceiptValidator.validate(forIdentifier: productIdentifier, sharedSecret: InAppManager.accountSecret) { (success, response) in
             if success {
-                self.checkExpiryDateAction(response: response, action: 1)
+                self.checkExpiryDateAction(response: response, action: 0)
             } else {
                 // Timed out/ failed
                 DispatchQueue.main.async {
@@ -108,6 +108,9 @@ class InAppManager: NSObject {
     // MARK: Check reciept/expiry date
     // Check expiry dates
         // Posts notifications that call functions
+    // Note on action parameter
+        // 0 == not called from subscription screen, i.e called from app delegate when first opening and checking to see wether or not to present subscription screen
+        // 1 == Restore/Purchase -> dismiss subscription screen, present walkthrough
     func checkExpiryDateAction(response: [String: AnyObject]?, action: Int) {
         /// Retreive the full apple receipt
         let receiptKey = SwiftyReceiptValidator.ResponseKey.receipt.rawValue
@@ -129,10 +132,10 @@ class InAppManager: NSObject {
                             SubscriptionsCheck.shared.isValid = true
                             Loading.shared.shouldPresentLoading = false
                             // Broadcast success notification
-                            // Action == 0 implies we are on the subscription screen, and if successful, want to dismiss it
-                            if action == 0 {
+                            // Purchase
+                            if action == 1 {
                                 DispatchQueue.main.async {
-                                    NotificationCenter.default.post(name: SubscriptionNotifiations.restoreSuccessfulNotification, object: nil)
+                                    NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseRestoreSuccessfulNotification, object: nil)
                                 }
                             }
                             DispatchQueue.main.async {
@@ -183,9 +186,10 @@ extension InAppManager: SKPaymentTransactionObserver {
                 let productIdentifier = transaction.payment.productIdentifier
                 SwiftyReceiptValidator.validate(forIdentifier: productIdentifier, sharedSecret: InAppManager.accountSecret) { (success, response) in
                     if success {
-                        InAppManager.shared.checkExpiryDateAction(response: response, action: 0)
+                        InAppManager.shared.checkExpiryDateAction(response: response, action: 1)
                         // Her stuff
                         self.delegate?.inAppLoadingSucceded(productType: productType)
+                        // nina
                     } else {
                         // Timed out/ failed
                         DispatchQueue.main.async {
@@ -218,7 +222,7 @@ extension InAppManager: SKPaymentTransactionObserver {
                     // Validate receipt
                     SwiftyReceiptValidator.validate(forIdentifier: productIdentifier, sharedSecret: InAppManager.accountSecret) { (success, response) in
                         if success {
-                            InAppManager.shared.checkExpiryDateAction(response: response, action: 0)
+                            InAppManager.shared.checkExpiryDateAction(response: response, action: 1)
                             // Her stuff
                             SKPaymentQueue.default().finishTransaction(transaction)
                             self.delegate?.inAppLoadingSucceded(productType: productType)
