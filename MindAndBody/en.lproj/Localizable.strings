@@ -27,6 +27,8 @@
 "rest:" = "Rest:";
 "skip" = "Skip";
 
+
+
 // MARK: Sessions
 "setsReps" = "Sets x Reps:";
 
@@ -2961,7 +2963,7 @@
 "swipeLeft" = "Swipe left to find out more...";
 //"Aim:\nDo your mind & body justice\nHow:\nProvide you the aid needed, leave you the responsibility required\nMethods:\nPlans, schedules, tracking, customisation";
 // Schedule
-"infoTable2" = "Get into a routine. The app can help you create weekly schedules in line with your goals, abilities and time (or you can create custom ones). The schedule can be split into a plan for each day, or a plan for the whole week (i.e have a number of sessions to be acheived whenever possible). The schedule presents several manners in which to work towards a goal therefore allowing you to do so in the best way depending on your feeling (e.g Workout\n→ Gym/Bodyweight\n→ Classic/Circuit\n→ Full/Upper/Lower Body\n→ Short/Medium/Long). This allows you to have the many benefits of a routine, whilst avoiding the potential monotony.\n";
+"infoTable2" = "Get into a routine. The app can help you create weekly schedules in line with your goals, abilities and time (or you can create custom ones). The schedule can be split into a plan for each day, or a plan for the whole week (i.e have a number of sessions to be acheived whenever possible). The schedule presents several manners in which to work towards a goal therefore allowing you to do so in the best way depending on your feeling (e.g Workout\n→ Gym/Bodyweight\n→ Classic/Circuit\n→ Full/Upper/Lower Body\n→ Short/Medium/Long). This allows you to enjoy the many benefits of a routine, whilst avoiding the potential monotony.\n";
 
 //
 // Fitness
@@ -3176,6 +3178,14 @@
 "breathe" = "Breathe";
 //
 "reminders" = "Reminders";
+// Reminder Settings
+"morningReminder" = "Morning Reminder";
+"afternoonReminder" = "Afternoon Reminder";
+"motivationalMessages" = "Motivating Comments";
+"am" = "am";
+"pm" = "pm";
+
+"turnOff" = "Turn Off";
 
 //
 // MARK: Profile //

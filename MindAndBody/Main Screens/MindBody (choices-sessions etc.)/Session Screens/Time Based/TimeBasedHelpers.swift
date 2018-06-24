@@ -190,6 +190,7 @@ extension TimeBasedScreen {
                 asymmetricProgress += 1
                 removeCircle()
                 lengthTimer.invalidate()
+                Vibrate.shared.vibratePhone()
                 indicateMovementProgress()
             // Movement is asymmetric and second side just finished being timed
             } else if asymmetricProgress == 1 {
@@ -415,59 +416,6 @@ extension TimeBasedScreen {
     
     //
     func endRest() {
-//        timerCountDown.invalidate()
-//        self.restAlert.dismiss(animated: true)
-//        //
-//        didSetEndTime = false
-//        //
-//        Vibrate.shared.vibratePhone()
-//        //
-//        // Next Round
-//        self.tableView.beginUpdates()
-//        self.tableView.endUpdates()
-//        //
-//
-////        self.updateProgress()
-////        self.tableView.reloadData()
-////        self.indicateMovementProgress()
-//        //
-//        self.selectedRow = 0
-//
-//
-//        let indexPath0 = NSIndexPath(row: 0, section: 0)
-//        self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
-//        //
-//        let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! TimeBasedTableViewCell
-//        //
-//        UIView.animate(withDuration: 0.6, animations: {
-//            // 1
-//            cell.movementLabel.alpha = 1
-//            cell.explanationButton.alpha = 1
-//            //
-//            self.updateProgress()
-//            //
-//        }, completion: { finished in
-//            self.tableView.reloadData()
-//            self.indicateMovementProgress()
-//        })
-//
-//        //
-//        // Alert View
-//        let titleString = "round" + String(self.sessionScreenRoundIndex + 1)
-//        let title = NSLocalizedString(titleString, comment: "")
-//        //let message = NSLocalizedString("resetMessage", comment: "")
-//        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-//        alert.view.tintColor = Colors.light
-//        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
-//        self.present(alert, animated: true, completion: {
-//            //
-//            let delayInSeconds = 0.7
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-//                alert.dismiss(animated: true, completion: nil)
-//            }
-//        })
-        
-        
         //
         Vibrate.shared.vibratePhone()
         

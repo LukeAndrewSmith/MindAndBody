@@ -198,6 +198,8 @@ extension ScheduleScreen {
                     
                 // Final choice steady state
                 case 7:
+                    // Select now as this choice is final choice (even if you choose the length afterwards)
+                    ScheduleVariables.shared.selectedRows[1] = row - 1
                     if row == 2 {
                         endurancePopup()
                     } else {
@@ -221,7 +223,6 @@ extension ScheduleScreen {
                     } else if steadyStateChoice == 1 {
                         selectStretching()
                     }
-                    ScheduleVariables.shared.selectedRows[1] = row - 1
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                     //
                     // Return to final choice without user seeing
@@ -280,7 +281,7 @@ extension ScheduleScreen {
         
         //
         // Action
-        let okAction = UIAlertAction(title: "Done", style: UIAlertActionStyle.default) {
+        let okAction = UIAlertAction(title: NSLocalizedString("done", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
             //
             var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
@@ -313,9 +314,11 @@ extension ScheduleScreen {
             self.updateTracking()
             self.updateWeekTracking()
             
-            //
-            let indexPathToReload = NSIndexPath(row: 1, section: 0)
+            // Update row
+            let indexPathToReload = NSIndexPath(row: 2, section: 0)
             self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+            self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
+            self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
             UIAlertAction in
@@ -1121,12 +1124,9 @@ extension ScheduleScreen {
         if ScheduleVariables.shared.choiceProgress[0] == -1 && shouldBeEnabled {
             //
             // Forward 1 day
-            if (extraSwipe.direction == .left){
+            if (extraSwipe.direction == .left) && ScheduleVariables.shared.selectedDay != 6{
                 // Update selected day
-                switch ScheduleVariables.shared.selectedDay {
-                case 6: ScheduleVariables.shared.selectedDay = 0
-                default: ScheduleVariables.shared.selectedDay += 1
-                }
+                ScheduleVariables.shared.selectedDay += 1
                 
                 // Deselect all ScheduleVariables.shared.indicators
                 for i in 0...(stackArray.count - 1) {
@@ -1153,12 +1153,9 @@ extension ScheduleScreen {
                 
             //
             // Back 1 day
-            } else if extraSwipe.direction == .right {
+            } else if extraSwipe.direction == .right && ScheduleVariables.shared.selectedDay != 0 {
                 // Update selected day
-                switch ScheduleVariables.shared.selectedDay {
-                case 0: ScheduleVariables.shared.selectedDay = 6
-                default: ScheduleVariables.shared.selectedDay -= 1
-                }
+                ScheduleVariables.shared.selectedDay -= 1
                 
                 // Deselect all indicators
                 for i in 0...(stackArray.count - 1) {

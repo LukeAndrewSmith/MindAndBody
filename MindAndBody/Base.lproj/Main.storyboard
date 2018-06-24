@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -885,7 +885,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jYQ-DR-kda" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-346" y="2985"/>
+            <point key="canvasLocation" x="-202" y="2962"/>
         </scene>
         <!--Title-->
         <scene sceneID="MUY-fT-Xj0">
@@ -931,7 +931,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VoP-Fs-cEI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="2984"/>
+            <point key="canvasLocation" x="486" y="3205"/>
         </scene>
         <!--view0-->
         <scene sceneID="Lwk-bd-tU1">
@@ -4445,7 +4445,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSy-Oq-wwH">
-                                                    <rect key="frame" x="135.5" y="0.0" width="104" height="27.5"/>
+                                                    <rect key="frame" x="136" y="0.0" width="104" height="27.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="27.5" id="DwF-Bf-aQz"/>
                                                     </constraints>
@@ -5085,6 +5085,7 @@
                         <outlet property="navigationBar" destination="JRG-rZ-TEm" id="Ka0-4M-FmY"/>
                         <segue destination="U5d-IN-X7D" kind="show" identifier="BackgroundImageSegue" id="GKV-bG-CaC"/>
                         <segue destination="8IA-AP-QDR" kind="show" identifier="YogaAutomaticSegue" id="6Xa-ns-zfk"/>
+                        <segue destination="niJ-73-6he" kind="show" identifier="RemindersSegue" id="0Lj-0J-PUR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DbC-9W-Xf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5330,6 +5331,52 @@
             </objects>
             <point key="canvasLocation" x="-417" y="-2046"/>
         </scene>
+        <!--Title-->
+        <scene sceneID="aqL-y2-dNn">
+            <objects>
+                <viewController id="niJ-73-6he" customClass="ReminderNotificationsSettings" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="r0o-45-IJy"/>
+                        <viewControllerLayoutGuide type="bottom" id="B3f-YS-T5Z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ilL-MP-tfa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1pr-Eq-2Sl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="niJ-73-6he" id="OJJ-52-1sI"/>
+                                    <outlet property="delegate" destination="niJ-73-6he" id="vM1-00-E7A"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="1pr-Eq-2Sl" secondAttribute="trailing" id="5m8-yW-rd0"/>
+                            <constraint firstItem="1pr-Eq-2Sl" firstAttribute="top" secondItem="r0o-45-IJy" secondAttribute="bottom" id="M70-xI-kEN"/>
+                            <constraint firstItem="1pr-Eq-2Sl" firstAttribute="leading" secondItem="ilL-MP-tfa" secondAttribute="leading" id="Ntp-Za-Mr2"/>
+                            <constraint firstItem="B3f-YS-T5Z" firstAttribute="top" secondItem="1pr-Eq-2Sl" secondAttribute="bottom" id="s2v-1U-K85"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="1Qk-Pg-tmB">
+                        <barButtonItem key="rightBarButtonItem" image="QuestionMarkMenu" id="b7y-TC-1uI">
+                            <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="questionMarkButtonAciton:" destination="niJ-73-6he" id="JqA-KX-JhJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="navigationBar" destination="1Qk-Pg-tmB" id="Qr8-C4-aeZ"/>
+                        <outlet property="remindersTable" destination="1pr-Eq-2Sl" id="A2z-qX-uyV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RqN-b4-mCf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1169" y="3474"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Back Arrow" width="30" height="30"/>
@@ -5374,7 +5421,7 @@
         <segue reference="Fhn-aO-iU6"/>
         <segue reference="y3k-i5-esE"/>
         <segue reference="izD-lx-C3k"/>
-        <segue reference="Lwd-n2-ybY"/>
+        <segue reference="9CT-5x-VKO"/>
         <segue reference="54L-er-yGs"/>
         <segue reference="gRr-Mf-DSK"/>
         <segue reference="s9D-3O-zvR"/>

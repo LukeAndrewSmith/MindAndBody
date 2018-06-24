@@ -189,7 +189,8 @@ enum Register {
         // Metric/Imperial - 6
         "Units": [0], // == "kg" (0), "lb" (1)
         // Notifications
-        "ReminderNotifications": [1], // 0 == disabled, 1 == enabled
+        "ReminderNotifications": [420,-1,1], // [0]: morning, [1]: evening, [2]: motivational comments
+        // [0]: -1 == off, 420 == 7:00 am (number of minutes), [1]: same, [3]: 0 == off, 1 == on
         // Is icloud enabled, 0 == false, 1 == true
         "iCloud": [0],
     ]

@@ -36,7 +36,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     // switches
     let timedSessionSwitch = UISwitch()
-    let remindersSwitch = UISwitch()
     
     //
     var selectedRow = Int()
@@ -131,7 +130,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         //
         // Switches
         setupSwitch(switchToSetup: timedSessionSwitch)
-        setupSwitch(switchToSetup: remindersSwitch)
     }
     
     func setupSwitch(switchToSetup: UISwitch) {
@@ -403,24 +401,13 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
         // Reminders
         case 4:
+            //
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             cell.backgroundColor = Colors.light
-            cell.selectionStyle = .none
+            cell.accessoryType = .disclosureIndicator
+            //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-            //
-            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            let reminderNotifications = settings["ReminderNotifications"]
-            //
             cell.textLabel?.text = NSLocalizedString("reminders", comment: "")
-            //
-            if reminderNotifications![0] == 1 {
-                remindersSwitch.isOn = true
-            } else {
-                remindersSwitch.isOn = false
-            }
-            // on off
-            cell.addSubview(remindersSwitch)
-            remindersSwitch.center = CGPoint(x: view.bounds.width - 16 - (remindersSwitch.bounds.width / 2), y: cell.bounds.height / 2)
             //
             return cell
             
@@ -523,7 +510,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Yoga automatic
             case 1:
                 //
-                // Segue to homescreen choice
+                // Segue to Automatic yoga settings screen
                 performSegue(withIdentifier: "YogaAutomaticSegue", sender: nil)
                 //
                 tableView.deselectRow(at: indexPath, animated: true)
@@ -606,7 +593,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             }
             tableView.deselectRow(at: indexPath, animated: true)
             //
-            
+         
+        // Notifications
+        case 4:
+            // Segue to reminder notifications settings screen
+            performSegue(withIdentifier: "RemindersSegue", sender: nil)
+            tableView.deselectRow(at: indexPath, animated: true)
       
         // Reset
         case 5:
@@ -726,7 +718,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     //
     // MARK: Switch handlers
     @objc func valueChanged(_ sender: UISwitch) {
-        
         // Timed sessions
         if sender == timedSessionSwitch {
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -739,26 +730,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             UserDefaults.standard.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-            
-        // Reminders
-        // Morning reminders
-        } else if sender == remindersSwitch {
-            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            if sender.isOn {
-                settings["ReminderNotifications"]![0] = 1
-            } else {
-                settings["ReminderNotifications"]![0] = 0
-            }
-            //
-            UserDefaults.standard.set(settings, forKey: "userSettings")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-            // Set/Cancel notifications after settings updated
-            if sender.isOn {
-                ReminderNotifications.shared.setNotifications()
-            } else {
-                ReminderNotifications.shared.cancelNotifications()
-            }
         }
     }
     
@@ -1061,6 +1032,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         walkthroughView.alpha = 1
         didSetWalkthrough = false
         walkthroughProgress = 0
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         walkthroughSettings()
     }
     

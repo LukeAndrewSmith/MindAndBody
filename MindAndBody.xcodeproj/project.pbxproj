@@ -1269,6 +1269,7 @@
 		07E465221F4ED1E400A5AF49 /* rearThigh@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E465041F4ED1E400A5AF49 /* rearThigh@3x.png */; };
 		07E465231F4ED1E400A5AF49 /* soleus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E465051F4ED1E400A5AF49 /* soleus@2x.png */; };
 		07E465241F4ED1E400A5AF49 /* soleus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E465061F4ED1E400A5AF49 /* soleus@3x.png */; };
+		07E6913220DD3C0200069597 /* ReminderNotificationsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6913120DD3C0200069597 /* ReminderNotificationsSettings.swift */; };
 		07EFC0AC1F66CCEF0030DCE6 /* ScheduleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */; };
 		07F8EDD51FA5DB3700C452F4 /* ScheduleTypeQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */; };
 		07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F912071DC2D1240004C924 /* WarmupChoice.swift */; };
@@ -2622,6 +2623,7 @@
 		07E465041F4ED1E400A5AF49 /* rearThigh@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rearThigh@3x.png"; sourceTree = "<group>"; };
 		07E465051F4ED1E400A5AF49 /* soleus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soleus@2x.png"; sourceTree = "<group>"; };
 		07E465061F4ED1E400A5AF49 /* soleus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "soleus@3x.png"; sourceTree = "<group>"; };
+		07E6913120DD3C0200069597 /* ReminderNotificationsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderNotificationsSettings.swift; sourceTree = "<group>"; };
 		07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCreator.swift; sourceTree = "<group>"; };
 		07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeQuestion.swift; sourceTree = "<group>"; };
 		07F912071DC2D1240004C924 /* WarmupChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmupChoice.swift; sourceTree = "<group>"; };
@@ -4497,6 +4499,7 @@
 				07995A351E8699010009C9B1 /* BackgroundImageCollection.swift */,
 				0794A7481FBC7F550029968D /* Settings.swift */,
 				074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */,
+				07E6913120DD3C0200069597 /* ReminderNotificationsSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -8304,6 +8307,7 @@
 				077AC1001DA54C810026895B /* Lessons.swift in Sources */,
 				07EFC0AC1F66CCEF0030DCE6 /* ScheduleCreator.swift in Sources */,
 				07308E39209E11DF00A4B292 /* SuggestedWeights.swift in Sources */,
+				07E6913220DD3C0200069597 /* ReminderNotificationsSettings.swift in Sources */,
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
 				077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,
