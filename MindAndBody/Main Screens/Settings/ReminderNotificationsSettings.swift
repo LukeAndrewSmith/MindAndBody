@@ -55,6 +55,7 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
     let selectionView = UIView()
     let okButton = UIButton()
     let offButton = UIButton()
+    var selectedRow = 0
     //
     // Lengths
     let pickerView = UIPickerView()
@@ -72,14 +73,6 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
         backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
         //
         self.remindersTable.backgroundView = backView
-        //
-        // Switch
-        motivationSwitch.onTintColor = Colors.green
-        motivationSwitch.tintColor = Colors.red
-        motivationSwitch.backgroundColor = Colors.red
-        motivationSwitch.layer.cornerRadius = motivationSwitch.bounds.height / 2
-        motivationSwitch.clipsToBounds = true
-        motivationSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
     
     
@@ -114,12 +107,19 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
         offButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         offButton.addTarget(self, action: #selector(offButtonAction(_:)), for: .touchUpInside)
         
-        
         // Picker
         pickerView.backgroundColor = Colors.dark
         pickerView.delegate = self
         pickerView.dataSource = self
         
+        //
+        // Switch
+        motivationSwitch.onTintColor = Colors.green
+        motivationSwitch.tintColor = Colors.red
+        motivationSwitch.backgroundColor = Colors.red
+        motivationSwitch.layer.cornerRadius = motivationSwitch.bounds.height / 2
+        motivationSwitch.clipsToBounds = true
+        motivationSwitch.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
     
     //
@@ -194,11 +194,9 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
             
         case 1:
             cell.textLabel?.text = NSLocalizedString(sectionArray[indexPath.section][indexPath.row], comment: "")
-            
             cell.selectionStyle = .none
-            
-            // Retreive Presentation Style
-            if settings["AutomaticYoga"]![0] == 0 {
+            // Select state
+            if settings["ReminderNotifications"]![2] == 0 {
                 motivationSwitch.isOn = false
             } else {
                 motivationSwitch.isOn = true
@@ -227,8 +225,8 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
         
         //
         if indexPath.section == 0 {
-            
             //
+            selectedRow = indexPath.row
             pickerView.reloadAllComponents()
             //
             // View
@@ -244,34 +242,20 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
             selectionView.addSubview(pickerView)
             pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: 147)
             // Select Rows
-            if settings["ReminderNotifications"]![1] == -1 {
-                pickerView.selectRow(0, inComponent: 0, animated: true)
+            if settings["ReminderNotifications"]![indexPath.row] == -1 {
+                selectTimeInPicker(time: 0, picker: pickerView)
             } else {
-                pickerView.selectRow(settings["ReminderNotifications"]![1], inComponent: 0, animated: true)
+                selectTimeInPicker(time: settings["ReminderNotifications"]![indexPath.row], picker: pickerView)
             }
-            //
-//            switch indexPath.row {
-//            case 0:
-//            //
-//            case 1:
-//            //
-//            default:
-//                break
-//            }
             
             // Ok
             okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
             selectionView.addSubview(okButton)
-            
             // Off
             offButton.frame = CGRect(x: 0, y: 147 + 49 + separationHeight, width: Int(selectionView.frame.size.width), height: 49)
             selectionView.addSubview(offButton)
-            
             //
             selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
-
-//            offButton.layer.cornerRadius = offButton.bounds.height / 2
-            //
             
             ActionSheet.shared.setupActionSheet()
             ActionSheet.shared.actionSheet.addSubview(selectionView)
@@ -343,12 +327,49 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
     
     // MARK: Helpers
     // MARK: Convert times
-    func convertPickerToMinutes() {
-        // Nina
+    func convertPickerToMinutes(picker: UIPickerView) -> Int {
+        var totalMinutes: Int = 0
+        var hours = picker.selectedRow(inComponent: 0)
+        let minutes = picker.selectedRow(inComponent: 1)
+        // pm, shift by 12 hours (0(12)-11 in picker with am/pm)
+        let amPm = picker.selectedRow(inComponent: 2)
+        if amPm == 1 {
+            hours = hours + 12
+        }
+        totalMinutes = (hours*60) + minutes
+        return totalMinutes
     }
     
-    func convertMinutesToPicker() {
-        
+    func selectTimeInPicker(time: Int, picker: UIPickerView) {
+        var hours = Int(time/60)
+        if hours < 12 {
+            // 00 am == 12 am
+            if hours == 0 {
+                hours = 12
+            }
+            // Select am == row 0
+            picker.selectRow(0, inComponent: 2, animated: false)
+        } else if hours > 11 {
+            // 00 pm = 12 pm
+            if hours != 12 {
+                hours = hours % 12
+            }
+            // Select pm == row 1
+            picker.selectRow(1, inComponent: 2, animated: false)
+        }
+        //
+        if let hoursIndex = timeInDayArray[0].index(of: hours) {
+            picker.selectRow(hoursIndex, inComponent: 0, animated: false)
+        } else {
+            picker.selectRow(0, inComponent: 0, animated: false)
+        }
+        //
+        let minutes = time % 60
+        if let minutesIndex = timeInDayArray[1].index(of: minutes) {
+            picker.selectRow(minutesIndex, inComponent: 1, animated: false)
+        } else {
+            picker.selectRow(0, inComponent: 1, animated: false)
+        }
     }
     
     func convertTimeToString(time: Int) -> String {
@@ -358,15 +379,17 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
         var amPm = String()
         let am = NSLocalizedString("am", comment: "")
         let pm = NSLocalizedString("pm", comment: "")
-        if hours == 0 {
-            hours = 12
+        if hours < 12 {
+            // 00 am == 12 am
+            if hours == 0 {
+                hours = 12
+            }
             amPm = am
-        } else if hours < 12 {
-            amPm = am
-        } else if hours == 12 {
-            amPm = pm
-        } else if hours > 12 {
-            hours = hours % 10
+        } else if hours > 11 {
+            // 00 pm = 12 pm
+            if hours != 12 {
+                hours = hours % 12
+            }
             amPm = pm
         }
         let minutes = time % 60
@@ -384,29 +407,41 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
     
     // Ok button action
     @objc func okButtonAction(_ sender: Any) {
-        //
-        let defaults = UserDefaults.standard
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        //
-        // Breath Length
-        //
-        settings["ReminderNotifications"]![1] = pickerView.selectedRow(inComponent: 0)
-        defaults.set(settings, forKey: "userSettings")
+        // Save
+        settings["ReminderNotifications"]![selectedRow] = convertPickerToMinutes(picker: pickerView)
+        UserDefaults.standard.set(settings, forKey: "userSettings")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-        //
-        let indexPath = NSIndexPath(row: 0, section: 1)
+        // Update Indicator
+        let indexPath = NSIndexPath(row: selectedRow, section: 0)
         let cell = remindersTable.cellForRow(at: indexPath as IndexPath)
-//        cell?.detailTextLabel?.text = String(timeInDayArray[settings["AutomaticYoga"]![1]]) + "s"
-        //
-        
+        cell?.detailTextLabel?.text = convertTimeToString(time: settings["ReminderNotifications"]![selectedRow])
+        // Animate
         ActionSheet.shared.animateActionSheetDown()
         //
+        // Update notifications
+        ReminderNotifications.shared.setNotifications()
+
     }
     
     // Off button action
     @objc func offButtonAction(_ sender: Any) {
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        // Save
+        settings["ReminderNotifications"]![selectedRow] = -1
+        UserDefaults.standard.set(settings, forKey: "userSettings")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+        // Update Indicator
+        let indexPath = NSIndexPath(row: selectedRow, section: 0)
+        let cell = remindersTable.cellForRow(at: indexPath as IndexPath)
+        cell?.detailTextLabel?.text = NSLocalizedString("off", comment: "")
+        // Animate
+        ActionSheet.shared.animateActionSheetDown()
         //
+        // Update notifications
+        ReminderNotifications.shared.setNotifications()
     }
     
     //
@@ -414,165 +449,21 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
     @objc func valueChanged(_ sender: UISwitch) {
         // Timed sessions
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        
         // off -> on
         if sender.isOn {
-            //
-            settings["AutomaticYoga"]![0] = 1
-            //
-            // Present walkthrough
-            let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-            if walkthroughs["AutomaticYoga"] == false {
-                walkthroughAutomaticYoga()
-            }
-            // on -> off
+            settings["ReminderNotifications"]![2] = 1
+        // on -> off
         } else {
-            //
-            settings["AutomaticYoga"]![0] = 0
+            settings["ReminderNotifications"]![2] = 0
         }
         //
         UserDefaults.standard.set(settings, forKey: "userSettings")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-    }
-    
-    
-    //
-    // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
-    //
-    //
-    var walkthroughProgress = 0
-    var walkthroughView = UIView()
-    var walkthroughHighlight = UIView()
-    var walkthroughLabel = UILabel()
-    var nextButton = UIButton()
-    
-    var didSetWalkthrough = false
-    
-    //
-    // Components
-    var walkthroughTexts = ["automaticYoga0", "automaticYoga1", "automaticYoga2"]
-    var highlightSize: CGSize? = nil
-    var highlightCenter: CGPoint? = nil
-    // Corner radius, 0 = height / 2 && 1 = width / 2
-    var highlightCornerRadius = 0
-    var labelFrame = 0
-    //
-    var walkthroughBackgroundColor = UIColor()
-    var walkthroughTextColor = UIColor()
-    
-    // Walkthrough
-    @objc func walkthroughAutomaticYoga() {
-        
         //
-        if didSetWalkthrough == false {
-            //
-            nextButton.addTarget(self, action: #selector(walkthroughAutomaticYoga), for: .touchUpInside)
-            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
-            didSetWalkthrough = true
-        }
-        
-        //
-        switch walkthroughProgress {
-            // First has to be done differently
-        // Walkthrough explanation
-        case 0:
-            //
-            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
-            walkthroughLabel.sizeToFit()
-            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
-            
-            // Colour
-            walkthroughLabel.textColor = Colors.light
-            walkthroughLabel.backgroundColor = Colors.dark
-            walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colors.dark.cgColor
-            // Highlight
-            let section = remindersTable.rect(forSection: 1)
-            walkthroughHighlight.frame = CGRect(x: 8, y: section.minY + 47, width: view.bounds.width - 16, height: 44)
-            walkthroughHighlight.center.y += TopBarHeights.combinedHeight
-            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 4
-            
-            //
-            // Flash
-            //
-            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
-                //
-                self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(1)
-            }, completion: {(finished: Bool) -> Void in
-                UIView.animate(withDuration: 0.2, animations: {
-                    //
-                    self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
-                }, completion: nil)
-            })
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        // Transition time
-        case 1:
-            //
-            let section = remindersTable.rect(forSection: 1)
-            highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 44 + 22)
-            highlightCenter?.y += TopBarHeights.combinedHeight
-            //
-            highlightCornerRadius = 2
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.dark
-            walkthroughTextColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        // Transition indicator
-        case 2:
-            //
-            let section = remindersTable.rect(forSection: 1)
-            highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 44 + 44 + 22)
-            highlightCenter?.y += TopBarHeights.combinedHeight
-            //
-            highlightCornerRadius = 2
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.dark
-            walkthroughTextColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        //
-        default:
-            UIView.animate(withDuration: 0.4, animations: {
-                self.walkthroughView.alpha = 0
-            }, completion: { finished in
-                self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-                walkthroughs["AutomaticYoga"] = true
-                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
-            })
-        }
+        // Update notifications
+        ReminderNotifications.shared.setNotifications()
     }
-    
-    // QuestionMark, information needed, show walkthrough
-    @IBAction func questionMarkButtonAciton(_ sender: Any) {
-        walkthroughView.alpha = 1
-        didSetWalkthrough = false
-        walkthroughProgress = 0
-        walkthroughAutomaticYoga()
-    }
-    
 }
 

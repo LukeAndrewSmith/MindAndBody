@@ -3167,13 +3167,30 @@
 // MARK: Repeating Reminders/Notifications
 "mindBodySchedule" = "Mind & Body Schedule";
 "morningNotification1" = "You have "; // nSession
-"morningNotification2" = " sessions planned for today"; // 7 o'clock
-"morningNotification21" = " session planned for today";
-"afternoonNotification" = "Have you worked towards your goals as planned today?"; // 5 o'clock
+"morningNotification2" = " sessions planned for today."; // 7 o'clock
+"morningNotification21" = " session planned for today.";
 //
-"weekNotification2" = " sessions planned for this week";
+"afternoonNotification1" = "You have "; // nSession
+"afternoonNotification2" = " sessions left."; // 7 o'clock
+"afternoonNotification21" = " session left.";
+//
+"afternoonFinishedComment" = "Well Done! You've achieved your goals for today.";
+//
+"weekNotification2" = " sessions planned for this week.";
 "eveningNotification" = "Have you acheived your goals today?";
 "sundayNotification" = "Have you worked towards your goals as planned this week?";
+// Motivation messages
+"motivation1" = "Do your best!";
+"motivation2" = "Go for it!";
+"motivation3" = "Enjoy!";
+"motivation4" = "Exceed your limits!";
+"motivation5" = "Refuse to fail!";
+"motivation6" = "No excuses!";
+"motivation7" = "Never back down!";
+"motivation8" = "Earn your success!";
+"motivation9" = "Work for you goals!";
+"motivation10" = "Have fun!";
+
 // Breathing reminders
 "breathe" = "Breathe";
 //
@@ -3507,7 +3524,7 @@
         "settings0" = "Home Page:\nChoose the default screen of the app";
         "settings1" = "Timed Sessions:\nYou can put down your phone and simply follow what the app says.\nNOTE: Perform non-timed sessions until you have got a good understanding of the movements regularly presented (by reading their explanations).";
         "settings2" = "Automatic Yoga:\nTimed sessions for yoga; you have to set your average breath length to enable it.\nNOTE: Perform non-timed yoga first, reading the explanations of each pose until you are comfortable with the techniques.";
-        "settings3" = "Reminders:\nThe app sends a reminder indicating the number of sessions planned for the day at 7am. It also asks on sunday at 7pm if you have acheived your goals - a question worth reflecting upon.";
+        "settings3" = "Reminders:\nThe app can send reminders indicating the number of sessions planned in the morning/afternoon at times you set. You can also choose to turn off the motivating comments included in the reminders here.";
         // Automatic Yoga
         "automaticYoga0" = "Average Breath Length:\nThe length of your average breath when doing yoga. A breath being both inhale and exhale, it can be calculated by timing 10-30 breaths and then dividing by the number of breaths.";
         "automaticYoga1" = "Transition Time:\nThe average length of time you would for changing poses.";

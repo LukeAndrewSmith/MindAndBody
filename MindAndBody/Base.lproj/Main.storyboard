@@ -5360,14 +5360,7 @@
                             <constraint firstItem="B3f-YS-T5Z" firstAttribute="top" secondItem="1pr-Eq-2Sl" secondAttribute="bottom" id="s2v-1U-K85"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="1Qk-Pg-tmB">
-                        <barButtonItem key="rightBarButtonItem" image="QuestionMarkMenu" id="b7y-TC-1uI">
-                            <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="questionMarkButtonAciton:" destination="niJ-73-6he" id="JqA-KX-JhJ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="1Qk-Pg-tmB"/>
                     <connections>
                         <outlet property="navigationBar" destination="1Qk-Pg-tmB" id="Qr8-C4-aeZ"/>
                         <outlet property="remindersTable" destination="1pr-Eq-2Sl" id="A2z-qX-uyV"/>

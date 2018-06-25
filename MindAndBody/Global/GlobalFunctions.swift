@@ -65,6 +65,8 @@ class ReminderNotifications {
     static var shared = ReminderNotifications()
     private init() {}
     
+    private let motivatingComments: [String] = ["motivation1", "motivation2", "motivation3", "motivation4", "motivation5", "motivation6", "motivation7", "motivation8", "motivation9", "motivation10"]
+    
     // Sets morning and/or everning repeating notifiations
         // Could be called reset, as clears before setting
     func setNotifications() {
@@ -72,180 +74,232 @@ class ReminderNotifications {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         //
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        let notificationSettings = settings["ReminderNotifications"]
-        //
         let cal: Calendar = Calendar.current
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
-        // Double check notifications are on
-        if notificationSettings![0] == 1 {
-            //
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-
-            if schedules.count != 0 {
-                // Day view: set notifications for each day something is planned
-                let scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
-                if scheduleStyle == 0 {
-                    // Loop week
-                    for i in 0...6 {
-                        // Check day
-                        let dayCount = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
-                        if dayCount != 0 {
-                            //
-                            // Set morning notifications
-                            let morningContent = UNMutableNotificationContent()
-                            morningContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                            // Session not plural
-                            if dayCount == 1 {
-                                morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification21", comment: "")
-                            // Sessions plural
-                            } else {
-                                morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification2", comment: "")
-                            }
-                            
-                            // Sound
-                            morningContent.sound = UNNotificationSound.default()
-                            
-                            // App Badge Counter
-                            morningContent.badge = dayCount as NSNumber
-                            
-                            // Get day of week
-                            let morningDate = Date().firstMondayInCurrentWeek
-                            let morningDateToSchedule = cal.date(byAdding: .day, value: i, to: morningDate)
-                            // Get 7 in morning
-                            let dateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: morningDateToSchedule!)!
-
-                            
-                            // Get trigger daye
-                            let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: dateToScheduleWithTime)
-                            
-                            // Set trigger
-                            let morningTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
-                            let identifier = "morningReminderNotification" + String(i)
-                            let morningRequest = UNNotificationRequest(identifier: identifier, content: morningContent, trigger: morningTrigger)
-                            
-                            //
-                            UNUserNotificationCenter.current().add(morningRequest, withCompletionHandler: nil)
+        if schedules.count != 0 {
+            // Day view: set notifications for each day something is planned
+            let scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+            if scheduleStyle == 0 {
+                // Loop week
+                for i in 0...6 {
+                    // Check day
+                    let dayCount = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
+                    if dayCount != 0 {
+                        //
+                        // Set morning notifications
+                        let morningContent = UNMutableNotificationContent()
+                        morningContent.title = NSLocalizedString("mindBodySchedule", comment: "")
+                        // Motivating comments (if on)
+                        var motivatingComment = ""
+                        if settings["ReminderNotifications"]![2] == 1 {
+                            let random = Int(arc4random_uniform(UInt32(motivatingComment.count)))
+                            motivatingComment = "\n" + NSLocalizedString(motivatingComments[random], comment: "")
                         }
-                        
-                        //
-
-                        //
-                        // Set sunday notification
-                        let sundayContent = UNMutableNotificationContent()
-                        sundayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                        sundayContent.body = NSLocalizedString("sundayNotification", comment: "")
-                        
-                        sundayContent.sound = UNNotificationSound.default()
-                        
+                        // Session - not plural
+                        if dayCount == 1 {
+                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification21", comment: "") + motivatingComment
+                        // Sessions - plural
+                        } else {
+                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification2", comment: "") + motivatingComment
+                        }
+                        // Sound
+                        morningContent.sound = UNNotificationSound.default()
+                        // App Badge Counter
+                        morningContent.badge = dayCount as NSNumber
                         // Get day of week
-                        let mondayDate = Date().firstMondayInCurrentWeek
-                        let sundayDateToSchedule = cal.date(byAdding: .day, value: 6, to: mondayDate)
-                        // Get 7 in sunday
-                        let sundayDateToScheduleWithTime: Date = cal.date(bySettingHour: 19, minute: 0, second: 0, of: sundayDateToSchedule!)!
-                        
-                        // Get trigger day
-                        let sundayTriggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: sundayDateToScheduleWithTime)
-                        
+                        let morningDate = Date().firstMondayInCurrentWeek
+                        let morningDateToSchedule = cal.date(byAdding: .day, value: i, to: morningDate)
+                        // Get time
+                        let totalMinutes = settings["ReminderNotifications"]![0]
+                        let hour = Int(totalMinutes/60)
+                        let minute = totalMinutes % 60
+                        let dateToScheduleWithTime: Date = cal.date(bySettingHour: hour, minute: minute, second: 0, of: morningDateToSchedule!)!
+                        // Get trigger date
+                        let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: dateToScheduleWithTime)
                         // Set trigger
-                        let sundayTrigger = UNCalendarNotificationTrigger(dateMatching: sundayTriggerDate, repeats: true)
-                        let sundayRequest = UNNotificationRequest(identifier: "sundayReminderNotification", content: sundayContent, trigger: sundayTrigger)
+                        let morningTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
+                        let identifier = "morningReminderNotification" + String(i)
+                        let morningRequest = UNNotificationRequest(identifier: identifier, content: morningContent, trigger: morningTrigger)
+                        UNUserNotificationCenter.current().add(morningRequest, withCompletionHandler: nil)
+                        
                         //
-                        UNUserNotificationCenter.current().add(sundayRequest, withCompletionHandler: nil)
+                        // Set Afternoon Notification (if on)
+                        if settings["ReminderNotifications"]![1] != -1 {
+                            var shouldPresentNotification = false
+                            // See whats left
+                            var unfinishedCount = 0
+                            for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count {
+                                if !(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
+                                    unfinishedCount += 1
+                                }
+                            }
+                            // Set notification
+                            let afternoonContent = UNMutableNotificationContent()
+                            afternoonContent.title = NSLocalizedString("mindBodySchedule", comment: "")
+                            // Content
+                            // Finished session for today notification
+                            if unfinishedCount == 0 {
+                                // If motivational comment are on and finished -> congratulate (e.g well done)
+                                if settings["ReminderNotifications"]![2] != -1 {
+                                    afternoonContent.body = NSLocalizedString("afternoonFinishedComment", comment: "")
+                                    shouldPresentNotification = true
+                                }
+                                // No motivational comment and finished -> leave them to it (shouldPresentNotification = false)(defaults to false)
+                            // Something left for today notification
+                            } else {
+                                // Motivating comments (if on)
+                                var motivatingComment = ""
+                                if settings["ReminderNotifications"]![2] == 1 {
+                                    let random = Int(arc4random_uniform(UInt32(motivatingComment.count)))
+                                    motivatingComment = "\n" + NSLocalizedString(motivatingComments[random], comment: "")
+                                }
+                                // Session - not plural
+                                if unfinishedCount == 1 {
+                                    afternoonContent.body = NSLocalizedString("afternoonNotification1", comment: "") + String(unfinishedCount) + NSLocalizedString("afternoonNotification21", comment: "") +  motivatingComment
+                                // Sessions - plural
+                                } else {
+                                    afternoonContent.body = NSLocalizedString("afternoonNotification1", comment: "") + String(unfinishedCount) + NSLocalizedString("afternoonNotification2", comment: "") + motivatingComment
+                                }
+                                //
+                                shouldPresentNotification = true
+                            }
+                            // Present
+                            if shouldPresentNotification {
+                                // Sound
+                                afternoonContent.sound = UNNotificationSound.default()
+                                // App Badge Counter
+                                afternoonContent.badge = dayCount as NSNumber
+                                // Get day of week
+                                let afternoonDate = Date().firstMondayInCurrentWeek
+                                let afternoonDateToSchedule = cal.date(byAdding: .day, value: i, to: afternoonDate)
+                                // Get time
+                                let totalMinutes = settings["ReminderNotifications"]![1]
+                                let hour = Int(totalMinutes/60)
+                                let minute = totalMinutes % 60
+                                let dateToScheduleWithTime: Date = cal.date(bySettingHour: hour, minute: minute, second: 0, of: afternoonDateToSchedule!)!
+                                // Get trigger date
+                                let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: dateToScheduleWithTime)
+                                // Set trigger
+                                let afternoonTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
+                                let identifier = "afternoonReminderNotification" + String(i)
+                                let afternoonRequest = UNNotificationRequest(identifier: identifier, content: afternoonContent, trigger: afternoonTrigger)
+                                UNUserNotificationCenter.current().add(afternoonRequest, withCompletionHandler: nil)
+                            }
+                        }
                     }
-                // Week view: set notifications for each day ??
-                } else {
-                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-                    //
-                    // Set monday notification
-                    let mondayContent = UNMutableNotificationContent()
-                    mondayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                    //
-                    var count = Int()
-                    // Loop week
-                    for i in 0...6 {
-                        count += schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
-                    }
-                    mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(count) + NSLocalizedString("weekNotification2", comment: "")
-                    mondayContent.sound = UNNotificationSound.default()
                     
-                    // App Badge Counter
-                    mondayContent.badge = count as NSNumber
-                    
-                    // Get day of week
-                    let mondayDate = Date().firstMondayInCurrentWeek
-                    // Get 7 in monday
-                    let mondayDateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: mondayDate)!
-                    // Get trigger day
-                    let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: mondayDateToScheduleWithTime)
-
-                    
-                    // Set trigger
-                    let mondayTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
-                    let mondayRequest = UNNotificationRequest(identifier: "mondayReminderNotification", content: mondayContent, trigger: mondayTrigger)
-                    //
-                    UNUserNotificationCenter.current().add(mondayRequest, withCompletionHandler: nil)
-                    
-                    //
-                    // Set sunday notification
+                    // ----
+                    // Set Sunday notification
                     let sundayContent = UNMutableNotificationContent()
                     sundayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
                     sundayContent.body = NSLocalizedString("sundayNotification", comment: "")
-                    
                     sundayContent.sound = UNNotificationSound.default()
-                    mondayContent.badge = 0
-
                     // Get day of week
+                    let mondayDate = Date().firstMondayInCurrentWeek
                     let sundayDateToSchedule = cal.date(byAdding: .day, value: 6, to: mondayDate)
-                    // Get 7 in sunday
+                    // Get 7pm in sunday
                     let sundayDateToScheduleWithTime: Date = cal.date(bySettingHour: 19, minute: 0, second: 0, of: sundayDateToSchedule!)!
-                    
                     // Get trigger day
                     let sundayTriggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: sundayDateToScheduleWithTime)
-                    
                     // Set trigger
                     let sundayTrigger = UNCalendarNotificationTrigger(dateMatching: sundayTriggerDate, repeats: true)
                     let sundayRequest = UNNotificationRequest(identifier: "sundayReminderNotification", content: sundayContent, trigger: sundayTrigger)
-                    //
                     UNUserNotificationCenter.current().add(sundayRequest, withCompletionHandler: nil)
                 }
+            // Week view: set notifications for each day ??
+            } else {
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                //
+                // Set monday notification
+                let mondayContent = UNMutableNotificationContent()
+                mondayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
+                //
+                var count = Int()
+                // Loop week
+                for i in 0...6 {
+                    count += schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
+                }
+                mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(count) + NSLocalizedString("weekNotification2", comment: "")
+                mondayContent.sound = UNNotificationSound.default()
                 
+                // App Badge Counter
+                mondayContent.badge = count as NSNumber
                 
-                // Update current badge count, only useful if user switches between scheduleStyles, i.e from view full week to view each day and vice versa, or for when this gets reset in the middle of a day
-                // View each day
-                if scheduleStyle == 0 {
-                    let currentDay = Date().weekDayFromMonday
-                    var currentCount: Int = 0
-                    // Loop current day counting how much has been done
-                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![currentDay].count != 0 {
-                        for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![currentDay].count {
-                            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![currentDay][j]["isGroupCompleted"] as! Bool == false {
+                // Get day of week
+                let mondayDate = Date().firstMondayInCurrentWeek
+                // Get 7 in monday
+                let mondayDateToScheduleWithTime: Date = cal.date(bySettingHour: 7, minute: 0, second: 0, of: mondayDate)!
+                // Get trigger day
+                let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: mondayDateToScheduleWithTime)
+
+                
+                // Set trigger
+                let mondayTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
+                let mondayRequest = UNNotificationRequest(identifier: "mondayReminderNotification", content: mondayContent, trigger: mondayTrigger)
+                //
+                UNUserNotificationCenter.current().add(mondayRequest, withCompletionHandler: nil)
+                
+                //
+                // Set sunday notification
+                let sundayContent = UNMutableNotificationContent()
+                sundayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
+                sundayContent.body = NSLocalizedString("sundayNotification", comment: "")
+                
+                sundayContent.sound = UNNotificationSound.default()
+                mondayContent.badge = 0
+
+                // Get day of week
+                let sundayDateToSchedule = cal.date(byAdding: .day, value: 6, to: mondayDate)
+                // Get 7 in sunday
+                let sundayDateToScheduleWithTime: Date = cal.date(bySettingHour: 19, minute: 0, second: 0, of: sundayDateToSchedule!)!
+                
+                // Get trigger day
+                let sundayTriggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: sundayDateToScheduleWithTime)
+                
+                // Set trigger
+                let sundayTrigger = UNCalendarNotificationTrigger(dateMatching: sundayTriggerDate, repeats: true)
+                let sundayRequest = UNNotificationRequest(identifier: "sundayReminderNotification", content: sundayContent, trigger: sundayTrigger)
+                //
+                UNUserNotificationCenter.current().add(sundayRequest, withCompletionHandler: nil)
+            }
+            
+            
+            // Update current badge count, only useful if user switches between scheduleStyles, i.e from view full week to view each day and vice versa, or for when this gets reset in the middle of a day
+            // View each day
+            if scheduleStyle == 0 {
+                let currentDay = Date().weekDayFromMonday
+                var currentCount: Int = 0
+                // Loop current day counting how much has been done
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![currentDay].count != 0 {
+                    for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![currentDay].count {
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![currentDay][j]["isGroupCompleted"] as! Bool == false {
+                            currentCount += 1
+                        }
+
+                    }
+                }
+                UIApplication.shared.applicationIconBadgeNumber = currentCount
+            // View full week
+            } else {
+                var currentCount: Int = 0
+                // Loop week
+                for i in 0...6 {
+                    // If day not empty
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
+                        // Loop day counting how much has been done
+                        for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count {
+                            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j]["isGroupCompleted"] as! Bool == false {
                                 currentCount += 1
                             }
-
+                            
                         }
                     }
-                    UIApplication.shared.applicationIconBadgeNumber = currentCount
-                // View full week
-                } else {
-                    var currentCount: Int = 0
-                    // Loop week
-                    for i in 0...6 {
-                        // If day not empty
-                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count != 0 {
-                            // Loop day counting how much has been done
-                            for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count {
-                                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j]["isGroupCompleted"] as! Bool == false {
-                                    currentCount += 1
-                                }
-                                
-                            }
-                        }
-                    }
-                    UIApplication.shared.applicationIconBadgeNumber = currentCount
                 }
-                
-            } // end schedules.count
-        } // end notificationSettings![0] == 1
+                UIApplication.shared.applicationIconBadgeNumber = currentCount
+            }
+            
+        } // end schedules.count
     }
     
     // removes all pending notifications (as there should only be repeating notifications that are pending, if ever notifications used more, this should be changed to only cancel repeating notifiations
@@ -944,6 +998,8 @@ extension UIViewController {
             // Reload
             ScheduleVariables.shared.shouldReloadChoice = true
         }
+        // Update notifications (incase before evening notification)
+        ReminderNotifications.shared.setNotifications()
     }
     
     func getIndexingVariablesForSession() -> (Int, String, Int) {
