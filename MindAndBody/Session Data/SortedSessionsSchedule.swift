@@ -477,7 +477,7 @@ extension sessionData {
                     "hard": ["WGHS-CcF-1",
                              "WGHS-CcF-2",
                              "WGHS-CcF-3",
-                             "WGHS-CcF -4",
+                             "WGHS-CcF-4",
                              "WGHS-CcF-5",],
                 ],
                 // Normal

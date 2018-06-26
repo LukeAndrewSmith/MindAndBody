@@ -113,23 +113,22 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //
     // MARK: View did load
-    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //        testTrackingValues()
+        
         // Ensure week goal correct
         updateWeekGoal()
-        
-        // MARK: Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        testTrackingValues()
-        updateWeekTracking()
+        // Update Tracking
+        updateWeekProgress()
         updateTracking()
+        updateWeekTracking()
         
         // Create [[Date: Int]] from the stored [[String: Int]] (ICloud wont store [Date: Int], only [String: Int])
         let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
         trackingDictionariesDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionaries)
-        
-        
         
         // Present walkthrough 2
         let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Schedule/Helpers/ScheduleHelpers.swift"
-            timestampString = "551652820.090825"
+            timestampString = "551701934.153991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1967"
-            endingLineNumber = "1967"
+            startingLineNumber = "1963"
+            endingLineNumber = "1963"
             landmarkName = "layoutViews()"
             landmarkType = "7">
          </BreakpointContent>

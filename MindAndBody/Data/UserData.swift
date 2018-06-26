@@ -207,6 +207,7 @@ enum Register {
             "Session2": false,
             // Schedule
             "Schedule": false,
+            "LongPressScheduleNote": false,
             // Tracking
             "Tracking": false,
             // Settings

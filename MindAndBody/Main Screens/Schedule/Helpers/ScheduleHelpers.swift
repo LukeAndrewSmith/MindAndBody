@@ -76,8 +76,6 @@ extension ScheduleScreen {
                     nextChoice()
                 // Final Choice
                 case 6:
-                    // Test
-                    // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
                     if row == 1 {
                         selectWarmup()
@@ -1459,8 +1457,6 @@ extension ScheduleScreen {
                         // Animate back to initial choice
                         if isLastChoice() {
                             animateFromLongPress()
-    //                        nina
-    //                        backToBeginning()
                         }
                     }
                     

@@ -147,6 +147,12 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             // At end of session, updateScheduleTracking() gets called, this updates the final choice (session) tracking, then indicates the scheduleShouldReload
             // This function that means the function does something, it reloads the relevant rows and animated back to the home schedule screen if necessary
         markAsCompletedAndAnimate()
+        
+        // Walkthrough for note on long press to mark group/session as complete, the function check if there is a session on the screen and if so presents a quick note explaining the long press
+        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+        if walkthroughs["Schedule"] == true && walkthroughs["LongPressScheduleNote"] == false {
+            self.walkthroughScheduleLongPressNote()
+        }
     }
     
     //

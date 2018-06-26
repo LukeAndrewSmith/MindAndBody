@@ -988,13 +988,49 @@ extension UIViewController {
             
             // Update
             schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = true
-            // Update Badges
-                // currentBool == False as False -> True
-            ReminderNotifications.shared.updateBadges(day: day, currentBool: false)
             // Set
             UserDefaults.standard.set(schedules, forKey: "schedules")
             // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
+            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+            // Update Badges
+            ReminderNotifications.shared.updateBadges(day: day, currentBool: false)
+            // Update Week Progress & Tracking
+            updateWeekProgress()
+            updateTracking()
+            updateWeekTracking()
+            
+            //
+            // Check if full group completed
+            var isGroupCompleted = true
+            // Yoga handled differently
+            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["group"] as! String == "yoga" {
+                // Yoga warmup optional, so is completed if session is finished
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["1"] as! Bool == false {
+                    isGroupCompleted = false
+                }
+                // Normal case
+            } else {
+                // Number of session included in group (i.e warmup/session/stretching) can be found by number of elements in group dictionary - 2 (-2 as "group" and "isGroupCompleted" included). Check ScheduleData, schedule groups to understand better
+                for i in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0].count - 2 {
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][String(i)] as! Bool == false {
+                        isGroupCompleted = false
+                        break
+                    }
+                }
+            }
+            //
+            if isGroupCompleted {
+                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = true
+                // If group is completed, arrays should be updated
+                UserDefaults.standard.set(schedules, forKey: "schedules")
+                // Sync
+                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+                // Update Tracking
+                updateWeekProgress()
+                updateTracking()
+                updateWeekTracking()
+            }
+            
             // Reload
             ScheduleVariables.shared.shouldReloadChoice = true
         }

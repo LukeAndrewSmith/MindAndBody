@@ -3502,6 +3502,8 @@
         "schedule7" = "Lessons:\nUseful lessons regarding mind & body are found here. They are presented in the schedule at revelant times, and can help you to get the most out of the app.";
         "schedule8" = "Settings:\nPersonalise the app, changing the background image, choosing units etc...";
         "schedule9" = "What next?\nHow about creating a schedule (by pressing this button). All you need to do then is to follow it, check tracking every now and again and maybe change some settings (like eventually turning automatic yoga/timed sessions on).";
+        //
+        "longPressNoteWalkthrough" = "Note:\nYou can press and hold a session for 2s to mark it as completed. This is so that if you complete your session without using the app, you can still easily track it.";
 
         // Tracking
         "tracking0" = "Goal:\nThe green line is 100%, it represents the amount sessions you planned.\nYou can touch the graph to see specific percentages.";
