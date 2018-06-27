@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Schedule/Helpers/ScheduleHelpers.swift"
-            timestampString = "551810914.216645"
+            timestampString = "551811200.733953"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1963"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/MindBody (choices-sessions etc.)/Session Screens/Workout/SessionScreen.swift"
-            timestampString = "551804131.058834"
+            timestampString = "551811200.7340879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "966"
-            endingLineNumber = "966"
+            startingLineNumber = "967"
+            endingLineNumber = "967"
             landmarkName = "handleImageTap(imageTap:)"
             landmarkType = "7">
          </BreakpointContent>
