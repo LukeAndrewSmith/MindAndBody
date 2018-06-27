@@ -384,7 +384,7 @@ extension sessionData {
             // Pull (Forearms)
             "farmersCarry", "reverseBarbellCurl",
             // Push (Chest) ---------
-            "benchPress", "benchPressDumbell", "semiInclineDumbellPress", "platePress", "barbellKneelingPress", "dips",
+            "benchPress", "benchPressDumbell", "semiInclineDumbellPress", "platePress", "barbellKneelingPress",
             // Push (Shoulders)
             "standingShoulderPressBarbell", "standingShoulderPressDumbell", "lateralRaise", "frontRaise",
             // Push (Triceps) // 46: !!!

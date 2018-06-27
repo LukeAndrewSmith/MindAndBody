@@ -17,19 +17,8 @@ class sessionData {
     // Naming of sessions
         // Check excel spreadsheet 'Mind & Body Sessions'
         // e.g Bodyweight, Toning, Easy, Short - Classic, Full = BTES-CF-SS-1
-            // ...-SS begin session (-W warmup, -S being stretching
+            // ...-SS being session (-W warmup, -S being stretching
             // ...-1 being workout 1 of several
-
-    
-//    func returnDict(name: String) -> [String: [String: [[String: Any]]]] {
-//        let Dicts = ["warmup": sessionData.warmup,
-//                     "workout": sessionData.workout,
-//                     "cardio": sessionData.cardio,
-//                     "stretching": sessionData.stretching,
-//                     "yoga": sessionData.yoga,]
-//        return Dicts
-//    }
-    
     
     // MARK: Sessions
         // Set arrays like this as doesn't compile otherwise, dictionary too large, would be good to find a new way of storing it
@@ -356,8 +345,8 @@ class sessionData {
                         // Joint Rotations
                         ["movement": "wrist",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "30s",
+                         "time": 30],
                         ["movement": "elbow",
                          "sets": 1,
                          "reps": "15s",
@@ -368,8 +357,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Cardio
                         ["movement": "forefootBounces",
                          "sets": 1,
@@ -394,8 +383,8 @@ class sessionData {
                         // Joint Rotations
                         ["movement": "wrist",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "30s",
+                         "time": 30],
                         ["movement": "elbow",
                          "sets": 1,
                          "reps": "15s",
@@ -406,8 +395,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Cardio
                         ["movement": "jumpSquat",
                          "sets": 1,
@@ -432,8 +421,8 @@ class sessionData {
                         // Joint Rotations
                         ["movement": "wrist",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "30s",
+                         "time": 30],
                         ["movement": "elbow",
                          "sets": 1,
                          "reps": "15s",
@@ -444,8 +433,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Cardio
                         ["movement": "gluteKicks",
                          "sets": 1,
@@ -470,8 +459,8 @@ class sessionData {
                         // Joint Rotations
                         ["movement": "wrist",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "30s",
+                         "time": 30],
                         ["movement": "elbow",
                          "sets": 1,
                          "reps": "15s",
@@ -482,8 +471,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Cardio
                         ["movement": "aSkips",
                          "sets": 1,
@@ -706,8 +695,8 @@ class sessionData {
                         // Joint Rotations
                         ["movement": "wrist",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "30s",
+                         "time": 30],
                         ["movement": "elbow",
                          "sets": 1,
                          "reps": "15s",
@@ -740,8 +729,8 @@ class sessionData {
                         // Joint Rotations
                         ["movement": "wrist",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "30s",
+                         "time": 30],
                         ["movement": "elbow",
                          "sets": 1,
                          "reps": "15s",
@@ -855,8 +844,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -889,8 +878,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -923,8 +912,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -957,8 +946,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -992,8 +981,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -1026,8 +1015,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -1060,8 +1049,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -1094,8 +1083,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -1133,8 +1122,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -1166,8 +1155,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -1199,8 +1188,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -1232,8 +1221,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Back
                         ["movement": "catCow",
                          "sets": 1,
@@ -1400,8 +1389,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Cardio
                         ["movement": "forefootBounces",
                          "sets": 1,
@@ -1429,8 +1418,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Cardio
                         ["movement": "aSkips",
                          "sets": 1,
@@ -1458,8 +1447,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Cardio
                         ["movement": "gluteKicks",
                          "sets": 1,
@@ -1496,8 +1485,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Cardio
                         ["movement": "forefootBounces",
                          "sets": 1,
@@ -1538,8 +1527,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Cardio
                         ["movement": "aSkips",
                          "sets": 1,
@@ -1580,8 +1569,8 @@ class sessionData {
                          "time": 15],
                         ["movement": "ankles",
                          "sets": 1,
-                         "reps": "15s",
-                         "time": 15],
+                         "reps": "20s",
+                         "time": 20],
                         // Cardio
                         ["movement": "gluteKicks",
                          "sets": 1,

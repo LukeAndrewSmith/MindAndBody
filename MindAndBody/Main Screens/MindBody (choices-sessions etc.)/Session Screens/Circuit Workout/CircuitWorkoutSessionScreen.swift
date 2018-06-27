@@ -31,6 +31,8 @@ class WorkoutOverviewTableViewCell: UITableViewCell {
     // Timer
     @IBOutlet weak var timerButton: UIButton!
     
+    //
+    var imageState = 0 // 0 == left image, 1 == right image
 }
 
 
@@ -1239,7 +1241,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             case UISwipeGestureRecognizerDirection.left:
                 //
                 // Check left image is displayed
-                if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImageDot") || cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlay") {
+                if cell.imageState == 0 {
+                    cell.imageState = 1
                     // Screenshot of current image
                     let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                     snapshot1?.bounds = cell.imageViewCell.bounds
@@ -1275,7 +1278,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             case UISwipeGestureRecognizerDirection.right:
                 //
-                if cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImageDotDeselected") || cell.leftImageIndicator.image == #imageLiteral(resourceName: "ImagePlayDeselected") {
+                if cell.imageState == 1 {
+                    cell.imageState = 0
                     //
                     let snapshot1 = cell.imageViewCell.snapshotView(afterScreenUpdates: false)
                     snapshot1?.bounds = cell.imageViewCell.bounds
