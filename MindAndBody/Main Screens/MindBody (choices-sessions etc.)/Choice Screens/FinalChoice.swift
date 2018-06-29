@@ -510,6 +510,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 cell.imageView?.tag = indexPath.row
                 
                 // Title
+                print(SelectedSession.shared.selectedSession[0])
                 cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0], comment: "")
                 
                 // Breaths
@@ -771,6 +772,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // Get Cell
         let sender = extraTap.view as! UIImageView
         // indexing with sender.tag == indexPath.row
+        // MARK: NINA
         let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[sender.tag]["movement"] as! String
         //
         let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!

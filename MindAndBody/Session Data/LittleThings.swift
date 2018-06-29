@@ -231,17 +231,17 @@ extension sessionData {
                 [
                     "sessionLength",
                     //
-                    "Short: 10-20 min",
-                    "Medium: 20-50 min",
-                    "Long: 40+ min",
+                    "Short: 20-40 min",
+                    "Medium: 40-60 min",
+                    "Long: 60+ min",
                     ],
                 // --------------
                 // 5 | Choice 5 - Length 2 - others
                 [
                     "sessionLength",
                     //
-                    "Short: 10-20 min",
-                    "Normal: 20-50 min",
+                    "Short: 20-30 min",
+                    "Normal: 30-50 min",
                     ],
                 // 6 | Final - To Do
                 [
@@ -270,27 +270,27 @@ extension sessionData {
                 [
                     "practiceLength",
                     //
-                    "Very Short: 10-20 min",
-                    "Short: 10-20 min",
-                    "Medium: 20-40 min",
-                    "Long: 40+ min"
+                    "Very Short: 10-15 min",
+                    "Short: 15-20 min",
+                    "Medium: 20-30 min",
+                    "Long: 30+ min"
                 ],
                 // --------------
                 // 3 | Choice 3 - Length 1 - neutral
                 [
                     "practiceLength",
                     //
-                    "Short: 10-20 min",
-                    "Medium: 20-40 min",
-                    "Long: 40+ min"
+                    "Short: 10-15 min",
+                    "Medium: 15-25 min",
+                    "Long: 25+ min"
                 ],
                 // --------------
                 // 4 | Choice 4 - Length 1 - stimulating
                 [
                     "practiceLength",
                     //
-                    "Short: 10-20 min",
-                    "Normal: 20-40 min"
+                    "Short: 5 min",
+                    "Normal: 10 min"
                 ],
                 // 5 | Final - To Do
                 [

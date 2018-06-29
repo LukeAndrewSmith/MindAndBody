@@ -125,6 +125,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             break
         }
         
+        
+        // Check defaults are the same
+        UserData.shared.checkStoredDefaults()
+
+        
         //
         return true
     }
@@ -159,7 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             settings["AutomaticYoga"]![0] = 0
         }
         UserDefaults.standard.set(settings, forKey: "userSettings")
-        
+        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         
         // Indicate to the schedule the date of last opening
         // This is no persisted, if the app isn't quit, and the last day opened is not today, the schedule selects the correct day
@@ -176,6 +181,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
         ScheduleVariables.shared.resetWeekTracking()
+        
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

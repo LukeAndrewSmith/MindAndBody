@@ -157,7 +157,7 @@ extension sessionData {
                     // Standing
                     ["upwardsSalute", "mountain", "treeL", "treeR", "extendedToeGrabL", "extendedToeGrabR", "eagleL", "eagleR", "chair", "lordOfDanceL", "lordOfDanceR", "warrior1L", "warrior1R", "warrior2L", "warrior2R", "warrior3L", "warrior3R", "halfMoonL", "halfMoonR", "extendedTriangleL", "extendedTriangleR", "extendedSideAngleYL", "extendedSideAngleYR", "revolvedSideAngleL", "revolvedSideAngleR", "revolvedTriangleL", "revolvedTriangleR", "halfForwardBend", "forwardBend", "wideLeggedForwardBend", "intenseSideL", "intenseSideR", "gateL", "gateR", "highLungeL", "highLungeR", "lowLungeYL", "lowLungeYR", "deepSquat"],
                     // Hand/Elbows and Feet/Knees
-                    ["dolphin", "downwardDog", "halfDownwardDogL", "halfDownwardDogR", "dolphinPlank", "fourLimbedStaff", "sidePlankL", "sidePlankR", "cat", "cow", "catCow", "halfMonkeyL", "halfMonkeyR", "childPose", "wildThingL", "wildThingR", "upwardBow", "bridge", "upwardPlank", "extendedPuppy", "upwardDog"],
+                    ["dolphin", "downwardDog", "halfDownwardDogL", "halfDownwardDogR", "dolphinPlank", "fourLimbedStaff", "sidePlankL", "sidePlankR", "cat", "cow", "catCow", "halfMonkeyL", "halfMonkeyR", "childPose", "wildThingL", "wildThingR", "upwardBow", "bridge", "upwardPlank", "extendedPuppy", "upwardsDogY"],
                     // Seated
                     ["crossLeg", "lotus", "fireLogL", "fireLogR", "boat", "cowFaceL", "cowFaceR", "hero", "butterfly", "staffPose", "seatedForwardBend", "vForwardBend", "vSideBendL", "vSideBendR", "halfVForwardBendL", "halfVForwardBendR", "halfVSideBendL", "halfVSideBendR", "marichi1L", "marichi1R", "marichi3L", "marichi3R", "frontSplitL", "frontSplitR", "sideSplit"],
                     // Lying
@@ -476,7 +476,9 @@ extension sessionData {
                     "ankles":
                         [
                             "name": ["ankles"],
-                            "demonstration": ["ankleRotations", "ankleRotations1", "ankleRotations2", "ankleRotations1", "ankleRotations2", "ankleRotations3", "ankleRotations4", "ankleRotations3", "ankleRotations4"],
+                            "demonstration": ["ankleRotations", "ankleRotations1", "ankleRotations2", "ankleRotations1", "ankleRotations2",
+                                "ankleRotations1",
+                                "ankleRotations2",],
                             "explanation": ["anklesEH", "anklesEA", "anklesEF"],
                             "targetArea": ["ankle"]
                     ],
@@ -1874,7 +1876,7 @@ extension sessionData {
                 "ankles":
                     [
                         "name": ["ankles"],
-                        "demonstration": ["ankleRotations", "ankleRotations1", "ankleRotations2", "ankleRotations1", "ankleRotations2", "ankleRotations3", "ankleRotations4", "ankleRotations3", "ankleRotations4"],
+                        "demonstration": ["ankleRotations", "ankleRotations1", "ankleRotations2", "ankleRotations1", "ankleRotations2","ankleRotations1", "ankleRotations2",],
                         "explanation": ["anklesEH", "anklesEA", "anklesEF"],
                         "targetArea": ["ankle"]
                 ],
@@ -2655,11 +2657,11 @@ extension sessionData {
                         "demonstration": ["extendedPuppy", "extendedPuppy1", "extendedPuppy2", "extendedPuppy3", "extendedPuppy4", "extendedPuppy5"],
                         "explanation": ["extendedPuppyEH", "extendedPuppyEA", "extendedPuppyEF"],
                 ],
-                "upwardDog":
+                "upwardsDogY":
                     [
-                        "name": ["upwardDog"],
-                        "demonstration": ["upwardDog", "upwardDog1", "upwardDog2", "upwardDog3", "upwardDog4"],
-                        "explanation": ["upwardDogEH", "upwardDogEA", "upwardDogEF"],
+                        "name": ["upwardsDogY"],
+                        "demonstration": ["upwardsDogY", "upwardsDogY1", "upwardsDogY2", "upwardsDogY3", "upwardsDogY4"],
+                        "explanation": ["upwardsDogYEH", "upwardsDogYEA", "upwardsDogYEF"],
                 ],
                 // Seated
                 "crossLeg":
@@ -2918,7 +2920,7 @@ extension sessionData {
                 ],
                 "forearmStand":
                     [
-                        "name": ["headstand"],
+                        "name": ["forearmStand"],
                         "demonstration": ["forearmStand", "forearmStand1", "forearmStand2", "forearmStand3", "forearmStand4", "forearmStand5", "forearmStand6"],
                         "explanation": ["forearmStandEH", "forearmStandEA", "forearmStandEF"],
                 ]

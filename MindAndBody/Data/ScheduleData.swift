@@ -156,7 +156,7 @@ enum scheduleDataStructures {
                             "image": ["hero"]],
             "flexibilityBackBackward": ["Q": ["profileQFlexibilityBackBackward"],
                             "A": ["profileAFlexibilityBackBackward1", "profileAFlexibilityBackBackward2", "profileAFlexibilityBackBackward3"],
-                            "image": ["upwardDog"]],
+                            "image": ["upwardsDogY"]],
             "flexibilityBackSideways": ["Q": ["profileQFlexibilityBackSideways"],
                             "A": ["profileAFlexibilityBackSideways1", "profileAFlexibilityBackSideways2", "profileAFlexibilityBackSideways3"],
                             "image": ["legDrop"]],

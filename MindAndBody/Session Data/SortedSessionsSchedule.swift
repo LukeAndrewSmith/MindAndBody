@@ -1255,15 +1255,13 @@ extension sessionData {
                     "easy": ["YSES-1",
                              "YSES-2",
                              "YSES-3",
-                             "YSES-4",
-                             "YSES-5",],
+                             "YSES-4",],
                     // Average
                     "average": [// Easy
                                 "YSES-1",
                                 "YSES-2",
                                 "YSES-3",
                                 "YSES-4",
-                                "YSES-5",
                                 // Average
                                 ],
                     // Hard
@@ -1272,7 +1270,6 @@ extension sessionData {
                              "YSES-2",
                              "YSES-3",
                              "YSES-4",
-                             "YSES-5",
                             // Average
                             // Hard
                             ],
@@ -1283,15 +1280,13 @@ extension sessionData {
                     "easy": ["YSEM-1",
                              "YSEM-2",
                              "YSEM-3",
-                             "YSEM-4",
-                             "YSEM-5",],
+                             "YSEM-4",],
                     // Average
                     "average": [// Easy
                                 "YSEM-1",
                                 "YSEM-2",
                                 "YSEM-3",
                                 "YSEM-4",
-                                "YSEM-5",
                                 // Average
                                 ],
                     // Hard
@@ -1300,7 +1295,6 @@ extension sessionData {
                              "YSEM-2",
                              "YSEM-3",
                              "YSEM-4",
-                             "YSEM-5",
                              // Average
                              // Hard
                             ],

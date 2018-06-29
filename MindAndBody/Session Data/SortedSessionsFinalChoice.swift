@@ -1292,7 +1292,6 @@ extension sessionData {
                 "YSES-2",
                 "YSES-3",
                 "YSES-4",
-                "YSES-5",
                 // Average, Short
                 // Hard, Short
                 ],
@@ -1303,7 +1302,6 @@ extension sessionData {
                 "YSEM-2",
                 "YSEM-3",
                 "YSEM-4",
-                "YSEM-5",
                 // Average, Medium
                 // Hard, Medium
                 ],

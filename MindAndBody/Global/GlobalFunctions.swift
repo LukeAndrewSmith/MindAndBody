@@ -14,6 +14,28 @@ import SystemConfiguration
 import UserNotifications
 
 //
+//
+class UserData {
+    static var shared = UserData()
+    private init() {}
+    
+    // Updates if necessary
+    func checkStoredDefaults() {
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        let keys = settings.keys.sorted()
+        for i in 0..<settings.keys.count {
+            let key = keys[i]
+            if settings[key] != Register.defaultSettings[key] {
+                settings[key] = Register.defaultSettings[key]
+            }
+        }
+        UserDefaults.standard.set(settings, forKey: "userSettings")
+        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+    }
+    
+}
+
+//
 // iPhone
 class IPhoneType {
     static var shared = IPhoneType()
@@ -1029,13 +1051,13 @@ extension UIViewController {
                 updateWeekProgress()
                 updateTracking()
                 updateWeekTracking()
+                // Update notifications (incase before evening notification)
+                ReminderNotifications.shared.setNotifications()
             }
             
             // Reload
             ScheduleVariables.shared.shouldReloadChoice = true
         }
-        // Update notifications (incase before evening notification)
-        ReminderNotifications.shared.setNotifications()
     }
     
     func getIndexingVariablesForSession() -> (Int, String, Int) {
