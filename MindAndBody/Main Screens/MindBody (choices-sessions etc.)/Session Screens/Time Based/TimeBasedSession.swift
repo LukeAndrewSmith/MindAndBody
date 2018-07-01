@@ -14,7 +14,7 @@ import AVFoundation
 //
 // Custom TimeBasedTableViewCell ---------------------------------------------------------------------------
 //
-// Stretching TableView Cell
+// Time Based TableView Cell
 class TimeBasedTableViewCell: UITableViewCell {
     // Image View
     @IBOutlet weak var imageViewCell: UIImageView!
@@ -43,6 +43,12 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Variables
     var selectedRow = 0
     
+    // Variable indicating if movement can swipe:
+        // During movement flow, the user is told to 'Prepare'/'Begin' etc.. these instructions are displayed for 1.5s, and afterwards startTimer() etc. are called, the wait is made with a dispatchQueue.main.async and a swipe during this pause confuses
+        // Same issue found in endRound/endSession so used there as well
+    // BETTER FIX:
+        // Use dispatchWorkItems' for the delay so it can be cancelled if swipe/end round button activated
+    var canSwipeMovement = true
     
     // Circuit Elements
     var sessionScreenRoundIndex = 0
@@ -193,7 +199,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             toAdd = "@2x"
         case 3:
             toAdd = "@3x"
-        default: break
+        default:
+            toAdd = "@3x"
         }
         
         //
@@ -321,6 +328,19 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             
             //
+            // Next Swipe
+            let nextSwipe = UISwipeGestureRecognizer()
+            nextSwipe.direction = .up
+            nextSwipe.addTarget(self, action: #selector(nextMovement))
+            cell.addGestureRecognizer(nextSwipe)
+            
+            // Back Swipe
+            let backSwipe = UISwipeGestureRecognizer()
+            backSwipe.direction = .down
+            backSwipe.addTarget(self, action: #selector(previousMovement))
+            cell.addGestureRecognizer(backSwipe)
+            
+            //
             // Movement
             cell.movementLabel.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0] , comment: "")
             //
@@ -329,9 +349,11 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.movementLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
             //
+            cell.timeLabel.alpha = 1
             cell.timeLabel?.adjustsFontSizeToFitWidth = true
             
             //
+            cell.indicatorLabel.alpha = 1
             cell.indicatorLabel.text = " "
             
             //
@@ -467,28 +489,33 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             if isCircuit {
                 //
                 if sessionScreenRoundIndex < nRounds - 1 {
-                    //
-                    removeCircle()
-                    lengthTimer.invalidate()
-                    //
-                    sessionScreenRoundIndex += 1
-                    selectedRow = 0
-                    //
-                    endRound()
+                    if canSwipeMovement {
+                        //
+                        removeCircle()
+                        lengthTimer.invalidate()
+                        //
+                        selectedRow = 0
+                        //
+                        endRound()
+                    }
                     //
                 } else {
+                    if canSwipeMovement {
+                        //
+                        // Schedule Tracking
+                        updateScheduleTracking(fromSchedule: fromSchedule)
+                        //
+                        self.dismiss(animated: true)
+                    }
+                }
+            } else {
+                if canSwipeMovement {
                     //
                     // Schedule Tracking
                     updateScheduleTracking(fromSchedule: fromSchedule)
                     //
                     self.dismiss(animated: true)
                 }
-            } else {
-                //
-                // Schedule Tracking
-                updateScheduleTracking(fromSchedule: fromSchedule)
-                //
-                self.dismiss(animated: true)
             }
             tableView.deselectRow(at: indexPath, animated: true)
         //
@@ -590,7 +617,6 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    
     // Next Button
     @IBAction func nextButtonAction() {
         //
@@ -640,6 +666,74 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
                 })
             }
+            //
+            indicateMovementProgress()
+        }
+    }
+    
+    // MARK: Next/Previous movement skip
+    @IBAction func nextMovement() {
+        if canSwipeMovement {
+            lengthTimer.invalidate()
+            removeCircle()
+            timerValue = 0
+            movementProgress = 3
+            indicateMovementProgress()
+        }
+    }
+    @IBAction func previousMovement() {
+        if selectedRow != 0 && canSwipeMovement {
+            lengthTimer.invalidate()
+            removeCircle()
+            timerValue = 0
+            movementProgress = 1
+            //
+            selectedRow = selectedRow - 1
+            updateProgress()
+            //
+            let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
+            let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
+            let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
+            //
+            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
+            //
+            UIView.animate(withDuration: 0.6, animations: {
+                //
+                // As progress bar is contained in the table view header, scrolling back to row 0 jumps the progress bar off the screen
+                // Silly fix below seems to work
+                if self.selectedRow == 0 {
+                    self.tableView.beginUpdates()
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    self.tableView.endUpdates()
+                } else {
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                }
+                
+                // 1
+                cell.indicatorStack.alpha = 1
+                cell.movementLabel.alpha = 1
+                cell.timeLabel.alpha = 1
+                cell.indicatorLabel.alpha = 1
+                // - 1
+                if self.selectedRow > 0 {
+                    cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! TimeBasedTableViewCell
+                    cell.indicatorStack.alpha = 0
+                    cell.movementLabel.alpha = 0
+                    cell.explanationButton.alpha = 0
+                }
+                // + 1
+                cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! TimeBasedTableViewCell
+                cell.movementLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                cell.indicatorStack.alpha = 0
+                cell.movementLabel.alpha = 1
+                cell.explanationButton.alpha = 0
+                cell.timeLabel.alpha = 0
+                cell.indicatorLabel.alpha = 0
+                //
+            })
+            
             //
             indicateMovementProgress()
         }

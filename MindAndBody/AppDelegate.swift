@@ -125,11 +125,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             break
         }
         
-        
-        // Check defaults are the same
-        UserData.shared.checkStoredDefaults()
-
-        
         //
         return true
     }
@@ -156,16 +151,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         timerCountDown.invalidate()
         timerCountDown2.invalidate()
         
-        //
-        // For rare case where use quits app after turning automatic yoga on without changing breath/transition times -> automatic yoga is on but breath/transition time == -1 => crash
-        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        // Turn automatic yoga off
-        if settings["AutomaticYoga"]![1] == -1 || settings["AutomaticYoga"]![2] == -1 {
-            settings["AutomaticYoga"]![0] = 0
-        }
-        UserDefaults.standard.set(settings, forKey: "userSettings")
-        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-        
         // Indicate to the schedule the date of last opening
         // This is no persisted, if the app isn't quit, and the last day opened is not today, the schedule selects the correct day
         ScheduleVariables.shared.lastDayOpened = Date().setToMidnightUTC()
@@ -181,7 +166,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
         ScheduleVariables.shared.resetWeekTracking()
-        
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

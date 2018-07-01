@@ -34,15 +34,13 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // Arrays
     let sectionArray: [String] =
-        ["mind", "body", "other"]
+        ["mind", "body"]
     //
     let rowArray: [[String]] =
         [
-            ["mindfulness", "meditation", "yoga", "mindMuscle"],
-            ["breathing", "coreActivation", "equipment", "posture"],
-            ["anatomy", "nutrition", "appUsage"],
-            
-            ]
+            ["effort"],
+            ["breathingWorkout", "breathingYoga", "coreActivation"],
+        ]
     
     //
     // Blurs
@@ -107,19 +105,13 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // Number of Sections
     func numberOfSections(in tableView: UITableView) -> Int {
         //
-        return 3
+        return rowArray.count
     }
     
     // Header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         //
-        switch section {
-        case 0: return NSLocalizedString(sectionArray[0], comment: "")
-        case 1: return NSLocalizedString(sectionArray[1], comment: "")
-        case 2: return NSLocalizedString(sectionArray[2], comment: "")
-        default: break
-        }
-        return " "
+        return NSLocalizedString(sectionArray[section], comment: "")
     }
     
     // Header Customization
@@ -150,13 +142,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
-        switch section {
-        case 0: return rowArray[0].count
-        case 1: return rowArray[1].count
-        case 2: return rowArray[2].count
-        default: break
-        }
-        return 0
+        return rowArray[section].count
     }
     
     // Height for row
@@ -167,8 +153,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //
-        //default:
         //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         //
@@ -183,10 +167,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         cell.accessoryType = .disclosureIndicator
         //
         return cell
-        
-        //        }
-        //        //
-        //        return UITableViewCell()
     }
     
     // Did select row
@@ -194,22 +174,12 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         //
         tableView.deselectRow(at: indexPath, animated: true)
         //
-        //        // Selected Topic
-        //        selectedTopic[0] = indexPath.section
-        //        selectedTopic[1] = indexPath.row
+        // Selected Topic
+        selectedTopic[0] = indexPath.section
+        selectedTopic[1] = indexPath.row
         //
-        //
-        //        // Perform Segue
-        //        //
-        //        // Anatomy
-        //        if (indexPath.section, indexPath.row) == (0, 3) {
-        //            performSegue(withIdentifier: "anatomy", sender: nil)
-        //        } else if (indexPath.section, indexPath.row) == (1, 0) {
-        //            performSegue(withIdentifier: "music", sender: nil)
-        //        } else {
-        //            performSegue(withIdentifier: "informationSegue", sender: nil)
-        //        }
-        
+        // Perform Segue
+        performSegue(withIdentifier: "lessonsSegue", sender: nil)
     }
     
     // Mask cells under clear header
@@ -324,101 +294,12 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
             // Pass Info
             if (segue.identifier == "lessonsSegue") {
                 
-                let destinationVC = segue.destination as! LessonsScreen1
-                destinationVC.selectedTopic = selectedTopic
-                
-                //destinationVC.SelectedSession.shared.selectedSession = SelectedSession.shared.selectedSession
-                
-                //destinationVC.guidedTitle = guidedTitleText
-                //destinationVC.keyArray = selectedArray
-                //destinationVC.poses = posesDictionary
+                let destinationVC = segue.destination as! LessonsScreen
+                destinationVC.selectedLesson = selectedTopic
+                destinationVC.lessonsArray = rowArray
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //
-    // Walkthrough ------------------------------------------------------------------------------------
-    //
-    var  viewNumber = 0
-    let walkthroughView = UIView()
-    let label = UILabel()
-    let nextButton = UIButton()
-    let backButton = UIButton()
-    
-    
-    // Walkthrough
-    func walkthroughMindBody() {
-        
-        //
-        let screenSize = UIScreen.main.bounds
-        //
-        walkthroughView.frame.size = CGSize(width: screenSize.width, height: screenSize.height)
-        walkthroughView.backgroundColor = .black
-        walkthroughView.alpha = 0.72
-        walkthroughView.clipsToBounds = true
-        //
-        label.frame = CGRect(x: 0, y: 0, width: view.frame.width * 3/4, height: view.frame.size.height)
-        label.center = view.center
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont(name: "SFUIDisplay-light", size: 22)
-        label.textColor = .white
-        label.alpha = 0.9
-        //
-        nextButton.frame = screenSize
-        nextButton.backgroundColor = .clear
-        nextButton.addTarget(self, action: #selector(nextWalkthroughView(_:)), for: .touchUpInside)
-        
-        //
-        switch viewNumber {
-        //
-        case 0:
-            // Clear Section
-            let path = CGMutablePath()
-            path.addRect(CGRect(x: 0, y: 196, width: view.frame.size.width, height: 44))
-            path.addRect(screenSize)
-            //
-            let maskLayer = CAShapeLayer()
-            maskLayer.backgroundColor = UIColor.black.cgColor
-            maskLayer.path = path
-            maskLayer.fillRule = kCAFillRuleEvenOdd
-            //
-            walkthroughView.layer.mask = maskLayer
-            walkthroughView.clipsToBounds = true
-            
-            //
-            walkthroughView.addSubview(nextButton)
-            self.view.addSubview(walkthroughView)
-            UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-            walkthroughView.bringSubview(toFront: nextButton)
-            
-            //
-            label.text = NSLocalizedString("information1", comment: "")
-            UIApplication.shared.keyWindow?.insertSubview(label, aboveSubview: walkthroughView)
-            label.center.y = view.center.y + 50
-        //
-        default: break
-        }
-    }
-    
-    //
-    @objc func nextWalkthroughView(_ sender: Any) {
-        walkthroughView.removeFromSuperview()
-        label.removeFromSuperview()
-        viewNumber = viewNumber + 1
-        walkthroughMindBody()
-    }
-    //
 }
 
 

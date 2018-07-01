@@ -143,7 +143,8 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             toAdd = "@2x"
         case 3:
             toAdd = "@3x"
-        default: break
+        default:
+            toAdd = "@3x"
         }
         
         //

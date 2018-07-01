@@ -288,18 +288,10 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 switch indexPath.row {
                 case 0:
                     //
-                    if settings["AutomaticYoga"]![1] == -1 {
-                        cell.detailTextLabel?.text = "-"
-                    } else {
-                        cell.detailTextLabel?.text = String(timeArray[settings["AutomaticYoga"]![1]]) + "s"
-                    }
+                    cell.detailTextLabel?.text = String(Double(settings["AutomaticYoga"]![1]) / 10) + "s"
                 case 1:
                     //
-                    if settings["AutomaticYoga"]![2] == -1 {
-                        cell.detailTextLabel?.text = "-"
-                    } else {
-                        cell.detailTextLabel?.text = String(transitionArray[settings["AutomaticYoga"]![2]]) + "s"
-                    }
+                    cell.detailTextLabel?.text = String(settings["AutomaticYoga"]![2]) + "s"
                 case 2:
                     //
                     if settings["AutomaticYoga"]![3] == -1 {
@@ -399,10 +391,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     selectionView.addSubview(pickerView)
                     pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
                     // Select Rows
-                    if settings["AutomaticYoga"]![1] == -1 {
-                        pickerView.selectRow(0, inComponent: 0, animated: true)
-                    } else {
-                        pickerView.selectRow(settings["AutomaticYoga"]![1], inComponent: 0, animated: true)
+                    // Time saved as time as double with 1 dp * 10 as saved as int, so divide by 10 to find the time stored
+                    if let indexOfRow = timeArray.index(of: Double(settings["AutomaticYoga"]![1]) / 10) {
+                        pickerView.selectRow(indexOfRow, inComponent: 0, animated: true)
                     }
                     //
                     selectionView.addSubview(indicatorLabel)
@@ -443,10 +434,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     selectionView.addSubview(pickerView)
                     pickerView.frame = CGRect(x: 0, y: 0, width: selectionView.frame.size.width, height: selectionView.frame.size.height - 49)
                     // Select Rows
-                    if settings["AutomaticYoga"]![1] == -1 {
-                        pickerView.selectRow(0, inComponent: 0, animated: true)
-                    } else {
-                        pickerView.selectRow(settings["AutomaticYoga"]![2], inComponent: 0, animated: true)
+                    // Select Rows
+                    if let indexOfRow = transitionArray.index(of: settings["AutomaticYoga"]![2]) {
+                        pickerView.selectRow(indexOfRow, inComponent: 0, animated: true)
                     }
                     //
                     selectionView.addSubview(indicatorLabel)
@@ -619,26 +609,26 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Breath Length
         case 0:
             //
-            settings["AutomaticYoga"]![1] = pickerView.selectedRow(inComponent: 0)
+            settings["AutomaticYoga"]![1] = Int(timeArray[pickerView.selectedRow(inComponent: 0)] * 10)
             defaults.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             //
             let indexPath = NSIndexPath(row: 0, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
-            cell?.detailTextLabel?.text = String(timeArray[settings["AutomaticYoga"]![1]]) + "s"
+            cell?.detailTextLabel?.text = String(Double(settings["AutomaticYoga"]![1]) / 10) + "s"
             //
         // Transition time
         case 1:
             //
-            settings["AutomaticYoga"]![2] = pickerView.selectedRow(inComponent: 0)
+            settings["AutomaticYoga"]![2] = transitionArray[pickerView.selectedRow(inComponent: 0)]
             defaults.set(settings, forKey: "userSettings")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             //
             let indexPath = NSIndexPath(row: 1, section: 1)
             let cell = tableViewAutomatic.cellForRow(at: indexPath as IndexPath)
-            cell?.detailTextLabel?.text = String(transitionArray[settings["AutomaticYoga"]![2]]) + "s"
+            cell?.detailTextLabel?.text = String(settings["AutomaticYoga"]![2]) + "s"
             //
         // Transition Indicator
         case 2:

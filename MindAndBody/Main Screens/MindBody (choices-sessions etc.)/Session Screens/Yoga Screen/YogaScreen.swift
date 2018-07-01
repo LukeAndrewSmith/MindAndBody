@@ -68,7 +68,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
     //
-    var updateTimer = Timer()
     var soundPlayer: AVAudioPlayer?
     
 
@@ -286,19 +285,17 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             
             //
-            if automaticYogaArray[0] == 0 {
-                // Next Swipe
-                let nextSwipe = UISwipeGestureRecognizer()
-                nextSwipe.direction = .up
-                nextSwipe.addTarget(self, action: #selector(nextButtonAction))
-                cell.addGestureRecognizer(nextSwipe)
-            
-                // Back Swipe
-                let backSwipe = UISwipeGestureRecognizer()
-                backSwipe.direction = .down
-                backSwipe.addTarget(self, action: #selector(backButtonAction))
-                cell.addGestureRecognizer(backSwipe)
-            }
+            // Next Swipe
+            let nextSwipe = UISwipeGestureRecognizer()
+            nextSwipe.direction = .up
+            nextSwipe.addTarget(self, action: #selector(nextButtonAction))
+            cell.addGestureRecognizer(nextSwipe)
+        
+            // Back Swipe
+            let backSwipe = UISwipeGestureRecognizer()
+            backSwipe.direction = .down
+            backSwipe.addTarget(self, action: #selector(backButtonAction))
+            cell.addGestureRecognizer(backSwipe)
             
             // Explanation
             let explanationTap = UITapGestureRecognizer()
@@ -492,13 +489,28 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         //
         if selectedRow < keyArray.count - 1 {
-            //
+            
             selectedRow = selectedRow + 1
-            //
+
+            // If automatic yoga, ensure dispatch cancelled, this is incase user is swiping to skip, then start next movement
             if automaticYogaArray[0] == 1 {
+                // Bell
+                let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
+                //
+                do {
+                    let bell = try AVAudioPlayer(contentsOf: url)
+                    self.soundPlayer = bell
+                    bell.play()
+                } catch {
+                    // couldn't load file :(
+                }
+                // Cancel Dispatch
+                if task != nil {
+                    task?.cancel()
+                }
+                //
                 automaticYoga()
             }
-            
             updateProgress()
             //
             //
@@ -544,8 +556,28 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBAction func backButtonAction() {
         
         if selectedRow != 0 {
-            //
+            
             selectedRow = selectedRow - 1
+            // If automatic yoga, ensure dispatch cancelled, this is incase user is swiping to skip, then start next movement
+            if automaticYogaArray[0] == 1 {
+                // Bell
+                let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
+                //
+                do {
+                    let bell = try AVAudioPlayer(contentsOf: url)
+                    self.soundPlayer = bell
+                    bell.play()
+                } catch {
+                    // couldn't load file :(
+                }
+                // Cancel Dispatch
+                if task != nil {
+                    task?.cancel()
+                }
+                //
+                automaticYoga()
+            }
+            //
             updateProgress()
             //
             let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
@@ -709,7 +741,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         //
-        let poseTime = Double(transitionArray[automaticYogaArray[2]]) + (timeArray[automaticYogaArray[1]] * Double(breathsArray[selectedRow]))
+        let transitionTime = automaticYogaArray[2]
+        let breathLength = Double(automaticYogaArray[1]) / 10
+        let poseTime = Double(transitionTime) + (breathLength * Double(breathsArray[selectedRow]))
         // Play sound and repeat func
         let dispatchTime = DispatchTime.now() + poseTime
         //
@@ -846,7 +880,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // Action
             let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
                 UIAlertAction in
-                //
                 //
                 self.dismiss(animated: true)
             }

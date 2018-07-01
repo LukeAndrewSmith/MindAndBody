@@ -35,7 +35,6 @@ extension TimeBasedScreen {
         //}
         //
         let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: .pi * 1.5, endAngle: (.pi * 2) + (.pi * 1.5), clockwise: true)
-        //let circlePath = UIBezierPath(arcCenter: cell.center, radius: CGFloat(20), startAngle: .pi, endAngle: .pi, clockwise: true)
         timerShapeLayer = CAShapeLayer()
         timerShapeLayer.path = circlePath.cgPath
         timerShapeLayer.fillColor = UIColor.clear.cgColor
@@ -55,14 +54,20 @@ extension TimeBasedScreen {
         default:
             break
         }
-        
+        //
         view.layer.addSublayer(timerShapeLayer)
-        //cell.layer.addSublayer(timerShapeLayer)
     }
     
     //
     func removeCircle() {
-        timerShapeLayer.removeFromSuperlayer()
+        // SAFE!.. NICE UNWRAPPING
+        if let sublayers = view.layer.sublayers {
+            if let shapeLayer = timerShapeLayer {
+                if sublayers.contains(shapeLayer) {
+                    timerShapeLayer.removeFromSuperlayer()
+                }
+            }
+        }
     }
     
     //
@@ -94,13 +99,18 @@ extension TimeBasedScreen {
             // Longer preparation for circuit workout
             switch SelectedSession.shared.selectedSession[1] {
             case "circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
-                animation.duration = Double(10)
+                animation.duration = Double(5)
             default:
                 animation.duration = Double(5)
             }
             // Movement Time
         } else if movementProgress == 2 {
-            animation.duration = Double(lengthArray[selectedRow])
+            if isCircuit {
+                let indexRow = (nMovementsInRound * sessionScreenRoundIndex) + selectedRow
+                animation.duration = Double(lengthArray[indexRow])
+            } else {
+                animation.duration = Double(lengthArray[selectedRow])
+            }
         }
         animation.fillMode = kCAFillModeForwards
         animation.isRemovedOnCompletion = false
@@ -142,7 +152,7 @@ extension TimeBasedScreen {
             // Longer preparation for circuit workout
             switch SelectedSession.shared.selectedSession[1] {
             case "circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
-                timerValue = 10
+                timerValue = 5
             default:
                 timerValue = 5
             }
@@ -178,7 +188,7 @@ extension TimeBasedScreen {
         //
         let key = keyArray[indexPath.row]
         //
-        if timerValue == 0 {
+        if timerValue <= 0 {
             // Movement is not asymmetric (or is aysmmetric but rest or prepare)
             if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! == false || movementProgress != 2 {
                 movementProgress += 1
@@ -229,7 +239,9 @@ extension TimeBasedScreen {
                 cell.indicatorLabel.text = " "
                 finishEarly.isEnabled = false
                 cell.timeLabel.text = NSLocalizedString("rest", comment: "")
+                canSwipeMovement = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                    self.canSwipeMovement = true
                     cell.indicatorLabel.text = NSLocalizedString("rest", comment: "")
                     self.startTimer()
                     self.finishEarly.isEnabled = true
@@ -240,7 +252,9 @@ extension TimeBasedScreen {
             cell.indicatorLabel.text = " "
             finishEarly.isEnabled = false
             cell.timeLabel.text = NSLocalizedString("prepare", comment: "")
+            canSwipeMovement = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                self.canSwipeMovement = true
                 cell.indicatorLabel.text = NSLocalizedString("prepare", comment: "")
                 self.startTimer()
                 self.finishEarly.isEnabled = true
@@ -263,8 +277,10 @@ extension TimeBasedScreen {
             } else {
                 cell.timeLabel.text = NSLocalizedString("beginMovementSide2", comment: "")
             }
-            
+            //
+            canSwipeMovement = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                self.canSwipeMovement = true
                 self.startTimer()
                 self.finishEarly.isEnabled = true
                 self.playBell(bell: 1)
@@ -291,13 +307,16 @@ extension TimeBasedScreen {
                     movementProgress = 0
                 }
                 // Next round
-                if isCircuit && ((selectedRow - 1) % nMovementsInRound) == 0 {
+                    // If circuit AND final movement
+                if isCircuit && ((selectedRow + 1) % nMovementsInRound) == 0 {
                     endRound()
                 // Next movement
                 } else {
                     nextButtonAction()
                 }
             } else {
+                //
+                lengthTimer.invalidate()
                 //
                 // Schedule Tracking
                 updateScheduleTracking(fromSchedule: fromSchedule)
@@ -328,7 +347,6 @@ extension TimeBasedScreen {
         if restTime == 0 {
             //
             endRest()
-            
             //
         } else {
             restTime -= 1
@@ -347,7 +365,6 @@ extension TimeBasedScreen {
             //
             didSetEndTime = true
             //
-            //
             // Rest Timer
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             let restTimes = settings["RestTimes"]!
@@ -363,49 +380,8 @@ extension TimeBasedScreen {
         // Check Greater than 0
         if restTime <= 0 {
             restTime = 0
-            //
-            timerCountDown.invalidate()
-            self.restAlert.dismiss(animated: true)
-            //
-            didSetEndTime = false
-            //
-            // Next Round
-            self.tableView.beginUpdates()
-            self.tableView.endUpdates()
-            //
-            let indexPath0 = NSIndexPath(row: 0, section: 0)
-            self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
-            //
-            let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! TimeBasedTableViewCell
-            //
-            UIView.animate(withDuration: 0.6, animations: {
-                // 1
-                cell.movementLabel.alpha = 1
-                cell.explanationButton.alpha = 1
-                //
-                self.updateProgress()
-                //
-            }, completion: { finished in
-                self.tableView.reloadData()
-            })
-            
-            //
-            // Alert View
-            let titleString = "round" + String(self.sessionScreenRoundIndex + 1)
-            let title = NSLocalizedString(titleString, comment: "")
-            //let message = NSLocalizedString("resetMessage", comment: "")
-            let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-            alert.view.tintColor = Colors.light
-            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
-            self.present(alert, animated: true, completion: {
-                //
-                let delayInSeconds = 0.7
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                    alert.dismiss(animated: true, completion: nil)
-                }
-            })
         }
-        
+
         // Set Timer
         // Set initial time
         restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
@@ -416,14 +392,15 @@ extension TimeBasedScreen {
     
     //
     func endRest() {
+        // Increase round indicator
+        sessionScreenRoundIndex += 1
         //
         Vibrate.shared.vibratePhone()
-        
         //
         // Dismiss Alert
         self.restAlert.dismiss(animated: true)
         timerCountDown.invalidate()
-    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
         
         //
         // Next Round
@@ -433,7 +410,7 @@ extension TimeBasedScreen {
         self.selectedRow = 0
         //
         let indexPath0 = NSIndexPath(row: 0, section: 0)
-        self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: false)
         //
         let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! TimeBasedTableViewCell
         //
@@ -470,6 +447,7 @@ extension TimeBasedScreen {
     //
     // End Round func
     func endRound() {
+        
         // Rest Alert
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         let restTimes = settings["RestTimes"]!

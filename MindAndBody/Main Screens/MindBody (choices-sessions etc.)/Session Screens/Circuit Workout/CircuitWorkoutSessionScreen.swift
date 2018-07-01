@@ -165,7 +165,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             toAdd = "@2x"
         case 3:
             toAdd = "@3x"
-        default: break
+        default:
+            toAdd = "@3x"
         }
         
         //

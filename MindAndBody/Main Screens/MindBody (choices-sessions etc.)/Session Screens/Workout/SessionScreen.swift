@@ -179,7 +179,8 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             toAdd = "@2x"
         case 3:
             toAdd = "@3x"
-        default: break
+        default:
+            toAdd = "@3x"
         }
         
         //

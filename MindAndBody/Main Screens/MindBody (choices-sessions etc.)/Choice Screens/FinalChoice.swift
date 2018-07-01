@@ -773,7 +773,15 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let sender = extraTap.view as! UIImageView
         // indexing with sender.tag == indexPath.row
         // MARK: NINA
-        let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[sender.tag]["movement"] as! String
+        print(SelectedSession.shared.selectedSession[0])
+        var key = String()
+        // Movement == pose in yoga
+        if SelectedSession.shared.selectedSession[0] == "yoga" {
+            key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[sender.tag]["pose"] as! String
+        // Movement = movement
+        } else {
+            key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[sender.tag]["movement"] as! String
+        }
         //
         let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
         //
@@ -820,7 +828,6 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 performSegue(withIdentifier: "sessionSegueCircuit", sender: self)
             // Bodyweight Circuit Session
             case "circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
-                
                 // Timed Session off
                 if timedSession == 0 {
                     performSegue(withIdentifier: "sessionSegueCircuit", sender: self)
@@ -828,7 +835,16 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 } else {
                     performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
                 }
-            // Normal Session
+            // Bodyweight classic (has option for timed sessions)
+            case "classicBodyweightFull", "classicBodyweightUpper", "classicBodyweightLower":
+                // Timed Session off
+                if timedSession == 0 {
+                    performSegue(withIdentifier: "sessionSegue", sender: self)
+                    // Timed Session On
+                } else {
+                    performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
+                }
+            // Normal Session (classic gym, not timed sessions)
             default:
                 performSegue(withIdentifier: "sessionSegue", sender: self)
             }

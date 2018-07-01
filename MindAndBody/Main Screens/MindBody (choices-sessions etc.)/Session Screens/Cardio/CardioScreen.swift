@@ -382,12 +382,22 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
             }
             // Dismiss
+            cancelTimers()
             self.dismiss(animated: true)
         //
         default: break
         }
     }
     
+    
+    func cancelTimers() {
+        if timerCountDown.isValid {
+            timerCountDown.invalidate()
+        }
+        if timerCountDown2.isValid {
+            timerCountDown2.invalidate()
+        }
+    }
     
     
     
@@ -595,9 +605,9 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             let dispatchTime = DispatchTime.now() + delayInSeconds
             DispatchQueue.main.asyncAfter(deadline:  dispatchTime, execute: task1!)
             //
-        } else
-            if timerValue2 == 0 {
-                self.dismiss(animated: true)
+        } else if timerValue2 == 0 {
+            cancelTimers()
+            self.dismiss(animated: true)
         }
         
         //
@@ -637,6 +647,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             timerValue2 -= 1
         } else {
             timerCountDown2.invalidate()
+            cancelTimers()
             self.dismiss(animated: true)
         }
         
@@ -918,6 +929,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                     animationAdded = false
                 }
             } else {
+                cancelTimers()
                 self.dismiss(animated: true)
             }
             //
@@ -1084,6 +1096,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             
             //
+            self.cancelTimers()
             self.dismiss(animated: true)
         }
         let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {

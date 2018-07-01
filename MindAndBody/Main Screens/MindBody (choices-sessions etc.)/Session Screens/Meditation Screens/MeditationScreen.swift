@@ -371,27 +371,40 @@ class MeditationScreen: UIViewController {
             
         // Meditation Guided
         } else if selectedPreset == -1 && BellPlayer.shared.didSetEndTime == false {
+            // Get the bell
+            let url = Bundle.main.url(forResource: bellChosen, withExtension: "caf")!
             //
             endTime = startTime + Double(durationOfPractice)
             BellPlayer.shared.didSetEndTime = true
             //
+            //
             // Bells
             // Perform delays
-            var bellTime = 0
+            var bellTime = bellFrequency
+            // Start Bell
+            // Play with delay
+            do {
+                let audioPlayer = try AVAudioPlayer(contentsOf: url)
+                audioPlayerArray.append(audioPlayer)
+                audioPlayer.play(atTime: audioPlayer.deviceCurrentTime)
+            } catch {
+                // couldn't load file :(
+            }
             //var bellTime = startTime
-            while bellTime < durationOfPractice {
-                // Bells
-                // Delay bell
-                let delayInSeconds = bellTime
-                bellTime += bellFrequency
-                // Play with delay
-                let url = Bundle.main.url(forResource: bellChosen, withExtension: "caf")!
-                do {
-                    let audioPlayer = try AVAudioPlayer(contentsOf: url)
-                    audioPlayerArray.append(audioPlayer)
-                    audioPlayer.play(atTime: audioPlayer.deviceCurrentTime + Double(delayInSeconds))
-                } catch {
-                    // couldn't load file :(
+            if bellFrequency != 0 {
+                while bellTime < durationOfPractice {
+                    // Bells
+                    // Delay bell
+                    let delayInSeconds = bellTime
+                    bellTime += bellFrequency
+                    // Play with delay
+                    do {
+                        let audioPlayer = try AVAudioPlayer(contentsOf: url)
+                        audioPlayerArray.append(audioPlayer)
+                        audioPlayer.play(atTime: audioPlayer.deviceCurrentTime + Double(delayInSeconds))
+                    } catch {
+                        // couldn't load file :(
+                    }
                 }
             }
             
@@ -400,8 +413,6 @@ class MeditationScreen: UIViewController {
             // Requires different audio player to continue playing after view is dismissed
             //
             // Delay bell
-            
-            let url = Bundle.main.url(forResource: bellChosen, withExtension: "caf")!
             //
             do {
                 endingBellPlayer = try AVAudioPlayer(contentsOf: url)

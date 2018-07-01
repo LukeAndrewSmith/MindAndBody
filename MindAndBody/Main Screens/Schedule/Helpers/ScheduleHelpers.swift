@@ -674,9 +674,9 @@ extension ScheduleScreen {
                                 ScheduleVariables.shared.selectedChoiceSession[2] = "short"
                                 ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
                             case 2:
-                                ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
+                                ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
                                 ScheduleVariables.shared.selectedChoiceSession[2] = "medium"
-                                ScheduleVariables.shared.selectedChoiceStretching[2] = "normal"
+                                ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
                             case 3:
                                 ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
                                 ScheduleVariables.shared.selectedChoiceSession[2] = "long"
@@ -771,7 +771,7 @@ extension ScheduleScreen {
                         ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
                         ScheduleVariables.shared.selectedChoiceSession[2] = "short"
                     case 3:
-                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
+                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
                         ScheduleVariables.shared.selectedChoiceSession[2] = "medium"
                     case 4:
                         ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
@@ -868,9 +868,9 @@ extension ScheduleScreen {
                             ScheduleVariables.shared.selectedChoiceSession[2] = "short"
                             ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
                         case 2:
-                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
+                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
                             ScheduleVariables.shared.selectedChoiceSession[2] = "medium"
-                            ScheduleVariables.shared.selectedChoiceStretching[2] = "normal"
+                            ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
                         case 3:
                             ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
                             ScheduleVariables.shared.selectedChoiceSession[2] = "long"
