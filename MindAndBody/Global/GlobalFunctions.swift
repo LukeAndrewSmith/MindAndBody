@@ -459,10 +459,11 @@ class SubscriptionsCheck {
     // Check subscriptions, called from AppDelegate when first opening, to see if need to present subscription screen
     func checkSubscription() {
         // If internet, check subscription with apple
-        if Reachability.isConnectedToNetwork() {
-            InAppManager.shared.checkSubscriptionAvailability()
-        // If no internet, fall back to userDefaults
-        } else {
+        // NOTE TESTING, FOR TESTERS ONLY CHECK THE USERDEFAUKT
+//        if Reachability.isConnectedToNetwork() {
+//            InAppManager.shared.checkSubscriptionAvailability()
+//        // If no internet, fall back to userDefaults
+//        } else {
             Loading.shared.shouldPresentLoading = false
             isValid = UserDefaults.standard.object(forKey: "userHasValidSubscription") as! Bool
             if isValid {
@@ -476,7 +477,7 @@ class SubscriptionsCheck {
                     NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
                 }
             }
-        }
+//        }
     }
 }
 
@@ -1104,7 +1105,7 @@ extension UIViewController {
         // Current Date
         let currentDate = Date().setToMidnightUTC()
         // Get Mondays date
-        let currentMondayDate = Date().firstMondayInCurrentWeek
+        let currentMondayDate = Date().firstMondayInCurrentWeekCurrentTimeZone
         //
         // Week Goal
         let weekProgress: Double = trackingProgressDictionary["WeekProgress"] as! Double
@@ -1471,7 +1472,7 @@ extension Date {
     var firstMondayInCurrentWeek: Date {
         var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
-        
+
         var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
         components.timeZone = TimeZone(abbreviation: "UTC")
         // Making a Date from week components gives the first day of the week, hence Monday
@@ -1487,8 +1488,9 @@ extension Date {
 
         var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
         components.timeZone = TimeZone.current
-        // Making a Date from week components gives the first day of the week, hence Monday
-        let mondaysDate = calendar.date(from: components)?.setToMidnightUTC()
+        // Making a Date from week components in current time zone gives the first day of the week, considered sunday, hence +1 = Monday
+        let sundaysDate = calendar.date(from: components)?.setToMidnightUTC()
+        let mondaysDate = calendar.date(byAdding: .day, value: 1, to: sundaysDate!)
         return mondaysDate!
     }
     

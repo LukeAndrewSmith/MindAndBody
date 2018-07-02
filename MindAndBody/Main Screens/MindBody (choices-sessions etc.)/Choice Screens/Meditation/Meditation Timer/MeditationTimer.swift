@@ -27,7 +27,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     let backgroundSoundsArray: [String] =
         ["TestBackground"]
     let backgroundSoundsImages: [UIImage] =
-        [#imageLiteral(resourceName: "Tibetan Chimes")]
+        [#imageLiteral(resourceName: "water.png")]
     
     
     // Duration Array
@@ -1404,7 +1404,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    // Background Sound
+    // MARK: Background Sound
     @IBAction func backgroundSoundAction(_ sender: Any) {
         //
         okButton.isEnabled = true
@@ -1437,7 +1437,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             // .last = ending bell, [0] = bell
             if meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
                 let indexPath = IndexPath(row: meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int, section: 0)
-                tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
+//                tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             //
             ActionSheet.shared.setupActionSheet()

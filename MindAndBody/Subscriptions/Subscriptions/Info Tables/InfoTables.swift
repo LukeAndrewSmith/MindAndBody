@@ -155,8 +155,8 @@ class InfoTables {
 }
 
 //
-// MARK: Info Table 1 - Mind & Body
-class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
+// MARK: Info Table 0 - Mind & Body
+class InfoTable0: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var infoTable: UITableView!
     
@@ -281,7 +281,7 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
             explanationLabel.numberOfLines = 0
             explanationLabel.lineBreakMode = .byWordWrapping
             explanationLabel.frame = CGRect(x: 16, y: 8, width: infoTable.bounds.width - 32, height: explanationRowHeight)
-            explanationLabel.text = NSLocalizedString("infoTable1", comment: "")
+            explanationLabel.text = NSLocalizedString("infoTable0", comment: "")
             explanationLabel.sizeToFit()
             explanationLabel.frame = CGRect(x: 16, y: 8, width: infoTable.bounds.width - 32, height: explanationLabel.bounds.height)
             cell.addSubview(explanationLabel)
@@ -290,6 +290,92 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
         default:
             let cell = UITableViewCell()
             cell.selectionStyle = .none
+            cell.backgroundColor = Colors.light
+            cell.selectionStyle = .none
+            //
+            return cell
+        }
+    }
+}
+
+//
+// MARK: Info Table 1 - Idea
+class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var infoTable: UITableView!
+    
+    //
+    var row0Height = CGFloat()
+    var explanationRowHeight = CGFloat()
+    //
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //
+        view.backgroundColor = .clear
+        InfoTables.shared.setupTable(tableView: infoTable)
+        infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
+        infoTable.layer.borderWidth = 1
+        infoTable.layer.borderWidth = 1
+        infoTable.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
+        //
+        row0Height = infoTable.bounds.height * (4/9)
+        explanationRowHeight = infoTable.bounds.height - 8 - 44 - row0Height
+    }
+    
+    // Number of sections
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    // Header Height
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    // Rows
+    // Number of rows per section
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0: return row0Height
+        // Spcing cell
+        case 1: return 8
+        case 2: return 44
+        case 3: return explanationRowHeight
+        default: return 0
+        }
+    }
+    
+    // Row cell customization
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            let cell = UITableViewCell()
+            cell.backgroundColor = Colors.dark
+            cell.selectionStyle = .none
+            cell.clipsToBounds = true
+            // Image
+            let titleImage = UIImageView()
+            titleImage.frame.size = CGSize(width: infoTable.bounds.height / 3, height: infoTable.bounds.height * (1/3))
+            titleImage.image = #imageLiteral(resourceName: "Loading").withRenderingMode(.alwaysTemplate)
+            titleImage.tintColor = Colors.light
+            titleImage.alpha = 0.72
+            titleImage.contentMode = .scaleAspectFit
+            titleImage.center = CGPoint(x: infoTable.bounds.width / 2, y: row0Height * (1/2))
+            cell.addSubview(titleImage)
+            return cell
+        case 2:
+            let cell = UITableViewCell()
+            InfoTables.shared.setupTitleCell(cell: cell, title: NSLocalizedString("ideaAim", comment: ""), infoWidth: infoTable.bounds.width)
+            return cell
+        case 3:
+            let cell = UITableViewCell()
+            InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable1", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+            return cell
+        default:
+            let cell = UITableViewCell()
             cell.backgroundColor = Colors.light
             cell.selectionStyle = .none
             //

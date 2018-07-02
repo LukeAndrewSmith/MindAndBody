@@ -147,6 +147,13 @@ class MeditationScreen: UIViewController {
         default: break
         }
         
+        //
+        // Element Positions
+        // Iphone 5
+        if IPhoneType.shared.iPhoneType() == 0 {
+           timerLabel.font = UIFont(name: "SFUIDisplay-thin", size: 50)
+        }
+        
         // CheckMark
         checkMark.tintColor = Colors.red
         
