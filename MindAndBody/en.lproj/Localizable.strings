@@ -3003,12 +3003,12 @@
 "swipeLeft" = "Swipe left to find out more...";
 
 // Idea of App
-"ideaAim" = "Idea/Aim";
-"infoTable1" = "The idea of Mind & Body is to provide a simple, sensible and effective approach to a healthy mind and body. It aims to do this through a weekly routine (schedule), and avoids potential monotony by giving choice as to how to achieve a goal on any given day (see next section). The app provides sessions for a number of activities;\n\nMind:\n• Meditation\n• Yoga\n\nBody:\n• Workouts (Gym/Bodyweight)\n• Cardio (HIIT/Bodyweight workouts)\n• Warmup/Stretching sessions for workout/cardio\n• Stretching for flexibility\n• Yoga";
+"ideaAim" = "Idea";
+"infoTable1" = "The idea of Mind & Body is to provide a simple, sensible and effective approach to a healthy mind and body. It aims to do this through a weekly routine (schedule), and avoids potential monotony by giving choice as to how to achieve a goal on any given day (see next section). The app provides sessions for a number of activities:\n\nMind:\n• Meditation\n• Yoga\n\nBody:\n• Workouts (Gym/Bodyweight)\n• Cardio (HIIT/Bodyweight workouts)\n• Warmup/Stretching sessions for workout/cardio\n• Stretching for flexibility\n• Yoga";
 
 //"Aim:\nDo your mind & body justice\nHow:\nProvide you the aid needed, leave you the responsibility required\nMethods:\nPlans, schedules, tracking, customisation";
 // Schedule
-"infoTable2" = "Get into a routine. The app can help you create weekly schedules in line with your goals, abilities and time (or you can create custom ones). The schedule can be split into a plan for each day, or a plan for the whole week (i.e have a number of sessions to be achieved whenever possible). The schedule presents several manners in which to work towards a goal therefore allowing you to do so in the best way depending on your feeling (e.g Workout\n→ Gym/Bodyweight\n→ Classic/Circuit\n→ Full/Upper/Lower Body\n→ Short/Medium/Long). This allows you to enjoy the many benefits of a routine, whilst avoiding the potential monotony.\n";
+"infoTable2" = "Get into a routine. The app can help you create weekly schedules in line with your goals, abilities and time (or you can create custom ones). The schedule can be split into a plan for each day, or a plan for the whole week (i.e have a number of sessions to be achieved whenever possible). The schedule presents several manners in which to work towards a goal, therefore allowing you to do so in the best way depending on your feeling (e.g Workout\n→ Gym/Bodyweight\n→ Classic/Circuit\n→ Full/Upper/Lower Body\n→ Short/Medium/Long). This allows you to enjoy the many benefits of a routine, whilst avoiding the potential monotony.\n";
 
 //
 // Fitness
@@ -3379,7 +3379,7 @@
     "profileAFlexibilityNeck2" = "A little (but I tend to avoid rotating it)";
     "profileAFlexibilityNeck3" = "Yes";
 // Balance
-"profileQFlexibilityBalance" = "Can you stand stand on one leg for 10s?"; // Balance
+"profileQFlexibilityBalance" = "Can you stand on one leg for 10s?"; // Balance
     "profileAFlexibilityBalance1" = "No";
     "profileAFlexibilityBalance2" = "Yes";
     "profileAFlexibilityBalance3" = "Yes, with my eyes closed";
@@ -3513,7 +3513,7 @@
         "schedule6" = "Tracking:\nWhat you've done as a percentage of what you planned is presented in graphs here.";
         "schedule7" = "Lessons:\nUseful lessons regarding mind & body are found here. They are presented in the schedule at revelant times, and can help you to get the most out of the app.";
         "schedule8" = "Settings:\nPersonalise the app, changing the background image, choosing units etc...";
-        "schedule9" = "What next?\nHow about creating a schedule (by pressing this button). All you need to do then is to follow it, check tracking every now and again and maybe change some settings (like eventually turning automatic yoga/timed sessions on).";
+        "schedule9" = "What next?\nHow about creating a schedule (by pressing the highlighted button). All you need to do then is to follow it, check tracking every now and again and maybe change some settings (like eventually turning automatic yoga/timed sessions on).";
         //
         "longPressNoteWalkthrough" = "Note:\nYou can press and hold a session for 2s to mark it as completed. This is so that if you complete your session without using the app, you can still easily track it.";
 

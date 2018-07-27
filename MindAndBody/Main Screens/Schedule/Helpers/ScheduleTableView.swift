@@ -172,6 +172,19 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
                 }
                 cell.addSubview(dayLabel)
+                
+                //
+                // Checkmark box
+                let checkBox = UIButton()
+                checkBox.backgroundColor = .clear
+                checkBox.layer.borderWidth = 2
+                checkBox.layer.borderColor = Colors.green.cgColor
+                checkBox.layer.cornerRadius = 2
+                checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
+                checkBox.center.y = dayLabel.center.y
+//                checkBox.imageView?.image = .
+                cell.addSubview(checkBox)
+                
                 //
                 // CheckMark if completed
                 if ScheduleVariables.shared.shouldReloadChoice {

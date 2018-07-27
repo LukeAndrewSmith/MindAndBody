@@ -35,7 +35,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             "sessionChoosing",
             "view",
             "equipment",
-            "schedule",
+            "editSchedule",
         ]
     
     //
