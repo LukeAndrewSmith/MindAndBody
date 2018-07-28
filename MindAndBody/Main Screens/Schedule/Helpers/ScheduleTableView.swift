@@ -183,7 +183,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
                 checkBox.center.y = dayLabel.center.y
 //                checkBox.imageView?.image = .
-                cell.addSubview(checkBox)
+//                cell.addSubview(checkBox)
                 
                 //
                 // CheckMark if completed

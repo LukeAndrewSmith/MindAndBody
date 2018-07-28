@@ -18,6 +18,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     static var shared = ScheduleScreen()
 
+    @IBOutlet weak var testSegment: UISegmentedControl!
     
     // MARK: - Variables/Outlets
     // Schedule Animation Helpers
@@ -199,6 +200,19 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         let markAsCompletedGesture = UILongPressGestureRecognizer()
         markAsCompletedGesture.addTarget(self, action: #selector(markAsCompleted))
         scheduleTable.addGestureRecognizer(markAsCompletedGesture)
+        
+        
+        // MARK: TEST SEGMENT
+        testSegment.backgroundColor = Colors.dark
+        testSegment.tintColor = Colors.light
+        testSegment.layer.borderColor = Colors.dark.cgColor
+        
+//        testSegment.layer.cornerRadius = testSegment.bounds.height / 2
+        testSegment.layer.borderWidth = 0
+        testSegment.layer.masksToBounds = true
+        testSegment.clipsToBounds = true
+        testSegment.setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "SFUIDisplay-thin", size: 23), NSAttributedStringKey.foregroundColor: Colors.light], for: .normal)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -226,7 +240,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         //
         topView.frame = CGRect(x: 0, y: scheduleTable.frame.minY - scheduleTable.bounds.height, width: scheduleTable.bounds.width, height: scheduleTable.bounds.height)
         //
-        scheduleTable.addSubview(topView)
+//        scheduleTable.addSubview(topView)
     }
     
     // Begin walkthrough

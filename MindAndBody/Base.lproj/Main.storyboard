@@ -90,6 +90,9 @@
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hot-DZ-E0c">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="NiO-aP-sMb"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Schedule"/>
                                     <segment title="Tracking"/>
@@ -141,6 +144,7 @@
                         <outlet property="pageStack" destination="Uk6-xI-8tD" id="zin-Me-CB9"/>
                         <outlet property="scheduleTable" destination="oPE-Kh-Caj" id="UFV-AU-XOl"/>
                         <outlet property="scheduleTableBottom" destination="hvm-Og-oex" id="dJj-3U-R2h"/>
+                        <outlet property="testSegment" destination="hot-DZ-E0c" id="IFJ-Cf-hno"/>
                         <segue destination="bRc-pd-jNj" kind="show" identifier="scheduleSegueOverview" id="SOr-B2-NYZ"/>
                         <segue destination="eVk-Z7-PzP" kind="show" identifier="scheduleMeditationSegueGuided" id="aak-rT-dwz"/>
                         <segue destination="6Gr-JQ-KAl" kind="show" identifier="scheduleMeditationSegueTimer" id="y3k-i5-esE"/>
