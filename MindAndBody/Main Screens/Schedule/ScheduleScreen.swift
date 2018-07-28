@@ -17,8 +17,6 @@ import UserNotifications
 class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     static var shared = ScheduleScreen()
-
-    @IBOutlet weak var testSegment: UISegmentedControl!
     
     // MARK: - Variables/Outlets
     // Schedule Animation Helpers

@@ -71,10 +71,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Uk6-xI-8tD">
-                                <rect key="frame" x="0.0" y="578.5" width="375" height="24.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="24.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24.5" id="Kl1-8H-nBg"/>
+                                </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oPE-Kh-Caj">
-                                <rect key="frame" x="0.0" y="28" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="24.5" width="375" height="578.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="oDd-SZ-o1F" id="bPB-Wj-v9f"/>
@@ -82,40 +85,26 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bzt-Zq-NOh">
-                                <rect key="frame" x="0.0" y="601" width="54" height="1"/>
+                                <rect key="frame" x="0.0" y="22.5" width="54" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="gHH-Q7-xi3"/>
                                 </constraints>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hot-DZ-E0c">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="NiO-aP-sMb"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Schedule"/>
-                                    <segment title="Tracking"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Uk6-xI-8tD" secondAttribute="trailing" id="3Se-J5-JNI"/>
                             <constraint firstItem="bzt-Zq-NOh" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="6iG-BJ-b9Y"/>
-                            <constraint firstAttribute="trailing" secondItem="hot-DZ-E0c" secondAttribute="trailing" id="7px-FR-9ST"/>
                             <constraint firstItem="oPE-Kh-Caj" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="8eT-Ou-Jam"/>
                             <constraint firstItem="bzt-Zq-NOh" firstAttribute="width" secondItem="Uk6-xI-8tD" secondAttribute="width" multiplier="1/7" id="Chq-l8-sFW"/>
-                            <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="Uk6-xI-8tD" secondAttribute="bottom" id="HRZ-Wb-TZa"/>
-                            <constraint firstItem="hot-DZ-E0c" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="KjK-Zh-yD9"/>
+                            <constraint firstItem="oPE-Kh-Caj" firstAttribute="top" secondItem="Uk6-xI-8tD" secondAttribute="bottom" id="L2t-Wt-1ER"/>
                             <constraint firstItem="Uk6-xI-8tD" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="L8f-sx-BzF"/>
-                            <constraint firstItem="hot-DZ-E0c" firstAttribute="top" secondItem="G33-j5-FFf" secondAttribute="bottom" id="Qjh-aH-vAf"/>
-                            <constraint firstItem="oPE-Kh-Caj" firstAttribute="top" secondItem="hot-DZ-E0c" secondAttribute="bottom" id="RoG-Hu-XaX"/>
                             <constraint firstAttribute="trailing" secondItem="oPE-Kh-Caj" secondAttribute="trailing" id="RwX-n2-cJz"/>
-                            <constraint firstItem="Uk6-xI-8tD" firstAttribute="top" secondItem="oPE-Kh-Caj" secondAttribute="bottom" id="SWH-PO-ab2"/>
+                            <constraint firstItem="Uk6-xI-8tD" firstAttribute="top" secondItem="G33-j5-FFf" secondAttribute="bottom" id="TuB-z1-wnz"/>
                             <constraint firstItem="bzt-Zq-NOh" firstAttribute="bottom" secondItem="Uk6-xI-8tD" secondAttribute="bottom" constant="-1" id="dzf-qh-ECe"/>
-                            <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="oPE-Kh-Caj" secondAttribute="bottom" constant="24.5" id="hvm-Og-oex"/>
+                            <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="oPE-Kh-Caj" secondAttribute="bottom" id="hvm-Og-oex"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="jEJ-Yf-SbQ" appends="YES" id="o34-Op-fVb"/>
@@ -144,7 +133,6 @@
                         <outlet property="pageStack" destination="Uk6-xI-8tD" id="zin-Me-CB9"/>
                         <outlet property="scheduleTable" destination="oPE-Kh-Caj" id="UFV-AU-XOl"/>
                         <outlet property="scheduleTableBottom" destination="hvm-Og-oex" id="dJj-3U-R2h"/>
-                        <outlet property="testSegment" destination="hot-DZ-E0c" id="IFJ-Cf-hno"/>
                         <segue destination="bRc-pd-jNj" kind="show" identifier="scheduleSegueOverview" id="SOr-B2-NYZ"/>
                         <segue destination="eVk-Z7-PzP" kind="show" identifier="scheduleMeditationSegueGuided" id="aak-rT-dwz"/>
                         <segue destination="6Gr-JQ-KAl" kind="show" identifier="scheduleMeditationSegueTimer" id="y3k-i5-esE"/>
