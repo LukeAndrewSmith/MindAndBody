@@ -111,9 +111,9 @@
 "trackingScreenTimeScaleOption" = "Time Scale:";
 //
 "1week" = "Current Week";
-"1month" = "Current Month";
-"3months" = "Last 3 Months";
-"6months" = "Last 6 Months";
+"1month" = "1 Month";
+"3months" = "3 Months";
+"6months" = "6 Months";
 "1year" = "Current Year";
 "all" = "All";
 

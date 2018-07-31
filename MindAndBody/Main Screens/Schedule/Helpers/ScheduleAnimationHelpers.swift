@@ -152,20 +152,20 @@ extension ScheduleScreen {
         let screenFrame = UIScreen.main.bounds
         //
         maskView1.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
-        maskView2.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
+//        maskView2.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
         //
-        maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: (screenFrame.height - TopBarHeights.combinedHeight - pageStack.bounds.height) / 4)
-        maskView2.frame = CGRect(x: 0, y: scheduleTable.frame.maxY, width: screenFrame.width, height: pageStack.bounds.height)
+        maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: headerHeight + pageStack.bounds.height)
+//        maskView2.frame = CGRect(x: 0, y: scheduleTable.frame.maxY, width: screenFrame.width, height: pageStack.bounds.height)
         //
         maskView1.backgroundColor = .black
         maskView1.alpha = alpha
-        maskView2.backgroundColor = .black
-        maskView2.alpha = alpha
+//        maskView2.backgroundColor = .black
+//        maskView2.alpha = alpha
         //
         maskView3.isUserInteractionEnabled = false
         maskView3.backgroundColor = .black
         maskView3.alpha = alpha
-        maskView3.frame = CGRect(x: 0, y: maskView1.frame.maxY, width: view.frame.size.width, height: maskView2.frame.minY - maskView1.frame.maxY)
+        maskView3.frame = CGRect(x: 0, y: maskView1.frame.maxY, width: view.frame.size.width, height: view.bounds.height - maskView1.bounds.height)
         // Clear Section
         let path = CGMutablePath()
 //        path.addRect(CGRect(x: 1, y: 1, width: view.frame.size.width - 2, height: maskView3.bounds.height - 2))
@@ -254,16 +254,16 @@ extension ScheduleScreen {
         view.isUserInteractionEnabled = false
         //
         let screenFrame = UIScreen.main.bounds
-        let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
         //
         // Table gets hidden but need to keep header so add screenshot
-        let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
+        let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: headerHeight)
         let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
+        snapShotHeader.center.y += pageStack.bounds.height
         view.insertSubview(snapShotHeader, belowSubview: maskView1)
         //
         // Slide across table
-        let snapShotFrame = CGRect(x: 0, y: tableHeaderHeight, width: view.bounds.width, height: view.bounds.height - tableHeaderHeight - 24.5)
-        let snapShotY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
+        let snapShotFrame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight - pageStack.bounds.height)
+        let snapShotY = ControlBarHeights.combinedHeight + headerHeight + ((view.bounds.height - headerHeight - pageStack.bounds.height) / 2) + pageStack.bounds.height
         // Snapshots
         let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
         snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
@@ -299,16 +299,16 @@ extension ScheduleScreen {
         view.isUserInteractionEnabled = false
         //
         let screenFrame = UIScreen.main.bounds
-        let tableHeaderHeight = (screenFrame.height - TopBarHeights.combinedHeight - 24.5) / 4
         //
         // Table gets hidden but need to keep header so add screenshot
-        let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
+        let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: headerHeight)
         let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
+        snapShotHeader.center.y += pageStack.bounds.height
         view.insertSubview(snapShotHeader, belowSubview: maskView1)
         //
         // Slide table
-        let snapShotFrame = CGRect(x: 0, y: tableHeaderHeight, width: view.bounds.width, height: view.bounds.height - tableHeaderHeight - 24.5)
-        let snapShotY = TopBarHeights.combinedHeight + tableHeaderHeight + ((view.bounds.height - tableHeaderHeight - 24.5) / 2)
+        let snapShotFrame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight - pageStack.bounds.height)
+        let snapShotY = ControlBarHeights.combinedHeight + headerHeight + ((view.bounds.height - headerHeight - pageStack.bounds.height) / 2) + pageStack.bounds.height
         // Snapshots
         let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
         snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
@@ -342,7 +342,7 @@ extension ScheduleScreen {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == scheduleTable {
             for cell in scheduleTable.visibleCells {
-                let hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y + (view.bounds.height - 24.5) / 4
+                let hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y + (view.bounds.height - pageStack.bounds.height) / 4
                 if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                     maskCell(cell: cell, margin: Float(hiddenFrameHeight))
                 }

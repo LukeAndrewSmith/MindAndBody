@@ -28,13 +28,17 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     let maskViewBackToBeginningButton = UIButton()
     
     // TableView
+    let headerLabel = UILabel()
+    var headerHeight: CGFloat {
+        return (UIScreen.main.bounds.height - ControlBarHeights.combinedHeight - ControlBarHeights.tabBarHeight - pageStack.bounds.height) / 4
+    }
     var daySwipeLeft = UISwipeGestureRecognizer()
     var daySwipeRight = UISwipeGestureRecognizer()
     let separator = UIView()
     var separatorY: CGFloat {
-        return ((UIScreen.main.bounds.height - CGFloat(TopBarHeights.combinedHeight) - 24.5) / 4) - 1
+        // (Size of schedule screen / 4) + height of pageStack
+        return pageStack.bounds.height + headerHeight
     }
-    let headerLabel = UILabel()
     //
     var okAction = UIAlertAction()
  
@@ -51,9 +55,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     //
     @IBOutlet weak var dayIndicator: UIView!
     @IBOutlet weak var dayIndicatorLeading: NSLayoutConstraint!
-    
-    // Slide menu interactor
-    let interactor = Interactor()
     
     // Variables
     // Days array
@@ -119,6 +120,10 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Add here incase image changed in settings
+        addBackgroundImage(withBlur: true, fullScreen: false)
+        
         // Reload to be sure
         setScheduleStyle()
         //
@@ -142,6 +147,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // MARK: viewDidAppear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         // If coming back to schedule from having done a session, mark session as completed and, if the entire group has been completed, animate from final choice back to main schedule screen
             // At end of session, updateScheduleTracking() gets called, this updates the final choice (session) tracking, then indicates the scheduleShouldReload
             // This function that means the function does something, it reloads the relevant rows and animated back to the home schedule screen if necessary
@@ -158,7 +164,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)
         NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
         
@@ -198,19 +204,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         let markAsCompletedGesture = UILongPressGestureRecognizer()
         markAsCompletedGesture.addTarget(self, action: #selector(markAsCompleted))
         scheduleTable.addGestureRecognizer(markAsCompletedGesture)
-        
-        
-        // MARK: TEST SEGMENT
-        testSegment.backgroundColor = Colors.dark
-        testSegment.tintColor = Colors.light
-        testSegment.layer.borderColor = Colors.dark.cgColor
-        
-//        testSegment.layer.cornerRadius = testSegment.bounds.height / 2
-        testSegment.layer.borderWidth = 0
-        testSegment.layer.masksToBounds = true
-        testSegment.clipsToBounds = true
-        testSegment.setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "SFUIDisplay-thin", size: 23), NSAttributedStringKey.foregroundColor: Colors.light], for: .normal)
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -345,18 +338,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     //
     // MARK: Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        if segue.identifier == "openMenu" {
-            // Remove Mask View
-            if let destinationViewController = segue.destination as? SlideMenuView {
-                destinationViewController.transitioningDelegate = self
-            }
-            // Handle changing colour of status bar if button pressed
-            if MenuVariables.shared.menuInteractionType == 0 {
-                UIApplication.shared.statusBarStyle = .default
-            }
-        //
-        } else if segue.identifier == "scheduleSegueOverview" {
+       //
+        if segue.identifier == "scheduleSegueOverview" {
             let destinationVC = segue.destination as? FinalChoice
             // Only say from schedule if app chooses sessions for the user
             destinationVC?.comingFromSchedule = true
@@ -397,37 +380,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         } else if segue.identifier == "SubscriptionsSegue" {
             goingToSubscriptionsScreen = true
         }
-    }
-    
-    // Slide menu
-    @IBAction func slideMenuButtonAction(_ sender: Any) {
-        MenuVariables.shared.menuInteractionType = 0
-    }
-    
-}
-
-//
-// Slide Menu Extension
-extension ScheduleScreen: UIViewControllerTransitioningDelegate {
-    
-    // Interactive pan
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-    //
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-    
-    // Button
-    // Present
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PresentMenuAnimator()
-    }
-    
-    // Dismiss
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DismissMenuAnimator()
     }
 }
 

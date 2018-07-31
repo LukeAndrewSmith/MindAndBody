@@ -22,9 +22,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //
     @IBOutlet weak var tableView: UITableView!
     
-    
     //
-    let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
     var backgroundIndex = Int()
     let backgroundBlur = UIVisualEffectView()
     
@@ -48,9 +46,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let blur2 = UIVisualEffectView()
     let blur3 = UIVisualEffectView()
     
-    // Slide menu
-    var slideMenuInteraction = UIScreenEdgePanGestureRecognizer()
-    
     //
     // View did load ------------------------------------------------------------------------------------
     //
@@ -58,32 +53,30 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Slide Menu
-        self.tableView.addGestureRecognizer(slideMenuInteraction)
-        slideMenuInteraction.addTarget(self, action: #selector(edgePanGesture(sender:)))
-        slideMenuInteraction.edges = .left
-        
+            
         //
+        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         backgroundIndex = settings["BackgroundImage"]![0]
         
         //
         tableView.backgroundColor = .clear
         tableView.backgroundView = UIView()
         
-        
-        //
-        // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: false)
-        
-       
-        
         //
         //  Navigation Bar
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: Fonts.navigationBar]
         navigationBar.title = NSLocalizedString("lessons", comment: "")
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.navigationController?.navigationBar.tintColor = Colors.light
+    }
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add here incase image changed in settings
+        addBackgroundImage(withBlur: true, fullScreen: false)
     }
     
     //
@@ -246,88 +239,21 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     //
-    // Slide Menu ---------------------------------------------------------------------------------------------------------------------
-    //
-    
-    // Elements
-    //
-    let interactor = Interactor()
-    // Edge pan
-    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
-        
-        MenuVariables.shared.menuInteractionType = 1
-
-        let translation = sender.translation(in: view)
-        
-        let progress = MenuHelper.calculateProgress(translation, viewBounds: view.bounds, direction: .Right)
-        
-        MenuHelper.mapGestureStateToInteractor(
-            sender.state,
-            progress: progress,
-            interactor: interactor){
-                self.performSegue(withIdentifier: "openMenu", sender: nil)
-        }
-    }
-    // Button
-    @IBAction func slideMenuButton(_ sender: Any) {
-        MenuVariables.shared.menuInteractionType = 0
-    }
-    
-    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        if segue.identifier == "openMenu" {
-            //
-            if let destinationViewController = segue.destination as? SlideMenuView {
-                destinationViewController.transitioningDelegate = self
-            }
-            // Handle changing colour of status bar if button pressed
-            if MenuVariables.shared.menuInteractionType == 0 {
-                UIApplication.shared.statusBarStyle = .default
-            }
-        } else {
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            navigationItem.backBarButtonItem = backItem
+        // Remove back button text
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+        
+        // Pass Info
+        if (segue.identifier == "lessonsSegue") {
             
-            // Pass Info
-            if (segue.identifier == "lessonsSegue") {
-                
-                let destinationVC = segue.destination as! LessonsScreen
-                destinationVC.selectedLesson = selectedTopic
-                destinationVC.lessonsArray = rowArray
-            }
+            let destinationVC = segue.destination as! LessonsScreen
+            destinationVC.selectedLesson = selectedTopic
+            destinationVC.lessonsArray = rowArray
         }
     }
 }
-
-
-//
-// Slide Menu Extension
-extension Lessons: UIViewControllerTransitioningDelegate {
-    
-    // Interactive pan
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-    //
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-    
-    // Button
-    // Present
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PresentMenuAnimator()
-    }
-    
-    // Dismiss
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DismissMenuAnimator()
-    }
-}
-
 
 class LessonsNavigation: UINavigationController {
     

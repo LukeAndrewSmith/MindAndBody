@@ -461,9 +461,9 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         case 0:
             var toMinus = CGFloat()
             if IPhoneType.shared.iPhoneType() == 2 {
-                toMinus = TopBarHeights.statusBarHeight + 2 + TopBarHeights.homeIndicatorHeight
+                toMinus = ControlBarHeights.statusBarHeight + 2 + ControlBarHeights.homeIndicatorHeight
             } else {
-                toMinus = TopBarHeights.statusBarHeight + 2
+                toMinus = ControlBarHeights.statusBarHeight + 2
             }
             switch indexPath.row {
             case selectedRow - 1, selectedRow:

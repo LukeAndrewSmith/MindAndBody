@@ -140,15 +140,15 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         // Initial Element Positions
         presetsTop.constant = 0
         if IPhoneType.shared.iPhoneType() == 2 {
-            presetsBottom.constant = -TopBarHeights.homeIndicatorHeight
+            presetsBottom.constant = -ControlBarHeights.homeIndicatorHeight
         } else {
             presetsBottom.constant = 0
         }
         //
-        tableViewConstraintTop.constant = view.frame.size.height + TopBarHeights.homeIndicatorHeight
-        tableViewConstraintBottom.constant = -49 - TopBarHeights.homeIndicatorHeight
+        tableViewConstraintTop.constant = view.frame.size.height + ControlBarHeights.homeIndicatorHeight
+        tableViewConstraintBottom.constant = -49 - ControlBarHeights.homeIndicatorHeight
         //
-        beginButtonConstraint.constant = -49 - TopBarHeights.homeIndicatorHeight
+        beginButtonConstraint.constant = -49 - ControlBarHeights.homeIndicatorHeight
         
         // Width of action buttons
         // If Workout, option for circuit workout (numberofrounds)
@@ -261,15 +261,15 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         if didLayout == false {
             presetsTop.constant = 0
             if IPhoneType.shared.iPhoneType() == 2 {
-                presetsBottom.constant = -TopBarHeights.homeIndicatorHeight
+                presetsBottom.constant = -ControlBarHeights.homeIndicatorHeight
             } else {
                 presetsBottom.constant = 0
             }
             //
-            tableViewConstraintTop.constant = view.frame.size.height + TopBarHeights.homeIndicatorHeight
-            tableViewConstraintBottom.constant = -49 - TopBarHeights.homeIndicatorHeight
+            tableViewConstraintTop.constant = view.frame.size.height + ControlBarHeights.homeIndicatorHeight
+            tableViewConstraintBottom.constant = -49 - ControlBarHeights.homeIndicatorHeight
             //
-            beginButtonConstraint.constant = -49 - TopBarHeights.homeIndicatorHeight
+            beginButtonConstraint.constant = -49 - ControlBarHeights.homeIndicatorHeight
             //
             didLayout = true
         } else {
@@ -958,7 +958,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     //
                     // Element Positions
                     if IPhoneType.shared.iPhoneType() == 2 {
-                        self.presetsBottom.constant = self.view.frame.size.height - 73.5 - TopBarHeights.homeIndicatorHeight
+                        self.presetsBottom.constant = self.view.frame.size.height - 73.5 - ControlBarHeights.homeIndicatorHeight
                     } else {
                         self.presetsBottom.constant = self.view.frame.size.height - 73.5
                     }
@@ -1020,7 +1020,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                     //
                     // Element Positions
                     if IPhoneType.shared.iPhoneType() == 2 {
-                        self.presetsBottom.constant = self.view.frame.size.height - 73.5 - TopBarHeights.homeIndicatorHeight
+                        self.presetsBottom.constant = self.view.frame.size.height - 73.5 - ControlBarHeights.homeIndicatorHeight
                     } else {
                         self.presetsBottom.constant = self.view.frame.size.height - 73.5
                     }
@@ -1357,14 +1357,14 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
                 //
                 // Initial Element Positions
                 if IPhoneType.shared.iPhoneType() == 2 {
-                    presetsBottom.constant = -TopBarHeights.homeIndicatorHeight
+                    presetsBottom.constant = -ControlBarHeights.homeIndicatorHeight
                 } else {
                     presetsBottom.constant = 0
                 }
                 
-                self.tableViewConstraintTop.constant = self.view.frame.size.height + TopBarHeights.homeIndicatorHeight
-                self.tableViewConstraintBottom.constant = -49 - TopBarHeights.homeIndicatorHeight
-                self.beginButtonConstraint.constant = -49 - TopBarHeights.homeIndicatorHeight
+                self.tableViewConstraintTop.constant = self.view.frame.size.height + ControlBarHeights.homeIndicatorHeight
+                self.tableViewConstraintBottom.constant = -49 - ControlBarHeights.homeIndicatorHeight
+                self.beginButtonConstraint.constant = -49 - ControlBarHeights.homeIndicatorHeight
 
             //
             case customTableView:

@@ -368,9 +368,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case 0:
                 var toMinus = CGFloat()
                 if IPhoneType.shared.iPhoneType() == 2 {
-                    toMinus = TopBarHeights.statusBarHeight + 2 + TopBarHeights.homeIndicatorHeight
+                    toMinus = ControlBarHeights.statusBarHeight + 2 + ControlBarHeights.homeIndicatorHeight
                 } else {
-                    toMinus = TopBarHeights.statusBarHeight + 2
+                    toMinus = ControlBarHeights.statusBarHeight + 2
                 }
                 switch indexPath.row {
                 case selectedRow - 1, selectedRow:
@@ -927,11 +927,11 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @objc func walkthroughSession() {
         //
         var toMinus = CGFloat()
-        var toAdd = TopBarHeights.statusBarHeight + 2
+        var toAdd = ControlBarHeights.statusBarHeight + 2
         if IPhoneType.shared.iPhoneType() == 2 {
-            toMinus = TopBarHeights.statusBarHeight + 2 + TopBarHeights.homeIndicatorHeight
+            toMinus = ControlBarHeights.statusBarHeight + 2 + ControlBarHeights.homeIndicatorHeight
         } else {
-            toMinus = TopBarHeights.statusBarHeight + 2
+            toMinus = ControlBarHeights.statusBarHeight + 2
         }
         let cellHeight = (UIScreen.main.bounds.height - toMinus) * 7/8
         
@@ -954,7 +954,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
             walkthroughLabel.sizeToFit()
-            walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + TopBarHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + ControlBarHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             
             // Colour
             walkthroughLabel.textColor = Colors.dark
@@ -1083,7 +1083,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 upSwipe.backgroundColor = Colors.light
                 upSwipe.layer.cornerRadius = 25
                 upSwipe.clipsToBounds = true
-                upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
+                upSwipe.center.y = ControlBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
                 upSwipe.center.x = self.view.bounds.width / 2
                 UIApplication.shared.keyWindow?.insertSubview(upSwipe, aboveSubview: self.walkthroughView)
                 // Perform swipe action
@@ -1093,7 +1093,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 // Animate swipe demonstration
                 UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     //
-                    upSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
+                    upSwipe.center.y = ControlBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
                     //
                 }, completion: { finished in
                     upSwipe.removeFromSuperview()
@@ -1104,7 +1104,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         downSwipe.backgroundColor = Colors.light
                         downSwipe.layer.cornerRadius = 25
                         downSwipe.clipsToBounds = true
-                        downSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
+                        downSwipe.center.y = ControlBarHeights.statusBarHeight + (cellHeight * (1/8)) + 2
                         downSwipe.center.x = self.view.bounds.width / 2
                         UIApplication.shared.keyWindow?.insertSubview(downSwipe, aboveSubview: self.walkthroughView)
                         // Perform swipe action
@@ -1114,7 +1114,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         // Animate swipe demonstration
                         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                             //
-                            downSwipe.center.y = TopBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
+                            downSwipe.center.y = ControlBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
                             //
                         }, completion: { finished in
                             self.nextButton.isEnabled = true
@@ -1125,7 +1125,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                             //
                             // PROGRESS
                             self.highlightSize = CGSize(width: self.view.bounds.width, height: 8)
-                            self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: TopBarHeights.statusBarHeight + 1)
+                            self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: ControlBarHeights.statusBarHeight + 1)
                             self.highlightCornerRadius = 0
                             //
                             self.labelFrame = 0
@@ -1148,7 +1148,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case 6:
             //
             highlightSize = CGSize(width: 36, height: 36)
-            highlightCenter = CGPoint(x: 27, y: TopBarHeights.statusBarHeight + 2 + 5 + 22)
+            highlightCenter = CGPoint(x: 27, y: ControlBarHeights.statusBarHeight + 2 + 5 + 22)
             highlightCornerRadius = 0
             //
             labelFrame = 0

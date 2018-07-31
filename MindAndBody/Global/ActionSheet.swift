@@ -43,7 +43,7 @@ class ActionSheet {
         var height = CGFloat()
         // If smaller than iphone x, use first height, if not use smaller height
         if UIScreen.main.nativeBounds.height < 2436 {
-            height = UIScreen.main.bounds.height - CGFloat(TopBarHeights.combinedHeight) - 49 - 88
+            height = UIScreen.main.bounds.height - CGFloat(ControlBarHeights.combinedHeight) - 49 - 88
         } else {
             height = UIScreen.main.bounds.height / 2
         }
@@ -94,7 +94,7 @@ class ActionSheet {
             //
             // iPhone X
             if UIScreen.main.nativeBounds.height == 2436 {
-                self.actionSheet.frame = CGRect(x: self.xPos, y: UIScreen.main.bounds.height - self.actionSheet.bounds.height - 10 - TopBarHeights.homeIndicatorHeight, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
+                self.actionSheet.frame = CGRect(x: self.xPos, y: UIScreen.main.bounds.height - self.actionSheet.bounds.height - 10 - ControlBarHeights.homeIndicatorHeight, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
             } else {
                 self.actionSheet.frame = CGRect(x: self.xPos, y: UIScreen.main.bounds.height - self.actionSheet.bounds.height - 10, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
             }

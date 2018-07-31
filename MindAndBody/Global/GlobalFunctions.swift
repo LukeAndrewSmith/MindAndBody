@@ -646,7 +646,7 @@ class CustomWalkthrough {
             walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
             walkthroughLabel.sizeToFit()
             walkthroughLabel.frame = CGRect(x: 13, y: viewController.view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: viewController.view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
-            walkthroughLabel.center.y -= TopBarHeights.combinedHeight
+            walkthroughLabel.center.y -= ControlBarHeights.combinedHeight
             
             // Colour
             walkthroughLabel.textColor = Colors.light
@@ -656,7 +656,7 @@ class CustomWalkthrough {
             // Highlight
             walkthroughHighlight.frame = customButton.frame
             walkthroughHighlight.center = customButton.center
-            walkthroughHighlight.center.y += TopBarHeights.combinedHeight
+            walkthroughHighlight.center.y += ControlBarHeights.combinedHeight
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //
@@ -702,40 +702,76 @@ extension UIViewController {
     //
     // Add background Image
     func addBackgroundImage(withBlur: Bool, fullScreen: Bool) {
-        //
-        // Background Image View
-        let backgroundImage = UIImageView()
-        backgroundImage.contentMode = .scaleAspectFill
-        backgroundImage.clipsToBounds = true
-        // Frame
-        if fullScreen {
-            backgroundImage.frame = UIScreen.main.bounds
-        } else {
-            backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - (TopBarHeights.statusBarHeight + CGFloat(TopBarHeights.navigationBarHeight)))
-        }
-        //
-        // Background Image
+        
+        // Get correct background image to compare to presented one (if one is presented)
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        
         let backgroundIndex = settings["BackgroundImage"]![0]
-        // Background Image/Colour
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-        } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-            backgroundImage.image = nil
-            backgroundImage.backgroundColor = Colors.light
+        var currentBackgroundIndex = -1
+        var backgroundImageSubview = UIImageView()
+        
+        // Check if view contains background image
+        var containsBackgroundImage = false
+        for subview in view.subviews {
+            if subview is UIImageView {
+                if subview.tag >= BackgroundImages.backgroundImageArray.count {
+                    print(subview.tag)
+                    print(BackgroundImages.backgroundImageArray.count)
+                    backgroundImageSubview = subview as! UIImageView
+                    containsBackgroundImage = true
+                    currentBackgroundIndex = subview.tag % BackgroundImages.backgroundImageArray.count
+                }
+            }
         }
-        view.insertSubview(backgroundImage, at: 0)
-        //
-        // BackgroundBlur/Vibrancpy
-        if withBlur {
-            let backgroundBlur = UIVisualEffectView()
-            let backgroundBlurE = UIBlurEffect(style: .dark)
-            backgroundBlur.effect = backgroundBlurE
-            backgroundBlur.isUserInteractionEnabled = false
+    
+        
+        // If view doesn't already contain background image then add the image
+        if !containsBackgroundImage {
             //
-            backgroundBlur.frame = backgroundImage.bounds
+            // Background Image View
+            let backgroundImage = UIImageView()
+            // this number enables us to find the index of the background image, we can check if the number is greater than or equal to the count of the image array (implies the image is set, default tag might be 0 so need a number greater than 0), then mod the count to find the image index
+            backgroundImage.tag = BackgroundImages.backgroundImageArray.count + backgroundIndex
+            backgroundImage.contentMode = .scaleAspectFill
+            backgroundImage.clipsToBounds = true
+            // Frame
+            if fullScreen {
+                backgroundImage.frame = UIScreen.main.bounds
+            } else {
+                backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - (ControlBarHeights.statusBarHeight + CGFloat(ControlBarHeights.navigationBarHeight)))
+            }
             //
-            view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
+            // Background Image/Colour
+            if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+                backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+            } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
+                backgroundImage.image = nil
+                backgroundImage.backgroundColor = Colors.light
+            }
+            view.insertSubview(backgroundImage, at: 0)
+            //
+            // BackgroundBlur/Vibrancy
+            if withBlur {
+                let backgroundBlur = UIVisualEffectView()
+                let backgroundBlurE = UIBlurEffect(style: .dark)
+                backgroundBlur.effect = backgroundBlurE
+                backgroundBlur.isUserInteractionEnabled = false
+                //
+                backgroundBlur.frame = backgroundImage.bounds
+                //
+                view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
+            }
+        
+        // If wrong background presented, then update the background
+        } else if backgroundIndex != currentBackgroundIndex && currentBackgroundIndex != -1 {
+            backgroundImageSubview.tag = BackgroundImages.backgroundImageArray.count + backgroundIndex
+            // Background Image/Colour
+            if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+                backgroundImageSubview.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
+            } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
+                backgroundImageSubview.image = nil
+                backgroundImageSubview.backgroundColor = Colors.light
+            }
         }
     }
     
@@ -1318,12 +1354,12 @@ extension UIViewController {
         case 0:
             // Iphone X
             if IPhoneType.shared.iPhoneType() == 2 {
-                walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13 - TopBarHeights.homeIndicatorHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+                walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13 - ControlBarHeights.homeIndicatorHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             } else {
                 walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
             }
         case 1:
-            walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + TopBarHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + ControlBarHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
         default:
             break
         }

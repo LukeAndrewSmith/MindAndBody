@@ -82,7 +82,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
         case scheduleTable:
             // day
-            return (UIScreen.main.bounds.height - (TopBarHeights.statusBarHeight + CGFloat(TopBarHeights.navigationBarHeight)) - 24.5) / 4
+            return headerHeight
         case scheduleChoiceTable:
             return 47
         default:
@@ -177,13 +177,18 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 // Checkmark box
                 let checkBox = UIButton()
                 checkBox.backgroundColor = .clear
-                checkBox.layer.borderWidth = 2
-                checkBox.layer.borderColor = Colors.green.cgColor
-                checkBox.layer.cornerRadius = 2
+                checkBox.layer.borderWidth = 1
+                checkBox.layer.borderColor = Colors.light.cgColor
+                checkBox.layer.cornerRadius = 4
                 checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
                 checkBox.center.y = dayLabel.center.y
-//                checkBox.imageView?.image = .
-//                cell.addSubview(checkBox)
+                if indexPath.row == 0 {
+                    checkBox.setImage(#imageLiteral(resourceName: "CheckMark"), for: .normal)
+                    checkBox.imageView?.tintColor = Colors.light
+                    checkBox.backgroundColor = Colors.green
+                    checkBox.layer.borderColor = Colors.green.cgColor
+                }
+                cell.addSubview(checkBox)
                 
                 //
                 // CheckMark if completed

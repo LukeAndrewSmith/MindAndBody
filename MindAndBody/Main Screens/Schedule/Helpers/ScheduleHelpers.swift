@@ -1137,6 +1137,7 @@ extension ScheduleScreen {
                 // Animate
                 // Snapshot before update
                 let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+                snapShot1?.center.y += pageStack.bounds.height
                 view.insertSubview(snapShot1!, aboveSubview: scheduleTable)
                 // Move table and reload
                 scheduleTable.center.x = view.center.x + self.view.frame.size.width
@@ -1168,6 +1169,7 @@ extension ScheduleScreen {
                 //
                 // Snapshot before update
                 let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+                snapShot1?.center.y += pageStack.bounds.height
                 view.insertSubview(snapShot1!, aboveSubview: scheduleTable)
                 // Move table and reload
                 scheduleTable.center.x = view.center.x - self.view.frame.size.width
@@ -1211,7 +1213,9 @@ extension ScheduleScreen {
             // Animate
             scheduleTable.reloadData()
             let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+            snapShot1?.center.y += pageStack.bounds.height
             let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
+            snapShot2?.center.y += pageStack.bounds.height
             //
             view.addSubview(snapShot1!)
             view.bringSubview(toFront: snapShot1!)
@@ -1252,7 +1256,9 @@ extension ScheduleScreen {
             // Animate
             scheduleTable.reloadData()
             let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+            snapShot1?.center.y += pageStack.bounds.height
             let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
+            snapShot2?.center.y += pageStack.bounds.height
             //
             view.addSubview(snapShot1!)
             view.bringSubview(toFront: snapShot1!)
@@ -1277,28 +1283,6 @@ extension ScheduleScreen {
             
         }
     }
-
-    //
-    // MARK: Slide menu swipe
-    // Edge pan
-    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
-        
-        MenuVariables.shared.menuInteractionType = 1
-
-        let translation = sender.translation(in: view)
-        
-        let progress = MenuHelper.calculateProgress(translation, viewBounds: view.bounds, direction: .Right)
-        
-        MenuHelper.mapGestureStateToInteractor(
-            sender.state,
-            progress: progress,
-            interactor: interactor){
-                self.performSegue(withIdentifier: "openMenu", sender: nil)
-        }
-    }
-    // Button
-    
-    
     
     //
     // MARK: selectDay
@@ -1591,8 +1575,6 @@ extension ScheduleScreen {
         }
         let totalRowHeights = CGFloat(nRows * rowHeight)
         //
-        let headerHeight = (view.bounds.height - 24.5) / 4
-        //
         // Enabled
         if headerHeight + totalRowHeights <= scheduleTable.bounds.maxY {
             scheduleTable.isScrollEnabled = false
@@ -1845,22 +1827,14 @@ extension ScheduleScreen {
         separator.backgroundColor = Colors.light.withAlphaComponent(0.5)
         view.insertSubview(separator, aboveSubview: scheduleTable)
         
-        let testView = UIView()
-        testView.backgroundColor = UIColor.white
-        testView.frame.size = CGSize(width: 50, height: 50)
-        testView.center = view.center
-//        view.insertSubview(testView, aboveSubview: scheduleTable)
-        
-        //
-        addBackgroundImage(withBlur: true, fullScreen: false)
-        
         //
         // Navigation Bar
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: Fonts.navigationBar]
+
         // Navigation Title
-        navigationBar.title = NSLocalizedString("Mind & Body", comment: "")
+        navigationBar.title = NSLocalizedString("schedule", comment: "")
         
         //
         // TableView
@@ -1874,20 +1848,24 @@ extension ScheduleScreen {
     // Layout views
     func layoutViews() {
         //
+        // Remove navigation separator
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        //
         // Present as days or as week
         // days
         if scheduleStyle == 0 {
-            scheduleTableBottom.constant = 24.5
+            pageStack.frame.size.height = 27
             pageStack.isUserInteractionEnabled = true
         // week
         } else if scheduleStyle == 1 {
-            scheduleTableBottom.constant = 0
+            pageStack.frame.size.height = 0
             pageStack.isUserInteractionEnabled = false
         }
         
         // Day indicator
         if scheduleStyle == 0 {
-            dayIndicator.alpha = 0.97
+            dayIndicator.alpha = 1
         } else {
             dayIndicator.alpha = 0
         }
@@ -1921,6 +1899,11 @@ extension ScheduleScreen {
             }
             pageStack.isUserInteractionEnabled = true
             //
+            // Add background color to stack view
+            let backgroundStackView = UIView(frame: pageStack.bounds)
+            backgroundStackView.backgroundColor = Colors.dark
+            backgroundStackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            pageStack.insertSubview(backgroundStackView, at: 0)
         }
         //
         // Day Swipes (also used for swipe back in choices)
@@ -1956,7 +1939,7 @@ extension ScheduleScreen {
         
         //
         dayIndicator.frame.size = CGSize(width: view.bounds.width / 7, height: 1)
-        dayIndicator.backgroundColor = Colors.light.withAlphaComponent(0.5)
+        dayIndicator.backgroundColor = Colors.light
         if scheduleStyle == 0 {
             view.addSubview(dayIndicator)
             view.bringSubview(toFront: dayIndicator)

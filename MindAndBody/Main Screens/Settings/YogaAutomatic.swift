@@ -757,7 +757,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Highlight
             let section = tableViewAutomatic.rect(forSection: 1)
             walkthroughHighlight.frame = CGRect(x: 8, y: section.minY + 47, width: view.bounds.width - 16, height: 44)
-            walkthroughHighlight.center.y += TopBarHeights.combinedHeight
+            walkthroughHighlight.center.y += ControlBarHeights.combinedHeight
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 4
             
             //
@@ -783,7 +783,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let section = tableViewAutomatic.rect(forSection: 1)
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
             highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 44 + 22)
-            highlightCenter?.y += TopBarHeights.combinedHeight
+            highlightCenter?.y += ControlBarHeights.combinedHeight
             //
             highlightCornerRadius = 2
             //
@@ -804,7 +804,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let section = tableViewAutomatic.rect(forSection: 1)
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
             highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 44 + 44 + 22)
-            highlightCenter?.y += TopBarHeights.combinedHeight
+            highlightCenter?.y += ControlBarHeights.combinedHeight
             //
             highlightCornerRadius = 2
             //

@@ -48,11 +48,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     var homeScreenPicker = UIPickerView()
     // Use actionSheetView and okButton from above for home screen action sheet
     
-    
-    // Slide menu
-    var slideMenuInteraction = UIScreenEdgePanGestureRecognizer()
-    
-    
     // View Will Appear
     override func viewWillAppear(_ animated: Bool) {
         //
@@ -74,26 +69,19 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Slide Menu
-        self.tableView.addGestureRecognizer(slideMenuInteraction)
-        slideMenuInteraction.addTarget(self, action: #selector(edgePanGesture(sender:)))
-        slideMenuInteraction.edges = .left
-        
         //
         // Walkthrough
         let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-        if walkthroughs["Settings"] == false && MenuVariables.shared.secondLoad {
+        if walkthroughs["Settings"] == false {
             walkthroughSettings()
-            MenuVariables.shared.secondLoad = false
         }
-        MenuVariables.shared.secondLoad = true
         
         // Navigation Bar
         //
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.navigationController?.navigationBar.tintColor = Colors.light
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: Fonts.navigationBar]
         // Navigation Title
         navigationBar.title = NSLocalizedString("settings", comment: "")
         // View
@@ -792,54 +780,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         //
     }
     
-    
-    
-    //
-    // MARK: Slide Menu ---------------------------------------------------------------------------------------------------------------------
-    //
-    // Elements
-    //
-    let interactor = Interactor()
-    // Edge pan
-    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
-        
-        MenuVariables.shared.menuInteractionType = 1
-
-        let translation = sender.translation(in: view)
-        
-        let progress = MenuHelper.calculateProgress(translation, viewBounds: view.bounds, direction: .Right)
-        
-        MenuHelper.mapGestureStateToInteractor(
-            sender.state,
-            progress: progress,
-            interactor: interactor){
-                self.performSegue(withIdentifier: "openMenu", sender: nil)
-        }
-    }
-    // Button
-    @IBAction func slideMenuButton(_ sender: Any) {
-        MenuVariables.shared.menuInteractionType = 0
-    }
-    
-    
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        if segue.identifier == "openMenu" {
-            //
-            if let destinationViewController = segue.destination as? SlideMenuView {
-                destinationViewController.transitioningDelegate = self
-            }
-            // Handle changing colour of status bar if button pressed
-            if MenuVariables.shared.menuInteractionType == 0 {
-                UIApplication.shared.statusBarStyle = .default
-            }
-        } else {
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            navigationItem.backBarButtonItem = backItem
-        }
+        // Remove back button text
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
     }
     
     
@@ -900,7 +846,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 
             let section = tableView.rect(forSection: 0)
             walkthroughHighlight.frame = CGRect(x: 8, y: section.minY + 47 + 44, width: view.bounds.width - 16, height: 44)
-            walkthroughHighlight.center.y += TopBarHeights.combinedHeight
+            walkthroughHighlight.center.y += ControlBarHeights.combinedHeight
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 4
 
             //
@@ -926,7 +872,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             let section = tableView.rect(forSection: 1)
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
             highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 22)
-            highlightCenter?.y += TopBarHeights.combinedHeight
+            highlightCenter?.y += ControlBarHeights.combinedHeight
             
             //
             highlightCornerRadius = 2
@@ -953,7 +899,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             let section = tableView.rect(forSection: 1)
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
             highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 44 + 22)
-            highlightCenter?.y += TopBarHeights.combinedHeight
+            highlightCenter?.y += ControlBarHeights.combinedHeight
             
             //
             highlightCornerRadius = 2
@@ -982,7 +928,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             let section = tableView.rect(forSection: 4)
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
             highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 22 - tableView.contentOffset.y)
-            highlightCenter?.y += TopBarHeights.combinedHeight
+            highlightCenter?.y += ControlBarHeights.combinedHeight
             
             //
             highlightCornerRadius = 2
@@ -1021,7 +967,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     // Get frame
     func frameForRow(row: Int, section: Int) -> CGRect {
-        let y = TopBarHeights.combinedHeight + CGFloat(((section + 1) * 47) + (section * 20)) + CGFloat(row * 44)
+        let y = ControlBarHeights.combinedHeight + CGFloat(((section + 1) * 47) + (section * 20)) + CGFloat(row * 44)
         let rect = CGRect(x: 8, y: y, width: view.bounds.width - 16, height: 44)
         return rect
     }
@@ -1039,38 +985,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     //
 }
-
-
-//
-// MARK: Slide Menu Extension ------------------------------------------------------------------------------------------------------------------
-//
-
-//
-// Slide Menu Extension
-extension Settings: UIViewControllerTransitioningDelegate {
-    
-    // Interactive pan
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-    //
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-    
-    // Button
-    // Present
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PresentMenuAnimator()
-    }
-
-    // Dismiss
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DismissMenuAnimator()
-    }
-}
-
-
 
 class SettingsNavigation: UINavigationController {
 

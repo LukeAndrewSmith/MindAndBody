@@ -28,11 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: TEST!! REMOVE
         // ICloud/UserDefaults Reset
-//        ICloudFunctions.shared.removeAll()
 //        let domain = Bundle.main.bundleIdentifier!
 //        UserDefaults.standard.removePersistentDomain(forName: domain)
 //        ReminderNotifications.shared.cancelNotifications()
-        
+//        ICloudFunctions.shared.removeAll()
+
         //
         // iCloud Oberver
         NotificationCenter.default.addObserver(
@@ -100,30 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
         ScheduleVariables.shared.resetWeekTracking()
-        
-        //
-        // Set Home Screen
-        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        let homeScreen = settings["HomeScreen"]![0]
-        
-        switch homeScreen {
-        case 0,2:
-            let mindBody = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view0") as! MindBodyNavigation
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = mindBody
-            self.window?.makeKeyAndVisible()
-            //
-            MenuVariables.shared.menuIndex = 0
-        case 1:
-            let schedule = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "view1") as! ScheduleNavigation
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = schedule
-            self.window?.makeKeyAndVisible()
-            //
-            MenuVariables.shared.menuIndex = 1
-        default:
-            break
-        }
         
         //
         return true

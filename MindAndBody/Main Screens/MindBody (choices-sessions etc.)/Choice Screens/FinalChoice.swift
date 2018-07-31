@@ -230,15 +230,15 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
         } else {
             if IPhoneType.shared.iPhoneType() == 2 {
-                self.presetsConstraint.constant = -TopBarHeights.homeIndicatorHeight
+                self.presetsConstraint.constant = -ControlBarHeights.homeIndicatorHeight
             } else {
                 self.presetsConstraint.constant = 0
             }
             //
             tableConstraint1.constant = view.frame.size.height
-            tableConstraint.constant = -49 - TopBarHeights.homeIndicatorHeight
+            tableConstraint.constant = -49 - ControlBarHeights.homeIndicatorHeight
             //
-            beginConstraint.constant = -49 - TopBarHeights.homeIndicatorHeight
+            beginConstraint.constant = -49 - ControlBarHeights.homeIndicatorHeight
         }
         
         // Animate / Set

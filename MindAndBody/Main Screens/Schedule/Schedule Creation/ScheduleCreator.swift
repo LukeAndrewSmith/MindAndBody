@@ -908,7 +908,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     func maskStackViews() {
         stackViewMask.backgroundColor  = .black
         stackViewMask.alpha = 0
-        stackViewMask.frame = CGRect(x: 0, y: UIScreen.main.bounds.minY, width: view.bounds.width, height: groupStack.bounds.height + 8 + TopBarHeights.statusBarHeight)
+        stackViewMask.frame = CGRect(x: 0, y: UIScreen.main.bounds.minY, width: view.bounds.width, height: groupStack.bounds.height + 8 + ControlBarHeights.statusBarHeight)
         view.addSubview(stackViewMask)
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.stackViewMask.alpha = 0.5

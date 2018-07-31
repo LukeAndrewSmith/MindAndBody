@@ -14,7 +14,7 @@ import Charts
 //
 // Tracking Screen Class --------------------------------------------------------------------------------------------------------
 //
-class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, ChartViewDelegate {
+class TrackingScreen: UIViewController, ChartViewDelegate {
     
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -29,14 +29,19 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     // Time Scale Action Sheet
     let timeScaleTable = UITableView()
-    let timeScaleArray: [String] = ["1week", "1month", "3months", "6months", "1year", "all"]
+//    let timeScaleArray: [String] = ["1week", "1month", "3months", "6months", "1year", "all"]
+    let timeScaleArray: [String] = ["1month", "3months", "6months", "all"]
+
     var selectedTimeScale = 0
-    // Button on x axis
-    var timeScaleButton2 = UIButton()
+    // StackView
+    var stackArray: [UILabel] = []
+    var stackFontUnselected = UIFont(name: "SFUIDisplay-thin", size: 17)
+    var stackFontSelected = UIFont(name: "SFUIDisplay-medium", size: 17)
     //
+    @IBOutlet weak var timeScaleStack: UIStackView!
+    @IBOutlet weak var timeScaleIndicator: UIView!
+    @IBOutlet weak var timeScaleIndicatorLeading: NSLayoutConstraint!
     
-    // Slide menu
-    var slideMenuInteraction = UIScreenEdgePanGestureRecognizer()
     
     //
     // Retreive trackingdictionaries from userdefaults as [String: Int] and convert to [Date: Int]
@@ -47,21 +52,15 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //
-        // TimeScale Button2
-        var yValue = CGFloat()
-        // iPhone X
-        if IPhoneType.shared.iPhoneType() == 2 {
-            yValue = view.frame.maxY - 49 - TopBarHeights.homeIndicatorHeight
-            // Normal iPhone
-        } else {
-            yValue = view.frame.maxY - 49
-        }
-        timeScaleButton2.frame = CGRect(x: 0, y: yValue, width: view.bounds.width, height: 49)
-        timeScaleButton2.backgroundColor = .clear
-        timeScaleButton2.addTarget(self, action: #selector(timeScaleButton(_:)), for: .touchUpInside)
-        UIApplication.shared.keyWindow?.insertSubview(timeScaleButton2, aboveSubview: view)
         
+        // Add here incase image changed in settings
+        addBackgroundImage(withBlur: true, fullScreen: false)
+        
+        // Reload data and graphs incase tracking updated
+        // Create [[Date: Int]] from the stored [[String: Int]] (ICloud wont store [Date: Int], only [String: Int])
+        let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
+        trackingDictionariesDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionaries)
+        setupChartData(timeScale: selectedTimeScale)
     }
     
     
@@ -141,57 +140,79 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         //
-        setupTimeScaleButton()
+        setupTimeScaleChoice()
+        
         
         //
         // Navigation Controller
+        // Remove navigation separator
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: Fonts.navigationBar]
         
         // Navigation Title
         navigationBar.title = NSLocalizedString("tracking", comment: "")
-        
-        //
-        // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: false)
-        
         //
         setupChart()
-        
-        // Slide Menu
-        chartView.addGestureRecognizer(slideMenuInteraction)
-        slideMenuInteraction.addTarget(self, action: #selector(edgePanGesture(sender:)))
-        slideMenuInteraction.edges = .left
     }
     
-    func setupTimeScaleButton() {
-        // Time scale table
-        timeScaleTable.dataSource = self
-        timeScaleTable.delegate = self
-        timeScaleTable.tableFooterView = UIView()
-        timeScaleTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        timeScaleTable.separatorColor = Colors.light.withAlphaComponent(0.5)
-        timeScaleTable.backgroundColor = Colors.dark
-        timeScaleTable.layer.cornerRadius = 15
-        timeScaleTable.clipsToBounds = true
-        timeScaleTable.layer.borderWidth = 1
-        timeScaleTable.layer.borderColor = Colors.light.cgColor
-        timeScaleTable.isScrollEnabled = false
-        timeScaleTable.frame = CGRect(x: 0, y: 0, width: ActionSheet.shared.actionSheet.bounds.width, height: 7 * 47)
-        //
-        ActionSheet.shared.setupActionSheet()
-        ActionSheet.shared.actionSheet.addSubview(timeScaleTable)
-        let heightToAdd = timeScaleTable.bounds.height
-        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
-        ActionSheet.shared.resetCancelFrame()
+    // Time Scale
+    func setupTimeScaleChoice() {
+        if timeScaleStack.arrangedSubviews.count == 0 {
+            for i in 0..<timeScaleArray.count {
+                let timeScaleLabel = UILabel()
+                timeScaleLabel.textColor = Colors.light
+                timeScaleLabel.textAlignment = .center
+                timeScaleLabel.font = stackFontUnselected
+                timeScaleLabel.text = NSLocalizedString(timeScaleArray[i], comment: "")
+                timeScaleLabel.sizeToFit()
+                timeScaleLabel.tag = i
+                //
+                let timeScaleTap = UITapGestureRecognizer()
+                timeScaleTap.numberOfTapsRequired = 1
+                timeScaleTap.addTarget(self, action: #selector(timeScaleTapHandler))
+                //
+                timeScaleLabel.isUserInteractionEnabled = true
+                timeScaleLabel.addGestureRecognizer(timeScaleTap)
+                stackArray.append(timeScaleLabel)
+            }
+            for i in 0...stackArray.count - 1 {
+                timeScaleStack.addArrangedSubview(stackArray[i])
+            }
+            timeScaleStack.isUserInteractionEnabled = true
+            //
+            // Add background color to stack view
+            let backgroundStackView = UIView(frame: timeScaleStack.bounds)
+            backgroundStackView.backgroundColor = Colors.dark
+            backgroundStackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            timeScaleStack.insertSubview(backgroundStackView, at: 0)
+        }
+    }
+    
+    @objc func timeScaleTapHandler(sender: UITapGestureRecognizer) {
+        
+        let timeScaleLabel = sender.view as! UILabel
+        let index = timeScaleLabel.tag
+        selectedTimeScale = index
+        setupChartData(timeScale: selectedTimeScale)
+        timeScaleTable.reloadData()
+        
+        // Animate indicator to time scale label
+        timeScaleIndicatorLeading.constant = self.stackArray[selectedTimeScale].frame.minX
+        UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            //
+            self.view.layoutIfNeeded()
+        })
     }
     
     // MARK: Setup chart
     func setupChart() {
         
+        let viewHeight = UIScreen.main.bounds.height - ControlBarHeights.combinedHeight - ControlBarHeights.tabBarHeight - timeScaleStack.bounds.height
+        
         // Chart
-        chartView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: returnChartHeight())
+        chartView.frame = CGRect(x: 8, y: timeScaleStack.bounds.height + 8, width: view.bounds.width - 16, height: viewHeight - 16 - 8)
         view.addSubview(chartView)
         
         // No data
@@ -246,6 +267,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         setupChartData(timeScale: 0)
     }
     
+    
     // MARK: Setup chart data
     func setupChartData(timeScale: Int) {
         
@@ -259,36 +281,37 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Data points
         switch timeScale {
         // 1 Week
-        case 0:
-            
-            //
-            chartView.xAxis.granularity = 1 // 1 day
-
-            //
-            chartDataOriginal = trackingDictionariesDates[0].sorted(by: { $0.key < $1.key })
-            //
-            // Shift chart data so min date is 0, this allows for correct presenting of labels
-            if trackingDictionariesDates[0].count != 0 {
-                TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
-                for i in 0..<chartDataOriginal.count {
-                    let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
-                    let value = chartDataOriginal[i].value
-                    //
-                    let keyValue = (key: key, value: value)
-                    chartDataShifted.append(keyValue)
-                }
-                    //
-                lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
-            }
-            //
-            chartView.xAxis.axisMinimum = 0
-            chartView.xAxis.axisMaximum = 6
-            //
-            chartView.xAxis.valueFormatter = DateValueFormatterDay()
-            chartView.xAxis.labelCount = 7
-            chartView.xAxis.forceLabelsEnabled = true
+//        case 0:
+//
+//            //
+//            chartView.xAxis.granularity = 1 // 1 day
+//
+//            //
+//            chartDataOriginal = trackingDictionariesDates[0].sorted(by: { $0.key < $1.key })
+//            //
+//            // Shift chart data so min date is 0, this allows for correct presenting of labels
+//            if trackingDictionariesDates[0].count != 0 {
+//                TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
+//                for i in 0..<chartDataOriginal.count {
+//                    let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
+//                    let value = chartDataOriginal[i].value
+//                    //
+//                    let keyValue = (key: key, value: value)
+//                    chartDataShifted.append(keyValue)
+//                }
+//                    //
+//                lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
+//            }
+//            //
+//            chartView.xAxis.axisMinimum = 0
+//            chartView.xAxis.axisMaximum = 6
+//            //
+//            chartView.xAxis.valueFormatter = DateValueFormatterDay()
+//            chartView.xAxis.labelCount = 7
+//            chartView.xAxis.forceLabelsEnabled = true
         // 1 Month
-        case 1,2,3,4,5:
+            // 1,2,3,4,5
+        case 0,1,2,3:
             //
             chartView.xAxis.granularity = 7 // 7 days in a week
 
@@ -315,19 +338,20 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             // Set Start and end dates for 1,3,6,12 months && set date formatter
             switch timeScale {
             // 1,3,6 months
-            case 1,2,3:
+                //1,2,3
+            case 0,1,2:
                 //
                 //
                 var startDate = Date().setToMidnightUTC()
                 let endDate = calendar.date(byAdding: .weekOfYear, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
                 
                 switch selectedTimeScale {
-                case 1:
+                case 0:
                     startDate = Date().firstMondayInMonth
                     chartView.xAxis.labelCount = Date().numberOfMondaysInCurrentMonth
                     chartView.xAxis.forceLabelsEnabled = true
                     chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
-                case 2:
+                case 1:
                     startDate = calendar.date(byAdding: .month, value: -2, to: Date().setToMidnightUTC())!
                     startDate = startDate.firstMondayInMonth
                     // Find the number of x axis values to have
@@ -339,7 +363,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
                     chartView.xAxis.labelCount = 3
                     chartView.xAxis.forceLabelsEnabled = true
                     chartView.xAxis.valueFormatter = DateValueFormatterMonth()
-                case 3:
+                case 2:
                     startDate = calendar.date(byAdding: .month, value: -5, to: Date().setToMidnightUTC())!
                     startDate = startDate.firstMondayInMonth
                     chartView.xAxis.labelCount = 6
@@ -372,33 +396,33 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
 //                chartView.xAxis.axisMaximum = (endDate?.timeIntervalSince1970)!
                 //
 
-            // 12 months
-            case 4:
-                // nina
-                //
-                // Shift chart data so min date is 0, this allows for correct presenting of labels
-                if trackingDictionariesDates[1].count != 0 {
-                    TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
-                    for i in 0..<chartDataOriginal.count {
-                        let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
-                        let value = chartDataOriginal[i].value
-                        //
-                        let keyValue = (key: key, value: value)
-                        chartDataShifted.append(keyValue)
-                    }
-                    //
-                    lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
-                }
-                //
-                chartView.xAxis.axisMinimum = 0
-                chartView.xAxis.axisMaximum = 364
-                //
-                chartView.xAxis.valueFormatter = DateValueFormatterMonthLetter()
-                chartView.xAxis.labelCount = 12
-                chartView.xAxis.forceLabelsEnabled = true
-                
+//            // 12 months
+//            case 3:
+//                // nina
+//                //
+//                // Shift chart data so min date is 0, this allows for correct presenting of labels
+//                if trackingDictionariesDates[1].count != 0 {
+//                    TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
+//                    for i in 0..<chartDataOriginal.count {
+//                        let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
+//                        let value = chartDataOriginal[i].value
+//                        //
+//                        let keyValue = (key: key, value: value)
+//                        chartDataShifted.append(keyValue)
+//                    }
+//                    //
+//                    lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
+//                }
+//                //
+//                chartView.xAxis.axisMinimum = 0
+//                chartView.xAxis.axisMaximum = 364
+//                //
+//                chartView.xAxis.valueFormatter = DateValueFormatterMonthLetter()
+//                chartView.xAxis.labelCount = 12
+//                chartView.xAxis.forceLabelsEnabled = true
+//
             // All
-            case 5:
+            case 3:
                 //
                 chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
             default: break
@@ -441,160 +465,12 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         chartView.data = chartData
     }
     
-    // Return chart height
-    var firstTimeOpened = true
-    func returnChartHeight() -> CGFloat {
-        if firstTimeOpened {
-            firstTimeOpened = false
-            if IPhoneType.shared.iPhoneType() == 2 {
-                return self.view.bounds.height - TopBarHeights.combinedHeight - 4 - TopBarHeights.homeIndicatorHeight
-            } else {
-                return self.view.bounds.height - TopBarHeights.combinedHeight - 4
-            }
-            
-        } else {
-            if IPhoneType.shared.iPhoneType() == 2 {
-                return self.view.bounds.height - 4 - TopBarHeights.homeIndicatorHeight
-            } else {
-                return self.view.bounds.height - 4
-            }
-        }
-    }
-    
-    //
-    // MARK: Table View
-    // Sections
-    // Number of sections
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    // Section Titles
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("trackingScreenTimeScaleOption", comment: "")
-    }
-    
-    // Header Customization
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        // Header
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
-        header.textLabel?.textAlignment = .center
-        header.textLabel?.textColor = Colors.dark
-        //
-        let background = UIView()
-        background.frame = header.bounds
-        background.backgroundColor = Colors.light
-        header.backgroundView = background
-    }
-    
-    
-    // Header Height
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 47
-    }
-    
-    // Rows
-    // Number of rows per section
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timeScaleArray.count
-    }
-    
-    // Height
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 47
-    }
-    
-    // Row cell customization
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //
-        let cell = UITableViewCell()
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
-        cell.textLabel?.text = NSLocalizedString(timeScaleArray[indexPath.row], comment: "")
-        cell.textLabel?.textColor = Colors.light
-        cell.textLabel?.textAlignment = .center
-        cell.backgroundColor = Colors.dark
-        if indexPath.row == selectedTimeScale {
-            cell.accessoryType = .checkmark
-            cell.tintColor = Colors.green
-            cell.textLabel?.textColor = Colors.green
-        }
-        if indexPath.row == timeScaleArray.count - 1 {
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
-        }
-        return cell
-    }
-    
-    //
-    // Did select row
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
-        selectedTimeScale = indexPath.row
-        setupChartData(timeScale: selectedTimeScale)
-        //
-        timeScaleTable.reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
-            // Dismiss action sheet
-            ActionSheet.shared.animateActionSheetDown()
-        })
-        //
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    //
-    @IBAction func timeScaleButton(_ sender: Any) {
-        ActionSheet.shared.animateActionSheetUp()
-    }
-    
-    //
-    // MARK: Slide Menu ---------------------------------------------------------------------------------------------------------------------
-    //
-    let interactor = Interactor()
-    // Edge pan
-    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
-        
-        MenuVariables.shared.menuInteractionType = 1
-
-        let translation = sender.translation(in: view)
-        
-        let progress = MenuHelper.calculateProgress(translation, viewBounds: view.bounds, direction: .Right)
-        
-        MenuHelper.mapGestureStateToInteractor(
-            sender.state,
-            progress: progress,
-            interactor: interactor){
-                self.performSegue(withIdentifier: "openMenu", sender: nil)
-        }
-    }
-    //
-    @IBAction func slideMenuButtonAction(_ sender: Any) {
-        MenuVariables.shared.menuInteractionType = 0
-    }
-    
     //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        if segue.identifier == "openMenu" {
-            //
-            if let destinationViewController = segue.destination as? SlideMenuView {
-                destinationViewController.transitioningDelegate = self
-            }
-            // Handle changing colour of status bar if button pressed
-            if MenuVariables.shared.menuInteractionType == 0 {
-                UIApplication.shared.statusBarStyle = .default
-            }
-        } else {
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            navigationItem.backBarButtonItem = backItem
-        }
-    }
-    
-    //
-    // View will dissappear
-    override func viewDidDisappear(_ animated: Bool) {
-        timeScaleButton2.removeFromSuperview()
+        // Remove back button text
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
     }
     
     //
@@ -647,7 +523,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
             walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: view.bounds.width - 15, height: 20)
-            walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: TopBarHeights.combinedHeight + 2.5 + ((view.bounds.height - 73.5) * (25/125)))
+            walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: ControlBarHeights.combinedHeight + 2.5 + ((view.bounds.height - 73.5) * (25/125)))
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //
@@ -671,7 +547,7 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
         case 1:
             //
             highlightSize = CGSize(width: 36, height: 36)
-            highlightCenter = CGPoint(x: view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + TopBarHeights.statusBarHeight)
+            highlightCenter = CGPoint(x: view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ControlBarHeights.statusBarHeight)
             highlightCornerRadius = 0
             //
             labelFrame = 0
@@ -702,34 +578,6 @@ class TrackingScreen: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //
 }
-
-
-//
-// MARK: Slide Menu Extension
-extension TrackingScreen: UIViewControllerTransitioningDelegate {
-    
-    // Interactive pan
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-    //
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-    
-    // Button
-    // Present
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PresentMenuAnimator()
-    }
-    
-    // Dismiss
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DismissMenuAnimator()
-    }
-}
-
-
 
 class TrackingNavigation: UINavigationController {
     

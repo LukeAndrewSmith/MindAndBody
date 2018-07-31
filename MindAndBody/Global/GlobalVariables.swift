@@ -50,13 +50,22 @@ class SelectedSession {
 // Colours ---------------------------------------------------------------------------------------------------------------------
 enum Colors {
     // Light
-    static let light = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    static let light = UIColor.white
+//        UIColor.white
+//        UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     // Dark
     static let dark = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
     // Green
     static let green = UIColor(red:0.15, green:0.65, blue:0.36, alpha:1.0)
     // Red
     static let red = UIColor(red:0.74, green:0.25, blue:0.20, alpha:1.0)
+}
+
+//
+// Fonts ---------------------------------------------------------------------------------------------------------------------
+enum Fonts {
+    // Navigation bar
+    static let navigationBar = UIFont(name: "SFUIDisplay-thin", size: 23)
 }
 
 //
@@ -76,15 +85,16 @@ enum AnimationTimes {
 
 //
 // Navigation + Status height ---------------------------------------------------------------------------------------------------------------
-enum TopBarHeights {
+enum ControlBarHeights {
+    // Shouldn't be hard coded!!!! (but currently not in a view controller so not sure how to access them at run time)
+    
     // Navigation bar
     static let navigationBarHeight = 44
-    //
     static let statusBarHeight = UIApplication.shared.statusBarFrame.height
-    //
     static let combinedHeight = 44 + UIApplication.shared.statusBarFrame.height
-    //
-    // Not in fitting with enum name....
+    // Tab bar
+    static let tabBarHeight: CGFloat = 49
+    // iPhone 8
     static let homeIndicatorHeight: CGFloat = 34
 }
 
@@ -99,29 +109,6 @@ class BellPlayer {
     
     // Meditation Timer didSetEndTime
     var didSetEndTime = false
-}
-
-//
-// Menu Variables ---------------------------------------------------------------------------------------------------------------
-class MenuVariables {
-    static var shared = MenuVariables()
-    private init() {}
-    //
-    // Variables
-    // The index of the menu
-    var menuIndex = Int()
-    // When selecting a  view in the menu, this determines wether it's new or not
-    var isNewView = Bool()
-    // Check if app opening for the first time (in a session of the app)
-    var isInitialAppOpen = true
-    // Menu interaction type
-        // 0 == slide, 1 == press
-    var menuInteractionType = 0
-    
-    // Each time going to screen from menu, view loads twice, causes little design issue for walkthough so this variables ensures walkthrough is only presented on the seconds load
-        // Issue is that the walkthrough is presented before the view has animated into the right place
-        // Only used in settings as only place the issue is noticable due to black walkthrough screen, and seeing as viewdidload might be called many times, this isn't the safest fix but works for now
-    var secondLoad = false
 }
 
 //

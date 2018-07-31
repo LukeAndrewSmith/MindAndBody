@@ -22,10 +22,7 @@ class MindBody: UIViewController {
     // Navigation bar outlets
     //
     // Navigation Bar
-    @IBOutlet weak var navigationBar: UINavigationItem!
-    // Tracking
-    @IBOutlet weak var slideMenu: UIBarButtonItem!
-    
+    @IBOutlet weak var navigationBar: UINavigationItem!    
     
     // Button Outlets
     //
@@ -78,18 +75,6 @@ class MindBody: UIViewController {
     @IBOutlet weak var bottomLeft: NSLayoutConstraint!
     @IBOutlet weak var bottomRight: NSLayoutConstraint!
     
-    
-    
-    // Blurs
-    let blur0 = UIVisualEffectView()
-    let blur1 = UIVisualEffectView()
-    let blur2 = UIVisualEffectView()
-    let blur3 = UIVisualEffectView()
-    let blur4 = UIVisualEffectView()
-    let blur5 = UIVisualEffectView()
-    let blur6 = UIVisualEffectView()
-    let blur7 = UIVisualEffectView()
-    
     //
     // View Will Appear ---------------------------------------------------------------------------------------------------------------------
     //
@@ -99,26 +84,16 @@ class MindBody: UIViewController {
         if Loading.shared.shouldPresentLoading {
 //            Loading.shared.beginLoading()
         }
-        
-        //
-        blur0.removeFromSuperview()
-        blur1.removeFromSuperview()
-        blur2.removeFromSuperview()
-        blur3.removeFromSuperview()
-        blur4.removeFromSuperview()
-        blur5.removeFromSuperview()
-        blur6.removeFromSuperview()
-        blur7.removeFromSuperview()
-        
+    
         // Background Index
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         let backgroundIndex = settings["BackgroundImage"]![0]
         //
         // BackgroundImage
         addBackgroundImage(withBlur: false, fullScreen: false)
+        
         //
         // Title Colours and Blurs
-        //
         switch backgroundIndex {
             // Black
         // All Black with no blur
@@ -144,6 +119,15 @@ class MindBody: UIViewController {
         //
         default: break
         }
+        // Blur
+        if backgroundIndex != BackgroundImages.backgroundImageArray.count {
+            Warmup.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            Workout.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            Cardio.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            Stretching.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            Yoga.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            Meditation.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+        }
     }
     
     //
@@ -158,20 +142,17 @@ class MindBody: UIViewController {
         // Navigation Bar
         //
         // Title
-        navigationBar.title = "Mind & Body"
+        navigationBar.title = NSLocalizedString("sessions", comment: "")
         // Appearance
         self.navigationController?.navigationBar.tintColor = Colors.light
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar]
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.tabBarController?.tabBar.barTintColor = Colors.dark
         UITabBar.appearance().barTintColor = Colors.dark
         tabBarController?.tabBar.barStyle = .default
         self.tabBarController?.tabBar.barTintColor = Colors.dark
         //
-        // Navigation Items
-        slideMenu.tintColor = Colors.light
-        //
-        
+
         self.tabBarController?.tabBar.tintColor = Colors.light
         
         
@@ -233,52 +214,41 @@ class MindBody: UIViewController {
         Meditation.titleLabel?.textAlignment = .center
         Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
         
-        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        let backgroundIndex = settings["BackgroundImage"]![0]
-        if backgroundIndex != BackgroundImages.backgroundImageArray.count {
-            Warmup.backgroundColor = Colors.dark.withAlphaComponent(0.72)
-            Workout.backgroundColor = Colors.dark.withAlphaComponent(0.72)
-            Cardio.backgroundColor = Colors.dark.withAlphaComponent(0.72)
-            Stretching.backgroundColor = Colors.dark.withAlphaComponent(0.72)
-            Yoga.backgroundColor = Colors.dark.withAlphaComponent(0.72)
-            Meditation.backgroundColor = Colors.dark.withAlphaComponent(0.72)
-        }
-        
         // iPhone 5/SE layout
         if IPhoneType.shared.iPhoneType() == 0 {
             //
-            wamupBottom.constant = 15
+            wamupBottom.constant = 8
             //
-            bodyTop.constant = 5
+            bodyTop.constant = 4
             bodyBottom.constant = 2
-            mindTop.constant = 5
-            mindBottom.constant = 3
+            mindTop.constant = 2
+            mindBottom.constant = 4
             //
-            yogaBottom.constant = 15
+            yogaBottom.constant = 13
             meditationBottom.constant = 15
         // iPhoneX Layout
         } else if IPhoneType.shared.iPhoneType() == 2 {
             //
-            wamupBottom.constant = 35
+            wamupBottom.constant = 30
             //
             bodyTop.constant = 15
             bodyBottom.constant = 10
-            mindTop.constant = 15
+            mindTop.constant = 10
             mindBottom.constant = 13
             //
-            yogaBottom.constant = 40
-            meditationBottom.constant = 40
+            yogaBottom.constant = 35
+            meditationBottom.constant = 35
         // iPad Layout
         } else if IPhoneType.shared.iPhoneType() == 3 {
             //
             //
-            bodyTop.constant = 20
-            bodyBottom.constant = 15
-            mindTop.constant = 15
+            bodyTop.constant = 15
+            bodyBottom.constant = 10
+            mindTop.constant = 10
             mindBottom.constant = 13
             //
-            yogaBottom.constant = 40
-            meditationBottom.constant = 40
+            yogaBottom.constant = 35
+            meditationBottom.constant = 35
             //
             wamupBottom.constant = 30
             workoutLeft.constant = 72
@@ -299,25 +269,6 @@ class MindBody: UIViewController {
             bottomRight.constant = const
         }
         
-    }
-    //
-    //
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //
-        // Home Screen
-        if MenuVariables.shared.isInitialAppOpen {
-            //        if isInitialAppOpen {
-            // Deselect previous selection
-            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-            let homeScreen = settings["HomeScreen"]![0]
-            if homeScreen == 2 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                    self.performSegue(withIdentifier: "openMenu", sender: self)
-                })
-            }
-            MenuVariables.shared.isInitialAppOpen = false
-        }
     }
     
     // Upon completion of check subscription, perform action
@@ -399,86 +350,13 @@ class MindBody: UIViewController {
     
     
     //
-    // Slide Menu ---------------------------------------------------------------------------------------------------------------------
-    //
-    let interactor = Interactor()
-    // Edge pan
-    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer) {
-        
-        //
-        MenuVariables.shared.menuInteractionType = 1
-        
-        let translation = sender.translation(in: view)
-        
-        let progress = MenuHelper.calculateProgress(translation, viewBounds: view.bounds, direction: .Right)
-        
-        MenuHelper.mapGestureStateToInteractor(
-            sender.state,
-            progress: progress,
-            interactor: interactor){
-                self.performSegue(withIdentifier: "openMenu", sender: nil)
-        }
-    }
-    // Button
-    @IBAction func slideMenuButtonAction(_ sender: Any) {
-        MenuVariables.shared.menuInteractionType = 0
-    }
-    
-    
-    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        if segue.identifier == "openMenu" {
-            //
-            if let destinationViewController = segue.destination as? SlideMenuView {
-                destinationViewController.transitioningDelegate = self
-            }
-            // Handle changing colour of status bar if button pressed
-            if MenuVariables.shared.menuInteractionType == 0 {
-                UIApplication.shared.statusBarStyle = .default
-            }
-        } else {
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            navigationItem.backBarButtonItem = backItem
-        }
+        // Remove back button text
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
     }
 }
-
-
-
-
-
-
-//
-// Slide Menu Extension
-extension MindBody: UIViewControllerTransitioningDelegate {
-    
-    // Interactive pan
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-    //
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
-    }
-    
-    // Button
-    // Present
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PresentMenuAnimator()
-    }
-    // Dismiss
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DismissMenuAnimator()
-    }
-}
-
-
-
-
-
 
 class MindBodyNavigation: UINavigationController {
 }

@@ -173,7 +173,7 @@ class StopClock {
             //
             // iPhone X
             if UIScreen.main.nativeBounds.height == 2436 {
-                self.stopClock.frame = CGRect(x: 10, y: UIScreen.main.bounds.height - self.stopClock.bounds.height - 10 - TopBarHeights.homeIndicatorHeight, width: self.stopClock.bounds.width, height: self.stopClock.bounds.height)
+                self.stopClock.frame = CGRect(x: 10, y: UIScreen.main.bounds.height - self.stopClock.bounds.height - 10 - ControlBarHeights.homeIndicatorHeight, width: self.stopClock.bounds.width, height: self.stopClock.bounds.height)
             } else {
                 self.stopClock.frame = CGRect(x: 10, y: UIScreen.main.bounds.height - self.stopClock.bounds.height - 10, width: self.stopClock.bounds.width, height: self.stopClock.bounds.height)
             }
