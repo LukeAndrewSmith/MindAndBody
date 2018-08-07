@@ -55,6 +55,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     //
     var selectedRow = Int()
+    var selectedSection = Int()
     
     //
     let restTimesArray: [Int] = [0, 5, 10, 15, 20, 30, 45, 60, 90, 120]
@@ -99,6 +100,27 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         view.backgroundColor = Colors.light
         
         //
+        tableView.backgroundColor = Colors.gray
+        let headerView = UIView()
+        headerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 24.5)
+        headerView.backgroundColor = Colors.gray
+        tableView.tableHeaderView = headerView
+        let topView = UIView()
+        topView.backgroundColor = Colors.gray
+        topView.frame = CGRect(x: 0, y: tableView.frame.minY - tableView.bounds.height, width: tableView.bounds.width, height: tableView.bounds.height)
+        tableView.addSubview(topView)
+        //
+        let footerView = UIView()
+        footerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableView.sectionFooterHeight)
+        footerView.backgroundColor = Colors.gray
+        tableView.tableFooterView = footerView
+        let bottomView = UIView()
+        bottomView.backgroundColor = Colors.gray
+        bottomView.frame = CGRect(x: 0, y: tableView.contentSize.height - 24.5, width: tableView.bounds.width, height: tableView.bounds.height)
+        tableView.addSubview(bottomView)
+        
+
+        //
         // Sets Reps Selection (Action Sheet)
         // view
         actionSheetView.backgroundColor = Colors.dark
@@ -127,11 +149,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         selectionView.layer.cornerRadius = 15
         selectionView.layer.masksToBounds = true
         //
-        okButton.backgroundColor = Colors.light
-        okButton.setTitleColor(Colors.green, for: .normal)
-        okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
-        okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
+        okButton2.backgroundColor = Colors.light
+        okButton2.setTitleColor(Colors.green, for: .normal)
+        okButton2.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
+        okButton2.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        okButton2.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
         //
         offButton.backgroundColor = Colors.light
         offButton.setTitleColor(Colors.red, for: .normal)
@@ -204,9 +226,10 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         // Update Indicator
-        let indexPath = NSIndexPath(row: selectedRow, section: 0)
+        let indexPath = NSIndexPath(row: selectedRow, section: selectedSection)
         let cell = tableView.cellForRow(at: indexPath as IndexPath)
         cell?.detailTextLabel?.text = NSLocalizedString("off", comment: "")
+        cell?.detailTextLabel?.textColor = Colors.red
         // Animate
         ActionSheet.shared.animateActionSheetDown()
         //
@@ -240,24 +263,24 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         // Header
-//        let header = UITableViewHeaderFooterView()
-//        let header = view as! UITableViewHeaderFooterView
+        print(section)
         let header = UIView()
-        header.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 47)
+        let headerHeight = CGFloat(24.5)
+        header.backgroundColor = Colors.gray
         let label = UILabel()
-        label.font = UIFont(name: "SFUIDisplay-thin", size: 17)!
+        label.backgroundColor = .clear
+        label.font = UIFont(name: "SFUIDisplay-light", size: 14)!
         label.textColor = UIColor.gray
         label.text = NSLocalizedString(sectionsArray[section]["title"] as! String, comment: "").uppercased()
-        label.backgroundColor = Colors.light
         label.sizeToFit()
-        label.center = CGPoint(x: 16 + (label.bounds.width / 2), y: header.bounds.height * (2/3))
+        label.frame = CGRect(x: 16, y: 0, width: label.bounds.width, height: headerHeight)
         header.addSubview(label)
         //
         switch section {
         case 0,2,3,5:
             let explanationButton = UIButton()
-            let headerHeight = header.bounds.height
-            explanationButton.frame = CGRect(x: label.frame.maxX + 8, y: headerHeight / 2, width: headerHeight / 3, height: headerHeight / 3)
+            explanationButton.frame = CGRect(x: label.frame.maxX + 8, y: 3.25, width: 18, height: 18)
+            explanationButton.center.y = label.center.y
             explanationButton.setImage(#imageLiteral(resourceName: "QuestionMarkMenu"), for: .normal)
             explanationButton.layer.borderColor = UIColor.gray.cgColor
             explanationButton.layer.borderWidth = 0.75
@@ -265,16 +288,33 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             explanationButton.clipsToBounds = true
             explanationButton.tintColor = UIColor.gray
             explanationButton.tag = section
+            explanationButton.addTarget(self, action: #selector(helpButtonAction(_:)), for: .touchUpInside)
             header.addSubview(explanationButton)
         default: break
         }
         return header
     }
     
+//    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+//        let footer = view as! UITableViewHeaderFooterView
+//        footer.backgroundColor = Colors.gray
+//    }
+//
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView()
+        footer.frame = CGRect.zero
+        footer.backgroundColor = Colors.gray
+        return footer
+    }
+    
     // Header Height
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 47
+        return 24.5
     }
+//
+//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 0
+//    }
     
     // Rows
     // Number of rows per section
@@ -432,6 +472,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = Colors.light
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.textLabel?.textColor = UIColor.black
             //
             cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
             //
@@ -443,6 +484,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.textLabel?.text = NSLocalizedString("morningReminder", comment: "")
                 if settings["ReminderNotifications"]![0] == -1 {
                     cell.detailTextLabel?.text = NSLocalizedString("off", comment: "")
+                    cell.detailTextLabel?.textColor = Colors.red
                 } else {
                     cell.detailTextLabel?.text = convertTimeToString(time: settings["ReminderNotifications"]![0])
                 }
@@ -451,6 +493,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.textLabel?.text = NSLocalizedString("afternoonReminder", comment: "")
                 if settings["ReminderNotifications"]![1] == -1 {
                     cell.detailTextLabel?.text = NSLocalizedString("off", comment: "")
+                    cell.detailTextLabel?.textColor = Colors.red
                 } else {
                     cell.detailTextLabel?.text = convertTimeToString(time: settings["ReminderNotifications"]![1])
                 }
@@ -593,6 +636,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 
                 //
                 selectedRow = indexPath.row
+                selectedSection = indexPath.section
                 timePicker.reloadAllComponents()
                 //
                 // View
@@ -615,8 +659,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 }
                 
                 // Ok
-                okButton.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
-                selectionView.addSubview(okButton)
+                okButton2.frame = CGRect(x: 0, y: 147, width: self.selectionView.frame.size.width, height: 49)
+                selectionView.addSubview(okButton2)
                 // Off
                 offButton.frame = CGRect(x: 0, y: 147 + 49 + separationHeight, width: Int(selectionView.frame.size.width), height: 49)
                 selectionView.addSubview(offButton)
@@ -638,11 +682,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Rest Time
         case 4:
             //
-            // MARK: MAY BE USEFUL
-//            if actionSheetView.subviews.contains(homeScreenPicker) {
-//                let i = actionSheetView.subviews.index(of: homeScreenPicker)
-//                actionSheetView.subviews[i!].removeFromSuperview()
-//            }
             actionSheetView.addSubview(restTimePicker)
             actionSheetView.addSubview(secondIndicatorLabel)
             actionSheetView.bringSubview(toFront: secondIndicatorLabel)
@@ -1014,6 +1053,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     }
     
     
+    //
+    // MARK: Help - question mark handler
+    func helpButtonAction(_ sender: UIButton) {
+        print(sender.tag)
+    }
     
     //
     // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------
