@@ -339,7 +339,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 23)
             cell.movementLabel?.textAlignment = .center
-            cell.movementLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.movementLabel?.textColor = Colors.light
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
             
             //
@@ -387,7 +387,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             cell.setsRepsLabel?.text = setsRepsString
             cell.setsRepsLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
             cell.setsRepsLabel?.textAlignment = .right
-            cell.setsRepsLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.setsRepsLabel?.textColor = Colors.light
             cell.setsRepsLabel.adjustsFontSizeToFitWidth = true
             
             
@@ -1132,7 +1132,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         scrollViewExplanation.center.x = bounds.width/2
         scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 2.5) + 20
         //
-        scrollViewExplanation.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        scrollViewExplanation.backgroundColor = Colors.light
         
         // Background View
         //

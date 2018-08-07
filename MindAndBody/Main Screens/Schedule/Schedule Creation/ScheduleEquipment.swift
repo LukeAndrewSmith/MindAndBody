@@ -51,7 +51,7 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         // Table View
         equipmentTable.tableFooterView = UIView()
-        equipmentTable.separatorColor = UIColor.white.withAlphaComponent(0.25)
+        equipmentTable.separatorColor = Colors.light.withAlphaComponent(0.25)
         equipmentTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         equipmentTable.backgroundColor = .clear
         equipmentTable.isScrollEnabled = false

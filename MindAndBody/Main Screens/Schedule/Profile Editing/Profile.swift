@@ -567,7 +567,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         //
         cell.backgroundColor = Colors.dark
         cell.tintColor = Colors.green
-        cell.textLabel?.textColor = .white
+        cell.textLabel?.textColor = Colors.light
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.lineBreakMode = .byWordWrapping

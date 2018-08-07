@@ -178,8 +178,6 @@ enum Register {
     static let defaultSettings: [String: [Int]] = [
         // Background image index - 0
         "BackgroundImage": [2],
-        // Home Screen - 1 (Defaults to schedule)
-        "HomeScreen": [1],
         // Time Based Sessions - 2
         "TimeBasedSessions": [0], // 0 == Off, 1 = on
         // Yoga Automatic - 3

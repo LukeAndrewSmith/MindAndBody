@@ -52,14 +52,14 @@ class GymChoice: UIViewController  {
         // Button Titles
         classic.setTitle(NSLocalizedString("classic", comment: ""), for: UIControlState.normal)
         classic.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        classic.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        classic.titleLabel!.textColor = Colors.light
         classic.layer.borderWidth = 5
         classic.layer.borderColor = Colors.dark.cgColor
         classic.setTitleColor(Colors.dark, for: .normal)
         //
         circuit.setTitle(NSLocalizedString("circuit", comment: ""), for: UIControlState.normal)
         circuit.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
-        circuit.titleLabel!.textColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        circuit.titleLabel!.textColor = Colors.light
         circuit.layer.borderWidth = 5
         circuit.layer.borderColor = Colors.dark.cgColor
         circuit.setTitleColor(Colors.dark, for: .normal)

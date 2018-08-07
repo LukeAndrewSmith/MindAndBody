@@ -637,7 +637,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         scrollViewExplanation.center.x = bounds.width/2
         scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 2.5) + 20
         //
-        scrollViewExplanation.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        scrollViewExplanation.backgroundColor = Colors.light
         
         // Background View
         //

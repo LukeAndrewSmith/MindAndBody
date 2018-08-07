@@ -4941,14 +4941,7 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Item" id="VjJ-pa-Zxt"/>
-                    <navigationItem key="navigationItem" title="Settings" id="JRG-rZ-TEm">
-                        <barButtonItem key="rightBarButtonItem" image="QuestionMarkMenu" id="vdh-hA-mxM">
-                            <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="questionMarkButtonAciton:" destination="C87-uf-Q8P" id="fpv-YK-mQg"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Settings" id="JRG-rZ-TEm"/>
                     <connections>
                         <outlet property="navigationBar" destination="JRG-rZ-TEm" id="Ka0-4M-FmY"/>
                         <segue destination="U5d-IN-X7D" kind="show" identifier="BackgroundImageSegue" id="GKV-bG-CaC"/>

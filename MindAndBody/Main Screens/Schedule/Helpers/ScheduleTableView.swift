@@ -54,7 +54,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         case scheduleTable:
             // Header
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 30)!
+            header.textLabel?.font = Fonts.bigRegular
             header.textLabel?.textAlignment = .center
             header.textLabel?.textColor = Colors.light
             //
@@ -64,7 +64,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         case scheduleChoiceTable:
             // Header
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
+            header.textLabel?.font = Fonts.mediumRegular
             header.textLabel?.textAlignment = .center
             header.textLabel?.textColor = Colors.dark
             //
@@ -154,7 +154,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
                 // Groups
                 let dayLabel = UILabel()
-                dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
+                dayLabel.font = Fonts.mediumRegular
                 dayLabel.textColor = Colors.light
                 //
                 var text = String()
@@ -176,34 +176,38 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 //
                 // Checkmark box
                 let checkBox = UIButton()
-                checkBox.backgroundColor = .clear
+                checkBox.tag = indexPath.row
+                checkBox.layer.backgroundColor = UIColor.clear.cgColor
                 checkBox.layer.borderWidth = 1
                 checkBox.layer.borderColor = Colors.light.cgColor
                 checkBox.layer.cornerRadius = 4
                 checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
                 checkBox.center.y = dayLabel.center.y
-                if indexPath.row == 0 {
-                    checkBox.setImage(#imageLiteral(resourceName: "CheckMark"), for: .normal)
-                    checkBox.imageView?.tintColor = Colors.light
-                    checkBox.backgroundColor = Colors.green
-                    checkBox.layer.borderColor = Colors.green.cgColor
-                }
+                checkBox.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
                 cell.addSubview(checkBox)
+                
+                // To make sure its easy to press the button
+                let checkBoxExtraButton = UIButton()
+                checkBoxExtraButton.tag = indexPath.row
+                var height = 72
+                if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
+                    height = 49
+                }
+                checkBoxExtraButton.frame = CGRect(x: 0, y: 0, width: height, height: height)
+                checkBoxExtraButton.center.x = checkBox.center.x
+                checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
+                cell.addSubview(checkBoxExtraButton)
                 
                 //
                 // CheckMark if completed
                 if ScheduleVariables.shared.shouldReloadChoice {
                     if indexPath.row != ScheduleVariables.shared.selectedRows[0] {
                         if isCompleted(row: indexPath.row) {
-                            dayLabel.textColor = Colors.green
-                            cell.tintColor = Colors.green
-                            cell.accessoryType = .checkmark
+                            checkButton(button: checkBox)
                         }
                     }
                 } else if isCompleted(row: indexPath.row) {
-                    dayLabel.textColor = Colors.green
-                    cell.tintColor = Colors.green
-                    cell.accessoryType = .checkmark
+                    checkButton(button: checkBox)
                 }
                 
             // Currently selecting a session, i.e not first screen
@@ -230,7 +234,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     //
                     // Color if last choice
                     if isLastChoice() {
-                        cell.textLabel?.textColor = Colors.green
+//                        cell.textLabel?.textColor = Colors.green
                         separator.backgroundColor = Colors.green.cgColor
                     }
                     // Else if selection
@@ -241,7 +245,6 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     choiceLabel.textColor = Colors.light
                     //
                     // Normal
-                    //
                     let text = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][indexPath.row]
                     choiceLabel.text = NSLocalizedString(text, comment: "")
                     choiceLabel.numberOfLines = 2
@@ -252,13 +255,37 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     //
                     if isLastChoice() {
                         //
+                        // Checkmark box
+                        let checkBox = UIButton()
+                        checkBox.tag = indexPath.row
+                        // Use layer as not affected by cell highlight
+                        checkBox.layer.backgroundColor = UIColor.clear.cgColor
+                        checkBox.backgroundColor = .clear
+                        checkBox.layer.borderWidth = 1
+                        checkBox.layer.borderColor = Colors.light.cgColor
+                        checkBox.layer.cornerRadius = 4
+                        checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
+                        checkBox.center.y = choiceLabel.center.y
+                        checkBox.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
+                        cell.addSubview(checkBox)
+                        
+                        // To make sure its easy to press the button
+                        let checkBoxExtraButton = UIButton()
+                        checkBoxExtraButton.tag = indexPath.row
+                        var height = 72
+                        if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
+                            height = 49
+                        }
+                        checkBoxExtraButton.frame = CGRect(x: 0, y: 0, width: height, height: height)
+                        checkBoxExtraButton.center.x = checkBox.center.x
+                        checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
+                        cell.addSubview(checkBoxExtraButton)
+                        //
                         // CheckMark if completed
                         // - 1 as title included, so rows offset by 1
                         if indexPath.row != 0 {
                             if isCompleted(row: indexPath.row) {
-                                choiceLabel.textColor = Colors.green
-                                cell.tintColor = Colors.green
-                                cell.accessoryType = .checkmark
+                                checkButton(button: checkBox)
                             }
                         }
                     }
@@ -288,9 +315,34 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         //
         return cell
     }
+    
+    // MARK: Helper
+    func checkButton(button: UIButton) {
+        button.setImage(#imageLiteral(resourceName: "CheckMark"), for: .normal)
+        button.imageView?.tintColor = Colors.light
+        // Use layer as not affected by cell highlight
+        button.layer.backgroundColor = Colors.green.cgColor
+        button.backgroundColor = Colors.green
+        button.layer.borderColor = Colors.green.cgColor
+    }
         
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Silly highlighting issue
+        // Highlight affects checkBox background colors, therefore find the button through the image, and set the background color to green if the border is green as implies that it is selected
+        if tableView == scheduleTable {
+            let cell = tableView.cellForRow(at: indexPath)
+            for view in (cell?.subviews)! {
+                if view is UIButton {
+                    if let image = (view as! UIButton).imageView?.image, image == #imageLiteral(resourceName: "CheckMark") {
+                        view.backgroundColor = Colors.green
+                        print("found")
+                    }
+                }
+            }
+        }
+        
         //
         // Session choice
         switch tableView {

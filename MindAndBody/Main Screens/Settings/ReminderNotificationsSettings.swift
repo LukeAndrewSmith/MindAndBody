@@ -70,7 +70,7 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
         // Set TableView Background Colour
         //
         let backView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-        backView.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        backView.backgroundColor = Colors.light
         //
         self.remindersTable.backgroundView = backView
     }
@@ -162,7 +162,7 @@ class ReminderNotificationsSettings: UIViewController, UITableViewDelegate, UITa
         //
         //
         cell.textLabel?.textAlignment = NSTextAlignment.left
-        cell.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+        cell.backgroundColor = Colors.light
         cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         //
         cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)

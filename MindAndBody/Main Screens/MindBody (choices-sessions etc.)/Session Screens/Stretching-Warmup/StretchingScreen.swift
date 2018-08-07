@@ -273,7 +273,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 27)
             cell.movementLabel?.textAlignment = .center
-            cell.movementLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.movementLabel?.textColor = Colors.light
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
             
             //
@@ -666,7 +666,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         scrollViewExplanation.center.x = bounds.width/2
         scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 2.5) + 20
         //
-        scrollViewExplanation.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        scrollViewExplanation.backgroundColor = Colors.light
         
         // Background View
         //

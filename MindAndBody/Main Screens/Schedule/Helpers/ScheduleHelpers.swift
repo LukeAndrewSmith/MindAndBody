@@ -1349,111 +1349,106 @@ extension ScheduleScreen {
     // MARK: Mark as completed
         // Handler for the long touch on the cell, the user can mark as completed themselves
         // Also marks as incomplete if previously comleted, note: rename
-    @IBAction func markAsCompleted(_ sender: UILongPressGestureRecognizer) {
-        //
-        if sender.state == UIGestureRecognizerState.began {
-            let touchPoint = sender.location(in: self.view)
-            // Get indexPath
-            if let indexPathLongPress = scheduleTable.indexPathForRow(at: touchPoint) {
-                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+    @IBAction func markAsCompleted(_ sender: UIButton) {
+        
+        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
 
-                // Get row
-                let row = indexPathLongPress.row
-                
-                // If first choice
-                // indicate to reset first choice
-                var shouldResetSelectedRows = false
-                // Set selected row to ScheduleVariables.shared.selectedRow[0]
-                if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                    ScheduleVariables.shared.selectedRows[0] = row
-                    shouldResetSelectedRows = true
-                }
-                
-                // Indexing variables
-                    // Differ if last choice or first choice
-                let indexingVariables = getIndexingVariables(row: row, firstChoice: false, checkLastChoice: false)
-                // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
-                let index0 = indexingVariables.0
-                // index1 = Selected row in final choice (i.e warmup, session, stretching)
-                let index1 = indexingVariables.1
-                //
-                let day = indexingVariables.2
-                
-                // if first or last choiec
-                if index1 != "notFirstOrLastChoice" {
-                    // Update Tracking
-                    // True/False
-                    let currentBool = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] as! Bool
-                    
-                    // UPDATES
-                    // Update
-                    schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
-                    UserDefaults.standard.set(schedules, forKey: "schedules")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-                    // Update Badges
-                    ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
-                    // Update Week Progress & Tracking
-                    updateWeekProgress()
-                    updateTracking()
-                    updateWeekTracking()
-                    
+        //
+        // Get indexPath.row
+        let row = sender.tag
+        
+        // If first choice
+        // indicate to reset first choice
+        var shouldResetSelectedRows = false
+        // Set selected row to ScheduleVariables.shared.selectedRow[0]
+        if ScheduleVariables.shared.choiceProgress[0] == -1 {
+            ScheduleVariables.shared.selectedRows[0] = row
+            shouldResetSelectedRows = true
+        }
+        
+        // Indexing variables
+            // Differ if last choice or first choice
+        let indexingVariables = getIndexingVariables(row: row, firstChoice: false, checkLastChoice: false)
+        // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+        let index0 = indexingVariables.0
+        // index1 = Selected row in final choice (i.e warmup, session, stretching)
+        let index1 = indexingVariables.1
+        //
+        let day = indexingVariables.2
+        
+        // if first or last choiec
+        if index1 != "notFirstOrLastChoice" {
+            // Update Tracking
+            // True/False
+            let currentBool = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] as! Bool
+            
+            // UPDATES
+            // Update
+            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
+            UserDefaults.standard.set(schedules, forKey: "schedules")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+            // Update Badges
+            ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
+            // Update Week Progress & Tracking
+            updateWeekProgress()
+            updateTracking()
+            updateWeekTracking()
+            
+            //
+            let indexPathToReload = NSIndexPath(row: row, section: 0)
+            scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+        
+            
+            //
+            // Box indicator round todo, done here because userdefaults set above && check if full group needs to be completed
+            var shouldUpdateArraysAgain = false
+            if isLastChoice() {
+                if isGroupCompleted(checkAll: true) {
+                    maskView3.backgroundColor = Colors.green
                     //
-                    let indexPathToReload = NSIndexPath(row: row, section: 0)
-                    scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
-                
-                    
-                    //
-                    // Box indicator round todo, done here because userdefaults set above && check if full group needs to be completed
-                    var shouldUpdateArraysAgain = false
-                    if isLastChoice() {
-                        if isGroupCompleted(checkAll: true) {
-                            maskView3.backgroundColor = Colors.green
-                            //
-                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = true
-                            shouldUpdateArraysAgain = true
-                        } else {
-                            maskView3.backgroundColor = Colors.red
-                            //
-                            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = false
-                            shouldUpdateArraysAgain = true
-                        }
-                    // Update day indicators
-                    } else {
-                        updateDayIndicatorColours()
-                    }
-                    
-                    // Only called if is last choice
-                    if shouldUpdateArraysAgain {
-                        UserDefaults.standard.set(schedules, forKey: "schedules")
-                        // Sync
-                        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-                        // Update Tracking
-                        updateWeekProgress()
-                        updateTracking()
-                        updateWeekTracking()
-                    }
-                    
-                    //
-                    // Mark first instance of group in all other schedules as completed- called after to avoid conflicts storing to userdefaults
-                    if isGroupCompleted(checkAll: false) {
-                        markAsGroupForOtherSchedules(markAs: !currentBool)
-                        // Animate back to initial choice
-                        if isLastChoice() {
-                            animateFromLongPress()
-                        }
-                    }
-                    
-                    // ScheduleVariables.shared.choiceProgress[0] was updated just for the duration of the mark as complete function, reset back to -1 now completed
-                    // Reset first choice to -1 to indicate still on schedule home screen
-                    if shouldResetSelectedRows {
-                        ScheduleVariables.shared.choiceProgress[0] = -1
-                    }
+                    schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = true
+                    shouldUpdateArraysAgain = true
                 } else {
-                    let indexPathToReload = NSIndexPath(row: row, section: 0)
-                    scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+                    maskView3.backgroundColor = Colors.red
+                    //
+                    schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = false
+                    shouldUpdateArraysAgain = true
+                }
+            // Update day indicators
+            } else {
+                updateDayIndicatorColours()
+            }
+            
+            // Only called if is last choice
+            if shouldUpdateArraysAgain {
+                UserDefaults.standard.set(schedules, forKey: "schedules")
+                // Sync
+                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+                // Update Tracking
+                updateWeekProgress()
+                updateTracking()
+                updateWeekTracking()
+            }
+            
+            //
+            // Mark first instance of group in all other schedules as completed- called after to avoid conflicts storing to userdefaults
+            if isGroupCompleted(checkAll: false) {
+                markAsGroupForOtherSchedules(markAs: !currentBool)
+                // Animate back to initial choice
+                if isLastChoice() {
+                    animateFromLongPress()
                 }
             }
+            
+            // ScheduleVariables.shared.choiceProgress[0] was updated just for the duration of the mark as complete function, reset back to -1 now completed
+            // Reset first choice to -1 to indicate still on schedule home screen
+            if shouldResetSelectedRows {
+                ScheduleVariables.shared.choiceProgress[0] = -1
+            }
+        } else {
+            let indexPathToReload = NSIndexPath(row: row, section: 0)
+            scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
         }
     }
     
@@ -1618,7 +1613,7 @@ extension ScheduleScreen {
                             DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
                                 let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
                                 self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
-                                self.scheduleTable.selectRow(at: indexPathToReload2 as IndexPath, animated: true, scrollPosition: .none)
+                                self.selectRow(indexPath: indexPathToReload2 as IndexPath)
                                 self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
                             })
                         })
@@ -1642,11 +1637,17 @@ extension ScheduleScreen {
             DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
                 let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
                 self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
-                self.scheduleTable.selectRow(at: indexPathToReload2 as IndexPath, animated: true, scrollPosition: .none)
+                self.selectRow(indexPath: indexPathToReload2 as IndexPath)
                 self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
             })
             updateDayIndicatorColours()
         }
+    }
+    
+    func selectRow(indexPath: IndexPath) {
+        scheduleTable.selectRow(at: indexPath as IndexPath, animated: true, scrollPosition: .none)
+        // Called due to silly issue with highlighting cell messing up checkBox background color, see didSelectRow for more detail
+        scheduleTable.delegate?.tableView!(scheduleTable, didSelectRowAt: indexPath)
     }
     
     func animateFromLongPress() {
@@ -1662,7 +1663,7 @@ extension ScheduleScreen {
             DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
                 let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
                 self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
-                self.scheduleTable.selectRow(at: indexPathToReload2 as IndexPath, animated: true, scrollPosition: .none)
+                self.selectRow(indexPath: indexPathToReload2 as IndexPath)
                 self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
                 self.updateDayIndicatorColours()
             })
@@ -1831,7 +1832,7 @@ extension ScheduleScreen {
         // Navigation Bar
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: Fonts.navigationBar]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar]
 
         // Navigation Title
         navigationBar.title = NSLocalizedString("schedule", comment: "")

@@ -193,9 +193,9 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         // Discussion
         //
         // Scroll
-        discussionScrollView.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        discussionScrollView.backgroundColor = Colors.light
         //
-        discussionTitle.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        discussionTitle.backgroundColor = Colors.light
         discussionTitle.textColor = Colors.dark
         discussionTitle.text = NSLocalizedString("discussion", comment: "")
         

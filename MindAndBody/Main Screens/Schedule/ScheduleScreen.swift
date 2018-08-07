@@ -63,8 +63,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     let dayArrayChar = ["mondayLetter","tuesdayLetter","wednesdayLetter","thursdayLetter","fridayLetter","saturdayLetter","sundayLetter"]
     // StackView
     var stackArray: [UILabel] = []
-    var stackFontUnselected = UIFont(name: "SFUIDisplay-thin", size: 17)
-    var stackFontSelected = UIFont(name: "SFUIDisplay-medium", size: 17)
+    var stackFontUnselected = UIFont(name: "SFUIDisplay-regular", size: 17)
+    var stackFontSelected = UIFont(name: "SFUIDisplay-bold", size: 17)
 
     // Schedule creation and choices ACTION SHEET
     let scheduleChoiceTable = UITableView()
@@ -198,12 +198,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(checkSelectedDay), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         // reload view
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        
-        //
-        // Long press for cheating groups; ability to mark session as complete
-        let markAsCompletedGesture = UILongPressGestureRecognizer()
-        markAsCompletedGesture.addTarget(self, action: #selector(markAsCompleted))
-        scheduleTable.addGestureRecognizer(markAsCompletedGesture)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

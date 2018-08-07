@@ -41,7 +41,7 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
         //
         // Table View
         weekTable.tableFooterView = UIView()
-        weekTable.separatorColor = UIColor.white.withAlphaComponent(0.25)
+        weekTable.separatorColor = Colors.light.withAlphaComponent(0.25)
         weekTable.backgroundColor = .clear
         weekTable.isScrollEnabled = false
         weekTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

@@ -121,7 +121,7 @@ class BackgroundImageCollection: UICollectionViewController {
         cell.selectionLabel.layer.masksToBounds = true
         //
         cell.selectionLabel.layer.borderWidth = 1
-        cell.selectionLabel.layer.borderColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0).cgColor
+        cell.selectionLabel.layer.borderColor = Colors.light.cgColor
         
         
         // Index
@@ -139,7 +139,7 @@ class BackgroundImageCollection: UICollectionViewController {
             // Selection Label
             //
             if indexPath.item == backgroundIndex {
-                cell.selectionLabel.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+                cell.selectionLabel.backgroundColor = Colors.light
                 cell.isSelected = true
             }
             //
@@ -153,12 +153,12 @@ class BackgroundImageCollection: UICollectionViewController {
             // Grey
             //
             cell.backgroundImage.image = nil
-            cell.backgroundImage.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.backgroundImage.backgroundColor = Colors.light
             
             // Selection Label
             //
             if indexPath.item == backgroundIndex {
-                cell.selectionLabel.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+                cell.selectionLabel.backgroundColor = Colors.light
                 cell.isSelected = true
             }
             //
@@ -193,7 +193,7 @@ class BackgroundImageCollection: UICollectionViewController {
         
         // Set New Selection
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionImageCell
-        cell.selectionLabel.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        cell.selectionLabel.backgroundColor = Colors.light
         cell.isSelected = true
         
         

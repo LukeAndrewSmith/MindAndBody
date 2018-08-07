@@ -364,7 +364,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             cell.movementLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 27)
             cell.movementLabel?.textAlignment = .center
-            cell.movementLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.movementLabel?.textColor = Colors.light
             cell.movementLabel?.adjustsFontSizeToFitWidth = true
             
             //
@@ -473,7 +473,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 for s in 0...indexOfUnpressedButton - 1 {
                     //
                     buttonArray[indexPath.row][s].isEnabled = false
-                    buttonArray[indexPath.row][s].backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+                    buttonArray[indexPath.row][s].backgroundColor = Colors.light
                 }
             }
             //
@@ -774,10 +774,10 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         setButton.addConstraints([widthHeight])
         setButton.frame = CGRect(x: 0, y: 0, width: 42.875, height: 42.875)
         setButton.layer.borderWidth = 3
-        setButton.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0).cgColor
+        setButton.layer.borderColor = Colors.light.cgColor
         setButton.layer.cornerRadius = 21.4375
         setButton.addTarget(self, action: #selector(setButtonAction), for: .touchUpInside)
-        setButton.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        setButton.backgroundColor = Colors.dark
         setButton.isEnabled = false
         //
         return setButton
@@ -829,7 +829,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
             //
             sender.isEnabled = false
-            sender.backgroundColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+            sender.backgroundColor = Colors.light
             //
             updateProgress()
         }
@@ -1149,7 +1149,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         scrollViewExplanation.center.x = bounds.width/2
         scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 2.5) + 20
         //
-        scrollViewExplanation.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        scrollViewExplanation.backgroundColor = Colors.light
         
         // Background View
         //

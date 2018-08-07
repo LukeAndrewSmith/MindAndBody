@@ -87,7 +87,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         //
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-        header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        header.textLabel?.textColor = Colors.light
         header.contentView.backgroundColor = Colors.dark
         //
     }
@@ -97,7 +97,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         //
-        cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        cell.backgroundColor = Colors.light
         cell.tintColor = .black
         //
         cell.textLabel?.text = NSLocalizedString(guidedSessions[indexPath.section][indexPath.row], comment: "")

@@ -79,7 +79,7 @@
 
 "preset" = "Preset";
 
-"timedSession" = "Timed Sessions";
+"automaticSessions" = "Automatic Sessions";
 
 "homePage" = "Home Page";
 
@@ -3403,7 +3403,6 @@
         "resetWalkthrough" = "Reset Walkthrough";
 
         //
-        "homeScreen" = "Home Screen";
         "menu" = "Menu";
 
         // Reset Alert //

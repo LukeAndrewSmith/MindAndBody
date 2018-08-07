@@ -164,7 +164,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         
         
         // Colour
-        self.view.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+        self.view.backgroundColor = Colors.light
         
         //
         presetsButton.backgroundColor = Colors.dark
@@ -675,14 +675,14 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         case customTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)!
-            header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            header.textLabel?.textColor = Colors.light
             header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             header.contentView.tintColor = Colors.light
         //
         case movementsTableView:
             let header = view as! UITableViewHeaderFooterView
             header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)!
-            header.textLabel?.textColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            header.textLabel?.textColor = Colors.light
             header.textLabel?.adjustsFontSizeToFitWidth = true
             header.contentView.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             header.contentView.tintColor = Colors.light
@@ -831,7 +831,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.textLabel?.textAlignment = .left
-            cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.backgroundColor = Colors.light
             cell.textLabel?.textColor = .black
             cell.tintColor = .black
             // Cell Image
@@ -1661,7 +1661,7 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
         expandedImage.center.x = self.view.frame.size.width/2
         expandedImage.center.y = (height/2) * 2.5
         //
-        expandedImage.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+        expandedImage.backgroundColor = Colors.dark
         expandedImage.contentMode = .scaleAspectFit
         expandedImage.isUserInteractionEnabled = true
         expandedImage.image = image

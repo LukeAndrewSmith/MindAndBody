@@ -166,7 +166,7 @@ class MindBody: UIViewController {
         Warmup.titleLabel?.adjustsFontSizeToFitWidth = true
         Warmup.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Warmup.titleLabel?.textAlignment = .center
-        Warmup.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
+        Warmup.setTitleColor(Colors.light, for: .normal)
         // Workout
         Workout.setTitle(NSLocalizedString("workout", comment: ""), for: UIControlState.normal)
         Workout.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
@@ -175,7 +175,7 @@ class MindBody: UIViewController {
         Workout.titleLabel?.adjustsFontSizeToFitWidth = true
         Workout.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Workout.titleLabel?.textAlignment = .center
-        Workout.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
+        Workout.setTitleColor(Colors.light, for: .normal)
         // Stretching
         Stretching.setTitle(NSLocalizedString("stretching", comment: ""), for: UIControlState.normal)
         Stretching.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
@@ -184,7 +184,7 @@ class MindBody: UIViewController {
         Stretching.titleLabel?.adjustsFontSizeToFitWidth = true
         Stretching.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Stretching.titleLabel?.textAlignment = .center
-        Stretching.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
+        Stretching.setTitleColor(Colors.light, for: .normal)
         // Cardio
         Cardio.setTitle(NSLocalizedString("cardio", comment: ""), for: UIControlState.normal)
         Cardio.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
@@ -193,7 +193,7 @@ class MindBody: UIViewController {
         Cardio.titleLabel?.adjustsFontSizeToFitWidth = true
         Cardio.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Cardio.titleLabel?.textAlignment = .center
-        Cardio.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
+        Cardio.setTitleColor(Colors.light, for: .normal)
         // Yoga
         Yoga.setTitle(NSLocalizedString("yoga", comment: ""), for: UIControlState.normal)
         Yoga.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
@@ -203,7 +203,7 @@ class MindBody: UIViewController {
         Yoga.titleLabel?.adjustsFontSizeToFitWidth = true
         Yoga.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Yoga.titleLabel?.textAlignment = .center
-        Yoga.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
+        Yoga.setTitleColor(Colors.light, for: .normal)
         // Meditation
         Meditation.setTitle(NSLocalizedString("meditation", comment: ""), for: UIControlState.normal)
         Meditation.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
@@ -212,7 +212,7 @@ class MindBody: UIViewController {
         Meditation.titleLabel?.adjustsFontSizeToFitWidth = true
         Meditation.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
         Meditation.titleLabel?.textAlignment = .center
-        Meditation.setTitleColor(UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0), for: .normal)
+        Meditation.setTitleColor(Colors.light, for: .normal)
         
         // iPhone 5/SE layout
         if IPhoneType.shared.iPhoneType() == 0 {

@@ -115,7 +115,7 @@ class ReminderNotifications {
                         // Motivating comments (if on)
                         var motivatingComment = ""
                         if settings["ReminderNotifications"]![2] == 1 {
-                            let random = Int(arc4random_uniform(UInt32(motivatingComment.count)))
+                            let random = Int(arc4random_uniform(UInt32(motivatingComments.count)))
                             motivatingComment = "\n" + NSLocalizedString(motivatingComments[random], comment: "")
                         }
                         // Session - not plural

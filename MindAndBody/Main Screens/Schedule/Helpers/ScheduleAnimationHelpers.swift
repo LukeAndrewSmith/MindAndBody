@@ -154,7 +154,7 @@ extension ScheduleScreen {
         maskView1.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
 //        maskView2.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
         //
-        maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: headerHeight + pageStack.bounds.height)
+        maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: headerHeight + pageStack.bounds.height + 1)
 //        maskView2.frame = CGRect(x: 0, y: scheduleTable.frame.maxY, width: screenFrame.width, height: pageStack.bounds.height)
         //
         maskView1.backgroundColor = .black
