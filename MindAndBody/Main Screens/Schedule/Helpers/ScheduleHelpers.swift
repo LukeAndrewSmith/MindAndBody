@@ -1762,22 +1762,20 @@ extension ScheduleScreen {
         //
         // table   // buttons // spaces
         
-        let tableHeight: CGFloat = (47*2.5) + 49 // 47 is height of a row in the table
-            //147 + 49 // (49 for header)
+        let tableHeight: CGFloat = (47*4.5) + 49 // 47 is height of a row in the table - 49 for the header
         let buttonHeight: CGFloat = 49
         
         let elementWidth = ActionSheet.shared.actionWidth
         
         // Schedule View
         scheduleView.backgroundColor = Colors.dark
-        scheduleView.frame = CGRect(x: 0, y: 0, width: elementWidth, height: tableHeight + (2 * buttonHeight) + 1)
+        scheduleView.frame = CGRect(x: 0, y: 0, width: elementWidth, height: tableHeight + buttonHeight)
         scheduleView.layer.cornerRadius = CGFloat(buttonHeight / 2)
         scheduleView.clipsToBounds = true
         scheduleView.layer.borderWidth = 1
         scheduleView.layer.borderColor = Colors.light.cgColor
         // Important order for the shadow on editSchedule button to be in front of scheduleChoiceTable but behind editScheduleButton
         scheduleView.addSubview(scheduleChoiceTable)
-        scheduleView.addSubview(editScheduleButton)
         scheduleView.addSubview(createScheduleButton)
         // Schedule choice
         scheduleChoiceTable.backgroundColor = Colors.dark
@@ -1788,39 +1786,20 @@ extension ScheduleScreen {
         scheduleChoiceTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         scheduleChoiceTable.layer.borderWidth = 1
         scheduleChoiceTable.layer.borderColor = Colors.light.cgColor
-        // Edit schedule
-        editScheduleButton.addTarget(self, action: #selector(editScheduleAction), for: .touchUpInside)
-        editScheduleButton.setTitle(NSLocalizedString("editSchedule", comment: ""), for: .normal)
-        editScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        editScheduleButton.frame = CGRect(x: 0, y: tableHeight, width: elementWidth, height: 49)
-        editScheduleButton.setTitleColor(Colors.dark, for: .normal)
-        editScheduleButton.backgroundColor = Colors.light
-        editScheduleButton.setImage(#imageLiteral(resourceName: "Calendar"), for: .normal)
-        editScheduleButton.tintColor = Colors.dark
-        editScheduleButton.layer.shadowColor = UIColor.black.cgColor
-        editScheduleButton.layer.shadowOpacity = 0.72
-        editScheduleButton.layer.shadowRadius = 8
-        editScheduleButton.layer.shadowOffset = CGSize.zero
+        
         // Create Schedule
         createScheduleButton.addTarget(self, action: #selector(createScheduleAction), for: .touchUpInside)
         createScheduleButton.setTitle(NSLocalizedString("createSchedule", comment: ""), for: .normal)
         createScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        createScheduleButton.frame = CGRect(x: 0, y: tableHeight + buttonHeight + 1, width: elementWidth, height: buttonHeight)
+        createScheduleButton.frame = CGRect(x: 0, y: tableHeight, width: elementWidth, height: buttonHeight)
         createScheduleButton.setTitleColor(Colors.dark, for: .normal)
         createScheduleButton.backgroundColor = Colors.light
         createScheduleButton.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
         createScheduleButton.tintColor = Colors.dark
-        // Edit profile
-        editProfileButton.addTarget(self, action: #selector(editProfileAction), for: .touchUpInside)
-        editProfileButton.setTitle(NSLocalizedString("editProfile", comment: ""), for: .normal)
-        editProfileButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        editProfileButton.frame = CGRect(x: 0, y: scheduleView.frame.height + 10, width: elementWidth, height: 49)
-        editProfileButton.layer.cornerRadius = 49 / 2
-        editProfileButton.clipsToBounds = true
-        editProfileButton.setTitleColor(Colors.dark, for: .normal)
-        editProfileButton.backgroundColor = Colors.light
-        editProfileButton.setImage(#imageLiteral(resourceName: "Profile"), for: .normal)
-        editProfileButton.tintColor = Colors.dark
+        createScheduleButton.layer.shadowColor = UIColor.black.cgColor
+        createScheduleButton.layer.shadowOpacity = 0.72
+        createScheduleButton.layer.shadowRadius = 8
+        createScheduleButton.layer.shadowOffset = CGSize.zero
         //
         
         // Separator
@@ -1856,11 +1835,19 @@ extension ScheduleScreen {
         // Present as days or as week
         // days
         if scheduleStyle == 0 {
-            pageStack.frame.size.height = 27
+            pageStack.frame.size = CGSize(width: pageStack.bounds.width, height: pageStackHeight)
+            navigationSeparatorTopConstraint.constant = pageStackHeight
+            scheduleTableTopConstraint.constant = pageStackHeight
+            separator.center.y = separatorY
+            pageStack.alpha = 1
             pageStack.isUserInteractionEnabled = true
         // week
         } else if scheduleStyle == 1 {
-            pageStack.frame.size.height = 0
+            pageStack.frame.size = CGSize(width: pageStack.bounds.width, height: 0)
+            navigationSeparatorTopConstraint.constant = 0
+            scheduleTableTopConstraint.constant = 0
+            separator.center.y = separatorY
+            pageStack.alpha = 0
             pageStack.isUserInteractionEnabled = false
         }
         

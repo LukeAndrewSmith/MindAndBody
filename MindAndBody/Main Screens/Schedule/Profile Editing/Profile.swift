@@ -18,6 +18,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     @IBOutlet weak var questionsTable: UITableView!
     @IBOutlet weak var sectionLabel: UILabel!
+    @IBOutlet weak var topView: UIView!
     //
     // Also used as back button
     @IBOutlet weak var dismissViewButton: UIButton!
@@ -54,6 +55,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
         UIApplication.shared.statusBarStyle = .lightContent
         //
         sectionLabel.text = NSLocalizedString("profile", comment: "")
@@ -61,8 +63,11 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             dismissViewButton.imageView?.image = #imageLiteral(resourceName: "Back Arrow")
         }
         //
-        // BackgroundImage
+        // BackgroundImage / Color
         addBackgroundImage(withBlur: true, fullScreen: true)
+        view.backgroundColor = Colors.light
+        //        sectionLabel.backgroundColor = Colors.dark
+        topView.backgroundColor = UIColor.clear
         //
         // Table View
         questionsTable.tableFooterView = UIView()
@@ -73,7 +78,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         // Progress Bar
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
-        progressBar.trackTintColor = Colors.light
+        progressBar.trackTintColor = Colors.gray
         progressBar.progressTintColor = Colors.green
         progressBar.setProgress(0, animated: true)
         

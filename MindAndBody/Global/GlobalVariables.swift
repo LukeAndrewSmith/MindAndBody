@@ -52,7 +52,8 @@ enum Colors {
     // Light
     static let light = UIColor.white
 //        UIColor.white
-    static let gray = UIColor(red:0.90, green:0.89, blue:0.89, alpha:1.0)
+    static let gray = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
+//    UIColor(red:0.90, green:0.89, blue:0.89, alpha:1.0)
 //        UIColor(red:0.92, green:0.91, blue:0.91, alpha:1.0)
 //        UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
     // Dark
@@ -70,6 +71,7 @@ enum Fonts {
     // Navigation bar
     static let navigationBar = UIFont(name: "SFUIDisplay-thin", size: 23)
     
+    static let cellRegular = UIFont(name: "SFUIDisplay-light", size: 19)
     static let bigRegular = UIFont(name: "SFUIDisplay-thin", size: 30)
     static let mediumRegular = UIFont(name: "SFUIDisplay-thin", size: 23)
     

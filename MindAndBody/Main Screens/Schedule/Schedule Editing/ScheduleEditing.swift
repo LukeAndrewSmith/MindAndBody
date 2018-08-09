@@ -422,6 +422,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Note don't actually need to save anything, name for user experience
         // Ensure notifications correct
         ReminderNotifications.shared.setNotifications()
+        updateWeekProgress()
+        updateTracking()
         self.dismiss(animated: true)
     }
     
@@ -458,6 +460,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "selectedSchedule"])
             //
+            self.updateWeekProgress()
+            self.updateTracking()
             self.dismiss(animated: true)
         }
         // Cancel reset action

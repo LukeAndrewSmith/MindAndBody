@@ -263,13 +263,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         // Header
-        print(section)
         let header = UIView()
         let headerHeight = CGFloat(24.5)
         header.backgroundColor = Colors.gray
         let label = UILabel()
         label.backgroundColor = .clear
-        label.font = UIFont(name: "SFUIDisplay-light", size: 14)!
+        label.font = UIFont(name: "SFUIDisplay-light", size: 13)!
         label.textColor = UIColor.gray
         label.text = NSLocalizedString(sectionsArray[section]["title"] as! String, comment: "").uppercased()
         label.sizeToFit()
@@ -277,7 +276,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         header.addSubview(label)
         //
         switch section {
-        case 0,2,3,5:
+        case 0,2,3:
             let explanationButton = UIButton()
             explanationButton.frame = CGRect(x: label.frame.maxX + 8, y: 3.25, width: 18, height: 18)
             explanationButton.center.y = label.center.y
@@ -290,16 +289,18 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             explanationButton.tag = section
             explanationButton.addTarget(self, action: #selector(helpButtonAction(_:)), for: .touchUpInside)
             header.addSubview(explanationButton)
+            // Add extra button to make the area of the question mark larger and easier to press
+            let extraButton = UIButton()
+            extraButton.frame = CGRect(x: 0, y: 0, width: 49, height: 24.5)
+            extraButton.center.x = explanationButton.center.x
+            extraButton.tag = section
+            extraButton.addTarget(self, action: #selector(helpButtonAction(_:)), for: .touchUpInside)
+            header.addSubview(extraButton)
         default: break
         }
         return header
     }
     
-//    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-//        let footer = view as! UITableViewHeaderFooterView
-//        footer.backgroundColor = Colors.gray
-//    }
-//
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = UIView()
         footer.frame = CGRect.zero
@@ -311,11 +312,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 24.5
     }
-//
-//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 0
-//    }
-    
+
     // Rows
     // Number of rows per section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -334,7 +331,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.backgroundColor = Colors.light
             
             cell.textLabel?.text = NSLocalizedString("profile", comment: "")
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.textLabel?.font = Fonts.cellRegular
             cell.accessoryType = .disclosureIndicator
             
             return cell
@@ -349,7 +346,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.backgroundColor = Colors.light
                 //
                 cell.textLabel?.text = NSLocalizedString("backgroundImage", comment: "")
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                cell.textLabel?.font = Fonts.cellRegular
                 
                 // Background ImageView
                 let backgroundImageView = UIImageView()
@@ -388,8 +385,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 // Units
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                 cell.backgroundColor = Colors.light
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                cell.textLabel?.font = Fonts.cellRegular
+                cell.detailTextLabel?.font = Fonts.cellRegular
                 
                 cell.textLabel?.text = NSLocalizedString("units", comment: "")
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -420,7 +417,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.selectionStyle = .none
                 //
                 cell.textLabel?.text = NSLocalizedString("automaticSessions", comment: "")
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                cell.textLabel?.font = Fonts.cellRegular
                 //
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let automaticSession = settings["TimeBasedSessions"]![0]
@@ -442,7 +439,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                 //
                 cell.textLabel?.text = NSLocalizedString("automaticYoga", comment: "")
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                cell.textLabel?.font = Fonts.cellRegular
                 //
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let automaticYogaArray = settings["AutomaticYoga"]!
@@ -456,7 +453,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 }
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = Colors.light
-                cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                cell.detailTextLabel?.font = Fonts.cellRegular
                 //
                 cell.accessoryType = .disclosureIndicator
                 //
@@ -471,10 +468,10 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = Colors.light
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.textLabel?.font = Fonts.cellRegular
             cell.textLabel?.textColor = UIColor.black
             //
-            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.detailTextLabel?.font = Fonts.cellRegular
             //
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             
@@ -528,8 +525,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.detailTextLabel?.text = String(restTimes[indexPath.row]) + " s"
             //
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
-            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.textLabel?.font = Fonts.cellRegular
+            cell.detailTextLabel?.font = Fonts.cellRegular
             cell.backgroundColor = Colors.light
             //
             return cell
@@ -539,21 +536,21 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
             cell.backgroundColor = Colors.light
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.textLabel?.font = Fonts.cellRegular
             //
             // Reset Walkthrough
             if indexPath.row == 0 {
                 cell.textLabel?.text = NSLocalizedString("resetWalkthrough", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = Colors.light
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                cell.textLabel?.font = Fonts.cellRegular
                 return cell
             // Reset App
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = NSLocalizedString("resetApp", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = Colors.light
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+                cell.textLabel?.font = Fonts.cellRegular
                 return cell
             }
         //
@@ -569,6 +566,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         switch indexPath.section {
         // Profile
         case 0:
+            performSegue(withIdentifier: "ProfileSegue", sender: nil)
             tableView.deselectRow(at: indexPath, animated: true)
 
         // Background
@@ -972,6 +970,13 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        // Indicate coming from settings for profile
+        if segue.identifier == "ProfileSegue" {
+            let destinationVC = segue.destination as! Profile
+            destinationVC.comingFromSchedule = true
+            //
+        }
     }
     
     
@@ -1055,8 +1060,43 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     //
     // MARK: Help - question mark handler
-    func helpButtonAction(_ sender: UIButton) {
-        print(sender.tag)
+    
+    var explanationView = UIView()
+    var explanationHighlight = UIView()
+    var explanationLabel = UILabel()
+    var nextButtonExplanation = UIButton()
+    
+    let explanationTexts = ["settings0", "", "settings1", "settings2", "", ""]
+    
+    @objc func helpButtonAction(_ sender: UIButton) {
+        
+        // Setup
+        nextButtonExplanation.addTarget(self, action: #selector(explanationNextAction), for: .touchUpInside)
+        explanationView = setWalkthrough(walkthroughView: explanationView, walkthroughLabel: explanationLabel, walkthroughHighlight: explanationHighlight, nextButton: nextButtonExplanation)
+        
+        // Label
+        explanationLabel.text = NSLocalizedString(explanationTexts[sender.tag], comment: "")
+        explanationLabel.sizeToFit()
+        explanationLabel.frame = CGRect(x: 13, y: view.frame.maxY - explanationLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: explanationLabel.frame.size.height)
+    
+        // Colour
+        explanationLabel.textColor = Colors.light
+        explanationLabel.backgroundColor = Colors.dark
+        explanationHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
+        explanationHighlight.layer.borderColor = Colors.dark.cgColor
+        
+        // Highlight - none
+        explanationHighlight.frame = CGRect.zero
+    }
+    
+    @objc func explanationNextAction() {
+       // Dismiss view
+        UIView.animate(withDuration: 0.4, animations: {
+            self.explanationView.alpha = 0
+        }, completion: { finished in
+            self.explanationView.removeFromSuperview()
+            self.explanationView.alpha = 1
+        })
     }
     
     //

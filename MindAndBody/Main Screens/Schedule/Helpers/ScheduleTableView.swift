@@ -42,7 +42,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 return weekOfThe + firstMondayWithOrdinal!
             }
         case scheduleChoiceTable:
-            return NSLocalizedString("chooseSchedule", comment: "")
+            return NSLocalizedString("mySchedules", comment: "")
         default:
             return ""
         }
@@ -294,16 +294,51 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             
         //
         case scheduleChoiceTable:
+            
+//            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+//            cell.textLabel?.textColor = Colors.light
+//            cell.textLabel?.text = schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as! String
+            
+            let label = UILabel()
+            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+            label.text = schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as! String
+            label.textColor = Colors.light
+            label.sizeToFit()
+            // twice nomal padding
+            let padding: CGFloat = 16 + 16
+            // 1 for border
+            label.center = CGPoint(x: 1 + padding + (label.bounds.width / 2), y: cell.bounds.height / 2)
+            cell.addSubview(label)
+            
             let selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
-            //
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
-            cell.textLabel?.textAlignment = .left
-            cell.textLabel?.textColor = Colors.light
             if indexPath.row == selectedSchedule {
-                cell.accessoryType = .checkmark
-                cell.tintColor = Colors.green
+                let indicator = UIImageView()
+                indicator.image = #imageLiteral(resourceName: "CheckMark")
+                indicator.frame.size = CGSize(width: cell.bounds.height / 2, height: cell.bounds.height / 2)
+                indicator.center = CGPoint(x: 1 + (padding / 2), y: label.center.y)
+//                indicator.backgroundColor = Colors.green
+                indicator.tintColor = Colors.green
+//                indicator.layer.cornerRadius = indicator.bounds.height / 2
+//                indicator.clipsToBounds = true
+                cell.addSubview(indicator)
+                
+                let editButton = UIButton()
+                editButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
+                editButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
+                editButton.setTitleColor(UIColor.gray, for: .normal)
+                editButton.sizeToFit()
+                editButton.frame = CGRect(x: tableView.bounds.width - editButton.bounds.width - 16, y: 0, width: editButton.bounds.width, height: 47)
+                editButton.addTarget(self, action: #selector(editScheduleAction), for: .touchUpInside)
+                cell.addSubview(editButton)
+                
+                to do
+                // question: editing, after editing, select just edited schedule - answer: just have edit on the one thats currently selected
+                // schedule: don;t dismiss action sheet, have ok/done button instead of cancel
+                to do
+                
+//                cell.accessoryType = .checkmark
+//                cell.tintColor = Colors.green
             }
-            cell.textLabel?.text = NSLocalizedString(schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as! String, comment: "")
             
         //
         default:
@@ -378,14 +413,14 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             // Reload table
             layoutViews()
             scheduleChoiceTable.reloadData()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
-                self.scheduleTable.reloadData()
-                // Dismiss action sheet
-                ActionSheet.shared.animateActionSheetDown()
-                //
-            })
+            self.scheduleTable.reloadData()
+            // Dismiss action sheet
+            ActionSheet.shared.animateActionSheetDown()
+            //
             // Tracking
             updateWeekGoal()
+            updateWeekProgress()
+            updateTracking()
             // Notifications
             ReminderNotifications.shared.setNotifications()
             tableView.deselectRow(at: indexPath, animated: true)
@@ -446,6 +481,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "selectedSchedule"])
             // Tracking
             updateWeekGoal()
+            updateWeekProgress()
+            updateTracking()
             // Set Notifications
             ReminderNotifications.shared.setNotifications()
             

@@ -104,11 +104,11 @@
                             <constraint firstItem="bzt-Zq-NOh" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="6iG-BJ-b9Y"/>
                             <constraint firstItem="oPE-Kh-Caj" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="8eT-Ou-Jam"/>
                             <constraint firstItem="bzt-Zq-NOh" firstAttribute="width" secondItem="Uk6-xI-8tD" secondAttribute="width" multiplier="1/7" id="Chq-l8-sFW"/>
-                            <constraint firstItem="oPE-Kh-Caj" firstAttribute="top" secondItem="Uk6-xI-8tD" secondAttribute="bottom" id="L2t-Wt-1ER"/>
+                            <constraint firstItem="oPE-Kh-Caj" firstAttribute="top" secondItem="ANf-Xe-L7P" secondAttribute="top" constant="44" id="EEu-dX-BjX"/>
                             <constraint firstItem="Uk6-xI-8tD" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="L8f-sx-BzF"/>
+                            <constraint firstItem="UAO-fk-NJD" firstAttribute="top" secondItem="ANf-Xe-L7P" secondAttribute="top" constant="44" id="Q8P-Sb-fkF"/>
                             <constraint firstAttribute="trailing" secondItem="oPE-Kh-Caj" secondAttribute="trailing" id="RwX-n2-cJz"/>
                             <constraint firstItem="Uk6-xI-8tD" firstAttribute="top" secondItem="G33-j5-FFf" secondAttribute="bottom" id="TuB-z1-wnz"/>
-                            <constraint firstItem="UAO-fk-NJD" firstAttribute="top" secondItem="Uk6-xI-8tD" secondAttribute="bottom" id="bXa-rl-Qst"/>
                             <constraint firstItem="bzt-Zq-NOh" firstAttribute="bottom" secondItem="Uk6-xI-8tD" secondAttribute="bottom" id="dzf-qh-ECe"/>
                             <constraint firstItem="UAO-fk-NJD" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="eoa-ps-WDo"/>
                             <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="oPE-Kh-Caj" secondAttribute="bottom" id="hvm-Og-oex"/>
@@ -127,9 +127,11 @@
                         <outlet property="dayIndicator" destination="bzt-Zq-NOh" id="2F2-SL-0CU"/>
                         <outlet property="dayIndicatorLeading" destination="6iG-BJ-b9Y" id="ael-Xe-TQG"/>
                         <outlet property="navigationBar" destination="xF1-Nx-yoQ" id="dBd-vq-1MD"/>
+                        <outlet property="navigationSeparatorTopConstraint" destination="Q8P-Sb-fkF" id="fvc-OC-DwZ"/>
                         <outlet property="pageStack" destination="Uk6-xI-8tD" id="zin-Me-CB9"/>
                         <outlet property="scheduleTable" destination="oPE-Kh-Caj" id="UFV-AU-XOl"/>
                         <outlet property="scheduleTableBottom" destination="hvm-Og-oex" id="dJj-3U-R2h"/>
+                        <outlet property="scheduleTableTopConstraint" destination="EEu-dX-BjX" id="tAk-vd-Uyp"/>
                         <segue destination="bRc-pd-jNj" kind="show" identifier="scheduleSegueOverview" id="SOr-B2-NYZ"/>
                         <segue destination="eVk-Z7-PzP" kind="show" identifier="scheduleMeditationSegueGuided" id="aak-rT-dwz"/>
                         <segue destination="6Gr-JQ-KAl" kind="show" identifier="scheduleMeditationSegueTimer" id="y3k-i5-esE"/>
@@ -1225,16 +1227,24 @@
                                     <action selector="dismissViewButtonAction:" destination="d1w-hu-wYA" eventType="touchUpInside" id="ZVt-f3-57x"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aY6-gU-BNT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="44d-pi-LlM" firstAttribute="leading" secondItem="ck1-4c-xmU" secondAttribute="leading" id="2A5-Md-ogF"/>
                             <constraint firstItem="Ggx-k7-bbd" firstAttribute="top" secondItem="44d-pi-LlM" secondAttribute="bottom" id="30u-0R-zpH"/>
+                            <constraint firstItem="aY6-gU-BNT" firstAttribute="top" secondItem="ck1-4c-xmU" secondAttribute="top" id="NAT-gk-DhN"/>
+                            <constraint firstItem="aY6-gU-BNT" firstAttribute="leading" secondItem="ck1-4c-xmU" secondAttribute="leading" id="OGg-1m-2nV"/>
                             <constraint firstAttribute="trailing" secondItem="eVW-tN-6m5" secondAttribute="trailing" id="Py9-OF-9lP"/>
                             <constraint firstItem="5BY-SK-9oW" firstAttribute="top" secondItem="Ggx-k7-bbd" secondAttribute="bottom" id="TPV-ZF-spg"/>
                             <constraint firstItem="fnx-9W-DOk" firstAttribute="top" secondItem="3Pp-3K-CD5" secondAttribute="bottom" constant="7" id="a73-8P-aUz"/>
                             <constraint firstItem="eVW-tN-6m5" firstAttribute="leading" secondItem="ck1-4c-xmU" secondAttribute="leading" id="aXN-qB-vT9"/>
+                            <constraint firstAttribute="trailing" secondItem="aY6-gU-BNT" secondAttribute="trailing" id="aca-gl-VB6"/>
                             <constraint firstAttribute="trailing" secondItem="44d-pi-LlM" secondAttribute="trailing" id="dRF-0b-mEC"/>
+                            <constraint firstItem="eVW-tN-6m5" firstAttribute="top" secondItem="aY6-gU-BNT" secondAttribute="bottom" id="f83-5s-uxW"/>
                             <constraint firstAttribute="trailing" secondItem="Ggx-k7-bbd" secondAttribute="trailing" id="hgr-Vc-UPR"/>
                             <constraint firstItem="fnx-9W-DOk" firstAttribute="leading" secondItem="ck1-4c-xmU" secondAttribute="leadingMargin" id="hnu-gj-CpE"/>
                             <constraint firstItem="eVW-tN-6m5" firstAttribute="top" secondItem="3Pp-3K-CD5" secondAttribute="bottom" id="l4u-2a-d9J"/>
@@ -1250,13 +1260,14 @@
                         <outlet property="progressBar" destination="44d-pi-LlM" id="FUk-bh-BsO"/>
                         <outlet property="questionsTable" destination="Ggx-k7-bbd" id="qu9-07-n3I"/>
                         <outlet property="sectionLabel" destination="eVW-tN-6m5" id="7eH-Ve-Q4o"/>
+                        <outlet property="topView" destination="aY6-gU-BNT" id="0VM-ZP-LDg"/>
                         <segue destination="JCR-Wc-eVJ" kind="show" identifier="ProfileCustomSegue" id="s9D-3O-zvR"/>
                         <segue destination="FRW-Nq-DUv" kind="show" identifier="ProfileAppHelpSegue" id="dD1-H2-hdg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q30-t8-8oO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3884" y="-3947"/>
+            <point key="canvasLocation" x="4069.5" y="-3949.5"/>
         </scene>
         <!--Item-->
         <scene sceneID="o7y-bT-TM5">
@@ -4506,7 +4517,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgF-Df-hkq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3118" y="-3948"/>
+            <point key="canvasLocation" x="3118" y="-3944"/>
         </scene>
         <!--Schedule Creation Help-->
         <scene sceneID="TI5-U7-nA9">
@@ -4946,7 +4957,7 @@
                         <outlet property="navigationBar" destination="JRG-rZ-TEm" id="Ka0-4M-FmY"/>
                         <segue destination="U5d-IN-X7D" kind="show" identifier="BackgroundImageSegue" id="GKV-bG-CaC"/>
                         <segue destination="8IA-AP-QDR" kind="show" identifier="YogaAutomaticSegue" id="6Xa-ns-zfk"/>
-                        <segue destination="niJ-73-6he" kind="show" identifier="RemindersSegue" id="0Lj-0J-PUR"/>
+                        <segue destination="d1w-hu-wYA" kind="presentation" identifier="ProfileSegue" id="6Nf-Ku-86r"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DbC-9W-Xf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5193,45 +5204,6 @@
             </objects>
             <point key="canvasLocation" x="-41" y="-2031"/>
         </scene>
-        <!--Title-->
-        <scene sceneID="aqL-y2-dNn">
-            <objects>
-                <viewController id="niJ-73-6he" customClass="ReminderNotificationsSettings" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="r0o-45-IJy"/>
-                        <viewControllerLayoutGuide type="bottom" id="B3f-YS-T5Z"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ilL-MP-tfa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1pr-Eq-2Sl">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="niJ-73-6he" id="OJJ-52-1sI"/>
-                                    <outlet property="delegate" destination="niJ-73-6he" id="vM1-00-E7A"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="1pr-Eq-2Sl" secondAttribute="trailing" id="5m8-yW-rd0"/>
-                            <constraint firstItem="1pr-Eq-2Sl" firstAttribute="top" secondItem="r0o-45-IJy" secondAttribute="bottom" id="M70-xI-kEN"/>
-                            <constraint firstItem="1pr-Eq-2Sl" firstAttribute="leading" secondItem="ilL-MP-tfa" secondAttribute="leading" id="Ntp-Za-Mr2"/>
-                            <constraint firstItem="B3f-YS-T5Z" firstAttribute="top" secondItem="1pr-Eq-2Sl" secondAttribute="bottom" id="s2v-1U-K85"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Title" id="1Qk-Pg-tmB"/>
-                    <connections>
-                        <outlet property="navigationBar" destination="1Qk-Pg-tmB" id="Qr8-C4-aeZ"/>
-                        <outlet property="remindersTable" destination="1pr-Eq-2Sl" id="A2z-qX-uyV"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RqN-b4-mCf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1169" y="3474"/>
-        </scene>
         <!--Info Table1-->
         <scene sceneID="ARz-ie-hbO">
             <objects>
@@ -5292,9 +5264,9 @@
         <image name="WeekView" width="187" height="333"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tks-o5-DTQ"/>
+        <segue reference="SXY-HC-FeY"/>
         <segue reference="na3-42-cEE"/>
-        <segue reference="0ea-jZ-0Du"/>
+        <segue reference="dD1-H2-hdg"/>
         <segue reference="tUJ-Lb-bfp"/>
         <segue reference="2sH-Wt-Foe"/>
         <segue reference="SOr-B2-NYZ"/>
@@ -5310,6 +5282,6 @@
         <segue reference="izD-lx-C3k"/>
         <segue reference="54L-er-yGs"/>
         <segue reference="gRr-Mf-DSK"/>
-        <segue reference="0hW-vM-NHz"/>
+        <segue reference="s9D-3O-zvR"/>
     </inferredMetricsTieBreakers>
 </document>

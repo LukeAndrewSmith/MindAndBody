@@ -52,6 +52,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var scheduleTable: UITableView!
     @IBOutlet weak var scheduleTableBottom: NSLayoutConstraint!
     @IBOutlet weak var pageStack: UIStackView!
+    @IBOutlet weak var navigationSeparatorTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scheduleTableTopConstraint: NSLayoutConstraint!
     //
     @IBOutlet weak var dayIndicator: UIView!
     @IBOutlet weak var dayIndicatorLeading: NSLayoutConstraint!
@@ -62,6 +64,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
     let dayArrayChar = ["mondayLetter","tuesdayLetter","wednesdayLetter","thursdayLetter","fridayLetter","saturdayLetter","sundayLetter"]
     // StackView
+    var pageStackHeight: CGFloat = 44
     var stackArray: [UILabel] = []
     var stackFontUnselected = UIFont(name: "SFUIDisplay-regular", size: 17)
     var stackFontSelected = UIFont(name: "SFUIDisplay-bold", size: 17)
@@ -70,8 +73,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     let scheduleChoiceTable = UITableView()
     let scheduleView = UIView()
     let createScheduleButton = UIButton()
-    let editScheduleButton = UIButton()
-    let editProfileButton = UIButton()
 
     //
     // Very silly variable used in choices of 'endurance' group - steady state, as there is a 'time choice' after 'warmup/stretching' choice, variable indicating which one was selected
@@ -297,28 +298,16 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         self.performSegue(withIdentifier: "ScheduleCreationSegue", sender: self)
     }
     
-    // Edit Profile
-    @objc func editProfileAction() {
-        //
-        ActionSheet.shared.animateActionSheetDown()
-        //
-        // AND indicate to profile segue that coming from schedule so that the 'skip to goals section' button can be presented
-        self.performSegue(withIdentifier: "EditProfileSegue", sender: self)
-        
-    }
-    
     // Schedule Button (Bar button item)
     @IBAction func scheduleButton(_ sender: Any) {
         // Local
         let actionSheet = UIView()
         //
-        let height = scheduleChoiceTable.bounds.height + createScheduleButton.bounds.height + editScheduleButton.bounds.height + 10 + editProfileButton.bounds.height
+        let height = scheduleChoiceTable.bounds.height + createScheduleButton.bounds.height
             //+ 10
         actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionWidth, height: height)
-        actionSheet.layer.cornerRadius = editScheduleButton.bounds.height / 2
+        actionSheet.layer.cornerRadius = createScheduleButton.bounds.height / 2
         actionSheet.addSubview(scheduleView)
-        actionSheet.addSubview(editProfileButton)
-
         //
         ActionSheet.shared.setupActionSheet()
         ActionSheet.shared.actionSheet.addSubview(actionSheet)
@@ -341,10 +330,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             let backItem = UIBarButtonItem()
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
-        //
-        } else if segue.identifier == "EditProfileSegue" {
-            let destinationVC = segue.destination as! Profile
-            destinationVC.comingFromSchedule = true
         //
         } else if segue.identifier == "EditScheduleSegue" {
             ScheduleVariables.shared.shouldReloadSchedule = true
