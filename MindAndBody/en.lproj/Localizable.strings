@@ -149,7 +149,6 @@
 
 
 // MARK: Mind & Body
-// MARK: Home Screen
 // Title
 "mind&body" = "Mind & Body";
 
@@ -263,7 +262,7 @@
 "anklesEF" = "Maintaining good posture\nRotating gently";
 
 // Foam/Ball Roll
-"foamRoll" = "Foam/Ball Roll";
+"foamRoll" = "Foam Roll";
 
 "backf" = "Back Foam Roll";
 "backfEH" = "Place the foam roller underneath your back, around shoulder height\nBend your knees close to a little past 45º, placing your feet at hip width apart\nPut you hands behind your head with your elbows a little forward (so as to keep your shoulder a little forward)(or put your hands on your chest with your elbows up)\nKeeping your back a little tensed and straight, breath in while slowly rolling down your back by extending your legs until the roller reaches just above where your ribcage ends\nWhile breathing out, roll back up to shoulder height\nRepeat for the recommended nº reps\nNote:\nyou can pause at especially tense areas, and can rotate your whole torso to roll a specific side";
@@ -1000,6 +999,7 @@
         "general" = "General";
         "postExercise" = "Post-Workout";
 
+"back/neck" = "Back/Neck";
 
         // Information
 // MARK: Could be in lessons
@@ -1469,7 +1469,7 @@
 
 
         //
-        // Meditation //
+// MARK:Med itation //
         //
         "meditationTimer" = "Meditation Timer";
         "meditations" = "Meditations";
@@ -1483,6 +1483,8 @@
         // Timer
             //
             "meditationInputTitle" = "Meditation Title";
+
+            "tapToDismiss" = "Tap to dismiss";
 
             "bells" = "Bells";
             "bellTime" = "Bell time";
@@ -2876,7 +2878,7 @@
 
 
 //
-// MARK: TITLES for home screen choices
+// MARK: TITLES for sessions choices
 // Warmup
 "stretchingYoga" = "Stretching/\nYoga";
 "stretchingYoga2" = "Stretching/Yoga";
@@ -3291,8 +3293,6 @@
 //
 // Questions
     // Answer
-// Age
-"profileQAge" = "Age"; // Age
 // Gender
 "profileQGender" = "Gender"; // Gender
     "profileAGender1" = "Male";
@@ -3303,26 +3303,22 @@
     "profileAWorkoutExperience1" = "No";
     "profileAWorkoutExperience2" = "Fairly";
     "profileAWorkoutExperience3" = "Yes";
-"profileQWorkoutPushup" = "Can you do 15 slow pushups?"; // Strength: Pushup
-    "profileAWorkoutPushup1" = "No";
-    "profileAWorkoutPushup2" = "Not very easily";
-    "profileAWorkoutPushup3" = "Yes, comfortably";
-"profileQWorkoutPullup" = "Can you do 10 full pullups?"; // Strength: Pullup
-    "profileAWorkoutPullup1" = "No";
-    "profileAWorkoutPullup2" = "Not very easily";
-    "profileAWorkoutPullup3" = "Yes, comfortably";
-"profileQWorkoutSquat" = "Can you do 50 consecutive bodyweight squats?"; // Strength: Squat
-    "profileAWorkoutSquat1" = "No";
-    "profileAWorkoutSquat2" = "Not very easily";
-    "profileAWorkoutSquat3" = "Yes, comfortably";
-"profileQWorkoutWeights" = "Are you experienced in weightlifting?"; // Strength: Squat
+"profileQWorkoutPushup" = "How many slow pushups can you do?"; // Strength: Pushup
+    "profileAWorkoutPushup1" = "5 or less";
+    "profileAWorkoutPushup2" = "5 to 15";
+    "profileAWorkoutPushup3" = "15 or more";
+"profileQWorkoutPullup" = "How many slow full pullups can you do?"; // Strength: Pullup
+    "profileAWorkoutPullup1" = "5 or less";
+    "profileAWorkoutPullup2" = "5 to 10";
+    "profileAWorkoutPullup3" = "10 or more";
+"profileQWorkoutSquat" = "How many slow consecutive bodyweight squats can you comfortably do?"; // Strength: Squat
+    "profileAWorkoutSquat1" = "30 or less";
+    "profileAWorkoutSquat2" = "30 to 50";
+    "profileAWorkoutSquat3" = "50 or more";
+"profileQWorkoutWeights" = "Are you experienced in weightlifting?"; // Strength
     "profileAWorkoutWeights1" = "No";
     "profileAWorkoutWeights2" = "Fairly";
     "profileAWorkoutWeights3" = "Yes";
-"profileQWorkoutOpinion" = "Would you consider yourself strong?"; // Strength: Question
-    "profileAWorkoutOpinion1" = "Not at all";
-    "profileAWorkoutOpinion2" = "Not really";
-    "profileAWorkoutOpinion3" = "Yes";
 
 // Endurance
 "profileQEnduranceExperience" = "Do you do much cardio (running, biking etc..)?"; // Experience: Cardio, amount
@@ -3337,11 +3333,6 @@
     "profileAEnduranceAbility1" = "No";
     "profileAEnduranceAbility2" = "Not comfortably";
     "profileAEnduranceAbility3" = "Yes, comfortably";
-"profileQEnduranceOpinion" = "Would you consider yourself fit?"; // Endurance opinion
-    "profileAEnduranceOpinion1" = "No";
-    "profileAEnduranceOpinion2" = "Fairly (I wouldn't say I'm unfit)";
-    "profileAEnduranceOpinion3" = "Yes (I like my sport)";
-
 
 // Yoga
 "profileQYogaExperience" = "Are you experienced in yoga?"; // Experience: Yoga
@@ -3350,17 +3341,17 @@
     "profileAYogaExperience3" = "Yes";
 
 // Flexibility
-"profileQFlexibilityHamstrings" = "Can you touch your toes with straight (slightly bent) legs?"; // Hamstrings
+"profileQFlexibilityHamstrings" = "Can you touch your toes with slightly bent legs?"; // Hamstrings
     "profileAFlexibilityHamstrings1" = "No";
     "profileAFlexibilityHamstrings2" = "Nearly";
     "profileAFlexibilityHamstrings3" = "Yes";
-"profileQFlexibilityHips" = "Are your knees close to the ground doing the butterfly (heels as close to your groin as comfortable)?"; // Hips
+"profileQFlexibilityHips" = "Are your knees close to the ground doing the butterfly?"; // Hips
     "profileAFlexibilityHips1" = "No";
-    "profileAFlexibilityHips2" = "Fairly (around the height of a fist with your thumb sticking up)";
+    "profileAFlexibilityHips2" = "Fairly (more than the height of a fist)";
     "profileAFlexibilityHips3" = "Yes (the height of a fist or less)";
 "profileQFlexibilityHipsAnkles" = "Can you squat (hips below knees) comfortably?"; // Hips/Ankles
     "profileAFlexibilityHipsAnkles1" = "No";
-    "profileAFlexibilityHipsAnkles2" = "Nearly (I have to put in effort to stay balanced)";
+    "profileAFlexibilityHipsAnkles2" = "Nearly (It takes effort to stay balanced)";
     "profileAFlexibilityHipsAnkles3" = "Yes";
 "profileQFlexibilityKnees" = "Can you sit on your heels?"; // Kneels
     "profileAFlexibilityKnees1" = "No";
@@ -3392,7 +3383,9 @@
         // Titles //
         "backgroundImage" = "Background Image";
         "restTime" = "Rest Times";
+        "customWarmupStretching" = "Custom Warmup/Stretching";
         "reset" = "Reset";
+
 
         // Contents //
         // Presentation Style
@@ -3539,9 +3532,9 @@
 //        "settings2" = "Automatic Yoga:\nTimed sessions for yoga; you have to set your average breath length to enable it.\nNOTE: Perform non-timed yoga first, reading the explanations of each pose until you are comfortable with the techniques.";
 //        "settings3" = "Reminders:\nThe app can send reminders indicating the number of sessions planned in the morning/afternoon at times you set. You can also choose to turn off the motivating comments included in the reminders here.";
 
-"settings0" = "Profile:\nThe sessions the app selects for you in your schedule are chosen based on your profile, update it whenever you have improved to keep the sessions tailored to you.";
-"settings1" = "Automatic Sessions:\nThe app can tell you to do '20s' of a movement rather than '10 reps' and time it, like this you don't need to touch your phone.\nAutomatic Yoga is the same but some extra settings need to be personalised.";
-"settings2" = "Reminders:\nNotifications that popup to let you know what you have planned.";
+"settings0" = "Profile:\nYour schedule chooses sessions for you based on your profile, update it whenever you have improved to keep the sessions tailored to you.";
+"settings1" = "Automatic Sessions:\n'30s' of a movement rather than '10 reps'; the app times each movement and rest for you, just watch and follow.\nAutomatic Yoga is the same but some extra settings need to be personalised to enable it.";
+"settings2" = "Reminders:\nNotifications that let you know what you have planned.";
 
         // Automatic Yoga
         "automaticYoga0" = "Average Breath Length:\nThe length of your average breath when doing yoga. A breath being both inhale and exhale, it can be calculated by timing 10-30 breaths and then dividing by the number of breaths.";

@@ -148,19 +148,19 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             // Only present the current cell
                 // This is necessary as tableview within the cell is reused, so can only be loaded for one cell
         if tableView == questionsTable && indexPath.row == selectedQuestion {
-            switch indexPath.row {
-            // Age Picker
-            case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileAgeCell", for: indexPath) as! ProfileAgeCell
-                cell.row = indexPath.row
-                cell.ageAnswer = ageAnswer
-                cell.selectedQuestion = selectedQuestion
-                cell.agePicker.reloadAllComponents()
-                cell.delegate = self
-                return cell
-                //
+//            switch indexPath.row {
+//            // Age Picker
+//            case 0:
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileAgeCell", for: indexPath) as! ProfileAgeCell
+//                cell.row = indexPath.row
+//                cell.ageAnswer = ageAnswer
+//                cell.selectedQuestion = selectedQuestion
+//                cell.agePicker.reloadAllComponents()
+//                cell.delegate = self
+//                return cell
+//                //
             // Answer Table with image (flexibility questions)
-            default:
+//            default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
                 cell.row = indexPath.row
                 cell.selectedQuestion = selectedQuestion
@@ -168,7 +168,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
                 cell.delegate = self
                 return cell
                 //
-            }
+//            }
         // Last row, save profile cell
         } else if indexPath.row == scheduleDataStructures.profileQA.count {
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
@@ -506,10 +506,10 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         answerTableView.layer.cornerRadius = 15
         answerTableView.clipsToBounds = true
         answerTableView.isScrollEnabled = false
-        //
+        
         questionLabel.text = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["Q"]![0], comment: "")
-        questionLabel.sizeToFit()
-        //
+        questionLabel.sizeThatFits(sizeThatFits(CGSize(width: questionLabel.bounds.width, height: .greatestFiniteMagnitude)))
+        
         if image != "" && elementStack.bounds.height > questionsTableHeight {
             answerImageTrailing.constant = (elementStack.bounds.width * 0.25) / 2
             answerImageLeading.constant = (elementStack.bounds.width * 0.25) / 2
@@ -608,7 +608,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
             // Update difficulty levels each time row selected
                 // this is incase 
             var allAnswered = true
-            for i in 0...profileAnswers.count - 1 {
+            for i in 0..<scheduleDataStructures.defaultProfileAnswers.count {
                 if profileAnswers[scheduleDataStructures.profileQASorted[i]] == -1 {
                     allAnswered = false
                 }

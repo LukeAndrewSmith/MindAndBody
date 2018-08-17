@@ -90,11 +90,6 @@ enum scheduleDataStructures {
     // Questions & Answers
     static let profileQA: [String: [String: [String]]] =
         [
-            // Age - GOOD
-            "age": ["Q": ["profileQAge"],
-                    "A": [""],
-                    "image": [""]],
-            
             // Gender - GOOD
             "gender": ["Q": ["profileQGender"],
                        "A": ["profileAGender1", "profileAGender2", "profileAGender3"],
@@ -116,9 +111,6 @@ enum scheduleDataStructures {
             "workoutWeights": ["Q": ["profileQWorkoutWeights"],
                                "A": ["profileAWorkoutWeights1", "profileAWorkoutWeights2", "profileAWorkoutWeights3"],
                                "image": [""]],
-            "workoutOpinion": ["Q": ["profileQWorkoutOpinion"],
-                               "A": ["profileAWorkoutOpinion1", "profileAWorkoutOpinion2", "profileAWorkoutOpinion3"],
-                               "image": [""]],
             
             // Endurance - GOOD
             "enduranceExperience": ["Q": ["profileQEnduranceExperience"], // How much
@@ -131,10 +123,6 @@ enum scheduleDataStructures {
                                  "A": ["profileAEnduranceAbility1", "profileAEnduranceAbility2", "profileAEnduranceAbility3"],
                                  "image": [""]],
             
-            
-            "enduranceOpinion": ["Q": ["profileQEnduranceOpinion"],
-                                 "A": ["profileAEnduranceOpinion1", "profileAEnduranceOpinion2", "profileAEnduranceOpinion3"],
-                                 "image": [""]],
             
             // Yoga - TODO
             "yogaExperience": ["Q": ["profileQYogaExperience"],
@@ -170,9 +158,9 @@ enum scheduleDataStructures {
         ]
     
     static let profileQASorted: [String] =
-        ["age", "gender",
-         "workoutExperience", "workoutPushup", "workoutPullup", "workoutSquat", "workoutWeights", "workoutOpinion",
-         "enduranceExperience", "enduranceStairs", "enduranceAbility", "enduranceOpinion",
+        ["gender",
+         "workoutExperience", "workoutPushup", "workoutPullup", "workoutSquat", "workoutWeights",
+         "enduranceExperience", "enduranceStairs", "enduranceAbility",
          "yogaExperience",
          "flexibilityHamstrings", "flexibilityHips", "flexibilityHipsAnkles", "flexibilityKnees", "flexibilityBackBackward", "flexibilityBackSideways", "flexibilityNeck", "flexibilityBalance",
          ]
@@ -211,25 +199,20 @@ enum scheduleDataStructures {
     //    [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
     static let defaultProfileAnswers: [String: Int] =
         [
-            // Age - GOOD
-            "age": -1, // Age - 0
-            
             // Gender - GOOD
-            "gender": -1, // Gender - 1
+            "gender": -1, // Gender
             
             // Strength
-            "workoutExperience": -1, // Workout - 3 - 2
-            "workoutPushup": -1, // Pushup - 7 - 4
-            "workoutPullup": -1, // Pullup - 8 - 5
-            "workoutSquat": -1, // Squat - 9 - 6
-            "workoutWeights": -1, // Squat - 9 - 6
-            "workoutOpinion": -1, // Strength (Opinion) - 10 - 7
+            "workoutExperience": -1, // Workout
+            "workoutPushup": -1, // Pushup
+            "workoutPullup": -1, // Pullup
+            "workoutSquat": -1, // Squat
+            "workoutWeights": -1, // Strength Experience
             
             // Endurance - GOOD
-            "enduranceExperience": -1, // Cardio (Endurance) (Amount) - 4 - 8
-            "enduranceStairs": -1, // Endurance (Ability) - 5 - 9
-            "enduranceAbility": -1, // Endurance (Ability) - 5 - 9
-            "enduranceOpinion": -1, // Endurance (Opinion) - 6 - 10
+            "enduranceExperience": -1, // Cardio (Endurance) (Amount)
+            "enduranceStairs": -1, // Endurance (Ability)
+            "enduranceAbility": -1, // Endurance (Ability)
             
             // Yoga - TODO
             "yogaExperience": -1, // Yoga - 2 - 11
@@ -276,6 +259,7 @@ enum scheduleDataStructures {
                 "hamstrings": 1,
                 "hips": 1,
                 "backNeck": 1
+                // Foam rolling has one difficulty
             ],
             // Yoga
             "yoga": [
@@ -334,7 +318,7 @@ enum scheduleDataStructures {
                     "title": "",
                     // Schedule style: day [0] or full week [1], - 1
                     "scheduleStyle": 0,
-                    // Schedule type: app helps create scheudle [0], custom schedule [1] - 2
+                    // Schedule type: app helps create schedule [0], custom schedule [1] - 2
                     "customSchedule": 0,
                     // Session choice style: app [0] or user chooses [1] - 3
                     "customSessionChoice": 0,

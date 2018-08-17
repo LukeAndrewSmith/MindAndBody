@@ -148,15 +148,11 @@ class BackgroundImageCollection: UICollectionViewController {
             }
             //
         } else if indexPath.row == BackgroundImages.backgroundImageArray.count {
-            // Colour
-            //
-            // Grey
             //
             cell.backgroundImage.image = nil
-            cell.backgroundImage.backgroundColor = Colors.light
+            cell.backgroundImage.backgroundColor = Colors.darkGray
             
             // Selection Label
-            //
             if indexPath.item == backgroundIndex {
                 cell.selectionLabel.backgroundColor = Colors.light
                 cell.isSelected = true

@@ -98,15 +98,24 @@ class MindBody: UIViewController {
             // Black
         // All Black with no blur
         case BackgroundImages.backgroundImageArray.count:
-            Warmup.setTitleColor(Colors.dark, for: .normal)
-            Workout.setTitleColor(Colors.dark, for: .normal)
-            Cardio.setTitleColor(Colors.dark, for: .normal)
-            Stretching.setTitleColor(Colors.dark, for: .normal)
-            Yoga.setTitleColor(Colors.dark, for: .normal)
-            Meditation.setTitleColor(Colors.dark, for: .normal)
+            Warmup.setTitleColor(Colors.light, for: .normal)
+            Workout.setTitleColor(Colors.light, for: .normal)
+            Cardio.setTitleColor(Colors.light, for: .normal)
+            Stretching.setTitleColor(Colors.light, for: .normal)
+            Yoga.setTitleColor(Colors.light, for: .normal)
+            Meditation.setTitleColor(Colors.light, for: .normal)
             body.textColor = Colors.dark
             mind.textColor = Colors.dark
-        // All White
+            //
+            Warmup.backgroundColor = .clear
+            Workout.backgroundColor = .clear
+            Cardio.backgroundColor = .clear
+            Stretching.backgroundColor = .clear
+            Yoga.backgroundColor = .clear
+            Meditation.backgroundColor = .clear
+            body.backgroundColor = .clear
+            mind.backgroundColor = .clear
+        // All White text with blur
         case 4,3,0,1,2,5,6:
             Warmup.setTitleColor(Colors.light, for: .normal)
             Workout.setTitleColor(Colors.light, for: .normal)
@@ -116,17 +125,17 @@ class MindBody: UIViewController {
             Meditation.setTitleColor(Colors.light, for: .normal)
             body.textColor = Colors.light
             mind.textColor = Colors.light
-        //
-        default: break
-        }
-        // Blur
-        if backgroundIndex != BackgroundImages.backgroundImageArray.count {
+            //
             Warmup.backgroundColor = Colors.dark.withAlphaComponent(0.72)
             Workout.backgroundColor = Colors.dark.withAlphaComponent(0.72)
             Cardio.backgroundColor = Colors.dark.withAlphaComponent(0.72)
             Stretching.backgroundColor = Colors.dark.withAlphaComponent(0.72)
             Yoga.backgroundColor = Colors.dark.withAlphaComponent(0.72)
             Meditation.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            body.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+            mind.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+        //
+        default: break
         }
     }
     
@@ -315,13 +324,6 @@ class MindBody: UIViewController {
         
         mind.layer.cornerRadius = mind.frame.size.height / 2
         mind.clipsToBounds = true
-        
-        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        let backgroundIndex = settings["BackgroundImage"]![0]
-        if backgroundIndex != BackgroundImages.backgroundImageArray.count {
-            body.backgroundColor = Colors.dark.withAlphaComponent(0.72)
-            mind.backgroundColor = Colors.dark.withAlphaComponent(0.72)
-        }
     }
     
     

@@ -180,6 +180,8 @@ class MeditationScreen: UIViewController {
 
         // Set back to false
         BellPlayer.shared.didSetEndTime = false
+        
+        UIScreen.main.brightness = userBrightness
     }
     
     //
@@ -287,7 +289,7 @@ class MeditationScreen: UIViewController {
             updateScheduleTracking(fromSchedule: fromSchedule)
             ScheduleVariables.shared.shouldReloadChoice = true
             //
-            if UIScreen.main.brightness == 0 {
+            if view.subviews.contains(hideScreenView) {
                 UIApplication.shared.isStatusBarHidden = false
                 hideScreenView.removeFromSuperview()
                 UIScreen.main.brightness = userBrightness
@@ -378,8 +380,10 @@ class MeditationScreen: UIViewController {
             
         // Meditation Guided
         } else if selectedPreset == -1 && BellPlayer.shared.didSetEndTime == false {
-            // Get the bell
+            // Get the bells
             let url = Bundle.main.url(forResource: bellChosen, withExtension: "caf")!
+            let urlEnding = Bundle.main.url(forResource: "tibetanBowlL4", withExtension: "caf")!
+
             //
             endTime = startTime + Double(durationOfPractice)
             BellPlayer.shared.didSetEndTime = true
@@ -422,7 +426,7 @@ class MeditationScreen: UIViewController {
             // Delay bell
             //
             do {
-                endingBellPlayer = try AVAudioPlayer(contentsOf: url)
+                endingBellPlayer = try AVAudioPlayer(contentsOf: urlEnding)
                 audioPlayerArray.append(endingBellPlayer)
                 endingBellPlayer.play(atTime: endingBellPlayer.deviceCurrentTime + Double(durationOfPractice))
             } catch {
@@ -463,21 +467,31 @@ class MeditationScreen: UIViewController {
         hideScreenView.backgroundColor = .black
         hideScreenView.clipsToBounds = true
         hideScreenView.alpha = 0
+        
+        let label = UILabel()
+        label.text = NSLocalizedString("tapToDismiss", comment: "")
+        label.font = UIFont(name: "SFUIDisplay-light", size: 30)
+        label.textColor = Colors.light
+        label.sizeToFit()
+        label.center = view.center
+        hideScreenView.addSubview(label)
+        
         // single Tap
         let singleTap = UITapGestureRecognizer()
         singleTap.addTarget(self, action: #selector(handleTap))
         hideScreenView.isUserInteractionEnabled = true
         hideScreenView.addGestureRecognizer(singleTap)
         //
-        UIApplication.shared.keyWindow?.insertSubview(self.hideScreenView, aboveSubview: view)
+        view.addSubview(hideScreenView)
         //
         UIView.animate(withDuration: 0.4, animations: {
             UIApplication.shared.isStatusBarHidden = true
             self.hideScreenView.alpha = 1
+            UIScreen.main.brightness = CGFloat(0.25)
         }, completion: { finished in
-            UIScreen.main.brightness = CGFloat(0)
         })
     }
+    
     // Remove Hide Screen
     @IBAction func handleTap(extraTap:UITapGestureRecognizer) {
         //
@@ -485,6 +499,8 @@ class MeditationScreen: UIViewController {
         hideScreenView.removeFromSuperview()
         UIScreen.main.brightness = userBrightness
     }
+    
+    
     
     // Dismiss View
     @IBAction func dismissView(_ sender: Any) {

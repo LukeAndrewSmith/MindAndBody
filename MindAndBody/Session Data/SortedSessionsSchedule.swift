@@ -1641,15 +1641,11 @@ extension sessionData {
             "foamRoll": [
                 // Short
                 "short": [
-                    "easy": ["SFS-1",],
                     "average": ["SFS-1",],
-                    "hard": ["SFS-1",],
                 ],
                 // Normal
                 "normal": [
-                    "easy": ["SFN-1",],
                     "average": ["SFN-1",],
-                    "hard": ["SFN-1",],
                 ],
             ],
         ],

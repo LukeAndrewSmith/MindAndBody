@@ -63,7 +63,7 @@ class ActionSheet {
         cancelButton.backgroundColor = Colors.light
         cancelButton.setTitleColor(Colors.red, for: .normal)
         cancelButton.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
-        cancelButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        cancelButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         cancelButton.layer.cornerRadius = cancelButton.bounds.height / 2
         cancelButton.clipsToBounds = true
         actionSheet.addSubview(cancelButton)

@@ -56,6 +56,8 @@ enum Colors {
 //    UIColor(red:0.90, green:0.89, blue:0.89, alpha:1.0)
 //        UIColor(red:0.92, green:0.91, blue:0.91, alpha:1.0)
 //        UIColor(red:0.89, green:0.89, blue:0.89, alpha:1.0)
+    // Dark gray
+    static let darkGray = UIColor(white: 0.43, alpha: 1)
     // Dark
     static let dark = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
 //        UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)

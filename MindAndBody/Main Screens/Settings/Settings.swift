@@ -43,6 +43,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // switches
     let automaticSessionSwitch = UISwitch()
     let motivationSwitch = UISwitch()
+    let customSwitch = UISwitch()
     // Time array
     var timeInDayArray: [[Int]] = [
         // Hours
@@ -169,6 +170,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Switches
         setupSwitch(switchToSetup: automaticSessionSwitch)
         setupSwitch(switchToSetup: motivationSwitch)
+        setupSwitch(switchToSetup: customSwitch)
     }
     
     func setupSwitch(switchToSetup: UISwitch) {
@@ -251,6 +253,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                           "rows": 3],
                          ["title": "restTimes",
                           "rows": 3],
+                         ["title": "custom",
+                          "rows": 1],
                          ["title": "reset",
                           "rows": 2],
                          ]
@@ -367,7 +371,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     backgroundImageView.layer.borderWidth = 1
                     backgroundImageView.layer.borderColor = Colors.dark.cgColor
                     //
-                    backgroundImageView.backgroundColor = Colors.light
+                    backgroundImageView.backgroundColor = Colors.darkGray
                     
                     // If red-orange background
                 }
@@ -531,8 +535,32 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             return cell
             
-        // Reset
+        // Custom Warmup/Stretching
         case 5:
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            //
+            cell.backgroundColor = Colors.light
+            cell.selectionStyle = .none
+            //
+            cell.textLabel?.text = NSLocalizedString("customWarmupStretching", comment: "")
+            cell.textLabel?.textAlignment = NSTextAlignment.left
+            cell.backgroundColor = Colors.light
+            cell.textLabel?.font = Fonts.cellRegular
+            //
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            
+            // Select state of switch
+            if settings["CustomWarmupStretching"]![0] == 0 {
+                customSwitch.isOn = false
+            } else {
+                customSwitch.isOn = true
+            }
+            cell.addSubview(customSwitch)
+            customSwitch.center = CGPoint(x: view.bounds.width - 16 - (motivationSwitch.bounds.width / 2), y: cell.bounds.height / 2)
+            return cell
+            
+        // Reset
+        case 6:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
             cell.backgroundColor = Colors.light
@@ -723,7 +751,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             tableView.deselectRow(at: indexPath, animated: true)
       
         // Reset
-        case 5:
+        case 6:
             //
             // Reset Walkthrough
             if indexPath.row == 0 {
@@ -841,7 +869,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // MARK: Switch handlers
     @objc func valueChanged(_ sender: UISwitch) {
         // Timed sessions
-        if sender == automaticSessionSwitch {
+        switch sender {
+        case automaticSessionSwitch:
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             if sender.isOn {
                 settings["TimeBasedSessions"]![0] = 1
@@ -854,7 +883,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             
         // Reminders
-        } else if sender == motivationSwitch {
+        case motivationSwitch:
             // Timed sessions
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             
@@ -872,6 +901,25 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             // Update notifications
             ReminderNotifications.shared.setNotifications()
+            
+        // Custom Warmup/Stretching
+        case customSwitch:
+            // Timed sessions
+            var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+            
+            // off -> on
+            if sender.isOn {
+                settings["CustomWarmupStretching"]![0] = 1
+                // on -> off
+            } else {
+                settings["CustomWarmupStretching"]![0] = 0
+            }
+            //
+            UserDefaults.standard.set(settings, forKey: "userSettings")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
+            
+        default: break
         }
     }
     

@@ -294,8 +294,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             bigGroupLabelArray[i].clipsToBounds = true
 
             //
-            // app helps create schedule, change title
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
+            // App helps create schedule
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 && !fromScheduleEditing {
                 // Indicate suggestion in group label
                     // If user selects more than selected, leave button green
                 if groupIndexes.contains(i) && dayTableGroupArray[i] < ScheduleVariables.shared.temporarySessionsArray[i] {

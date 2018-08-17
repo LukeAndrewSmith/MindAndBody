@@ -306,14 +306,13 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 // Update Title
                 let textField = alert?.textFields![0]
-                let lastIndex = schedules.count - 1
-                schedules[lastIndex]["scheduleInformation"]![0][0]["title"] = textField?.text! ?? ""
+                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] = textField?.text! ?? ""
                 //
                 // SET NEW ARRAY
                 UserDefaults.standard.set(schedules, forKey: "schedules")
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-                //
+                
                 // Update name in table
                 cell?.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
             })

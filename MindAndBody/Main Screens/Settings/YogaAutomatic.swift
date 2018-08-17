@@ -159,6 +159,26 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         indicatorLabel.center.x = pickerView.frame.minX + (pickerView.frame.size.width * (3.55/6))
         pickerView.addSubview(indicatorLabel)
         
+        //
+        tableViewAutomatic.backgroundColor = Colors.gray
+        let headerView = UIView()
+        headerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 24.5)
+        headerView.backgroundColor = Colors.gray
+        tableViewAutomatic.tableHeaderView = headerView
+        let topView = UIView()
+        topView.backgroundColor = Colors.gray
+        topView.frame = CGRect(x: 0, y: tableViewAutomatic.frame.minY - tableViewAutomatic.bounds.height, width: tableViewAutomatic.bounds.width, height: tableViewAutomatic.bounds.height)
+        tableViewAutomatic.addSubview(topView)
+        //
+        let footerView = UIView()
+        footerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableViewAutomatic.sectionFooterHeight)
+        footerView.backgroundColor = Colors.gray
+        tableViewAutomatic.tableFooterView = footerView
+        let bottomView = UIView()
+        bottomView.backgroundColor = Colors.gray
+        bottomView.frame = CGRect(x: 0, y: tableViewAutomatic.contentSize.height - 24.5, width: tableViewAutomatic.bounds.width, height: tableViewAutomatic.bounds.height)
+        tableViewAutomatic.addSubview(bottomView)
+        
     }
     
     
@@ -192,27 +212,46 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    // Title for header
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch tableView {
-        case tableViewAutomatic:
-            return NSLocalizedString(sectionHeaderArray[section], comment: "")
-        case tableViewBells:
-            return " "
-        default: return " "
-        }
-    }
-    
-    // Header Customization
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch tableView {
         case tableViewAutomatic:
             // Header
-            let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 17)!
+            let header = UIView()
+            let headerHeight = CGFloat(24.5)
+            header.backgroundColor = Colors.gray
+            let label = UILabel()
+            label.backgroundColor = .clear
+            label.font = UIFont(name: "SFUIDisplay-light", size: 13)!
+            label.textColor = UIColor.gray
+            label.text = NSLocalizedString(sectionHeaderArray[section], comment: "").uppercased()
+            label.sizeToFit()
+            label.frame = CGRect(x: 16, y: 0, width: label.bounds.width, height: headerHeight)
+            header.addSubview(label)
             //
-            header.contentView.backgroundColor = Colors.light
+            switch section {
+            case 1:
+                let explanationButton = UIButton()
+                explanationButton.frame = CGRect(x: label.frame.maxX + 8, y: 3.25, width: 18, height: 18)
+                explanationButton.center.y = label.center.y
+                explanationButton.setImage(#imageLiteral(resourceName: "QuestionMarkMenu"), for: .normal)
+                explanationButton.layer.borderColor = UIColor.gray.cgColor
+                explanationButton.layer.borderWidth = 0.75
+                explanationButton.layer.cornerRadius = explanationButton.bounds.height / 2
+                explanationButton.clipsToBounds = true
+                explanationButton.tintColor = UIColor.gray
+                explanationButton.tag = section
+                explanationButton.addTarget(self, action: #selector(questionMarkButtonAction), for: .touchUpInside)
+                header.addSubview(explanationButton)
+                // Add extra button to make the area of the question mark larger and easier to press
+                let extraButton = UIButton()
+                extraButton.frame = CGRect(x: 0, y: 0, width: 49, height: 24.5)
+                extraButton.center.x = explanationButton.center.x
+                extraButton.tag = section
+                extraButton.addTarget(self, action: #selector(questionMarkButtonAction), for: .touchUpInside)
+                header.addSubview(extraButton)
+            default: break
+            }
+            return header
             
         case tableViewBells:
             let header = view as! UITableViewHeaderFooterView
@@ -220,7 +259,22 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             header.textLabel?.textColor = Colors.light
             header.contentView.backgroundColor = Colors.dark
             header.contentView.tintColor = Colors.light
-        default: break
+            return header
+        default:
+            let header = view as! UITableViewHeaderFooterView
+            return header
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if tableView == tableViewAutomatic {
+            let footer = UIView()
+            footer.frame = CGRect.zero
+            footer.backgroundColor = Colors.gray
+            return footer
+        } else {
+            let footer = UIView()
+            return footer
         }
     }
     
@@ -228,7 +282,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch tableView {
         case tableViewAutomatic:
-            return 47
+            return 24.5
         case tableViewBells:
             return 20
         default: break
@@ -756,7 +810,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             walkthroughHighlight.layer.borderColor = Colors.dark.cgColor
             // Highlight
             let section = tableViewAutomatic.rect(forSection: 1)
-            walkthroughHighlight.frame = CGRect(x: 8, y: section.minY + 47, width: view.bounds.width - 16, height: 44)
+            walkthroughHighlight.frame = CGRect(x: 8, y: section.minY + 24.5, width: view.bounds.width - 16, height: 44)
             walkthroughHighlight.center.y += ControlBarHeights.combinedHeight
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 4
             
@@ -782,7 +836,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             let section = tableViewAutomatic.rect(forSection: 1)
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 44 + 22)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 24.5 + 44 + 22)
             highlightCenter?.y += ControlBarHeights.combinedHeight
             //
             highlightCornerRadius = 2
@@ -803,7 +857,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             let section = tableViewAutomatic.rect(forSection: 1)
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 47 + 44 + 44 + 22)
+            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 24.5 + 44 + 44 + 22)
             highlightCenter?.y += ControlBarHeights.combinedHeight
             //
             highlightCornerRadius = 2
@@ -835,7 +889,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     // QuestionMark, information needed, show walkthrough
-    @IBAction func questionMarkButtonAciton(_ sender: Any) {
+    @objc func questionMarkButtonAction() {
         walkthroughView.alpha = 1
         didSetWalkthrough = false
         walkthroughProgress = 0

@@ -49,9 +49,12 @@ extension ScheduleScreen {
         // Table Counter
         // Return to choice 1 (sessions)
         if ScheduleVariables.shared.choiceProgress[1] > 1 {
-            // Workout has 2 choice paths for the length
+            // Workout has 2 choice paths for the length + Custom
             if ScheduleVariables.shared.choiceProgress[0] == 0 {
                 switch ScheduleVariables.shared.choiceProgress[1] {
+                // Go back from custom
+                case 7:
+                    ScheduleVariables.shared.choiceProgress[1] = 1
                 // Go back from final choice
                 case 6:
                     // Go back to length 1
@@ -71,6 +74,9 @@ extension ScheduleScreen {
             // Yoga has 3 choice paths for the length
             } else if ScheduleVariables.shared.choiceProgress[0] == 1 {
                 switch ScheduleVariables.shared.choiceProgress[1] {
+                // Custom
+                case 6:
+                    ScheduleVariables.shared.choiceProgress[1] = 1
                 // Go back from final choice
                 case 5:
                     // Go back to length 1
@@ -93,6 +99,9 @@ extension ScheduleScreen {
             // Endurance has 3 choice paths
             } else if ScheduleVariables.shared.choiceProgress[0] == 3 {
                 switch ScheduleVariables.shared.choiceProgress[1] {
+                // Custom
+                case 9:
+                    ScheduleVariables.shared.choiceProgress[1] = 1
                 case 6:
                     switch ScheduleVariables.shared.indicator {
                     case "bodyweight":
@@ -106,6 +115,15 @@ extension ScheduleScreen {
                 case 5,7:
                     ScheduleVariables.shared.choiceProgress[1] = 1
                     
+                default:
+                    ScheduleVariables.shared.choiceProgress[1] -= 1
+                }
+            // Stretching
+            } else if ScheduleVariables.shared.choiceProgress[0] == 4 {
+                switch ScheduleVariables.shared.choiceProgress[1] {
+                // Custom
+                case 4:
+                    ScheduleVariables.shared.choiceProgress[1] = 1
                 default:
                     ScheduleVariables.shared.choiceProgress[1] -= 1
                 }

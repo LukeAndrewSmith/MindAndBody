@@ -114,7 +114,7 @@
                             <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="oPE-Kh-Caj" secondAttribute="bottom" id="hvm-Og-oex"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Title" id="xF1-Nx-yoQ">
                         <barButtonItem key="rightBarButtonItem" image="DotsMenu" id="zGf-6u-5eP">
                             <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -139,6 +139,7 @@
                         <segue destination="d1w-hu-wYA" kind="presentation" identifier="EditProfileSegue" id="izD-lx-C3k"/>
                         <segue destination="q4h-Je-Ynw" kind="presentation" identifier="ScheduleCreationSegue" id="b4e-57-eAb"/>
                         <segue destination="THe-fh-5DZ" kind="presentation" identifier="SubscriptionsSegue" id="SXY-HC-FeY"/>
+                        <segue destination="A7A-wz-wFE" kind="show" identifier="scheduleSegueCustom" id="1Ei-dZ-eTc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dG-Jg-xiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -888,14 +889,7 @@
                             <constraint firstItem="8fl-iP-cbI" firstAttribute="top" secondItem="fe2-yQ-cP8" secondAttribute="bottom" id="avG-rI-icM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="W0N-u7-40P">
-                        <barButtonItem key="rightBarButtonItem" image="QuestionMarkMenu" id="2z3-Oe-82l">
-                            <color key="tintColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="questionMarkButtonAciton:" destination="8IA-AP-QDR" id="M43-Og-se6"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="W0N-u7-40P"/>
                     <connections>
                         <outlet property="navigationBar" destination="W0N-u7-40P" id="hPI-1j-gKE"/>
                         <outlet property="tableViewAutomatic" destination="fe2-yQ-cP8" id="ype-cF-3ZP"/>
@@ -2920,7 +2914,6 @@
                     <connections>
                         <segue destination="hzu-YA-w1J" kind="relationship" relationship="viewControllers" id="zaA-Bz-zbY"/>
                         <segue destination="l9d-0A-x20" kind="relationship" relationship="viewControllers" id="e4I-fS-5kR"/>
-                        <segue destination="eh5-tX-IBt" kind="relationship" relationship="viewControllers" id="eDi-Op-FgR"/>
                         <segue destination="bCZ-Mx-QR3" kind="relationship" relationship="viewControllers" id="90n-mw-Yag"/>
                         <segue destination="aLG-Wg-gvP" kind="relationship" relationship="viewControllers" id="z2R-FM-753"/>
                     </connections>
@@ -5259,7 +5252,6 @@
         <image name="Pause" width="60" height="60"/>
         <image name="Plus" width="30" height="30"/>
         <image name="QuestionMarkM" width="30" height="30"/>
-        <image name="QuestionMarkMenu" width="30" height="30"/>
         <image name="Timer" width="30" height="30"/>
         <image name="WeekView" width="187" height="333"/>
     </resources>
@@ -5268,7 +5260,7 @@
         <segue reference="na3-42-cEE"/>
         <segue reference="dD1-H2-hdg"/>
         <segue reference="tUJ-Lb-bfp"/>
-        <segue reference="2sH-Wt-Foe"/>
+        <segue reference="1Ei-dZ-eTc"/>
         <segue reference="SOr-B2-NYZ"/>
         <segue reference="zU9-Z8-ErV"/>
         <segue reference="m3z-OW-W4C"/>

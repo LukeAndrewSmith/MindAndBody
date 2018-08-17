@@ -726,7 +726,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         let indexPath = NSIndexPath(row: currentIndex, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! CardioTableViewCell
-        //
+        // 
         //
         if timerValue == 0 {
             cell.detailLabel.text = timeFormatted(totalSeconds: timerValue)

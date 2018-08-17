@@ -64,7 +64,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         case scheduleChoiceTable:
             // Header
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = Fonts.mediumRegular
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
             header.textLabel?.textAlignment = .center
             header.textLabel?.textColor = Colors.dark
             //
@@ -127,8 +127,15 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         case scheduleTable:
             if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
                 return 49
-            } else {
+            } else if ScheduleVariables.shared.choiceProgress[0] == -1 {
                 return 72
+            } else {
+                // If too many choices, reduce size of
+                if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count + 1) * 72) > view.bounds.height - headerHeight {
+                    return (view.bounds.height - headerHeight) / CGFloat(sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count + 1)
+                } else {
+                    return 72
+                }
             }
         case scheduleChoiceTable:
             return 47
@@ -212,49 +219,53 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 
             // Currently selecting a session, i.e not first screen
             } else {
+                var choiceCellHeight: CGFloat = 72
+                // If too many choices, reduce size of cell
+                if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count + 1) * 72) > view.bounds.height - headerHeight {
+                    choiceCellHeight = (view.bounds.height - headerHeight) / CGFloat(sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count + 1)
+                }
                 // If title
                 if indexPath.row == 0 {
+                    //
+
+                    
                     let title = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][0]
                     cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 24)!
                     cell.textLabel?.textColor = Colors.light
                     cell.textLabel?.text = NSLocalizedString(title, comment: "")
                     cell.textLabel?.textAlignment = .center
-                    //                    cell.textLabel?.numberOfLines = 2
-                    //                    cell.textLabel?.sizeToFit()
-                    cell.textLabel?.frame = CGRect(x: view.bounds.width / 2, y: 0, width: view.bounds.width / 2, height: 72)
+                    cell.textLabel?.frame = CGRect(x: view.bounds.width / 2, y: 0, width: view.bounds.width / 2, height: choiceCellHeight)
                     //
                     cell.selectionStyle = .none
-                    //
+                    
                     // Title Underline
+                    
                     let separator = CALayer()
-                    separator.frame = CGRect(x: view.bounds.width / 4, y: 72 - 1, width: view.bounds.width / 2, height: 1)
+                    separator.frame = CGRect(x: view.bounds.width / 4, y: choiceCellHeight - 1, width: view.bounds.width / 2, height: 1)
                     separator.backgroundColor = Colors.light.cgColor
                     separator.opacity = 0.25
                     cell.layer.addSublayer(separator)
-                    //
-                    // Color if last choice
-                    if isLastChoice() {
-//                        cell.textLabel?.textColor = Colors.green
-                        separator.backgroundColor = Colors.green.cgColor
-                    }
-                    // Else if selection
+                    
+                    // Question mark - explanation of choice
+                    // TODO: question mark
+                    
+                // Else if selection
                 } else {
                     //
                     let choiceLabel = UILabel()
                     choiceLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
                     choiceLabel.textColor = Colors.light
-                    //
+                    
                     // Normal
                     let text = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][indexPath.row]
                     choiceLabel.text = NSLocalizedString(text, comment: "")
                     choiceLabel.numberOfLines = 2
                     choiceLabel.sizeToFit()
-                    choiceLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
+                    choiceLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: choiceCellHeight)
                     cell.addSubview(choiceLabel)
                     
-                    //
                     if isLastChoice() {
-                        //
+                        
                         // Checkmark box
                         let checkBox = UIButton()
                         checkBox.tag = indexPath.row
@@ -280,7 +291,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                         checkBoxExtraButton.center.x = checkBox.center.x
                         checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
                         cell.addSubview(checkBoxExtraButton)
-                        //
+                        
                         // CheckMark if completed
                         // - 1 as title included, so rows offset by 1
                         if indexPath.row != 0 {
@@ -292,16 +303,12 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-        //
+        
         case scheduleChoiceTable:
-            
-//            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
-//            cell.textLabel?.textColor = Colors.light
-//            cell.textLabel?.text = schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as! String
             
             let label = UILabel()
             label.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
-            label.text = schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as! String
+            label.text = schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as? String
             label.textColor = Colors.light
             label.sizeToFit()
             // twice nomal padding
@@ -316,10 +323,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 indicator.image = #imageLiteral(resourceName: "CheckMark")
                 indicator.frame.size = CGSize(width: cell.bounds.height / 2, height: cell.bounds.height / 2)
                 indicator.center = CGPoint(x: 1 + (padding / 2), y: label.center.y)
-//                indicator.backgroundColor = Colors.green
                 indicator.tintColor = Colors.green
-//                indicator.layer.cornerRadius = indicator.bounds.height / 2
-//                indicator.clipsToBounds = true
                 cell.addSubview(indicator)
                 
                 let editButton = UIButton()
@@ -327,17 +331,10 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 editButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
                 editButton.setTitleColor(UIColor.gray, for: .normal)
                 editButton.sizeToFit()
-                editButton.frame = CGRect(x: tableView.bounds.width - editButton.bounds.width - 16, y: 0, width: editButton.bounds.width, height: 47)
+                let buttonWidth = editButton.bounds.width
+                editButton.frame = CGRect(x: tableView.bounds.width - buttonWidth - 32, y: 0, width: buttonWidth + 32, height: 47)
                 editButton.addTarget(self, action: #selector(editScheduleAction), for: .touchUpInside)
                 cell.addSubview(editButton)
-                
-                to do
-                // question: editing, after editing, select just edited schedule - answer: just have edit on the one thats currently selected
-                // schedule: don;t dismiss action sheet, have ok/done button instead of cancel
-                to do
-                
-//                cell.accessoryType = .checkmark
-//                cell.tintColor = Colors.green
             }
             
         //
@@ -401,26 +398,30 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         // Select schedule
         case scheduleChoiceTable:
             var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-            // Select schedule
-            // Select new schedule in user settings
+            
+            // Select new schedule, update schedule style, and save
             var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
+            
             selectedSchedule = indexPath.row
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
             scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+            
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
-            // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule"])
+            
+            // If week view, create temporary week array
+            TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+            
             // Reload table
             layoutViews()
             scheduleChoiceTable.reloadData()
             self.scheduleTable.reloadData()
-            // Dismiss action sheet
-            ActionSheet.shared.animateActionSheetDown()
-            //
+            
             // Tracking
             updateWeekGoal()
             updateWeekProgress()
             updateTracking()
+            
             // Notifications
             ReminderNotifications.shared.setNotifications()
             tableView.deselectRow(at: indexPath, animated: true)
@@ -456,7 +457,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         // Delete if not plus row
-        if editingStyle == UITableViewCellEditingStyle.delete {
+        if tableView == scheduleChoiceTable && editingStyle == UITableViewCellEditingStyle.delete {
             //
             // Update arrays
             schedules.remove(at: indexPath.row)
@@ -464,16 +465,22 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 
             // Select 1 schedule before last schedule
             var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
-            if schedules.count == 0 || selectedSchedule == 0 {
+            if schedules.count == 0 {
                 selectedSchedule = 0
                 scheduleStyle = 0
             } else {
-                selectedSchedule -= 1
+                if selectedSchedule != 0 {
+                    selectedSchedule -= 1
+                }
                 scheduleStyle = schedules[selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
             }
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
             ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
+            
+            // If week view, create temporary week array
+            TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+            
             // Reload table
             layoutViews()
             scheduleTable.reloadData()

@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Check if the user has a valid subscription
         // Subscription Check 1
-        SubscriptionsCheck.shared.checkSubscription()
+//        SubscriptionsCheck.shared.checkSubscription()
         
         // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
         ScheduleVariables.shared.resetWeekTracking()

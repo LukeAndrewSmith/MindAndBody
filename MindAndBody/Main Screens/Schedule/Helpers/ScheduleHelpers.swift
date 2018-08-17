@@ -59,6 +59,16 @@ extension ScheduleScreen {
             case 0:
                 // Session Choice
                 switch ScheduleVariables.shared.choiceProgress[1] {
+                // Custom
+                case 1:
+                    // Custom
+                    if row == 3 {
+                        ScheduleVariables.shared.choiceProgress[1] = 7
+                        nextChoice()
+                    } else {
+                        ScheduleVariables.shared.choiceProgress[1] += 1
+                        nextChoice()
+                    }
                 // Go to length 1 or length 2 choice
                 case 3:
                     //
@@ -88,6 +98,48 @@ extension ScheduleScreen {
                     }
                     ScheduleVariables.shared.selectedRows[1] = row - 1
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                // Custom Choice
+                case 7:
+                    
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    // If app chooses warmup/stretching
+                    if settings["CustomWarmupStretching"]![0] == 0 {
+                        // Warmup
+                        if row == 1 {
+                            selectWarmup()
+                            ScheduleVariables.shared.selectedRows[1] = row - 1
+                            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                            // Session
+                        } else if row == 2 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "workout"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                            // Stretching
+                        } else if row == 3 {
+                            selectStretching()
+                            ScheduleVariables.shared.selectedRows[1] = row - 1
+                            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                        }
+                    // If custom warmup/stretching
+                    } else if settings["CustomWarmupStretching"]![0] == 1 {
+                        // Warmup
+                        if row == 1 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "warmup"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                        // Session
+                        } else if row == 2 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "workout"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                        // Stretching
+                        } else if row == 3 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "stretching"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                        }
+                    }
+                    // }
                 // Normal next choice
                 default:
                     ScheduleVariables.shared.choiceProgress[1] += 1
@@ -112,14 +164,17 @@ extension ScheduleScreen {
                         nextChoice()
                     default: break
                     }
+                    // Custom
+                    if row == 4 {
+                        ScheduleVariables.shared.choiceProgress[1] = 6
+                        nextChoice()
+                    }
                 // Go from length to final choice
                 case 2,3:
                     ScheduleVariables.shared.choiceProgress[1] = 5
                     nextChoice()
                 // Final Choice
                 case 5:
-                    // Test
-                    // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
                     if row == 1 {
                         selectWarmup()
@@ -130,6 +185,38 @@ extension ScheduleScreen {
                     }
                     ScheduleVariables.shared.selectedRows[1] = row - 1
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                // Custom
+                case 6:
+                    
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    // If app chooses warmup/stretching
+                    if settings["CustomWarmupStretching"]![0] == 0 {
+                        // Warmup
+                        if row == 1 {
+                            selectWarmup()
+                            ScheduleVariables.shared.selectedRows[1] = row - 1
+                            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                            // Practice
+                        } else if row == 2 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "yoga"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                        }
+                    // If custom warmup/stretching
+                    } else if settings["CustomWarmupStretching"]![0] == 1 {
+                        // Warmup
+                        if row == 1 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "warmup"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                        // Practice
+                        } else if row == 2 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "yoga"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                        }
+                    }
+
                 // Normal next choice
                 default:
                     ScheduleVariables.shared.choiceProgress[1] += 1
@@ -161,16 +248,21 @@ extension ScheduleScreen {
                 switch ScheduleVariables.shared.choiceProgress[1] {
                 // Type 1, hiit vs steady state
                 case 1:
+                    // HIIT
+                    if row == 1 {
+                        ScheduleVariables.shared.choiceProgress[1] += 1
+                        nextChoice()
                     // Workout
-                    if row == 2 {
+                    } else if row == 2 {
                         ScheduleVariables.shared.choiceProgress[1] = 5
                         nextChoice()
                         // Steady state cardio
                     } else if row == 3 {
                         ScheduleVariables.shared.choiceProgress[1] = 7
                         nextChoice()
-                    } else {
-                        ScheduleVariables.shared.choiceProgress[1] += 1
+                    // Custom
+                    } else if row == 4 {
+                        ScheduleVariables.shared.choiceProgress[1] = 9
                         nextChoice()
                     }
                 // Go straight to final choice from hiit length
@@ -179,8 +271,6 @@ extension ScheduleScreen {
                     nextChoice()
                 // Session Choice, To Do
                 case 6:
-                    // Test
-                    // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
                     if row == 1 {
                         selectWarmup()
@@ -212,8 +302,6 @@ extension ScheduleScreen {
                     }
                 // Session Choice , To do
                 case 8:
-                    // Test
-                    // TODO: Selected choice as index to sortedGroups (in data structures)
                     // Warmup
                     if steadyStateChoice == 0 {
                         selectWarmup()
@@ -223,9 +311,40 @@ extension ScheduleScreen {
                     }
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                     //
-                    // Return to final choice without user seeing
+                    // Return to final choice without user seeing, as this is extra choice for length of warmup/stretching, need to get back to final choice
                     ScheduleVariables.shared.choiceProgress[1] -= 1
                     nextChoice()
+                // Custom
+                case 9:
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    // If app chooses warmup/stretching
+                    if settings["CustomWarmupStretching"]![0] == 0 {
+                        // Warmup
+                        if row == 1 {
+                            selectWarmup()
+                            ScheduleVariables.shared.selectedRows[1] = row - 1
+                            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                            // Practice
+                        } else if row == 2 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "cardio"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                        }
+                        // If custom warmup/stretching
+                    } else if settings["CustomWarmupStretching"]![0] == 1 {
+                        // Warmup
+                        if row == 1 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "warmup"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                            // Practice
+                        } else if row == 2 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "cardio"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                        }
+                    }
+                    
                 default:
                     ScheduleVariables.shared.choiceProgress[1] += 1
                     nextChoice()
@@ -234,10 +353,20 @@ extension ScheduleScreen {
                 // ------------------------------------------------------------------------------------------------
             // Flexibility
             case 4:
+                switch ScheduleVariables.shared.choiceProgress[1] {
+                //
+                case 1:
+                    switch row {
+                    // Custom
+                    case 6:
+                        ScheduleVariables.shared.choiceProgress[1] = 4
+                        nextChoice()
+                    default:
+                        ScheduleVariables.shared.choiceProgress[1] += 1
+                        nextChoice()
+                    }
                 // Final choice -> session
-                if ScheduleVariables.shared.choiceProgress[1] == 3 {
-                    // Test
-                    // TODO: Selected choice as index to sortedGroups (in data structures)
+                case 3:
                     // Warmup
                     if row == 1 {
                         selectWarmup()
@@ -248,8 +377,39 @@ extension ScheduleScreen {
                     //
                     ScheduleVariables.shared.selectedRows[1] = row - 1
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                // Custom
+                case 4:
+                    var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+                    // If app chooses warmup/stretching
+                    if settings["CustomWarmupStretching"]![0] == 0 {
+                        // Warmup
+                        if row == 1 {
+                            selectWarmup()
+                            ScheduleVariables.shared.selectedRows[1] = row - 1
+                            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                            // Practice
+                        } else if row == 2 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "stretching"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                        }
+                    // If custom warmup/stretching
+                    } else if settings["CustomWarmupStretching"]![0] == 1 {
+                        // Warmup
+                        if row == 1 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "warmup"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                            // Practice
+                        } else if row == 2 {
+                            // Select workout
+                            SelectedSession.shared.selectedSession[0] = "stretching"
+                            performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                        }
+                    }
+                    
                 // Choice
-                } else {
+                default:
                     ScheduleVariables.shared.choiceProgress[1] += 1
                     nextChoice()
                 }
@@ -432,6 +592,9 @@ extension ScheduleScreen {
                 ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["hips"]!]
             case "backNeck":
                 ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["backNeck"]!]
+            case "foamRoll":
+                // only one difficulty
+                ScheduleVariables.shared.selectedChoiceSession[3] = "average"
             default: break
             }
         default: break
@@ -565,6 +728,12 @@ extension ScheduleScreen {
                     // Bodyweight
                     case 2:
                         ScheduleVariables.shared.indicator = "bodyweight"
+                    // Custom - just set to bodyweight short,
+                    case 3:
+                        ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaF"
+                        ScheduleVariables.shared.selectedChoiceStretching[1] = "SF"
+                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
+                        ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
                     default: break
                     }
                     
@@ -753,6 +922,10 @@ extension ScheduleScreen {
                     case 3:
                         ScheduleVariables.shared.indicator = "stimulating"
                         ScheduleVariables.shared.selectedChoiceSession[1] = "stimulating"
+                    // Custom
+                    case 4:
+                        // Length
+                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
                     default: break
                     }
                     
@@ -834,6 +1007,11 @@ extension ScheduleScreen {
                     case 3:
                         ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
                         ScheduleVariables.shared.selectedChoiceStretching[1] = "stretching"
+                    case 4:
+                        ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
+                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
+                        ScheduleVariables.shared.selectedChoiceStretching[1] = "stretching"
+                        ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
                     default: break
                     }
                     //
@@ -929,19 +1107,22 @@ extension ScheduleScreen {
                     // Note warmups the same for now
                     switch row {
                     case 1:
-                        ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
                         ScheduleVariables.shared.selectedChoiceSession[1] = "full"
                     case 2:
-                        ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
                         ScheduleVariables.shared.selectedChoiceSession[1] = "hamstrings"
                     case 3:
-                        ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
                         ScheduleVariables.shared.selectedChoiceSession[1] = "hips"
                     case 4:
-                        ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
                         ScheduleVariables.shared.selectedChoiceSession[1] = "backNeck"
+                    case 5:
+                        ScheduleVariables.shared.selectedChoiceSession[1] = "foamRoll"
+                    // Custom
+                    case 6:
+                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
                     default: break
                     }
+                    ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
+
                 // Length
                 case 2:
                     switch row {
@@ -972,14 +1153,14 @@ extension ScheduleScreen {
         switch ScheduleVariables.shared.choiceProgress[0] {
         // Workout
         case 0:
-            if ScheduleVariables.shared.choiceProgress[1] == 6 {
+            if ScheduleVariables.shared.choiceProgress[1] == 6 || ScheduleVariables.shared.choiceProgress[1] == 7 {
                 return true
             } else {
                 return false
             }
         // Yoga
         case 1:
-            if ScheduleVariables.shared.choiceProgress[1] == 5 {
+            if ScheduleVariables.shared.choiceProgress[1] == 5 || ScheduleVariables.shared.choiceProgress[1] == 6 {
                 return true
             } else {
                 return false
@@ -995,7 +1176,7 @@ extension ScheduleScreen {
             
         // Endurance
         case 3:
-            if ScheduleVariables.shared.choiceProgress[1] == 6 || ScheduleVariables.shared.choiceProgress[1] == 7 {
+            if ScheduleVariables.shared.choiceProgress[1] == 6 || ScheduleVariables.shared.choiceProgress[1] == 7 || ScheduleVariables.shared.choiceProgress[1] == 9 {
                 return true
             } else {
                 return false
@@ -1003,7 +1184,7 @@ extension ScheduleScreen {
             
         // Flexibility
         case 4:
-            if ScheduleVariables.shared.choiceProgress[1] == 3 {
+            if ScheduleVariables.shared.choiceProgress[1] == 3 || ScheduleVariables.shared.choiceProgress[1] == 4 {
                 return true
             } else {
                 return false
@@ -1591,7 +1772,7 @@ extension ScheduleScreen {
                 // Reload the finalChoiceScreen Session after a delay
                 let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
                 self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
-                self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
+                self.selectRow(indexPath: indexPathToReload as IndexPath)
                 self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
                 //
                 // Check if group is completed for the day
@@ -1790,7 +1971,7 @@ extension ScheduleScreen {
         // Create Schedule
         createScheduleButton.addTarget(self, action: #selector(createScheduleAction), for: .touchUpInside)
         createScheduleButton.setTitle(NSLocalizedString("createSchedule", comment: ""), for: .normal)
-        createScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        createScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         createScheduleButton.frame = CGRect(x: 0, y: tableHeight, width: elementWidth, height: buttonHeight)
         createScheduleButton.setTitleColor(Colors.dark, for: .normal)
         createScheduleButton.backgroundColor = Colors.light

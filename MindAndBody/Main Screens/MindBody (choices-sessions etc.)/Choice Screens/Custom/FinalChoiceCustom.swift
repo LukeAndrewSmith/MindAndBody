@@ -1857,29 +1857,33 @@ class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataS
     // MARK: Nº Rounds Action
     @IBAction func nRoundsAction(_ sender: Any) {
         var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[[Any]]]]
-        //
-        selectingNumberOfRounds = true
-        setsRepsPicker.reloadAllComponents()
-        //
-        // selected number of rows
-        setsRepsPicker.selectRow(roundsPickerArray.index(of: (customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset][2][0] as! Int))!, inComponent: 0, animated: true)
-        //
-        self.setsRepsView.frame = CGRect(x: 20, y: 0, width: ActionSheet.shared.actionWidth, height: 147 + 49)
-        // picker
-        self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
-        self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
-        self.setsIndicatorLabel.text = NSLocalizedString("rounds", comment: "")
-        // ok
-        okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
-        // Sets Indicator Label
-        //
-        ActionSheet.shared.setupActionSheet()
-        ActionSheet.shared.actionSheet.addSubview(setsRepsView)
-        let heightToAdd = setsRepsView.bounds.height
-        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
-        ActionSheet.shared.resetCancelFrame()
-        //
-        ActionSheet.shared.animateActionSheetUp()
+        
+        // If no movements added yet, do nothing
+        if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset][2].count != 0 {
+            //
+            selectingNumberOfRounds = true
+            setsRepsPicker.reloadAllComponents()
+            //
+            // selected number of rows
+            setsRepsPicker.selectRow(roundsPickerArray.index(of: (customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset][2][0] as! Int))!, inComponent: 0, animated: true)
+            //
+            self.setsRepsView.frame = CGRect(x: 0, y: 0, width: ActionSheet.shared.actionWidth, height: 147 + 49)
+            // picker
+            self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
+            self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
+            self.setsIndicatorLabel.text = NSLocalizedString("rounds", comment: "")
+            // ok
+            okButton.frame = CGRect(x: 0, y: 147, width: setsRepsView.frame.size.width, height: 49)
+            // Sets Indicator Label
+            //
+            ActionSheet.shared.setupActionSheet()
+            ActionSheet.shared.actionSheet.addSubview(setsRepsView)
+            let heightToAdd = setsRepsView.bounds.height
+            ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
+            ActionSheet.shared.resetCancelFrame()
+            //
+            ActionSheet.shared.animateActionSheetUp()
+        }
     }
     
     

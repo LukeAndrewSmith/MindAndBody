@@ -209,7 +209,8 @@ extension sessionData {
                     "workoutType",
                     //
                     "gym",
-                    "bodyweight"
+                    "bodyweight",
+                    "custom",
                 ],
                 // 2 | Choice 2 - Style
                 [
@@ -250,7 +251,17 @@ extension sessionData {
                     "1. warmup",
                     "2. session",
                     "3. stretching",
-                    ],
+                ],
+                // ---------
+                // Custom
+                // 7 | Final - To Do
+                [
+                    "workoutToDo",
+                    //
+                    "1. warmup",
+                    "2. session",
+                    "3. stretching",
+                ],
             ],
             
             // MARK: Yoga
@@ -264,6 +275,7 @@ extension sessionData {
                     "relaxing",
                     "neutral",
                     "stimulating",
+                    "custom",
                 ],
                 // --------------
                 // 2 | Choice 2 - Length 1 - relaxing
@@ -299,6 +311,15 @@ extension sessionData {
                     "1. warmup (optional)",
                     "2. practice"
                 ],
+                // ---------
+                // Custom
+                // 6 | To Do
+                [
+                    "yogaToDo",
+                    //
+                    "1. warmup (optional)",
+                    "2. practice"
+                ],
             ],
             
             // MARK: Meditation
@@ -325,6 +346,7 @@ extension sessionData {
                         "highIntensityCardio",
                         "highIntensityWorkout",
                         "steadyState",
+                        "custom",
                         ],
                     // --------------
                     // High Intensity
@@ -388,7 +410,17 @@ extension sessionData {
                         //
                         "Short: 5 min",
                         "Normal: 5-10 min"
-                    ]
+                    ],
+                    // ------------
+                    // Custom
+                    // 9 | Choice 4 - 1 - To Do
+                    [
+                        "enduranceToDo",
+                        //
+                        "1. warmup",
+                        "2. session",
+                        "3. stretching",
+                    ],
             ],
             
             // Note: Choice = ["title","contents","contents"...]
@@ -404,6 +436,8 @@ extension sessionData {
                     "hamstrings",
                     "hips",
                     "back/neck",
+                    "foamRoll",
+                    "custom",
                     ],
                 // 2 | Choice 2 - Length
                 [
@@ -413,6 +447,15 @@ extension sessionData {
                     "Normal: 20-40 min"
                 ],
                 // 3 | Final - To Do
+                [
+                    "flexibilityToDo",
+                    //
+                    "1. warmup",
+                    "2. session"
+                ],
+                // ---------
+                // Custom
+                // 4 | To Do
                 [
                     "flexibilityToDo",
                     //

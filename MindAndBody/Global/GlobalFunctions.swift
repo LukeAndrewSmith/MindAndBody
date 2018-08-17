@@ -751,15 +751,24 @@ extension UIViewController {
             view.insertSubview(backgroundImage, at: 0)
             //
             // BackgroundBlur/Vibrancy
-            if withBlur {
+                // None if no background image
+            if withBlur && backgroundIndex != BackgroundImages.backgroundImageArray.count {
                 let backgroundBlur = UIVisualEffectView()
                 let backgroundBlurE = UIBlurEffect(style: .dark)
                 backgroundBlur.effect = backgroundBlurE
                 backgroundBlur.isUserInteractionEnabled = false
+                backgroundBlur.tag = 723
                 //
                 backgroundBlur.frame = backgroundImage.bounds
                 //
                 view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
+            } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
+                let backgroundView = UIView()
+                backgroundView.frame = backgroundImage.bounds
+                backgroundView.backgroundColor = Colors.darkGray
+                backgroundView.tag = 327
+                view.insertSubview(backgroundView, aboveSubview: backgroundImage)
+                //
             }
         
         // If wrong background presented, then update the background
@@ -771,6 +780,49 @@ extension UIViewController {
             } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
                 backgroundImageSubview.image = nil
                 backgroundImageSubview.backgroundColor = Colors.light
+            }
+            
+            // if no blur
+            var found = false
+            for sub in view.subviews {
+                // remove subview if no background image
+                if sub.tag == 723 {
+                    if backgroundIndex == BackgroundImages.backgroundImageArray.count {
+                        sub.removeFromSuperview()
+                    } else {
+                        found = true
+                    }
+                // remove gray background if background image
+                } else if sub.tag == 327 {
+                    if backgroundIndex != BackgroundImages.backgroundImageArray.count {
+                        sub.removeFromSuperview()
+                    } else {
+                        found = true
+                    }
+                }
+            }
+            //
+            // If should have a blur, add one
+            if withBlur && !found && backgroundIndex != BackgroundImages.backgroundImageArray.count {
+                // BackgroundBlur/Vibrancy
+                // None if no background image
+                let backgroundBlur = UIVisualEffectView()
+                let backgroundBlurE = UIBlurEffect(style: .dark)
+                backgroundBlur.effect = backgroundBlurE
+                backgroundBlur.isUserInteractionEnabled = false
+                backgroundBlur.tag = 723
+                //
+                backgroundBlur.frame = backgroundImageSubview.bounds
+                //
+                view.insertSubview(backgroundBlur, aboveSubview: backgroundImageSubview)
+            // If no background image, add gray background
+            } else if !found && backgroundIndex == BackgroundImages.backgroundImageArray.count {
+                let backgroundView = UIView()
+                backgroundView.frame = backgroundImageSubview.bounds
+                backgroundView.backgroundColor = Colors.darkGray
+                backgroundView.tag = 327
+                view.insertSubview(backgroundView, aboveSubview: backgroundImageSubview)
+                //
             }
         }
     }

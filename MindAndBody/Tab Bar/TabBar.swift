@@ -37,15 +37,16 @@ class tabBar: UITabBarController {
         tracking.image = #imageLiteral(resourceName: "Graph")
         tracking.title = NSLocalizedString("tracking", comment: "")
         
-        let sessions = (self.tabBar.items?[2])! as UITabBarItem
-        sessions.image = #imageLiteral(resourceName: "Mind&Body")
-        sessions.title = NSLocalizedString("sessions", comment: "")
+//        let sessions = (self.tabBar.items?[2])! as UITabBarItem
+//        sessions.image = #imageLiteral(resourceName: "Mind&Body")
+//        sessions.title = NSLocalizedString("sessions", comment: "")
         
-        let lessons = (self.tabBar.items?[3])! as UITabBarItem
-        lessons.image = #imageLiteral(resourceName: "QuestionMarkMenu")
+        let lessons = (self.tabBar.items?[2])! as UITabBarItem
+        lessons.image = #imageLiteral(resourceName: "Mind&Body")
+            //#imageLiteral(resourceName: "QuestionMarkMenu")
         lessons.title = NSLocalizedString("lessons", comment: "")
         
-        let settings = (self.tabBar.items?[4])! as UITabBarItem
+        let settings = (self.tabBar.items?[3])! as UITabBarItem
         settings.image = #imageLiteral(resourceName: "Settings")
         settings.title = NSLocalizedString("settings", comment: "")
     }

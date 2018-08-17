@@ -178,6 +178,8 @@ enum Register {
     static let defaultSettings: [String: [Int]] = [
         // Background image index - 0
         "BackgroundImage": [2],
+        // Metric/Imperial - 6
+        "Units": [0], // == "kg" (0), "lb" (1)
         // Time Based Sessions - 2
         "TimeBasedSessions": [0], // 0 == Off, 1 = on
         // Yoga Automatic - 3
@@ -187,11 +189,10 @@ enum Register {
             // NOT THE BEST WAY TO STORE BREATH LENGTH!!!!
         // Rest times - 4
         "RestTimes": [0, 45, 10],
-        // Metric/Imperial - 6
-        "Units": [0], // == "kg" (0), "lb" (1)
         // Notifications
         "ReminderNotifications": [420,-1,1], // [0]: morning, [1]: evening, [2]: motivational comments
-        // [0]: -1 == off, 420 == 7:00 am (number of minutes), [1]: same, [3]: 0 == off, 1 == on
+        // [0]: -1 == off, 420 == 7:00 am (number of minutes), [1]: same, [3]: 0 == off, 1 == on (motivating comments)
+        "CustomWarmupStretching": [0], // 0 == off (app chooses), 1 == on (custom)
         // Is icloud enabled, 0 == false, 1 == true
         "iCloud": [0],
     ]
@@ -208,7 +209,6 @@ enum Register {
             "Session2": false,
             // Schedule
             "Schedule": false,
-            "LongPressScheduleNote": false,
             // Tracking
             "Tracking": false,
             // Settings

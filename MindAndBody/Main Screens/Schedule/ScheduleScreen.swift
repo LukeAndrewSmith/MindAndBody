@@ -113,6 +113,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var lessonsBackground = UIButton()
     var isLessonsShowing = false // indicates if lessons view is presented
     
+    let extraButton = UIButton()
+    let extraButtonBig = UIButton()
     
     // -----------------------------------------------------------------------------------------------
     
@@ -153,19 +155,13 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             // At end of session, updateScheduleTracking() gets called, this updates the final choice (session) tracking, then indicates the scheduleShouldReload
             // This function that means the function does something, it reloads the relevant rows and animated back to the home schedule screen if necessary
         markAsCompletedAndAnimate()
-        
-        // Walkthrough for note on long press to mark group/session as complete, the function check if there is a session on the screen and if so presents a quick note explaining the long press
-        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-        if walkthroughs["Schedule"] == true && walkthroughs["LongPressScheduleNote"] == false {
-            self.walkthroughScheduleLongPressNote()
-        }
     }
     
     //
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)
         NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
         
@@ -176,7 +172,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         // Checking subscription is valid, (present loading during check)
         if Loading.shared.shouldPresentLoading {
             // Subscription Check 2
-            Loading.shared.beginLoading()
+//            Loading.shared.beginLoading()
         }
         // Check subscription -> Present Subscription Screen (if not valid)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
@@ -199,6 +195,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(checkSelectedDay), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         // reload view
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -227,6 +225,25 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         topView.frame = CGRect(x: 0, y: scheduleTable.frame.minY - scheduleTable.bounds.height, width: scheduleTable.bounds.width, height: scheduleTable.bounds.height)
         //
 //        scheduleTable.addSubview(topView)
+        
+        
+        
+        //        extraButton.frame.size = CGSize(width: 72, height: 72)
+        //        extra
+        // MARK: nina nina
+        let buttonHeight: CGFloat = 49
+        extraButtonBig.frame.size = CGSize(width: buttonHeight, height: buttonHeight)
+        extraButtonBig.center = CGPoint(x: view.bounds.width - (buttonHeight / 2) - 16, y: view.bounds.height - (buttonHeight / 2) - 16)
+//        extraButtonBig.center = CGPoint(x: view.center.x, y: (tabBarController?.tabBar.frame.minY)!)
+        extraButtonBig.layer.cornerRadius = extraButtonBig.bounds.height / 2
+        extraButtonBig.backgroundColor = Colors.light.withAlphaComponent(0.72)
+        extraButtonBig.tintColor = Colors.dark
+        extraButtonBig.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
+        view.insertSubview(extraButtonBig, aboveSubview: scheduleTable)
+//        view.addSubview(extraButtonBig)
+//        view.bringSubview(toFront: extraButtonBig)
+        // workout, yoga, meditation, endurance, flexibility
+        //
     }
     
     // Begin walkthrough
@@ -246,8 +263,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             }
         }
     }
-
-    // TableView in seperate file
     
     //
     // Schedule Selection (Bar Button Item (Top Right))
@@ -314,8 +329,12 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         let heightToAdd = height
         ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
         ActionSheet.shared.resetCancelFrame()
+        // Cancel button is a done button for this case
+        ActionSheet.shared.cancelButton.setTitleColor(Colors.green, for: .normal)
+        ActionSheet.shared.cancelButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
         //
         ActionSheet.shared.animateActionSheetUp()
+        //
     }
     
     //
@@ -358,6 +377,11 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             destinationVC?.comingFromSchedule = true
         } else if segue.identifier == "SubscriptionsSegue" {
             goingToSubscriptionsScreen = true
+        } else {
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            backItem.tintColor = Colors.light
+            navigationItem.backBarButtonItem = backItem
         }
     }
 }

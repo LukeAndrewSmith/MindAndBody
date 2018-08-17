@@ -42,12 +42,12 @@ class ProfileFunctions {
         let overallFlexibility = Double((sum1 + profileAnswers["flexibilityBackBackward"]! + profileAnswers["flexibilityBackSideways"]! + profileAnswers["flexibilityNeck"]!)) / 7
         difficultyLevels["flexibility"]!["overall"] = conservativeRound(toRound: overallFlexibility)
         // Endurance - 2
-        // Endurance Level - Average of 'do you do much cardio', 'stairs', '30 min cardio' and user self opinion - ["enduranceExperience"] ["enduranceStairs"] ["enduranceAbility"] ["enduranceOpinion"]
-        let enduranceAverage = Double((profileAnswers["enduranceExperience"]! + profileAnswers["enduranceStairs"]! + profileAnswers["enduranceAbility"]! + profileAnswers["enduranceOpinion"]!)) / 3
+        // Endurance Level - Average of 'do you do much cardio', 'stairs', '30 min cardio' - ["enduranceExperience"] ["enduranceStairs"] ["enduranceAbility"]
+        let enduranceAverage = Double((profileAnswers["enduranceExperience"]! + profileAnswers["enduranceStairs"]! + profileAnswers["enduranceAbility"]!)) / 3
         difficultyLevels["endurance"]!["endurance"] = conservativeRound(toRound: enduranceAverage)
         // Strength - not set in difficultyLevels, but deduced then used below
-        // Overall Strength - average of pushup, pullup and squat and self opinion ["workoutPushup"] ["workoutPullup"] ["workoutSquat"] ["workoutOpinion"]
-        let overallStrength = Double((profileAnswers["workoutPushup"]! + profileAnswers["workoutPullup"]! + profileAnswers["workoutSquat"]! + profileAnswers["workoutOpinion"]!)) / 4
+        // Overall Strength - average of pushup, pullup and squat and self opinion ["workoutPushup"] ["workoutPullup"] ["workoutSquat"]
+        let overallStrength = Double((profileAnswers["workoutPushup"]! + profileAnswers["workoutPullup"]! + profileAnswers["workoutSquat"]!)) / 3
         // Balance - not set, but used later - ["flexibilityBalance"]
         let balanceAnswer = profileAnswers["flexibilityBalance"]
         // MARK: 2: Deductions that use deductions

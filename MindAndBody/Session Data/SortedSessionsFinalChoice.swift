@@ -18,7 +18,8 @@ extension sessionData {
         "warmup": [
             // MARK: Full
             "workout": [
-                ["allMovements",
+                [
+//                    "allMovements",
                  // Short
                  "WaWS-F-1",
                  "WaWS-F-2",
@@ -82,7 +83,8 @@ extension sessionData {
             // MARK: Gym Classic
             // MARK: Full
             "classicGymFull": [
-                ["allMovements",
+                [
+//                    "allMovements",
                 // Easy, Short
                 "WGES-CsF-1-W",
                 "WGES-CsF-2-W",
@@ -1058,9 +1060,9 @@ extension sessionData {
             // MARK: -
             // MARK: General
             "general": [
-
                 // MARK: Full Body
-                ["allMovements",
+                [
+//                    "allMovements",
                  // Easy, Short
                 // Stretching, General, Easy, Short - 1
                 "SGES-1",
@@ -1195,7 +1197,8 @@ extension sessionData {
         "yoga": [
             // MARK: Relaxing
             "relaxing": [
-                ["allMovements",
+                [
+//                    "allMovements",
                 // Easy, Very Short
                 // Yoga - Relaxing - Easy - Very Short - 1
                 "YREVs-1",

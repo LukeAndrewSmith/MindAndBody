@@ -511,6 +511,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             } else {
                 if canSwipeMovement {
                     //
+                    lengthTimer.invalidate()
+                    //
                     // Schedule Tracking
                     updateScheduleTracking(fromSchedule: fromSchedule)
                     //
