@@ -302,7 +302,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
             }
             // 3. Get the value from the text field, and perform actions upon OK press
-            okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
                 //
                 // Update Title
                 let textField = alert?.textFields![0]
@@ -317,7 +317,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell?.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
             })
             // Cancel action
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
                 UIAlertAction in
             }
             alert.addAction(okAction)
@@ -375,7 +375,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                     paragraphStyle.alignment = .natural
                     alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
                     // Action
-                    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                    let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
                         UIAlertAction in
                         // Go to profile
                         self.performSegue(withIdentifier: "OverviewProfileSegue", sender: self)
@@ -464,7 +464,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.dismiss(animated: true)
         }
         // Cancel reset action
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
         }
         // Add Actions

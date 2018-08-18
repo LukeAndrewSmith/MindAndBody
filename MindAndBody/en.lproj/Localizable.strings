@@ -68,7 +68,13 @@
 "reps" = "reps";
 
 "edit" = "Edit";
+"create" = "Create";
 "done" = "Done";
+"add" = "Add";
+"areYouSureDelete" = "Are you sure you want to delete this?";
+
+"nameTitle" = "Name :";
+"chooseName" = "Choose Name";
 
 "remove" = "Remove";
 "delete" = "Delete";
@@ -179,8 +185,8 @@
 
 // MARK: Warmup
 // Warmup Misc.
-"selectWarmup" = "- Select Warmup -";
-"customWarmup" = "- Custom Warmup -";
+"selectWarmup" = "Select Warmup";
+"customWarmup" = "Custom Warmup";
 
 "select" = "Select";
 
@@ -656,7 +662,7 @@
     //
     // MARK: Workout
     //
-"selectWorkout" = "- Select Workout -";
+"selectWorkout" = "Select Workout";
         // Choice //
         //
     "location" = "Location";
@@ -670,7 +676,7 @@
 
             // Custom
         "nRoundsTitle" = "Nº Rounds: ";
-        "customWorkout" = "- Custom Workout -";
+        "customWorkout" = "Custom Workout";
         "workoutInputTitle" = "Workout Title";
         "workoutRemoveTitle" = "Remove Workout";
             //
@@ -959,8 +965,8 @@
 "biking" = "Biking";
 "running" = "Running";
 
-"selectCardio" = "- Select Cardio Session -";
-"customHIITCardio" = "- Custom Cardio Session -";
+"selectCardio" = "Select Cardio Session";
+"customHIITCardio" = "Custom Cardio";
 
 "timeBased" = " Time Based"; // Space Important
 "distanceBased" = " Distance Based";
@@ -994,7 +1000,7 @@
 
     //
     // MARK: Stretching //
-    "selectStretching" = "- Select Stretching Session -";
+    "selectStretching" = "Select Stretching Session";
         // Choice
         "general" = "General";
         "postExercise" = "Post-Workout";
@@ -1016,7 +1022,7 @@
 
         "presetSessions" = "Preset Sessions";
         "stretches" = "Stretches";
-        "customStretchingSession" = "- Custom Stretching Session -";
+        "customStretchingSession" = "Custom Stretching";
 
         "stretchingInputTitle" = "Stretching Session Title";
         "stretchingRemoveTitle" = "Remove Stretching Session";
@@ -1212,7 +1218,7 @@
 
 
             // Various //
-            "selectPractice" = "- Select Yoga Practice -";
+            "selectPractice" = "Select Yoga Practice";
 
 
             // Custom
@@ -1229,7 +1235,7 @@
             "yogaInputTitle" = "Yoga Practice Title";
             "yogaRemoveTitle" = "Remove Yoga Session";
 
-            "customYogaPractice" = "- Custom Yoga Practice -";
+            "customYogaPractice" = "Custom Yoga";
 
             "standing" = "Standing";
             "handElbow" = "Hands|Elbows & Feet|Knees";
@@ -1699,7 +1705,7 @@
 
 //
 // MARK: Custom
-"sessionInputTitle" = "Title";
+"sessionInputName" = "Name";
 
 // MARK: Warmup --------- ---------
 // Workout ---------
@@ -3265,7 +3271,6 @@
     //
     // Title //
     "profile" = "Profile";
-        "done" = "Done";
 
     //
     // Section Titles //

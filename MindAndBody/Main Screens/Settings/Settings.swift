@@ -769,7 +769,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 
                 
                 // Reset app action
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
                     UIAlertAction in
                     
                     // Walkthrough
@@ -800,7 +800,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     self.present(alert, animated: true, completion: nil)
                 }
                 // Cancel reset action
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
                     UIAlertAction in
                 }
                 // Add Actions
@@ -828,7 +828,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 
                 
                 // Reset app action
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
                     UIAlertAction in
                     
                     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
@@ -849,7 +849,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     self.present(alert, animated: true, completion: nil)
                 }
                 // Cancel reset action
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
                     UIAlertAction in
                 }
                 // Add Actions

@@ -90,6 +90,7 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomScheduleWeekCell", for: indexPath) as! CustomScheduleWeekCell
+        
         //
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()

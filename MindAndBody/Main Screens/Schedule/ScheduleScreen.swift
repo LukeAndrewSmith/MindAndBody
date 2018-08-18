@@ -292,7 +292,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             
             //
             // Action
-            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+            let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
                 UIAlertAction in
                 ActionSheet.shared.actionSheet.alpha = 1
                 ActionSheet.shared.actionSheetBackgroundView.alpha = 1
@@ -379,7 +379,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         } else if segue.identifier == "SubscriptionsSegue" {
             goingToSubscriptionsScreen = true
         } else if segue.identifier == "scheduleSegueCustom" {
-            let destinationVC = segue.destination as? FinalChoiceCustom
+            let destinationVC = segue.destination as? CustomChoice
             destinationVC?.comingFromSchedule = true
             // Remove back button text
             let backItem = UIBarButtonItem()

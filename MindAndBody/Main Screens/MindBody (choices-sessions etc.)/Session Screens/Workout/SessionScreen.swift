@@ -1232,7 +1232,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 
                 //
                 // Action
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) {
+                let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
                     UIAlertAction in
                     //
                 }

@@ -9,13 +9,15 @@
 import Foundation
 import UIKit
 
-
-
 class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var comingFromSchedule = false
+    var creatingSession = false
+    var selectedSession = 0
     
-    
+    // Outlets
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var customTable: UITableView!
     
     
     // Navigation bar titles
@@ -28,57 +30,104 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
     ]
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        customTable.reloadData()
+    }
     
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Navigation
+        navigationBar.title = NSLocalizedString(navigationBarTitles[SelectedSession.shared.selectedSession[0]]!, comment: "")
+        navigationBar.rightBarButtonItem?.tintColor = Colors.light
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
+
+
+        // Table View
+        customTable.tableFooterView = UIView()
+        customTable.dataSource = self
+        customTable.delegate = self
         
     }
     
-    
-    
-    //
     // MARK: Table View
-    //
     // Number of Sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-        //
         return 1
     }
     
     // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-        return customSessionsArray[SelectedSession.shared.selectedSession[0]]!.count + 1
+        return customSessionsArray[SelectedSession.shared.selectedSession[0]]!.count
     }
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
-        var cell = UITableViewCell()
-        cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
-        cell.textLabel?.adjustsFontSizeToFitWidth = true
-        //
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomSessionsChoiceCell", for: indexPath) as! CustomSessionsChoiceCell
+        cell.backgroundColor = Colors.light
+
         // Retreive Preset Sessions
         var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
+        cell.nameLabel?.text = customSessionsArray[SelectedSession.shared.selectedSession[0]]![indexPath.row]["name"]![0] as? String
         //
-        cell.textLabel?.textAlignment = .center
-        cell.backgroundColor = Colors.light
-        cell.textLabel?.textColor = Colors.dark
-        cell.tintColor = Colors.dark
-        //
-        cell.textLabel?.text = customSessionsArray[SelectedSession.shared.selectedSession[0]]![indexPath.row]["name"]![0] as? String
-        //
+        cell.layoutSubviews()
+        
+        // Images
+        // Remove any images
+        for view in cell.imageStack.arrangedSubviews {
+            view.removeFromSuperview()
+        }
+        // Sizes
+        let width = cell.imageStackSuperView.bounds.width
+        let height = cell.imageStack.bounds.height
+        let gap = CGFloat(4)
+        // Calculate how many square images can fit with 4 gap
+        let numberOfImages = Int(width / (height + gap))
+        // Add images
+        var imageArray: [UIImageView] = []
+        if let numberPossibleImages = customSessionsArray[SelectedSession.shared.selectedSession[0]]![indexPath.row]["movements"]?.count {
+            // Add images
+            if numberPossibleImages != 0 {
+                for i in 0..<numberOfImages {
+                    // If image is there to be added
+                    if i < (numberPossibleImages - 1) {
+                        let imageView = UIImageView()
+                        let keyIndex = (customSessionsArray[SelectedSession.shared.selectedSession[0]]![indexPath.row]["movements"]! as! [String])[i]
+                        //
+                        imageView.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]!["demonstration"]![0]))?.thumbnail(width: height, height: height)
+                        imageView.frame.size = CGSize(width: height, height: height)
+                        imageView.contentMode = .scaleAspectFit
+                        imageArray.append(imageView)
+                    }
+                }
+            }
+            cell.imageStack.spacing = gap
+            let width2 = (CGFloat(imageArray.count) * height) + (CGFloat(imageArray.count - 1) * gap)
+            for image in imageArray {
+                cell.imageStack.addArrangedSubview(image)
+            }
+            cell.imageStack.frame.size = CGSize(width: width2, height: height)
+            cell.imageStackRightConstraint.constant = width - width2
+        }
+
+        cell.deleteButton.tag = indexPath.row
+        cell.deleteButton.addTarget(self, action: #selector(deleteSession), for: .touchUpInside)
+        
+        cell.editButton.tag = indexPath.row
+        cell.editButton.addTarget(self, action: #selector(editSession), for: .touchUpInside)
+        
         return cell
     }
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
-        return 144
+        return 88
     }
     
     //
@@ -86,114 +135,9 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
-//        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-//        
-//        //
-//        // Add Custom Workout
-//        if indexPath.row == customSessionsArray[SelectedSession.shared.selectedSession[0]]?.count {
-//            
-//            ActionSheet.shared.actionSheetBackgroundView.isHidden = true
-//            
-//            // Alert and Functions
-//            //
-//            let inputTitle = NSLocalizedString("sessionInputTitle", comment: "")
-//            //
-//            let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-//            alert.view.tintColor = Colors.dark
-//            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-//            //2. Add the text field
-//            alert.addTextField { (textField: UITextField) in
-//                textField.text = " "
-//                textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
-//                textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
-//            }
-//            // 3. Get the value from the text field, and perform actions upon OK press
-//            okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-//                //
-//                // Append relevant (to SelectedSession.shared.selectedSession[0]) new array to customSessionsArray
-//                switch SelectedSession.shared.selectedSession[0] {
-//                // Warmup, Workout,
-//                case "warmup", "workout":
-//                    customSessionsArray[SelectedSession.shared.selectedSession[0]]!.append(Register.emptySessionFour)
-//                case "cardio", "stretching", "yoga":
-//                    customSessionsArray[SelectedSession.shared.selectedSession[0]]!.append(Register.emptySessionThree)
-//                //
-//                default:
-//                    break
-//                }
-//                //
-//                // Update Title
-//                let textField = alert?.textFields![0]
-//                let lastIndex = (customSessionsArray[SelectedSession.shared.selectedSession[0]]?.count)! - 1
-//                let title = textField?.text!
-//                customSessionsArray[SelectedSession.shared.selectedSession[0]]![lastIndex]["name"]![0] = title
-//                //
-//                // Default mumber of rounds if relevant
-//                if SelectedSession.shared.selectedSession[0] == "workout" {
-//                    self.nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
-//                }
-//                //
-//                // SET NEW ARRAY
-//                UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-//                // Sync
-//                ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
-//                //
-//                // Select new session and dismiss
-//                let selectedIndexPath = NSIndexPath(row: lastIndex, section: 0)
-//                self.presetsTableView.selectRow(at: selectedIndexPath as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
-//                self.selectedPreset = lastIndex
-//                //
-//                //
-//                // Presets title
-//                let string = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] as! String
-//                self.presetsButton.setTitle("- " + string + " -", for: .normal)
-//                
-//                //
-//                self.presetsTableView.reloadData()
-//                //
-//                tableView.deselectRow(at: indexPath, animated: true)
-//                // Reload
-//                self.customTableView.reloadData()
-//                self.beginButtonEnabled()
-//                //
-//                // Element Positions
-//                if IPhoneType.shared.iPhoneType() == 2 {
-//                    self.presetsBottom.constant = self.view.frame.size.height - 73.5 - ControlBarHeights.homeIndicatorHeight
-//                } else {
-//                    self.presetsBottom.constant = self.view.frame.size.height - 73.5
-//                }
-//                self.tableViewConstraintTop.constant = 122.5
-//                self.tableViewConstraintBottom.constant = 49
-//                self.beginButtonConstraint.constant = 0
-//                //
-//                // Dismiss presets table
-//                ActionSheet.shared.actionSheetBackgroundView.isHidden = false
-//                ActionSheet.shared.actionSheetBackgroundView.removeFromSuperview()
-//                //                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
-//                //                        ActionSheet.shared.animateActionSheetDown()
-//                UIView.animate(withDuration: AnimationTimes.animationTime3, animations: {
-//                    self.view.layoutIfNeeded()
-//                }, completion: nil)
-//                //                    })
-//            })
-//            okAction.isEnabled = false
-//            alert.addAction(okAction)
-//            // Cancel reset action
-//            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
-//                UIAlertAction in
-//                //
-//                ActionSheet.shared.actionSheetBackgroundView.isHidden = false
-//            }
-//            alert.addAction(cancelAction)
-//            // 4. Present the alert.
-//            self.present(alert, animated: true, completion: nil)
-//            //
-//            //
-//            // Select Custom Workout
-//        } else {
-//            //
-//            selectedPreset = indexPath.row
-//            //
+            //
+        // NINA
+        // MARK: May be important
 //            // NUMBER OF ROUNDS title
 //            if SelectedSession.shared.selectedSession[0] == "workout" {
 //                // Rounds
@@ -205,24 +149,93 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
 //                    nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
 //                }
 //            }
-//            //
-//            if selectedPreset == -1 {
-//                self.presetsButton.setTitle(NSLocalizedString(self.presetsButtonTitles[SelectedSession.shared.selectedSession[0]]!, comment: ""), for: .normal)
-//            } else {
-//                let string = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] as! String
-//                self.presetsButton.setTitle("- " + string + " -", for: .normal)
-//                
-//            }
-//            //
-//            tableView.deselectRow(at: indexPath, animated: true)
-//            //
-//            customTableView.reloadData()
-//            //
-//        }
-//        //
-        //
+            //
+        
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
+        
+        // If something in the session, go to session
+        selectedSession = indexPath.row
+        if customSessionsArray[SelectedSession.shared.selectedSession[0]]?[selectedSession]["movements"]?.count != 0 {
+            // Segue
+            switch SelectedSession.shared.selectedSession[0] {
+            // Warmup
+            case "warmup":
+                // Warmup uses stretching Screen
+                performSegue(withIdentifier: "customSessionSegueStretching", sender: self)
+            // Workout
+            case "workout":
+                // If circuit session
+                if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]![1] as! Int == -1 {
+                    performSegue(withIdentifier: "customSessionSegueCircuit", sender: self)
+                    // Normal session
+                } else {
+                    performSegue(withIdentifier: "customSessionSegue", sender: self)
+                }
+            // Cardio
+            case "cardio":
+                performSegue(withIdentifier: "customSessionSegueCardio", sender: self)
+            // Stretching
+            case "stretching":
+                performSegue(withIdentifier: "customSessionSegueStretching", sender: self)
+            // Yoga
+            case "yoga":
+                performSegue(withIdentifier: "customSessionSegueYoga", sender: self)
+            default:
+                break
+            }
+
+            // Return background to homescreen
+            perform(#selector(popToRootView), with: Any?.self, afterDelay: 0.5)
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    // MARK: Begin button action!!!!!!!
+    func didSelectRowAction() {
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
+        
+        // If something in the session
+        let selectedPreset = 0 // = indexPath.row
+        if customSessionsArray[SelectedSession.shared.selectedSession[0]]?[selectedPreset]["movements"]?.count != 0 {
+            // Segue
+            switch SelectedSession.shared.selectedSession[0] {
+            // Warmup
+            case "warmup":
+                // Warmup uses stretching Screen
+                performSegue(withIdentifier: "customSessionSegueStretching", sender: self)
+            // Workout
+            case "workout":
+                // If circuit session
+                if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![1] as! Int == -1 {
+                    performSegue(withIdentifier: "customSessionSegueCircuit", sender: self)
+                    // Normal session
+                } else {
+                    performSegue(withIdentifier: "customSessionSegue", sender: self)
+                }
+            // Cardio
+            case "cardio":
+                performSegue(withIdentifier: "customSessionSegueCardio", sender: self)
+            // Stretching
+            case "stretching":
+                performSegue(withIdentifier: "customSessionSegueStretching", sender: self)
+            // Yoga
+            case "yoga":
+                performSegue(withIdentifier: "customSessionSegueYoga", sender: self)
+            default:
+                break
+            }
+            
+            //
+            // Return background to homescreen
+            perform(#selector(popToRootView), with: Any?.self, afterDelay: 0.5)
+        }
+    }
+    // Pop to root view
+    @objc func popToRootView() {
+        _ = self.navigationController?.popToRootViewController(animated: false)
+    }
+    
     
     // Enable ok alert action func
     @objc func textChanged(_ sender: UITextField) {
@@ -239,94 +252,175 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
     // Can edit row
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         //
-        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-        //
-        switch tableView {
-        case presetsTableView:
-            
-            //
-            if indexPath.row < (customSessionsArray[SelectedSession.shared.selectedSession[0]]?.count)! {
-                return true
-            }
-        case movementsTableView: return false
-        case customTableView:
-            //
-            if customSessionsArray[SelectedSession.shared.selectedSession[0]]?.count == 0 || customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["movements"]!.count == 0 {
-                return false
-            } else {
-                if indexPath.row == customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["movements"]!.count {
-                    return false
-                } else {
-                    return true
-                }
-            }
-        default: return false
-        }
-        return false
+        return true
     }
     
     // Delete button title
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         //
-        if tableView == customTableView {
-            return NSLocalizedString("remove", comment: "")
-        } else {
-            return NSLocalizedString("delete", comment: "")
-        }
+        return NSLocalizedString("delete", comment: "")
     }
     
     // Commit editing style
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        //
-        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-        //
         if editingStyle == UITableViewCellEditingStyle.delete {
-            
-                // New array
-                customSessionsArray[SelectedSession.shared.selectedSession[0]]!.remove(at: indexPath.row)
-                UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
-                //
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.presetsTableView.reloadData()
-                })
-                //
-                self.selectedPreset = -1
-                self.customTableView.reloadData()
-                self.beginButtonEnabled()
-                //
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.presetsTableView.reloadData()
-                    //
-                    if self.selectedPreset == -1 {
-                        self.presetsButton.setTitle(NSLocalizedString(self.presetsButtonTitles[SelectedSession.shared.selectedSession[0]]!, comment: ""), for: .normal)
-                    } else {
-                        let string = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] as! String
-                        self.presetsButton.setTitle("- " + string + " -", for: .normal)
-                    }
-                })
-                //
-                self.presetsTableView.isHidden = false
-                //
-                self.presetsTableView.reloadData()
-                //
-                // Reload Data
-                self.customTableView.reloadData()
-                self.beginButtonEnabled()
-                //
-                // Initial Element Positions
-                if IPhoneType.shared.iPhoneType() == 2 {
-                    presetsBottom.constant = -ControlBarHeights.homeIndicatorHeight
-                } else {
-                    presetsBottom.constant = 0
-                }
-                
-                self.tableViewConstraintTop.constant = self.view.frame.size.height + ControlBarHeights.homeIndicatorHeight
-                self.tableViewConstraintBottom.constant = -49 - ControlBarHeights.homeIndicatorHeight
-                self.beginButtonConstraint.constant = -49 - ControlBarHeights.homeIndicatorHeight
-                
+            deleteSessionAction(session: indexPath.row)
         }
     }
     
+    @objc func deleteSession(sender: UIButton) {
+        // Get session index
+        let session = sender.tag
+        
+        // Alert for title and Functions
+        let inputTitle = NSLocalizedString("areYouSureDelete", comment: "")
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = Colors.dark
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
+        
+        // Ok action
+        okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
+            self.deleteSessionAction(session: session)
+        })
+        alert.addAction(okAction)
+        
+        // Cancel  action
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {UIAlertAction in}
+        alert.addAction(cancelAction)
+        
+        // Present the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    func deleteSessionAction(session: Int) {
+        
+        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
+
+        // New array
+        customSessionsArray[SelectedSession.shared.selectedSession[0]]!.remove(at: session)
+        UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
+        //
+        customTable.reloadData()
+    }
+    
+    @objc func editSession(sender: UIButton) {
+        // Get session index
+        let session = sender.tag
+        
+        selectedSession = session
+        creatingSession = false
+        
+        performSegue(withIdentifier: "sessionEditingSegue", sender: self)
+    }
+    
+    // MARK: Create Session
+    @IBAction func createSessionAction(_ sender: Any) {
+        
+        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
+
+        // Alert for title and Functions
+        let inputTitle = NSLocalizedString("sessionInputName", comment: "")
+        //
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = Colors.dark
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        //2. Add the text field
+        alert.addTextField { (textField: UITextField) in
+            textField.text = ""
+            textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+            textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
+        }
+        // 3. Get the value from the text field, and perform actions upon OK press
+        okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
+            //
+            // Append relevant (to SelectedSession.shared.selectedSession[0]) new array to customSessionsArray
+            switch SelectedSession.shared.selectedSession[0] {
+            // Warmup, Workout,
+            case "warmup", "workout":
+                customSessionsArray[SelectedSession.shared.selectedSession[0]]!.append(Register.emptySessionFour)
+            case "cardio", "stretching", "yoga":
+                customSessionsArray[SelectedSession.shared.selectedSession[0]]!.append(Register.emptySessionThree)
+            //
+            default:
+                break
+            }
+            //
+            // Update Title
+            let textField = alert?.textFields![0]
+            let lastIndex = (customSessionsArray[SelectedSession.shared.selectedSession[0]]?.count)! - 1
+            let title = textField?.text!
+            customSessionsArray[SelectedSession.shared.selectedSession[0]]![lastIndex]["name"]![0] = title as Any
+            //
+
+            // NINA
+            // MARK: May be important
+//            self.nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
+
+            // Set
+            UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
+            
+            // Select new session
+            self.selectedSession = lastIndex
+
+            // Reload
+            self.customTable.reloadData()
+            
+            // Segue
+            self.creatingSession = true
+            self.performSegue(withIdentifier: "sessionEditingSegue", sender: self)
+        })
+        okAction.isEnabled = false
+        alert.addAction(okAction)
+        // Cancel reset action
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            ActionSheet.shared.actionSheetBackgroundView.isHidden = false
+        }
+        alert.addAction(cancelAction)
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let destinationNC = segue.destination as? CustomSessionEditingNavigation
+        let destinationVC = destinationNC?.viewControllers.first as? EditingCustom
+        // Indicate if creating or editing
+        destinationVC?.creatingSession = creatingSession
+        destinationVC?.selectedPreset = selectedSession
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        backItem.tintColor = Colors.light
+        navigationItem.backBarButtonItem = backItem
+    }
+    
+}
+
+// MARK: Custom Cell
+class CustomSessionsChoiceCell: UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var imageStackSuperView: UIView!
+    @IBOutlet weak var imageStack: UIStackView!
+    @IBOutlet weak var imageStackRightConstraint: NSLayoutConstraint!
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        editButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
+        editButton.setTitleColor(Colors.dark, for: .normal)
+        editButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 17)
+        
+        deleteButton.tintColor = Colors.red
+        
+        nameLabel.font = UIFont(name: "SFUIDisplay-regular", size: 27)
+        nameLabel.textColor = Colors.dark
+        nameLabel.adjustsFontSizeToFitWidth = true
+    }
 }

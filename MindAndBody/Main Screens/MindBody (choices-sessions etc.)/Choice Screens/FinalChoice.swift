@@ -149,7 +149,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
         //
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = Colors.dark
+        tableViewBackground.backgroundColor = Colors.light
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.movementsTableView.frame.size.width, height: self.movementsTableView.frame.size.height)
         //
         movementsTableView.backgroundView = tableViewBackground
@@ -339,7 +339,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.textLabel?.textAlignment = .left
-            cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
+            cell.backgroundColor = Colors.light
             cell.textLabel?.textColor = Colors.dark
             cell.tintColor = Colors.dark
             

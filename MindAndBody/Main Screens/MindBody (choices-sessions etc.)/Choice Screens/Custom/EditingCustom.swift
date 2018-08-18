@@ -23,9 +23,11 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var selectedRow = Int()
     var selectedSection = Int()
     //
-    var selectedPreset = -1
+    var selectedPreset = 0
     //
     var selectingNumberOfRounds = false
+    
+    var creatingSession = false
     
     //
     // Picker Arrays
@@ -61,10 +63,11 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var navigationBar: UINavigationItem!
     
     // Presets
-    @IBOutlet weak var presetsButton: UIButton!
+    @IBOutlet weak var nameTitleLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var nameButton: UIButton!
     
-    // Begin Button
-    @IBOutlet weak var beginButton: UIButton!
+    @IBOutlet weak var topSeparator: UIView!
     
     // Table View
     @IBOutlet weak var customTableView: UITableView!
@@ -73,16 +76,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var nRoundsButton: UIButton!
     @IBOutlet weak var newMovementButton: UIButton!
     
-    
-    //
-    // Constraints
-    @IBOutlet weak var presetsTop: NSLayoutConstraint!
-    @IBOutlet weak var presetsBottom: NSLayoutConstraint!
-    //
-    @IBOutlet weak var tableViewConstraintTop: NSLayoutConstraint!
-    @IBOutlet weak var tableViewConstraintBottom: NSLayoutConstraint!
-    @IBOutlet weak var beginButtonConstraint: NSLayoutConstraint!
-    //
     @IBOutlet weak var nRoundsRight: NSLayoutConstraint!
     @IBOutlet weak var newMovementLeft: NSLayoutConstraint!
     
@@ -107,28 +100,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Nº Rounds Title
     let nRoundsTitle = NSLocalizedString("nRoundsTitle", comment: "")
     
-    
-    //
-    // View Will Appear
-    //
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Set Title of presets button
-        presetsButton.setTitle(NSLocalizedString(presetsButtonTitles[SelectedSession.shared.selectedSession[0]]!, comment: ""), for: .normal)
-    }
-    
-    //
-    // View did appear
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //
-        // Select
-        if selectedPreset == -1 {
-            self.presetsButton.sendActions(for: .touchUpInside)
-        }
-    }
-    
-    
     //
     // View did load  ---------------------------------------------------------------------------------------------------------------------------
     //
@@ -139,20 +110,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(gestureRecognizer:)))
         customTableView.addGestureRecognizer(longPress)
         
-        //
-        // Initial Element Positions
-        presetsTop.constant = 0
-        if IPhoneType.shared.iPhoneType() == 2 {
-            presetsBottom.constant = -ControlBarHeights.homeIndicatorHeight
-        } else {
-            presetsBottom.constant = 0
-        }
-        //
-        tableViewConstraintTop.constant = view.frame.size.height + ControlBarHeights.homeIndicatorHeight
-        tableViewConstraintBottom.constant = -49 - ControlBarHeights.homeIndicatorHeight
-        //
-        beginButtonConstraint.constant = -49 - ControlBarHeights.homeIndicatorHeight
-        
+
         // Width of action buttons
         // If Workout, option for circuit workout (numberofrounds)
         if SelectedSession.shared.selectedSession[0] != "workout" {
@@ -164,27 +122,50 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             newMovementLeft.constant = view.bounds.width / 2
             nRoundsButton.setTitle(nRoundsTitle + "1", for: .normal)
         }
+        newMovementButton.setTitle(NSLocalizedString("add", comment: ""), for: .normal)
+        newMovementButton.setTitleColor(Colors.dark, for: .normal)
+        newMovementButton.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
+        newMovementButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         
         
         // Colour
         self.view.backgroundColor = Colors.light
         
         //
-        presetsButton.backgroundColor = Colors.dark
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
+
+        nameButton.backgroundColor = Colors.light
+        nameTitleLabel.text = NSLocalizedString("nameTitle", comment: "")
+        nameTitleLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        nameTitleLabel.isUserInteractionEnabled = false
+        if customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] as! String == "" {
+            nameLabel.text = NSLocalizedString("chooseName", comment: "")
+        } else {
+            nameLabel.text = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] as! String
+        }
+        nameLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        nameLabel.isUserInteractionEnabled = false
+        
+        topSeparator.backgroundColor = Colors.dark.withAlphaComponent(0.27)
         
         // Navigation Bar Title
-        navigationBar.title = NSLocalizedString("custom", comment: "")
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar]
+        // Creating
+        if creatingSession {
+            navigationBar.title = NSLocalizedString("create", comment: "")
+        // Editing
+        } else {
+            navigationBar.title = NSLocalizedString("edit", comment: "")
+        }
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
         
-        // Begin Button Title
-        beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
-        beginButton.backgroundColor = Colors.green
-        beginButton.setTitleColor(Colors.dark, for: .normal)
-        
-        
+        navigationBar.leftBarButtonItem?.tintColor = Colors.light
+        navigationBar.leftBarButtonItem?.title = NSLocalizedString("done", comment: "")
+        navigationBar.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton], for: .normal)
         
         // Presets TableView
         //
-        // Movement tabl
+        // Movement table
         presetsTableView.backgroundColor = Colors.dark
         presetsTableView.delegate = self
         presetsTableView.dataSource = self
@@ -196,7 +177,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         presetsTableView.layer.borderColor = Colors.light.cgColor
         presetsTableView.layer.borderWidth = 1
         //
-        //
+        
         let tableViewBackground2 = UIView()
         //
         tableViewBackground2.backgroundColor = Colors.light
@@ -212,7 +193,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // TableView Background
         let tableViewBackground = UIView()
         //
-        tableViewBackground.backgroundColor = Colors.dark
+        tableViewBackground.backgroundColor = Colors.light
         tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.customTableView.frame.size.width, height: self.customTableView.frame.size.height)
         //
         customTableView.backgroundView = tableViewBackground
@@ -253,61 +234,16 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
     }
     
-    var didLayout = false
     //
     // View did layout subviews Actions -------------------------------------------------------------------------------------------------
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        //
-        // Initial Element Positions
-        if didLayout == false {
-            presetsTop.constant = 0
-            if IPhoneType.shared.iPhoneType() == 2 {
-                presetsBottom.constant = -ControlBarHeights.homeIndicatorHeight
-            } else {
-                presetsBottom.constant = 0
-            }
-            //
-            tableViewConstraintTop.constant = view.frame.size.height + ControlBarHeights.homeIndicatorHeight
-            tableViewConstraintBottom.constant = -49 - ControlBarHeights.homeIndicatorHeight
-            //
-            beginButtonConstraint.constant = -49 - ControlBarHeights.homeIndicatorHeight
-            //
-            didLayout = true
-        } else {
-            
-        }
         
         // TableView Footer
         let footerView = UIView(frame: .zero)
         footerView.backgroundColor = .clear
         customTableView.tableFooterView = footerView
         //
-    }
-    
-    
-    //
-    // MARK: Check enabled funcs
-    //
-    // Button Enabled
-    func beginButtonEnabled() {
-        // Begin Button
-        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-        //
-        if customTableView.isEditing {
-            beginButton.isEnabled = false
-        } else {
-            if selectedPreset == -1 {
-                
-            } else {
-                if customSessionsArray[SelectedSession.shared.selectedSession[0]]?[selectedPreset]["movements"]?.count == 0 {
-                    beginButton.isEnabled = false
-                } else {
-                    beginButton.isEnabled = true
-                }
-            }
-        }
     }
     
     //
@@ -899,19 +835,19 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 
                 // Alert and Functions
                 //
-                let inputTitle = NSLocalizedString("sessionInputTitle", comment: "")
+                let inputTitle = NSLocalizedString("sessionInputName", comment: "")
                 //
                 let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
                 alert.view.tintColor = Colors.dark
                 alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
                 //2. Add the text field
                 alert.addTextField { (textField: UITextField) in
-                    textField.text = " "
+                    textField.text = ""
                     textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
                     textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
                 }
                 // 3. Get the value from the text field, and perform actions upon OK press
-                okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
                     //
                     // Append relevant (to SelectedSession.shared.selectedSession[0]) new array to customSessionsArray
                     switch SelectedSession.shared.selectedSession[0] {
@@ -949,7 +885,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     //
                     // Presets title
                     let string = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] as! String
-                    self.presetsButton.setTitle("- " + string + " -", for: .normal)
+                    // set name to new place
                     
                     //
                     self.presetsTableView.reloadData()
@@ -957,17 +893,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     tableView.deselectRow(at: indexPath, animated: true)
                     // Reload
                     self.customTableView.reloadData()
-                    self.beginButtonEnabled()
                     //
-                    // Element Positions
-                    if IPhoneType.shared.iPhoneType() == 2 {
-                        self.presetsBottom.constant = self.view.frame.size.height - 73.5 - ControlBarHeights.homeIndicatorHeight
-                    } else {
-                        self.presetsBottom.constant = self.view.frame.size.height - 73.5
-                    }
-                    self.tableViewConstraintTop.constant = 122.5
-                    self.tableViewConstraintBottom.constant = 49
-                    self.beginButtonConstraint.constant = 0
                     //
                     // Dismiss presets table
                     ActionSheet.shared.actionSheetBackgroundView.isHidden = false
@@ -982,7 +908,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 okAction.isEnabled = false
                 alert.addAction(okAction)
                 // Cancel reset action
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
                     UIAlertAction in
                     //
                     ActionSheet.shared.actionSheetBackgroundView.isHidden = false
@@ -1010,10 +936,9 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
                 //
                 if selectedPreset == -1 {
-                    self.presetsButton.setTitle(NSLocalizedString(self.presetsButtonTitles[SelectedSession.shared.selectedSession[0]]!, comment: ""), for: .normal)
+                    // set default name title
                 } else {
-                    let string = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] as! String
-                    self.presetsButton.setTitle("- " + string + " -", for: .normal)
+                    // set name title
                     
                 }
                 //
@@ -1021,21 +946,8 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 // Dismiss Table
                 if customSessionsArray[SelectedSession.shared.selectedSession[0]]?.count != 0 {
                     //
-                    // Element Positions
-                    if IPhoneType.shared.iPhoneType() == 2 {
-                        self.presetsBottom.constant = self.view.frame.size.height - 73.5 - ControlBarHeights.homeIndicatorHeight
-                    } else {
-                        self.presetsBottom.constant = self.view.frame.size.height - 73.5
-                    }
-                    //
-                    self.tableViewConstraintTop.constant = 122.5
-                    self.tableViewConstraintBottom.constant = 49
-                    //
-                    self.beginButtonConstraint.constant = 0
-                    //
                     ActionSheet.shared.animateActionSheetDown()
                     self.customTableView.reloadData()
-                    self.beginButtonEnabled()
                     UIView.animate(withDuration: AnimationTimes.animationTime3, animations: {
                         self.view.layoutIfNeeded()
                     }, completion: nil)
@@ -1180,7 +1092,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             ActionSheet.shared.animateActionSheetDown()
             //
-            self.beginButtonEnabled()
             // Scroll to Bottom
             if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
                 let scrollIndex = NSIndexPath(row: (customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["movements"]?.count)! - 1, section: 0)
@@ -1337,16 +1248,14 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 self.selectedPreset = -1
                 self.customTableView.reloadData()
-                self.beginButtonEnabled()
                 //
                 UIView.animate(withDuration: 0.2, animations: {
                     self.presetsTableView.reloadData()
                     //
                     if self.selectedPreset == -1 {
-                        self.presetsButton.setTitle(NSLocalizedString(self.presetsButtonTitles[SelectedSession.shared.selectedSession[0]]!, comment: ""), for: .normal)
+                        // set default name title
                     } else {
-                        let string = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] as! String
-                        self.presetsButton.setTitle("- " + string + " -", for: .normal)
+                        // set name title
                     }
                 })
                 //
@@ -1356,19 +1265,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 // Reload Data
                 self.customTableView.reloadData()
-                self.beginButtonEnabled()
                 //
-                // Initial Element Positions
-                if IPhoneType.shared.iPhoneType() == 2 {
-                    presetsBottom.constant = -ControlBarHeights.homeIndicatorHeight
-                } else {
-                    presetsBottom.constant = 0
-                }
-                
-                self.tableViewConstraintTop.constant = self.view.frame.size.height + ControlBarHeights.homeIndicatorHeight
-                self.tableViewConstraintBottom.constant = -49 - ControlBarHeights.homeIndicatorHeight
-                self.beginButtonConstraint.constant = -49 - ControlBarHeights.homeIndicatorHeight
-
             //
             case customTableView:
                 //
@@ -1445,22 +1342,49 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     // MARK: Table view related button actions
     //
-    // Prests
-    @IBAction func presetsAction(_ sender: Any) {
+    // MARK: Rename
+    @IBAction func nameAction(_ sender: Any) {
+        
+        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
+
+        // Alert and Functions
+        let inputTitle = NSLocalizedString("sessionInputName", comment: "")
         //
-        let tableHeight = ActionSheet.shared.actionTableHeight - 49 - 20
-        let tableWidth = ActionSheet.shared.actionWidth
-        self.presetsTableView.frame = CGRect(x: 0, y: 0, width: tableWidth, height: tableHeight)
-        //
-        ActionSheet.shared.setupActionSheet()
-        ActionSheet.shared.actionSheet.addSubview(presetsTableView)
-        let heightToAdd = presetsTableView.bounds.height
-        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
-        ActionSheet.shared.resetCancelFrame()
-        //
-        ActionSheet.shared.animateActionSheetUp()
-        self.presetsTableView.reloadData()
-        //
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = Colors.dark
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        // 2. Add the text field
+        alert.addTextField { (textField: UITextField) in
+            textField.text = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] as? String
+            textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+            textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
+        }
+        // 3. Get the value from the text field, and perform actions upon OK press
+        okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
+            //
+            // Update Title
+            let textField = alert?.textFields![0]
+            let title = textField?.text!
+            customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] = title as Any
+            // Set
+            UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
+            
+            // Update title on page
+            self.nameLabel.text = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedPreset]["name"]![0] as? String
+        })
+        okAction.isEnabled = false
+        alert.addAction(okAction)
+        // Cancel reset action
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            //
+            ActionSheet.shared.actionSheetBackgroundView.isHidden = false
+        }
+        alert.addAction(cancelAction)
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
     }
     
     //
@@ -1789,18 +1713,17 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
         default:
             let cell = self.customTableView.cellForRow(at: Path.initialIndexPath!)
-            cell?.isHidden = false
             cell?.alpha = 0.0
+            cell?.isHidden = false
             UIView.animate(withDuration: 0.25, animations: {
                 My.cellSnapShot?.center = (cell?.center)!
                 My.cellSnapShot?.transform = .identity
-                My.cellSnapShot?.alpha = 0.0
-                cell?.alpha = 1.0
             }, completion: { (finished) -> Void in
                 if finished {
                     Path.initialIndexPath = nil
                     My.cellSnapShot?.removeFromSuperview()
                     My.cellSnapShot = nil
+                    cell?.alpha = 1.0
                 }
             })
             //
@@ -1889,55 +1812,10 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    
-    //
-    // MARK: Begin Button
-    //
-    // Begin Button
-    @IBAction func beginButton(_ sender: Any) {
-        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-        
-        // If something in the session
-        if customSessionsArray[SelectedSession.shared.selectedSession[0]]?[selectedPreset]["movements"]?.count != 0 {
-            // Segue
-            switch SelectedSession.shared.selectedSession[0] {
-            // Warmup
-            case "warmup":
-                // Warmup uses stretching Screen
-                performSegue(withIdentifier: "customSessionSegueStretching", sender: self)
-            // Workout
-            case "workout":
-                // If circuit session
-                if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![1] as! Int == -1 {
-                    performSegue(withIdentifier: "customSessionSegueCircuit", sender: self)
-                    // Normal session
-                } else {
-                    performSegue(withIdentifier: "customSessionSegue", sender: self)
-                }
-            // Cardio
-            case "cardio":
-                performSegue(withIdentifier: "customSessionSegueCardio", sender: self)
-            // Stretching
-            case "stretching":
-                performSegue(withIdentifier: "customSessionSegueStretching", sender: self)
-            // Yoga
-            case "yoga":
-                performSegue(withIdentifier: "customSessionSegueYoga", sender: self)
-            default:
-                break
-            }
-            
-            //
-            // Return background to homescreen
-            perform(#selector(popToRootView), with: Any?.self, afterDelay: 0.5)
-        }
+    // MARK: Dismiss
+    @IBAction func doneButtonAction(_ sender: Any) {
+        self.dismiss(animated: true)
     }
-    
-    // Pop to root view
-    @objc func popToRootView() {
-        _ = self.navigationController?.popToRootViewController(animated: false)
-    }
-    
     
     //
     // MARK: Pass Arrays
@@ -2028,5 +1906,10 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     //
+}
+
+// MARK: Navigation controller
+class CustomSessionEditingNavigation: UINavigationController {
+    
 }
 

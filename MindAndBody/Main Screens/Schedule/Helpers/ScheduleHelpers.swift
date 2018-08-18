@@ -484,7 +484,7 @@ extension ScheduleScreen {
             self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
             self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
         }
         //

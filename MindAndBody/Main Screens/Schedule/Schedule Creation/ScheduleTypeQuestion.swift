@@ -192,12 +192,12 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
             //2. Add the text field
             alert.addTextField { (textField: UITextField) in
-                textField.text = " "
+                textField.text = ""
                 textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
                 textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
             }
             // 3. Get the value from the text field, and perform actions upon OK press
-            okAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
                 var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
                 //
                 // Append new schedule array to schedules
@@ -243,7 +243,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             okAction.isEnabled = false
             alert.addAction(okAction)
             // Cancel action
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) {
+            let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
                 UIAlertAction in
             }
             alert.addAction(cancelAction)
