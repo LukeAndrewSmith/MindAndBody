@@ -12,166 +12,7 @@ import Foundation
 //
 // MARK: User Data
 
-enum customSectionEmptySessions {
-    
-    // Empty Session, Warmup, Workout, Workout - circuit - [string],[int],[int],[int]
-    static let emptySessionFour: [[Any]] =
-        [
-            // Name - String
-            [""],
-            // Movements - Int
-            [],
-            // Sets - Int || Rounds - Int ([nRounds, -1], -1 indicates that its a circuit workout)
-            [],
-            // Reps - String?
-            []
-    ]
-    
-    // Empty Session, Cardio, Stretching, Yoga, - [string],[int],[int]
-    static let emptySessionThree: [[Any]] =
-        [
-            // Name - String
-            [""],
-            // Movements - Int
-            [],
-            // Reps - Int
-            []
-    ]
-    
-    //
-    static let emptySessionMeditation: [[[Any]]] =
-        [
-            // Name - String
-            [[]],
-            // Duration - Int
-            [[]],
-            // Bells, starting and ending bells go at first and last, interval bells in the middle
-            // [Bell, Time] - [Int]
-            [[-1,0],[-1,0]],
-            // Background Sound - Int
-            [[-1]]
-    ]
-    
-    
-    //
-    // MARK: Schedule Tracking, tracking what youve done each week, putting a tick next to what you've done in schedule if true
-    //
-    static let scheduleTrackingArrays: [Int:[[Any]]] =
-        [
-            // MARK: Mind
-            0:
-                [
-                    // 0
-                    [false],
-                    // Choice progress state
-                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
-                    [0,0],
-                    // Yoga, Meditation Walk
-                    [
-                        false,
-                        false,
-                        false
-                    ],
-                    // 4 | To Do Yoga - Warmup, Practice
-                    [
-                        false,
-                        false
-                    ]
-            ],
-            
-            // Note: Choice = ["title","contents","contents"...]
-            // MARK: Flexibility
-            1:
-                [
-                    // 0
-                    [false],
-                    // Choice progress state
-                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
-                    [0,0],
-                    // 4 | To Do Flexibility - Warmup, Session
-                    [
-                        false,
-                        false
-                    ]
-            ],
-            
-            // MARK: Endurance
-            2:
-                [
-                    // 0
-                    [false],
-                    // Choice progress state
-                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
-                    [0,0],
-                    // Type - High Intesnsity, Steady State
-                    [
-                        false,
-                        false
-                    ],
-                    // --------------
-                    // 4 | High Intensity To Do - warmup, cardio, stretching
-                    // or  ------------
-                    // Steady State
-                    // 5 | Steady State To Do 2 - 2 - To Do
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ],
-            
-            // MARK: Toning
-            3:
-                [
-                    // 0
-                    [false],
-                    // Choice progress state
-                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
-                    [0,0],
-                    // 3 | Toning To Do, warmup, session, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ],
-            
-            // MARK: Muscle Gain
-            4:
-                [
-                    // 0
-                    [false],
-                    // Choice progress state
-                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
-                    [0,0],
-                    // 4 | Muscle Gain To Do - Warmup, session, stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ],
-            
-            // MARK: Strength
-            5:
-                [
-                    // 0
-                    [false],
-                    // Choice progress state
-                    // Indicates which session was selected, i.e which selection was made to obtain the warmup/session/stretching choice
-                    [0,0],
-                    // 4 | Strength To Do, Warmup, Session, Stretching
-                    [
-                        false,
-                        false,
-                        false
-                    ]
-            ]
-    ]
-    
-}
-
-// Settings
+// Register to user defaults
 enum Register {
     // --------------------------------------------------------
     // Settings
@@ -241,7 +82,7 @@ enum Register {
     // Custom Sessions
     // Warmup, Workout, Cardio, Stretching, Yoga
         // Array because indexe with ints
-    static let customSessionsRegister: [String: [[[Any]]]] =
+    static let customSessionsRegister: [String: [[String: [Any]]]] =
         [
             // Warmup -
             // [name] - string, [movements] - int, [sets] - int, [reps] - string
@@ -262,26 +103,26 @@ enum Register {
             "yoga": []
     ]
     // Empty Session, Warmup, Workout, Workout - circuit - [string],[int],[int],[int]
-    static let emptySessionFour: [[Any]] =
+    static let emptySessionFour: [String: [Any]] =
         [
             // Name - String - 0
-            [""],
+            "name": [""],
             // Movements - Int - 1
-            [],
+            "movements": [],
             // Sets - Int - 2
-            [],
+            "setsBreathsTime": [],
             // Reps - String? - 3
-            []
+            "reps": []
     ]
     // Empty Session, Cardio, Stretching, Yoga, - [string],[int][int]
-    static let emptySessionThree: [[Any]] =
+    static let emptySessionThree: [String: [Any]] =
         [
             // Name - String - 0
-            [""],
+            "name": [""],
             // Movements - Int - 1
-            [],
-            // Breaths/Time - Int
-            []
+            "movements": [],
+            // Breaths/Time - Int  (called sets for simplicity in code)
+            "setsBreathsTime": []
     ]
     
     // --------------------------------------------------------

@@ -70,6 +70,7 @@ extension sessionData {
             ],
             // Cardio
             "cardio": [
+                    "intensity",
                     "running",
                     "biking",
                     "rowing"

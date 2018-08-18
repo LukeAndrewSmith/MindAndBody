@@ -367,6 +367,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             // Remove back button text
             let backItem = UIBarButtonItem()
             backItem.title = ""
+            backItem.tintColor = Colors.light
             navigationItem.backBarButtonItem = backItem
         // Create Schedule
         } else if segue.identifier == "ScheduleCreationSegue" {
@@ -377,6 +378,14 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             destinationVC?.comingFromSchedule = true
         } else if segue.identifier == "SubscriptionsSegue" {
             goingToSubscriptionsScreen = true
+        } else if segue.identifier == "scheduleSegueCustom" {
+            let destinationVC = segue.destination as? FinalChoiceCustom
+            destinationVC?.comingFromSchedule = true
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            backItem.tintColor = Colors.light
+            navigationItem.backBarButtonItem = backItem
         } else {
             let backItem = UIBarButtonItem()
             backItem.title = ""

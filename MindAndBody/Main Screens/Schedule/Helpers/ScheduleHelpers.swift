@@ -100,6 +100,8 @@ extension ScheduleScreen {
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 // Custom Choice
                 case 7:
+                    // Indicate selected row
+                    ScheduleVariables.shared.selectedRows[1] = row - 1
                     
                     var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                     // If app chooses warmup/stretching
@@ -107,7 +109,6 @@ extension ScheduleScreen {
                         // Warmup
                         if row == 1 {
                             selectWarmup()
-                            ScheduleVariables.shared.selectedRows[1] = row - 1
                             performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                             // Session
                         } else if row == 2 {
@@ -117,7 +118,6 @@ extension ScheduleScreen {
                             // Stretching
                         } else if row == 3 {
                             selectStretching()
-                            ScheduleVariables.shared.selectedRows[1] = row - 1
                             performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                         }
                     // If custom warmup/stretching
@@ -187,6 +187,8 @@ extension ScheduleScreen {
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 // Custom
                 case 6:
+                    // Indicate selected row
+                    ScheduleVariables.shared.selectedRows[1] = row - 1
                     
                     var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                     // If app chooses warmup/stretching
@@ -316,13 +318,15 @@ extension ScheduleScreen {
                     nextChoice()
                 // Custom
                 case 9:
+                    // Indicate selected row
+                    ScheduleVariables.shared.selectedRows[1] = row - 1
+                    
                     var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                     // If app chooses warmup/stretching
                     if settings["CustomWarmupStretching"]![0] == 0 {
                         // Warmup
                         if row == 1 {
                             selectWarmup()
-                            ScheduleVariables.shared.selectedRows[1] = row - 1
                             performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                             // Practice
                         } else if row == 2 {
@@ -379,13 +383,15 @@ extension ScheduleScreen {
                     performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                 // Custom
                 case 4:
+                    // Indicate selected row
+                    ScheduleVariables.shared.selectedRows[1] = row - 1
+                    
                     var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                     // If app chooses warmup/stretching
                     if settings["CustomWarmupStretching"]![0] == 0 {
                         // Warmup
                         if row == 1 {
                             selectWarmup()
-                            ScheduleVariables.shared.selectedRows[1] = row - 1
                             performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
                             // Practice
                         } else if row == 2 {

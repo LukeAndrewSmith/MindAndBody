@@ -369,7 +369,6 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 if view is UIButton {
                     if let image = (view as! UIButton).imageView?.image, image == #imageLiteral(resourceName: "CheckMark") {
                         view.backgroundColor = Colors.green
-                        print("found")
                     }
                 }
             }

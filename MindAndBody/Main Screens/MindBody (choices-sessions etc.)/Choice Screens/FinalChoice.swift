@@ -339,7 +339,7 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.textLabel?.textAlignment = .left
-            cell.backgroundColor = Colors.light
+            cell.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.0)
             cell.textLabel?.textColor = Colors.dark
             cell.tintColor = Colors.dark
             

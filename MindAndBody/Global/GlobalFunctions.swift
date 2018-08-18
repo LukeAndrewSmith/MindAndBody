@@ -1122,10 +1122,15 @@ extension UIViewController {
                 // Normal case
             } else {
                 // Number of session included in group (i.e warmup/session/stretching) can be found by number of elements in group dictionary - 2 (-2 as "group" and "isGroupCompleted" included). Check ScheduleData, schedule groups to understand better
-                for i in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0].count - 2 {
-                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][String(i)] as! Bool == false {
-                        isGroupCompleted = false
-                        break
+                // Use default group array to avoid errors
+                // Error occured here as extra field was saved in dictionary - ["72"]: something
+                    // no idea when it was saved there
+                if let group = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["group"] as? String {
+                    for i in 0..<(scheduleDataStructures.scheduleGroups[group.groupFromString()]?.count)! - 2 {
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][String(i)] as! Bool == false {
+                            isGroupCompleted = false
+                            break
+                        }
                     }
                 }
             }
@@ -1170,6 +1175,7 @@ extension UIViewController {
             index0 = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["index"] as! Int
             selectedDay = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["day"] as! Int
         }
+        print(index0)
         //
         index1 = String(ScheduleVariables.shared.selectedRows[1])
         return (index0, index1, selectedDay)
