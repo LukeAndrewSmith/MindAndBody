@@ -139,7 +139,7 @@
                         <segue destination="d1w-hu-wYA" kind="presentation" identifier="EditProfileSegue" id="izD-lx-C3k"/>
                         <segue destination="q4h-Je-Ynw" kind="presentation" identifier="ScheduleCreationSegue" id="b4e-57-eAb"/>
                         <segue destination="THe-fh-5DZ" kind="presentation" identifier="SubscriptionsSegue" id="SXY-HC-FeY"/>
-                        <segue destination="A7A-wz-wFE" kind="show" identifier="scheduleSegueCustom" id="1Ei-dZ-eTc"/>
+                        <segue destination="Gwv-m2-9jD" kind="show" identifier="scheduleSegueCustom" id="CRx-7v-B2Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dG-Jg-xiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4134,10 +4134,48 @@
             </objects>
             <point key="canvasLocation" x="9774" y="754"/>
         </scene>
-        <!--Final Choice Custom-->
+        <!--Title-->
+        <scene sceneID="zwQ-AS-qEF">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="Gwv-m2-9jD" customClass="CustomChoice" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6uj-oe-bTM"/>
+                        <viewControllerLayoutGuide type="bottom" id="rmI-YK-kXT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Sy4-qh-4gE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Ua-me-OpM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1Ua-me-OpM" firstAttribute="leading" secondItem="Sy4-qh-4gE" secondAttribute="leading" id="2ZC-Ep-YdJ"/>
+                            <constraint firstAttribute="trailing" secondItem="1Ua-me-OpM" secondAttribute="trailing" id="2eJ-dP-4hX"/>
+                            <constraint firstItem="rmI-YK-kXT" firstAttribute="top" secondItem="1Ua-me-OpM" secondAttribute="bottom" id="Nw7-G0-A2H"/>
+                            <constraint firstItem="1Ua-me-OpM" firstAttribute="top" secondItem="6uj-oe-bTM" secondAttribute="bottom" id="u3v-Jg-3Kt"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Title" id="WIL-ai-OEU">
+                        <barButtonItem key="rightBarButtonItem" image="Plus" id="xee-xt-Tf4"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="navigationBar" destination="WIL-ai-OEU" id="H7T-rN-XhF"/>
+                        <segue destination="A7A-wz-wFE" kind="show" id="9Yg-dD-otW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UIb-fc-adJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9431" y="1666"/>
+        </scene>
+        <!--Editing Custom-->
         <scene sceneID="dsP-6g-FtN">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="A7A-wz-wFE" customClass="FinalChoiceCustom" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="A7A-wz-wFE" customClass="EditingCustom" customModule="MindAndBody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MCf-F8-3YA"/>
                         <viewControllerLayoutGuide type="bottom" id="JvW-81-naY"/>
@@ -4249,7 +4287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zok-z3-RTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9774" y="1723"/>
+            <point key="canvasLocation" x="10191" y="1667"/>
         </scene>
         <!--Time Based Screen-->
         <scene sceneID="uJh-73-ahr">
@@ -5260,7 +5298,7 @@
         <segue reference="na3-42-cEE"/>
         <segue reference="dD1-H2-hdg"/>
         <segue reference="tUJ-Lb-bfp"/>
-        <segue reference="1Ei-dZ-eTc"/>
+        <segue reference="9Yg-dD-otW"/>
         <segue reference="SOr-B2-NYZ"/>
         <segue reference="zU9-Z8-ErV"/>
         <segue reference="m3z-OW-W4C"/>

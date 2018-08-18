@@ -13,7 +13,7 @@ import UIKit
 //
 // Workout Choice Custom --------------------------------------------------------------------------------------
 //
-class FinalChoiceCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     var comingFromSchedule = false

@@ -106,6 +106,7 @@
 		07038D881F4C6081001CC6D5 /* itBandFoam3.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038D841F4C6081001CC6D5 /* itBandFoam3.png */; };
 		07038D8A1F4C6088001CC6D5 /* standingOnBall.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038D891F4C6088001CC6D5 /* standingOnBall.png */; };
 		0719D528210DDC86003BA353 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0719D527210DDC86003BA353 /* TabBar.swift */; };
+		0719D52C212886B0003BA353 /* CustomChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0719D52B212886B0003BA353 /* CustomChoice.swift */; };
 		071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071C4FB21E98D6D800328D18 /* MeditationTimer.swift */; };
 		071D4A331FC0CD1600ED779B /* SubscriptionNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */; };
 		071FB62C1E9283AE0081444F /* BodyweightChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071FB62B1E9283AE0081444F /* BodyweightChoice.swift */; };
@@ -479,7 +480,7 @@
 		077AC1361DA793950026895B /* SF-UI-Text-Ultrathin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1281DA793950026895B /* SF-UI-Text-Ultrathin.otf */; };
 		077AC1371DA793950026895B /* SF-UI-Text-UltrathinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */; };
 		077B0EE11FC2C35A008F3503 /* InfoTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077B0EE01FC2C35A008F3503 /* InfoTables.swift */; };
-		077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BC6941F725DCB00B9E798 /* FinalChoiceCustom.swift */; };
+		077BC6951F725DCB00B9E798 /* EditingCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BC6941F725DCB00B9E798 /* EditingCustom.swift */; };
 		077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */; };
 		077C2C801E5C724D00BA62C0 /* CircuitChoiceG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */; };
 		077DAB131FD5FCD500CF7949 /* Sessions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DAB121FD5FCD500CF7949 /* Sessions.swift */; };
@@ -1464,6 +1465,7 @@
 		07038D841F4C6081001CC6D5 /* itBandFoam3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itBandFoam3.png; sourceTree = "<group>"; };
 		07038D891F4C6088001CC6D5 /* standingOnBall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = standingOnBall.png; sourceTree = "<group>"; };
 		0719D527210DDC86003BA353 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		0719D52B212886B0003BA353 /* CustomChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChoice.swift; sourceTree = "<group>"; };
 		071C4FB21E98D6D800328D18 /* MeditationTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationTimer.swift; sourceTree = "<group>"; };
 		071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionNotifications.swift; sourceTree = "<group>"; };
 		071FB62B1E9283AE0081444F /* BodyweightChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodyweightChoice.swift; sourceTree = "<group>"; };
@@ -1824,7 +1826,7 @@
 		077AC1281DA793950026895B /* SF-UI-Text-Ultrathin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Ultrathin.otf"; sourceTree = "<group>"; };
 		077AC1291DA793950026895B /* SF-UI-Text-UltrathinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-UltrathinItalic.otf"; sourceTree = "<group>"; };
 		077B0EE01FC2C35A008F3503 /* InfoTables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTables.swift; sourceTree = "<group>"; };
-		077BC6941F725DCB00B9E798 /* FinalChoiceCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalChoiceCustom.swift; sourceTree = "<group>"; };
+		077BC6941F725DCB00B9E798 /* EditingCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingCustom.swift; sourceTree = "<group>"; };
 		077C2C7D1E5C723D00BA62C0 /* GymChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymChoice.swift; sourceTree = "<group>"; };
 		077C2C7F1E5C724D00BA62C0 /* CircuitChoiceG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircuitChoiceG.swift; sourceTree = "<group>"; };
 		077DAB121FD5FCD500CF7949 /* Sessions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sessions.swift; sourceTree = "<group>"; };
@@ -2835,7 +2837,8 @@
 		0729F6721F8C118C00C9F810 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				077BC6941F725DCB00B9E798 /* FinalChoiceCustom.swift */,
+				077BC6941F725DCB00B9E798 /* EditingCustom.swift */,
+				0719D52B212886B0003BA353 /* CustomChoice.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -8217,7 +8220,7 @@
 				07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */,
 				072A87721EDEC59A00684809 /* CardioChoiceHIIT.swift in Sources */,
 				07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */,
-				077BC6951F725DCB00B9E798 /* FinalChoiceCustom.swift in Sources */,
+				077BC6951F725DCB00B9E798 /* EditingCustom.swift in Sources */,
 				077DAB151FD5FCE300CF7949 /* Movements.swift in Sources */,
 				07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */,
 				07CB04391E6049DF002066CD /* MeditationGuided.swift in Sources */,
@@ -8264,6 +8267,7 @@
 				07308E39209E11DF00A4B292 /* SuggestedWeights.swift in Sources */,
 				07DEE6F31E0AADAC003B89AB /* StretchingChoice.swift in Sources */,
 				077C2C7E1E5C723D00BA62C0 /* GymChoice.swift in Sources */,
+				0719D52C212886B0003BA353 /* CustomChoice.swift in Sources */,
 				07F912081DC2D1240004C924 /* WarmupChoice.swift in Sources */,
 				0719D528210DDC86003BA353 /* TabBar.swift in Sources */,
 				07D127F61FD6FB1F00C88352 /* SortedSessionsSchedule.swift in Sources */,
