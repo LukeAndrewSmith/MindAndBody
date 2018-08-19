@@ -71,7 +71,12 @@
 "create" = "Create";
 "done" = "Done";
 "add" = "Add";
+"addMovement" = "Add Movement";
+"addInterval" = "Add Interval";
+"addStretch" = "Add Stretch";
+"addPose" = "Add Pose";
 "areYouSureDelete" = "Are you sure you want to delete this?";
+"nRoundsAlert" = "Please add a movement first";
 
 "nameTitle" = "Name :";
 "chooseName" = "Choose Name";
@@ -675,7 +680,7 @@
     "5x5" = "5 x 5";
 
             // Custom
-        "nRoundsTitle" = "Nº Rounds: ";
+        "nRoundsTitle" = "Nº Rounds:";
         "customWorkout" = "Custom Workout";
         "workoutInputTitle" = "Workout Title";
         "workoutRemoveTitle" = "Remove Workout";

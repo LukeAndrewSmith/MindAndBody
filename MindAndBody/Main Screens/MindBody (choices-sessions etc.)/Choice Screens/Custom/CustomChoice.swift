@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ImageIO
 
 class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -95,7 +96,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
             if numberPossibleImages != 0 {
                 for i in 0..<numberOfImages {
                     // If image is there to be added
-                    if i < (numberPossibleImages - 1) {
+                    if i <= (numberPossibleImages - 1) {
                         let imageView = UIImageView()
                         let keyIndex = (customSessionsArray[SelectedSession.shared.selectedSession[0]]![indexPath.row]["movements"]! as! [String])[i]
                         //
@@ -120,6 +121,8 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         cell.editButton.tag = indexPath.row
         cell.editButton.addTarget(self, action: #selector(editSession), for: .touchUpInside)
+        cell.editButtonBig.tag = indexPath.row
+        cell.editButtonBig.addTarget(self, action: #selector(editSession), for: .touchUpInside)
         
         return cell
     }
@@ -141,9 +144,9 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
 //            // NUMBER OF ROUNDS title
 //            if SelectedSession.shared.selectedSession[0] == "workout" {
 //                // Rounds
-//                if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![1] as! Int == -1 {
+//                if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]![1] as! Int == -1 {
 //                    //
-//                    nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![0] as! Int), for: .normal)
+//                    nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]![0] as! Int), for: .normal)
 //                    // No rounds
 //                } else {
 //                    nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
@@ -190,47 +193,6 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    // MARK: Begin button action!!!!!!!
-    func didSelectRowAction() {
-        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-        
-        // If something in the session
-        let selectedPreset = 0 // = indexPath.row
-        if customSessionsArray[SelectedSession.shared.selectedSession[0]]?[selectedPreset]["movements"]?.count != 0 {
-            // Segue
-            switch SelectedSession.shared.selectedSession[0] {
-            // Warmup
-            case "warmup":
-                // Warmup uses stretching Screen
-                performSegue(withIdentifier: "customSessionSegueStretching", sender: self)
-            // Workout
-            case "workout":
-                // If circuit session
-                if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![1] as! Int == -1 {
-                    performSegue(withIdentifier: "customSessionSegueCircuit", sender: self)
-                    // Normal session
-                } else {
-                    performSegue(withIdentifier: "customSessionSegue", sender: self)
-                }
-            // Cardio
-            case "cardio":
-                performSegue(withIdentifier: "customSessionSegueCardio", sender: self)
-            // Stretching
-            case "stretching":
-                performSegue(withIdentifier: "customSessionSegueStretching", sender: self)
-            // Yoga
-            case "yoga":
-                performSegue(withIdentifier: "customSessionSegueYoga", sender: self)
-            default:
-                break
-            }
-            
-            //
-            // Return background to homescreen
-            perform(#selector(popToRootView), with: Any?.self, afterDelay: 0.5)
-        }
-    }
     // Pop to root view
     @objc func popToRootView() {
         _ = self.navigationController?.popToRootViewController(animated: false)
@@ -272,14 +234,14 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Get session index
         let session = sender.tag
         
-        // Alert for title and Functions
+        // Alert
         let inputTitle = NSLocalizedString("areYouSureDelete", comment: "")
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
         
         // Ok action
-        okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
+        okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { [weak alert] (_) in
             self.deleteSessionAction(session: session)
         })
         alert.addAction(okAction)
@@ -384,18 +346,89 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.present(alert, animated: true, completion: nil)
     }
     
+    //
+    // MARK: Pass Arrays
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        let destinationNC = segue.destination as? CustomSessionEditingNavigation
-        let destinationVC = destinationNC?.viewControllers.first as? EditingCustom
-        // Indicate if creating or editing
-        destinationVC?.creatingSession = creatingSession
-        destinationVC?.selectedPreset = selectedSession
-        
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        backItem.tintColor = Colors.light
-        navigationItem.backBarButtonItem = backItem
+        //
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
+        //
+        switch segue.identifier {
+        // Creating/Editing
+        case "sessionEditingSegue":
+            let destinationNC = segue.destination as? CustomSessionEditingNavigation
+            let destinationVC = destinationNC?.viewControllers.first as? EditingCustom
+            // Indicate if creating or editing
+            destinationVC?.creatingSession = creatingSession
+            destinationVC?.selectedPreset = selectedSession
+        // Warmup / Stretching
+        case "customSessionSegueStretching"?:
+            // Warmup
+            let destinationVC = segue.destination as! StretchingScreen
+            destinationVC.fromCustom = true
+            destinationVC.keyArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["movements"]! as! [String]
+            if SelectedSession.shared.selectedSession[0] == "warmup" {
+                destinationVC.setsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]! as! [Int]
+                destinationVC.repsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["reps"]! as! [String]
+                // Stretching
+            } else if SelectedSession.shared.selectedSession[0] == "stretching" {
+                destinationVC.breathsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]! as! [Int]
+            }
+            
+            //
+            destinationVC.fromSchedule = comingFromSchedule
+            
+        // Circuit Workout
+        case "customSessionSegueCircuit"?:
+            let destinationVC = segue.destination as! CircuitWorkoutScreen
+            destinationVC.fromCustom = true
+            //
+            let numberOfRounds = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]![0] as! Int
+            //
+            // Key array needs to include n times the movements of a round
+            let keyArray =  customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["movements"]! as! [String]
+            var fullKeyArray: [String] = []
+            for _ in 1...numberOfRounds {
+                for i in 0..<keyArray.count {
+                    fullKeyArray.append(keyArray[i])
+                }
+            }
+            destinationVC.keyArray = fullKeyArray
+            destinationVC.numberOfRounds = numberOfRounds
+            destinationVC.repsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["reps"]! as! [String]
+            //
+            destinationVC.fromSchedule = comingFromSchedule
+            
+        // Normal Workout
+        case "customSessionSegue"?:
+            let destinationVC = segue.destination as! SessionScreen
+            destinationVC.fromCustom = true
+            destinationVC.keyArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["movements"]! as! [String]
+            destinationVC.setsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]! as! [Int]
+            destinationVC.repsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["reps"]! as! [String]
+            //
+            destinationVC.fromSchedule = comingFromSchedule
+            
+        // Cardio
+        case "customSessionSegueCardio"?:
+            let destinationVC = segue.destination as! CardioScreen
+            destinationVC.fromCustom = true
+            destinationVC.keyArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["movements"]! as! [String]
+            destinationVC.lengthArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]! as! [Int]
+            //
+            destinationVC.fromSchedule = comingFromSchedule
+            
+        // Yoga
+        case "customSessionSegueYoga"?:
+            let destinationVC = segue.destination as! YogaScreen
+            destinationVC.fromCustom = true
+            destinationVC.keyArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["movements"]! as! [String]
+            destinationVC.breathsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]! as! [Int]
+            //
+            destinationVC.fromSchedule = comingFromSchedule
+            
+        default:
+            break
+        }
     }
     
 }
@@ -405,7 +438,9 @@ class CustomSessionsChoiceCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var editButtonBig: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var deleteImage: UIImageView!
     @IBOutlet weak var imageStackSuperView: UIView!
     @IBOutlet weak var imageStack: UIStackView!
     @IBOutlet weak var imageStackRightConstraint: NSLayoutConstraint!
@@ -418,6 +453,7 @@ class CustomSessionsChoiceCell: UITableViewCell {
         editButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 17)
         
         deleteButton.tintColor = Colors.red
+        deleteImage.tintColor = Colors.red
         
         nameLabel.font = UIFont(name: "SFUIDisplay-regular", size: 27)
         nameLabel.textColor = Colors.dark

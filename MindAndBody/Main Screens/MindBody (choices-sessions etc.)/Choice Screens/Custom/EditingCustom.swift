@@ -62,22 +62,29 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Navigation Bar
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    // Presets
+    // Name
     @IBOutlet weak var nameTitleLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameButton: UIButton!
     
+    // N Rounds
+    @IBOutlet weak var roundsTitleLabel: UILabel!
+    @IBOutlet weak var roundsLabel: UILabel!
+    @IBOutlet weak var roundsButton: UIButton!
+    @IBOutlet weak var roundsHeight: NSLayoutConstraint!
+    @IBOutlet weak var removeRound: UIButton!
+    @IBOutlet weak var addRound: UIButton!
+    
+    // Separators
     @IBOutlet weak var topSeparator: UIView!
+    @IBOutlet weak var topSeparator2: UIView!
+    @IBOutlet weak var topSeparator3: UIView!
     
     // Table View
     @IBOutlet weak var customTableView: UITableView!
     
     // Action Buttons
-    @IBOutlet weak var nRoundsButton: UIButton!
     @IBOutlet weak var newMovementButton: UIButton!
-    
-    @IBOutlet weak var nRoundsRight: NSLayoutConstraint!
-    @IBOutlet weak var newMovementLeft: NSLayoutConstraint!
     
     //
     let emptyString = ""
@@ -106,34 +113,56 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Long press reorder
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(gestureRecognizer:)))
-        customTableView.addGestureRecognizer(longPress)
-        
+        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
 
-        // Width of action buttons
         // If Workout, option for circuit workout (numberofrounds)
         if SelectedSession.shared.selectedSession[0] != "workout" {
-            nRoundsRight.constant = view.bounds.width
-            nRoundsButton.alpha = 0
-            newMovementLeft.constant = 0
+            roundsHeight.constant = 0
+            roundsButton.alpha = 0
+            roundsTitleLabel.alpha = 0
+            roundsLabel.alpha = 0
+            addRound.alpha = 0
+            removeRound.alpha = 0
+            addRound.isEnabled = false
+            removeRound.isEnabled = false
+            roundsButton.isEnabled = false
+            topSeparator2.alpha = 0
         } else {
-            nRoundsRight.constant = view.bounds.width / 2
-            newMovementLeft.constant = view.bounds.width / 2
-            nRoundsButton.setTitle(nRoundsTitle + "1", for: .normal)
+            roundsHeight.constant = 44
+            roundsTitleLabel.text = nRoundsTitle
+            addRound.tintColor = Colors.dark
+            removeRound.tintColor = Colors.dark
+            addRound.alpha = 0
+            removeRound.alpha = 0
+            // Rounds
+            if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![1] as! Int == -1 {
+                //
+                roundsLabel.text = String(customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![0] as! Int)
+            // No rounds
+            } else {
+                roundsLabel.text = "1"
+            }
         }
-        newMovementButton.setTitle(NSLocalizedString("add", comment: ""), for: .normal)
+        // Add movement button
+        switch SelectedSession.shared.selectedSession[0] {
+        case "warmup", "workout":
+            newMovementButton.setTitle(NSLocalizedString("addMovement", comment: ""), for: .normal)
+        case "cardio":
+            newMovementButton.setTitle(NSLocalizedString("addInterval", comment: ""), for: .normal)
+        case "stretching":
+            newMovementButton.setTitle(NSLocalizedString("addStretch", comment: ""), for: .normal)
+        case "yoga":
+            newMovementButton.setTitle(NSLocalizedString("addPose", comment: ""), for: .normal)
+        default: break
+        }
         newMovementButton.setTitleColor(Colors.dark, for: .normal)
         newMovementButton.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
         newMovementButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
         
-        
-        // Colour
-        self.view.backgroundColor = Colors.light
+        roundsTitleLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        roundsLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
         
         //
-        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-
         nameButton.backgroundColor = Colors.light
         nameTitleLabel.text = NSLocalizedString("nameTitle", comment: "")
         nameTitleLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
@@ -147,6 +176,8 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         nameLabel.isUserInteractionEnabled = false
         
         topSeparator.backgroundColor = Colors.dark.withAlphaComponent(0.27)
+        topSeparator2.backgroundColor = Colors.dark.withAlphaComponent(0.27)
+        topSeparator3.backgroundColor = Colors.dark.withAlphaComponent(0.27)
         
         // Navigation Bar Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar]
@@ -186,10 +217,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         presetsTableView.backgroundView = tableViewBackground2
         presetsTableView.tableFooterView = UIView()
         
-        
-        
         // TableView
-        //
         // TableView Background
         let tableViewBackground = UIView()
         //
@@ -232,6 +260,12 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         setsRepsView.addSubview(setsIndicatorLabel)
         setsRepsView.bringSubview(toFront: setsIndicatorLabel)
         //
+        // Colour
+        self.view.backgroundColor = Colors.light
+        
+        // Long press reorder
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(gestureRecognizer:)))
+        customTableView.addGestureRecognizer(longPress)
     }
     
     //
@@ -867,11 +901,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     let title = textField?.text!
                     customSessionsArray[SelectedSession.shared.selectedSession[0]]![lastIndex]["name"]![0] = title
                     //
-                    // Default mumber of rounds if relevant
-                    if SelectedSession.shared.selectedSession[0] == "workout" {
-                        self.nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
-                    }
-                    //
                     // SET NEW ARRAY
                     UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
                     // Sync
@@ -928,10 +957,10 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     // Rounds
                     if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![1] as! Int == -1 {
                         //
-                        nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![0] as! Int), for: .normal)
+                        roundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![0] as! Int), for: .normal)
                         // No rounds
                     } else {
-                        nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
+                        roundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
                     }
                 }
                 //
@@ -1399,7 +1428,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
             let numberOfMovements = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["movements"]!.count
             //
-            nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)]), for: .normal)
+            roundsLabel.text = String(roundsPickerArray[setsRepsPicker.selectedRow(inComponent: 0)])
 
             //
             // Empty session -> Empty session
@@ -1781,7 +1810,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     //
     // MARK: Nº Rounds Action
-    @IBAction func nRoundsAction(_ sender: Any) {
+    @IBAction func roundsAction(_ sender: Any) {
         var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
         
         // If no movements added yet, do nothing
@@ -1809,6 +1838,22 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             ActionSheet.shared.resetCancelFrame()
             //
             ActionSheet.shared.animateActionSheetUp()
+        
+        // No movements added
+        } else {
+            // Alert
+            let inputTitle = NSLocalizedString("nRoundsAlert", comment: "")
+            let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+            alert.view.tintColor = Colors.dark
+            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
+            
+            // Ok action
+            okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { [weak alert] (_) in
+            })
+            alert.addAction(okAction)
+            
+            // Present the alert
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -1816,96 +1861,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBAction func doneButtonAction(_ sender: Any) {
         self.dismiss(animated: true)
     }
-    
-    //
-    // MARK: Pass Arrays
-    //
-    // Pass Array to next ViewController
-    //
-    // Prepare for segue Cardio
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-        //
-        switch segue.identifier {
-        // Warmup / Stretching
-        case "customSessionSegueStretching"?:
-            // Warmup
-            let destinationVC = segue.destination as! StretchingScreen
-            destinationVC.fromCustom = true
-            destinationVC.keyArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["movements"]! as! [String]
-            if SelectedSession.shared.selectedSession[0] == "warmup" {
-                destinationVC.setsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]! as! [Int]
-                destinationVC.repsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["reps"]! as! [String]
-            // Stretching
-            } else if SelectedSession.shared.selectedSession[0] == "stretching" {
-                destinationVC.breathsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]! as! [Int]
-            }
-            
-            //
-            destinationVC.fromSchedule = comingFromSchedule
-
-        // Circuit Workout
-        case "customSessionSegueCircuit"?:
-            let destinationVC = segue.destination as! CircuitWorkoutScreen
-            destinationVC.fromCustom = true
-            //
-            let numberOfRounds = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]![0] as! Int
-            //
-            // Key array needs to include n times the movements of a round
-            let keyArray =  customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["movements"]! as! [String]
-            var fullKeyArray: [String] = []
-            for _ in 1...numberOfRounds {
-                for i in 0..<keyArray.count {
-                    fullKeyArray.append(keyArray[i])
-                }
-            }
-            destinationVC.keyArray = fullKeyArray
-            destinationVC.numberOfRounds = numberOfRounds
-            destinationVC.repsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["reps"]! as! [String]
-            //
-            destinationVC.fromSchedule = comingFromSchedule
-
-        // Normal Workout
-        case "customSessionSegue"?:
-            let destinationVC = segue.destination as! SessionScreen
-            destinationVC.fromCustom = true
-            destinationVC.keyArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["movements"]! as! [String]
-            destinationVC.setsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]! as! [Int]
-            destinationVC.repsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["reps"]! as! [String]
-            //
-            destinationVC.fromSchedule = comingFromSchedule
-
-        // Cardio
-        case "customSessionSegueCardio"?:
-            let destinationVC = segue.destination as! CardioScreen
-            destinationVC.fromCustom = true
-            destinationVC.keyArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["movements"]! as! [String]
-            destinationVC.lengthArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]! as! [Int]
-            //
-            destinationVC.fromSchedule = comingFromSchedule
-
-        // Yoga
-        case "customSessionSegueYoga"?:
-            let destinationVC = segue.destination as! YogaScreen
-            destinationVC.fromCustom = true
-            destinationVC.keyArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["movements"]! as! [String]
-            destinationVC.breathsArray = customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedPreset]["setsBreathsTime"]! as! [Int]
-            //
-            destinationVC.fromSchedule = comingFromSchedule
-
-        default:
-            break
-        }
-        
-        if segue.identifier == "sessionSegueCardio" {
-            //
-            let destinationVC = segue.destination as! CardioScreen
-            //
-            destinationVC.sessionType = 0
-        }
-    }
-    //
 }
 
 // MARK: Navigation controller
