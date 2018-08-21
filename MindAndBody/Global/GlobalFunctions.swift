@@ -1693,11 +1693,23 @@ extension UIImage {
     
     // MARK: Thumbnail
     func thumbnail(width: CGFloat, height: CGFloat) -> UIImage {
-        var newImage: UIImage
         
+//        if let imageSource = CGImageSourceCreateWithURL(self as! CFURL, nil) {
+//            let options: [NSString: NSObject] = [
+//                kCGImageSourceThumbnailMaxPixelSize: max(width, height) / 2.0 as NSObject,
+//                kCGImageSourceCreateThumbnailFromImageAlways: true as NSObject
+//            ]
+//
+//            let scaledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary).flatMap { UIImage(CGImage: $0) }
+//        } else {
+//            return UIImage()
+//        }
+        
+        var newImage: UIImage
+
         let size = self.size
         let aspectRatio =  size.width/size.height
-        
+
 //        if aspectRatio > 1 {                            // Landscape image
 //            width = dimension
 //            height = dimension / aspectRatio
@@ -1705,7 +1717,7 @@ extension UIImage {
 //            height = dimension
 //            width = dimension * aspectRatio
 //        }
-    
+
         if #available(iOS 10.0, *) {
             let renderFormat = UIGraphicsImageRendererFormat.default()
             renderFormat.opaque = false
@@ -1720,7 +1732,7 @@ extension UIImage {
             newImage = UIGraphicsGetImageFromCurrentImageContext()!
             UIGraphicsEndImageContext()
         }
-        
+
         return newImage
     }
 }

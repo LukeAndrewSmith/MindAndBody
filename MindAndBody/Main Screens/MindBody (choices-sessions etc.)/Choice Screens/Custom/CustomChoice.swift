@@ -8,13 +8,17 @@
 
 import Foundation
 import UIKit
-import ImageIO
 
 class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var comingFromSchedule = false
     var creatingSession = false
     var selectedSession = 0
+    
+    let cellHeight: CGFloat = 88
+    
+    // Load
+    var imageArray: [[UIImage]] = []
     
     // Outlets
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -34,6 +38,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        fillImageArray()
         customTable.reloadData()
     }
     
@@ -80,42 +85,39 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // Images
         // Remove any images
-        for view in cell.imageStack.arrangedSubviews {
-            view.removeFromSuperview()
-        }
+        cell.imageStack.subviews.forEach({ $0.removeFromSuperview() })
+
         // Sizes
-        let width = cell.imageStackSuperView.bounds.width
         let height = cell.imageStack.bounds.height
         let gap = CGFloat(4)
-        // Calculate how many square images can fit with 4 gap
-        let numberOfImages = Int(width / (height + gap))
+        //
+        let numberOfImages = imageArray[indexPath.row].count
+
         // Add images
-        var imageArray: [UIImageView] = []
-        if let numberPossibleImages = customSessionsArray[SelectedSession.shared.selectedSession[0]]![indexPath.row]["movements"]?.count {
-            // Add images
-            if numberPossibleImages != 0 {
-                for i in 0..<numberOfImages {
-                    // If image is there to be added
-                    if i <= (numberPossibleImages - 1) {
-                        let imageView = UIImageView()
-                        let keyIndex = (customSessionsArray[SelectedSession.shared.selectedSession[0]]![indexPath.row]["movements"]! as! [String])[i]
-                        //
-                        imageView.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]!["demonstration"]![0]))?.thumbnail(width: height, height: height)
-                        imageView.frame.size = CGSize(width: height, height: height)
-                        imageView.contentMode = .scaleAspectFit
-                        imageArray.append(imageView)
-                    }
-                }
-            }
-            cell.imageStack.spacing = gap
-            let width2 = (CGFloat(imageArray.count) * height) + (CGFloat(imageArray.count - 1) * gap)
-            for image in imageArray {
-                cell.imageStack.addArrangedSubview(image)
-            }
-            cell.imageStack.frame.size = CGSize(width: width2, height: height)
-            cell.imageStackRightConstraint.constant = width - width2
+        for i in 0..<numberOfImages {
+            let imageView = UIImageView()
+
+            imageView.image = imageArray[indexPath.row][i]
+
+            imageView.contentMode = .scaleAspectFit
+            imageView.frame.size = CGSize(width: height, height: height)
+            imageView.widthAnchor.constraint(equalToConstant: height).isActive = true
+            cell.imageStack.addArrangedSubview(imageView)
         }
 
+        var width2 = CGFloat()
+        width2 = (CGFloat(numberOfImages) * height) + (CGFloat(numberOfImages - 1) * gap)
+        cell.imageStack.spacing = gap
+        cell.imageStack.frame = CGRect(x: 0, y: 0, width: width2, height: height)
+        cell.imageScroll.contentSize = CGSize(width: width2, height: height)
+        
+        cell.imageStack.tag = indexPath.row
+        cell.stackTap.addTarget(self, action: #selector(stackTapAction))
+        cell.stackPress.addTarget(self, action: #selector(stackPressAction))
+        cell.imageScroll.tag = indexPath.row
+        cell.scrollTap.addTarget(self, action: #selector(stackTapAction))
+        cell.scrollPress.addTarget(self, action: #selector(stackPressAction))
+        
         cell.deleteButton.tag = indexPath.row
         cell.deleteButton.addTarget(self, action: #selector(deleteSession), for: .touchUpInside)
         
@@ -127,32 +129,39 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    @objc func stackTapAction(sender: UITapGestureRecognizer) {
+        let index = IndexPath(row: (sender.view?.tag)!, section: 0)
+        customTable.selectRow(at: index, animated: false, scrollPosition: .none)
+        customTable.delegate?.tableView!(customTable, didSelectRowAt: index)
+    }
+    @objc func stackPressAction(sender: UILongPressGestureRecognizer) {
+        let index = IndexPath(row: (sender.view?.tag)!, section: 0)
+        let cell = customTable.cellForRow(at: index)
+        if sender.state == .began {
+            customTable.selectRow(at: index, animated: false, scrollPosition: .none)
+        } else if sender.state == .changed {
+            if !(cell?.frame.contains(sender.location(in: self.customTable)))! {
+                customTable.deselectRow(at: index, animated: false)
+            } else {
+                customTable.selectRow(at: index, animated: false, scrollPosition: .none)
+            }
+        } else if sender.state == .ended {
+            if (cell?.frame.contains(sender.location(in: self.customTable)))! {
+                customTable.delegate?.tableView!(customTable, didSelectRowAt: index)
+            }
+        }
+    }
+    
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
-        return 88
+        return cellHeight
     }
     
     //
     var okAction = UIAlertAction()
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
-            //
-        // NINA
-        // MARK: May be important
-//            // NUMBER OF ROUNDS title
-//            if SelectedSession.shared.selectedSession[0] == "workout" {
-//                // Rounds
-//                if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]![1] as! Int == -1 {
-//                    //
-//                    nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + String(customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]![0] as! Int), for: .normal)
-//                    // No rounds
-//                } else {
-//                    nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
-//                }
-//            }
-            //
         
         let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
         
@@ -276,6 +285,22 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         performSegue(withIdentifier: "sessionEditingSegue", sender: self)
     }
     
+    // MARK:
+    func fillImageArray() {
+
+        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
+        
+        let numberOfRows = customSessionsArray[SelectedSession.shared.selectedSession[0]]!.count
+        
+        imageArray = []
+        for i in 0..<numberOfRows {
+            imageArray.append([])
+            for imageName in (customSessionsArray[SelectedSession.shared.selectedSession[0]]![i]["movements"]! as! [String]) {
+                imageArray[i].append(getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![imageName]!["demonstration"]![0]))!)
+            }
+        }
+    }
+    
     // MARK: Create Session
     @IBAction func createSessionAction(_ sender: Any) {
         
@@ -313,12 +338,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
             let lastIndex = (customSessionsArray[SelectedSession.shared.selectedSession[0]]?.count)! - 1
             let title = textField?.text!
             customSessionsArray[SelectedSession.shared.selectedSession[0]]![lastIndex]["name"]![0] = title as Any
-            //
-
-            // NINA
-            // MARK: May be important
-//            self.nRoundsButton.setTitle(NSLocalizedString("numberOfRounds", comment: "") + "1", for: .normal)
-
+            
             // Set
             UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
             // Sync
@@ -359,7 +379,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
             let destinationVC = destinationNC?.viewControllers.first as? EditingCustom
             // Indicate if creating or editing
             destinationVC?.creatingSession = creatingSession
-            destinationVC?.selectedPreset = selectedSession
+            destinationVC?.selectedSession = selectedSession
         // Warmup / Stretching
         case "customSessionSegueStretching"?:
             // Warmup
@@ -441,9 +461,13 @@ class CustomSessionsChoiceCell: UITableViewCell {
     @IBOutlet weak var editButtonBig: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var deleteImage: UIImageView!
-    @IBOutlet weak var imageStackSuperView: UIView!
     @IBOutlet weak var imageStack: UIStackView!
-    @IBOutlet weak var imageStackRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageScroll: UIScrollView!
+    
+    let stackTap = UITapGestureRecognizer()
+    let stackPress = UILongPressGestureRecognizer()
+    let scrollTap = UITapGestureRecognizer()
+    let scrollPress = UILongPressGestureRecognizer()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -458,5 +482,13 @@ class CustomSessionsChoiceCell: UITableViewCell {
         nameLabel.font = UIFont(name: "SFUIDisplay-regular", size: 27)
         nameLabel.textColor = Colors.dark
         nameLabel.adjustsFontSizeToFitWidth = true
+        
+        stackPress.minimumPressDuration = 0.1
+        imageStack.addGestureRecognizer(stackTap)
+        imageStack.addGestureRecognizer(stackPress)
+        
+        scrollPress.minimumPressDuration = 0.1
+        imageScroll.addGestureRecognizer(scrollTap)
+        imageScroll.addGestureRecognizer(scrollPress)
     }
 }

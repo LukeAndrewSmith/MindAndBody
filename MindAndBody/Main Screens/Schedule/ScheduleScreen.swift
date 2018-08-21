@@ -341,27 +341,29 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // MARK: Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        //
-        if segue.identifier == "scheduleSegueOverview" {
-            let destinationVC = segue.destination as? FinalChoice
+        switch segue.identifier {
+        //
+        case "scheduleSegueOverview":
+            let destinationVC = segue.destination as? FinalChoiceDetail
             // Only say from schedule if app chooses sessions for the user
             destinationVC?.comingFromSchedule = true
             // Remove back button text
             let backItem = UIBarButtonItem()
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
-        //
-        } else if segue.identifier == "EditScheduleSegue" {
+        
+        case "EditScheduleSegue":
             ScheduleVariables.shared.shouldReloadSchedule = true
-        //
-        } else if segue.identifier == "scheduleMeditationSegueTimer" {
+        
+        case "scheduleMeditationSegueTimer":
             let destinationVC = segue.destination as? MeditationTimer
             destinationVC?.comingFromSchedule = true
             // Remove back button text
             let backItem = UIBarButtonItem()
             backItem.title = ""
             navigationItem.backBarButtonItem = backItem
-        //
-        } else if segue.identifier == "scheduleMeditationSegueGuided" {
+        
+        case "scheduleMeditationSegueGuided":
             let destinationVC = segue.destination as? MeditationChoiceGuided
             destinationVC?.comingFromSchedule = true
             // Remove back button text
@@ -369,16 +371,19 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             backItem.title = ""
             backItem.tintColor = Colors.light
             navigationItem.backBarButtonItem = backItem
+            
         // Create Schedule
-        } else if segue.identifier == "ScheduleCreationSegue" {
+        case "ScheduleCreationSegue":
             ScheduleVariables.shared.didCreateNewSchedule = false
             ScheduleVariables.shared.shouldReloadSchedule = true
             let destinationNC = segue.destination as? ScheduleTypeQuestionNavigation
             let destinationVC = destinationNC?.viewControllers.first as? ScheduleTypeQuestion
             destinationVC?.comingFromSchedule = true
-        } else if segue.identifier == "SubscriptionsSegue" {
+            
+        case "SubscriptionsSegue":
             goingToSubscriptionsScreen = true
-        } else if segue.identifier == "scheduleSegueCustom" {
+            
+        case "scheduleSegueCustom":
             let destinationVC = segue.destination as? CustomChoice
             destinationVC?.comingFromSchedule = true
             // Remove back button text
@@ -386,7 +391,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             backItem.title = ""
             backItem.tintColor = Colors.light
             navigationItem.backBarButtonItem = backItem
-        } else {
+            
+        default:
             let backItem = UIBarButtonItem()
             backItem.title = ""
             backItem.tintColor = Colors.light

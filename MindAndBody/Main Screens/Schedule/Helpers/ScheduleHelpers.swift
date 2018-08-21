@@ -97,7 +97,7 @@ extension ScheduleScreen {
                         selectStretching()
                     }
                     ScheduleVariables.shared.selectedRows[1] = row - 1
-                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                    performScheduleSegue()
                 // Custom Choice
                 case 7:
                     // Indicate selected row
@@ -109,7 +109,7 @@ extension ScheduleScreen {
                         // Warmup
                         if row == 1 {
                             selectWarmup()
-                            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                            performScheduleSegue()
                             // Session
                         } else if row == 2 {
                             // Select workout
@@ -118,7 +118,7 @@ extension ScheduleScreen {
                             // Stretching
                         } else if row == 3 {
                             selectStretching()
-                            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                            performScheduleSegue()
                         }
                     // If custom warmup/stretching
                     } else if settings["CustomWarmupStretching"]![0] == 1 {
@@ -184,7 +184,7 @@ extension ScheduleScreen {
                         // Stretching
                     }
                     ScheduleVariables.shared.selectedRows[1] = row - 1
-                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                    performScheduleSegue()
                 // Custom
                 case 6:
                     // Indicate selected row
@@ -197,7 +197,7 @@ extension ScheduleScreen {
                         if row == 1 {
                             selectWarmup()
                             ScheduleVariables.shared.selectedRows[1] = row - 1
-                            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                            performScheduleSegue()
                             // Practice
                         } else if row == 2 {
                             // Select workout
@@ -284,7 +284,7 @@ extension ScheduleScreen {
                         selectStretching()
                     }
                     ScheduleVariables.shared.selectedRows[1] = row - 1
-                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                    performScheduleSegue()
                     
                 // Final choice steady state
                 case 7:
@@ -311,7 +311,7 @@ extension ScheduleScreen {
                     } else if steadyStateChoice == 1 {
                         selectStretching()
                     }
-                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                    performScheduleSegue()
                     //
                     // Return to final choice without user seeing, as this is extra choice for length of warmup/stretching, need to get back to final choice
                     ScheduleVariables.shared.choiceProgress[1] -= 1
@@ -327,7 +327,7 @@ extension ScheduleScreen {
                         // Warmup
                         if row == 1 {
                             selectWarmup()
-                            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                            performScheduleSegue()
                             // Practice
                         } else if row == 2 {
                             // Select workout
@@ -380,7 +380,7 @@ extension ScheduleScreen {
                     }
                     //
                     ScheduleVariables.shared.selectedRows[1] = row - 1
-                    performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                    performScheduleSegue()
                 // Custom
                 case 4:
                     // Indicate selected row
@@ -392,7 +392,7 @@ extension ScheduleScreen {
                         // Warmup
                         if row == 1 {
                             selectWarmup()
-                            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+                            performScheduleSegue()
                             // Practice
                         } else if row == 2 {
                             // Select workout
@@ -426,6 +426,20 @@ extension ScheduleScreen {
             
             // Check wether to add extra back button
             backToBeginningButtonAddRemove()
+        }
+    }
+    
+    // MARK: Perform schedule Segue
+    func performScheduleSegue() {
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        // App chooses session
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+            performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
+
+        // User chooses sessions
+        } else {
+            performSegue(withIdentifier: "scheduleSegueFinalChoice", sender: self)
+
         }
     }
     

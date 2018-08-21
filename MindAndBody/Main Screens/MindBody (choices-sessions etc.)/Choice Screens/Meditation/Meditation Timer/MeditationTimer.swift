@@ -507,7 +507,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLayoutSubviews()
         
         // Picker Labels
-        //
         hoursLabel.textAlignment = .center
         hoursLabel.textColor = Colors.light
         hoursLabel.text = "h"

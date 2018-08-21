@@ -1,5 +1,5 @@
 //
-//  FinalChoice.swift
+//  FinalChoiceDetail.swift
 //  MindAndBody
 //
 //  Created by Luke Smith on 17.09.17.
@@ -13,7 +13,7 @@ import UIKit
 //
 // Warmup Choice Class -------------------------------------------------------------------------------------------------------------
 //
-class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     // Section Numbers (representing tableview section arrray, used to remove arrays with the arrays of arrays of keys, and to determine which sections are left)
@@ -685,42 +685,17 @@ class FinalChoice: UIViewController, UITableViewDelegate, UITableViewDataSource 
     // Number of rows in section of movements tableview
     func numberOfRowsInSectionMovements(section: Int) -> Int {
         //
-        switch SelectedSession.shared.selectedSession[0] {
-        // Warmup, Cardio, Stretching, Yoga
-        case "warmup", "cardio", "stretching", "yoga":
-            // Rows
-            if SelectedSession.shared.selectedSession[2] == "" {
-                return 0
-            } else {
-                if SelectedSession.shared.selectedSession[1] == "bodyweight" {
-                    let numberOfMovementsPerRound = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count / (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int)
-                    return numberOfMovementsPerRound
-                } else {
-                    return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count
-                }
-            }
-            
-        // Workout
-        case "workout":
-            // Rows
-            if SelectedSession.shared.selectedSession[2] == "" {
-                return 0
-            //
-            } else {
-                switch SelectedSession.shared.selectedSession[1] {
-                // Circuit Session
-                case "circuitGymFull", "circuitGymUpper", "circuitGymLower","circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
-                    // [SelectedSession.shared.selectedSession[0]] = warmup/workout/cardio etc..., [SelectedSession.shared.selectedSession[1]] = fullbody/upperbody etc..., [0] = sessions, [SelectedSession.shared.selectedSession[2] = session, [1] = key array
-                    let numberOfMovementsPerRound = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count / (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int)
-                    return numberOfMovementsPerRound
-                // Normal Session
-                default:
-                    return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count
-                }
-            }
-        //
-        default:
+        // Rows
+        if SelectedSession.shared.selectedSession[2] == "" {
             return 0
+        } else {
+            switch SelectedSession.shared.selectedSession[1] {
+            case "bodyweight", "circuitGymFull", "circuitGymUpper", "circuitGymLower","circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower":
+                let numberOfMovementsPerRound = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count / (sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int)
+                return numberOfMovementsPerRound
+            default:
+                return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]!.count
+            }
         }
     }
     

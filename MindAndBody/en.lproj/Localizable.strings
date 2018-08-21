@@ -2792,12 +2792,19 @@
 // Relaxing ---------
 // Easy, Very Short
     // Yoga - Relaxing - Easy - Very Short - 1
-"YREVs-1" = "Level 1 - 1";
-"YREVs-2" = "Level 1 - 2";
-"YREVs-3" = "Level 1 - 3";
-"YREVs-4" = "Level 1 - 4";
-"YREVs-5" = "Level 1 - 5";
-"YREVs-6" = "Level 1 - 6";
+"YREVs-1" = "nº 1";
+"YREVs-2" = "nº 2";
+"YREVs-3" = "nº 3";
+"YREVs-4" = "nº 4";
+"YREVs-5" = "nº 5";
+"YREVs-6" = "nº 6";
+
+//"YREVs-1" = "Level 1 - 1";
+//"YREVs-2" = "Level 1 - 2";
+//"YREVs-3" = "Level 1 - 3";
+//"YREVs-4" = "Level 1 - 4";
+//"YREVs-5" = "Level 1 - 5";
+//"YREVs-6" = "Level 1 - 6";
 // Easy, Short
 "YRES-1" = "Level 1 - 1";
 "YRES-2" = "Level 1 - 2";

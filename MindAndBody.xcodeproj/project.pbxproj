@@ -279,7 +279,7 @@
 		072A87721EDEC59A00684809 /* CardioChoiceHIIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A87711EDEC59A00684809 /* CardioChoiceHIIT.swift */; };
 		07308E39209E11DF00A4B292 /* SuggestedWeights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07308E38209E11DF00A4B292 /* SuggestedWeights.swift */; };
 		073734221FD2DE42009F5B54 /* TrackingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073734211FD2DE42009F5B54 /* TrackingScreen.swift */; };
-		073BA9C71F6E7CCA005DB480 /* FinalChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA9C61F6E7CCA005DB480 /* FinalChoice.swift */; };
+		073BA9C71F6E7CCA005DB480 /* FinalChoiceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA9C61F6E7CCA005DB480 /* FinalChoiceDetail.swift */; };
 		074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */; };
 		0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748C2E01FC2DC4F0087992D /* InfoPageController.swift */; };
 		0750DB631F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */; };
@@ -501,6 +501,8 @@
 		07A6346F208C999000712EE2 /* ScheduleEquipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6346E208C999000712EE2 /* ScheduleEquipment.swift */; };
 		07B4E00F1F377E1E00C77807 /* TestBackground.caf in Resources */ = {isa = PBXBuildFile; fileRef = 07B4E00E1F377E1E00C77807 /* TestBackground.caf */; };
 		07B852621F83756C005F3781 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B852611F83756C005F3781 /* ScheduleData.swift */; };
+		07BB1A2F212C463D007C50CD /* FinalChoiceChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB1A2E212C463D007C50CD /* FinalChoiceChoice.swift */; };
+		07BB1A31212CB225007C50CD /* MeditationTimerChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB1A30212CB225007C50CD /* MeditationTimerChoice.swift */; };
 		07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreen.swift */; };
 		07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */; };
 		07C028B41FB4D1A800CBB1ED /* ProfileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C028B31FB4D1A800CBB1ED /* ProfileHelper.swift */; };
@@ -1638,7 +1640,7 @@
 		072A87711EDEC59A00684809 /* CardioChoiceHIIT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioChoiceHIIT.swift; sourceTree = "<group>"; };
 		07308E38209E11DF00A4B292 /* SuggestedWeights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedWeights.swift; sourceTree = "<group>"; };
 		073734211FD2DE42009F5B54 /* TrackingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingScreen.swift; sourceTree = "<group>"; };
-		073BA9C61F6E7CCA005DB480 /* FinalChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalChoice.swift; sourceTree = "<group>"; };
+		073BA9C61F6E7CCA005DB480 /* FinalChoiceDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalChoiceDetail.swift; sourceTree = "<group>"; };
 		074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaAutomatic.swift; sourceTree = "<group>"; };
 		0748C2E01FC2DC4F0087992D /* InfoPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPageController.swift; sourceTree = "<group>"; };
 		0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreatorFunctions.swift; sourceTree = "<group>"; };
@@ -1848,6 +1850,8 @@
 		07A6346E208C999000712EE2 /* ScheduleEquipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEquipment.swift; sourceTree = "<group>"; };
 		07B4E00E1F377E1E00C77807 /* TestBackground.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestBackground.caf; sourceTree = "<group>"; };
 		07B852611F83756C005F3781 /* ScheduleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
+		07BB1A2E212C463D007C50CD /* FinalChoiceChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalChoiceChoice.swift; sourceTree = "<group>"; };
+		07BB1A30212CB225007C50CD /* MeditationTimerChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationTimerChoice.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
 		07BEAE8F1F36055600EEC088 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		07C028B31FB4D1A800CBB1ED /* ProfileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHelper.swift; sourceTree = "<group>"; };
@@ -2837,8 +2841,8 @@
 		0729F6721F8C118C00C9F810 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				077BC6941F725DCB00B9E798 /* EditingCustom.swift */,
 				0719D52B212886B0003BA353 /* CustomChoice.swift */,
+				077BC6941F725DCB00B9E798 /* EditingCustom.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -2860,6 +2864,7 @@
 			isa = PBXGroup;
 			children = (
 				071C4FB21E98D6D800328D18 /* MeditationTimer.swift */,
+				07BB1A30212CB225007C50CD /* MeditationTimerChoice.swift */,
 			);
 			path = "Meditation Timer";
 			sourceTree = "<group>";
@@ -2874,7 +2879,8 @@
 				0728F3E11E1C2D7C00EA409B /* Warmup */,
 				076A9D0A1E23B1ED00DC8F42 /* Workout */,
 				076A9D0D1E23B1FF00DC8F42 /* Yoga */,
-				073BA9C61F6E7CCA005DB480 /* FinalChoice.swift */,
+				07BB1A2E212C463D007C50CD /* FinalChoiceChoice.swift */,
+				073BA9C61F6E7CCA005DB480 /* FinalChoiceDetail.swift */,
 			);
 			path = "Choice Screens";
 			sourceTree = "<group>";
@@ -8239,9 +8245,10 @@
 				0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */,
 				07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */,
 				07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */,
+				07BB1A2F212C463D007C50CD /* FinalChoiceChoice.swift in Sources */,
 				077B0EE11FC2C35A008F3503 /* InfoTables.swift in Sources */,
 				07DEE6F11E0AAD2E003B89AB /* ClassicChoiceG.swift in Sources */,
-				073BA9C71F6E7CCA005DB480 /* FinalChoice.swift in Sources */,
+				073BA9C71F6E7CCA005DB480 /* FinalChoiceDetail.swift in Sources */,
 				0757326B1E64D8A3003DA77E /* LessonsScreen.swift in Sources */,
 				07C10F53202DE1CB00D70DF8 /* TrackingClasses.swift in Sources */,
 				07995A361E8699010009C9B1 /* BackgroundImageCollection.swift in Sources */,
@@ -8257,6 +8264,7 @@
 				077DAB171FD5FE1900CF7949 /* LittleThings.swift in Sources */,
 				07DE23071FC0AB3300940567 /* SwiftReceiptValidator.swift in Sources */,
 				07DEE6F51E0AADC3003B89AB /* CardioChoice.swift in Sources */,
+				07BB1A31212CB225007C50CD /* MeditationTimerChoice.swift in Sources */,
 				07D5C3D91F9E32430038F143 /* ScheduleViewQuestion.swift in Sources */,
 				0794A74D1FBCC3D70029968D /* ActionSheet.swift in Sources */,
 				0798381E1F8A8DD9007C3CF5 /* TimeBasedSession.swift in Sources */,
