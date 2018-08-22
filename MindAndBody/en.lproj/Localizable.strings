@@ -686,7 +686,7 @@
         "workoutRemoveTitle" = "Remove Workout";
             //
         "numberOfRounds" = "Nº Rounds: ";
-        "notCircuitWorkout" = " ";
+        "notCircuitWorkout" = "";
 
             // Information Workout
         "purposeTextWorkout" = "";

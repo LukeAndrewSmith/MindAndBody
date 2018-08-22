@@ -2863,8 +2863,8 @@
 		07520BB51E9FB80C00FA682E /* Meditation Timer */ = {
 			isa = PBXGroup;
 			children = (
-				071C4FB21E98D6D800328D18 /* MeditationTimer.swift */,
 				07BB1A30212CB225007C50CD /* MeditationTimerChoice.swift */,
+				071C4FB21E98D6D800328D18 /* MeditationTimer.swift */,
 			);
 			path = "Meditation Timer";
 			sourceTree = "<group>";

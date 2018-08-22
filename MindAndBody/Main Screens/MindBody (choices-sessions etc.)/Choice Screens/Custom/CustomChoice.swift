@@ -272,6 +272,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
         //
+        fillImageArray()
         customTable.reloadData()
     }
     
@@ -348,6 +349,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.selectedSession = lastIndex
 
             // Reload
+            self.fillImageArray()
             self.customTable.reloadData()
             
             // Segue
@@ -359,7 +361,6 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Cancel reset action
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
-            ActionSheet.shared.actionSheetBackgroundView.isHidden = false
         }
         alert.addAction(cancelAction)
         // 4. Present the alert.

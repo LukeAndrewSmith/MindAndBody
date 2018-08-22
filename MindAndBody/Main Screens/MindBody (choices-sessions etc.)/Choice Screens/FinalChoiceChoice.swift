@@ -22,8 +22,12 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         "stretching": "stretching",
         "yoga": "yoga"]
     
-    // Cardio - time or distance
+    // Cardio - time or distance - currently unused
     var cardioType = 0
+    
+    // Passed to finalChoiceChoice
+    // 0 == warmup, 1 == session, 2 == stretching
+    var selectedComponent = 0
     
     let cellHeight: CGFloat = 88
     
@@ -58,13 +62,19 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString(sessionData.headerTitles[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![section], comment: "")
-            
+        // If only on section => 1 difficulty which is "average"
+            // see 'Session Data' -> 'SortedSessionsSchedule'
+        var keys = ["level1", "level2", "level3"]
+        if imageArray.count == 1 {
+            return NSLocalizedString(keys[1], comment: "")
+        } else {
+            return NSLocalizedString(keys[section], comment: "")
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)!
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 17)!
         header.textLabel?.textAlignment = .left
         header.textLabel?.textColor = Colors.light
         header.contentView.backgroundColor = Colors.dark
@@ -82,7 +92,6 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Retreive Preset Sessions
         cell.nameLabel?.text = NSLocalizedString(sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![indexPath.section][indexPath.row], comment: "")
-
         cell.layoutSubviews()
         
         // Images
@@ -119,8 +128,6 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.scrollTap.addTarget(self, action: #selector(stackTapAction))
         cell.scrollPress.addTarget(self, action: #selector(stackPressAction))
         
-//        cell.imageStack.center.x += view.bounds.width - 16 - (height * 2.5)
-        
         cell.imageStack.tag = indexPath.row
         cell.imageScroll.tag = indexPath.row
         
@@ -138,7 +145,7 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         if sender.state == .began {
             finalChoiceTable.selectRow(at: index, animated: false, scrollPosition: .none)
         } else if sender.state == .changed {
-            if !(cell?.frame.contains(sender.location(in: self.finalChoiceTable)))! {
+            if !(cell?.frame.contains(sender.location(in: self.view)))! {
                 finalChoiceTable.deselectRow(at: index, animated: false)
             } else {
                 finalChoiceTable.selectRow(at: index, animated: false, scrollPosition: .none)
@@ -188,20 +195,42 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
             movementIndex = "pose"
         }
 
-        // Loop number of sections (e.g full, upper, lower etc)
-        let numberOfSections = (sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]!).count
+        var sessions: [String: [String]] = [:]
+        switch selectedComponent {
+        // Warmup
+        case 0:
+            sessions = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceWarmup[0]]![ScheduleVariables.shared.selectedChoiceWarmup[1]]![ScheduleVariables.shared.selectedChoiceWarmup[2]]!
+        // Session
+        case 1:
+            sessions = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceSession[0]]![ScheduleVariables.shared.selectedChoiceSession[1]]![ScheduleVariables.shared.selectedChoiceSession[2]]!
+        // Stretching
+        case 2:
+            sessions = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceStretching[0]]![ScheduleVariables.shared.selectedChoiceStretching[1]]![ScheduleVariables.shared.selectedChoiceStretching[2]]!
+        default: break
+        }
+        
+        let numberOfSections = sessions.count
+        
+        // If only on section => 1 difficulty which is indexed by "average"
+            // see 'Session Data' -> 'SortedSessionsSchedule'
+        var keys = ["easy", "average", "hard"]
+        if numberOfSections == 1 {
+            keys = ["average"]
+        }
+        
         for i in 0..<numberOfSections {
             imageArray.append([])
             // Loop number of sessions per section
-            let numberOfSessions = (sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]!)[i].count
-            for j in 0..<numberOfSessions {
-                imageArray[i].append([])
-                // Append all movements
-                let sessionIndex = (sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]!)[i][j]
-                let numberOfMovements = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex]!.count
-                for k in 0..<numberOfMovements  {
-                    let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex]?[k][movementIndex] as! String
-                    imageArray[i][j].append(getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)!)
+            if let numberOfSessions = sessions[keys[i]]?.count {
+                for j in 0..<numberOfSessions {
+                    imageArray[i].append([])
+                    // Append all movements
+                    let sessionIndex = sessions[keys[i]]?[j]
+                    let numberOfMovements = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]!.count
+                    for k in 0..<numberOfMovements  {
+                        let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]?[k][movementIndex] as! String
+                        imageArray[i][j].append(getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)!)
+                    }
                 }
             }
         }
@@ -214,6 +243,10 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
             let destinationVC = segue.destination as? FinalChoiceDetail
             destinationVC?.cardioType = cardioType
             destinationVC?.comingFromSchedule = true
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            navigationItem.backBarButtonItem = backItem
         }
     }
 }
@@ -222,8 +255,8 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
 class FinalChoiceChoiceCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var imageStack: UIStackView!
     @IBOutlet weak var imageScroll: UIScrollView!
+    @IBOutlet weak var imageStack: UIStackView!
 
     let stackTap = UITapGestureRecognizer()
     let stackPress = UILongPressGestureRecognizer()

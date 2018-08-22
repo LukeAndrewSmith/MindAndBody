@@ -87,6 +87,10 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     // Should watch for walkthrough when coming back
     var goingToSubscriptionsScreen = false
+    
+    // Passed to finalChoiceChoice
+        // 0 == warmup, 1 == session, 2 == stretching
+    var selectedComponent = 0
 
     //
     // Walkthrough
@@ -350,17 +354,28 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             // Remove back button text
             let backItem = UIBarButtonItem()
             backItem.title = ""
+            backItem.tintColor = Colors.light
             navigationItem.backBarButtonItem = backItem
-        
+            
+        case "scheduleSegueFinalChoice":
+            let destinationVC = segue.destination as? FinalChoiceChoice
+            destinationVC?.selectedComponent = selectedComponent
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            backItem.tintColor = Colors.light
+            navigationItem.backBarButtonItem = backItem
+            
         case "EditScheduleSegue":
             ScheduleVariables.shared.shouldReloadSchedule = true
-        
+            
         case "scheduleMeditationSegueTimer":
             let destinationVC = segue.destination as? MeditationTimer
             destinationVC?.comingFromSchedule = true
             // Remove back button text
             let backItem = UIBarButtonItem()
             backItem.title = ""
+            backItem.tintColor = Colors.light
             navigationItem.backBarButtonItem = backItem
         
         case "scheduleMeditationSegueGuided":

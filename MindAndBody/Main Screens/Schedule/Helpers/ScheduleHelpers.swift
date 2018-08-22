@@ -88,12 +88,15 @@ extension ScheduleScreen {
                 case 6:
                     // Warmup
                     if row == 1 {
+                        selectedComponent = 0
                         selectWarmup()
                         // Session
                     } else if row == 2 {
+                        selectedComponent = 1
                         selectSession()
                         // Stretching
                     } else if row == 3 {
+                        selectedComponent = 2
                         selectStretching()
                     }
                     ScheduleVariables.shared.selectedRows[1] = row - 1
@@ -108,6 +111,7 @@ extension ScheduleScreen {
                     if settings["CustomWarmupStretching"]![0] == 0 {
                         // Warmup
                         if row == 1 {
+                            selectedComponent = 0
                             selectWarmup()
                             performScheduleSegue()
                             // Session
@@ -117,6 +121,7 @@ extension ScheduleScreen {
                             performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
                             // Stretching
                         } else if row == 3 {
+                            selectedComponent = 2
                             selectStretching()
                             performScheduleSegue()
                         }
@@ -177,9 +182,11 @@ extension ScheduleScreen {
                 case 5:
                     // Warmup
                     if row == 1 {
+                        selectedComponent = 0
                         selectWarmup()
                     // Practice
                     } else if row == 2 {
+                        selectedComponent = 1
                         selectSession()
                         // Stretching
                     }
@@ -195,6 +202,7 @@ extension ScheduleScreen {
                     if settings["CustomWarmupStretching"]![0] == 0 {
                         // Warmup
                         if row == 1 {
+                            selectedComponent = 0
                             selectWarmup()
                             ScheduleVariables.shared.selectedRows[1] = row - 1
                             performScheduleSegue()
@@ -275,12 +283,15 @@ extension ScheduleScreen {
                 case 6:
                     // Warmup
                     if row == 1 {
+                        selectedComponent = 0
                         selectWarmup()
                         // Session
                     } else if row == 2 {
+                        selectedComponent = 1
                         selectSession()
                         // Stretching
                     } else if row == 3 {
+                        selectedComponent = 2
                         selectStretching()
                     }
                     ScheduleVariables.shared.selectedRows[1] = row - 1
@@ -306,9 +317,11 @@ extension ScheduleScreen {
                 case 8:
                     // Warmup
                     if steadyStateChoice == 0 {
+                        selectedComponent = 0
                         selectWarmup()
                         // Stretching
                     } else if steadyStateChoice == 1 {
+                        selectedComponent = 1
                         selectStretching()
                     }
                     performScheduleSegue()
@@ -326,6 +339,7 @@ extension ScheduleScreen {
                     if settings["CustomWarmupStretching"]![0] == 0 {
                         // Warmup
                         if row == 1 {
+                            selectedComponent = 0
                             selectWarmup()
                             performScheduleSegue()
                             // Practice
@@ -373,9 +387,11 @@ extension ScheduleScreen {
                 case 3:
                     // Warmup
                     if row == 1 {
+                        selectedComponent = 0
                         selectWarmup()
                     // Session
                     } else if row == 2 {
+                        selectedComponent = 1
                         selectSession()
                     }
                     //
@@ -391,6 +407,7 @@ extension ScheduleScreen {
                     if settings["CustomWarmupStretching"]![0] == 0 {
                         // Warmup
                         if row == 1 {
+                            selectedComponent = 0
                             selectWarmup()
                             performScheduleSegue()
                             // Practice
@@ -2011,7 +2028,6 @@ extension ScheduleScreen {
         //
         // Navigation Bar
         self.navigationController?.navigationBar.barTintColor = Colors.dark
-        // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar]
 
         // Navigation Title
