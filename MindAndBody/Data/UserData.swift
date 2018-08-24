@@ -68,9 +68,9 @@ enum Register {
     static let meditationEmptySession: [String: [[Any]]] =
         [
             // Name - String
-            "Name": [[]],
+            "Name": [[""]],
             // Duration - Int
-            "Duration": [[]],
+            "Duration": [[0]],
             // Bells, starting and ending bells go at first and last, interval bells in the middle
             // [Bell, Time] - [Int]
             "Bells": [[-1,0],[-1,0]],

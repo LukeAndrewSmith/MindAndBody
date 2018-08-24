@@ -891,8 +891,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Remove Table
             self.customTableView.reloadData()
             //
-            ActionSheet.shared.animateActionSheetDown()
-            //
             // Scroll to Bottom
             if self.customTableView.contentSize.height > self.customTableView.frame.size.height {
                 let scrollIndex = NSIndexPath(row: (customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedSession]["movements"]?.count)! - 1, section: 0)
@@ -1532,6 +1530,9 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let heightToAdd = movementsTableView.bounds.height
         ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
         ActionSheet.shared.resetCancelFrame()
+        // Cancel button is a done button for this case
+        ActionSheet.shared.cancelButton.setTitleColor(Colors.green, for: .normal)
+        ActionSheet.shared.cancelButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
         ActionSheet.shared.animateActionSheetUp()
     }
     

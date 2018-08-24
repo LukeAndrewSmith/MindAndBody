@@ -267,11 +267,12 @@ extension ScheduleScreen {
     // Table View ------------------------------------
     // FOR SLIDING THROUGH GROUP CHOICES
     // Tableview slide left (next table)
+    // Table View ------------------------------------
+    // FOR SLIDING THROUGH GROUP CHOICES
+    // Tableview slide left (next table)
     func slideLeft() {
         //
         view.isUserInteractionEnabled = false
-        //
-        let screenFrame = UIScreen.main.bounds
         //
         // Table gets hidden but need to keep header so add screenshot
         let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: headerHeight)
@@ -281,17 +282,17 @@ extension ScheduleScreen {
         //
         // Slide across table
         let snapShotFrame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight - pageStack.bounds.height)
-        let snapShotY = ControlBarHeights.combinedHeight + headerHeight + ((view.bounds.height - headerHeight - pageStack.bounds.height) / 2) + pageStack.bounds.height
+        let snapShotY = (separator.frame.maxY + scheduleTable.frame.maxY) / 2
         // Snapshots
         let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
         snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
-        UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
+        view.insertSubview((snapShot1)!, aboveSubview: self.view)
         //
         scheduleTable.reloadData()
         //
         let snapShot2 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
         snapShot2?.center = CGPoint(x: view.center.x + view.frame.size.width, y: snapShotY)
-        UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, belowSubview: snapShot1!)
+        view.insertSubview((snapShot2)!, belowSubview: snapShot1!)
         //
         scheduleTable.isHidden = true
         // Animate new and old image to left
@@ -316,8 +317,6 @@ extension ScheduleScreen {
         //
         view.isUserInteractionEnabled = false
         //
-        let screenFrame = UIScreen.main.bounds
-        //
         // Table gets hidden but need to keep header so add screenshot
         let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: headerHeight)
         let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
@@ -326,17 +325,17 @@ extension ScheduleScreen {
         //
         // Slide table
         let snapShotFrame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight - pageStack.bounds.height)
-        let snapShotY = ControlBarHeights.combinedHeight + headerHeight + ((view.bounds.height - headerHeight - pageStack.bounds.height) / 2) + pageStack.bounds.height
+        let snapShotY = (separator.frame.maxY + scheduleTable.frame.maxY) / 2
         // Snapshots
         let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
         snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
-        UIApplication.shared.keyWindow?.insertSubview((snapShot1)!, aboveSubview: self.view)
+        view.insertSubview((snapShot1)!, aboveSubview: self.view)
         //
         scheduleTable.reloadData()
         //
         let snapShot2 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
         snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
-        UIApplication.shared.keyWindow?.insertSubview((snapShot2)!, belowSubview: snapShot1!)
+        view.insertSubview((snapShot2)!, belowSubview: snapShot1!)
         
         scheduleTable.isHidden = true
         //

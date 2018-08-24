@@ -48,6 +48,12 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
     let backgroundSoundsImages: [UIImage] =
         [#imageLiteral(resourceName: "water.png")]
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        customTable.reloadData()
+    }
+    
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,51 +84,78 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
     
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomMeditationChoiceCell", for: indexPath) as! CustomMeditationChoiceCell
         cell.backgroundColor = Colors.light
         
         // Retreive Preset Sessions
         let meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
         cell.nameLabel?.text = meditationArray[indexPath.row]["Name"]![0][0] as? String
+        
+        // Duration
+        let hmsArray = convertToHMS(row: indexPath.row)
+        cell.durationLabel.text = String(hmsArray[0]) + "h " + String(hmsArray[1]) + "m " + String(hmsArray[2]) + "s"
+//        cell.durationLabel.sizeToFit()
+        
         //
         cell.layoutSubviews()
+        cell.layoutIfNeeded()
         
-        // Images
-        // Remove any images
-        cell.imageStack.subviews.forEach({ $0.removeFromSuperview() })
+        let height = cell.backgroundSoundImageView.frame.height
         
-        // Sizes
-        let height = cell.imageStack.bounds.height
-        let gap = CGFloat(4)
-        //
-//        let numberOfImages = imageArray[indexPath.row].count
-//
-//        // Add images
-//        for i in 0..<numberOfImages {
-//            let imageView = UIImageView()
-//
-//            imageView.image = imageArray[indexPath.row][i]
-//
-//            imageView.contentMode = .scaleAspectFit
-//            imageView.frame.size = CGSize(width: height, height: height)
-//            imageView.widthAnchor.constraint(equalToConstant: height).isActive = true
-//            cell.imageStack.addArrangedSubview(imageView)
-//        }
+        // Background Sound
+        let chosenBackgroundSound = meditationArray[indexPath.row]["BackgroundSound"]?[0][0] as! Int
+        // No background sound
+        if chosenBackgroundSound == -1 {
+            addNothingChosenSymbol(view: cell.backgroundSoundImageView, height: height)
+        // Background sound
+        } else {
+            removeNothingChosenSymbol(view: cell.backgroundSoundImageView)
+            cell.backgroundSoundImageView.image = backgroundSoundsImages[chosenBackgroundSound]
+        }
         
-        var width2 = CGFloat()
-//        width2 = (CGFloat(numberOfImages) * height) + (CGFloat(numberOfImages - 1) * gap)
-        cell.imageStack.spacing = gap
-        cell.imageStack.frame = CGRect(x: 0, y: 0, width: width2, height: height)
-        cell.imageScroll.contentSize = CGSize(width: width2, height: height)
+        // Starting Bell
+        let startingBell = meditationArray[indexPath.row]["Bells"]?.first![0] as! Int
+        // No starting bell
+        if startingBell == -1 {
+            addNothingChosenSymbol(view: cell.startingImage, height: height)
+        // Starting bell
+        } else {
+            removeNothingChosenSymbol(view: cell.startingImage)
+            cell.startingImage.image = bellsImages[startingBell]
+        }
         
-        cell.imageStack.tag = indexPath.row
-        cell.stackTap.addTarget(self, action: #selector(stackTapAction))
-        cell.stackPress.addTarget(self, action: #selector(stackPressAction))
-        cell.imageScroll.tag = indexPath.row
-        cell.scrollTap.addTarget(self, action: #selector(stackTapAction))
-        cell.scrollPress.addTarget(self, action: #selector(stackPressAction))
+        // Interval Bells
+        var intervalBells = meditationArray[indexPath.row]["Bells"]
+        intervalBells?.removeFirst() // Remove starting bell
+        intervalBells?.removeLast() // Remove ending bell
+        let imageViewArray = [cell.intervalImage1, cell.intervalImage2, cell.intervalImage3]
+        let count = intervalBells?.count
+        // Bells
+        for i in 0..<imageViewArray.count {
+            if i < count! {
+                if let intervalBell = intervalBells?[i][0] as? Int, intervalBell != -1 {
+                    removeNothingChosenSymbol(view: imageViewArray[i]!)
+                    imageViewArray[i]?.image = bellsImages[intervalBell]
+                } else {
+                    addNothingChosenSymbol(view: imageViewArray[i]!, height: height)
+                }
+            } else {
+                addNothingChosenSymbol(view: imageViewArray[i]!, height: height)
+            }
+        }
         
+        // Ending Bell
+        let endingBell = meditationArray[indexPath.row]["Bells"]?.last![0] as! Int
+        // No ending bell
+        if endingBell == -1 {
+            addNothingChosenSymbol(view: cell.endingImage, height: height)
+        // Ending bell
+        } else {
+            removeNothingChosenSymbol(view: cell.endingImage)
+            cell.endingImage.image = bellsImages[endingBell]
+        }
+ 
         cell.deleteButton.tag = indexPath.row
         cell.deleteButton.addTarget(self, action: #selector(deleteSession), for: .touchUpInside)
         
@@ -134,25 +167,57 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    @objc func stackTapAction(sender: UITapGestureRecognizer) {
-        let index = IndexPath(row: (sender.view?.tag)!, section: 0)
-        customTable.selectRow(at: index, animated: false, scrollPosition: .none)
-        customTable.delegate?.tableView!(customTable, didSelectRowAt: index)
+    // MARK: Cell helpers
+    func convertToHMS(row: Int) -> [Int] {
+        
+        let meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
+        var hmsArray: [Int] = []
+
+        // Time in seconds (duration)
+        // [1] = duration array
+        let timeInSeconds = meditationArray[row]["Duration"]?[0][0] as! Int
+        //
+        let hours = Int(timeInSeconds / 3600)
+        hmsArray.append(hours)
+        //
+        let minutes = Int((timeInSeconds % 3600) / 60)
+        hmsArray.append(minutes)
+        //
+        let seconds = Int(timeInSeconds % 60)
+        hmsArray.append(seconds)
+        
+        return hmsArray
     }
-    @objc func stackPressAction(sender: UILongPressGestureRecognizer) {
-        let index = IndexPath(row: (sender.view?.tag)!, section: 0)
-        let cell = customTable.cellForRow(at: index)
-        if sender.state == .began {
-            customTable.selectRow(at: index, animated: false, scrollPosition: .none)
-        } else if sender.state == .changed {
-            if !(cell?.frame.contains(sender.location(in: self.customTable)))! {
-                customTable.deselectRow(at: index, animated: false)
-            } else {
-                customTable.selectRow(at: index, animated: false, scrollPosition: .none)
-            }
-        } else if sender.state == .ended {
-            if (cell?.frame.contains(sender.location(in: self.customTable)))! {
-                customTable.delegate?.tableView!(customTable, didSelectRowAt: index)
+    
+    func addNothingChosenSymbol(view: UIImageView, height: CGFloat) {
+        
+        removeNothingChosenSymbol(view: view)
+        let imageHeight = view.frame.height
+        
+        let slash = UIView()
+        slash.tag = 43
+        slash.backgroundColor = Colors.dark
+        let slashHeight = pow( ((pow(height,2) + pow(height,2))), (1/2)) * (1/3)
+        slash.frame.size = CGSize(width: 1, height: slashHeight)
+        slash.center = CGPoint(x: imageHeight/2, y: imageHeight/2)
+        slash.transform = slash.transform.rotated(by: .pi/4)
+        view.addSubview(slash)
+        
+        let circle = UIView()
+        circle.tag = 72
+        circle.frame.size = CGSize(width: height/3, height: height/3)
+        circle.center = CGPoint(x: imageHeight/2, y: imageHeight/2)
+        circle.layer.borderWidth = 1
+        circle.layer.borderColor = Colors.dark.cgColor
+        circle.layer.cornerRadius = height/6
+        view.addSubview(circle)
+    }
+    
+    func removeNothingChosenSymbol(view: UIImageView) {
+        
+        for sub in view.subviews {
+            if sub.tag == 43 || sub.tag == 72 {
+                sub.removeFromSuperview()
             }
         }
     }
@@ -282,23 +347,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         
         performSegue(withIdentifier: "editMeditationSegue", sender: self)
     }
-    
-    // MARK:
-    func fillImageArray() {
-        
-        var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-        
-        let numberOfRows = customSessionsArray[SelectedSession.shared.selectedSession[0]]!.count
-        
-        imageArray = []
-        for i in 0..<numberOfRows {
-            imageArray.append([])
-            for imageName in (customSessionsArray[SelectedSession.shared.selectedSession[0]]![i]["movements"]! as! [String]) {
-                imageArray[i].append(getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![imageName]!["demonstration"]![0]))!)
-            }
-        }
-    }
-    
+   
     // MARK: Create Session
     @IBAction func createSessionAction(_ sender: Any) {
         
@@ -324,7 +373,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
             // New empty session array
             var newSession = Register.meditationEmptySession
             // Update name
-            newSession["Name"]![0].append((textField?.text)!)
+            newSession["Name"]![0][0] = (textField?.text)!
             meditationArray.append(newSession)
             //
             UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
@@ -397,17 +446,24 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
 class CustomMeditationChoiceCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    
+    @IBOutlet weak var backgroundSoundImageView: UIImageView!
+    @IBOutlet weak var startingImage: UIImageView!
+    @IBOutlet weak var intervalImage1: UIImageView!
+    @IBOutlet weak var intervalImage2: UIImageView!
+    @IBOutlet weak var intervalImage3: UIImageView!
+    @IBOutlet weak var endingImage: UIImageView!
+    
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var editButtonBig: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var deleteImage: UIImageView!
-    @IBOutlet weak var imageStack: UIStackView!
-    @IBOutlet weak var imageScroll: UIScrollView!
     
-    let stackTap = UITapGestureRecognizer()
-    let stackPress = UILongPressGestureRecognizer()
-    let scrollTap = UITapGestureRecognizer()
-    let scrollPress = UILongPressGestureRecognizer()
+    @IBOutlet weak var constraint1: NSLayoutConstraint!
+    @IBOutlet weak var constraint2: NSLayoutConstraint!
+    @IBOutlet weak var constraint3: NSLayoutConstraint!
+    @IBOutlet weak var constraint4: NSLayoutConstraint!
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -423,12 +479,15 @@ class CustomMeditationChoiceCell: UITableViewCell {
         nameLabel.textColor = Colors.dark
         nameLabel.adjustsFontSizeToFitWidth = true
         
-        stackPress.minimumPressDuration = 0.1
-        imageStack.addGestureRecognizer(stackTap)
-        imageStack.addGestureRecognizer(stackPress)
+        durationLabel.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        durationLabel.textColor = Colors.dark
         
-        scrollPress.minimumPressDuration = 0.1
-        imageScroll.addGestureRecognizer(scrollTap)
-        imageScroll.addGestureRecognizer(scrollPress)
+        // Iphone 5/SE layout, smaller text for endurance
+        if IPhoneType.shared.iPhoneType() == 0 {
+            constraint1.constant = 12
+            constraint1.constant = 12
+            constraint1.constant = 6
+            constraint1.constant = 6
+        }
     }
 }
