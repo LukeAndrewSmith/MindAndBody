@@ -18,25 +18,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Arrays
     // Bells Arrays
     var bellsArray: [String] = []
-//        BellsFunctions.shared.bellsArray
     var bellsImages: [UIImage] = []
-//        [#imageLiteral(resourceName: "Tibetan Chimes"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Wind Chimes"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Small"), #imageLiteral(resourceName: "Indonesian Frog"), #imageLiteral(resourceName: "Cow Bell"), #imageLiteral(resourceName: "Cow Bell Big")]
-    
+ 
     // Background Sounds Array
     var backgroundSoundsArray: [String] = []
-//        ["TestBackground"]
     var backgroundSoundsImages: [UIImage] = []
-//        [#imageLiteral(resourceName: "water.png")]
     
     // Duration Array
     var durationTimeArray: [[Int]] = []
-//
-//        [
-//            [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
-//            [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 58, 59],
-//            [00, 10, 20, 30, 40, 50]
-//    ]
-//
     
     // Selected Preset
     var selectedPreset = Int()
@@ -83,16 +72,19 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var durationDetail: UILabel!
     //
     @IBOutlet weak var startingBell: UIButton!
-    @IBOutlet weak var startingBellDetail: UILabel!
+    @IBOutlet weak var startingBellImage: UIImageView!
+    @IBOutlet weak var startingBellNone: UILabel!
     //
     @IBOutlet weak var intervalBells: UIButton!
     @IBOutlet weak var intervalBellsDetail: UILabel!
     //
     @IBOutlet weak var endingBell: UIButton!
-    @IBOutlet weak var endingBellDetail: UILabel!
+    @IBOutlet weak var endingBellImage: UIImageView!
+    @IBOutlet weak var endingBellNone: UILabel!
     //
     @IBOutlet weak var backgroundSound: UIButton!
-    @IBOutlet weak var backgroundSoundDetail: UILabel!
+    @IBOutlet weak var backgroundSoundImage: UIImageView!
+    @IBOutlet weak var backgroundSoundNone: UILabel!
     
     var selectedButton = Int()
     
@@ -118,6 +110,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Selection Items
     let selectionView = UIView()
     let okButton = UIButton()
+    let noneButton = UIButton()
     //
     // Duration
     let pickerViewDuration = UIPickerView()
@@ -144,7 +137,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         // Navigation Bar
         // Title
-        navigationBar.title = NSLocalizedString("meditationTimer", comment: "")
+        // Creating
+        if creatingSession {
+            navigationBar.title = NSLocalizedString("create", comment: "")
+            // Editing
+        } else {
+            navigationBar.title = NSLocalizedString("edit", comment: "")
+        }
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar]
         // Appearance
         self.navigationController?.navigationBar.tintColor = Colors.light
@@ -158,9 +157,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // BackgroundImage
         addBackgroundImage(withBlur: true, fullScreen: false)
         
+        
+        let cornerRadius: CGFloat = 22
+        let titleFont = UIFont(name: "SFUIDisplay-light", size: 20)
+        let detailFont = UIFont(name: "SFUIDisplay-light", size: 19)
         //
-        presets.setTitle(NSLocalizedString("meditation", comment: ""), for: .normal)
-        presets.layer.cornerRadius = 22
+        presets.setTitle(NSLocalizedString("name", comment: ""), for: .normal)
+        presets.titleLabel?.font = titleFont
+        presets.layer.cornerRadius = cornerRadius
         presets.layer.masksToBounds = true
         presets.contentHorizontalAlignment = .left
         presets.titleEdgeInsets = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 0)
@@ -168,7 +172,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         let presetBlurE = UIBlurEffect(style: .dark)
         presetBlur.effect = presetBlurE
         presetBlur.isUserInteractionEnabled = false
-        presetBlur.layer.cornerRadius = 22
+        presetBlur.layer.cornerRadius = cornerRadius
         presetBlur.layer.masksToBounds = true
         view.insertSubview(presetBlur, belowSubview: presets)
         
@@ -176,29 +180,39 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Buttons
         // Duration
         duration.setTitle(NSLocalizedString("duration", comment: ""), for: .normal)
+        duration.titleLabel?.font = titleFont
         duration.contentHorizontalAlignment = .left
         duration.titleEdgeInsets = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 0)
-        duration.layer.cornerRadius = 22
+        duration.layer.cornerRadius = cornerRadius
         duration.layer.masksToBounds = true
+        //
+        durationDetail.font = detailFont
         //
         didChangeDuration = false
         
         // Starting Bell
         startingBell.setTitle(NSLocalizedString("startingBell", comment: ""), for: .normal)
+        startingBell.titleLabel?.font = titleFont
         startingBell.contentHorizontalAlignment = .left
         startingBell.titleEdgeInsets = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 0)
-        startingBell.layer.cornerRadius = 22
+        startingBell.layer.cornerRadius = cornerRadius
         startingBell.layer.masksToBounds = true
+        //
+        startingBellNone.font = detailFont
+        startingBellNone.text = "-"
         //
         selectedStartingBell = -1
         didChangeStartingBell = false
         
         // Interval Bells
         intervalBells.setTitle(NSLocalizedString("intervalBells", comment: ""), for: .normal)
+        intervalBells.titleLabel?.font = titleFont
         intervalBells.contentHorizontalAlignment = .left
         intervalBells.titleEdgeInsets = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 0)
-        intervalBells.layer.cornerRadius = 22
+        intervalBells.layer.cornerRadius = cornerRadius
         intervalBells.layer.masksToBounds = true
+        //
+        intervalBellsDetail.font = detailFont
         //
         selectedIntervalBell = -1
         didChangeIntervalBell = false
@@ -206,21 +220,28 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         // Ending Bell
         endingBell.setTitle(NSLocalizedString("endingBell", comment: ""), for: .normal)
+        endingBell.titleLabel?.font = titleFont
         endingBell.contentHorizontalAlignment = .left
         endingBell.titleEdgeInsets = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 0)
-        endingBell.layer.cornerRadius = 22
+        endingBell.layer.cornerRadius = cornerRadius
         endingBell.layer.masksToBounds = true
+        //
+        endingBellNone.font = detailFont
+        endingBellNone.text = "-"
         //
         selectedEndingBell = -1
         didChangeEndingBell = false
         
         // Background Sound
         backgroundSound.setTitle(NSLocalizedString("backgroundSound", comment: ""), for: .normal)
+        backgroundSound.titleLabel?.font = titleFont
         backgroundSound.contentHorizontalAlignment = .left
         backgroundSound.titleEdgeInsets = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 0)
-        backgroundSound.layer.cornerRadius = 22
+        backgroundSound.layer.cornerRadius = cornerRadius
         backgroundSound.layer.masksToBounds = true
-        
+        //
+        backgroundSoundNone.font = detailFont
+        backgroundSoundNone.text = "-"
         
         // Colours
         // Background Index
@@ -236,13 +257,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             duration.setTitleColor(Colors.dark, for: .normal)
             durationDetail.textColor = Colors.dark
             startingBell.setTitleColor(Colors.dark, for: .normal)
-            startingBellDetail.textColor = Colors.dark
             intervalBells.setTitleColor(Colors.dark, for: .normal)
             intervalBellsDetail.textColor = Colors.dark
             endingBell.setTitleColor(Colors.dark, for: .normal)
-            endingBellDetail.textColor = Colors.dark
             backgroundSound.setTitleColor(Colors.dark, for: .normal)
-            backgroundSoundDetail.textColor = Colors.dark
+            //
+            startingBellNone.textColor = Colors.dark
+            endingBellNone.textColor = Colors.dark
+            backgroundSoundNone.textColor = Colors.dark
         // All White
         case 0,4:
             presets.setTitleColor(Colors.light, for: .normal)
@@ -250,13 +272,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             duration.setTitleColor(Colors.light, for: .normal)
             durationDetail.textColor = Colors.light
             startingBell.setTitleColor(Colors.light, for: .normal)
-            startingBellDetail.textColor = Colors.light
             intervalBells.setTitleColor(Colors.light, for: .normal)
             intervalBellsDetail.textColor = Colors.light
             endingBell.setTitleColor(Colors.light, for: .normal)
-            endingBellDetail.textColor = Colors.light
             backgroundSound.setTitleColor(Colors.light, for: .normal)
-            backgroundSoundDetail.textColor = Colors.light
+            //
+            startingBellNone.textColor = Colors.light
+            endingBellNone.textColor = Colors.light
+            backgroundSoundNone.textColor = Colors.light
         //
         default: break
         }
@@ -266,35 +289,35 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         let blurE = UIBlurEffect(style: .regular)
         blur.effect = blurE
         blur.isUserInteractionEnabled = false
-        blur.layer.cornerRadius = 22
+        blur.layer.cornerRadius = cornerRadius
         blur.layer.masksToBounds = true
         view.insertSubview(blur, belowSubview: startingBell)
         //
         let blur1E = UIBlurEffect(style: .regular)
         blur1.effect = blur1E
         blur1.isUserInteractionEnabled = false
-        blur1.layer.cornerRadius = 22
+        blur1.layer.cornerRadius = cornerRadius
         blur1.layer.masksToBounds = true
         view.insertSubview(blur1, belowSubview: duration)
         //
         let blur2E = UIBlurEffect(style: .regular)
         blur2.effect = blur2E
         blur2.isUserInteractionEnabled = false
-        blur2.layer.cornerRadius = 22
+        blur2.layer.cornerRadius = cornerRadius
         blur2.layer.masksToBounds = true
         view.insertSubview(blur2, belowSubview: backgroundSound)
         //
         let blur3E = UIBlurEffect(style: .regular)
         blur3.effect = blur3E
         blur3.isUserInteractionEnabled = false
-        blur3.layer.cornerRadius = 22
+        blur3.layer.cornerRadius = cornerRadius
         blur3.layer.masksToBounds = true
         view.insertSubview(blur3, belowSubview: intervalBells)
         //
         let blur4E = UIBlurEffect(style: .regular)
         blur4.effect = blur4E
         blur4.isUserInteractionEnabled = false
-        blur4.layer.cornerRadius = 22
+        blur4.layer.cornerRadius = cornerRadius
         blur4.layer.masksToBounds = true
         view.insertSubview(blur4, belowSubview: endingBell)
         
@@ -406,6 +429,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         } catch let error as NSError {
             print(error.localizedDescription)
         }
+        
+        updateRows()
     }
 
     // View Did Dissapear
@@ -486,6 +511,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
         okButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
         okButton.addTarget(self, action: #selector(okButtonAction(_:)), for: .touchUpInside)
+        //
+        noneButton.backgroundColor = Colors.light
+        noneButton.setTitleColor(Colors.green, for: .normal)
+        noneButton.setTitle(NSLocalizedString("none", comment: ""), for: .normal)
+        noneButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        noneButton.layer.cornerRadius = noneButton.bounds.height / 2
+        noneButton.clipsToBounds = true
+        noneButton.addTarget(self, action: #selector(noneButtonAction), for: .touchUpInside)
         //
         selectionView.addSubview(okButton)
         //
@@ -625,7 +658,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
-                startingBellDetail.text = NSLocalizedString(bellsArray[meditationArray[selectedPreset]["Bells"]?.first![0] as! Int], comment: "")
+                startingBellImage.image = bellsImages[selectedStartingBell]
+                startingBellNone.alpha = 0
                 //
                 selectedStartingBell = -1
                 //
@@ -817,7 +851,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
-                endingBellDetail.text = NSLocalizedString(bellsArray[selectedEndingBell], comment: "")
+                endingBellImage.image = bellsImages[selectedEndingBell]
+                endingBellNone.alpha = 0
                 //
                 selectedEndingBell = -1
                 //
@@ -843,7 +878,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
-                backgroundSoundDetail.text = NSLocalizedString(backgroundSoundsArray[selectedBackgroundSound], comment: "")
+                backgroundSoundImage.image = backgroundSoundsImages[selectedBackgroundSound]
+                backgroundSoundNone.alpha = 0
                 //
                 selectedBackgroundSound = -1
                 //
@@ -902,7 +938,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             isDeleting = true
             buttonArray = [startingBell, intervalBells, endingBell, backgroundSound]
-            let buttonDetailArray = [startingBellDetail, intervalBellsDetail, endingBellDetail, backgroundSoundDetail]
+            let buttonDetailArray: [Any] = [startingBellImage, intervalBellsDetail, endingBellImage, backgroundSoundImage]
             //
             let buttonTag = sender.view?.tag
             let button = buttonArray[buttonTag!]
@@ -927,14 +963,18 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             duration.isEnabled = false
             presets.isEnabled = false
             //
-            buttonDetailArray[buttonTag!]?.alpha = 0
+            // Label
+            if buttonTag == 1 {
+                (buttonDetailArray[buttonTag!] as! UILabel).alpha = 0
+            // Image
+            } else {
+                (buttonDetailArray[buttonTag!] as! UIImageView).alpha = 0
+            }
         }
     }
     
-    //
-    @objc func deleteAction(_ sender: Any) {
-        let defaults = UserDefaults.standard
-        var meditationArray = defaults.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
+    @objc func noneButtonAction() {
+        var meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
         // Set Nil
         switch deleteTag {
         // Starting Bell
@@ -942,8 +982,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             meditationArray[selectedPreset]["Bells"]?[0][0] = -1
             //
-            startingBellDetail.text = "-"
-            startingBellDetail.alpha = 1
+            startingBellImage.image = nil
+            startingBellImage.alpha = 1
+            startingBellNone.alpha = 1
         //
         case 1:
             //
@@ -966,19 +1007,77 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             let count = (meditationArray[selectedPreset]["Bells"] as! [[Int]]).count - 1
             meditationArray[selectedPreset]["Bells"]?[count][0] = -1
             //
-            endingBellDetail.text = "-"
-            endingBellDetail.alpha = 1
+            endingBellImage.image = nil
+            endingBellImage.alpha = 1
+            endingBellNone.alpha = 1
         //
         case 3:
             //
             meditationArray[selectedPreset]["BackgroundSound"]?[0][0] = -1
             //
-            backgroundSoundDetail.text = "-"
-            backgroundSoundDetail.alpha = 1
+            backgroundSoundImage.image = nil
+            backgroundSoundImage.alpha = 1
+            backgroundSoundNone.alpha = 1
         default: break
         }
         //
-        defaults.set(meditationArray, forKey: "meditationTimer")
+        UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
+        // Sync
+        ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
+        //
+        ActionSheet.shared.animateActionSheetDown()
+    }
+    
+    //
+    @objc func deleteAction(_ sender: Any) {
+        var meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
+        // Set Nil
+        switch deleteTag {
+        // Starting Bell
+        case 0:
+            //
+            meditationArray[selectedPreset]["Bells"]?[0][0] = -1
+            //
+            startingBellImage.image = nil
+            startingBellImage.alpha = 1
+            startingBellNone.alpha = 1
+        //
+        case 1:
+            //
+            // 1 as interval bells start at 1 (starting bell = 0)
+            let count = (meditationArray[selectedPreset]["Bells"] as! [[Int]]).count - 2
+            if count > 0 {
+                // Remove all interval bells
+                for _ in 1...count {
+                    // If new time < i time, add at i
+                    meditationArray[selectedPreset]["Bells"]?.remove(at: 1)
+                }
+            }
+            
+            //
+            intervalBellsDetail.text = "-"
+            intervalBellsDetail.alpha = 1
+        //
+        case 2:
+            //
+            let count = (meditationArray[selectedPreset]["Bells"] as! [[Int]]).count - 1
+            meditationArray[selectedPreset]["Bells"]?[count][0] = -1
+            //
+            endingBellImage.image = nil
+            endingBellImage.alpha = 1
+            endingBellNone.alpha = 1
+        //
+        case 3:
+            //
+            meditationArray[selectedPreset]["BackgroundSound"]?[0][0] = -1
+            //
+            backgroundSoundImage.image = nil
+            backgroundSoundImage.alpha = 1
+            backgroundSoundNone.alpha = 1
+        default: break
+        }
+        //
+        UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
         //
@@ -1138,7 +1237,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             // View
             let selectionWidth = ActionSheet.shared.actionWidth
-            let selectionHeight = ActionSheet.shared.actionTableHeight
+            let selectionHeight = ActionSheet.shared.actionTableHeight - 49 - 8
             selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: selectionWidth, height: selectionHeight)
             // Tableview
             selectionView.addSubview(tableViewBells)
@@ -1149,6 +1248,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             if selectedStartingBell != -1 {
                 okButton.isEnabled = true
             }
+            //
+            noneButton.frame = CGRect(x: 0, y: selectionHeight + 10, width: selectionWidth, height: 49)
+            noneButton.setTitle(NSLocalizedString("noStartingBell", comment: ""), for: .normal)
+            noneButton.layer.cornerRadius = noneButton.bounds.height / 2
             //
             selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
             //
@@ -1161,7 +1264,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             ActionSheet.shared.setupActionSheet()
             ActionSheet.shared.actionSheet.addSubview(selectionView)
-            let heightToAdd = selectionView.bounds.height
+            ActionSheet.shared.actionSheet.addSubview(noneButton)
+            let heightToAdd = selectionView.bounds.height + 10 + 49
             ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
             ActionSheet.shared.resetCancelFrame()
             ActionSheet.shared.animateActionSheetUp()
@@ -1173,7 +1277,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.deleteButton.frame = CGRect(x: self.duration.frame.size.width, y: 0, width: 0, height: self.duration.frame.size.height)
-                self.startingBellDetail.alpha = 1
+                self.startingBellImage.alpha = 1
                 //
             }, completion: { finished in
                 self.deleteButton.removeFromSuperview()
@@ -1262,7 +1366,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             // View
             let selectionWidth = ActionSheet.shared.actionWidth
-            let selectionHeight = ActionSheet.shared.actionTableHeight
+            let selectionHeight = ActionSheet.shared.actionTableHeight - 49 - 8
             selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: selectionWidth, height: selectionHeight)
             // Tableview
             selectionView.addSubview(tableViewBells)
@@ -1273,6 +1377,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             if selectedStartingBell != -1 {
                 okButton.isEnabled = true
             }
+            //
+            noneButton.frame = CGRect(x: 0, y: selectionHeight + 10, width: selectionWidth, height: 49)
+            noneButton.setTitle(NSLocalizedString("noEndingBell", comment: ""), for: .normal)
+            noneButton.layer.cornerRadius = noneButton.bounds.height / 2
             //
             selectionView.frame = CGRect(x: 0, y: 0, width: selectionWidth, height: selectionHeight)
             //
@@ -1287,7 +1395,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             ActionSheet.shared.setupActionSheet()
             ActionSheet.shared.actionSheet.addSubview(selectionView)
-            let heightToAdd = selectionView.bounds.height
+            ActionSheet.shared.actionSheet.addSubview(noneButton)
+            let heightToAdd = selectionView.bounds.height + 10 + 49
             ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
             ActionSheet.shared.resetCancelFrame()
             ActionSheet.shared.animateActionSheetUp()
@@ -1300,7 +1409,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.deleteButton.frame = CGRect(x: self.duration.frame.size.width, y: 0, width: 0, height: self.duration.frame.size.height)
-                self.endingBellDetail.alpha = 1
+                self.endingBellImage.alpha = 1
                 //
             }, completion: { finished in
                 self.deleteButton.removeFromSuperview()
@@ -1330,7 +1439,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             // View
             let selectionWidth = ActionSheet.shared.actionWidth
-            let selectionHeight = ActionSheet.shared.actionTableHeight
+            let selectionHeight = ActionSheet.shared.actionTableHeight - 49 - 8
             selectionView.frame = CGRect(x: 10, y: self.view.frame.maxY, width: selectionWidth, height: selectionHeight)
             // Tableview
             selectionView.addSubview(tableViewBackgroundSounds)
@@ -1352,9 +1461,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 //                tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             //
+            noneButton.frame = CGRect(x: 0, y: selectionHeight + 10, width: selectionWidth, height: 49)
+            noneButton.setTitle(NSLocalizedString("noBackgroundSound", comment: ""), for: .normal)
+            noneButton.layer.cornerRadius = noneButton.bounds.height / 2
+            //
             ActionSheet.shared.setupActionSheet()
             ActionSheet.shared.actionSheet.addSubview(selectionView)
-            let heightToAdd = selectionView.bounds.height
+            ActionSheet.shared.actionSheet.addSubview(noneButton)
+            let heightToAdd = selectionView.bounds.height + 10 + 49
             ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
             ActionSheet.shared.resetCancelFrame()
             ActionSheet.shared.animateActionSheetUp()
@@ -1367,7 +1481,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 //
                 self.deleteButton.frame = CGRect(x: self.duration.frame.size.width, y: 0, width: 0, height: self.duration.frame.size.height)
-                self.backgroundSoundDetail.alpha = 1
+                self.backgroundSoundImage.alpha = 1
                 //
             }, completion: { finished in
                 self.deleteButton.removeFromSuperview()
@@ -1395,7 +1509,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Update Main Screen Detail Labels
     func updateRows() {
         //
-                let meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
+        let meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
 
         //
         // Test all for nil
@@ -1417,9 +1531,11 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             // [2] = bells array, .first = starting bell, [0] = bell
             let startingBell = meditationArray[selectedPreset]["Bells"]?.first![0] as! Int
             if startingBell != -1 {
-                startingBellDetail.text = NSLocalizedString(bellsArray[startingBell], comment: "")
+                startingBellImage.image = bellsImages[startingBell]
+                startingBellNone.alpha = 0
             } else {
-                startingBellDetail.text = "-"
+                startingBellImage.image = nil
+                startingBellNone.alpha = 1
             }
             //
             // Interval Bells
@@ -1438,27 +1554,34 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             // [2] = bells array, .first = ending bell, [0] = bell
             let endingBell = meditationArray[selectedPreset]["Bells"]?.last![0] as! Int
             if endingBell != -1 {
-                endingBellDetail.text = NSLocalizedString(bellsArray[endingBell], comment: "")
+                endingBellImage.image = bellsImages[endingBell]
+                endingBellNone.alpha = 0
             } else {
-                endingBellDetail.text = "-"
+                endingBellImage.image = nil
+                endingBellNone.alpha = 1
             }
             //
             // Background Sounds
             // [3] = bells array, [0] = background sound array, [0] = background sounds
             let backgroundSound = meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int
             if backgroundSound != -1 {
-                backgroundSoundDetail.text = NSLocalizedString(backgroundSoundsArray[backgroundSound], comment: "")
+                backgroundSoundImage.image = backgroundSoundsImages[backgroundSound]
+                backgroundSoundNone.alpha = 0
             } else {
-                backgroundSoundDetail.text = "-"
+                backgroundSoundImage.image = nil
+                backgroundSoundNone.alpha = 1
             }
             //
         } else {
             presetsDetail.text = "-"
             durationDetail.text = "-"
-            startingBellDetail.text = "-"
+            startingBellImage.image = nil
+            startingBellNone.alpha = 1
             intervalBellsDetail.text = "-"
-            endingBellDetail.text = "-"
-            backgroundSoundDetail.text = "-"
+            endingBellImage.image = nil
+            endingBellNone.alpha = 1
+            backgroundSoundImage.image = nil
+            backgroundSoundNone.alpha = 1
         }
         //
     }
@@ -1477,18 +1600,18 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Title for header
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch tableView {
-        case tableViewBells:
-            switch selectedItem {
-            case 2:
-                return " " + NSLocalizedString("startingBell", comment: "")
-            case 3:
-                return " " + NSLocalizedString("bells", comment: "")
-            case 4:
-                return " " + NSLocalizedString("endingBell", comment: "")
-            default: return " "
-            }
-        case tableViewIntervalBells: return " " + NSLocalizedString("intervalBells", comment: "")
-        case tableViewBackgroundSounds: return " " + NSLocalizedString("backgroundSound", comment: "")
+//        case tableViewBells:
+//            switch selectedItem {
+//            case 2:
+//                return " " + NSLocalizedString("startingBell", comment: "")
+//            case 3:
+//                return " " + NSLocalizedString("bells", comment: "")
+//            case 4:
+//                return " " + NSLocalizedString("endingBell", comment: "")
+//            default: return " "
+//            }
+//        case tableViewIntervalBells: return " " + NSLocalizedString("intervalBells", comment: "")
+//        case tableViewBackgroundSounds: return " " + NSLocalizedString("backgroundSound", comment: "")
         default: return ""
         }
     }

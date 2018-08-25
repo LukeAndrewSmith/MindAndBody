@@ -94,7 +94,15 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         
         // Duration
         let hmsArray = convertToHMS(row: indexPath.row)
-        cell.durationLabel.text = String(hmsArray[0]) + "h " + String(hmsArray[1]) + "m " + String(hmsArray[2]) + "s"
+        let nameArray = ["h ", "m ", "s "]
+        var duration = ""
+        for i in 0..<hmsArray.count {
+            if hmsArray[i] != 0 {
+                duration += String(hmsArray[i]) + nameArray[i]
+            }
+        }
+        cell.durationLabel.text = duration
+//            String(hmsArray[0]) + "h " + String(hmsArray[1]) + "m " + String(hmsArray[2]) + "s"
 //        cell.durationLabel.sizeToFit()
         
         //
@@ -125,25 +133,26 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
             cell.startingImage.image = bellsImages[startingBell]
         }
         
-        // Interval Bells
-        var intervalBells = meditationArray[indexPath.row]["Bells"]
-        intervalBells?.removeFirst() // Remove starting bell
-        intervalBells?.removeLast() // Remove ending bell
-        let imageViewArray = [cell.intervalImage1, cell.intervalImage2, cell.intervalImage3]
-        let count = intervalBells?.count
-        // Bells
-        for i in 0..<imageViewArray.count {
-            if i < count! {
-                if let intervalBell = intervalBells?[i][0] as? Int, intervalBell != -1 {
-                    removeNothingChosenSymbol(view: imageViewArray[i]!)
-                    imageViewArray[i]?.image = bellsImages[intervalBell]
-                } else {
-                    addNothingChosenSymbol(view: imageViewArray[i]!, height: height)
-                }
-            } else {
-                addNothingChosenSymbol(view: imageViewArray[i]!, height: height)
-            }
-        }
+//        // Interval Bells
+//        var intervalBells = meditationArray[indexPath.row]["Bells"]
+//        intervalBells?.removeFirst() // Remove starting bell
+//        intervalBells?.removeLast() // Remove ending bell
+//        let imageViewArray = [cell.intervalImage1]
+////            , cell.intervalImage2, cell.intervalImage3]
+//        let count = intervalBells?.count
+//        // Bells
+//        for i in 0..<imageViewArray.count {
+//            if i < count! {
+//                if let intervalBell = intervalBells?[i][0] as? Int, intervalBell != -1 {
+//                    removeNothingChosenSymbol(view: imageViewArray[i]!)
+//                    imageViewArray[i]?.image = bellsImages[intervalBell]
+//                } else {
+//                    addNothingChosenSymbol(view: imageViewArray[i]!, height: height)
+//                }
+//            } else {
+//                addNothingChosenSymbol(view: imageViewArray[i]!, height: height)
+//            }
+//        }
         
         // Ending Bell
         let endingBell = meditationArray[indexPath.row]["Bells"]?.last![0] as! Int
@@ -154,6 +163,12 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             removeNothingChosenSymbol(view: cell.endingImage)
             cell.endingImage.image = bellsImages[endingBell]
+        }
+        
+        if indexPath.row != 0 {
+            cell.startTitle.alpha = 0
+            cell.endTitle.alpha = 0
+            cell.backgroundTitle.alpha = 0
         }
  
         cell.deleteButton.tag = indexPath.row
@@ -201,15 +216,17 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         slash.frame.size = CGSize(width: 1, height: slashHeight)
         slash.center = CGPoint(x: imageHeight/2, y: imageHeight/2)
         slash.transform = slash.transform.rotated(by: .pi/4)
+        slash.alpha = 0.72
         view.addSubview(slash)
         
         let circle = UIView()
         circle.tag = 72
-        circle.frame.size = CGSize(width: height/3, height: height/3)
+        circle.frame.size = CGSize(width: height/4, height: height/4)
         circle.center = CGPoint(x: imageHeight/2, y: imageHeight/2)
         circle.layer.borderWidth = 1
         circle.layer.borderColor = Colors.dark.cgColor
-        circle.layer.cornerRadius = height/6
+        circle.layer.cornerRadius = height/8
+        circle.alpha = 0.72
         view.addSubview(circle)
     }
     
@@ -421,6 +438,9 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
             destinationVC?.backgroundSoundsArray = backgroundSoundsArray
             destinationVC?.backgroundSoundsImages = backgroundSoundsImages
             destinationVC?.durationTimeArray = durationTimeArray
+//            let destinationNC = segue.destination as? MeditationTimerNavigation
+//            let destinationVC = destinationNC?.viewControllers.first as? MeditationTimerEditing
+//            destinationVC?.creatingMeditation = creatingMeditation
         // Session
         case "meditationSegue"?:
             //
@@ -450,21 +470,22 @@ class CustomMeditationChoiceCell: UITableViewCell {
     
     @IBOutlet weak var backgroundSoundImageView: UIImageView!
     @IBOutlet weak var startingImage: UIImageView!
-    @IBOutlet weak var intervalImage1: UIImageView!
-    @IBOutlet weak var intervalImage2: UIImageView!
-    @IBOutlet weak var intervalImage3: UIImageView!
+//    @IBOutlet weak var intervalImage1: UIImageView!
     @IBOutlet weak var endingImage: UIImageView!
     
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var editButtonBig: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var deleteImage: UIImageView!
-    
-    @IBOutlet weak var constraint1: NSLayoutConstraint!
-    @IBOutlet weak var constraint2: NSLayoutConstraint!
-    @IBOutlet weak var constraint3: NSLayoutConstraint!
-    @IBOutlet weak var constraint4: NSLayoutConstraint!
-    
+//
+//    @IBOutlet weak var constraint1: NSLayoutConstraint!
+//    @IBOutlet weak var constraint2: NSLayoutConstraint!
+////    @IBOutlet weak var constraint3: NSLayoutConstraint!
+////    @IBOutlet weak var constraint4: NSLayoutConstraint!
+    @IBOutlet weak var startTitle: UILabel!
+    @IBOutlet weak var endTitle: UILabel!
+    @IBOutlet weak var backgroundTitle: UILabel!
+    //
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -479,15 +500,15 @@ class CustomMeditationChoiceCell: UITableViewCell {
         nameLabel.textColor = Colors.dark
         nameLabel.adjustsFontSizeToFitWidth = true
         
-        durationLabel.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        durationLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         durationLabel.textColor = Colors.dark
         
-        // Iphone 5/SE layout, smaller text for endurance
-        if IPhoneType.shared.iPhoneType() == 0 {
-            constraint1.constant = 12
-            constraint1.constant = 12
-            constraint1.constant = 6
-            constraint1.constant = 6
-        }
+//        // Iphone 5/SE layout, smaller text for endurance
+//        if IPhoneType.shared.iPhoneType() == 0 {
+//            constraint1.constant = 12
+//            constraint2.constant = 12
+//            constraint3.constant = 6
+//            constraint4.constant = 6
+//        }
     }
 }

@@ -226,6 +226,7 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
                     imageArray[i].append([])
                     // Append all movements
                     let sessionIndex = sessions[keys[i]]?[j]
+                    print(SelectedSession.shared.selectedSession)
                     let numberOfMovements = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]!.count
                     for k in 0..<numberOfMovements  {
                         let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]?[k][movementIndex] as! String

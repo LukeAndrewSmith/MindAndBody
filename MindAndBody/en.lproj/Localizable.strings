@@ -1493,7 +1493,7 @@
 
         // Timer
             //
-            "meditationInputTitle" = "Meditation Title";
+            "meditationInputTitle" = "Meditation Name";
 
             "tapToDismiss" = "Tap to dismiss";
 
@@ -1693,6 +1693,10 @@
         "backgroundSound" = "Background Sound";
         "intervalBells" = "Interval Bells";
         "endingBell" = "Ending Bell";
+// None button titles
+"noStartingBell" = "No Starting Bell";
+"noEndingBell" = "No Ending Bell";
+"noBackgroundSound" = "No Background Sound";
 
         // Oxygen Overload
         //

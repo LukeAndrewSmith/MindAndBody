@@ -18,7 +18,7 @@ enum Register {
     // Settings
     static let defaultSettings: [String: [Int]] = [
         // Background image index - 0
-        "BackgroundImage": [2],
+        "BackgroundImage": [1],
         // Metric/Imperial - 6
         "Units": [0], // == "kg" (0), "lb" (1)
         // Time Based Sessions - 2
