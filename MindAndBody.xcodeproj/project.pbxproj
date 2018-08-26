@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07002A601FD5ACE00000A755 /* SortedSessionsFinalChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07002A5F1FD5ACE00000A755 /* SortedSessionsFinalChoice.swift */; };
 		07038CC61F4C5C2A001CC6D5 /* purpleTree.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC51F4C5C2A001CC6D5 /* purpleTree.png */; };
 		07038CCC1F4C5FD8001CC6D5 /* wristRotations.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC71F4C5FD8001CC6D5 /* wristRotations.png */; };
 		07038CCD1F4C5FD8001CC6D5 /* wristRotations1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC81F4C5FD8001CC6D5 /* wristRotations1.png */; };
@@ -1368,7 +1367,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		07002A5F1FD5ACE00000A755 /* SortedSessionsFinalChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedSessionsFinalChoice.swift; sourceTree = "<group>"; };
 		07038CC51F4C5C2A001CC6D5 /* purpleTree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpleTree.png; sourceTree = "<group>"; };
 		07038CC71F4C5FD8001CC6D5 /* wristRotations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wristRotations.png; sourceTree = "<group>"; };
 		07038CC81F4C5FD8001CC6D5 /* wristRotations1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wristRotations1.png; sourceTree = "<group>"; };
@@ -3725,7 +3723,6 @@
 				077DAB161FD5FE1900CF7949 /* LittleThings.swift */,
 				077DAB141FD5FCE300CF7949 /* Movements.swift */,
 				077DAB121FD5FCD500CF7949 /* Sessions.swift */,
-				07002A5F1FD5ACE00000A755 /* SortedSessionsFinalChoice.swift */,
 				07D127F51FD6FB1F00C88352 /* SortedSessionsSchedule.swift */,
 			);
 			path = "Session Data";
@@ -8256,7 +8253,6 @@
 				0782AB571FC4F1BB00D34500 /* ScheduleWalkthrough.swift in Sources */,
 				077DAB131FD5FCD500CF7949 /* Sessions.swift in Sources */,
 				07B852621F83756C005F3781 /* ScheduleData.swift in Sources */,
-				07002A601FD5ACE00000A755 /* SortedSessionsFinalChoice.swift in Sources */,
 				07E1D4E11FB2250B00B53B85 /* ScheduleCreationHelp.swift in Sources */,
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07C2D3BC1EBA88CF000770DE /* MindBody.swift in Sources */,

@@ -33,6 +33,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        ReminderNotifications.shared.cancelNotifications()
 //        ICloudFunctions.shared.removeAll()
 
+        
+        //
+        // MARK: Sessions check
+        // Compares sessions dictionaries and sorted sessions dictionaries to see if anything missing
+        var sessionsArray: Set<String> = []
+        // warmup, workout...
+        for key1 in sessionData.sessions.keys {
+            // classic, upper ,lower...
+            for key2 in (sessionData.sessions[key1]?.keys)! {
+                // Append Sessions
+                for key3 in (sessionData.sessions[key1]![key2]?.keys)! {
+                    sessionsArray.insert(key3)
+                }
+            }
+        }
+        var sortedSessionsArray: Set<String> = []
+        // warmup, workout...
+        for key1 in sessionData.sortedSessions.keys {
+            // classic, upper ,lower...
+            for key2 in (sessionData.sortedSessions[key1]?.keys)! {
+                for key3 in (sessionData.sortedSessions[key1]?[key2]?.keys)! {
+                    for key4 in (sessionData.sortedSessions[key1]?[key2]?[key3]?.keys)! {
+                        // Append Sessions
+                        for key5 in (sessionData.sortedSessions[key1]?[key2]?[key3]?[key4])! {
+                            sortedSessionsArray.insert(key5)
+                        }
+                    }
+                }
+            }
+        }
+        let notInSortedSessions = sortedSessionsArray.subtracting(sessionsArray)
+        let notInSessions = sessionsArray.subtracting(sortedSessionsArray)
+        // Duplicates
+        let duplicates = Array(Set(sortedSessionsArray.filter({ (i) in sortedSessionsArray.filter({ $0 == i }).count > 1})))
+                
+        
         //
         // iCloud Oberver
         NotificationCenter.default.addObserver(
@@ -50,6 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSUbiquitousKeyValueStore.default.synchronize()
             ICloudFunctions.shared.pullToDefaults()
         }
+        
+        
         
         //
         // Register Defaults --------------------------------------------------------------------------------

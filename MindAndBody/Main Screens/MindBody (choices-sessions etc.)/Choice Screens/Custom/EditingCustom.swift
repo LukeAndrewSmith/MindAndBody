@@ -686,7 +686,21 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
             //
             // Cell Image
-            cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]!["demonstration"]![0]))
+            // Flip asymmetric images for yoga
+            let movementImage = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]!["demonstration"]![0]))
+            if SelectedSession.shared.selectedSession[0] == "yoga" {
+                // If asymmetric array contains image, flip image
+                if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(keyIndex))! {
+                    let flippedImage = UIImage(cgImage: (movementImage?.cgImage!)!, scale: (movementImage?.scale)!, orientation: .upMirrored)
+                    cell.imageView?.image = flippedImage
+                } else {
+                    cell.imageView?.image = movementImage
+                }
+                
+            // Normal
+            } else {
+                cell.imageView?.image = movementImage
+            }
             cell.imageView?.isUserInteractionEnabled = true
             // Image Tap
             let imageTap = UITapGestureRecognizer()
@@ -710,7 +724,21 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.textLabel?.textColor = .black
             cell.tintColor = .black
             // Cell Image
-            cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]?["demonstration"]![0])!)
+            let movementImage = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]!["demonstration"]![0]))
+            if SelectedSession.shared.selectedSession[0] == "yoga" {
+                // If asymmetric array contains image, flip image
+                if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(keyIndex))! {
+                    let flippedImage = UIImage(cgImage: (movementImage?.cgImage!)!, scale: (movementImage?.scale)!, orientation: .upMirrored)
+                    cell.imageView?.image = flippedImage
+                } else {
+                    cell.imageView?.image = movementImage
+                }
+                
+                // Normal append
+            } else {
+                cell.imageView?.image = movementImage
+            }
+//            cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]?["demonstration"]![0])!)
             cell.imageView?.isUserInteractionEnabled = true
             // Image Tap
             let imageTap = UITapGestureRecognizer()

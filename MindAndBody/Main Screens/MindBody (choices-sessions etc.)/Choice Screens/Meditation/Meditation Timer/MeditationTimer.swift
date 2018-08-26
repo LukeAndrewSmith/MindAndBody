@@ -614,11 +614,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 didChangeDuration = false
                 //
                 // Set new duration
-                if (meditationArray[selectedPreset]["Duration"]?[0] as! [Int]).count != 0 {
-                    meditationArray[selectedPreset]["Duration"]?[0][0] = convertToSeconds()
-                } else {
-                    meditationArray[selectedPreset]["Duration"]?[0].append(convertToSeconds())
-                }
+                meditationArray[selectedPreset]["Duration"]?[0][0] = convertToSeconds()
                 // Set ending bell time to duration
                 let lastIndex = (meditationArray[selectedPreset]["Bells"] as! [[Int]]).count - 1
                 meditationArray[selectedPreset]["Bells"]?[lastIndex][1] = convertToSeconds()

@@ -9,6 +9,12 @@
 import Foundation
 
 class sessionData {
+
+    // IMPORTANT NOTE: Creating new session!!!!!!!!!
+        // - Read how to naming below
+        // - Add session to localizable string and give name
+        // - Add to sessionData.sortedSessions in correct places
+    
     //
     // MARK: Notes
     // Session names have to be the same as their key
@@ -7250,7 +7256,7 @@ class sessionData {
                          "sets": 2,
                          "reps": "25+ breaths"],
                     ],
-                    "WGHM-CsL-8": [
+                    "WGHM-CsL-7": [
                         ["movement": "squat",
                          "sets": 3,
                          "reps": "8-12"],

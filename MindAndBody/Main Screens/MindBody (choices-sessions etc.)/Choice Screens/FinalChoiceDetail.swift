@@ -51,7 +51,8 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
         if appChoosesSessions {
             navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]! , comment: ""))
         } else {
-             NSLocalizedString(navigationBarTitles[SelectedSession.shared.selectedSession[0]]!, comment: "")
+            navigationBar.title =
+                NSLocalizedString(SelectedSession.shared.selectedSession[2], comment: "")
         }
         navigationController?.navigationBar.tintColor = Colors.light
         

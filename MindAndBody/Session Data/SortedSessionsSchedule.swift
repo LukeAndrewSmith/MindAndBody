@@ -10,6 +10,9 @@ import Foundation
 
 extension sessionData {
 
+    static let indexArray3 = ["easy", "average", "hard"]
+    static let indexArray1 = ["average"]
+    
     // MARK:- Sorted Sessions for Schedule
     static let sortedSessions: [String: [String: [String: [String: [String]]]]] = [
         // TODO: CORRECT INDEXING OF SCHEDULE SCREEN
@@ -359,8 +362,7 @@ extension sessionData {
                              "WGES-CsL-6",
                              "WGES-CsL-7",
                              "WGES-CsL-8",
-                             "WGES-CsL-9",
-                             "WGES-CsL-10",],
+                             "WGES-CsL-9",],
                     // Average
                     "average": ["WGAS-CsL-1",
                                 "WGAS-CsL-2",
@@ -370,8 +372,7 @@ extension sessionData {
                                 "WGAS-CsL-6",
                                 "WGAS-CsL-7",
                                 "WGAS-CsL-8",
-                                "WGAS-CsL-9",
-                                "WGAS-CsL-10",],
+                                "WGAS-CsL-9",],
                     // Hard
                     "hard": ["WGHS-CsL-1",
                              "WGHS-CsL-2",
@@ -379,10 +380,7 @@ extension sessionData {
                              "WGHS-CsL-4",
                              "WGHS-CsL-5",
                              "WGHS-CsL-6",
-                             "WGHS-CsL-7",
-                             "WGHS-CsL-8",
-                             "WGHS-CsL-9",
-                             "WGHS-CsL-10",],
+                             "WGHS-CsL-7",],
                 ],
                 // Medium
                 "medium": [
@@ -395,8 +393,7 @@ extension sessionData {
                              "WGEM-CsL-6",
                              "WGEM-CsL-7",
                              "WGEM-CsL-8",
-                             "WGEM-CsL-9",
-                             "WGEM-CsL-10",],
+                             "WGEM-CsL-9",],
                     // Average
                     "average": ["WGAM-CsL-1",
                                 "WGAM-CsL-2",
@@ -406,8 +403,7 @@ extension sessionData {
                                 "WGAM-CsL-6",
                                 "WGAM-CsL-7",
                                 "WGAM-CsL-8",
-                                "WGAM-CsL-9",
-                                "WGAM-CsL-10",],
+                                "WGAM-CsL-9",],
                     // Hard
                     "hard": ["WGHM-CsL-1",
                              "WGHM-CsL-2",
@@ -415,10 +411,7 @@ extension sessionData {
                              "WGHM-CsL-4",
                              "WGHM-CsL-5",
                              "WGHM-CsL-6",
-                             "WGHM-CsL-7",
-                             "WGHM-CsL-8",
-                             "WGHM-CsL-9",
-                             "WGHM-CsL-10",],
+                             "WGHM-CsL-7",],
                 ],
                 // Long
                 "long": [
@@ -431,8 +424,7 @@ extension sessionData {
                              "WGEL-CsL-6",
                              "WGEL-CsL-7",
                              "WGEL-CsL-8",
-                             "WGEL-CsL-9",
-                             "WGEL-CsL-10",],
+                             "WGEL-CsL-9",],
                     // Average
                     "average": ["WGAL-CsL-1",
                                 "WGAL-CsL-2",
@@ -442,8 +434,7 @@ extension sessionData {
                                 "WGAL-CsL-6",
                                 "WGAL-CsL-7",
                                 "WGAL-CsL-8",
-                                "WGAL-CsL-9",
-                                "WGAL-CsL-10",],
+                                "WGAL-CsL-9"],
                     // Hard
                     "hard": ["WGHL-CsL-1",
                              "WGHL-CsL-2",
@@ -451,10 +442,7 @@ extension sessionData {
                              "WGHL-CsL-4",
                              "WGHL-CsL-5",
                              "WGHL-CsL-6",
-                             "WGHL-CsL-7",
-                             "WGHL-CsL-8",
-                             "WGHL-CsL-9",
-                             "WGHL-CsL-10",],
+                             "WGHL-CsL-7",],
                 ],
             ],
             // MARK: Circuit Gym
@@ -553,20 +541,17 @@ extension sessionData {
                     "easy": ["WGES-CcL-1",
                              "WGES-CcL-2",
                              "WGES-CcL-3",
-                             "WGES-CcL-4",
-                             "WGES-CcL-5",],
+                             "WGES-CcL-4",],
                     // Average
                     "average": ["WGAS-CcL-1",
                                 "WGAS-CcL-2",
                                 "WGAS-CcL-3",
-                                "WGAS-CcL-4",
-                                "WGAS-CcL-5",],
+                                "WGAS-CcL-4",],
                     // Hard
                     "hard": ["WGHS-CcL-1",
                              "WGHS-CcL-2",
                              "WGHS-CcL-3",
-                             "WGHS-CcL-4",
-                             "WGHS-CcL-5",],
+                             "WGHS-CcL-4",],
                 ],
                 // Normal
                 "normal": [
@@ -574,20 +559,17 @@ extension sessionData {
                     "easy": ["WGEN-CcL-1",
                              "WGEN-CcL-2",
                              "WGEN-CcL-3",
-                             "WGEN-CcL-4",
-                             "WGEN-CcL-5",],
+                             "WGEN-CcL-4",],
                     // Average
                     "average": ["WGAN-CcL-1",
                                 "WGAN-CcL-2",
                                 "WGAN-CcL-3",
-                                "WGAN-CcL-4",
-                                "WGAN-CcL-5",],
+                                "WGAN-CcL-4",],
                     // Hard
                     "hard": ["WGHN-CcL-1",
                              "WGHN-CcL-2",
                              "WGHN-CcL-3",
-                             "WGHN-CcL-4",
-                             "WGHN-CcL-5",],
+                             "WGHN-CcL-4",],
                 ],
             ],
             // MARK: Classic Bodyweight

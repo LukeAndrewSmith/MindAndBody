@@ -10,6 +10,10 @@ import Foundation
 
 extension sessionData {
     
+    // MARK: Circuit
+    // Contains  SelectedSession.shared.selectedSession[1]  keys of circuit workout
+    static let circuitChoices: Set = ["circuitGymFull", "circuitGymUpper", "circuitGymLower", "circuitBodyweightFull", "circuitBodyweightUpper", "circuitBodyweightLower", "bodyweight"]
+    
     // MARK:- TableView Section Arrays
     static let tableViewSectionArrays: [String: [String]] = [
             // Warmup

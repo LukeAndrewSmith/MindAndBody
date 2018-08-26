@@ -32,7 +32,12 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
     let cellHeight: CGFloat = 88
     
     // Load
+    // Images of sessions
     var imageArray: [[[UIImage]]] = []
+    // Names of sessions
+    var sessionsArray: [String: [String]] = [:]
+    // Keys to sorted sessions (set as the array which will never crash as all have at least average)
+    var keys: [String] = sessionData.indexArray1
     
     // Outlets
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -45,7 +50,25 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         fillImageArray()
         
         // Navigation
-        navigationBar.title = NSLocalizedString(navigationBarTitles[SelectedSession.shared.selectedSession[0]]!, comment: "")
+        var navTitle = String()
+        switch selectedComponent {
+        // Warmup
+        case 0:
+            navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[2], comment: "")
+
+        // Session
+        case 1:
+            navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[2], comment: "")
+
+            print(ScheduleVariables.shared.selectedChoiceSession)
+        // Stretching
+        case 2:
+            navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[2], comment: "")
+
+        default: break
+        }
+        navigationBar.title = navTitle
+        print(navTitle)
         navigationBar.rightBarButtonItem?.tintColor = Colors.light
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         
@@ -91,7 +114,8 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.backgroundColor = Colors.light
         
         // Retreive Preset Sessions
-        cell.nameLabel?.text = NSLocalizedString(sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![indexPath.section][indexPath.row], comment: "")
+        cell.nameLabel?.text = NSLocalizedString(sessionsArray[keys[indexPath.section]]![indexPath.row], comment: "")
+        
         cell.layoutSubviews()
         
         // Images
@@ -172,7 +196,7 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // Select session
-        let selectedSessionKey: String = sessionData.sortedSessionsForFinalChoice[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![indexPath.section][indexPath.row]
+        let selectedSessionKey: String = sessionsArray[keys[indexPath.section]]![indexPath.row]
         SelectedSession.shared.selectedSession[2] = selectedSessionKey
         
         // Cardio Type
@@ -188,6 +212,7 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
     func fillImageArray() {
         
         imageArray = []
+        sessionsArray = [:]
         
         // Yoga indexed differently
         var  movementIndex = "movement"
@@ -195,42 +220,69 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
             movementIndex = "pose"
         }
 
-        var sessions: [String: [String]] = [:]
         switch selectedComponent {
         // Warmup
         case 0:
-            sessions = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceWarmup[0]]![ScheduleVariables.shared.selectedChoiceWarmup[1]]![ScheduleVariables.shared.selectedChoiceWarmup[2]]!
+            sessionsArray = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceWarmup[0]]![ScheduleVariables.shared.selectedChoiceWarmup[1]]![ScheduleVariables.shared.selectedChoiceWarmup[2]]!
         // Session
         case 1:
-            sessions = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceSession[0]]![ScheduleVariables.shared.selectedChoiceSession[1]]![ScheduleVariables.shared.selectedChoiceSession[2]]!
+            sessionsArray = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceSession[0]]![ScheduleVariables.shared.selectedChoiceSession[1]]![ScheduleVariables.shared.selectedChoiceSession[2]]!
         // Stretching
         case 2:
-            sessions = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceStretching[0]]![ScheduleVariables.shared.selectedChoiceStretching[1]]![ScheduleVariables.shared.selectedChoiceStretching[2]]!
+            sessionsArray = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceStretching[0]]![ScheduleVariables.shared.selectedChoiceStretching[1]]![ScheduleVariables.shared.selectedChoiceStretching[2]]!
         default: break
         }
         
-        let numberOfSections = sessions.count
+        let numberOfSections = sessionsArray.count
         
         // If only on section => 1 difficulty which is indexed by "average"
             // see 'Session Data' -> 'SortedSessionsSchedule'
-        var keys = ["easy", "average", "hard"]
-        if numberOfSections == 1 {
-            keys = ["average"]
+        if numberOfSections == 3 {
+            keys = sessionData.indexArray3
+        } else if numberOfSections == 1 {
+            keys = sessionData.indexArray1
         }
         
+        // Loop sections (= difficulty levels)
         for i in 0..<numberOfSections {
             imageArray.append([])
             // Loop number of sessions per section
-            if let numberOfSessions = sessions[keys[i]]?.count {
+            if let numberOfSessions = sessionsArray[keys[i]]?.count {
+                // Loop sessions
                 for j in 0..<numberOfSessions {
                     imageArray[i].append([])
-                    // Append all movements
-                    let sessionIndex = sessions[keys[i]]?[j]
-                    print(SelectedSession.shared.selectedSession)
-                    let numberOfMovements = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]!.count
+                    
+                    // Find number of movements
+                    let sessionIndex = sessionsArray[keys[i]]?[j]
+                    var numberOfMovements = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]!.count
+                    
+                    // If circuit, only show one round of images
+                    if sessionData.circuitChoices.contains(SelectedSession.shared.selectedSession[1]) {
+                        let numberOfRounds = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int
+                        // Number of movements per round
+                        numberOfMovements = numberOfMovements/numberOfRounds
+                    }
+                    
+                    // Add images
                     for k in 0..<numberOfMovements  {
                         let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]?[k][movementIndex] as! String
-                        imageArray[i][j].append(getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)!)
+                        let movementImage = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)!
+                        
+                        // Flip asymmetric images for yoga
+                        if SelectedSession.shared.selectedSession[0] == "yoga" {
+                            // If asymmetric array contains image, flip image
+                            if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! {
+                                let flippedImage = UIImage(cgImage: movementImage.cgImage!, scale: movementImage.scale, orientation: .upMirrored)
+                                imageArray[i][j].append(flippedImage)
+                            } else {
+                                imageArray[i][j].append(movementImage)
+                            }
+                            
+                        // Normal append
+                        } else {
+                            imageArray[i][j].append(movementImage)
+                        }
+                        
                     }
                 }
             }

@@ -297,7 +297,23 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         for i in 0..<numberOfRows {
             imageArray.append([])
             for imageName in (customSessionsArray[SelectedSession.shared.selectedSession[0]]![i]["movements"]! as! [String]) {
-                imageArray[i].append(getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![imageName]!["demonstration"]![0]))!)
+                
+                let movementImage = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![imageName]!["demonstration"]![0]))!
+                
+                // Flip asymmetric images for yoga
+                if SelectedSession.shared.selectedSession[0] == "yoga" {
+                    // If asymmetric array contains image, flip image
+                    if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(imageName))! {
+                        let flippedImage = UIImage(cgImage: movementImage.cgImage!, scale: movementImage.scale, orientation: .upMirrored)
+                        imageArray[i].append(flippedImage)
+                    } else {
+                        imageArray[i].append(movementImage)
+                    }
+                    
+                // Normal append
+                } else {
+                    imageArray[i].append(movementImage)
+                }
             }
         }
     }
