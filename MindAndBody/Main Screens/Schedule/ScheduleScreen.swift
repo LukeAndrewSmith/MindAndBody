@@ -36,8 +36,16 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var daySwipeRight = UISwipeGestureRecognizer()
     let separator = UIView()
     var separatorY: CGFloat {
-        // (Size of schedule screen / 4) + height of pageStack
-        return pageStack.bounds.height + headerHeight
+        // Day view
+        if scheduleStyle == 0 {
+            // (Size of schedule screen / 4) + height of pageStack
+            return pageStack.bounds.height + headerHeight
+            
+        // Week view
+        } else {
+            return headerHeight
+        }
+        
     }
     //
     var okAction = UIAlertAction()
@@ -147,6 +155,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         }
         // Reload the view if requested by previous view
         reloadView()
+        //
+        scheduleTableScrollCheck()
     }
     
     

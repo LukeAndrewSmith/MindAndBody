@@ -488,7 +488,7 @@
 		0782AB521FC4F0CE00D34500 /* ScheduleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782AB511FC4F0CE00D34500 /* ScheduleTableView.swift */; };
 		0782AB571FC4F1BB00D34500 /* ScheduleWalkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782AB561FC4F1BB00D34500 /* ScheduleWalkthrough.swift */; };
 		078674FE1FB84F7000C6B74C /* ICloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078674FD1FB84F7000C6B74C /* ICloudStorage.swift */; };
-		0789ED061F79A6EA000EB739 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789ED051F79A6EA000EB739 /* UserData.swift */; };
+		0789ED061F79A6EA000EB739 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789ED051F79A6EA000EB739 /* Register.swift */; };
 		0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872A1E7B4E2C00E7153A /* SessionScreen.swift */; };
 		0794A7491FBC7F550029968D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794A7481FBC7F550029968D /* Settings.swift */; };
 		0794A74D1FBCC3D70029968D /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794A74C1FBCC3D70029968D /* ActionSheet.swift */; };
@@ -1835,7 +1835,7 @@
 		0782AB511FC4F0CE00D34500 /* ScheduleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableView.swift; sourceTree = "<group>"; };
 		0782AB561FC4F1BB00D34500 /* ScheduleWalkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWalkthrough.swift; sourceTree = "<group>"; };
 		078674FD1FB84F7000C6B74C /* ICloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudStorage.swift; sourceTree = "<group>"; };
-		0789ED051F79A6EA000EB739 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		0789ED051F79A6EA000EB739 /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		0791872A1E7B4E2C00E7153A /* SessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
 		0794A7481FBC7F550029968D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		0794A74C1FBCC3D70029968D /* ActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheet.swift; sourceTree = "<group>"; };
@@ -3752,7 +3752,7 @@
 			isa = PBXGroup;
 			children = (
 				07B852611F83756C005F3781 /* ScheduleData.swift */,
-				0789ED051F79A6EA000EB739 /* UserData.swift */,
+				0789ED051F79A6EA000EB739 /* Register.swift */,
 				07308E38209E11DF00A4B292 /* SuggestedWeights.swift */,
 			);
 			path = Data;
@@ -8235,7 +8235,7 @@
 				0798925E1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift in Sources */,
 				07DE23051FC0A47500940567 /* SubscriptionScreen.swift in Sources */,
 				0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */,
-				0789ED061F79A6EA000EB739 /* UserData.swift in Sources */,
+				0789ED061F79A6EA000EB739 /* Register.swift in Sources */,
 				07DEE6FB1E0AC47F003B89AB /* WorkoutChoice.swift in Sources */,
 				07A6346F208C999000712EE2 /* ScheduleEquipment.swift in Sources */,
 				078674FE1FB84F7000C6B74C /* ICloudStorage.swift in Sources */,

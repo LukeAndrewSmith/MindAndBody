@@ -44,8 +44,8 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     
     
     //
-    // Retreive trackingdictionaries from userdefaults as [String: Int] and convert to [Date: Int]
-    var trackingDictionariesDates: [[Date: Int]] = []
+    // Retreive trackingDictionary from userdefaults as [String: Int] and convert to [Date: Int]
+    var trackingDictionaryDates: [Date: Int] = [:]
     
     //
     // View Will Appear ---------------------------------------------------------------------------------
@@ -53,13 +53,19 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Ensure week goal correct
+        updateWeekGoal()
+        // Update Tracking
+        updateWeekProgress()
+        updateTracking()
+        
         // Add here incase image changed in settings
         addBackgroundImage(withBlur: true, fullScreen: false)
         
         // Reload data and graphs incase tracking updated
         // Create [[Date: Int]] from the stored [[String: Int]] (ICloud wont store [Date: Int], only [String: Int])
-        let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
-        trackingDictionariesDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionaries)
+        let trackingDictionary = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
+        trackingDictionaryDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionary)
         setupChartData(timeScale: selectedTimeScale)
     }
     
@@ -77,36 +83,36 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
 //        var calendar = Calendar(identifier: .iso8601)
 //        calendar.timeZone = TimeZone(abbreviation: "UTC")!
 //        //
-//        var trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
-//        trackingDictionaries[0] = [:]
+//        var trackingDictionary = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
+//        trackingDictionary[0] = [:]
 //        let firstMonday = Date().firstMondayInCurrentWeek
-//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 1), forKey: TrackingHelpers.shared.dateToString(date: firstMonday))
+//        trackingDictionary[0].updateValue(testCurrentProgress(total: 6, current: 1), forKey: TrackingHelpers.shared.dateToString(date: firstMonday))
 //        let tue = calendar.date(byAdding: .day, value: 1, to: firstMonday)
-//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 1), forKey: TrackingHelpers.shared.dateToString(date: tue!))
+//        trackingDictionary[0].updateValue(testCurrentProgress(total: 6, current: 1), forKey: TrackingHelpers.shared.dateToString(date: tue!))
 //        let wed = calendar.date(byAdding: .day, value: 2, to: firstMonday)
-//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 3), forKey: TrackingHelpers.shared.dateToString(date: wed!))
+//        trackingDictionary[0].updateValue(testCurrentProgress(total: 6, current: 3), forKey: TrackingHelpers.shared.dateToString(date: wed!))
 //        let thur = calendar.date(byAdding: .day, value: 2, to: firstMonday)
-//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 3), forKey: TrackingHelpers.shared.dateToString(date: thur!))
+//        trackingDictionary[0].updateValue(testCurrentProgress(total: 6, current: 3), forKey: TrackingHelpers.shared.dateToString(date: thur!))
 //        let fri = calendar.date(byAdding: .day, value: 4, to: firstMonday)
-//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 4), forKey: TrackingHelpers.shared.dateToString(date: fri!))
+//        trackingDictionary[0].updateValue(testCurrentProgress(total: 6, current: 4), forKey: TrackingHelpers.shared.dateToString(date: fri!))
 //        let sat = calendar.date(byAdding: .day, value: 5, to: firstMonday)
-//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 6), forKey: TrackingHelpers.shared.dateToString(date: sat!))
+//        trackingDictionary[0].updateValue(testCurrentProgress(total: 6, current: 6), forKey: TrackingHelpers.shared.dateToString(date: sat!))
 //        let sun = calendar.date(byAdding: .day, value: 6, to: firstMonday)
-//        trackingDictionaries[0].updateValue(testCurrentProgress(total: 6, current: 6), forKey: TrackingHelpers.shared.dateToString(date: sun!))
+//        trackingDictionary[0].updateValue(testCurrentProgress(total: 6, current: 6), forKey: TrackingHelpers.shared.dateToString(date: sun!))
 //
 //        //
-//        trackingDictionaries[1] = [:]
+//        trackingDictionary = [:]
 ////        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().setToMidnightUTC())!
 ////        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
 //        var firstMondayLastMonth = Date().firstMondayInMonth
 //        //
-//        trackingDictionaries[1].updateValue(100, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
-//        trackingDictionaries[1].updateValue(85, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
-//        trackingDictionaries[1].updateValue(95, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
-//        trackingDictionaries[1].updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
+//        trackingDictionary.updateValue(100, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
+//        trackingDictionary.updateValue(85, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
+//        trackingDictionary.updateValue(95, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
+//        trackingDictionary.updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
 //
-//        UserDefaults.standard.set(trackingDictionaries, forKey: "trackingDictionaries")
-//        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionaries"])
+//        UserDefaults.standard.set(trackingDictionary, forKey: "trackingDictionary")
+//        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionary"])
 //
 //    }
     
@@ -126,12 +132,11 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         // Update Tracking
         updateWeekProgress()
         updateTracking()
-        updateWeekTracking()
         
         
         // Create [[Date: Int]] from the stored [[String: Int]] (ICloud wont store [Date: Int], only [String: Int])
-        let trackingDictionaries = UserDefaults.standard.object(forKey: "trackingDictionaries") as! [[String: Int]]
-        trackingDictionariesDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionaries)
+        let trackingDictionary = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
+        trackingDictionaryDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionary)
         
         // Present walkthrough 2
         let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
@@ -287,10 +292,10 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
 //            chartView.xAxis.granularity = 1 // 1 day
 //
 //            //
-//            chartDataOriginal = trackingDictionariesDates[0].sorted(by: { $0.key < $1.key })
+//            chartDataOriginal = trackingDictionaryDates[0].sorted(by: { $0.key < $1.key })
 //            //
 //            // Shift chart data so min date is 0, this allows for correct presenting of labels
-//            if trackingDictionariesDates[0].count != 0 {
+//            if trackingDictionaryDates[0].count != 0 {
 //                TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
 //                for i in 0..<chartDataOriginal.count {
 //                    let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
@@ -316,10 +321,10 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
             chartView.xAxis.granularity = 7 // 7 days in a week
 
             //
-            chartDataOriginal = trackingDictionariesDates[1].sorted(by: { $0.key < $1.key })
+            chartDataOriginal = trackingDictionaryDates.sorted(by: { $0.key < $1.key })
             //
             // Shift chart data so min date is 0, this allows for correct presenting of labels
-            if trackingDictionariesDates[1].count != 0 {
+            if trackingDictionaryDates.count != 0 {
                 TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
                 for i in 0..<chartDataOriginal.count {
                     let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
@@ -401,7 +406,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
 //                // nina
 //                //
 //                // Shift chart data so min date is 0, this allows for correct presenting of labels
-//                if trackingDictionariesDates[1].count != 0 {
+//                if trackingDictionaryDates.count != 0 {
 //                    TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
 //                    for i in 0..<chartDataOriginal.count {
 //                        let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
@@ -433,7 +438,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         // Chart data
         let chartDataSet = LineChartDataSet(values: lineDataEntry, label: "I'm a label that isn't shown")
         let chartData = LineChartData()
-        if trackingDictionariesDates[0].count != 0 || trackingDictionariesDates[1].count != 0 {
+        if trackingDictionaryDates.count != 0 || trackingDictionaryDates.count != 0 {
             chartData.addDataSet(chartDataSet)
             chartData.setDrawValues(true)
         }

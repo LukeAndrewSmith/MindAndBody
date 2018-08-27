@@ -421,6 +421,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Note don't actually need to save anything, name for user experience
         // Ensure notifications correct
         ReminderNotifications.shared.setNotifications()
+        updateWeekGoal()
         updateWeekProgress()
         updateTracking()
         self.dismiss(animated: true)

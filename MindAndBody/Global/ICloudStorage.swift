@@ -16,7 +16,7 @@ class ICloudFunctions {
     static var shared = ICloudFunctions()
     private init() {}
     
-    static let keyArray = ["userSettings", "selectedSchedule", "schedules", "difficultyLevels", "profileAnswers", "trackingDictionaries", "trackingProgress", "customSessions", "movementWeights", "meditationTimer", "walkthroughs", "userHasValidSubscription"]
+    static let keyArray = ["userSettings", "selectedSchedule", "schedules", "difficultyLevels", "profileAnswers", "trackingDictionary", "trackingProgress", "customSessions", "movementWeights", "meditationTimer", "walkthroughs", "userHasValidSubscription"]
 
     //
     // MARK: Update ICloud (NSUbiquitousKeys)

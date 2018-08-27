@@ -535,7 +535,9 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
             
             // If week view, create temporary week array
-            TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+            if schedules.count != 0 {
+                TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+            }
             
             // Reload table
             layoutViews()

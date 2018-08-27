@@ -234,6 +234,8 @@ class ScheduleVariables {
             }
             // Set week progress to 0
             trackingProgressDictionary["WeekProgress"] = 0
+            // Set extra sessions to 0
+            trackingProgressDictionary["ExtraSessions"] = 0
             // Set Last Reset
             trackingProgressDictionary["LastResetWeek"] = currentMondayDate
             // Update

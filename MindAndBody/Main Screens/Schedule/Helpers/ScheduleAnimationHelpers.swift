@@ -377,11 +377,12 @@ extension ScheduleScreen {
             }
             // Animate Separator
             let currentY = scrollView.contentOffset.y
+            
             if currentY < 0 {
                 //"scrolling down"
                 separator.center.y = separatorY - currentY
             // Reset
-            } else if currentY < 10 {
+            } else if currentY > 0 {
                 separator.center.y = separatorY
             }
         }

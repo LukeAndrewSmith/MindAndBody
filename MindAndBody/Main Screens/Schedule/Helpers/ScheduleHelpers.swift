@@ -546,7 +546,6 @@ extension ScheduleScreen {
             // Update Tracking
             self.updateWeekProgress()
             self.updateTracking()
-            self.updateWeekTracking()
             
             // Update row
             let indexPathToReload = NSIndexPath(row: 2, section: 0)
@@ -1638,7 +1637,7 @@ extension ScheduleScreen {
     @IBAction func markAsCompleted(_ sender: UIButton) {
         
         // Extra session
-        if ScheduleVariables.shared.isExtraSession {
+        if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.choiceProgress[0] != -1 {
 
             // Get indexPath.row
             let row = sender.tag
@@ -1662,9 +1661,8 @@ extension ScheduleScreen {
             // Only called if is last choice
             if shouldUpdateArraysAgain {
                 // Update Tracking
-                updateWeekProgress()
+                incrementExtraSessions()
                 updateTracking()
-                updateWeekTracking()
                 // Animate back to initial choice
                 ScheduleVariables.shared.isExtraSession = false
                 let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
@@ -1716,7 +1714,6 @@ extension ScheduleScreen {
                 // Update Week Progress & Tracking
                 updateWeekProgress()
                 updateTracking()
-                updateWeekTracking()
                 
                 //
                 let indexPathToReload = NSIndexPath(row: row, section: 0)
@@ -1751,7 +1748,6 @@ extension ScheduleScreen {
                     // Update Tracking
                     updateWeekProgress()
                     updateTracking()
-                    updateWeekTracking()
                 }
                 
                 //
@@ -1884,7 +1880,19 @@ extension ScheduleScreen {
     //
     // Should scroll be enabled
     func scheduleTableScrollCheck() {
-        let nRows = scheduleTable.numberOfRows(inSection: 0)
+        
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+
+        var nRows = 0
+        // Note: +1 for extra sessions cell
+        if scheduleStyle == 0 {
+            nRows = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
+        } else {
+            nRows = TemporaryWeekArray.shared.weekArray.count + 1
+        }
+        
+        print(TemporaryWeekArray.shared.weekArray)
+        
         var rowHeight = Int()
         // If first screen of week view, height 49, else 72
         if scheduleStyle == 1 && ScheduleVariables.shared.selectedRows[0] == -1 {
@@ -1893,9 +1901,9 @@ extension ScheduleScreen {
             rowHeight = 72
         }
         let totalRowHeights = CGFloat(nRows * rowHeight)
-        //
+        
         // Enabled
-        if headerHeight + totalRowHeights <= scheduleTable.bounds.maxY {
+        if headerHeight + totalRowHeights <= scheduleTable.bounds.height {
             scheduleTable.isScrollEnabled = false
         } else {
             scheduleTable.isScrollEnabled = true
@@ -1912,28 +1920,35 @@ extension ScheduleScreen {
         // Extra session
         if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.isExtraSession {
             //
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                self.maskView3.backgroundColor = Colors.green
-                // Slide back to initial choice when completed
-            }, completion: { finished in
-                DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
-                    ScheduleVariables.shared.choiceProgress[1] = 1
-                    self.maskAction()
-                    
-                    ScheduleVariables.shared.shouldReloadChoice = false
-                    nina
-                    reload rows
-//                    // Animate initial choice group completion after slideRight() animation finished
-//                    let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
-//                        let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
-//                        self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
-//                        self.selectRow(indexPath: indexPathToReload2 as IndexPath)
-//                        self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
-//                    })
-                })
+            // Delay so looks nice
+            DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
+                // Reload the finalChoiceScreen Session after a delay
+                let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
+                self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+                self.selectRow(indexPath: indexPathToReload as IndexPath)
+                self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
+                //
+                // Check if group is completed for the day
+                if self.isGroupCompleted(checkAll: true) {
+                    // Update schedule tracking
+                    // Update Tracking
+                    self.updateWeekProgress()
+                    self.updateTracking()
+                    //
+                    UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                        self.maskView3.backgroundColor = Colors.green
+                        // Slide back to initial choice when completed
+                    }, completion: { finished in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
+                            // Slide back
+                            self.backToBeginning()
+//                            ScheduleVariables.shared.choiceProgress[1] = 1
+//                            self.maskAction()
+                        })
+                    })
+                }
             })
-            
+        
         // Normal session (NOT MEDITATION, = 72 => MEDITATION)
         } else if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.selectedRows[1] != 72 {
             //
@@ -2045,7 +2060,6 @@ extension ScheduleScreen {
         // Update Tracking
         updateWeekProgress()
         updateTracking()
-        updateWeekTracking()
 
         UserDefaults.standard.set(schedules, forKey: "schedules")
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])

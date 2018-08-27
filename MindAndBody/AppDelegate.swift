@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    
     //
     //
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
@@ -111,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Tracking
         // Tracking arrays [weekTracking, tracking]
-        UserDefaults.standard.register(defaults: ["trackingDictionaries" : Register.registerTrackingDictionaries])
+        UserDefaults.standard.register(defaults: ["trackingDictionary" : Register.registerTrackingDictionary])
         // Progress, [currentProgress, lastResetWeek/Month]
         UserDefaults.standard.register(defaults: ["trackingProgress" : Register.registertrackingProgressDictionary])
         //

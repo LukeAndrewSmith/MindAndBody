@@ -132,21 +132,12 @@ enum Register {
         [
             "WeekProgress": 0,
             "WeekGoal": 1,
+            "ExtraSessions": 0,
             "LastResetWeek": Date().firstMondayInCurrentWeek
         ]
     
     // Tracking percentages
         // % = completed / planned
                 // Note kept as array not dictionary as nicer to convert to and fro Date: String
-    static let registerTrackingDictionaries: [[String: Int]] =
-    [
-        // Week Tracking
-            // Tracks % during each week
-                // -> Reset every week
-                    // Stores 7 values, 1 for each day
-        [:],
-        // Tracking
-            // Tracks % associated with monday of every week from beginning of using the app
-        [:]
-    ]
+    static let registerTrackingDictionary: [String: Int] = [:]
 }
