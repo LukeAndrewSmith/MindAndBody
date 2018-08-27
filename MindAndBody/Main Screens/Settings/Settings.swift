@@ -335,7 +335,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.backgroundColor = Colors.light
             
             cell.textLabel?.text = NSLocalizedString("profile", comment: "")
-            cell.textLabel?.font = Fonts.cellRegular
+            cell.textLabel?.font = Fonts.regularCell
             cell.accessoryType = .disclosureIndicator
             
             return cell
@@ -350,7 +350,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.backgroundColor = Colors.light
                 //
                 cell.textLabel?.text = NSLocalizedString("backgroundImage", comment: "")
-                cell.textLabel?.font = Fonts.cellRegular
+                cell.textLabel?.font = Fonts.regularCell
                 
                 // Background ImageView
                 let backgroundImageView = UIImageView()
@@ -389,8 +389,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 // Units
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                 cell.backgroundColor = Colors.light
-                cell.textLabel?.font = Fonts.cellRegular
-                cell.detailTextLabel?.font = Fonts.cellRegular
+                cell.textLabel?.font = Fonts.regularCell
+                cell.detailTextLabel?.font = Fonts.regularCell
                 
                 cell.textLabel?.text = NSLocalizedString("units", comment: "")
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -421,7 +421,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.selectionStyle = .none
                 //
                 cell.textLabel?.text = NSLocalizedString("automaticSessions", comment: "")
-                cell.textLabel?.font = Fonts.cellRegular
+                cell.textLabel?.font = Fonts.regularCell
                 //
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let automaticSession = settings["TimeBasedSessions"]![0]
@@ -443,7 +443,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                 //
                 cell.textLabel?.text = NSLocalizedString("automaticYoga", comment: "")
-                cell.textLabel?.font = Fonts.cellRegular
+                cell.textLabel?.font = Fonts.regularCell
                 //
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let automaticYogaArray = settings["AutomaticYoga"]!
@@ -457,7 +457,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 }
                 cell.detailTextLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = Colors.light
-                cell.detailTextLabel?.font = Fonts.cellRegular
+                cell.detailTextLabel?.font = Fonts.regularCell
                 //
                 cell.accessoryType = .disclosureIndicator
                 //
@@ -472,10 +472,10 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = Colors.light
-            cell.textLabel?.font = Fonts.cellRegular
+            cell.textLabel?.font = Fonts.regularCell
             cell.textLabel?.textColor = UIColor.black
             //
-            cell.detailTextLabel?.font = Fonts.cellRegular
+            cell.detailTextLabel?.font = Fonts.regularCell
             //
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             
@@ -529,8 +529,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.detailTextLabel?.text = String(restTimes[indexPath.row]) + " s"
             //
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            cell.textLabel?.font = Fonts.cellRegular
-            cell.detailTextLabel?.font = Fonts.cellRegular
+            cell.textLabel?.font = Fonts.regularCell
+            cell.detailTextLabel?.font = Fonts.regularCell
             cell.backgroundColor = Colors.light
             //
             return cell
@@ -545,7 +545,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.text = NSLocalizedString("customWarmupStretching", comment: "")
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = Colors.light
-            cell.textLabel?.font = Fonts.cellRegular
+            cell.textLabel?.font = Fonts.regularCell
             //
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             
@@ -564,21 +564,21 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
             cell.backgroundColor = Colors.light
-            cell.textLabel?.font = Fonts.cellRegular
+            cell.textLabel?.font = Fonts.regularCell
             //
             // Reset Walkthrough
             if indexPath.row == 0 {
                 cell.textLabel?.text = NSLocalizedString("resetWalkthrough", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = Colors.light
-                cell.textLabel?.font = Fonts.cellRegular
+                cell.textLabel?.font = Fonts.regularCell
                 return cell
             // Reset App
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = NSLocalizedString("resetApp", comment: "")
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.backgroundColor = Colors.light
-                cell.textLabel?.font = Fonts.cellRegular
+                cell.textLabel?.font = Fonts.regularCell
                 return cell
             }
         //

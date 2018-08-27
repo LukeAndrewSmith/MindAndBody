@@ -21,8 +21,8 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // Coming from schedule, if coming from menu, hide presets button
     // && set title to presets title
-    var comingFromSchedule = false
-    var appChoosesSessions = false
+    var comingFromSchedule = false    
+    var selectedComponent = 0
     
     // MARK: Outlets
     // Navigation Bar
@@ -48,8 +48,30 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
         view.backgroundColor = UIColor(red:0.08, green:0.08, blue:0.08, alpha:1.0)
         
         // Navigation Bar Title
-        if appChoosesSessions {
-            navigationBar.title = (NSLocalizedString(sessionData.navigationTitles[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]! , comment: ""))
+        // App chooses sessions - choice title
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        // App chooses session
+        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+            // Navigation
+            var navTitle = String()
+            switch selectedComponent {
+            // Warmup
+            case 0:
+                navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[2], comment: "")
+                
+            // Session
+            case 1:
+                navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[2], comment: "")
+                
+                print(ScheduleVariables.shared.selectedChoiceSession)
+            // Stretching
+            case 2:
+                navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[2], comment: "")
+                
+            default: break
+            }
+            navigationBar.title = navTitle
+        // User chooses session - session title
         } else {
             navigationBar.title =
                 NSLocalizedString(SelectedSession.shared.selectedSession[2], comment: "")
@@ -315,7 +337,9 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
             break
         }
         //
-    
+        cell.layoutIfNeeded()
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.widthAnchor.constraint(equalToConstant: 20)
         //
         return cell
     }

@@ -1084,73 +1084,91 @@ extension UIViewController {
     func updateScheduleTracking(fromSchedule: Bool) {
         // Only relevant if coming from schedule, check here because only need to code this once instead of every time the function is called
         if fromSchedule {
-            //
-            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             
-            // Indexing variables
-            // Differ if last choice or first choice
-            let indexingVariables = getIndexingVariablesForSession()
-            // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
-            let index0 = indexingVariables.0
-            // index1 = Selected row in final choice (i.e warmup, session, stretching)
-            let index1 = indexingVariables.1
-            // day
-            let day = indexingVariables.2
-            
-            // Update
-            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = true
-            // Set
-            UserDefaults.standard.set(schedules, forKey: "schedules")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-            // Update Badges
-            ReminderNotifications.shared.updateBadges(day: day, currentBool: false)
-            // Update Week Progress & Tracking
-            updateWeekProgress()
-            updateTracking()
-            updateWeekTracking()
-            
-            //
-            // Check if full group completed
-            var isGroupCompleted = true
-            // Yoga handled differently
-            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["group"] as! String == "yoga" {
-                // Yoga warmup optional, so is completed if session is finished
-                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["1"] as! Bool == false {
-                    isGroupCompleted = false
-                }
-                // Normal case
-            } else {
-                // Number of session included in group (i.e warmup/session/stretching) can be found by number of elements in group dictionary - 2 (-2 as "group" and "isGroupCompleted" included). Check ScheduleData, schedule groups to understand better
-                // Use default group array to avoid errors
-                // Error occured here as extra field was saved in dictionary - ["72"]: something
-                    // no idea when it was saved there
-                if let group = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["group"] as? String {
-                    for i in 0..<(scheduleDataStructures.scheduleGroups[group.groupFromString()]?.count)! - 2 {
-                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][String(i)] as! Bool == false {
-                            isGroupCompleted = false
-                            break
-                        }
-                    }
-                }
-            }
-            //
-            if isGroupCompleted {
-                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = true
-                // If group is completed, arrays should be updated
-                UserDefaults.standard.set(schedules, forKey: "schedules")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-                // Update Tracking
+            // Extra session
+            if ScheduleVariables.shared.isExtraSession {
+
+                let selectedRow = ScheduleVariables.shared.selectedRows[1]
+                ScheduleVariables.shared.extraSessionCompletion[selectedRow] = true
+                
+                // Update Week Progress & Tracking
                 updateWeekProgress()
                 updateTracking()
                 updateWeekTracking()
-                // Update notifications (incase before evening notification)
-                ReminderNotifications.shared.setNotifications()
+//                nina
+//                for i in 0..<
+                
+                // Reload
+                ScheduleVariables.shared.shouldReloadChoice = true
+            // Normal
+            } else {
+                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                
+                // Indexing variables
+                // Differ if last choice or first choice
+                let indexingVariables = getIndexingVariablesForSession()
+                // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+                let index0 = indexingVariables.0
+                // index1 = Selected row in final choice (i.e warmup, session, stretching)
+                let index1 = indexingVariables.1
+                // day
+                let day = indexingVariables.2
+                
+                // Update
+                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = true
+                // Set
+                UserDefaults.standard.set(schedules, forKey: "schedules")
+                // Sync
+                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+                // Update Badges
+                ReminderNotifications.shared.updateBadges(day: day, currentBool: false)
+                // Update Week Progress & Tracking
+                updateWeekProgress()
+                updateTracking()
+                updateWeekTracking()
+                
+                //
+                // Check if full group completed
+                var isGroupCompleted = true
+                // Yoga handled differently
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["group"] as! String == "yoga" {
+                    // Yoga warmup optional, so is completed if session is finished
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["1"] as! Bool == false {
+                        isGroupCompleted = false
+                    }
+                    // Normal case
+                } else {
+                    // Number of session included in group (i.e warmup/session/stretching) can be found by number of elements in group dictionary - 2 (-2 as "group" and "isGroupCompleted" included). Check ScheduleData, schedule groups to understand better
+                    // Use default group array to avoid errors
+                    // Error occured here as extra field was saved in dictionary - ["72"]: something
+                        // no idea when it was saved there
+                    if let group = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["group"] as? String {
+                        for i in 0..<(scheduleDataStructures.scheduleGroups[group.groupFromString()]?.count)! - 2 {
+                            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][String(i)] as! Bool == false {
+                                isGroupCompleted = false
+                                break
+                            }
+                        }
+                    }
+                }
+                //
+                if isGroupCompleted {
+                    schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = true
+                    // If group is completed, arrays should be updated
+                    UserDefaults.standard.set(schedules, forKey: "schedules")
+                    // Sync
+                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+                    // Update Tracking
+                    updateWeekProgress()
+                    updateTracking()
+                    updateWeekTracking()
+                    // Update notifications (incase before evening notification)
+                    ReminderNotifications.shared.setNotifications()
+                }
+                
+                // Reload
+                ScheduleVariables.shared.shouldReloadChoice = true
             }
-            
-            // Reload
-            ScheduleVariables.shared.shouldReloadChoice = true
         }
     }
     

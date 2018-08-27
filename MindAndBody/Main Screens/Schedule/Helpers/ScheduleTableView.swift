@@ -54,7 +54,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         case scheduleTable:
             // Header
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = Fonts.bigRegular
+            header.textLabel?.font = Fonts.bigTitle
             header.textLabel?.textAlignment = .center
             header.textLabel?.textColor = Colors.light
             //
@@ -101,10 +101,11 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             // First Screen, showing groups
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
                 if schedules.count != 0 {
+                    // Note: +1 for extra sessions cell
                     if scheduleStyle == 0 {
-                        return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count
+                        return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
                     } else {
-                        return TemporaryWeekArray.shared.weekArray.count
+                        return TemporaryWeekArray.shared.weekArray.count + 1
                     }
                 } else {
                     return 0
@@ -159,62 +160,97 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             
             // First Screen, showing groups
             if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                // Groups
-                let dayLabel = UILabel()
-                dayLabel.font = Fonts.mediumRegular
-                dayLabel.textColor = Colors.light
-                //
-                var text = String()
-                if scheduleStyle == 0 {
-                    text = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][indexPath.row]["group"] as! String
+                
+                // Extra Session Cell
+                if scheduleStyle == 0 && indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count || scheduleStyle == 1 && indexPath.row == TemporaryWeekArray.shared.weekArray.count {
+                    
+                    // Groups
+                    let extraLabel = UILabel()
+                    extraLabel.font = Fonts.bigCell
+                    extraLabel.textColor = Colors.light
+                    extraLabel.text = NSLocalizedString("extra", comment: "")
+                    extraLabel.sizeToFit()
+                    extraLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
+                    cell.addSubview(extraLabel)
+                    
+                    //
+                    // Checkmark box
+                    let checkBox = UIButton()
+                    checkBox.tag = indexPath.row
+                    checkBox.layer.backgroundColor = UIColor.clear.cgColor
+                    checkBox.layer.borderWidth = 1
+                    checkBox.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
+                    checkBox.layer.cornerRadius = 4
+                    checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
+                    checkBox.center.y = extraLabel.center.y
+                    checkBox.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
+                    checkBox.imageView?.tintColor = Colors.light
+                    checkBox.isEnabled = false
+                    cell.addSubview(checkBox)
+                    
+                    extraLabel.alpha = 0.27
+                    checkBox.alpha = 0.27
+                    
+                // Session cells
                 } else {
-                    text = TemporaryWeekArray.shared.weekArray[indexPath.row]["group"] as! String
-                }
-                dayLabel.text = NSLocalizedString(text, comment: "")
-                dayLabel.numberOfLines = 2
-                dayLabel.sizeToFit()
-                if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
-                    dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 49)
-                } else {
-                    dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
-                }
-                cell.addSubview(dayLabel)
-                
-                //
-                // Checkmark box
-                let checkBox = UIButton()
-                checkBox.tag = indexPath.row
-                checkBox.layer.backgroundColor = UIColor.clear.cgColor
-                checkBox.layer.borderWidth = 1
-                checkBox.layer.borderColor = Colors.light.cgColor
-                checkBox.layer.cornerRadius = 4
-                checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
-                checkBox.center.y = dayLabel.center.y
-                checkBox.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
-                cell.addSubview(checkBox)
-                
-                // To make sure its easy to press the button
-                let checkBoxExtraButton = UIButton()
-                checkBoxExtraButton.tag = indexPath.row
-                var height = 72
-                if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
-                    height = 49
-                }
-                checkBoxExtraButton.frame = CGRect(x: 0, y: 0, width: height, height: height)
-                checkBoxExtraButton.center.x = checkBox.center.x
-                checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
-                cell.addSubview(checkBoxExtraButton)
-                
-                //
-                // CheckMark if completed
-                if ScheduleVariables.shared.shouldReloadChoice {
-                    if indexPath.row != ScheduleVariables.shared.selectedRows[0] {
-                        if isCompleted(row: indexPath.row) {
-                            checkButton(button: checkBox)
-                        }
+
+                    // Groups
+                    let dayLabel = UILabel()
+                    dayLabel.font = Fonts.bigCell
+                    dayLabel.textColor = Colors.light
+                    //
+                    var text = String()
+                    if scheduleStyle == 0 {
+                        text = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][indexPath.row]["group"] as! String
+                    } else {
+                        text = TemporaryWeekArray.shared.weekArray[indexPath.row]["group"] as! String
                     }
-                } else if isCompleted(row: indexPath.row) {
-                    checkButton(button: checkBox)
+                    dayLabel.text = NSLocalizedString(text, comment: "")
+                    dayLabel.numberOfLines = 2
+                    dayLabel.sizeToFit()
+                    if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
+                        dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 49)
+                    } else {
+                        dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
+                    }
+                    cell.addSubview(dayLabel)
+                    
+                    //
+                    // Checkmark box
+                    let checkBox = UIButton()
+                    checkBox.tag = indexPath.row
+                    checkBox.layer.backgroundColor = UIColor.clear.cgColor
+                    checkBox.layer.borderWidth = 1
+                    checkBox.layer.borderColor = Colors.light.cgColor
+                    checkBox.layer.cornerRadius = 4
+                    checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
+                    checkBox.center.y = dayLabel.center.y
+                    checkBox.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
+                    cell.addSubview(checkBox)
+                    
+                    // To make sure its easy to press the button
+                    let checkBoxExtraButton = UIButton()
+                    checkBoxExtraButton.tag = indexPath.row
+                    var height = 72
+                    if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
+                        height = 49
+                    }
+                    checkBoxExtraButton.frame = CGRect(x: 0, y: 0, width: height, height: height)
+                    checkBoxExtraButton.center.x = checkBox.center.x
+                    checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
+                    cell.addSubview(checkBoxExtraButton)
+                    
+                    //
+                    // CheckMark if completed
+                    if ScheduleVariables.shared.shouldReloadChoice {
+                        if indexPath.row != ScheduleVariables.shared.selectedRows[0] {
+                            if isCompleted(row: indexPath.row) {
+                                checkButton(button: checkBox)
+                            }
+                        }
+                    } else if isCompleted(row: indexPath.row) {
+                        checkButton(button: checkBox)
+                    }
                 }
                 
             // Currently selecting a session, i.e not first screen
@@ -230,7 +266,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
 
                     
                     let title = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][0]
-                    cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 24)!
+                    cell.textLabel?.font = Fonts.bigCell
+//                        UIFont(name: "SFUIDisplay-thin", size: 24)!
                     cell.textLabel?.textColor = Colors.light
                     cell.textLabel?.text = NSLocalizedString(title, comment: "")
                     cell.textLabel?.textAlignment = .center
@@ -253,7 +290,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 } else {
                     //
                     let choiceLabel = UILabel()
-                    choiceLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)!
+                    choiceLabel.font = Fonts.bigCell
+//                        UIFont(name: "SFUIDisplay-thin", size: 23)!
                     choiceLabel.textColor = Colors.light
                     
                     // Normal
@@ -378,20 +416,39 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         // Session choice
         switch tableView {
         case scheduleTable:
-            //
-            // If ScheduleVariables.shared.choiceProgress[0] = -1
-            if ScheduleVariables.shared.choiceProgress[0] != -1 && indexPath.row == 0 {
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+
+            // If title of choice table, do nothing, if not then do something
+            if !(ScheduleVariables.shared.choiceProgress[0] != -1 && indexPath.row == 0) {
                 
-            } else {
-                //
-                // If completed, do nothing
-                if !isLastChoice() && !isCompleted(row: indexPath.row) {
-                    didSelectRowHandler(row: indexPath.row)
-                } else if isLastChoice() && !isCompleted(row: indexPath.row) {
-                    didSelectRowHandler(row: indexPath.row)
+                // First choice
+                if ScheduleVariables.shared.choiceProgress[0] == -1 {
+                    
+                    // Extra session
+                    // (day view last cell || week view last cell)
+                    if  (scheduleStyle == 0 && indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count || scheduleStyle == 1 && indexPath.row == TemporaryWeekArray.shared.weekArray.count) {
+                        didSelectRowHandler(row: 723)
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        
+                    // Normal session, if not completed, do something
+                    } else if !isCompleted(row: indexPath.row) {
+                        didSelectRowHandler(row: indexPath.row)
+                    }
+                    
+                // Other choices
+                } else {
+                    
+                    // Normal
+                    if !isLastChoice() {
+                        didSelectRowHandler(row: indexPath.row)
+                        
+                    // If last choice and not completed, do something
+                    } else if isLastChoice() && !isCompleted(row: indexPath.row) {
+                        didSelectRowHandler(row: indexPath.row)
+                    }
+                    
+                    tableView.deselectRow(at: indexPath, animated: true)
                 }
-                //
-                tableView.deselectRow(at: indexPath, animated: true)
             }
           
         // Select schedule

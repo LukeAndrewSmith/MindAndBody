@@ -234,6 +234,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         
         //        extraButton.frame.size = CGSize(width: 72, height: 72)
         //        extra
+        extraButton.alpha = 0
         // MARK: nina nina
         let buttonHeight: CGFloat = 49
         extraButtonBig.frame.size = CGSize(width: buttonHeight, height: buttonHeight)
@@ -243,7 +244,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         extraButtonBig.backgroundColor = Colors.light.withAlphaComponent(0.72)
         extraButtonBig.tintColor = Colors.dark
         extraButtonBig.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
-        view.insertSubview(extraButtonBig, aboveSubview: scheduleTable)
+//        view.insertSubview(extraButtonBig, aboveSubview: scheduleTable)
 //        view.addSubview(extraButtonBig)
 //        view.bringSubview(toFront: extraButtonBig)
         // workout, yoga, meditation, endurance, flexibility
@@ -349,6 +350,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         //
         case "scheduleSegueOverview":
             let destinationVC = segue.destination as? FinalChoiceDetail
+            destinationVC?.selectedComponent = selectedComponent
             // Only say from schedule if app chooses sessions for the user
             destinationVC?.comingFromSchedule = true
             // Remove back button text

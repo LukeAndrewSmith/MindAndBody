@@ -1712,6 +1712,7 @@
 
 // MARK: General
 "normal" = "Normal";
+"full" = "Full";
 
 // MARK:- Workout
 // MARK: Warmup
@@ -3090,6 +3091,9 @@
 "editProfile" = "Edit Profile";
 "scheduleInputTitle" = "Schedule Title";
 "appSchedule" = "App Schedule";
+
+"extra" = "Extra";
+"extraSession" = "Extra Session";
 
 "monday" = "Monday";
 "tuesday" = "Tuesday";

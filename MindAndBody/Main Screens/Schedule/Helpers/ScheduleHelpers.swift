@@ -30,25 +30,39 @@ extension ScheduleScreen {
     // MARK: didSelectRowHandler
     func didSelectRowHandler(row: Int) {
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-
+        
         updateSelectedChoice(row: row)
         // ------------------------------------------------------------------------------------------------
         // Next Choice Function
         if ScheduleVariables.shared.choiceProgress[0] == -1 {
-            //
-            var groupString = String()
-            if scheduleStyle == 0 {
-                groupString = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][row]["group"] as! String
+            
+            // Extra Session
+            if row == 723 {
+                ScheduleVariables.shared.isExtraSession = true
+                ScheduleVariables.shared.extraSessionCompletion = [false, false, false]
+                ScheduleVariables.shared.choiceProgress[0] = 723
+                ScheduleVariables.shared.choiceProgress[1] += 1
+                ScheduleVariables.shared.selectedRows[0] = row
+                maskView(animated: true)
+                // Next Table info
+                slideLeft()
+            // Normal Session
             } else {
-                groupString = TemporaryWeekArray.shared.weekArray[row]["group"] as! String
+                ScheduleVariables.shared.isExtraSession = false
+                var groupString = String()
+                if scheduleStyle == 0 {
+                    groupString = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][row]["group"] as! String
+                } else {
+                    groupString = TemporaryWeekArray.shared.weekArray[row]["group"] as! String
+                }
+                let groupInt = groupString.groupFromString()
+                ScheduleVariables.shared.choiceProgress[0] = groupInt
+                ScheduleVariables.shared.choiceProgress[1] += 1
+                ScheduleVariables.shared.selectedRows[0] = row
+                maskView(animated: true)
+                // Next Table info
+                slideLeft()
             }
-            let groupInt = groupString.groupFromString()
-            ScheduleVariables.shared.choiceProgress[0] = groupInt
-            ScheduleVariables.shared.choiceProgress[1] += 1
-            ScheduleVariables.shared.selectedRows[0] = row
-            maskView(animated: true)
-            // Next Table info
-            slideLeft()
             
         //
         } else {
@@ -437,6 +451,31 @@ extension ScheduleScreen {
                     nextChoice()
                 }
                 
+            // Extra Session
+            case 723:
+                
+                switch ScheduleVariables.shared.choiceProgress[1] {
+                //
+                case 1:
+                    // Select correct session type
+                    ScheduleVariables.shared.choiceProgress[0] = row - 1
+                    
+                    // Update selected choice
+                    let groupString = (row - 1).groupFromInt()
+                    // selectedChoice...[0] to group
+                    ScheduleVariables.shared.selectedChoiceWarmup[0] = groupString
+                    ScheduleVariables.shared.selectedChoiceSession[0] = groupString
+                    // Notes ScheduleVariables.shared.selectedChoiceStretching not always used but set anyway for all, no harm done
+                    ScheduleVariables.shared.selectedChoiceStretching[0] = groupString
+                    
+                    nextChoice()
+
+                // Choice
+                default:
+                    ScheduleVariables.shared.choiceProgress[1] += 1
+                    nextChoice()
+                }
+                
             default:
                 break
             }
@@ -733,18 +772,21 @@ extension ScheduleScreen {
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // ------------------------------------------------------------------------------------------------
         if ScheduleVariables.shared.choiceProgress[0] == -1 {
-            //
-            var groupString = String()
-            if scheduleStyle == 0 {
-                groupString = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][row]["group"] as! String
-            } else {
-                groupString = TemporaryWeekArray.shared.weekArray[row]["group"] as! String
+            
+            // Extra session
+            if row != 723 {
+                var groupString = String()
+                if scheduleStyle == 0 {
+                    groupString = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][row]["group"] as! String
+                } else {
+                    groupString = TemporaryWeekArray.shared.weekArray[row]["group"] as! String
+                }
+                // selectedChoice...[0] to group
+                ScheduleVariables.shared.selectedChoiceWarmup[0] = groupString
+                ScheduleVariables.shared.selectedChoiceSession[0] = groupString
+                // Notes ScheduleVariables.shared.selectedChoiceStretching not always used but set anyway for all, no harm done
+                ScheduleVariables.shared.selectedChoiceStretching[0] = groupString
             }
-            // selectedChoice...[0] to group
-            ScheduleVariables.shared.selectedChoiceWarmup[0] = groupString
-            ScheduleVariables.shared.selectedChoiceSession[0] = groupString
-            // Notes ScheduleVariables.shared.selectedChoiceStretching not always used but set anyway for all, no harm done
-            ScheduleVariables.shared.selectedChoiceStretching[0] = groupString
         //
         } else {
             // Present next choice or present session
@@ -1235,24 +1277,33 @@ extension ScheduleScreen {
     //
     // MARK: isCompleted()
     func isCompleted(row: Int) -> Bool {
-        //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         
-        // Indexing variables
-        // Differ if last choice or first choice
-        let indexingVariables = getIndexingVariables(row: row, firstChoice: false, checkLastChoice: false)
-        // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
-        let index0 = indexingVariables.0
-        // index1 = Selected row in final choice (i.e warmup, session, stretching)
-        let index1 = indexingVariables.1
-        //
-        let day = indexingVariables.2
-        
-        // Return bool
-        if index1 != "notFirstOrLastChoice" {
-            return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] as! Bool
+        // Extra session
+        if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.choiceProgress[0] != -1 {
+            // row - 1 as title included
+            return ScheduleVariables.shared.extraSessionCompletion[row - 1]
+            
+        // Normal
         } else {
-            return false
+            //
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            
+            // Indexing variables
+            // Differ if last choice or first choice
+            let indexingVariables = getIndexingVariables(row: row, firstChoice: false, checkLastChoice: false)
+            // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+            let index0 = indexingVariables.0
+            // index1 = Selected row in final choice (i.e warmup, session, stretching)
+            let index1 = indexingVariables.1
+            //
+            let day = indexingVariables.2
+            
+            // Return bool
+            if index1 != "notFirstOrLastChoice" {
+                return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] as! Bool
+            } else {
+                return false
+            }
         }
     }
     
@@ -1260,46 +1311,63 @@ extension ScheduleScreen {
         // If on the last choice, this function checks if and element of a group (checkAll=false)/all the elements of a group have been performed (checkAll=true)
     func isGroupCompleted(checkAll: Bool) -> Bool {
         
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        //
-        // Check if group is completed
-        let nRows = scheduleTable.numberOfRows(inSection: 0)
-        var isCompleted = true
-        //
-        // Get day/index in day for the two different schedule styles
-        var day = Int()
-        var indexInDay = Int()
-        if scheduleStyle == 0 {
-            day = ScheduleVariables.shared.selectedDay
-            indexInDay = ScheduleVariables.shared.selectedRows[0]
-        } else {
-            day = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["day"] as! Int
-            indexInDay = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["index"] as! Int
-        }
-        // Loop second array in scheduleTracking, if one if false, not completed (warmup/session/stretching)
-            // -2 because title included
-        if checkAll {
-            if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["group"] as! String == "yoga" {
-                // Yoga warmup optional, so is completed if session is finished
-                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["1"] as! Bool == false {
+        // Extra session
+        if ScheduleVariables.shared.isExtraSession {
+            // -1 for title
+            let nRows = scheduleTable.numberOfRows(inSection: 0) - 1
+            var isCompleted = true
+            for i in 0..<nRows {
+                if !ScheduleVariables.shared.extraSessionCompletion[i] {
                     isCompleted = false
-                }
-            // Normal case
-            } else {
-                for i in 0...nRows - 2 {
-                    print(ScheduleVariables.shared.selectedRows[0])
-                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay][String(i)] as! Bool == false {
-                        isCompleted = false
-                        break
-                    }
+                    break
                 }
             }
-        // Just checks on part of the group
+            return isCompleted
+            
+        // Normal
         } else {
-            return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["isGroupCompleted"] as! Bool
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            //
+            // Check if group is completed
+                // -1 for title
+            let nRows = scheduleTable.numberOfRows(inSection: 0) - 1
+            var isCompleted = true
+            //
+            // Get day/index in day for the two different schedule styles
+            var day = Int()
+            var indexInDay = Int()
+            if scheduleStyle == 0 {
+                day = ScheduleVariables.shared.selectedDay
+                indexInDay = ScheduleVariables.shared.selectedRows[0]
+            } else {
+                day = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["day"] as! Int
+                indexInDay = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["index"] as! Int
+            }
+            // Loop second array in scheduleTracking, if one if false, not completed (warmup/session/stretching)
+                // -2 because title included
+            if checkAll {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["group"] as! String == "yoga" {
+                    // Yoga warmup optional, so is completed if session is finished
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["1"] as! Bool == false {
+                        isCompleted = false
+                    }
+                // Normal case
+                } else {
+                    for i in 0..<nRows {
+                        print(ScheduleVariables.shared.selectedRows[0])
+                        if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay][String(i)] as! Bool == false {
+                            isCompleted = false
+                            break
+                        }
+                    }
+                }
+            // Just checks on part of the group
+            } else {
+                return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["isGroupCompleted"] as! Bool
+            }
+            //
+            return isCompleted
         }
-        //
-        return isCompleted
     }
     
     //
@@ -1569,104 +1637,142 @@ extension ScheduleScreen {
         // Also marks as incomplete if previously comleted, note: rename
     @IBAction func markAsCompleted(_ sender: UIButton) {
         
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        // Extra session
+        if ScheduleVariables.shared.isExtraSession {
 
-        //
-        // Get indexPath.row
-        let row = sender.tag
-        
-        // If first choice
-        // indicate to reset first choice
-        var shouldResetSelectedRows = false
-        // Set selected row to ScheduleVariables.shared.selectedRow[0]
-        if ScheduleVariables.shared.choiceProgress[0] == -1 {
-            ScheduleVariables.shared.selectedRows[0] = row
-            shouldResetSelectedRows = true
-        }
-        
-        // Indexing variables
-            // Differ if last choice or first choice
-        let indexingVariables = getIndexingVariables(row: row, firstChoice: false, checkLastChoice: false)
-        // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
-        let index0 = indexingVariables.0
-        // index1 = Selected row in final choice (i.e warmup, session, stretching)
-        let index1 = indexingVariables.1
-        //
-        let day = indexingVariables.2
-        
-        // if first or last choiec
-        if index1 != "notFirstOrLastChoice" {
-            // Update Tracking
-            // True/False
-            let currentBool = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] as! Bool
+            // Get indexPath.row
+            let row = sender.tag
+
+            // Update bool
+            ScheduleVariables.shared.extraSessionCompletion[row - 1] = !ScheduleVariables.shared.extraSessionCompletion[row - 1]
             
-            // UPDATES
-            // Update
-            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
-            UserDefaults.standard.set(schedules, forKey: "schedules")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-            // Update Badges
-            ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
-            // Update Week Progress & Tracking
-            updateWeekProgress()
-            updateTracking()
-            updateWeekTracking()
-            
-            //
+            // Reload row
             let indexPathToReload = NSIndexPath(row: row, section: 0)
             scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
-        
             
-            //
-            // Box indicator round todo, done here because userdefaults set above && check if full group needs to be completed
+            // Box indicator round todo
             var shouldUpdateArraysAgain = false
             if isLastChoice() {
                 if isGroupCompleted(checkAll: true) {
                     maskView3.backgroundColor = Colors.green
-                    //
-                    schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = true
-                    shouldUpdateArraysAgain = true
-                } else {
-                    maskView3.backgroundColor = Colors.red
-                    //
-                    schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = false
                     shouldUpdateArraysAgain = true
                 }
-            // Update day indicators
-            } else {
-                updateDayIndicatorColours()
             }
             
             // Only called if is last choice
             if shouldUpdateArraysAgain {
-                UserDefaults.standard.set(schedules, forKey: "schedules")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                 // Update Tracking
                 updateWeekProgress()
                 updateTracking()
                 updateWeekTracking()
-            }
-            
-            //
-            // Mark first instance of group in all other schedules as completed- called after to avoid conflicts storing to userdefaults
-            if isGroupCompleted(checkAll: false) {
-                markAsGroupForOtherSchedules(markAs: !currentBool)
                 // Animate back to initial choice
-                if isLastChoice() {
-                    animateFromLongPress()
-                }
+                ScheduleVariables.shared.isExtraSession = false
+                let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
+                DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
+                    self.backToBeginning()
+                })
             }
             
-            // ScheduleVariables.shared.choiceProgress[0] was updated just for the duration of the mark as complete function, reset back to -1 now completed
-            // Reset first choice to -1 to indicate still on schedule home screen
-            if shouldResetSelectedRows {
-                ScheduleVariables.shared.choiceProgress[0] = -1
-            }
         } else {
-            let indexPathToReload = NSIndexPath(row: row, section: 0)
-            scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+
+            //
+            // Get indexPath.row
+            let row = sender.tag
+            
+            // If first choice
+            // indicate to reset first choice
+            var shouldResetSelectedRows = false
+            // Set selected row to ScheduleVariables.shared.selectedRow[0]
+            if ScheduleVariables.shared.choiceProgress[0] == -1 {
+                ScheduleVariables.shared.selectedRows[0] = row
+                shouldResetSelectedRows = true
+            }
+            
+            // Indexing variables
+                // Differ if last choice or first choice
+            let indexingVariables = getIndexingVariables(row: row, firstChoice: false, checkLastChoice: false)
+            // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
+            let index0 = indexingVariables.0
+            // index1 = Selected row in final choice (i.e warmup, session, stretching)
+            let index1 = indexingVariables.1
+            //
+            let day = indexingVariables.2
+            
+            // if first or last choiec
+            if index1 != "notFirstOrLastChoice" {
+                // Update Tracking
+                // True/False
+                let currentBool = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] as! Bool
+                
+                // UPDATES
+                // Update
+                schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
+                UserDefaults.standard.set(schedules, forKey: "schedules")
+                // Sync
+                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+                // Update Badges
+                ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
+                // Update Week Progress & Tracking
+                updateWeekProgress()
+                updateTracking()
+                updateWeekTracking()
+                
+                //
+                let indexPathToReload = NSIndexPath(row: row, section: 0)
+                scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+            
+                
+                //
+                // Box indicator round todo, done here because userdefaults set above && check if full group needs to be completed
+                var shouldUpdateArraysAgain = false
+                if isLastChoice() {
+                    if isGroupCompleted(checkAll: true) {
+                        maskView3.backgroundColor = Colors.green
+                        //
+                        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = true
+                        shouldUpdateArraysAgain = true
+                    } else {
+                        maskView3.backgroundColor = Colors.red
+                        //
+                        schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = false
+                        shouldUpdateArraysAgain = true
+                    }
+                // Update day indicators
+                } else {
+                    updateDayIndicatorColours()
+                }
+                
+                // Only called if is last choice
+                if shouldUpdateArraysAgain {
+                    UserDefaults.standard.set(schedules, forKey: "schedules")
+                    // Sync
+                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+                    // Update Tracking
+                    updateWeekProgress()
+                    updateTracking()
+                    updateWeekTracking()
+                }
+                
+                //
+                // Mark first instance of group in all other schedules as completed- called after to avoid conflicts storing to userdefaults
+                if isGroupCompleted(checkAll: false) {
+                    markAsGroupForOtherSchedules(markAs: !currentBool)
+                    // Animate back to initial choice
+                    if isLastChoice() {
+                        animateFromLongPress()
+                    }
+                }
+                
+                // ScheduleVariables.shared.choiceProgress[0] was updated just for the duration of the mark as complete function, reset back to -1 now completed
+                // Reset first choice to -1 to indicate still on schedule home screen
+                if shouldResetSelectedRows {
+                    ScheduleVariables.shared.choiceProgress[0] = -1
+                }
+            } else {
+                let indexPathToReload = NSIndexPath(row: row, section: 0)
+                scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+            }
         }
     }
     
@@ -1802,7 +1908,34 @@ extension ScheduleScreen {
         // Once having completed a session from the schedule, this function gets called upon return to the schedule, if the group is complete then the tracking is updated, and the schedule is animated back to the initial choice of groups
     func markAsCompletedAndAnimate() {
         // MARK AS COMPLETED
-        if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.selectedRows[1] != 72 {
+        
+        // Extra session
+        if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.isExtraSession {
+            //
+            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                self.maskView3.backgroundColor = Colors.green
+                // Slide back to initial choice when completed
+            }, completion: { finished in
+                DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
+                    ScheduleVariables.shared.choiceProgress[1] = 1
+                    self.maskAction()
+                    
+                    ScheduleVariables.shared.shouldReloadChoice = false
+                    nina
+                    reload rows
+//                    // Animate initial choice group completion after slideRight() animation finished
+//                    let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
+//                        let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
+//                        self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
+//                        self.selectRow(indexPath: indexPathToReload2 as IndexPath)
+//                        self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
+//                    })
+                })
+            })
+            
+        // Normal session (NOT MEDITATION, = 72 => MEDITATION)
+        } else if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.selectedRows[1] != 72 {
             //
             // Delay so looks nice
             DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {

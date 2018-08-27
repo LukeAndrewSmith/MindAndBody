@@ -79,9 +79,9 @@ enum Fonts {
     static let navigationBar = UIFont(name: "SFUIDisplay-light", size: 19)
     static let navigationBarButton = UIFont(name: "SFUIDisplay-light", size: 17)
     
-    static let cellRegular = UIFont(name: "SFUIDisplay-light", size: 19)
-    static let bigRegular = UIFont(name: "SFUIDisplay-thin", size: 30)
-    static let mediumRegular = UIFont(name: "SFUIDisplay-thin", size: 23)
+    static let bigTitle = UIFont(name: "SFUIDisplay-light", size: 30)
+    static let regularCell = UIFont(name: "SFUIDisplay-regular", size: 19)
+    static let bigCell = UIFont(name: "SFUIDisplay-light", size: 23)
     
 }
 
@@ -165,6 +165,12 @@ class ScheduleVariables {
     
     // Checks if new schedule has just been created
     var didCreateNewSchedule = false
+    
+    // Extra Session variables
+    // Indicator for weather the user is completing an extra session, used for didSelectRow, and maskAction to present correct choices
+    var isExtraSession = false
+    // warmup, session, stretching
+    var extraSessionCompletion = [false, false, false]
     
     
     //

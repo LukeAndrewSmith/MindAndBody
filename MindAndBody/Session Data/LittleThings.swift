@@ -468,5 +468,21 @@ extension sessionData {
                     "2. session"
                 ]
             ],
+            
+            // Extra Session
+            723:[
+                // 0
+                ["extraSession"],
+                // 1 | Choice 1 - Focus
+                [
+                    "extraSession",
+                    //
+                    "workout",
+                    "yoga",
+                    "meditation",
+                    "endurance",
+                    "flexibility",
+                ],
+            ]
     ]
 }

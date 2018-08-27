@@ -49,8 +49,9 @@ extension ScheduleScreen {
         // Table Counter
         // Return to choice 1 (sessions)
         if ScheduleVariables.shared.choiceProgress[1] > 1 {
+            switch ScheduleVariables.shared.choiceProgress[0] {
             // Workout has 2 choice paths for the length + Custom
-            if ScheduleVariables.shared.choiceProgress[0] == 0 {
+            case 0:
                 switch ScheduleVariables.shared.choiceProgress[1] {
                 // Go back from custom
                 case 7:
@@ -72,7 +73,7 @@ extension ScheduleScreen {
                     ScheduleVariables.shared.choiceProgress[1] -= 1
                 }
             // Yoga has 3 choice paths for the length
-            } else if ScheduleVariables.shared.choiceProgress[0] == 1 {
+            case 1:
                 switch ScheduleVariables.shared.choiceProgress[1] {
                 // Custom
                 case 6:
@@ -97,7 +98,7 @@ extension ScheduleScreen {
                     ScheduleVariables.shared.choiceProgress[1] -= 1
                 }
             // Endurance has 3 choice paths
-            } else if ScheduleVariables.shared.choiceProgress[0] == 3 {
+            case 3:
                 switch ScheduleVariables.shared.choiceProgress[1] {
                 // Custom
                 case 9:
@@ -119,7 +120,7 @@ extension ScheduleScreen {
                     ScheduleVariables.shared.choiceProgress[1] -= 1
                 }
             // Stretching
-            } else if ScheduleVariables.shared.choiceProgress[0] == 4 {
+            case 4:
                 switch ScheduleVariables.shared.choiceProgress[1] {
                 // Custom
                 case 4:
@@ -128,14 +129,24 @@ extension ScheduleScreen {
                     ScheduleVariables.shared.choiceProgress[1] -= 1
                 }
             // Normal
-            } else {
+            default:
                 ScheduleVariables.shared.choiceProgress[1] -= 1
             }
             slideRight()
             maskView3.backgroundColor = .black
         // Return to choice 0 (groups)
         } else if ScheduleVariables.shared.choiceProgress[1] == 1 {
-            backToBeginning()
+            
+            // If extra session, return to extra session choice
+            if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.choiceProgress[0] != 723 {
+                ScheduleVariables.shared.choiceProgress[0] = 723
+                slideRight()
+                
+            // Normal
+            } else {
+                backToBeginning()
+
+            }
         }
         //
         // Check wether to remove extra back button
