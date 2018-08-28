@@ -420,11 +420,18 @@ class TrackingHelpers {
     func convertStringDictToDateDict(stringDict: [String: Int]) -> [Date: Int] {
         
         var dateDict: [Date: Int] = [:]
-        
         if stringDict.count != 0 {
             let keys = stringDict.keys.sorted()
             for i in 0...keys.count - 1 {
-                dateDict.updateValue(stringDict[keys[i]]!, forKey: stringToDate(string: keys[i]))
+                if stringDict[keys[i]]! < 100 {
+                    dateDict.updateValue(stringDict[keys[i]]!, forKey: stringToDate(string: keys[i]))
+                } else {
+                    // Nina
+                    let extra = Double(stringDict[keys[i]]! - 100)
+                    let extraScaled = pow(extra, 1/2)
+                    let logValue = 100 + extraScaled
+                    dateDict.updateValue(Int(logValue), forKey: stringToDate(string: keys[i]))
+                }
             }
         }
         

@@ -30,22 +30,14 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // TableView
     let headerLabel = UILabel()
     var headerHeight: CGFloat {
-        return (UIScreen.main.bounds.height - ControlBarHeights.combinedHeight - ControlBarHeights.tabBarHeight - pageStack.bounds.height) / 4
+        return (UIScreen.main.bounds.height - ControlBarHeights.combinedHeight - ControlBarHeights.tabBarHeight - pageStackHeight.constant) / 4
     }
     var daySwipeLeft = UISwipeGestureRecognizer()
     var daySwipeRight = UISwipeGestureRecognizer()
     let separator = UIView()
     var separatorY: CGFloat {
-        // Day view
-        if scheduleStyle == 0 {
-            // (Size of schedule screen / 4) + height of pageStack
-            return pageStack.bounds.height + headerHeight
-            
-        // Week view
-        } else {
-            return headerHeight
-        }
-        
+        // (Size of schedule screen / 4) + height of pageStack
+        return pageStackHeight.constant + headerHeight
     }
     //
     var okAction = UIAlertAction()
@@ -66,13 +58,14 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var dayIndicator: UIView!
     @IBOutlet weak var dayIndicatorLeading: NSLayoutConstraint!
     
+    @IBOutlet weak var pageStackHeight: NSLayoutConstraint!
+    
     // Variables
     // Days array
     let dayArray: [String] =
         ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
     let dayArrayChar = ["mondayLetter","tuesdayLetter","wednesdayLetter","thursdayLetter","fridayLetter","saturdayLetter","sundayLetter"]
     // StackView
-    var pageStackHeight: CGFloat = 44
     var stackArray: [UILabel] = []
     var stackFontUnselected = UIFont(name: "SFUIDisplay-regular", size: 17)
     var stackFontSelected = UIFont(name: "SFUIDisplay-bold", size: 17)
@@ -81,6 +74,10 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     let scheduleChoiceTable = UITableView()
     let scheduleView = UIView()
     let createScheduleButton = UIButton()
+    
+    // Set by heightForRow, as cellForRow uses height but height isn't updated yet
+        // Could move all code to cell.didlayoutsubviews but prefer not to
+    var cellHeight: CGFloat = 72
 
     //
     // Very silly variable used in choices of 'endurance' group - steady state, as there is a 'time choice' after 'warmup/stretching' choice, variable indicating which one was selected
@@ -100,6 +97,12 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         // 0 == warmup, 1 == session, 2 == stretching
     var selectedComponent = 0
 
+    // Session choice explanation
+    var explanationView = UIView()
+    var explanationHighlight = UIView()
+    var explanationLabel = UILabel()
+    var nextButtonExplanation = UIButton()
+    
     //
     // Walkthrough
     var walkthroughProgress = 0

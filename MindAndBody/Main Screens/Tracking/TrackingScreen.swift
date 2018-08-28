@@ -285,37 +285,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         var chartDataShifted: [(key: Double, value: Int)] = [] // Shift chart data so min date is 0, this allows for correct presenting of labels
         // Data points
         switch timeScale {
-        // 1 Week
-//        case 0:
-//
-//            //
-//            chartView.xAxis.granularity = 1 // 1 day
-//
-//            //
-//            chartDataOriginal = trackingDictionaryDates[0].sorted(by: { $0.key < $1.key })
-//            //
-//            // Shift chart data so min date is 0, this allows for correct presenting of labels
-//            if trackingDictionaryDates[0].count != 0 {
-//                TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
-//                for i in 0..<chartDataOriginal.count {
-//                    let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
-//                    let value = chartDataOriginal[i].value
-//                    //
-//                    let keyValue = (key: key, value: value)
-//                    chartDataShifted.append(keyValue)
-//                }
-//                    //
-//                lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
-//            }
-//            //
-//            chartView.xAxis.axisMinimum = 0
-//            chartView.xAxis.axisMaximum = 6
-//            //
-//            chartView.xAxis.valueFormatter = DateValueFormatterDay()
-//            chartView.xAxis.labelCount = 7
-//            chartView.xAxis.forceLabelsEnabled = true
         // 1 Month
-            // 1,2,3,4,5
         case 0,1,2,3:
             //
             chartView.xAxis.granularity = 7 // 7 days in a week
@@ -343,10 +313,8 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
             // Set Start and end dates for 1,3,6,12 months && set date formatter
             switch timeScale {
             // 1,3,6 months
-                //1,2,3
             case 0,1,2:
-                //
-                //
+                
                 var startDate = Date().setToMidnightUTC()
                 let endDate = calendar.date(byAdding: .weekOfYear, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
                 
@@ -396,39 +364,10 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
                 }
                 
                 chartView.xAxis.axisMaximum = start + Double(diffInDays!)
-                //
-//                chartView.xAxis.axisMinimum = startDate.timeIntervalSince1970
-//                chartView.xAxis.axisMaximum = (endDate?.timeIntervalSince1970)!
-                //
-
-//            // 12 months
-//            case 3:
-//                // nina
-//                //
-//                // Shift chart data so min date is 0, this allows for correct presenting of labels
-//                if trackingDictionaryDates.count != 0 {
-//                    TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
-//                    for i in 0..<chartDataOriginal.count {
-//                        let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
-//                        let value = chartDataOriginal[i].value
-//                        //
-//                        let keyValue = (key: key, value: value)
-//                        chartDataShifted.append(keyValue)
-//                    }
-//                    //
-//                    lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
-//                }
-//                //
-//                chartView.xAxis.axisMinimum = 0
-//                chartView.xAxis.axisMaximum = 364
-//                //
-//                chartView.xAxis.valueFormatter = DateValueFormatterMonthLetter()
-//                chartView.xAxis.labelCount = 12
-//                chartView.xAxis.forceLabelsEnabled = true
-//
+                
             // All
             case 3:
-                //
+                
                 chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
             default: break
             }

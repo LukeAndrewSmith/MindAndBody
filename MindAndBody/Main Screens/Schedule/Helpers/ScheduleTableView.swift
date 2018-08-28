@@ -126,18 +126,51 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableView {
         case scheduleTable:
-            if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
-                return 49
-            } else if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                return 72
-            } else {
-                // If too many choices, reduce size of
-                if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count + 1) * 72) > view.bounds.height - headerHeight {
-                    return (view.bounds.height - headerHeight) / CGFloat(sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count + 1)
+            // First choice == session choice
+            if ScheduleVariables.shared.choiceProgress[0] == -1 {
+                // Get number of rows
+                var count = 0
+                if scheduleStyle == 0 {
+                    let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                    count = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
+                } else if scheduleStyle == 1 {
+                    count = TemporaryWeekArray.shared.weekArray.count + 1
+                }
+                
+                // If height set to 72 is too big
+                if CGFloat(count) * 72 > (scheduleTable.bounds.height - headerHeight) {
+                    
+                    // Height calculated to fit screen unless it gets too small
+                    let height = (scheduleTable.bounds.height - headerHeight) / CGFloat(count)
+                    if height < 49 {
+                        cellHeight = 49
+                        return 49
+                    } else {
+                        cellHeight = height
+                        return height
+                    }
+                    
+                // Height 72
                 } else {
+                    cellHeight = 72
+                    return 72
+                }
+                
+            // Not first choice
+            } else {
+                // If too many choices, reduce size of cell
+                if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count) * 72) > (scheduleTable.bounds.height - headerHeight) {
+                    let height = (scheduleTable.bounds.height - headerHeight) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]]).count)
+                    cellHeight = height
+                    return height
+                    
+                // Height 72
+                } else {
+                    cellHeight = 72
                     return 72
                 }
             }
+            
         case scheduleChoiceTable:
             return 47
         default:
@@ -152,6 +185,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         
         // Get cell
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        
         //
         switch tableView {
         case scheduleTable:
@@ -170,7 +204,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     extraLabel.textColor = Colors.light
                     extraLabel.text = NSLocalizedString("extra", comment: "")
                     extraLabel.sizeToFit()
-                    extraLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
+                    extraLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: cellHeight)
                     cell.addSubview(extraLabel)
                     
                     //
@@ -208,11 +242,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     dayLabel.text = NSLocalizedString(text, comment: "")
                     dayLabel.numberOfLines = 2
                     dayLabel.sizeToFit()
-                    if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
-                        dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 49)
-                    } else {
-                        dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: 72)
-                    }
+                    dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: cellHeight)
                     cell.addSubview(dayLabel)
                     
                     //
@@ -231,11 +261,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     // To make sure its easy to press the button
                     let checkBoxExtraButton = UIButton()
                     checkBoxExtraButton.tag = indexPath.row
-                    var height = 72
-                    if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
-                        height = 49
-                    }
-                    checkBoxExtraButton.frame = CGRect(x: 0, y: 0, width: height, height: height)
+                    checkBoxExtraButton.frame = CGRect(x: 0, y: 0, width: cellHeight, height: cellHeight)
                     checkBoxExtraButton.center.x = checkBox.center.x
                     checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
                     cell.addSubview(checkBoxExtraButton)
@@ -255,43 +281,52 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 
             // Currently selecting a session, i.e not first screen
             } else {
-                var choiceCellHeight: CGFloat = 72
-                // If too many choices, reduce size of cell
-                if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count + 1) * 72) > view.bounds.height - headerHeight {
-                    choiceCellHeight = (view.bounds.height - headerHeight) / CGFloat(sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count + 1)
-                }
                 // If title
                 if indexPath.row == 0 {
-                    //
-
                     
                     let title = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][0]
                     cell.textLabel?.font = Fonts.bigCell
-//                        UIFont(name: "SFUIDisplay-thin", size: 24)!
                     cell.textLabel?.textColor = Colors.light
                     cell.textLabel?.text = NSLocalizedString(title, comment: "")
                     cell.textLabel?.textAlignment = .center
-                    cell.textLabel?.frame = CGRect(x: view.bounds.width / 2, y: 0, width: view.bounds.width / 2, height: choiceCellHeight)
+                    cell.textLabel?.frame = CGRect(x: view.bounds.width / 2, y: 0, width: view.bounds.width / 2, height: cellHeight)
                     //
                     cell.selectionStyle = .none
                     
                     // Title Underline
                     
                     let separator = CALayer()
-                    separator.frame = CGRect(x: view.bounds.width / 4, y: choiceCellHeight - 1, width: view.bounds.width / 2, height: 1)
+                    separator.frame = CGRect(x: view.bounds.width / 4, y: cellHeight - 1, width: view.bounds.width / 2, height: 1)
                     separator.backgroundColor = Colors.light.cgColor
                     separator.opacity = 0.25
                     cell.layer.addSublayer(separator)
                     
-                    // Question mark - explanation of choice
                     // TODO: question mark
+                    // Question mark - explanation of choice
+                    if needsExplanation() {
+                        
+                        let explanationButton = UIButton()
+                        explanationButton.frame = CGRect(x: view.bounds.width * (3/4), y: 0, width: view.bounds.width / 4, height: cellHeight)
+                        explanationButton.setImage(#imageLiteral(resourceName: "QuestionMarkMenu"), for: .normal)
+                        explanationButton.tintColor = Colors.light
+                        explanationButton.addTarget(self, action: #selector(presentExplanation), for: .touchUpInside)
+                        cell.addSubview(explanationButton)
+                        
+                        let border = UIView()
+                        border.layer.borderWidth = 1
+                        border.layer.borderColor = Colors.light.withAlphaComponent(0.13).cgColor
+                        border.layer.cornerRadius = 11
+                        border.frame.size = CGSize(width: 44, height: 44)
+                        border.center = explanationButton.center
+                        border.isUserInteractionEnabled = false
+                        cell.addSubview(border)
+                    }
                     
                 // Else if selection
                 } else {
                     //
                     let choiceLabel = UILabel()
                     choiceLabel.font = Fonts.bigCell
-//                        UIFont(name: "SFUIDisplay-thin", size: 23)!
                     choiceLabel.textColor = Colors.light
                     
                     // Normal
@@ -299,7 +334,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     choiceLabel.text = NSLocalizedString(text, comment: "")
                     choiceLabel.numberOfLines = 2
                     choiceLabel.sizeToFit()
-                    choiceLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: choiceCellHeight)
+                    choiceLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: cellHeight)
                     cell.addSubview(choiceLabel)
                     
                     if isLastChoice() {
@@ -428,12 +463,13 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     // (day view last cell || week view last cell)
                     if  (scheduleStyle == 0 && indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count || scheduleStyle == 1 && indexPath.row == TemporaryWeekArray.shared.weekArray.count) {
                         didSelectRowHandler(row: 723)
-                        tableView.deselectRow(at: indexPath, animated: true)
                         
                     // Normal session, if not completed, do something
                     } else if !isCompleted(row: indexPath.row) {
                         didSelectRowHandler(row: indexPath.row)
                     }
+                    
+                    tableView.deselectRow(at: indexPath, animated: true)
                     
                 // Other choices
                 } else {

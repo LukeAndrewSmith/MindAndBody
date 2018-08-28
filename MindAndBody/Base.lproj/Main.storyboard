@@ -129,6 +129,7 @@
                         <outlet property="navigationBar" destination="xF1-Nx-yoQ" id="dBd-vq-1MD"/>
                         <outlet property="navigationSeparatorTopConstraint" destination="Q8P-Sb-fkF" id="fvc-OC-DwZ"/>
                         <outlet property="pageStack" destination="Uk6-xI-8tD" id="zin-Me-CB9"/>
+                        <outlet property="pageStackHeight" destination="Kl1-8H-nBg" id="egl-jJ-Vjt"/>
                         <outlet property="scheduleTable" destination="oPE-Kh-Caj" id="UFV-AU-XOl"/>
                         <outlet property="scheduleTableBottom" destination="hvm-Og-oex" id="dJj-3U-R2h"/>
                         <outlet property="scheduleTableTopConstraint" destination="EEu-dX-BjX" id="tAk-vd-Uyp"/>
@@ -3058,7 +3059,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="012-1d-8yV">
-                                                    <rect key="frame" x="143.5" y="330.5" width="90" height="23"/>
+                                                    <rect key="frame" x="142.5" y="330.5" width="90" height="23"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
@@ -5731,7 +5732,7 @@
         <segue reference="dD1-H2-hdg"/>
         <segue reference="7EB-Ms-L5h"/>
         <segue reference="Ulk-g9-ZJG"/>
-        <segue reference="Z0R-pr-Y7a"/>
+        <segue reference="SOr-B2-NYZ"/>
         <segue reference="NNV-PL-USW"/>
         <segue reference="Q3V-X2-nea"/>
         <segue reference="M8n-a7-S6V"/>

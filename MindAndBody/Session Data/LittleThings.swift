@@ -201,8 +201,8 @@ extension sessionData {
     
     // MARK:- Group Choices
     // Note
-    // (0: - 5:) = choiceProgress[0] in schedule
-    // (0-4/5) = choiceProgress[1] in schedule
+    // dict keys = choiceProgress[0] in schedule
+    // arrays = choiceProgress[1] in schedule
     static let sortedGroups: [Int: [[String]]] =
         [
             // MARK: Workout
@@ -484,5 +484,24 @@ extension sessionData {
                     "flexibility",
                 ],
             ]
+    ]
+    
+    // MARK:- Session explanations
+    // dict keys = choiceProgress[0] in schedule
+    // dict 2 keys = choiceProgress[1] in schedule
+    static let sessionChoiceExplanations: [Int: [Int: String]] = [
+        // Workout
+        0: [2: "workoutStyleE"],
+        // Yoga
+        1: [1: "yogaTypeE"],
+        // Meditation
+        2: [:],
+        // Endurance
+        3: [1: "enduranceTypeE",
+            4: "intervalLengthE",],
+        // Flexibility
+        4: [:],
+        // Extra Sessions
+        723: [1: "extraSessionE"],
     ]
 }

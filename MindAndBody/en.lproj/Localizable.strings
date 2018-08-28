@@ -3164,6 +3164,19 @@
 "hips" = "Hips";
 "back\neck" = "Back\neck";
 
+// Choice explanations, see sessionData.sessionChoiceExplanations, and scheduleHelpers needsExplanation to see what explanations are necessary ----
+// Workout
+"workoutStyleE" = "Classic:  Each movement is repeated a number of times (reps) to form a set, and each set repeated a number of times with breaks before going to the next movement.\n\nCircuit:  A series of movements performed without pause form one round which is repeated in a circuit a number of times with pauses between each round.\n\nNote: Circuit workouts are quicker and require more endurance, classic workouts are good in the gym, especially for gaining strength.";
+// Yoga
+"yogaTypeE" = "";
+// Meditation
+// Endurance
+"enduranceTypeE" = "";
+"intervalLengthE" = "";
+// Flexibility
+// Extra Sessions
+"extraSessionE" = "";
+
 // Endurance popup
 "endurancePopupTitle" = "Steady state";
 "endurancePopupMessage" = "\nUp to you to do your steady state cardio (run, bike, row, swim etc..), press done when complete.";

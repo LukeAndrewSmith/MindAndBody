@@ -1353,7 +1353,6 @@ extension ScheduleScreen {
                 // Normal case
                 } else {
                     for i in 0..<nRows {
-                        print(ScheduleVariables.shared.selectedRows[0])
                         if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay][String(i)] as! Bool == false {
                             isCompleted = false
                             break
@@ -1422,7 +1421,7 @@ extension ScheduleScreen {
                 // Animate
                 // Snapshot before update
                 let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-                snapShot1?.center.y += pageStack.bounds.height
+                snapShot1?.center.y += pageStackHeight.constant
                 view.insertSubview(snapShot1!, aboveSubview: scheduleTable)
                 // Move table and reload
                 scheduleTable.center.x = view.center.x + self.view.frame.size.width
@@ -1454,7 +1453,7 @@ extension ScheduleScreen {
                 //
                 // Snapshot before update
                 let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-                snapShot1?.center.y += pageStack.bounds.height
+                snapShot1?.center.y += pageStackHeight.constant
                 view.insertSubview(snapShot1!, aboveSubview: scheduleTable)
                 // Move table and reload
                 scheduleTable.center.x = view.center.x - self.view.frame.size.width
@@ -1498,9 +1497,9 @@ extension ScheduleScreen {
             // Animate
             scheduleTable.reloadData()
             let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-            snapShot1?.center.y += pageStack.bounds.height
+            snapShot1?.center.y += pageStackHeight.constant
             let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-            snapShot2?.center.y += pageStack.bounds.height
+            snapShot2?.center.y += pageStackHeight.constant
             //
             view.addSubview(snapShot1!)
             view.bringSubview(toFront: snapShot1!)
@@ -1541,9 +1540,9 @@ extension ScheduleScreen {
             // Animate
             scheduleTable.reloadData()
             let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-            snapShot1?.center.y += pageStack.bounds.height
+            snapShot1?.center.y += pageStackHeight.constant
             let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-            snapShot2?.center.y += pageStack.bounds.height
+            snapShot2?.center.y += pageStackHeight.constant
             //
             view.addSubview(snapShot1!)
             view.bringSubview(toFront: snapShot1!)
@@ -1891,8 +1890,6 @@ extension ScheduleScreen {
             nRows = TemporaryWeekArray.shared.weekArray.count + 1
         }
         
-        print(TemporaryWeekArray.shared.weekArray)
-        
         var rowHeight = Int()
         // If first screen of week view, height 49, else 72
         if scheduleStyle == 1 && ScheduleVariables.shared.selectedRows[0] == -1 {
@@ -1908,6 +1905,85 @@ extension ScheduleScreen {
         } else {
             scheduleTable.isScrollEnabled = true
         }
+    }
+    
+    //
+    // Check if session choice needs an explanation
+    func needsExplanation() -> Bool {
+        switch ScheduleVariables.shared.choiceProgress[0] {
+            
+        // Workout
+        case 0:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            case 2: return true
+            default: return false
+            }
+            
+        // Yoga
+        case 1:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            case 1: return true
+            default: return false
+            }
+            
+        // Meditation
+        case 2:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            default: return false
+            }
+            
+        // Endurance
+        case 3:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            case 1,4: return true
+            default: return false
+            }
+            
+        // Flexibility
+        case 4:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            default: return false
+            }
+            
+        // Extra Sessions
+        case 723:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            case 1: return true
+            default: return false
+            }
+            
+        default: return false
+        }
+    }
+    
+    @objc func presentExplanation() {
+        
+        // Setup
+        nextButtonExplanation.addTarget(self, action: #selector(explanationNextAction), for: .touchUpInside)
+        explanationView = setWalkthrough(walkthroughView: explanationView, walkthroughLabel: explanationLabel, walkthroughHighlight: explanationHighlight, nextButton: nextButtonExplanation)
+        
+        // Label
+        explanationLabel.text = NSLocalizedString(sessionData.sessionChoiceExplanations[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]]!, comment: "")
+        explanationLabel.sizeToFit()
+        explanationLabel.frame = CGRect(x: 13, y: view.frame.maxY - explanationLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: explanationLabel.frame.size.height)
+        
+        // Colour
+        explanationLabel.textColor = Colors.dark
+        explanationLabel.backgroundColor = Colors.light
+        explanationHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+        explanationHighlight.layer.borderColor = Colors.light.cgColor
+        
+        // Highlight - none
+        explanationHighlight.frame = CGRect.zero
+    }
+    @objc func explanationNextAction() {
+        // Dismiss view
+        UIView.animate(withDuration: 0.4, animations: {
+            self.explanationView.alpha = 0
+        }, completion: { finished in
+            self.explanationView.removeFromSuperview()
+            self.explanationView.alpha = 1
+        })
     }
     
     // MARK: - Reload Functions
@@ -2199,20 +2275,20 @@ extension ScheduleScreen {
         // Present as days or as week
         // days
         if scheduleStyle == 0 {
-            pageStack.frame.size = CGSize(width: pageStack.bounds.width, height: pageStackHeight)
-            navigationSeparatorTopConstraint.constant = pageStackHeight
-            scheduleTableTopConstraint.constant = pageStackHeight
-            separator.center.y = separatorY
             pageStack.alpha = 1
             pageStack.isUserInteractionEnabled = true
+            pageStackHeight.constant = 44
+            navigationSeparatorTopConstraint.constant = pageStackHeight.constant
+            scheduleTableTopConstraint.constant = pageStackHeight.constant
+            separator.center.y = separatorY
         // week
         } else if scheduleStyle == 1 {
-            pageStack.frame.size = CGSize(width: pageStack.bounds.width, height: 0)
+            pageStack.alpha = 0
+            pageStack.isUserInteractionEnabled = false
+            pageStackHeight.constant = 0
             navigationSeparatorTopConstraint.constant = 0
             scheduleTableTopConstraint.constant = 0
             separator.center.y = separatorY
-            pageStack.alpha = 0
-            pageStack.isUserInteractionEnabled = false
         }
         
         // Day indicator

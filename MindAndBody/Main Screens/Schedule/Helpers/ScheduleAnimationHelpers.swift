@@ -183,8 +183,8 @@ extension ScheduleScreen {
         maskView1.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
 //        maskView2.addTarget(self, action: #selector(maskAction), for: .touchUpInside)
         //
-        maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: headerHeight + pageStack.bounds.height + 1)
-//        maskView2.frame = CGRect(x: 0, y: scheduleTable.frame.maxY, width: screenFrame.width, height: pageStack.bounds.height)
+        maskView1.frame = CGRect(x: 0, y: 0, width: screenFrame.width, height: headerHeight + pageStackHeight.constant + 1)
+//        maskView2.frame = CGRect(x: 0, y: scheduleTable.frame.maxY, width: screenFrame.width, height: pageStackHeight.constant)
         //
         maskView1.backgroundColor = .black
         maskView1.alpha = alpha
@@ -288,11 +288,11 @@ extension ScheduleScreen {
         // Table gets hidden but need to keep header so add screenshot
         let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: headerHeight)
         let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
-        snapShotHeader.center.y += pageStack.bounds.height
+        snapShotHeader.center.y += pageStackHeight.constant
         view.insertSubview(snapShotHeader, belowSubview: maskView1)
         //
         // Slide across table
-        let snapShotFrame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight - pageStack.bounds.height)
+        let snapShotFrame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight - pageStackHeight.constant)
         let snapShotY = (separator.frame.maxY + scheduleTable.frame.maxY) / 2
         // Snapshots
         let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
@@ -331,11 +331,11 @@ extension ScheduleScreen {
         // Table gets hidden but need to keep header so add screenshot
         let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: headerHeight)
         let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
-        snapShotHeader.center.y += pageStack.bounds.height
+        snapShotHeader.center.y += pageStackHeight.constant
         view.insertSubview(snapShotHeader, belowSubview: maskView1)
         //
         // Slide table
-        let snapShotFrame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight - pageStack.bounds.height)
+        let snapShotFrame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight - pageStackHeight.constant)
         let snapShotY = (separator.frame.maxY + scheduleTable.frame.maxY) / 2
         // Snapshots
         let snapShot1 = scheduleTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
@@ -370,7 +370,7 @@ extension ScheduleScreen {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == scheduleTable {
             for cell in scheduleTable.visibleCells {
-                let hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y + (view.bounds.height - pageStack.bounds.height) / 4
+                let hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y + (view.bounds.height - pageStackHeight.constant) / 4
                 if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                     maskCell(cell: cell, margin: Float(hiddenFrameHeight))
                 }
