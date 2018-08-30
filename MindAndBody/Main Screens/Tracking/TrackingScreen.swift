@@ -137,12 +137,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         // Create [[Date: Int]] from the stored [[String: Int]] (ICloud wont store [Date: Int], only [String: Int])
         let trackingDictionary = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
         trackingDictionaryDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionary)
-        
-        // Present walkthrough 2
-        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-        if walkthroughs["Tracking"] == false {
-            walkthroughTracking()
-        }
+
         
         //
         setupTimeScaleChoice()
@@ -416,111 +411,6 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
-    
-    //
-    // MARK: Walkthrough
-    var walkthroughProgress = 0
-    var walkthroughView = UIView()
-    var walkthroughHighlight = UIView()
-    var walkthroughLabel = UILabel()
-    var nextButton = UIButton()
-    
-    var didSetWalkthrough = false
-    
-    //
-    // Components
-    var walkthroughTexts = ["tracking0", "tracking1"]
-    var highlightSize: CGSize? = nil
-    var highlightCenter: CGPoint? = nil
-    // Corner radius, 0 = height / 2 && 1 = width / 2
-    var highlightCornerRadius = 0
-    var labelFrame = 0
-    //
-    var walkthroughBackgroundColor = UIColor()
-    var walkthroughTextColor = UIColor()
-    
-    // Walkthrough
-    @objc func walkthroughTracking() {
-        
-        //
-        if didSetWalkthrough == false {
-            //
-            nextButton.addTarget(self, action: #selector(walkthroughTracking), for: .touchUpInside)
-            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
-            didSetWalkthrough = true
-        }
-        
-        //
-        switch walkthroughProgress {
-            // First has to be done differently
-        // Walkthrough explanation
-        case 0:
-            //
-            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
-            walkthroughLabel.sizeToFit()
-            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
-            
-            // Colour
-            walkthroughLabel.textColor = Colors.dark
-            walkthroughLabel.backgroundColor = Colors.light
-            walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colors.light.cgColor
-            // Highlight
-            walkthroughHighlight.frame.size = CGSize(width: view.bounds.width - 15, height: 20)
-            walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: ControlBarHeights.combinedHeight + 2.5 + ((view.bounds.height - 73.5) * (25/125)))
-            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
-            
-            //
-            // Flash
-            //
-            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
-                //
-                self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(1)
-            }, completion: {(finished: Bool) -> Void in
-                UIView.animate(withDuration: 0.2, animations: {
-                    //
-                    self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0)
-                }, completion: nil)
-            })
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        // Menu
-        case 1:
-            //
-            highlightSize = CGSize(width: 36, height: 36)
-            highlightCenter = CGPoint(x: view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ControlBarHeights.statusBarHeight)
-            highlightCornerRadius = 0
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-        //
-        default:
-            UIView.animate(withDuration: 0.4, animations: {
-                self.walkthroughView.alpha = 0
-            }, completion: { finished in
-                self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-                walkthroughs["Tracking"] = true
-                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
-            })
-        }
-    }
-    
-    
-    //
 }
 
 class TrackingNavigation: UINavigationController {

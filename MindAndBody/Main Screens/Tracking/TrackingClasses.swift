@@ -284,6 +284,7 @@ public class BalloonMarker: MarkerImage {
     
 }
 
+// MARK: Indicator Label
 public class XYMarkerView: BalloonMarker {
     public var xAxisValueFormatter: IAxisValueFormatter
     fileprivate var yFormatter = NumberFormatter()
@@ -296,14 +297,22 @@ public class XYMarkerView: BalloonMarker {
         super.init(color: color, font: font, textColor: textColor, insets: insets)
     }
     
+    // MARK: Label content
     public override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         // De shift x value time
         let timeIntervalDeShifted = (entry.x * 3600 * 24) + TrackingVariables.shared.minTime
+        var yValue = entry.y
+        // Descale
+        if yValue > 100 {
+            var extra = yValue - 100
+            extra = extra * 4
+            yValue = 100 + extra
+        }
         
         let string = ""
             + xAxisValueFormatter.stringForValue(timeIntervalDeShifted, axis: XAxis())
             + " - "
-            + yFormatter.string(from: NSNumber(floatLiteral: entry.y))!
+            + yFormatter.string(from: NSNumber(floatLiteral: yValue))!
             + "%"
         setLabel(string)
     }

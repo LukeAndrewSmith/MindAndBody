@@ -423,14 +423,17 @@ class TrackingHelpers {
         if stringDict.count != 0 {
             let keys = stringDict.keys.sorted()
             for i in 0...keys.count - 1 {
+                // If under 100%, linear scaling
                 if stringDict[keys[i]]! < 100 {
                     dateDict.updateValue(stringDict[keys[i]]!, forKey: stringToDate(string: keys[i]))
+                // If over 100%, linear scaling but faster by factor of 4, the 25% extra == 100%
+                    // => if greater than 200% then off the screen
+                    // For the label of the data point, the percentage is descaled and the correct percentage is presented, see TrackingClasses -> marker class
                 } else {
-                    // Nina
                     let extra = Double(stringDict[keys[i]]! - 100)
-                    let extraScaled = pow(extra, 1/2)
-                    let logValue = 100 + extraScaled
-                    dateDict.updateValue(Int(logValue), forKey: stringToDate(string: keys[i]))
+                    let extraScaled = extra/4
+                    let scaled = 100 + extraScaled
+                    dateDict.updateValue(Int(scaled), forKey: stringToDate(string: keys[i]))
                 }
             }
         }
@@ -592,110 +595,6 @@ class BellsFunctions {
         return conversionDict[name]!
     }
 }
-
-// For initial choice question from Sessions screen, as this is where the 'C' button from which you can create custom sessions is found on multiple screens
-    // Walkthrough used by multiple screens so put in seperate class
-class CustomWalkthrough {
-    
-    static var shared = CustomWalkthrough()
-    private init() {}
-    
-    //
-    var walkthroughProgress = 0
-    var walkthroughView = UIView()
-    var walkthroughHighlight = UIView()
-    var walkthroughLabel = UILabel()
-    var nextButton = UIButton()
-    
-    var didSetWalkthrough = false
-    
-    //
-    // Components
-    var walkthroughTexts = ["customWalkthrough"]
-    var highlightSize: CGSize? = nil
-    var highlightCenter: CGPoint? = nil
-    // Corner radius, 0 = height / 2 && 1 = width / 2
-    var highlightCornerRadius = 0
-    var labelFrame = 0
-    //
-    var walkthroughBackgroundColor = UIColor()
-    var walkthroughTextColor = UIColor()
-    
-    //
-    // Walkthrough
-    func beginWalkthrough(viewController: UIViewController, customButton: UIButton) {
-        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-        if walkthroughs["CustomSessions"] == false {
-            walkthroughCustom(viewController: viewController, customButton: customButton)
-        }
-    }
-    
-    // Walkthrough
-    @objc func walkthroughCustom(viewController: UIViewController, customButton: UIButton) {
-        
-        //
-        if didSetWalkthrough == false {
-            //
-            nextButton.addTarget(self, action: #selector(walkthroughCustom), for: .touchUpInside)
-            walkthroughView = viewController.setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
-            didSetWalkthrough = true
-        }
-        
-        //
-        //
-        switch walkthroughProgress {
-            // First has to be done differently
-        // Homepage
-        case 0:
-            //
-            walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
-            walkthroughLabel.sizeToFit()
-            walkthroughLabel.frame = CGRect(x: 13, y: viewController.view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: viewController.view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
-            walkthroughLabel.center.y -= ControlBarHeights.combinedHeight
-            
-            // Colour
-            walkthroughLabel.textColor = Colors.light
-            walkthroughLabel.backgroundColor = Colors.dark
-            walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colors.dark.cgColor
-            // Highlight
-            walkthroughHighlight.frame = customButton.frame
-            walkthroughHighlight.center = customButton.center
-            walkthroughHighlight.center.y += ControlBarHeights.combinedHeight
-            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
-            
-            //
-            // Flash
-            //
-            UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
-                //
-                self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(1)
-            }, completion: {(finished: Bool) -> Void in
-                UIView.animate(withDuration: 0.2, animations: {
-                    //
-                    self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
-                }, completion: nil)
-            })
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-        //
-        default:
-            UIView.animate(withDuration: 0.4, animations: {
-                self.walkthroughView.alpha = 0
-            }, completion: { finished in
-                self.walkthroughView.removeFromSuperview()
-                var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-                walkthroughs["CustomSessions"] = true
-                UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
-            })
-        }
-    }
-}
-
 //
 // MARK: - Global Function as extensions
 //
@@ -1024,8 +923,6 @@ extension UIViewController {
     //
     // MARK: Week Progress
     func updateWeekProgress() {
-        // Reset if last reset wasn't in current week
-        ScheduleVariables.shared.resetWeekTracking()
         //
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         
@@ -1114,6 +1011,7 @@ extension UIViewController {
                 
                 // Reload
                 ScheduleVariables.shared.shouldReloadChoice = true
+                
             // Normal
             } else {
                 var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
@@ -1284,44 +1182,73 @@ extension UIViewController {
     //
     //
     // Set Initial States
-    func setWalkthrough(walkthroughView: UIView, walkthroughLabel: UILabel, walkthroughHighlight: UIView, nextButton: UIButton) -> UIView {
-        //
-        let screenSize = UIScreen.main.bounds
+    func setWalkthrough(walkthroughView: UIView, labelView: UIView, label: UILabel, title: UILabel, separator: UIView, nextButton: UIButton, backButton: UIButton, highlight: UIView, simplePopup: Bool) -> UIView {
         
-        // View
+        let screenSize = UIScreen.main.bounds
         walkthroughView.frame = screenSize
         walkthroughView.backgroundColor = .clear
         
-        // Highlight
-        walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
-        walkthroughHighlight.layer.borderColor = Colors.light.cgColor
-        walkthroughHighlight.layer.borderWidth = 1
+        highlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+        highlight.layer.borderColor = Colors.light.cgColor
+        highlight.layer.borderWidth = 1
         
-        // Label
-        walkthroughLabel.frame = CGRect(x: 13, y: 0, width: view.frame.size.width - 26, height: 0)
-        walkthroughLabel.center = view.center
-        walkthroughLabel.textAlignment = .center
-        walkthroughLabel.numberOfLines = 0
-        walkthroughLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-        walkthroughLabel.layer.cornerRadius = 13
-        walkthroughLabel.clipsToBounds = true
-        walkthroughLabel.backgroundColor = Colors.light
-        walkthroughLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)
-        walkthroughLabel.textColor = Colors.dark
-        walkthroughLabel.alpha = 0.93
+        labelView.frame = CGRect(x: WalkthroughVariables.viewPadding, y: 0, width: view.frame.size.width - 26, height: 0)
+        labelView.backgroundColor = Colors.light
+        labelView.layer.cornerRadius = WalkthroughVariables.viewPadding
+        labelView.clipsToBounds = true
         
-        // Button
-        nextButton.frame = screenSize
-        nextButton.backgroundColor = .clear
+        title.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        title.frame = CGRect(x: 0, y: 0, width: labelView.bounds.width, height: WalkthroughVariables.topHeight)
+        title.textAlignment = .center
+        title.backgroundColor = .clear
+        labelView.addSubview(title)
         
-        //
-        walkthroughView.addSubview(walkthroughLabel)
-        walkthroughView.addSubview(walkthroughHighlight)
-        walkthroughView.addSubview(nextButton)
+        separator.frame = CGRect(x: 0, y: WalkthroughVariables.topHeight, width: labelView.bounds.width, height: 1)
+        separator.backgroundColor = Colors.dark
+        labelView.addSubview(separator)
+        
+        label.frame = CGRect(x: WalkthroughVariables.viewPadding, y: 0, width: view.frame.size.width - 26, height: 0)
+        label.center = view.center
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.backgroundColor = .clear
+        label.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        label.textColor = Colors.dark
+        labelView.addSubview(label)
+        
+        nextButton.frame = CGRect(x: labelView.bounds.width - 49 - 4, y: 0, width: 49, height: WalkthroughVariables.topHeight)
+        nextButton.setTitleColor(Colors.dark, for: .normal)
+        nextButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        nextButton.backgroundColor = UIColor.clear
+        nextButton.layer.cornerRadius = 8
+        labelView.addSubview(nextButton)
+        
+        // Simple popup => only ok button, no back button, as only one walkthorugh
+        if !simplePopup {
+            nextButton.setTitle(NSLocalizedString("next", comment: ""), for: .normal)
+
+            backButton.alpha = 1
+            backButton.isUserInteractionEnabled = true
+            
+            backButton.frame = CGRect(x: 4, y: 0, width: 49, height: WalkthroughVariables.topHeight)
+            backButton.setTitle(NSLocalizedString("back", comment: ""), for: .normal)
+            backButton.setTitleColor(Colors.dark, for: .normal)
+            backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+            backButton.backgroundColor = UIColor.clear
+            backButton.layer.cornerRadius = 8
+            labelView.addSubview(backButton)
+        } else {
+            nextButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
+            
+            backButton.alpha = 0
+            backButton.isUserInteractionEnabled = false
+        }
+        
+        walkthroughView.addSubview(labelView)
+        
+        walkthroughView.addSubview(highlight)
         UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
-        walkthroughView.bringSubview(toFront: nextButton)
-        walkthroughView.bringSubview(toFront: walkthroughLabel)
-        //
         return walkthroughView
     }
     
@@ -1336,7 +1263,6 @@ extension UIViewController {
         walkthroughSnapshot1?.center = walkthroughLabel.center
         //
         // Label
-        walkthroughLabel.alpha = 0
         walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
         walkthroughLabel.sizeToFit()
         switch walkthroughLabelFrame {
@@ -1411,7 +1337,87 @@ extension UIViewController {
             
         })
     }
-    //
+    
+    func nextWalkthroughViewTest(walkthroughView: UIView, labelView: UIView, label: UILabel, title: UILabel, highlight: UIView, walkthroughTexts: [String], walkthroughLabelFrame: Int, highlightSize: CGSize, highlightCenter: CGPoint, highlightCornerRadius: Int, backgroundColor: UIColor, textColor: UIColor, highlightColor: UIColor, animationTime: Double, walkthroughProgress: Int) {
+        
+        // Label
+        title.text = NSLocalizedString(walkthroughTexts[walkthroughProgress] + "T", comment: "")
+        
+        label.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
+        label.frame.size = label.sizeThatFits(CGSize(width: labelView.bounds.width - WalkthroughVariables.twicePadding, height: .greatestFiniteMagnitude))
+        
+        label.frame = CGRect(
+            x: WalkthroughVariables.padding,
+            y: WalkthroughVariables.topHeight + WalkthroughVariables.padding,
+            width: labelView.bounds.width - WalkthroughVariables.twicePadding,
+            height: label.frame.size.height)
+        
+        
+        switch walkthroughLabelFrame {
+        case 0:
+            labelView.frame = CGRect(
+                x: 13,
+                y: view.frame.maxY - WalkthroughVariables.topHeight - label.frame.size.height - 13 - WalkthroughVariables.twicePadding,
+                width: view.frame.size.width - 26,
+                height: WalkthroughVariables.topHeight + label.frame.size.height + WalkthroughVariables.twicePadding)
+        case 1:
+            labelView.frame = CGRect(
+                x: 13,
+                y: 13 + ControlBarHeights.combinedHeight,
+                width: view.frame.size.width - WalkthroughVariables.twiceViewPadding,
+                height: WalkthroughVariables.topHeight + label.frame.size.height + WalkthroughVariables.twicePadding)
+        default:
+            labelView.frame = CGRect(
+                x: 13,
+                y: view.frame.maxY - WalkthroughVariables.topHeight - label.frame.size.height - 13 - WalkthroughVariables.twicePadding,
+                width: view.frame.size.width - 26,
+                height: WalkthroughVariables.topHeight + label.frame.size.height + WalkthroughVariables.twicePadding)
+        }
+        
+        // Animate Highlight and Label
+        UIView.animate(withDuration: animationTime, animations: {
+            
+            if highlightColor != .clear {
+                highlight.backgroundColor = highlightColor.withAlphaComponent(0.5)
+                highlight.layer.borderColor = highlightColor.cgColor
+            } else {
+                highlight.backgroundColor = nil
+                highlight.layer.borderColor = nil
+            }
+            highlight.frame.size = highlightSize
+            highlight.center = highlightCenter
+            switch highlightCornerRadius {
+            case 0:
+                highlight.layer.cornerRadius = highlight.bounds.height / 2
+            case 1:
+                highlight.layer.cornerRadius = highlight.bounds.width / 2
+            case 2:
+                highlight.layer.cornerRadius = highlight.bounds.height / 4
+            case 3:
+                highlight.layer.cornerRadius = 15
+            default:
+                break
+            }
+            
+        }, completion: {finished in
+
+            // Flash
+            UIView.animate(withDuration: 0.1, delay: 0, animations: {
+                //
+                if highlightColor != .clear {
+                    highlight.backgroundColor = highlightColor.withAlphaComponent(1)
+                }
+            }, completion: {(finished: Bool) -> Void in
+                UIView.animate(withDuration: 0.1, animations: {
+                    //
+                    if highlightColor != .clear {
+                        highlight.backgroundColor = highlightColor.withAlphaComponent(0.5)
+                    }
+                }, completion: nil)
+            })
+        })
+    }
+    
 }
 
 
@@ -1667,4 +1673,3 @@ extension UIImage {
         return newImage
     }
 }
-

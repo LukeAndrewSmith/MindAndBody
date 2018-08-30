@@ -135,9 +135,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Subscription Check 1
 //        SubscriptionsCheck.shared.checkSubscription()
         
-        // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
-        ScheduleVariables.shared.resetWeekTracking()
-        
         //
         return true
     }
@@ -163,10 +160,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         timerCountDown.invalidate()
         timerCountDown2.invalidate()
-        
-        // Indicate to the schedule the date of last opening
-        // This is no persisted, if the app isn't quit, and the last day opened is not today, the schedule selects the correct day
-        ScheduleVariables.shared.lastDayOpened = Date().setToMidnightUTC()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -174,11 +167,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
     
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        
-        // Reset weekTracking/scheduleTracking (called a few times too many throughout but better safe than sorry)
-        ScheduleVariables.shared.resetWeekTracking()
+    func applicationWillEnterForeground(_ application: UIApplication) {        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

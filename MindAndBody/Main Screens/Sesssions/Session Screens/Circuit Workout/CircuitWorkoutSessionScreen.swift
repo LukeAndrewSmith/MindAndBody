@@ -1389,14 +1389,17 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     var walkthroughProgress = 0
     var walkthroughView = UIView()
     var walkthroughHighlight = UIView()
+    var walkthroughLabelView = UIView()
+    var walkthroughLabelTitle = UILabel()
+    var walkthroughLabelSeparator = UIView()
     var walkthroughLabel = UILabel()
-    var nextButton = UIButton()
-    
+    var walkthroughNextButton = UIButton()
+    var walkthroughBackButton = UIButton()
     var didSetWalkthrough = false
     
     //
     // Components
-    var walkthroughTexts = ["session0", "session2", "session3", "sessionsBlank", "sessionsBlank", "session4", "sessionBlank", "session5", "session62", "session7"]
+    var walkthroughTexts = ["session0C", "session2", "session3", "session4", "session5"]
     var highlightSize: CGSize? = nil
     var highlightCenter: CGPoint? = nil
     // Corner radius, 0 = height / 2 && 1 = width / 2
@@ -1407,6 +1410,13 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     var walkthroughTextColor = UIColor()
     var highlightColor = UIColor()
     //
+    
+    @objc func backActionWalkthrough() {
+        if walkthroughProgress != 0 && walkthroughProgress != 1 {
+            walkthroughProgress -= 2
+            walkthroughSession()
+        }
+    }
     
     // Walkthrough
     @objc func walkthroughSession() {
@@ -1420,14 +1430,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         }
         let cellHeight = (UIScreen.main.bounds.height - toMinus) * 3/4
         
-        let delayLong = 1.5
         let delayShort = 0.6
         
         //
         if didSetWalkthrough == false {
             //
-            nextButton.addTarget(self, action: #selector(walkthroughSession), for: .touchUpInside)
-            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
+            walkthroughNextButton.addTarget(self, action: #selector(walkthroughSession), for: .touchUpInside)
+            walkthroughBackButton.addTarget(self, action: #selector(backActionWalkthrough), for: .touchUpInside)
+            
+            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, separator: walkthroughLabelSeparator, nextButton: walkthroughNextButton, backButton: walkthroughBackButton, highlight: walkthroughHighlight, simplePopup: false)
             didSetWalkthrough = true
         }
         
@@ -1436,29 +1447,48 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             // First has to be done differently
         // Sets x Reps
         case 0:
+            
             //
+            walkthroughLabelTitle.text = NSLocalizedString(walkthroughTexts[walkthroughProgress] + "T", comment: "")
+            
             walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
-            walkthroughLabel.sizeToFit()
-            walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + ControlBarHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            walkthroughLabel.frame.size = walkthroughLabel.sizeThatFits(CGSize(width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding, height: .greatestFiniteMagnitude))
+            
+            walkthroughLabel.frame = CGRect(
+                x: WalkthroughVariables.padding,
+                y: WalkthroughVariables.topHeight + WalkthroughVariables.padding,
+                width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding,
+                height: walkthroughLabel.frame.size.height)
+            walkthroughLabelView.frame = CGRect(
+                x: 13,
+                y: tableView.frame.maxY - WalkthroughVariables.topHeight - walkthroughLabel.frame.size.height - 13 - WalkthroughVariables.twicePadding,
+                width: view.frame.size.width - 26,
+                height: WalkthroughVariables.topHeight + walkthroughLabel.frame.size.height + WalkthroughVariables.twicePadding)
             
             // Colour
+            walkthroughLabelView.backgroundColor = Colors.light
             walkthroughLabel.textColor = Colors.dark
-            walkthroughLabel.backgroundColor = Colors.light
+            walkthroughLabelTitle.textColor = Colors.dark
+            walkthroughLabelSeparator.backgroundColor = Colors.dark
+            walkthroughNextButton.setTitleColor(Colors.dark, for: .normal)
+            walkthroughBackButton.setTitleColor(Colors.dark, for: .normal)
             walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
             walkthroughHighlight.layer.borderColor = Colors.light.cgColor
-            // Highlight
-            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
-            walkthroughHighlight.frame.size = CGSize(width: cell.setsRepsLabel.frame.width + 16, height: cell.setsRepsLabel.frame.height + 4)
-            walkthroughHighlight.center = cell.setsRepsLabel.center
-            walkthroughHighlight.center.y += toAdd
-            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
+            
             
             //
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+            
+            
             // Flash
-            
-            //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
+                self.walkthroughHighlight.frame.size = CGSize(width: cell.setsRepsLabel.frame.width + 16, height: cell.setsRepsLabel.frame.height + 4)
+                self.walkthroughHighlight.center = cell.setsRepsLabel.center
+                self.walkthroughHighlight.center.y += toAdd
+                self.walkthroughHighlight.layer.cornerRadius = self.walkthroughHighlight.bounds.height / 2
+                
                 self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
@@ -1467,11 +1497,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 }, completion: nil)
             })
             
-            //
             walkthroughProgress = self.walkthroughProgress + 1
             
-            
-        // Demonstration
+        // Demonstration (+ target area)
         case 1:
             //
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
@@ -1481,214 +1509,69 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             highlightCornerRadius = 0
             // Top of view
-            labelFrame = 1
-            //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
-            highlightColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
-        // Target Area Explanation
-        case 2:
-            //
-            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
-            highlightSize = cell.indicatorStack.frame.size
-            highlightCenter = cell.indicatorStack.center
-            highlightCenter?.y += toAdd
-            //
-            highlightCornerRadius = 0
-            // Top
-            labelFrame = 1
-            //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
-            highlightColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-        // Target Area Swipe and return
-        case 3:
-            
-            // Get rid of explanation
-            //
-            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
-            highlightSize = cell.indicatorStack.frame.size
-            highlightCenter = cell.indicatorStack.center
-            highlightCenter?.y += toAdd
-            //
-            highlightCornerRadius = 0
-            //
             labelFrame = 0
             //
             walkthroughBackgroundColor = Colors.light
             walkthroughTextColor = Colors.dark
             highlightColor = Colors.light
             //
-            nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-            
-            
-            // Swipe demonstration
-            let leftSwipe = UIView()
-            leftSwipe.frame.size = CGSize(width: 50, height: 50)
-            leftSwipe.backgroundColor = Colors.light
-            leftSwipe.layer.cornerRadius = 25
-            leftSwipe.clipsToBounds = true
-            leftSwipe.center.y = ControlBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
-            leftSwipe.center.x = view.bounds.width * (7/8)
+            nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+
             //
-            nextButton.isEnabled = false
-            //
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort - 0.2, execute: {
-                UIApplication.shared.keyWindow?.insertSubview(leftSwipe, aboveSubview: self.walkthroughView)
-                // Animate swipe demonstration
-                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    //
-                    leftSwipe.center.x = self.view.bounds.width * (1/8)
-                    //
-                }, completion: { finished in
-                    self.nextButton.isEnabled = true
-                    //
-                    leftSwipe.removeFromSuperview()
-                    //
-                    self.walkthroughProgress = self.walkthroughProgress + 1
-                    self.walkthroughSession()
-                })
-            })
-            // Perform swipe action
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
-                let leftSwipeSimulate = UISwipeGestureRecognizer()
-                leftSwipeSimulate.direction = .left
-                self.handleSwipes(extraSwipe: leftSwipeSimulate)
-            })
+            walkthroughProgress = self.walkthroughProgress + 1
             
             
-        // Return to demonstration and Explanation
-        case 4:
+        // Explanation
+        case 2:
             //
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
-            highlightSize = cell.indicatorStack.frame.size
-            highlightCenter = cell.indicatorStack.center
+            highlightSize = cell.explanationButton.frame.size
+            highlightCenter = cell.explanationButton.center
             highlightCenter?.y += toAdd
             //
             highlightCornerRadius = 0
             // Top
-            labelFrame = 1
+            labelFrame = 0
             //
             walkthroughBackgroundColor = Colors.light
             walkthroughTextColor = Colors.dark
             highlightColor = Colors.light
+            walkthroughHighlight.alpha = 1
             //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+
             //
-            self.walkthroughProgress = self.walkthroughProgress + 1
+            walkthroughProgress = self.walkthroughProgress + 1
             
+        // Next Movement
+        case 3:
+            //
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
+            highlightSize = cell.explanationButton.frame.size
+            highlightCenter = cell.explanationButton.center
+            highlightCenter?.y += toAdd
+            //
+            highlightCornerRadius = 0
+            // Top
+            labelFrame = 0
+            //
+            walkthroughBackgroundColor = Colors.light
+            walkthroughTextColor = Colors.dark
+            highlightColor = Colors.light
+            walkthroughHighlight.alpha = 0
+            //
+            nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
+            //
+            walkthroughProgress = self.walkthroughProgress + 1
+            
+        // Next movement demonstration and then go to finish early
+        case 4:
+            //
+            walkthroughLabelView.alpha = 0
             //
             // Swipe demonstration
-            nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
-                //
-                let rightSwipe = UIView()
-                rightSwipe.frame.size = CGSize(width: 50, height: 50)
-                rightSwipe.backgroundColor = Colors.light
-                rightSwipe.layer.cornerRadius = 25
-                rightSwipe.clipsToBounds = true
-                rightSwipe.center.y = ControlBarHeights.statusBarHeight + ((cellHeight * (7/8)) / 2) + 2
-                rightSwipe.center.x = self.view.bounds.width * (1/8)
-                UIApplication.shared.keyWindow?.insertSubview(rightSwipe, aboveSubview: self.walkthroughView)
-                // Perform swipe action
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
-                    let rightSwipeSimulate = UISwipeGestureRecognizer()
-                    rightSwipeSimulate.direction = .right
-                    self.handleSwipes(extraSwipe: rightSwipeSimulate)
-                })
-                // Animate swipe demonstration
-                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    //
-                    rightSwipe.center.x = self.view.bounds.width * (7/8)
-                    //
-                }, completion: { finished in
-                    self.nextButton.isEnabled = true
-                    //
-                    rightSwipe.removeFromSuperview()
-                    
-                    //
-                    // Explanation explanation
-                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
-                    self.highlightSize = cell.explanationButton.frame.size
-                    self.highlightCenter = cell.explanationButton.center
-                    self.highlightCenter?.y += toAdd
-                    //
-                    self.highlightCornerRadius = 0
-                    // Top
-                    self.labelFrame = 1
-                    //
-                    self.walkthroughBackgroundColor = Colors.light
-                    self.walkthroughTextColor = Colors.dark
-                    self.highlightColor = Colors.light
-                    //
-                    self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-                    
-                    //
-                    self.walkthroughProgress = self.walkthroughProgress + 1
-                })
-            })
-            
-            
-            // Explanation open and Next Movement
-        // Case 6 not 5 as + 1 to walkthroughprogress twice in case 4 for label reasons (need an empty label)
-        case 6:
-            backgroundViewExplanation.isEnabled = false
-            expandExplanation()
-            //
-            //
-            self.walkthroughProgress = self.walkthroughProgress + 1
-            //
-            // Next Movement
-            nextButton.isEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayLong, execute: {
-                //
-                self.nextButton.isEnabled = true
-                self.backgroundViewExplanation.isEnabled = true
-                //
-                self.retractExplanation(self)
-                
-                //
-                // Explanation explanation
-                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
-                self.highlightSize = CGSize(width: 0, height: 0)
-                self.highlightCenter = cell.explanationButton.center
-                self.highlightCenter?.y += toAdd
-                //
-                self.highlightCornerRadius = 0
-                // Top
-                self.labelFrame = 1
-                //
-                self.walkthroughBackgroundColor = Colors.light
-                self.walkthroughTextColor = Colors.dark
-                self.highlightColor = .clear
-                //
-                self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
-                //
-                self.walkthroughProgress = self.walkthroughProgress + 1
-            })
-            
-            
-            // Progress
-        // Case 8 not 7 as + 1 to walkthroughprogress twice in case 6 for label reasons (need an empty label)
-        case 8:
-            //
-            walkthroughLabel.alpha = 0
-            //
-            // Swipe demonstration
-            nextButton.isEnabled = false
+            walkthroughNextButton.isEnabled = false
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayShort, execute: {
                 //
                 let upSwipe = UIView()
@@ -1730,15 +1613,16 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                             downSwipe.center.y = ControlBarHeights.statusBarHeight + (cellHeight * (7/8)) + 2
                             //
                         }, completion: { finished in
-                            self.nextButton.isEnabled = true
+                            self.walkthroughNextButton.isEnabled = true
                             //
                             downSwipe.removeFromSuperview()
                             //
-                            self.walkthroughLabel.alpha = 1
+                            self.walkthroughLabelView.alpha = 1
                             //
-                            self.highlightSize = CGSize(width: self.view.bounds.width, height: 8)
-                            self.highlightCenter = CGPoint(x: self.view.bounds.width / 2, y: ControlBarHeights.statusBarHeight + 1)
+                            self.highlightSize = CGSize(width: 36, height: 36)
+                            self.highlightCenter = CGPoint(x: 27, y: ControlBarHeights.statusBarHeight + 2 + 5 + 22)
                             self.highlightCornerRadius = 0
+                            self.walkthroughHighlight.alpha = 1
                             //
                             self.labelFrame = 0
                             //
@@ -1746,7 +1630,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                             self.walkthroughTextColor = Colors.dark
                             self.highlightColor = Colors.light
                             //
-                            self.nextWalkthroughView(walkthroughView: self.walkthroughView, walkthroughLabel: self.walkthroughLabel, walkthroughHighlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.highlightColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
+                            self.nextWalkthroughViewTest(walkthroughView: self.walkthroughView, labelView: self.walkthroughLabelView, label: self.walkthroughLabel, title: self.walkthroughLabelTitle, highlight: self.walkthroughHighlight, walkthroughTexts: self.walkthroughTexts, walkthroughLabelFrame: self.labelFrame, highlightSize: self.highlightSize!, highlightCenter: self.highlightCenter!, highlightCornerRadius: self.highlightCornerRadius, backgroundColor: self.walkthroughBackgroundColor, textColor: self.walkthroughTextColor, highlightColor: self.walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: self.walkthroughProgress)
                             //
                             self.walkthroughProgress = self.walkthroughProgress + 1
                             
@@ -1755,33 +1639,12 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 })
             })
             
-            
-        // Finish Early
-        case 9:
-            //
-            highlightSize = CGSize(width: 36, height: 36)
-            highlightCenter = CGPoint(x: 27, y: ControlBarHeights.statusBarHeight + 2 + 5 + 22)
-            highlightCornerRadius = 0
-            //
-            labelFrame = 0
-            //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
-            highlightColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            //
-            
-            
         //
         default:
-            //
             UIView.animate(withDuration: 0.4, animations: {
                 self.walkthroughView.alpha = 0
             }, completion: { finished in
+                self.didSetWalkthrough = false
                 self.walkthroughView.removeFromSuperview()
                 var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
                 walkthroughs["Session2"] = true

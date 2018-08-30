@@ -17,7 +17,6 @@ class LessonsScreen: UIViewController {
     
     // Navigation
     @IBOutlet weak var navigationBar: UINavigationItem!
-    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var lessonScroll: UIScrollView!
     var lessonsLabel = UILabel()
     
@@ -33,15 +32,12 @@ class LessonsScreen: UIViewController {
         super.viewDidLoad()
         // Title
         navigationBar.title = NSLocalizedString(lessonsArray[selectedLesson[0]][selectedLesson[1]], comment: "")
-        
-        // Begin Button
-        backButton.setTitle(NSLocalizedString("back", comment: ""), for: .normal)
-        backButton.backgroundColor = Colors.green
-        backButton.setTitleColor(Colors.dark, for: .normal)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        view.backgroundColor = Colors.light
         
         // Label
         let lessonTextString = lessonsArray[selectedLesson[0]][selectedLesson[1]] + "Lesson"
@@ -70,11 +66,4 @@ class LessonsScreen: UIViewController {
         lessonScroll.contentSize = CGSize(width: lessonsLabel.bounds.width, height: lessonsLabel.bounds.height + 40)
         lessonScroll.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     }
-    
-    // MARK: Actions
-    
-    @IBAction func backButtonAction(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-    //
 }

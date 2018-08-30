@@ -38,9 +38,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    //
-    var offView = UIView()
     var onOffSwitch = UISwitch()
+    
+    var presentingWalkthrough = false
     
     //
     // Arrays --------------------------------------------------------------------------------------------------
@@ -181,25 +181,18 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
     }
     
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        // Off View
-        offView.backgroundColor = Colors.dark
-        offView.alpha = 0.5
-        let yPosition = CGFloat(91)
-        offView.frame = CGRect(x: 0, y: yPosition, width: self.view.frame.size.width, height: view.frame.size.height - yPosition)
-        
-        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        // Retreive Presentation Style
-        if settings["AutomaticYoga"]![0] == 0 {
-            view.insertSubview(offView, aboveSubview: tableViewAutomatic)
-            tableViewAutomatic.isScrollEnabled = false
+        // Present walkthrough
+        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+        if walkthroughs["AutomaticYoga"] == false {
+            if !presentingWalkthrough {
+                presentingWalkthrough = true
+                walkthroughAutomaticYoga()
+            }
         }
     }
-    
-    
     //
     // Table View --------------------------------------------------------------------------------------------------
     //
@@ -719,37 +712,11 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         // off -> on
         if sender.isOn {
-            //
             settings["AutomaticYoga"]![0] = 1
-            //
-            // Off view
-            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.offView.alpha = 0
-            }, completion: { finished in
-                self.offView.removeFromSuperview()
-                self.tableViewAutomatic.isScrollEnabled = true
-            })
-            //
-            // Present walkthrough
-            let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-            if walkthroughs["AutomaticYoga"] == false {
-                walkthroughAutomaticYoga()
-            }
+            
             // on -> off
         } else {
-            //
             settings["AutomaticYoga"]![0] = 0
-            //
-            //
-            offView.alpha = 0
-            view.insertSubview(offView, aboveSubview: tableViewAutomatic)
-            //
-            // Off view
-            UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.offView.alpha = 0.5
-            }, completion: { finished in
-                self.tableViewAutomatic.isScrollEnabled = false
-            })
         }
         //
         UserDefaults.standard.set(settings, forKey: "userSettings")
@@ -765,9 +732,12 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var walkthroughProgress = 0
     var walkthroughView = UIView()
     var walkthroughHighlight = UIView()
+    var walkthroughLabelView = UIView()
+    var walkthroughLabelTitle = UILabel()
+    var walkthroughLabelSeparator = UIView()
     var walkthroughLabel = UILabel()
-    var nextButton = UIButton()
-    
+    var walkthroughNextButton = UIButton()
+    var walkthroughBackButton = UIButton()
     var didSetWalkthrough = false
     
     //
@@ -782,14 +752,23 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var walkthroughBackgroundColor = UIColor()
     var walkthroughTextColor = UIColor()
     
+    @objc func backActionWalkthrough() {
+        if walkthroughProgress != 0 && walkthroughProgress != 1 {
+            walkthroughProgress -= 2
+            walkthroughAutomaticYoga()
+        }
+    }
+    
     // Walkthrough
     @objc func walkthroughAutomaticYoga() {
         
         //
         if didSetWalkthrough == false {
             //
-            nextButton.addTarget(self, action: #selector(walkthroughAutomaticYoga), for: .touchUpInside)
-            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, nextButton: nextButton)
+            walkthroughNextButton.addTarget(self, action: #selector(walkthroughAutomaticYoga), for: .touchUpInside)
+            walkthroughBackButton.addTarget(self, action: #selector(backActionWalkthrough), for: .touchUpInside)
+            
+            walkthroughView = setWalkthrough(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, separator: walkthroughLabelSeparator, nextButton: walkthroughNextButton, backButton: walkthroughBackButton, highlight: walkthroughHighlight, simplePopup: false)
             didSetWalkthrough = true
         }
         
@@ -798,27 +777,44 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // First has to be done differently
         // Walkthrough explanation
         case 0:
+            
             //
+            walkthroughLabelTitle.text = NSLocalizedString(walkthroughTexts[walkthroughProgress] + "T", comment: "")
+            
             walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
-            walkthroughLabel.sizeToFit()
-            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            walkthroughLabel.frame.size = walkthroughLabel.sizeThatFits(CGSize(width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding, height: .greatestFiniteMagnitude))
+            
+            walkthroughLabel.frame = CGRect(
+                x: WalkthroughVariables.padding,
+                y: WalkthroughVariables.topHeight + WalkthroughVariables.padding,
+                width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding,
+                height: walkthroughLabel.frame.size.height)
+            walkthroughLabelView.frame = CGRect(
+                x: 13,
+                y: (tabBarController?.tabBar.frame.minY)! - WalkthroughVariables.topHeight - walkthroughLabel.frame.size.height - 13 - WalkthroughVariables.twicePadding,
+                width: view.frame.size.width - 26,
+                height: WalkthroughVariables.topHeight + walkthroughLabel.frame.size.height + WalkthroughVariables.twicePadding)
             
             // Colour
+            walkthroughLabelView.backgroundColor = Colors.dark
             walkthroughLabel.textColor = Colors.light
-            walkthroughLabel.backgroundColor = Colors.dark
+            walkthroughLabelTitle.textColor = Colors.light
+            walkthroughLabelSeparator.backgroundColor = Colors.light
+            walkthroughNextButton.setTitleColor(Colors.light, for: .normal)
+            walkthroughBackButton.setTitleColor(Colors.light, for: .normal)
             walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
             walkthroughHighlight.layer.borderColor = Colors.dark.cgColor
-            // Highlight
-            let section = tableViewAutomatic.rect(forSection: 1)
-            walkthroughHighlight.frame = CGRect(x: 8, y: section.minY + 24.5, width: view.bounds.width - 16, height: 44)
-            walkthroughHighlight.center.y += ControlBarHeights.combinedHeight
-            walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 4
+            
             
             //
+            let cell = tableViewAutomatic.cellForRow(at: IndexPath(row: 0, section: 1))
+            
             // Flash
-            //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
+                self.walkthroughHighlight.frame = CGRect(x: 8, y: ControlBarHeights.combinedHeight + (cell?.frame.minY)!, width: self.view.bounds.width - 16, height: 44)
+                self.walkthroughHighlight.layer.cornerRadius = self.walkthroughHighlight.bounds.height / 4
+                
                 self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
@@ -827,49 +823,40 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }, completion: nil)
             })
             
-            //
             walkthroughProgress = self.walkthroughProgress + 1
             
             
         // Transition time
         case 1:
-            //
-            let section = tableViewAutomatic.rect(forSection: 1)
+            
+            let cell = tableViewAutomatic.cellForRow(at: IndexPath(row: 1, section: 1))
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 24.5 + 44 + 22)
-            highlightCenter?.y += ControlBarHeights.combinedHeight
-            //
+            highlightCenter = CGPoint(x: (cell?.center.x)!, y: ControlBarHeights.combinedHeight + (cell?.center.y)!)
+
             highlightCornerRadius = 2
-            //
-            labelFrame = 0
-            //
+            
             walkthroughBackgroundColor = Colors.dark
             walkthroughTextColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
-            //
+            nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
             walkthroughProgress = self.walkthroughProgress + 1
             
             
         // Transition indicator
         case 2:
-            //
-            let section = tableViewAutomatic.rect(forSection: 1)
+            
+            let cell = tableViewAutomatic.cellForRow(at: IndexPath(row: 2, section: 1))
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
-            highlightCenter = CGPoint(x: view.bounds.width / 2, y: section.minY + 24.5 + 44 + 44 + 22)
-            highlightCenter?.y += ControlBarHeights.combinedHeight
-            //
+            highlightCenter = CGPoint(x: (cell?.center.x)!, y: ControlBarHeights.combinedHeight + (cell?.center.y)!)
+            
             highlightCornerRadius = 2
-            //
-            labelFrame = 0
-            //
+            
             walkthroughBackgroundColor = Colors.dark
             walkthroughTextColor = Colors.light
-            //
-            nextWalkthroughView(walkthroughView: walkthroughView, walkthroughLabel: walkthroughLabel, walkthroughHighlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
-            //
+            nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
+            
             walkthroughProgress = self.walkthroughProgress + 1
             
             

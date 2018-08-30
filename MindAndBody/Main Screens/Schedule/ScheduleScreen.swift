@@ -103,17 +103,25 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var explanationLabel = UILabel()
     var nextButtonExplanation = UIButton()
     
+    // Variable that is set to current day, if app is opened and current day is different to this variabe then the schedule goes to the current day, if not then stays on whatever day it was on
+        // Ensures that upon opening the app for the first time on a day, the schedule presents the current day
+    var currentDay = 0
+    
     //
     // Walkthrough
     var walkthroughProgress = 0
     var walkthroughView = UIView()
     var walkthroughHighlight = UIView()
+    var walkthroughLabelView = UIView()
+    var walkthroughLabelTitle = UILabel()
+    var walkthroughLabelSeparator = UIView()
     var walkthroughLabel = UILabel()
-    var nextButton = UIButton()
+    var walkthroughNextButton = UIButton()
+    var walkthroughBackButton = UIButton()
     var didSetWalkthrough = false
     //
     // Components
-    var walkthroughTexts = ["schedule0", "schedule1", "schedule2", "schedule3", "schedule4", "schedule5", "schedule6", "schedule7", "schedule8", "schedule9"]
+    var walkthroughTexts = ["schedule0", "schedule1", "schedule2", "schedule3", "schedule4", "schedule5", "schedule6"]
     var highlightSize: CGSize? = nil
     var highlightCenter: CGPoint? = nil
     // Corner radius, 0 = height / 2 && 1 = width / 2
@@ -139,15 +147,18 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Check if reset necessary
+        ScheduleVariables.shared.resetWeekTracking()
+        
         // Add here incase image changed in settings
         addBackgroundImage(withBlur: true, fullScreen: false)
         
-        // Reload to be sure
+        // Reload scheudle style to be sure
         setScheduleStyle()
-        //
+        
         // Check if necessary to go to current day
         checkSelectedDay()
-        //
+        
         // Ensure dayIndicator in correct position / not visible && if week view, update temporary full week array
         if scheduleStyle == 0 {
             self.view.layoutIfNeeded()
@@ -156,9 +167,10 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             dayIndicator.alpha = 0
             TemporaryWeekArray.shared.createTemporaryWeekViewArray()
         }
+        
         // Reload the view if requested by previous view
         reloadView()
-        //
+        
         scheduleTableScrollCheck()
     }
     
@@ -179,11 +191,10 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        walkthroughSchedule()
+        
         // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)
         NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
-        
-        // Check if reset necessary
-        ScheduleVariables.shared.resetWeekTracking()
         
         // Subscriptions
         // Checking subscription is valid, (present loading during check)

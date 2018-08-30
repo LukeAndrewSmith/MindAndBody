@@ -101,6 +101,19 @@ enum AnimationTimes {
 }
 
 //
+// Walkthrough ---------------------------------------------------------------------------------------------------------------
+enum WalkthroughVariables {
+    // Title bar height
+    static let topHeight: CGFloat = 49 * (3/4)
+    // Label padding
+    static let padding: CGFloat = 8
+    static let twicePadding: CGFloat = padding * 2
+    // View padding
+    static let viewPadding: CGFloat = 13
+    static let twiceViewPadding: CGFloat = viewPadding * 2
+}
+
+//
 // Navigation + Status height ---------------------------------------------------------------------------------------------------------------
 enum ControlBarHeights {
     // Shouldn't be hard coded!!!! (but currently not in a view controller so not sure how to access them at run time)
@@ -190,8 +203,7 @@ class ScheduleVariables {
     // Last Day
     // Checks if last day on the app was opened was yesterday, if so the schedule is animated to the correct day, and this flag is set to today
     // Ensures that on the first open of the app on any day, the correct day on the schedule is presented
-    var lastDayOpened: Date? = nil
-    //Date().firstMondayInCurrentWeek
+    var lastDayOpened = 0
     
     
     // Note, this function should be somewhere else

@@ -50,8 +50,6 @@ enum Register {
             "Session2": false,
             // Schedule
             "Schedule": false,
-            // Tracking
-            "Tracking": false,
             // Settings
             "Settings": false,
             // Automatic Yoga

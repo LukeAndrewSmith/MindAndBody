@@ -3146,8 +3146,8 @@
 "practiceLength" = "Practice Length";
 // Endurance --------
 "enduranceToDo" = "Endurance - To Do";
-"enduranceType" = "Endurance - Type";
-"enduranceType2" = "Endurance - Type - 2";
+"enduranceType" = "Endurance - Style";
+"enduranceType2" = "Endurance - Type";
 "steadyState" = "Steady State (Without the app)";
 "intervalLength" = "Interval Length";
 // Choice 1
@@ -3163,19 +3163,6 @@
 "hamstrings" = "Hamstrings";
 "hips" = "Hips";
 "back\neck" = "Back\neck";
-
-// Choice explanations, see sessionData.sessionChoiceExplanations, and scheduleHelpers needsExplanation to see what explanations are necessary ----
-// Workout
-"workoutStyleE" = "Classic:  Each movement is repeated a number of times (reps) to form a set, and each set repeated a number of times with breaks before going to the next movement.\n\nCircuit:  A series of movements performed without pause form one round which is repeated in a circuit a number of times with pauses between each round.\n\nNote: Circuit workouts are quicker and require more endurance, classic workouts are good in the gym, especially for gaining strength.";
-// Yoga
-"yogaTypeE" = "";
-// Meditation
-// Endurance
-"enduranceTypeE" = "";
-"intervalLengthE" = "";
-// Flexibility
-// Extra Sessions
-"extraSessionE" = "";
 
 // Endurance popup
 "endurancePopupTitle" = "Steady state";
@@ -3555,79 +3542,101 @@
 //
 // Walkthrough
 //
+"next" = "Next";
+"ok" = "Ok";
     // Mind Body
         // Mind Body
         "customWalkthrough" = "You can create custom sessions here.";
 
         // Schedule
-        "schedule0" = "Walkthrough:\nOn the first viewing of important screens, explanations of highlighted objects appear. Here, the 'Mind & Body' title is highlighted at the top, the highlight will move to bring attention to different features. Tap anywhere to continue.";
-        "schedule1" = "Schedule Screen:\nYour schedules, once made, will be found here.";
-        "schedule2" = "Schedules:\nCreate, select and edit schedules from this button. You also edit your profile here. Your profile is what enables the app to choose sessions for you, so update it whenever you feel you've improved.";
-        "schedule3" = "Menu:\nAccess the menu to navigate the main screens of the app.";
-        "schedule4" = "Sessions:\nAll sessions (Workout, Yoga etc.) are sorted here, and custom sessions can be made here.\nNote: This screen is mainly for people who wish to use the app without the schedule, as the schedule takes you directly to the sessions best for you.";
-        "schedule5" = "Schedule:\nWhere we just came from. Your home in the app.";
-        "schedule6" = "Tracking:\nWhat you've done as a percentage of what you planned is presented in graphs here.";
-        "schedule7" = "Lessons:\nUseful lessons regarding mind & body are found here. They are presented in the schedule at revelant times, and can help you to get the most out of the app.";
-        "schedule8" = "Settings:\nPersonalise the app, changing the background image, choosing units etc...";
-        "schedule9" = "What next?\nHow about creating a schedule (by pressing the highlighted button). All you need to do then is to follow it, check tracking every now and again and maybe change some settings (like eventually turning automatic yoga/timed sessions on).";
-        //
-        "longPressNoteWalkthrough" = "Note:\nYou can press and hold a session for 2s to mark it as completed. This is so that if you complete your session without using the app, you can still easily track it.";
+"schedule0T" = "Walkthrough";
+        "schedule0" = "A few important features are highlighted (e.g here the title) and explained.";
+"schedule1T" = "Current Schedule";
+        "schedule1" = "Your current schedule, once made, is found on this screen.";
+"schedule2T" = "Schedules";
+        "schedule2" = "Create, edit and choose schedules from this button (top right).";
+"schedule3T" = "Tracking";
+        "schedule3" = "What you've acheived as a percentage of what you planned is tracked in graphs here.";
+"schedule4T" = "Lessons";
+        "schedule4" = "Some useful lessons regarding mind & body are found here.";
+"schedule5T" = "Settings";
+        "schedule5" = "Settings:\nPersonalise the app, changing the background image, choosing units etc...\nYour profile is also here (you'll first fill it in when creating a schedule)";
+"schedule6T" = "What next?";
+        "schedule6" = "How about creating a schedule (top right). Then simply follow it, checking tracking on occassion to motivate you to keep to it. Simple!";
 
-        // Tracking
-        "tracking0" = "Goal:\nThe green line is 100%, it represents the amount sessions you planned.\nYou can touch the graph to see specific percentages.";
-        "tracking1" = "Time Scale:\nChange the time scale to view that data of a week, a month, a years...";
 
-        // Profile
-        "profile0" = "Sections:\nAnswer all the questions in each section.";
-        "profile1" = "Update Schedule:\nPress update schedule once all the questions are answered, you will then be able to decide when to do each session.";
+// Choice explanations, see sessionData.sessionChoiceExplanations, and scheduleHelpers needsExplanation to see what explanations are necessary ----
+// Workout
+"workoutStyleET" = "Workout Style";
+"workoutStyleE" = "Classic:  The movements are performed one at a time, with breaks in between.\n\nCircuit:  A series of movements performed without pause form a round which is repeated in a circuit with pauses in between.\n\nNote: Circuit workouts are quicker and require more endurance, classic workouts are good in the gym, especially for gaining strength.";
+// Yoga
+"yogaTypeET" = "Yoga Type";
+"yogaTypeE" = "Relaxing:  More breaths in each pose, more meditative.\n\nNeutral:  Less breaths in each pose, contains more balance oriented poses.\n\nStimulating:  Short practices with few breaths and lots of poses so you move about more.";
+// Meditation
+// Endurance
+"enduranceTypeET" = "Endurance Type";
+"enduranceTypeE" = "HIIT:  Alternating high intensity cardio (e.g running fast) and low intensity (e.g pauses or jogging), very good for short but intense and effective cardio training.\n\nBodyweight:  Intense bodyweight workouts with lots of endurance oriented movements.\n\nSteady State:  e.g Running/Biking for a number of kilometers, you warmup and stretch with the app and go off and do the cardio yourself.";
+"intervalLengthET" = "Interval Length";
+"intervalLengthE" = "The length of time of each high intensity (e.g sprinting) and low intensity (e.g jogging) interval. Beginners should start with longer intervals as they are less taxing on the body.";
+// Flexibility
+// Extra Sessions
+"extraSessionET" = "Extra Session";
+"extraSessionE" = "Extra sessions on top of the schedule that are still tracked by the app, for whenever you feel like doing more than planned!";
 
-            // Me
-            "me0" = "Me:\nAnswer all questions so the app can suggest sessions relevant to you.\nReturn here if you/your abilities change to edit your answers.";
-
-            // Goals
-            "goals0" = "Goals:\nRate how important each goal is to you on a scale of 0-3 (0 - not a goal, 2 - primary goal, 1 - secondary goal) using the slider.\nRate only the goals you would like the app to help you achieve.";
-
-            // Sessions
-            "nSessions0" = "Min-Max Nº possible hours per week; reduce if you lack the time (it might not be as much as you think and you can reduce later). The Nº sessions of each group can be changed underneath, with the recommended range shown in green.";
 
         // Settings
-//        "settings0" = "Home Page:\nChoose the default screen of the app";
-//        "settings1" = "Timed Sessions:\nYou can put down your phone and simply follow what the app says.\nNOTE: Perform non-timed sessions until you have got a good understanding of the movements regularly presented (by reading their explanations).";
-//        "settings2" = "Automatic Yoga:\nTimed sessions for yoga; you have to set your average breath length to enable it.\nNOTE: Perform non-timed yoga first, reading the explanations of each pose until you are comfortable with the techniques.";
-//        "settings3" = "Reminders:\nThe app can send reminders indicating the number of sessions planned in the morning/afternoon at times you set. You can also choose to turn off the motivating comments included in the reminders here.";
-
-"settings0" = "Profile:\nYour schedule chooses sessions for you based on your profile, update it whenever you have improved to keep the sessions tailored to you.";
-"settings1" = "Automatic Sessions:\n'30s' of a movement rather than '10 reps'; the app times each movement and rest for you, just watch and follow.\nAutomatic Yoga is the same but some extra settings need to be personalised to enable it.";
-"settings2" = "Reminders:\nNotifications that let you know what you have planned.";
+"settings0T" = "Profile";
+"settings0" = "Your schedule chooses sessions for you based on your profile, update it whenever you have improved to keep the sessions tailored to you.";
+"settings1T" = "Automatic Sessions";
+"settings1" = "'30s' of a movement rather than '10 reps'; the app times each movement and rest for you, just watch and follow.\nAutomatic Yoga is the same but some extra settings need to be personalised to enable it.";
+"settings2T" = "Reminders";
+"settings2" = "Notifications that let you know what you have planned.";
+"settings3T" = "Custom";
+"settings3" = "Custom sessions can be chosen in the schedule. Turning this setting on means that not only the session (e.g workout, yoga) is custom, but also the warmup and stretching.";
 
         // Automatic Yoga
-        "automaticYoga0" = "Average Breath Length:\nThe length of your average breath when doing yoga. A breath being both inhale and exhale, it can be calculated by timing 10-30 breaths and then dividing by the number of breaths.";
-        "automaticYoga1" = "Transition Time:\nThe average length of time you would for changing poses.";
-        "automaticYoga2" = "Transition Indicator:\nA sound to indicate when to change pose.";
+"automaticYoga0T" = "Average Breath Length";
+        "automaticYoga0" = "The length of your average breath when doing yoga.\nA breath is both inhale and exhale, and can be calculated by timing between 10-30 slow breaths and then dividing by the number of breaths.";
+"automaticYoga1T" = "Transition Time";
+        "automaticYoga1" = "The length of time you need to change pose.";
+"automaticYoga2T" = "Transition Indicator";
+        "automaticYoga2" = "A sound to indicate when to change pose.";
 
         // Session Screen
-        "sessionsBlank" = "";
-        "session0" = "Sets x Reps:\nReps: The number of repetitions in a set (or sometimes a length of time\number of breaths)\nSets: The number of sets to perform (no indication = 1 set)";
-        "session1" = "Rest Timer:\nPress a rest button upon completion of a set; the app will notify you when to begin the next set (rest times can be changed in the app settings).";
-        "session2" = "Demonstration:\nIf the left indicator is a green arrow, a sequence of images can be viewed by tapping the image. This is to supplement the written explanation.";
-        "session3" = "Target Area:\nSwipe left to view the target area image (then swipe right to return). Understanding the target area of a movement can help you to perform it better.";
-        "session4" = "Explanation:\nAn explanation of the movement is found here. Explanations are important for understanding the details of each movement, thereby helping to get the most out of them.";
-        "session5" = "Next Movement:\nSwipe up to go to the next movement (and swipe down to go to the previous).";
-        "session6" = "Progress Bar:\nYour progress in the session is seen at the top of the screen.";
-        "session7" = "Finish Early:\nNote: The schedule won't track the session unless you finish it and press 'End Session' at the bottom ('End Session' appears after the last movement).";
+"session0T" = "Sets x Reps";
+        "session0" = "Reps: The number of repetitions in a set (or a length of time / nº breaths)\nSets: The number of sets to perform (no indication => 1 set)";
+"session1T" = "Rest Timer";
+        "session1" = "Press a rest button upon completion of a set; the app will notify you when to begin the next set.";
+"session2T" = "Demonstration";
+        "session2" = "A green arrow indicates that tapping the image presents a demonstration.\nAn image showing the target area on the body can be viewed by swiping left on the image.";
+"session3T" = "Explanation";
+        "session3" = "Explanations are very important for understanding the details of each movement, and help you to perform them optimally.";
+"session4T" = "Next Movement";
+        "session4" = "Swipe up to go to the next movement.\nYour progress through the session is indicated in the bar at the top.";
+"session5T" = "Finish Early";
+        "session5" = "Note: The schedule won't track the session unless you finish it by pressing the 'End' button at the end of the session.";
 
-        // Gym workout screen
-        "session01" = "Sets x Reps | Weight:\nReps: The number of repetitions in a set (or sometimes a length of time\number of breaths)\nSets: The number of sets to perform (no indication = 1 set)\nWeight: Gym workouts suggest weights, these are only initial suggestions (likely to be not perfect) and should be absolutely updated whenever necessary, click on the weight to change and save it.";
-
-
-        // Circuit Workout Note
-        "session62" = "Progress Bar:\nYour progress in each round is seen at the top of the screen.";
+        // Circuit
+"session0CT" = "Reps";
+        "session0C" = "The number of repetitions of the movement to perform (or a length of time / nº breaths)";
+        // Stretching
+"session0ST" = "Breaths";
+        "session0S" = "The number of breaths to hold a pose for (or nº reps to repeat the movement for)";
+        // Gym workout
+"session01T" = "Sets x Reps | Weight";
+        "session01" = "Reps: The number of repetitions in a set (or length of time / nº breaths)\nSets: The number of sets of reps to perform\nWeight: Suggested weight; only a suggested starting point that should be updated whenever necessary, click to change and save it.";
 
         // Yoga
-        "session02" = "Breaths:\nThe number of breaths to hold a pose for.";
-        "session42" = "Explanation:\nAn explanation of the pose is found here. Explanations are important for understanding the details of each pose, thereby helping to get the most out of them.";
-        "session62" = "Progress Bar:\nYour progress in the practice is seen at the top of the screen.";
-        "session72" = "Finish Early:\nNote: The schedule will not track the practice unless you finish it and press 'End Practice' at the bottom ('End Practice' appears after the last movement).";
+"yogaPractice0T" = "Breaths";
+        "yogaPractice0" = "The number of breaths to hold a pose for.";
+"yogaPractice1T" = "Demonstration";
+        "yogaPractice1" = "A green arrow indicates that tapping the image presents a demonstration.";
+"yogaPractice2T" = "Explanation";
+        "yogaPractice2" = "Explanations are very important for understanding the details of each pose, and help you to perform them optimally.";
+"yogaPractice3T" = "Next Movement";
+        "yogaPractice3" = "Swipe up to go to the next movement.\nYour progress through the session is indicated in the bar at the top.";
+"yogaPractice4T" = "Breaths";
+        "yogaPractice4" = "Finish Early:\nNote: The schedule will not track the practice unless you finish it and press 'End Practice' at the bottom ('End Practice' appears after the last movement).";
 
 
 

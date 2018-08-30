@@ -1884,10 +1884,12 @@ extension ScheduleScreen {
 
         var nRows = 0
         // Note: +1 for extra sessions cell
-        if scheduleStyle == 0 {
-            nRows = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
-        } else {
-            nRows = TemporaryWeekArray.shared.weekArray.count + 1
+        if schedules.count != 0 {
+            if scheduleStyle == 0 {
+                nRows = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
+            } else {
+                nRows = TemporaryWeekArray.shared.weekArray.count + 1
+            }
         }
         
         var rowHeight = Int()
@@ -1958,31 +1960,48 @@ extension ScheduleScreen {
     
     @objc func presentExplanation() {
         
+        let text = sessionData.sessionChoiceExplanations[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]]!
+        
         // Setup
-        nextButtonExplanation.addTarget(self, action: #selector(explanationNextAction), for: .touchUpInside)
-        explanationView = setWalkthrough(walkthroughView: explanationView, walkthroughLabel: explanationLabel, walkthroughHighlight: explanationHighlight, nextButton: nextButtonExplanation)
+        walkthroughNextButton.addTarget(self, action: #selector(explanationNextAction), for: .touchUpInside)
+        walkthroughView = setWalkthrough(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, separator: walkthroughLabelSeparator, nextButton: walkthroughNextButton, backButton: walkthroughBackButton, highlight: walkthroughHighlight, simplePopup: true)
         
         // Label
-        explanationLabel.text = NSLocalizedString(sessionData.sessionChoiceExplanations[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]]!, comment: "")
-        explanationLabel.sizeToFit()
-        explanationLabel.frame = CGRect(x: 13, y: view.frame.maxY - explanationLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: explanationLabel.frame.size.height)
+        walkthroughLabelTitle.text = NSLocalizedString(text + "T", comment: "")
+        
+        walkthroughLabel.text = NSLocalizedString(text, comment: "")
+        walkthroughLabel.frame.size = walkthroughLabel.sizeThatFits(CGSize(width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding, height: .greatestFiniteMagnitude))
+        
+        walkthroughLabel.frame = CGRect(
+            x: WalkthroughVariables.padding,
+            y: WalkthroughVariables.topHeight + WalkthroughVariables.padding,
+            width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding,
+            height: walkthroughLabel.frame.size.height)
+        walkthroughLabelView.frame = CGRect(
+            x: WalkthroughVariables.viewPadding,
+            y: (tabBarController?.tabBar.frame.minY)! - WalkthroughVariables.topHeight - walkthroughLabel.frame.size.height - WalkthroughVariables.viewPadding - WalkthroughVariables.twicePadding,
+            width: view.frame.size.width - WalkthroughVariables.twiceViewPadding,
+            height: WalkthroughVariables.topHeight + walkthroughLabel.frame.size.height + WalkthroughVariables.twicePadding)
         
         // Colour
-        explanationLabel.textColor = Colors.dark
-        explanationLabel.backgroundColor = Colors.light
-        explanationHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
-        explanationHighlight.layer.borderColor = Colors.light.cgColor
+        walkthroughView.alpha = 1
+        walkthroughLabelView.backgroundColor = Colors.dark
+        walkthroughLabel.textColor = Colors.light
+        walkthroughLabelTitle.textColor = Colors.light
+        walkthroughLabelSeparator.backgroundColor = Colors.light
+        walkthroughNextButton.setTitleColor(Colors.light, for: .normal)
+        walkthroughBackButton.setTitleColor(Colors.light, for: .normal)
         
         // Highlight - none
-        explanationHighlight.frame = CGRect.zero
+        walkthroughHighlight.frame = CGRect.zero
     }
     @objc func explanationNextAction() {
         // Dismiss view
         UIView.animate(withDuration: 0.4, animations: {
-            self.explanationView.alpha = 0
+            self.walkthroughView.alpha = 0
         }, completion: { finished in
-            self.explanationView.removeFromSuperview()
-            self.explanationView.alpha = 1
+            self.walkthroughView.alpha = 1
+            self.walkthroughView.removeFromSuperview()
         })
     }
     
@@ -1992,97 +2011,97 @@ extension ScheduleScreen {
         // Once having completed a session from the schedule, this function gets called upon return to the schedule, if the group is complete then the tracking is updated, and the schedule is animated back to the initial choice of groups
     func markAsCompletedAndAnimate() {
         // MARK AS COMPLETED
-        
-        // Extra session
-        if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.isExtraSession {
-            //
-            // Delay so looks nice
-            DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
-                // Reload the finalChoiceScreen Session after a delay
-                let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
-                self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
-                self.selectRow(indexPath: indexPathToReload as IndexPath)
-                self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
+        if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.choiceProgress[0] != -1 {
+            // Extra session
+            if ScheduleVariables.shared.isExtraSession {
                 //
-                // Check if group is completed for the day
-                if self.isGroupCompleted(checkAll: true) {
-                    // Update schedule tracking
-                    // Update Tracking
-                    self.updateWeekProgress()
-                    self.updateTracking()
+                // Delay so looks nice
+                DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
+                    // Reload the finalChoiceScreen Session after a delay
+                    let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
+                    self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+                    self.selectRow(indexPath: indexPathToReload as IndexPath)
+                    self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
                     //
-                    UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                        self.maskView3.backgroundColor = Colors.green
-                        // Slide back to initial choice when completed
-                    }, completion: { finished in
-                        DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
-                            // Slide back
-                            self.backToBeginning()
-//                            ScheduleVariables.shared.choiceProgress[1] = 1
-//                            self.maskAction()
-                        })
-                    })
-                }
-            })
-        
-        // Normal session (NOT MEDITATION, = 72 => MEDITATION)
-        } else if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.selectedRows[1] != 72 {
-            //
-            // Delay so looks nice
-            DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
-                // Reload the finalChoiceScreen Session after a delay
-                let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
-                self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
-                self.selectRow(indexPath: indexPathToReload as IndexPath)
-                self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
-                //
-                // Check if group is completed for the day
-                if self.isGroupCompleted(checkAll: true) {
-                    // Update schedule tracking
-                    self.updateGroupTracking()
-                    //
-                    UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                        self.maskView3.backgroundColor = Colors.green
-                    // Slide back to initial choice when completed
-                    }, completion: { finished in
-                        DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
-                            ScheduleVariables.shared.choiceProgress[1] = 1
-                            self.maskAction()
-                            // Set to false here so the tick doesn;t get loaded before the view has appeared
-                            ScheduleVariables.shared.shouldReloadChoice = false
-                            // Animate initial choice group completion after slideRight() animation finished
-                            let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
-                            DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
-                                let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
-                                self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
-                                self.selectRow(indexPath: indexPathToReload2 as IndexPath)
-                                self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
+                    // Check if group is completed for the day
+                    if self.isGroupCompleted(checkAll: true) {
+                        // Update schedule tracking
+                        // Update Tracking
+                        self.updateWeekProgress()
+                        self.updateTracking()
+                        //
+                        UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                            self.maskView3.backgroundColor = Colors.green
+                            // Slide back to initial choice when completed
+                        }, completion: { finished in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
+                                // Slide back
+                                self.backToBeginning()
+                                ScheduleVariables.shared.shouldReloadChoice = false
                             })
                         })
-                    })
-                }
-            })
-        // Meditation
-        } else if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.selectedRows[1] == 72 {
-            //
-            // Go to initial choice
-            ScheduleVariables.shared.choiceProgress[1] = 1
-            maskAction()
-            //
-            updateGroupTracking()
-            // Mark first instance of group in all other schedules as completed
-            markAsGroupForOtherSchedules(markAs: true)
-            // Set to false here so the tick doesn't get loaded before the view has appeared
-            ScheduleVariables.shared.shouldReloadChoice = false
-            // Animate initial choice group completion after slideRight() animation finished
-            let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
-            DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
-                let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
-                self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
-                self.selectRow(indexPath: indexPathToReload2 as IndexPath)
-                self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
-            })
-            updateDayIndicatorColours()
+                    }
+                })
+            
+            // Normal session (NOT MEDITATION, = 72 => MEDITATION)
+            } else if ScheduleVariables.shared.selectedRows[1] != 72 {
+                //
+                // Delay so looks nice
+                DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
+                    // Reload the finalChoiceScreen Session after a delay
+                    let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
+                    self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+                    self.selectRow(indexPath: indexPathToReload as IndexPath)
+                    self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
+                    //
+                    // Check if group is completed for the day
+                    if self.isGroupCompleted(checkAll: true) {
+                        // Update schedule tracking
+                        self.updateGroupTracking()
+                        //
+                        UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                            self.maskView3.backgroundColor = Colors.green
+                        // Slide back to initial choice when completed
+                        }, completion: { finished in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
+                                ScheduleVariables.shared.choiceProgress[1] = 1
+                                self.maskAction()
+                                // Set to false here so the tick doesn;t get loaded before the view has appeared
+                                ScheduleVariables.shared.shouldReloadChoice = false
+                                // Animate initial choice group completion after slideRight() animation finished
+                                let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
+                                DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
+                                    let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
+                                    self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
+                                    self.selectRow(indexPath: indexPathToReload2 as IndexPath)
+                                    self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
+                                })
+                            })
+                        })
+                    }
+                })
+            // Meditation
+            } else if ScheduleVariables.shared.selectedRows[1] == 72 {
+                //
+                // Go to initial choice
+                ScheduleVariables.shared.choiceProgress[1] = 1
+                maskAction()
+                //
+                updateGroupTracking()
+                // Mark first instance of group in all other schedules as completed
+                markAsGroupForOtherSchedules(markAs: true)
+                // Set to false here so the tick doesn't get loaded before the view has appeared
+                ScheduleVariables.shared.shouldReloadChoice = false
+                // Animate initial choice group completion after slideRight() animation finished
+                let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
+                DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
+                    let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
+                    self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
+                    self.selectRow(indexPath: indexPathToReload2 as IndexPath)
+                    self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
+                })
+                updateDayIndicatorColours()
+            }
         }
     }
     
@@ -2385,12 +2404,12 @@ extension ScheduleScreen {
         // If see each day
         if scheduleStyle == 0 {
             //
-            if ScheduleVariables.shared.lastDayOpened != Date().setToMidnightUTC() {
+            if ScheduleVariables.shared.lastDayOpened != Date().weekDayFromMonday {
                 // Reload
                 ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
                 ScheduleVariables.shared.shouldReloadSchedule = true
                 reloadView()
-                ScheduleVariables.shared.lastDayOpened = Date().setToMidnightUTC()
+                ScheduleVariables.shared.lastDayOpened = Date().weekDayFromMonday
             }
         }
     }

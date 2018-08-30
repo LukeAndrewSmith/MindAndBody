@@ -243,6 +243,12 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
             keys = sessionData.indexArray1
         }
         
+        // If cardio, uses workout images, so need to change for cardio
+        var selectedSession0 = SelectedSession.shared.selectedSession[0]
+        if SelectedSession.shared.selectedSession[0] == "cardio" && SelectedSession.shared.selectedSession[1] == "bodyweight" {
+            selectedSession0 = "workout"
+        }
+        
         // Loop sections (= difficulty levels)
         for i in 0..<numberOfSections {
             imageArray.append([])
@@ -266,7 +272,7 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
                     // Add images
                     for k in 0..<numberOfMovements  {
                         let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]?[k][movementIndex] as! String
-                        let movementImage = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)!
+                        let movementImage = getUncachedImage(named: (sessionData.movements[selectedSession0]![key]?["demonstration"]![0])!)!
                         
                         // Flip asymmetric images for yoga
                         if SelectedSession.shared.selectedSession[0] == "yoga" {
