@@ -64,7 +64,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         //
         //  Navigation Bar
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
         navigationBar.title = NSLocalizedString("lessons", comment: "")
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.navigationController?.navigationBar.tintColor = Colors.light

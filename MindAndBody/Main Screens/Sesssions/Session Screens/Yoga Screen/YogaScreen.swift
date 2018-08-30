@@ -988,11 +988,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
             walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             
-            
-            //
-            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
-            
-            
             // Flash
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //

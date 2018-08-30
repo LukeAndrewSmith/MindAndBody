@@ -60,7 +60,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         
         // Navigation
         navigationBar.title = NSLocalizedString("meditationTimer", comment: "")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         navigationBar.rightBarButtonItem?.tintColor = Colors.light
         
@@ -331,7 +331,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
         
         // Ok action
-        okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { [weak alert] (_) in
+        okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { UIAlertAction in
             self.deleteSessionAction(session: session)
         })
         alert.addAction(okAction)
@@ -421,9 +421,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: Pass Arrays
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        let customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
-        //
+        
         switch segue.identifier {
         // Creating/Editing
         case "editMeditationSegue":

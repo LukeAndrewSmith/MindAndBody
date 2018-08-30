@@ -144,14 +144,14 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         } else {
             navigationBar.title = NSLocalizedString("edit", comment: "")
         }
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
         // Appearance
         self.navigationController?.navigationBar.tintColor = Colors.light
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         // Done button
         navigationBar.leftBarButtonItem?.tintColor = Colors.light
         navigationBar.leftBarButtonItem?.title = NSLocalizedString("done", comment: "")
-        navigationBar.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton], for: .normal)
+        navigationBar.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
         
         
         // BackgroundImage
@@ -1146,13 +1146,13 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             let textField = alert?.textFields![0]
 
             // Update name
-            meditationArray[self.selectedPreset]["Name"]![0][0] = textField?.text
+            meditationArray[self.selectedPreset]["Name"]![0][0] = textField?.text!
             //
             UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
             
-            self.presetsDetail.text = meditationArray[self.selectedPreset]["Name"]![0] as? String
+            self.presetsDetail.text = meditationArray[self.selectedPreset]["Name"]![0][0] as? String
         })
         okAction.isEnabled = false
         alert.addAction(okAction)
@@ -1454,7 +1454,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             // .last = ending bell, [0] = bell
             if meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
                 let indexPath = IndexPath(row: meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int, section: 0)
-//                tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
+                tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             //
             noneButton.frame = CGRect(x: 0, y: selectionHeight + 10, width: selectionWidth, height: 49)

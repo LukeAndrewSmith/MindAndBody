@@ -381,6 +381,8 @@ class MeditationScreen: UIViewController {
         } else if selectedPreset == -1 && BellPlayer.shared.didSetEndTime == false {
             // Get the bells
             let url = Bundle.main.url(forResource: bellChosen, withExtension: "caf")!
+            // MARK: Ending bell
+            // 4 times so user knows when the meditation has ended
             let urlEnding = Bundle.main.url(forResource: "tibetanBowlL4", withExtension: "caf")!
 
             //
@@ -421,9 +423,7 @@ class MeditationScreen: UIViewController {
             //
             // Ending Bell
             // Requires different audio player to continue playing after view is dismissed
-            //
             // Delay bell
-            //
             do {
                 endingBellPlayer = try AVAudioPlayer(contentsOf: urlEnding)
                 audioPlayerArray.append(endingBellPlayer)

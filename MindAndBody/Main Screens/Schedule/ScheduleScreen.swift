@@ -136,9 +136,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var lessonsBackground = UIButton()
     var isLessonsShowing = false // indicates if lessons view is presented
     
-    let extraButton = UIButton()
-    let extraButtonBig = UIButton()
-    
     // -----------------------------------------------------------------------------------------------
     
     //
@@ -190,8 +187,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        walkthroughSchedule()
         
         // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)
         NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
@@ -251,28 +246,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         topView.isUserInteractionEnabled = false
         //
         topView.frame = CGRect(x: 0, y: scheduleTable.frame.minY - scheduleTable.bounds.height, width: scheduleTable.bounds.width, height: scheduleTable.bounds.height)
-        //
-//        scheduleTable.addSubview(topView)
-        
-        
-        
-        //        extraButton.frame.size = CGSize(width: 72, height: 72)
-        //        extra
-        extraButton.alpha = 0
-        // MARK: nina nina
-        let buttonHeight: CGFloat = 49
-        extraButtonBig.frame.size = CGSize(width: buttonHeight, height: buttonHeight)
-        extraButtonBig.center = CGPoint(x: view.bounds.width - (buttonHeight / 2) - 16, y: view.bounds.height - (buttonHeight / 2) - 16)
-//        extraButtonBig.center = CGPoint(x: view.center.x, y: (tabBarController?.tabBar.frame.minY)!)
-        extraButtonBig.layer.cornerRadius = extraButtonBig.bounds.height / 2
-        extraButtonBig.backgroundColor = Colors.light.withAlphaComponent(0.72)
-        extraButtonBig.tintColor = Colors.dark
-        extraButtonBig.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
-//        view.insertSubview(extraButtonBig, aboveSubview: scheduleTable)
-//        view.addSubview(extraButtonBig)
-//        view.bringSubview(toFront: extraButtonBig)
-        // workout, yoga, meditation, endurance, flexibility
-        //
     }
     
     // Begin walkthrough

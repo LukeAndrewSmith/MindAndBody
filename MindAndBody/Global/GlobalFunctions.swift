@@ -1130,7 +1130,7 @@ extension UIViewController {
         let extraSessions = trackingProgressDictionary["ExtraSessions"] as! Double
         let weekGoal = trackingProgressDictionary["WeekGoal"] as! Double
         let currentProgressDivision: Double = ((weekProgress + extraSessions) / weekGoal) * 100.0
-        var currentProgress = Int(currentProgressDivision)
+        let currentProgress = Int(currentProgressDivision)
         //
         // Keys
         let keys = trackingDictionary.keys.sorted()
@@ -1617,59 +1617,6 @@ extension String {
         //
         return label.frame.height
     }
-//    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
-//        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-//        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
-//
-//        return ceil(boundingBox.height)
-//    }
 }
 
-// MARK: UIImage
-extension UIImage {
-    
-    // MARK: Thumbnail
-    func thumbnail(width: CGFloat, height: CGFloat) -> UIImage {
-        
-//        if let imageSource = CGImageSourceCreateWithURL(self as! CFURL, nil) {
-//            let options: [NSString: NSObject] = [
-//                kCGImageSourceThumbnailMaxPixelSize: max(width, height) / 2.0 as NSObject,
-//                kCGImageSourceCreateThumbnailFromImageAlways: true as NSObject
-//            ]
-//
-//            let scaledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary).flatMap { UIImage(CGImage: $0) }
-//        } else {
-//            return UIImage()
-//        }
-        
-        var newImage: UIImage
 
-        let size = self.size
-        let aspectRatio =  size.width/size.height
-
-//        if aspectRatio > 1 {                            // Landscape image
-//            width = dimension
-//            height = dimension / aspectRatio
-//        } else {                                        // Portrait image
-//            height = dimension
-//            width = dimension * aspectRatio
-//        }
-
-        if #available(iOS 10.0, *) {
-            let renderFormat = UIGraphicsImageRendererFormat.default()
-            renderFormat.opaque = false
-            let renderer = UIGraphicsImageRenderer(size: CGSize(width: width, height: height), format: renderFormat)
-            newImage = renderer.image {
-                (context) in
-                self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
-            }
-        } else {
-            UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height), false, 0)
-            self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
-            newImage = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
-        }
-
-        return newImage
-    }
-}

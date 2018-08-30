@@ -142,7 +142,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedSession]["name"]![0] as! String == "" {
             nameLabel.text = NSLocalizedString("chooseName", comment: "")
         } else {
-            nameLabel.text = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedSession]["name"]![0] as! String
+            nameLabel.text = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedSession]["name"]![0] as? String
         }
         nameLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
         nameLabel.isUserInteractionEnabled = false
@@ -152,7 +152,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         topSeparator3.backgroundColor = Colors.dark.withAlphaComponent(0.27)
         
         // Navigation Bar Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
         // Creating
         if creatingSession {
             navigationBar.title = NSLocalizedString("create", comment: "")
@@ -164,7 +164,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         navigationBar.leftBarButtonItem?.tintColor = Colors.light
         navigationBar.leftBarButtonItem?.title = NSLocalizedString("done", comment: "")
-        navigationBar.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton], for: .normal)
+        navigationBar.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
         
         
         // TableView
@@ -956,7 +956,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
         default: return false
         }
-        return false
     }
     
     // Can move to row
@@ -1604,7 +1603,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
             
             // Ok action
-            okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { [weak alert] (_) in
+            okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { UIAlertAction in
             })
             alert.addAction(okAction)
             

@@ -250,7 +250,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
         
         // Ok action
-        okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { [weak alert] (_) in
+        okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { UIAlertAction in
             self.deleteSessionAction(session: session)
         })
         alert.addAction(okAction)

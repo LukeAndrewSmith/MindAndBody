@@ -133,7 +133,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let day = NSLocalizedString("dayStyle", comment: "")
         let items = [week, day]
         scheduleStyleSegment = UISegmentedControl(items: items)
-        scheduleStyleSegment.setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "SFUIDisplay-thin", size: 23), NSAttributedStringKey.foregroundColor: Colors.light], for: .normal)
+        scheduleStyleSegment.setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "SFUIDisplay-thin", size: 23)!, NSAttributedStringKey.foregroundColor: Colors.light], for: .normal)
         scheduleStyleSegment.layer.borderWidth = 1
         scheduleStyleSegment.layer.borderColor = Colors.light.withAlphaComponent(0.72).cgColor
         scheduleStyleSegment.backgroundColor = Colors.dark.withAlphaComponent(0.23)
