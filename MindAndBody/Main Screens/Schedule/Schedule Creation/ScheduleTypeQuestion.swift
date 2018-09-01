@@ -33,13 +33,22 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     
     //
     // MARK: Outlets
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var leftItem: UIBarButtonItem!
+    @IBOutlet weak var rightItem: UIBarButtonItem!
+    
+    @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var progressStack: UIStackView!
+    
+    
     @IBOutlet weak var titleLabel: UILabel!
-    //
+    @IBOutlet weak var separator: UIView!
+    
     @IBOutlet weak var ScheduleTypeQuestionTable: UITableView!
     var scheduleOptionSwitch = UISwitch()
     var sessionsOptionSwitch = UISwitch()
-    //
-    @IBOutlet weak var backButton: UIButton!
+    
+    
     
     var comingFromSchedule = false
     //
@@ -82,46 +91,60 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         // Layout
         layoutView()
-        //
-        // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: true)
         
-        //
+        // Navigation bar
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
+        self.navigationController?.navigationBar.tintColor = Colors.light
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
+        navigationBar.title = NSLocalizedString("createSchedule", comment: "")
+        
+        // Items
+        leftItem.tintColor = Colors.red
+        leftItem.image = #imageLiteral(resourceName: "Down")
+        
+        rightItem.title = NSLocalizedString("create", comment: "")
+        rightItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
+        rightItem.tintColor = Colors.light
+
+        // View
+        view.backgroundColor = Colors.light
+        separator.backgroundColor = Colors.dark.withAlphaComponent(0.72)
+
         // Title Label
         titleLabel.text = NSLocalizedString("scheduleTypeQuestion", comment: "")
-        titleLabel.textColor = Colors.light
+        titleLabel.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+        titleLabel.textColor = Colors.dark
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        //
-        // Back
-        // Swipe
-        let rightSwipe = UIScreenEdgePanGestureRecognizer()
-        rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
-        view.addGestureRecognizer(rightSwipe)
+        setupProgressView()
+    }
+    
+    func setupProgressView() {
+        progressView.backgroundColor = Colors.dark
         
-        if comingFromSchedule {
-            backButton.imageView?.image = #imageLiteral(resourceName: "Down")
-            backButton.tintColor = Colors.red
-        } else {
-            backButton.imageView?.image = #imageLiteral(resourceName: "Back Arrow")
-            backButton.tintColor = Colors.red
+        let titles = ["create", "profile", "help", "view", "content", "equipment"]
+        for i in 0..<titles.count {
+            let label = UILabel()
+            label.font = UIFont(name: "SFUIDisplay-thin", size: 13)
+            label.text = titles[i]
+            label.textColor = Colors.light
+            progressStack.addArrangedSubview(label)
         }
+        let indicator = UIView()
+        indicator.frame = CGRect(x: 0, y: 43, width: view.bounds.width / CGFloat(titles.count), height: 1)
     }
     
     //
     // MARK: tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Create Schedule Row
-        if indexPath.row == 2 {
-            return 49
-        // Option rows
-        } else {
-            return (ScheduleTypeQuestionTable.bounds.height - 49) / 2
-        }
+        return ScheduleTypeQuestionTable.bounds.height / 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -134,8 +157,8 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             cell.selectionStyle = .none
             let titleLabel = UILabel()
             titleLabel.text = NSLocalizedString("scheduleOptionText", comment: "")
-            titleLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            titleLabel.textColor = Colors.light
+            titleLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+            titleLabel.textColor = Colors.dark
             titleLabel.numberOfLines = 0
             titleLabel.lineBreakMode = .byWordWrapping
             titleLabel.frame = CGRect(x: 24, y: 0, width: cell.bounds.width - 24 - scheduleOptionSwitch.bounds.width - 16 - 8, height: cellHeight)
@@ -145,7 +168,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             scheduleOptionSwitch.center = CGPoint(x: view.bounds.width - (scheduleOptionSwitch.bounds.width / 2) - 16, y: cellHeight / 2)
             // Separator
             let separator = UIView()
-            separator.backgroundColor = Colors.light.withAlphaComponent(0.5)
+            separator.backgroundColor = Colors.dark.withAlphaComponent(0.72)
             separator.frame.size = CGSize(width: view.bounds.width - 32, height: 1)
             separator.center = CGPoint(x: view.center.x, y: cellHeight)
             cell.addSubview(separator)
@@ -157,8 +180,8 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             cell.selectionStyle = .none
             let titleLabel = UILabel()
             titleLabel.text = NSLocalizedString("sessionsOptionText", comment: "")
-            titleLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            titleLabel.textColor = Colors.light
+            titleLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+            titleLabel.textColor = Colors.dark
             titleLabel.numberOfLines = 0
             titleLabel.lineBreakMode = .byWordWrapping
             titleLabel.frame = CGRect(x: 24, y: 0, width: cell.bounds.width - 24 - scheduleOptionSwitch.bounds.width - 16 - 8, height: cellHeight)
@@ -166,13 +189,6 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             //
             cell.addSubview(sessionsOptionSwitch)
             sessionsOptionSwitch.center = CGPoint(x: view.bounds.width - (scheduleOptionSwitch.bounds.width / 2) - 16, y: cellHeight / 2)
-        // Create Schedule Row
-        } else if indexPath.row == 2 {
-            cell.backgroundColor = Colors.green.withAlphaComponent(0.25)
-            cell.textLabel?.text = NSLocalizedString("createSchedule", comment: "")
-            cell.textLabel?.textColor = Colors.light
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            cell.textLabel?.textAlignment = .center
         }
         return cell
     }
@@ -333,8 +349,10 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         sessionsOptionSwitch.clipsToBounds = true
     }
     
-    //
-    //
+    
+    @IBAction func createScheduleAction(_ sender: Any) {
+    }
+    
     // Back Button
     @IBAction func backButtonAction(_ sender: Any) {
         if comingFromSchedule {
@@ -343,18 +361,82 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             self.navigationController?.popViewController(animated: true)
         }
     }
-    //
-    // MARK: Back Swipe
-    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
-        if sender.state == .began {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
     
     //
     // Override segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
+        // Alert and Functions
+        let inputTitle = NSLocalizedString("scheduleInputTitle", comment: "")
+        //
+        let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+        alert.view.tintColor = Colors.dark
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+        //2. Add the text field
+        alert.addTextField { (textField: UITextField) in
+            textField.text = ""
+            textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+            textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
+        }
+        // 3. Get the value from the text field, and perform actions upon OK press
+        okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
+            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            //
+            // Append new schedule array to schedules
+            schedules.append(scheduleDataStructures.emptyWeek)
+            //
+            // Update selected Schedule
+            // Set selected schedule to newly created schedule (last schedule in schedules)
+            var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
+            selectedSchedule = schedules.count - 1
+            ScheduleVariables.shared.selectedSchedule = selectedSchedule
+            UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
+            //
+            // Update Title
+            let textField = alert?.textFields![0]
+            let lastIndex = schedules.count - 1
+            let title = textField?.text!
+            schedules[lastIndex]["scheduleInformation"]![0][0]["title"] = title
+            //
+            // Update schedule settings settings based on switches
+            // Schedule type option option
+            if self.scheduleOptionSwitch.isOn {
+                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] = 0
+            } else if self.scheduleOptionSwitch.isOn == false {
+                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] = 1
+            }
+            // Sessions choice option
+            if self.sessionsOptionSwitch.isOn {
+                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 0
+            } else if self.sessionsOptionSwitch.isOn == false {
+                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
+            }
+            //
+            // SET NEW ARRAY
+            UserDefaults.standard.set(schedules, forKey: "schedules")
+            // Sync
+            ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule", "schedules"])
+            //
+            // Indicate that new schedule has been created
+            ScheduleVariables.shared.didCreateNewSchedule = true
+            //
+            self.performSegueFunction()
+        })
+        okAction.isEnabled = false
+        alert.addAction(okAction)
+        // Cancel action
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+        }
+        alert.addAction(cancelAction)
+        // 4. Present the alert
+        if didCreateNewSchedule == false {
+            self.present(alert, animated: true, completion: nil)
+            //
+            // If schedule just been created but user goes back to change something, doesn;t create new schedule
+        } else {
+            performSegueFunction()
+        }
     }
     
 }

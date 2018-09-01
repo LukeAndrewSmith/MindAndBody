@@ -11,34 +11,37 @@ import UIKit
 
 
 class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    //
-    // Using fake navigation bar as can;t get hiding the navigation bar on subsequent screens to work as desired
-    @IBOutlet weak var fakeNavigationBarLabel: UILabel!
-    @IBOutlet weak var scheduleOverviewTable: UITableView!
     
-    @IBOutlet weak var saveButton: UIButton!
+    // Outlets
+    @IBOutlet weak var leftItem: UIBarButtonItem!
+    @IBOutlet weak var rightItem: UIBarButtonItem!
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var editScheduleTable: UITableView!
     
-    //
     // App helps create schedule 0 or custom schedule 1
     var scheduleType = Int()
     
-    //
     var appChoosesSessionsSwitch = UISwitch()
     var scheduleStyleSegment = UISegmentedControl()
     
     var heightForRow = CGFloat()
     
-    //
-    let scheduleOverviewArrays: [String] =
+    let editScheduleSections: [[String]] =
+        [
+            ["name",],
+            ["sessionChoosing",
+            "view",],
+            ["equipment",
+            "editSchedule"],
+        ]
+    let editScheduleSectionTitles: [String] =
         [
             "name",
-            "sessionChoosing",
-            "view",
-            "equipment",
-            "editSchedule",
+            "style",
+            "content",
         ]
     
-    //
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -59,7 +62,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
 
     // func check profile
     func isProfileComplete() -> Bool {
-        //
+        
         // Check if profile is complete
         let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
         var isComplete = true
@@ -75,9 +78,8 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // View did load
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
+        
         setVariables()
-        //
         layoutView()
     }
     
@@ -94,23 +96,41 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Layout
     func layoutView() {
-        //
-        view.backgroundColor = Colors.dark
-        //
+        
+        view.backgroundColor = Colors.gray
+
         // Navigation Bar
-        fakeNavigationBarLabel.text = NSLocalizedString("scheduleOverview", comment: "")
-        //
-        // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: true)
-        
-        //
+        navigationBar.title = NSLocalizedString("editSchedule", comment: "")
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
+        // Items
+        leftItem.tintColor = Colors.light
+        leftItem.title = NSLocalizedString("done", comment: "")
+        leftItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
+        rightItem.tintColor = Colors.red
+        rightItem.image = #imageLiteral(resourceName: "Bin")
+
         // TableView
-        scheduleOverviewTable.backgroundColor = .clear
-        scheduleOverviewTable.tableFooterView = UIView()
-        scheduleOverviewTable.separatorColor = Colors.light.withAlphaComponent(0.27)
-        scheduleOverviewTable.isScrollEnabled = false
+        editScheduleTable.tableFooterView = UIView()
+        editScheduleTable.backgroundColor = Colors.gray
         
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        let headerView = UIView()
+        headerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 24.5)
+        headerView.backgroundColor = Colors.gray
+        editScheduleTable.tableHeaderView = headerView
+        let topView = UIView()
+        topView.backgroundColor = Colors.gray
+        editScheduleTable.frame = CGRect(x: 0, y: editScheduleTable.frame.minY - editScheduleTable.bounds.height, width: editScheduleTable.bounds.width, height: editScheduleTable.bounds.height)
+        editScheduleTable.addSubview(topView)
+        //
+        let footerView = UIView()
+        footerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: editScheduleTable.sectionFooterHeight)
+        footerView.backgroundColor = Colors.gray
+        editScheduleTable.tableFooterView = footerView
+        let bottomView = UIView()
+        bottomView.backgroundColor = Colors.gray
+        bottomView.frame = CGRect(x: 0, y: editScheduleTable.contentSize.height - 24.5, width: editScheduleTable.bounds.width, height: editScheduleTable.bounds.height)
+        editScheduleTable.addSubview(bottomView)
         
         // App chooses sessions switch
         appChoosesSessionsSwitch.onTintColor = Colors.green
@@ -120,6 +140,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         appChoosesSessionsSwitch.clipsToBounds = true
         appChoosesSessionsSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
         // Set inital value
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // On
         if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
             appChoosesSessionsSwitch.isOn = true
@@ -133,11 +154,17 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let day = NSLocalizedString("dayStyle", comment: "")
         let items = [week, day]
         scheduleStyleSegment = UISegmentedControl(items: items)
-        scheduleStyleSegment.setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "SFUIDisplay-thin", size: 23)!, NSAttributedStringKey.foregroundColor: Colors.light], for: .normal)
+        scheduleStyleSegment.setTitleTextAttributes([NSAttributedStringKey.font : Fonts.regularCell!, NSAttributedStringKey.foregroundColor: Colors.dark], for: .normal)
         scheduleStyleSegment.layer.borderWidth = 1
-        scheduleStyleSegment.layer.borderColor = Colors.light.withAlphaComponent(0.72).cgColor
-        scheduleStyleSegment.backgroundColor = Colors.dark.withAlphaComponent(0.23)
-        scheduleStyleSegment.tintColor = Colors.light.withAlphaComponent(0.72)
+        scheduleStyleSegment.layer.borderColor = Colors.dark.withAlphaComponent(0.93).cgColor
+        scheduleStyleSegment.clipsToBounds = true
+        scheduleStyleSegment.backgroundColor = Colors.light
+//            .withAlphaComponent(0.72)
+//            Colors.dark.withAlphaComponent(0.72)
+        scheduleStyleSegment.tintColor = Colors.green.withAlphaComponent(0.93)
+//            Colors.dark.withAlphaComponent(0.72)
+//            Colors.green
+//            Colors.dark.withAlphaComponent(0.72)
         scheduleStyleSegment.addTarget(self, action: #selector(segmentHandler), for: .valueChanged)
         //
         // Schedule style = Day
@@ -147,12 +174,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
             scheduleStyleSegment.selectedSegmentIndex = 0
         }
-        
-        //
-        // Done Button
-        saveButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
-        saveButton.setTitle(NSLocalizedString("save", comment: ""), for: .normal)
-        //
     }
     
     //
@@ -161,57 +182,69 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Number of Sections
     func numberOfSections(in tableView: UITableView) -> Int {
         //
-        return 1
+        return editScheduleSections.count
     }
     
-    // Header
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ""
-    }
-    
-    // Header Customization
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         // Header
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)!
-        header.textLabel?.textColor = Colors.light
-        header.textLabel?.text = header.textLabel?.text?.capitalized
-        
+        let header = UIView()
+        let headerHeight = CGFloat(24.5)
+        header.backgroundColor = Colors.gray
+        let label = UILabel()
+        label.font = UIFont(name: "SFUIDisplay-light", size: 13)!
+        label.textColor = UIColor.gray
+        label.text = NSLocalizedString(editScheduleSectionTitles[section], comment: "").uppercased()
+        label.sizeToFit()
+        label.frame = CGRect(x: 16, y: 0, width: label.bounds.width, height: headerHeight)
+        header.addSubview(label)
         //
-        header.backgroundColor = .clear
-        header.backgroundView = UIView()
-        
-        let separator = CALayer()
-        separator.frame = CGRect(x: 16, y: header.frame.size.height - 1, width: view.frame.size.width - 32, height: 1)
-        separator.backgroundColor = Colors.light.cgColor
-        separator.opacity = 0.5
-        header.layer.addSublayer(separator)
+        switch section {
+        case 1,2:
+            let explanationButton = UIButton()
+            explanationButton.frame = CGRect(x: label.frame.maxX + 8, y: 3.25, width: 18, height: 18)
+            explanationButton.center.y = label.center.y
+            explanationButton.setImage(#imageLiteral(resourceName: "QuestionMarkMenu"), for: .normal)
+            explanationButton.layer.borderColor = UIColor.gray.cgColor
+            explanationButton.layer.borderWidth = 0.75
+            explanationButton.layer.cornerRadius = explanationButton.bounds.height / 2
+            explanationButton.clipsToBounds = true
+            explanationButton.tintColor = UIColor.gray
+            explanationButton.tag = section
+            explanationButton.addTarget(self, action: #selector(helpButtonAction(_:)), for: .touchUpInside)
+            header.addSubview(explanationButton)
+            // Add extra button to make the area of the question mark larger and easier to press
+            let extraButton = UIButton()
+            extraButton.frame = CGRect(x: 0, y: 0, width: 49, height: 24.5)
+            extraButton.center.x = explanationButton.center.x
+            extraButton.tag = section
+            extraButton.addTarget(self, action: #selector(helpButtonAction(_:)), for: .touchUpInside)
+            header.addSubview(extraButton)
+        default: break
+        }
+        return header
     }
     
     // Header Height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return view.bounds.height / 4
-        return 0
+        return 24.5
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView()
+        footer.frame = CGRect.zero
+        footer.backgroundColor = Colors.gray
+        return footer
     }
     
     // Number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
-        return scheduleOverviewArrays.count
+        return editScheduleSections[section].count
     }
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //
-        // Iphone 5/SE layout
-        if IPhoneType.shared.iPhoneType() == 0 {
-            heightForRow = 52
-            return heightForRow
-        } else {
-            heightForRow = 62
-            return heightForRow
-        }
+        return 44
     }
     
     // Cell for row
@@ -219,58 +252,59 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         // Text label
-        cell.textLabel?.text = NSLocalizedString(scheduleOverviewArrays[indexPath.row], comment: "")
+        cell.textLabel?.text = NSLocalizedString(editScheduleSections[indexPath.section][indexPath.row], comment: "")
         cell.textLabel?.textAlignment = NSTextAlignment.left
-        cell.backgroundColor = .clear
+        cell.backgroundColor = Colors.light
         cell.backgroundView = UIView()
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        cell.textLabel?.textColor = Colors.light
+        cell.textLabel?.font = Fonts.regularCell
         // Detail text label
-        cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
-        cell.detailTextLabel?.textColor = Colors.light
+        cell.detailTextLabel?.font = Fonts.regularCell
         
         //
         // Detail label, shows schedule overview data
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        switch indexPath.row {
+        switch indexPath.section {
         // Name
         case 0:
             cell.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
-        // Sessions choosing
+        // View
         case 1:
-            // App chooses
-            cell.selectionStyle = .none
-            cell.addSubview(appChoosesSessionsSwitch)
-            if IPhoneType.shared.iPhoneType() == 0 {
-                appChoosesSessionsSwitch.center = CGPoint(x: view.bounds.width - (appChoosesSessionsSwitch.bounds.width / 2) - 16, y: 52 / 2)
-            } else {
-                appChoosesSessionsSwitch.center = CGPoint(x: view.bounds.width - (appChoosesSessionsSwitch.bounds.width / 2) - 16, y: 62 / 2)
-            }
+            switch indexPath.row {
+            // Sessions choosing
+            case 0:
+                // App chooses
+                cell.selectionStyle = .none
+                cell.addSubview(appChoosesSessionsSwitch)
+                appChoosesSessionsSwitch.center = CGPoint(x: view.bounds.width - (appChoosesSessionsSwitch.bounds.width / 2) - 16, y: cell.bounds.height / 2)
 
-        // View full week
-        case 2:
-            cell.selectionStyle = .none
-            cell.layoutIfNeeded()
-            
-            // minX good for
-            let minX = cell.textLabel?.frame.maxX
-            let labelHeight = cell.textLabel?.bounds.height
-            var width = view.bounds.width - 32 - 16 - minX!
-            if width > 323 {
-                width = 323
+            // View full week
+            case 1:
+                cell.selectionStyle = .none
+                cell.layoutIfNeeded()
+                
+                // minX good for
+                let minX = cell.textLabel?.frame.maxX
+                var width = view.bounds.width - 32 - 16 - minX!
+                if width > 223 {
+                    width = 223
+                }
+                scheduleStyleSegment.frame = CGRect(x: view.frame.maxX - width - 16, y: cell.bounds.height * (1/6), width: width, height: cell.bounds.height * (2/3))
+                scheduleStyleSegment.layer.cornerRadius = scheduleStyleSegment.bounds.height / 2
+                scheduleStyleSegment.clipsToBounds = true
+                cell.addSubview(scheduleStyleSegment)
+            default: break
             }
-            scheduleStyleSegment.frame = CGRect(x: view.frame.maxX - width - 16, y: (heightForRow - labelHeight!) / 2, width: width, height: labelHeight!)
-            // heightForRow - 32
-            scheduleStyleSegment.layer.cornerRadius = (heightForRow - 32) * (1/4)
-            scheduleStyleSegment.clipsToBounds = true
-            cell.addSubview(scheduleStyleSegment)
-            
-        // Equiptment
-        case 3:
-            cell.accessoryType = .disclosureIndicator
-        // Schedule
-        case 4:
-            cell.accessoryType = .disclosureIndicator
+        // Content
+        case 2:
+            switch indexPath.row {
+            // Equiptment
+            case 0:
+                cell.accessoryType = .disclosureIndicator
+            // Schedule
+            case 1:
+                cell.accessoryType = .disclosureIndicator
+            default: break
+            }
         default: break
         }
         //
@@ -285,57 +319,67 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         // Detail label, shows schedule overview data
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        switch indexPath.row {
+        switch indexPath.section {
         // Name
         case 0:
-            // Popup
-            // Alert and Functions
-            let inputTitle = NSLocalizedString("scheduleInputTitle", comment: "")
-            //
-            let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
-            alert.view.tintColor = Colors.dark
-            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
-            //2. Add the text field
-            alert.addTextField { (textField: UITextField) in
-                textField.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
-                textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
-                textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
-            }
-            // 3. Get the value from the text field, and perform actions upon OK press
-            okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
+            switch indexPath.row {
+            // Name
+            case 0:
+                // Popup
+                // Alert and Functions
+                let inputTitle = NSLocalizedString("scheduleInputTitle", comment: "")
                 //
-                // Update Title
-                let textField = alert?.textFields![0]
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] = textField?.text! ?? ""
-                //
-                // SET NEW ARRAY
-                UserDefaults.standard.set(schedules, forKey: "schedules")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-                
-                // Update name in table
-                cell?.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
-            })
-            // Cancel action
-            let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
-                UIAlertAction in
+                let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
+                alert.view.tintColor = Colors.dark
+                alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                //2. Add the text field
+                alert.addTextField { (textField: UITextField) in
+                    textField.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
+                    textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
+                    textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
+                }
+                // 3. Get the value from the text field, and perform actions upon OK press
+                okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
+                    //
+                    // Update Title
+                    let textField = alert?.textFields![0]
+                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] = textField?.text! ?? ""
+                    //
+                    // SET NEW ARRAY
+                    UserDefaults.standard.set(schedules, forKey: "schedules")
+                    // Sync
+                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
+                    
+                    // Update name in table
+                    cell?.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
+                })
+                // Cancel action
+                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                }
+                alert.addAction(okAction)
+                alert.addAction(cancelAction)
+                // 4. Present the alert.
+                self.present(alert, animated: true, completion: nil)
+            default: break
             }
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
-            // 4. Present the alert.
-            self.present(alert, animated: true, completion: nil)
-            //
-        // Equipment
-        case 3:
-            self.performSegue(withIdentifier: "EquipmentSegue", sender: self)
-        // N Sessions / Schedule
-        case 4:
-            // View each day
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
-                self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
-            // View full week
-            } else {
-                self.performSegue(withIdentifier: "OverviewScheduleWeekSegue", sender: self)
+        // case 1: no selection possible
+        // Content
+        case 2:
+            switch indexPath.row {
+            // Equipment
+            case 0:
+                self.performSegue(withIdentifier: "EquipmentSegue", sender: self)
+            // N Sessions / Schedule
+            case 1:
+                // View each day
+                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+                    self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
+                // View full week
+                } else {
+                    self.performSegue(withIdentifier: "OverviewScheduleWeekSegue", sender: self)
+                }
+            default: break
             }
         default: break
         }
@@ -418,7 +462,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Save Schedule
     @IBAction func saveButtonAction(_ sender: Any) {
-        // Note don't actually need to save anything, name for user experience
         // Ensure notifications correct
         ReminderNotifications.shared.setNotifications()
         updateWeekGoal()
@@ -434,7 +477,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let title = NSLocalizedString("deleteScheduleWarning", comment: "")
         let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: Fonts.navigationBar]), forKey: "attributedTitle")
         
         // Delete schedule action
         let okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertActionStyle.default) {
@@ -496,6 +539,70 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             destinationVC.comingFromScheduleEditing = true
         default: break
         }
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        backItem.tintColor = Colors.light
+        navigationItem.backBarButtonItem = backItem
+    }
+    
+    
+    // MARK: Help - question mark handler
+    var walkthroughProgress = 0
+    var walkthroughView = UIView()
+    var walkthroughHighlight = UIView()
+    var walkthroughLabelView = UIView()
+    var walkthroughLabelTitle = UILabel()
+    var walkthroughLabelSeparator = UIView()
+    var walkthroughLabel = UILabel()
+    var walkthroughNextButton = UIButton()
+    var walkthroughBackButton = UIButton()
+    var didSetWalkthrough = false
+    let explanationTexts = ["", "editSchedule1", "editSchedule2"]
+    
+    @objc func helpButtonAction(_ sender: UIButton) {
+        
+        // Setup
+        walkthroughNextButton.addTarget(self, action: #selector(explanationNextAction), for: .touchUpInside)
+        //
+        walkthroughView = setWalkthrough(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, separator: walkthroughLabelSeparator, nextButton: walkthroughNextButton, backButton: walkthroughBackButton, highlight: walkthroughHighlight, simplePopup: true)
+        
+        // Label
+        walkthroughLabelTitle.text = NSLocalizedString(explanationTexts[sender.tag] + "T", comment: "")
+        
+        walkthroughLabel.text = NSLocalizedString(explanationTexts[sender.tag], comment: "")
+        walkthroughLabel.frame.size = walkthroughLabel.sizeThatFits(CGSize(width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding, height: .greatestFiniteMagnitude))
+        
+        walkthroughLabel.frame = CGRect(
+            x: WalkthroughVariables.padding,
+            y: WalkthroughVariables.topHeight + WalkthroughVariables.padding,
+            width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding,
+            height: walkthroughLabel.frame.size.height)
+        walkthroughLabelView.frame = CGRect(
+            x: WalkthroughVariables.viewPadding,
+            y: view.frame.maxY - WalkthroughVariables.topHeight - walkthroughLabel.frame.size.height - WalkthroughVariables.viewPadding - WalkthroughVariables.twicePadding,
+            width: view.frame.size.width - WalkthroughVariables.twiceViewPadding,
+            height: WalkthroughVariables.topHeight + walkthroughLabel.frame.size.height + WalkthroughVariables.twicePadding)
+        
+        // Colour
+        walkthroughView.alpha = 1
+        walkthroughLabelView.backgroundColor = Colors.dark
+        walkthroughLabel.textColor = Colors.light
+        walkthroughLabelTitle.textColor = Colors.light
+        walkthroughLabelSeparator.backgroundColor = Colors.light
+        walkthroughNextButton.setTitleColor(Colors.light, for: .normal)
+        walkthroughBackButton.setTitleColor(Colors.light, for: .normal)
+        
+        // Highlight - none
+        walkthroughHighlight.frame = CGRect.zero
+    }
+    @objc func explanationNextAction() {
+        // Dismiss view
+        UIView.animate(withDuration: 0.4, animations: {
+            self.walkthroughView.alpha = 0
+        }, completion: { finished in
+            self.walkthroughView.alpha = 1
+            self.walkthroughView.removeFromSuperview()
+        })
     }
     
 }

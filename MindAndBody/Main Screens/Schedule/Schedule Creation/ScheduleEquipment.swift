@@ -17,10 +17,7 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
     // MARK: Outlets --------------------------------------------------------------------------------------------------------
     //
     @IBOutlet weak var equipmentTable: UITableView!
-    @IBOutlet weak var sectionLabel: UILabel!
-    //
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var navigationBar: UINavigationItem!
     
     // If schedule is being created
     var isScheduleCreation = false
@@ -41,33 +38,22 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
-        UIApplication.shared.statusBarStyle = .lightContent
-        //
-        sectionLabel.text = NSLocalizedString("equipment", comment: "")
-        //
-        // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: true)
-        //
+        
+        view.backgroundColor = Colors.light
+        
+        // Navigation Bar
+        navigationBar.title = NSLocalizedString("equipment", comment: "")
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
+        
         // Table View
         equipmentTable.tableFooterView = UIView()
-        equipmentTable.separatorColor = Colors.light.withAlphaComponent(0.25)
+        equipmentTable.separatorStyle = .singleLine
+        equipmentTable.separatorColor = Colors.dark
+//            .withAlphaComponent(0.25)
         equipmentTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        equipmentTable.backgroundColor = .clear
-        equipmentTable.isScrollEnabled = false
+//        equipmentTable.backgroundColor = .clear
         
-        //
-        // Done
-        doneButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
-        doneButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-        
-        //
-        // Back
-        // Swipe
-        let rightSwipe = UIScreenEdgePanGestureRecognizer()
-        rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
-        view.addGestureRecognizer(rightSwipe)
     }
     
     //
@@ -95,51 +81,32 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomScheduleEquipmentCell", for: indexPath) as! CustomScheduleEquipmentCell
         //
-        cell.backgroundColor = .clear
-        cell.backgroundView = UIView()
+//        cell.backgroundColor = .clear
         cell.row = indexPath.row
         cell.selectionStyle = .none
         //
-        cell.equipmentLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        cell.equipmentLabel.textColor = Colors.light
+        // Iphone 5/SE layout
+        if IPhoneType.shared.iPhoneType() == 0 {
+            cell.equipmentLabel.font = UIFont(name: "SFUIDisplay-regular", size: 21)
+        } else {
+            cell.equipmentLabel.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+        }
+        cell.equipmentLabel.textColor = Colors.dark
         cell.equipmentLabel.text = NSLocalizedString(equiptmentArray[indexPath.row]["name"] as! String, comment: "")
         //
-        cell.equipmentDetail.font = UIFont(name: "SFUIDisplay-thin", size: 15)
-        cell.equipmentDetail.textColor = Colors.light
+        cell.equipmentDetail.font = UIFont(name: "SFUIDisplay-light", size: 15)
+        cell.equipmentDetail.textColor = Colors.dark
         cell.equipmentDetail.numberOfLines = 0
         cell.equipmentDetail.lineBreakMode = .byWordWrapping
         cell.equipmentDetail.text = NSLocalizedString(equiptmentArray[indexPath.row]["description"] as! String, comment: "")
         //
         cell.equipmentImage.image = equiptmentArray[indexPath.row]["image"] as? UIImage
         //
+        cell.separator.backgroundColor = Colors.dark.withAlphaComponent(0.43)
+        //
         return cell
     }
-    
-    //
-    // Done
-    @IBAction func doneButtonAction(_ sender: Any) {
-        // If schedule is being created, dismiss, as this was last question
-        if isScheduleCreation {
-            self.dismiss(animated: true)
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    //
-    // Back
-    @IBAction func backButtonAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    //
-    // MARK: Back Swipe
-    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
-        if sender.state == .began {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    //
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
         if segue.identifier == "ScheduleHelpCreationSegue" {

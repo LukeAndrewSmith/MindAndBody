@@ -3171,7 +3171,7 @@
 // Schedule creation
 "scheduleTypeQuestion" = "I would like :";
 "scheduleOptionText" = "The app to help me create my schedule";
-"sessionsOptionText" = "The app to choose sessions for me based on my profile\n(Very strongly recommended!)";
+"sessionsOptionText" = "The app to choose sessions for me based on my profile";
 
 // Schedule Style
 "scheduleView" = "I would like to have:";
@@ -3181,10 +3181,11 @@
 
 // Schedule Overview
 "scheduleOverview" = "Schedule Overview";
+"editSchedule" = "Edit Schedule";
 "save" = "Save";
 //
 "name" = "Name";
-"sessionChoosing" = "App chooses sessions:";
+"sessionChoosing" = "App chooses sessions";
 "planEachDay" = "Plan each weekday:";
 "appHelpsCreateSchedule" = "App helps create schedule:";
 "appHelpsCreateScheduleShort" = "App helps create sched.:";
@@ -3194,7 +3195,7 @@
 "deleteScheduleWarning" = "Are you sure you'd like to delete this schedule?";
     "yes" = "Yes";
 
-"week" = "Nº Sessions per week";
+"week" = "nº Sessions per week";
 // Equipment
 "foamRoller" = "Foam Roller";
 "forStretching" = "For stretching sessions";
@@ -3253,7 +3254,7 @@
 "scheduleCreatorIndication" = "Drag & Drop";
 
 // Editing
-"view" = "View:";
+"view" = "View";
 "weekStyle" = "Week";
 "dayStyle" = "Days";
 
@@ -3582,6 +3583,12 @@
 // Extra Sessions
 "extraSessionET" = "Extra Session";
 "extraSessionE" = "Extra sessions on top of the schedule that are still tracked by the app, for whenever you feel like doing more than planned!";
+
+// Schedule editing explanations
+"editSchedule1T" = "Style";
+"editSchedule1" = "App chooses sessions:\nIn the schedule, the app makes the final decision and selects the correct session for you based on your profile.\n\nView:\nHow you want to view your schedule;\nWeek = a list of all your sessions for the week.\nDays = a plan for each day of the week.";
+"editSchedule2T" = "Content";
+"editSchedule2" = "Equipment:\nWhat equipment you would like included in the sessions of this schedule (App chooses sessions should be on for this setting to take effect).\n\nEdit Schedule:\nEdit what sessions are presented in your schedule.";
 
 
         // Settings

@@ -85,12 +85,9 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         super.viewDidLoad()
         
         // Navigation Bar
-        //
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.navigationController?.navigationBar.tintColor = Colors.light
-        // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        // Navigation Title
         navigationBar.title = NSLocalizedString("settings", comment: "")
         // View
         view.backgroundColor = Colors.light
@@ -1117,12 +1114,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     //
     // MARK: Help - question mark handler
-    
-//    var explanationView = UIView()
-//    var explanationHighlight = UIView()
-//    var explanationLabel = UILabel()
-//    var nextButtonExplanation = UIButton()
-    
     let explanationTexts = ["settings0", "", "settings1", "settings2", "", "settings3", ""]
     
     @objc func helpButtonAction(_ sender: UIButton) {

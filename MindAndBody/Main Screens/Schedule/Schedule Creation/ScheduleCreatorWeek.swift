@@ -17,11 +17,8 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: Outlets --------------------------------------------------------------------------------------------------------
     //
     @IBOutlet weak var weekTable: UITableView!
-    @IBOutlet weak var sectionLabel: UILabel!
-    //
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var doneButton: UIButton!
     
+    @IBOutlet weak var navigationBar: UINavigationItem!
     //
     var comingFromScheduleEditing = false
 
@@ -31,33 +28,20 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
-        UIApplication.shared.statusBarStyle = .lightContent
-        //
-        sectionLabel.text = NSLocalizedString("week", comment: "")
-        //
-        // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: true)
-        //
+
+        view.backgroundColor = Colors.light
+        
+        // Navigation Bar
+        navigationBar.title = NSLocalizedString("week", comment: "")
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
+
         // Table View
         weekTable.tableFooterView = UIView()
-        weekTable.separatorColor = Colors.light.withAlphaComponent(0.25)
+//        weekTable.separatorColor = Colors.dark.withAlphaComponent(0.25)
         weekTable.backgroundColor = .clear
         weekTable.isScrollEnabled = false
         weekTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
-        //
-        // Done
-        doneButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
-        doneButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-        
-        //
-        // Back
-        // Swipe
-        let rightSwipe = UIScreenEdgePanGestureRecognizer()
-        rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
-        view.addGestureRecognizer(rightSwipe)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,16 +75,23 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
         //
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomScheduleWeekCell", for: indexPath) as! CustomScheduleWeekCell
         
-        //
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
         cell.row = indexPath.row
         cell.selectionStyle = .none
-        //
         if indexPath.row == scheduleDataStructures.groupNames.count - 1 {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         }
-        //
+        
+        cell.groupLabel.font = UIFont(name: "SFUIDisplay-regular", size: 27)
+        cell.groupLabel.textColor = Colors.dark
+        
+        cell.sessionsLabel.font = UIFont(name: "SFUIDisplay-regular", size: 27)
+        cell.sessionsLabel.textColor = Colors.dark
+        
+        cell.plusButton.tintColor = Colors.dark
+        cell.minusButton.tintColor = Colors.dark
+        
         return cell
     }
     
@@ -149,12 +140,14 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
 
 //
 class CustomScheduleWeekCell: UITableViewCell {
-    //
+
     // Outlets
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var sessionsLabel: UILabel!
     
-    //
+    @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var minusButton: UIButton!
+
     // Passed data
         // Row = indexpath.row of cell = groupIndex
     var row = Int()
@@ -184,13 +177,8 @@ class CustomScheduleWeekCell: UITableViewCell {
             }
         }
         
-        //
         sessionsLabel.text = String(groupArray[row])
-        if groupArray[row] != 0 {
-            sessionsLabel.textColor = Colors.green
-        } else {
-            sessionsLabel.textColor = Colors.light
-        }
+        sessionsLabel.textColor = Colors.dark
     }
     
     //

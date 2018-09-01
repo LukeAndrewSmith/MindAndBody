@@ -29,17 +29,18 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     var fromScheduleEditing = false
     
     @IBOutlet weak var dayTable: UITableView!
-    //
-    let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+    @IBOutlet weak var dayTableHeight: NSLayoutConstraint!
     
-    // Create schedule button
-    @IBOutlet weak var createScheduleButton: UIButton!
-    @IBOutlet weak var createScheduleButtonHeight: NSLayoutConstraint!
+    
+    let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
     
     // Indication
     @IBOutlet weak var indicationLabel: UILabel!
     
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var binView: UIImageView!
     
+    @IBOutlet weak var separator: UIView!
     //
     // Stack Views
     @IBOutlet weak var groupStack: UIStackView!
@@ -100,6 +101,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     let dayArray = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
     let dayArrayShort = ["mondayChar", "tuesdayChar", "wednesdayChar", "thursdayChar", "fridayChar", "saturdayChar", "sundayChar",]
+    
+    var themeColor = Colors.dark
 
     //
     // View did load --------------------------------------------------------------------------------------------------------
@@ -112,39 +115,57 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         setGroupLabels()
         //
         // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: true)
+//        addBackgroundImage(withBlur: true, fullScreen: true)
+        // Navigation Bar
+        navigationBar.title = NSLocalizedString("schedule", comment: "")
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
         
         // Indication Label
-        indicationLabel.font = UIFont(name: "SFUIDisplay-thin", size: 20)
-        indicationLabel.textColor = Colors.light
+        indicationLabel.font = UIFont(name: "SFUIDisplay-light", size: 20)
+        indicationLabel.textColor = themeColor
         indicationLabel.text = NSLocalizedString("scheduleCreatorIndication", comment: "")
+        
+        separator.backgroundColor = Colors.dark.withAlphaComponent(0.43)
 
-        //
+        binView.tintColor = Colors.red
+        binView.alpha = 0
+        bigGroupLabel5.layer.borderColor = UIColor.clear.cgColor
+        bigGroupLabel5.layer.borderWidth = 2
+        bigGroupLabel5.layer.cornerRadius = 15
+        bigGroupLabel5.clipsToBounds = true
+        
         // Tables
         // Day Table
         dayTable.tableFooterView = UIView()
         dayTable.backgroundColor = .clear
         dayTable.isScrollEnabled = false
+        //
+        // Iphone 5/SE layout
+        if IPhoneType.shared.iPhoneType() == 0 {
+            dayTableHeight.constant = 7*42
+            indicationLabel.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        }
         
         //
-        for i in 0...bigGroupLabelArray.count - 1 {
+        for i in 0..<bigGroupLabelArray.count {
             longPressArray[i].minimumPressDuration = 0
             longPressArray[i].addTarget(self, action: #selector(beginDraggingFromTop(gestureRecognizer:)))
             bigGroupLabelArray[i].addGestureRecognizer(longPressArray[i])
+            // Iphone 5/SE layout, smaller text for endurance
+            if IPhoneType.shared.iPhoneType() == 0 {
+                bigGroupLabelArray[i].font = UIFont(name: "SFUIDisplay-light", size: 21)
+            }
         }
         
-        // Iphone 5/SE layout, smaller text for endurance
-        if IPhoneType.shared.iPhoneType() == 0 {
-            bigGroupLabelArray[3].font = UIFont(name: "SFUIDisplay-thin", size: 21)
-        }
         
         // Dragging
-        draggingLabel.textColor = Colors.light
+        draggingLabel.textColor = themeColor
         draggingLabel.textAlignment = .center
-        draggingLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        draggingLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         draggingLabel.lineBreakMode = .byWordWrapping
-        draggingLabel.layer.borderColor = Colors.light.withAlphaComponent(0.5).cgColor
-        draggingLabel.layer.borderWidth = 1
+        draggingLabel.layer.borderColor = themeColor.cgColor
+        draggingLabel.layer.borderWidth = 2
         draggingLabel.layer.cornerRadius = 15
         draggingLabel.clipsToBounds = true
         
@@ -158,13 +179,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         rightSwipe.edges = .left
         rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
         view.addGestureRecognizer(rightSwipe)
-        
-        //
-        // Create schedule button
-        createScheduleButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
-        createScheduleButton.tintColor = Colors.light
-        createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-        
     }
     
     
@@ -193,7 +207,12 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       return 49
+        // Iphone 5/SE layout, smaller text for endurance
+        if IPhoneType.shared.iPhoneType() == 0 {
+           return 42
+        } else {
+            return 49
+        }
     }
     
     // Cell for row
@@ -210,24 +229,31 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.row], comment: "")
 
         }
+        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        cell.dayLabel.textColor = themeColor
+        
         cell.layoutSubviews()
-        //
+        
+        for i in 0..<cell.groupLabelArray.count {
+            cell.groupLabelArray[i].textColor = Colors.dark
+            cell.groupLabelArray[i].font = UIFont(name: "SFUIDisplay-light", size: 23)
+        }
+        
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        //
         // add relevant groups if they are there
         if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![indexPath.row].count != 0 {
             for i in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![indexPath.row].count - 1 {
                 cell.groupLabelArray[i].tag = 1
                 cell.groupLabelArray[i].alpha = 1
-                cell.groupLabelArray[i].layer.borderWidth = 1
-                cell.groupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.75).cgColor
+                cell.groupLabelArray[i].layer.borderWidth = 2
+                cell.groupLabelArray[i].layer.borderColor = themeColor.cgColor
                 cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                 cell.groupLabelArray[i].clipsToBounds = true
                 //
                 // Get group as int
                 let group = (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![indexPath.row][i]["group"] as! String).groupFromString()
                 cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[group], comment: "")
-                cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
             }
         }
         return cell
@@ -285,13 +311,14 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Not selected filled in
             let title = groupTitle
             bigGroupLabelArray[i].text = title
-            bigGroupLabelArray[i].textColor = Colors.light
+            bigGroupLabelArray[i].textColor = themeColor
             bigGroupLabelArray[i].alpha = 1
-            bigGroupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.5).cgColor
-            bigGroupLabelArray[i].layer.borderWidth = 1
+            bigGroupLabelArray[i].layer.borderColor = themeColor.cgColor
+            bigGroupLabelArray[i].layer.borderWidth = 2
             bigGroupLabelArray[i].isUserInteractionEnabled = true
             bigGroupLabelArray[i].layer.cornerRadius = 15
             bigGroupLabelArray[i].clipsToBounds = true
+            bigGroupLabelArray[i].font = UIFont(name: "SFUIDisplay-light", size: 23)
 
             //
             // App helps create schedule
@@ -368,7 +395,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             draggingLabel.center = locationInView
             
             // Add dragging label and mask stack views
-            UIApplication.shared.keyWindow?.addSubview(draggingLabel)
+            view.addSubview(draggingLabel)
             maskStackViews()
             
             previousIndexPath = nil
@@ -390,11 +417,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         break
                     } else if cell.groupLabelArray[i].tag == 0 {
                         cell.groupLabelArray[i].tag = 2
-                        cell.groupLabelArray[i].backgroundColor = Colors.light
+                        cell.groupLabelArray[i].backgroundColor = themeColor
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-regular", size: 27)
                         break
                     }
                 }
@@ -410,7 +437,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             previousCell.groupLabelArray[i].tag = 0
                             previousCell.groupLabelArray[i].backgroundColor = .clear
                             previousCell.groupLabelArray[i].alpha = 0
-                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
                             break
                         }
                     }
@@ -419,15 +446,15 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
                 // ADD INDICATOR
                 for i in 0...cell.groupLabelArray.count - 1 {
-                    if cell.groupLabelArray[i].backgroundColor == Colors.light {
+                    if cell.groupLabelArray[i].backgroundColor == themeColor {
                         break
                     } else if cell.groupLabelArray[i].tag == 0 {
                         cell.groupLabelArray[i].tag = 2
-                        cell.groupLabelArray[i].backgroundColor = Colors.light
+                        cell.groupLabelArray[i].backgroundColor = themeColor
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 27)
                         break
                     }
                 }
@@ -443,7 +470,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             previousCell.groupLabelArray[i].tag = 0
                             previousCell.groupLabelArray[i].backgroundColor = .clear
                             previousCell.groupLabelArray[i].alpha = 0
-                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
                             break
                         }
                     }
@@ -462,7 +489,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         previousCell.groupLabelArray[i].tag = 0
                         previousCell.groupLabelArray[i].backgroundColor = .clear
                         previousCell.groupLabelArray[i].alpha = 0
-                        previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                        previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
                         break
                     }
                 }
@@ -479,7 +506,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
                 
-                // if there are already 5 things in one day, do nothing
+                // if there are already 5 lightgs in one day, do nolightg
                 var dayIsFull = false
                 // Put the goal in the day
                 // ADD INDICATOR
@@ -487,13 +514,13 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if cell.groupLabelArray[i].tag == 0 {
                         cell.groupLabelArray[i].tag = 1
                         cell.groupLabelArray[i].alpha = 1
-                        cell.groupLabelArray[i].layer.borderWidth = 1
-                        cell.groupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.75).cgColor
+                        cell.groupLabelArray[i].layer.borderWidth = 2
+                        cell.groupLabelArray[i].layer.borderColor = themeColor.cgColor
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
                         //
                         cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
                         break
                     } else if i == cell.groupLabelArray.count - 1 {
                         // Too much in one day, cant add any more
@@ -592,14 +619,14 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         for k in 0...schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(indexPathForRow?.row)!].count - 1 {
                             cell.groupLabelArray[k].tag = 1
                             cell.groupLabelArray[k].alpha = 1
-                            cell.groupLabelArray[k].layer.borderWidth = 1
-                            cell.groupLabelArray[k].layer.borderColor = Colors.light.withAlphaComponent(0.75).cgColor
+                            cell.groupLabelArray[k].layer.borderWidth = 2
+                            cell.groupLabelArray[k].layer.borderColor = themeColor.cgColor
                             cell.groupLabelArray[k].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[k].clipsToBounds = true
                             //
                             let groupIndex =  (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(indexPathForRow?.row)!][k]["group"] as! String).groupFromString()
                             cell.groupLabelArray[k].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[groupIndex], comment: "")
-                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
                         }
                     }
                     
@@ -611,14 +638,14 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     // Add dragging label and mask stack views
                     draggingLabel.center = locationInView2
-                    UIApplication.shared.keyWindow?.addSubview(draggingLabel)
+                    view.addSubview(draggingLabel)
                     maskStackViews()
                     
-                    // Turn createschedulebutton into bin
-                    createScheduleButton.backgroundColor = Colors.red.withAlphaComponent(0.25)
-                    createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
-                    createScheduleButton.setTitle("", for: .normal)
-                    
+                    // Reveal bin
+                    binView.alpha = 1
+                    indicationLabel.alpha = 0
+                    bigGroupLabel5.layer.borderColor = Colors.red.cgColor
+                    bigGroupLabel5.backgroundColor = .clear
                     break
                 // Press is not in a group label, indicate by setting previousindexpath = nil
                 } else {
@@ -643,7 +670,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             draggingLabel.center = locationInView2
             
             // If over bin (createschedulebutton)
-            if createScheduleButton.frame.contains(locationInView2) {
+            if !dayTable.frame.contains(locationInView2) {
                 // Clear old cell
                 // CLEAR INDICATOR
                 if previousIndexPath != nil {
@@ -653,13 +680,14 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             previousCell.groupLabelArray[i].tag = 0
                             previousCell.groupLabelArray[i].backgroundColor = .clear
                             previousCell.groupLabelArray[i].alpha = 0
-                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
                             break
                         }
                     }
                 }
-                //
-                createScheduleButton.setImage(#imageLiteral(resourceName: "BinOpen"), for: .normal)
+                
+                bigGroupLabel5.backgroundColor = Colors.red.withAlphaComponent(0.5)
+                binView.image = #imageLiteral(resourceName: "BinOpen")
             // If dragging label is over the dayTable, highlight the relevant label of the relevant day
             // Row being highlighted
             } else if indexPathForRow != nil && indexPathForRow == previousIndexPath {
@@ -671,16 +699,17 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             break
                         } else if cell.groupLabelArray[i].tag == 0 {
                             cell.groupLabelArray[i].tag = 2
-                            cell.groupLabelArray[i].backgroundColor = Colors.light
+                            cell.groupLabelArray[i].backgroundColor = themeColor
                             cell.groupLabelArray[i].alpha = 0.5
                             cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[i].clipsToBounds = true
-                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 27)
                             break
                         }
                     }
-                    createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
-                    createScheduleButton.setTitle("", for: .normal)
+                
+                    bigGroupLabel5.backgroundColor = .clear
+                    binView.image = #imageLiteral(resourceName: "Bin")
                 // Row is changing, changing highlight
             } else if indexPathForRow != nil && indexPathForRow != previousIndexPath {
                 
@@ -696,7 +725,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 previousCell.groupLabelArray[i].tag = 0
                                 previousCell.groupLabelArray[i].backgroundColor = .clear
                                 previousCell.groupLabelArray[i].alpha = 0
-                                previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                                previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
                                 break
                             }
                         }
@@ -708,22 +737,23 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
                 // ADD INDICATOR
                 for i in 0...cell.groupLabelArray.count - 1 {
-                    if cell.groupLabelArray[i].backgroundColor == Colors.light {
+                    if cell.groupLabelArray[i].backgroundColor == themeColor {
                         break
                     } else if cell.groupLabelArray[i].tag == 0 {
                         cell.groupLabelArray[i].tag = 2
-                        cell.groupLabelArray[i].backgroundColor = Colors.light
+                        cell.groupLabelArray[i].backgroundColor = themeColor
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 27)
                         break
                     }
                 }
                 
             }
-                createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
-                createScheduleButton.setTitle("", for: .normal)
+                
+                bigGroupLabel5.backgroundColor = .clear
+                binView.image = #imageLiteral(resourceName: "Bin")
             // Dragging label is dragged off table, set to monday
             } else if indexPathForRow == nil {
                 // Clear old cell
@@ -732,20 +762,21 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
                 // ADD INDICATOR
                 for i in 0...cell.groupLabelArray.count - 1 {
-                    if cell.groupLabelArray[i].backgroundColor == Colors.light {
+                    if cell.groupLabelArray[i].backgroundColor == themeColor {
                         break
                     } else if cell.groupLabelArray[i].tag == 0 {
                         cell.groupLabelArray[i].tag = 2
-                        cell.groupLabelArray[i].backgroundColor = Colors.light
+                        cell.groupLabelArray[i].backgroundColor = themeColor
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
+                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 27)
                         break
                     }
                 }
-                createScheduleButton.setImage(#imageLiteral(resourceName: "Bin"), for: .normal)
-                createScheduleButton.setTitle("", for: .normal)
+                
+                bigGroupLabel5.backgroundColor = .clear
+                binView.image = #imageLiteral(resourceName: "Bin")
             }
             
             
@@ -753,7 +784,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         default:
             var shouldRemoveBin = true
             // If over bin
-            if createScheduleButton.frame.contains(locationInView2) {
+            if !dayTable.frame.contains(locationInView2) {
                 // Haptic feedback
                 var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
                 generator?.prepare()
@@ -764,11 +795,14 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 shouldRemoveBin = false // Remove bin handled here, after animation
                 UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
                     self.draggingLabel.frame.size = CGSize(width: 0, height: 0)
-                    self.draggingLabel.center = self.createScheduleButton.center
+                    let center = CGPoint(x: self.bigGroupLabel5.center.x, y: self.groupStack2.center.y)
+                    self.draggingLabel.center = center
                 }, completion: { finished in
-                    self.createScheduleButton.setImage(nil, for: .normal)
-                    self.createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-                    self.createScheduleButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
+                    // Hide bin
+                    self.binView.alpha = 0
+                    self.indicationLabel.alpha = 1
+                    self.bigGroupLabel5.backgroundColor = .clear
+                    self.bigGroupLabel5.layer.borderColor = UIColor.clear.cgColor
                     self.draggingLabel.removeFromSuperview()
                     self.deMaskStackViews()
                 })
@@ -798,7 +832,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             previousCell.groupLabelArray[i].tag = 0
                             previousCell.groupLabelArray[i].backgroundColor = .clear
                             previousCell.groupLabelArray[i].alpha = 0
-                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
                             break
                         }
                     }
@@ -814,7 +848,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     cell = dayTable.cellForRow(at: indexPathForRow!) as! DayCell
                 }
             
-                    // if there are already 5 things in one day, do nothing
+                    // if there are already 5 lightgs in one day, do nolightg
                     var dayIsFull = false
                     // Put the goal in the day
                     // ADD INDICATOR
@@ -822,13 +856,13 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         if cell.groupLabelArray[i].tag == 0 {
                             cell.groupLabelArray[i].tag = 1
                             cell.groupLabelArray[i].alpha = 1
-                            cell.groupLabelArray[i].layer.borderWidth = 1
-                            cell.groupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.75).cgColor
+                            cell.groupLabelArray[i].layer.borderWidth = 2
+                            cell.groupLabelArray[i].layer.borderColor = themeColor.cgColor
                             cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[i].clipsToBounds = true
                             //
                             cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
-                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
                             break
                         } else if i == cell.groupLabelArray.count - 1 {
                             // Too much in one day, cant add any more
@@ -859,13 +893,13 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             if cell.groupLabelArray[i].tag == 0 {
                                 cell.groupLabelArray[i].tag = 1
                                 cell.groupLabelArray[i].alpha = 1
-                                cell.groupLabelArray[i].layer.borderWidth = 1
-                                cell.groupLabelArray[i].layer.borderColor = Colors.light.withAlphaComponent(0.75).cgColor
+                                cell.groupLabelArray[i].layer.borderWidth = 2
+                                cell.groupLabelArray[i].layer.borderColor = themeColor.cgColor
                                 cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                                 cell.groupLabelArray[i].clipsToBounds = true
                                 //
                                 cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
-                                cell.dayLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+                                cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
                                 break
                             } else if i == cell.groupLabelArray.count - 1 {
                                 // Too much in one day, cant add any more
@@ -889,9 +923,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 // Remove bin
                 if shouldRemoveBin {
-                    createScheduleButton.setImage(nil, for: .normal)
-                    createScheduleButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-                    createScheduleButton.backgroundColor = Colors.green.withAlphaComponent(0.25)
+                    // Hide bin
+                    self.binView.alpha = 0
+                    self.indicationLabel.alpha = 1
+                    self.bigGroupLabel5.backgroundColor = .clear
+                    self.bigGroupLabel5.layer.borderColor = UIColor.clear.cgColor
                 }
             }
         }
@@ -908,8 +944,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     func maskStackViews() {
         stackViewMask.backgroundColor  = .black
         stackViewMask.alpha = 0
-        stackViewMask.frame = CGRect(x: 0, y: UIScreen.main.bounds.minY, width: view.bounds.width, height: groupStack.bounds.height + 8 + ControlBarHeights.statusBarHeight)
-        view.addSubview(stackViewMask)
+        stackViewMask.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: separator.frame.maxY)
+//        view.addSubview(stackViewMask)
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
             self.stackViewMask.alpha = 0.5
         })
