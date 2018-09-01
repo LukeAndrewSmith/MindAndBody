@@ -37,10 +37,6 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var leftItem: UIBarButtonItem!
     @IBOutlet weak var rightItem: UIBarButtonItem!
     
-    @IBOutlet weak var progressView: UIView!
-    @IBOutlet weak var progressStack: UIStackView!
-    
-    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var separator: UIView!
     
@@ -114,27 +110,6 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         titleLabel.text = NSLocalizedString("scheduleTypeQuestion", comment: "")
         titleLabel.font = UIFont(name: "SFUIDisplay-regular", size: 23)
         titleLabel.textColor = Colors.dark
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        setupProgressView()
-    }
-    
-    func setupProgressView() {
-        progressView.backgroundColor = Colors.dark
-        
-        let titles = ["create", "profile", "help", "view", "content", "equipment"]
-        for i in 0..<titles.count {
-            let label = UILabel()
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 13)
-            label.text = titles[i]
-            label.textColor = Colors.light
-            progressStack.addArrangedSubview(label)
-        }
-        let indicator = UIView()
-        indicator.frame = CGRect(x: 0, y: 43, width: view.bounds.width / CGFloat(titles.count), height: 1)
     }
     
     //
@@ -277,43 +252,46 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     
     // Segues
     func performSegueFunction() {
-        // Check if user has filled in profile
-        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
-        var userHasFilledInProfile = true
-        // Loop profile answers
-        for i in 0..<scheduleDataStructures.profileQASorted.count {
-            if profileAnswers[scheduleDataStructures.profileQASorted[i]] == -1 {
-                userHasFilledInProfile = false
-                break
-            }
-        }
-        // Perform relevant segue
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        // PERFORM SEGUE
-        // App helps create schedule
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
-            // App chooses sessions
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 && userHasFilledInProfile == false {
-                // Goes to profile
-                self.performSegue(withIdentifier: "ScheduleQuestionProfileSegue", sender: self)
-            // User chooses sessions
-            } else {
-                // Goes to schedule creation help
-                self.performSegue(withIdentifier: "ScheduleQuestionHelpSegue", sender: self)
-            }
-        // Custom Schedule
-        } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 {
-            // App chooses sessions
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 && userHasFilledInProfile == false {
-                // Goes to profile
-                self.performSegue(withIdentifier: "ScheduleQuestionProfileSegue", sender: self)
-            // User chooses sessions
-            } else {
-                // Goes to schedule view type question
-                self.performSegue(withIdentifier: "ScheduleQuestionCustomSegue", sender: self)
-            }
-            
-        }
+        
+        self.performSegue(withIdentifier: "scheduleCreationPageSegue", sender: self)
+        
+//        // Check if user has filled in profile
+//        let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
+//        var userHasFilledInProfile = true
+//        // Loop profile answers
+//        for i in 0..<scheduleDataStructures.profileQASorted.count {
+//            if profileAnswers[scheduleDataStructures.profileQASorted[i]] == -1 {
+//                userHasFilledInProfile = false
+//                break
+//            }
+//        }
+//        // Perform relevant segue
+//        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+//        // PERFORM SEGUE
+//        // App helps create schedule
+//        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
+//            // App chooses sessions
+//            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 && userHasFilledInProfile == false {
+//                // Goes to profile
+//                self.performSegue(withIdentifier: "ScheduleQuestionProfileSegue", sender: self)
+//            // User chooses sessions
+//            } else {
+//                // Goes to schedule creation help
+//                self.performSegue(withIdentifier: "ScheduleQuestionHelpSegue", sender: self)
+//            }
+//        // Custom Schedule
+//        } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 1 {
+//            // App chooses sessions
+//            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 && userHasFilledInProfile == false {
+//                // Goes to profile
+//                self.performSegue(withIdentifier: "ScheduleQuestionProfileSegue", sender: self)
+//            // User chooses sessions
+//            } else {
+//                // Goes to schedule view type question
+//                self.performSegue(withIdentifier: "ScheduleQuestionCustomSegue", sender: self)
+//            }
+//
+//        }
     }
     
     
@@ -351,20 +329,6 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @IBAction func createScheduleAction(_ sender: Any) {
-    }
-    
-    // Back Button
-    @IBAction func backButtonAction(_ sender: Any) {
-        if comingFromSchedule {
-            self.dismiss(animated: true)
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    //
-    // Override segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //
         // Alert and Functions
         let inputTitle = NSLocalizedString("scheduleInputTitle", comment: "")
@@ -432,10 +396,58 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         // 4. Present the alert
         if didCreateNewSchedule == false {
             self.present(alert, animated: true, completion: nil)
-            //
-            // If schedule just been created but user goes back to change something, doesn;t create new schedule
+            
+        // If schedule just been created but user goes back to change something, doesn;t create new schedule
         } else {
-            performSegueFunction()
+            performSegue(withIdentifier: "scheduleCreationPageSegue", sender: self)
+        }
+    }
+    
+    // Back Button
+    @IBAction func backButtonAction(_ sender: Any) {
+        if comingFromSchedule {
+            self.dismiss(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    //
+    // Override segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "scheduleCreationPageSegue" {
+            
+            let destinationVC = segue.destination as! ScheduleCreationController
+            
+            // Check if user has filled in profile
+            let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
+            var userHasFilledInProfile = true
+            // Loop profile answers
+            for i in 0..<scheduleDataStructures.profileQASorted.count {
+                if profileAnswers[scheduleDataStructures.profileQASorted[i]] == -1 {
+                    userHasFilledInProfile = false
+                    break
+                }
+            }
+            destinationVC.isProfileCompleted = userHasFilledInProfile
+            
+            var appChoosesSessions = false
+            var appHelpsCreateSchedule = false
+            print(ScheduleVariables.shared.selectedSchedule)
+            
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            // App helps create schedule
+            print(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int)
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
+                appHelpsCreateSchedule = true
+            }
+            print(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int)
+            // App chooses sessions
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+                appChoosesSessions = true
+            }
+            destinationVC.appChoosesSessions = appChoosesSessions
+            destinationVC.appHelpsCreateSchedule = appHelpsCreateSchedule
         }
     }
     

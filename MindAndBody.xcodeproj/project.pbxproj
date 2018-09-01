@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07034332213AB74F00FBB8E6 /* ScheduleCreationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07034331213AB74F00FBB8E6 /* ScheduleCreationController.swift */; };
+		07034335213AB7D900FBB8E6 /* ScheduleCreationPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07034334213AB7D900FBB8E6 /* ScheduleCreationPageController.swift */; };
 		07038CC61F4C5C2A001CC6D5 /* purpleTree.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC51F4C5C2A001CC6D5 /* purpleTree.png */; };
 		07038CCC1F4C5FD8001CC6D5 /* wristRotations.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC71F4C5FD8001CC6D5 /* wristRotations.png */; };
 		07038CCD1F4C5FD8001CC6D5 /* wristRotations1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07038CC81F4C5FD8001CC6D5 /* wristRotations1.png */; };
@@ -1355,6 +1357,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07034331213AB74F00FBB8E6 /* ScheduleCreationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationController.swift; sourceTree = "<group>"; };
+		07034334213AB7D900FBB8E6 /* ScheduleCreationPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationPageController.swift; sourceTree = "<group>"; };
 		07038CC51F4C5C2A001CC6D5 /* purpleTree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpleTree.png; sourceTree = "<group>"; };
 		07038CC71F4C5FD8001CC6D5 /* wristRotations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wristRotations.png; sourceTree = "<group>"; };
 		07038CC81F4C5FD8001CC6D5 /* wristRotations1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wristRotations1.png; sourceTree = "<group>"; };
@@ -2693,6 +2697,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07034333213AB7B800FBB8E6 /* Page Control */ = {
+			isa = PBXGroup;
+			children = (
+				07034331213AB74F00FBB8E6 /* ScheduleCreationController.swift */,
+				07034334213AB7D900FBB8E6 /* ScheduleCreationPageController.swift */,
+			);
+			path = "Page Control";
+			sourceTree = "<group>";
+		};
 		07038CC11F4C5BF2001CC6D5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -4458,6 +4471,7 @@
 		07D5C3D31F9E31B20038F143 /* Schedule Creation */ = {
 			isa = PBXGroup;
 			children = (
+				07034333213AB7B800FBB8E6 /* Page Control */,
 				07E1D4E01FB2250B00B53B85 /* ScheduleCreationHelp.swift */,
 				07EFC0AB1F66CCEF0030DCE6 /* ScheduleCreator.swift */,
 				0750DB621F86C8F7003C2AE6 /* ScheduleCreatorFunctions.swift */,
@@ -8143,6 +8157,7 @@
 				071C4FB31E98D6D800328D18 /* MeditationTimer.swift in Sources */,
 				07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */,
 				074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */,
+				07034332213AB74F00FBB8E6 /* ScheduleCreationController.swift in Sources */,
 				0798925E1FB5078C00AA0B55 /* ScheduleCreatorWeek.swift in Sources */,
 				07DE23051FC0A47500940567 /* SubscriptionScreen.swift in Sources */,
 				0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */,
@@ -8151,6 +8166,7 @@
 				078674FE1FB84F7000C6B74C /* ICloudStorage.swift in Sources */,
 				0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */,
 				07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */,
+				07034335213AB7D900FBB8E6 /* ScheduleCreationPageController.swift in Sources */,
 				07CB04371E604653002066CD /* MeditationChoiceGuided.swift in Sources */,
 				07BB1A2F212C463D007C50CD /* FinalChoiceChoice.swift in Sources */,
 				077B0EE11FC2C35A008F3503 /* InfoTables.swift in Sources */,

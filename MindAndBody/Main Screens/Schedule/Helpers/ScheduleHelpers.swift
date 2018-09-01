@@ -2271,8 +2271,6 @@ extension ScheduleScreen {
         // Navigation Bar
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-
-        // Navigation Title
         navigationBar.title = NSLocalizedString("schedule", comment: "")
         
         //

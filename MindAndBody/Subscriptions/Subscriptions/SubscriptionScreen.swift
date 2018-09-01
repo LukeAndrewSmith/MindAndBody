@@ -236,18 +236,6 @@ class SubscriptionScreen: UIViewController {
     }
     
     //
-    // MARK: Info table
-    var infoSections: [String] =
-        [" ", ""]
-    var infoBulletPoints: [[String]] =
-        [
-            // Overview
-            ["subscription1", "subscription2", "subscription3", "", "termsAndConditions"],
-            // Terms & Conditions
-            ["termsAndConditionsDetail"]
-    ]
-    
-    //
     // MARK: Button Handlers
     // Subscription button
     @IBAction func subscriptionButtonAction(_ sender: Any) {
