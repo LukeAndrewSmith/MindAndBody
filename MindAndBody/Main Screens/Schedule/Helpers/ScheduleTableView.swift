@@ -380,7 +380,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         case scheduleChoiceTable:
             
             let label = UILabel()
-            label.font = UIFont(name: "SFUIDisplay-thin", size: 21)!
+            label.font = Fonts.smallElementRegular
             label.text = schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as? String
             label.textColor = Colors.light
             label.sizeToFit()
@@ -401,7 +401,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 
                 let editButton = UIButton()
                 editButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
-                editButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
+                editButton.titleLabel?.font = Fonts.smallElementLight
                 editButton.setTitleColor(UIColor.gray, for: .normal)
                 editButton.sizeToFit()
                 let buttonWidth = editButton.bounds.width
@@ -587,13 +587,31 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             // Set Notifications
             ReminderNotifications.shared.setNotifications()
             
-            //
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-            //
+
             // Change indicator
             if schedules.count != 0 {
+                // Select new cell (reloading row has strange animation)
                 let indexToReload = IndexPath(row: ScheduleVariables.shared.selectedSchedule, section: 0)
-                let cell = scheduleChoiceTable.cellForRow(at: indexToReload)
+                let cell = tableView.cellForRow(at: indexToReload)
+                let padding: CGFloat = 16 + 16
+
+                let indicator = UIImageView()
+                indicator.image = #imageLiteral(resourceName: "CheckMark")
+                indicator.frame.size = CGSize(width: (cell?.bounds.height)! / 2, height: (cell?.bounds.height)! / 2)
+                indicator.center = CGPoint(x: 1 + (padding / 2), y: (cell?.bounds.height)! / 2)
+                indicator.tintColor = Colors.green
+                cell?.addSubview(indicator)
+                
+                let editButton = UIButton()
+                editButton.setTitle(NSLocalizedString("edit", comment: ""), for: .normal)
+                editButton.titleLabel?.font = Fonts.smallElementLight
+                editButton.setTitleColor(UIColor.gray, for: .normal)
+                editButton.sizeToFit()
+                let buttonWidth = editButton.bounds.width
+                editButton.frame = CGRect(x: tableView.bounds.width - buttonWidth - 32, y: 0, width: buttonWidth + 32, height: 47)
+                editButton.addTarget(self, action: #selector(editScheduleAction), for: .touchUpInside)
+                cell?.addSubview(editButton)
             }
         }
     }

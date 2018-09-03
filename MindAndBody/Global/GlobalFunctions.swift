@@ -1436,11 +1436,13 @@ class TriangleLabel : UILabel {
         
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
+        let halfHeight = rect.height / 2
+        
         context.beginPath()
         context.move(to: CGPoint(x: rect.minX, y: rect.minY))
-        context.addLine(to: CGPoint(x: rect.maxX - 22, y: rect.minY))
-        context.addLine(to: CGPoint(x: rect.maxX, y: rect.minY + 22))
-        context.addLine(to: CGPoint(x: rect.maxX - 22, y: rect.maxY))
+        context.addLine(to: CGPoint(x: rect.maxX - halfHeight, y: rect.minY))
+        context.addLine(to: CGPoint(x: rect.maxX, y: rect.minY + halfHeight))
+        context.addLine(to: CGPoint(x: rect.maxX - halfHeight, y: rect.maxY))
         context.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
         context.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
         context.closePath()
@@ -1466,13 +1468,15 @@ class TriangleLabel2 : UIView {
         
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
+        let halfHeight = rect.height / 2
+        
         context.beginPath()
         context.move(to: CGPoint(x: rect.minX, y: rect.minY))
-        context.addLine(to: CGPoint(x: rect.maxX - 22, y: rect.minY))
-        context.addLine(to: CGPoint(x: rect.maxX, y: rect.minY + 22))
-        context.addLine(to: CGPoint(x: rect.maxX - 22, y: rect.maxY))
+        context.addLine(to: CGPoint(x: rect.maxX - halfHeight, y: rect.minY))
+        context.addLine(to: CGPoint(x: rect.maxX, y: rect.minY + halfHeight))
+        context.addLine(to: CGPoint(x: rect.maxX - halfHeight, y: rect.maxY))
         context.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
-        context.addLine(to: CGPoint(x: rect.minX + 22, y: rect.maxY - 22))
+        context.addLine(to: CGPoint(x: rect.minX + halfHeight, y: rect.maxY - halfHeight))
         context.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
         context.closePath()
         
@@ -1497,12 +1501,14 @@ class TriangleLabel3 : UIView {
         
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
+        let halfHeight = rect.height / 2
+
         context.beginPath()
         context.move(to: CGPoint(x: rect.minX, y: rect.minY))
         context.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
         context.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
         context.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
-        context.addLine(to: CGPoint(x: rect.minX + 22, y: rect.maxY - 22))
+        context.addLine(to: CGPoint(x: rect.minX + halfHeight, y: rect.maxY - halfHeight))
         context.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
         context.closePath()
         

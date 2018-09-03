@@ -60,7 +60,7 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
             createScheduleButton.backgroundColor = Colors.green
             createScheduleButton.setTitle(NSLocalizedString("create", comment: ""), for: .normal)
             createScheduleButton.setTitleColor(Colors.dark, for: .normal)
-            createScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+            createScheduleButton.titleLabel?.font = Fonts.bottomButton
             createScheduleButton.isEnabled = true
             createScheduleButton.alpha = 1
             createScheduleButtonHeight.constant = 49
@@ -106,10 +106,10 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         }
         
-        cell.groupLabel.font = UIFont(name: "SFUIDisplay-regular", size: 27)
+        cell.groupLabel.font = Fonts.mediumElementRegular
         cell.groupLabel.textColor = Colors.dark
         
-        cell.sessionsLabel.font = UIFont(name: "SFUIDisplay-regular", size: 27)
+        cell.sessionsLabel.font = Fonts.veryLargeElementRegular
         cell.sessionsLabel.textColor = Colors.dark
         
         cell.plusButton.tintColor = Colors.dark

@@ -37,7 +37,7 @@ extension Register {
             "lungeDumbell": 2,
             "bulgarianSplitSquat": 2,
             "weightedStepUp": 2,
-            // Legs (Calves)
+            // Legs (calves)
             "standingCalfRaise": 8,
             "seatedCalfRaise": 8,
         ]
@@ -102,7 +102,7 @@ extension Register {
             "lungeDumbell": 3,
             "bulgarianSplitSquat": 3,
             "weightedStepUp": 3,
-            // Legs (Calves)
+            // Legs (calves)
             "standingCalfRaise": 12,
             "seatedCalfRaise": 12,
         ]
@@ -167,7 +167,7 @@ extension Register {
             "lungeDumbell": 4,
             "bulgarianSplitSquat": 4,
             "weightedStepUp": 4,
-            // Legs (Calves)
+            // Legs (calves)
             "standingCalfRaise": 16,
             "seatedCalfRaise": 16,
         ]
@@ -233,7 +233,7 @@ extension Register {
             "lungeDumbell": 2,
             "bulgarianSplitSquat": 2,
             "weightedStepUp": 2,
-            // Legs (Calves)
+            // Legs (calves)
             "standingCalfRaise": 8,
             "seatedCalfRaise": 8,
             ]
@@ -298,7 +298,7 @@ extension Register {
             "lungeDumbell": 4,
             "bulgarianSplitSquat": 4,
             "weightedStepUp": 4,
-            // Legs (Calves)
+            // Legs (calves)
             "standingCalfRaise": 12,
             "seatedCalfRaise": 12,
         ]
@@ -363,7 +363,7 @@ extension Register {
             "lungeDumbell": 6,
             "bulgarianSplitSquat": 6,
             "weightedStepUp": 6,
-            // Legs (Calves)
+            // Legs (calves)
             "standingCalfRaise": 16,
             "seatedCalfRaise": 16,
             ]

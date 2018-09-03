@@ -53,7 +53,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         UIApplication.shared.statusBarStyle = .lightContent
         
         self.navigationController?.navigationBar.barTintColor = Colors.dark
@@ -144,6 +144,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             // Only present the current cell
                 // This is necessary as tableview within the cell is reused, so can only be loaded for one cell
         if tableView == questionsTable && indexPath.row == selectedQuestion {
+            
+            
 //            switch indexPath.row {
 //            // Age Picker
 //            case 0:
@@ -158,6 +160,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             // Answer Table with image (flexibility questions)
 //            default:
             
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
             cell.row = indexPath.row
             cell.selectedQuestion = selectedQuestion
@@ -170,8 +173,12 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             }
             cell.delegate = self
             return cell
+            
+            
                 //
 //            }
+            
+            
         // Last row, save profile cell
         } else if indexPath.row == scheduleDataStructures.profileQA.count {
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
@@ -182,7 +189,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             } else {
                 cell.textLabel?.text = NSLocalizedString("saveProfile", comment: "")
             }
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+            cell.textLabel?.font = Fonts.bottomButton
             cell.textLabel?.textColor = Colors.dark
             cell.textLabel?.textAlignment = .center
             return cell
@@ -236,7 +243,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
         let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: Fonts.smallElementRegular!]), forKey: "attributedTitle")
         
         // Reset app action
         let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
@@ -327,17 +334,18 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
     var selectedQuestion = Int()
     var selectedSection = Int()
     
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         //
         self.backgroundColor = .clear
         self.selectionStyle = .none
         // Questions Label
-        questionLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        questionLabel.textColor = Colors.light
+        questionLabel.font = Fonts.smallElementRegular
+        questionLabel.textColor = Colors.dark
         questionLabel.layer.cornerRadius = 15
         questionLabel.clipsToBounds = true
-        questionLabel.backgroundColor = Colors.dark
+        questionLabel.backgroundColor = Colors.light
         questionLabel.lineBreakMode = .byWordWrapping
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 0
@@ -433,6 +441,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var answerImageHeight: NSLayoutConstraint!
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
     //
+    @IBOutlet weak var separator: UIView!
     
     //
     // Passed data
@@ -444,15 +453,17 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        separator.backgroundColor = Colors.dark
         //
         self.backgroundColor = .clear
         self.selectionStyle = .none
         // Questions Label
-        questionLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
-        questionLabel.textColor = Colors.light
+        questionLabel.font = Fonts.mediumElementRegular
+        questionLabel.backgroundColor = Colors.light
+        questionLabel.textColor = Colors.dark
         questionLabel.layer.cornerRadius = 15
         questionLabel.clipsToBounds = true
-        questionLabel.backgroundColor = Colors.dark
         questionLabel.lineBreakMode = .byWordWrapping
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 0
@@ -468,10 +479,12 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         answerTableView.layer.cornerRadius = 15
         answerTableView.layer.masksToBounds = true
         answerTableView.tableFooterView = UIView()
-        answerTableView.backgroundColor = Colors.dark
-        answerTableView.separatorColor = Colors.light.withAlphaComponent(0.5)
+        answerTableView.backgroundColor = Colors.light
+        answerTableView.separatorColor = Colors.dark
         answerTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         answerTableView.layer.cornerRadius = 15
+        answerTableView.layer.borderColor = Colors.dark.cgColor
+        answerTableView.layer.borderWidth = 2
         answerTableView.clipsToBounds = true
         answerTableView.isScrollEnabled = false
         
@@ -482,7 +495,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
             // Hide image
             answerImageHeight.constant = 0
         } else {
-            answerImageView.backgroundColor = Colors.dark
+            answerImageView.backgroundColor = Colors.light
             answerImageView.layer.cornerRadius = 15
             answerImageView.clipsToBounds = true
             answerImageView.image = getUncachedImage(named: image)
@@ -504,7 +517,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        let font = Fonts.mediumElementRegular
         let height = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]![indexPath.row], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
         //
         setTableHeight()
@@ -523,7 +536,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     func setTableHeight() {
         var tableHeightConstant: CGFloat = 0
         for i in 0..<scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]!.count {
-            let font = UIFont(name: "SFUIDisplay-thin", size: 23)
+            let font = Fonts.mediumElementRegular
             let height = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]![i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
             if height > (49 * 1.5) {
                 tableHeightConstant += (49 * 2)
@@ -541,7 +554,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     func getTableHieght() -> CGFloat {
         var tableHeightConstant: CGFloat = 0
         for i in 0..<scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]!.count {
-            let font = UIFont(name: "SFUIDisplay-thin", size: 23)
+            let font = Fonts.mediumElementRegular
             let height = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]![i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
             if height > (49 * 1.5) {
                 tableHeightConstant += (49 * 2)
@@ -563,15 +576,15 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
         //
-        cell.backgroundColor = Colors.dark
+        cell.backgroundColor = Colors.light
         cell.tintColor = Colors.green
-        cell.textLabel?.textColor = Colors.light
+        cell.textLabel?.textColor = Colors.dark
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.lineBreakMode = .byWordWrapping
         // row + 1 as question included with answers
         cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]![indexPath.row], comment: "")
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        cell.textLabel?.font = Fonts.mediumElementRegular
         // Select answer
         if profileAnswers[scheduleDataStructures.profileQASorted[row]] != -1 && indexPath.row == profileAnswers[scheduleDataStructures.profileQASorted[selectedQuestion]] {
             cell.textLabel?.textColor = Colors.green

@@ -161,6 +161,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        navigationItem.backBarButtonItem?.tintColor = Colors.light
     }
     
     //

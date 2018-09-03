@@ -35,6 +35,7 @@ class ScheduleViewQuestion: UIViewController {
         
         // Title Label
         titleLabel.text = NSLocalizedString("scheduleView", comment: "")
+        titleLabel.font = Fonts.mediumElementRegular
         titleLabel.textColor = Colors.dark
         
         topSeparator.backgroundColor = Colors.dark
@@ -46,12 +47,12 @@ class ScheduleViewQuestion: UIViewController {
         // Buttons
         dayViewButton.titleLabel?.lineBreakMode = .byWordWrapping
         dayViewButton.setTitle(NSLocalizedString("scheduleView1", comment: ""), for: .normal)
-        dayViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        dayViewButton.titleLabel?.font = Fonts.mediumElementRegular
         dayViewButton.setTitleColor(Colors.dark, for: .normal)
         
         weekViewButton.titleLabel?.lineBreakMode = .byWordWrapping
         weekViewButton.setTitle(NSLocalizedString("scheduleView2", comment: ""), for: .normal)
-        weekViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        weekViewButton.titleLabel?.font = Fonts.mediumElementRegular
         weekViewButton.setTitleColor(Colors.dark, for: .normal)
     }
     

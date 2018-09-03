@@ -16,6 +16,7 @@ class ScheduleCreationController: UIViewController {
     @IBOutlet weak var rightItem: UIBarButtonItem!
     
     @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var progressViewHeight: NSLayoutConstraint!
     @IBOutlet weak var progressIndicator: UIView!
     @IBOutlet weak var progressIndicatorWidth: NSLayoutConstraint!
     @IBOutlet weak var progressIndicator2: UIView!
@@ -26,6 +27,7 @@ class ScheduleCreationController: UIViewController {
     @IBOutlet weak var currentIndicatorWidth2: NSLayoutConstraint!
     
     @IBOutlet weak var explanationView: UIView!
+    @IBOutlet weak var explanationViewHeight: NSLayoutConstraint!
     @IBOutlet weak var explanationLabel: UILabel!
     
     var appChoosesSessions = true
@@ -68,7 +70,14 @@ class ScheduleCreationController: UIViewController {
         explanationView.backgroundColor = Colors.dark
         
         explanationLabel.textColor = Colors.light
-        explanationLabel.font = UIFont(name: "SFUIDisplay-regular", size: 13)
+        // Iphone 5/SE layout
+        if IPhoneType.shared.iPhoneType() == 0 {
+            explanationLabel.font = UIFont(name: "SFUIDisplay-regular", size: 11)
+            explanationViewHeight.constant = 36
+            progressViewHeight.constant = 36
+        } else {
+            explanationLabel.font = UIFont(name: "SFUIDisplay-regular", size: 13)
+        }
         explanationLabel.numberOfLines = 0
         explanationLabel.lineBreakMode = .byWordWrapping
     }
@@ -82,19 +91,25 @@ class ScheduleCreationController: UIViewController {
         currentIndicator2.backgroundColor = Colors.red
         
         let viewWidth = view.bounds.width / CGFloat(pages.count)
+        var half: CGFloat = 21
+        var extra: CGFloat = 9
+        if IPhoneType.shared.iPhoneType() == 0 {
+            half = 17
+            extra = 8
+        }
         
         if pages.count != 0 {
             for i in 0..<pages.count {
                 switch i {
                 case 0:
                     let backgroundView = TriangleLabel()
-                    backgroundView.frame = CGRect(x: 0, y: 0, width: viewWidth + 21 - 9, height: 44)
+                    backgroundView.frame = CGRect(x: 0, y: 0, width: viewWidth + half - extra, height: progressViewHeight.constant)
                     backgroundView.backgroundColor = .clear
                     backgroundView.triangleColor = Colors.dark
                     progressView.addSubview(backgroundView)
                     let label = UILabel()
                     label.text = NSLocalizedString(pages[i], comment: "")
-                    label.font = UIFont(name: "SFUIDisplay-light", size: 13)
+                    label.font = Fonts.tinyElementLight
                     label.textColor = Colors.light
                     label.textAlignment = .center
                     label.sizeToFit()
@@ -106,13 +121,13 @@ class ScheduleCreationController: UIViewController {
                     
                 case pages.count - 1:
                     let backgroundView = TriangleLabel3()
-                    backgroundView.frame = CGRect(x: tabs[i - 1].frame.maxX - 21, y: 0, width: viewWidth + 21 - 9, height: 44)
+                    backgroundView.frame = CGRect(x: tabs[i - 1].frame.maxX - half, y: 0, width: viewWidth + half - extra, height: progressViewHeight.constant)
                     backgroundView.backgroundColor = .clear
                     backgroundView.triangleColor = Colors.dark
                     progressView.addSubview(backgroundView)
                     let label = UILabel()
                     label.text = NSLocalizedString(pages[i], comment: "")
-                    label.font = UIFont(name: "SFUIDisplay-light", size: 13)
+                    label.font = Fonts.tinyElementLight
                     label.textColor = Colors.light
                     label.textAlignment = .center
                     label.sizeToFit()
@@ -124,13 +139,13 @@ class ScheduleCreationController: UIViewController {
                     
                 default:
                     let backgroundView = TriangleLabel2()
-                    backgroundView.frame = CGRect(x: tabs[i - 1].frame.maxX - 21, y: 0, width: viewWidth + 21, height: 44)
+                    backgroundView.frame = CGRect(x: tabs[i - 1].frame.maxX - half, y: 0, width: viewWidth + half, height: progressViewHeight.constant)
                     backgroundView.backgroundColor = .clear
                     backgroundView.triangleColor = Colors.dark
                     progressView.addSubview(backgroundView)
                     let label = UILabel()
                     label.text = NSLocalizedString(pages[i], comment: "")
-                    label.font = UIFont(name: "SFUIDisplay-light", size: 13)
+                    label.font = Fonts.tinyElementLight
                     label.textColor = Colors.light
                     label.textAlignment = .center
                     label.sizeToFit()
@@ -157,7 +172,12 @@ class ScheduleCreationController: UIViewController {
         if pages.count != 0 {
             if self.currentPage < self.pages.count - 1 {
                 
-                let indicatorWidth1 = self.tabs[self.currentPage].bounds.width - 21
+                var toMinus: CGFloat = 21
+                if IPhoneType.shared.iPhoneType() == 0 {
+                    toMinus = 17
+                }
+                
+                let indicatorWidth1 = self.tabs[self.currentPage].bounds.width - toMinus
                 self.currentIndicatorWidth.constant = indicatorWidth1
                 self.currentIndicatorWidth2.constant = indicatorWidth1
 

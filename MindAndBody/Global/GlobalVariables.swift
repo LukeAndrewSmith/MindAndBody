@@ -79,11 +79,56 @@ enum Fonts {
     static let navigationBar = UIFont(name: "SFUIDisplay-light", size: 19)
     static let navigationBarButton = UIFont(name: "SFUIDisplay-light", size: 17)
     
+    // Cells
     static let bigTitle = UIFont(name: "SFUIDisplay-light", size: 30)
-    static let regularCell = UIFont(name: "SFUIDisplay-regular", size: 19)
     static let bigCell = UIFont(name: "SFUIDisplay-light", size: 23)
+    static let regularCell = UIFont(name: "SFUIDisplay-regular", size: 18)
     
+    // Various Elements
+    static let veryLargeElementRegular = UIFont(name: "SFUIDisplay-regular", size: 27)
+    
+    static let largeElementRegular = UIFont(name: "SFUIDisplay-regular", size: 23)
+    
+    static let mediumElementRegular = UIFont(name: "SFUIDisplay-regular", size: 21)
+    static let mediumElementLight = UIFont(name: "SFUIDisplay-light", size: 21)
+    
+    static let smallElementRegular = UIFont(name: "SFUIDisplay-regular", size: 19)
+    static let smallElementLight = UIFont(name: "SFUIDisplay-light", size: 19)
+    
+    static let verySmallElementLight = UIFont(name: "SFUIDisplay-light", size: 15)
+    
+    static let tinyElementLight = UIFont(name: "SFUIDisplay-light", size: 13)
+    
+    // Buttons
+    static let bottomButton = UIFont(name: "SFUIDisplay-regular", size: 23)
+
 }
+
+// Old bigger text
+//// Navigation bar
+//static let navigationBar = UIFont(name: "SFUIDisplay-light", size: 19)
+//static let navigationBarButton = UIFont(name: "SFUIDisplay-light", size: 17)
+//
+//static let bigTitle = UIFont(name: "SFUIDisplay-light", size: 30)
+//
+//static let regularCell = UIFont(name: "SFUIDisplay-regular", size: 19)
+//static let bigCell = UIFont(name: "SFUIDisplay-light", size: 23)
+//
+//static let bottomButton = UIFont(name: "SFUIDisplay-regular", size: 23)
+//
+//static let veryLargeElementRegular = UIFont(name: "SFUIDisplay-regular", size: 27)
+//
+//static let largeElementRegular = UIFont(name: "SFUIDisplay-regular", size: 23)
+//
+//static let mediumElementRegular = UIFont(name: "SFUIDisplay-regular", size: 21)
+//static let mediumElementLight = UIFont(name: "SFUIDisplay-light", size: 21)
+//
+//static let smallElementRegular = UIFont(name: "SFUIDisplay-regular", size: 19)
+//static let smallElementLight = UIFont(name: "SFUIDisplay-light", size: 19)
+//
+//static let verySmallElementLight = UIFont(name: "SFUIDisplay-light", size: 15)
+//
+//static let tinyElementLight = UIFont(name: "SFUIDisplay-light", size: 13)
 
 //
 // Animation Times ---------------------------------------------------------------------------------------------------------------

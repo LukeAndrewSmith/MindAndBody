@@ -20,7 +20,7 @@ extension sessionData {
                     // Joint Rotations
                     ["wrist", "elbow", "shoulderR", "neckR", "waist", "hip", "knees", "ankles"],
                     // Foam/Ball Roll
-                    ["backf", "thoracicSpine", "lat", "pecDelt", "rearDelt", "quadf", "adductorf", "hamstringf", "glutef", "calvef", "itBand", "standOnBall"],
+                    ["backf", "thoracicSpine", "lat", "pecDelt", "rearDelt", "quadf", "adductorf", "hamstringf", "glutef", "calff", "itBand", "standOnBall"],
                     // Glutes
                     ["gluteBridgewW", "kneelingKickBackW", "legsToSideSquat", "standingGluteKickback"],
                     // Lower Back
@@ -47,7 +47,7 @@ extension sessionData {
                     ["deadlift", "romanianDeadlift", "weightedHipThrust", "legCurl", "oneLeggedDeadlift"],
                     // Legs (General)
                     ["lungeDumbell", "bulgarianSplitSquat", "weightedStepUp"],
-                    // Legs (Calves)
+                    // Legs (calves)
                     ["standingCalfRaise", "seatedCalfRaise"],
                     // Pull (Back) ---------
                     ["pullDown", "kneelingPullDown", "bentOverRowDumbell", "tBarRow", "rowMachine", "latPullover"],
@@ -76,7 +76,7 @@ extension sessionData {
                     ["bodyweightDeadlift", "singleLegDeadlift"],
                     // Legs (Glutes)
                     ["gluteBridge", "singleLegGluteBridge", "kickBack", "standingKickBack"],
-                    // Legs (Calves)
+                    // Legs (calves)
                     ["calfRaise"],
                     // Pull (Back) ---------
                     ["contralateralLimbRaises", "superMan", "backHyperextension", "doorFrameRow", "reverseSnowAngels"],
@@ -128,7 +128,7 @@ extension sessionData {
                     // Joint Rotations
                     ["wrist", "elbow", "shoulderR", "neckR", "waist", "hip", "knees", "ankles"],
                     // Foam/Ball Roll
-                    ["backf", "thoracicSpine", "lat", "pecDelt", "rearDelt", "quadf", "adductorf", "hamstringf", "glutef", "calvef", "itBand", "standOnBall"],
+                    ["backf", "thoracicSpine", "lat", "pecDelt", "rearDelt", "quadf", "adductorf", "hamstringf", "glutef", "calff", "itBand", "standOnBall"],
                     // Back
                     ["catCow", "upwardsDog", "extendedPuppy", "childPose", "staffPose", "pelvicTilt", "kneeToChest", "legDrop", "seatedTwist", "legsWall"],
                     // Obliques(Sides)
@@ -143,8 +143,8 @@ extension sessionData {
                     ["shoulderRoll", "behindBackTouch", "frontDelt", "lateralDelt", "rearDeltStretch", "rotatorCuff"],
                     // Hips and Glutes
                     ["squatHold", "groinStretch", "butterflyPose", "lungeStretch", "threadTheNeedle", "pigeonPose", "seatedGlute"],
-                    // Calves
-                    ["calveStretch"],
+                    // calves
+                    ["calvestretch"],
                     // Hamstrings
                     ["standingHamstring", "standingOneLegHamstring", "downWardsDog", "singleLegHamstring", "twoLegHamstring"],
                     // Quads
@@ -190,7 +190,7 @@ extension sessionData {
                     "adductorf",
                     "hamstringf",
                     "glutef",
-                    "calvef",
+                    "calff",
                     "itBand",
                     "standOnBall",
                     // Glutes
@@ -221,7 +221,7 @@ extension sessionData {
                     // Legs (General)
                     "bulgarianSplitSquat",
                     "weightedStepUp",
-                    // Legs (Calves)
+                    // Legs (calves)
                     "seatedCalfRaise",
                     // Pull (Biceps)
                     "hammerCurlCable",
@@ -237,7 +237,7 @@ extension sessionData {
                     "singleLegGluteBridge",
                     "kickBack",
                     "standingKickBack",
-                    // Legs (Calves)
+                    // Legs (calves)
                     "calfRaise",
                     // Pull (Back) ---------
                     "doorFrameRow",
@@ -267,7 +267,7 @@ extension sessionData {
                     "adductorf",
                     "hamstringf",
                     "glutef",
-                    "calvef",
+                    "calff",
                     "itBand",
                     "standOnBall",
                     // Back
@@ -298,8 +298,8 @@ extension sessionData {
                     "threadTheNeedle",
                     "pigeonPose",
                     "seatedGlute",
-                    // Calves
-                    "calveStretch",
+                    // calves
+                    "calvestretch",
                     // Hamstrings
                     "standingOneLegHamstring",
                     "singleLegHamstring",
@@ -369,7 +369,7 @@ extension sessionData {
             "deadlift", "romanianDeadlift", "weightedHipThrust", "legCurl", "oneLeggedDeadlift",
             // Legs (General)
             "lungeDumbell", "bulgarianSplitSquat", "weightedStepUp",
-            // Legs (Calves)
+            // Legs (calves)
             "standingCalfRaise", "seatedCalfRaise",
             // Pull (Back) ---------
             "pullDown", "kneelingPullDown", "bentOverRowDumbell", "tBarRow", "rowMachine", "latPullover",
@@ -546,11 +546,11 @@ extension sessionData {
                             "explanation": ["glutefEH", "glutefEA", "glutefEF"],
                             "targetArea": ["glute"]
                     ],
-                    "calvef":
+                    "calff":
                         [
-                            "name": ["calvef"],
-                            "demonstration": ["calveFoam", "calveFoam1", "calveFoam2", "calveFoam3", "calveFoam2", "calveFoam1", "calveFoam2", "calveFoam3", "calveFoam4", "calveFoam5", "calveFoam4", "calveFoam3", "calveFoam2", "calveFoam1"],
-                            "explanation": ["calvefEH", "calvefEA", "calvefEF"],
+                            "name": ["calff"],
+                            "demonstration": ["calfFoam", "calfFoam1", "calfFoam2", "calfFoam3", "calfFoam2", "calfFoam1", "calfFoam2", "calfFoam3", "calfFoam4", "calfFoam5", "calfFoam4", "calfFoam3", "calfFoam2", "calfFoam1"],
+                            "explanation": ["calffEH", "calffEA", "calffEF"],
                             "targetArea": ["calf"]
                     ],
                     "itBand":
@@ -995,7 +995,7 @@ extension sessionData {
                         "explanation": ["weightedStepUpEH", "weightedStepUpEA", "weightedStepUpEF"],
                         "targetArea": ["squatBody"]
                 ],
-                // Legs (Calves)
+                // Legs (calves)
                 "standingCalfRaise":
                     [
                         "name": ["standingCalfRaise"],
@@ -1325,7 +1325,7 @@ extension sessionData {
                         "explanation": ["standingKickBackEH", "standingKickBackEA", "standingKickBackEF"],
                         "targetArea": ["squatBody"]
                 ],
-                // Legs (Calves)
+                // Legs (calves)
                 "calfRaise":
                     [
                         "name": ["calfRaise"],
@@ -1944,11 +1944,11 @@ extension sessionData {
                         "explanation": ["glutefEH", "glutefEA", "glutefEF"],
                         "targetArea": ["glute"]
                 ],
-                "calvef":
+                "calff":
                     [
-                        "name": ["calvef"],
-                        "demonstration": ["calveFoam", "calveFoam1", "calveFoam2", "calveFoam3", "calveFoam2", "calveFoam1", "calveFoam2", "calveFoam3", "calveFoam4", "calveFoam5", "calveFoam4", "calveFoam3", "calveFoam2", "calveFoam1"],
-                        "explanation": ["calvefEH", "calvefEA", "calvefEF"],
+                        "name": ["calff"],
+                        "demonstration": ["calfFoam", "calfFoam1", "calfFoam2", "calfFoam3", "calfFoam2", "calfFoam1", "calfFoam2", "calfFoam3", "calfFoam4", "calfFoam5", "calfFoam4", "calfFoam3", "calfFoam2", "calfFoam1"],
+                        "explanation": ["calffEH", "calffEA", "calffEF"],
                         "targetArea": ["calf"]
                 ],
                 "itBand":
@@ -2224,12 +2224,12 @@ extension sessionData {
                         "explanation": ["seatedGluteEH", "seatedGluteEA", "seatedGluteEF"],
                         "targetArea": ["glute"]
                 ],
-                // Calves
-                "calveStretch":
+                // calves
+                "calvestretch":
                     [
-                        "name": ["calveStretch"],
-                        "demonstration": ["calveStretch"],
-                        "explanation": ["calveStretchEH", "calveStretchEA", "calveStretchEF"],
+                        "name": ["calvestretch"],
+                        "demonstration": ["calvestretch"],
+                        "explanation": ["calvestretchEH", "calvestretchEA", "calvestretchEF"],
                         "targetArea": ["calf"]
                 ],
                 // Hamstrings

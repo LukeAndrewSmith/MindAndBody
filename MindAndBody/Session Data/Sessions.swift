@@ -144,7 +144,7 @@ class sessionData {
                          "sets": 2,
                          "reps": "0",
                          "time": 2],
-                        ["movement": "calvef",
+                        ["movement": "calff",
                          "sets": 2,
                          "reps": "0",
                          "time": 2],
@@ -23333,7 +23333,7 @@ class sessionData {
                        ["movement": "glutef",
                              "breaths": 10,
                              "time": 2],
-                       ["movement": "calvef",
+                       ["movement": "calff",
                              "breaths": 10,
                              "time": 2],
                        ["movement": "itBand",
@@ -23450,7 +23450,7 @@ class sessionData {
                        ["movement": "seatedGlute",
                              "breaths": 10,
                              "time": 2],
-                       ["movement": "calveStretch",
+                       ["movement": "calvestretch",
                              "breaths": 10,
                              "time": 2],
                        ["movement": "standingHamstring",
@@ -23519,8 +23519,8 @@ class sessionData {
                         ["movement": "threadTheNeedle",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Hamstrings
@@ -23560,8 +23560,8 @@ class sessionData {
                         ["movement": "butterflyPose",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Hamstrings
@@ -23601,8 +23601,8 @@ class sessionData {
                         ["movement": "threadTheNeedle",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Hamstrings
@@ -23656,8 +23656,8 @@ class sessionData {
                         ["movement": "butterflyPose",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Hamstrings
@@ -23710,8 +23710,8 @@ class sessionData {
                         ["movement": "butterflyPose",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Hamstrings
@@ -23764,8 +23764,8 @@ class sessionData {
                         ["movement": "butterflyPose",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Hamstrings
@@ -23809,8 +23809,8 @@ class sessionData {
                         ["movement": "pigeonPose",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Hamstrings
@@ -23850,8 +23850,8 @@ class sessionData {
                         ["movement": "pigeonPose",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Hamstrings
@@ -23905,8 +23905,8 @@ class sessionData {
                         ["movement": "butterflyPose",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Hamstrings
@@ -23959,8 +23959,8 @@ class sessionData {
                         ["movement": "butterflyPose",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Hamstrings
@@ -23991,8 +23991,8 @@ class sessionData {
                         ["movement": "threadTheNeedle",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Side/Hamstrings
@@ -24022,8 +24022,8 @@ class sessionData {
                         ["movement": "threadTheNeedle",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Side/Hamstrings
@@ -24054,8 +24054,8 @@ class sessionData {
                         ["movement": "threadTheNeedle",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Side/Hamstrings
@@ -24089,8 +24089,8 @@ class sessionData {
                         ["movement": "threadTheNeedle",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Side/Hamstrings
@@ -24127,8 +24127,8 @@ class sessionData {
                         ["movement": "pigeonPose",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Side/Hamstrings
@@ -24159,8 +24159,8 @@ class sessionData {
                         ["movement": "pigeonPose",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                         // Side/Hamstrings
@@ -24669,7 +24669,7 @@ class sessionData {
                         ["movement": "adductorf",
                          "breaths": 10,
                          "time": 30],
-                        ["movement": "calvef",
+                        ["movement": "calff",
                          "breaths": 10,
                          "time": 30],
                     ],
@@ -26151,8 +26151,8 @@ class sessionData {
                         ["movement": "lungeStretchWall",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                     ],
@@ -26180,8 +26180,8 @@ class sessionData {
                         ["movement": "lungeStretchWall",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                     ],
@@ -26209,8 +26209,8 @@ class sessionData {
                         ["movement": "lungeStretchWall",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                     ],
@@ -26226,7 +26226,7 @@ class sessionData {
                         ["movement": "quadf",
                          "breaths": 10,
                          "time": 45],
-                        ["movement": "calvef",
+                        ["movement": "calff",
                          "breaths": 10,
                          "time": 30],
                         // Dynamic/Back
@@ -26264,7 +26264,7 @@ class sessionData {
                         ["movement": "itBand",
                          "breaths": 10,
                          "time": 30],
-                        ["movement": "calvef",
+                        ["movement": "calff",
                          "breaths": 10,
                          "time": 30],
                         // Dynamic/Back
@@ -26302,7 +26302,7 @@ class sessionData {
                         ["movement": "quadf",
                          "breaths": 10,
                          "time": 45],
-                        ["movement": "calvef",
+                        ["movement": "calff",
                          "breaths": 10,
                          "time": 30],
                         // Dynamic/Back
@@ -26358,8 +26358,8 @@ class sessionData {
                         ["movement": "lungeStretchWall",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                     ],
@@ -26390,8 +26390,8 @@ class sessionData {
                         ["movement": "lungeStretchWall",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                     ],
@@ -26422,8 +26422,8 @@ class sessionData {
                         ["movement": "lungeStretchWall",
                          "breaths": 5,
                          "time": 20],
-                        // Calves
-                        ["movement": "calveStretch",
+                        // calves
+                        ["movement": "calvestretch",
                          "breaths": 5,
                          "time": 20],
                     ],
@@ -26442,7 +26442,7 @@ class sessionData {
                         ["movement": "adductorf",
                          "breaths": 10,
                          "time": 30],
-                        ["movement": "calvef",
+                        ["movement": "calff",
                          "breaths": 10,
                          "time": 30],
                         // Dynamic/Back
@@ -26486,7 +26486,7 @@ class sessionData {
                         ["movement": "adductorf",
                          "breaths": 10,
                          "time": 30],
-                        ["movement": "calvef",
+                        ["movement": "calff",
                          "breaths": 10,
                          "time": 30],
                         // Dynamic/Back
@@ -26530,7 +26530,7 @@ class sessionData {
                         ["movement": "adductorf",
                          "breaths": 10,
                          "time": 30],
-                        ["movement": "calvef",
+                        ["movement": "calff",
                          "breaths": 10,
                          "time": 30],
                         // Dynamic/Back

@@ -138,7 +138,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         // Iphone 5/SE layout
         if IPhoneType.shared.iPhoneType() == 0 {
-            dayTableHeight.constant = 7*42
+            dayTableHeight.constant = 7*38
+            createScheduleButtonHeight.constant = 40
         } else {
             dayTableHeight.constant = 7*44
         }
@@ -150,7 +151,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             bigGroupLabelArray[i].addGestureRecognizer(longPressArray[i])
             // Iphone 5/SE layout, smaller text for endurance
             if IPhoneType.shared.iPhoneType() == 0 {
-                bigGroupLabelArray[i].font = UIFont(name: "SFUIDisplay-light", size: 21)
+                bigGroupLabelArray[i].font = UIFont(name: "SFUIDisplay-light", size: 18)
             }
         }
         
@@ -158,7 +159,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Dragging
         draggingLabel.textColor = themeColor
         draggingLabel.textAlignment = .center
-        draggingLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        draggingLabel.font = Fonts.mediumElementRegular
+        // Iphone 5/SE layout, smaller text for endurance
+        if IPhoneType.shared.iPhoneType() == 0 {
+            draggingLabel.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        }
         draggingLabel.lineBreakMode = .byWordWrapping
         draggingLabel.layer.borderColor = themeColor.cgColor
         draggingLabel.layer.borderWidth = 2
@@ -177,7 +182,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             createScheduleButton.backgroundColor = Colors.green
             createScheduleButton.setTitle(NSLocalizedString("create", comment: ""), for: .normal)
             createScheduleButton.setTitleColor(Colors.dark, for: .normal)
-            createScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+            createScheduleButton.titleLabel?.font = Fonts.bottomButton
             createScheduleButton.isEnabled = true
             createScheduleButton.alpha = 1
             createScheduleButtonHeight.constant = 49
@@ -218,7 +223,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Iphone 5/SE layout, smaller text for endurance
         if IPhoneType.shared.iPhoneType() == 0 {
-           return 42
+            return 38
         } else {
             return 44
         }
@@ -238,14 +243,14 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.dayLabel.text = NSLocalizedString(dayArray[indexPath.row], comment: "")
 
         }
-        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        cell.dayLabel.font = Fonts.mediumElementRegular
         cell.dayLabel.textColor = themeColor
         
         cell.layoutSubviews()
         
         for i in 0..<cell.groupLabelArray.count {
             cell.groupLabelArray[i].textColor = Colors.dark
-            cell.groupLabelArray[i].font = UIFont(name: "SFUIDisplay-light", size: 23)
+            cell.groupLabelArray[i].font = Fonts.mediumElementRegular
         }
         
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
@@ -262,7 +267,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Get group as int
                 let group = (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![indexPath.row][i]["group"] as! String).groupFromString()
                 cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[group], comment: "")
-                cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                cell.dayLabel.font = Fonts.mediumElementRegular
             }
         }
         return cell
@@ -327,7 +332,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             bigGroupLabelArray[i].isUserInteractionEnabled = true
             bigGroupLabelArray[i].layer.cornerRadius = 15
             bigGroupLabelArray[i].clipsToBounds = true
-            bigGroupLabelArray[i].font = UIFont(name: "SFUIDisplay-light", size: 23)
+            bigGroupLabelArray[i].font = Fonts.mediumElementRegular
 
             //
             // App helps create schedule
@@ -353,11 +358,12 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let title = groupTitle + nGroupsString
                     bigGroupLabelArray[i].text = title
                     
-                // Make label dark and green if all session of group have been chosen, or if not suggested
+                // Make label dark if all session of group have been chosen, or if not suggested
                 } else {
-//                        bigGroupLabelArray[i].alpha = 0.75
-                        bigGroupLabelArray[i].layer.borderColor = Colors.green.withAlphaComponent(0.5).cgColor
-                        bigGroupLabelArray[i].textColor = Colors.green
+                    if !fromScheduleEditing {
+                        bigGroupLabelArray[i].layer.borderColor = Colors.dark.withAlphaComponent(0.5).cgColor
+                        bigGroupLabelArray[i].textColor = Colors.dark.withAlphaComponent(0.5)
+                    }
                 }
             }
         }
@@ -430,7 +436,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-regular", size: 27)
+                        cell.dayLabel.font = Fonts.veryLargeElementRegular
                         break
                     }
                 }
@@ -446,7 +452,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             previousCell.groupLabelArray[i].tag = 0
                             previousCell.groupLabelArray[i].backgroundColor = .clear
                             previousCell.groupLabelArray[i].alpha = 0
-                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                            previousCell.dayLabel.font = Fonts.mediumElementRegular
                             break
                         }
                     }
@@ -463,7 +469,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 27)
+                        cell.dayLabel.font = Fonts.veryLargeElementRegular
                         break
                     }
                 }
@@ -479,7 +485,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             previousCell.groupLabelArray[i].tag = 0
                             previousCell.groupLabelArray[i].backgroundColor = .clear
                             previousCell.groupLabelArray[i].alpha = 0
-                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                            previousCell.dayLabel.font = Fonts.mediumElementRegular
                             break
                         }
                     }
@@ -498,7 +504,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         previousCell.groupLabelArray[i].tag = 0
                         previousCell.groupLabelArray[i].backgroundColor = .clear
                         previousCell.groupLabelArray[i].alpha = 0
-                        previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                        previousCell.dayLabel.font = Fonts.mediumElementRegular
                         break
                     }
                 }
@@ -529,7 +535,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.groupLabelArray[i].clipsToBounds = true
                         //
                         cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                        cell.dayLabel.font = Fonts.mediumElementRegular
                         break
                     } else if i == cell.groupLabelArray.count - 1 {
                         // Too much in one day, cant add any more
@@ -635,7 +641,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             //
                             let groupIndex =  (schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(indexPathForRow?.row)!][k]["group"] as! String).groupFromString()
                             cell.groupLabelArray[k].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[groupIndex], comment: "")
-                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                            cell.dayLabel.font = Fonts.mediumElementRegular
                         }
                     }
                     
@@ -688,7 +694,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             previousCell.groupLabelArray[i].tag = 0
                             previousCell.groupLabelArray[i].backgroundColor = .clear
                             previousCell.groupLabelArray[i].alpha = 0
-                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                            previousCell.dayLabel.font = Fonts.mediumElementRegular
                             break
                         }
                     }
@@ -711,7 +717,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             cell.groupLabelArray[i].alpha = 0.5
                             cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[i].clipsToBounds = true
-                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 27)
+                            cell.dayLabel.font = Fonts.veryLargeElementRegular
                             break
                         }
                     }
@@ -733,7 +739,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 previousCell.groupLabelArray[i].tag = 0
                                 previousCell.groupLabelArray[i].backgroundColor = .clear
                                 previousCell.groupLabelArray[i].alpha = 0
-                                previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                                previousCell.dayLabel.font = Fonts.mediumElementRegular
                                 break
                             }
                         }
@@ -753,7 +759,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 27)
+                        cell.dayLabel.font = Fonts.veryLargeElementRegular
                         break
                     }
                 }
@@ -778,7 +784,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         cell.groupLabelArray[i].alpha = 0.5
                         cell.groupLabelArray[i].layer.cornerRadius = 15 / 2
                         cell.groupLabelArray[i].clipsToBounds = true
-                        cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 27)
+                        cell.dayLabel.font = Fonts.veryLargeElementRegular
                         break
                     }
                 }
@@ -839,7 +845,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             previousCell.groupLabelArray[i].tag = 0
                             previousCell.groupLabelArray[i].backgroundColor = .clear
                             previousCell.groupLabelArray[i].alpha = 0
-                            previousCell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                            previousCell.dayLabel.font = Fonts.mediumElementRegular
                             break
                         }
                     }
@@ -869,7 +875,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             cell.groupLabelArray[i].clipsToBounds = true
                             //
                             cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
-                            cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                            cell.dayLabel.font = Fonts.mediumElementRegular
                             break
                         } else if i == cell.groupLabelArray.count - 1 {
                             // Too much in one day, cant add any more
@@ -906,7 +912,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 cell.groupLabelArray[i].clipsToBounds = true
                                 //
                                 cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[indexOfDraggedGroup], comment: "")
-                                cell.dayLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                                cell.dayLabel.font = Fonts.mediumElementRegular
                                 break
                             } else if i == cell.groupLabelArray.count - 1 {
                                 // Too much in one day, cant add any more
@@ -990,9 +996,16 @@ class DayCell: UITableViewCell {
     @IBOutlet weak var groupLabel3: UILabel!
     @IBOutlet weak var groupLabel4: UILabel!
     
+    @IBOutlet weak var top: NSLayoutConstraint!
+    @IBOutlet weak var bottom: NSLayoutConstraint!
+    
     var groupLabelArray: [UILabel] = []
     
     override func layoutSubviews() {
         groupLabelArray = [groupLabel0, groupLabel1, groupLabel2, groupLabel3, groupLabel4]
+        if IPhoneType.shared.iPhoneType() == 0 {
+            top.constant = 4
+            bottom.constant = 4
+        }
     }
 }

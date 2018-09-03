@@ -35,8 +35,6 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     var selectedTimeScale = 0
     // StackView
     var stackArray: [UILabel] = []
-    var stackFontUnselected = UIFont(name: "SFUIDisplay-thin", size: 17)
-    var stackFontSelected = UIFont(name: "SFUIDisplay-medium", size: 17)
     //
     @IBOutlet weak var timeScaleStack: UIStackView!
     @IBOutlet weak var timeScaleIndicator: UIView!
@@ -164,7 +162,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
                 let timeScaleLabel = UILabel()
                 timeScaleLabel.textColor = Colors.light
                 timeScaleLabel.textAlignment = .center
-                timeScaleLabel.font = stackFontUnselected
+                timeScaleLabel.font = Fonts.verySmallElementLight
                 timeScaleLabel.text = NSLocalizedString(timeScaleArray[i], comment: "")
                 timeScaleLabel.sizeToFit()
                 timeScaleLabel.tag = i
@@ -216,7 +214,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         view.addSubview(chartView)
         
         // No data
-        chartView.noDataFont = UIFont(name: "SFUIDisplay-thin", size: 23)
+        chartView.noDataFont = Fonts.largeElementRegular
         chartView.noDataText = NSLocalizedString("trackingWarning", comment: "")
         chartView.noDataTextColor = Colors.light
         
@@ -233,7 +231,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         let leftAxis = chartView.leftAxis
         leftAxis.axisLineColor = Colors.light
         leftAxis.labelTextColor = Colors.light
-        leftAxis.labelFont = UIFont(name: "SFUIDisplay-thin", size: 21)!
+        leftAxis.labelFont = Fonts.smallElementRegular!
         leftAxis.drawGridLinesEnabled = false
         leftAxis.drawLabelsEnabled = false
         leftAxis.axisMinimum = 0
@@ -245,11 +243,12 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         xAxis.axisLineColor = Colors.light
         xAxis.labelTextColor = Colors.light
         xAxis.avoidFirstLastClippingEnabled = true
-        xAxis.labelFont = UIFont(name: "SFUIDisplay-thin", size: 17)!
+        xAxis.labelFont = Fonts.verySmallElementLight!
         
         // Goal: 100 %
         let goalLine = ChartLimitLine(limit: 100, label: "100 %")
-        goalLine.valueFont = UIFont(name: "SFUIDisplay-thin", size: 10)!
+        // nina
+        goalLine.valueFont = UIFont(name: "SFUIDisplay-light", size: 10)!
         goalLine.lineWidth = 1
         goalLine.lineDashLengths = [5,5]
         goalLine.labelPosition = .rightTop
@@ -380,11 +379,11 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         chartDataSet.setCircleColor(Colors.red)
         chartDataSet.circleHoleColor = Colors.red
         chartDataSet.circleRadius = 4
-        chartDataSet.valueFont = UIFont(name: "SFUIDisplay-thin", size: 10)!
+        chartDataSet.valueFont = UIFont(name: "SFUIDisplay-light", size: 10)!
         chartDataSet.valueTextColor = UIColor.clear
         
         // Marker
-        let marker: XYMarkerView = XYMarkerView(color: Colors.light, font: UIFont(name: "SFUIDisplay-thin", size: 19)!, textColor: Colors.dark, insets: UIEdgeInsets(top: 3.0, left: 5.0, bottom: 8.0, right: 5.0), xAxisValueFormatter: DateValueFormatterMarker())
+        let marker: XYMarkerView = XYMarkerView(color: Colors.light, font: Fonts.smallElementRegular!, textColor: Colors.dark, insets: UIEdgeInsets(top: 3.0, left: 5.0, bottom: 8.0, right: 5.0), xAxisValueFormatter: DateValueFormatterMarker())
         marker.minimumSize = CGSize(width: 75, height: 35)
         chartView.marker = marker
         

@@ -191,7 +191,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let headerHeight = CGFloat(24.5)
         header.backgroundColor = Colors.gray
         let label = UILabel()
-        label.font = UIFont(name: "SFUIDisplay-light", size: 13)!
+        label.font = Fonts.tinyElementLight!
         label.textColor = UIColor.gray
         label.text = NSLocalizedString(editScheduleSectionTitles[section], comment: "").uppercased()
         label.sizeToFit()

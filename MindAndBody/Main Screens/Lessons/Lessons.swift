@@ -68,6 +68,18 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         navigationBar.title = NSLocalizedString("lessons", comment: "")
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.navigationController?.navigationBar.tintColor = Colors.light
+        
+        // Table View
+        let headerView = UIView()
+        headerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 24.5)
+        headerView.backgroundColor = .clear
+        tableView.tableHeaderView = headerView
+        let footerView = UIView()
+        footerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableView.sectionFooterHeight)
+        footerView.backgroundColor = .clear
+        tableView.tableFooterView = footerView
+        
+        tableView.separatorColor = Colors.light.withAlphaComponent(0.43)
     }
     
     
@@ -80,19 +92,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     //
-    override func viewDidLayoutSubviews() {
-        // Tableview top view
-        let topView = UIVisualEffectView()
-        let topViewE = UIBlurEffect(style: .dark)
-        topView.effect = topViewE
-        topView.isUserInteractionEnabled = false
-        topView.frame = CGRect(x: 0, y: tableView.frame.minY - tableView.bounds.height, width: tableView.bounds.width, height: tableView.bounds.height)
-        //
-        tableView.addSubview(topView)
-    }
-    
-    
-    //
     // TableView ------------------------------------------------------------------------------------
     //
     // Number of Sections
@@ -101,35 +100,33 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         return rowArray.count
     }
     
-    // Header
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //
-        return NSLocalizedString(sectionArray[section], comment: "")
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // Header
+        let header = UIView()
+        let headerHeight = CGFloat(24.5)
+        header.backgroundColor = .clear
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.font = Fonts.tinyElementLight!
+        label.textColor = Colors.light
+        label.text = NSLocalizedString(sectionArray[section], comment: "").uppercased()
+        label.sizeToFit()
+        label.frame = CGRect(x: 16, y: 0, width: label.bounds.width, height: headerHeight)
+        header.addSubview(label)
+        return header
     }
     
-    // Header Customization
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
-        // Header
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 22)!
-        header.textLabel?.textColor = Colors.light
-        header.textLabel?.text = header.textLabel?.text?.capitalized
-        
-        //
-        header.backgroundColor = .clear
-        header.backgroundView = UIView()
-        
-        let separator = CALayer()
-        separator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
-        separator.backgroundColor = Colors.light.cgColor
-        separator.opacity = 0.5
-        header.layer.addSublayer(separator)
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView()
+        footer.frame = CGRect.zero
+        footer.backgroundColor = .clear
+        return footer
     }
     
     // Header Height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 47
+        return 24.5
     }
     
     // Number of rows
@@ -141,7 +138,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //
-        return 47
+        return 44
     }
     
     // Cell for row
@@ -153,7 +150,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.textAlignment = NSTextAlignment.left
         cell.backgroundColor = .clear
         cell.backgroundView = UIView()
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 21)
+        cell.textLabel?.font = Fonts.regularCell
         cell.textLabel?.textColor = Colors.light
         //
         // Indicator
@@ -173,29 +170,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         //
         // Perform Segue
         performSegue(withIdentifier: "lessonsSegue", sender: nil)
-    }
-    
-    // Mask cells under clear header
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in tableView.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y + navigationController!.navigationBar.frame.size.height - cell.frame.origin.y + 2
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-    }
-    
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-    
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask
     }
     
     //

@@ -109,13 +109,14 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
         // Iphone 5/SE layout
         if IPhoneType.shared.iPhoneType() == 0 {
             cell.equipmentLabel.font = UIFont(name: "SFUIDisplay-regular", size: 21)
+            cell.equipmentDetail.font = Fonts.tinyElementLight
         } else {
             cell.equipmentLabel.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+            cell.equipmentDetail.font = UIFont(name: "SFUIDisplay-light", size: 15)
         }
         cell.equipmentLabel.textColor = Colors.dark
         cell.equipmentLabel.text = NSLocalizedString(equiptmentArray[indexPath.row]["name"] as! String, comment: "")
         //
-        cell.equipmentDetail.font = UIFont(name: "SFUIDisplay-light", size: 15)
         cell.equipmentDetail.textColor = Colors.dark
         cell.equipmentDetail.numberOfLines = 0
         cell.equipmentDetail.lineBreakMode = .byWordWrapping

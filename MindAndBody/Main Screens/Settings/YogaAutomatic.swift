@@ -152,7 +152,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         indicatorLabel.textAlignment = .center
         indicatorLabel.textColor = Colors.light
         indicatorLabel.text = "s"
-        indicatorLabel.font = UIFont(name: "SFUIDisplay-thin", size: 22)
+        indicatorLabel.font = Fonts.mediumElementLight
         indicatorLabel.numberOfLines = 1
         indicatorLabel.sizeToFit()
         indicatorLabel.center.y = pickerView.center.y
@@ -214,7 +214,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             header.backgroundColor = Colors.gray
             let label = UILabel()
             label.backgroundColor = .clear
-            label.font = UIFont(name: "SFUIDisplay-light", size: 13)!
+            label.font = Fonts.tinyElementLight!
             label.textColor = UIColor.gray
             label.text = NSLocalizedString(sectionHeaderArray[section], comment: "").uppercased()
             label.sizeToFit()
@@ -247,8 +247,8 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             return header
             
         case tableViewBells:
-            let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 17)!
+            let header = UITableViewHeaderFooterView()
+            header.textLabel?.font = Fonts.verySmallElementLight
             header.textLabel?.textColor = Colors.light
             header.contentView.backgroundColor = Colors.dark
             header.contentView.tintColor = Colors.light
@@ -309,9 +309,9 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = Colors.light
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.textLabel?.font = Fonts.regularCell
             //
-            cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
+            cell.detailTextLabel?.font = Fonts.regularCell
             //
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
             
@@ -357,7 +357,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         case tableViewBells:
             //
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            cell.textLabel?.font = Fonts.smallElementRegular
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.lineBreakMode = .byWordWrapping

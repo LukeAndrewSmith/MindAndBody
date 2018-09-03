@@ -278,7 +278,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         header.backgroundColor = Colors.gray
         let label = UILabel()
         label.backgroundColor = .clear
-        label.font = UIFont(name: "SFUIDisplay-light", size: 13)!
+        label.font = Fonts.tinyElementLight!
         label.textColor = UIColor.gray
         label.text = NSLocalizedString(sectionsArray[section]["title"] as! String, comment: "").uppercased()
         label.sizeToFit()
