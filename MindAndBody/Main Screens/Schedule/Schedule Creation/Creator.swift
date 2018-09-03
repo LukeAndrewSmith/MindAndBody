@@ -31,12 +31,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var dayTable: UITableView!
     @IBOutlet weak var dayTableHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var createScheduleButton: UIButton!
+    @IBOutlet weak var createScheduleButtonHeight: NSLayoutConstraint!
     
     let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-    
-    // Indication
-    @IBOutlet weak var indicationLabel: UILabel!
-    
+  
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var binView: UIImageView!
     
@@ -113,6 +112,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // SETUP
         setVariables()
         setGroupLabels()
+        setupCreateScheduleButton()
         //
         // BackgroundImage
 //        addBackgroundImage(withBlur: true, fullScreen: true)
@@ -120,11 +120,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         navigationBar.title = NSLocalizedString("schedule", comment: "")
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        
-        // Indication Label
-        indicationLabel.font = UIFont(name: "SFUIDisplay-light", size: 20)
-        indicationLabel.textColor = themeColor
-        indicationLabel.text = NSLocalizedString("scheduleCreatorIndication", comment: "")
         
         separator.backgroundColor = Colors.dark.withAlphaComponent(0.43)
 
@@ -144,7 +139,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Iphone 5/SE layout
         if IPhoneType.shared.iPhoneType() == 0 {
             dayTableHeight.constant = 7*42
-            indicationLabel.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        } else {
+            dayTableHeight.constant = 7*44
         }
         
         //
@@ -173,12 +169,25 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         longPressCell.minimumPressDuration = 0
         longPressCell.addTarget(self, action: #selector(beginDraggingFromCell(gestureRecognizer:)))
         dayTable.addGestureRecognizer(longPressCell)
-        
-        // Back Swipe to previous screen
-        let rightSwipe = UIScreenEdgePanGestureRecognizer()
-        rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
-        view.addGestureRecognizer(rightSwipe)
+    }
+    
+    func setupCreateScheduleButton() {
+        // Not from schedule editing => schedule creation
+        if !fromScheduleEditing {
+            createScheduleButton.backgroundColor = Colors.green
+            createScheduleButton.setTitle(NSLocalizedString("create", comment: ""), for: .normal)
+            createScheduleButton.setTitleColor(Colors.dark, for: .normal)
+            createScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+            createScheduleButton.isEnabled = true
+            createScheduleButton.alpha = 1
+            createScheduleButtonHeight.constant = 49
+            
+        // Schedule editing, hide button
+        } else {
+            createScheduleButton.isEnabled = false
+            createScheduleButton.alpha = 0
+            createScheduleButtonHeight.constant = 0
+        }
     }
     
     
@@ -211,7 +220,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         if IPhoneType.shared.iPhoneType() == 0 {
            return 42
         } else {
-            return 49
+            return 44
         }
     }
     
@@ -643,7 +652,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     // Reveal bin
                     binView.alpha = 1
-                    indicationLabel.alpha = 0
                     bigGroupLabel5.layer.borderColor = Colors.red.cgColor
                     bigGroupLabel5.backgroundColor = .clear
                     break
@@ -800,7 +808,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }, completion: { finished in
                     // Hide bin
                     self.binView.alpha = 0
-                    self.indicationLabel.alpha = 1
                     self.bigGroupLabel5.backgroundColor = .clear
                     self.bigGroupLabel5.layer.borderColor = UIColor.clear.cgColor
                     self.draggingLabel.removeFromSuperview()
@@ -925,7 +932,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if shouldRemoveBin {
                     // Hide bin
                     self.binView.alpha = 0
-                    self.indicationLabel.alpha = 1
                     self.bigGroupLabel5.backgroundColor = .clear
                     self.bigGroupLabel5.layer.borderColor = UIColor.clear.cgColor
                 }
@@ -960,37 +966,12 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Drag Stack
     
-    //
-    // MARK: Back Swipe
-    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
-        if sender.state == .began {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    //
     // Finished
     @IBAction func createScheduleButtonAction(_ sender: Any) {
         // Ensure notifications correct
         ReminderNotifications.shared.setNotifications()
-        //
-        // Return to sc  hedule overview
-        if fromScheduleEditing {
-            self.navigationController?.popToRootViewController(animated: true)
-        //
-        // Schedule has just been created, go to schedule equiptment question
-        } else {
-            self.performSegue(withIdentifier: "ScheduleCreatorEquiptmentSegue1", sender: self)
-        }
-    }
-    
-    //
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        if segue.identifier == "ScheduleCreatorEquiptmentSegue1" {
-            let destinationVC = segue.destination as! ScheduleEquipment
-            destinationVC.isScheduleCreation = true
-        }
+        
+        self.dismiss(animated: true)
     }
 }
 

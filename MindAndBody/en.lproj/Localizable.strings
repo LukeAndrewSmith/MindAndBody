@@ -1676,12 +1676,12 @@
                 "pauseYoga" = "Pause";
                 "finishEarly" = "Finish Early";
                 "finishEarlyMessage" = "\nAre you sure you want to finish early?";
-                "pauseMessageYoga" = "\nYou can finish early, pause (and dismiss this question), or continue the practice";
+                "pauseMessageYoga" = "\nYou can finish early,\npause (and dismiss this question),\nor continue the practice";
                 "pause" = "Pause";
                 "finishEarly" = "Finish Early";
                 "continuePractice" = "Continue Practice";
 
-                "pauseMessageSession" = "\nYou can finish early, pause (and dismiss this question), or continue the practice";
+                "pauseMessageSession" = "\nYou can finish early,\npause (and dismiss this question),\nor continue the practice";
                 "continueSession" = "Continue Session";
 
 
@@ -3207,13 +3207,38 @@
 
 
 // MARK: Schedule creation help
+
+"beginCreating" = "Begin Creating";
+
+// Tabs (S => Schedule)
+"profileS" = "Profile";
+"equipmentS" = "Equip.";
+"goalsS" = "Goals";
+"styleS" = "Style";
+"contentS" = "Content";
+"content2S" = "Content";
+// Titles
+"profileST" = "Profile";
+"equipmentST" = "Equipment";
+"goalsST" = "My Goals (scale: 0 - 3)";
+"styleST" = "Schedule Style";
+"contentST" = "Schedule";
+"content2ST" = "Schedule";
+// Explanations
+"profileSE" = "Answer the questions so that the app can choose sessions fit for you (can be updated later in Settings).";
+"equipmentSE" = "Choose what equipment you'd like to be included in this schedule";
+"goalsSE" = "Rate your goals on a scale of 0 - 3, then answer two questions so the app can suggest what to put in your schedule.";
+"styleSE" = "Choose how you'd like your schedule to be presented.";
+"contentSE" = "Drag the activities into the days to setup your schedule (can be edited later where you created the schedule).";
+"content2SE" = "Choose how many of each activity to perform each week"; // Week view
+
 // Time / Committement
-"scheduleQTime" = "Do you have time and energy to work towards your goals (time where you're able and willing to)?"; // Time
-"scheduleATime1" = "Not much (1 - 2 days a week)";
-"scheduleATime2" = "A little (2 - 3 days a week)";
-"scheduleATime3" = "Some (3 - 5 days a week)";
-"scheduleATime4" = "Yes (5 - 7 days a week)";
-"scheduleQPriority" = "Are your goals a high priority (will you be committed)?"; // Priority
+"scheduleQTime" = "How many days a week do you have where you have some time and energy to work towards your goals?"; // Time
+"scheduleATime1" = "1 - 2";
+"scheduleATime2" = "2 - 3";
+"scheduleATime3" = "3 - 5";
+"scheduleATime4" = "5 - 7";
+"scheduleQPriority" = "Are your goals a high priority and will you be committed?"; // Priority
 "scheduleAPriority1" = "Not really, but I'd like to do a little";
 "scheduleAPriority2" = "Yes, but I should take it easy to begin with";
 "scheduleAPriority3" = "Definitely, I will work hard towards my goals";

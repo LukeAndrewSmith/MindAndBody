@@ -9,78 +9,65 @@
 import Foundation
 import UIKit
 
-// A view for a quick question asking wether the user would like to see their
-
-// I would like to:
-    // Create a weekly schedule, and each day of the week see the current day and what I have planned to do on that day
-    // See the whole week as a list of my planned weekly sessions
+// A view for a quick question asking wether the user would like to see their schedule as 'day view' or as 'week view'
 
 class ScheduleViewQuestion: UIViewController {
     
-    //
     // MARK: Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dayViewButton: UIButton!
     @IBOutlet weak var dayViewImage: UIImageView!
     @IBOutlet weak var weekViewButton: UIButton!
     @IBOutlet weak var weekViewImage: UIImageView!
-    @IBOutlet weak var backButton: UIButton!
     
-    var comingFromSchedule = false
+    @IBOutlet weak var topSeparator: UIView!
+    @IBOutlet weak var middleSeparator: UIView!
     
-    //
+    // 0 == day, 1 == week
+    var selectedStyle = 0
+    
     // MARK: View did load
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
+
         // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: true)
+//        addBackgroundImage(withBlur: true, fullScreen: true)
         
-        //
         // Title Label
         titleLabel.text = NSLocalizedString("scheduleView", comment: "")
-        titleLabel.textColor = Colors.light
-        //
+        titleLabel.textColor = Colors.dark
+        
+        topSeparator.backgroundColor = Colors.dark
+        topSeparator.alpha = 0.5
+        
+        middleSeparator.backgroundColor = Colors.dark
+        middleSeparator.alpha = 0.5
+
         // Buttons
         dayViewButton.titleLabel?.lineBreakMode = .byWordWrapping
         dayViewButton.setTitle(NSLocalizedString("scheduleView1", comment: ""), for: .normal)
-        dayViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        dayViewButton.setTitleColor(Colors.light, for: .normal)
-        dayViewImage.layer.borderWidth = 1
-        dayViewImage.layer.borderColor = Colors.light.withAlphaComponent(0.5).cgColor
-        //
+        dayViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        dayViewButton.setTitleColor(Colors.dark, for: .normal)
+        
         weekViewButton.titleLabel?.lineBreakMode = .byWordWrapping
         weekViewButton.setTitle(NSLocalizedString("scheduleView2", comment: ""), for: .normal)
-        weekViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-        weekViewButton.setTitleColor(Colors.light, for: .normal)
-        weekViewImage.layer.borderWidth = 1
-        weekViewImage.layer.borderColor = Colors.light.withAlphaComponent(0.5).cgColor
-        
-        //
-        // Back
-        // Swipe
-        let rightSwipe = UIScreenEdgePanGestureRecognizer()
-        rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
-        view.addGestureRecognizer(rightSwipe)
-        
-        if comingFromSchedule {
-            backButton.alpha = 0
-            backButton.isEnabled = false
-        }
+        weekViewButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+        weekViewButton.setTitleColor(Colors.dark, for: .normal)
     }
     
-    //
     // MARK: Button actions
     // Day
     @IBAction func dayButtonAction(_ sender: Any) {
+        
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // Set user settings for schedule style to week
         schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
         UserDefaults.standard.set(schedules, forKey: "schedules")
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-        self.performSegue(withIdentifier: "ScheduleCreatorSegue", sender: self)
+        
+        selectedStyle = 0
+        nextAndUpdate()
     }
     
     // Week
@@ -93,10 +80,11 @@ class ScheduleViewQuestion: UIViewController {
         // Sync
         ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         //
-        // App helps create schedule, first create preliminary number of groups
+        // App helps create schedule, fill suggested sessions into week creator
         if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
-            // Fill up days in week array with sessions
-            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            
+            // Ensure that the schedule is clean
+            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"] = scheduleDataStructures.emptyWeek["schedule"]
             // Loop sessions array - therefore loop groups
             for i in 0..<ScheduleVariables.shared.temporarySessionsArray.count {
                 // If n session not 0 for a group
@@ -119,39 +107,25 @@ class ScheduleViewQuestion: UIViewController {
             UserDefaults.standard.set(schedules, forKey: "schedules")
             // Sync
             ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-            //
+            
             // Create temporary week view array, as week is viewed as full week
             TemporaryWeekArray.shared.createTemporaryWeekViewArray()
-            //
+
             // Then go to schedule editor to let them finalise the schedule
-            self.performSegue(withIdentifier: "ScheduleWeekCreatorSegue", sender: self)
-        //
+            
+            
         // If custom schedule, go straight to schedule creator
-        } else {
-            self.performSegue(withIdentifier: "ScheduleWeekCreatorSegue", sender: self)
         }
+        
+        selectedStyle = 1
+        nextAndUpdate()
     }
     
-    //
-    // Back Button
-    @IBAction func backButtonAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    //
-    // MARK: Back Swipe
-    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
-        if sender.state == .began {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        if segue.identifier == "ScheduleCreatorSegue" {
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            navigationItem.backBarButtonItem = backItem
+    // Tells parent to update next screen based on choice, and tells to go to next screen
+    func nextAndUpdate() {
+        if let parentVC = self.parent as? ScheduleCreationPageController {
+            parentVC.updateContentStyle(style: selectedStyle)
+            parentVC.nextViewController()
         }
     }
     

@@ -594,8 +594,6 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             if schedules.count != 0 {
                 let indexToReload = IndexPath(row: ScheduleVariables.shared.selectedSchedule, section: 0)
                 let cell = scheduleChoiceTable.cellForRow(at: indexToReload)
-                cell?.accessoryType = .checkmark
-                cell?.tintColor = Colors.green
             }
         }
     }

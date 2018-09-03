@@ -218,8 +218,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(checkSelectedDay), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         // reload view
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {

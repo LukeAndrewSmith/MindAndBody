@@ -523,10 +523,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     // MARK: Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        // Going to schedule creator
-        case "OverviewSessionsSegue":
-            let destinationVC = segue.destination as? ScheduleCreationHelp
-            destinationVC?.comingFromScheduleEditing = true
         // Goin to profile (before schedule creator as not filled in yet)
         case "OverviewProfileSegue":
             let destinationVC = segue.destination as? Profile
@@ -537,6 +533,9 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         case "OverviewScheduleWeekSegue":
             let destinationVC = segue.destination as! ScheduleCreatorWeek
             destinationVC.comingFromScheduleEditing = true
+        case "EquipmentSegue":
+            let destinationVC = segue.destination as! ScheduleEquipment
+            destinationVC.fromScheduleEditing = true
         default: break
         }
         let backItem = UIBarButtonItem()

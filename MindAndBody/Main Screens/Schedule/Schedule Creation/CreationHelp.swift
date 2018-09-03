@@ -17,9 +17,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: Outlets --------------------------------------------------------------------------------------------------------
     //
     @IBOutlet weak var questionsTable: UITableView!
-    @IBOutlet weak var sectionLabel: UILabel!
-    //
-    @IBOutlet weak var backButton: UIButton!
     
     // Answer elements
     // Answer Table
@@ -32,18 +29,15 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     var downTap = UITapGestureRecognizer()
     // gesture for going forward
     var upSwipe = UISwipeGestureRecognizer()
-    //
-    @IBOutlet weak var progressBar: UIProgressView!
-    //
+    
+    // Currently unused
+    var progressBar = UIProgressView()
+
     // Me/Goals/Sessions
     var selectedSection = 0
     // Question progress, incrimented by nextQuestion()
     var selectedQuestion = 0
     
-    //
-    var comingFromScheduleEditing = false
-    
-    //
     // Age
     var ageAnswer = ["16 (or less)", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "70+"]
     
@@ -55,46 +49,37 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         //
         UIApplication.shared.statusBarStyle = .lightContent
-        //
-        sectionLabel.text = NSLocalizedString("goalsI", comment: "")
-        //
+
         // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: true)
-        //
+//        addBackgroundImage(withBlur: true, fullScreen: true)
+        
         // Table View
         questionsTable.tableFooterView = UIView()
         questionsTable.separatorStyle = .none
         questionsTable.backgroundColor = .clear
         questionsTable.isScrollEnabled = true
-        //
+        
         // Progress Bar
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
-        progressBar.trackTintColor = Colors.light
+        progressBar.trackTintColor = Colors.dark
         progressBar.progressTintColor = Colors.green
         progressBar.setProgress(0, animated: true)
-        //
         
-        //
         // Previous question swipe
         downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(previousQuestion))
         downSwipe.direction = .down
         questionsTable.addGestureRecognizer(downSwipe)
         //
-        downTap = UITapGestureRecognizer(target: self, action: #selector(previousQuestion))
-        sectionLabel.isUserInteractionEnabled = true
-        sectionLabel.addGestureRecognizer(downTap)
-        //
         upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(upSwipeAction))
         upSwipe.direction = .up
         questionsTable.addGestureRecognizer(upSwipe)
-        //
-        // Back
-        // Swipe
-        let rightSwipe = UIScreenEdgePanGestureRecognizer()
-        rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
-        view.addGestureRecognizer(rightSwipe)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        questionsTable.reloadData()
     }
     
     //
@@ -128,19 +113,24 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         if selectedSection == 0 {
             // Header
             let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 22)!
-            header.textLabel?.textColor = Colors.light
+            header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)!
+            header.textLabel?.textColor = Colors.dark
             //
             header.backgroundColor = .clear
             header.backgroundView = UIView()
             //
-            let separator = CALayer()
-            if header.layer.sublayers?.contains(separator) == false {
-                separator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
-                separator.backgroundColor = Colors.light.cgColor
-                separator.opacity = 0.5
-                header.layer.addSublayer(separator)
+            // Check for and remove any separators leftover
+            for view in header.subviews {
+                if view.tag == 72 {
+                    view.removeFromSuperview()
+                }
             }
+            let separator = UIView()
+            separator.tag = 72
+            separator.frame = CGRect(x: 15, y: header.frame.size.height - 1, width: view.frame.size.width, height: 1)
+            separator.backgroundColor = Colors.dark
+            separator.alpha = 0.5
+            header.addSubview(separator)
         }
     }
     
@@ -257,16 +247,16 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 //
                 // Indicator Label
                 cell.textLabel?.text = String(value)
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.textLabel?.textColor = Colors.light
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
+                cell.textLabel?.textColor = Colors.dark
                 //
                 // Next Section -> N Sessions
             } else {
                 // Indicator Label
-                cell.backgroundColor = Colors.green.withAlphaComponent(0.25)
+                cell.backgroundColor = Colors.green
                 cell.textLabel?.text = NSLocalizedString("done", comment: "")
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.textLabel?.textColor = Colors.light
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+                cell.textLabel?.textColor = Colors.dark
                 cell.textLabel?.textAlignment = .center
             }
             return cell
@@ -295,10 +285,10 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             } else if indexPath.row == scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count {
                 let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
                 // Indicator Label
-                cell.backgroundColor = Colors.green.withAlphaComponent(0.25)
-                cell.textLabel?.text = NSLocalizedString("saveGoals", comment: "")
-                cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-                cell.textLabel?.textColor = Colors.light
+                cell.backgroundColor = Colors.green
+                cell.textLabel?.text = NSLocalizedString("next", comment: "")
+                cell.textLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+                cell.textLabel?.textColor = Colors.dark
                 cell.textLabel?.textAlignment = .center
                 return cell
             }
@@ -336,7 +326,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 let title = NSLocalizedString("noGoalsChosenWarning", comment: "")
                 let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
                 alert.view.tintColor = Colors.dark
-                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 20)!]), forKey: "attributedTitle")
                 
                 // Reset app action
                 let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
@@ -350,9 +340,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             }
         // Last cell, save
         } else if indexPath.row == scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count {
-            //
-            // Set number of sessions
-            setNumberOfSessions(updating: false)
             
             //
             // Make sure no question is unanswered
@@ -365,35 +352,25 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
             
-            //
             // If all questions answered, go to next screen
-                // -> either scheduleviewquestion or scheduleediting
             if allAnswered {
-                // If not coming from schedule editing, go to scheudle help question first to see wether user wants to see schedule as full week, or as seperate days
-                if !comingFromScheduleEditing {
-                    self.performSegue(withIdentifier: "ScheduleHelpQuestionSegue", sender: self)
-                    
-                // Coming from schedule editingSchedule editing
-                // -> either pop or go to schedule creator
-                } else {
-                    //
-                    // Schedule is viewed as days
-                    if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
-                        self.performSegue(withIdentifier: "ScheduleHelpCreationSegueDay", sender: self)
-                    // Schedule is viewed as week
-                    } else {
-                        self.performSegue(withIdentifier: "ScheduleHelpCreationSegueWeek", sender: self)
-                    }
+                
+                // Set number of sessions
+                setNumberOfSessions(updating: false)
+                
+                // Go to next section in schedule creation
+                if let parentVC = self.parent as? ScheduleCreationPageController {
+                    parentVC.nextViewController()
                 }
-            //
+            
             // If not all questions are answered, alert user
             } else {
-                //
+                
                 // Alert
                 let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
                 let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
                 alert.view.tintColor = Colors.dark
-                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 23)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 21)!]), forKey: "attributedTitle")
                 
                 // Reset app action
                 let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
@@ -497,16 +474,12 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 // Sandwitched in animation to get updating at the right time
                 questionsTable.isScrollEnabled = false
                 questionsTable.addGestureRecognizer(downSwipe)
-                sectionLabel.removeGestureRecognizer(downTap)
                 selectedSection += 1
                 updateProgress()
                 questionsTable.reloadData()
                 let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
                 questionsTable.reloadRows(at: [indexPath as IndexPath], with: .automatic)
                 questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                //
-                sectionLabel.text = NSLocalizedString("me", comment: "")
-
 
             // Reload
             questionsTable.reloadData()
@@ -563,9 +536,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             // Questions -> Goals
             } else {
                 questionsTable.removeGestureRecognizer(downSwipe)
-                sectionLabel.addGestureRecognizer(downTap)
-                //
-                sectionLabel.text = NSLocalizedString("goalsI", comment: "")
                 selectedSection -= 1
                 updateProgress()
                 questionsTable.isScrollEnabled = true
@@ -647,7 +617,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         self.backgroundColor = .clear
         self.selectionStyle = .none
         // Questions Label
-        questionLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        questionLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         questionLabel.textColor = Colors.light
         questionLabel.layer.cornerRadius = 15
         questionLabel.clipsToBounds = true
@@ -706,7 +676,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        let font = UIFont(name: "SFUIDisplay-light", size: 23)
         // + 1 as question inclueded in array
         let height = NSLocalizedString(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][indexPath.row + 1], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
         //
@@ -726,7 +696,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     func setTableHeight() {
         var tableHeightConstant: CGFloat = 0
         for i in 1...scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion].count - 1 {
-            let font = UIFont(name: "SFUIDisplay-thin", size: 23)
+            let font = UIFont(name: "SFUIDisplay-light", size: 23)
             // + 1 as question inclueded in array
             let height = NSLocalizedString(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
             if height > (49 * 1.5) {
@@ -760,11 +730,9 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         cell.textLabel?.lineBreakMode = .byWordWrapping
         // row + 1 as question included with answers
         cell.textLabel?.text = NSLocalizedString(scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][indexPath.row + 1], comment: "")
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        cell.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 21)
         // Select answer
             // If answer not -1, and row is correct
-        // MARK: NOT SURE
-        //schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][row][0]] as! Int != -1 && indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![selectedSection][selectedQuestion]
         if indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][row][0]] as! Int {
             cell.textLabel?.textColor = Colors.green
         }

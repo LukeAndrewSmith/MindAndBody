@@ -1025,11 +1025,10 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
         
-        // Indicate coming from settings for profile
         if segue.identifier == "ProfileSegue" {
-            let destinationVC = segue.destination as! Profile
-            destinationVC.comingFromSchedule = true
-            //
+            let destinationNC = segue.destination as? ProfileNavigation
+            let destinationVC = destinationNC?.viewControllers.first as? Profile
+            destinationVC?.fromSettings = true
         }
     }
     

@@ -35,7 +35,6 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: Outlets
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var leftItem: UIBarButtonItem!
-    @IBOutlet weak var rightItem: UIBarButtonItem!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var separator: UIView!
@@ -43,6 +42,8 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var ScheduleTypeQuestionTable: UITableView!
     var scheduleOptionSwitch = UISwitch()
     var sessionsOptionSwitch = UISwitch()
+    
+    @IBOutlet weak var createScheduleButton: UIButton!
     
     
     
@@ -96,12 +97,8 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         
         // Items
         leftItem.tintColor = Colors.red
-        leftItem.image = #imageLiteral(resourceName: "Down")
+        leftItem.image = #imageLiteral(resourceName: "Cross")
         
-        rightItem.title = NSLocalizedString("create", comment: "")
-        rightItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
-        rightItem.tintColor = Colors.light
-
         // View
         view.backgroundColor = Colors.light
         separator.backgroundColor = Colors.dark.withAlphaComponent(0.72)
@@ -180,7 +177,7 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
             //
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
             alert.view.tintColor = Colors.dark
-            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-regular", size: 22)!]), forKey: "attributedTitle")
             //2. Add the text field
             alert.addTextField { (textField: UITextField) in
                 textField.text = ""
@@ -325,6 +322,11 @@ class ScheduleTypeQuestion: UIViewController, UITableViewDelegate, UITableViewDa
         sessionsOptionSwitch.backgroundColor = Colors.red
         sessionsOptionSwitch.layer.cornerRadius = scheduleOptionSwitch.bounds.height / 2
         sessionsOptionSwitch.clipsToBounds = true
+        //
+        createScheduleButton.backgroundColor = Colors.green
+        createScheduleButton.setTitle(NSLocalizedString("beginCreating", comment: ""), for: .normal)
+        createScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 27)
+        createScheduleButton.setTitleColor(Colors.dark, for: .normal)
     }
     
     

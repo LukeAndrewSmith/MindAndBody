@@ -16,12 +16,11 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     // MARK: Outlets --------------------------------------------------------------------------------------------------------
     //
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var leftItem: UIBarButtonItem!
+    
     @IBOutlet weak var questionsTable: UITableView!
-    @IBOutlet weak var sectionLabel: UILabel!
     @IBOutlet weak var topView: UIView!
-    //
-    // Also used as back button
-    @IBOutlet weak var dismissViewButton: UIButton!
     
     // Answer elements
     // Age Picker
@@ -41,9 +40,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     var selectedQuestion = 0
     
     // schedule
-    var comingFromSchedule = false // false indicates that this is a schedule creation
-                                   // true indicates user is editing just the profile from the schedule
     var comingFromScheduleEditing = false
+    var fromSettings = false
     
     //
     // Age
@@ -55,18 +53,17 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
+                
         UIApplication.shared.statusBarStyle = .lightContent
-        //
-        sectionLabel.text = NSLocalizedString("profile", comment: "")
-        if !comingFromSchedule || comingFromScheduleEditing {
-            dismissViewButton.imageView?.image = #imageLiteral(resourceName: "Back Arrow")
-        }
-        //
+        
+        self.navigationController?.navigationBar.barTintColor = Colors.dark
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
+        navigationBar.title = NSLocalizedString("profile", comment: "")
+        
+        leftItem.tintColor = Colors.red
+
         // BackgroundImage / Color
-        addBackgroundImage(withBlur: true, fullScreen: true)
         view.backgroundColor = Colors.light
-        //        sectionLabel.backgroundColor = Colors.dark
         topView.backgroundColor = UIColor.clear
         //
         // Table View
@@ -78,7 +75,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         // Progress Bar
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 2)
-        progressBar.trackTintColor = Colors.gray
+        progressBar.trackTintColor = Colors.dark
         progressBar.progressTintColor = Colors.green
         progressBar.setProgress(0, animated: true)
         
@@ -91,13 +88,12 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(upSwipeAction))
         upSwipe.direction = .up
         questionsTable.addGestureRecognizer(upSwipe)
-        //
-        // Back
-        // Swipe
-        let rightSwipe = UIScreenEdgePanGestureRecognizer()
-        rightSwipe.edges = .left
-        rightSwipe.addTarget(self, action: #selector(edgeGestureRight))
-        view.addGestureRecognizer(rightSwipe)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        questionsTable.reloadData()
     }
     
     //
@@ -161,22 +157,33 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
 //                //
             // Answer Table with image (flexibility questions)
 //            default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
-                cell.row = indexPath.row
-                cell.selectedQuestion = selectedQuestion
-                cell.answerTableView.reloadData()
-                cell.delegate = self
-                return cell
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
+            cell.row = indexPath.row
+            cell.selectedQuestion = selectedQuestion
+            cell.answerTableView.reloadData()
+            // Recalculate height because cell frame wrong
+            if indexPath.row < scheduleDataStructures.profileQA.count - 1 {
+                cell.cellHeight = questionsTable.bounds.height
+            } else if indexPath.row == scheduleDataStructures.profileQA.count - 1 {
+                cell.cellHeight = questionsTable.bounds.height - 49
+            }
+            cell.delegate = self
+            return cell
                 //
 //            }
         // Last row, save profile cell
         } else if indexPath.row == scheduleDataStructures.profileQA.count {
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             // Indicator Label
-            cell.backgroundColor = Colors.green.withAlphaComponent(0.25)
-            cell.textLabel?.text = NSLocalizedString("saveProfile", comment: "")
-            cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
-            cell.textLabel?.textColor = Colors.light
+            cell.backgroundColor = Colors.green
+            if !fromSettings && !comingFromScheduleEditing {
+                cell.textLabel?.text = NSLocalizedString("next", comment: "")
+            } else {
+                cell.textLabel?.text = NSLocalizedString("saveProfile", comment: "")
+            }
+            cell.textLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+            cell.textLabel?.textColor = Colors.dark
             cell.textLabel?.textAlignment = .center
             return cell
         }
@@ -191,50 +198,35 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         tableView.deselectRow(at: indexPath, animated: true)
         // If last row
         if indexPath.row == scheduleDataStructures.profileQA.count {
-            if comingFromSchedule {
-                let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
-                var allAnswered = true
-                for i in 0...scheduleDataStructures.profileQASorted.count - 1 {
-                    if profileAnswers[scheduleDataStructures.profileQASorted[i]] == -1 {
-                        allAnswered = false
-                        break
-                    }
-                }
-                if allAnswered {
-                    if comingFromSchedule {
-                        self.dismiss(animated: true)
-                    }
+            
+            let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
+            var allAnswered = true
+            if profileAnswers.values.contains(-1) {
+                allAnswered = false
+            }
+            
+            if allAnswered {
+                // Editing
+                if comingFromScheduleEditing {
+                    self.navigationController?.popToRootViewController(animated: true)
+
+                // Updating from settings
+                } else if fromSettings {
+                    
+                    self.dismiss(animated: true)
+
+                // Creating
                 } else {
-                    unansweredQuestionsAlert()
-                }
-            } else {
-                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-                let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
-                var allAnswered = true
-                for i in 0...scheduleDataStructures.profileQASorted.count - 1 {
-                    if profileAnswers[scheduleDataStructures.profileQASorted[i]] == -1 {
-                        allAnswered = false
-                        break
+                    // Tell parent to go to next section in schedule creation
+                    if let parentVC = self.parent as? ScheduleCreationPageController {
+                        parentVC.nextViewController()
                     }
                 }
                 
-                if allAnswered {
-                    if comingFromScheduleEditing {
-                        self.navigationController?.popToRootViewController(animated: true)
-                    } else {
-                        // App helps schedule creation
-                        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
-                            self.performSegue(withIdentifier: "ProfileAppHelpSegue", sender: self)
-                        // Custom schedule creation
-                        } else {
-                            self.performSegue(withIdentifier: "ProfileCustomSegue", sender: self)
-                        }
-                    }
-                } else {
-                    unansweredQuestionsAlert()
-                }
+            // Not all questions are answered
+            } else {
+                unansweredQuestionsAlert()
             }
-            
         }
     }
     
@@ -305,21 +297,12 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     //
     // Dismiss View
     @IBAction func dismissViewButtonAction(_ sender: Any) {
-        if comingFromSchedule {
-            self.dismiss(animated: true)
+        if comingFromScheduleEditing {
+            self.navigationController?.popToRootViewController(animated: true)
         } else {
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true)
         }
     }
-    
-    //
-    // MARK: Back Swipe
-    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
-        if sender.state == .began {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
 }
 
 protocol NextRowDelegate: class {
@@ -350,7 +333,7 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         self.backgroundColor = .clear
         self.selectionStyle = .none
         // Questions Label
-        questionLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        questionLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         questionLabel.textColor = Colors.light
         questionLabel.layer.cornerRadius = 15
         questionLabel.clipsToBounds = true
@@ -410,7 +393,7 @@ class ProfileAgeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSou
         //
         let answerLabel = UILabel()
         answerLabel.text = ageAnswer[row]
-        answerLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        answerLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         answerLabel.textColor = Colors.light
         //
         answerLabel.textAlignment = .center
@@ -447,8 +430,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answerImageView: UIImageView!
     @IBOutlet weak var elementStack: UIStackView!
-    @IBOutlet weak var answerImageLeading: NSLayoutConstraint!
-    @IBOutlet weak var answerImageTrailing: NSLayoutConstraint!
+    @IBOutlet weak var answerImageHeight: NSLayoutConstraint!
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
     //
     
@@ -458,6 +440,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
     var questionsTableHeight = CGFloat()
     var selectedQuestion = Int()
     var selectedSection = Int()
+    var cellHeight = CGFloat()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -465,7 +448,7 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         self.backgroundColor = .clear
         self.selectionStyle = .none
         // Questions Label
-        questionLabel.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        questionLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         questionLabel.textColor = Colors.light
         questionLabel.layer.cornerRadius = 15
         questionLabel.clipsToBounds = true
@@ -474,26 +457,11 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 0
         questionLabel.adjustsFontSizeToFitWidth = true
-        //
-        let image = scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["image"]![0]
-        // Demonstration Image View
-        if image == "" {
-            // Hide image
-            //            answerImageView.removeFromSuperview()
-            answerImageLeading.constant = elementStack.bounds.width / 2
-            answerImageTrailing.constant = elementStack.bounds.width / 2
-        } else {
-            answerImageLeading.constant = 0
-            answerImageTrailing.constant = 0
-            // Ensure image is in stack view
-            //            if elementStack.arrangedSubviews.contains(answerImageView) == false {
-            //                elementStack.insertArrangedSubview(answerImageView, at: 1)
-            //            }
-            answerImageView.backgroundColor = Colors.dark
-            answerImageView.layer.cornerRadius = 15
-            answerImageView.clipsToBounds = true
-            answerImageView.image = getUncachedImage(named: image)
-        }
+        
+        questionLabel.text = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["Q"]![0], comment: "")
+        let fit = questionLabel.sizeThatFits(CGSize(width: questionLabel.bounds.width, height: .greatestFiniteMagnitude))
+        questionLabel.frame.size = CGSize(width: questionLabel.bounds.width, height: fit.height)
+        
         // Table View
         answerTableView.dataSource = self
         answerTableView.delegate = self
@@ -507,12 +475,21 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         answerTableView.clipsToBounds = true
         answerTableView.isScrollEnabled = false
         
-        questionLabel.text = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["Q"]![0], comment: "")
-        questionLabel.sizeThatFits(sizeThatFits(CGSize(width: questionLabel.bounds.width, height: .greatestFiniteMagnitude)))
-        
-        if image != "" && elementStack.bounds.height > questionsTableHeight {
-            answerImageTrailing.constant = (elementStack.bounds.width * 0.25) / 2
-            answerImageLeading.constant = (elementStack.bounds.width * 0.25) / 2
+        //
+        let image = scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[row]]!["image"]![0]
+        // Demonstration Image View
+        if image == "" {
+            // Hide image
+            answerImageHeight.constant = 0
+        } else {
+            answerImageView.backgroundColor = Colors.dark
+            answerImageView.layer.cornerRadius = 15
+            answerImageView.clipsToBounds = true
+            answerImageView.image = getUncachedImage(named: image)
+
+            let totalElementHeight = getTableHieght() + questionLabel.bounds.height + (2 * 10)
+            let padding = CGFloat(2 * 16)
+            answerImageHeight.constant = cellHeight - totalElementHeight - padding
         }
     }
     
@@ -559,6 +536,22 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
         tableHeight.constant = tableHeightConstant
         //
         
+    }
+    
+    func getTableHieght() -> CGFloat {
+        var tableHeightConstant: CGFloat = 0
+        for i in 0..<scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]!.count {
+            let font = UIFont(name: "SFUIDisplay-thin", size: 23)
+            let height = NSLocalizedString(scheduleDataStructures.profileQA[scheduleDataStructures.profileQASorted[selectedQuestion]]!["A"]![i], comment: "").height(withConstrainedWidth: answerTableView.bounds.width - 32, font: font!)
+            if height > (49 * 1.5) {
+                tableHeightConstant += (49 * 2)
+            } else if height > 49 {
+                tableHeightConstant += (49 * 1.5)
+            } else {
+                tableHeightConstant += 49
+            }
+        }
+        return tableHeightConstant
     }
     
     
@@ -623,5 +616,9 @@ class ProfileCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
             
         }
     }
+}
+
+class ProfileNavigation: UINavigationController {
+    
 }
 

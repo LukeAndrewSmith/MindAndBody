@@ -19,8 +19,11 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var equipmentTable: UITableView!
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    // If schedule is being created
-    var isScheduleCreation = false
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
+    
+    // Editing
+    var fromScheduleEditing = false
     
     // Stored here and not in scheudle data as images didnt want to be stored in an array
     let equiptmentArray: [[String: Any]] =
@@ -41,6 +44,8 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
         
         view.backgroundColor = Colors.light
         
+        setupNextButton()
+        
         // Navigation Bar
         navigationBar.title = NSLocalizedString("equipment", comment: "")
         self.navigationController?.navigationBar.barTintColor = Colors.dark
@@ -50,10 +55,27 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
         equipmentTable.tableFooterView = UIView()
         equipmentTable.separatorStyle = .singleLine
         equipmentTable.separatorColor = Colors.dark
-//            .withAlphaComponent(0.25)
         equipmentTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        equipmentTable.backgroundColor = .clear
         
+    }
+    
+    func setupNextButton() {
+        // Not from schedule editing => schedule creation
+        if !fromScheduleEditing {
+            nextButton.backgroundColor = Colors.green
+            nextButton.setTitle(NSLocalizedString("next", comment: ""), for: .normal)
+            nextButton.setTitleColor(Colors.dark, for: .normal)
+            nextButton.titleLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+            nextButton.isEnabled = true
+            nextButton.alpha = 1
+            nextButtonHeight.constant = 49
+            
+        // Schedule editing, hide button
+        } else {
+            nextButton.isEnabled = false
+            nextButton.alpha = 0
+            nextButtonHeight.constant = 0
+        }
     }
     
     //
@@ -81,7 +103,6 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomScheduleEquipmentCell", for: indexPath) as! CustomScheduleEquipmentCell
         //
-//        cell.backgroundColor = .clear
         cell.row = indexPath.row
         cell.selectionStyle = .none
         //
@@ -106,12 +127,11 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         return cell
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        if segue.identifier == "ScheduleHelpCreationSegue" {
-            let destinationVC = segue.destination as! ScheduleCreator
-            destinationVC.fromScheduleEditing = true
+    
+    // Finished
+    @IBAction func nextButtonAction(_ sender: Any) {
+        if let parentVC = self.parent as? ScheduleCreationPageController {
+            parentVC.nextViewController()
         }
     }
 }

@@ -22,6 +22,8 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
     //
     var comingFromScheduleEditing = false
 
+    @IBOutlet weak var createScheduleButton: UIButton!
+    @IBOutlet weak var createScheduleButtonHeight: NSLayoutConstraint!
     
     //
     // Viewdidload --------------------------------------------------------------------------------------------------------
@@ -30,6 +32,8 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
 
         view.backgroundColor = Colors.light
+        
+        setupCreateScheduleButton()
         
         // Navigation Bar
         navigationBar.title = NSLocalizedString("week", comment: "")
@@ -48,6 +52,25 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewWillDisappear(animated)
         // Ensure temporary week array created
         TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+    }
+    
+    func setupCreateScheduleButton() {
+        // Not from schedule editing => schedule creation
+        if !comingFromScheduleEditing {
+            createScheduleButton.backgroundColor = Colors.green
+            createScheduleButton.setTitle(NSLocalizedString("create", comment: ""), for: .normal)
+            createScheduleButton.setTitleColor(Colors.dark, for: .normal)
+            createScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 23)
+            createScheduleButton.isEnabled = true
+            createScheduleButton.alpha = 1
+            createScheduleButtonHeight.constant = 49
+            
+            // Schedule editing, hide button
+        } else {
+            createScheduleButton.isEnabled = false
+            createScheduleButton.alpha = 0
+            createScheduleButtonHeight.constant = 0
+        }
     }
     
     //
@@ -95,45 +118,14 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
-    //
-    // Done
-    @IBAction func doneButtonAction(_ sender: Any) {
+    // Finished
+    @IBAction func createScheduleButtonAction(_ sender: Any) {
         // Ensure notifications correct
         ReminderNotifications.shared.setNotifications()
         // Ensure temporary week array created
         TemporaryWeekArray.shared.createTemporaryWeekViewArray()
-        //
-        if comingFromScheduleEditing {
-            self.navigationController?.popViewController(animated: true)
-        // Go to schedule equiptment question
-        } else {
-            self.performSegue(withIdentifier: "ScheduleCreatorEquiptmentSegue2", sender: self)
-        }
-    }
-    
-    //
-    // Back
-    @IBAction func backButtonAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    //
-    // MARK: Back Swipe
-    @IBAction func edgeGestureRight(sender: UIScreenEdgePanGestureRecognizer) {
-        if sender.state == .began {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    //
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //
-        if segue.identifier == "ScheduleHelpCreationSegue" {
-            let destinationVC = segue.destination as! ScheduleCreator
-            destinationVC.fromScheduleEditing = true
-        } else if segue.identifier == "ScheduleCreatorEquiptmentSegue2" {
-            let destinationVC = segue.destination as! ScheduleEquipment
-            destinationVC.isScheduleCreation = true
-        }
+        
+        self.dismiss(animated: true)
     }
 }
 
