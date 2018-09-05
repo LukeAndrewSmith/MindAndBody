@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UserDefaults.standard.removePersistentDomain(forName: domain)
 //        ReminderNotifications.shared.cancelNotifications()
 //        ICloudFunctions.shared.removeAll()
-        UserDefaults.standard.removeObject(forKey: "profileAnswers")
 
         
 //        //

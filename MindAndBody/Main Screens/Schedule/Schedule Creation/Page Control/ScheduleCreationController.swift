@@ -13,7 +13,6 @@ class ScheduleCreationController: UIViewController {
     
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var leftItem: UIBarButtonItem!
-    @IBOutlet weak var rightItem: UIBarButtonItem!
     
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var progressViewHeight: NSLayoutConstraint!
@@ -46,8 +45,6 @@ class ScheduleCreationController: UIViewController {
         leftItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
         leftItem.tintColor = Colors.light
         
-        rightItem.tintColor = Colors.dark
-
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         self.navigationController?.navigationBar.shadowImage = UIImage() // Remove separator
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
@@ -220,16 +217,6 @@ class ScheduleCreationController: UIViewController {
         } else {
             self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false
         }
-    }
-    
-    @IBAction func nextButtonAction(_ sender: Any) {
-        if let childVC = self.childViewControllers.first as? ScheduleCreationPageController {
-            childVC.updatePagesOfParent()
-            if currentPage < (pages.count - 1) {
-                childVC.nextViewController()
-            }
-        }
-        
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

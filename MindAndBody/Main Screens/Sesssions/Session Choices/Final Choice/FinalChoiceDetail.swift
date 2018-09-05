@@ -83,6 +83,7 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Begin Button Title
         beginButton.titleLabel?.text = NSLocalizedString("begin", comment: "")
+        beginButton.titleLabel?.font = Fonts.bottomButton
         beginButton.backgroundColor = Colors.green
         beginButton.setTitleColor(Colors.dark, for: .normal)
         
@@ -113,7 +114,7 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
     // Will display header
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)!
+        header.textLabel?.font = Fonts.verySmallElementLight
         header.textLabel?.textColor = Colors.light
         header.contentView.backgroundColor = Colors.dark
         header.contentView.tintColor = Colors.light

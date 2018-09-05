@@ -61,9 +61,11 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         addBackgroundImage(withBlur: true, fullScreen: false)
         
         // Reload data and graphs incase tracking updated
-        // Create [[Date: Int]] from the stored [[String: Int]] (ICloud wont store [Date: Int], only [String: Int])
-        let trackingDictionary = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
-        trackingDictionaryDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionary)
+        // Create [[Date: Int]] from the stored [[String: Int]] (UserDefaults won't store [Date: Int], only [String: Int])
+        // Also scales values above 100% so they can be seen on the graph
+            // Presenting the indicator for the data point de scales and presents the correct value (see tracking classes)
+        let trackingDictionaryString = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
+        trackingDictionaryDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionaryString)
         setupChartData(timeScale: selectedTimeScale)
     }
     
@@ -119,39 +121,16 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: Tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //        testTrackingValues()
-        
-        // Check if reset necessary
-        ScheduleVariables.shared.resetWeekTracking()
-        
-        // Ensure week goal correct
-        updateWeekGoal()
-        // Update Tracking
-        updateWeekProgress()
-        updateTracking()
-        
-        
-        // Create [[Date: Int]] from the stored [[String: Int]] (ICloud wont store [Date: Int], only [String: Int])
-        let trackingDictionary = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
-        trackingDictionaryDates = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionary)
-
-        
-        //
         setupTimeScaleChoice()
         
-        
-        //
         // Navigation Controller
         // Remove navigation separator
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.barTintColor = Colors.dark
         // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        
-        // Navigation Title
         navigationBar.title = NSLocalizedString("tracking", comment: "")
-        //
+
         setupChart()
     }
     

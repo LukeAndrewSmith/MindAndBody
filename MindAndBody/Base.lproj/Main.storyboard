@@ -872,7 +872,7 @@
                     <connections>
                         <outlet property="navigationBar" destination="fql-Cl-jhS" id="fo9-Nw-pmn"/>
                         <outlet property="tableView" destination="WTX-Dd-faj" id="ZwS-wB-Ci1"/>
-                        <segue destination="nRk-xc-RaX" kind="show" identifier="lessonsSegue" id="XiP-ph-F4T"/>
+                        <segue destination="nRk-xc-RaX" kind="presentation" identifier="lessonsSegue" id="0dD-wr-kwT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zbp-4k-0wU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -888,25 +888,39 @@
                         <viewControllerLayoutGuide type="bottom" id="sWJ-Z9-Sq4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rNz-ca-FzL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAN-Yh-Vao">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i0O-c4-JR6">
+                                <rect key="frame" x="326" y="36" width="33" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="33" id="Ny5-tV-JsK"/>
+                                    <constraint firstAttribute="height" constant="33" id="xD1-fw-rrI"/>
+                                </constraints>
+                                <state key="normal" image="Cross"/>
+                                <connections>
+                                    <action selector="closeButtonAction:" destination="nRk-xc-RaX" eventType="touchUpInside" id="SUc-KC-GyC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="WAN-Yh-Vao" firstAttribute="top" secondItem="Jzx-Iv-my3" secondAttribute="bottom" id="Ejy-TG-TpR"/>
-                            <constraint firstAttribute="trailing" secondItem="WAN-Yh-Vao" secondAttribute="trailing" id="L2e-49-8Br"/>
+                            <constraint firstItem="i0O-c4-JR6" firstAttribute="top" secondItem="Jzx-Iv-my3" secondAttribute="bottom" constant="16" id="F8s-Uj-dmy"/>
                             <constraint firstItem="sWJ-Z9-Sq4" firstAttribute="top" secondItem="WAN-Yh-Vao" secondAttribute="bottom" id="OI0-vh-qx3"/>
-                            <constraint firstItem="WAN-Yh-Vao" firstAttribute="leading" secondItem="rNz-ca-FzL" secondAttribute="leading" id="i72-Zk-O2Q"/>
+                            <constraint firstAttribute="trailing" secondItem="WAN-Yh-Vao" secondAttribute="trailing" id="Til-xt-P5R"/>
+                            <constraint firstItem="WAN-Yh-Vao" firstAttribute="leading" secondItem="rNz-ca-FzL" secondAttribute="leading" id="ZvN-Fa-fn4"/>
+                            <constraint firstItem="i0O-c4-JR6" firstAttribute="trailing" secondItem="rNz-ca-FzL" secondAttribute="trailingMargin" id="hwN-Ug-kp0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pdl-L2-b9u"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="closeButton" destination="i0O-c4-JR6" id="9E1-tC-uyY"/>
                         <outlet property="lessonScroll" destination="WAN-Yh-Vao" id="6yr-h4-IOU"/>
-                        <outlet property="navigationBar" destination="pdl-L2-b9u" id="Zng-8K-iWz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elf-SZ-nzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3274,11 +3288,6 @@
                                 <action selector="backButtonAction:" destination="K09-Ad-PwU" id="gHw-QW-0UC"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="X8w-fD-xVF">
-                            <connections>
-                                <action selector="nextButtonAction:" destination="K09-Ad-PwU" id="bSi-Qg-JGs"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="currentIndicator" destination="gHI-4k-pSz" id="Ttm-Td-gK2"/>
@@ -3296,7 +3305,6 @@
                         <outlet property="progressIndicatorWidth2" destination="y9g-Vs-Zuu" id="YWS-N1-JF4"/>
                         <outlet property="progressView" destination="dlh-q8-29j" id="RY5-Iq-D5k"/>
                         <outlet property="progressViewHeight" destination="X2H-wX-1lX" id="epn-vP-Fhd"/>
-                        <outlet property="rightItem" destination="X8w-fD-xVF" id="f8E-F5-KY0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cmd-y0-A3I" userLabel="First Responder" sceneMemberID="firstResponder"/>

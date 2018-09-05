@@ -213,7 +213,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     checkBox.tag = indexPath.row
                     checkBox.layer.backgroundColor = UIColor.clear.cgColor
                     checkBox.layer.borderWidth = 1
-                    checkBox.layer.borderColor = Colors.light.withAlphaComponent(0.27).cgColor
+                    checkBox.layer.borderColor = Colors.light.withAlphaComponent(0.33).cgColor
                     checkBox.layer.cornerRadius = 4
                     checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
                     checkBox.center.y = extraLabel.center.y
@@ -222,8 +222,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     checkBox.isEnabled = false
                     cell.addSubview(checkBox)
                     
-                    extraLabel.alpha = 0.27
-                    checkBox.alpha = 0.27
+                    extraLabel.alpha = 0.33
+                    checkBox.alpha = 0.33
                     
                 // Session cells
                 } else {

@@ -586,11 +586,18 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             UIView.animate(withDuration: 0.6, animations: {
                 //
-                self.tableView.beginUpdates()
-                self.tableView.endUpdates()
-                //
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                
+                // As progress bar is contained in the table view header, scrolling back to row 0 jumps the progress bar off the screen
+                // Silly fix below seems to work
+                if self.selectedRow == 0 {
+                    self.tableView.beginUpdates()
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    self.tableView.endUpdates()
+                } else {
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                }
+
                 // 1
                 cell.imageIndicator.alpha = 1
                 cell.breathsLabel.alpha = 1

@@ -284,6 +284,7 @@
 		0750DB631F86C8F7003C2AE6 /* CreatorFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750DB621F86C8F7003C2AE6 /* CreatorFunctions.swift */; };
 		07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07520BB31E9F894C00FA682E /* MeditationScreen.swift */; };
 		0757326B1E64D8A3003DA77E /* LessonsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757326A1E64D8A3003DA77E /* LessonsScreen.swift */; };
+		075D441C21406028003502B6 /* CustomElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075D441B21406028003502B6 /* CustomElements.swift */; };
 		07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */; };
 		07686A901F843A1600C278CC /* ScheduleHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */; };
 		076C681F1ED1D35D009160C2 /* tibetanChimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680E1ED1BFAD009160C2 /* tibetanChimes.caf */; };
@@ -1634,6 +1635,7 @@
 		0750DB621F86C8F7003C2AE6 /* CreatorFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorFunctions.swift; sourceTree = "<group>"; };
 		07520BB31E9F894C00FA682E /* MeditationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreen.swift; sourceTree = "<group>"; };
 		0757326A1E64D8A3003DA77E /* LessonsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonsScreen.swift; sourceTree = "<group>"; };
+		075D441B21406028003502B6 /* CustomElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomElements.swift; sourceTree = "<group>"; };
 		07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAnimationHelpers.swift; sourceTree = "<group>"; };
 		07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleHelpers.swift; sourceTree = "<group>"; };
 		076C680E1ED1BFAD009160C2 /* tibetanChimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tibetanChimes.caf; sourceTree = "<group>"; };
@@ -3682,6 +3684,7 @@
 				078674FD1FB84F7000C6B74C /* ICloudStorage.swift */,
 				0794A74C1FBCC3D70029968D /* ActionSheet.swift */,
 				0778FAA620A34F390032698A /* StopClock.swift */,
+				075D441B21406028003502B6 /* CustomElements.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -8164,6 +8167,7 @@
 				0789ED061F79A6EA000EB739 /* Register.swift in Sources */,
 				07A6346F208C999000712EE2 /* Equipment.swift in Sources */,
 				078674FE1FB84F7000C6B74C /* ICloudStorage.swift in Sources */,
+				075D441C21406028003502B6 /* CustomElements.swift in Sources */,
 				0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */,
 				07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */,
 				07034335213AB7D900FBB8E6 /* ScheduleCreationPageController.swift in Sources */,

@@ -80,8 +80,8 @@ enum Fonts {
     static let navigationBarButton = UIFont(name: "SFUIDisplay-light", size: 17)
     
     // Cells
-    static let bigTitle = UIFont(name: "SFUIDisplay-light", size: 30)
-    static let bigCell = UIFont(name: "SFUIDisplay-light", size: 23)
+    static let bigTitle = UIFont(name: "SFUIDisplay-light", size: 27) // 30
+    static let bigCell = UIFont(name: "SFUIDisplay-light", size: 22) // 23
     static let regularCell = UIFont(name: "SFUIDisplay-regular", size: 18)
     
     // Various Elements
@@ -102,6 +102,11 @@ enum Fonts {
     // Buttons
     static let bottomButton = UIFont(name: "SFUIDisplay-regular", size: 23)
 
+    // Lessons
+    static let lessonTitle = UIFont(name: "SFUIDisplay-bold", size: 37)
+    static let lessonSubtitle = UIFont(name: "SFUIDisplay-bold", size: 27)
+    static let lessonsImageTitle = UIFont(name: "SFUIDisplay-medium", size: 23)
+    static let lessonText = UIFont(name: "SFUIDisplay-regular", size: 19)
 }
 
 // Old bigger text

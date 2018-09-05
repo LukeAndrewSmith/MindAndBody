@@ -129,22 +129,22 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
         newMovementButton.setTitleColor(Colors.dark, for: .normal)
         newMovementButton.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
-        newMovementButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        newMovementButton.titleLabel?.font = Fonts.smallElementLight
         
-        roundsTitleLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
-        roundsLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        roundsTitleLabel.font = Fonts.smallElementLight
+        roundsLabel.font = Fonts.smallElementLight
         
         //
         nameButton.backgroundColor = Colors.light
         nameTitleLabel.text = NSLocalizedString("nameTitle", comment: "")
-        nameTitleLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        nameTitleLabel.font = Fonts.smallElementLight
         nameTitleLabel.isUserInteractionEnabled = false
         if customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedSession]["name"]![0] as! String == "" {
             nameLabel.text = NSLocalizedString("chooseName", comment: "")
         } else {
             nameLabel.text = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedSession]["name"]![0] as? String
         }
-        nameLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        nameLabel.font = Fonts.smallElementLight
         nameLabel.isUserInteractionEnabled = false
         
         topSeparator.backgroundColor = Colors.dark.withAlphaComponent(0.27)
