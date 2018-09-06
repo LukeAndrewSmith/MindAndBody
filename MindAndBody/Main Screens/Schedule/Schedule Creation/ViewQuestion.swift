@@ -30,9 +30,6 @@ class ScheduleViewQuestion: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // BackgroundImage
-//        addBackgroundImage(withBlur: true, fullScreen: true)
-        
         // Title Label
         titleLabel.text = NSLocalizedString("scheduleView", comment: "")
         titleLabel.font = Fonts.mediumElementRegular

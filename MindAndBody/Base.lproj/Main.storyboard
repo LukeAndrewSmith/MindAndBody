@@ -905,13 +905,25 @@
                                     <action selector="closeButtonAction:" destination="nRk-xc-RaX" eventType="touchUpInside" id="SUc-KC-GyC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNH-kF-pql" userLabel="Big Close Button">
+                                <rect key="frame" x="309" y="20" width="66" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="8BV-bc-3Ss"/>
+                                    <constraint firstAttribute="width" constant="66" id="iHh-Dg-RGL"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="closeButtonAction:" destination="nRk-xc-RaX" eventType="touchUpInside" id="m3W-CD-Sz1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="WAN-Yh-Vao" firstAttribute="top" secondItem="Jzx-Iv-my3" secondAttribute="bottom" id="Ejy-TG-TpR"/>
                             <constraint firstItem="i0O-c4-JR6" firstAttribute="top" secondItem="Jzx-Iv-my3" secondAttribute="bottom" constant="16" id="F8s-Uj-dmy"/>
                             <constraint firstItem="sWJ-Z9-Sq4" firstAttribute="top" secondItem="WAN-Yh-Vao" secondAttribute="bottom" id="OI0-vh-qx3"/>
                             <constraint firstAttribute="trailing" secondItem="WAN-Yh-Vao" secondAttribute="trailing" id="Til-xt-P5R"/>
+                            <constraint firstItem="PNH-kF-pql" firstAttribute="top" secondItem="Jzx-Iv-my3" secondAttribute="bottom" id="ZTs-Pf-Dmk"/>
                             <constraint firstItem="WAN-Yh-Vao" firstAttribute="leading" secondItem="rNz-ca-FzL" secondAttribute="leading" id="ZvN-Fa-fn4"/>
+                            <constraint firstAttribute="trailing" secondItem="PNH-kF-pql" secondAttribute="trailing" id="eTB-pI-Ipv"/>
                             <constraint firstItem="i0O-c4-JR6" firstAttribute="trailing" secondItem="rNz-ca-FzL" secondAttribute="trailingMargin" id="hwN-Ug-kp0"/>
                         </constraints>
                     </view>

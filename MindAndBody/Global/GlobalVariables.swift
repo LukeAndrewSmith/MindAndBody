@@ -96,6 +96,7 @@ enum Fonts {
     static let smallElementLight = UIFont(name: "SFUIDisplay-light", size: 19)
     
     static let verySmallElementLight = UIFont(name: "SFUIDisplay-light", size: 15)
+    static let verySmallElementRegular = UIFont(name: "SFUIDisplay-regular", size: 15)
     
     static let tinyElementLight = UIFont(name: "SFUIDisplay-light", size: 13)
     

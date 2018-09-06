@@ -114,8 +114,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         setGroupLabels()
         setupCreateScheduleButton()
         //
-        // BackgroundImage
-//        addBackgroundImage(withBlur: true, fullScreen: true)
         // Navigation Bar
         navigationBar.title = NSLocalizedString("schedule", comment: "")
         self.navigationController?.navigationBar.barTintColor = Colors.dark

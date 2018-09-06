@@ -58,7 +58,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         updateTracking()
         
         // Add here incase image changed in settings
-        addBackgroundImage(withBlur: true, fullScreen: false)
+//        addBackgroundImage(withBlur: true, fullScreen: false)
         
         // Reload data and graphs incase tracking updated
         // Create [[Date: Int]] from the stored [[String: Int]] (UserDefaults won't store [Date: Int], only [String: Int])
@@ -130,6 +130,8 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         // Title
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
         navigationBar.title = NSLocalizedString("tracking", comment: "")
+        
+        view.backgroundColor = Colors.light
 
         setupChart()
     }
@@ -195,7 +197,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         // No data
         chartView.noDataFont = Fonts.largeElementRegular
         chartView.noDataText = NSLocalizedString("trackingWarning", comment: "")
-        chartView.noDataTextColor = Colors.light
+        chartView.noDataTextColor = Colors.dark
         
         // General
         chartView.delegate = self
@@ -208,8 +210,9 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         
         // Y Axis
         let leftAxis = chartView.leftAxis
-        leftAxis.axisLineColor = Colors.light
-        leftAxis.labelTextColor = Colors.light
+//        leftAxis.axisLineWidth = 1
+        leftAxis.axisLineColor = Colors.dark
+        leftAxis.labelTextColor = Colors.dark
         leftAxis.labelFont = Fonts.smallElementRegular!
         leftAxis.drawGridLinesEnabled = false
         leftAxis.drawLabelsEnabled = false
@@ -218,20 +221,21 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         
         // X Axis
         let xAxis = chartView.xAxis
-        xAxis.axisLineColor = Colors.light
-        xAxis.axisLineColor = Colors.light
-        xAxis.labelTextColor = Colors.light
+//        xAxis.axisLineWidth = 1
+        xAxis.axisLineColor = Colors.dark
+        xAxis.axisLineColor = Colors.dark
+        xAxis.labelTextColor = Colors.dark
         xAxis.avoidFirstLastClippingEnabled = true
-        xAxis.labelFont = Fonts.verySmallElementLight!
+        xAxis.labelFont = Fonts.smallElementLight!
         
         // Goal: 100 %
         let goalLine = ChartLimitLine(limit: 100, label: "100 %")
         // nina
-        goalLine.valueFont = UIFont(name: "SFUIDisplay-light", size: 10)!
-        goalLine.lineWidth = 1
+        goalLine.valueFont = UIFont(name: "SFUIDisplay-light", size: 11)!
+        goalLine.lineWidth = 2
         goalLine.lineDashLengths = [5,5]
         goalLine.labelPosition = .rightTop
-        goalLine.valueTextColor = Colors.light
+        goalLine.valueTextColor = Colors.dark
         goalLine.lineColor = Colors.green
         chartView.leftAxis.addLimitLine(goalLine)
         
@@ -362,13 +366,13 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         chartDataSet.valueTextColor = UIColor.clear
         
         // Marker
-        let marker: XYMarkerView = XYMarkerView(color: Colors.light, font: Fonts.smallElementRegular!, textColor: Colors.dark, insets: UIEdgeInsets(top: 3.0, left: 5.0, bottom: 8.0, right: 5.0), xAxisValueFormatter: DateValueFormatterMarker())
+        let marker: XYMarkerView = XYMarkerView(color: Colors.dark, font: Fonts.smallElementRegular!, textColor: Colors.light, insets: UIEdgeInsets(top: 3.0, left: 5.0, bottom: 8.0, right: 5.0), xAxisValueFormatter: DateValueFormatterMarker())
         marker.minimumSize = CGSize(width: 75, height: 35)
         chartView.marker = marker
         
         // Highlight
         chartDataSet.setDrawHighlightIndicators(true)
-        chartDataSet.highlightColor = Colors.light
+        chartDataSet.highlightColor = Colors.dark
         chartDataSet.highlightEnabled = true
         chartDataSet.drawHorizontalHighlightIndicatorEnabled = false
         chartDataSet.highlightLineWidth = 0.5
@@ -376,7 +380,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         // Axes setup
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.drawGridLinesEnabled = true
-        chartView.xAxis.gridColor = Colors.light.withAlphaComponent(0.03)
+        chartView.xAxis.gridColor = Colors.darkGray.withAlphaComponent(0.5)
         chartView.xAxis.drawAxisLineEnabled = true
         //
         chartView.data = chartData

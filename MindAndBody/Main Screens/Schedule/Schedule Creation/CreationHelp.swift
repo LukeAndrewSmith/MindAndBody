@@ -50,9 +50,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         //
         UIApplication.shared.statusBarStyle = .lightContent
 
-        // BackgroundImage
-//        addBackgroundImage(withBlur: true, fullScreen: true)
-        
         // Table View
         questionsTable.tableFooterView = UIView()
         questionsTable.separatorStyle = .none

@@ -110,19 +110,20 @@ class LessonsScreen: UIViewController {
             let commitText = UILabel()
             setupText(label: commitText, text: "effortCommitText", previous: commitTitle, gap: 8)
             
-            // Acheive Title
-            let acheiveTitle = UILabel()
-            setupSubtitle(titleLabel: acheiveTitle, title: "effortWatchTitle", previous: commitText, gap: 16)
-            // Acheive text
-            let acheiveText = UILabel()
-            setupText(label: acheiveText, text: "effortWatchText", previous: acheiveTitle, gap: 8)
+            // Achieve Title
+            let achieveTitle = UILabel()
+            setupSubtitle(titleLabel: achieveTitle, title: "effortWatchTitle", previous: commitText, gap: 16)
+            // Achieve text
+            let achieveText = UILabel()
+            setupText(label: achieveText, text: "effortWatchText", previous: achieveTitle, gap: 8)
             
-            // Acheive Title
+            // Achieve Title
             let recapTitle = UILabel()
-            setupSubtitle(titleLabel: recapTitle, title: "effortRecapTitle", previous: acheiveText, gap: 16)
-            // Acheive text
+            setupSubtitle(titleLabel: recapTitle, title: "effortRecapTitle", previous: achieveText, gap: 24)
+            // Achieve text
             let recapBullets = UILabel()
             setupBulletPoints(label: recapBullets, text: "effortRecapText", style: "numbers", previous: recapTitle, gap: 8)
+            
             
         // Breathing (Workout)
         case "breathingWorkout":
@@ -137,7 +138,7 @@ class LessonsScreen: UIViewController {
             
             // Workout Title
             let workoutTitle = UILabel()
-            setupSubtitle(titleLabel: workoutTitle, title: "breathingWorkoutWorkoutTitle", previous: intro, gap: 16)
+            setupSubtitle(titleLabel: workoutTitle, title: "breathingWorkoutWorkoutTitle", previous: intro, gap: 24)
             // Workout Text
             let workoutText = UILabel()
             setupText(label: workoutText, text: "breathingWorkoutWorkoutText", previous: workoutTitle, gap: 8)
@@ -170,15 +171,120 @@ class LessonsScreen: UIViewController {
             
             // Cardio/Endurance Title
             let cardioTitle = UILabel()
-            setupSubtitle(titleLabel: cardioTitle, title: "breathingWorkoutCardioTitle", previous: rulesNoteText, gap: 16)
+            setupSubtitle(titleLabel: cardioTitle, title: "breathingWorkoutCardioTitle", previous: rulesNoteText, gap: 24)
             // Cardio/Endurance Text
             let cardioText = UILabel()
             setupText(label: cardioText, text: "breathingWorkoutCardioText", previous: cardioTitle, gap: 8)
             
+        // Breathing (Yoga)
         case "breathingYoga":
-            break
+            
+            // Title
+            let title = UILabel()
+            let titleImage = UIImageView()
+            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.dark, titleImageView: titleImage, titleImage: getUncachedImage(named: "upwardsDogY")!)
+            
+            // Intro
+            let intro = UILabel()
+            setupText(label: intro, text: "breathingYogaIntro", previous: titleImage, gap: 16)
+            
+            // Mindfulness Title
+            let mindfulTitle = UILabel()
+            setupSubtitle(titleLabel: mindfulTitle, title: "breathingYogaMindfulnessTitle", previous: intro, gap: 24)
+            // Mindfulness Text
+            let mindfulText = UILabel()
+            setupText(label: mindfulText, text: "breathingYogaMindfulnessText", previous: mindfulTitle, gap: 8)
+            
+            // Rules
+            // How to breathe Title
+            let breatheTitle = UILabel()
+            setupSubtitle(titleLabel: breatheTitle, title: "breathingYogaBreathingTitle", previous: mindfulText, gap: 24)
+            // How to breathe text
+            let breatheText = UILabel()
+            setupText(label: breatheText, text: "breathingYogaBreathingNote", previous: breatheTitle, gap: 8)
+            // Rules title
+            let rulesTitle = UILabel()
+            setupSubtitle(titleLabel: rulesTitle, title: "breathingYogaBreathingRulesTitle", previous: breatheText, gap: 8)
+            // Rules Bullets
+            let rulesBullet1 = UILabel()
+            setupBulletPoints(label: rulesBullet1, text: "breathingYogaBreathingRules1", style: "dots", previous: rulesTitle, gap: 8)
+            let rulesImage1 = UIImageView()
+            setupImage(imageView: rulesImage1, image: getUncachedImage(named: "wideLeggedForwardBend")!, previous: rulesBullet1, height: 88 * 2, gap: 0)
+            //
+            let rulesBullet2 = UILabel()
+            setupBulletPoints(label: rulesBullet2, text: "breathingYogaBreathingRules2", style: "dots", previous: rulesImage1, gap: 0)
+            let rulesImage2 = UIImageView()
+            setupImage(imageView: rulesImage2, image: getUncachedImage(named: "upwardsDogY")!, previous: rulesBullet2, height: 88 * 2, gap: 0)
+            //
+            let rulesBullet3 = UILabel()
+            setupBulletPoints(label: rulesBullet3, text: "breathingYogaBreathingRules3", style: "dots", previous: rulesImage2, gap: 0)
+            let rulesImage3 = UIImageView()
+            setupImage(imageView: rulesImage3, image: getUncachedImage(named: "marichi1")!, previous: rulesBullet3, height: 88 * 2, gap: 0)
+            //
+            let rulesBullet4 = UILabel()
+            setupBulletPoints(label: rulesBullet4, text: "breathingYogaBreathingRules4", style: "dots", previous: rulesImage3, gap: 0)
+            
+        // Core Activation
         case "coreActivation":
-            break
+            
+            // Title
+            let title = UILabel()
+            let titleImage = UIImageView()
+            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.dark, titleImageView: titleImage, titleImage: getUncachedImage(named: "plank")!)
+            
+            // Intro
+            let intro1 = UILabel()
+            setupText(label: intro1, text: "coreActivationIntro1", previous: titleImage, gap: 16)
+            // Core muscles image
+            let coreImage = UIImageView()
+            setupImage(imageView: coreImage, image: getUncachedImage(named: "core@2x")!, previous: intro1, height: 88 * 2, gap: 0)
+            // Intro cont.
+            let intro2 = UILabel()
+            setupText(label: intro2, text: "coreActivationIntro2", previous: coreImage, gap: 0)
+            
+            // Breathing Title
+            let breathingTitle = UILabel()
+            setupSubtitle(titleLabel: breathingTitle, title: "coreActivationBreathingTitle", previous: intro2, gap: 24)
+            // Breathing Text
+            let breathingText = UILabel()
+            setupText(label: breathingText, text: "coreActivationBreathingText", previous: breathingTitle, gap: 8)
+            // Breathing Plank Title
+            let plankTitle = UILabel()
+            setupSubtitle(titleLabel: plankTitle, title: "coreActivationBreathingPlankTitle", previous: breathingText, gap: 8)
+            // Breathing Plank Image
+            let plankImage = UIImageView()
+            setupImage(imageView: plankImage, image: getUncachedImage(named: "plank")!, previous: plankTitle, height: 88 * 2, gap: 0)
+            // Breathing Plank Bullets
+            let plankBullets = UILabel()
+            setupBulletPoints(label: plankBullets, text: "coreActivationBreathingPlankText", style: "numbers", previous: plankImage, gap: 0)
+            
+            // Core activation title
+            let activationTitle = UILabel()
+            setupSubtitle(titleLabel: activationTitle, title: "coreActivationActivationTitle", previous: plankBullets, gap: 24)
+            // Core activation note
+            let activationNote = UILabel()
+            setupText(label: activationNote, text: "coreActivationActivationNote", previous: activationTitle, gap: 8)
+            // Core activation exercise title
+            let activationTitle2 = UILabel()
+            setupSubtitle(titleLabel: activationTitle2, title: "coreActivationActivationPracticeTitle", previous: activationNote, gap: 8)
+            // Core activation exercise image
+            let activationImage = UIImageView()
+            setupImage(imageView: activationImage, image: getUncachedImage(named: "mountain")!, previous: activationTitle2, height: 88 * 2, gap: 0)
+            // Core activation exercise
+            let activationBullets = UILabel()
+            setupBulletPoints(label: activationBullets, text: "coreActivationActivationPracticeText", style: "numbers", previous: activationImage, gap: 0)
+            // Core activation notw 2
+            let activationNote2 = UILabel()
+            setupText(label: activationNote2, text: "coreActivationActivationNote2", previous: activationBullets, gap: 8)
+            
+            // Posture Title
+            let postureTitle = UILabel()
+            setupSubtitle(titleLabel: postureTitle, title: "coreActivationPostureTitle", previous: activationNote2, gap: 24)
+            // Posture Text
+            let postureText = UILabel()
+            setupText(label: postureText, text: "coreActivationPostureText", previous: postureTitle, gap: 8)
+
+            
         default: break
         }
         
@@ -315,14 +421,18 @@ class LessonsScreen: UIViewController {
         lessonHeight = lessonHeight + size.height + gap
     }
     
-    func setupImage(imageView: UIImageView, image: UIImage, previous: UIView, gap: CGFloat) {
+    func setupImage(imageView: UIImageView, image: UIImage, previous: UIView, height: CGFloat, gap: CGFloat) {
         
         let minY = previous.frame.maxY
         
-        imageView.frame = CGRect(x: 0, y: minY, width: lessonScroll.bounds.width, height: 88 * 2)
+        imageView.frame = CGRect(x: 0, y: minY + gap, width: view.bounds.width, height: height)
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         imageView.image = image
         
         lessonScroll.addSubview(imageView)
+        lessonElements.append(imageView)
+        lessonHeight = lessonHeight + height + gap
     }
     
     func setupDualImageArrows(imageView1: UIImageView, image1: UIImage, titleLabel1: UILabel, title1: String, titleColor1: UIColor, arrow1: UIView, imageView2: UIImageView, image2: UIImage, titleLabel2: UILabel, title2: String, titleColor2: UIColor, arrow2: UIView, previous: UIView, gap: CGFloat) {
@@ -332,7 +442,7 @@ class LessonsScreen: UIViewController {
         let height: CGFloat = 88 * 2
         let arrowHeight: CGFloat = 33
 
-        imageView1.frame = CGRect(x: 0, y: minY, width: halfWidth, height: height)
+        imageView1.frame = CGRect(x: 0, y: minY + gap, width: halfWidth, height: height)
         imageView1.contentMode = .scaleAspectFit
         imageView1.image = image1
         //
@@ -346,7 +456,7 @@ class LessonsScreen: UIViewController {
         arrow1.backgroundColor = .clear
         imageView1.addSubview(arrow1)
         
-        imageView2.frame = CGRect(x: halfWidth, y: minY, width: halfWidth, height: height)
+        imageView2.frame = CGRect(x: halfWidth, y: minY + gap, width: halfWidth, height: height)
         imageView2.contentMode = .scaleAspectFit
         imageView2.image = image2
         titleLabel2.text = NSLocalizedString(title2, comment: "")

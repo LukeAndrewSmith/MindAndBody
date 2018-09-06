@@ -39,8 +39,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let rowArray: [String] =
             ["effort", "breathingWorkout", "breathingYoga", "coreActivation"]
     //
-    let backgroundImages: [UIImage] =
-            [#imageLiteral(resourceName: "Effort"), #imageLiteral(resourceName: "BreathingWorkout"), #imageLiteral(resourceName: "Effort"), #imageLiteral(resourceName: "Effort")]
+    var backgroundImages: [UIImage] = []
     
     
     let cellHeight: CGFloat = 88
@@ -58,6 +57,8 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        backgroundImages = [#imageLiteral(resourceName: "Effort"), #imageLiteral(resourceName: "BreathingWorkout"), getUncachedImage(named: "upwardsDogY")!, getUncachedImage(named: "plank")!]
             
         //
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -112,7 +113,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         header.backgroundColor = .clear
         let label = UILabel()
         label.backgroundColor = .clear
-        label.font = Fonts.tinyElementLight!
+        label.font = Fonts.verySmallElementRegular!
         label.textColor = Colors.dark
         label.text = NSLocalizedString(sectionArray[section], comment: "").uppercased()
         label.sizeToFit()
@@ -168,6 +169,8 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         backgroundImage.contentMode = .scaleAspectFill
         if indexPath.section == 0 {
             backgroundImage.center.y -= 36
+        } else if indexPath.section > 1 {
+            backgroundImage.contentMode = .scaleAspectFit
         }
         cell.addSubview(backgroundImage)
         
@@ -175,6 +178,10 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         title.text = NSLocalizedString(rowArray[indexPath.section], comment: "")
         title.font = Fonts.lessonSubtitle
         title.textColor = Colors.light
+        if indexPath.section > 1 {
+            title.textColor = Colors.dark
+            cell.backgroundColor = Colors.gray
+        }
         title.numberOfLines = 0
         title.lineBreakMode = .byWordWrapping
         let size = title.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))

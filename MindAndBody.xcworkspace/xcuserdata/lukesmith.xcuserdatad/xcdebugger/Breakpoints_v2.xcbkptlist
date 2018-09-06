@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Lessons/LessonsScreen.swift"
-            timestampString = "557875083.3420531"
+            timestampString = "557884903.927532"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "setupBulletPoints(label:text:style:previous:gap:)"
             landmarkType = "7">
          </BreakpointContent>
