@@ -108,6 +108,9 @@ enum Fonts {
     static let lessonSubtitle = UIFont(name: "SFUIDisplay-bold", size: 27)
     static let lessonsImageTitle = UIFont(name: "SFUIDisplay-medium", size: 23)
     static let lessonText = UIFont(name: "SFUIDisplay-regular", size: 19)
+    
+    // Guided meditation
+    static let meditationTitle = UIFont(name: "SFUIDisplay-bold", size: 23)
 }
 
 // Old bigger text

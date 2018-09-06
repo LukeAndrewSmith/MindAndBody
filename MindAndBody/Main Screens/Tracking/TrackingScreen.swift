@@ -39,6 +39,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     @IBOutlet weak var timeScaleStack: UIStackView!
     @IBOutlet weak var timeScaleIndicator: UIView!
     @IBOutlet weak var timeScaleIndicatorLeading: NSLayoutConstraint!
+    @IBOutlet weak var timeScaleIndicatorHeight: NSLayoutConstraint!
     
     
     //
@@ -160,12 +161,20 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
                 timeScaleStack.addArrangedSubview(stackArray[i])
             }
             timeScaleStack.isUserInteractionEnabled = true
+            timeScaleIndicatorHeight.constant = 2
+            //
+            timeScaleIndicator.backgroundColor = Colors.light
             //
             // Add background color to stack view
             let backgroundStackView = UIView(frame: timeScaleStack.bounds)
             backgroundStackView.backgroundColor = Colors.dark
             backgroundStackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             timeScaleStack.insertSubview(backgroundStackView, at: 0)
+            
+            backgroundStackView.layer.shadowColor = Colors.dark.cgColor
+            backgroundStackView.layer.shadowOpacity = 1
+            backgroundStackView.layer.shadowOffset = CGSize.zero
+            backgroundStackView.layer.shadowRadius = 7
         }
     }
     

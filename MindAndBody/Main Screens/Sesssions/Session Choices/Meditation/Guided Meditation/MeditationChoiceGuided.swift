@@ -38,7 +38,10 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     
     let guidedTitles = ["introductionG", "introduction", "techniquesB", "techniquesV"]
     
+    let backgroundImages = ["mountains", "purpleTree", "sunWater", "mountainsRedBlue"]
+    var images: [UIImageView] = []
     
+    let cellHeight: CGFloat = 88
     //
     // View did load --------------------------------------------------------------------------------------------------------
     //
@@ -49,18 +52,40 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         view.backgroundColor = Colors.light
         
         // Navigation Bar Title
-        navigationBar.title = (NSLocalizedString("guidedSessions", comment: ""))
+        navigationBar.title = (NSLocalizedString("guidedMeditation", comment: ""))
         
         // TableView
-        //
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        //
-        let tableViewBackground = UIView()
-        //
-        tableViewBackground.backgroundColor = Colors.dark
-        tableViewBackground.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: self.tableView.frame.size.height)
-        //
-        tableView.backgroundView = tableViewBackground
+
+        // Add background images
+//        addBackgroundImages()
+//        // Ensure table loaded and images behind
+//        tableView.reloadData()
+        
+        let imageView = UIImageView()
+        imageView.image = getUncachedImage(named: "mountainsRedBlue") // mountainsRedBlue purpleTree
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        tableView.backgroundView = imageView
+//        tableView.separatorInset = UIEdgeInsets(top: 0, left: 88, bottom: 0, right: 0)
+    }
+    
+    func addBackgroundImages() {
+        
+        // Add behind cell
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+        
+        for i in 0..<backgroundImages.count {
+            
+            let imageView = UIImageView()
+            imageView.image = getUncachedImage(named: backgroundImages[i])
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.frame = tableView.rect(forSection: i)
+            imageView.frame.size = CGSize(width: 88, height: imageView.bounds.height)
+            tableView.insertSubview(imageView, belowSubview: cell!)
+            images.append(imageView)
+        }
     }
     
     
@@ -72,9 +97,20 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         return guidedSessions.count
     }
     
-    // Title for header
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString(guidedTitles[section], comment: "")
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return  22
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView()
+        header.backgroundColor = Colors.dark
+        let label = UILabel()
+        label.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
+        label.textColor = Colors.light
+        label.text = NSLocalizedString(guidedTitles[section], comment: "")
+        label.frame = CGRect(x: 16, y: 0, width: view.bounds.width, height: 22)
+        header.addSubview(label)
+        return header
     }
     
     // Number of rows
@@ -82,47 +118,54 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         return guidedSessions[section].count
     }
     
-    // Will display header
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        //
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
-        header.textLabel?.textColor = Colors.light
-        header.contentView.backgroundColor = Colors.dark
-        //
-    }
-    
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         //
-        cell.backgroundColor = Colors.light
-        cell.tintColor = .black
+        cell.backgroundColor = .clear
         //
-        cell.textLabel?.text = NSLocalizedString(guidedSessions[indexPath.section][indexPath.row], comment: "")
-        cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 19)
-        cell.textLabel?.textAlignment = .left
-        cell.textLabel?.textColor = .black
-        //
-//        cell.imageView?.image = #imageLiteral(resourceName: "TestG")
-        //
-//        let itemSize = CGSize(width: 76, height: 76)
-//        UIGraphicsBeginImageContextWithOptions(itemSize, false, UIScreen.main.scale)
-//        let imageRect = CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height)
-//        cell.imageView?.image!.draw(in: imageRect)
-//        cell.imageView?.image! = UIGraphicsGetImageFromCurrentImageContext()!
-//        UIGraphicsEndImageContext()
-        //
-        cell.imageView?.layer.cornerRadius = 3
-        cell.imageView?.layer.masksToBounds = true
-        //
+        let title = UILabel()
+        title.text = NSLocalizedString(guidedSessions[indexPath.section][indexPath.row], comment: "")
+        title.font = Fonts.meditationTitle
+        title.textColor = Colors.light
+        switch indexPath.section {
+        // General Introduction
+        case 0:
+            title.textColor = Colors.light
+        // Introduction
+        case 1:
+            title.textColor = Colors.light
+        // Techniques (Breathing)
+        case 2:
+            title.textColor = Colors.light
+        // Techniques (Visualisation)
+        case 3:
+            title.textColor = Colors.light
+
+        default: break
+        }
+//        title.textColor = Colors.dark
+
+        title.numberOfLines = 0
+        title.lineBreakMode = .byWordWrapping
+        let size = title.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))
+        title.frame = CGRect(x: 16, y: 0, width: view.bounds.width - 32, height: size.height)
+        title.center.y = (cellHeight / 2)
+        cell.addSubview(title)
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if images.count != 0 {
+            tableView.sendSubview(toBack: images[indexPath.section])
+        }
     }
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 96
+        return cellHeight
     }
     
     // Did select row

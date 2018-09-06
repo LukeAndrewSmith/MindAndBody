@@ -65,7 +65,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         backgroundIndex = settings["BackgroundImage"]![0]
         
         //
-        tableView.backgroundColor = Colors.light
+        tableView.backgroundColor = Colors.gray
         
         //
         //  Navigation Bar
@@ -180,7 +180,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         title.textColor = Colors.light
         if indexPath.section > 1 {
             title.textColor = Colors.dark
-            cell.backgroundColor = Colors.gray
+            cell.backgroundColor = Colors.darkGray
         }
         title.numberOfLines = 0
         title.lineBreakMode = .byWordWrapping

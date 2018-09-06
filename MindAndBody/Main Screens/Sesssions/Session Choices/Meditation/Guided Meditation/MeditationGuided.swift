@@ -44,12 +44,14 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     // Detail
     @IBOutlet weak var detailView: UIView!
+    @IBOutlet weak var detailViewHeight: NSLayoutConstraint!
     @IBOutlet weak var separator: UIView!
     
     // Discussion
-    @IBOutlet weak var discussionScrollView: UIScrollView!
-    @IBOutlet weak var discussionTitle: UILabel!
-    @IBOutlet weak var discussionTitleTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var discussionScroll: UIScrollView!
+    var discussionElements: [UIView] = []
+    var discussionHeight: CGFloat = 0
+    var discussionsLabel = UILabel()
     
     // Passed from previous VC
     //var guidedTitle = String()
@@ -142,7 +144,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
              "duration": 120,
              "bell": "tibetanBowlL",
              "bellFrequency": 30,
-             ],
+        ],
 //            // Intro 1
 //            ["title": "tummoInnerFire",
 //             "discussion": "tummoInnerFireE",
@@ -189,46 +191,15 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         // Setup
         setupView()
-        
-        // Discussion
-        //
-        // Scroll
-        discussionScrollView.backgroundColor = Colors.light
-        //
-        discussionTitle.backgroundColor = Colors.light
-        discussionTitle.textColor = Colors.dark
-        discussionTitle.text = NSLocalizedString("discussion", comment: "")
-        
-        // Text
-        let discussionLabel = UILabel()
-        let attributedText = NSMutableAttributedString(string: NSLocalizedString(practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["discussion"] as! String, comment: ""))
-        let paragraphStyleE = NSMutableParagraphStyle()
-        paragraphStyleE.alignment = .natural
-        paragraphStyleE.lineSpacing = 2
-        //
-        attributedText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyleE, range: NSMakeRange(0, attributedText.length))
-        //
-        discussionLabel.attributedText = attributedText
-        //
-        discussionLabel.font = UIFont(name: "SFUIDisplay-light", size: 20)
-        discussionLabel.textColor = .black
-        discussionLabel.textAlignment = .natural
-        discussionLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-        discussionLabel.numberOfLines = 0
-        discussionLabel.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: 0)
-        discussionLabel.sizeToFit()
-        // Scroll View
-        discussionScrollView.addSubview(discussionLabel)
-        discussionScrollView.contentSize = CGSize(width: self.view.frame.size.width, height: discussionLabel.frame.size.height + 20)
-        //
-        self.discussionScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+    
+        // Discussion Scroll
+        discussionScroll.backgroundColor = Colors.light
         
         if selectedSessionMeditation[0] == 0 {
             detailView.alpha = 0
-            detailView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 0)
             detailView.isUserInteractionEnabled = false
+            detailViewHeight.constant = 0
             beginButton.setTitle(NSLocalizedString("back", comment: ""), for: .normal)
-            discussionTitleTopConstraint.constant = -(self.view.bounds.height * (1/4)) + 24.5
         }
     }
     
@@ -319,6 +290,10 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         secondsLabel.center.y = pickerViewDuration.center.y
         secondsLabel.center.x = pickerViewDuration.frame.minX + (pickerViewDuration.frame.size.width * (4.65/6))
         pickerViewDuration.addSubview(secondsLabel)
+        
+        // Discussion
+        let discussion = practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["discussion"] as! String
+        setupDiscussion(discussion: discussion)
     }
     
     // Timer CountDown Title
@@ -328,6 +303,481 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
+    
+    // --------------------------------------------------------------------
+    // MARK: Setup Discussion
+    func setupDiscussion(discussion: String) {
+        
+        // Ensure Clear
+        for element in discussionElements {
+            element.removeFromSuperview()
+        }
+        discussionHeight = 0
+        
+        switch discussion {
+        // Effort
+        case "introductionGE":
+            
+            // Intro
+            let intro = UILabel()
+            setupIntro(label: intro, text: "introductionGEIntro")
+            
+            // Independence Title
+            let independenceTitle = UILabel()
+            setupSubtitle(titleLabel: independenceTitle, title: "introductionGEIndependenceTitle", previous: intro, gap: 24)
+            // Independence text
+            let independenceText = UILabel()
+            setupText(label: independenceText, text: "introductionGEIndependenceText", previous: independenceTitle, gap: 8)
+            
+            // Techniques Title
+            let techniquesTitle = UILabel()
+            setupSubtitle(titleLabel: techniquesTitle, title: "introductionGETechniquesTitle", previous: independenceText, gap: 24)
+            // Independence text
+            let techniquesBullets = UILabel()
+            setupBulletPoints(label: techniquesBullets, text: "introductionGETechniquesBullets", style: "numbers",  previous: techniquesTitle, gap: 8)
+            // Relax note title
+            let relaxTitle = UILabel()
+            setupSubtitle(titleLabel: relaxTitle, title: "introductionGERelaxNoteTitle", previous: techniquesBullets, gap: 8)
+            // Relax note text
+            let relaxText = UILabel()
+            setupText(label: relaxText, text: "introductionGERelaxNoteText", previous: relaxTitle, gap: 8)
+            
+            // Posture Title
+            let postureTitle = UILabel()
+            setupSubtitle(titleLabel: postureTitle, title: "introductionGEPostureTitle", previous: relaxText, gap: 24)
+            // Posture text
+            let postureText = UILabel()
+            setupText(label: postureText, text: "introductionGEPostureText", previous: postureTitle, gap: 8)
+            
+            
+        // Introduction -------------------------------------------------------
+        case "introduction1E":
+            
+            // Intro
+            let intro = UILabel()
+            setupIntro(label: intro, text: "introduction1EIntro")
+            
+            // Distraction Title
+            let disctractionTitle = UILabel()
+            setupSubtitle(titleLabel: disctractionTitle, title: "introduction1EDistractionTitle", previous: intro, gap: 24)
+            // Distraction text
+            let disctractionText = UILabel()
+            setupText(label: disctractionText, text: "introduction1EDistractionText", previous: disctractionTitle, gap: 8)
+            
+            // Practice Title
+            let practiceTitle = UILabel()
+            setupSubtitle(titleLabel: practiceTitle, title: "introduction1EPracticeTitle", previous: disctractionText, gap: 24)
+            // Practice Text
+            let practiceText = UILabel()
+            setupText(label: practiceText, text: "introduction1EPracticeText", previous: practiceTitle, gap: 8)
+            // Practice title 2
+            let practiceTitle2 = UILabel()
+            setupSubtitle(titleLabel: practiceTitle2, title: "introduction1EPracticePracticeTitle", previous: practiceText, gap: 8)
+            // Practice
+            let practice = UILabel()
+            setupBulletPoints(label: practice, text: "introduction1EPracticePracticeText", style: "dots", previous: practiceTitle2, gap: 8)
+            
+            
+        case "introduction2E":
+            
+            
+            // Intro
+            let intro = UILabel()
+            setupIntro(label: intro, text: "introduction2EIntro")
+            
+            // Difficulty Title
+            let difficultyTitle = UILabel()
+            setupSubtitle(titleLabel: difficultyTitle, title: "introduction2EDifficultyNoteTitle", previous: intro, gap: 24)
+            // Difficulty Text
+            let difficultyText = UILabel()
+            setupText(label: difficultyText, text: "introduction2EDifficultyNoteText", previous: difficultyTitle, gap: 8)
+            
+            // Aim Title
+            let aimTitle = UILabel()
+            setupSubtitle(titleLabel: aimTitle, title: "introduction2EAimTitle", previous: difficultyText, gap: 24)
+            // Aim text
+            let aimText = UILabel()
+            setupText(label: aimText, text: "introduction2EAimText", previous: aimTitle, gap: 8)
+            
+            // Breathing Title
+            let breathingTitle = UILabel()
+            setupSubtitle(titleLabel: breathingTitle, title: "introduction2EBreathingTitle", previous: aimText, gap: 24)
+            // Breathing Text
+            let breathingText = UILabel()
+            setupText(label: breathingText, text: "introduction2EBreathingText", previous: breathingTitle, gap: 8)
+            
+            // Visualisation Title
+            let visualisationTitle = UILabel()
+            setupSubtitle(titleLabel: visualisationTitle, title: "introduction2EVisualisationTitle", previous: breathingText, gap: 16)
+            // Visualisation Text
+            let visualisationText = UILabel()
+            setupText(label: visualisationText, text: "introduction2EVisualisationText", previous: visualisationTitle, gap: 8)
+            
+            // Observation Title
+            let observationTitle = UILabel()
+            setupSubtitle(titleLabel: observationTitle, title: "introduction2EObservationTitle", previous: visualisationText, gap: 16)
+            // Observation Text
+            let observationText = UILabel()
+            setupText(label: observationText, text: "introduction2EObservationText", previous: observationTitle, gap: 8)
+            
+            // Practice title
+            let practiceTitle = UILabel()
+            setupSubtitle(titleLabel: practiceTitle, title: "introduction2EPracticeTitle", previous: observationText, gap: 24)
+            // Practice note
+            let practiceText = UILabel()
+            setupText(label: practiceText, text: "introduction2EPracticeText", previous: practiceTitle, gap: 8)
+            // Practice
+            let practice = UILabel()
+            setupBulletPoints(label: practice, text: "introduction2EPracticeBullets", style: "dots", previous: practiceText, gap: 8)
+            
+            
+        case "introduction3E":
+            
+            // Intro
+            let intro = UILabel()
+            setupIntro(label: intro, text: "introduction3EIntro")
+            
+            // Breathing Title
+            let breathingTitle = UILabel()
+            setupSubtitle(titleLabel: breathingTitle, title: "introduction3EBreathingTitle", previous: intro, gap: 24)
+            // Breathing Text
+            let breathingText = UILabel()
+            setupText(label: breathingText, text: "introduction3EBreathingText", previous: breathingTitle, gap: 8)
+            
+            // Aim Title
+            let aimTitle = UILabel()
+            setupSubtitle(titleLabel: aimTitle, title: "introduction3EIntroAimTitle", previous: breathingText, gap: 24)
+            // Aim text
+            let aimText = UILabel()
+            setupText(label: aimText, text: "introduction3EIntroAimText", previous: aimTitle, gap: 8)
+            
+            // Practice title
+            let practiceTitle = UILabel()
+            setupSubtitle(titleLabel: practiceTitle, title: "introduction3EPracticeTitle", previous: aimText, gap: 24)
+            // Practice note
+            let practiceText = UILabel()
+            setupText(label: practiceText, text: "introduction3EPracticeText", previous: practiceTitle, gap: 8)
+            // Practice
+            let practice = UILabel()
+            setupBulletPoints(label: practice, text: "introduction3EPracticeBullets", style: "dots", previous: practiceText, gap: 8)
+            
+            
+        case "introduction4E":
+            
+            // Intro
+            let intro = UILabel()
+            setupIntro(label: intro, text: "introduction4EIntro")
+            
+            // Breathing Title
+            let breathingTitle = UILabel()
+            setupSubtitle(titleLabel: breathingTitle, title: "introduction4EIntroBreathingTitle", previous: intro, gap: 24)
+            // Breathing Text
+            let breathingText = UILabel()
+            setupText(label: breathingText, text: "introduction4EIntroBreathingText", previous: breathingTitle, gap: 8)
+            // Present Title
+            let presentTitle = UILabel()
+            setupSubtitle(titleLabel: presentTitle, title: "introduction4EIntroPresentTitle", previous: breathingText, gap: 8)
+            // Present text
+            let presentText = UILabel()
+            setupText(label: presentText, text: "introduction4EIntroPresentText", previous: presentTitle, gap: 8)
+            
+            // Mindfulness Title
+            let mindfulnessTitle = UILabel()
+            setupSubtitle(titleLabel: mindfulnessTitle, title: "introduction4EIntroMindfulnessTitle", previous: presentText, gap: 24)
+            // Aim text
+            let mindfulnessText = UILabel()
+            setupText(label: mindfulnessText, text: "introduction4EIntroMindfulnessText", previous: mindfulnessTitle, gap: 8)
+            
+            // Practice title
+            let practiceTitle = UILabel()
+            setupSubtitle(titleLabel: practiceTitle, title: "introduction4EPracticeTitle", previous: mindfulnessText, gap: 24)
+            // Practice note
+            let practiceText = UILabel()
+            setupText(label: practiceText, text: "introduction4EPracticeText", previous: practiceTitle, gap: 8)
+            // Practice
+            let practice = UILabel()
+            setupBulletPoints(label: practice, text: "introduction4EPracticeBullets", style: "dots", previous: practiceText, gap: 8)
+            
+            
+        // Breathing -------------------------------------------------------
+        case "squareBreathingE":
+            
+            // Intro
+            let intro = UILabel()
+            setupIntro(label: intro, text: "squareBreathingEIntro")
+        
+            // Technique title
+            let techniqueTitle = UILabel()
+            setupSubtitle(titleLabel: techniqueTitle, title: "squareBreathingETechniqueTitle", previous: intro, gap: 24)
+            // Technique Bullets
+            let techniqueBullets = UILabel()
+            setupBulletPoints(label: techniqueBullets, text: "squareBreathingETechniqueText", style: "dots", previous: techniqueTitle, gap: 8)
+            // Notes title
+            let notesTitle = UILabel()
+            setupSubtitle(titleLabel: notesTitle, title: "squareBreathingETechniqueNotes", previous: techniqueBullets, gap: 16)
+            // Technique Discussion
+            let techniqueText = UILabel()
+            setupText(label: techniqueText, text: "squareBreathingETechniqueDiscussion", previous: notesTitle, gap: 8)
+            
+            
+        case "breathCountingE":
+            
+            // Intro
+            let intro = UILabel()
+            setupIntro(label: intro, text: "breathCountingEIntro")
+            
+            // Technique title
+            let techniqueTitle = UILabel()
+            setupSubtitle(titleLabel: techniqueTitle, title: "breathCountingETechniqueTitle", previous: intro, gap: 24)
+            // Technique Bullets
+            let techniqueBullets = UILabel()
+            setupBulletPoints(label: techniqueBullets, text: "breathCountingETechniqueText", style: "dots", previous: techniqueTitle, gap: 8)
+            // Notes title
+            let notesTitle = UILabel()
+            setupSubtitle(titleLabel: notesTitle, title: "breathCountingETechniqueNotesTitle", previous: techniqueBullets, gap: 16)
+            // Technique Discussion
+            let techniqueText = UILabel()
+            setupText(label: techniqueText, text: "breathCountingETechniqueNotesText", previous: notesTitle, gap: 8)
+            
+            
+        case "purgingE":
+            
+            // Intro
+            let intro = UILabel()
+            setupIntro(label: intro, text: "purgingEIntro")
+            
+            // Technique title
+            let techniqueTitle = UILabel()
+            setupSubtitle(titleLabel: techniqueTitle, title: "purgingETechniqueTitle", previous: intro, gap: 24)
+            // Technique Bullets
+            let techniqueBullets = UILabel()
+            setupBulletPoints(label: techniqueBullets, text: "purgingETechniqueText", style: "dots", previous: techniqueTitle, gap: 8)
+            // Notes title
+            let notesTitle = UILabel()
+            setupSubtitle(titleLabel: notesTitle, title: "purgingENotesTitle", previous: techniqueBullets, gap: 16)
+            // Technique Discussion
+            let techniqueText = UILabel()
+            setupText(label: techniqueText, text: "purgingENotesText", previous: notesTitle, gap: 8)
+            
+            
+        case "nostrilBreathingE":
+            
+            // Intro
+            let intro = UILabel()
+            setupIntro(label: intro, text: "nostrilBreathingEIntro")
+            
+            // Technique title
+            let techniqueTitle = UILabel()
+            setupSubtitle(titleLabel: techniqueTitle, title: "nostrilBreathingETechniqueTitle", previous: intro, gap: 24)
+            // Technique Bullets 1
+            let techniqueBullets = UILabel()
+            setupBulletPoints(label: techniqueBullets, text: "nostrilBreathingETechniqueText", style: "dots", previous: techniqueTitle, gap: 8)
+            // Variation title
+            let techniqueVariationTitle = UILabel()
+            setupSubtitle(titleLabel: techniqueVariationTitle, title: "nostrilBreathingETechniqueVariationTitle", previous: techniqueBullets, gap: 8)
+            // Technique Note
+            let techniqueNote = UILabel()
+            setupText(label: techniqueNote, text: "nostrilBreathingETechniqueTextNote", previous: techniqueVariationTitle, gap: 8)
+            // Technique Bullets 2
+            let techniqueBullets2 = UILabel()
+            setupBulletPoints(label: techniqueBullets2, text: "nostrilBreathingETechniqueText2", style: "dots", previous: techniqueNote, gap: 8)
+            // Notes title
+            let notesTitle = UILabel()
+            setupSubtitle(titleLabel: notesTitle, title: "nostrilBreathingENotesTitle", previous: techniqueBullets2, gap: 16)
+            // Technique Discussion
+            let techniqueText = UILabel()
+            setupText(label: techniqueText, text: "nostrilBreathingENotesText", previous: notesTitle, gap: 8)
+            
+        // Visualisation -------------------------------------------------------
+        case "bodyScanE":
+            
+            // Intro
+            let intro = UILabel()
+            setupIntro(label: intro, text: "bodyScanEIntro")
+            
+            // Technique title
+            let techniqueExplanationTitle = UILabel()
+            setupSubtitle(titleLabel: techniqueExplanationTitle, title: "bodyScanETechnique", previous: intro, gap: 24)
+            // Technique explanation
+            let techniqueExplanation = UILabel()
+            setupText(label: techniqueExplanation, text: "bodyScanETechniqueExplanation", previous: techniqueExplanationTitle, gap: 8)
+            // Technique title example
+            let techniqueTitle = UILabel()
+            setupSubtitle(titleLabel: techniqueTitle, title: "bodyScanETechniqueTitle", previous: techniqueExplanation, gap: 8)
+            // Technique Bullets 1
+            let techniqueBullets = UILabel()
+            setupBulletPoints(label: techniqueBullets, text: "bodyScanETechniqueText", style: "dots", previous: techniqueTitle, gap: 8)
+            
+            // Note title
+            let notesTitle = UILabel()
+            setupSubtitle(titleLabel: notesTitle, title: "bodyScanETechniqueNotesTitle", previous: techniqueBullets, gap: 16)
+            // Technique Note
+            let techniqueNote = UILabel()
+            setupText(label: techniqueNote, text: "bodyScanETechniqueNotesText", previous: notesTitle, gap: 8)
+            // Recap title
+            let recapTitle = UILabel()
+            setupSubtitle(titleLabel: recapTitle, title: "bodyScanETechniqueNotesRecapTitle", previous: techniqueNote, gap: 16)
+            // Technique Bullets 2
+            let techniqueBullets2 = UILabel()
+            setupBulletPoints(label: techniqueBullets2, text: "bodyScanETechniqueNotesRecapText", style: "dots", previous: recapTitle, gap: 8)
+            
+            
+        default: break
+        }
+        
+        discussionScroll.contentSize = CGSize(width: discussionScroll.bounds.width, height: discussionHeight + 16)
+    }
+    
+    func setupTitle(titleLabel: UILabel, title: String) {
+        
+        let gap: CGFloat = 16
+        
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.numberOfLines = 0
+        titleLabel.text = NSLocalizedString(title, comment: "")
+        titleLabel.textColor = Colors.dark
+        titleLabel.font = Fonts.lessonSubtitle
+        let size = titleLabel.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))
+        titleLabel.frame = CGRect(x: 16, y: 16, width: view.bounds.width - 32, height: size.height)
+        
+        discussionScroll.addSubview(titleLabel)
+        discussionElements.append(titleLabel)
+        discussionHeight = discussionHeight + size.height + gap
+    }
+    
+    func setupIntro(label: UILabel, text: String) {
+        
+        let gap: CGFloat = 16
+
+        let plainString = NSLocalizedString(text, comment: "")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 2
+        let attributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font: Fonts.lessonText!,
+            NSAttributedStringKey.paragraphStyle: paragraphStyle,
+            NSAttributedStringKey.foregroundColor: Colors.dark
+        ]
+        let attributedString = NSMutableAttributedString(string: plainString, attributes: attributes)
+        
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.attributedText = attributedString
+        let size = label.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))
+        label.frame = CGRect(x: 16, y: 16, width: view.bounds.width - 32, height: size.height)
+        
+        discussionScroll.addSubview(label)
+        discussionElements.append(label)
+        discussionHeight = discussionHeight + size.height + gap
+    }
+    
+    func setupSubtitle(titleLabel: UILabel, title: String, previous: UIView, gap: CGFloat) {
+        
+        let minY = previous.frame.maxY
+        
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.numberOfLines = 0
+        titleLabel.text = NSLocalizedString(title, comment: "")
+        titleLabel.textColor = Colors.dark
+        titleLabel.font = Fonts.lessonSubtitle
+        let size = titleLabel.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))
+        titleLabel.frame = CGRect(x: 16, y: minY + gap, width: view.bounds.width - 32, height: size.height)
+        
+        discussionScroll.addSubview(titleLabel)
+        discussionElements.append(titleLabel)
+        discussionHeight = discussionHeight + size.height + gap
+    }
+    
+    func setupText(label: UILabel, text: String, previous: UIView, gap: CGFloat) {
+        
+        let minY = previous.frame.maxY
+        
+        let plainString = NSLocalizedString(text, comment: "")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 2
+        let attributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font: Fonts.lessonText!,
+            NSAttributedStringKey.paragraphStyle: paragraphStyle,
+            NSAttributedStringKey.foregroundColor: Colors.dark
+        ]
+        let attributedString = NSMutableAttributedString(string: plainString, attributes: attributes)
+        
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.attributedText = attributedString
+        let size = label.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))
+        label.frame = CGRect(x: 16, y: minY + gap, width: view.bounds.width - 32, height: size.height)
+        
+        discussionScroll.addSubview(label)
+        discussionElements.append(label)
+        discussionHeight = discussionHeight + size.height + gap
+    }
+    
+    func setupBulletPoints(label: UILabel, text: String, style: String, previous: UIView, gap: CGFloat) {
+        
+        let minY = previous.frame.maxY
+        
+        // Strings
+        let orignalString = NSLocalizedString(text, comment: "")
+        let bulletPoints = orignalString.components(separatedBy: .newlines)
+        let bulletedString = NSMutableAttributedString(string: "")
+        
+        // Indent
+        let paragraphStyle: NSMutableParagraphStyle
+        paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        paragraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 15, options: [:])]
+        paragraphStyle.defaultTabInterval = 15
+        paragraphStyle.firstLineHeadIndent = 0
+        paragraphStyle.headIndent = 15
+        paragraphStyle.lineSpacing = 2
+        // Attributes
+        let attributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font: Fonts.lessonText!,
+            NSAttributedStringKey.paragraphStyle: paragraphStyle,
+            NSAttributedStringKey.foregroundColor: Colors.dark
+        ]
+        
+        // Apply
+        switch style {
+        case "numbers":
+            for i in 1...bulletPoints.count {
+                let bulletPoint: String = String(i) + "."
+                var enter = ""
+                if i != bulletPoints.count {
+                    enter = "\n"
+                }
+                let formattedString: String = "\(bulletPoint) \(bulletPoints[i-1])" + enter
+                let attributedString = NSMutableAttributedString(string: formattedString, attributes: attributes)
+                
+                bulletedString.append(attributedString)
+            }
+        case "dots":
+            for i in 1...bulletPoints.count {
+                let bulletPoint: String = "\u{2022}"
+                var enter = ""
+                if i != bulletPoints.count {
+                    enter = "\n"
+                }
+                let formattedString: String = "\(bulletPoint) \(bulletPoints[i-1])" + enter
+                let attributedString = NSMutableAttributedString(string: formattedString, attributes: attributes)
+                
+                bulletedString.append(attributedString)
+            }
+        default: break
+        }
+        
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.attributedText = bulletedString
+        label.sizeToFit()
+        let size = label.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))
+        label.frame = CGRect(x: 16, y: minY + gap, width: view.bounds.width - 32, height: size.height)
+        
+        discussionScroll.addSubview(label)
+        discussionElements.append(label)
+        discussionHeight = discussionHeight + size.height + gap
+    }
     
     //
     // MARK: Button Functions
