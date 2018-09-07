@@ -634,7 +634,7 @@
 "jumpSquatE" = "Movement:\nStand straight up with an active core.\nLower your hips back while bending your knees, and keep your back in a straight constant position.\n\Keep your weight pushing through the center of your feet and breath in as you go down.\nSwing your arms back just before you reach the lowest squat position (so they are all the way back when you reach the bottom).\nReverse the motion, pushing firmly through your feet without letting your knees cave in (if anything, try to push them out), and swing your arms up.\nJump off the ground and extend your arms upwards, stretching your body out as far as possible.\nSpot the landing and land on your toes first to begin slowing down the movement.\nAllow your arms to swing down and you make contact with the floor to go down and reinitiate the jump.\n\nNotes:\nBreath in as you squat down, and out as you push and jump up.\nMake sure to keep an active core and a straight back throughout the movement.\n\n\nPurpose:\nThis is a very good dynamic warm up that prepares the body for squats and increases the heart rate.";
 "lungeE" = "Movement:\nStand straight up with an active core.\nStep forward with your right leg about a meter in front of you, allowing your leg to bend so your hips move towards the ground.\nMake sure your left knee doesn't touch the ground and your right knee doesn't extend forwards past your toes.\nStretch down into the bottom position with your hips, then push with your right leg back up to the starting position.\nPerform the same with the other leg, 1 rep is 1 lunge with each leg.\n\nNotes:\nYou can lift the leg up with a bent knee before lunging forwards to increase the range of motion.\nKeep the torso facing forwards and upright.\n\n\nPurpose:\nLunges dynamically warm up the thigh and hips, thus preparing the body for a variety of leg movements.";
                 // Accessory //
-"calvestretchE" = "Movement:\nStand upright facing a wall with your arms straight in front and hands pressed against the wall at or above shoulder height.\nExtend your left leg backwards whilst keeping your right foot flat on the floor.\nPlace your left leg straight behind you at a distance that allows your heel to be in contact with the ground whilst feeling a good stretch in the calf.\nKeep your leg straight and progressively lean into the wall a little more to increase the stretch in the calf.\nRepeat with the other leg, holding for the recommeded amount of time.\n\nNotes:\nThe heel of the leg being stretched should always be in contact with the floor.\nDon't force the stretch but keep pressure applied against the wall.\nYou can also bend the knee a little to move the stretch from the gastronemous (upper larger part of the calf) to the soleus (lower part of the calf) and hold for as long as necessary.\n\n\nPurpose:\nStretching the calves increases their range of motion, facilitating a variety of leg movements (including squats) and increasing the effectiveness of calf movements.";
+"calfStretchE" = "Movement:\nStand upright facing a wall with your arms straight in front and hands pressed against the wall at or above shoulder height.\nExtend your left leg backwards whilst keeping your right foot flat on the floor.\nPlace your left leg straight behind you at a distance that allows your heel to be in contact with the ground whilst feeling a good stretch in the calf.\nKeep your leg straight and progressively lean into the wall a little more to increase the stretch in the calf.\nRepeat with the other leg, holding for the recommeded amount of time.\n\nNotes:\nThe heel of the leg being stretched should always be in contact with the floor.\nDon't force the stretch but keep pressure applied against the wall.\nYou can also bend the knee a little to move the stretch from the gastronemous (upper larger part of the calf) to the soleus (lower part of the calf) and hold for as long as necessary.\n\n\nPurpose:\nStretching the calves increases their range of motion, facilitating a variety of leg movements (including squats) and increasing the effectiveness of calf movements.";
 
 
     // Warm Up Choice Cardio //
@@ -881,7 +881,7 @@
 "pullDownE" = "Pull Down";
 "kneelingPullDownE" = "Kneeling Pull Down";
 "hammerStrengthPullDownE" = "Hammer Strength Pull Down";
-"bentOverRowDumbellE" = "Bent Over Dumbell Row";
+"bentOverRowDumbellE" = "Bent Over Dumbell Row, if you have a bad lower back, perform this exercize supporting one side with your hand";
 "tBarRowE" = "T-Bar Row";
 "rowMachineE" = "Machine Row";
 "hammerStrengthRowE" = "Hammer Strength Row";
@@ -1107,7 +1107,7 @@
 
             // calves
     "calves" = "calves";
-     //       "calvestretch" = "";
+            "calfStretch" = "Calf Stretch";
 
             // Hamstrings
     "hamstrings" = "Hamstrings";
@@ -1184,7 +1184,7 @@
             "seatedGluteE" = "Stretch:\nSit on the floor with your legs outstretch in front of you.\nBend your right knee until your foot is flat next to your left knee, then lift the right foot over so it is flat next to the left knee on the other side.\nPut your right hand just behind you to enable you to push your torso into an upright position.\nHold your right knee with your left hand, and pull it towards your left shoulder, you should feel a stretch in the glutes.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nDon't allow the glute being stretched to come of the ground when performing the stretch (especially not when pulling your knee back), and don't allow the hip of the side being stretched to lift up when pulling. Allowing either to happen will alleviate the stretch, so make sure your glutes stay on the ground, and your hips in the same position that they were when sitting with your legs outstretched in front of you.\nMake sure to keep your torso upright and hips rotated back by using your rear hand.\nBreath into the glute.";
 
             // calves
-    //       "calvestretchE" = "";
+           "calfStretchE" = "";
 
             // Hamstrings
             "standingHamstringE" = "Stretch:\nGenerally the standing hamstring stretch is simply to reach down to touch your toes, however this often puts excess pressure on the lower back and makes you over bend your lower back. If you are flexible enough and have a strong lower back then this can be a good stretch.\nI present an alternative that uses isomeric stretching (activate the muscle for a period of time in the stretch then relax):.\nStand upright with good posture and an active core.\nBreak at the hips and bend forwards, keeping your back perfectly straight and knees straight.\nLower yourself to the deepest stretch you can reach with a straight back, feeling your lower back with your hands to ensure it's straight.\nFor many people this won't even be close to parallel with the ground, don't fool yourself and go lower with a bent back, work to your limits.\nRelax your arms down in front of you or stretch them up above your head to increase the stretch.\nConcentrate on activating the hamstrings during the stretch, and hold for the recommended amount of time.\nReturn to standing and relax, pausing for 5s, then repeat for the recommended amount of sets.\n\nNotes:\nThis exercise can also be performed with very light weights if you want to get an even better contraction in the hamstrings.\nDon't allow your back to bend at all during the stretch, keeping it straight whilst concentrating on activating the hamstrings.\nBreath into the hamstrings.";
@@ -3017,6 +3017,7 @@
 // Cardio
 "bodyweightCardio" = "Bodyweight\nWorkout";
 "bodyweightCardio2" = "Bodyweight Workout";
+"customHIITCardioSession" = "Custom HIIT Cardio";
     //
 "shortSession" = "Short (Session)";
 "mediumSession" = "Medium (Session)";

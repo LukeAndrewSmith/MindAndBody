@@ -144,7 +144,7 @@ extension sessionData {
                     // Hips and Glutes
                     ["squatHold", "groinStretch", "butterflyPose", "lungeStretch", "threadTheNeedle", "pigeonPose", "seatedGlute"],
                     // calves
-                    ["calvestretch"],
+                    ["calfStretch"],
                     // Hamstrings
                     ["standingHamstring", "standingOneLegHamstring", "downWardsDog", "singleLegHamstring", "twoLegHamstring"],
                     // Quads
@@ -299,7 +299,7 @@ extension sessionData {
                     "pigeonPose",
                     "seatedGlute",
                     // calves
-                    "calvestretch",
+                    "calfStretch",
                     // Hamstrings
                     "standingOneLegHamstring",
                     "singleLegHamstring",
@@ -2225,11 +2225,11 @@ extension sessionData {
                         "targetArea": ["glute"]
                 ],
                 // calves
-                "calvestretch":
+                "calfStretch":
                     [
-                        "name": ["calvestretch"],
-                        "demonstration": ["calvestretch"],
-                        "explanation": ["calvestretchEH", "calvestretchEA", "calvestretchEF"],
+                        "name": ["calfStretch"],
+                        "demonstration": ["calfStretch"],
+                        "explanation": ["calfStretchEH", "calfStretchEA", "calfStretchEF"],
                         "targetArea": ["calf"]
                 ],
                 // Hamstrings

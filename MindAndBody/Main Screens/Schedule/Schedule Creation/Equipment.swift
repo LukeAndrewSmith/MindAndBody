@@ -47,9 +47,8 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
         setupNextButton()
         
         // Navigation Bar
-        navigationBar.title = NSLocalizedString("equipment", comment: "")
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
+        
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("equipment", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
         
         // Table View
         equipmentTable.tableFooterView = UIView()

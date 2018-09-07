@@ -70,7 +70,6 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         navigationBar.title = navTitle
         print(navTitle)
         navigationBar.rightBarButtonItem?.tintColor = Colors.light
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
         
         
         // Table View
@@ -245,7 +244,8 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // If cardio, uses workout images, so need to change for cardio
         var selectedSession0 = SelectedSession.shared.selectedSession[0]
-        if SelectedSession.shared.selectedSession[0] == "cardio" && SelectedSession.shared.selectedSession[1] == "bodyweight" {
+        // Only weights if gym workout
+        if SelectedSession.shared.selectedSession[0] == "cardio" && SelectedSession.shared.selectedSession[0].contains("Gym") {
             selectedSession0 = "workout"
         }
         

@@ -126,12 +126,8 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         
         // Navigation Controller
         // Remove navigation separator
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
-        // Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        navigationBar.title = NSLocalizedString("tracking", comment: "")
-        
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("tracking", comment: ""), separator: false, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
+
         view.backgroundColor = Colors.light
 
         setupChart()

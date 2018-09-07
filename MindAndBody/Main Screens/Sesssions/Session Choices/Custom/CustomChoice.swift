@@ -49,7 +49,6 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Navigation
         navigationBar.title = NSLocalizedString(navigationBarTitles[SelectedSession.shared.selectedSession[0]]!, comment: "")
         navigationBar.rightBarButtonItem?.tintColor = Colors.light
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
 
 
         // Table View

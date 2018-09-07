@@ -351,7 +351,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             // String
             var setsRepsString = String()
             // Weighted
-            if sessionData.weightedWorkoutMovements.contains(movement) {
+            print(SelectedSession.shared.selectedSession)
+            if sessionData.weightedWorkoutMovements.contains(movement) && SelectedSession.shared.selectedSession[1] != "bodyweight" {
                 // Units
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let units = settings["Units"]![0]
@@ -584,7 +585,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let key = keyArray[selectedRow]
         let movement = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
         //
-        if sessionData.weightedWorkoutMovements.contains(movement) {
+        if sessionData.weightedWorkoutMovements.contains(movement) && SelectedSession.shared.selectedSession[0].contains("Gym")  {
             //
             actionSheetView.addSubview(weightPicker)
             actionSheetView.addSubview(unitIndicatorLabel)

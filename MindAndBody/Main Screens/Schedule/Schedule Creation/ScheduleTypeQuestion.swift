@@ -96,11 +96,8 @@ class ScheduleTypeQuestion: UIViewController {
         layoutView()
         
         // Navigation bar
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
-        self.navigationController?.navigationBar.tintColor = Colors.light
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        navigationBar.title = NSLocalizedString("scheduleOptions", comment: "")
-        
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("scheduleOptions", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
+
         // Items
         leftItem.tintColor = Colors.red
         leftItem.image = #imageLiteral(resourceName: "Cross")

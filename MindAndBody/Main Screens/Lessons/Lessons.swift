@@ -67,12 +67,8 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         //
         tableView.backgroundColor = Colors.gray
         
-        //
         //  Navigation Bar
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        navigationBar.title = NSLocalizedString("lessons", comment: "")
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
-        self.navigationController?.navigationBar.tintColor = Colors.light
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("lessons", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
         
         // Table View
         let headerView = UIView()

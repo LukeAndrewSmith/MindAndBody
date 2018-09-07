@@ -106,7 +106,15 @@ class ReminderNotifications {
                 // Loop week
                 for i in 0...6 {
                     // Check day
-                    let dayCount = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
+//                    let dayCount = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count
+                    // Count whats left instead of .count for the day, incase something has been done in advance
+                    var dayCount = 0
+                    for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count {
+                        if !(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
+                            dayCount += 1
+                        }
+                    }
+                    
                     if dayCount != 0 {
                         //
                         // Set morning notifications
@@ -120,10 +128,10 @@ class ReminderNotifications {
                         }
                         // Session - not plural
                         if dayCount == 1 {
-                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification21", comment: "") + motivatingComment
+                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(dayCount) + NSLocalizedString("morningNotification21", comment: "") + motivatingComment
                         // Sessions - plural
                         } else {
-                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count) + NSLocalizedString("morningNotification2", comment: "") + motivatingComment
+                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(dayCount) + NSLocalizedString("morningNotification2", comment: "") + motivatingComment
                         }
                         // Sound
                         morningContent.sound = UNNotificationSound.default()
@@ -335,8 +343,9 @@ class ReminderNotifications {
     // Update badges func
         // Note
             // Current Bool = False if False -> True, True if True -> False
-    func updateBadges(day: Int, currentBool: Bool) {
+    func updateBadges() {
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         // Get schedule style
         var scheduleStyle = Int()
         if schedules.count != 0 {
@@ -344,55 +353,40 @@ class ReminderNotifications {
         } else {
             scheduleStyle = 0
         }
-
-        // Update badge
-        // Day View, scheduleStyle 0
+        
+        // Get current day
+        let day = Date().weekDayFromMonday
+        
+        // Day view
         if scheduleStyle == 0 {
-            // If current day
-            if day == (Date().weekDayFromMonday) {
-                // True -> False, increment badge
-                if currentBool {
-                    updateBadgeCounter(increment: true)
-                // False -> True, decrement badge
-                } else {
-                    updateBadgeCounter(increment: false)
-                }
-            // If not current day but current day is empty (Description below)
-            } else if day != (Date().weekDayFromMonday) && schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(Date().weekDayFromMonday)].count == 0 {
-                // If not current day but current day is empty:
-                // This indicates that if something is completed, the user has probably missed a day and is doing it the next day on the empty day, only allow decrementing
-                // The badges are set in the morning of a day when there is something to be done, and updated throughout the day. If the user does nothing the badges stay there until the next day there is something and the badges are updated in the morning, or if they do something on an empty day as described above.
-                // This is not perfect but its ok for now
-                
-                // False -> True, decrement badge
-                if !currentBool {
-                    updateBadgeCounter(increment: false)
+            var dayCount = 0
+            // Loop day counting whats left
+            for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day].count {
+                if !(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][j]["isGroupCompleted"] as! Bool) {
+                    dayCount += 1
                 }
             }
-        // Week View, scheduleStyle 1
+            setBadgeCounter(value: dayCount)
+            
+        // Week view
         } else {
-            // True -> False, increment badge
-            if currentBool {
-                updateBadgeCounter(increment: true)
-                // False -> True, decrement badge
-            } else {
-                updateBadgeCounter(increment: false)
+            var weekCount = 0
+            // Loop week counting whats left
+            for i in 0..<6 {
+                for j in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i].count {
+                    if !(schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
+                        weekCount += 1
+                    }
+                }
             }
+            setBadgeCounter(value: weekCount)
+            
         }
     }
-    
-    // Update Badge Counter
-    func updateBadgeCounter(increment: Bool) {
-        // Increment
-        if increment {
-            UIApplication.shared.applicationIconBadgeNumber += 1
-            // Decrement
-        } else {
-            if UIApplication.shared.applicationIconBadgeNumber < 2 {
-                UIApplication.shared.applicationIconBadgeNumber = 0
-            } else {
-                UIApplication.shared.applicationIconBadgeNumber -= 1
-            }
+   
+    func setBadgeCounter(value: Int) {
+        if value >= 0 {
+            UIApplication.shared.applicationIconBadgeNumber = value
         }
     }
 }
@@ -604,9 +598,28 @@ class BellsFunctions {
 // View Controller
 extension UIViewController {
     
+    // Setup navigation bar
+    func setupNavigationBar(navBar: UINavigationItem, title: String, separator: Bool, tintColor: UIColor, textColor: UIColor, font: UIFont, shadow: Bool) {
+        
+        navBar.title = title
+        self.navigationController?.navigationBar.barTintColor = tintColor
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, NSAttributedStringKey.font: font]
+
+        if !separator {
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+        }
+        
+        if shadow {
+            self.navigationController?.navigationBar.layer.shadowColor = Colors.dark.cgColor
+            self.navigationController?.navigationBar.layer.shadowOpacity = 1
+            self.navigationController?.navigationBar.layer.shadowOffset = CGSize.zero
+            self.navigationController?.navigationBar.layer.shadowRadius = 4 // 7
+        }
+    }
+    
     //
     // Add background Image
-    func addBackgroundImage(withBlur: Bool, fullScreen: Bool) {
+    func addBackgroundImage(withBlur: Bool, fullScreen: Bool, image: String) {
         
         // Get correct background image to compare to presented one (if one is presented)
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -647,7 +660,9 @@ extension UIViewController {
             }
             //
             // Background Image/Colour
-            if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+            if image != "" {
+                backgroundImage.image = getUncachedImage(named: image)
+            } else if backgroundIndex < BackgroundImages.backgroundImageArray.count {
                 backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
             } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
                 backgroundImage.image = nil
@@ -680,7 +695,9 @@ extension UIViewController {
         } else if backgroundIndex != currentBackgroundIndex && currentBackgroundIndex != -1 {
             backgroundImageSubview.tag = BackgroundImages.backgroundImageArray.count + backgroundIndex
             // Background Image/Colour
-            if backgroundIndex < BackgroundImages.backgroundImageArray.count {
+            if image != "" {
+                backgroundImageSubview.image = getUncachedImage(named: image)
+            } else if backgroundIndex < BackgroundImages.backgroundImageArray.count {
                 backgroundImageSubview.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
             } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
                 backgroundImageSubview.image = nil
@@ -795,10 +812,10 @@ extension UIViewController {
         //
         // Title
         let titleString = NSMutableAttributedString(string: title)
-        titleString.addAttribute(NSAttributedStringKey.font, value: UIFont(name: "SFUIDisplay-light", size: 22)!, range: NSMakeRange(0, titleString.length))
+        titleString.addAttribute(NSAttributedStringKey.font, value: Fonts.explanationTitle!, range: NSMakeRange(0, titleString.length))
         //
         let centering = NSMutableParagraphStyle()
-        centering.alignment = .center
+        centering.alignment = .left
         titleString.addAttribute(NSAttributedStringKey.paragraphStyle, value: centering, range: NSMakeRange(0, titleString.length))
         
         //
@@ -806,10 +823,10 @@ extension UIViewController {
         
         //
         // Title Attributes
-        let subTitleFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : UIFont(name: "SFUIDisplay-light", size: 22) as Any]
+        let subTitleFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : Fonts.explanationTitle as Any]
         //
         // Bullet Point Attributes
-        let bulletPointFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : UIFont(name: "SFUIDisplay-thin", size: 22) as Any]
+        let bulletPointFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : Fonts.lessonText as Any]
         //
         let paragraphStyle: NSMutableParagraphStyle
         paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
@@ -1034,7 +1051,7 @@ extension UIViewController {
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                 // Update Badges
-                ReminderNotifications.shared.updateBadges(day: day, currentBool: false)
+                ReminderNotifications.shared.updateBadges()
                 // Update Week Progress & Tracking
                 updateWeekProgress()
                 updateTracking()

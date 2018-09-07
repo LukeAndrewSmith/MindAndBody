@@ -84,6 +84,8 @@ enum Fonts {
     static let bigCell = UIFont(name: "SFUIDisplay-light", size: 22) // 23
     static let regularCell = UIFont(name: "SFUIDisplay-regular", size: 18)
     
+    static let scheduleCell = UIFont(name: "SFUIDisplay-regular", size: 23)
+    
     // Various Elements
     static let veryLargeElementRegular = UIFont(name: "SFUIDisplay-regular", size: 27)
     
@@ -108,6 +110,9 @@ enum Fonts {
     static let lessonSubtitle = UIFont(name: "SFUIDisplay-bold", size: 27)
     static let lessonsImageTitle = UIFont(name: "SFUIDisplay-medium", size: 23)
     static let lessonText = UIFont(name: "SFUIDisplay-regular", size: 19)
+    
+    // Explanations
+    static let explanationTitle = UIFont(name: "SFUIDisplay-bold", size: 21)
     
     // Guided meditation
     static let meditationTitle = UIFont(name: "SFUIDisplay-bold", size: 23)

@@ -139,15 +139,11 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Title
         // Creating
         if creatingSession {
-            navigationBar.title = NSLocalizedString("create", comment: "")
-            // Editing
+            setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("create", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
+        // Editing
         } else {
-            navigationBar.title = NSLocalizedString("edit", comment: "")
+            setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("edit", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
         }
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        // Appearance
-        self.navigationController?.navigationBar.tintColor = Colors.light
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
         // Done button
         navigationBar.leftBarButtonItem?.tintColor = Colors.light
         navigationBar.leftBarButtonItem?.title = NSLocalizedString("done", comment: "")
@@ -155,7 +151,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: false)
+        addBackgroundImage(withBlur: true, fullScreen: false, image: "")
         
         
         let cornerRadius: CGFloat = 22

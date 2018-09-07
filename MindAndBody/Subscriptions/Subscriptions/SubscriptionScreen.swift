@@ -138,7 +138,7 @@ class SubscriptionScreen: UIViewController {
         //
         // BackgroundImage
 //        view.backgroundColor = Colors.dark
-        addBackgroundImage(withBlur: true, fullScreen: true)
+        addBackgroundImage(withBlur: true, fullScreen: true, image: "")
         //
         // Buttons
         // Profile

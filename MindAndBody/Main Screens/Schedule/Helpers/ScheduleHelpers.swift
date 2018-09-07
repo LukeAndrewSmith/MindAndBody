@@ -537,7 +537,7 @@ extension ScheduleScreen {
             // Update
             schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
             // Update Badges
-            ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
+            ReminderNotifications.shared.updateBadges()
             
             UserDefaults.standard.set(schedules, forKey: "schedules")
             // Sync
@@ -1709,7 +1709,7 @@ extension ScheduleScreen {
                 // Sync
                 ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                 // Update Badges
-                ReminderNotifications.shared.updateBadges(day: day, currentBool: currentBool)
+                ReminderNotifications.shared.updateBadges()
                 // Update Week Progress & Tracking
                 updateWeekProgress()
                 updateTracking()
@@ -2012,6 +2012,9 @@ extension ScheduleScreen {
     func markAsCompletedAndAnimate() {
         // MARK AS COMPLETED
         if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.choiceProgress[0] != -1 {
+            
+            ScheduleVariables.shared.shouldReloadChoice = false
+            
             // Extra session
             if ScheduleVariables.shared.isExtraSession {
                 //
@@ -2036,6 +2039,9 @@ extension ScheduleScreen {
                         }, completion: { finished in
                             DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                                 // Slide back
+                                // Set to false then to true ensures that the tick doesn't get loaded on the initial screen before it has appeared
+                                // In schedule table cell for row, checks this variable and doesn't load tick on just completed session until it can animate it
+                                ScheduleVariables.shared.shouldReloadChoice = true
                                 self.backToBeginning()
                                 ScheduleVariables.shared.shouldReloadChoice = false
                             })
@@ -2065,9 +2071,13 @@ extension ScheduleScreen {
                         }, completion: { finished in
                             DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                                 ScheduleVariables.shared.choiceProgress[1] = 1
+                                
+                                // Set to false then to true ensures that the tick doesn't get loaded on the initial screen before it has appeared
+                                // In schedule table cell for row, checks this variable and doesn't load tick on just completed session until it can animate it (animation just below)
+                                ScheduleVariables.shared.shouldReloadChoice = true
                                 self.maskAction()
-                                // Set to false here so the tick doesn;t get loaded before the view has appeared
                                 ScheduleVariables.shared.shouldReloadChoice = false
+                                
                                 // Animate initial choice group completion after slideRight() animation finished
                                 let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
                                 DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
@@ -2085,13 +2095,18 @@ extension ScheduleScreen {
                 //
                 // Go to initial choice
                 ScheduleVariables.shared.choiceProgress[1] = 1
+                // Set to false then to true ensures that the tick doesn't get loaded on the initial screen before it has appeared
+                // In schedule table cell for row, checks this variable and doesn't load tick on just completed session until it can animate it (animation just below)
+                ScheduleVariables.shared.shouldReloadChoice = true
                 maskAction()
+                ScheduleVariables.shared.shouldReloadChoice = false
+
                 //
                 updateGroupTracking()
+                
                 // Mark first instance of group in all other schedules as completed
                 markAsGroupForOtherSchedules(markAs: true)
-                // Set to false here so the tick doesn't get loaded before the view has appeared
-                ScheduleVariables.shared.shouldReloadChoice = false
+                
                 // Animate initial choice group completion after slideRight() animation finished
                 let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
                 DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
@@ -2151,7 +2166,7 @@ extension ScheduleScreen {
         schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = true
         // Update Badges
             // currentBool == False as False -> True
-        ReminderNotifications.shared.updateBadges(day: day, currentBool: false)
+        ReminderNotifications.shared.updateBadges()
         // Update Tracking
         updateWeekProgress()
         updateTracking()
@@ -2264,14 +2279,12 @@ extension ScheduleScreen {
         
         // Separator
         separator.frame = CGRect(x: 27, y: separatorY, width: view.bounds.width - 54, height: 1)
-        separator.backgroundColor = Colors.light.withAlphaComponent(0.5)
+        separator.backgroundColor = foregroundColor.withAlphaComponent(0.5)
         view.insertSubview(separator, aboveSubview: scheduleTable)
         
         //
         // Navigation Bar
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        navigationBar.title = NSLocalizedString("schedule", comment: "")
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("schedule", comment: ""), separator: false, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
         
         //
         // TableView
@@ -2284,10 +2297,6 @@ extension ScheduleScreen {
     
     // Layout views
     func layoutViews() {
-        //
-        // Remove navigation separator
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
         //
         // Present as days or as week
         // days
@@ -2313,6 +2322,27 @@ extension ScheduleScreen {
             dayIndicator.alpha = 1
         } else {
             dayIndicator.alpha = 0
+        }
+        
+        
+        // Shadow to page stack
+        var shouldAdd = true
+        for view in pageStack.subviews {
+            if view.tag == 723 {
+                shouldAdd = false
+            }
+        }
+        if shouldAdd {
+            let backgroundStackView = UIView(frame: pageStack.bounds)
+            backgroundStackView.tag = 723
+            backgroundStackView.backgroundColor = Colors.dark
+            backgroundStackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            pageStack.insertSubview(backgroundStackView, at: 0)
+            
+            backgroundStackView.layer.shadowColor = Colors.dark.cgColor
+            backgroundStackView.layer.shadowOpacity = 1
+            backgroundStackView.layer.shadowOffset = CGSize.zero
+            backgroundStackView.layer.shadowRadius = 7
         }
         
         // Set status bar to light
@@ -2349,8 +2379,9 @@ extension ScheduleScreen {
             backgroundStackView.backgroundColor = Colors.dark
             backgroundStackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             pageStack.insertSubview(backgroundStackView, at: 0)
+            
         }
-        //
+        
         // Day Swipes (also used for swipe back in choices)
         daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         daySwipeLeft.direction = UISwipeGestureRecognizerDirection.left
@@ -2359,9 +2390,7 @@ extension ScheduleScreen {
         daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
         scheduleTable.addGestureRecognizer(daySwipeRight)
-        //
         
-        //
         // Select Today
         // Get current day as index
         if scheduleStyle == 0 {
@@ -2382,18 +2411,14 @@ extension ScheduleScreen {
             maskView(animated: false)
         }
         
-        //
-        dayIndicator.frame.size = CGSize(width: view.bounds.width / 7, height: 1)
+        dayIndicator.frame.size = CGSize(width: view.bounds.width / 7, height: 2)
         dayIndicator.backgroundColor = Colors.light
         if scheduleStyle == 0 {
             view.addSubview(dayIndicator)
             view.bringSubview(toFront: dayIndicator)
         }
         
-        //
         updateDayIndicatorColours()
-        
-        //
         scheduleTableScrollCheck()
     }
     

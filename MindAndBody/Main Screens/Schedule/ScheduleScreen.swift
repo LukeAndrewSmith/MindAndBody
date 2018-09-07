@@ -32,6 +32,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var headerHeight: CGFloat {
         return (UIScreen.main.bounds.height - ControlBarHeights.combinedHeight - ControlBarHeights.tabBarHeight - pageStackHeight.constant) / 4
     }
+//    var headerHeight: CGFloat {
+//        return 88 * 1.5
+//    }
     var daySwipeLeft = UISwipeGestureRecognizer()
     var daySwipeRight = UISwipeGestureRecognizer()
     let separator = UIView()
@@ -136,6 +139,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var lessonsBackground = UIButton()
     var isLessonsShowing = false // indicates if lessons view is presented
     
+    let foregroundColor = Colors.dark
+    
     // -----------------------------------------------------------------------------------------------
     
     //
@@ -148,7 +153,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         ScheduleVariables.shared.resetWeekTracking()
         
         // Add here incase image changed in settings
-        addBackgroundImage(withBlur: true, fullScreen: false)
+//        addBackgroundImage(withBlur: true, fullScreen: false, image: "")
         
         // Reload scheudle style to be sure
         setScheduleStyle()

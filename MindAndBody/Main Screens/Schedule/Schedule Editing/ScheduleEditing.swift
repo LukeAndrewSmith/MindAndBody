@@ -100,9 +100,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         view.backgroundColor = Colors.gray
 
         // Navigation Bar
-        navigationBar.title = NSLocalizedString("editSchedule", comment: "")
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("editSchedule", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
         // Items
         leftItem.tintColor = Colors.light
         leftItem.title = NSLocalizedString("done", comment: "")

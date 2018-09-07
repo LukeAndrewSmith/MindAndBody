@@ -45,9 +45,8 @@ class ScheduleCreationController: UIViewController {
         leftItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
         leftItem.tintColor = Colors.light
         
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
-        self.navigationController?.navigationBar.shadowImage = UIImage() // Remove separator
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("scheduleOptions", comment: ""), separator: false, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
+
         enableBackButton()
         // Pass information to child
         if let childVC = self.childViewControllers.first as? ScheduleCreationPageController {

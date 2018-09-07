@@ -56,9 +56,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         
         UIApplication.shared.statusBarStyle = .lightContent
         
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        navigationBar.title = NSLocalizedString("profile", comment: "")
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("profile", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
+        
         
         leftItem.tintColor = Colors.red
 

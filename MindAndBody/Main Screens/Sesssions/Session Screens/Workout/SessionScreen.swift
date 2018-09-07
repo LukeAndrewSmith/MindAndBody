@@ -373,7 +373,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             var setsRepsString = String()
             let setsString = String(setsArray[indexPath.row])
             // Weighted
-            if sessionData.weightedWorkoutMovements.contains(movement) {
+            if sessionData.weightedWorkoutMovements.contains(movement) && SelectedSession.shared.selectedSession[0].contains("Gym")  {
                 // Units
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let units = settings["Units"]![0]
@@ -650,7 +650,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let key = keyArray[selectedRow]
         let movement = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
         //
-        if sessionData.weightedWorkoutMovements.contains(movement) {
+        if sessionData.weightedWorkoutMovements.contains(movement) && SelectedSession.shared.selectedSession[0].contains("Gym")  {
             //
             actionSheetView.addSubview(weightPicker)
             actionSheetView.addSubview(unitIndicatorLabel)

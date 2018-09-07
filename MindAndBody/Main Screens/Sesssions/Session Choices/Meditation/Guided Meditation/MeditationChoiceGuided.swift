@@ -62,11 +62,10 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
 //        // Ensure table loaded and images behind
 //        tableView.reloadData()
         
-        let imageView = UIImageView()
-        imageView.image = getUncachedImage(named: "mountainsRedBlue") // mountainsRedBlue purpleTree
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        tableView.backgroundView = imageView
+        addBackgroundImage(withBlur: true, fullScreen: true, image: "mountains")
+        // mountainsRedBlue purpleTree mountains
+        
+        view.backgroundColor = Colors.light
 //        tableView.separatorInset = UIEdgeInsets(top: 0, left: 88, bottom: 0, right: 0)
     }
     
@@ -129,24 +128,6 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         title.text = NSLocalizedString(guidedSessions[indexPath.section][indexPath.row], comment: "")
         title.font = Fonts.meditationTitle
         title.textColor = Colors.light
-        switch indexPath.section {
-        // General Introduction
-        case 0:
-            title.textColor = Colors.light
-        // Introduction
-        case 1:
-            title.textColor = Colors.light
-        // Techniques (Breathing)
-        case 2:
-            title.textColor = Colors.light
-        // Techniques (Visualisation)
-        case 3:
-            title.textColor = Colors.light
-
-        default: break
-        }
-//        title.textColor = Colors.dark
-
         title.numberOfLines = 0
         title.lineBreakMode = .byWordWrapping
         let size = title.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))

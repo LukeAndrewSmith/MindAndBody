@@ -36,9 +36,8 @@ class ScheduleCreatorWeek: UIViewController, UITableViewDelegate, UITableViewDat
         setupCreateScheduleButton()
         
         // Navigation Bar
-        navigationBar.title = NSLocalizedString("week", comment: "")
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("week", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
+
 
         // Table View
         weekTable.tableFooterView = UIView()

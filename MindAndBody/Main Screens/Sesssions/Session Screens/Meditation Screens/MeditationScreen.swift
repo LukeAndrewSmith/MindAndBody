@@ -93,7 +93,7 @@ class MeditationScreen: UIViewController {
         
         //
         // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: true)
+        addBackgroundImage(withBlur: true, fullScreen: true, image: "")
         
         
         // Initial Conditions

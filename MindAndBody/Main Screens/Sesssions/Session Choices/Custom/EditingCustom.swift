@@ -152,15 +152,15 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         topSeparator3.backgroundColor = Colors.dark.withAlphaComponent(0.27)
         
         // Navigation Bar Title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("editSchedule", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
+
         // Creating
         if creatingSession {
-            navigationBar.title = NSLocalizedString("create", comment: "")
+            setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("create", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
         // Editing
         } else {
-            navigationBar.title = NSLocalizedString("edit", comment: "")
+            setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("edit", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
         }
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
         
         navigationBar.leftBarButtonItem?.tintColor = Colors.light
         navigationBar.leftBarButtonItem?.title = NSLocalizedString("done", comment: "")

@@ -59,9 +59,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         
         // Navigation
-        navigationBar.title = NSLocalizedString("meditationTimer", comment: "")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("meditationTimer", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
         navigationBar.rightBarButtonItem?.tintColor = Colors.light
         
         // Table View

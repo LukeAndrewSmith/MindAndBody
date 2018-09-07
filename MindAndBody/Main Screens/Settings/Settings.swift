@@ -85,10 +85,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         super.viewDidLoad()
         
         // Navigation Bar
-        self.navigationController?.navigationBar.barTintColor = Colors.dark
-        self.navigationController?.navigationBar.tintColor = Colors.light
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBar!]
-        navigationBar.title = NSLocalizedString("settings", comment: "")
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("settings", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
         // View
         view.backgroundColor = Colors.light
         
