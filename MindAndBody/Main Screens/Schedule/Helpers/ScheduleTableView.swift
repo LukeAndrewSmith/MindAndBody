@@ -18,36 +18,6 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
-    // Section Titles
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        //
-//        switch tableView {
-//        case scheduleTable:
-//            // day
-//            if scheduleStyle == 0 {
-//                return NSLocalizedString(dayArray[ScheduleVariables.shared.selectedDay], comment: "")
-//                // week
-//            } else {
-//                let weekOfThe = NSLocalizedString("weekOfThe", comment: "")
-//                // Date formatters
-//                let df = DateFormatter()
-//                df.dateFormat = "dd"
-//                let firstMonday = df.string(from: Date().firstMondayInCurrentWeek)
-//                let firstMondayInt = Int(firstMonday)
-//                //
-//                let numberFormatter = NumberFormatter()
-//                numberFormatter.numberStyle = .ordinal
-//                let firstMondayWithOrdinal = numberFormatter.string(from: firstMondayInt! as NSNumber)
-//                //
-//                return weekOfThe + firstMondayWithOrdinal!
-//            }
-//        case scheduleChoiceTable:
-//            return NSLocalizedString("mySchedules", comment: "")
-//        default:
-//            return ""
-//        }
-//    }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
         switch tableView {
@@ -78,7 +48,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             titleLabel.numberOfLines = 0
             titleLabel.lineBreakMode = .byWordWrapping
             let size = titleLabel.sizeThatFits(CGSize(width: view.bounds.width - 54, height: .greatestFiniteMagnitude))
-            titleLabel.frame = CGRect(x: 27, y: headerHeight - size.height - (27 * 3/4), width: view.bounds.width - 32, height: size.height)
+            titleLabel.frame = CGRect(x: tableSpacing, y: headerHeight - size.height - (tableSpacing * 3/4), width: view.bounds.width - 32, height: size.height)
             header.addSubview(titleLabel)
             
             
@@ -101,41 +71,13 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         return header
     }
     
-    // Header Customization
-//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        switch tableView {
-//        case scheduleTable:
-//            // Header
-//            let header = view as! UITableViewHeaderFooterView
-//            header.textLabel?.font = Fonts.bigTitle
-//            header.textLabel?.textAlignment = .center
-//            header.textLabel?.textColor = foregroundColor
-//            //
-//            header.backgroundColor = .clear
-//            header.backgroundView = UIView()
-//            //
-//        case scheduleChoiceTable:
-//            // Header
-//            let header = view as! UITableViewHeaderFooterView
-//            header.textLabel?.font = UIFont(name: "SFUIDisplay-light", size: 20)
-//            header.textLabel?.textAlignment = .center
-//            header.textLabel?.textColor = Colors.dark
-//            //
-//            let background = UIView()
-//            background.frame = header.bounds
-//            background.backgroundColor = Colors.light
-//            header.backgroundView = background
-//        default: break
-//        }
-//    }
-    
     // Header Height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         //
         switch tableView {
         case scheduleTable:
             // day
-            return headerHeight
+            return headerHeight + headerSpacing
         case scheduleChoiceTable:
             return 47
         default:
@@ -257,7 +199,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     extraLabel.textColor = foregroundColor
                     extraLabel.text = NSLocalizedString("extra", comment: "")
                     extraLabel.sizeToFit()
-                    extraLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: cellHeight)
+                    extraLabel.frame = CGRect(x: tableSpacing, y: 0, width: view.bounds.width - 54, height: cellHeight)
                     cell.addSubview(extraLabel)
                     
                     //
@@ -268,7 +210,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     checkBox.layer.borderWidth = 1
                     checkBox.layer.borderColor = foregroundColor.withAlphaComponent(0.33).cgColor
                     checkBox.layer.cornerRadius = 4
-                    checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
+                    checkBox.frame = CGRect(x: view.bounds.width - tableSpacing - 24.5, y: 0, width: 24.5, height: 24.5)
                     checkBox.center.y = extraLabel.center.y
                     checkBox.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
                     checkBox.imageView?.tintColor = foregroundColor
@@ -280,23 +222,33 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     
                 // Session cells
                 } else {
-
+                    
+                    let imageHeight = cellHeight - 8
                     // Groups
                     let dayLabel = UILabel()
                     dayLabel.font = Fonts.scheduleCell
                     dayLabel.textColor = foregroundColor
                     //
-                    var text = String()
+                    var groupString = String()
                     if scheduleStyle == 0 {
-                        text = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][indexPath.row]["group"] as! String
+                        groupString = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][indexPath.row]["group"] as! String
                     } else {
-                        text = TemporaryWeekArray.shared.weekArray[indexPath.row]["group"] as! String
+                        groupString = TemporaryWeekArray.shared.weekArray[indexPath.row]["group"] as! String
                     }
-                    dayLabel.text = NSLocalizedString(text, comment: "")
+                    dayLabel.text = NSLocalizedString(groupString, comment: "")
                     dayLabel.numberOfLines = 2
-                    dayLabel.sizeToFit()
-                    dayLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: cellHeight)
+                    dayLabel.frame = CGRect(x: tableSpacing + 8 + imageHeight, y: 0, width: view.bounds.width - 54, height: cellHeight)
                     cell.addSubview(dayLabel)
+                    
+                    
+                    let groupImage = UIImageView()
+                    groupImage.frame = CGRect(x: tableSpacing, y: 4, width: imageHeight, height: imageHeight)
+                    groupImage.contentMode = .scaleAspectFill
+                    groupImage.clipsToBounds = true
+                    groupImage.image = groupImages[groupString]
+                    groupImage.layer.cornerRadius = 4
+                    cell.addSubview(groupImage)
+                    
                     
                     //
                     // Checkmark box
@@ -306,7 +258,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     checkBox.layer.borderWidth = 1
                     checkBox.layer.borderColor = foregroundColor.cgColor
                     checkBox.layer.cornerRadius = 4
-                    checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
+                    checkBox.frame = CGRect(x: view.bounds.width - tableSpacing - 24.5, y: 0, width: 24.5, height: 24.5)
                     checkBox.center.y = dayLabel.center.y
                     checkBox.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
                     cell.addSubview(checkBox)
@@ -383,11 +335,11 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     choiceLabel.textColor = foregroundColor
                     
                     // Normal
-                    let text = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][indexPath.row]
-                    choiceLabel.text = NSLocalizedString(text, comment: "")
+                    let groupString = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][indexPath.row]
+                    choiceLabel.text = NSLocalizedString(groupString, comment: "")
                     choiceLabel.numberOfLines = 2
                     choiceLabel.sizeToFit()
-                    choiceLabel.frame = CGRect(x: 27, y: 0, width: view.bounds.width - 54, height: cellHeight)
+                    choiceLabel.frame = CGRect(x: tableSpacing, y: 0, width: view.bounds.width - 54, height: cellHeight)
                     cell.addSubview(choiceLabel)
                     
                     if isLastChoice() {
@@ -401,7 +353,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                         checkBox.layer.borderWidth = 1
                         checkBox.layer.borderColor = foregroundColor.cgColor
                         checkBox.layer.cornerRadius = 4
-                        checkBox.frame = CGRect(x: view.bounds.width - 27 - 24.5, y: 0, width: 24.5, height: 24.5)
+                        checkBox.frame = CGRect(x: view.bounds.width - tableSpacing - 24.5, y: 0, width: 24.5, height: 24.5)
                         checkBox.center.y = choiceLabel.center.y
                         checkBox.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
                         cell.addSubview(checkBox)

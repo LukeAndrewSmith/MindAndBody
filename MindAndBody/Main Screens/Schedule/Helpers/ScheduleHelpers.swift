@@ -2278,7 +2278,7 @@ extension ScheduleScreen {
         //
         
         // Separator
-        separator.frame = CGRect(x: 27, y: separatorY, width: view.bounds.width - 54, height: 1)
+        separator.frame = CGRect(x: tableSpacing, y: separatorY, width: view.bounds.width - 54, height: 1)
         separator.backgroundColor = foregroundColor.withAlphaComponent(0.5)
         view.insertSubview(separator, aboveSubview: scheduleTable)
         
@@ -2291,7 +2291,8 @@ extension ScheduleScreen {
         scheduleTable.backgroundView = UIView()
         scheduleTable.backgroundColor = .clear
         scheduleTable.tableFooterView = UIView()
-        scheduleTable.separatorStyle = .none
+//        scheduleTable.separatorStyle = .none
+        scheduleTable.separatorInset = UIEdgeInsets(top: 0, left: tableSpacing, bottom: 0, right: tableSpacing)
         
     }
     

@@ -18,6 +18,15 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     static var shared = ScheduleScreen()
     
+    
+    // Currently testing which values are best
+    let foregroundColor = Colors.dark
+    let tableSpacing: CGFloat = 27
+    let headerSpacing: CGFloat = 0 // 16
+    
+    
+    
+    
     // MARK: - Variables/Outlets
     // Schedule Animation Helpers
     let mask = CAGradientLayer()
@@ -72,6 +81,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var stackArray: [UILabel] = []
     var stackFontUnselected = UIFont(name: "SFUIDisplay-regular", size: 17)
     var stackFontSelected = UIFont(name: "SFUIDisplay-bold", size: 17)
+    
+    // Images
+    var groupImages: [String: UIImage] = [:]
 
     // Schedule creation and choices ACTION SHEET
     let scheduleChoiceTable = UITableView()
@@ -139,8 +151,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var lessonsBackground = UIButton()
     var isLessonsShowing = false // indicates if lessons view is presented
     
-    let foregroundColor = Colors.dark
-    
     // -----------------------------------------------------------------------------------------------
     
     //
@@ -192,6 +202,16 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Test
+        groupImages =
+            [
+                "workout": #imageLiteral(resourceName: "BreathingWorkout"),
+                "yoga": getUncachedImage(named: "upwardsDogY")!,
+                "meditation": getUncachedImage(named: "mountains")!,
+                "endurance": getUncachedImage(named: "running")!,
+                "flexibility": getUncachedImage(named: "seatedSide")!,
+            ]
         
         // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)
         NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
