@@ -1345,13 +1345,22 @@ extension ScheduleScreen {
             // Loop second array in scheduleTracking, if one if false, not completed (warmup/session/stretching)
                 // -2 because title included
             if checkAll {
-                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["group"] as! String == "yoga" {
+                // Switch groups
+                switch schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["group"] as! String {
+                // Yoga
+                case "yoga":
                     // Yoga warmup optional, so is completed if session is finished
                     if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["1"] as! Bool == false {
                         isCompleted = false
                     }
+                // Meditation
+                case "meditation":
+                    // Either one of timer or guided for it to be completed
+                    if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["0"] as! Bool == false && schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["1"] as! Bool == false {
+                        isCompleted = false
+                    }
                 // Normal case
-                } else {
+                default:
                     for i in 0..<nRows {
                         if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay][String(i)] as! Bool == false {
                             isCompleted = false
@@ -1696,7 +1705,7 @@ extension ScheduleScreen {
             //
             let day = indexingVariables.2
             
-            // if first or last choiec
+            // if first or last choice
             if index1 != "notFirstOrLastChoice" {
                 // Update Tracking
                 // True/False

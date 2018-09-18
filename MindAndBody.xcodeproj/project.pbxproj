@@ -2736,7 +2736,7 @@
 			isa = PBXGroup;
 			children = (
 				075A0DB91E8D68800008E014 /* Schedule */,
-				077AC0FD1DA54C0C0026895B /* Sesssions */,
+				077AC0FD1DA54C0C0026895B /* Choices-Sesssions */,
 				075A0DBA1E8D688D0008E014 /* Tracking */,
 				077AC0FE1DA54C500026895B /* Lessons */,
 				07995A371E86A83A0009C9B1 /* Settings */,
@@ -3584,13 +3584,13 @@
 			path = MindAndBodyTests;
 			sourceTree = "<group>";
 		};
-		077AC0FD1DA54C0C0026895B /* Sesssions */ = {
+		077AC0FD1DA54C0C0026895B /* Choices-Sesssions */ = {
 			isa = PBXGroup;
 			children = (
 				07C45C0221383D200038018A /* Session Choices */,
 				07530C981E96717B00BD33EC /* Session Screens */,
 			);
-			path = Sesssions;
+			path = "Choices-Sesssions";
 			sourceTree = "<group>";
 		};
 		077AC0FE1DA54C500026895B /* Lessons */ = {

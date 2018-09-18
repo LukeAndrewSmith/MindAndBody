@@ -265,7 +265,7 @@
 "knees" = "Knee Bends";
 "kneesEH" = "Stand upright\nShift your weight to one leg\nFlex your knee, gently bringing your heel towards your glutes\nReturn your foot back towards the ground, without putting any weight on it\nRepeat 5-10 times\nRepeat with the other leg";
 "kneesEA" = "Tensing your hamstrings too much, the aim is to warm up the knee joint not the hamstring\nUsing momentum, slowly bring your heel up, and pause at the bottom";
-"kneesEF" = "Keeping your knee pointed towards the floor and your thighs parralel\nMaintaining good posture";
+"kneesEF" = "Keeping your knee pointed towards the floor and your thighs parallel\nMaintaining good posture";
 
 "ankles" = "Ankle Rotations";
 "anklesEH" = "Stand upright\nShift your weight to one leg\nPoint your toes and place them on the ground\nSlowly rotate your ankle round above your toes, without placing any weight on the foot\nRepeat for the recommended nº reps\nRepeat rotating in the other direction\nRepeat with the other ankle\nExtra: Rotate each ankle again with your foot infront of you (as in the video)";
@@ -3321,7 +3321,7 @@
 "content2SE" = "Choose how many of each activity to perform each week"; // Week view
 
 // Time / Committement
-"scheduleQTime" = "How many days a week do you have where you have some time and energy to work towards your goals?"; // Time
+"scheduleQTime" = "How many days a week do you have time and energy to work towards your goals?"; // Time
 "scheduleATime1" = "1 - 2";
 "scheduleATime2" = "2 - 3";
 "scheduleATime3" = "3 - 5";
@@ -3738,7 +3738,7 @@
 // Meditation
 // Endurance
 "enduranceTypeET" = "Endurance Type";
-"enduranceTypeE" = "HIIT:  Alternating high intensity cardio (e.g running fast) and low intensity (e.g pauses or jogging), very good for short but intense and effective cardio training.\n\nBodyweight:  Intense bodyweight workouts with lots of endurance oriented movements.\n\nSteady State:  e.g Running/Biking for a number of kilometers, you warmup and stretch with the app and go off and do the cardio yourself.";
+"enduranceTypeE" = "HIIT:  Alternating high intensity cardio (e.g running fast) and low intensity (e.g pauses or jogging); very good for short but intense and effective cardio training.\n\nBodyweight:  Intense bodyweight workouts with lots of endurance oriented movements.\n\nSteady State:  e.g Running/Biking for a number of kilometers; you warm up and stretch with the app then do the cardio without.";
 "intervalLengthET" = "Interval Length";
 "intervalLengthE" = "The length of time of each high intensity (e.g sprinting) and low intensity (e.g jogging) interval. Beginners should start with longer intervals as they are less taxing on the body.";
 // Flexibility
@@ -3750,7 +3750,7 @@
 "editSchedule1T" = "Style";
 "editSchedule1" = "App chooses sessions:\nIn the schedule, the app makes the final decision and selects the correct session for you based on your profile.\n\nView:\nHow you want to view your schedule;\nWeek = a list of all your sessions for the week.\nDays = a plan for each day of the week.";
 "editSchedule2T" = "Content";
-"editSchedule2" = "Equipment:\nWhat equipment you would like included in the sessions of this schedule (App chooses sessions should be on for this setting to take effect).\n\nEdit Schedule:\nEdit what sessions are presented in your schedule.";
+"editSchedule2" = "Equipment:\nWhat equipment you would like included in the sessions of this schedule (The 'App chooses sessions' choice should be on for this setting to take effect).\n\nEdit Schedule:\nEdit what sessions are presented in your schedule.";
 
 
         // Settings
@@ -3759,9 +3759,9 @@
 "settings1T" = "Automatic Sessions";
 "settings1" = "'30s' of a movement rather than '10 reps'; the app times each movement and rest for you, just watch and follow.\nAutomatic Yoga is the same but some extra settings need to be personalised to enable it.";
 "settings2T" = "Reminders";
-"settings2" = "Notifications that let you know what you have planned.";
+"settings2" = "Notifications that let you know what you have planned. Motivating comments can be included in the notification.";
 "settings3T" = "Custom";
-"settings3" = "Custom sessions can be chosen in the schedule. Turning this setting on means that not only the session (e.g workout, yoga) is custom, but also the warmup and stretching.";
+"settings3" = "In the schedule you can create and choose custom sessions. In order for the warmup/stretching to be custom as well as the session, turn this setting on.";
 
         // Automatic Yoga
 "automaticYoga0T" = "Average Breath Length";
@@ -3777,11 +3777,11 @@
 "session1T" = "Rest Timer";
         "session1" = "Press a rest button upon completion of a set; the app will notify you when to begin the next set.";
 "session2T" = "Demonstration";
-        "session2" = "A green arrow indicates that tapping the image presents a demonstration.\nAn image showing the target area on the body can be viewed by swiping left on the image.";
+        "session2" = "If the left indicator under the image is a green arrow, then tapping the image presents a demonstration.\nAn image showing the target area on the body can be viewed by swiping left on the image.";
 "session3T" = "Explanation";
         "session3" = "Explanations are very important for understanding the details of each movement, and help you to perform them optimally.";
 "session4T" = "Next Movement";
-        "session4" = "Swipe up to go to the next movement.\nYour progress through the session is indicated in the bar at the top.";
+        "session4" = "Your progress through the session is indicated in the bar at the top.\nSwipe up to go to the next movement.";
 "session5T" = "Finish Early";
         "session5" = "Note: The schedule won't track the session unless you finish it by pressing the 'End' button at the end of the session.";
 
@@ -3799,11 +3799,11 @@
 "yogaPractice0T" = "Breaths";
         "yogaPractice0" = "The number of breaths to hold a pose for.";
 "yogaPractice1T" = "Demonstration";
-        "yogaPractice1" = "A green arrow indicates that tapping the image presents a demonstration.";
+        "yogaPractice1" = "If the left indicator under the image is a green arrow, then tapping the image presents a demonstration.";
 "yogaPractice2T" = "Explanation";
         "yogaPractice2" = "Explanations are very important for understanding the details of each pose, and help you to perform them optimally.";
 "yogaPractice3T" = "Next Movement";
-        "yogaPractice3" = "Swipe up to go to the next movement.\nYour progress through the session is indicated in the bar at the top.";
+        "yogaPractice3" = "Your progress through the session is indicated in the bar at the top.\nSwipe up to go to the next movement.";
 "yogaPractice4T" = "Breaths";
         "yogaPractice4" = "Finish Early:\nNote: The schedule will not track the practice unless you finish it and press 'End Practice' at the bottom ('End Practice' appears after the last movement).";
 

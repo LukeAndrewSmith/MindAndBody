@@ -20,7 +20,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
     @IBOutlet weak var leftItem: UIBarButtonItem!
     
     @IBOutlet weak var questionsTable: UITableView!
-    @IBOutlet weak var topView: UIView!
     
     // Answer elements
     // Age Picker
@@ -63,7 +62,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
 
         // BackgroundImage / Color
         view.backgroundColor = Colors.light
-        topView.backgroundColor = UIColor.clear
         //
         // Table View
         questionsTable.tableFooterView = UIView()

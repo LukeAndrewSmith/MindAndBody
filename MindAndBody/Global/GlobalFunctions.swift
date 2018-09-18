@@ -117,42 +117,43 @@ class ReminderNotifications {
                     
                     if dayCount != 0 {
                         //
-                        // Set morning notifications
-                        let morningContent = UNMutableNotificationContent()
-                        morningContent.title = NSLocalizedString("mindBodySchedule", comment: "")
-                        // Motivating comments (if on)
-                        var motivatingComment = ""
-                        if settings["ReminderNotifications"]![2] == 1 {
-                            let random = Int(arc4random_uniform(UInt32(motivatingComments.count)))
-                            motivatingComment = "\n" + NSLocalizedString(motivatingComments[random], comment: "")
+                        // Set morning notifications if on
+                        if settings["ReminderNotifications"]![0] != -1 {
+                            let morningContent = UNMutableNotificationContent()
+                            morningContent.title = NSLocalizedString("mindBodySchedule", comment: "")
+                            // Motivating comments (if on)
+                            var motivatingComment = ""
+                            if settings["ReminderNotifications"]![2] == 1 {
+                                let random = Int(arc4random_uniform(UInt32(motivatingComments.count)))
+                                motivatingComment = "\n" + NSLocalizedString(motivatingComments[random], comment: "")
+                            }
+                            // Session - not plural
+                            if dayCount == 1 {
+                                morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(dayCount) + NSLocalizedString("morningNotification21", comment: "") + motivatingComment
+                            // Sessions - plural
+                            } else {
+                                morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(dayCount) + NSLocalizedString("morningNotification2", comment: "") + motivatingComment
+                            }
+                            // Sound
+                            morningContent.sound = UNNotificationSound.default()
+                            // App Badge Counter
+                            morningContent.badge = dayCount as NSNumber
+                            // Get day of week
+                            let morningDate = Date().firstMondayInCurrentWeek
+                            let morningDateToSchedule = cal.date(byAdding: .day, value: i, to: morningDate)
+                            // Get time
+                            let totalMinutes = settings["ReminderNotifications"]![0]
+                            let hour = Int(totalMinutes/60)
+                            let minute = totalMinutes % 60
+                            let dateToScheduleWithTime: Date = cal.date(bySettingHour: hour, minute: minute, second: 0, of: morningDateToSchedule!)!
+                            // Get trigger date
+                            let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: dateToScheduleWithTime)
+                            // Set trigger
+                            let morningTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
+                            let identifier = "morningReminderNotification" + String(i)
+                            let morningRequest = UNNotificationRequest(identifier: identifier, content: morningContent, trigger: morningTrigger)
+                            UNUserNotificationCenter.current().add(morningRequest, withCompletionHandler: nil)
                         }
-                        // Session - not plural
-                        if dayCount == 1 {
-                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(dayCount) + NSLocalizedString("morningNotification21", comment: "") + motivatingComment
-                        // Sessions - plural
-                        } else {
-                            morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(dayCount) + NSLocalizedString("morningNotification2", comment: "") + motivatingComment
-                        }
-                        // Sound
-                        morningContent.sound = UNNotificationSound.default()
-                        // App Badge Counter
-                        morningContent.badge = dayCount as NSNumber
-                        // Get day of week
-                        let morningDate = Date().firstMondayInCurrentWeek
-                        let morningDateToSchedule = cal.date(byAdding: .day, value: i, to: morningDate)
-                        // Get time
-                        let totalMinutes = settings["ReminderNotifications"]![0]
-                        let hour = Int(totalMinutes/60)
-                        let minute = totalMinutes % 60
-                        let dateToScheduleWithTime: Date = cal.date(bySettingHour: hour, minute: minute, second: 0, of: morningDateToSchedule!)!
-                        // Get trigger date
-                        let triggerDate =  Calendar.current.dateComponents([.weekday,.hour,.minute], from: dateToScheduleWithTime)
-                        // Set trigger
-                        let morningTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
-                        let identifier = "morningReminderNotification" + String(i)
-                        let morningRequest = UNNotificationRequest(identifier: identifier, content: morningContent, trigger: morningTrigger)
-                        UNUserNotificationCenter.current().add(morningRequest, withCompletionHandler: nil)
-                        
                         //
                         // Set Afternoon Notification (if on)
                         if settings["ReminderNotifications"]![1] != -1 {
@@ -610,10 +611,9 @@ extension UIViewController {
         }
         
         if shadow {
-            self.navigationController?.navigationBar.layer.shadowColor = Colors.dark.cgColor
-            self.navigationController?.navigationBar.layer.shadowOpacity = 1
-            self.navigationController?.navigationBar.layer.shadowOffset = CGSize.zero
-            self.navigationController?.navigationBar.layer.shadowRadius = 4 // 7
+            self.navigationController?.navigationBar.addShadow()
+        } else {
+            self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         }
     }
     
@@ -1237,7 +1237,7 @@ extension UIViewController {
         
         nextButton.frame = CGRect(x: labelView.bounds.width - 49 - 4, y: 0, width: 49, height: WalkthroughVariables.topHeight)
         nextButton.setTitleColor(Colors.dark, for: .normal)
-        nextButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+        nextButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 17)
         nextButton.backgroundColor = UIColor.clear
         nextButton.layer.cornerRadius = 8
         labelView.addSubview(nextButton)
@@ -1252,7 +1252,7 @@ extension UIViewController {
             backButton.frame = CGRect(x: 4, y: 0, width: 49, height: WalkthroughVariables.topHeight)
             backButton.setTitle(NSLocalizedString("back", comment: ""), for: .normal)
             backButton.setTitleColor(Colors.dark, for: .normal)
-            backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 18)
+            backButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 17)
             backButton.backgroundColor = UIColor.clear
             backButton.layer.cornerRadius = 8
             labelView.addSubview(backButton)
@@ -1467,6 +1467,21 @@ class TriangleLabel : UILabel {
         
         context.setFillColor(triangleColor.cgColor)
         context.fillPath()
+    }
+}
+
+
+//
+// MARK: UIView Extension
+//
+extension UIView {
+    
+    // Shadow
+    func addShadow() {
+        self.layer.shadowColor = Colors.dark.cgColor
+        self.layer.shadowOpacity = 1
+        self.layer.shadowOffset = CGSize.zero
+        self.layer.shadowRadius = 4 // 7
     }
 }
 

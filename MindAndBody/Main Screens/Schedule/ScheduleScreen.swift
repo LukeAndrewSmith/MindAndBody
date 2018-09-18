@@ -24,6 +24,11 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     let tableSpacing: CGFloat = 27
     let headerSpacing: CGFloat = 0 // 16
     
+    // Set by heightForRow, as cellForRow uses height but height isn't updated yet
+    // Could move all code to cell.didlayoutsubviews but prefer not to
+    var presetCellHeight: CGFloat = 88
+    var cellHeight: CGFloat = 72
+    // 110 // 88 // 72
     
     
     
@@ -89,10 +94,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     let scheduleChoiceTable = UITableView()
     let scheduleView = UIView()
     let createScheduleButton = UIButton()
-    
-    // Set by heightForRow, as cellForRow uses height but height isn't updated yet
-        // Could move all code to cell.didlayoutsubviews but prefer not to
-    var cellHeight: CGFloat = 72
 
     //
     // Very silly variable used in choices of 'endurance' group - steady state, as there is a 'time choice' after 'warmup/stretching' choice, variable indicating which one was selected
@@ -159,11 +160,19 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        willAppear()
+    }
+    
+    @objc func willEnterForeground() {
+        willAppear()
+    }
+    
+    func willAppear() {
         // Check if reset necessary
         ScheduleVariables.shared.resetWeekTracking()
         
         // Add here incase image changed in settings
-//        addBackgroundImage(withBlur: true, fullScreen: false, image: "")
+        //        addBackgroundImage(withBlur: true, fullScreen: false, image: "")
         
         // Reload scheudle style to be sure
         setScheduleStyle()
@@ -174,7 +183,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         // Ensure dayIndicator in correct position / not visible && if week view, update temporary full week array
         if scheduleStyle == 0 {
             self.view.layoutIfNeeded()
-        // Week view
+            // Week view
         } else {
             dayIndicator.alpha = 0
             TemporaryWeekArray.shared.createTemporaryWeekViewArray()
@@ -203,14 +212,17 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set observer for UIApplicationWillEnterForeground
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+        
         // Test
         groupImages =
             [
-                "workout": #imageLiteral(resourceName: "BreathingWorkout"),
-                "yoga": getUncachedImage(named: "upwardsDogY")!,
-                "meditation": getUncachedImage(named: "mountains")!,
-                "endurance": getUncachedImage(named: "running")!,
-                "flexibility": getUncachedImage(named: "seatedSide")!,
+                "workout": #imageLiteral(resourceName: "GroupWorkout"),
+                "yoga": #imageLiteral(resourceName: "GroupYoga"),
+                "meditation": #imageLiteral(resourceName: "GroupMeditation"),
+                "endurance": #imageLiteral(resourceName: "GroupEndurance"),
+                "flexibility": #imageLiteral(resourceName: "LessonYoga"),
             ]
         
         // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)

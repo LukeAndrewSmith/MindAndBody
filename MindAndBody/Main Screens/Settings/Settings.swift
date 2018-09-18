@@ -1021,6 +1021,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        navigationItem.backBarButtonItem?.tintColor = Colors.light
         
         if segue.identifier == "ProfileSegue" {
             let destinationNC = segue.destination as? ProfileNavigation

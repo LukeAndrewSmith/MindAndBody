@@ -39,7 +39,7 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let rowArray: [String] =
             ["effort", "breathingWorkout", "breathingYoga", "coreActivation"]
     //
-    var backgroundImages: [UIImage] = []
+    let backgroundImages: [UIImage] = [#imageLiteral(resourceName: "LessonEffort"), #imageLiteral(resourceName: "LessonWorkout"), #imageLiteral(resourceName: "LessonYoga"), #imageLiteral(resourceName: "LessonCore")]
     
     
     let cellHeight: CGFloat = 88
@@ -57,8 +57,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        backgroundImages = [#imageLiteral(resourceName: "Effort"), #imageLiteral(resourceName: "BreathingWorkout"), getUncachedImage(named: "upwardsDogY")!, getUncachedImage(named: "plank")!]
             
         //
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -165,8 +163,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         backgroundImage.contentMode = .scaleAspectFill
         if indexPath.section == 0 {
             backgroundImage.center.y -= 36
-        } else if indexPath.section > 1 {
-            backgroundImage.contentMode = .scaleAspectFit
         }
         cell.addSubview(backgroundImage)
         
@@ -174,10 +170,6 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         title.text = NSLocalizedString(rowArray[indexPath.section], comment: "")
         title.font = Fonts.lessonSubtitle
         title.textColor = Colors.light
-        if indexPath.section > 1 {
-            title.textColor = Colors.dark
-            cell.backgroundColor = Colors.darkGray
-        }
         title.numberOfLines = 0
         title.lineBreakMode = .byWordWrapping
         let size = title.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))

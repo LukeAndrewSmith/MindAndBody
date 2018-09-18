@@ -145,10 +145,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             longPressArray[i].minimumPressDuration = 0
             longPressArray[i].addTarget(self, action: #selector(beginDraggingFromTop(gestureRecognizer:)))
             bigGroupLabelArray[i].addGestureRecognizer(longPressArray[i])
-            // Iphone 5/SE layout, smaller text for endurance
-            if IPhoneType.shared.iPhoneType() == 0 {
-                bigGroupLabelArray[i].font = UIFont(name: "SFUIDisplay-light", size: 18)
-            }
         }
         
         
@@ -328,7 +324,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             bigGroupLabelArray[i].isUserInteractionEnabled = true
             bigGroupLabelArray[i].layer.cornerRadius = 15
             bigGroupLabelArray[i].clipsToBounds = true
-            bigGroupLabelArray[i].font = Fonts.mediumElementRegular
+            if IPhoneType.shared.iPhoneType() == 0 {
+                bigGroupLabelArray[i].font = UIFont(name: "SFUIDisplay-regular", size: 17)
+            } else {
+                bigGroupLabelArray[i].font = Fonts.mediumElementRegular
+            }
 
             //
             // App helps create schedule

@@ -133,7 +133,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 // If height set to 72 is too big
-                if CGFloat(count) * 72 > (scheduleTable.bounds.height - headerHeight) {
+                if CGFloat(count) * presetCellHeight > (scheduleTable.bounds.height - headerHeight) {
                     
                     // Height calculated to fit screen unless it gets too small
                     let height = (scheduleTable.bounds.height - headerHeight) / CGFloat(count)
@@ -147,8 +147,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     
                 // Height 72
                 } else {
-                    cellHeight = 72
-                    return 72
+                    cellHeight = presetCellHeight
+                    return presetCellHeight
                 }
                 
             // Not first choice

@@ -29,7 +29,7 @@ enum Register {
             // Note numbers for breaths is stored as an int but represent a double with 1 decimal place, therefore stored is *10 the desired value
             // NOT THE BEST WAY TO STORE BREATH LENGTH!!!!
         // Rest times - 4
-        "RestTimes": [0, 45, 10],
+        "RestTimes": [0, 45, 0],
         // Notifications
         "ReminderNotifications": [420,-1,1], // [0]: morning, [1]: evening, [2]: motivational comments
         // [0]: -1 == off, 420 == 7:00 am (number of minutes), [1]: same, [3]: 0 == off, 1 == on (motivating comments)

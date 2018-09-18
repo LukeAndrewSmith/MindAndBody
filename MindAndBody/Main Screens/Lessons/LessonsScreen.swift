@@ -87,7 +87,7 @@ class LessonsScreen: UIViewController {
             // Title
             let title = UILabel()
             let titleImage = UIImageView()
-            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "Effort"))
+            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonEffort"))
             
             // Intro
             let intro = UILabel()
@@ -130,7 +130,7 @@ class LessonsScreen: UIViewController {
             // Title
             let title = UILabel()
             let titleImage = UIImageView()
-            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "BreathingWorkout"))
+            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonWorkout"))
             
             // Intro
             let intro = UILabel()
@@ -182,7 +182,7 @@ class LessonsScreen: UIViewController {
             // Title
             let title = UILabel()
             let titleImage = UIImageView()
-            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.dark, titleImageView: titleImage, titleImage: getUncachedImage(named: "upwardsDogY")!)
+            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonYoga"))
             
             // Intro
             let intro = UILabel()
@@ -230,7 +230,7 @@ class LessonsScreen: UIViewController {
             // Title
             let title = UILabel()
             let titleImage = UIImageView()
-            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.dark, titleImageView: titleImage, titleImage: getUncachedImage(named: "plank")!)
+            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonCore"))
             
             // Intro
             let intro1 = UILabel()
