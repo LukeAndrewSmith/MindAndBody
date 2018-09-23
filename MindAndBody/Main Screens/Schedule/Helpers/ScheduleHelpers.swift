@@ -517,41 +517,21 @@ extension ScheduleScreen {
         // Action
         let okAction = UIAlertAction(title: NSLocalizedString("done", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
-            //
-            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-            //
-            // Indexing variables
-            // Differ if last choice or first choice
-            let indexingVariables = self.getIndexingVariables(row: 2, firstChoice: false, checkLastChoice: false)
-            // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
-            let index0 = indexingVariables.0
-            // index1 = Selected row in final choice (i.e warmup, session, stretching)
-            let index1 = indexingVariables.1
-            //
-            let day = indexingVariables.2
-            //
-            // Update Tracking
-            // True/False
-            let currentBool = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] as! Bool
-            
-            // Update
-            schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
-            // Update Badges
-            ReminderNotifications.shared.updateBadges()
-            
-            UserDefaults.standard.set(schedules, forKey: "schedules")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
-            
-            // Update Tracking
-            self.updateWeekProgress()
-            self.updateTracking()
-            
-            // Update row
-            let indexPathToReload = NSIndexPath(row: 2, section: 0)
-            self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
-            self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
-            self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
+            // Reload
+            ScheduleVariables.shared.shouldReloadChoice = true
+            let indexPath = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
+            // Find checkmark button and use this for markAsCompleted function
+            if let cell = self.scheduleTable.cellForRow(at: indexPath as IndexPath) {
+                for view in (cell.subviews) {
+                    if view is UIButton {
+                        // Select only if unselected
+                        if (view as! UIButton).backgroundColor != Colors.green {
+                            (view as! UIButton).sendActions(for: .touchUpInside)
+                            break
+                        }
+                    }
+                }
+            }
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
@@ -1640,7 +1620,7 @@ extension ScheduleScreen {
     
     //
     // MARK: Mark as completed
-        // Handler for the long touch on the cell, the user can mark as completed themselves
+        // Handler for the checkmark on the cell, the user can mark as completed themselves
         // Also marks as incomplete if previously comleted, note: rename
     @IBAction func markAsCompleted(_ sender: UIButton) {
         
@@ -2032,7 +2012,8 @@ extension ScheduleScreen {
                     // Reload the finalChoiceScreen Session after a delay
                     let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
                     self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
-                    self.selectRow(indexPath: indexPathToReload as IndexPath)
+                    self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
+                    self.ensureCheckMarkGreen(indexPath: indexPathToReload as IndexPath)
                     self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
                     //
                     // Check if group is completed for the day
@@ -2066,7 +2047,8 @@ extension ScheduleScreen {
                     // Reload the finalChoiceScreen Session after a delay
                     let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[1] + 1, section: 0)
                     self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
-                    self.selectRow(indexPath: indexPathToReload as IndexPath)
+                    self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
+                    self.ensureCheckMarkGreen(indexPath: indexPathToReload as IndexPath)
                     self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
                     //
                     // Check if group is completed for the day
@@ -2090,10 +2072,11 @@ extension ScheduleScreen {
                                 // Animate initial choice group completion after slideRight() animation finished
                                 let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
                                 DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
-                                    let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
-                                    self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
-                                    self.selectRow(indexPath: indexPathToReload2 as IndexPath)
-                                    self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
+                                    let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
+                                    self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+                                    self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
+                                    self.ensureCheckMarkGreen(indexPath: indexPathToReload as IndexPath)
+                                    self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
                                 })
                             })
                         })
@@ -2119,20 +2102,27 @@ extension ScheduleScreen {
                 // Animate initial choice group completion after slideRight() animation finished
                 let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
                 DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
-                    let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
-                    self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
-                    self.selectRow(indexPath: indexPathToReload2 as IndexPath)
-                    self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
+                    let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
+                    self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+                    self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
+                    self.ensureCheckMarkGreen(indexPath: indexPathToReload as IndexPath)
+                    self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
                 })
                 updateDayIndicatorColours()
             }
         }
     }
     
-    func selectRow(indexPath: IndexPath) {
-        scheduleTable.selectRow(at: indexPath as IndexPath, animated: true, scrollPosition: .none)
-        // Called due to silly issue with highlighting cell messing up checkBox background color, see didSelectRow for more detail
-        scheduleTable.delegate?.tableView!(scheduleTable, didSelectRowAt: indexPath)
+    func ensureCheckMarkGreen(indexPath: IndexPath) {
+        if let cell = self.scheduleTable.cellForRow(at: indexPath as IndexPath) {
+            for view in (cell.subviews) {
+                if view is UIButton {
+                    if let image = (view as! UIButton).imageView?.image, image == #imageLiteral(resourceName: "CheckMark") {
+                        view.backgroundColor = Colors.green
+                    }
+                }
+            }
+        }
     }
     
     func animateFromLongPress() {
@@ -2146,10 +2136,11 @@ extension ScheduleScreen {
             // Animate initial choice group completion after slideRight() animation finished
             let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
             DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
-                let indexPathToReload2 = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
-                self.scheduleTable.reloadRows(at: [indexPathToReload2 as IndexPath], with: .automatic)
-                self.selectRow(indexPath: indexPathToReload2 as IndexPath)
-                self.scheduleTable.deselectRow(at: indexPathToReload2 as IndexPath, animated: true)
+                let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows[0], section: 0)
+                self.scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+                self.scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
+                self.ensureCheckMarkGreen(indexPath: indexPathToReload as IndexPath)
+                self.scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
                 self.updateDayIndicatorColours()
             })
         })

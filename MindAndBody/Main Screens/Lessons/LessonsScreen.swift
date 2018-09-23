@@ -13,7 +13,7 @@ import UIKit
 //
 // Lessons Screen Class -----------------------------------------------------------------------------
 //
-class LessonsScreen: UIViewController {
+class LessonsScreen: UIViewController, UIScrollViewDelegate {
     
     // Navigation
     @IBOutlet weak var closeButton: UIButton!
@@ -24,16 +24,22 @@ class LessonsScreen: UIViewController {
     
     // Title Array
     var lesson = ""
+    let titleLabel = UILabel()
+    let titleImage = UIImageView()
+    let imageHeight: CGFloat = 88 * 2.5
     
     // View did load
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        lessonScroll.delegate = self
 
         closeButton.tintColor = Colors.dark
         closeButton.backgroundColor = Colors.red.withAlphaComponent(0.97)
         closeButton.layer.cornerRadius = closeButton.bounds.height / 2
         closeButton.clipsToBounds = true
         
+        lessonScroll.contentInset = UIEdgeInsets(top: imageHeight, left: 0, bottom: 0, right: 0)
     }
     
     
@@ -43,37 +49,10 @@ class LessonsScreen: UIViewController {
         view.backgroundColor = Colors.light
         
         setupLesson(lesson: lesson)
-//
-//        // Label
-//        let lessonTextString = lessonsArray[selectedLesson[0]][selectedLesson[1]] + "Lesson"
-//        let lessonText = NSLocalizedString(lessonTextString, comment: "")
-//        // Text
-//        let attributedText = NSMutableAttributedString(string: NSLocalizedString(lessonText, comment: ""))
-//        let paragraphStyleE = NSMutableParagraphStyle()
-//        paragraphStyleE.alignment = .natural
-//        paragraphStyleE.lineSpacing = 2
-//        //
-//        attributedText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyleE, range: NSMakeRange(0, attributedText.length))
-//        //
-//        lessonsLabel.attributedText = attributedText
-//        //
-//        lessonsLabel.font = UIFont(name: "SFUIDisplay-light", size: 20)
-//        lessonsLabel.textColor = .black
-//        lessonsLabel.textAlignment = .natural
-//        lessonsLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-//        lessonsLabel.numberOfLines = 0
-//        //        lessonsLabel.frame = CGRect(x: 10, y: 20, width: lessonScroll.bounds.width - 20, height: 0)
-//        lessonsLabel.frame.size = lessonsLabel.sizeThatFits(CGSize(width: lessonScroll.bounds.width - 20, height: CGFloat.greatestFiniteMagnitude))
-//        lessonsLabel.frame = CGRect(x: 10, y: 20, width: lessonsLabel.bounds.width, height: lessonsLabel.bounds.height)
-//
-//        // Scroll
-//        lessonScroll.addSubview(lessonsLabel)
-//        lessonScroll.contentSize = CGSize(width: lessonsLabel.bounds.width, height: lessonsLabel.bounds.height + 40)
-//        lessonScroll.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     }
     
     func setupLesson(lesson: String) {
-        
+
         // Ensure Clear
         for element in lessonElements {
             element.removeFromSuperview()
@@ -85,13 +64,11 @@ class LessonsScreen: UIViewController {
         case "effort":
             
             // Title
-            let title = UILabel()
-            let titleImage = UIImageView()
-            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonEffort"))
+            setupTopTitle(titleLabel: titleLabel, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonEffort"))
             
             // Intro
             let intro = UILabel()
-            setupText(label: intro, text: "effortIntro", previous: titleImage, gap: 16)
+            setupIntro(label: intro, text: "effortIntro", gap: 16)
             // Intro Bullet points
             let introBullets = UILabel()
             setupBulletPoints(label: introBullets, text: "effortIntroBullet", style: "numbers",  previous: intro, gap: 0)
@@ -128,13 +105,11 @@ class LessonsScreen: UIViewController {
         // Breathing (Workout)
         case "breathingWorkout":
             // Title
-            let title = UILabel()
-            let titleImage = UIImageView()
-            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonWorkout"))
+            setupTopTitle(titleLabel: titleLabel, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonWorkout"))
             
             // Intro
             let intro = UILabel()
-            setupText(label: intro, text: "breathingWorkoutIntro", previous: titleImage, gap: 16)
+            setupIntro(label: intro, text: "breathingWorkoutIntro", gap: 16)
             
             // Workout Title
             let workoutTitle = UILabel()
@@ -180,13 +155,11 @@ class LessonsScreen: UIViewController {
         case "breathingYoga":
             
             // Title
-            let title = UILabel()
-            let titleImage = UIImageView()
-            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonYoga"))
+            setupTopTitle(titleLabel: titleLabel, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonYoga"))
             
             // Intro
             let intro = UILabel()
-            setupText(label: intro, text: "breathingYogaIntro", previous: titleImage, gap: 16)
+            setupIntro(label: intro, text: "breathingYogaIntro", gap: 16)
             
             // Mindfulness Title
             let mindfulTitle = UILabel()
@@ -228,13 +201,11 @@ class LessonsScreen: UIViewController {
         case "coreActivation":
             
             // Title
-            let title = UILabel()
-            let titleImage = UIImageView()
-            setupTopTitle(titleLabel: title, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonCore"))
+            setupTopTitle(titleLabel: titleLabel, title: lesson, titleColor: Colors.light, titleImageView: titleImage, titleImage: #imageLiteral(resourceName: "LessonCore"))
             
             // Intro
             let intro1 = UILabel()
-            setupText(label: intro1, text: "coreActivationIntro1", previous: titleImage, gap: 16)
+            setupIntro(label: intro1, text: "coreActivationIntro1", gap: 16)
             // Core muscles image
             let coreImage = UIImageView()
             setupImage(imageView: coreImage, image: getUncachedImage(named: "core@2x")!, previous: intro1, height: 88 * 2, gap: 0)
@@ -293,24 +264,38 @@ class LessonsScreen: UIViewController {
     
     func setupTopTitle(titleLabel: UILabel, title: String, titleColor: UIColor, titleImageView: UIImageView, titleImage: UIImage) {
         
-        let imageHeight: CGFloat = 88 * 2.5
         titleImageView.frame = CGRect(x: 0, y: 0, width: lessonScroll.bounds.width, height: imageHeight)
-        titleImageView.image = titleImage
         titleImageView.contentMode = .scaleAspectFill
+        titleImageView.layer.masksToBounds = true
         titleImageView.clipsToBounds = true
+//        titleImageView.image = titleImage
+        
+        let ratio1 = imageHeight / view.bounds.width
+        let ratio2 = view.bounds.width / imageHeight
+        let size = titleImage.size
+        let height = min(ratio1 * size.width, ratio2 * size.height)
+        let width = height * ratio2
+        let cropRect = CGRect(x: (size.width - width) / 2, y: (size.height - height) / 2, width: width, height: height)
+        
+        if let cgImage = titleImage.cgImage?.cropping(to: cropRect) {
+            let imageCropped = UIImage(cgImage: cgImage)
+            titleImageView.image = imageCropped
+        } else {
+            titleImageView.image = titleImage
+        }
         
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 0
         titleLabel.text = NSLocalizedString(title, comment: "")
         titleLabel.textColor = titleColor
         titleLabel.font = Fonts.lessonTitle
-        let size = titleLabel.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))
-        titleLabel.frame = CGRect(x: 16, y: titleImageView.frame.maxY - size.height - 8, width: view.bounds.width - 32, height: size.height)
+        let labelSize = titleLabel.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))
+        titleLabel.frame = CGRect(x: 16, y: titleImageView.frame.maxY - labelSize.height - 8, width: view.bounds.width - 32, height: labelSize.height)
         
         titleImageView.addSubview(titleLabel)
-        lessonScroll.addSubview(titleImageView)
+        view.insertSubview(titleImageView, belowSubview: closeButton)
         lessonElements.append(titleImageView)
-        lessonHeight = lessonHeight + imageHeight
+//        lessonHeight = lessonHeight + imageHeight
     }
     
     func setupSubtitle(titleLabel: UILabel, title: String, previous: UIView, gap: CGFloat) {
@@ -327,6 +312,32 @@ class LessonsScreen: UIViewController {
         
         lessonScroll.addSubview(titleLabel)
         lessonElements.append(titleLabel)
+        lessonHeight = lessonHeight + size.height + gap
+    }
+    
+    func setupIntro(label: UILabel, text: String, gap: CGFloat) {
+        
+        let minY = gap
+        
+        let plainString = NSLocalizedString(text, comment: "")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 2
+        let attributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font: Fonts.lessonText!,
+            NSAttributedStringKey.paragraphStyle: paragraphStyle,
+            NSAttributedStringKey.foregroundColor: Colors.dark
+        ]
+        let attributedString = NSMutableAttributedString(string: plainString, attributes: attributes)
+        
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.attributedText = attributedString
+        let size = label.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))
+        label.frame = CGRect(x: 16, y: minY, width: view.bounds.width - 32, height: size.height)
+        
+        lessonScroll.addSubview(label)
+        lessonElements.append(label)
         lessonHeight = lessonHeight + size.height + gap
     }
     
@@ -479,6 +490,33 @@ class LessonsScreen: UIViewController {
         lessonElements.append(titleLabel2)
         
         lessonHeight = lessonHeight + height + max(titleLabel1.bounds.height, titleLabel2.bounds.height) + gap
+    }
+    
+    // MARK: Did scroll
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let imageHeight: CGFloat = 88 * 2.5
+        let y = scrollView.frame.minY + scrollView.contentOffset.y + imageHeight
+        let labelCenter = imageHeight - (titleLabel.bounds.height / 2) - 8
+        if y < 0 {
+            titleImage.frame = CGRect(x: 0, y: 0, width: lessonScroll.bounds.width, height: imageHeight - y)
+            titleLabel.center.y = labelCenter - y
+        } else if y > 0 {
+            titleImage.frame = CGRect(x: 0, y: 0, width: lessonScroll.bounds.width, height: imageHeight)
+            titleImage.center.y = (imageHeight / 2) - y
+            titleLabel.center.y = labelCenter
+
+        } else if y == 0 {
+            titleImage.frame = CGRect(x: 0, y: 0, width: lessonScroll.bounds.width, height: imageHeight)
+            titleLabel.center.y = labelCenter
+        }
+        
+        // Hide image if off screen to avoid strange appearing of image when dismissing
+        if y > imageHeight {
+            titleImage.alpha = 0
+        } else {
+            titleImage.alpha = 1
+        }
     }
     
     // MARK: Close action

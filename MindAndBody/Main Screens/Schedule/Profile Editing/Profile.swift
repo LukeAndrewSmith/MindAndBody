@@ -55,7 +55,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         
         UIApplication.shared.statusBarStyle = .lightContent
         
-        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("profile", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
+        setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("profile", comment: ""), separator: true, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: false)
         
         
         leftItem.tintColor = Colors.red
@@ -75,6 +75,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         progressBar.trackTintColor = Colors.dark
         progressBar.progressTintColor = Colors.green
         progressBar.setProgress(0, animated: true)
+        progressBar.addShadow()
         
         //
         // Previous question swipe

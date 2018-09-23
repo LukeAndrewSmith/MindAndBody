@@ -127,6 +127,8 @@
 "6months" = "6 Months";
 "1year" = "Current Year";
 "all" = "All";
+//
+"%acheived" = "% Acheived";
 
 // Add ons to dates 1st/2nd/3rd/th
 "st" = "st";
@@ -1603,7 +1605,7 @@
 "introductionGERelaxNoteTitle" = "Patience";
 "introductionGERelaxNoteText" = "Don’t be daunted if at first you find it difficult to meditate, and make sure you are not too hard on yourself – this would be counter-productive; learning how to meditate takes time. It is best to relax and not to force the mind to do what you want it to, but rather to encourage it in the right direction and to keep on trying.";
 "introductionGEPostureTitle" = "Posture";
-"introductionGEPostureText" = "It is common to practice meditation in a seated posture, cross legged, with a straight and tall back, or to meditate on a chair with your feet on the ground, and your back sitting tall (or even lying on the floor).\nIt can be helpful to start meditating with your eyes closed, as this can help avoid distractions.\n\nContinue on to the introduction section for the first meditation practice.";
+"introductionGEPostureText" = "It is common to practice meditation in a seated posture, cross legged, with a straight and tall back, or to meditate on a chair with your feet on the ground, and your back sitting tall, or even lying on the floor.\nIt can be helpful to start meditating with your eyes closed, as this can help avoid distractions.\n\nContinue on to the introduction section for the first meditation practice.";
 
 // Focused, Breathing
 "introduction1EIntro" = "This meditation technique can be described as the taming of your monkey mind. Your monkey mind represents the general noise and chatter of the brain, and focused meditation aims at developing the ability to sit above this, calm it, and be present in the moment without your attention wandering. It entails giving a simple job to the monkey mind, a meditation object to observe, your breath for example. This object should be observed and relaxed into.";
@@ -3701,6 +3703,10 @@
 
         "routineBuilding" = "Routine Building";
         "trainingPhilosophy" = "Training Philosophy";
+
+
+// Note for schedule, no sessions
+"noScheduleNote" = "You have not yet created a schedule;  create one by tapping the button in the top right of the screen.";
 
 //
 // Walkthrough

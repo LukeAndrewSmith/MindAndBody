@@ -205,6 +205,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func setupView() {
         // View
+        detailView.addShadow()
         detailView.backgroundColor = Colors.dark
         separator.backgroundColor = .black
         separator.alpha = 0.5

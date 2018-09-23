@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 //
 // Meditation Choice Class -------------------------------------------------------------------------------------------
 //
@@ -58,15 +57,17 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 
         // Add background images
-//        addBackgroundImages()
+        addBackgroundImages()
 //        // Ensure table loaded and images behind
-//        tableView.reloadData()
-        
-        addBackgroundImage(withBlur: true, fullScreen: true, image: "mountains")
+        tableView.reloadData()
+//
+//        addBackgroundImage(withBlur: true, fullScreen: true, image: "mountains")
         // mountainsRedBlue purpleTree mountains
         
         view.backgroundColor = Colors.light
-//        tableView.separatorInset = UIEdgeInsets(top: 0, left: 88, bottom: 0, right: 0)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 88, bottom: 0, right: 0)
+        
+        
     }
     
     func addBackgroundImages() {
@@ -126,12 +127,16 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         //
         let title = UILabel()
         title.text = NSLocalizedString(guidedSessions[indexPath.section][indexPath.row], comment: "")
-        title.font = Fonts.meditationTitle
-        title.textColor = Colors.light
+        if IPhoneType.shared.iPhoneType() == 0 {
+            title.font = Fonts.meditationTitleSmall
+        } else {
+            title.font = Fonts.meditationTitle
+        }
+        title.textColor = Colors.dark
         title.numberOfLines = 0
         title.lineBreakMode = .byWordWrapping
         let size = title.sizeThatFits(CGSize(width: view.bounds.width - 32, height: .greatestFiniteMagnitude))
-        title.frame = CGRect(x: 16, y: 0, width: view.bounds.width - 32, height: size.height)
+        title.frame = CGRect(x: 88+8, y: 0, width: view.bounds.width - 32, height: size.height)
         title.center.y = (cellHeight / 2)
         cell.addSubview(title)
         

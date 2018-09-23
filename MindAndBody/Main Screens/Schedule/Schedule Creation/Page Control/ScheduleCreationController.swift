@@ -63,6 +63,7 @@ class ScheduleCreationController: UIViewController {
     
     func setupExplanationView() {
         
+        explanationView.addShadow()
         explanationView.backgroundColor = Colors.dark
         
         explanationLabel.textColor = Colors.light

@@ -163,6 +163,8 @@ class Lessons: UIViewController, UITableViewDataSource, UITableViewDelegate {
         backgroundImage.contentMode = .scaleAspectFill
         if indexPath.section == 0 {
             backgroundImage.center.y -= 36
+        } else if indexPath.section == 1 {
+            backgroundImage.center.y -= 10
         }
         cell.addSubview(backgroundImage)
         

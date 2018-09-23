@@ -196,8 +196,16 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         let viewHeight = UIScreen.main.bounds.height - ControlBarHeights.combinedHeight - ControlBarHeights.tabBarHeight - timeScaleStack.bounds.height
         
         // Chart
-        chartView.frame = CGRect(x: 8, y: timeScaleStack.bounds.height + 8, width: view.bounds.width - 16, height: viewHeight - 16 - 8)
+        chartView.frame = CGRect(x: 16, y: timeScaleStack.bounds.height + 8, width: view.bounds.width - 16, height: viewHeight - 16)
         view.addSubview(chartView)
+        
+        let testLabel = UILabel()
+        testLabel.text = NSLocalizedString("%acheived", comment: "")
+        testLabel.font = Fonts.smallElementLight!
+        testLabel.sizeToFit()
+        testLabel.center = CGPoint(x: testLabel.bounds.height/2, y: chartView.center.y)
+        testLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+        view.addSubview(testLabel)
         
         // No data
         chartView.noDataFont = Fonts.largeElementRegular
@@ -215,7 +223,8 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         
         // Y Axis
         let leftAxis = chartView.leftAxis
-//        leftAxis.axisLineWidth = 1
+        // MARK: Test!!!
+        leftAxis.axisLineWidth = 2
         leftAxis.axisLineColor = Colors.dark
         leftAxis.labelTextColor = Colors.dark
         leftAxis.labelFont = Fonts.smallElementRegular!
@@ -226,7 +235,8 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         
         // X Axis
         let xAxis = chartView.xAxis
-//        xAxis.axisLineWidth = 1
+        // MARK: Test!!!
+        xAxis.axisLineWidth = 2
         xAxis.axisLineColor = Colors.dark
         xAxis.axisLineColor = Colors.dark
         xAxis.labelTextColor = Colors.dark
@@ -369,6 +379,8 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         chartDataSet.circleRadius = 4
         chartDataSet.valueFont = UIFont(name: "SFUIDisplay-light", size: 10)!
         chartDataSet.valueTextColor = UIColor.clear
+        // MARK: TEst!!!!
+        chartDataSet.lineWidth = 2
         
         // Marker
         let marker: XYMarkerView = XYMarkerView(color: Colors.dark, font: Fonts.smallElementRegular!, textColor: Colors.light, insets: UIEdgeInsets(top: 3.0, left: 5.0, bottom: 8.0, right: 5.0), xAxisValueFormatter: DateValueFormatterMarker())
@@ -384,7 +396,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         
         // Axes setup
         chartView.xAxis.labelPosition = .bottom
-        chartView.xAxis.drawGridLinesEnabled = true
+        chartView.xAxis.drawGridLinesEnabled = false // true
         chartView.xAxis.gridColor = Colors.darkGray.withAlphaComponent(0.5)
         chartView.xAxis.drawAxisLineEnabled = true
         //
