@@ -405,8 +405,6 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][question] = Int(roundedInt)
         
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
     }
     
     
@@ -741,8 +739,6 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         let question = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][0]
         schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][selectedSection][question] = indexPath.row
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         //
         tableView.deselectRow(at: indexPath, animated: true)
         answerTableView.reloadData()

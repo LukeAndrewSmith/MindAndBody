@@ -61,8 +61,6 @@ class ScheduleViewQuestion: UIViewController {
         // Set user settings for schedule style to week
         schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         
         selectedStyle = 0
         nextAndUpdate()
@@ -75,8 +73,6 @@ class ScheduleViewQuestion: UIViewController {
         // Set user settings for schedule style to week
         schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         //
         // App helps create schedule, fill suggested sessions into week creator
         if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
@@ -103,8 +99,6 @@ class ScheduleViewQuestion: UIViewController {
             }
             //
             UserDefaults.standard.set(schedules, forKey: "schedules")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
             
             // Create temporary week view array, as week is viewed as full week
             TemporaryWeekArray.shared.createTemporaryWeekViewArray()

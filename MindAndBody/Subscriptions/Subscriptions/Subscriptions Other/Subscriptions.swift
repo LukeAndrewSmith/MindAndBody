@@ -128,7 +128,6 @@ class InAppManager: NSObject {
                         if isValidSubscription(expiryDate: expiryDate) {
                             // Valid subscription found
                             UserDefaults.standard.set(true, forKey: "userHasValidSubscription")
-                            ICloudFunctions.shared.pushToICloud(toSync: ["userHasValidSubscription"])
                             SubscriptionsCheck.shared.isValid = true
                             Loading.shared.shouldPresentLoading = false
                             // Broadcast success notification
@@ -152,7 +151,6 @@ class InAppManager: NSObject {
                         NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
                     }
                     UserDefaults.standard.set(false, forKey: "userHasValidSubscription")
-                    ICloudFunctions.shared.pushToICloud(toSync: ["userHasValidSubscription"])
                     SubscriptionsCheck.shared.isValid = false
                     Loading.shared.shouldPresentLoading = false
                     DispatchQueue.main.async {

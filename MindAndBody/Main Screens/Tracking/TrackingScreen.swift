@@ -113,7 +113,6 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
 //        trackingDictionary.updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
 //
 //        UserDefaults.standard.set(trackingDictionary, forKey: "trackingDictionary")
-//        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionary"])
 //
 //    }
     
@@ -200,9 +199,11 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         view.addSubview(chartView)
         
         let testLabel = UILabel()
+//        testLabel.text = NSLocalizedString("%", comment: "")
         testLabel.text = NSLocalizedString("%acheived", comment: "")
         testLabel.font = Fonts.smallElementLight!
         testLabel.sizeToFit()
+//        testLabel.center = CGPoint(x: 4+testLabel.bounds.width/2, y: chartView.frame.minY + 20)
         testLabel.center = CGPoint(x: testLabel.bounds.height/2, y: chartView.center.y)
         testLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
         view.addSubview(testLabel)

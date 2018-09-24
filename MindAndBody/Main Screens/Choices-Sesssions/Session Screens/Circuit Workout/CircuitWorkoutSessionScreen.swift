@@ -638,8 +638,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         movementWeights[rowIndex] = weightPicker.selectedRow(inComponent: 0)
         //
         UserDefaults.standard.set(movementWeights, forKey: "movementWeights")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["movementWeights"])
         //
         
         ActionSheet.shared.animateActionSheetDown()
@@ -1645,8 +1643,6 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
                 walkthroughs["Session2"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
             })
         }
     }

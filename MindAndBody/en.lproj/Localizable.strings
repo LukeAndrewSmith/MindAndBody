@@ -3548,7 +3548,7 @@
     "settings" = "Settings";
         //
         // Titles //
-        "backgroundImage" = "Background Image";
+        "backgroundImage" = "Meditation Background";
         "restTime" = "Rest Times";
         "customWarmupStretching" = "Custom Warmup/Stretching";
         "reset" = "Reset";
@@ -3763,7 +3763,7 @@
 "settings0T" = "Profile";
 "settings0" = "Your schedule chooses sessions for you based on your profile, update it whenever you have improved to keep the sessions tailored to you.";
 "settings1T" = "Automatic Sessions";
-"settings1" = "'30s' of a movement rather than '10 reps'; the app times each movement and rest for you, just watch and follow.\nAutomatic Yoga is the same but some extra settings need to be personalised to enable it.";
+"settings1" = "'30s' of a movement rather than '10 reps'; the app times each movement and rest for you, just watch and follow. Available for bodyweight circuit workouts, warmups and stretching sessions.\nAutomatic Yoga is the same but some extra settings need to be personalised to enable it.";
 "settings2T" = "Reminders";
 "settings2" = "Notifications that let you know what you have planned. Motivating comments can be included in the notification.";
 "settings3T" = "Custom";

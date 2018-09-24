@@ -391,7 +391,6 @@ enum scheduleDataStructures {
                 "1": false], // Practice
             
             // MARK: Meditation
-            // NOTE MIND HAS CHOICE OF GOING FOR A WALK, IF SELECTED WONT GO GREEN, WILL JUST TAKE BACK TO INITIAL SCREEN AND SET TO TRUE
             2: ["group": "meditation",
                  "isGroupCompleted": false,
                  "0": false, // Timer

@@ -302,8 +302,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
     }
     
     func setGroupLabels() {
@@ -548,8 +546,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     // update schedules
                     schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
                     UserDefaults.standard.set(schedules, forKey: "schedules")
-                        // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                     // update label
                     setGroupLabels()
                 }
@@ -611,8 +607,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(indexPathForRow?.row)!].remove(at: indexOfDrag)
                     //
                     UserDefaults.standard.set(schedules, forKey: "schedules")
-                        // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                     // Remove the label being dragged
                     cell.groupLabelArray[indexOfDrag].tag = 0
                     cell.groupLabelArray[indexOfDrag].alpha = 0
@@ -891,8 +885,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
                         }
                         UserDefaults.standard.set(schedules, forKey: "schedules")
-                                // Sync
-                        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                     } else {
                         let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
 
@@ -923,8 +915,6 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 // update schedules
                         schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
                         UserDefaults.standard.set(schedules, forKey: "schedules")
-                                // Sync
-                        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                 }
                 
                     draggingLabel.removeFromSuperview()

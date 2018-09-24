@@ -347,8 +347,6 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         // Remove session
         meditationArray.remove(at: session)
         UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
         //
         customTable.reloadData()
     }
@@ -392,8 +390,6 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
             meditationArray.append(newSession)
             //
             UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
             
             // Select new session
             let lastIndex = meditationArray.count - 1

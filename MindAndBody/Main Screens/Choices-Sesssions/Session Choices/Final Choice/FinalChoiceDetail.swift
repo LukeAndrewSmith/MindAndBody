@@ -534,15 +534,15 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
                 } else {
                     performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
                 }
-            // Bodyweight classic (has option for timed sessions)
-            case "classicBodyweightFull", "classicBodyweightUpper", "classicBodyweightLower":
-                // Timed Session off
-                if timedSession == 0 {
-                    performSegue(withIdentifier: "sessionSegue", sender: self)
-                    // Timed Session On
-                } else {
-                    performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
-                }
+//            // Bodyweight classic (has option for timed sessions)
+//            case "classicBodyweightFull", "classicBodyweightUpper", "classicBodyweightLower":
+//                // Timed Session off
+//                if timedSession == 0 {
+//                    performSegue(withIdentifier: "sessionSegue", sender: self)
+//                    // Timed Session On
+//                } else {
+//                    performSegue(withIdentifier: "sessionSegueTimeBased", sender: self)
+//                }
             // Normal Session (classic gym, not timed sessions)
             default:
                 performSegue(withIdentifier: "sessionSegue", sender: self)

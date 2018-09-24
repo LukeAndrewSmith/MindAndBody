@@ -268,8 +268,6 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         // New array
         customSessionsArray[SelectedSession.shared.selectedSession[0]]!.remove(at: session)
         UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
         //
         fillImageArray()
         customTable.reloadData()
@@ -357,8 +355,6 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             // Set
             UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
             
             // Select new session
             self.selectedSession = lastIndex

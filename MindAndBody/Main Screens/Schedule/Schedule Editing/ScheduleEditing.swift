@@ -54,8 +54,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 appChoosesSessionsSwitch.isOn = false
                 // Update
                 UserDefaults.standard.set(schedules, forKey: "schedules")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
             }
         }
     }
@@ -345,8 +343,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     // SET NEW ARRAY
                     UserDefaults.standard.set(schedules, forKey: "schedules")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                     
                     // Update name in table
                     cell?.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
@@ -432,8 +428,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
     }
     
     @objc func segmentHandler(sender: UISegmentedControl) {
@@ -450,8 +444,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                     break
             }
             UserDefaults.standard.set(schedules, forKey: "schedules")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
             
             // Reset notifications
             ReminderNotifications.shared.setNotifications()
@@ -498,8 +490,6 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "selectedSchedule"])
             //
             self.updateWeekProgress()
             self.updateTracking()

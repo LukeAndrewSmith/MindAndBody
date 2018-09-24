@@ -195,8 +195,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             settings["RestTimes"]![selectedRow] = restTimesArray[restTimePicker.selectedRow(inComponent: 0)]
             defaults.set(settings, forKey: "userSettings")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             //
         // Reminders
         } else if sender == okButton2 {
@@ -204,8 +202,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Save
             settings["ReminderNotifications"]![selectedRow] = convertPickerToMinutes(picker: timePicker)
             UserDefaults.standard.set(settings, forKey: "userSettings")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             // Update Indicator
             let indexPath = NSIndexPath(row: selectedRow, section: 0)
             let cell = tableView.cellForRow(at: indexPath as IndexPath)
@@ -228,8 +224,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         // Save
         settings["ReminderNotifications"]![selectedRow] = -1
         UserDefaults.standard.set(settings, forKey: "userSettings")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         // Update Indicator
         let indexPath = NSIndexPath(row: selectedRow, section: selectedSection)
         let cell = tableView.cellForRow(at: indexPath as IndexPath)
@@ -365,19 +359,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let backgroundIndex = settings["BackgroundImage"]![0]
                 // Set image background based on index
-                if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-                    backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-                    
-                    // If grey background
-                } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-                    //
-                    backgroundImageView.layer.borderWidth = 1
-                    backgroundImageView.layer.borderColor = Colors.dark.cgColor
-                    //
-                    backgroundImageView.backgroundColor = Colors.darkGray
-                    
-                    // If red-orange background
-                }
+                backgroundImageView.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
                 // Final background image view customization
                 backgroundImageView.contentMode = .scaleToFill
                 cell.addSubview(backgroundImageView)
@@ -623,15 +605,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     cell?.detailTextLabel?.text = NSLocalizedString("imperial", comment: "")
                     settings["Units"]![0] = 1
                     UserDefaults.standard.set(settings, forKey: "userSettings")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                 // lb --> kg
                 } else if units == 1 {
                     cell?.detailTextLabel?.text = NSLocalizedString("metric", comment: "")
                     settings["Units"]![0] = 0
                     UserDefaults.standard.set(settings, forKey: "userSettings")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                 }
                 tableView.deselectRow(at: indexPath, animated: true)
                 //
@@ -784,8 +762,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     }
                     // Set
                     UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
                     
                     //
                     // Alert View indicating need for app reset
@@ -835,7 +811,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     UIAlertAction in
                     
                     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-                    ICloudFunctions.shared.removeAll()
                     ReminderNotifications.shared.cancelNotifications()
                     
                     // Alert View
@@ -882,8 +857,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             }
             //
             UserDefaults.standard.set(settings, forKey: "userSettings")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             
         // Reminders
         case motivationSwitch:
@@ -899,8 +872,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             }
             //
             UserDefaults.standard.set(settings, forKey: "userSettings")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             //
             // Update notifications
             ReminderNotifications.shared.setNotifications()
@@ -919,8 +890,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             }
             //
             UserDefaults.standard.set(settings, forKey: "userSettings")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
             
         default: break
         }
@@ -1292,8 +1261,6 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
                 walkthroughs["Settings"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
             })
         }
     }

@@ -247,7 +247,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         let backgroundIndex = settings["BackgroundImage"]![0]
         switch backgroundIndex {
         // All Black, white presets
-        case 1,2,3,5,6, BackgroundImages.backgroundImageArray.count:
+        case 1,2,3,5,6:
             presets.setTitleColor(Colors.light, for: .normal)
             presetsDetail.textColor = Colors.light
             duration.setTitleColor(Colors.dark, for: .normal)
@@ -616,8 +616,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 meditationArray[selectedPreset]["Bells"]?[lastIndex][1] = convertToSeconds()
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 
                 // Change duration button detail text label
                 let hmsArray = convertToHMS(time: 0, index: 0)
@@ -647,8 +645,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 meditationArray[selectedPreset]["Bells"]?[0][0] = selectedStartingBell
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
                 startingBellImage.image = bellsImages[selectedStartingBell]
                 startingBellNone.alpha = 0
@@ -784,8 +780,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 
                 //
                 removeView = false
@@ -840,8 +834,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 meditationArray[selectedPreset]["Bells"]?[lastIndex][0] = selectedEndingBell
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
                 endingBellImage.image = bellsImages[selectedEndingBell]
                 endingBellNone.alpha = 0
@@ -867,8 +859,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 meditationArray[selectedPreset]["BackgroundSound"]?[0][0] = selectedBackgroundSound
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
                 backgroundSoundImage.image = backgroundSoundsImages[selectedBackgroundSound]
                 backgroundSoundNone.alpha = 0
@@ -909,8 +899,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         //
         defaults.set(meditationArray, forKey: "meditationTimer")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
         //
         updateRows()
     }
@@ -1014,8 +1002,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         //
         UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
         //
         ActionSheet.shared.animateActionSheetDown()
     }
@@ -1070,8 +1056,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         //
         UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
         //
         isDeleting = false
         //
@@ -1145,8 +1129,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             meditationArray[self.selectedPreset]["Name"]![0][0] = textField?.text!
             //
             UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
             
             self.presetsDetail.text = meditationArray[self.selectedPreset]["Name"]![0][0] as? String
         })
@@ -2034,8 +2016,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // [2] = bells, indexPath.row + 1 because array contains starting bell as well in position 0, therefore interval bells begin at 1 not 0
                 meditationArray[selectedPreset]["Bells"]?.remove(at: indexPath.row + 1)
                 defaults.set(meditationArray, forKey: "meditationTimer")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["meditationTimer"])
                 //
                 UIView.animate(withDuration: 0.2, animations: {
                     self.tableViewIntervalBells.reloadData()

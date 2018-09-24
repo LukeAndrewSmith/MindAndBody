@@ -136,7 +136,7 @@ class MeditationScreen: UIViewController {
         //
         switch backgroundIndex {
         // All Black
-        case 1,3,BackgroundImages.backgroundImageArray.count:
+        case 1,3:
             timerLabel.textColor = Colors.dark
             hideScreen.tintColor = Colors.dark
         // All White

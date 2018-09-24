@@ -703,8 +703,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         movementWeights[rowIndex] = weightPicker.selectedRow(inComponent: 0)
         //
         UserDefaults.standard.set(movementWeights, forKey: "movementWeights")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["movementWeights"])
         //
         
         ActionSheet.shared.animateActionSheetDown()
@@ -1691,8 +1689,6 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
                 walkthroughs["Session"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
             })
         }
     }

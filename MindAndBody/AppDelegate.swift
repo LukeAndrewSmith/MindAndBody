@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let domain = Bundle.main.bundleIdentifier!
 //        UserDefaults.standard.removePersistentDomain(forName: domain)
 //        ReminderNotifications.shared.cancelNotifications()
-//        ICloudFunctions.shared.removeAll()
 
         
 //        //
@@ -66,27 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let notInSessions = sessionsArray.subtracting(sortedSessionsArray)
 //        // Duplicates
 //        let duplicates = Array(Set(sortedSessionsArray.filter({ (i) in sortedSessionsArray.filter({ $0 == i }).count > 1})))
-        
-        
-        //
-        // iCloud Oberver
-        NotificationCenter.default.addObserver(
-            forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
-            object: NSUbiquitousKeyValueStore.default,
-            queue: OperationQueue.main) { notification in
-                //
-                NSUbiquitousKeyValueStore.default.synchronize()
-                ICloudFunctions.shared.pullToDefaults()
-        }
-        
-        //
-        // Sync all, only does something if new device but existing data on iCloud
-        if UserDefaults.standard.object(forKey: "userSettings") == nil {
-            NSUbiquitousKeyValueStore.default.synchronize()
-            ICloudFunctions.shared.pullToDefaults()
-        }
-        
-        
         
         //
         // Register Defaults --------------------------------------------------------------------------------
@@ -125,10 +103,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Walkthroughs
         UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughDictionary])
-        
-        
-        // Push everything to iCloud
-        ICloudFunctions.shared.pushToICloud(toSync: [""])
         
         //
         // Check if the user has a valid subscription

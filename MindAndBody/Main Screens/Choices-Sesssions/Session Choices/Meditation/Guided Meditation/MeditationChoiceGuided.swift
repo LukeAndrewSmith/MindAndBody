@@ -105,7 +105,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         let header = UIView()
         header.backgroundColor = Colors.dark
         let label = UILabel()
-        label.font = UIFont(name: "SFUIDisplay-Medium", size: 17)!
+        label.font = Fonts.verySmallElementRegular
         label.textColor = Colors.light
         label.text = NSLocalizedString(guidedTitles[section], comment: "")
         label.frame = CGRect(x: 16, y: 0, width: view.bounds.width, height: 22)
@@ -127,11 +127,13 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
         //
         let title = UILabel()
         title.text = NSLocalizedString(guidedSessions[indexPath.section][indexPath.row], comment: "")
+        
         if IPhoneType.shared.iPhoneType() == 0 {
             title.font = Fonts.meditationTitleSmall
         } else {
             title.font = Fonts.meditationTitle
         }
+        
         title.textColor = Colors.dark
         title.numberOfLines = 0
         title.lineBreakMode = .byWordWrapping

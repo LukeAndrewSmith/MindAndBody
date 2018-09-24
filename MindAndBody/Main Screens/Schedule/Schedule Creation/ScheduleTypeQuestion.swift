@@ -83,8 +83,6 @@ class ScheduleTypeQuestion: UIViewController {
             }
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "selectedSchedule"])
         }
         
     }
@@ -229,8 +227,6 @@ class ScheduleTypeQuestion: UIViewController {
             //
             // SET NEW ARRAY
             UserDefaults.standard.set(schedules, forKey: "schedules")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule", "schedules"])
             //
             // Indicate that new schedule has been created
             ScheduleVariables.shared.didCreateNewSchedule = true

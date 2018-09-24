@@ -73,7 +73,7 @@ class BackgroundImageCollection: UICollectionViewController {
     // Number of items in section
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //
-        return BackgroundImages.backgroundImageArray.count + 1
+        return BackgroundImages.backgroundImageArray.count
     }
     
     
@@ -129,38 +129,19 @@ class BackgroundImageCollection: UICollectionViewController {
         let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         let backgroundIndex = settings["BackgroundImage"]![0]
         
-        //
         // Section
+        // Image
+        cell.backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[indexPath.item])
+        
+        // Selection Label
         //
-        if indexPath.row < BackgroundImages.backgroundImageArray.count {
-            // Image
-            cell.backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[indexPath.item])
-            
-            // Selection Label
-            //
-            if indexPath.item == backgroundIndex {
-                cell.selectionLabel.backgroundColor = Colors.light
-                cell.isSelected = true
-            }
-            //
-            if cell.isSelected == false {
-                cell.selectionLabel.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-            }
-            //
-        } else if indexPath.row == BackgroundImages.backgroundImageArray.count {
-            //
-            cell.backgroundImage.image = nil
-            cell.backgroundImage.backgroundColor = Colors.darkGray
-            
-            // Selection Label
-            if indexPath.item == backgroundIndex {
-                cell.selectionLabel.backgroundColor = Colors.light
-                cell.isSelected = true
-            }
-            //
-            if cell.isSelected == false {
-                cell.selectionLabel.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-            }
+        if indexPath.item == backgroundIndex {
+            cell.selectionLabel.backgroundColor = Colors.light
+            cell.isSelected = true
+        }
+        //
+        if cell.isSelected == false {
+            cell.selectionLabel.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
         }
         
         //
@@ -177,12 +158,7 @@ class BackgroundImageCollection: UICollectionViewController {
         //
         var deselectIndex = NSIndexPath()
         // Image
-        if backgroundIndex < BackgroundImages.backgroundImageArray.count {
-            deselectIndex = NSIndexPath(item: backgroundIndex, section: 0)
-            // Colour
-        } else {
-            deselectIndex = NSIndexPath(item: backgroundIndex - BackgroundImages.backgroundImageArray.count, section: 0)
-        }
+        deselectIndex = NSIndexPath(item: backgroundIndex, section: 0)
         //
         collectionView.deselectItem(at: deselectIndex as IndexPath, animated: false)
         
@@ -197,8 +173,6 @@ class BackgroundImageCollection: UICollectionViewController {
         // Image
         settings["BackgroundImage"]![0] = indexPath.item
         UserDefaults.standard.set(settings, forKey: "userSettings")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
         //
         collectionView.reloadData()
     }

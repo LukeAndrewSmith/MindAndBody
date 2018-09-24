@@ -196,8 +196,6 @@ class CustomScheduleWeekCell: UITableViewCell {
         }
         
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         
         // Update label
         sessionsLabel.text = String(Int(sessionsLabel.text!)! + 1)
@@ -242,8 +240,6 @@ class CustomScheduleWeekCell: UITableViewCell {
         //
     
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         
         // Update label
         sessionsLabel.text = String(Int(sessionsLabel.text!)! - 1)

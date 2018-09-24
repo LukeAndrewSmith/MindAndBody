@@ -1159,8 +1159,6 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 var walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
                 walkthroughs["Session2"] = true
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["walkthroughs"])
             })
         }
     }

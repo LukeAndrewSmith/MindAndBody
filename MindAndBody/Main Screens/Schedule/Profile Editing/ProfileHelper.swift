@@ -68,8 +68,6 @@ class ProfileFunctions {
         
         // Set new difficulty levels
         UserDefaults.standard.set(difficultyLevels, forKey: "difficultyLevels")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["difficultyLevels"])
         
         
         // Check for setting weight suggestions
@@ -147,8 +145,6 @@ class ProfileFunctions {
             let newWeightDict = lower.merging(upper) { (current, _) in current }
             //
             UserDefaults.standard.set(newWeightDict, forKey: "movementWeights")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["movementWeights"])
         }
     }
     

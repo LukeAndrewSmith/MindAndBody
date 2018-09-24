@@ -121,60 +121,64 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableView {
         case scheduleTable:
-            // First choice == session choice
-            if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-                if schedules.count != 0 {
-                    // Get number of rows
-                    var count = 0
-                    if scheduleStyle == 0 {
-                        count = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
-                    } else if scheduleStyle == 1 {
-                        count = TemporaryWeekArray.shared.weekArray.count + 1
-                    }
-                    
-                    // If height set to 72 is too big
-                    if CGFloat(count) * presetCellHeight > (scheduleTable.bounds.height - headerHeight) {
-                        
-                        // Height calculated to fit screen unless it gets too small
-                        let height = (scheduleTable.bounds.height - headerHeight) / CGFloat(count)
-                        if height < 49 {
-                            cellHeight = 49
-                            return 49
-                        } else {
-                            cellHeight = height
-                            return height
-                        }
-                        
-                    // Height 72
-                    } else {
-                        cellHeight = presetCellHeight
-                        return presetCellHeight
-                    }
-                } else {
-                    cellHeight = presetCellHeight
-                    return presetCellHeight
-                }
-                
-            // Not first choice
-            } else {
-                // If too many choices, reduce size of cell
-                if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count) * 72) > (scheduleTable.bounds.height - headerHeight) {
-                    let height = (scheduleTable.bounds.height - headerHeight) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]]).count)
-                    cellHeight = height
-                    return height
-                    
-                // Height 72
-                } else {
-                    cellHeight = 72
-                    return 72
-                }
-            }
-            
+            calculateCellHeight()
+            return cellHeight
         case scheduleChoiceTable:
             return 47
         default:
             return 0
+        }
+    }
+    
+    func calculateCellHeight() {
+        // First choice == session choice
+        if ScheduleVariables.shared.choiceProgress[0] == -1 {
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            if schedules.count != 0 {
+                // Get number of rows
+                var count = 0
+                if scheduleStyle == 0 {
+                    count = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
+                } else if scheduleStyle == 1 {
+                    count = TemporaryWeekArray.shared.weekArray.count + 1
+                }
+                
+                // If height set to 72 is too big
+                if CGFloat(count) * presetCellHeight > (scheduleTable.bounds.height - headerHeight) {
+                    
+                    // Height calculated to fit screen unless it gets too small
+                    let height = (scheduleTable.bounds.height - headerHeight) / CGFloat(count)
+                    if height < 49 {
+                        cellHeight = 49
+//                        return 49
+                    } else {
+                        cellHeight = height
+//                        return height
+                    }
+                    
+                    // Height 72
+                } else {
+                    cellHeight = presetCellHeight
+//                    return presetCellHeight
+                }
+            } else {
+                cellHeight = presetCellHeight
+//                return presetCellHeight
+            }
+            
+            // Not first choice
+        } else {
+            // If too many choices, reduce size of cell
+            if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count) * 72) > (scheduleTable.bounds.height - headerHeight) {
+                let height = (scheduleTable.bounds.height - headerHeight) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]]).count)
+                cellHeight = height
+//                return height
+                
+                // Height 72
+            } else {
+                cellHeight = 72
+//                return 72
+            }
         }
     }
     
@@ -185,6 +189,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         
         // Get cell
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        // Enure cell height is correct
+        calculateCellHeight()
         
         //
         switch tableView {
@@ -527,7 +533,6 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
             
             UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
-            ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule"])
             
             // If week view, create temporary week array
             TemporaryWeekArray.shared.createTemporaryWeekViewArray()
@@ -606,8 +611,6 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             // Reload table
             layoutViews()
             scheduleTable.reloadData()
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["schedules", "selectedSchedule"])
             // Tracking
             updateWeekGoal()
             updateWeekProgress()

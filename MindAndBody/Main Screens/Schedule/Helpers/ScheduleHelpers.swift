@@ -25,7 +25,195 @@ extension ScheduleScreen {
     //
     // MARK: Schedule Helper Functions
     
+    // MARK:- Navigation through days
+    // Handle Swipes
+    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
+        // Determine wether the swipe should be enabled
+        // Only should be enabled if schedule style is day view, or if swiping back from choices
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        var shouldBeEnabled = true
+        if schedules.count != 0 {
+            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
+                shouldBeEnabled = false
+            }
+        }
+        //
+        if ScheduleVariables.shared.choiceProgress[0] == -1 && shouldBeEnabled {
+            //
+            // Forward 1 day
+            if (extraSwipe.direction == .left) && ScheduleVariables.shared.selectedDay != 6{
+                // Update selected day
+                ScheduleVariables.shared.selectedDay += 1
+                
+                // Deselect all ScheduleVariables.shared.indicators
+                for i in 0...(stackArray.count - 1) {
+                    stackArray[i].font = stackFontUnselected
+                }
+                // Select ScheduleVariables.shared.indicator
+                stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
+                animateDayIndicatorToDay()
+                
+                // Animate
+                // Snapshot before update
+                let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+                snapShot1?.center.y += pageStackHeight.constant
+                view.insertSubview(snapShot1!, aboveSubview: scheduleTable)
+                // Move table and reload
+                scheduleTable.center.x = view.center.x + self.view.frame.size.width
+                scheduleTable.reloadData()
+                //
+                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                    snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
+                    self.scheduleTable.center.x = self.view.center.x
+                }, completion: { finish in
+                    snapShot1?.removeFromSuperview()
+                })
+                
+                //
+                // Back 1 day
+            } else if extraSwipe.direction == .right && ScheduleVariables.shared.selectedDay != 0 {
+                // Update selected day
+                ScheduleVariables.shared.selectedDay -= 1
+                
+                // Deselect all indicators
+                for i in 0...(stackArray.count - 1) {
+                    stackArray[i].font = stackFontUnselected
+                }
+                // Select indicator
+                stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
+                selectDay(day: ScheduleVariables.shared.selectedDay)
+                animateDayIndicatorToDay()
+                
+                // Animate
+                //
+                // Snapshot before update
+                let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+                snapShot1?.center.y += pageStackHeight.constant
+                view.insertSubview(snapShot1!, aboveSubview: scheduleTable)
+                // Move table and reload
+                scheduleTable.center.x = view.center.x - self.view.frame.size.width
+                scheduleTable.reloadData()
+                //
+                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                    snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
+                    self.scheduleTable.center.x = self.view.center.x
+                }, completion: { finish in
+                    self.scheduleTable.isHidden = false
+                    snapShot1?.removeFromSuperview()
+                })
+                
+            }
+        } else if ScheduleVariables.shared.choiceProgress[0] != -1 {
+            if extraSwipe.direction == .right {
+                maskAction()
+            }
+        }
+    }
     
+    //
+    // Day Tap
+    @objc func dayTapHandler(sender: UITapGestureRecognizer) {
+        let dayLabel = sender.view as! UILabel
+        let index = dayLabel.tag
+        //
+        // Forward
+        if index > ScheduleVariables.shared.selectedDay {
+            // Update selected day
+            ScheduleVariables.shared.selectedDay = index
+            
+            // Deselect all indicators
+            for i in 0...(stackArray.count - 1) {
+                stackArray[i].font = stackFontUnselected
+            }
+            // Select indicator
+            stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
+            animateDayIndicatorToDay()
+            
+            // Animate
+            scheduleTable.reloadData()
+            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+            snapShot1?.center.y += pageStackHeight.constant
+            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
+            snapShot2?.center.y += pageStackHeight.constant
+            //
+            view.addSubview(snapShot1!)
+            view.bringSubview(toFront: snapShot1!)
+            //
+            snapShot2?.center.x = view.center.x + self.view.frame.size.width
+            view.addSubview(snapShot2!)
+            view.bringSubview(toFront: snapShot2!)
+            //
+            scheduleTable.alpha = 0
+            //
+            view.isUserInteractionEnabled = false
+            //
+            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
+                snapShot2?.center.x = self.view.center.x
+            }, completion: { finish in
+                self.scheduleTable.alpha = 1
+                snapShot1?.removeFromSuperview()
+                snapShot2?.removeFromSuperview()
+                self.view.isUserInteractionEnabled = true
+            })
+            
+            //
+            // Back
+        } else if index < ScheduleVariables.shared.selectedDay {
+            // Update selected day
+            ScheduleVariables.shared.selectedDay = index
+            
+            // Deselect all indicators
+            for i in 0...(stackArray.count - 1) {
+                stackArray[i].font = stackFontUnselected
+            }
+            // Select indicator
+            stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
+            //selectDay(day: ScheduleVariables.shared.selectedDay)
+            animateDayIndicatorToDay()
+            
+            // Animate
+            scheduleTable.reloadData()
+            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
+            snapShot1?.center.y += pageStackHeight.constant
+            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
+            snapShot2?.center.y += pageStackHeight.constant
+            //
+            view.addSubview(snapShot1!)
+            view.bringSubview(toFront: snapShot1!)
+            //
+            snapShot2?.center.x = view.center.x - self.view.frame.size.width
+            view.addSubview(snapShot2!)
+            view.bringSubview(toFront: snapShot2!)
+            //
+            scheduleTable.alpha = 0
+            //
+            view.isUserInteractionEnabled = false
+            //
+            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
+                snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
+                snapShot2?.center.x = self.view.center.x
+            }, completion: { finish in
+                self.scheduleTable.alpha = 1
+                snapShot1?.removeFromSuperview()
+                snapShot2?.removeFromSuperview()
+                self.view.isUserInteractionEnabled = true
+            })
+            
+        }
+    }
+    
+    //
+    // MARK: selectDay
+    func selectDay(day: Int) {
+        // Select indicator
+        stackArray[day].alpha = 1
+        
+        // Reload table
+        scheduleTable.reloadData()
+    }
+    
+    // MARK:- Session choice helpers
     //
     // MARK: didSelectRowHandler
     func didSelectRowHandler(row: Int) {
@@ -1254,6 +1442,25 @@ extension ScheduleScreen {
     }
     
     //
+    // MARK: Choice Functions
+    func nextChoice() {
+        //
+        // Mask View
+        maskView(animated: true)
+        // Next Table info
+        slideLeft()
+        //
+        if isLastChoice() {
+            if isGroupCompleted(checkAll: true) {
+                maskView3.backgroundColor = Colors.green
+            } else {
+                maskView3.backgroundColor = Colors.red
+            }
+        }
+    }
+    
+    // MARK:- Tests
+    //
     // MARK: isCompleted()
     func isCompleted(row: Int) -> Bool {
         
@@ -1262,7 +1469,7 @@ extension ScheduleScreen {
             // row - 1 as title included
             return ScheduleVariables.shared.extraSessionCompletion[row - 1]
             
-        // Normal
+            // Normal
         } else {
             //
             let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
@@ -1287,7 +1494,7 @@ extension ScheduleScreen {
     }
     
     // Is group completed
-        // If on the last choice, this function checks if and element of a group (checkAll=false)/all the elements of a group have been performed (checkAll=true)
+    // If on the last choice, this function checks if and element of a group (checkAll=false)/all the elements of a group have been performed (checkAll=true)
     func isGroupCompleted(checkAll: Bool) -> Bool {
         
         // Extra session
@@ -1303,12 +1510,12 @@ extension ScheduleScreen {
             }
             return isCompleted
             
-        // Normal
+            // Normal
         } else {
             let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             //
             // Check if group is completed
-                // -1 for title
+            // -1 for title
             let nRows = scheduleTable.numberOfRows(inSection: 0) - 1
             var isCompleted = true
             //
@@ -1323,7 +1530,7 @@ extension ScheduleScreen {
                 indexInDay = TemporaryWeekArray.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["index"] as! Int
             }
             // Loop second array in scheduleTracking, if one if false, not completed (warmup/session/stretching)
-                // -2 because title included
+            // -2 because title included
             if checkAll {
                 // Switch groups
                 switch schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["group"] as! String {
@@ -1348,7 +1555,7 @@ extension ScheduleScreen {
                         }
                     }
                 }
-            // Just checks on part of the group
+                // Just checks on part of the group
             } else {
                 return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][indexInDay]["isGroupCompleted"] as! Bool
             }
@@ -1357,214 +1564,26 @@ extension ScheduleScreen {
         }
     }
     
-    //
-    // MARK: Choice Functions
-    func nextChoice() {
-        //
-        // Mask View
-        maskView(animated: true)
-        // Next Table info
-        slideLeft()
-        //
-        if isLastChoice() {
-            if isGroupCompleted(checkAll: true) {
-                maskView3.backgroundColor = Colors.green
-            } else {
-                maskView3.backgroundColor = Colors.red
-            }
-        }
-    }
-    
-    
-    
-    //
-    // Navigation through days ---------------------------------------------------------------------------------------------------------------------
-    //
-    // Handle Swipes
-    @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
-        // Determine wether the swipe should be enabled
-            // Only should be enabled if schedule style is day view, or if swiping back from choices
+    // Is day completed
+    // 0 == true, 1 == false, 2 == Nothing on the day
+    func isDayCompleted(day: Int) -> Int {
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        var shouldBeEnabled = true
-        if schedules.count != 0 {
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
-                shouldBeEnabled = false
-            }
-        }
-        //
-        if ScheduleVariables.shared.choiceProgress[0] == -1 && shouldBeEnabled {
-            //
-            // Forward 1 day
-            if (extraSwipe.direction == .left) && ScheduleVariables.shared.selectedDay != 6{
-                // Update selected day
-                ScheduleVariables.shared.selectedDay += 1
-                
-                // Deselect all ScheduleVariables.shared.indicators
-                for i in 0...(stackArray.count - 1) {
-                    stackArray[i].font = stackFontUnselected
+        var isCompleted = 0
+        // If not empty
+        if schedules.count != 0 && schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day].count != 0 {
+            // Loop day
+            for i in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day].count {
+                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][i]["isGroupCompleted"] as! Bool
+                    == false {
+                    // 1 == false
+                    isCompleted = 1
+                    break
                 }
-                // Select ScheduleVariables.shared.indicator
-                stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
-                animateDayIndicatorToDay()
-                
-                // Animate
-                // Snapshot before update
-                let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-                snapShot1?.center.y += pageStackHeight.constant
-                view.insertSubview(snapShot1!, aboveSubview: scheduleTable)
-                // Move table and reload
-                scheduleTable.center.x = view.center.x + self.view.frame.size.width
-                scheduleTable.reloadData()
-                //
-                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                    snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
-                    self.scheduleTable.center.x = self.view.center.x
-                }, completion: { finish in
-                    snapShot1?.removeFromSuperview()
-                })
-                
-            //
-            // Back 1 day
-            } else if extraSwipe.direction == .right && ScheduleVariables.shared.selectedDay != 0 {
-                // Update selected day
-                ScheduleVariables.shared.selectedDay -= 1
-                
-                // Deselect all indicators
-                for i in 0...(stackArray.count - 1) {
-                    stackArray[i].font = stackFontUnselected
-                }
-                // Select indicator
-                stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
-                selectDay(day: ScheduleVariables.shared.selectedDay)
-                animateDayIndicatorToDay()
-                
-                // Animate
-                //
-                // Snapshot before update
-                let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-                snapShot1?.center.y += pageStackHeight.constant
-                view.insertSubview(snapShot1!, aboveSubview: scheduleTable)
-                // Move table and reload
-                scheduleTable.center.x = view.center.x - self.view.frame.size.width
-                scheduleTable.reloadData()
-                //
-                UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                    snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
-                    self.scheduleTable.center.x = self.view.center.x
-                }, completion: { finish in
-                    self.scheduleTable.isHidden = false
-                    snapShot1?.removeFromSuperview()
-                })
-                
             }
-        } else if ScheduleVariables.shared.choiceProgress[0] != -1 {
-            if extraSwipe.direction == .right {
-                maskAction()
-            }
+        } else {
+            return 2
         }
-    }
-    
-    //
-    // Day Tap
-    @objc func dayTapHandler(sender: UITapGestureRecognizer) {
-        let dayLabel = sender.view as! UILabel
-        let index = dayLabel.tag
-        //
-        // Forward
-        if index > ScheduleVariables.shared.selectedDay {
-            // Update selected day
-            ScheduleVariables.shared.selectedDay = index
-            
-            // Deselect all indicators
-            for i in 0...(stackArray.count - 1) {
-                stackArray[i].font = stackFontUnselected
-            }
-            // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
-            animateDayIndicatorToDay()
-
-            // Animate
-            scheduleTable.reloadData()
-            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-            snapShot1?.center.y += pageStackHeight.constant
-            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-            snapShot2?.center.y += pageStackHeight.constant
-            //
-            view.addSubview(snapShot1!)
-            view.bringSubview(toFront: snapShot1!)
-            //
-            snapShot2?.center.x = view.center.x + self.view.frame.size.width
-            view.addSubview(snapShot2!)
-            view.bringSubview(toFront: snapShot2!)
-            //
-            scheduleTable.alpha = 0
-            //
-            view.isUserInteractionEnabled = false
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
-                snapShot2?.center.x = self.view.center.x
-            }, completion: { finish in
-                self.scheduleTable.alpha = 1
-                snapShot1?.removeFromSuperview()
-                snapShot2?.removeFromSuperview()
-                self.view.isUserInteractionEnabled = true
-            })
-            
-            //
-            // Back
-        } else if index < ScheduleVariables.shared.selectedDay {
-            // Update selected day
-            ScheduleVariables.shared.selectedDay = index
-            
-            // Deselect all indicators
-            for i in 0...(stackArray.count - 1) {
-                stackArray[i].font = stackFontUnselected
-            }
-            // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
-            //selectDay(day: ScheduleVariables.shared.selectedDay)
-            animateDayIndicatorToDay()
-            
-            // Animate
-            scheduleTable.reloadData()
-            let snapShot1 = scheduleTable.snapshotView(afterScreenUpdates: false)
-            snapShot1?.center.y += pageStackHeight.constant
-            let snapShot2 = scheduleTable.snapshotView(afterScreenUpdates: true)
-            snapShot2?.center.y += pageStackHeight.constant
-            //
-            view.addSubview(snapShot1!)
-            view.bringSubview(toFront: snapShot1!)
-            //
-            snapShot2?.center.x = view.center.x - self.view.frame.size.width
-            view.addSubview(snapShot2!)
-            view.bringSubview(toFront: snapShot2!)
-            //
-            scheduleTable.alpha = 0
-            //
-            view.isUserInteractionEnabled = false
-            //
-            UIView.animate(withDuration: AnimationTimes.animationTime1, animations: {
-                snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
-                snapShot2?.center.x = self.view.center.x
-            }, completion: { finish in
-                self.scheduleTable.alpha = 1
-                snapShot1?.removeFromSuperview()
-                snapShot2?.removeFromSuperview()
-                self.view.isUserInteractionEnabled = true
-            })
-            
-        }
-    }
-    
-    //
-    // MARK: selectDay
-    func selectDay(day: Int) {
-        // Select indicator
-        stackArray[day].alpha = 1
-        
-        // Reload table
-        scheduleTable.reloadData()
+        return isCompleted
     }
     
     
@@ -1618,6 +1637,8 @@ extension ScheduleScreen {
         return (index0, index1, selectedDay)
     }
     
+    
+    // MARK:- Update Schedule Tracking
     //
     // MARK: Mark as completed
         // Handler for the checkmark on the cell, the user can mark as completed themselves
@@ -1646,7 +1667,7 @@ extension ScheduleScreen {
                 }
             }
             
-            // Only called if is last choice
+            // Only called if group completed
             if shouldUpdateArraysAgain {
                 // Update Tracking
                 incrementExtraSessions()
@@ -1695,8 +1716,6 @@ extension ScheduleScreen {
                 // Update
                 schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = !currentBool
                 UserDefaults.standard.set(schedules, forKey: "schedules")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                 // Update Badges
                 ReminderNotifications.shared.updateBadges()
                 // Update Week Progress & Tracking
@@ -1731,8 +1750,6 @@ extension ScheduleScreen {
                 // Only called if is last choice
                 if shouldUpdateArraysAgain {
                     UserDefaults.standard.set(schedules, forKey: "schedules")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                     // Update Tracking
                     updateWeekProgress()
                     updateTracking()
@@ -1746,6 +1763,10 @@ extension ScheduleScreen {
                     if isLastChoice() {
                         animateFromLongPress()
                     }
+                    
+                // If was completed, but no incomplete, mark as false for other schedules
+                } else if currentBool {
+                    markAsGroupForOtherSchedules(markAs: false)
                 }
                 
                 // ScheduleVariables.shared.choiceProgress[0] was updated just for the duration of the mark as complete function, reset back to -1 now completed
@@ -1815,189 +1836,11 @@ extension ScheduleScreen {
         
         // Update
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
     }
     
-    
-    //
-    // MARK: Update Day Indicator colours
-    func updateDayIndicatorColours() {
-        //
-        // If scheduleStyle == day update pageStack, if not do nothing
-        if scheduleStyle == 0 {
-            for i in 0...6 {
-                let isCompleted = isDayCompleted(day: i)
-                // True, green
-                if isCompleted == 0 {
-                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.green
-                // False, red
-                } else if isCompleted == 1 {
-                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.red
-                // Nothing on day, White
-                } else if isCompleted == 2 {
-                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.light
-                }
-            }
-        }
-    }
-    
-    // Is day completed
-        // 0 == true, 1 == false, 2 == Nothing on the day
-    func isDayCompleted(day: Int) -> Int {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        var isCompleted = 0
-        // If not empty
-        if schedules.count != 0 && schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day].count != 0 {
-            // Loop day
-            for i in 0..<schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day].count {
-                if schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][i]["isGroupCompleted"] as! Bool
-                    == false {
-                    // 1 == false
-                    isCompleted = 1
-                    break
-                }
-            }
-        } else {
-            return 2
-        }
-        return isCompleted
-    }
-    
-    
-    //
-    // Should scroll be enabled
-    func scheduleTableScrollCheck() {
-        
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-
-        var nRows = 0
-        // Note: +1 for extra sessions cell
-        if schedules.count != 0 {
-            if scheduleStyle == 0 {
-                nRows = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
-            } else {
-                nRows = TemporaryWeekArray.shared.weekArray.count + 1
-            }
-        }
-        
-        var rowHeight = Int()
-        // If first screen of week view, height 49, else 72
-        if scheduleStyle == 1 && ScheduleVariables.shared.selectedRows[0] == -1 {
-            rowHeight = 49
-        } else {
-            rowHeight = 72
-        }
-        let totalRowHeights = CGFloat(nRows * rowHeight)
-        
-        // Enabled
-        if headerHeight + totalRowHeights <= scheduleTable.bounds.height {
-            scheduleTable.isScrollEnabled = false
-        } else {
-            scheduleTable.isScrollEnabled = true
-        }
-    }
-    
-    //
-    // Check if session choice needs an explanation
-    func needsExplanation() -> Bool {
-        switch ScheduleVariables.shared.choiceProgress[0] {
-            
-        // Workout
-        case 0:
-            switch ScheduleVariables.shared.choiceProgress[1] {
-            case 2: return true
-            default: return false
-            }
-            
-        // Yoga
-        case 1:
-            switch ScheduleVariables.shared.choiceProgress[1] {
-            case 1: return true
-            default: return false
-            }
-            
-        // Meditation
-        case 2:
-            switch ScheduleVariables.shared.choiceProgress[1] {
-            default: return false
-            }
-            
-        // Endurance
-        case 3:
-            switch ScheduleVariables.shared.choiceProgress[1] {
-            case 1,4: return true
-            default: return false
-            }
-            
-        // Flexibility
-        case 4:
-            switch ScheduleVariables.shared.choiceProgress[1] {
-            default: return false
-            }
-            
-        // Extra Sessions
-        case 723:
-            switch ScheduleVariables.shared.choiceProgress[1] {
-            case 1: return true
-            default: return false
-            }
-            
-        default: return false
-        }
-    }
-    
-    @objc func presentExplanation() {
-        
-        let text = sessionData.sessionChoiceExplanations[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]]!
-        
-        // Setup
-        walkthroughNextButton.addTarget(self, action: #selector(explanationNextAction), for: .touchUpInside)
-        walkthroughView = setWalkthrough(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, separator: walkthroughLabelSeparator, nextButton: walkthroughNextButton, backButton: walkthroughBackButton, highlight: walkthroughHighlight, simplePopup: true)
-        
-        // Label
-        walkthroughLabelTitle.text = NSLocalizedString(text + "T", comment: "")
-        
-        walkthroughLabel.text = NSLocalizedString(text, comment: "")
-        walkthroughLabel.frame.size = walkthroughLabel.sizeThatFits(CGSize(width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding, height: .greatestFiniteMagnitude))
-        
-        walkthroughLabel.frame = CGRect(
-            x: WalkthroughVariables.padding,
-            y: WalkthroughVariables.topHeight + WalkthroughVariables.padding,
-            width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding,
-            height: walkthroughLabel.frame.size.height)
-        walkthroughLabelView.frame = CGRect(
-            x: WalkthroughVariables.viewPadding,
-            y: (tabBarController?.tabBar.frame.minY)! - WalkthroughVariables.topHeight - walkthroughLabel.frame.size.height - WalkthroughVariables.viewPadding - WalkthroughVariables.twicePadding,
-            width: view.frame.size.width - WalkthroughVariables.twiceViewPadding,
-            height: WalkthroughVariables.topHeight + walkthroughLabel.frame.size.height + WalkthroughVariables.twicePadding)
-        
-        // Colour
-        walkthroughView.alpha = 1
-        walkthroughLabelView.backgroundColor = Colors.dark
-        walkthroughLabel.textColor = Colors.light
-        walkthroughLabelTitle.textColor = Colors.light
-        walkthroughLabelSeparator.backgroundColor = Colors.light
-        walkthroughNextButton.setTitleColor(Colors.light, for: .normal)
-        walkthroughBackButton.setTitleColor(Colors.light, for: .normal)
-        
-        // Highlight - none
-        walkthroughHighlight.frame = CGRect.zero
-    }
-    @objc func explanationNextAction() {
-        // Dismiss view
-        UIView.animate(withDuration: 0.4, animations: {
-            self.walkthroughView.alpha = 0
-        }, completion: { finished in
-            self.walkthroughView.alpha = 1
-            self.walkthroughView.removeFromSuperview()
-        })
-    }
-    
-    // MARK: - Reload Functions
-    // MARK: Reload Choice
+    // MARK: Mark as completed and animate
         // if shouldReloadChoice == true then this function is executed
-        // Once having completed a session from the schedule, this function gets called upon return to the schedule, if the group is complete then the tracking is updated, and the schedule is animated back to the initial choice of groups
+        // Once having completed a session from the schedule, this function gets called upon return to the schedule, it reloads the necessary rows and animates back to initial screen if necessary
     func markAsCompletedAndAnimate() {
         // MARK AS COMPLETED
         if ScheduleVariables.shared.shouldReloadChoice && ScheduleVariables.shared.choiceProgress[0] != -1 {
@@ -2095,10 +1938,7 @@ extension ScheduleScreen {
 
                 //
                 updateGroupTracking()
-                
-                // Mark first instance of group in all other schedules as completed
-                markAsGroupForOtherSchedules(markAs: true)
-                
+
                 // Animate initial choice group completion after slideRight() animation finished
                 let toAdd = AnimationTimes.animationTime1 + AnimationTimes.animationTime2
                 DispatchQueue.main.asyncAfter(deadline: .now() + toAdd, execute: {
@@ -2122,6 +1962,62 @@ extension ScheduleScreen {
                     }
                 }
             }
+        }
+    }
+    
+    //
+    // MARK: Update Day Indicator colours
+    func updateDayIndicatorColours() {
+        //
+        // If scheduleStyle == day update pageStack, if not do nothing
+        if scheduleStyle == 0 {
+            for i in 0...6 {
+                let isCompleted = isDayCompleted(day: i)
+                // True, green
+                if isCompleted == 0 {
+                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.green
+                    // False, red
+                } else if isCompleted == 1 {
+                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.red
+                    // Nothing on day, White
+                } else if isCompleted == 2 {
+                    (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.light
+                }
+            }
+        }
+    }
+    
+
+    //
+    // Should scroll be enabled
+    func scheduleTableScrollCheck() {
+        
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
+        var nRows = 0
+        // Note: +1 for extra sessions cell
+        if schedules.count != 0 {
+            if scheduleStyle == 0 {
+                nRows = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
+            } else {
+                nRows = TemporaryWeekArray.shared.weekArray.count + 1
+            }
+        }
+        
+        var rowHeight = Int()
+        // If first screen of week view, height 49, else 72
+        if scheduleStyle == 1 && ScheduleVariables.shared.selectedRows[0] == -1 {
+            rowHeight = 49
+        } else {
+            rowHeight = 72
+        }
+        let totalRowHeights = CGFloat(nRows * rowHeight)
+        
+        // Enabled
+        if headerHeight + totalRowHeights <= scheduleTable.bounds.height {
+            scheduleTable.isScrollEnabled = false
+        } else {
+            scheduleTable.isScrollEnabled = true
         }
     }
     
@@ -2172,7 +2068,6 @@ extension ScheduleScreen {
         updateTracking()
 
         UserDefaults.standard.set(schedules, forKey: "schedules")
-        ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
         
         // Mark first instance of group in all other schedules as completed
         if isGroupCompleted(checkAll: true) {
@@ -2182,8 +2077,20 @@ extension ScheduleScreen {
         updateDayIndicatorColours()
     }
     
+    // MARK:- Subscriptions
+    // Upon completion of check subscription, perform action
+    @objc func subscriptionCheckCompleted() {
+        Loading.shared.shouldPresentLoading = false
+        Loading.shared.endLoading()
+        print(SubscriptionsCheck.shared.isValid)
+        if !SubscriptionsCheck.shared.isValid {
+            self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
+        }
+    }
+    
+    // MARK:- View Setup/Layout
     // MARK: Reload View
-        // shouldReloadSchedule
+    // shouldReloadSchedule
     @objc func reloadView() {
         // RELOAD VIEW
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
@@ -2199,8 +2106,6 @@ extension ScheduleScreen {
                     selectedSchedule = schedules.count - 1
                 }
                 UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["selectedSchedule"])
             }
             ScheduleVariables.shared.selectedSchedule = selectedSchedule
             //
@@ -2218,19 +2123,7 @@ extension ScheduleScreen {
             scheduleTableScrollCheck()
         }
     }
-    
-    // MARK: Subscriptions
-    // Upon completion of check subscription, perform action
-    @objc func subscriptionCheckCompleted() {
-        Loading.shared.shouldPresentLoading = false
-        Loading.shared.endLoading()
-        print(SubscriptionsCheck.shared.isValid)
-        if !SubscriptionsCheck.shared.isValid {
-            self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
-        }
-    }
-    
-    // MARK: View Setup/Layout
+    // MARK: Setup views
     func setupViews() {
         // Set status bar to light
         UIApplication.shared.statusBarStyle = .lightContent
@@ -2448,5 +2341,102 @@ extension ScheduleScreen {
         } else {
             scheduleStyle = 0
         }
+    }
+    
+    // MARK:- Explanation of choices
+    //
+    // Check if session choice needs an explanation
+    func needsExplanation() -> Bool {
+        switch ScheduleVariables.shared.choiceProgress[0] {
+            
+        // Workout
+        case 0:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            case 2: return true
+            default: return false
+            }
+            
+        // Yoga
+        case 1:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            case 1: return true
+            default: return false
+            }
+            
+        // Meditation
+        case 2:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            default: return false
+            }
+            
+        // Endurance
+        case 3:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            case 1,4: return true
+            default: return false
+            }
+            
+        // Flexibility
+        case 4:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            default: return false
+            }
+            
+        // Extra Sessions
+        case 723:
+            switch ScheduleVariables.shared.choiceProgress[1] {
+            case 1: return true
+            default: return false
+            }
+            
+        default: return false
+        }
+    }
+    
+    @objc func presentExplanation() {
+        
+        let text = sessionData.sessionChoiceExplanations[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]]!
+        
+        // Setup
+        walkthroughNextButton.addTarget(self, action: #selector(explanationNextAction), for: .touchUpInside)
+        walkthroughView = setWalkthrough(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, separator: walkthroughLabelSeparator, nextButton: walkthroughNextButton, backButton: walkthroughBackButton, highlight: walkthroughHighlight, simplePopup: true)
+        
+        // Label
+        walkthroughLabelTitle.text = NSLocalizedString(text + "T", comment: "")
+        
+        walkthroughLabel.text = NSLocalizedString(text, comment: "")
+        walkthroughLabel.frame.size = walkthroughLabel.sizeThatFits(CGSize(width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding, height: .greatestFiniteMagnitude))
+        
+        walkthroughLabel.frame = CGRect(
+            x: WalkthroughVariables.padding,
+            y: WalkthroughVariables.topHeight + WalkthroughVariables.padding,
+            width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding,
+            height: walkthroughLabel.frame.size.height)
+        walkthroughLabelView.frame = CGRect(
+            x: WalkthroughVariables.viewPadding,
+            y: (tabBarController?.tabBar.frame.minY)! - WalkthroughVariables.topHeight - walkthroughLabel.frame.size.height - WalkthroughVariables.viewPadding - WalkthroughVariables.twicePadding,
+            width: view.frame.size.width - WalkthroughVariables.twiceViewPadding,
+            height: WalkthroughVariables.topHeight + walkthroughLabel.frame.size.height + WalkthroughVariables.twicePadding)
+        
+        // Colour
+        walkthroughView.alpha = 1
+        walkthroughLabelView.backgroundColor = Colors.dark
+        walkthroughLabel.textColor = Colors.light
+        walkthroughLabelTitle.textColor = Colors.light
+        walkthroughLabelSeparator.backgroundColor = Colors.light
+        walkthroughNextButton.setTitleColor(Colors.light, for: .normal)
+        walkthroughBackButton.setTitleColor(Colors.light, for: .normal)
+        
+        // Highlight - none
+        walkthroughHighlight.frame = CGRect.zero
+    }
+    @objc func explanationNextAction() {
+        // Dismiss view
+        UIView.animate(withDuration: 0.4, animations: {
+            self.walkthroughView.alpha = 0
+        }, completion: { finished in
+            self.walkthroughView.alpha = 1
+            self.walkthroughView.removeFromSuperview()
+        })
     }
 }

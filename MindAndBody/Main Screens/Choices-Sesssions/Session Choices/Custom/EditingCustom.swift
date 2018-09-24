@@ -913,8 +913,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             // SET ARRAY
             UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
             //
             // Remove Table
             self.customTableView.reloadData()
@@ -1009,8 +1007,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         // SET NEW ARRAY
         UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
         
         //
         tableView.reloadData()
@@ -1091,8 +1087,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 // SET NEW ARRAY
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
                 //
                 switch SelectedSession.shared.selectedSession[0] {
                 case "warmup", "cardio", "stretching", "yoga":
@@ -1155,8 +1149,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedSession]["name"]![0] = title as Any
             // Set
             UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
             
             // Update title on page
             self.nameLabel.text = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedSession]["name"]![0] as? String
@@ -1209,8 +1201,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
                 // Set
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
                 //
             // Circuit -> Non-circuit
             // If selected a non circuit workout, i.e selectedRounds = 1
@@ -1235,8 +1225,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     }
                     // Set
                     UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
                 }
                 //
                 //
@@ -1262,8 +1250,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
                 // Set
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
                 
                 //
                 // Circuit -> Circuit
@@ -1300,8 +1286,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 }
                 // Set
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
                 
             }
             //
@@ -1341,8 +1325,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             // SET NEW ARRAY
             UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-            // Sync
-            ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
             
         }
         //
@@ -1488,8 +1470,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     break
                 }
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["customSessions"])
                 //
                 self.customTableView.moveRow(at: Path.initialIndexPath!, to: indexPath!)
                 Path.initialIndexPath = indexPath

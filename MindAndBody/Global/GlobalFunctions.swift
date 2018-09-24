@@ -30,7 +30,6 @@ class UserData {
             }
         }
         UserDefaults.standard.set(settings, forKey: "userSettings")
-        ICloudFunctions.shared.pushToICloud(toSync: ["userSettings"])
     }
     
 }
@@ -632,6 +631,7 @@ extension UIViewController {
         var containsBackgroundImage = false
         for subview in view.subviews {
             if subview is UIImageView {
+                // Enure background image within range of possible images
                 if subview.tag >= BackgroundImages.backgroundImageArray.count {
                     print(subview.tag)
                     print(BackgroundImages.backgroundImageArray.count)
@@ -664,15 +664,12 @@ extension UIViewController {
                 backgroundImage.image = getUncachedImage(named: image)
             } else if backgroundIndex < BackgroundImages.backgroundImageArray.count {
                 backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-            } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-                backgroundImage.image = nil
-                backgroundImage.backgroundColor = Colors.light
             }
             view.insertSubview(backgroundImage, at: 0)
             //
             // BackgroundBlur/Vibrancy
                 // None if no background image
-            if withBlur && backgroundIndex != BackgroundImages.backgroundImageArray.count {
+            if withBlur {
                 let backgroundBlur = UIVisualEffectView()
                 let backgroundBlurE = UIBlurEffect(style: .dark)
                 backgroundBlur.effect = backgroundBlurE
@@ -682,13 +679,6 @@ extension UIViewController {
                 backgroundBlur.frame = backgroundImage.bounds
                 //
                 view.insertSubview(backgroundBlur, aboveSubview: backgroundImage)
-            } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-                let backgroundView = UIView()
-                backgroundView.frame = backgroundImage.bounds
-                backgroundView.backgroundColor = Colors.darkGray
-                backgroundView.tag = 327
-                view.insertSubview(backgroundView, aboveSubview: backgroundImage)
-                //
             }
         
         // If wrong background presented, then update the background
@@ -699,9 +689,6 @@ extension UIViewController {
                 backgroundImageSubview.image = getUncachedImage(named: image)
             } else if backgroundIndex < BackgroundImages.backgroundImageArray.count {
                 backgroundImageSubview.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
-            } else if backgroundIndex == BackgroundImages.backgroundImageArray.count {
-                backgroundImageSubview.image = nil
-                backgroundImageSubview.backgroundColor = Colors.light
             }
             
             // if no blur
@@ -714,18 +701,11 @@ extension UIViewController {
                     } else {
                         found = true
                     }
-                // remove gray background if background image
-                } else if sub.tag == 327 {
-                    if backgroundIndex != BackgroundImages.backgroundImageArray.count {
-                        sub.removeFromSuperview()
-                    } else {
-                        found = true
-                    }
                 }
             }
             //
             // If should have a blur, add one
-            if withBlur && !found && backgroundIndex != BackgroundImages.backgroundImageArray.count {
+            if withBlur && !found {
                 // BackgroundBlur/Vibrancy
                 // None if no background image
                 let backgroundBlur = UIVisualEffectView()
@@ -737,14 +717,6 @@ extension UIViewController {
                 backgroundBlur.frame = backgroundImageSubview.bounds
                 //
                 view.insertSubview(backgroundBlur, aboveSubview: backgroundImageSubview)
-            // If no background image, add gray background
-            } else if !found && backgroundIndex == BackgroundImages.backgroundImageArray.count {
-                let backgroundView = UIView()
-                backgroundView.frame = backgroundImageSubview.bounds
-                backgroundView.backgroundColor = Colors.darkGray
-                backgroundView.tag = 327
-                view.insertSubview(backgroundView, aboveSubview: backgroundImageSubview)
-                //
             }
         }
     }
@@ -966,8 +938,6 @@ extension UIViewController {
         trackingProgressDictionary["WeekProgress"] = completedCount
         // Update
         UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
     }
     
     // MARK: Extra Sessions
@@ -979,8 +949,6 @@ extension UIViewController {
         trackingProgressDictionary["ExtraSessions"] = currentValue + 1
         // Save
         UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
     }
     
     //
@@ -1007,8 +975,6 @@ extension UIViewController {
         }
         //
         UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-        // Sync
-        ICloudFunctions.shared.pushToICloud(toSync: ["trackingProgress"])
     }
     
     // MARK: Schedule Tracking
@@ -1048,8 +1014,6 @@ extension UIViewController {
                 schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0][index1] = true
                 // Set
                 UserDefaults.standard.set(schedules, forKey: "schedules")
-                // Sync
-                ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                 // Update Badges
                 ReminderNotifications.shared.updateBadges()
                 // Update Week Progress & Tracking
@@ -1085,8 +1049,6 @@ extension UIViewController {
                     schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![day][index0]["isGroupCompleted"] = true
                     // If group is completed, arrays should be updated
                     UserDefaults.standard.set(schedules, forKey: "schedules")
-                    // Sync
-                    ICloudFunctions.shared.pushToICloud(toSync: ["schedules"])
                     // Update Tracking
                     updateWeekProgress()
                     updateTracking()
@@ -1190,7 +1152,6 @@ extension UIViewController {
         
         // Save
         UserDefaults.standard.set(updatedtrackingDictionaryString, forKey: "trackingDictionary")
-        ICloudFunctions.shared.pushToICloud(toSync: ["trackingDictionary"])
     }
     
     
