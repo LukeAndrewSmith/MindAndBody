@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Loading" translatesAutoresizingMaskIntoConstraints="NO" id="Lkf-Vu-P6M">
-                                <rect key="frame" x="69" y="215" width="236" height="236"/>
+                                <rect key="frame" x="69.5" y="215.5" width="236" height="236"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Lkf-Vu-P6M" secondAttribute="height" id="jzD-N6-VWd"/>
                                 </constraints>

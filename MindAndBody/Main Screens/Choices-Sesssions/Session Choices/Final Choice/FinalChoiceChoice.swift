@@ -207,9 +207,12 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    // MARK:
+    // MARK: Fill image array
+    // Creates array of all possible images
     func fillImageArray() {
         
+        var possibleImages: [String:UIImage] = [:]
+
         imageArray = []
         sessionsArray = [:]
         
@@ -218,7 +221,7 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         if SelectedSession.shared.selectedSession[0] == "yoga" {
             movementIndex = "pose"
         }
-
+        
         switch selectedComponent {
         // Warmup
         case 0:
@@ -233,7 +236,7 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         
         let numberOfSections = sessionsArray.count
-        
+ 
         // If only on section => 1 difficulty which is indexed by "average"
             // see 'Session Data' -> 'SortedSessionsSchedule'
         if numberOfSections == 3 {
@@ -248,6 +251,34 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         if SelectedSession.shared.selectedSession[0] == "cardio" && SelectedSession.shared.selectedSession[0].contains("Gym") {
             selectedSession0 = "workout"
         }
+        
+        
+        // Loop sections (= difficulty levels)
+        for i in 0..<numberOfSections {
+            // Loop number of sessions per section
+            if let numberOfSessions = sessionsArray[keys[i]]?.count {
+                // Loop sessions
+                for j in 0..<numberOfSessions {
+                    
+                    // Find number of movements
+                    let sessionIndex = sessionsArray[keys[i]]?[j]
+                    let numberOfMovements = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]!.count
+                    
+                    // Add images
+                    for k in 0..<numberOfMovements  {
+                        let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]?[k][movementIndex] as! String
+                        // Only add movements which haven't been added
+                        if !possibleImages.keys.contains(key) {
+                            let movementImage = getUncachedImage(named: (sessionData.movements[selectedSession0]![key]?["demonstration"]![0])!)!.thumbnail()
+                            possibleImages.updateValue(movementImage, forKey: key)
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+        
         
         // Loop sections (= difficulty levels)
         for i in 0..<numberOfSections {
@@ -272,21 +303,21 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
                     // Add images
                     for k in 0..<numberOfMovements  {
                         let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]?[k][movementIndex] as! String
-                        let movementImage = getUncachedImage(named: (sessionData.movements[selectedSession0]![key]?["demonstration"]![0])!)!
+                        let movementImage = possibleImages[key]
                         
                         // Flip asymmetric images for yoga
                         if SelectedSession.shared.selectedSession[0] == "yoga" {
                             // If asymmetric array contains image, flip image
                             if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! {
-                                let flippedImage = UIImage(cgImage: movementImage.cgImage!, scale: movementImage.scale, orientation: .upMirrored)
+                                let flippedImage = UIImage(cgImage: movementImage!.cgImage!, scale: movementImage!.scale, orientation: .upMirrored)
                                 imageArray[i][j].append(flippedImage)
                             } else {
-                                imageArray[i][j].append(movementImage)
+                                imageArray[i][j].append(movementImage!)
                             }
                             
                         // Normal append
                         } else {
-                            imageArray[i][j].append(movementImage)
+                            imageArray[i][j].append(movementImage!)
                         }
                         
                     }
