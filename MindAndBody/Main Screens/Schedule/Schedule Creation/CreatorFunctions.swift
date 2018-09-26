@@ -30,7 +30,7 @@ extension UIViewController {
         
         // Create goals
         for i in 0..<goals.count {
-            goals[i] = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][i][0]] as! Int
+            goals[i] = ScheduleVariables.shared.selectedSchedule["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][i][0]] as! Int
         }
        
         // MARK: Determind ratios: goal answer / total goals
@@ -77,10 +77,10 @@ extension UIViewController {
         }
         
         
-        switch schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1]["scheduleQTime"] as! Int {
+        switch ScheduleVariables.shared.selectedSchedule["scheduleCreationHelp"]![0][1]["scheduleQTime"] as! Int {
         // 1 - 2 days
         case 0:
-            switch schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
+            switch ScheduleVariables.shared.selectedSchedule["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
             // Do a little 1 - 2
             case 0:
                 if lotsOfGoals {
@@ -106,7 +106,7 @@ extension UIViewController {
             }
         // 2 - 3 days
         case 1:
-            switch schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
+            switch ScheduleVariables.shared.selectedSchedule["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
             // Do a little 2 - 4
             case 0:
                 if lotsOfGoals {
@@ -133,7 +133,7 @@ extension UIViewController {
             
         // 3 - 5 days
         case 2:
-            switch schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
+            switch ScheduleVariables.shared.selectedSchedule["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
             // Do a little 2 - 4
             case 0:
                 if lotsOfGoals {
@@ -160,7 +160,7 @@ extension UIViewController {
             
         // 5 - 7 days
         case 3:
-            switch schedules[ScheduleVariables.shared.selectedSchedule]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
+            switch ScheduleVariables.shared.selectedSchedule["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
             // Do a little 5
             case 0:
                 if lotsOfGoals {

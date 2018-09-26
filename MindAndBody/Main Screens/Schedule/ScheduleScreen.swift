@@ -28,7 +28,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // Could move all code to cell.didlayoutsubviews but prefer not to
     var presetCellHeight: CGFloat = 88
     var cellHeight: CGFloat = 72
-    // 110 // 88 // 72
     
     
     
@@ -100,12 +99,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         // 'warmup/stretching' choice usually last choice
     var steadyStateChoice = Int()
     
-    // IMPORTANT VARIABLE
-    // Variable saying which presentation style is wanted by the user, either
-    // 0 - presenting each day on the day
-    // 1 - presenting the whole week at once
-    var scheduleStyle = Int()
-    
     // Should watch for walkthrough when coming back
     var goingToSubscriptionsScreen = false
     
@@ -160,6 +153,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         willAppear()
     }
     
@@ -181,12 +175,12 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         checkSelectedDay()
         
         // Ensure dayIndicator in correct position / not visible && if week view, update temporary full week array
-        if scheduleStyle == 0 {
+        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             self.view.layoutIfNeeded()
             // Week view
         } else {
             dayIndicator.alpha = 0
-            TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+            ScheduleVariables.shared.createTemporaryWeekViewArray()
         }
         
         // Reload the view if requested by previous view
@@ -243,8 +237,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         // Setup
         setScheduleStyle()
         // If week view, crete temporary week array
-        if scheduleStyle == 1 {
-            TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue {
+            ScheduleVariables.shared.createTemporaryWeekViewArray()
         }
         setupViews()
         layoutViews()
@@ -259,6 +253,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        // Nina
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
         //
         NotificationCenter.default.removeObserver(self)
         if goingToSubscriptionsScreen {
@@ -269,7 +266,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // MARK: viewDidLayoutSubviews
     override func viewDidLayoutSubviews() {
         //
-        if scheduleStyle == 0 {
+        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             pageStack.layoutSubviews()
             dayIndicatorLeading.constant = self.stackArray[ScheduleVariables.shared.selectedDay].frame.minX
         }
@@ -451,5 +448,12 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
 }
 
 //
-class ScheduleNavigation: UINavigationController {
+class ScheduleNavigation: UINavigationController, UIGestureRecognizerDelegate {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        interactivePopGestureRecognizer?.delegate = self
+    }
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
+    }
 }

@@ -50,7 +50,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             // If app chooses sessions, revert
             if appChoosesSessionsSwitch.isOn {
                 var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
+                ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSessionChoice"] = 1
                 appChoosesSessionsSwitch.isOn = false
                 // Update
                 UserDefaults.standard.set(schedules, forKey: "schedules")
@@ -89,7 +89,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     func setVariables() {
         // Schedule Type
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        scheduleType = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int
+        scheduleType = ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSchedule"] as! Int
     }
     
     // Layout
@@ -138,10 +138,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Set inital value
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // On
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+        if ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
             appChoosesSessionsSwitch.isOn = true
         // Off
-        } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 1 {
+        } else if ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 1 {
             appChoosesSessionsSwitch.isOn = false
         }
     
@@ -164,10 +164,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         scheduleStyleSegment.addTarget(self, action: #selector(segmentHandler), for: .valueChanged)
         //
         // Schedule style = Day
-        if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+        if ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
             scheduleStyleSegment.selectedSegmentIndex = 1
         // Schedule style = Week
-        } else if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
+        } else if ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
             scheduleStyleSegment.selectedSegmentIndex = 0
         }
     }
@@ -262,7 +262,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         switch indexPath.section {
         // Name
         case 0:
-            cell.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
+            cell.detailTextLabel?.text = ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["title"] as? String
         // View
         case 1:
             switch indexPath.row {
@@ -330,7 +330,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 //2. Add the text field
                 alert.addTextField { (textField: UITextField) in
-                    textField.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
+                    textField.text = ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["title"] as? String
                     textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
                     textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
                 }
@@ -339,13 +339,13 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     // Update Title
                     let textField = alert?.textFields![0]
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] = textField?.text! ?? ""
+                    ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["title"] = textField?.text! ?? ""
                     //
                     // SET NEW ARRAY
                     UserDefaults.standard.set(schedules, forKey: "schedules")
                     
                     // Update name in table
-                    cell?.detailTextLabel?.text = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["title"] as? String
+                    cell?.detailTextLabel?.text = ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["title"] as? String
                 })
                 // Cancel action
                 let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
@@ -367,7 +367,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             // N Sessions / Schedule
             case 1:
                 // View each day
-                if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+                if ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
                     self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
                 // View full week
                 } else {
@@ -398,7 +398,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         if sender == appChoosesSessionsSwitch {
             // App chooses sessions
             if sender.isOn {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 0
+                ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSessionChoice"] = 0
                 // If profile is not completed, go to profile
                 // Profile not complete if one of the answers is still the default -1
                 if !isProfileComplete() {
@@ -424,7 +424,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             // User chooses sessions
             } else {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
+                ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSessionChoice"] = 1
             }
         }
         UserDefaults.standard.set(schedules, forKey: "schedules")
@@ -436,10 +436,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             switch sender.selectedSegmentIndex {
                 // Week selected
                 case 0:
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
+                    ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["scheduleStyle"] = 1
                 // Day selected
                 case 1:
-                    schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
+                    ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["scheduleStyle"] = 0
                 default:
                     break
             }

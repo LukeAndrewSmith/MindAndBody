@@ -214,15 +214,15 @@ class ScheduleTypeQuestion: UIViewController {
             // Update schedule settings settings based on switches
             // Schedule type option option
             if self.scheduleOptionSwitch.isOn {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] = 0
+                ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSchedule"] = 0
             } else if self.scheduleOptionSwitch.isOn == false {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] = 1
+                ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSchedule"] = 1
             }
             // Sessions choice option
             if self.sessionOptionSwitch.isOn {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 0
+                ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSessionChoice"] = 0
             } else if self.sessionOptionSwitch.isOn == false {
-                schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
+                ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSessionChoice"] = 1
             }
             //
             // SET NEW ARRAY
@@ -284,13 +284,13 @@ class ScheduleTypeQuestion: UIViewController {
             
             let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             // App helps create schedule
-            print(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int)
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
+            print(ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSchedule"] as! Int)
+            if ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
                 appHelpsCreateSchedule = true
             }
-            print(schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int)
+            print(ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSessionChoice"] as! Int)
             // App chooses sessions
-            if schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+            if ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
                 appChoosesSessions = true
             }
             destinationVC.appChoosesSessions = appChoosesSessions

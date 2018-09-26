@@ -22,8 +22,9 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         let header = UIView()
         switch tableView {
         case scheduleTable:
+
             var title = String()
-            if scheduleStyle == 0 {
+            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
                 title = NSLocalizedString(dayArray[ScheduleVariables.shared.selectedDay], comment: "")
                 // week
             } else {
@@ -88,26 +89,26 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     // Rows
     // Number of rows per section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //
+        
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        //
+        
         switch tableView {
         case scheduleTable:
             // First Screen, showing groups
-            if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                if schedules.count != 0 {
+            if ScheduleVariables.shared.selectedGroup == .none {
+                if ScheduleVariables.shared.selectedScheduleIndex != 0 {
                     // Note: +1 for extra sessions cell
-                    if scheduleStyle == 0 {
-                        return schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
+                    if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+                        return (ScheduleVariables.shared.selectedSchedule?["schedule"]?[ScheduleVariables.shared.selectedDay].count)! + 1
                     } else {
-                        return TemporaryWeekArray.shared.weekArray.count + 1
+                        return ScheduleVariables.shared.weekArray.count + 1
                     }
                 } else {
                     return 1
                 }
             // Selecting a session
             } else {
-                return sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count
+                return sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup.rawValue.groupFromString()]![ScheduleVariables.shared.choiceProgress].count
             }
         case scheduleChoiceTable:
             return schedules.count
@@ -132,15 +133,15 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     
     func calculateCellHeight() {
         // First choice == session choice
-        if ScheduleVariables.shared.choiceProgress[0] == -1 {
+        if ScheduleVariables.shared.selectedGroup == .none {
             let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             if schedules.count != 0 {
                 // Get number of rows
                 var count = 0
-                if scheduleStyle == 0 {
-                    count = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
-                } else if scheduleStyle == 1 {
-                    count = TemporaryWeekArray.shared.weekArray.count + 1
+                if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+                    count = ScheduleVariables.shared.selectedSchedule!["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
+                } else if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue {
+                    count = ScheduleVariables.shared.weekArray.count + 1
                 }
                 
                 // If height set to 72 is too big
@@ -167,24 +168,12 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             }
             
             // Not first choice
-        } else {
-            // If too many choices, reduce size of cell
-            if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]].count) * 72) > (scheduleTable.bounds.height - headerHeight) {
-                let height = (scheduleTable.bounds.height - headerHeight) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]]).count)
-                cellHeight = height
-//                return height
-                
-                // Height 72
-            } else {
-                cellHeight = 72
-//                return 72
-            }
         }
     }
     
     // Row cell customization
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Note: accessing title so cast as any
+        
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         
         // Get cell
@@ -200,198 +189,98 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                 //
                 cell.tag = indexPath.row
                 
-                // First Screen, showing groups
-                if ScheduleVariables.shared.choiceProgress[0] == -1 {
+                // Extra Session Cell
+                if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue && indexPath.row == ScheduleVariables.shared.selectedSchedule!["schedule"]![ScheduleVariables.shared.selectedDay].count || ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue && indexPath.row == ScheduleVariables.shared.weekArray.count {
                     
-                    // Extra Session Cell
-                    if scheduleStyle == 0 && indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count || scheduleStyle == 1 && indexPath.row == TemporaryWeekArray.shared.weekArray.count {
-                        
-                        // Groups
-                        let extraLabel = UILabel()
-                        extraLabel.font = Fonts.scheduleCell
-                        extraLabel.textColor = foregroundColor
-                        extraLabel.text = NSLocalizedString("extra", comment: "")
-                        extraLabel.sizeToFit()
-                        extraLabel.frame = CGRect(x: tableSpacing, y: 0, width: view.bounds.width - 54, height: cellHeight)
-                        cell.addSubview(extraLabel)
-                        
-                        //
-                        // Checkmark box
-                        let checkBox = UIButton()
-                        checkBox.tag = indexPath.row
-                        checkBox.layer.backgroundColor = UIColor.clear.cgColor
-                        checkBox.layer.borderWidth = 1
-                        checkBox.layer.borderColor = foregroundColor.withAlphaComponent(0.33).cgColor
-                        checkBox.layer.cornerRadius = 4
-                        checkBox.frame = CGRect(x: view.bounds.width - tableSpacing - 24.5, y: 0, width: 24.5, height: 24.5)
-                        checkBox.center.y = extraLabel.center.y
-                        checkBox.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
-                        checkBox.imageView?.tintColor = foregroundColor
-                        checkBox.isEnabled = false
-                        cell.addSubview(checkBox)
-                        
-                        extraLabel.alpha = 0.33
-                        checkBox.alpha = 0.33
-                        
-                    // Session cells
-                    } else {
-                        
-                        let gap: CGFloat = 8
-                        let imageHeight = cellHeight - (2*gap)
-                        // Groups
-                        let dayLabel = UILabel()
-                        dayLabel.font = Fonts.scheduleCell
-                        dayLabel.textColor = foregroundColor
-                        //
-                        var groupString = String()
-                        if scheduleStyle == 0 {
-                            groupString = schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay][indexPath.row]["group"] as! String
-                        } else {
-                            groupString = TemporaryWeekArray.shared.weekArray[indexPath.row]["group"] as! String
-                        }
-                        dayLabel.text = NSLocalizedString(groupString, comment: "")
-                        dayLabel.numberOfLines = 2
-                        dayLabel.frame = CGRect(x: tableSpacing + 8 + imageHeight, y: 0, width: view.bounds.width - 54, height: cellHeight)
-                        cell.addSubview(dayLabel)
-                        
-                        
-                        let groupImage = UIImageView()
-                        groupImage.frame = CGRect(x: tableSpacing, y: gap, width: imageHeight, height: imageHeight)
-                        groupImage.contentMode = .scaleAspectFill
-                        groupImage.clipsToBounds = true
-                        groupImage.image = groupImages[groupString]
-                        groupImage.layer.cornerRadius = 4
-                        cell.addSubview(groupImage)
-                        
-                        
-                        //
-                        // Checkmark box
-                        let checkBox = UIButton()
-                        checkBox.tag = indexPath.row
-                        checkBox.layer.backgroundColor = UIColor.clear.cgColor
-                        checkBox.layer.borderWidth = 1
-                        checkBox.layer.borderColor = foregroundColor.cgColor
-                        checkBox.layer.cornerRadius = 4
-                        checkBox.frame = CGRect(x: view.bounds.width - tableSpacing - 24.5, y: 0, width: 24.5, height: 24.5)
-                        checkBox.center.y = dayLabel.center.y
-                        checkBox.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
-                        cell.addSubview(checkBox)
-                        
-                        // To make sure its easy to press the button
-                        let checkBoxExtraButton = UIButton()
-                        checkBoxExtraButton.tag = indexPath.row
-                        checkBoxExtraButton.frame = CGRect(x: 0, y: 0, width: cellHeight, height: cellHeight)
-                        checkBoxExtraButton.center.x = checkBox.center.x
-                        checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
-                        cell.addSubview(checkBoxExtraButton)
-                        
-                        //
-                        // CheckMark if completed
-                        if ScheduleVariables.shared.shouldReloadChoice {
-                            if indexPath.row != ScheduleVariables.shared.selectedRows[0] {
-                                if isCompleted(row: indexPath.row) {
-                                    checkButton(button: checkBox)
-                                }
-                            }
-                        } else if isCompleted(row: indexPath.row) {
-                            checkButton(button: checkBox)
-                        }
-                    }
+                    // Groups
+                    let extraLabel = UILabel()
+                    extraLabel.font = Fonts.scheduleCell
+                    extraLabel.textColor = foregroundColor
+                    extraLabel.text = NSLocalizedString("extra", comment: "")
+                    extraLabel.sizeToFit()
+                    extraLabel.frame = CGRect(x: tableSpacing, y: 0, width: view.bounds.width - 54, height: cellHeight)
+                    cell.addSubview(extraLabel)
                     
-                // Currently selecting a session, i.e not first screen
+                    //
+                    // Checkmark box
+                    let checkBox = UIButton()
+                    checkBox.tag = indexPath.row
+                    checkBox.layer.backgroundColor = UIColor.clear.cgColor
+                    checkBox.layer.borderWidth = 1
+                    checkBox.layer.borderColor = foregroundColor.withAlphaComponent(0.33).cgColor
+                    checkBox.layer.cornerRadius = 4
+                    checkBox.frame = CGRect(x: view.bounds.width - tableSpacing - 24.5, y: 0, width: 24.5, height: 24.5)
+                    checkBox.center.y = extraLabel.center.y
+                    checkBox.setImage(#imageLiteral(resourceName: "Plus"), for: .normal)
+                    checkBox.imageView?.tintColor = foregroundColor
+                    checkBox.isEnabled = false
+                    cell.addSubview(checkBox)
+                    
+                    extraLabel.alpha = 0.33
+                    checkBox.alpha = 0.33
+                    
+                // Session cells
                 } else {
-                    // If title
-                    if indexPath.row == 0 {
-                        
-                        let title = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][0]
-                        cell.textLabel?.font = Fonts.scheduleCell
-                        cell.textLabel?.textColor = foregroundColor
-                        cell.textLabel?.text = NSLocalizedString(title, comment: "")
-                        cell.textLabel?.textAlignment = .center
-                        cell.textLabel?.frame = CGRect(x: view.bounds.width / 2, y: 0, width: view.bounds.width / 2, height: cellHeight)
-                        //
-                        cell.selectionStyle = .none
-                        
-                        // Title Underline
-                        
-                        let separator = CALayer()
-                        separator.frame = CGRect(x: view.bounds.width / 4, y: cellHeight - 1, width: view.bounds.width / 2, height: 1)
-                        separator.backgroundColor = foregroundColor.cgColor
-                        separator.opacity = 0.25
-                        cell.layer.addSublayer(separator)
-                        
-                        // TODO: question mark
-                        // Question mark - explanation of choice
-                        if needsExplanation() {
-                            
-                            let explanationButton = UIButton()
-                            explanationButton.frame = CGRect(x: view.bounds.width * (3/4), y: 0, width: view.bounds.width / 4, height: cellHeight)
-                            explanationButton.setImage(#imageLiteral(resourceName: "QuestionMarkMenu"), for: .normal)
-                            explanationButton.tintColor = foregroundColor
-                            explanationButton.addTarget(self, action: #selector(presentExplanation), for: .touchUpInside)
-                            cell.addSubview(explanationButton)
-                            
-                            let border = UIView()
-                            border.layer.borderWidth = 1
-                            border.layer.borderColor = foregroundColor.withAlphaComponent(0.13).cgColor
-                            border.layer.cornerRadius = 11
-                            border.frame.size = CGSize(width: 44, height: 44)
-                            border.center = explanationButton.center
-                            border.isUserInteractionEnabled = false
-                            cell.addSubview(border)
-                        }
-                        
-                    // Else if selection
+                    
+                    let gap: CGFloat = 8
+                    let imageHeight = cellHeight - (2*gap)
+                    // Groups
+                    let dayLabel = UILabel()
+                    dayLabel.font = Fonts.scheduleCell
+                    dayLabel.textColor = foregroundColor
+                    //
+                    var groupString = String()
+                    if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+                        groupString = ScheduleVariables.shared.selectedSchedule!["schedule"]![ScheduleVariables.shared.selectedDay][indexPath.row]["group"] as! String
                     } else {
-                        //
-                        let choiceLabel = UILabel()
-                        choiceLabel.font = Fonts.scheduleCell
-                        choiceLabel.textColor = foregroundColor
-                        
-                        // Normal
-                        let groupString = sessionData.sortedGroups[ScheduleVariables.shared.choiceProgress[0]]![ScheduleVariables.shared.choiceProgress[1]][indexPath.row]
-                        choiceLabel.text = NSLocalizedString(groupString, comment: "")
-                        choiceLabel.numberOfLines = 2
-                        choiceLabel.sizeToFit()
-                        choiceLabel.frame = CGRect(x: tableSpacing, y: 0, width: view.bounds.width - 54, height: cellHeight)
-                        cell.addSubview(choiceLabel)
-                        
-                        if isLastChoice() {
-                            
-                            // Checkmark box
-                            let checkBox = UIButton()
-                            checkBox.tag = indexPath.row
-                            // Use layer as not affected by cell highlight
-                            checkBox.layer.backgroundColor = UIColor.clear.cgColor
-                            checkBox.backgroundColor = .clear
-                            checkBox.layer.borderWidth = 1
-                            checkBox.layer.borderColor = foregroundColor.cgColor
-                            checkBox.layer.cornerRadius = 4
-                            checkBox.frame = CGRect(x: view.bounds.width - tableSpacing - 24.5, y: 0, width: 24.5, height: 24.5)
-                            checkBox.center.y = choiceLabel.center.y
-                            checkBox.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
-                            cell.addSubview(checkBox)
-                            
-                            // To make sure its easy to press the button
-                            let checkBoxExtraButton = UIButton()
-                            checkBoxExtraButton.tag = indexPath.row
-                            var height = 72
-                            if scheduleStyle == 1 && ScheduleVariables.shared.choiceProgress[0] == -1 {
-                                height = 49
-                            }
-                            checkBoxExtraButton.frame = CGRect(x: 0, y: 0, width: height, height: height)
-                            checkBoxExtraButton.center.x = checkBox.center.x
-                            checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
-                            cell.addSubview(checkBoxExtraButton)
-                            
-                            // CheckMark if completed
-                            // - 1 as title included, so rows offset by 1
-                            if indexPath.row != 0 {
-                                if isCompleted(row: indexPath.row) {
-                                    checkButton(button: checkBox)
-                                }
+                        groupString = ScheduleVariables.shared.weekArray[indexPath.row]["group"] as! String
+                    }
+                    dayLabel.text = NSLocalizedString(groupString, comment: "")
+                    dayLabel.numberOfLines = 2
+                    dayLabel.frame = CGRect(x: tableSpacing + 8 + imageHeight, y: 0, width: view.bounds.width - 54, height: cellHeight)
+                    cell.addSubview(dayLabel)
+                    
+                    
+                    let groupImage = UIImageView()
+                    groupImage.frame = CGRect(x: tableSpacing, y: gap, width: imageHeight, height: imageHeight)
+                    groupImage.contentMode = .scaleAspectFill
+                    groupImage.clipsToBounds = true
+                    groupImage.image = groupImages[groupString]
+                    groupImage.layer.cornerRadius = 4
+                    cell.addSubview(groupImage)
+                    
+                    
+                    //
+                    // Checkmark box
+                    let checkBox = UIButton()
+                    checkBox.tag = indexPath.row
+                    checkBox.layer.backgroundColor = UIColor.clear.cgColor
+                    checkBox.layer.borderWidth = 1
+                    checkBox.layer.borderColor = foregroundColor.cgColor
+                    checkBox.layer.cornerRadius = 4
+                    checkBox.frame = CGRect(x: view.bounds.width - tableSpacing - 24.5, y: 0, width: 24.5, height: 24.5)
+                    checkBox.center.y = dayLabel.center.y
+                    checkBox.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
+                    cell.addSubview(checkBox)
+                    
+                    // To make sure its easy to press the button
+                    let checkBoxExtraButton = UIButton()
+                    checkBoxExtraButton.tag = indexPath.row
+                    checkBoxExtraButton.frame = CGRect(x: 0, y: 0, width: cellHeight, height: cellHeight)
+                    checkBoxExtraButton.center.x = checkBox.center.x
+                    checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
+                    cell.addSubview(checkBoxExtraButton)
+                    
+                    //
+                    // CheckMark if completed
+                    if ScheduleVariables.shared.shouldReloadChoice {
+                        if indexPath.row != ScheduleVariables.shared.selectedRows.inital {
+                            if ScheduleVariables.shared.isGroupCompleted(row: indexPath.row, checkAll: false) {
+                                checkButton(button: checkBox)
                             }
                         }
+                    } else if ScheduleVariables.shared.isGroupCompleted(row: indexPath.row, checkAll: false) {
+                        checkButton(button: checkBox)
                     }
                 }
                 
@@ -485,57 +374,35 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         // Session choice
         switch tableView {
         case scheduleTable:
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-
-            // If title of choice table, do nothing, if not then do something
-            if !(ScheduleVariables.shared.choiceProgress[0] != -1 && indexPath.row == 0) {
+            
+            // Extra Session
+            // (day view last cell || week view last cell)
+            if  (ScheduleVariables.shared.scheduleStyle == "day" && indexPath.row == ScheduleVariables.shared.currentDayCount() ||  ScheduleVariables.shared.scheduleStyle == "week" && indexPath.row == ScheduleVariables.shared.weekArray.count) {
                 
-                // First choice
-                if ScheduleVariables.shared.choiceProgress[0] == -1 {
-                    
-                    // Extra session
-                    // (day view last cell || week view last cell)
-                    if  (scheduleStyle == 0 && indexPath.row == schedules[ScheduleVariables.shared.selectedSchedule]["schedule"]![ScheduleVariables.shared.selectedDay].count || scheduleStyle == 1 && indexPath.row == TemporaryWeekArray.shared.weekArray.count) {
-                        didSelectRowHandler(row: 723)
-                        
-                    // Normal session, if not completed, do something
-                    } else if !isCompleted(row: indexPath.row) {
-                        didSelectRowHandler(row: indexPath.row)
-                    }
-                    
-                    tableView.deselectRow(at: indexPath, animated: true)
-                    
-                // Other choices
-                } else {
-                    
-                    // Normal
-                    if !isLastChoice() {
-                        didSelectRowHandler(row: indexPath.row)
-                        
-                    // If last choice and not completed, do something
-                    } else if isLastChoice() && !isCompleted(row: indexPath.row) {
-                        didSelectRowHandler(row: indexPath.row)
-                    }
-                    
-                    tableView.deselectRow(at: indexPath, animated: true)
-                }
+                ScheduleVariables.shared.initializeChoice(extraSession: true, selectedRow: indexPath.row)
+
+            // Normal Session
+            } else if ScheduleVariables.shared.isGroupCompleted(row: indexPath.row, checkAll: false) {
+                
+                ScheduleVariables.shared.initializeChoice(extraSession: true, selectedRow: indexPath.row)
             }
-          
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            performSegue(withIdentifier: "SessionChoiceSegue", sender: self)
+            
         // Select schedule
         case scheduleChoiceTable:
-            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             
             // Select new schedule, update schedule style, and save
-            var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
+            var selectedScheduleIndex = UserDefaults.standard.integer(forKey: "selectedSchedule")
             
-            selectedSchedule = indexPath.row
-            ScheduleVariables.shared.selectedSchedule = selectedSchedule
-            scheduleStyle = schedules[ScheduleVariables.shared.selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+            ScheduleVariables.shared.selectedScheduleIndex = selectedScheduleIndex
+            scheduleStyle = (ScheduleVariables.shared.selectedSchedule["scheduleInformation"][0][0]["scheduleStyle"] as Int).scheduleStyleFromInt()
             
-            UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
+            UserDefaults.standard.set(selectedScheduleIndex, forKey: "selectedSchedule")
             
             // If week view, create temporary week array
-            TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+            ScheduleVariables.shared.createTemporaryWeekViewArray()
             
             // Reload table
             layoutViews()
@@ -605,7 +472,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             
             // If week view, create temporary week array
             if schedules.count != 0 {
-                TemporaryWeekArray.shared.createTemporaryWeekViewArray()
+                ScheduleVariables.shared.createTemporaryWeekViewArray()
             }
             
             // Reload table
