@@ -100,16 +100,16 @@ class ReminderNotifications {
         //
         if schedules.count != 0 {
             // Day view: set notifications for each day something is planned
-            let scheduleStyle = ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+            let scheduleStyle = ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
             if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
                 // Loop week
                 for i in 0...6 {
                     // Check day
-//                    let dayCount = ScheduleVariables.shared.selectedSchedule["schedule"]![i].count
+//                    let dayCount = ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count
                     // Count whats left instead of .count for the day, incase something has been done in advance
                     var dayCount = 0
-                    for j in 0..<ScheduleVariables.shared.selectedSchedule["schedule"]![i].count {
-                        if !(ScheduleVariables.shared.selectedSchedule["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
+                    for j in 0..<ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count {
+                        if !(ScheduleVariables.shared.selectedSchedule!["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
                             dayCount += 1
                         }
                     }
@@ -159,8 +159,8 @@ class ReminderNotifications {
                             var shouldPresentNotification = false
                             // See whats left
                             var unfinishedCount = 0
-                            for j in 0..<ScheduleVariables.shared.selectedSchedule["schedule"]![i].count {
-                                if !(ScheduleVariables.shared.selectedSchedule["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
+                            for j in 0..<ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count {
+                                if !(ScheduleVariables.shared.selectedSchedule!["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
                                     unfinishedCount += 1
                                 }
                             }
@@ -248,7 +248,7 @@ class ReminderNotifications {
                 var count = Int()
                 // Loop week
                 for i in 0...6 {
-                    count += ScheduleVariables.shared.selectedSchedule["schedule"]![i].count
+                    count += ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count
                 }
                 mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(count) + NSLocalizedString("weekNotification2", comment: "")
                 mondayContent.sound = UNNotificationSound.default()
@@ -301,9 +301,9 @@ class ReminderNotifications {
                 let currentDay = Date().weekDayFromMonday
                 var currentCount: Int = 0
                 // Loop current day counting how much has been done
-                if ScheduleVariables.shared.selectedSchedule["schedule"]![currentDay].count != 0 {
-                    for j in 0..<ScheduleVariables.shared.selectedSchedule["schedule"]![currentDay].count {
-                        if ScheduleVariables.shared.selectedSchedule["schedule"]![currentDay][j]["isGroupCompleted"] as! Bool == false {
+                if ScheduleVariables.shared.selectedSchedule!["schedule"]![currentDay].count != 0 {
+                    for j in 0..<ScheduleVariables.shared.selectedSchedule!["schedule"]![currentDay].count {
+                        if ScheduleVariables.shared.selectedSchedule!["schedule"]![currentDay][j]["isGroupCompleted"] as! Bool == false {
                             currentCount += 1
                         }
 
@@ -316,10 +316,10 @@ class ReminderNotifications {
                 // Loop week
                 for i in 0...6 {
                     // If day not empty
-                    if ScheduleVariables.shared.selectedSchedule["schedule"]![i].count != 0 {
+                    if ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count != 0 {
                         // Loop day counting how much has been done
-                        for j in 0..<ScheduleVariables.shared.selectedSchedule["schedule"]![i].count {
-                            if ScheduleVariables.shared.selectedSchedule["schedule"]![i][j]["isGroupCompleted"] as! Bool == false {
+                        for j in 0..<ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count {
+                            if ScheduleVariables.shared.selectedSchedule!["schedule"]![i][j]["isGroupCompleted"] as! Bool == false {
                                 currentCount += 1
                             }
                             
@@ -349,7 +349,7 @@ class ReminderNotifications {
         // Get schedule style
         var scheduleStyle = Int()
         if schedules.count != 0 {
-            scheduleStyle = ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+            scheduleStyle = ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
         } else {
             scheduleStyle = 0
         }
@@ -361,8 +361,8 @@ class ReminderNotifications {
         if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             var dayCount = 0
             // Loop day counting whats left
-            for j in 0..<ScheduleVariables.shared.selectedSchedule["schedule"]![day].count {
-                if !(ScheduleVariables.shared.selectedSchedule["schedule"]![day][j]["isGroupCompleted"] as! Bool) {
+            for j in 0..<ScheduleVariables.shared.selectedSchedule!["schedule"]![day].count {
+                if !(ScheduleVariables.shared.selectedSchedule!["schedule"]![day][j]["isGroupCompleted"] as! Bool) {
                     dayCount += 1
                 }
             }
@@ -373,8 +373,8 @@ class ReminderNotifications {
             var weekCount = 0
             // Loop week counting whats left
             for i in 0..<6 {
-                for j in 0..<ScheduleVariables.shared.selectedSchedule["schedule"]![i].count {
-                    if !(ScheduleVariables.shared.selectedSchedule["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
+                for j in 0..<ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count {
+                    if !(ScheduleVariables.shared.selectedSchedule!["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
                         weekCount += 1
                     }
                 }
@@ -908,164 +908,8 @@ extension UIViewController {
         return imageToReturn
     }
     
-    // ----------------------------------------------------------------------------------------------------------------
-    // MARK: Update Tracking ---------
-    //
-    // MARK: Week Progress
-    func updateWeekProgress() {
-        //
-        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
-        
-        // Recalculate progress each time to be absolutely sure!!!
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        var completedCount: Int = 0
-        if schedules.count != 0 {
-            // Loop week
-            for i in 0...6 {
-                // If day isn't empty
-                if ScheduleVariables.shared.selectedSchedule["schedule"]![i].count != 0 {
-                    // Loop day
-                    for j in 0..<ScheduleVariables.shared.selectedSchedule["schedule"]![i].count {
-                        //
-                        if ScheduleVariables.shared.selectedSchedule["schedule"]![i][j]["isGroupCompleted"] as! Bool == true {
-                            completedCount += 1
-                        }
-                    }
-                }
-            }
-        }
-        // Update value
-        trackingProgressDictionary["WeekProgress"] = completedCount
-        // Update
-        UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-    }
-    
-    // MARK: Extra Sessions
-    func incrementExtraSessions() {
-        //
-        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
-        // Increment
-        let currentValue = trackingProgressDictionary["ExtraSessions"] as! Int
-        trackingProgressDictionary["ExtraSessions"] = currentValue + 1
-        // Save
-        UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-    }
-    
-    //
-    // MARK: Week goal
-    func updateWeekGoal() {
-        //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
-        // Find goal = number of groups planned = fullWeekArray.count
-        var goal = Int()
-        if schedules.count != 0 {
-            // Loop week
-            for i in 0...6 {
-                goal += ScheduleVariables.shared.selectedSchedule["schedule"]![i].count
-            }
-        } else {
-            goal = 1
-        }
-        // SetWeekGoal
-        if goal != 0 {
-            trackingProgressDictionary["WeekGoal"] = goal
-        } else {
-            trackingProgressDictionary["WeekGoal"] = 1
-        }
-        //
-        UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-    }
-    
-    // MARK: Schedule Tracking
-        // Updates the 'finalChoice' of the group
-    func updateScheduleTracking(fromSchedule: Bool) {
-        
-        if fromSchedule {
-            
-            // Extra session
-            if ScheduleVariables.shared.selectedGroup == Groups.extra.rawValue {
-
-                let selectedRow = ScheduleVariables.shared.selectedRows[1]
-                ScheduleVariables.shared.extraSessionCompletion[selectedRow] = true
-                
-                // Update Week Progress & Tracking
-                incrementExtraSessions()
-                updateTracking()
-                
-                // Reload
-                ScheduleVariables.shared.shouldReloadChoice = true
-                
-            // Normal
-            } else {
-                var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-                
-                // Indexing variables
-                // Differ if last choice or first choice
-                let indexingVariables = getIndexingVariablesForSession()
-                // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
-                let index0 = indexingVariables.0
-                // index1 = Selected row in final choice (i.e warmup, session, stretching)
-                let index1 = indexingVariables.1
-                // day
-                let day = indexingVariables.2
-                
-                // Update
-                ScheduleVariables.shared.selectedSchedule["schedule"]![day][index0][index1] = true
-                // Set
-                UserDefaults.standard.set(schedules, forKey: "schedules")
-                // Update Badges
-                ReminderNotifications.shared.updateBadges()
-                // Update Week Progress & Tracking
-                updateWeekProgress()
-                updateTracking()
-                
-                //
-                // Check if full group completed
-                var isGroupCompleted = true
-                // Yoga handled differently
-                if ScheduleVariables.shared.selectedSchedule["schedule"]![day][index0]["group"] as! String == "yoga" {
-                    // Yoga warmup optional, so is completed if session is finished
-                    if ScheduleVariables.shared.selectedSchedule["schedule"]![day][index0]["1"] as! Bool == false {
-                        isGroupCompleted = false
-                    }
-                    // Normal case
-                } else {
-                    // Number of session included in group (i.e warmup/session/stretching) can be found by number of elements in group dictionary - 2 (-2 as "group" and "isGroupCompleted" included). Check ScheduleData, schedule groups to understand better
-                    // Use default group array to avoid errors
-                    // Error occured here as extra field was saved in dictionary - ["72"]: something
-                        // no idea when it was saved there
-                    if let group = ScheduleVariables.shared.selectedSchedule["schedule"]![day][index0]["group"] as? String {
-                        for i in 0..<(scheduleDataStructures.scheduleGroups[group.groupFromString()]?.count)! - 2 {
-                            if ScheduleVariables.shared.selectedSchedule["schedule"]![day][index0][String(i)] as! Bool == false {
-                                isGroupCompleted = false
-                                break
-                            }
-                        }
-                    }
-                }
-                //
-                if isGroupCompleted {
-                    ScheduleVariables.shared.selectedSchedule["schedule"]![day][index0]["isGroupCompleted"] = true
-                    // If group is completed, arrays should be updated
-                    UserDefaults.standard.set(schedules, forKey: "schedules")
-                    // Update Tracking
-                    updateWeekProgress()
-                    updateTracking()
-                    // Update notifications (incase before evening notification)
-                    ReminderNotifications.shared.setNotifications()
-                }
-                
-                // Reload
-                ScheduleVariables.shared.shouldReloadChoice = true
-            }
-        }
-    }
-    
     func getIndexingVariablesForSession() -> (Int, String, Int) {
-        //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-
+        
         // Indexing variables
         // index0 = selected row in initial choice screen (schedule homescreen selected group) i.e index to group in current day in schedule
         var index0 = Int()
@@ -1073,85 +917,21 @@ extension UIViewController {
         var index1 = String()
         //
         var selectedDay = Int()
-        
+        // Nina
+        index0 = ScheduleVariables.shared.selectedRows.initial
         // Day view - index is simply row
-        if ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
-            index0 = ScheduleVariables.shared.selectedRows[0]
+        if ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+            index0 = ScheduleVariables.shared.selectedRows.initial
             selectedDay = ScheduleVariables.shared.selectedDay
         // Week view -  find stored index to schedule week using temporary full week array
         } else {
-            index0 = ScheduleVariables.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["index"] as! Int
-            selectedDay = ScheduleVariables.shared.weekArray[ScheduleVariables.shared.selectedRows[0]]["day"] as! Int
+            index0 = ScheduleVariables.shared.weekArray[ScheduleVariables.shared.selectedRows.initial]["index"] as! Int
+            selectedDay = ScheduleVariables.shared.weekArray[ScheduleVariables.shared.selectedRows.initial]["day"] as! Int
         }
         print(index0)
         //
-        index1 = String(ScheduleVariables.shared.selectedRows[1])
+        index1 = String(ScheduleVariables.shared.selectedRows.final)
         return (index0, index1, selectedDay)
-    }
-    
-    // NOTE: Func to reset schedule tracking and week tracking found in globalVariables, Schedule data, as needs to be contained in a class
-    // TODO: TURN THIS ENTIRE DOCUMENT INTO SEVERAL CLASSES CONTAINING A SHARED, AND THE FUNCTIONS, SO FUNCTIONS CAN BE CALLED MORE LEGIBLY BY CLASS.SHARED.FUNCTION
-    // -------------------------------------------------------------------------------------
-    // MARK: Week %
-    func updateTracking() {
-        let trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
-        let trackingDictionaryString = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
-        
-        // Convert to [Date: Int]
-        var trackingDictionary: [Date: Int] = TrackingHelpers.shared.convertStringDictToDateDict(stringDict: trackingDictionaryString)
-        //
-        var calendar = Calendar(identifier: .iso8601)
-        calendar.timeZone = TimeZone(abbreviation: "UTC")!
-        // Get Mondays date
-        let currentMondayDate = Date().firstMondayInCurrentWeek
-        //
-        // Week Goal
-        let weekProgress = trackingProgressDictionary["WeekProgress"] as! Double
-        let extraSessions = trackingProgressDictionary["ExtraSessions"] as! Double
-        let weekGoal = trackingProgressDictionary["WeekGoal"] as! Double
-        let currentProgressDivision: Double = ((weekProgress + extraSessions) / weekGoal) * 100.0
-        let currentProgress = Int(currentProgressDivision)
-        //
-        // Keys
-        let keys = trackingDictionary.keys.sorted()
-        
-        //
-        // Note: Weeks defined by their mondays date
-        // Current week exists
-        if keys.contains(currentMondayDate) {
-            // Update current weeks progress
-            trackingDictionary[currentMondayDate] = currentProgress
-            
-        //
-        // Current week doesn't exist
-        } else {
-            // Last updated week was last week |or| first week ever updated
-            if keys.count == 0 || keys.last! == calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate)?.setToMidnightUTC() {
-                // Create current weeks progress
-                trackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
-                
-            // Skipped weeks
-            } else {
-                //
-                // Update missed weeks with 0, starting with week after last updated value
-                var startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: keys.last!)!.setToMidnightUTC()
-
-                // Loop adding 0 to dates
-                while startDate < currentMondayDate {
-                    trackingDictionary.updateValue(0, forKey: startDate)
-                    // For some reason adding a week adds an extra hour here but not in other places, so add on a weeks worth of hours
-                    startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: startDate)!.setToMidnightUTC()
-                }
-                // Update today
-                trackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
-            }
-        }
-        
-        // Convert back to [String: Int]
-        let updatedtrackingDictionaryString: [String: Int] = TrackingHelpers.shared.convertDateDictToStringDict(dateDict: trackingDictionary)
-        
-        // Save
-        UserDefaults.standard.set(updatedtrackingDictionaryString, forKey: "trackingDictionary")
     }
     
     

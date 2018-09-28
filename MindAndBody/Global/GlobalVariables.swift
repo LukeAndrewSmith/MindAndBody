@@ -85,6 +85,8 @@ enum Fonts {
     static let regularCell = UIFont(name: "SFUIDisplay-regular", size: 18)
     
     static let scheduleCell = UIFont(name: "SFUIDisplay-regular", size: 23)
+    static let scheduleTitle = UIFont(name: "SFUIDisplay-medium", size: 23)
+    
     
     // Various Elements
     static let veryLargeElementRegular = UIFont(name: "SFUIDisplay-regular", size: 27)
@@ -202,14 +204,3 @@ class BellPlayer {
     // Meditation Timer didSetEndTime
     var didSetEndTime = false
 }
-
-//
-// Tracking Variables {
-class TrackingVariables {
-    static var shared = TrackingVariables()
-    private init() {}
-    
-    //
-    var minTime = Double()
-}
-

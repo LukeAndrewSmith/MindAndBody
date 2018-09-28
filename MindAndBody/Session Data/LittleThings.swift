@@ -203,10 +203,10 @@ extension sessionData {
     // Note
     // dict keys = choiceProgress[0] in schedule
     // arrays = choiceProgress[1] in schedule
-    static let sortedGroups: [Int: [[String]]] =
+    static let sortedGroups: [Groups: [[String]]] =
         [
             // MARK: Workout
-            0: [
+            Groups.workout: [
                 // 0
                 ["workout"],
                 // 1 | Choice 1 - Type
@@ -270,7 +270,7 @@ extension sessionData {
             ],
             
             // MARK: Yoga
-            1: [
+            Groups.yoga: [
                 // 0
                 [ "yoga"],
                 // 1 | Choice 1 - type
@@ -328,7 +328,7 @@ extension sessionData {
             ],
             
             // MARK: Meditation
-            2: [
+            Groups.meditation: [
                     // 0
                     ["meditation"],
                     // 1 | Final - Type
@@ -341,7 +341,7 @@ extension sessionData {
             ],
             
             // MARK: Endurance
-            3: [
+            Groups.endurance: [
                     // 0
                     ["endurance"],
                     // 1 | Choice 1 - Type
@@ -430,7 +430,7 @@ extension sessionData {
             
             // Note: Choice = ["title","contents","contents"...]
             // MARK: Flexibility
-            4: [
+            Groups.flexibility: [
                 // 0
                 ["flexibility"],
                 // 1 | Choice 1 - Focus
@@ -470,7 +470,7 @@ extension sessionData {
             ],
             
             // Extra Session
-            723:[
+            Groups.extra: [
                 // 0
                 ["extraSession"],
                 // 1 | Choice 1 - Focus
@@ -489,19 +489,19 @@ extension sessionData {
     // MARK:- Session explanations
     // dict keys = choiceProgress[0] in schedule
     // dict 2 keys = choiceProgress[1] in schedule
-    static let sessionChoiceExplanations: [Int: [Int: String]] = [
+    static let sessionChoiceExplanations: [Groups: [Int: String]] = [
         // Workout
-        0: [2: "workoutStyleE"],
+        Groups.workout: [2: "workoutStyleE"],
         // Yoga
-        1: [1: "yogaTypeE"],
+        Groups.yoga: [1: "yogaTypeE"],
         // Meditation
-        2: [:],
+        Groups.meditation: [:],
         // Endurance
-        3: [1: "enduranceTypeE",
+        Groups.endurance: [1: "enduranceTypeE",
             4: "intervalLengthE",],
         // Flexibility
-        4: [:],
+        Groups.flexibility: [:],
         // Extra Sessions
-        723: [1: "extraSessionE"],
+        Groups.extra: [1: "extraSessionE"],
     ]
 }

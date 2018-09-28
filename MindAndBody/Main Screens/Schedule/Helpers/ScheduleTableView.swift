@@ -94,22 +94,18 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         
         switch tableView {
         case scheduleTable:
-            // First Screen, showing groups
-            if ScheduleVariables.shared.selectedGroup == .none {
-                if ScheduleVariables.shared.selectedScheduleIndex != 0 {
-                    // Note: +1 for extra sessions cell
-                    if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-                        return (ScheduleVariables.shared.selectedSchedule?["schedule"]?[ScheduleVariables.shared.selectedDay].count)! + 1
-                    } else {
-                        return ScheduleVariables.shared.weekArray.count + 1
-                    }
+            if schedules.count != 0 {
+                // Note: +1 for extra sessions cell
+                if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+                    print((ScheduleVariables.shared.selectedSchedule!["schedule"]?[ScheduleVariables.shared.selectedDay].count)! + 1)
+                    return (ScheduleVariables.shared.selectedSchedule!["schedule"]?[ScheduleVariables.shared.selectedDay].count)! + 1
                 } else {
-                    return 1
+                    return ScheduleVariables.shared.weekArray.count + 1
                 }
-            // Selecting a session
             } else {
-                return sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup.rawValue.groupFromString()]![ScheduleVariables.shared.choiceProgress].count
+                return 1
             }
+            
         case scheduleChoiceTable:
             return schedules.count
         default:
@@ -133,41 +129,33 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     
     func calculateCellHeight() {
         // First choice == session choice
-        if ScheduleVariables.shared.selectedGroup == .none {
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-            if schedules.count != 0 {
-                // Get number of rows
-                var count = 0
-                if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-                    count = ScheduleVariables.shared.selectedSchedule!["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
-                } else if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue {
-                    count = ScheduleVariables.shared.weekArray.count + 1
-                }
-                
-                // If height set to 72 is too big
-                if CGFloat(count) * presetCellHeight > (scheduleTable.bounds.height - headerHeight) {
-                    
-                    // Height calculated to fit screen unless it gets too small
-                    let height = (scheduleTable.bounds.height - headerHeight) / CGFloat(count)
-                    if height < 49 {
-                        cellHeight = 49
-//                        return 49
-                    } else {
-                        cellHeight = height
-//                        return height
-                    }
-                    
-                    // Height 72
-                } else {
-                    cellHeight = presetCellHeight
-//                    return presetCellHeight
-                }
-            } else {
-                cellHeight = presetCellHeight
-//                return presetCellHeight
+        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        if schedules.count != 0 {
+            // Get number of rows
+            var count = 0
+            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+                count = ScheduleVariables.shared.selectedSchedule!["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
+            } else if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue {
+                count = ScheduleVariables.shared.weekArray.count + 1
             }
             
-            // Not first choice
+            // If height set to 72 is too big
+            if CGFloat(count) * presetCellHeight > (scheduleTable.bounds.height - headerHeight) {
+                
+                // Height calculated to fit screen unless it gets too small
+                let height = (scheduleTable.bounds.height - headerHeight) / CGFloat(count)
+                if height < 49 {
+                    cellHeight = 49
+                } else {
+                    cellHeight = height
+                }
+                
+            // Height 72
+            } else {
+                cellHeight = presetCellHeight
+            }
+        } else {
+            cellHeight = presetCellHeight
         }
     }
     
@@ -250,7 +238,6 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     cell.addSubview(groupImage)
                     
                     
-                    //
                     // Checkmark box
                     let checkBox = UIButton()
                     checkBox.tag = indexPath.row
@@ -271,10 +258,9 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
                     cell.addSubview(checkBoxExtraButton)
                     
-                    //
                     // CheckMark if completed
                     if ScheduleVariables.shared.shouldReloadChoice {
-                        if indexPath.row != ScheduleVariables.shared.selectedRows.inital {
+                        if indexPath.row != ScheduleVariables.shared.selectedRows.initial {
                             if ScheduleVariables.shared.isGroupCompleted(row: indexPath.row, checkAll: false) {
                                 checkButton(button: checkBox)
                             }
@@ -375,31 +361,18 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
         case scheduleTable:
             
-            // Extra Session
-            // (day view last cell || week view last cell)
-            if  (ScheduleVariables.shared.scheduleStyle == "day" && indexPath.row == ScheduleVariables.shared.currentDayCount() ||  ScheduleVariables.shared.scheduleStyle == "week" && indexPath.row == ScheduleVariables.shared.weekArray.count) {
-                
-                ScheduleVariables.shared.initializeChoice(extraSession: true, selectedRow: indexPath.row)
-
-            // Normal Session
-            } else if ScheduleVariables.shared.isGroupCompleted(row: indexPath.row, checkAll: false) {
-                
-                ScheduleVariables.shared.initializeChoice(extraSession: true, selectedRow: indexPath.row)
-            }
+            ScheduleVariables.shared.initializeChoice(extraSession: true, selectedRow: indexPath.row)
             
             tableView.deselectRow(at: indexPath, animated: true)
             performSegue(withIdentifier: "SessionChoiceSegue", sender: self)
             
         // Select schedule
         case scheduleChoiceTable:
+        
+            ScheduleVariables.shared.selectedScheduleIndex = indexPath.row
+            ScheduleVariables.shared.scheduleStyle = (ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
             
-            // Select new schedule, update schedule style, and save
-            var selectedScheduleIndex = UserDefaults.standard.integer(forKey: "selectedSchedule")
-            
-            ScheduleVariables.shared.selectedScheduleIndex = selectedScheduleIndex
-            scheduleStyle = (ScheduleVariables.shared.selectedSchedule["scheduleInformation"][0][0]["scheduleStyle"] as Int).scheduleStyleFromInt()
-            
-            UserDefaults.standard.set(selectedScheduleIndex, forKey: "selectedSchedule")
+            UserDefaults.standard.set(ScheduleVariables.shared.selectedScheduleIndex, forKey: "selectedSchedule")
             
             // If week view, create temporary week array
             ScheduleVariables.shared.createTemporaryWeekViewArray()
@@ -410,9 +383,9 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             self.scheduleTable.reloadData()
             
             // Tracking
-            updateWeekGoal()
-            updateWeekProgress()
-            updateTracking()
+            Tracking.shared.updateWeekGoal()
+            Tracking.shared.updateWeekProgress()
+            Tracking.shared.updateTracking()
             
             // Notifications
             ReminderNotifications.shared.setNotifications()
@@ -446,51 +419,19 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     
     // Commit editing style
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         //
         // Delete if not plus row
         if tableView == scheduleChoiceTable && editingStyle == UITableViewCellEditingStyle.delete {
-            //
-            // Update arrays
-            schedules.remove(at: indexPath.row)
-            UserDefaults.standard.set(schedules, forKey: "schedules")
-                
-            // Select 1 schedule before last schedule
-            var selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
-            if schedules.count == 0 {
-                selectedSchedule = 0
-                scheduleStyle = 0
-            } else {
-                if selectedSchedule != 0 {
-                    selectedSchedule -= 1
-                }
-                scheduleStyle = schedules[selectedSchedule]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
-            }
-            ScheduleVariables.shared.selectedSchedule = selectedSchedule
-            ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
-            UserDefaults.standard.set(selectedSchedule, forKey: "selectedSchedule")
-            
-            // If week view, create temporary week array
-            if schedules.count != 0 {
-                ScheduleVariables.shared.createTemporaryWeekViewArray()
-            }
-            
+
             // Reload table
             layoutViews()
-            scheduleTable.reloadData()
-            // Tracking
-            updateWeekGoal()
-            updateWeekProgress()
-            updateTracking()
-            // Set Notifications
-            ReminderNotifications.shared.setNotifications()
-            
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
 
             // Change indicator
+            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
             if schedules.count != 0 {
                 // Select new cell (reloading row has strange animation)
-                let indexToReload = IndexPath(row: ScheduleVariables.shared.selectedSchedule, section: 0)
+                let indexToReload = IndexPath(row: ScheduleVariables.shared.selectedScheduleIndex, section: 0)
                 let cell = tableView.cellForRow(at: indexToReload)
                 let padding: CGFloat = 16 + 16
 

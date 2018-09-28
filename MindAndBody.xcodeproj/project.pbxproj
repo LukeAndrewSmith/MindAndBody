@@ -155,6 +155,7 @@
 		0729004E1F4D715D0048A355 /* straightLegBound7.png in Resources */ = {isa = PBXBuildFile; fileRef = 072900451F4D715D0048A355 /* straightLegBound7.png */; };
 		0729004F1F4D715D0048A355 /* straightLegBound8.png in Resources */ = {isa = PBXBuildFile; fileRef = 072900461F4D715D0048A355 /* straightLegBound8.png */; };
 		072900511F4D71650048A355 /* sprints.png in Resources */ = {isa = PBXBuildFile; fileRef = 072900501F4D71650048A355 /* sprints.png */; };
+		072941F4215E6D92007F2D4B /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072941F3215E6D92007F2D4B /* Tracking.swift */; };
 		0729536F1F4ED58400B2F21C /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729532D1F4ED58400B2F21C /* back@2x.png */; };
 		072953701F4ED58400B2F21C /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729532E1F4ED58400B2F21C /* back@3x.png */; };
 		072953711F4ED58400B2F21C /* backBicep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729532F1F4ED58400B2F21C /* backBicep@2x.png */; };
@@ -1503,6 +1504,7 @@
 		072900451F4D715D0048A355 /* straightLegBound7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = straightLegBound7.png; sourceTree = "<group>"; };
 		072900461F4D715D0048A355 /* straightLegBound8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = straightLegBound8.png; sourceTree = "<group>"; };
 		072900501F4D71650048A355 /* sprints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprints.png; sourceTree = "<group>"; };
+		072941F3215E6D92007F2D4B /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
 		0729532D1F4ED58400B2F21C /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		0729532E1F4ED58400B2F21C /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@3x.png"; sourceTree = "<group>"; };
 		0729532F1F4ED58400B2F21C /* backBicep@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backBicep@2x.png"; sourceTree = "<group>"; };
@@ -2894,6 +2896,7 @@
 			children = (
 				073734211FD2DE42009F5B54 /* TrackingScreen.swift */,
 				07C10F52202DE1CA00D70DF8 /* TrackingClasses.swift */,
+				072941F3215E6D92007F2D4B /* Tracking.swift */,
 			);
 			path = Tracking;
 			sourceTree = "<group>";
@@ -8177,6 +8180,7 @@
 				07DE23051FC0A47500940567 /* SubscriptionScreen.swift in Sources */,
 				0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */,
 				0789ED061F79A6EA000EB739 /* Register.swift in Sources */,
+				072941F4215E6D92007F2D4B /* Tracking.swift in Sources */,
 				07A6346F208C999000712EE2 /* Equipment.swift in Sources */,
 				075D441C21406028003502B6 /* CustomElements.swift in Sources */,
 				0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */,

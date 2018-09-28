@@ -51,7 +51,7 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
         // App chooses sessions - choice title
         let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // App chooses session
-        if ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+        if ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
             // Navigation
             var navTitle = String()
             switch selectedComponent {

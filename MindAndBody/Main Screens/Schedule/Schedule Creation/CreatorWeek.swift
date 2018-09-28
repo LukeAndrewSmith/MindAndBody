@@ -158,11 +158,11 @@ class CustomScheduleWeekCell: UITableViewCell {
         // Loop Week
         for i in 0...6 {
             // If day not empty
-            if ScheduleVariables.shared.selectedSchedule["schedule"]![i].count != 0 {
+            if ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count != 0 {
                 // Loop day
-                for j in 0..<ScheduleVariables.shared.selectedSchedule["schedule"]![i].count {
+                for j in 0..<ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count {
                     // Index of the group as int for group Array
-                    let index = (ScheduleVariables.shared.selectedSchedule["schedule"]![i][j]["group"] as! String).groupFromString()
+                    let index = (ScheduleVariables.shared.selectedSchedule!["schedule"]![i][j]["group"] as! String).groupFromString()
                     groupArray[index] += 1
                 }
             }
@@ -189,8 +189,8 @@ class CustomScheduleWeekCell: UITableViewCell {
         // Add to first available day in the week
         for i in 0...6 {
             // If week not full (max 5 things per day in week
-            if ScheduleVariables.shared.selectedSchedule["schedule"]![i].count < 5 {
-                ScheduleVariables.shared.selectedSchedule["schedule"]![i].append(scheduleDataStructures.scheduleGroups[row]!)
+            if ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count < 5 {
+                ScheduleVariables.shared.selectedSchedule!["schedule"]![i].append(scheduleDataStructures.scheduleGroups[row]!)
                 break
             }
         }
@@ -220,13 +220,13 @@ class CustomScheduleWeekCell: UITableViewCell {
         // Loop week
         for i in (0...6).reversed() {
             // If day isn't empty
-            if ScheduleVariables.shared.selectedSchedule["schedule"]![i].count != 0 {
+            if ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count != 0 {
                 // Loop day
-                for j in 0...ScheduleVariables.shared.selectedSchedule["schedule"]![i].count - 1 {
+                for j in 0...ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count - 1 {
                     // If correct group
-                    if ScheduleVariables.shared.selectedSchedule["schedule"]![i][j]["group"] as! String == row.groupFromInt() {
+                    if ScheduleVariables.shared.selectedSchedule!["schedule"]![i][j]["group"] as! String == row.groupFromInt() {
                         // Remove
-                        ScheduleVariables.shared.selectedSchedule["schedule"]![i].remove(at: j)
+                        ScheduleVariables.shared.selectedSchedule!["schedule"]![i].remove(at: j)
                         shouldBreak = true
                         break
                     }

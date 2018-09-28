@@ -59,7 +59,7 @@ class ScheduleViewQuestion: UIViewController {
         
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // Set user settings for schedule style to week
-        ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["scheduleStyle"] = 0
+        ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["scheduleStyle"] = 0
         UserDefaults.standard.set(schedules, forKey: "schedules")
         
         selectedStyle = 0
@@ -71,14 +71,14 @@ class ScheduleViewQuestion: UIViewController {
         // If app schedule, go to week
         var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         // Set user settings for schedule style to week
-        ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["scheduleStyle"] = 1
+        ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["scheduleStyle"] = 1
         UserDefaults.standard.set(schedules, forKey: "schedules")
         //
         // App helps create schedule, fill suggested sessions into week creator
-        if ScheduleVariables.shared.selectedSchedule["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
+        if ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             
             // Ensure that the schedule is clean
-            ScheduleVariables.shared.selectedSchedule["schedule"] = scheduleDataStructures.emptyWeek["schedule"]
+            ScheduleVariables.shared.selectedSchedule!["schedule"] = scheduleDataStructures.emptyWeek["schedule"]
             // Loop sessions array - therefore loop groups
             for i in 0..<ScheduleVariables.shared.temporarySessionsArray.count {
                 // If n session not 0 for a group
@@ -89,8 +89,8 @@ class ScheduleViewQuestion: UIViewController {
                         for j in 0...6 {
                             // If day not full (max 5 things per day in week)
                                 // Note, i is the group
-                            if ScheduleVariables.shared.selectedSchedule["schedule"]![j].count < 5 {
-                                ScheduleVariables.shared.selectedSchedule["schedule"]![j].append(scheduleDataStructures.scheduleGroups[i]!)
+                            if ScheduleVariables.shared.selectedSchedule!["schedule"]![j].count < 5 {
+                                ScheduleVariables.shared.selectedSchedule!["schedule"]![j].append(scheduleDataStructures.scheduleGroups[i]!)
                                 break
                             }
                         }

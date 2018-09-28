@@ -53,10 +53,10 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         super.viewWillAppear(animated)
         
         // Ensure week goal correct
-        updateWeekGoal()
+        Tracking.shared.updateWeekGoal()
         // Update Tracking
-        updateWeekProgress()
-        updateTracking()
+        Tracking.shared.updateWeekProgress()
+        Tracking.shared.updateTracking()
         
         // Add here incase image changed in settings
 //        addBackgroundImage(withBlur: true, fullScreen: false)
@@ -288,9 +288,9 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
             //
             // Shift chart data so min date is 0, this allows for correct presenting of labels
             if trackingDictionaryDates.count != 0 {
-                TrackingVariables.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
+                Tracking.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
                 for i in 0..<chartDataOriginal.count {
-                    let key = (chartDataOriginal[i].key.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
+                    let key = (chartDataOriginal[i].key.timeIntervalSince1970 - Tracking.shared.minTime) / (3600.0 * 24.0)
                     let value = chartDataOriginal[i].value
                     //
                     let keyValue = (key: key, value: value)
@@ -338,7 +338,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
                 default: break
                 }
                 //
-                let start = (startDate.timeIntervalSince1970 - TrackingVariables.shared.minTime) / (3600.0 * 24.0)
+                let start = (startDate.timeIntervalSince1970 - Tracking.shared.minTime) / (3600.0 * 24.0)
                 chartView.xAxis.axisMinimum = start
                 
                 

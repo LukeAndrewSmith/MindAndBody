@@ -503,7 +503,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if canSwipeMovement {
                         //
                         // Schedule Tracking
-                        updateScheduleTracking(fromSchedule: fromSchedule)
+                        ScheduleVariables.shared.shouldReloadChoice = true
                         //
                         self.dismiss(animated: true)
                     }
@@ -514,7 +514,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     lengthTimer.invalidate()
                     //
                     // Schedule Tracking
-                    updateScheduleTracking(fromSchedule: fromSchedule)
+                    ScheduleVariables.shared.shouldReloadChoice = true
                     //
                     self.dismiss(animated: true)
                 }

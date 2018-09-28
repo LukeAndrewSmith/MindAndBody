@@ -93,11 +93,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     let scheduleChoiceTable = UITableView()
     let scheduleView = UIView()
     let createScheduleButton = UIButton()
-
-    //
-    // Very silly variable used in choices of 'endurance' group - steady state, as there is a 'time choice' after 'warmup/stretching' choice, variable indicating which one was selected
-        // 'warmup/stretching' choice usually last choice
-    var steadyStateChoice = Int()
     
     // Should watch for walkthrough when coming back
     var goingToSubscriptionsScreen = false
@@ -139,11 +134,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     //
     var walkthroughBackgroundColor = UIColor()
     var walkthroughTextColor = UIColor()
-    
-    //
-    var lessonsView = UIView()
-    var lessonsBackground = UIButton()
-    var isLessonsShowing = false // indicates if lessons view is presented
+
     
     // -----------------------------------------------------------------------------------------------
     
@@ -169,7 +160,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         //        addBackgroundImage(withBlur: true, fullScreen: false, image: "")
         
         // Reload scheudle style to be sure
-        setScheduleStyle()
+        ScheduleVariables.shared.setScheduleStyle()
         
         // Check if necessary to go to current day
         checkSelectedDay()
@@ -190,18 +181,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     
-    //
-    // MARK: viewDidAppear
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // If coming back to schedule from having done a session, mark session as completed and, if the entire group has been completed, animate from final choice back to main schedule screen
-            // At end of session, updateScheduleTracking() gets called, this updates the final choice (session) tracking, then indicates the scheduleShouldReload
-            // This function that means the function does something, it reloads the relevant rows and animated back to the home schedule screen if necessary
-        markAsCompletedAndAnimate()
-    }
-    
-    //
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -232,10 +211,10 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
         
         // Ensure week goal correct
-        updateWeekGoal()
+        Tracking.shared.updateWeekGoal()
         
         // Setup
-        setScheduleStyle()
+        ScheduleVariables.shared.setScheduleStyle()
         // If week view, crete temporary week array
         if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue {
             ScheduleVariables.shared.createTemporaryWeekViewArray()

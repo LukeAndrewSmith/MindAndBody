@@ -104,6 +104,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Walkthroughs
         UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughDictionary])
         
+        ScheduleVariables.shared.setSelectedSchedule()
+        
         //
         // Check if the user has a valid subscription
         // Subscription Check 1
