@@ -161,25 +161,25 @@ class CustomScheduleEquipmentCell: UITableViewCell {
         equipmentSwitch.layer.cornerRadius = equipmentSwitch.bounds.height / 2
         equipmentSwitch.clipsToBounds = true
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         // Set initial value
         switch row {
         // Foam Roller
         case 0:
             // Off
-            if ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["foamRoller"] as! Int == 0 {
+            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 0 {
                 equipmentSwitch.isOn = false
                 // On
-            } else if ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["foamRoller"] as! Int == 1 {
+            } else if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 1 {
                 equipmentSwitch.isOn = true
             }
         // Pullup Bar
         case 1:
             // Off
-            if ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["pullupBar"] as! Int == 0 {
+            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] as! Int == 0 {
                 equipmentSwitch.isOn = false
                 // On
-            } else if ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["pullupBar"] as! Int == 1 {
+            } else if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] as! Int == 1 {
                 equipmentSwitch.isOn = true
             }
         default: break
@@ -187,32 +187,32 @@ class CustomScheduleEquipmentCell: UITableViewCell {
     }
     
     @IBAction func switchAction(_ sender: UISwitch) {
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         //
         switch row {
         // Foam Roller
         case 0:
             // Use
             if sender.isOn {
-                ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["foamRoller"] = 1
+                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] = 1
             // Don't Use
             } else {
-                ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["foamRoller"] = 0
+                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] = 0
             }
         // Pullup Bar
         case 1:
             // Use
             if sender.isOn {
-                ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["pullupBar"] = 1
+                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] = 1
             // Don't Use
             } else {
-                ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["pullupBar"] = 0
+                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] = 0
             }
         default: break
         }
         
         // Save
-        UserDefaults.standard.set(schedules, forKey: "schedules")
+        ScheduleVariables.shared.saveSchedules()
     }
     
     

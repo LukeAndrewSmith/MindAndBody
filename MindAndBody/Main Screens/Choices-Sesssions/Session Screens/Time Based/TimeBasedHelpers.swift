@@ -319,7 +319,7 @@ extension TimeBasedScreen {
                 lengthTimer.invalidate()
                 //
                 // Schedule Tracking
-                ScheduleVariables.shared.shouldReloadChoice = true
+                ScheduleVariables.shared.shouldReloadScheduleTracking()
                 //
                 self.dismiss(animated: true)
             }

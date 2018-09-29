@@ -415,7 +415,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             //
             // Schedule Tracking
-            ScheduleVariables.shared.shouldReloadChoice = true
+            ScheduleVariables.shared.shouldReloadScheduleTracking()
             // Dismiss
             self.dismiss(animated: true)
             //
@@ -543,7 +543,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if automaticYogaArray[0] == 1 {
                 UIApplication.shared.isIdleTimerDisabled = false
                 // Tracking
-                ScheduleVariables.shared.shouldReloadChoice = true
+                ScheduleVariables.shared.shouldReloadScheduleTracking()
                 //
                 self.dismiss(animated: true)
             }

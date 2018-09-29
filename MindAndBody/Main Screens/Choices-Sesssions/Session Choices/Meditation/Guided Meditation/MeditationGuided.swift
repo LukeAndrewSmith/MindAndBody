@@ -1058,7 +1058,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
             // Return to beginning
             let delayInSeconds = 1.0
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                _ = self.navigationController?.popToRootViewController(animated: false)
+                self.navigationController?.popViewController(animated: false)
             }
         }
     }

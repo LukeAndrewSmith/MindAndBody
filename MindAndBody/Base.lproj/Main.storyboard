@@ -130,14 +130,9 @@
                         <outlet property="scheduleTable" destination="oPE-Kh-Caj" id="UFV-AU-XOl"/>
                         <outlet property="scheduleTableBottom" destination="hvm-Og-oex" id="dJj-3U-R2h"/>
                         <outlet property="scheduleTableTopConstraint" destination="EEu-dX-BjX" id="tAk-vd-Uyp"/>
-                        <segue destination="bRc-pd-jNj" kind="show" identifier="scheduleSegueOverview" id="SOr-B2-NYZ"/>
-                        <segue destination="eVk-Z7-PzP" kind="show" identifier="scheduleMeditationSegueGuided" id="aak-rT-dwz"/>
                         <segue destination="oWk-Ma-VKX" kind="presentation" identifier="EditScheduleSegue" id="48d-pH-vgR"/>
                         <segue destination="q4h-Je-Ynw" kind="presentation" identifier="ScheduleCreationSegue" id="b4e-57-eAb"/>
                         <segue destination="THe-fh-5DZ" kind="presentation" identifier="SubscriptionsSegue" id="SXY-HC-FeY"/>
-                        <segue destination="Gwv-m2-9jD" kind="show" identifier="scheduleSegueCustom" id="CRx-7v-B2Q"/>
-                        <segue destination="cxC-qc-tK1" kind="show" identifier="scheduleMeditationSegueTimer" id="7b0-YY-LxK"/>
-                        <segue destination="d26-8Y-1cJ" kind="show" identifier="scheduleSegueFinalChoice" id="Bd4-SV-Jaw"/>
                         <segue destination="pLq-8Q-Oq5" kind="show" identifier="SessionChoiceSegue" id="SYJ-ZP-pjw"/>
                     </connections>
                 </viewController>
@@ -154,45 +149,78 @@
                         <viewControllerLayoutGuide type="bottom" id="JGZ-Ex-BjH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="96v-hP-GAm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mbq-ii-X2T">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="176"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="176" id="iVW-hE-dV3"/>
-                                </constraints>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vci-rP-y7J">
-                                <rect key="frame" x="0.0" y="176" width="375" height="442"/>
+                                <rect key="frame" x="0.0" y="176" width="375" height="378"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="pLq-8Q-Oq5" id="hg2-25-X4I"/>
                                     <outlet property="delegate" destination="pLq-8Q-Oq5" id="U8H-QJ-L8p"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mbq-ii-X2T">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="176"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="176" id="b80-iZ-5qV"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYW-oD-8ex">
+                                <rect key="frame" x="8" y="8" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Bcg-CG-wKh"/>
+                                    <constraint firstAttribute="width" constant="44" id="J2t-ft-PZc"/>
+                                </constraints>
+                                <state key="normal" image="Cross"/>
+                                <connections>
+                                    <action selector="cancelButtonAction:" destination="pLq-8Q-Oq5" eventType="touchUpInside" id="5Z6-KJ-Os7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mZ-8b-7jP">
+                                <rect key="frame" x="8" y="176" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="0OC-ac-Rtn"/>
+                                    <constraint firstAttribute="height" constant="44" id="VQa-O2-1XR"/>
+                                </constraints>
+                                <state key="normal" image="Back Arrow"/>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="pLq-8Q-Oq5" eventType="touchUpInside" id="i0I-Ev-JBh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vci-rP-y7J" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" id="0kT-uF-O1a"/>
-                            <constraint firstItem="mbq-ii-X2T" firstAttribute="top" secondItem="96v-hP-GAm" secondAttribute="top" id="N7a-57-OZx"/>
-                            <constraint firstAttribute="trailing" secondItem="mbq-ii-X2T" secondAttribute="trailing" id="VmG-kE-5DH"/>
+                            <constraint firstAttribute="trailing" secondItem="mbq-ii-X2T" secondAttribute="trailing" id="8VV-UW-KwH"/>
+                            <constraint firstItem="2mZ-8b-7jP" firstAttribute="top" secondItem="mbq-ii-X2T" secondAttribute="bottom" id="Q5T-n8-7rl"/>
+                            <constraint firstItem="2mZ-8b-7jP" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" constant="8" id="QlL-qy-9tv"/>
+                            <constraint firstItem="nYW-oD-8ex" firstAttribute="top" secondItem="tlE-Ad-BgG" secondAttribute="bottom" constant="8" id="Qy2-B9-cv0"/>
+                            <constraint firstItem="vci-rP-y7J" firstAttribute="top" secondItem="mbq-ii-X2T" secondAttribute="bottom" id="WMQ-5f-RcP"/>
+                            <constraint firstItem="mbq-ii-X2T" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" id="c8M-nH-nK3"/>
                             <constraint firstAttribute="trailing" secondItem="vci-rP-y7J" secondAttribute="trailing" id="e3g-2D-Rdf"/>
-                            <constraint firstItem="vci-rP-y7J" firstAttribute="top" secondItem="mbq-ii-X2T" secondAttribute="bottom" id="iOH-2P-Zg0"/>
                             <constraint firstItem="JGZ-Ex-BjH" firstAttribute="top" secondItem="vci-rP-y7J" secondAttribute="bottom" id="jJr-FP-6ag"/>
-                            <constraint firstItem="mbq-ii-X2T" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" id="oSk-Gz-L8v"/>
+                            <constraint firstItem="nYW-oD-8ex" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" constant="8" id="mQ8-TT-4BD"/>
+                            <constraint firstItem="mbq-ii-X2T" firstAttribute="top" secondItem="tlE-Ad-BgG" secondAttribute="bottom" id="xt3-or-lz1"/>
                         </constraints>
                     </view>
-                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="2mZ-8b-7jP" id="s0O-5h-FGt"/>
+                        <outlet property="cancelButton" destination="nYW-oD-8ex" id="VBS-EG-eEc"/>
+                        <outlet property="cancelButtonHeight" destination="VQa-O2-1XR" id="zio-iB-hGo"/>
                         <outlet property="choiceTable" destination="vci-rP-y7J" id="pnR-ti-c1H"/>
                         <outlet property="groupImage" destination="mbq-ii-X2T" id="03V-4X-stK"/>
-                        <outlet property="sessionChoiceTable" destination="vci-rP-y7J" id="JXt-yn-hay"/>
+                        <outlet property="groupImageHeight" destination="b80-iZ-5qV" id="Fkq-vl-4Gh"/>
+                        <segue destination="Gwv-m2-9jD" kind="show" identifier="scheduleSegueCustom" id="rft-cN-lVI"/>
+                        <segue destination="bRc-pd-jNj" kind="show" identifier="scheduleSegueOverview" id="8CF-7f-X9A"/>
+                        <segue destination="d26-8Y-1cJ" kind="show" identifier="scheduleSegueFinalChoice" id="kjz-yZ-hSb"/>
+                        <segue destination="eVk-Z7-PzP" kind="show" identifier="scheduleMeditationSegueGuided" id="6mR-Q3-iWF"/>
+                        <segue destination="cxC-qc-tK1" kind="show" identifier="scheduleMeditationSegueTimer" id="Lzr-hF-bIK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wbn-VA-zf6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-204" y="805"/>
+            <point key="canvasLocation" x="-204" y="742.5787106446777"/>
         </scene>
         <!--Schedule Editing Navigation-->
         <scene sceneID="gfY-IL-60q">
@@ -4476,6 +4504,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Back Arrow" width="30" height="30"/>
         <image name="Bin" width="45" height="45"/>
         <image name="CheckMark" width="30" height="30"/>
         <image name="Cross" width="30" height="30"/>
@@ -4497,7 +4526,7 @@
         <segue reference="9aF-hr-dOa"/>
         <segue reference="JIN-WD-W4f"/>
         <segue reference="7EB-Ms-L5h"/>
-        <segue reference="SOr-B2-NYZ"/>
+        <segue reference="8CF-7f-X9A"/>
         <segue reference="NNV-PL-USW"/>
         <segue reference="Q3V-X2-nea"/>
         <segue reference="M8n-a7-S6V"/>

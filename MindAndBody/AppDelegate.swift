@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Profile/Schedules
         // Selected Schedule
-        UserDefaults.standard.register(defaults: ["selectedSchedule" : 0])
+        UserDefaults.standard.register(defaults: ["selectedScheduleIndex" : 0])
         // Schedules
         UserDefaults.standard.register(defaults: ["schedules" : scheduleDataStructures.registerSchedules])
         // Difficulty Levels
@@ -104,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Walkthroughs
         UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughDictionary])
         
-        ScheduleVariables.shared.setSelectedSchedule()
+        ScheduleVariables.shared.setSchedules()
         
         //
         // Check if the user has a valid subscription

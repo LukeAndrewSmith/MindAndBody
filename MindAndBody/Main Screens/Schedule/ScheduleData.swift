@@ -10,61 +10,72 @@ import Foundation
 import UIKit
 
 
-//
-// Schedule Variabls ---------------------------------------------------------------------------------------------------------------
 class ScheduleVariables {
     static var shared = ScheduleVariables()
     private init() {}
     
+    // Images
+    var groupImageThumbnails: [String: UIImage] = {
+        return [
+            "workout": #imageLiteral(resourceName: "GroupWorkout").thumbnail(),
+            "yoga": #imageLiteral(resourceName: "GroupYoga").thumbnail(),
+            "meditation": #imageLiteral(resourceName: "GroupMeditation").thumbnail(),
+            "endurance": #imageLiteral(resourceName: "GroupEndurance").thumbnail(),
+            "flexibility": #imageLiteral(resourceName: "LessonYoga").thumbnail(),
+            ]
+    }()
+    
     // -------------------------------------------
     // MARK: Schedule Screen
     var selectedDay: Int = 0
+    var scheduleStyle = ScheduleStyle.day.rawValue // week or day
     
     // -------------------------------------------
     // MARK: Current Schedule && Functions
     
     // Current Schedule
     var selectedScheduleIndex = Int()
-    var selectedSchedule: [String: [[[String: Any]]]]?
+    var schedules: [[String: [[[String: Any]]]]] = []
     
     // Temporary week array
-    // If viewed as! week, then creates a temporary array of the full week from the schedules sorted to user defaults
-    // This array contains dictionaries with fields: group, day, index, so that the relevant group in the schedulesTracking array can be found and updated
-    // This avoids the need to store two seperate arrays for week view and day view
+    // If viewed as week, then creates a temporary array of the full week from the schedules sorted to user defaults
+        // This array contains dictionaries with fields: group, day, index, so that the relevant group in the schedulesTracking array can be found and updated
+        // This avoids the need to store two seperate arrays for week view and day view
     var weekArray: [[String: Any]] = []
     // "group": ""
     // "index0": Int // for indexing in week
     // "index1": Int
     
+    // -------------------------------------------
+    // MARK:- Initial retreival of data
+    
+    func setSchedules() {
+        schedules = UserDefaults.standard.object(forKey: "schedules") as? [[String: [[[String: Any]]]]] ?? []
+        setSelectedScheduleIndex()
+        setScheduleStyle()
+    }
+    
     func setSelectedScheduleIndex() {
-        selectedScheduleIndex = UserDefaults.standard.integer(forKey: "selectedSchedule")
+        selectedScheduleIndex = UserDefaults.standard.integer(forKey: "selectedScheduleIndex")
+        if selectedScheduleIndex >= schedules.count {
+            selectedScheduleIndex = 0
+        }
     }
     
     func setScheduleStyle() {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        if schedules.count != 0 {
-            ScheduleVariables.shared.scheduleStyle = (ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
+        
+        if schedules.count > 0 {
+            scheduleStyle = (schedules[selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
+            if scheduleStyle == ScheduleStyle.day.rawValue {
+                createTemporaryWeekViewArray()
+            }
         } else {
-            ScheduleVariables.shared.scheduleStyle = ScheduleStyle.day.rawValue
+            scheduleStyle = ScheduleStyle.day.rawValue
         }
-    }
-    
-    func setSelectedSchedule() {
-        
-        setSelectedScheduleIndex()
-        
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        if schedules.count != 0 {
-            selectedSchedule = schedules[selectedScheduleIndex]
-        }
-        
-        setScheduleStyle()
     }
     
     // All sessions are stored in schedule week, if schedule is viewed as! full week, temporary array is made to stor them in the correct order to present, saves having extra array in schedule
     func createTemporaryWeekViewArray() {
-        
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
         
         // Ensure empty
         weekArray = []
@@ -77,11 +88,11 @@ class ScheduleVariables {
             // Loop week
             for j in 0...6 {
                 // If day not empty
-                if ScheduleVariables.shared.selectedSchedule!["schedule"]![j].count != 0 {
+                if schedules[selectedScheduleIndex]["schedule"]![j].count != 0 {
                     // Loop day
-                    for k in 0..<ScheduleVariables.shared.selectedSchedule!["schedule"]![j].count {
+                    for k in 0..<schedules[selectedScheduleIndex]["schedule"]![j].count {
                         // If correct group
-                        if ScheduleVariables.shared.selectedSchedule!["schedule"]![j][k]["group"] as! String == orderedGroupArray[i] {
+                        if schedules[selectedScheduleIndex]["schedule"]![j][k]["group"] as! String == orderedGroupArray[i] {
                             // Create group dict that references this one
                             let groupDict: [String: Any] = [
                                 "group": orderedGroupArray[i],
@@ -89,7 +100,7 @@ class ScheduleVariables {
                                 "index": k,
                                 ]
                             // Append
-                            ScheduleVariables.shared.weekArray.append(groupDict)
+                            weekArray.append(groupDict)
                         }
                     }
                 }
@@ -99,333 +110,27 @@ class ScheduleVariables {
     
     // Current Schedule Functions
     func currentDayCount() -> Int {
-        let count = selectedSchedule!["schedule"]?[ScheduleVariables.shared.selectedDay].count ?? {return 0}()
+        let count = schedules[selectedScheduleIndex]["schedule"]?[selectedDay].count ?? {return 0}()
         return count
     }
     
     // -------------------------------------------
-    // MARK: Session Choice
+    // MARK:- Session Choice
     var selectedGroup = Groups.none
+    var isExtraSession = false
     var choiceProgress: Int = 1
     var selectedRows: (initial: Int, final: Int) = (0,0)
-    
+    var shouldPop = false // if user chooses session, need to pop from final choice as well as final choice detail after clicking begin
     var extraSessionCompletion = [false, false, false] // warmup, session, stretching
+    // Once session is done, update ticks
+    // Final choice tick
+    var shouldReloadFinalChoice = false
+    var shouldReloadInitialChoice = false
     
-    // Called upon selection of group in schedule screen
-    func initializeChoice(extraSession: Bool, selectedRow: Int) {
-        if extraSession {
-            extraSessionCompletion = [false, false, false]
-            selectedGroup = Groups.extra
-            choiceProgress = 1
-            selectedRows.initial = selectedRow
-        } else {
-            let groupName: String = {
-                if scheduleStyle == "day" {
-                    return ScheduleVariables.shared.selectedSchedule!["schedule"]![selectedDay][selectedRow]["group"] as! String
-                } else {
-                    return weekArray[selectedRow]["group"] as! String
-                }
-            }()
-            selectedGroup = Groups.init(rawValue: groupName)!
-            choiceProgress = 1
-            selectedRows.initial = selectedRow
-        }
+    func shouldReloadScheduleTracking() {
+        shouldReloadFinalChoice = true
+        shouldReloadInitialChoice = true
     }
-    
-    // Checks if the group is completed
-        // row: the row of the group in the initial schedule screen
-        // checkAll:
-            // True: checks if all components of group
-            // False: checks if parameter "isGroupCompleted" of group in schedule
-    func isGroupCompleted(row: Int, checkAll: Bool) -> Bool {
-        
-        // Extra session
-        if ScheduleVariables.shared.selectedGroup == Groups.extra {
-
-            return !ScheduleVariables.shared.extraSessionCompletion.contains(false)
-            
-        // Normal
-        } else {
-            
-            // Get day/index in day for the two different schedule styles
-            let (day, indexInDay) = getDayIndexingVariables()
-            
-            if checkAll {
-                // Switch groups
-                switch selectedSchedule!["schedule"]![day][indexInDay]["group"] as! String {
-                    
-                // Yoga
-                case "yoga":
-                    // Yoga warmup optional, so is completed if session is finished
-                    return selectedSchedule!["schedule"]![day][indexInDay]["1"] as! Bool
-                    
-                // Meditation
-                case "meditation":
-                    // Either one of timer or guided for it to be completed
-                    return selectedSchedule!["schedule"]![day][indexInDay]["0"] as! Bool  ||  selectedSchedule!["schedule"]![day][indexInDay]["1"] as! Bool
-                    
-                // Normal case
-                default:
-                    // Each group has! fields: "group", and "isGroupCompleted", and components of warmup/session/stretching (index with: 0/1/2)     (See scheduleDataStructures.scheduleGroups)
-                    // We only want to check components loop the count-2
-                    for i in 0..<(selectedSchedule!["schedule"]![day][indexInDay].count-2) {
-                        if selectedSchedule!["schedule"]![day][indexInDay][String(i)] as! Bool == false {
-                            return false
-                        }
-                    }
-                    return true
-                }
-
-            } else {
-                return ScheduleVariables.shared.selectedSchedule!["schedule"]![day][indexInDay]["isGroupCompleted"] as! Bool
-            }
-        }
-    }
-    
-    func getDayIndexingVariables() -> (day: Int, indexInDay: Int) {
-        // Get day/index in day for the two different schedule styles
-        let day: Int = {
-            if scheduleStyle == "day" {
-                return selectedDay
-            } else {
-                return weekArray[selectedRows.initial]["day"] as! Int ?? 0
-            }
-        }()
-        let indexInDay: Int = {
-            if scheduleStyle == "day" {
-                return selectedRows.initial
-            } else {
-                return weekArray[selectedRows.initial]["index"] as! Int ?? 0
-            }
-        }()
-        return (day: day, indexInDay: indexInDay)
-    }
-    
-    // Checks if a component of a group (warmup/session/stretching) is completed using the index of the row
-        // Only used for final choice screen, schedule screen uses isGroupCompleted
-    func isComponentCompleted(row: Int) -> Bool {
-        
-        // Extra session
-        if selectedGroup == Groups.extra {
-            
-            return extraSessionCompletion[row]
-            
-        // Normal
-        } else {
-            
-            // Get day/index in day for the two different schedule styles
-            let (day, indexInDay) = getDayIndexingVariables()
-            return selectedSchedule!["schedule"]![day][indexInDay][String(row)] as! Bool
-            
-        }
-    }
-    
-    func isDayCompleted(day: Int) -> Bool {
-        for group in selectedSchedule!["schedule"]![day] {
-            if !(group["isGroupCompleted"] as! Bool) {
-                return false
-            }
-        }
-        return true
-    }
-    
-    func isDayEmpty(day: Int) -> Bool {
-        return selectedSchedule!["schedule"]![day].count == 0
-    }
-    
-    // MARK: Update completions functions
-    func updateCompletion(row: Int) {
-        // Group components
-        if isLastChoice() {
-            if selectedGroup == Groups.extra {
-                extraSessionCompletion[row] = !extraSessionCompletion[row]
-                if isGroupCompleted(row: row, checkAll: true) {
-                    // MARK: CHECK
-                    incrementExtraSessions()
-                    Tracking.shared.updateTracking()
-                }
-
-            } else {
-                
-                // Get day/index in day for the two different schedule styles
-                let (day, indexInDay) = getDayIndexingVariables()
-                
-                let currentBool = selectedSchedule!["schedule"]![day][indexInDay][String(row)] as! Bool
-                selectedSchedule!["schedule"]![day][indexInDay][String(row)] = !currentBool
-                selectedSchedule!["schedule"]![day][indexInDay]["isGroupCompleted"] = isGroupCompleted(row: indexInDay, checkAll: true)
-                
-                if currentBool != isGroupCompleted(row: indexInDay, checkAll: true) {
-                    let group = selectedSchedule!["schedule"]![day][indexInDay]["group"] as! String
-                    updateGroupForOtherSchedule(markAs: !currentBool, group: group)
-                }
-                
-                // Maybe should be set after schedule updated to userdefaults!!!!!!!
-                ReminderNotifications.shared.updateBadges()
-                Tracking.shared.updateWeekProgress()
-                Tracking.shared.updateTracking()
-            }
-            
-        // Group
-        } else {
-            
-            // Get day/index in day for the two different schedule styles
-            let (day, indexInDay) = getDayIndexingVariables()
-            let currentBool = selectedSchedule!["schedule"]![day][row]["isGroupCompleted"] as! Bool
-            selectedSchedule!["schedule"]![day][row]["isGroupCompleted"] = !currentBool
-            let group = selectedSchedule!["schedule"]![day][indexInDay]["group"] as! String
-            updateGroupForOtherSchedule(markAs: !currentBool, group: group)
-            
-            // Maybe should be set after schedule updated to userdefaults!!!!!!!
-            ReminderNotifications.shared.updateBadges()
-            Tracking.shared.updateWeekProgress()
-            Tracking.shared.updateTracking()
-
-        }
-        
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        schedules[ScheduleVariables.shared.selectedScheduleIndex] = selectedSchedule!
-        UserDefaults.standard.set(schedules, forKey: "schedules")
-    }
-    
-    func updateGroupForOtherSchedule(markAs: Bool, group: String) {
-        
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        
-        if schedules.count != 0 {
-            // Loop Schedules
-            for i in 0..<schedules.count {
-                // If not currently selected schedule
-                if i != selectedScheduleIndex {
-                    // Indicates that group has! been updated so should break week loop as! well
-                    var shouldBreak = false
-                    // Loop week
-                    for j in 0...6 {
-                        // If day isn't empty
-                        if schedules[i]["schedule"]![j].count != 0 {
-                            // Loop day
-                            for k in 0..<schedules[i]["schedule"]![j].count {
-                                // If correct group and false
-                                if schedules[i]["schedule"]![j][k]["group"] as! String == selectedGroup.rawValue && schedules[i]["schedule"]![j][k]["isGroupCompleted"] as! Bool == !markAs {
-                                    schedules[i]["schedule"]![j][k]["isGroupCompleted"] = markAs
-                                    shouldBreak = true
-                                    break
-                                }
-                            }
-                        }
-                        if shouldBreak {
-                            break
-                        }
-                    }
-                }
-            }
-        }
-        
-        schedules[ScheduleVariables.shared.selectedScheduleIndex] = selectedSchedule!
-        UserDefaults.standard.set(schedules, forKey: "schedules")
-    }
-    
-    func incrementExtraSessions() {
-        //
-        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
-        // Increment
-        let currentValue = trackingProgressDictionary["ExtraSessions"] as! Int
-        trackingProgressDictionary["ExtraSessions"] = currentValue + 1
-        // Save
-        UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-    }
-    
-    func isLastChoice() -> Bool {
-        // NINA
-        return false
-    }
-    
-    func deleteSchedule(at: Int) {
-        
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-
-        schedules.remove(at: at)
-        UserDefaults.standard.set(schedules, forKey: "schedules")
-        
-        // Update selected schedule index and style
-        if schedules.count == 0 {
-            selectedScheduleIndex = 0
-            scheduleStyle = ScheduleStyle.day.rawValue
-        } else {
-            if ScheduleVariables.shared.selectedScheduleIndex != 0 {
-                ScheduleVariables.shared.selectedScheduleIndex -= 1
-            }
-            ScheduleVariables.shared.scheduleStyle = (schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
-        }
-        UserDefaults.standard.set(ScheduleVariables.shared.selectedScheduleIndex, forKey: "selectedSchedule")
-        
-        if scheduleStyle == ScheduleStyle.day.rawValue {
-            ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
-        } else {
-            ScheduleVariables.shared.selectedDay = 7
-        }
-        
-        // Update selected schedule
-        if schedules.count == 0 {
-            ScheduleVariables.shared.selectedSchedule = nil
-        } else {
-            ScheduleVariables.shared.selectedSchedule = schedules[ScheduleVariables.shared.selectedScheduleIndex]
-        }
-        
-        // If week view, create temporary week array
-        if schedules.count != 0 {
-            ScheduleVariables.shared.createTemporaryWeekViewArray()
-        }
-        
-        // Tracking
-        Tracking.shared.updateWeekGoal()
-        Tracking.shared.updateWeekProgress()
-        Tracking.shared.updateTracking()
-        // Set Notifications
-        ReminderNotifications.shared.setNotifications()
-        
-    }
-    
-    func deleteLastSchedule() {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        deleteSchedule(at: schedules.count-1)
-    }
-    
-    
-    // Select
-    
-    // -------------------------------------------
-
-    
-    
-    //
-    // Variables
-    // Used in profile, when creating schedule, uses this to create then adds to userdata after (this is so that update schedule can compare new to old to find whats different and tell the user)
-    var temporaryNSessions = 0
-    // [workout, yoga, meditation, endurance, flexibility]
-    var temporarySessionsArray = [0,0,0,0,0]
-    // ScheduleVariables.shared.choiceProgress Indicated progress through the choices to select a session
-    // Note: ScheduleVariables.shared.selectedGroup = -1 if first screen (i.e groups of the day/week being shown), != 0 choices being displayed and the int indicates the index of the group selected, ---- ScheduleVariables.shared.choiceProgress == progress through choices
-//    var choiceProgress = [-1,0]
-    // Indicates which row was! selected on initial choice screen, and which row was! selected on final choice screen (note: row of final choice is stored as! row even though title included as! row 0 so offset by 1, take into account when using)
-//    var selectedRows = [0,0]
-//    var selectedDay = Int()
-//    var selectedSchedule = Int()
-    // Should reload schedule table
-    var shouldReloadSchedule = true
-    // Should reload choice (once done session, reload to update tick if done)
-    var shouldReloadChoice = false
-    // Schedule Style: week or day
-    var scheduleStyle = "day"
-    
-    // Checks if new schedule has! just been created
-    var didCreateNewSchedule = false
-    
-    // Extra Session variables
-    // Indicator for weather the user is completing an extra session, used for didSelectRow, and maskAction to present correct choices
-//    var isExtraSession = false
-//    var extraSessionCompletion = [false, false, false] // warmup, session, stretching
-
-    
     
     //
     // Selected Choices
@@ -439,16 +144,358 @@ class ScheduleVariables {
     var indicator = ""
     var indicator2 = ""
     
+    // Called upon selection of group in schedule screen
+    func initializeChoice(extraSession: Bool, selectedRow: Int) {
+        if extraSession {
+            extraSessionCompletion = [false, false, false]
+            selectedGroup = Groups.extra
+            isExtraSession = true
+            choiceProgress = 1
+            selectedRows.initial = selectedRow
+        } else {
+            let groupName: String = {
+                if scheduleStyle == "day" {
+                    return schedules[selectedScheduleIndex]["schedule"]![selectedDay][selectedRow]["group"] as! String
+                } else {
+                    return weekArray[selectedRow]["group"] as! String
+                }
+            }()
+            selectedGroup = Groups.init(rawValue: groupName)!
+            isExtraSession = false
+            print(selectedGroup)
+            choiceProgress = 1
+            selectedRows.initial = selectedRow
+            //
+            // selectedChoice...[0] to group
+            selectedChoiceWarmup[0] = groupName
+            selectedChoiceSession[0] = groupName
+            // Notes selectedChoiceStretching not always used but set anyway for all, no harm done
+            selectedChoiceStretching[0] = groupName
+        }
+    }
     
-    //
+    // MARK: Checks
+    // Checks if the group is completed
+        // row: the row of the group in the initial schedule screen
+        // checkAll:
+            // True: checks if all components of group
+            // False: checks if parameter "isGroupCompleted" of group in schedule
+    func isGroupCompleted(day: Int, indexInDay: Int, checkAll: Bool) -> Bool {
+        
+        // Extra session
+        if isExtraSession {
+            return !extraSessionCompletion.contains(false)
+            
+        // Normal
+        } else {
+            
+            if checkAll {
+                // Switch groups
+                switch schedules[selectedScheduleIndex]["schedule"]![day][indexInDay]["group"] as! String {
+                    
+                // Yoga
+                case Groups.yoga.rawValue:
+                    // Yoga warmup optional, so is completed if session is finished
+                    return schedules[selectedScheduleIndex]["schedule"]![day][indexInDay]["1"] as! Bool
+                    
+                // Meditation
+                case Groups.meditation.rawValue:
+                    // Either one of timer or guided for it to be completed
+                    return schedules[selectedScheduleIndex]["schedule"]![day][indexInDay]["0"] as! Bool  ||  schedules[selectedScheduleIndex]["schedule"]![day][indexInDay]["1"] as! Bool
+                    
+                // Normal case
+                default:
+                    // Each group has! fields: "group", and "isGroupCompleted", and components of warmup/session/stretching (index with: 0/1/2)     (See scheduleDataStructures.scheduleGroups)
+                    // We only want to check components loop the count-2
+                    for i in 0..<(schedules[selectedScheduleIndex]["schedule"]![day][indexInDay].count-2) {
+                        if schedules[selectedScheduleIndex]["schedule"]![day][indexInDay][String(i)] as! Bool == false {
+                            return false
+                        }
+                    }
+                    return true
+                }
+
+            } else {
+                return schedules[selectedScheduleIndex]["schedule"]![day][indexInDay]["isGroupCompleted"] as! Bool
+            }
+        }
+    }
+    
+
+    // Logic for week/day view indexing
+        // Argument takes row
+            // If initial choice, row should be indexPath.row
+            // If final choice, row should be selectedRows.initial
+        // and returns indexing variables for schedule
+        // Note if day view, it simply returns selected day and provided row
+            // Use more apparent when week view, as finds the indexing variables
+    func getIndexing(row: Int) -> (day: Int, indexInDay: Int) {
+        let day: Int = {
+            if scheduleStyle == ScheduleStyle.day.rawValue {
+                return selectedDay
+            } else {
+                return weekArray[row]["day"] as! Int
+            }
+        }()
+        let indexInDay: Int = {
+            if scheduleStyle == ScheduleStyle.day.rawValue {
+                return row
+            } else {
+                return weekArray[row]["index"] as! Int
+            }
+        }()
+        return (day: day, indexInDay: indexInDay)
+    }
+    
+    // Checks if a component of a group (warmup/session/stretching) is completed using the index of the row
+        // Only used for final choice screen, schedule screen uses isGroupCompleted
+    func isComponentCompleted(day: Int, indexInDay: Int, row: Int) -> Bool {
+        if isExtraSession {
+            return extraSessionCompletion[row]
+        } else {
+            return schedules[selectedScheduleIndex]["schedule"]![day][indexInDay][String(row)] as! Bool
+            
+        }
+    }
+    
+    func isDayCompleted(day: Int) -> Bool {
+        for group in schedules[selectedScheduleIndex]["schedule"]![day] {
+            if !(group["isGroupCompleted"] as! Bool) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func isDayEmpty(day: Int) -> Bool {
+        if schedules.count > 0 {
+            return schedules[selectedScheduleIndex]["schedule"]![day].count == 0
+        } else {
+            return true
+        }
+    }
+    
+    func isLastChoice() -> Bool {
+        // Present next choice or present session
+        switch selectedGroup {
+        // Workout
+        case Groups.workout:
+            if choiceProgress == 6 || choiceProgress == 7 {
+                return true
+            } else {
+                return false
+            }
+        // Yoga
+        case Groups.yoga:
+            if choiceProgress == 5 || choiceProgress == 6 {
+                return true
+            } else {
+                return false
+            }
+            
+        // Meditation
+        case Groups.meditation:
+            if choiceProgress == 1 {
+                return true
+            } else {
+                return false
+            }
+            
+        // Endurance
+        case Groups.endurance:
+            if choiceProgress == 6 || choiceProgress == 7 || choiceProgress == 9 {
+                return true
+            } else {
+                return false
+            }
+            
+        // Flexibility
+        case Groups.flexibility:
+            if choiceProgress == 3 || choiceProgress == 4 {
+                return true
+            } else {
+                return false
+            }
+            
+        default:
+            return false
+        }
+    }
+    
+    // MARK: Updates
+    func updateCompletion(day: Int, indexInDay: Int, row: Int?) {
+        // Group components
+        if isLastChoice() {
+            let unWrappedRow = row ?? 0
+            if isExtraSession {
+                extraSessionCompletion[unWrappedRow] = !extraSessionCompletion[unWrappedRow]
+                if isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: true) {
+                    // MARK: CHECK
+                    incrementExtraSessions()
+                    Tracking.shared.updateTracking()
+                }
+
+            } else {
+
+                let currentBool = schedules[selectedScheduleIndex]["schedule"]![day][indexInDay][String(unWrappedRow)] as! Bool
+                schedules[selectedScheduleIndex]["schedule"]![day][indexInDay][String(unWrappedRow)] = !currentBool
+                schedules[selectedScheduleIndex]["schedule"]![day][indexInDay]["isGroupCompleted"] = isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: true)
+                saveSchedules()
+
+                if currentBool != isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: true) {
+                    let group = schedules[selectedScheduleIndex]["schedule"]![day][indexInDay]["group"] as! String
+                    updateGroupForOtherSchedule(markAs: !currentBool, group: group)
+                }
+                
+                ReminderNotifications.shared.updateBadges()
+                Tracking.shared.updateWeekProgress()
+                Tracking.shared.updateTracking()
+            }
+            
+        // Group
+        } else {
+            
+            // Get day/index in day for the two different schedule styles
+            let currentBool = schedules[selectedScheduleIndex]["schedule"]![day][indexInDay]["isGroupCompleted"] as! Bool
+            schedules[selectedScheduleIndex]["schedule"]![day][indexInDay]["isGroupCompleted"] = !currentBool
+            saveSchedules()
+            
+            let group = schedules[selectedScheduleIndex]["schedule"]![day][indexInDay]["group"] as! String
+            updateGroupForOtherSchedule(markAs: !currentBool, group: group)
+            
+            ReminderNotifications.shared.updateBadges()
+            Tracking.shared.updateWeekProgress()
+            Tracking.shared.updateTracking()
+
+        }
+    }
+    
+    func updateGroupForOtherSchedule(markAs: Bool, group: String) {
+        
+        if schedules.count > 0 {
+            // Loop Schedules
+            for i in 0..<schedules.count {
+                // If not currently selected schedule
+                if i != selectedScheduleIndex {
+                    // Indicates that group has! been updated so should break week loop as! well
+                    var shouldBreak = false
+                    // Loop week
+                    for j in 0...6 {
+                        // If day isn't empty
+                        if schedules[i]["schedule"]![j].count != 0 {
+                            // Loop day
+                            for k in 0..<schedules[i]["schedule"]![j].count {
+                                // If correct group and false
+                                if schedules[i]["schedule"]![j][k]["group"] as! String == group && schedules[i]["schedule"]![j][k]["isGroupCompleted"] as! Bool == !markAs {
+                                    schedules[i]["schedule"]![j][k]["isGroupCompleted"] = markAs
+                                    shouldBreak = true
+                                    break
+                                }
+                            }
+                        }
+                        if shouldBreak {
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        saveSchedules()
+    }
+    
+    func incrementExtraSessions() {
+        //
+        var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
+        // Increment
+        let currentValue = trackingProgressDictionary["ExtraSessions"] as! Int
+        trackingProgressDictionary["ExtraSessions"] = currentValue + 1
+        // Save
+        UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
+    }
+    
+    // MARK: Save/Create/Delete
+    func saveSchedules() {
+        UserDefaults.standard.set(schedules, forKey: "schedules")
+    }
+    
+    func createSchedule() {
+        // Append new schedule array to schedules
+        schedules.append(scheduleDataStructures.emptyWeek)
+        
+        // Update selected Schedule
+        // Set selected schedule to newly created schedule (last schedule in schedules)
+        selectedScheduleIndex = schedules.count - 1
+        
+        saveSelectedScheduleIndex()
+        saveSchedules()
+    }
+    
+    func deleteSchedule(at: Int) {
+        
+        schedules.remove(at: at)
+        saveSchedules()
+        
+        // Update selected schedule index and style
+        if schedules.count == 0 {
+            selectedScheduleIndex = 0
+            scheduleStyle = ScheduleStyle.day.rawValue
+        } else {
+            if selectedScheduleIndex != 0 {
+                selectedScheduleIndex -= 1
+            }
+            scheduleStyle = (schedules[selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
+        }
+        saveSelectedScheduleIndex()
+        
+        if scheduleStyle == ScheduleStyle.day.rawValue {
+            selectedDay = Date().weekDayFromMonday
+        } else {
+            selectedDay = 7
+        }
+        
+        // If week view, create temporary week array
+        if schedules.count > 0 && scheduleStyle == ScheduleStyle.week.rawValue {
+            createTemporaryWeekViewArray()
+        }
+        
+        // Tracking
+        Tracking.shared.updateWeekGoal()
+        Tracking.shared.updateWeekProgress()
+        Tracking.shared.updateTracking()
+        // Set Notifications
+        ReminderNotifications.shared.setNotifications()
+        
+    }
+    
+    func deleteLastSchedule() {
+        deleteSchedule(at: schedules.count-1)
+    }
+    
+    func saveSelectedScheduleIndex() {
+        UserDefaults.standard.set(selectedScheduleIndex, forKey: "selectedScheduleIndex")
+    }
+    
+    
+    // MARK:- Creation
+    // Variables
+    // Used in profile, when creating schedule, uses this to create then adds to userdata after (this is so that update schedule can compare new to old to find whats different and tell the user)
+    var temporaryNSessions = 0
+    // [workout, yoga, meditation, endurance, flexibility]
+    var temporarySessionsArray = [0,0,0,0,0]
+    // Should reload schedule table
+    var shouldReloadSchedule = true
+    // Checks if new schedule has! just been created
+    var didCreateNewSchedule = false
+    
+    
+    // MARK: Reset Schedule Tracking
     // Last Day
     // Checks if last day on the app was! opened was! yesterday, if so the schedule is animated to the correct day, and this flag is set to today
     // Ensures that on the first open of the app on any day, the correct day on the schedule is presented
     var lastDayOpened = 0
     
-    // Note, this function should be somewhere else
-    // Func reset schedule tracking and week tracking
-    func resetWeekTracking() {
+    // Func reset schedule tracking
+    func resetScheduleTracking() {
         // Use lastResetWeek in tracking progress array to reset schedule tracking bools to false and and week progress to 0
         //
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
@@ -459,9 +506,9 @@ class ScheduleVariables {
         
         // Reset if last reset wasn't in current week
         if lastReset < currentMondayDate {
-            var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            
             // Reset all bools in week tracking to false
-            if schedules.count != 0 {
+            if schedules.count > 0 {
                 // Loop scheduleTracking
                 for i in 0..<schedules.count {
                     // Loop week
@@ -491,10 +538,10 @@ class ScheduleVariables {
             // Set Last Reset
             trackingProgressDictionary["LastResetWeek"] = currentMondayDate
             // Update
-            UserDefaults.standard.set(schedules, forKey: "schedules")
+            saveSchedules()
             UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
             // Reload schedule
-            ScheduleVariables.shared.shouldReloadSchedule = true
+            shouldReloadSchedule = true
             // Reset notifications
             ReminderNotifications.shared.setNotifications()
         }
@@ -502,6 +549,8 @@ class ScheduleVariables {
     
 }
 
+// MARK:-
+// MARK:-
 enum Groups: String {
     case workout = "workout"
     case yoga = "yoga"

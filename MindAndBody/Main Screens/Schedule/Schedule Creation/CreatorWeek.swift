@@ -152,17 +152,17 @@ class CustomScheduleWeekCell: UITableViewCell {
         groupLabel.lineBreakMode = .byWordWrapping
         groupLabel.numberOfLines = 0
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         var groupArray = [0,0,0,0,0,0]
         // Create array of nsession of each group
         // Loop Week
         for i in 0...6 {
             // If day not empty
-            if ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count != 0 {
+            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count != 0 {
                 // Loop day
-                for j in 0..<ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count {
+                for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count {
                     // Index of the group as int for group Array
-                    let index = (ScheduleVariables.shared.selectedSchedule!["schedule"]![i][j]["group"] as! String).groupFromString()
+                    let index = (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["group"] as! String).groupFromString()
                     groupArray[index] += 1
                 }
             }
@@ -184,18 +184,18 @@ class CustomScheduleWeekCell: UITableViewCell {
         generator?.impactOccurred()
         generator = nil
         
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
       
         // Add to first available day in the week
         for i in 0...6 {
             // If week not full (max 5 things per day in week
-            if ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count < 5 {
-                ScheduleVariables.shared.selectedSchedule!["schedule"]![i].append(scheduleDataStructures.scheduleGroups[row]!)
+            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count < 5 {
+                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].append(scheduleDataStructures.scheduleGroups[row]!)
                 break
             }
         }
         
-        UserDefaults.standard.set(schedules, forKey: "schedules")
+        ScheduleVariables.shared.saveSchedules()
         
         // Update label
         sessionsLabel.text = String(Int(sessionsLabel.text!)! + 1)
@@ -213,20 +213,20 @@ class CustomScheduleWeekCell: UITableViewCell {
         generator = nil
         
         // Update the array
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         // Remove from schedules array and update userdefaults
         // Remove first instance from from Week
         var shouldBreak = false
         // Loop week
         for i in (0...6).reversed() {
             // If day isn't empty
-            if ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count != 0 {
+            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count != 0 {
                 // Loop day
-                for j in 0...ScheduleVariables.shared.selectedSchedule!["schedule"]![i].count - 1 {
+                for j in 0...ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count - 1 {
                     // If correct group
-                    if ScheduleVariables.shared.selectedSchedule!["schedule"]![i][j]["group"] as! String == row.groupFromInt() {
+                    if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["group"] as! String == row.groupFromInt() {
                         // Remove
-                        ScheduleVariables.shared.selectedSchedule!["schedule"]![i].remove(at: j)
+                        ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].remove(at: j)
                         shouldBreak = true
                         break
                     }
@@ -239,7 +239,7 @@ class CustomScheduleWeekCell: UITableViewCell {
         }
         //
     
-        UserDefaults.standard.set(schedules, forKey: "schedules")
+        ScheduleVariables.shared.saveSchedules()
         
         // Update label
         sessionsLabel.text = String(Int(sessionsLabel.text!)! - 1)

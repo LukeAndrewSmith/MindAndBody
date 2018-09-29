@@ -49,24 +49,24 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // Navigation Bar Title
         // App chooses sessions - choice title
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         // App chooses session
-        if ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
             // Navigation
             var navTitle = String()
             switch selectedComponent {
             // Warmup
             case 0:
-                navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[2], comment: "")
+                navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[2], comment: "")
                 
             // Session
             case 1:
-                navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[2], comment: "")
+                navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[2], comment: "")
                 
                 print(ScheduleVariables.shared.selectedChoiceSession)
             // Stretching
             case 2:
-                navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[2], comment: "")
+                navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[2], comment: "")
                 
             default: break
             }
@@ -578,17 +578,15 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
         default:
             break
         }
+    }
+    
+    // Reurn to final choice
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
-        //
-        // Return background to homescreen
-        perform(#selector(popToRootView), with: Any?.self, afterDelay: 0.5)
+        self.navigationController?.popViewController(animated: false)
+        ScheduleVariables.shared.shouldPop = true
     }
-    
-    // Pop to root view
-    @objc func popToRootView() {
-        _ = self.navigationController?.popToRootViewController(animated: false)
-    }
-    
     
     // MARK: Cardio helpers
     // Time

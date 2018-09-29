@@ -203,7 +203,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     // Pop to root view
     @objc func popToRootView() {
-        _ = self.navigationController?.popToRootViewController(animated: false)
+        self.navigationController?.popViewController(animated: false)
     }
     
     

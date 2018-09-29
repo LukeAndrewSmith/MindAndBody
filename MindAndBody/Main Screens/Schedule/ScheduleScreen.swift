@@ -85,9 +85,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var stackArray: [UILabel] = []
     var stackFontUnselected = UIFont(name: "SFUIDisplay-regular", size: 17)
     var stackFontSelected = UIFont(name: "SFUIDisplay-bold", size: 17)
-    
-    // Images
-    var groupImages: [String: UIImage] = [:]
 
     // Schedule creation and choices ACTION SHEET
     let scheduleChoiceTable = UITableView()
@@ -96,6 +93,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     // Should watch for walkthrough when coming back
     var goingToSubscriptionsScreen = false
+    
+    var goingToSessionChoice = false
     
     // Passed to finalChoiceChoice
         // 0 == warmup, 1 == session, 2 == stretching
@@ -148,20 +147,15 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         willAppear()
     }
     
+    
     @objc func willEnterForeground() {
         willAppear()
     }
     
     func willAppear() {
         // Check if reset necessary
-        ScheduleVariables.shared.resetWeekTracking()
-        
-        // Add here incase image changed in settings
-        //        addBackgroundImage(withBlur: true, fullScreen: false, image: "")
-        
-        // Reload scheudle style to be sure
-        ScheduleVariables.shared.setScheduleStyle()
-        
+        ScheduleVariables.shared.resetScheduleTracking()
+
         // Check if necessary to go to current day
         checkSelectedDay()
         
@@ -180,6 +174,12 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         scheduleTableScrollCheck()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        reloadCompletedRow()
+    }
+    
     
     // MARK: viewDidLoad
     override func viewDidLoad() {
@@ -187,16 +187,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         
         // set observer for UIApplicationWillEnterForeground
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
-        
-        // Test
-        groupImages =
-            [
-                "workout": #imageLiteral(resourceName: "GroupWorkout"),
-                "yoga": #imageLiteral(resourceName: "GroupYoga"),
-                "meditation": #imageLiteral(resourceName: "GroupMeditation"),
-                "endurance": #imageLiteral(resourceName: "GroupEndurance"),
-                "flexibility": #imageLiteral(resourceName: "LessonYoga"),
-            ]
         
         // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)
         NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
@@ -232,9 +222,12 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // Nina
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-
+        
+        // Hide navigation bar
+        if goingToSessionChoice {
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            goingToSessionChoice = false
+        }
         //
         NotificationCenter.default.removeObserver(self)
         if goingToSubscriptionsScreen {
@@ -281,9 +274,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // Schedule Selection (Bar Button Item (Top Right))
     // Edit Schedule
     @objc func editScheduleAction() {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         // There is a schedule to edit
-        if schedules.count != 0 {
+        if ScheduleVariables.shared.schedules.count > 0 {
             self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
             ActionSheet.shared.animateActionSheetDown()
         // There is no schedule to edit - popup indicating so
@@ -355,47 +348,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        //
         switch segue.identifier {
-        //
-        case "scheduleSegueOverview":
-            let destinationVC = segue.destination as? FinalChoiceDetail
-            destinationVC?.selectedComponent = selectedComponent
-            // Only say from schedule if app chooses sessions for the user
-            destinationVC?.comingFromSchedule = true
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            backItem.tintColor = Colors.light
-            navigationItem.backBarButtonItem = backItem
-            
-        case "scheduleSegueFinalChoice":
-            let destinationVC = segue.destination as? FinalChoiceChoice
-            destinationVC?.selectedComponent = selectedComponent
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            backItem.tintColor = Colors.light
-            navigationItem.backBarButtonItem = backItem
             
         case "EditScheduleSegue":
             ScheduleVariables.shared.shouldReloadSchedule = true
-            
-        case "scheduleMeditationSegueTimer":
-            let destinationVC = segue.destination as? MeditationTimer
-            destinationVC?.comingFromSchedule = true
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            backItem.tintColor = Colors.light
-            navigationItem.backBarButtonItem = backItem
-        
-        case "scheduleMeditationSegueGuided":
-            let destinationVC = segue.destination as? MeditationChoiceGuided
-            destinationVC?.comingFromSchedule = true
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            backItem.tintColor = Colors.light
-            navigationItem.backBarButtonItem = backItem
             
         // Create Schedule
         case "ScheduleCreationSegue":
@@ -408,14 +363,10 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         case "SubscriptionsSegue":
             goingToSubscriptionsScreen = true
             
-        case "scheduleSegueCustom":
-            let destinationVC = segue.destination as? CustomChoice
-            destinationVC?.comingFromSchedule = true
-            // Remove back button text
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            backItem.tintColor = Colors.light
-            navigationItem.backBarButtonItem = backItem
+        case "SessionChoiceSegue":
+            // Hide shadow otherwise animation is strange
+            self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
+
             
         default:
             let backItem = UIBarButtonItem()

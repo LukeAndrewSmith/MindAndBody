@@ -78,6 +78,15 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         finalChoiceTable.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if ScheduleVariables.shared.shouldPop {
+            self.navigationController?.popViewController(animated: false)
+            ScheduleVariables.shared.shouldPop = false
+        }
+    }
+    
     // MARK: Table View
     func numberOfSections(in tableView: UITableView) -> Int {
         return imageArray.count

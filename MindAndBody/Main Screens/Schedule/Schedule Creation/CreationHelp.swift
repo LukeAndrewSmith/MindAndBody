@@ -228,9 +228,9 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 // Section tag
                 slider.tag = indexPath.section
                 //
-                let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+                
                 let indexString = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][indexPath.section][0]
-                let value = ScheduleVariables.shared.selectedSchedule!["scheduleCreationHelp"]![0][selectedSection][indexString] as! Int
+                let value = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][indexString] as! Int
                 slider.value = Float(value)
                 
                 //
@@ -298,14 +298,14 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         //
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         // If first section and last row
         if selectedSection == 0 && indexPath.row == 1 {
             //
             // Count goals, making sure that there are actually some goals set
             var count = 0
-            for i in 0..<ScheduleVariables.shared.selectedSchedule!["scheduleCreationHelp"]![0][selectedSection].count {
-                count += ScheduleVariables.shared.selectedSchedule!["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][i][0]] as! Int
+            for i in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection].count {
+                count += ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][i][0]] as! Int
             }
             
             // If goals not empty
@@ -338,10 +338,10 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             
             //
             // Make sure no question is unanswered
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+            
             var allAnswered = true
-            for i in 0..<ScheduleVariables.shared.selectedSchedule!["scheduleCreationHelp"]![0][selectedSection].count {
-                if ScheduleVariables.shared.selectedSchedule!["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][i][0]] as! Int == -1 {
+            for i in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection].count {
+                if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][i][0]] as! Int == -1 {
                     allAnswered = false
                     break
                 }
@@ -387,7 +387,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: sliderValueChanged
     let step: Float = 1
     @IBAction func sliderValueChanged(sender: UISlider) {
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         //
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue
@@ -402,9 +402,9 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         // Goals
         // Find question string to index schedules, as questions saved to schedules are index by the title of the question
         let question = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][sender.tag][0]
-        ScheduleVariables.shared.selectedSchedule!["scheduleCreationHelp"]![0][selectedSection][question] = Int(roundedInt)
+        ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][question] = Int(roundedInt)
         
-        UserDefaults.standard.set(schedules, forKey: "schedules")
+        ScheduleVariables.shared.saveSchedules()
     }
     
     
@@ -478,11 +478,11 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     //
     //
     @objc func upSwipeAction() {
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         // Questions
         if selectedSection > 0 {
             // If question has been answered
-            if ScheduleVariables.shared.selectedSchedule!["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][0]] as! Int != -1 {
+            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][0]] as! Int != -1 {
                 // If not last question, go to next question
                 if selectedQuestion != scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count - 1 {
                     nextQuestion()
@@ -706,7 +706,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     // ScheduleCreationHelpCell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         //
         //
         cell.backgroundColor = Colors.light
@@ -720,7 +720,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         cell.textLabel?.font = Fonts.mediumElementRegular
         // Select answer
             // If answer not -1, and row is correct
-        if indexPath.row == ScheduleVariables.shared.selectedSchedule!["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][row][0]] as! Int {
+        if indexPath.row == ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][row][0]] as! Int {
             cell.textLabel?.textColor = Colors.green
         }
         // If last cell hide separator
@@ -734,11 +734,11 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
     
     // Cell Questions table, set answer in array to selected answer
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         // Find question string to index schedules, as questions saved to schedules are index by the title of the question
         let question = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][0]
-        ScheduleVariables.shared.selectedSchedule!["scheduleCreationHelp"]![0][selectedSection][question] = indexPath.row
-        UserDefaults.standard.set(schedules, forKey: "schedules")
+        ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][question] = indexPath.row
+        ScheduleVariables.shared.saveSchedules()
         //
         tableView.deselectRow(at: indexPath, animated: true)
         answerTableView.reloadData()

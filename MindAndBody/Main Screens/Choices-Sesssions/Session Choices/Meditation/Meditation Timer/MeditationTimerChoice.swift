@@ -284,7 +284,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
     }
     // Pop to root view
     @objc func popToRootView() {
-        _ = self.navigationController?.popToRootViewController(animated: false)
+        self.navigationController?.popViewController(animated: false)
     }
     
     // Enable ok alert action func

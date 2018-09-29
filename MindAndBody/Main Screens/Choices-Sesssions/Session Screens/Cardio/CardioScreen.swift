@@ -373,7 +373,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         case 1:
             //
-            ScheduleVariables.shared.shouldReloadChoice = true
+            ScheduleVariables.shared.shouldReloadScheduleTracking()
             // Cancel notificaitons
             if self.sessionType == 0 {
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: self.arrayOfNotifications)

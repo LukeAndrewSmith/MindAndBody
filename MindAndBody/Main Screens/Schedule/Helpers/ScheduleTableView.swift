@@ -90,15 +90,14 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     // Number of rows per section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
+        
         
         switch tableView {
         case scheduleTable:
-            if schedules.count != 0 {
+            if ScheduleVariables.shared.schedules.count > 0 {
                 // Note: +1 for extra sessions cell
                 if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-                    print((ScheduleVariables.shared.selectedSchedule!["schedule"]?[ScheduleVariables.shared.selectedDay].count)! + 1)
-                    return (ScheduleVariables.shared.selectedSchedule!["schedule"]?[ScheduleVariables.shared.selectedDay].count)! + 1
+                    return (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]?[ScheduleVariables.shared.selectedDay].count)! + 1
                 } else {
                     return ScheduleVariables.shared.weekArray.count + 1
                 }
@@ -107,7 +106,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             }
             
         case scheduleChoiceTable:
-            return schedules.count
+            return ScheduleVariables.shared.schedules.count
         default:
             return 0
         }
@@ -129,12 +128,12 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     
     func calculateCellHeight() {
         // First choice == session choice
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        if schedules.count != 0 {
+        
+        if ScheduleVariables.shared.schedules.count > 0 {
             // Get number of rows
             var count = 0
             if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-                count = ScheduleVariables.shared.selectedSchedule!["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
+                count = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![ScheduleVariables.shared.selectedDay].count + 1
             } else if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue {
                 count = ScheduleVariables.shared.weekArray.count + 1
             }
@@ -162,23 +161,20 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     // Row cell customization
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        
         // Get cell
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         // Enure cell height is correct
         calculateCellHeight()
         
-        //
         switch tableView {
         case scheduleTable:
             
-            if schedules.count != 0 {
+            if ScheduleVariables.shared.schedules.count > 0 {
                 //
                 cell.tag = indexPath.row
                 
                 // Extra Session Cell
-                if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue && indexPath.row == ScheduleVariables.shared.selectedSchedule!["schedule"]![ScheduleVariables.shared.selectedDay].count || ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue && indexPath.row == ScheduleVariables.shared.weekArray.count {
+                if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue && indexPath.row == ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![ScheduleVariables.shared.selectedDay].count || ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue && indexPath.row == ScheduleVariables.shared.weekArray.count {
                     
                     // Groups
                     let extraLabel = UILabel()
@@ -219,7 +215,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     //
                     var groupString = String()
                     if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-                        groupString = ScheduleVariables.shared.selectedSchedule!["schedule"]![ScheduleVariables.shared.selectedDay][indexPath.row]["group"] as! String
+                        groupString = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![ScheduleVariables.shared.selectedDay][indexPath.row]["group"] as! String
                     } else {
                         groupString = ScheduleVariables.shared.weekArray[indexPath.row]["group"] as! String
                     }
@@ -233,7 +229,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     groupImage.frame = CGRect(x: tableSpacing, y: gap, width: imageHeight, height: imageHeight)
                     groupImage.contentMode = .scaleAspectFill
                     groupImage.clipsToBounds = true
-                    groupImage.image = groupImages[groupString]
+                    groupImage.image = ScheduleVariables.shared.groupImageThumbnails[groupString]
                     groupImage.layer.cornerRadius = 4
                     cell.addSubview(groupImage)
                     
@@ -258,14 +254,14 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
                     checkBoxExtraButton.addTarget(self, action: #selector(markAsCompleted(_:)), for: .touchUpInside)
                     cell.addSubview(checkBoxExtraButton)
                     
-                    // CheckMark if completed
-                    if ScheduleVariables.shared.shouldReloadChoice {
-                        if indexPath.row != ScheduleVariables.shared.selectedRows.initial {
-                            if ScheduleVariables.shared.isGroupCompleted(row: indexPath.row, checkAll: false) {
-                                checkButton(button: checkBox)
-                            }
+                    // Checkmark if completed
+                    let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: indexPath.row)
+                    // If shouldReloadInitialChoice, then animate checkmark in so leave the row to be animated alone as animated handled in viewDidAppear
+                    if ScheduleVariables.shared.shouldReloadInitialChoice && indexPath.row != ScheduleVariables.shared.selectedRows.initial {
+                        if ScheduleVariables.shared.isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: false) {
+                            checkButton(button: checkBox)
                         }
-                    } else if ScheduleVariables.shared.isGroupCompleted(row: indexPath.row, checkAll: false) {
+                    } else if ScheduleVariables.shared.isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: false) {
                         checkButton(button: checkBox)
                     }
                 }
@@ -290,7 +286,7 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             
             let label = UILabel()
             label.font = Fonts.smallElementRegular
-            label.text = schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as? String
+            label.text = ScheduleVariables.shared.schedules[indexPath.row]["scheduleInformation"]![0][0]["title"] as? String
             label.textColor = Colors.light
             label.sizeToFit()
             // twice nomal padding
@@ -298,9 +294,8 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
             // 1 for border
             label.center = CGPoint(x: 1 + padding + (label.bounds.width / 2), y: cell.bounds.height / 2)
             cell.addSubview(label)
-            
-            let selectedSchedule = UserDefaults.standard.integer(forKey: "selectedSchedule")
-            if indexPath.row == selectedSchedule {
+
+            if indexPath.row == ScheduleVariables.shared.selectedScheduleIndex {
                 let indicator = UIImageView()
                 indicator.image = #imageLiteral(resourceName: "CheckMark")
                 indicator.frame.size = CGSize(width: cell.bounds.height / 2, height: cell.bounds.height / 2)
@@ -361,24 +356,40 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
         case scheduleTable:
             
-            ScheduleVariables.shared.initializeChoice(extraSession: true, selectedRow: indexPath.row)
+            // Extra Session
+            // (day view last cell || week view last cell)
+            if  (ScheduleVariables.shared.scheduleStyle == "day" && indexPath.row == ScheduleVariables.shared.currentDayCount() ||  ScheduleVariables.shared.scheduleStyle == "week" && indexPath.row == ScheduleVariables.shared.weekArray.count) {
+                
+                ScheduleVariables.shared.initializeChoice(extraSession: true, selectedRow: indexPath.row)
+                performSegue(withIdentifier: "SessionChoiceSegue", sender: self)
+                goingToSessionChoice = true
+            } else {
+                
+                let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: indexPath.row)
+                // If group is not completed, do something
+                if !ScheduleVariables.shared.isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: false) {
+                    ScheduleVariables.shared.initializeChoice(extraSession: false, selectedRow: indexPath.row)
+                    performSegue(withIdentifier: "SessionChoiceSegue", sender: self)
+                    goingToSessionChoice = true
+                }
+               
+            }
             
             tableView.deselectRow(at: indexPath, animated: true)
-            performSegue(withIdentifier: "SessionChoiceSegue", sender: self)
             
         // Select schedule
         case scheduleChoiceTable:
         
             ScheduleVariables.shared.selectedScheduleIndex = indexPath.row
-            ScheduleVariables.shared.scheduleStyle = (ScheduleVariables.shared.selectedSchedule!["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
-            
-            UserDefaults.standard.set(ScheduleVariables.shared.selectedScheduleIndex, forKey: "selectedSchedule")
+            ScheduleVariables.shared.saveSelectedScheduleIndex()
+            ScheduleVariables.shared.scheduleStyle = (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
             
             // If week view, create temporary week array
             ScheduleVariables.shared.createTemporaryWeekViewArray()
             
             // Reload table
             layoutViews()
+            // nina
             scheduleChoiceTable.reloadData()
             self.scheduleTable.reloadData()
             
@@ -423,13 +434,16 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
         // Delete if not plus row
         if tableView == scheduleChoiceTable && editingStyle == UITableViewCellEditingStyle.delete {
 
+            ScheduleVariables.shared.deleteSchedule(at: indexPath.row)
+            
             // Reload table
             layoutViews()
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            
+            scheduleTable.reloadData()
 
             // Change indicator
-            let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-            if schedules.count != 0 {
+            if ScheduleVariables.shared.schedules.count > 0 {
                 // Select new cell (reloading row has strange animation)
                 let indexToReload = IndexPath(row: ScheduleVariables.shared.selectedScheduleIndex, section: 0)
                 let cell = tableView.cellForRow(at: indexToReload)

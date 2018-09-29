@@ -204,7 +204,9 @@ extension ScheduleScreen {
         
         // Get indexPath.row
         let row = sender.tag
-        ScheduleVariables.shared.updateCompletion(row: row)
+        // ScheduleVariables.shared.getIndexingVariables uses the selectedRows.initial to find the riw, therefore
+        let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: row)
+        ScheduleVariables.shared.updateCompletion(day: day, indexInDay: indexInDay, row: nil)
         
         let indexPathToReload = NSIndexPath(row: row, section: 0)
         scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
@@ -222,6 +224,22 @@ extension ScheduleScreen {
                         view.backgroundColor = Colors.green
                     }
                 }
+            }
+        }
+    }
+    
+    func reloadCompletedRow() {
+        if ScheduleVariables.shared.shouldReloadInitialChoice {
+            ScheduleVariables.shared.shouldReloadInitialChoice = false
+            
+            let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows.initial, section: 0)
+            scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
+            scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
+            ensureCheckMarkGreen(indexPath: indexPathToReload as IndexPath)
+            scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
+            
+            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+                updateDayIndicatorColours()
             }
         }
     }
@@ -257,13 +275,11 @@ extension ScheduleScreen {
     // Should scroll be enabled
     func scheduleTableScrollCheck() {
         
-        let schedules = UserDefaults.standard.object(forKey: "schedules") as! [[String: [[[String: Any]]]]]
-        
         var nRows = 0
         // Note: +1 for extra sessions cell
-        if schedules.count != 0 {
+        if ScheduleVariables.shared.schedules.count > 0 {
             if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-                nRows = (ScheduleVariables.shared.selectedSchedule!["schedule"]?[ScheduleVariables.shared.selectedDay].count)! + 1
+                nRows = (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]?[ScheduleVariables.shared.selectedDay].count)! + 1
             } else {
                 nRows = ScheduleVariables.shared.weekArray.count + 1
             }

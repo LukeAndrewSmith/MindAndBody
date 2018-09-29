@@ -13,8 +13,11 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     @IBOutlet weak var choiceTable: UITableView!
+    @IBOutlet weak var groupImageHeight: NSLayoutConstraint!
     @IBOutlet weak var groupImage: UIImageView!
-    @IBOutlet weak var sessionChoiceTable: UITableView!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var cancelButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var backButton: UIButton!
     
     var cellHeight: CGFloat = 72 // 110 // 88 // 72
     let tableSpacing: CGFloat = 27
@@ -57,28 +60,83 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var lessonsBackground = UIButton()
     var isLessonsShowing = false // indicates if lessons view is presented
     
+    var comingFromSchedule = true
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
        setupGroupImage()
         
+        choiceTable.tableFooterView = UIView()
+        choiceTable.isScrollEnabled = false
+        cancelButton.tintColor = Colors.light
+        backButton.tintColor = Colors.dark
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if comingFromSchedule {
+            UIApplication.shared.isStatusBarHidden = true
+            comingFromSchedule = false
+        } else {
+            self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+        
+        if ScheduleVariables.shared.shouldReloadFinalChoice {
+            markAsCompletedAndAnimate()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIApplication.shared.isStatusBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.navigationBar.layer.shadowColor = Colors.dark.cgColor
+        UIApplication.shared.isStatusBarHidden = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func setupGroupImage() {
 
-        let groupString: String = {
-            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-                return ScheduleVariables.shared.selectedSchedule!["schedule"]![ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows.initial]["group"] as! String
-            } else {
-                return ScheduleVariables.shared.weekArray[ScheduleVariables.shared.selectedRows.initial]["group"] as! String
+        if ScheduleVariables.shared.isExtraSession {
+            groupImageHeight.constant = 0
+        } else {
+            let groupString: String = {
+                if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+                    return ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows.initial]["group"] as! String
+                } else {
+                    return ScheduleVariables.shared.weekArray[ScheduleVariables.shared.selectedRows.initial]["group"] as! String
+                }
+            }()
+            // Image
+            groupImage.image = groupString.groupImageFromString()
+            groupImage.contentMode = .scaleAspectFill
+            groupImage.clipsToBounds = true
+            //
+            if groupImageHeight.constant == 0 {
+                groupImageHeight.constant = 176
             }
-        }()
-        // Image
-        groupImage.image = groupString.groupImageFromString()
-        groupImage.contentMode = .scaleAspectFill
-        groupImage.clipsToBounds = true
+        }
     }
+    
+    
+    @IBAction func cancelButtonAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @IBAction func backButtonAction(_ sender: Any) {
+         backAction()
+    }
+    
     
     
     // MARK: Schedule TableView
@@ -102,19 +160,23 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         titleLabel.text = NSLocalizedString(title, comment: "")
         titleLabel.textAlignment = .center
         titleLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: cellHeight)
+        header.addSubview(titleLabel)
         
         // Title Underline
         let separator = CALayer()
-        separator.frame = CGRect(x: view.bounds.width / 4, y: cellHeight - 1, width: view.bounds.width / 2, height: 1)
+        separator.frame = CGRect(x: 0, y: cellHeight - 1, width: view.bounds.width, height: 1)
         separator.backgroundColor = foregroundColor.cgColor
-        separator.opacity = 0.25
+        separator.opacity = 1
         header.layer.addSublayer(separator)
+        
+        header.backgroundColor = Colors.light
         
         // Question mark - explanation of choice
         if needsExplanation() {
             
             let explanationButton = UIButton()
-            explanationButton.frame = CGRect(x: view.bounds.width * (3/4), y: 0, width: view.bounds.width / 4, height: cellHeight)
+//            explanationButton.frame = CGRect(x: view.bounds.width * (3/4), y: 0, width: view.bounds.width / 4, height: cellHeight)
+            explanationButton.frame = CGRect(x: view.bounds.width - cellHeight, y: 0, width: cellHeight, height: cellHeight)
             explanationButton.setImage(#imageLiteral(resourceName: "QuestionMarkMenu"), for: .normal)
             explanationButton.tintColor = foregroundColor
             explanationButton.addTarget(self, action: #selector(presentExplanation), for: .touchUpInside)
@@ -122,7 +184,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             let border = UIView()
             border.layer.borderWidth = 1
-            border.layer.borderColor = foregroundColor.withAlphaComponent(0.13).cgColor
+            border.layer.borderColor = foregroundColor.withAlphaComponent(0.27).cgColor
             border.layer.cornerRadius = 11
             border.frame.size = CGSize(width: 44, height: 44)
             border.center = explanationButton.center
@@ -146,13 +208,21 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func calculateCellHeight() {
         // If too many choices, reduce size of cell
-        if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count) * 72) > (sessionChoiceTable.bounds.height - groupImage.bounds.height) {
-            let height = (sessionChoiceTable.bounds.height - groupImage.bounds.height) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress]).count)
+        if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count) * 72) > (choiceTable.bounds.height) {
+            let height = (choiceTable.bounds.height) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress]).count)
             cellHeight = height
+            UIView.animate(withDuration: 0.1) {
+                self.cancelButtonHeight.constant = height
+                self.view.layoutIfNeeded()
+            }
             
         // Height 72
         } else {
             cellHeight = 72
+            UIView.animate(withDuration: 0.1) {
+                self.cancelButtonHeight.constant = 72
+                self.view.layoutIfNeeded()
+            }
         }
     }
     
@@ -176,7 +246,27 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         choiceLabel.frame = CGRect(x: tableSpacing, y: 0, width: view.bounds.width - 54, height: cellHeight)
         cell.addSubview(choiceLabel)
         
-        if isLastChoice() {
+        // Add images if extra session
+        if ScheduleVariables.shared.isExtraSession {
+
+            let gap: CGFloat = 6
+            let imageHeight = cellHeight - (2*gap)
+            
+            choiceLabel.frame = CGRect(x: 16 + imageHeight + 8, y: 0, width: view.bounds.width - 54, height: cellHeight)
+            
+            let groupImage = UIImageView()
+            groupImage.frame = CGRect(x: 16, y: gap, width: imageHeight, height: imageHeight)
+            groupImage.contentMode = .scaleAspectFill
+            groupImage.clipsToBounds = true
+            groupImage.image = ScheduleVariables.shared.groupImageThumbnails[groupString]
+            groupImage.layer.cornerRadius = 4
+            cell.addSubview(groupImage)
+            
+        } else if groupImageHeight.constant == 0 {
+            setupGroupImage()
+        }
+        
+        if ScheduleVariables.shared.isLastChoice() {
             
             // Checkmark box
             let checkBox = UIButton()
@@ -205,7 +295,8 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.addSubview(checkBoxExtraButton)
             
             // CheckMark if completed
-            if ScheduleVariables.shared.isComponentCompleted(row: indexPath.row) {
+            let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: ScheduleVariables.shared.selectedRows.initial)
+            if ScheduleVariables.shared.isComponentCompleted(day: day, indexInDay: indexInDay, row: indexPath.row) {
                 checkButton(button: checkBox)
             }
         }
@@ -228,27 +319,93 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // Silly highlighting issue
-        // Highlight affects checkBox background colors, therefore find the button through the image, and set the background color to green if the border is green as implies that it is selected
-        let cell = tableView.cellForRow(at: indexPath)
-        for view in (cell?.subviews)! {
-            if view is UIButton {
-                if let image = (view as! UIButton).imageView?.image, image == #imageLiteral(resourceName: "CheckMark") {
-                    view.backgroundColor = Colors.green
-                }
-            }
-        }
     
+        let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: ScheduleVariables.shared.selectedRows.initial)
+        
         // Normal
-        if !isLastChoice() {
+        if !ScheduleVariables.shared.isLastChoice() {
             didSelectRowHandler(row: indexPath.row)
             
         // If last choice and not completed, do something
-        } else if isLastChoice() && !ScheduleVariables.shared.isComponentCompleted(row: indexPath.row) {
+        } else if !ScheduleVariables.shared.isComponentCompleted(day: day, indexInDay: indexInDay, row: indexPath.row) {
+            // Silly highlighting issue
+            // Highlight affects checkBox background colors, therefore find the button through the image, and set the background color to green if the border is green as implies that it is selected
+            let cell = tableView.cellForRow(at: indexPath)
+            for view in (cell?.subviews)! {
+                if view is UIButton {
+                    if let image = (view as! UIButton).imageView?.image, image == #imageLiteral(resourceName: "CheckMark") {
+                        view.backgroundColor = Colors.green
+                    }
+                }
+            }
             didSelectRowHandler(row: indexPath.row)
+        // Custom
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    // MARK: Prepare for segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //
+        switch segue.identifier {
+        //
+        case "scheduleSegueOverview":
+            let destinationVC = segue.destination as? FinalChoiceDetail
+            destinationVC?.selectedComponent = selectedComponent
+            // Only say from schedule if app chooses sessions for the user
+            destinationVC?.comingFromSchedule = true
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            backItem.tintColor = Colors.light
+            navigationItem.backBarButtonItem = backItem
+            
+            ScheduleVariables.shared.shouldPop = false
+            
+        case "scheduleSegueFinalChoice":
+            let destinationVC = segue.destination as? FinalChoiceChoice
+            destinationVC?.selectedComponent = selectedComponent
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            backItem.tintColor = Colors.light
+            navigationItem.backBarButtonItem = backItem
+            
+            ScheduleVariables.shared.shouldPop = false
+            
+        case "scheduleMeditationSegueTimer":
+            let destinationVC = segue.destination as? MeditationTimer
+            destinationVC?.comingFromSchedule = true
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            backItem.tintColor = Colors.light
+            navigationItem.backBarButtonItem = backItem
+            
+        case "scheduleMeditationSegueGuided":
+            let destinationVC = segue.destination as? MeditationChoiceGuided
+            destinationVC?.comingFromSchedule = true
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            backItem.tintColor = Colors.light
+            navigationItem.backBarButtonItem = backItem
+
+        case "scheduleSegueCustom":
+            let destinationVC = segue.destination as? CustomChoice
+            destinationVC?.comingFromSchedule = true
+            // Remove back button text
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            backItem.tintColor = Colors.light
+            navigationItem.backBarButtonItem = backItem
+            
+        default:
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            backItem.tintColor = Colors.light
+            navigationItem.backBarButtonItem = backItem
+        }
     }
 }
