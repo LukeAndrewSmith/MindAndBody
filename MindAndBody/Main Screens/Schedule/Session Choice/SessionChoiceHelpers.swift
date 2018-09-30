@@ -431,6 +431,8 @@ extension SessionChoice {
                 
                 nextChoice()
                 
+                setupGroupImage()
+                
             // Choice
             default:
                 ScheduleVariables.shared.choiceProgress += 1
@@ -1165,16 +1167,16 @@ extension SessionChoice {
         choiceTable.reloadData()
         //
         let snapShot2 = choiceTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
-        snapShot2?.center = CGPoint(x: view.center.x + view.frame.size.width, y: snapShotY)
+        snapShot2?.frame.origin = CGPoint(x: view.frame.maxX + view.frame.size.width, y: 176)
         view.insertSubview((snapShot2)!, belowSubview: snapShot1!)
         //
         choiceTable.isHidden = true
         // Animate new and old image to left
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            //
+
             snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
             snapShot2?.center.x = self.view.center.x
-            //
+
         }, completion: { finished in
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
@@ -1201,18 +1203,29 @@ extension SessionChoice {
         choiceTable.reloadData()
         //
         let snapShot2 = choiceTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
-        snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
+        if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.selectedGroup == Groups.extra {
+            backButtonTop.constant = -176 // Image height isn't changed till after animation, this puts the back button in the correct posisiton as anchored to image
+            self.view.layoutIfNeeded()
+            snapShot2?.frame.origin = CGPoint(x: view.frame.minX - view.frame.size.width, y: 0)
+        } else {
+            snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
+        }
         view.insertSubview((snapShot2)!, belowSubview: snapShot1!)
         
         choiceTable.isHidden = true
         //
         // Animate new and old image to left
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            //
+
             snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
             snapShot2?.center.x = self.view.center.x
-            //
+
         }, completion: { finished in
+            // If going back to first choice of
+            if ScheduleVariables.shared.selectedGroup == Groups.extra {
+                // nina
+                self.setupGroupImage()
+            }
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
             self.choiceTable.isHidden = false
@@ -1397,8 +1410,7 @@ extension SessionChoice {
     }
     
     
-    // Session selection mask
-    // Previous Question!!!!
+    // Previous Question
     func backAction() {
         // Table Counter
         // Return to choice 1 (sessions)

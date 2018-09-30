@@ -18,9 +18,10 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var cancelButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var backButtonTop: NSLayoutConstraint! // Used for animation going back to extra session choice
     
     var cellHeight: CGFloat = 72 // 110 // 88 // 72
-    let tableSpacing: CGFloat = 27
+    let tableSpacing: CGFloat = 16
     let foregroundColor = Colors.dark
     var scheduleStyle = 0
     
@@ -107,16 +108,14 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func setupGroupImage() {
 
-        if ScheduleVariables.shared.isExtraSession {
+        if backButtonTop.constant != 0 {
+            backButtonTop.constant = 0
+        }
+        if ScheduleVariables.shared.selectedGroup == Groups.extra {
             groupImageHeight.constant = 0
+            self.view.layoutIfNeeded()
         } else {
-            let groupString: String = {
-                if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-                    return ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![ScheduleVariables.shared.selectedDay][ScheduleVariables.shared.selectedRows.initial]["group"] as! String
-                } else {
-                    return ScheduleVariables.shared.weekArray[ScheduleVariables.shared.selectedRows.initial]["group"] as! String
-                }
-            }()
+            let groupString = ScheduleVariables.shared.selectedGroup.rawValue
             // Image
             groupImage.image = groupString.groupImageFromString()
             groupImage.contentMode = .scaleAspectFill
@@ -124,6 +123,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             if groupImageHeight.constant == 0 {
                 groupImageHeight.constant = 176
+                self.view.layoutIfNeeded()
             }
         }
     }
@@ -247,7 +247,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         cell.addSubview(choiceLabel)
         
         // Add images if extra session
-        if ScheduleVariables.shared.isExtraSession {
+        if ScheduleVariables.shared.selectedGroup == Groups.extra {
 
             let gap: CGFloat = 6
             let imageHeight = cellHeight - (2*gap)
@@ -262,8 +262,6 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             groupImage.layer.cornerRadius = 4
             cell.addSubview(groupImage)
             
-        } else if groupImageHeight.constant == 0 {
-            setupGroupImage()
         }
         
         if ScheduleVariables.shared.isLastChoice() {

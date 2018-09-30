@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Schedule/Session Choice/SessionChoiceHelpers.swift"
-            timestampString = "559927938.1221499"
+            timestampString = "559929945.6286401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1237"
-            endingLineNumber = "1237"
+            startingLineNumber = "1250"
+            endingLineNumber = "1250"
             landmarkName = "markAsCompleted(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Schedule/Session Choice/SessionChoiceHelpers.swift"
-            timestampString = "559927938.122242"
+            timestampString = "559929945.629231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1240"
-            endingLineNumber = "1240"
+            startingLineNumber = "1253"
+            endingLineNumber = "1253"
             landmarkName = "markAsCompleted(_:)"
             landmarkType = "7">
          </BreakpointContent>

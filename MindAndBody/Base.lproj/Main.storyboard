@@ -206,6 +206,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="2mZ-8b-7jP" id="s0O-5h-FGt"/>
+                        <outlet property="backButtonTop" destination="Q5T-n8-7rl" id="GYy-Sp-73b"/>
                         <outlet property="cancelButton" destination="nYW-oD-8ex" id="VBS-EG-eEc"/>
                         <outlet property="cancelButtonHeight" destination="VQa-O2-1XR" id="zio-iB-hGo"/>
                         <outlet property="choiceTable" destination="vci-rP-y7J" id="pnR-ti-c1H"/>
