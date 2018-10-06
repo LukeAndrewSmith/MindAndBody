@@ -15,18 +15,6 @@ import AVFoundation
 //
 class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    // Arrays
-    // Bells Arrays
-    var bellsArray: [String] = []
-    var bellsImages: [UIImage] = []
- 
-    // Background Sounds Array
-    var backgroundSoundsArray: [String] = []
-    var backgroundSoundsImages: [UIImage] = []
-    
-    // Duration Array
-    var durationTimeArray: [[Int]] = []
-    
     // Selected Preset
     var selectedPreset = Int()
     
@@ -646,7 +634,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 //
-                startingBellImage.image = bellsImages[selectedStartingBell]
+                startingBellImage.image = MeditationSounds.shared.bellsImageArray[selectedStartingBell]
                 startingBellNone.alpha = 0
                 //
                 selectedStartingBell = -1
@@ -829,7 +817,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 //
-                endingBellImage.image = bellsImages[selectedEndingBell]
+                endingBellImage.image = MeditationSounds.shared.bellsImageArray[selectedEndingBell]
                 endingBellNone.alpha = 0
                 //
                 selectedEndingBell = -1
@@ -854,7 +842,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 UserDefaults.standard.set(meditationArray, forKey: "meditationTimer")
                 //
-                backgroundSoundImage.image = backgroundSoundsImages[selectedBackgroundSound]
+                backgroundSoundImage.image = MeditationSounds.shared.backgroundSoundsImageArray[selectedBackgroundSound]
                 backgroundSoundNone.alpha = 0
                 //
                 selectedBackgroundSound = -1
@@ -1168,9 +1156,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 
         if meditationArray[selectedPreset]["Duration"]?[0].count != 0 {
             let hmsArray = convertToHMS(time: 0, index: 0)
-            pickerViewDuration.selectRow(durationTimeArray[0].index(of: hmsArray[0])!, inComponent: 0, animated: true)
-            pickerViewDuration.selectRow(durationTimeArray[1].index(of: hmsArray[1])!, inComponent: 1, animated: true)
-            pickerViewDuration.selectRow(durationTimeArray[2].index(of: hmsArray[2])!, inComponent: 2, animated: true)
+            pickerViewDuration.selectRow(MeditationSounds.shared.durationTimeArray[0].index(of: hmsArray[0])!, inComponent: 0, animated: true)
+            pickerViewDuration.selectRow(MeditationSounds.shared.durationTimeArray[1].index(of: hmsArray[1])!, inComponent: 1, animated: true)
+            pickerViewDuration.selectRow(MeditationSounds.shared.durationTimeArray[2].index(of: hmsArray[2])!, inComponent: 2, animated: true)
         }
         //
         selectionView.addSubview(durationTimeLabel)
@@ -1499,7 +1487,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             // [2] = bells array, .first = starting bell, [0] = bell
             let startingBell = meditationArray[selectedPreset]["Bells"]?.first![0] as! Int
             if startingBell != -1 {
-                startingBellImage.image = bellsImages[startingBell]
+                startingBellImage.image = MeditationSounds.shared.bellsImageArray[startingBell]
                 startingBellNone.alpha = 0
             } else {
                 startingBellImage.image = nil
@@ -1522,7 +1510,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             // [2] = bells array, .first = ending bell, [0] = bell
             let endingBell = meditationArray[selectedPreset]["Bells"]?.last![0] as! Int
             if endingBell != -1 {
-                endingBellImage.image = bellsImages[endingBell]
+                endingBellImage.image = MeditationSounds.shared.bellsImageArray[endingBell]
                 endingBellNone.alpha = 0
             } else {
                 endingBellImage.image = nil
@@ -1533,7 +1521,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             // [3] = bells array, [0] = background sound array, [0] = background sounds
             let backgroundSound = meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int
             if backgroundSound != -1 {
-                backgroundSoundImage.image = backgroundSoundsImages[backgroundSound]
+                backgroundSoundImage.image = MeditationSounds.shared.backgroundSoundsImageArray[backgroundSound]
                 backgroundSoundNone.alpha = 0
             } else {
                 backgroundSoundImage.image = nil
@@ -1600,7 +1588,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 
         switch tableView {
         case tableViewBells:
-            return bellsArray.count
+            return MeditationSounds.shared.bellsArray.count
         case tableViewIntervalBells:
             // Retreive Interval Bells
             //            let intervalBellsArray = UserDefaults.standard.object(forKey: "meditationTimerIntervalBells") as! [[Int]]
@@ -1612,7 +1600,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             intervalBellsArray.removeLast()
             return intervalBellsArray.count + 1
         case tableViewBackgroundSounds:
-            return backgroundSoundsArray.count
+            return MeditationSounds.shared.backgroundSoundsArray.count
         default: return 0
         }
         
@@ -1638,8 +1626,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.lineBreakMode = .byWordWrapping
             //
             //
-            cell.textLabel?.text = NSLocalizedString(bellsArray[indexPath.row], comment: "")
-            cell.imageView?.image = bellsImages[indexPath.row]
+            cell.textLabel?.text = NSLocalizedString(MeditationSounds.shared.bellsArray[indexPath.row], comment: "")
+            cell.imageView?.image = MeditationSounds.shared.bellsImageArray[indexPath.row]
             //
             cell.textLabel?.textAlignment = .left
             cell.backgroundColor = Colors.dark
@@ -1649,7 +1637,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             switch selectedItem {
             case 2:
                 //
-                //                let startingBellsArray = UserDefaults.standard.object(forKey: "meditationTimerStartingBells") as! [Int]
+                //                let startingMeditationSounds.shared.bellsArray = UserDefaults.standard.object(forKey: "meditationTimerStartingBells") as! [Int]
                 // Interval Bells
                 if didChangeStartingBell == false {
                     let startingBell = meditationArray[selectedPreset]["Bells"]?.first![0] as! Int
@@ -1675,7 +1663,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                     cell.tintColor = Colors.green
                 }
                 //
-                if indexPath.row == bellsArray.count {
+                if indexPath.row == MeditationSounds.shared.bellsArray.count {
                     cell.alpha = 0
                     cell.isUserInteractionEnabled = false
                 }
@@ -1685,7 +1673,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             case 4:
                 //
-                //                let endingBellsArray = UserDefaults.standard.object(forKey: "meditationTimerEndingBells") as! [Int]
+                //                let endingMeditationSounds.shared.bellsArray = UserDefaults.standard.object(forKey: "meditationTimerEndingBells") as! [Int]
                 if didChangeEndingBell == false {
                     let endingBell = meditationArray[selectedPreset]["Bells"]?.last![0] as! Int
                     if endingBell != -1 {
@@ -1744,8 +1732,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.detailTextLabel?.textColor = Colors.light
                 cell.detailTextLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 20)
                 //
-                cell.textLabel?.text = NSLocalizedString(bellsArray[intervalBellsArray[indexPath.row][0]] + "Short", comment: "")
-                cell.imageView?.image = bellsImages[intervalBellsArray[indexPath.row][0]]
+                cell.textLabel?.text = NSLocalizedString(MeditationSounds.shared.bellsArray[intervalBellsArray[indexPath.row][0]] + "Short", comment: "")
+                cell.imageView?.image = MeditationSounds.shared.bellsImageArray[intervalBellsArray[indexPath.row][0]]
                 //
                 cell.selectionStyle = .none
             }
@@ -1762,7 +1750,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.textColor = Colors.light
             cell.tintColor = Colors.light
             //
-            //            let selectedBackgroundSoundsArray = UserDefaults.standard.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
+            //            let selectedMeditationSounds.shared.backgroundSoundsArray = UserDefaults.standard.object(forKey: "meditationTimerBackgroundSounds") as! [Int]
             if didChangeBackgroundSound == false {
                 let chosenBackgroundSound = meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int
                 if chosenBackgroundSound != -1 {
@@ -1780,8 +1768,8 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 okButton.isEnabled = true
             }
             //
-            cell.textLabel?.text = NSLocalizedString(backgroundSoundsArray[indexPath.row], comment: "")
-            cell.imageView?.image = backgroundSoundsImages[indexPath.row]
+            cell.textLabel?.text = NSLocalizedString(MeditationSounds.shared.backgroundSoundsArray[indexPath.row], comment: "")
+            cell.imageView?.image = MeditationSounds.shared.backgroundSoundsImageArray[indexPath.row]
             
             
         default: break
@@ -1826,7 +1814,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             okButton.isEnabled = true
             //
-            let url = Bundle.main.url(forResource: bellsArray[indexPath.row], withExtension: "caf")!
+            let url = Bundle.main.url(forResource: MeditationSounds.shared.bellsArray[indexPath.row], withExtension: "caf")!
             //
             do {
                 let bell = try AVAudioPlayer(contentsOf: url)
@@ -1937,22 +1925,28 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             okButton.isEnabled = true
             //
-            let url = Bundle.main.url(forResource: backgroundSoundsArray[indexPath.row], withExtension: "caf")!
+            print(MeditationSounds.shared.backgroundSoundsArray[indexPath.row])
+            let url = Bundle.main.url(forResource: MeditationSounds.shared.backgroundSoundsArray[indexPath.row], withExtension: "caf")
+            // nina
+            print(url)
             //
-            do {
-                let bell = try AVAudioPlayer(contentsOf: url)
-                BellPlayer.shared.bellPlayer = bell
-                BellPlayer.shared.bellPlayer?.numberOfLoops = -1
-                bell.play()
-            } catch {
-                // couldn't load file :(
+            if let url = Bundle.main.url(forResource: MeditationSounds.shared.backgroundSoundsArray[indexPath.row], withExtension: "caf") {
+                //
+                do {
+                    let bell = try AVAudioPlayer(contentsOf: url)
+                    BellPlayer.shared.bellPlayer = bell
+                    BellPlayer.shared.bellPlayer?.numberOfLoops = -1
+                    bell.play()
+                } catch {
+                    // couldn't load file :(
+                }
+                //
+                selectedBackgroundSound = indexPath.row
+                didChangeBackgroundSound = true
+                //
+                tableViewBackgroundSounds.deselectRow(at: indexPath, animated: true)
+                tableViewBackgroundSounds.reloadData()
             }
-            //
-            selectedBackgroundSound = indexPath.row
-            didChangeBackgroundSound = true
-            //
-            tableViewBackgroundSounds.deselectRow(at: indexPath, animated: true)
-            tableViewBackgroundSounds.reloadData()
         default: break
         }
     }
@@ -2028,7 +2022,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         // duration
         if selectedItem == 1 {
-            return durationTimeArray[component].count
+            return MeditationSounds.shared.durationTimeArray[component].count
             // interval
         } else {
             let hmsArray = convertToHMS(time: 0, index: 0)
@@ -2044,7 +2038,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 case 1:
                     return 0
                 case 2:
-                    let index = durationTimeArray[2].index(of: hmsArray[2])
+                    let index = MeditationSounds.shared.durationTimeArray[2].index(of: hmsArray[2])
                     return index!
                 default: return 0
                 }
@@ -2058,10 +2052,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 case 0:
                     return 0
                 case 1:
-                    let index = durationTimeArray[1].index(of: hmsArray[1])
+                    let index = MeditationSounds.shared.durationTimeArray[1].index(of: hmsArray[1])
                     return index!
                 case 2:
-                    return durationTimeArray[component].count
+                    return MeditationSounds.shared.durationTimeArray[component].count
                 default: return 0
                 }
                 //
@@ -2069,12 +2063,12 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             } else {
                 switch component {
                 case 0:
-                    let index = durationTimeArray[0].index(of: hmsArray[0])
+                    let index = MeditationSounds.shared.durationTimeArray[0].index(of: hmsArray[0])
                     return index!
                 case 1:
-                    return durationTimeArray[component].count
+                    return MeditationSounds.shared.durationTimeArray[component].count
                 case 2:
-                    return durationTimeArray[component].count
+                    return MeditationSounds.shared.durationTimeArray[component].count
                 default: return 0
                 }
                 //
@@ -2092,7 +2086,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         //
         let label = UILabel()
-        label.text = String(durationTimeArray[component][row])
+        label.text = String(MeditationSounds.shared.durationTimeArray[component][row])
         label.font = UIFont(name: "SFUIDisplay-light", size: 24)
         label.textColor = Colors.light
         //
@@ -2120,9 +2114,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Convert to seconds func
     func convertToSeconds() -> Int {
-        let hours = durationTimeArray[0][pickerViewDuration.selectedRow(inComponent: 0)]
-        let minutes = durationTimeArray[1][pickerViewDuration.selectedRow(inComponent: 1)]
-        let seconds = durationTimeArray[2][pickerViewDuration.selectedRow(inComponent: 2)]
+        let hours = MeditationSounds.shared.durationTimeArray[0][pickerViewDuration.selectedRow(inComponent: 0)]
+        let minutes = MeditationSounds.shared.durationTimeArray[1][pickerViewDuration.selectedRow(inComponent: 1)]
+        let seconds = MeditationSounds.shared.durationTimeArray[2][pickerViewDuration.selectedRow(inComponent: 2)]
         //
         let timeInSeconds = (hours * 3600) + (minutes * 60) + seconds
         return timeInSeconds
@@ -2186,9 +2180,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         if segue.identifier == "meditationTimerSegue" {
             //
             let destinationVC = segue.destination as! MeditationScreen
-            //
-            destinationVC.bellsArray = bellsArray
-            destinationVC.backgroundSoundsArray = backgroundSoundsArray
             //
             destinationVC.selectedPreset = selectedPreset
             //

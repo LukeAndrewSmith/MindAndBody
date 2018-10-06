@@ -565,15 +565,23 @@ public class Reachability {
 }
 
 // Bells -> Images
-class BellsFunctions {
+class MeditationSounds {
     
-    static var shared = BellsFunctions()
+    static var shared = MeditationSounds()
     private init() {}
+    
+    // Duration Array
+    let durationTimeArray: [[Int]] =
+        [
+            [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], // ours
+            [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 58, 59], // Minutes
+            [00, 10, 20, 30, 40, 50] // Seconds
+    ]
     
     let bellsArray: [String] =
         ["tibetanChimes", "tibetanBowlL", "tibetanBowlL4", "tibetanBowlLS", "tibetanBowlH", "tibetanBowlH4", "tibetanBowlHS", "rainStick", "rainStick2", "rainStick2S", "windChimes", "gambangWU", "gambangWD", "gambangM", "indonesianFrog", "cowBellS", "cowBellB"]
     
-    let conversionDict: [String: UIImage] =
+    let conversionDictBells: [String: UIImage] =
         ["tibetanChimes": #imageLiteral(resourceName: "Tibetan Chimes"),
          "tibetanBowlL": #imageLiteral(resourceName: "Tibetan Bowl Big"),
          "tibetanBowlL4":#imageLiteral(resourceName: "Tibetan Bowl Big"),
@@ -592,10 +600,30 @@ class BellsFunctions {
          "cowBellS":#imageLiteral(resourceName: "Cow Bell"),
          "cowBellB":#imageLiteral(resourceName: "Cow Bell Big")]
     
+    let bellsImageArray: [UIImage] =
+        [#imageLiteral(resourceName: "Tibetan Chimes"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Wind Chimes"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Small"), #imageLiteral(resourceName: "Indonesian Frog"), #imageLiteral(resourceName: "Cow Bell"), #imageLiteral(resourceName: "Cow Bell Big")]
+    
     // Get Image from bell name
     func bellToImage(name: String) -> UIImage {
-        return conversionDict[name]!
+        return conversionDictBells[name] ?? #imageLiteral(resourceName: "Tibetan Bowl Big")
     }
+    
+    let backgroundSoundsArray: [String] =
+        ["rainStick2S", "LakeTiticaca", "ForestStream", "SwissCows"] // MountainStream
+    
+    let conversionDictBackgroundSound: [String: UIImage] =
+        ["MountainStream": #imageLiteral(resourceName: "MountainStream"),
+         "LakeTiticaca": #imageLiteral(resourceName: "LakeTiticaca"),
+         "ForestStream":#imageLiteral(resourceName: "MountainStream"),
+         "SwissCows":#imageLiteral(resourceName: "SwissCows")]
+    
+    let backgroundSoundsImageArray: [UIImage] = [#imageLiteral(resourceName: "MountainStream"), #imageLiteral(resourceName: "LakeTiticaca") ,#imageLiteral(resourceName: "MountainStream"), #imageLiteral(resourceName: "SwissCows")]
+    
+    // Get Image from backgrounds sound name
+    func backgroundSoundToImage(name: String) -> UIImage {
+        return conversionDictBackgroundSound[name] ?? #imageLiteral(resourceName: "MountainStream")
+    }
+    
 }
 
 // MARK: Update Profile

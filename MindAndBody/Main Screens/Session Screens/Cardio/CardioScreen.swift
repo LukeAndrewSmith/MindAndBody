@@ -38,7 +38,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     var lengthArray: [Int] = []
     
     // Bells Arrays
-    let bellsArray: [String] = BellsFunctions.shared.bellsArray
+    let bellsArray: [String] = MeditationSounds.shared.bellsArray
     
     // Check frame for header view
     var didSetFrame = false

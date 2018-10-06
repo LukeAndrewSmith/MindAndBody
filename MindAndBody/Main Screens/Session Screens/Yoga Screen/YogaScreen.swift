@@ -56,7 +56,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var automaticYogaArray: [Int] = []
 
     // Bells Arrays
-    let bellsArray: [String] = BellsFunctions.shared.bellsArray
+    let bellsArray: [String] = MeditationSounds.shared.bellsArray
     
     
     //

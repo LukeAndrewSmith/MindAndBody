@@ -1359,10 +1359,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0702A94A2168F57F00B1B63C /* ForestStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ForestStream.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/ForestStream.caf"; sourceTree = "<group>"; };
-		0702A94B2168F57F00B1B63C /* MountainStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MountainStream.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/MountainStream.caf"; sourceTree = "<group>"; };
-		0702A94C2168F57F00B1B63C /* LakeTiticaca.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LakeTiticaca.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/LakeTiticaca.caf"; sourceTree = "<group>"; };
-		0702A94D2168F57F00B1B63C /* SwissCows.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SwissCows.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/SwissCows.caf"; sourceTree = "<group>"; };
 		07034331213AB74F00FBB8E6 /* ScheduleCreationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationController.swift; sourceTree = "<group>"; };
 		07034334213AB7D900FBB8E6 /* ScheduleCreationPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationPageController.swift; sourceTree = "<group>"; };
 		07038CC51F4C5C2A001CC6D5 /* purpleTree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpleTree.png; sourceTree = "<group>"; };
@@ -1788,6 +1784,10 @@
 		07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquatTwist.png; sourceTree = "<group>"; };
 		07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tinyFencerStretch.png; sourceTree = "<group>"; };
 		077206811F90C52000818088 /* TimeBasedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedHelpers.swift; sourceTree = "<group>"; };
+		07761EBD216900BF00D4473B /* MountaiStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MountaiStream.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/MountaiStream.caf"; sourceTree = "<group>"; };
+		07761EBE216900BF00D4473B /* ForestStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ForestStream.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/ForestStream.caf"; sourceTree = "<group>"; };
+		07761EBF216900BF00D4473B /* LakeTiticaca.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LakeTiticaca.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/LakeTiticaca.caf"; sourceTree = "<group>"; };
+		07761EC0216900BF00D4473B /* SwissCows.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SwissCows.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/SwissCows.caf"; sourceTree = "<group>"; };
 		077876221F92A50D005CE68A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0778FAA620A34F390032698A /* StopClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopClock.swift; sourceTree = "<group>"; };
 		0778FAAA20AED8880032698A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -4456,10 +4456,10 @@
 		07B4E00B1F3774E500C77807 /* Background Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				0702A94A2168F57F00B1B63C /* ForestStream.caf */,
-				0702A94C2168F57F00B1B63C /* LakeTiticaca.caf */,
-				0702A94B2168F57F00B1B63C /* MountainStream.caf */,
-				0702A94D2168F57F00B1B63C /* SwissCows.caf */,
+				07761EBE216900BF00D4473B /* ForestStream.caf */,
+				07761EBF216900BF00D4473B /* LakeTiticaca.caf */,
+				07761EBD216900BF00D4473B /* MountaiStream.caf */,
+				07761EC0216900BF00D4473B /* SwissCows.caf */,
 			);
 			path = "Background Sounds";
 			sourceTree = "<group>";

@@ -28,26 +28,6 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var customTable: UITableView!
     
-    // Bells Arrays
-    let bellsArray = BellsFunctions.shared.bellsArray
-    let bellsImages: [UIImage] =
-        [#imageLiteral(resourceName: "Tibetan Chimes"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Wind Chimes"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Small"), #imageLiteral(resourceName: "Indonesian Frog"), #imageLiteral(resourceName: "Cow Bell"), #imageLiteral(resourceName: "Cow Bell Big")]
-    
-    // Duration Array
-    let durationTimeArray: [[Int]] =
-        [
-            [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
-            [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 58, 59],
-            [00, 10, 20, 30, 40, 50]
-    ]
-    
-    
-    // Background Sounds Array
-    let backgroundSoundsArray: [String] =
-        ["MountainStream", "LakeTiticaca", "MountainStream", "SwissCows"]
-    let backgroundSoundsImages: [UIImage] =
-        [MountainStream]
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -117,7 +97,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         // Background sound
         } else {
             removeNothingChosenSymbol(view: cell.backgroundSoundImageView)
-            cell.backgroundSoundImageView.image = backgroundSoundsImages[chosenBackgroundSound]
+            cell.backgroundSoundImageView.image = MeditationSounds.shared.backgroundSoundsImageArray[chosenBackgroundSound]
         }
         
         // Starting Bell
@@ -128,7 +108,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         // Starting bell
         } else {
             removeNothingChosenSymbol(view: cell.startingImage)
-            cell.startingImage.image = bellsImages[startingBell]
+            cell.startingImage.image = MeditationSounds.shared.bellsImageArray[startingBell]
         }
         
 //        // Interval Bells
@@ -160,7 +140,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         // Ending bell
         } else {
             removeNothingChosenSymbol(view: cell.endingImage)
-            cell.endingImage.image = bellsImages[endingBell]
+            cell.endingImage.image = MeditationSounds.shared.bellsImageArray[endingBell]
         }
         
         if indexPath.row != 0 {
@@ -424,25 +404,11 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
             // Indicate if creating or editing
             destinationVC?.creatingSession = creatingMeditation
             destinationVC?.selectedPreset = selectedMeditation
-            // PAss arrays so only one instance is hardcoded
-            destinationVC?.bellsArray = bellsArray
-            destinationVC?.bellsImages = bellsImages
-            destinationVC?.backgroundSoundsArray = backgroundSoundsArray
-            destinationVC?.backgroundSoundsImages = backgroundSoundsImages
-            destinationVC?.durationTimeArray = durationTimeArray
-//            let destinationNC = segue.destination as? MeditationTimerNavigation
-//            let destinationVC = destinationNC?.viewControllers.first as? MeditationTimerEditing
-//            destinationVC?.creatingMeditation = creatingMeditation
         // Session
         case "meditationSegue"?:
-            //
+
             let destinationVC = segue.destination as! MeditationScreen
-            //
-            destinationVC.bellsArray = bellsArray
-            destinationVC.backgroundSoundsArray = backgroundSoundsArray
-            //
             destinationVC.selectedPreset = selectedMeditation
-            //
             destinationVC.fromSchedule = comingFromSchedule
             
         default:

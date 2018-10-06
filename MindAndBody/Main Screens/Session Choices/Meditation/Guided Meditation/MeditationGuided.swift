@@ -169,7 +169,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         ],
     ]
     
-    let bellsArray = BellsFunctions.shared.bellsArray
+    let bellsArray = MeditationSounds.shared.bellsArray
     
     let frequencyArray = ["noBells", "30", "60", "90", "120", "180", "240"]
     
@@ -264,7 +264,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         bellImage.backgroundColor = Colors.dark
         bellImage.layer.cornerRadius = 3
         bellImage.layer.masksToBounds = true
-        bellImage.image = BellsFunctions.shared.bellToImage(name: practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bell"] as! String)
+        bellImage.image = MeditationSounds.shared.bellToImage(name: practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bell"] as! String)
         // Frequency
         bellFrequency.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 19)
         bellFrequency.setTitleColor(Colors.light, for: .normal)
@@ -887,7 +887,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
             // Change bell
             practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bell"] = bellsArray[selectedBell]
             // Update bell image
-            bellImage.image = BellsFunctions.shared.bellToImage(name: practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bell"] as! String)
+            bellImage.image = MeditationSounds.shared.bellToImage(name: practiceDict[selectedSessionMeditation[0]][selectedSessionMeditation[1]]["bell"] as! String)
 
             // Remove View
             ActionSheet.shared.animateActionSheetDown()
@@ -962,7 +962,7 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
         cell.textLabel?.lineBreakMode = .byWordWrapping
         //
         cell.textLabel?.text = NSLocalizedString(bellsArray[indexPath.row], comment: "")
-        cell.imageView?.image = BellsFunctions.shared.bellToImage(name: bellsArray[indexPath.row])
+        cell.imageView?.image = MeditationSounds.shared.bellToImage(name: bellsArray[indexPath.row])
         //
         cell.textLabel?.textAlignment = .left
         cell.backgroundColor = Colors.dark
@@ -1074,7 +1074,6 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             let destinationVC = segue.destination as! MeditationScreen
             //
-            destinationVC.bellsArray = bellsArray
             // To indicate that were coming from Guided
             destinationVC.selectedPreset = -1
             //

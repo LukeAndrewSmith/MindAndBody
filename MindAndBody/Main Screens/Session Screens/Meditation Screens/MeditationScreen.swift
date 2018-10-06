@@ -20,15 +20,6 @@ var endingBellPlayer = AVAudioPlayer()
 //
 class MeditationScreen: UIViewController {
     
-    
-    
-    //
-    // Arrays Passed -------------------------------------------------------------------------------------------
-    //
-    var bellsArray: [String] = []
-    //
-    var backgroundSoundsArray: [String] = []
-    //
     var selectedPreset = Int()
     
     // For guided meditation
@@ -36,8 +27,6 @@ class MeditationScreen: UIViewController {
     var bellChosen = String()
     var bellFrequency = Int()
     
-    
-    //
     var audioPlayerArray: [AVAudioPlayer] = []
     
     // Variables
@@ -319,7 +308,7 @@ class MeditationScreen: UIViewController {
                     // Delay bell
                     let delayInSeconds = Double(meditationArray[selectedPreset]["Bells"]?[i][1] as! Int)
                     // Play with delay
-                    let url = Bundle.main.url(forResource: bellsArray[meditationArray[selectedPreset]["Bells"]?[i][0] as! Int], withExtension: "caf")!
+                    let url = Bundle.main.url(forResource: MeditationSounds.shared.bellsArray[meditationArray[selectedPreset]["Bells"]?[i][0] as! Int], withExtension: "caf")!
 
                     do {
                         let audioPlayer = try AVAudioPlayer(contentsOf: url)
@@ -339,7 +328,7 @@ class MeditationScreen: UIViewController {
                 // Delay bell
                 let delayInSeconds = Double(meditationArray[selectedPreset]["Bells"]?[lastIndex][1] as! Int)
                 
-                let url = Bundle.main.url(forResource: self.bellsArray[meditationArray[selectedPreset]["Bells"]?[lastIndex][0] as! Int], withExtension: "caf")!
+                let url = Bundle.main.url(forResource: MeditationSounds.shared.bellsArray[meditationArray[selectedPreset]["Bells"]?[lastIndex][0] as! Int], withExtension: "caf")!
                 do {
                     endingBellPlayer = try AVAudioPlayer(contentsOf: url)
                     audioPlayerArray.append(endingBellPlayer)
@@ -351,7 +340,7 @@ class MeditationScreen: UIViewController {
             
             // Background Sound
             if meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
-                let url = Bundle.main.url(forResource: backgroundSoundsArray[meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int], withExtension: "caf")!
+                let url = Bundle.main.url(forResource: MeditationSounds.shared.backgroundSoundsArray[meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int], withExtension: "caf")!
                 //
                 do {
                     let bell = try AVAudioPlayer(contentsOf: url)
