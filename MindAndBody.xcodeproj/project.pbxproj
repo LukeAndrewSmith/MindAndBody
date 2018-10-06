@@ -1784,10 +1784,6 @@
 		07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquatTwist.png; sourceTree = "<group>"; };
 		07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tinyFencerStretch.png; sourceTree = "<group>"; };
 		077206811F90C52000818088 /* TimeBasedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedHelpers.swift; sourceTree = "<group>"; };
-		07761EBD216900BF00D4473B /* MountaiStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MountaiStream.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/MountaiStream.caf"; sourceTree = "<group>"; };
-		07761EBE216900BF00D4473B /* ForestStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ForestStream.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/ForestStream.caf"; sourceTree = "<group>"; };
-		07761EBF216900BF00D4473B /* LakeTiticaca.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LakeTiticaca.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/LakeTiticaca.caf"; sourceTree = "<group>"; };
-		07761EC0216900BF00D4473B /* SwissCows.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SwissCows.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/SwissCows.caf"; sourceTree = "<group>"; };
 		077876221F92A50D005CE68A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0778FAA620A34F390032698A /* StopClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopClock.swift; sourceTree = "<group>"; };
 		0778FAAA20AED8880032698A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -3534,6 +3530,13 @@
 			path = upwardsDog;
 			sourceTree = "<group>";
 		};
+		07761EC12169016000D4473B /* Background Sounds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Background Sounds";
+			sourceTree = "<group>";
+		};
 		0778761C1F92A44B005CE68A /* Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
@@ -3710,7 +3713,7 @@
 		078C59541EC893EA00FA1890 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				07B4E00B1F3774E500C77807 /* Background Sounds */,
+				07761EC12169016000D4473B /* Background Sounds */,
 				07B4E00A1F3774DB00C77807 /* Bells */,
 			);
 			path = Sounds;
@@ -4451,17 +4454,6 @@
 				076C68181ED1BFAD009160C2 /* windChimes.caf */,
 			);
 			path = Bells;
-			sourceTree = "<group>";
-		};
-		07B4E00B1F3774E500C77807 /* Background Sounds */ = {
-			isa = PBXGroup;
-			children = (
-				07761EBE216900BF00D4473B /* ForestStream.caf */,
-				07761EBF216900BF00D4473B /* LakeTiticaca.caf */,
-				07761EBD216900BF00D4473B /* MountaiStream.caf */,
-				07761EC0216900BF00D4473B /* SwissCows.caf */,
-			);
-			path = "Background Sounds";
 			sourceTree = "<group>";
 		};
 		07BDFEFE1EB1E69700B131D7 /* Yoga Screen */ = {
