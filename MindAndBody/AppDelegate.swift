@@ -16,9 +16,7 @@ import StoreKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
-    //
-    //
+
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
         //
@@ -73,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["userHasValidSubscription" : false])
         // Settings
         UserDefaults.standard.register(defaults: ["userSettings" : Register.defaultSettings])
-        //
+
         // Profile/Schedules
         // Selected Schedule
         UserDefaults.standard.register(defaults: ["selectedScheduleIndex" : 0])
@@ -83,15 +81,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["difficultyLevels" : scheduleDataStructures.defaultDifficultyLevels])
         // Profile Answers
         UserDefaults.standard.register(defaults: ["profileAnswers" : scheduleDataStructures.defaultProfileAnswers])
+        UserDefaults.standard.register(defaults: ["lastProfileUpdateAlert" : Date().setToMidnightUTC()])
         // Lessons
         UserDefaults.standard.register(defaults: ["scheduleLessons" : scheduleDataStructures.defaultScheduleLessons])
-        //
+
         // Tracking
         // Tracking arrays [weekTracking, tracking]
         UserDefaults.standard.register(defaults: ["trackingDictionary" : Register.registerTrackingDictionary])
         // Progress, [currentProgress, lastResetWeek/Month]
         UserDefaults.standard.register(defaults: ["trackingProgress" : Register.registertrackingProgressDictionary])
-        //
+
         // Custom
         // Custom Sessions
         UserDefaults.standard.register(defaults: ["customSessions" : Register.customSessionsRegister])
@@ -106,12 +105,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ScheduleVariables.shared.setSchedules()
         
-        //
         // Check if the user has a valid subscription
         // Subscription Check 1
 //        SubscriptionsCheck.shared.checkSubscription()
         
-        //
         return true
     }
 
@@ -120,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+                
         //
         NSSetUncaughtExceptionHandler { exception in
             print(exception)
@@ -134,8 +131,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
         
-        timerCountDown.invalidate()
-        timerCountDown2.invalidate()
+        rowTimer.invalidate()
+        sessionTimer.invalidate()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {

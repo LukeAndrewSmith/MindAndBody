@@ -62,7 +62,7 @@ extension ScheduleScreen {
             walkthroughHighlight.layer.borderColor = Colors.light.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: 172, height: 33)
-            walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ControlBarHeights.statusBarHeight)
+            walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ElementHeights.statusBarHeight)
             walkthroughHighlight.layer.cornerRadius = walkthroughHighlight.bounds.height / 2
             
             //
@@ -85,7 +85,7 @@ extension ScheduleScreen {
         case 1:
             //
             highlightSize = CGSize(width: 172, height: 33)
-            highlightCenter = CGPoint(x: view.frame.size.width / 2, y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ControlBarHeights.statusBarHeight)
+            highlightCenter = CGPoint(x: view.frame.size.width / 2, y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ElementHeights.statusBarHeight)
             highlightCornerRadius = 0
             //
             labelFrame = 0
@@ -103,7 +103,7 @@ extension ScheduleScreen {
         case 2:
             //
             highlightSize = CGSize(width: 36, height: 36)
-            highlightCenter = CGPoint(x: view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ControlBarHeights.statusBarHeight)
+            highlightCenter = CGPoint(x: view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ElementHeights.statusBarHeight)
             highlightCornerRadius = 1
             //
             labelFrame = 0
@@ -174,7 +174,7 @@ extension ScheduleScreen {
         case 6:
             //
             highlightSize = CGSize(width: 36, height: 36)
-            highlightCenter = CGPoint(x: view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ControlBarHeights.statusBarHeight)
+            highlightCenter = CGPoint(x: view.bounds.width * (91.5/100), y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ElementHeights.statusBarHeight)
             highlightCornerRadius = 1
             //
             labelFrame = 0

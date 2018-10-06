@@ -496,8 +496,8 @@ class ScheduleVariables {
     
     // Func reset schedule tracking
     func resetScheduleTracking() {
+        
         // Use lastResetWeek in tracking progress array to reset schedule tracking bools to false and and week progress to 0
-        //
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         // Current mondays date in week (is set to midnight in func)
         let currentMondayDate = Date().firstMondayInCurrentWeekCurrentTimeZone
@@ -509,7 +509,7 @@ class ScheduleVariables {
             
             // Reset all bools in week tracking to false
             if schedules.count > 0 {
-                // Loop scheduleTracking
+                // Loop schedules
                 for i in 0..<schedules.count {
                     // Loop week
                     for j in 0...6 {
@@ -531,18 +531,15 @@ class ScheduleVariables {
                     }
                 }
             }
-            // Set week progress to 0
+            
             trackingProgressDictionary["WeekProgress"] = 0
-            // Set extra sessions to 0
             trackingProgressDictionary["ExtraSessions"] = 0
-            // Set Last Reset
             trackingProgressDictionary["LastResetWeek"] = currentMondayDate
-            // Update
+            
             saveSchedules()
             UserDefaults.standard.set(trackingProgressDictionary, forKey: "trackingProgress")
-            // Reload schedule
+            
             shouldReloadSchedule = true
-            // Reset notifications
             ReminderNotifications.shared.setNotifications()
         }
     }

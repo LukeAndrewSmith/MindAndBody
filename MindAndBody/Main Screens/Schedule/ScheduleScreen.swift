@@ -43,7 +43,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // TableView
     let headerLabel = UILabel()
     var headerHeight: CGFloat {
-        return (UIScreen.main.bounds.height - ControlBarHeights.combinedHeight - ControlBarHeights.tabBarHeight - pageStackHeight.constant) / 4
+        return (UIScreen.main.bounds.height - ElementHeights.combinedHeight - ElementHeights.tabBarHeight - pageStackHeight.constant) / 4
     }
 //    var headerHeight: CGFloat {
 //        return 88 * 1.5
@@ -152,7 +152,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         willAppear()
     }
     
+    
     func willAppear() {
+        
         // Check if reset necessary
         ScheduleVariables.shared.resetScheduleTracking()
 
@@ -172,6 +174,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         reloadView()
         
         scheduleTableScrollCheck()
+        
+        // Check if alert reminding to update profile (Once a month) should be presented
+        UpdateProfile.shared.checkUpdateProfile()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -250,6 +255,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         topView.isUserInteractionEnabled = false
         //
         topView.frame = CGRect(x: 0, y: scheduleTable.frame.minY - scheduleTable.bounds.height, width: scheduleTable.bounds.width, height: scheduleTable.bounds.height)
+        //
+        scheduleTableScrollCheck()
     }
     
     // Begin walkthrough

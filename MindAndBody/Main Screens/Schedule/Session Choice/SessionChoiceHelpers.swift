@@ -1157,17 +1157,16 @@ extension SessionChoice {
         view.isUserInteractionEnabled = false
 
         // Slide across table
-        let snapShotFrame = CGRect(x: 0, y: 0, width: choiceTable.frame.width, height: choiceTable.frame.height)
         let snapShotY = choiceTable.center.y
         // Snapshots
-        let snapShot1 = choiceTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
+        let snapShot1 = choiceTable.snapshotView(afterScreenUpdates: false)
         snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
         view.insertSubview((snapShot1)!, belowSubview: backButton)
         //
         choiceTable.reloadData()
         //
-        let snapShot2 = choiceTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
-        snapShot2?.frame.origin = CGPoint(x: view.frame.maxX + view.frame.size.width, y: 176)
+        let snapShot2 = choiceTable.snapshotView(afterScreenUpdates: true)
+        snapShot2?.frame.origin = CGPoint(x: view.frame.maxX, y: choiceTable.frame.minY)
         view.insertSubview((snapShot2)!, belowSubview: snapShot1!)
         //
         choiceTable.isHidden = true
@@ -1193,16 +1192,22 @@ extension SessionChoice {
         view.isUserInteractionEnabled = false
         
         // Slide table
-        let snapShotFrame = CGRect(x: 0, y: 0, width: choiceTable.frame.width, height: choiceTable.frame.height)
         let snapShotY = choiceTable.center.y
         // Snapshots
-        let snapShot1 = choiceTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: false, withCapInsets: .zero)
+        let snapShot1 = choiceTable.snapshotView(afterScreenUpdates: false)
         snapShot1?.center = CGPoint(x: view.center.x, y: snapShotY)
         view.insertSubview((snapShot1)!, belowSubview: backButton)
         //
         choiceTable.reloadData()
-        //
-        let snapShot2 = choiceTable.resizableSnapshotView(from: snapShotFrame, afterScreenUpdates: true, withCapInsets: .zero)
+        // If going back to first choice of
+        let snapShotImage = groupImage.snapshotView(afterScreenUpdates: false)
+        if ScheduleVariables.shared.selectedGroup == Groups.extra {
+            // nina
+            view.insertSubview(snapShotImage!, belowSubview: snapShot1!)
+            self.setupGroupImage()
+        }
+
+        let snapShot2 = choiceTable.snapshotView(afterScreenUpdates: true)
         if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.selectedGroup == Groups.extra {
             backButtonTop.constant = -176 // Image height isn't changed till after animation, this puts the back button in the correct posisiton as anchored to image
             self.view.layoutIfNeeded()
@@ -1210,10 +1215,14 @@ extension SessionChoice {
         } else {
             snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
         }
-        view.insertSubview((snapShot2)!, belowSubview: snapShot1!)
+        if ScheduleVariables.shared.selectedGroup == Groups.extra {
+            view.insertSubview((snapShot2)!, aboveSubview: snapShotImage!)
+        } else {
+            view.insertSubview((snapShot2)!, belowSubview: snapShot1!)
+        }
         
         choiceTable.isHidden = true
-        //
+
         // Animate new and old image to left
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
 
@@ -1221,13 +1230,10 @@ extension SessionChoice {
             snapShot2?.center.x = self.view.center.x
 
         }, completion: { finished in
-            // If going back to first choice of
-            if ScheduleVariables.shared.selectedGroup == Groups.extra {
-                // nina
-                self.setupGroupImage()
-            }
+            self.backButtonTop.constant = 0
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
+            snapShotImage?.removeFromSuperview()
             self.choiceTable.isHidden = false
             self.view.isUserInteractionEnabled = true
         })
@@ -1264,7 +1270,6 @@ extension SessionChoice {
     func markAsCompletedAndAnimate() {
         // MARK AS COMPLETED
         if ScheduleVariables.shared.shouldReloadFinalChoice {
-            
             ScheduleVariables.shared.shouldReloadFinalChoice = false
             
             // Get indexPath.row

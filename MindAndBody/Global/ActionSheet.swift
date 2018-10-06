@@ -26,7 +26,7 @@ class ActionSheet {
     var actionWidth: CGFloat {
         var width: CGFloat = 0
         // iPad
-        if IPhoneType.shared.iPhoneType() == 3 {
+        if IPhoneType.shared.iPhoneType() == IPhone.pad {
             width = 423
             xPos = (UIScreen.main.bounds.width - width) / 2
             // iPhones
@@ -43,7 +43,7 @@ class ActionSheet {
         var height = CGFloat()
         // If smaller than iphone x, use first height, if not use smaller height
         if UIScreen.main.nativeBounds.height < 2436 {
-            height = UIScreen.main.bounds.height - CGFloat(ControlBarHeights.combinedHeight) - 49 - 88
+            height = UIScreen.main.bounds.height - ElementHeights.bottomSafeAreaInset - 49 - 88
         } else {
             height = UIScreen.main.bounds.height / 2
         }
@@ -91,13 +91,9 @@ class ActionSheet {
         //
         // Animate
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
+            
             //
-            // iPhone X
-            if UIScreen.main.nativeBounds.height == 2436 {
-                self.actionSheet.frame = CGRect(x: self.xPos, y: UIScreen.main.bounds.height - self.actionSheet.bounds.height - 10 - ControlBarHeights.homeIndicatorHeight, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
-            } else {
-                self.actionSheet.frame = CGRect(x: self.xPos, y: UIScreen.main.bounds.height - self.actionSheet.bounds.height - 10, width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
-            }
+            self.actionSheet.frame = CGRect(x: self.xPos, y: UIScreen.main.bounds.height - ElementHeights.bottomSafeAreaInset - self.actionSheet.bounds.height - 10 , width: self.actionSheet.bounds.width, height: self.actionSheet.bounds.height)
             //
             self.actionSheetBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         }, completion: nil)

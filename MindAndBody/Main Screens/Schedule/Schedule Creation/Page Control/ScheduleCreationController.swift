@@ -68,7 +68,7 @@ class ScheduleCreationController: UIViewController {
         
         explanationLabel.textColor = Colors.light
         // Iphone 5/SE layout
-        if IPhoneType.shared.iPhoneType() == 0 {
+        if IPhoneType.shared.iPhoneType() == IPhone.little {
             explanationLabel.font = UIFont(name: "SFUIDisplay-regular", size: 11)
             explanationViewHeight.constant = 36
             progressViewHeight.constant = 36
@@ -90,7 +90,7 @@ class ScheduleCreationController: UIViewController {
         let viewWidth = view.bounds.width / CGFloat(pages.count)
         var half: CGFloat = 21
         var extra: CGFloat = 9
-        if IPhoneType.shared.iPhoneType() == 0 {
+        if IPhoneType.shared.iPhoneType() == IPhone.little {
             half = 17
             extra = 8
         }
@@ -170,7 +170,7 @@ class ScheduleCreationController: UIViewController {
             if self.currentPage < self.pages.count - 1 {
                 
                 var toMinus: CGFloat = 21
-                if IPhoneType.shared.iPhoneType() == 0 {
+                if IPhoneType.shared.iPhoneType() == IPhone.little {
                     toMinus = 17
                 }
                 

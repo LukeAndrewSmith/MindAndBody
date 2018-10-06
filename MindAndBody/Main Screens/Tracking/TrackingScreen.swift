@@ -121,15 +121,29 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTimeScaleChoice()
+        
         
         // Navigation Controller
         // Remove navigation separator
         setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("tracking", comment: ""), separator: false, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
 
         view.backgroundColor = Colors.light
-
+        
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupTimeScaleChoice()
         setupChart()
+        
+        let testLabel = UILabel()
+        testLabel.text = NSLocalizedString("%acheived", comment: "")
+        testLabel.font = Fonts.smallElementLight!
+        testLabel.sizeToFit()
+        testLabel.center = CGPoint(x: testLabel.bounds.height/2, y: chartView.center.y)
+        testLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+        view.addSubview(testLabel)
     }
     
     // Time Scale
@@ -192,21 +206,12 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     // MARK: Setup chart
     func setupChart() {
         
-        let viewHeight = UIScreen.main.bounds.height - ControlBarHeights.combinedHeight - ControlBarHeights.tabBarHeight - timeScaleStack.bounds.height
+        
+        let viewHeight: CGFloat = UIScreen.main.bounds.height - ElementHeights.combinedHeight - ElementHeights.tabBarHeight - timeScaleStack.bounds.height - ElementHeights.bottomSafeAreaInset
         
         // Chart
         chartView.frame = CGRect(x: 16, y: timeScaleStack.bounds.height + 8, width: view.bounds.width - 16, height: viewHeight - 16)
         view.addSubview(chartView)
-        
-        let testLabel = UILabel()
-//        testLabel.text = NSLocalizedString("%", comment: "")
-        testLabel.text = NSLocalizedString("%acheived", comment: "")
-        testLabel.font = Fonts.smallElementLight!
-        testLabel.sizeToFit()
-//        testLabel.center = CGPoint(x: 4+testLabel.bounds.width/2, y: chartView.frame.minY + 20)
-        testLabel.center = CGPoint(x: testLabel.bounds.height/2, y: chartView.center.y)
-        testLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-        view.addSubview(testLabel)
         
         // No data
         chartView.noDataFont = Fonts.largeElementRegular

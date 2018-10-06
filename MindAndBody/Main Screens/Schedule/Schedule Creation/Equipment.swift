@@ -106,7 +106,7 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.selectionStyle = .none
         //
         // Iphone 5/SE layout
-        if IPhoneType.shared.iPhoneType() == 0 {
+        if IPhoneType.shared.iPhoneType() == IPhone.little {
             cell.equipmentLabel.font = UIFont(name: "SFUIDisplay-regular", size: 21)
             cell.equipmentDetail.font = Fonts.tinyElementLight
         } else {

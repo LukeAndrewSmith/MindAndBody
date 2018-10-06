@@ -40,29 +40,36 @@ class IPhoneType {
     static var shared = IPhoneType()
     private init() {}
     
-    func iPhoneType() -> Int {
+    func iPhoneType() -> IPhone {
         // Device
         switch UIDevice.current.userInterfaceIdiom {
         // Phone
         case .phone:
             // 0 == iPhone5
             if UIScreen.main.nativeBounds.height < 1334 {
-                return 0
+                return IPhone.little
             // 2 == iPhoneX
             } else if UIScreen.main.nativeBounds.height == 2436 {
-                return 2
+                return IPhone.big
             // 1 == normal
             } else {
-                return 1
+                return IPhone.average
             }
         // iPad
         case .pad:
-            return 3
+            return IPhone.pad
         // Uh, oh! What could it be?
         default:
-            return 1
+            return IPhone.average
         }
     }
+}
+
+enum IPhone {
+    case average
+    case little
+    case big
+    case pad
 }
 
 // Vibrate
@@ -590,6 +597,48 @@ class BellsFunctions {
         return conversionDict[name]!
     }
 }
+
+// MARK: Update Profile
+class UpdateProfile {
+    
+    static var shared = UpdateProfile()
+    private init() {}
+
+    func checkUpdateProfile() {
+        
+        if let lastResetDate = UserDefaults.standard.object(forKey: "lastProfileUpdateAlert") as? Date {
+            var calendar = Calendar(identifier: .iso8601)
+            calendar.timeZone = TimeZone(abbreviation: "UTC")!
+            if let date = calendar.date(byAdding: .month, value: 1, to: lastResetDate), date <= Date().setToMidnightUTC() {
+                updateProfileAlert()
+            }
+        }
+    }
+    
+    func updateProfileAlert() {
+        // Alert View
+        let title = NSLocalizedString("updateProfileNotificationTitle", comment: "")
+        let message = NSLocalizedString("updateProfileNotificationMessage", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = Colors.dark
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        
+        // Action
+        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            UserDefaults.standard.set(Date().setToMidnightUTC(), forKey: "lastProfileUpdateAlert")
+        }
+        alert.addAction(okAction)
+
+        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+    
+}
+
 //
 // MARK: - Global Function as extensions
 //
@@ -658,7 +707,7 @@ extension UIViewController {
             if fullScreen {
                 backgroundImage.frame = UIScreen.main.bounds
             } else {
-                backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - (ControlBarHeights.statusBarHeight + CGFloat(ControlBarHeights.navigationBarHeight)))
+                backgroundImage.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - (ElementHeights.statusBarHeight + CGFloat(ElementHeights.navigationBarHeight)))
             }
             //
             // Background Image/Colour
@@ -952,6 +1001,7 @@ extension UIViewController {
         highlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
         highlight.layer.borderColor = Colors.light.cgColor
         highlight.layer.borderWidth = 1
+        highlight.isUserInteractionEnabled = false
         
         labelView.frame = CGRect(x: WalkthroughVariables.viewPadding, y: 0, width: view.frame.size.width - 26, height: 0)
         labelView.backgroundColor = Colors.light
@@ -1006,9 +1056,9 @@ extension UIViewController {
             backButton.isUserInteractionEnabled = false
         }
         
+        walkthroughView.addSubview(highlight)
         walkthroughView.addSubview(labelView)
         
-        walkthroughView.addSubview(highlight)
         UIApplication.shared.keyWindow?.insertSubview(walkthroughView, aboveSubview: view)
         return walkthroughView
     }
@@ -1028,14 +1078,9 @@ extension UIViewController {
         walkthroughLabel.sizeToFit()
         switch walkthroughLabelFrame {
         case 0:
-            // Iphone X
-            if IPhoneType.shared.iPhoneType() == 2 {
-                walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13 - ControlBarHeights.homeIndicatorHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
-            } else {
-                walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
-            }
+            walkthroughLabel.frame = CGRect(x: 13, y: view.frame.maxY - walkthroughLabel.frame.size.height - 13 - ElementHeights.bottomSafeAreaInset, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
         case 1:
-            walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + ControlBarHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
+            walkthroughLabel.frame = CGRect(x: 13, y: CGFloat(13) + ElementHeights.statusBarHeight, width: view.frame.size.width - 26, height: walkthroughLabel.frame.size.height)
         default:
             break
         }
@@ -1124,7 +1169,7 @@ extension UIViewController {
         case 1:
             labelView.frame = CGRect(
                 x: 13,
-                y: 13 + ControlBarHeights.combinedHeight,
+                y: 13 + ElementHeights.combinedHeight,
                 width: view.frame.size.width - WalkthroughVariables.twiceViewPadding,
                 height: WalkthroughVariables.topHeight + label.frame.size.height + WalkthroughVariables.twicePadding)
         default:

@@ -59,8 +59,6 @@
 "round4" = "Round 4";
 "round5" = "Round 5";
 
-"sessionStarted" = "Session has begun!";
-
 // MARK: Custom Sessions
 "set" = "set";
 "sets" = "sets";
@@ -208,10 +206,9 @@
 "bodyWeight" = "Body Weight (no equipment)";
 "bodybuilding" = "BodyBuilding/Aesthetics";
 "strength" = "Strength";
-"highIntensity" = "High Intensity";
 
-
-"lowIntensity" = "Low Intensity";
+"highIntensity" = "High Intensity (Fast)";
+"lowIntensity" = "Low Intensity (Slow)";
 
 // Warm Up Screen
 "movement" = "Movement:";
@@ -612,7 +609,6 @@
 "bodyWeight" = "Body Weight (no equipment)";
 "bodybuilding" = "BodyBuilding/Aesthetics";
 "strength" = "Strength";
-"highIntensity" = "High Intensity";
 
 
 
@@ -1214,9 +1210,6 @@
             "presetPractices" = "Preset Practices";
         "practices" = "Practices";
             "customPractices" = "Custom Practices";
-
-            "practiceStarted" = "Practice Began!";
-
 
             // Information //
             "purposeTextYoga" = "";
@@ -3421,8 +3414,11 @@
 
 //
 // MARK: Profile //
-//
-//
+
+"updateProfileNotificationTitle" = "Profile";
+"updateProfileNotificationMessage" = "Make sure the app is still choosing the best sessions for you by checking that your Profile is up to date in the settings tab!";
+
+
 "saveProfile" = "Save Profile";
 "profileNotCompleteWarning" = "You have not answered every question, please go back and answers all unanswered questions";
 

@@ -179,7 +179,7 @@ enum WalkthroughVariables {
 
 //
 // Navigation + Status height ---------------------------------------------------------------------------------------------------------------
-enum ControlBarHeights {
+enum ElementHeights {
     // Shouldn't be hard coded!!!! (but currently not in a view controller so not sure how to access them at run time)
     
     // Navigation bar
@@ -188,8 +188,25 @@ enum ControlBarHeights {
     static let combinedHeight = 44 + UIApplication.shared.statusBarFrame.height
     // Tab bar
     static let tabBarHeight: CGFloat = 49
-    // iPhone 8
-    static let homeIndicatorHeight: CGFloat = 34
+    
+    //
+    static let bottomSafeAreaInset: CGFloat =  {
+        if #available(iOS 11.0, *) {
+            return UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        // Fallback on earlier versions
+        } else {
+            return UIScreen.main.bounds.height
+        }
+    }()
+    
+    static let topSafeAreaInset: CGFloat =  {
+        if #available(iOS 11.0, *) {
+            return UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+            // Fallback on earlier versions
+        } else {
+            return UIScreen.main.bounds.height
+        }
+    }()
 }
 
 //

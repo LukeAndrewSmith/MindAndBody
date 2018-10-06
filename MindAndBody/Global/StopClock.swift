@@ -116,8 +116,8 @@ class StopClock {
     @objc func startTimer() {
         //
         if isPresented {
-            if timerCountDown.isValid {
-                timerCountDown.invalidate()
+            if rowTimer.isValid {
+                rowTimer.invalidate()
             }
             //
             NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
@@ -152,7 +152,7 @@ class StopClock {
                     addCircle()
                     startAnimation()
                 }
-                timerCountDown = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+                rowTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
                 
             }
         }
@@ -170,15 +170,10 @@ class StopClock {
         //
         // Animate
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
-            //
-            // iPhone X
-            if UIScreen.main.nativeBounds.height == 2436 {
-                self.stopClock.frame = CGRect(x: 10, y: UIScreen.main.bounds.height - self.stopClock.bounds.height - 10 - ControlBarHeights.homeIndicatorHeight, width: self.stopClock.bounds.width, height: self.stopClock.bounds.height)
-            } else {
-                self.stopClock.frame = CGRect(x: 10, y: UIScreen.main.bounds.height - self.stopClock.bounds.height - 10, width: self.stopClock.bounds.width, height: self.stopClock.bounds.height)
-            }
-            //
+
+            self.stopClock.frame = CGRect(x: 10, y: UIScreen.main.bounds.height - self.stopClock.bounds.height - 10 - ElementHeights.bottomSafeAreaInset, width: self.stopClock.bounds.width, height: self.stopClock.bounds.height)
             self.stopClockBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            
         }, completion: nil)
     }
     
@@ -205,7 +200,7 @@ class StopClock {
         // Ensure timer cancelled
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["stopClock"])
         didSetEndTime = false
-        timerCountDown.invalidate()
+        rowTimer.invalidate()
         if animationAdded {
             timerShapeLayer.removeAllAnimations()
             timerShapeLayer.removeFromSuperlayer()

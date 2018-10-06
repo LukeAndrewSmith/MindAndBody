@@ -498,7 +498,6 @@
 		07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A381E893E590009C9B1 /* ScheduleScreen.swift */; };
 		07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */; };
 		07A6346F208C999000712EE2 /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6346E208C999000712EE2 /* Equipment.swift */; };
-		07B4E00F1F377E1E00C77807 /* TestBackground.caf in Resources */ = {isa = PBXBuildFile; fileRef = 07B4E00E1F377E1E00C77807 /* TestBackground.caf */; };
 		07B852621F83756C005F3781 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B852611F83756C005F3781 /* ScheduleData.swift */; };
 		07BB1A2F212C463D007C50CD /* FinalChoiceChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB1A2E212C463D007C50CD /* FinalChoiceChoice.swift */; };
 		07BB1A31212CB225007C50CD /* MeditationTimerChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB1A30212CB225007C50CD /* MeditationTimerChoice.swift */; };
@@ -1360,6 +1359,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0702A94A2168F57F00B1B63C /* ForestStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ForestStream.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/ForestStream.caf"; sourceTree = "<group>"; };
+		0702A94B2168F57F00B1B63C /* MountainStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MountainStream.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/MountainStream.caf"; sourceTree = "<group>"; };
+		0702A94C2168F57F00B1B63C /* LakeTiticaca.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LakeTiticaca.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/LakeTiticaca.caf"; sourceTree = "<group>"; };
+		0702A94D2168F57F00B1B63C /* SwissCows.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SwissCows.caf; path = "../../../../../Mind_Body_Sounds/Background Sounds/Cafs/SwissCows.caf"; sourceTree = "<group>"; };
 		07034331213AB74F00FBB8E6 /* ScheduleCreationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationController.swift; sourceTree = "<group>"; };
 		07034334213AB7D900FBB8E6 /* ScheduleCreationPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationPageController.swift; sourceTree = "<group>"; };
 		07038CC51F4C5C2A001CC6D5 /* purpleTree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpleTree.png; sourceTree = "<group>"; };
@@ -1839,7 +1842,6 @@
 		07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioScreen.swift; sourceTree = "<group>"; };
 		07A464231FB88C3F00139DCD /* MindAndBody.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindAndBody.entitlements; sourceTree = "<group>"; };
 		07A6346E208C999000712EE2 /* Equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment.swift; sourceTree = "<group>"; };
-		07B4E00E1F377E1E00C77807 /* TestBackground.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestBackground.caf; sourceTree = "<group>"; };
 		07B852611F83756C005F3781 /* ScheduleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
 		07BB1A2E212C463D007C50CD /* FinalChoiceChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalChoiceChoice.swift; sourceTree = "<group>"; };
 		07BB1A30212CB225007C50CD /* MeditationTimerChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationTimerChoice.swift; sourceTree = "<group>"; };
@@ -2740,7 +2742,8 @@
 			isa = PBXGroup;
 			children = (
 				075A0DB91E8D68800008E014 /* Schedule */,
-				077AC0FD1DA54C0C0026895B /* Choices-Sesssions */,
+				07C45C0221383D200038018A /* Session Choices */,
+				07530C981E96717B00BD33EC /* Session Screens */,
 				075A0DBA1E8D688D0008E014 /* Tracking */,
 				077AC0FE1DA54C500026895B /* Lessons */,
 				07995A371E86A83A0009C9B1 /* Settings */,
@@ -2880,13 +2883,13 @@
 		075A0DB91E8D68800008E014 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				07B852611F83756C005F3781 /* ScheduleData.swift */,
 				07995A381E893E590009C9B1 /* ScheduleScreen.swift */,
 				07686A8C1F84398000C278CC /* Helpers */,
 				07F8EDD81FA5DB4900C452F4 /* Profile Editing */,
 				07D5C3D31F9E31B20038F143 /* Schedule Creation */,
 				07E1D4DD1FB0DDE100B53B85 /* Schedule Editing */,
 				074EF88E215ADEAC00266E5B /* Session Choice */,
-				07B852611F83756C005F3781 /* ScheduleData.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -3598,15 +3601,6 @@
 				077AC0F11DA535840026895B /* MindAndBodyTests.swift */,
 			);
 			path = MindAndBodyTests;
-			sourceTree = "<group>";
-		};
-		077AC0FD1DA54C0C0026895B /* Choices-Sesssions */ = {
-			isa = PBXGroup;
-			children = (
-				07C45C0221383D200038018A /* Session Choices */,
-				07530C981E96717B00BD33EC /* Session Screens */,
-			);
-			path = "Choices-Sesssions";
 			sourceTree = "<group>";
 		};
 		077AC0FE1DA54C500026895B /* Lessons */ = {
@@ -4409,8 +4403,8 @@
 		0798381F1F8A8DDF007C3CF5 /* Time Based */ = {
 			isa = PBXGroup;
 			children = (
-				077206811F90C52000818088 /* TimeBasedHelpers.swift */,
 				0798381D1F8A8DD8007C3CF5 /* TimeBasedSession.swift */,
+				077206811F90C52000818088 /* TimeBasedHelpers.swift */,
 			);
 			path = "Time Based";
 			sourceTree = "<group>";
@@ -4462,7 +4456,10 @@
 		07B4E00B1F3774E500C77807 /* Background Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				07B4E00E1F377E1E00C77807 /* TestBackground.caf */,
+				0702A94A2168F57F00B1B63C /* ForestStream.caf */,
+				0702A94C2168F57F00B1B63C /* LakeTiticaca.caf */,
+				0702A94B2168F57F00B1B63C /* MountainStream.caf */,
+				0702A94D2168F57F00B1B63C /* SwissCows.caf */,
 			);
 			path = "Background Sounds";
 			sourceTree = "<group>";
@@ -7099,7 +7096,6 @@
 				0729FFC31F4D70F50048A355 /* lungeTwist.png in Resources */,
 				07E4604D1F4DB62300A5AF49 /* extendedPuppy3.png in Resources */,
 				07E4643E1F4DDE1300A5AF49 /* burpee5.png in Resources */,
-				07B4E00F1F377E1E00C77807 /* TestBackground.caf in Resources */,
 				072953A31F4ED58400B2F21C /* shoulder@2x.png in Resources */,
 				07702C411F4D9383000E1DB8 /* extendedSideAngleS.png in Resources */,
 				0729539F1F4ED58400B2F21C /* rectus@2x.png in Resources */,

@@ -804,7 +804,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Flash
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.frame = CGRect(x: 8, y: ControlBarHeights.combinedHeight + (cell?.frame.minY)!, width: self.view.bounds.width - 16, height: 44)
+                self.walkthroughHighlight.frame = CGRect(x: 8, y: ElementHeights.combinedHeight + (cell?.frame.minY)!, width: self.view.bounds.width - 16, height: 44)
                 self.walkthroughHighlight.layer.cornerRadius = self.walkthroughHighlight.bounds.height / 4
                 
                 self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(1)
@@ -823,7 +823,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             let cell = tableViewAutomatic.cellForRow(at: IndexPath(row: 1, section: 1))
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
-            highlightCenter = CGPoint(x: (cell?.center.x)!, y: ControlBarHeights.combinedHeight + (cell?.center.y)!)
+            highlightCenter = CGPoint(x: (cell?.center.x)!, y: ElementHeights.combinedHeight + (cell?.center.y)!)
 
             highlightCornerRadius = 2
             
@@ -840,7 +840,7 @@ class YogaAutomatic: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             let cell = tableViewAutomatic.cellForRow(at: IndexPath(row: 2, section: 1))
             highlightSize = CGSize(width: view.bounds.width - 22, height: 44)
-            highlightCenter = CGPoint(x: (cell?.center.x)!, y: ControlBarHeights.combinedHeight + (cell?.center.y)!)
+            highlightCenter = CGPoint(x: (cell?.center.x)!, y: ElementHeights.combinedHeight + (cell?.center.y)!)
             
             highlightCornerRadius = 2
             

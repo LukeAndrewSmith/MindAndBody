@@ -193,6 +193,7 @@
                         <constraints>
                             <constraint firstItem="vci-rP-y7J" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" id="0kT-uF-O1a"/>
                             <constraint firstAttribute="trailing" secondItem="mbq-ii-X2T" secondAttribute="trailing" id="8VV-UW-KwH"/>
+                            <constraint firstItem="mbq-ii-X2T" firstAttribute="top" secondItem="96v-hP-GAm" secondAttribute="top" id="9ia-Eu-roI"/>
                             <constraint firstItem="2mZ-8b-7jP" firstAttribute="top" secondItem="mbq-ii-X2T" secondAttribute="bottom" id="Q5T-n8-7rl"/>
                             <constraint firstItem="2mZ-8b-7jP" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" constant="8" id="QlL-qy-9tv"/>
                             <constraint firstItem="nYW-oD-8ex" firstAttribute="top" secondItem="tlE-Ad-BgG" secondAttribute="bottom" constant="8" id="Qy2-B9-cv0"/>
@@ -201,7 +202,6 @@
                             <constraint firstAttribute="trailing" secondItem="vci-rP-y7J" secondAttribute="trailing" id="e3g-2D-Rdf"/>
                             <constraint firstItem="JGZ-Ex-BjH" firstAttribute="top" secondItem="vci-rP-y7J" secondAttribute="bottom" id="jJr-FP-6ag"/>
                             <constraint firstItem="nYW-oD-8ex" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" constant="8" id="mQ8-TT-4BD"/>
-                            <constraint firstItem="mbq-ii-X2T" firstAttribute="top" secondItem="tlE-Ad-BgG" secondAttribute="bottom" id="xt3-or-lz1"/>
                         </constraints>
                     </view>
                     <connections>

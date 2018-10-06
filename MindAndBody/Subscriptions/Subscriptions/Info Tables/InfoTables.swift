@@ -232,7 +232,7 @@ class InfoTable0: UIViewController, UITableViewDelegate, UITableViewDataSource {
             detailLabel.center = CGPoint(x: infoTable.bounds.width / 2, y: infoTable.bounds.height * (13/18))
             detailLabel.text = "Fitness | Yoga | Meditation"
             // Iphone 5
-            if IPhoneType.shared.iPhoneType() == 0 {
+            if IPhoneType.shared.iPhoneType() == IPhone.little {
                 detailLabel.font = UIFont(name: "SFUIDisplay-thin", size: 24)
             } else {
                 detailLabel.font = UIFont(name: "SFUIDisplay-thin", size: 27)
@@ -256,7 +256,7 @@ class InfoTable0: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let cell = UITableViewCell()
             cell.selectionStyle = .none
             // Iphone 5
-            if IPhoneType.shared.iPhoneType() == 0 {
+            if IPhoneType.shared.iPhoneType() == IPhone.little {
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 24)
             } else {
                 cell.textLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)

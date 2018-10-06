@@ -1217,7 +1217,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             // Flash
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.frame = CGRect(x: 8, y: ControlBarHeights.combinedHeight + (cell?.frame.minY)!, width: self.view.bounds.width - 16, height: 44)
+                self.walkthroughHighlight.frame = CGRect(x: 8, y: ElementHeights.combinedHeight + (cell?.frame.minY)!, width: self.view.bounds.width - 16, height: 44)
                 self.walkthroughHighlight.layer.cornerRadius = self.walkthroughHighlight.bounds.height / 4
                 
                 self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(1)
@@ -1240,7 +1240,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
             highlightCornerRadius = 2
             // iphone5
-            if IPhoneType.shared.iPhoneType() == 0 {
+            if IPhoneType.shared.iPhoneType() == IPhone.little {
                 labelFrame = 1
             } else {
                 labelFrame = 0

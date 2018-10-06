@@ -133,7 +133,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         dayTable.isScrollEnabled = false
         //
         // Iphone 5/SE layout
-        if IPhoneType.shared.iPhoneType() == 0 {
+        if IPhoneType.shared.iPhoneType() == IPhone.little {
             dayTableHeight.constant = 7*38
             createScheduleButtonHeight.constant = 40
         } else {
@@ -153,7 +153,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         draggingLabel.textAlignment = .center
         draggingLabel.font = Fonts.mediumElementRegular
         // Iphone 5/SE layout, smaller text for endurance
-        if IPhoneType.shared.iPhoneType() == 0 {
+        if IPhoneType.shared.iPhoneType() == IPhone.little {
             draggingLabel.font = UIFont(name: "SFUIDisplay-light", size: 18)
         }
         draggingLabel.lineBreakMode = .byWordWrapping
@@ -214,7 +214,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Iphone 5/SE layout, smaller text for endurance
-        if IPhoneType.shared.iPhoneType() == 0 {
+        if IPhoneType.shared.iPhoneType() == IPhone.little {
             return 38
         } else {
             return 44
@@ -228,7 +228,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .none
         //
         // Iphone 5/SE layout
-        if IPhoneType.shared.iPhoneType() == 0 {
+        if IPhoneType.shared.iPhoneType() == IPhone.little {
             // Short names
             cell.dayLabel.text = NSLocalizedString(dayArrayShort[indexPath.row], comment: "")
         } else {
@@ -322,7 +322,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
             bigGroupLabelArray[i].isUserInteractionEnabled = true
             bigGroupLabelArray[i].layer.cornerRadius = 15
             bigGroupLabelArray[i].clipsToBounds = true
-            if IPhoneType.shared.iPhoneType() == 0 {
+            if IPhoneType.shared.iPhoneType() == IPhone.little {
                 bigGroupLabelArray[i].font = UIFont(name: "SFUIDisplay-regular", size: 17)
             } else {
                 bigGroupLabelArray[i].font = Fonts.mediumElementRegular
@@ -989,7 +989,7 @@ class DayCell: UITableViewCell {
     
     override func layoutSubviews() {
         groupLabelArray = [groupLabel0, groupLabel1, groupLabel2, groupLabel3, groupLabel4]
-        if IPhoneType.shared.iPhoneType() == 0 {
+        if IPhoneType.shared.iPhoneType() == IPhone.little {
             top.constant = 4
             bottom.constant = 4
         }

@@ -26,7 +26,13 @@ class LessonsScreen: UIViewController, UIScrollViewDelegate {
     var lesson = ""
     let titleLabel = UILabel()
     let titleImage = UIImageView()
-    let imageHeight: CGFloat = 88 * 2.5
+    let imageHeight: CGFloat = {
+        if IPhoneType.shared.iPhoneType() == IPhone.big {
+            return 88 * 3.5
+        } else {
+            return 88 * 2.5
+        }
+    }()
     
     // View did load
     override func viewDidLoad() {
@@ -495,8 +501,7 @@ class LessonsScreen: UIViewController, UIScrollViewDelegate {
     // MARK: Did scroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let imageHeight: CGFloat = 88 * 2.5
-        let y = scrollView.frame.minY + scrollView.contentOffset.y + imageHeight
+        let y = scrollView.frame.minY + scrollView.contentOffset.y + imageHeight - ElementHeights.topSafeAreaInset
         let labelCenter = imageHeight - (titleLabel.bounds.height / 2) - 8
         if y < 0 {
             titleImage.frame = CGRect(x: 0, y: 0, width: lessonScroll.bounds.width, height: imageHeight - y)

@@ -21,6 +21,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var backButtonTop: NSLayoutConstraint! // Used for animation going back to extra session choice
     
     var cellHeight: CGFloat = 72 // 110 // 88 // 72
+    var headerHeight: CGFloat = 72
     let tableSpacing: CGFloat = 16
     let foregroundColor = Colors.dark
     var scheduleStyle = 0
@@ -67,8 +68,6 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       setupGroupImage()
-        
         choiceTable.tableFooterView = UIView()
         choiceTable.isScrollEnabled = false
         cancelButton.tintColor = Colors.light
@@ -81,15 +80,19 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         if comingFromSchedule {
             UIApplication.shared.isStatusBarHidden = true
+            choiceTable.reloadData()
             comingFromSchedule = false
         } else {
             self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
         
-        if ScheduleVariables.shared.shouldReloadFinalChoice {
-            markAsCompletedAndAnimate()
-        }
+        markAsCompletedAndAnimate()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupGroupImage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,10 +124,12 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             groupImage.contentMode = .scaleAspectFill
             groupImage.clipsToBounds = true
             //
-            if groupImageHeight.constant == 0 {
+            if IPhoneType.shared.iPhoneType() == IPhone.big || IPhoneType.shared.iPhoneType() == IPhone.pad {
+                groupImageHeight.constant = 176 + 44
+            } else {
                 groupImageHeight.constant = 176
-                self.view.layoutIfNeeded()
             }
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -145,8 +150,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        calculateCellHeight()
-        return cellHeight
+        return headerHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -159,12 +163,12 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         titleLabel.textColor = foregroundColor
         titleLabel.text = NSLocalizedString(title, comment: "")
         titleLabel.textAlignment = .center
-        titleLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: cellHeight)
+        titleLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: headerHeight)
         header.addSubview(titleLabel)
         
         // Title Underline
         let separator = CALayer()
-        separator.frame = CGRect(x: 0, y: cellHeight - 1, width: view.bounds.width, height: 1)
+        separator.frame = CGRect(x: 0, y: headerHeight - 1, width: view.bounds.width, height: 1)
         separator.backgroundColor = foregroundColor.cgColor
         separator.opacity = 1
         header.layer.addSublayer(separator)
@@ -175,8 +179,8 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if needsExplanation() {
             
             let explanationButton = UIButton()
-//            explanationButton.frame = CGRect(x: view.bounds.width * (3/4), y: 0, width: view.bounds.width / 4, height: cellHeight)
-            explanationButton.frame = CGRect(x: view.bounds.width - cellHeight, y: 0, width: cellHeight, height: cellHeight)
+//            explanationButton.frame = CGRect(x: view.bounds.width * (3/4), y: 0, width: view.bounds.width / 4, height: headerHeight)
+            explanationButton.frame = CGRect(x: view.bounds.width - headerHeight, y: 0, width: headerHeight, height: headerHeight)
             explanationButton.setImage(#imageLiteral(resourceName: "QuestionMarkMenu"), for: .normal)
             explanationButton.tintColor = foregroundColor
             explanationButton.addTarget(self, action: #selector(presentExplanation), for: .touchUpInside)
@@ -207,9 +211,15 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func calculateCellHeight() {
+        if ScheduleVariables.shared.selectedGroup == Groups.extra {
+            cellHeight = (view.frame.height - 72) / 5
+            UIView.animate(withDuration: 0.1) {
+                self.cancelButtonHeight.constant = self.headerHeight
+                self.view.layoutIfNeeded()
+            }
         // If too many choices, reduce size of cell
-        if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count) * 72) > (choiceTable.bounds.height) {
-            let height = (choiceTable.bounds.height) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress]).count)
+        } else if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count - 1) * 72) > (choiceTable.bounds.height + 72) {
+            let height = (choiceTable.bounds.height - 72) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress]).count - 1)
             cellHeight = height
             UIView.animate(withDuration: 0.1) {
                 self.cancelButtonHeight.constant = height
@@ -220,7 +230,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         } else {
             cellHeight = 72
             UIView.animate(withDuration: 0.1) {
-                self.cancelButtonHeight.constant = 72
+                self.cancelButtonHeight.constant = self.headerHeight
                 self.view.layoutIfNeeded()
             }
         }
@@ -249,7 +259,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Add images if extra session
         if ScheduleVariables.shared.selectedGroup == Groups.extra {
 
-            let gap: CGFloat = 6
+            let gap: CGFloat = 8
             let imageHeight = cellHeight - (2*gap)
             
             choiceLabel.frame = CGRect(x: 16 + imageHeight + 8, y: 0, width: view.bounds.width - 54, height: cellHeight)
