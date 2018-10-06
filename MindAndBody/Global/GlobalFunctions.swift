@@ -609,7 +609,7 @@ class MeditationSounds {
     }
     
     let backgroundSoundsArray: [String] =
-        ["rainStick2S", "LakeTiticaca", "ForestStream", "SwissCows"] // MountainStream
+        ["MountainStream", "LakeTiticaca", "ForestStream", "SwissCows"]
     
     let conversionDictBackgroundSound: [String: UIImage] =
         ["MountainStream": #imageLiteral(resourceName: "MountainStream"),

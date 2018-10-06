@@ -1784,6 +1784,10 @@
 		07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquatTwist.png; sourceTree = "<group>"; };
 		07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tinyFencerStretch.png; sourceTree = "<group>"; };
 		077206811F90C52000818088 /* TimeBasedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedHelpers.swift; sourceTree = "<group>"; };
+		07761EC2216901B600D4473B /* SwissCows.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwissCows.caf; sourceTree = "<group>"; };
+		07761EC3216901B700D4473B /* LakeTiticaca.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LakeTiticaca.caf; sourceTree = "<group>"; };
+		07761EC4216901B700D4473B /* ForestStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ForestStream.caf; sourceTree = "<group>"; };
+		07761EC5216901B700D4473B /* MountainStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MountainStream.caf; sourceTree = "<group>"; };
 		077876221F92A50D005CE68A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0778FAA620A34F390032698A /* StopClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopClock.swift; sourceTree = "<group>"; };
 		0778FAAA20AED8880032698A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -3533,6 +3537,10 @@
 		07761EC12169016000D4473B /* Background Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				07761EC5216901B700D4473B /* MountainStream.caf */,
+				07761EC2216901B600D4473B /* SwissCows.caf */,
+				07761EC4216901B700D4473B /* ForestStream.caf */,
+				07761EC3216901B700D4473B /* LakeTiticaca.caf */,
 			);
 			path = "Background Sounds";
 			sourceTree = "<group>";
