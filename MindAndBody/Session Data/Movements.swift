@@ -103,7 +103,7 @@ extension sessionData {
                     // Isometric (Legs) ---------
                     ["wallSit", "toePress", "staticLunge"],
                     // Isometric (Upper Body)
-                    ["chestSqueeze", "pushupHold", "pullupHold"],
+                    ["pushupHold", "pullupHold"],
                     // Equipment (Ball) ---------
                     ["ballPushup"],
                     // Equipment (Bar)
@@ -140,7 +140,7 @@ extension sessionData {
                     // Pecs
                     ["pecStretch"],
                     // Shoulders
-                    ["shoulderRoll", "behindBackTouch", "frontDelt", "lateralDelt", "rearDeltStretch", "rotatorCuff"],
+                    ["shoulderRoll", "behindBackTouch", "frontDelt", "lateralDelt", "rearDeltStretch"],
                     // Hips and Glutes
                     ["squatHold", "groinStretch", "butterflyPose", "lungeStretch", "threadTheNeedle", "pigeonPose", "seatedGlute"],
                     // calves
@@ -292,7 +292,6 @@ extension sessionData {
                     "frontDelt",
                     "lateralDelt",
                     "rearDeltStretch",
-                    "rotatorCuff",
                     // Hips and Glutes
                     "lungeStretch",
                     "threadTheNeedle",
@@ -357,8 +356,6 @@ extension sessionData {
             ]
     ]
     
-    //
-    //
     // MARK:- Weighted Movements
     static let weightedWorkoutMovements: [String] =
         [
@@ -558,14 +555,14 @@ extension sessionData {
                             "name": ["itBand"],
                             "demonstration": ["itBandFoam", "itBandFoam1", "itBandFoam2", "itBandFoam3", "itBandFoam2", "itBandFoam1"],
                             "explanation": ["itBandEH", "itBandEA", "itBandEF"],
-                            "targetArea": ["calf"]
+                            "targetArea": ["ITBand"]
                     ],
                     "standOnBall":
                         [
                             "name": ["standOnBall"],
                             "demonstration": ["standingOnBall"],
                             "explanation": ["standOnBallEH", "standOnBallEA", "standOnBallEF"],
-                            "targetArea": ["calf"]
+                            "targetArea": ["foot"]
                     ],
                     // Glutes
                     "gluteBridgewW":
@@ -573,7 +570,7 @@ extension sessionData {
                             "name": ["gluteBridgewW"],
                             "demonstration": ["gluteBridgeW", "gluteBridgeW1", "gluteBridgeW2", "gluteBridgeW3", "gluteBridgeW3", "gluteBridgeW2", "gluteBridgeW1", "gluteBridgeW2", "gluteBridgeW3", "gluteBridgeW3", "gluteBridgeW2", "gluteBridgeW1"],
                             "explanation": ["gluteBridgewWEH", "gluteBridgewWEA", "gluteBridgewWEF"],
-                            "targetArea": ["glute"]
+                            "targetArea": ["hamstringGlute"]
                     ], ///
                     "kneelingKickBackW":
                         [
@@ -652,7 +649,7 @@ extension sessionData {
                             "name": ["upperBackRotation"],
                             "demonstration": ["upperBackRotation", "upperBackRotation1", "upperBackRotation2", "upperBackRotation1", "upperBackRotation", "upperBackRotation1", "upperBackRotation2", "upperBackRotation1"],
                             "explanation": ["upperBackRotationEH", "upperBackRotationEA", "upperBackRotationEF"],
-                            "targetArea": ["upperBackShoulder"]
+                            "targetArea": ["backShoulder"]
                     ], ///
                     "latStretch":
                         [
@@ -667,28 +664,28 @@ extension sessionData {
                             "name": ["wallSlides"],
                             "demonstration": ["wallSlides", "wallSlides1", "wallSlides2", "wallSlides1", "wallSlides", "wallSlides1", "wallSlides2", "wallSlides1"],
                             "explanation": ["wallSlidesEH", "wallSlidesEA", "wallSlidesEF"],
-                            "targetArea": ["shouler"]
+                            "targetArea": ["shoulder"]
                     ],
                     "wallReaches":
                         [
                             "name": ["wallReaches"],
                             "demonstration": ["wallReaches", "wallReaches1", "wallReaches2", "wallReaches1", "wallReaches", "wallReaches1", "wallReaches2", "wallReaches1"],
                             "explanation": ["wallReachesEH", "wallReachesEA", "wallReachesEF"],
-                            "targetArea": ["shouler"]
+                            "targetArea": ["shoulder"]
                     ],
                     "shoulderRotationW":
                         [
                             "name": ["shoulderRotationW"],
                             "demonstration": ["shoulderRotationW", "shoulderRotationW1", "shoulderRotationW2", "shoulderRotationW1", "shoulderRotationW", "shoulderRotationW1", "shoulderRotationW2", "shoulderRotationW1"],
                             "explanation": ["shoulderRotationWEH", "shoulderRotationWEA", "shoulderRotationWEF"],
-                            "targetArea": ["shouler"]
+                            "targetArea": ["shoulder"]
                     ],
                     "forearmWallSlides135":
                         [
                             "name": ["forearmWallSlides135"],
                             "demonstration": ["forearmWallSlides135", "forearmWallSlides1351", "forearmWallSlides1352", "forearmWallSlides1351", "forearmWallSlides135", "forearmWallSlides1351", "forearmWallSlides1352", "forearmWallSlides1351"],
                             "explanation": ["forearmWallSlides135EH", "forearmWallSlides135EA", "forearmWallSlides135EF"],
-                            "targetArea": ["shouler"]
+                            "targetArea": ["shoulder"]
                     ],
                     "superManShoulder":
                         [
@@ -710,14 +707,14 @@ extension sessionData {
                             "name": ["externalRotation"],
                             "demonstration": ["externalRotation", "externalRotation1", "externalRotation2", "externalRotation3", "externalRotation4", "externalRotation4", "externalRotation3", "externalRotation2", "externalRotation1"],
                             "explanation": ["externalRotationEH", "externalRotationEA", "externalRotationEF"],
-                            "targetArea": ["rearDelt"]
+                            "targetArea": ["shoulderJoint"]
                     ],
                     "internalRotation":
                         [
                             "name": ["internalRotation"],
                             "demonstration": ["internalRotation", "internalRotation1", "internalRotation2", "internalRotation3", "internalRotation4", "internalRotation4", "internalRotation3", "internalRotation2", "internalRotation1"],
                             "explanation": ["internalRotationEH", "internalRotationEA", "internalRotationEF"],
-                            "targetArea": ["rearDelt"]
+                            "targetArea": ["shoulderJoint"]
                     ],
                     "shoulderDislocation":
                         [
@@ -739,63 +736,63 @@ extension sessionData {
                             "name": ["seatedKneeDrop"],
                             "demonstration": ["seatedKneeDrop", "seatedKneeDrop1", "seatedKneeDrop2", "seatedKneeDrop3", "seatedKneeDrop4", "seatedKneeDrop3", "seatedKneeDrop2", "seatedKneeDrop1"],
                             "explanation": ["seatedKneeDropEH", "seatedKneeDropEA", "seatedKneeDropEF"],
-                            "targetArea": ["hipArea"]
+                            "targetArea": ["hip"]
                     ], ///
                     "mountainClimber":
                         [
                             "name": ["mountainClimber"],
                             "demonstration": ["mountainClimber", "mountainClimber3", "mountainClimber2", "mountainClimber1", "mountainClimber2", "mountainClimber3", "mountainClimber4", "mountainClimber5", "mountainClimber4", "mountainClimber3"],
                             "explanation": ["mountainClimberEH", "mountainClimberEA", "mountainClimberEF"],
-                            "targetArea": ["hipArea"]
+                            "targetArea": ["core"]
                     ],
                     "groinStretch":
                         [
                             "name": ["groinStretch"],
                             "demonstration": ["groinStretch"],
                             "explanation": ["groinStretchEH", "groinStretchEA", "groinStretchEF"],
-                            "targetArea": ["quadHamstringGluteStretch"]
+                            "targetArea": ["adductor"]
                     ],
                     "threadTheNeedle":
                         [
                             "name": ["threadTheNeedle"],
                             "demonstration": ["threadTheNeedleS"],
                             "explanation": ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"],
-                            "targetArea": ["adductor"]
+                            "targetArea": ["glute"]
                     ],
                     "butterflyPose":
                         [
                             "name": ["butterflyPose"],
                             "demonstration": ["butterflyPoseS"],
                             "explanation": ["butterflyPoseEH", "butterflyPoseEA", "butterflyPoseEF"],
-                            "targetArea": ["hamstringLowerBack"]
+                            "targetArea": ["adductor"]
                     ],
                     "cossakSquat":
                         [
                             "name": ["cossakSquat"],
                             "demonstration": ["cossakSquat", "cossakSquat4", "cossakSquat1", "cossakSquat2", "cossakSquat3", "cossakSquat2", "cossakSquat1", "cossakSquat4", "cossakSquat5", "cossakSquat6", "cossakSquat7", "cossakSquat6", "cossakSquat5", "cossakSquat4"],
                             "explanation": ["cossakSquatEH", "cossakSquatEA", "cossakSquatEF"],
-                            "targetArea": ["piriformis"]
+                            "targetArea": ["squatBody"]
                     ],
                     "hipHinges":
                         [
                             "name": ["hipHinges"],
                             "demonstration": ["hipHinges", "hipHinges1", "hipHinges2", "hipHinges3", "hipHinges4", "hipHinges4", "hipHinges3", "hipHinges2", "hipHinges1", "hipHinges1"],
                             "explanation": ["hipHingesEH", "hipHingesEA", "hipHingesEF"],
-                            "targetArea": ["adductor"]
+                            "targetArea": ["hamstringLowerBack"]
                     ],
                     "lungeTwist":
                         [
                             "name": ["lungeTwist"],
                             "demonstration": ["lungeTwist", "lungeTwist1", "lungeTwist2", "lungeTwist3", "lungeTwist4", "lungeTwist5", "lungeTwist6", "lungeTwist5", "lungeTwist4", "lungeTwist7", "lungeTwist8", "lungeTwist9", "lungeTwist10", "lungeTwist11", "lungeTwist12", "lungeTwist13", "lungeTwist12", "lungeTwist11", "lungeTwist14", "lungeTwist15"],
                             "explanation": ["lungeTwistEH", "lungeTwistEA", "lungeTwistEF"],
-                            "targetArea": ["quadHamstringGluteStretch"]
+                            "targetArea": ["squatBody"]
                     ],
                     "sideLegSwings":
                         [
                             "name": ["sideLegSwings"],
                             "demonstration": ["sideLegSwings", "sideLegSwings1", "sideLegSwings2", "sideLegSwings3", "sideLegSwings4", "sideLegSwings3", "sideLegSwings2", "sideLegSwings1", "sideLegSwings5", "sideLegSwings1", "sideLegSwings2", "sideLegSwings3", "sideLegSwings4"],
                             "explanation": ["sideLegSwingsEH", "sideLegSwingsEA", "sideLegSwingsEF"],
-                            "targetArea": ["hamstringGlute"]
+                            "targetArea": ["quadHamstringGluteStretch"]
                     ],
                     "frontLegSwings":
                         [
@@ -964,14 +961,14 @@ extension sessionData {
                         "name": ["legCurl"],
                         "demonstration": ["legCurl", "legCurl1", "legCurl2", "legCurl3", "legCurl2", "legCurl1"],
                         "explanation": ["legCurlEH", "legCurlEA", "legCurlEF"],
-                        "targetArea": ["deadliftBody"]
+                        "targetArea": ["hamstring"]
                 ],
                 "oneLeggedDeadlift":
                     [
                         "name": ["oneLeggedDeadlift"],
                         "demonstration": ["oneLeggedDeadlift", "oneLeggedDeadlift1", "oneLeggedDeadlift2", "oneLeggedDeadlift3", "oneLeggedDeadlift4", "oneLeggedDeadlift3", "oneLeggedDeadlift2", "oneLeggedDeadlift1"],
                         "explanation": ["oneLeggedDeadliftEH", "oneLeggedDeadliftEA", "oneLeggedDeadliftEF"],
-                        "targetArea": ["rearThigh"]
+                        "targetArea": ["deadliftBody"]
                 ],
                 // Legs (General)
                 "lungeDumbell":
@@ -1044,7 +1041,7 @@ extension sessionData {
                         "name": ["rowMachine"],
                         "demonstration": ["rowMachine", "rowMachine1", "rowMachine2", "rowMachine3", "rowMachine4", "rowMachine4", "rowMachine3", "rowMachine2", "rowMachine1"],
                         "explanation": ["rowMachineEH", "rowMachineEA", "rowMachineEF"],
-                        "targetArea": ["backBicepErector"]
+                        "targetArea": ["backBicep"]
                 ],
                 "latPullover":
                     [
@@ -1169,7 +1166,7 @@ extension sessionData {
                         "name": ["dips"],
                         "demonstration": ["dips", "dips1", "dips", "dips1"],
                         "explanation": ["dipsEH", "dipsEA", "dipsEF"],
-                        "targetArea": ["pecFrontDelt"]
+                        "targetArea": ["chestFrontDeltTricep"]
                 ],
                 // Push (Shoulders)
                 "standingShoulderPressBarbell":
@@ -1316,14 +1313,14 @@ extension sessionData {
                         "name": ["kickBack"],
                         "demonstration": ["kneelingHipRotations", "kneelingHipRotations8", "kneelingHipRotations9", "kneelingHipRotations10", "kneelingHipRotations10", "kneelingHipRotations9", "kneelingHipRotations8"],
                         "explanation": ["kickBackEH", "kickBackEA", "kickBackEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["glute"]
                 ],
                 "standingKickBack":
                     [
                         "name": ["standingKickBack"],
                         "demonstration": ["standingGluteKickback", "standingGluteKickback1", "standingGluteKickback2", "standingGluteKickback3", "standingGluteKickback3", "standingGluteKickback2", "standingGluteKickback1"],
                         "explanation": ["standingKickBackEH", "standingKickBackEA", "standingKickBackEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["glute"]
                 ],
                 // Legs (calves)
                 "calfRaise":
@@ -1331,7 +1328,7 @@ extension sessionData {
                         "name": ["calfRaise"],
                         "demonstration": ["calfRaise", "calfRaise1", "calfRaise", "calfRaise1"],
                         "explanation": ["calfRaiseEH", "calfRaiseEA", "calfRaiseEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["calf"]
                 ],
                 // Pull (Back) ---------
                 "contralateralLimbRaises":
@@ -1339,35 +1336,35 @@ extension sessionData {
                         "name": ["contralateralLimbRaises"],
                         "demonstration": ["contralateralLimbRaises", "contralateralLimbRaises1", "contralateralLimbRaises2", "contralateralLimbRaises3", "contralateralLimbRaises3", "contralateralLimbRaises2", "contralateralLimbRaises1", "contralateralLimbRaises4", "contralateralLimbRaises5", "contralateralLimbRaises5", "contralateralLimbRaises4", "contralateralLimbRaises1"],
                         "explanation": ["contralateralLimbRaisesEH", "contralateralLimbRaisesEA", "contralateralLimbRaisesEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["backGlute"]
                 ],
                 "superMan":
                     [
                         "name": ["superMan"],
                         "demonstration": ["superMan"],
                         "explanation": ["superManEH", "superManEA", "superManEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["backGlute"]
                 ],
                 "backHyperextension":
                     [
                         "name": ["backHyperextension"],
                         "demonstration": ["backHyperextension", "backHyperextension1", "backHyperextension2", "backHyperextension3", "backHyperextension4", "backHyperextension4", "backHyperextension3", "backHyperextension2", "backHyperextension1"],
                         "explanation": ["backHyperextensionEH", "backHyperextensionEA", "backHyperextensionEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["backGlute"]
                 ],
                 "doorFrameRow":
                     [
                         "name": ["doorFrameRow"],
                         "demonstration": ["doorFrameRow", "doorFrameRow1", "doorFrameRow2", "doorFrameRow2", "doorFrameRow1"],
                         "explanation": ["doorFrameRowEH", "doorFrameRowEA", "doorFrameRowEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["backBicep"]
                 ],
                 "reverseSnowAngels":
                     [
                         "name": ["reverseSnowAngels"],
                         "demonstration": ["reverseSnowAngels", "reverseSnowAngels1", "reverseSnowAngels2", "reverseSnowAngels3", "reverseSnowAngels4", "reverseSnowAngels4", "reverseSnowAngels3", "reverseSnowAngels2", "reverseSnowAngels1"],
                         "explanation": ["reverseSnowAngelsEH", "reverseSnowAngelsEA", "reverseSnowAngelsEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["backGlute"]
                 ],
                 // Pull (Traps)
                 "handStandTrap":
@@ -1375,7 +1372,7 @@ extension sessionData {
                         "name": ["handStandTrap"],
                         "demonstration": ["handStandTrap", "handStandTrap1", "handStandTrap", "handStandTrap1"],
                         "explanation": ["handStandTrapEH", "handStandTrapEA", "handStandTrapEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["trap"]
                 ],
                 // Push (Chest) ---------
                 "pushup":
@@ -1383,7 +1380,7 @@ extension sessionData {
                         "name": ["pushup"],
                         "demonstration": ["pushUp", "pushUp1", "pushUp2", "pushUp3", "pushUp4", "pushUp4", "pushUp3", "pushUp2", "pushUp1"],
                         "explanation": ["pushupEH", "pushupEA", "pushupEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["chestFrontDeltTricep"]
                 ],
                 // Push (Tricep)
                 "trianglePushup":
@@ -1391,21 +1388,21 @@ extension sessionData {
                         "name": ["trianglePushup"],
                         "demonstration": ["trianglePushup", "trianglePushup1", "trianglePushup2", "trianglePushup3", "trianglePushup4", "trianglePushup4", "trianglePushup3", "trianglePushup2", "trianglePushup1"],
                         "explanation": ["trianglePushupEH", "trianglePushupEA", "trianglePushupEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "dolphinPushup":
                     [
                         "name": ["dolphinPushup"],
                         "demonstration": ["dolphinPushup", "dolphinPushup1", "dolphinPushup2", "dolphinPushup3", "dolphinPushup4", "dolphinPushup3", "dolphinPushup2", "dolphinPushup1"],
                         "explanation": ["dolphinPushupEH", "dolphinPushupEA", "dolphinPushupEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "tricepExtensionsBodyweight":
                     [
                         "name": ["tricepExtensionsBodyweight"],
                         "demonstration": ["tricepExtensionsBodyweight", "tricepExtensionsBodyweight1", "tricepExtensionsBodyweight", "tricepExtensionsBodyweight1"],
                         "explanation": ["tricepExtensionsBodyweightEH", "tricepExtensionsBodyweightEA", "tricepExtensionsBodyweightEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["tricep"]
                 ],
                 // Push (Chest & Tricep)
                 "walkingPushup":
@@ -1413,7 +1410,7 @@ extension sessionData {
                         "name": ["walkingPushup"],
                         "demonstration": ["walkingPushup", "walkingPushup1", "walkingPushup2", "walkingPushup1", "walkingPushup3", "walkingPushup4", "walkingPushup5", "walkingPushup4", "walkingPushup3", "walkingPushup1", "walkingPushup2", "walkingPushup1", "walkingPushup6", "walkingPushup7", "walkingPushup8", "walkingPushup7", "walkingPushup6", "walkingPushup1", "walkingPushup2", "walkingPushup1"],
                         "explanation": ["walkingPushupEH", "walkingPushupEA", "walkingPushupEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["chestFrontDeltTricep"]
                 ],
                 // Push (Shoulder)
                 "downwardDogPushup":
@@ -1421,28 +1418,28 @@ extension sessionData {
                         "name": ["downwardDogPushup"],
                         "demonstration": ["downwardDogPushup", "downwardDogPushup1", "downwardDogPushup2", "downwardDogPushup3", "downwardDogPushup4", "downwardDogPushup5", "downwardDogPushup6", "downwardDogPushup7", "downwardDogPushup8", "downwardDogPushup1"],
                         "explanation": ["downwardDogPushupEH", "downwardDogPushupEA", "downwardDogPushupEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "wallPushup":
                     [
                         "name": ["wallPushup"],
                         "demonstration": ["handStandTrap1"],
                         "explanation": ["wallPushupEH", "wallPushupEA", "wallPushupEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "boxer":
                     [
                         "name": ["boxer"],
                         "demonstration": ["boxer2", "boxer", "boxer1", "boxer2", "boxer1", "boxer", "boxer3", "boxer4", "boxer3", "boxer1"],
                         "explanation": ["boxerEH", "boxerEA", "boxerEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["rearDelt"]
                 ],
                 "armCircles":
                     [
                         "name": ["armCircles"],
                         "demonstration": ["armCircles"],
                         "explanation": ["armCirclesEH", "armCirclesEA", "armCirclesEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["shoulder"]
                 ],
                 // Core ---------
                 "plank":
@@ -1450,28 +1447,28 @@ extension sessionData {
                         "name": ["plank"],
                         "demonstration": ["plank"],
                         "explanation": ["plankEH", "plankEA", "plankEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["core"]
                 ],
                 "dynamicPlank":
                     [
                         "name": ["dynamicPlank"],
                         "demonstration": ["dynamicPlank", "dynamicPlank1", "dynamicPlank", "dynamicPlank1"],
                         "explanation": ["dynamicPlankEH", "dynamicPlankEA", "dynamicPlankEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["core"]
                 ],
                 "sidePlankW":
                     [
                         "name": ["sidePlankW"],
                         "demonstration": ["sidePlankW"],
                         "explanation": ["sidePlankWEH", "sidePlankWEA", "sidePlankWEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["core"]
                 ],
                 "pushupPlank":
                     [
                         "name": ["pushupPlank"],
                         "demonstration": ["pushupPlank"],
                         "explanation": ["pushupPlankEH", "pushupPlankEA", "pushupPlankEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["core"]
                 ],
                 "lSit":
                     [
@@ -1485,28 +1482,28 @@ extension sessionData {
                         "name": ["bicycleCrunch"],
                         "demonstration": ["bicycleCrunch", "bicycleCrunch1", "bicycleCrunch2", "bicycleCrunch3", "bicycleCrunch4", "bicycleCrunch3", "bicycleCrunch2", "bicycleCrunch1"],
                         "explanation": ["bicycleCrunchEH", "bicycleCrunchEA", "bicycleCrunchEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["core"]
                 ],
                 "divingHold":
                     [
                         "name": ["divingHold"],
                         "demonstration": ["divingHold"],
                         "explanation": ["divingHoldEH", "divingHoldEA", "divingHoldEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["core"]
                 ],
                 "hipRaise":
                     [
                         "name": ["hipRaise"],
                         "demonstration": ["hipRaise", "hipRaise1", "hipRaise", "hipRaise1"],
                         "explanation": ["hipRaiseEH", "hipRaiseEA", "hipRaiseEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["core"]
                 ],
                 "legHold":
                     [
                         "name": ["legHold"],
                         "demonstration": ["legHold"],
                         "explanation": ["legHoldEH", "legHoldEA", "legHoldEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["core"]
                 ],
                 "sideLegDrop":
                     [
@@ -1521,7 +1518,7 @@ extension sessionData {
                         "name": ["mountainClimbers"],
                         "demonstration": ["mountainClimber", "mountainClimber3", "mountainClimber2", "mountainClimber1", "mountainClimber2", "mountainClimber3", "mountainClimber4", "mountainClimber5", "mountainClimber4", "mountainClimber3"],
                         "explanation": ["mountainClimbersEH", "mountainClimbersEA", "mountainClimbersEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["core"]
                 ],
                 // General (Full Body)
                 "burpee":
@@ -1544,7 +1541,7 @@ extension sessionData {
                         "name": ["spiderPushup"],
                         "demonstration": ["spiderPushup4", "spiderPushup", "spiderPushup1", "spiderPushup2", "spiderPushup3", "spiderPushup4", "spiderPushup3", "spiderPushup2", "spiderPushup1", "spiderPushup", "spiderPushup1", "spiderPushup2", "spiderPushup5", "spiderPushup6", "spiderPushup5", "spiderPushup2", "spiderPushup1", "spiderPushup"],
                         "explanation": ["spiderPushupEH", "spiderPushupEA", "spiderPushupEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "crabWalk":
                     [
@@ -1595,7 +1592,7 @@ extension sessionData {
                         "name": ["toePress"],
                         "demonstration": ["toePress"],
                         "explanation": ["toePressEH", "toePressEA", "toePressEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["adductor"]
                 ],
                 "staticLunge":
                     [
@@ -1605,26 +1602,19 @@ extension sessionData {
                         "targetArea": ["squatBody"]
                 ],
                 // Isometric (Upper Body)
-                "chestSqueeze":
-                    [
-                        "name": ["chestSqueeze"],
-                        "demonstration": ["chestSqueeze"],
-                        "explanation": ["chestSqueezeEH", "chestSqueezeEA", "chestSqueezeEF"],
-                        "targetArea": ["squatBody"]
-                ],
                 "pushupHold":
                     [
                         "name": ["pushupHold"],
                         "demonstration": ["pushupHold"],
                         "explanation": ["pushupHoldEH", "pushupHoldEA", "pushupHoldEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "pullupHold":
                     [
                         "name": ["pullupHold"],
                         "demonstration": ["pullUp"],
                         "explanation": ["pullupHoldEH", "pullupHoldEA", "pullupHoldEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["backBicep"]
                 ],
                 // Equipment (Ball) ---------
                 "ballPushup":
@@ -1632,7 +1622,7 @@ extension sessionData {
                         "name": ["ballPushup"],
                         "demonstration": ["ballPushup", "ballPushup1", "ballPushup", "ballPushup1"],
                         "explanation": ["ballPushupEH", "ballPushupEA", "ballPushupEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["chestFrontDeltTricep"]
                 ],
                 // Equipment (Bar)
                 "bodyweightRow":
@@ -1640,21 +1630,21 @@ extension sessionData {
                         "name": ["bodyweightRow"],
                         "demonstration": ["bodyweightRow", "bodyweightRow1", "bodyweightRow", "bodyweightRow1"],
                         "explanation": ["bodyweightRowEH", "bodyweightRowEA", "bodyweightRowEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["backBicep"]
                 ],
                 "pullup":
                     [
                         "name": ["pullup"],
                         "demonstration": ["pullUp", "pullUp1", "pullUp2", "pullUp3", "pullUp4", "pullUp4", "pullUp3", "pullUp2", "pullUp1"],
                         "explanation": ["pullupEH", "pullupEA", "pullupEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["backBicep"]
                 ],
                 "hangingLegRaise":
                     [
                         "name": ["hangingLegRaise"],
                         "demonstration": ["hangingLegRaises", "hangingLegRaises1", "hangingLegRaises2", "hangingLegRaises3", "hangingLegRaises4", "hangingLegRaises3", "hangingLegRaises2", "hangingLegRaises1"],
                         "explanation": ["hangingLegRaiseEH", "hangingLegRaiseEA", "hangingLegRaiseEF"],
-                        "targetArea": ["squatBody"]
+                        "targetArea": ["core"]
                 ],
                 // Equipment (Bench/Step)
                 "bodyweightBulgarianSplitSquat":
@@ -1956,14 +1946,14 @@ extension sessionData {
                         "name": ["itBand"],
                         "demonstration": ["itBandFoam", "itBandFoam1", "itBandFoam2", "itBandFoam3", "itBandFoam2", "itBandFoam1"],
                         "explanation": ["itBandEH", "itBandEA", "itBandEF"],
-                        "targetArea": ["calf"]
+                        "targetArea": ["ITBand"]
                 ],
                 "standOnBall":
                     [
                         "name": ["standOnBall"],
                         "demonstration": ["standingOnBall"],
                         "explanation": ["standOnBallEH", "standOnBallEA", "standOnBallEF"],
-                        "targetArea": ["calf"]
+                        "targetArea": ["foot"]
                 ],
                 // Back
                 "catCow":
@@ -1978,21 +1968,21 @@ extension sessionData {
                         "name": ["upwardsDog"],
                         "demonstration": ["upwardsDogS"],
                         "explanation": ["upwardsDogEH", "upwardsDogEA", "upwardsDogEF"],
-                        "targetArea": ["spineCore"]
+                        "targetArea": ["core"]
                 ],
                 "extendedPuppy":
                     [
                         "name": ["extendedPuppy"],
                         "demonstration": ["extendedPuppyS"],
                         "explanation": ["extendedPuppyEH", "extendedPuppyEA", "extendedPuppyEF"],
-                        "targetArea": ["spine"]
+                        "targetArea": ["spineCore"]
                 ],
                 "childPose":
                     [
                         "name": ["childPose"],
                         "demonstration": ["childPoseS"],
                         "explanation": ["childPoseEH", "childPoseEA", "childPoseEF"],
-                        "targetArea": ["spine"]
+                        "targetArea": ["backGlute"]
                 ],
                 "staffPose":
                     [
@@ -2013,7 +2003,7 @@ extension sessionData {
                         "name": ["kneeToChest"],
                         "demonstration": ["kneeToChest"],
                         "explanation": ["kneeToChestEH", "kneeToChestEA", "kneeToChestEF"],
-                        "targetArea": ["spine"]
+                        "targetArea": ["hipArea"]
                 ],
                 "legDrop":
                     [
@@ -2049,14 +2039,14 @@ extension sessionData {
                         "name": ["extendedSideAngle"],
                         "demonstration": ["extendedSideAngleS"],
                         "explanation": ["extendedSideAngleEH", "extendedSideAngleEA", "extendedSideAngleEF"],
-                        "targetArea": ["oblique"]
+                        "targetArea": ["extendedSide"]
                 ],
                 "seatedSide":
                     [
                         "name": ["seatedSide"],
                         "demonstration": ["seatedSide"],
                         "explanation": ["seatedSideEH", "seatedSideEA", "seatedSideEF"],
-                        "targetArea": ["oblique"]
+                        "targetArea": ["hamstringGlute"]
                 ],
                 // Neck
                 "rearNeck":
@@ -2158,20 +2148,13 @@ extension sessionData {
                         "name": ["lateralDelt"],
                         "demonstration": ["lateralDeltStretch"],
                         "explanation": ["lateralDeltEH", "lateralDeltEA", "lateralDeltEF"],
-                        "targetArea": ["lateralNeck"]
+                        "targetArea": ["lateralDelt"]
                 ],
                 "rearDeltStretch":
                     [
                         "name": ["rearDelt"],
                         "demonstration": ["rearDeltStretch"],
                         "explanation": ["rearDeltEH", "rearDeltEA", "rearDeltEF"],
-                        "targetArea": ["rearDelt"]
-                ],
-                "rotatorCuff":
-                    [
-                        "name": ["rotatorCuff"],
-                        "demonstration": ["rotatorCuff"],
-                        "explanation": ["rotatorCuffEH", "rotatorCuffEA", "rotatorCuffEF"],
                         "targetArea": ["rearDelt"]
                 ],
                 // Hips and Glutes
@@ -2208,7 +2191,7 @@ extension sessionData {
                         "name": ["threadTheNeedle"],
                         "demonstration": ["threadTheNeedleS"],
                         "explanation": ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"],
-                        "targetArea": ["piriformis"]
+                        "targetArea": ["glute"]
                 ],
                 "pigeonPose":
                     [
@@ -2317,181 +2300,181 @@ extension sessionData {
                 "treeL":
                     [
                         "name": ["treeL"],
-                        "demonstration": ["tree", "tree1", "tree2", "tree3", "tree4", "tree5", "tree6"],
+                        "demonstration": ["tree"], // "tree1", "tree2", "tree3", "tree4", "tree5", "tree6"],
                         "explanation": ["treeEH", "treeEA", "treeEF"],
                 ], //
                 "treeR":
                     [
                         "name": ["treeR"],
-                        "demonstration": ["tree", "tree1", "tree2", "tree3", "tree4", "tree5", "tree6"],
+                        "demonstration": ["tree"], //, "tree1", "tree2", "tree3", "tree4", "tree5", "tree6"],
                         "explanation": ["treeEH", "treeEA", "treeEF"],
                 ],
                 "extendedToeGrabL":
                     [
                         "name": ["extendedToeGrabL"],
-                        "demonstration": ["extendedToeGrab", "extendedToeGrab1", "extendedToeGrab2", "extendedToeGrab3", "extendedToeGrab4", "extendedToeGrab5"],
+                        "demonstration": ["extendedToeGrab"],// "extendedToeGrab1", "extendedToeGrab2", "extendedToeGrab3", "extendedToeGrab4", "extendedToeGrab5"],
                         "explanation": ["extendedToeGrabEH", "extendedToeGrabEA", "extendedToeGrabEF"],
                 ], //
                 "extendedToeGrabR":
                     [
                         "name": ["extendedToeGrabR"],
-                        "demonstration": ["extendedToeGrab", "extendedToeGrab1", "extendedToeGrab2", "extendedToeGrab3", "extendedToeGrab4", "extendedToeGrab5"],
+                        "demonstration": ["extendedToeGrab"],// "extendedToeGrab1", "extendedToeGrab2", "extendedToeGrab3", "extendedToeGrab4", "extendedToeGrab5"],
                         "explanation": ["extendedToeGrabEH", "extendedToeGrabEA", "extendedToeGrabEF"],
                 ],
                 "eagleL":
                     [
                         "name": ["eagleL"],
-                        "demonstration": ["eagle", "eagle1", "eagle2", "eagle3", "eagle4", "eagle5", "eagle6", "eagle7"],
+                        "demonstration": ["eagle"], // "eagle1", "eagle2", "eagle3", "eagle4", "eagle5", "eagle6", "eagle7"],
                         "explanation": ["eagleEH", "eagleEA", "eagleEF"],
                 ], //
                 "eagleR":
                     [
                         "name": ["eagleR"],
-                        "demonstration": ["eagle", "eagle1", "eagle2", "eagle3", "eagle4", "eagle5", "eagle6", "eagle7"],
+                        "demonstration": ["eagle"], // "eagle1", "eagle2", "eagle3", "eagle4", "eagle5", "eagle6", "eagle7"],
                         "explanation": ["eagleEH", "eagleEA", "eagleEF"],
                 ],
                 "chair":
                     [
                         "name": ["chair"],
-                        "demonstration": ["chair", "chair1", "chair2", "chair3", "chair4", "chair5"],
+                        "demonstration": ["chair"], // "chair1", "chair2", "chair3", "chair4", "chair5"],
                         "explanation": ["chairEH", "chairEA", "chairEF"],
                 ],
                 "lordOfDanceL":
                     [
                         "name": ["lordOfDanceL"],
-                        "demonstration": ["lordOfDance", "lordOfDance1", "lordOfDance2", "lordOfDance3", "lordOfDance4", "lordOfDance5", "lordOfDance6", "lordOfDance7"],
+                        "demonstration": ["lordOfDance"], // "lordOfDance1", "lordOfDance2", "lordOfDance3", "lordOfDance4", "lordOfDance5", "lordOfDance6", "lordOfDance7"],
                         "explanation": ["lordOfDanceEH", "lordOfDanceEA", "lordOfDanceEF"],
                 ], //
                 "lordOfDanceR":
                     [
                         "name": ["lordOfDanceR"],
-                        "demonstration": ["lordOfDance", "lordOfDance1", "lordOfDance2", "lordOfDance3", "lordOfDance4", "lordOfDance5", "lordOfDance6", "lordOfDance7"],
+                        "demonstration": ["lordOfDance"], // "lordOfDance1", "lordOfDance2", "lordOfDance3", "lordOfDance4", "lordOfDance5", "lordOfDance6", "lordOfDance7"],
                         "explanation": ["lordOfDanceEH", "lordOfDanceEA", "lordOfDanceEF"],
                 ],
                 "warrior1L":
                     [
                         "name": ["warrior1L"],
-                        "demonstration": ["warrior1", "warrior11", "warrior12", "warrior13", "warrior14", "warrior15"],
+                        "demonstration": ["warrior1"], // "warrior11", "warrior12", "warrior13", "warrior14", "warrior15"],
                         "explanation": ["warrior1EH", "warrior1EA", "warrior1EF"],
                 ], //
                 "warrior1R":
                     [
                         "name": ["warrior1R"],
-                        "demonstration": ["warrior1", "warrior11", "warrior12", "warrior13", "warrior14", "warrior15"],
+                        "demonstration": ["warrior1"], // "warrior11", "warrior12", "warrior13", "warrior14", "warrior15"],
                         "explanation": ["warrior1EH", "warrior1EA", "warrior1EF"],
                 ],
                 "warrior2L":
                     [
                         "name": ["warrior2L"],
-                        "demonstration": ["warrior2", "warrior21", "warrior22", "warrior23", "warrior24", "warrior25"],
+                        "demonstration": ["warrior2"], // "warrior21", "warrior22", "warrior23", "warrior24", "warrior25"],
                         "explanation": ["warrior2EH", "warrior2EA", "warrior2EF"],
                 ], //
                 "warrior2R":
                     [
                         "name": ["warrior2R"],
-                        "demonstration": ["warrior2", "warrior21", "warrior22", "warrior23", "warrior24", "warrior25"],
+                        "demonstration": ["warrior2"], // "warrior21", "warrior22", "warrior23", "warrior24", "warrior25"],
                         "explanation": ["warrior2EH", "warrior2EA", "warrior2EF"],
                 ],
                 "warrior3L":
                     [
                         "name": ["warrior3L"],
-                        "demonstration": ["warrior3", "warrior31", "warrior32", "warrior33", "warrior34", "warrior35", "warrior36"],
+                        "demonstration": ["warrior3"], // "warrior31", "warrior32", "warrior33", "warrior34", "warrior35", "warrior36"],
                         "explanation": ["warrior3EH", "warrior3EA", "warrior3EF"],
                 ], //
                 "warrior3R":
                     [
                         "name": ["warrior3R"],
-                        "demonstration": ["warrior3", "warrior31", "warrior32", "warrior33", "warrior34", "warrior35", "warrior36"],
+                        "demonstration": ["warrior3"], // "warrior31", "warrior32", "warrior33", "warrior34", "warrior35", "warrior36"],
                         "explanation": ["warrior3EH", "warrior3EA", "warrior3EF"],
                 ],
                 "halfMoonL":
                     [
                         "name": ["halfMoonL"],
-                        "demonstration": ["halfMoon", "halfMoon1", "halfMoon2", "halfMoon3", "halfMoon4", "halfMoon5", "halfMoon6", "halfMoon7"],
+                        "demonstration": ["halfMoon"], // "halfMoon1", "halfMoon2", "halfMoon3", "halfMoon4", "halfMoon5", "halfMoon6", "halfMoon7"],
                         "explanation": ["halfMoonEH", "halfMoonEA", "halfMoonEF"],
                 ], //
                 "halfMoonR":
                     [
                         "name": ["halfMoonR"],
-                        "demonstration": ["halfMoon", "halfMoon1", "halfMoon2", "halfMoon3", "halfMoon4", "halfMoon5", "halfMoon6", "halfMoon7"],
+                        "demonstration": ["halfMoon"], // "halfMoon1", "halfMoon2", "halfMoon3", "halfMoon4", "halfMoon5", "halfMoon6", "halfMoon7"],
                         "explanation": ["halfMoonEH", "halfMoonEA", "halfMoonEF"],
                 ],
                 "extendedTriangleL":
                     [
                         "name": ["extendedTriangleL"],
-                        "demonstration": ["extendedTriangle", "extendedTriangle1", "extendedTriangle2", "extendedTriangle3", "extendedTriangle4", "extendedTriangle5"],
+                        "demonstration": ["extendedTriangle"], // "extendedTriangle1", "extendedTriangle2", "extendedTriangle3", "extendedTriangle4", "extendedTriangle5"],
                         "explanation": ["extendedTriangleEH", "extendedTriangleEA", "extendedTriangleEF"],
                 ], //
                 "extendedTriangleR":
                     [
                         "name": ["extendedTriangleR"],
-                        "demonstration": ["extendedTriangle", "extendedTriangle1", "extendedTriangle2", "extendedTriangle3", "extendedTriangle4", "extendedTriangle5"],
+                        "demonstration": ["extendedTriangle"], // "extendedTriangle1", "extendedTriangle2", "extendedTriangle3", "extendedTriangle4", "extendedTriangle5"],
                         "explanation": ["extendedTriangleEH", "extendedTriangleEA", "extendedTriangleEF"],
                 ],
                 "extendedSideAngleYL":
                     [
                         "name": ["extendedSideAngleYL"],
-                        "demonstration": ["extendedSideAngle", "extendedSideAngle1", "extendedSideAngle2", "extendedSideAngle3", "extendedSideAngle4", "extendedSideAngle5", "extendedSideAngle6"],
+                        "demonstration": ["extendedSideAngle"], // "extendedSideAngle1", "extendedSideAngle2", "extendedSideAngle3", "extendedSideAngle4", "extendedSideAngle5", "extendedSideAngle6"],
                         "explanation": ["extendedSideAngleYEH", "extendedSideAngleYEA", "extendedSideAngleYEF"],
                 ], //
                 "extendedSideAngleYR":
                     [
                         "name": ["extendedSideAngleYR"],
-                        "demonstration": ["extendedSideAngle", "extendedSideAngle1", "extendedSideAngle2", "extendedSideAngle3", "extendedSideAngle4", "extendedSideAngle5", "extendedSideAngle6"],
+                        "demonstration": ["extendedSideAngle"], // "extendedSideAngle1", "extendedSideAngle2", "extendedSideAngle3", "extendedSideAngle4", "extendedSideAngle5", "extendedSideAngle6"],
                         "explanation": ["extendedSideAngleYEH", "extendedSideAngleYEA", "extendedSideAngleYEF"],
                 ],
                 "revolvedSideAngleL":
                     [
                         "name": ["revolvedSideAngleL"],
-                        "demonstration": ["revolvedSideAngle", "revolvedSideAngle1", "revolvedSideAngle2", "revolvedSideAngle3", "revolvedSideAngle4", "revolvedSideAngle5", "revolvedSideAngle6"],
+                        "demonstration": ["revolvedSideAngle"], // "revolvedSideAngle1", "revolvedSideAngle2", "revolvedSideAngle3", "revolvedSideAngle4", "revolvedSideAngle5", "revolvedSideAngle6"],
                         "explanation": ["revolvedSideAngleEH", "revolvedSideAngleEA", "revolvedSideAngleEF"],
                 ], //
                 "revolvedSideAngleR":
                     [
                         "name": ["revolvedSideAngleR"],
-                        "demonstration": ["revolvedSideAngle", "revolvedSideAngle1", "revolvedSideAngle2", "revolvedSideAngle3", "revolvedSideAngle4", "revolvedSideAngle5", "revolvedSideAngle6"],
+                        "demonstration": ["revolvedSideAngle"], // "revolvedSideAngle1", "revolvedSideAngle2", "revolvedSideAngle3", "revolvedSideAngle4", "revolvedSideAngle5", "revolvedSideAngle6"],
                         "explanation": ["revolvedSideAngleEH", "revolvedSideAngleEA", "revolvedSideAngleEF"],
                 ],
                 "revolvedTriangleL":
                     [
                         "name": ["revolvedTriangleL"],
-                        "demonstration": ["revolvedTriangle", "revolvedTriangle1", "revolvedTriangle2", "revolvedTriangle3", "revolvedTriangle4", "revolvedTriangle5", "revolvedTriangle6"],
+                        "demonstration": ["revolvedTriangle"], // "revolvedTriangle1", "revolvedTriangle2", "revolvedTriangle3", "revolvedTriangle4", "revolvedTriangle5", "revolvedTriangle6"],
                         "explanation": ["revolvedTriangleEH", "revolvedTriangleEA", "revolvedTriangleEF"],
                 ], //
                 "revolvedTriangleR":
                     [
                         "name": ["revolvedTriangleR"],
-                        "demonstration": ["revolvedTriangle", "revolvedTriangle1", "revolvedTriangle2", "revolvedTriangle3", "revolvedTriangle4", "revolvedTriangle5", "revolvedTriangle6"],
+                        "demonstration": ["revolvedTriangle"], // "revolvedTriangle1", "revolvedTriangle2", "revolvedTriangle3", "revolvedTriangle4", "revolvedTriangle5", "revolvedTriangle6"],
                         "explanation": ["revolvedTriangleEH", "revolvedTriangleEA", "revolvedTriangleEF"],
                 ],
                 "halfForwardBend":
                     [
                         "name": ["halfForwardBend"],
-                        "demonstration": ["halfForwardBend", "halfForwardBend1", "halfForwardBend2", "halfForwardBend3", "halfForwardBend4", "halfForwardBend5", "halfForwardBend6", "halfForwardBend7"],
+                        "demonstration": ["halfForwardBend"], // "halfForwardBend1", "halfForwardBend2", "halfForwardBend3", "halfForwardBend4", "halfForwardBend5", "halfForwardBend6", "halfForwardBend7"],
                         "explanation": ["halfForwardBendEH", "halfForwardBendEA", "halfForwardBendEF"],
                 ],
                 "forwardBend":
                     [
                         "name": ["forwardBend"],
-                        "demonstration": ["forwardBend", "forwardBend1", "forwardBend2", "forwardBend3", "forwardBend4", "forwardBend5", "forwardBend6", "forwardBend7"],
+                        "demonstration": ["forwardBend"], // "forwardBend1", "forwardBend2", "forwardBend3", "forwardBend4", "forwardBend5", "forwardBend6", "forwardBend7"],
                         "explanation": ["forwardBendEH", "forwardBendEA", "forwardBendEF"],
                 ],
                 "wideLeggedForwardBend":
                     [
                         "name": ["wideLeggedForwardBend"],
-                        "demonstration": ["wideLeggedForwardBend", "wideLeggedForwardBend1", "wideLeggedForwardBend2", "wideLeggedForwardBend3", "wideLeggedForwardBend4", "wideLeggedForwardBend5", "wideLeggedForwardBend6"],
+                        "demonstration": ["wideLeggedForwardBend"], // "wideLeggedForwardBend1", "wideLeggedForwardBend2", "wideLeggedForwardBend3", "wideLeggedForwardBend4", "wideLeggedForwardBend5", "wideLeggedForwardBend6"],
                         "explanation": ["wideLeggedForwardBendEH", "wideLeggedForwardBendEA", "wideLeggedForwardBendEF"],
                 ],
                 "intenseSideL":
                     [
                         "name": ["intenseSideL"],
-                        "demonstration": ["intenseSide", "intenseSide1", "intenseSide2", "intenseSide3", "intenseSide4", "intenseSide5"],
+                        "demonstration": ["intenseSide"], // "intenseSide1", "intenseSide2", "intenseSide3", "intenseSide4", "intenseSide5"],
                         "explanation": ["intenseSideEH", "intenseSideEA", "intenseSideEF"],
                 ], //
                 "intenseSideR":
                     [
                         "name": ["intenseSideR"],
-                        "demonstration": ["intenseSide", "intenseSide1", "intenseSide2", "intenseSide3", "intenseSide4", "intenseSide5"],
+                        "demonstration": ["intenseSide"], // "intenseSide1", "intenseSide2", "intenseSide3", "intenseSide4", "intenseSide5"],
                         "explanation": ["intenseSideEH", "intenseSideEA", "intenseSideEF"],
                 ],
                 "gateL":
@@ -2509,56 +2492,56 @@ extension sessionData {
                 "highLungeL":
                     [
                         "name": ["highLungeL"],
-                        "demonstration": ["highLunge", "highLunge1", "highLunge2", "highLunge3", "highLunge4", "highLunge5", "highLunge6"],
+                        "demonstration": ["highLunge"], // "highLunge1", "highLunge2", "highLunge3", "highLunge4", "highLunge5", "highLunge6"],
                         "explanation": ["highLungeEH", "highLungeEA", "highLungeEF"],
                 ], //
                 "highLungeR":
                     [
                         "name": ["highLungeR"],
-                        "demonstration": ["highLunge", "highLunge1", "highLunge2", "highLunge3", "highLunge4", "highLunge5", "highLunge6"],
+                        "demonstration": ["highLunge"], // "highLunge1", "highLunge2", "highLunge3", "highLunge4", "highLunge5", "highLunge6"],
                         "explanation": ["highLungeEH", "highLungeEA", "highLungeEF"],
                 ],
                 "lowLungeYL":
                     [
                         "name": ["lowLungeYL"],
-                        "demonstration": ["lowLunge", "lowLunge1", "lowLunge2", "lowLunge3", "lowLunge4", "lowLunge5", "lowLunge6"],
+                        "demonstration": ["lowLunge"], // "lowLunge1", "lowLunge2", "lowLunge3", "lowLunge4", "lowLunge5", "lowLunge6"],
                         "explanation": ["lowLungeYEH", "lowLungeYEA", "lowLungeYEF"],
                 ], //
                 "lowLungeYR":
                     [
                         "name": ["lowLungeYR"],
-                        "demonstration": ["lowLunge", "lowLunge1", "lowLunge2", "lowLunge3", "lowLunge4", "lowLunge5", "lowLunge6"],
+                        "demonstration": ["lowLunge"], // "lowLunge1", "lowLunge2", "lowLunge3", "lowLunge4", "lowLunge5", "lowLunge6"],
                         "explanation": ["lowLungeYEH", "lowLungeYEA", "lowLungeYEF"],
                 ],
                 "deepSquat":
                     [
                         "name": ["deepSquat"],
-                        "demonstration": ["deepSquat", "deepSquat1", "deepSquat2", "deepSquat3", "deepSquat4", "deepSquat5"],
+                        "demonstration": ["deepSquat"], // "deepSquat1", "deepSquat2", "deepSquat3", "deepSquat4", "deepSquat5"],
                         "explanation": ["deepSquatEH", "deepSquatEA", "deepSquatEF"],
                 ],
                 // Hand/Elbows and Feet/Knees
                 "dolphin":
                     [
                         "name": ["dolphin"],
-                        "demonstration": ["dolphin", "dolphin1", "dolphin2", "dolphin3"],
+                        "demonstration": ["dolphin"], // "dolphin1", "dolphin2", "dolphin3"],
                         "explanation": ["dolphinEH", "dolphinEA", "dolphinEF"],
                 ],
                 "downwardDog":
                     [
                         "name": ["downwardDog"],
-                        "demonstration": ["downwardDog", "downwardDog1", "downwardDog2", "downwardDog3", "downwardDog4"],
+                        "demonstration": ["downwardDog"], // "downwardDog1", "downwardDog2", "downwardDog3", "downwardDog4"],
                         "explanation": ["downwardDogEH", "downwardDogEA", "downwardDogEF"],
                 ],
                 "halfDownwardDogL":
                     [
                         "name": ["halfDownwardDogL"],
-                        "demonstration": ["halfDownwardDog", "halfDownwardDog1", "halfDownwardDog2", "halfDownwardDog3", "halfDownwardDog4"],
+                        "demonstration": ["halfDownwardDog"], // "halfDownwardDog1", "halfDownwardDog2", "halfDownwardDog3", "halfDownwardDog4"],
                         "explanation": ["halfDownwardDogEH", "halfDownwardDogEA", "halfDownwardDogEF"],
                 ], //
                 "halfDownwardDogR":
                     [
                         "name": ["halfDownwardDogR"],
-                        "demonstration": ["halfDownwardDog", "halfDownwardDog1", "halfDownwardDog2", "halfDownwardDog3", "halfDownwardDog4"],
+                        "demonstration": ["halfDownwardDog"], // "halfDownwardDog1", "halfDownwardDog2", "halfDownwardDog3", "halfDownwardDog4"],
                         "explanation": ["halfDownwardDogEH", "halfDownwardDogEA", "halfDownwardDogEF"],
                 ],
                 "dolphinPlank":
@@ -2576,13 +2559,13 @@ extension sessionData {
                 "sidePlankL":
                     [
                         "name": ["sidePlankL"],
-                        "demonstration": ["sidePlank", "sidePlank1", "sidePlank2", "sidePlank3", "sidePlank4"],
+                        "demonstration": ["sidePlank"], // "sidePlank1", "sidePlank2", "sidePlank3", "sidePlank4"],
                         "explanation": ["sidePlankEH", "sidePlankEA", "sidePlankEF"],
                 ], //
                 "sidePlankR":
                     [
                         "name": ["sidePlankR"],
-                        "demonstration": ["sidePlank", "sidePlank1", "sidePlank2", "sidePlank3", "sidePlank4"],
+                        "demonstration": ["sidePlank"], // "sidePlank1", "sidePlank2", "sidePlank3", "sidePlank4"],
                         "explanation": ["sidePlankEH", "sidePlankEA", "sidePlankEF"],
                 ],
                 "cat":
@@ -2600,67 +2583,67 @@ extension sessionData {
                 "catCow":
                     [
                         "name": ["catCow"],
-                        "demonstration": ["cat", "catCow1", "catCow2", "catCow1", "catCow3", "catCow1"],
+                        "demonstration": ["cat"], // "catCow1", "catCow2", "catCow1", "catCow3", "catCow1"],
                         "explanation": ["catCowEH", "catCowEA", "catCowEF"],
                 ],
                 "halfMonkeyL":
                     [
                         "name": ["halfMonkeyL"],
-                        "demonstration": ["halfMonkey", "halfMonkey1", "halfMonkey2", "halfMonkey3", "halfMonkey4"],
+                        "demonstration": ["halfMonkey"], // "halfMonkey1", "halfMonkey2", "halfMonkey3", "halfMonkey4"],
                         "explanation": ["halfMonkeyEH", "halfMonkeyEA", "halfMonkeyEF"],
                 ], //
                 "halfMonkeyR":
                     [
                         "name": ["halfMonkeyR"],
-                        "demonstration": ["halfMonkey", "halfMonkey1", "halfMonkey2", "halfMonkey3", "halfMonkey4"],
+                        "demonstration": ["halfMonkey"], // "halfMonkey1", "halfMonkey2", "halfMonkey3", "halfMonkey4"],
                         "explanation": ["halfMonkeyEH", "halfMonkeyEA", "halfMonkeyEF"],
                 ],
                 "childPose":
                     [
                         "name": ["childPose"],
-                        "demonstration": ["childPose", "childPose1", "childPose2", "childPose3"],
+                        "demonstration": ["childPose"], // "childPose1", "childPose2", "childPose3"],
                         "explanation": ["childPoseEH", "childPoseEA", "childPoseEF"],
                 ],
                 "wildThingL":
                     [
                         "name": ["wildThingL"],
-                        "demonstration": ["wildThing", "wildThing1", "wildThing2", "wildThing3", "wildThing4", "wildThing5", "wildThing6"],
+                        "demonstration": ["wildThing"], // "wildThing1", "wildThing2", "wildThing3", "wildThing4", "wildThing5", "wildThing6"],
                         "explanation": ["wildThingEH", "wildThingEA", "wildThingEF"],
                 ], //
                 "wildThingR":
                     [
                         "name": ["wildThingR"],
-                        "demonstration": ["wildThing", "wildThing1", "wildThing2", "wildThing3", "wildThing4", "wildThing5", "wildThing6"],
+                        "demonstration": ["wildThing"], // "wildThing1", "wildThing2", "wildThing3", "wildThing4", "wildThing5", "wildThing6"],
                         "explanation": ["wildThingEH", "wildThingEA", "wildThingEF"],
                 ],
                 "upwardBow":
                     [
                         "name": ["upwardBow"],
-                        "demonstration": ["upwardBow", "upwardBow1", "upwardBow2", "upwardBow3", "upwardBow4", "upwardBow5"],
+                        "demonstration": ["upwardBow"], // "upwardBow1", "upwardBow2", "upwardBow3", "upwardBow4", "upwardBow5"],
                         "explanation": ["upwardBowEH", "upwardBowEA", "upwardBowEF"],
                 ],
                 "bridge":
                     [
                         "name": ["bridge"],
-                        "demonstration": ["bridge", "bridge1", "bridge2", "bridge3"],
+                        "demonstration": ["bridge"], // "bridge1", "bridge2", "bridge3"],
                         "explanation": ["bridgeEH", "bridgeEA", "bridgeEF"],
                 ],
                 "upwardPlank":
                     [
                         "name": ["upwardPlank"],
-                        "demonstration": ["upwardPlank", "upwardPlank1", "upwardPlank2", "upwardPlank3", "upwardPlank4", "upwardPlank5"],
+                        "demonstration": ["upwardPlank"], // "upwardPlank1", "upwardPlank2", "upwardPlank3", "upwardPlank4", "upwardPlank5"],
                         "explanation": ["upwardPlankEH", "upwardPlankEA", "upwardPlankEF"],
                 ],
                 "extendedPuppy":
                     [
                         "name": ["extendedPuppy"],
-                        "demonstration": ["extendedPuppy", "extendedPuppy1", "extendedPuppy2", "extendedPuppy3", "extendedPuppy4", "extendedPuppy5"],
+                        "demonstration": ["extendedPuppy"], // "extendedPuppy1", "extendedPuppy2", "extendedPuppy3", "extendedPuppy4", "extendedPuppy5"],
                         "explanation": ["extendedPuppyEH", "extendedPuppyEA", "extendedPuppyEF"],
                 ],
                 "upwardsDogY":
                     [
                         "name": ["upwardsDogY"],
-                        "demonstration": ["upwardsDogY", "upwardsDogY1", "upwardsDogY2", "upwardsDogY3", "upwardsDogY4"],
+                        "demonstration": ["upwardsDogY"], // "upwardsDogY1", "upwardsDogY2", "upwardsDogY3", "upwardsDogY4"],
                         "explanation": ["upwardsDogYEH", "upwardsDogYEA", "upwardsDogYEF"],
                 ],
                 // Seated
@@ -2739,61 +2722,61 @@ extension sessionData {
                 "vSideBendL":
                     [
                         "name": ["vSideBendL"],
-                        "demonstration": ["vSideBend", "vSideBend1", "vSideBend2", "vSideBend3", "vSideBend4", "vSideBend5"],
+                        "demonstration": ["vSideBend"], // "vSideBend1", "vSideBend2", "vSideBend3", "vSideBend4", "vSideBend5"],
                         "explanation": ["vSideBendH", "vSideBendA", "vSideBendF"],
                 ], //
                 "vSideBendR":
                     [
                         "name": ["vSideBendR"],
-                        "demonstration": ["vSideBend", "vSideBend1", "vSideBend2", "vSideBend3", "vSideBend4", "vSideBend5"],
+                        "demonstration": ["vSideBend"], //, "vSideBend1", "vSideBend2", "vSideBend3", "vSideBend4", "vSideBend5"],
                         "explanation": ["vSideBendH", "vSideBendA", "vSideBendF"],
                 ],
                 "halfVForwardBendL":
                     [
                         "name": ["halfVForwardBendL"],
-                        "demonstration": ["halfVForwardBend", "halfVForwardBend1", "halfVForwardBend2", "halfVForwardBend3", "halfVForwardBend4", "halfVForwardBend5", "halfVForwardBend6"],
+                        "demonstration": ["halfVForwardBend"], // "halfVForwardBend1", "halfVForwardBend2", "halfVForwardBend3", "halfVForwardBend4", "halfVForwardBend5", "halfVForwardBend6"],
                         "explanation": ["halfVForwardBendEH", "halfVForwardBendEA", "halfVForwardBendEF"],
                 ], //
                 "halfVForwardBendR":
                     [
                         "name": ["halfVForwardBendR"],
-                        "demonstration": ["halfVForwardBend", "halfVForwardBend1", "halfVForwardBend2", "halfVForwardBend3", "halfVForwardBend4", "halfVForwardBend5", "halfVForwardBend6"],
+                        "demonstration": ["halfVForwardBend"], // "halfVForwardBend1", "halfVForwardBend2", "halfVForwardBend3", "halfVForwardBend4", "halfVForwardBend5", "halfVForwardBend6"],
                         "explanation": ["halfVForwardBendEH", "halfVForwardBendEA", "halfVForwardBendEF"],
                 ],
                 "halfVSideBendL":
                     [
                         "name": ["halfVSideBendL"],
-                        "demonstration": ["halfVSideBend", "halfVSideBend1", "halfVSideBend2", "halfVSideBend3", "halfVSideBend4", "halfVSideBend5"],
+                        "demonstration": ["halfVSideBend"], // "halfVSideBend1", "halfVSideBend2", "halfVSideBend3", "halfVSideBend4", "halfVSideBend5"],
                         "explanation": ["halfVSideBendEH", "halfVSideBendEA", "halfVSideBendEF"],
                 ],
                 "halfVSideBendR":
                     [
                         "name": ["halfVSideBendR"],
-                        "demonstration": ["halfVSideBend", "halfVSideBend1", "halfVSideBend2", "halfVSideBend3", "halfVSideBend4", "halfVSideBend5"],
+                        "demonstration": ["halfVSideBend"], // "halfVSideBend1", "halfVSideBend2", "halfVSideBend3", "halfVSideBend4", "halfVSideBend5"],
                         "explanation": ["halfVSideBendEH", "halfVSideBendEA", "halfVSideBendEF"],
                 ],
                 "marichi1L":
                     [
                         "name": ["marichi1L"],
-                        "demonstration": ["marichi1", "marichi11", "marichi12", "marichi13", "marichi14", "marichi15", "marichi16", "marichi17"],
+                        "demonstration": ["marichi1"], // "marichi11", "marichi12", "marichi13", "marichi14", "marichi15", "marichi16", "marichi17"],
                         "explanation": ["marichi1EH", "marichi1EA", "marichi1EF"],
                 ], //
                 "marichi1R":
                     [
                         "name": ["marichi1R"],
-                        "demonstration": ["marichi1", "marichi11", "marichi12", "marichi13", "marichi14", "marichi15", "marichi16", "marichi17"],
+                        "demonstration": ["marichi1"], // "marichi11", "marichi12", "marichi13", "marichi14", "marichi15", "marichi16", "marichi17"],
                         "explanation": ["marichi1EH", "marichi1EA", "marichi1EF"],
                 ],
                 "marichi3L":
                     [
                         "name": ["marichi3L"],
-                        "demonstration": ["marichi3", "marichi31", "marichi32", "marichi33", "marichi34", "marichi35", "marichi36", "marichi37"],
+                        "demonstration": ["marichi3"], // "marichi31", "marichi32", "marichi33", "marichi34", "marichi35", "marichi36", "marichi37"],
                         "explanation": ["marichi3EH", "marichi3EA", "marichi3EF"],
                 ], //
                 "marichi3R":
                     [
                         "name": ["marichi3R"],
-                        "demonstration": ["marichi3", "marichi31", "marichi32", "marichi33", "marichi34", "marichi35", "marichi36", "marichi37"],
+                        "demonstration": ["marichi3"], // "marichi31", "marichi32", "marichi33", "marichi34", "marichi35", "marichi36", "marichi37"],
                         "explanation": ["marichi3EH", "marichi3EA", "marichi3EF"],
                 ],
                 "frontSplitL":
@@ -2824,7 +2807,7 @@ extension sessionData {
                 "fish":
                     [
                         "name": ["fish"],
-                        "demonstration": ["fish", "fish1", "fish2", "fish3", "fish4", "fish5"],
+                        "demonstration": ["fish"], // "fish1", "fish2", "fish3", "fish4", "fish5"],
                         "explanation": ["fishEH", "fishEA", "fishEF"],
                 ],
                 "happyBaby":
@@ -2836,7 +2819,7 @@ extension sessionData {
                 "lyingButterfly":
                     [
                         "name": ["lyingButterfly"],
-                        "demonstration": ["lyingButterfly", "lyingButterfly1", "lyingButterfly2", "lyingButterfly3", "lyingButterfly4"],
+                        "demonstration": ["lyingButterfly"], // "lyingButterfly1", "lyingButterfly2", "lyingButterfly3", "lyingButterfly4"],
                         "explanation": ["lyingButterflyEH", "lyingButterflyEA", "lyingButterflyEF"],
                 ],
                 "legRaiseToeL":
@@ -2854,31 +2837,31 @@ extension sessionData {
                 "threadTheNeedleL":
                     [
                         "name": ["threadTheNeedleL"],
-                        "demonstration": ["threadTheNeedle", "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
+                        "demonstration": ["threadTheNeedle"], // "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
                         "explanation": ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"],
                 ], //
                 "threadTheNeedleR":
                     [
                         "name": ["threadTheNeedleR"],
-                        "demonstration": ["threadTheNeedle", "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
+                        "demonstration": ["threadTheNeedle"], // "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
                         "explanation": ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"],
                 ],
                 "shoulderStand":
                     [
                         "name": ["shoulderStand"],
-                        "demonstration": ["shoulderStand", "shoulderStand1", "shoulderStand2", "shoulderStand3", "shoulderStand4", "shoulderStand5", "shoulderStand6", "shoulderStand7"],
+                        "demonstration": ["shoulderStand"], // "shoulderStand1", "shoulderStand2", "shoulderStand3", "shoulderStand4", "shoulderStand5", "shoulderStand6", "shoulderStand7"],
                         "explanation": ["shoulderStandEH", "shoulderStandEA", "shoulderStandEF"],
                 ],
                 "plow":
                     [
                         "name": ["plow"],
-                        "demonstration": ["plow", "plow1", "plow2", "plow3", "plow4"],
+                        "demonstration": ["plow"], // "plow1", "plow2", "plow3", "plow4"],
                         "explanation": ["plowEH", "plowEA", "plowEF"],
                 ],
                 "cobra":
                     [
                         "name": ["cobra"],
-                        "demonstration": ["cobra", "cobra1", "cobra2", "cobra3", "cobra4"],
+                        "demonstration": ["cobra"], // "cobra1", "cobra2", "cobra3", "cobra4"],
                         "explanation": ["cobraEH", "cobraEA", "cobraEF"],
                 ],
                 "sphinx":
@@ -2890,38 +2873,38 @@ extension sessionData {
                 "pigeonL":
                     [
                         "name": ["pigeonL"],
-                        "demonstration": ["pigeon", "pigeon1", "pigeon2", "pigeon3", "pigeon4", "pigeon5", "pigeon6", "pigeon7", "pigeon8"],
+                        "demonstration": ["pigeon"], // "pigeon1", "pigeon2", "pigeon3", "pigeon4", "pigeon5", "pigeon6", "pigeon7", "pigeon8"],
                         "explanation": ["pigeonEH", "pigeonEA", "pigeonEF"],
                 ], //
                 "pigeonR":
                     [
                         "name": ["pigeonR"],
-                        "demonstration": ["pigeon", "pigeon1", "pigeon2", "pigeon3", "pigeon4", "pigeon5", "pigeon6", "pigeon7", "pigeon8"],
+                        "demonstration": ["pigeon"], // "pigeon1", "pigeon2", "pigeon3", "pigeon4", "pigeon5", "pigeon6", "pigeon7", "pigeon8"],
                         "explanation": ["pigeonEH", "pigeonEA", "pigeonEF"],
                 ],
                 "spineRolling":
                     [
                         "name": ["spineRolling"],
-                        "demonstration": ["spineRolling", "spineRolling1", "spineRolling2", "spineRolling3", "spineRolling2", "spineRolling4", "spineRolling2", "spineRolling3", "spineRolling2", "spineRolling4"],
+                        "demonstration": ["spineRolling"], // "spineRolling1", "spineRolling2", "spineRolling3", "spineRolling2", "spineRolling4", "spineRolling2", "spineRolling3", "spineRolling2", "spineRolling4"],
                         "explanation": ["spineRollingEH", "spineRollingEA", "spineRollingEF"],
                 ],
                 // Hand Stands
                 "handstand":
                     [
                         "name": ["handstand"],
-                        "demonstration": ["handStand", "handStand1", "handStand2", "handStand3", "handStand4", "handStand5", "handStand6", "handStand7", "handStand8"],
+                        "demonstration": ["handStand"], // "handStand1", "handStand2", "handStand3", "handStand4", "handStand5", "handStand6", "handStand7", "handStand8"],
                         "explanation": ["handstandEH", "handstandEA", "handstandEF"],
                 ],
                 "headstand":
                     [
                         "name": ["headstand"],
-                        "demonstration": ["headStand", "headStand1", "headStand2", "headStand3", "headStand4", "headStand5", "headStand6", "headStand7", "headStand8"],
+                        "demonstration": ["headStand"], // "headStand1", "headStand2", "headStand3", "headStand4", "headStand5", "headStand6", "headStand7", "headStand8"],
                         "explanation": ["headstandEH", "headstandEA", "headstandEF"],
                 ],
                 "forearmStand":
                     [
                         "name": ["forearmStand"],
-                        "demonstration": ["forearmStand", "forearmStand1", "forearmStand2", "forearmStand3", "forearmStand4", "forearmStand5", "forearmStand6"],
+                        "demonstration": ["forearmStand"], // "forearmStand1", "forearmStand2", "forearmStand3", "forearmStand4", "forearmStand5", "forearmStand6"],
                         "explanation": ["forearmStandEH", "forearmStandEA", "forearmStandEF"],
                 ]
             ]

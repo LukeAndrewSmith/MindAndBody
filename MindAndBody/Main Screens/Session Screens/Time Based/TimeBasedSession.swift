@@ -405,6 +405,9 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.explanationButton.alpha = 0
             }
             
+            // Reset image state
+            cell.imageState = 0
+            
             //
             return cell
         //

@@ -15,6 +15,10 @@ class Tracking {
     
     // Used in tracking screen
     var minTime = Double()
+    
+    func beginNewWeek() {
+        
+    }
 
     
     func updateTracking() {
@@ -27,36 +31,33 @@ class Tracking {
         var calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         // Get Mondays date
-        let currentMondayDate = Date().firstMondayInCurrentWeek
-        //
+        let currentMondayDate = Date().firstMondayInCurrentWeekCurrentTimeZone.setToMidnightUTC()
+
         // Week Goal
         let weekProgress = trackingProgressDictionary["WeekProgress"] as! Double
         let extraSessions = trackingProgressDictionary["ExtraSessions"] as! Double
         let weekGoal = trackingProgressDictionary["WeekGoal"] as! Double
         let currentProgressDivision: Double = ((weekProgress + extraSessions) / weekGoal) * 100.0
         let currentProgress = Int(currentProgressDivision)
-        //
+
         // Keys
         let keys = trackingDictionary.keys.sorted()
         
-        //
         // Note: Weeks defined by their mondays date
         // Current week exists
         if keys.contains(currentMondayDate) {
             // Update current weeks progress
             trackingDictionary[currentMondayDate] = currentProgress
             
-            //
-            // Current week doesn't exist
+        // Current week doesn't exist
         } else {
             // Last updated week was last week |or| first week ever updated
             if keys.count == 0 || keys.last! == calendar.date(byAdding: .weekOfYear, value: -1, to: currentMondayDate)?.setToMidnightUTC() {
                 // Create current weeks progress
                 trackingDictionary.updateValue(currentProgress, forKey: currentMondayDate)
                 
-                // Skipped weeks
+            // Skipped weeks
             } else {
-                //
                 // Update missed weeks with 0, starting with week after last updated value
                 var startDate = calendar.date(byAdding: .weekOfYear, value: 1, to: keys.last!)!.setToMidnightUTC()
                 

@@ -25,6 +25,8 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     
     var menuSwipeView = UIView()
     
+    let percentageLabel = UILabel()
+    
     // Time scale variables
     //
     // Time Scale Action Sheet
@@ -51,6 +53,8 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        ScheduleVariables.shared.resetScheduleTracking()
         
         // Ensure week goal correct
         Tracking.shared.updateWeekGoal()
@@ -120,9 +124,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     // MARK: View did load
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+    
         // Navigation Controller
         // Remove navigation separator
         setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("tracking", comment: ""), separator: false, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
@@ -137,13 +139,14 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         setupTimeScaleChoice()
         setupChart()
         
-        let testLabel = UILabel()
-        testLabel.text = NSLocalizedString("%acheived", comment: "")
-        testLabel.font = Fonts.smallElementLight!
-        testLabel.sizeToFit()
-        testLabel.center = CGPoint(x: testLabel.bounds.height/2, y: chartView.center.y)
-        testLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-        view.addSubview(testLabel)
+        if !view.subviews.contains(percentageLabel) {
+            percentageLabel.text = NSLocalizedString("%acheived", comment: "")
+            percentageLabel.font = Fonts.smallElementLight!
+            percentageLabel.sizeToFit()
+            percentageLabel.center = CGPoint(x: percentageLabel.bounds.height/2, y: chartView.center.y)
+            percentageLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+            view.addSubview(percentageLabel)
+        }
     }
     
     // Time Scale
@@ -205,7 +208,6 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     
     // MARK: Setup chart
     func setupChart() {
-        
         
         let viewHeight: CGFloat = UIScreen.main.bounds.height - ElementHeights.combinedHeight - ElementHeights.tabBarHeight - timeScaleStack.bounds.height - ElementHeights.bottomSafeAreaInset
         

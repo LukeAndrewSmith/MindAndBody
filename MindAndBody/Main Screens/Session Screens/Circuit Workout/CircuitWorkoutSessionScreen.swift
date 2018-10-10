@@ -473,6 +473,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.timerButton.alpha = 0
             }
             
+            // Reset image state
+            cell.imageState = 0
+            
             //
             return cell
         //

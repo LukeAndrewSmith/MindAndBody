@@ -82,7 +82,11 @@ class MeditationScreen: UIViewController {
         
         //
         // BackgroundImage
-        addBackgroundImage(withBlur: true, fullScreen: true, image: "")
+        if let backgroundSound = meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as? Int, backgroundSound != -1 {
+            addBackgroundImage(withBlur: false, fullScreen: true, image: MeditationSounds.shared.backgroundSoundsArray[backgroundSound])
+        } else {
+            addBackgroundImage(withBlur: true, fullScreen: true, image: "")
+        }
         
         
         // Initial Conditions
@@ -118,23 +122,9 @@ class MeditationScreen: UIViewController {
         }
         
         // Colours
-        let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        let backgroundIndex = settings["BackgroundImage"]![0]
-        //
-        switch backgroundIndex {
-        // All Black
-        case 1,3:
-            timerLabel.textColor = Colors.dark
-            hideScreen.tintColor = Colors.dark
-        // All White
-        case 0,2,4,5,6:
-            timerLabel.textColor = Colors.light
-            hideScreen.tintColor = Colors.light
-        //
-        default: break
-        }
+        timerLabel.textColor = Colors.light
+        hideScreen.tintColor = Colors.light
         
-        //
         // Element Positions
         // Iphone 5
         if IPhoneType.shared.iPhoneType() == IPhone.little {
@@ -144,7 +134,6 @@ class MeditationScreen: UIViewController {
         // CheckMark
         checkMark.tintColor = Colors.red
         
-        //
         // Watch for enter foreground
         NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }

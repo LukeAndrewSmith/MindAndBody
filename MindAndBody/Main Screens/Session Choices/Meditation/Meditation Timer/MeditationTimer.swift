@@ -117,6 +117,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     let pickerViewIntervalTimes = UIPickerView()
     // Background Sounds
     let tableViewBackgroundSounds = UITableView()
+    
+    //
+    let cellHeight: CGFloat = 88
 
     
     // View did load
@@ -938,17 +941,18 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     @objc func noneButtonAction() {
         var meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
         // Set Nil
-        switch deleteTag {
+        switch selectedItem {
         // Starting Bell
-        case 0:
+        case 2:
             //
             meditationArray[selectedPreset]["Bells"]?[0][0] = -1
             //
             startingBellImage.image = nil
             startingBellImage.alpha = 1
             startingBellNone.alpha = 1
-        //
-        case 1:
+            
+        // Interval Bells
+        case 3:
             //
             // 1 as interval bells start at 1 (starting bell = 0)
             let count = (meditationArray[selectedPreset]["Bells"] as! [[Int]]).count - 2
@@ -963,8 +967,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             intervalBellsDetail.text = "-"
             intervalBellsDetail.alpha = 1
-        //
-        case 2:
+            
+        // Ending Bell
+        case 4:
             //
             let count = (meditationArray[selectedPreset]["Bells"] as! [[Int]]).count - 1
             meditationArray[selectedPreset]["Bells"]?[count][0] = -1
@@ -972,8 +977,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             endingBellImage.image = nil
             endingBellImage.alpha = 1
             endingBellNone.alpha = 1
-        //
-        case 3:
+           
+        // Background Sounds
+        case 5:
             //
             meditationArray[selectedPreset]["BackgroundSound"]?[0][0] = -1
             //
@@ -1412,10 +1418,10 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Scroll to row
             let meditationArray = UserDefaults.standard.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
             // .last = ending bell, [0] = bell
-            if meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
-                let indexPath = IndexPath(row: meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int, section: 0)
-                tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
-            }
+//            if meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int != -1 {
+//                let indexPath = IndexPath(row: meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as! Int, section: 0)
+//                tableViewBells.scrollToRow(at: indexPath, at: .top, animated: true)
+//            }
             //
             noneButton.frame = CGRect(x: 0, y: selectionHeight + 10, width: selectionWidth, height: 49)
             noneButton.setTitle(NSLocalizedString("noBackgroundSound", comment: ""), for: .normal)
@@ -1745,7 +1751,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             //
             //
-            cell.textLabel?.textAlignment = .left
             cell.backgroundColor = Colors.dark
             cell.textLabel?.textColor = Colors.light
             cell.tintColor = Colors.light
@@ -1767,9 +1772,25 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             if selectedBackgroundSound != -1 {
                 okButton.isEnabled = true
             }
-            //
-            cell.textLabel?.text = NSLocalizedString(MeditationSounds.shared.backgroundSoundsArray[indexPath.row], comment: "")
-            cell.imageView?.image = MeditationSounds.shared.backgroundSoundsImageArray[indexPath.row]
+
+            let tableSpacing: CGFloat = 16
+            let gap: CGFloat = 4
+            let imageHeight = cellHeight - (2*gap)
+            
+            let label = UILabel()
+            label.font = UIFont(name: "SFUIDisplay-Light", size: 20)
+            label.textColor = Colors.light
+            label.text = NSLocalizedString(MeditationSounds.shared.backgroundSoundsArray[indexPath.row], comment: "")
+            label.frame = CGRect(x: tableSpacing + 8 + imageHeight, y: 0, width: tableViewBackgroundSounds.bounds.width - 54, height: cellHeight)
+            cell.addSubview(label)
+            
+            let image = UIImageView()
+            image.frame = CGRect(x: tableSpacing, y: gap, width: imageHeight, height: imageHeight)
+            image.contentMode = .scaleAspectFill
+            image.clipsToBounds = true
+            image.image = MeditationSounds.shared.backgroundSoundsImageArray[indexPath.row]
+            image.layer.cornerRadius = 4
+            cell.addSubview(image)
             
             
         default: break
@@ -1792,12 +1813,12 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
             intervalBellsArray.removeFirst()
             intervalBellsArray.removeLast()
             if indexPath.row == intervalBellsArray.count {
-                return 44
+                return cellHeight / 2
             } else {
-                return 88
+                return cellHeight
             }
         case tableViewBackgroundSounds, tableViewBells:
-            return 88
+            return cellHeight
         default: return 0
         }
     }
@@ -1924,11 +1945,6 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         case tableViewBackgroundSounds:
             //
             okButton.isEnabled = true
-            //
-            print(MeditationSounds.shared.backgroundSoundsArray[indexPath.row])
-            let url = Bundle.main.url(forResource: MeditationSounds.shared.backgroundSoundsArray[indexPath.row], withExtension: "caf")
-            // nina
-            print(url)
             //
             if let url = Bundle.main.url(forResource: MeditationSounds.shared.backgroundSoundsArray[indexPath.row], withExtension: "caf") {
                 //

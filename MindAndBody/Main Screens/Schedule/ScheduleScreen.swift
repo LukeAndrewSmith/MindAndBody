@@ -21,13 +21,13 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     // Currently testing which values are best
     let foregroundColor = Colors.dark
-    let tableSpacing: CGFloat = 27
+    let tableSpacing: CGFloat = 27 // 27
     let headerSpacing: CGFloat = 0 // 16
     
     // Set by heightForRow, as cellForRow uses height but height isn't updated yet
     // Could move all code to cell.didlayoutsubviews but prefer not to
-    var presetCellHeight: CGFloat = 88
-    var cellHeight: CGFloat = 72
+    var presetCellHeight: CGFloat = 88 // 88
+    var cellHeight: CGFloat = 88
     
     
     
@@ -43,7 +43,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // TableView
     let headerLabel = UILabel()
     var headerHeight: CGFloat {
-        return (UIScreen.main.bounds.height - ElementHeights.combinedHeight - ElementHeights.tabBarHeight - pageStackHeight.constant) / 4
+        return (UIScreen.main.bounds.height - ElementHeights.combinedHeight - ElementHeights.tabBarHeight - pageStackHeight.constant - ElementHeights.bottomSafeAreaInset) / 4
     }
 //    var headerHeight: CGFloat {
 //        return 88 * 1.5
@@ -134,6 +134,10 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var walkthroughBackgroundColor = UIColor()
     var walkthroughTextColor = UIColor()
 
+    // MARK: TEST, TO REMOVE
+    @IBAction func subscriptionsTestAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "SubscriptionSegue", sender: self)
+    }
     
     // -----------------------------------------------------------------------------------------------
     

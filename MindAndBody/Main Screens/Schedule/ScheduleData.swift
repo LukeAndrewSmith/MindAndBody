@@ -183,7 +183,7 @@ class ScheduleVariables {
     func isGroupCompleted(day: Int, indexInDay: Int, checkAll: Bool) -> Bool {
         
         // Extra session
-        if isExtraSession {
+        if isLastChoice() && isExtraSession {
             return !extraSessionCompletion.contains(false)
             
         // Normal
@@ -250,7 +250,7 @@ class ScheduleVariables {
     // Checks if a component of a group (warmup/session/stretching) is completed using the index of the row
         // Only used for final choice screen, schedule screen uses isGroupCompleted
     func isComponentCompleted(day: Int, indexInDay: Int, row: Int) -> Bool {
-        if isExtraSession {
+        if isLastChoice() && isExtraSession {
             return extraSessionCompletion[row]
         } else {
             return schedules[selectedScheduleIndex]["schedule"]![day][indexInDay][String(row)] as! Bool

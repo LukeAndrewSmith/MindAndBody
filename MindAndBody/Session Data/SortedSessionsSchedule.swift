@@ -31,7 +31,9 @@ extension sessionData {
                 // Short
                 "short": [
                     // Average
-                    "average": ["WaWS-F-1",
+                    "average": [
+                                "allMovements",
+                                "WaWS-F-1",
                                 "WaWS-F-2",
                                 "WaWS-F-3",
                                 "WaWS-F-4",],
@@ -83,7 +85,9 @@ extension sessionData {
                 // Short
                 "short": [
                     // Easy
-                    "easy": ["WGES-CsF-1-W",
+                    "easy": [
+                            "allMovements",
+                            "WGES-CsF-1-W",
                              "WGES-CsF-2-W",
                              "WGES-CsF-3-W",
                              "WGES-CsF-4-W",
@@ -1007,7 +1011,9 @@ extension sessionData {
                 // Very Short
                 "veryShort": [
                     // Easy
-                    "easy": ["YREVs-1",
+                    "easy": [
+                            "allMovements",
+                            "YREVs-1",
                              "YREVs-2",
                              "YREVs-3",
                              "YREVs-4",
@@ -1455,7 +1461,9 @@ extension sessionData {
                 // Short
                 "short": [
                     // Easy
-                    "easy": ["SGES-1",
+                    "easy": [
+                            "allMovements",
+                            "SGES-1",
                              "SGES-2",
                              "SGES-3",],
                     // Average

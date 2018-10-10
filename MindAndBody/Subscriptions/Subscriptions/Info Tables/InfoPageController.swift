@@ -17,8 +17,10 @@ class InfoPageControl {
 
     func setupPageControl(x: CGFloat, y: CGFloat) {
         //
-        pageControl.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 24)
-        pageControl.center = CGPoint(x: x, y: y)
+        pageControl.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 22)
+        pageControl.center = CGPoint(x: x, y: y+11)
+        pageControl.pageIndicatorTintColor = Colors.dark.withAlphaComponent(0.27)
+        pageControl.currentPageIndicatorTintColor = Colors.dark
         //
     }
 }
@@ -40,7 +42,6 @@ class InfoPageViewController: UIPageViewController, UIPageViewControllerDataSour
         let page3: UIViewController! = (storyboard?.instantiateViewController(withIdentifier: "InfoTable3"))! as! InfoTable3
         let page4: UIViewController! = (storyboard?.instantiateViewController(withIdentifier: "InfoTable4"))! as! InfoTable4
         let page5: UIViewController! = (storyboard?.instantiateViewController(withIdentifier: "InfoTable5"))! as! InfoTable5
-        let page6: UIViewController! = (storyboard?.instantiateViewController(withIdentifier: "InfoTable6"))! as! InfoTable6
 
         pages.append(page0)
         pages.append(page1)
@@ -48,7 +49,6 @@ class InfoPageViewController: UIPageViewController, UIPageViewControllerDataSour
         pages.append(page3)
         pages.append(page4)
         pages.append(page5)
-        pages.append(page6)
         
         setViewControllers([page0], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
         
@@ -81,5 +81,4 @@ class InfoPageViewController: UIPageViewController, UIPageViewControllerDataSour
         let pageContentViewController = pageViewController.viewControllers![0]
         InfoPageControl.shared.pageControl.currentPage = pages.index(of: pageContentViewController)!
     }
-
 }

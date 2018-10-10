@@ -579,16 +579,16 @@ class MeditationSounds {
     ]
     
     let bellsArray: [String] =
-        ["tibetanChimes", "tibetanBowlL", "tibetanBowlL4", "tibetanBowlLS", "tibetanBowlH", "tibetanBowlH4", "tibetanBowlHS", "rainStick", "rainStick2", "rainStick2S", "windChimes", "gambangWU", "gambangWD", "gambangM", "indonesianFrog", "cowBellS", "cowBellB"]
+        ["tibetanBowlL", "tibetanBowlL4", "tibetanBowlLS", "tibetanBowlH", "tibetanBowlH4", "tibetanBowlHS", "tibetanChimes", "rainStick", "rainStick2", "rainStick2S", "windChimes", "gambangWU", "gambangWD", "gambangM", "indonesianFrog", "cowBellS", "cowBellB"]
     
     let conversionDictBells: [String: UIImage] =
-        ["tibetanChimes": #imageLiteral(resourceName: "Tibetan Chimes"),
-         "tibetanBowlL": #imageLiteral(resourceName: "Tibetan Bowl Big"),
+        ["tibetanBowlL": #imageLiteral(resourceName: "Tibetan Bowl Big"),
          "tibetanBowlL4":#imageLiteral(resourceName: "Tibetan Bowl Big"),
          "tibetanBowlLS":#imageLiteral(resourceName: "Tibetan Bowl Big"),
          "tibetanBowlH":#imageLiteral(resourceName: "Tibetan Bowl Small"),
          "tibetanBowlH4":#imageLiteral(resourceName: "Tibetan Bowl Small"),
          "tibetanBowlHS":#imageLiteral(resourceName: "Tibetan Bowl Small"),
+         "tibetanChimes": #imageLiteral(resourceName: "Tibetan Chimes"),
          "rainStick":#imageLiteral(resourceName: "Australian Rain Stick"),
          "rainStick2":#imageLiteral(resourceName: "Australian Rain Stick"),
          "rainStick2S":#imageLiteral(resourceName: "Australian Rain Stick"),
@@ -601,7 +601,7 @@ class MeditationSounds {
          "cowBellB":#imageLiteral(resourceName: "Cow Bell Big")]
     
     let bellsImageArray: [UIImage] =
-        [#imageLiteral(resourceName: "Tibetan Chimes"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Wind Chimes"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Small"), #imageLiteral(resourceName: "Indonesian Frog"), #imageLiteral(resourceName: "Cow Bell"), #imageLiteral(resourceName: "Cow Bell Big")]
+        [#imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Big"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small"), #imageLiteral(resourceName: "Tibetan Bowl Small") , #imageLiteral(resourceName: "Tibetan Chimes"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Australian Rain Stick"), #imageLiteral(resourceName: "Wind Chimes"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Big"), #imageLiteral(resourceName: "Indonesian Xylophone Small"), #imageLiteral(resourceName: "Indonesian Frog"), #imageLiteral(resourceName: "Cow Bell"), #imageLiteral(resourceName: "Cow Bell Big")]
     
     // Get Image from bell name
     func bellToImage(name: String) -> UIImage {
@@ -614,8 +614,8 @@ class MeditationSounds {
     let conversionDictBackgroundSound: [String: UIImage] =
         ["MountainStream": #imageLiteral(resourceName: "MountainStream"),
          "LakeTiticaca": #imageLiteral(resourceName: "LakeTiticaca"),
-         "ForestStream":#imageLiteral(resourceName: "MountainStream"),
-         "SwissCows":#imageLiteral(resourceName: "SwissCows")]
+         "ForestStream": #imageLiteral(resourceName: "MountainStream"),
+         "SwissCows": #imageLiteral(resourceName: "SwissCows")]
     
     let backgroundSoundsImageArray: [UIImage] = [#imageLiteral(resourceName: "MountainStream"), #imageLiteral(resourceName: "LakeTiticaca") ,#imageLiteral(resourceName: "MountainStream"), #imageLiteral(resourceName: "SwissCows")]
     
@@ -739,7 +739,9 @@ extension UIViewController {
             }
             //
             // Background Image/Colour
-            if image != "" {
+            if MeditationSounds.shared.backgroundSoundsArray.contains(image) {
+                backgroundImage.image = UIImage(named: image)
+            } else if image != "" {
                 backgroundImage.image = getUncachedImage(named: image)
             } else if backgroundIndex < BackgroundImages.backgroundImageArray.count {
                 backgroundImage.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
@@ -764,7 +766,9 @@ extension UIViewController {
         } else if backgroundIndex != currentBackgroundIndex && currentBackgroundIndex != -1 {
             backgroundImageSubview.tag = BackgroundImages.backgroundImageArray.count + backgroundIndex
             // Background Image/Colour
-            if image != "" {
+            if MeditationSounds.shared.backgroundSoundsArray.contains(image) {
+                backgroundImageSubview.image = UIImage(named: image)
+            } else if image != "" {
                 backgroundImageSubview.image = getUncachedImage(named: image)
             } else if backgroundIndex < BackgroundImages.backgroundImageArray.count {
                 backgroundImageSubview.image = getUncachedImage(named: BackgroundImages.backgroundImageArray[backgroundIndex])
@@ -982,9 +986,14 @@ extension UIViewController {
     //
     // Get Uncached Image
     func getUncachedImage(named: String) -> UIImage? {
-        let imgPath = Bundle.main.path(forResource: named, ofType: "png")
-        let imageToReturn = UIImage(contentsOfFile: imgPath!)
-        return imageToReturn
+        let imgPathUnwrapped = Bundle.main.path(forResource: named, ofType: "png")
+        if let imagePath = imgPathUnwrapped {
+            let imageToReturn = UIImage(contentsOfFile: imagePath)
+            return imageToReturn
+        } else {
+            return #imageLiteral(resourceName: "Mind&Body")
+        }
+        
     }
     
     func getIndexingVariablesForSession() -> (Int, String, Int) {
@@ -1380,7 +1389,6 @@ extension Date {
         return dateAtMidnight
     }
     
-    //
     // Day in week of date from monday, monday being 1
     var weekDayFromMonday: Int {
         var calendar = Calendar(identifier: .iso8601)
@@ -1397,7 +1405,6 @@ extension Date {
         return currentWeekDay
     }
     
-    //
     // First Monday in current week as Date
     var firstMondayInCurrentWeek: Date {
         var calendar = Calendar(identifier: .iso8601)
@@ -1410,7 +1417,6 @@ extension Date {
         return mondaysDate!
     }
     
-    //
     // First Monday in current week as Date
     var firstMondayInCurrentWeekCurrentTimeZone: Date {
         var calendar = Calendar(identifier: .iso8601)
@@ -1424,7 +1430,6 @@ extension Date {
         return mondaysDate!
     }
     
-    //
     // First MONDAY in month
     var firstMondayInMonth: Date {
         var calendar = Calendar(identifier: .iso8601)
@@ -1448,7 +1453,6 @@ extension Date {
         return mondaysDate!
     }
     
-    //
     // Number of Mondays in month
     var numberOfMondaysInCurrentMonth: Int {
         var calendar = Calendar(identifier: .iso8601)
@@ -1470,7 +1474,6 @@ extension Date {
         return weeks.weekOfMonth! + 1
     }
     
-    //
     // First day in month
     var firstDateInMonth: Date {
         var calendar = Calendar(identifier: .iso8601)

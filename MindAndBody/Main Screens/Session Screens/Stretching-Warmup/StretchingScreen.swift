@@ -404,6 +404,9 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 }
             }
             
+            // Reset image state
+            cell.imageState = 0
+            
             //
             return cell
         //

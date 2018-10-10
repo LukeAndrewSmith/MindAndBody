@@ -1091,7 +1091,6 @@
 "frontDelt" = "Front Delt";
 "lateralDelt" = "Lateral Delt";
 "rearDelt" = "Rear Delt";
-"rotatorCuff" = "Rotator Cuff";
 
             // Hip and Glutes
     "hipsaGlutes" = "Hips and Glutes";
@@ -1110,7 +1109,7 @@
             // Hamstrings
     "hamstrings" = "Hamstrings";
 "standingHamstring" = "Standing Hamstring Stretch";
-"standingOneLegHamstring" = "Standing Raised Leg";
+"standingOneLegHamstring" = "Standing One Leg Hamstring";
 "singleLegStanding" = "Single Leg Standing Stretch";
 "downWardsDog" = "Downwards Dog";
 "singleLegHamstring" = "Single Leg Stretch";
@@ -1170,7 +1169,6 @@
 "frontDeltE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nPut your hands in fists together begin your back, then raise them up the back whilst sticking the chest out and keeping your elbows back.\nStop when you feel a good stretch in the front delt (front shoulder).\n\nNotes:\nYou can hold one hand in the other instead of touching your fists together.\nDon't lift your arms too far up your back as this will impede your ability to stick your chest out.";
 "lateralDeltE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nLift your right arm across your chest with you palm facing upwards.\nHold just past your elbow with your left hand, and pull your elbow left until you feel a good stretch in the lateral delt (side shoulder).\n\nNotes:\nDon't allow the shoulder rise up much, simply pull the elbow away from the shoulder.";
 "rearDeltE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nLift your right arm across your chest with you palm facing upwards.\nHold just past your elbow with your left hand, and pull your elbow left and upwards.\nLean forwards a little and push the shoulder being stretched in front and to the floor a little until you feel a good stretch in the rear delt (rear shoulder).\n\nNotes:\nWhen lifting the elbow up try to keep the shoulder in a constant position and don't allow it to rise much.";
-"rotatorCuffE" = "Stretch:\nStand upright with an active core and your shoulder back and down.\nPlace the backs of your hands on or just above your hips, and push your elbows forwards so you feel a good stretch in the rotator cuffs.\n\nNotes:\nTry not to rotate your shoulder forwards while performing this stretch.\nYou can increase the stretch by squatting down, putting the back of your hands together and using your knees to increase the stretch a little by using them to push your elbows closer together.";
 
             // Hip and Glutes
 "squatHoldE" = "Stretch:\nStand upright with an active core, your feet at shoulder width apart and your toes pointing slightly outwards.\nSquat down, breaking at the hip and knees simultaneously and and holding your arms straight in front of you if necessary. Don't let your heels lift of the floor.\nSit in the deep squat position for the recommended amount of time.\nAs you perform this movement more, try to bring your feet closer together (this will take quite a while so don't try and move them together quickly).\nIf you are lacking the necessary flexibility you can widen your stance a little. If you are far off the necessary flexibility, sit in the squat position whilst holding onto a support to stop you from falling backwards.\nDon't allow your knees to collapse inwards, and keep your weight centered in the middle of your feet.";
@@ -1555,6 +1553,12 @@
 "indonesianFrogShort" = "IF";
 "cowBellSShort" = "CBS";
 "cowBellBShort" = "CBB";
+
+// Background Sounds
+"MountainStream" = "Mountain Stream";
+"LakeTiticaca" = "Lake Titicaca";
+"ForestStream" = "Forest Stream";
+"SwissCows" = "Swiss Cows";
 
         // Guided
             // Choice
@@ -3134,7 +3138,9 @@
 
 // Idea of App
 "ideaAim" = "Idea";
-"infoTable1" = "The idea of Mind & Body is to provide a simple, sensible and effective approach to a healthy mind and body. It aims to do this through a weekly routine (schedule), and avoids potential monotony by giving choice as to how to achieve a goal on any given day (see next section). The app provides sessions for a number of activities:\n\nMind:\n• Meditation\n• Yoga\n\nBody:\n• Workouts (Gym/Bodyweight)\n• Cardio (HIIT/Bodyweight workouts)\n• Warmup/Stretching sessions for workout/cardio\n• Stretching for flexibility\n• Yoga";
+//"infoTable1" = "The idea of Mind & Body is to provide a simple, sensible and effective approach to a healthy mind and body. It aims to do this through a weekly routine (schedule), and avoids potential monotony by giving choice as to how to achieve a goal on any given day (see next section). The app provides sessions for a number of activities:\n\nMind:\n• Meditation\n• Yoga\n\nBody:\n• Workouts (Gym/Bodyweight)\n• Cardio (HIIT/Bodyweight workouts)\n• Warmup/Stretching sessions for workout/cardio\n• Stretching for flexibility\n• Yoga";
+"infoTable1" = "A simple, sensible, effective approach to a healthy mind and body.\nCreate a weekly schedule and achieve your goals through:\n• Meditation\n• Yoga\n• Workouts (Gym/Bodyweight)\n• Cardio (HIIT/Bodyweight workouts)\n• Stretching";
+
 
 //"Aim:\nDo your mind & body justice\nHow:\nProvide you the aid needed, leave you the responsibility required\nMethods:\nPlans, schedules, tracking, customisation";
 // Schedule

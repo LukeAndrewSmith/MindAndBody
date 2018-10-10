@@ -2025,9 +2025,6 @@ class sessionData {
                         ["movement": "staticLunge",
                          "sets": 2,
                          "reps": "0"],
-                        ["movement": "chestSqueeze",
-                         "sets": 2,
-                         "reps": "0"],
                         ["movement": "pushupHold",
                          "sets": 2,
                          "reps": "0"],
@@ -23423,10 +23420,7 @@ class sessionData {
                        ["movement": "lateralDelt",
                              "breaths": 10,
                              "time": 2],
-                       ["movement": "rearDelt",
-                             "breaths": 10,
-                             "time": 2],
-                       ["movement": "rotatorCuff",
+                       ["movement": "rearDeltStretch",
                              "breaths": 10,
                              "time": 2],
                        ["movement": "squatHold",
@@ -23512,7 +23506,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -23553,7 +23547,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -23646,7 +23640,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -23700,7 +23694,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -23802,7 +23796,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -23843,7 +23837,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -23895,7 +23889,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -23949,7 +23943,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -24702,7 +24696,7 @@ class sessionData {
                         "breaths": 5,
                         "time": 20],
                        // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -24821,7 +24815,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -24950,7 +24944,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -25044,7 +25038,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -25101,7 +25095,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -25199,7 +25193,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                         // Hips glutes
@@ -25244,7 +25238,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                     ],
@@ -25351,7 +25345,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                     ],
@@ -25468,7 +25462,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                     ],
@@ -25584,7 +25578,7 @@ class sessionData {
                          "breaths": 5,
                          "time": 20],
                         // Shoudlers
-                        ["movement": "rotatorCuff",
+                        ["movement": "lateralDelt",
                          "breaths": 5,
                          "time": 20],
                     ],

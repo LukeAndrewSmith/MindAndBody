@@ -525,7 +525,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                if isTimedMovement() {
+                if isTimedMovement() && !fromCustom {
                     cell.timerButton.alpha = 1
                 } else {
                     cell.timerButton.alpha = 0
@@ -554,11 +554,14 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                if isTimedMovement() {
+                if isTimedMovement() && !fromCustom {
                     cell.timerButton.alpha = 1
                 }
                 cell.weightButton.isEnabled = true
             }
+            
+            // Reset image state
+            cell.imageState = 0
             
             //
             return cell
@@ -1019,7 +1022,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                if self.isTimedMovement() {
+                if self.isTimedMovement() && !self.fromCustom {
                     cell.timerButton.alpha = 1
                 }
                 cell.weightButton.isEnabled = true
@@ -1049,19 +1052,18 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBAction func backButtonAction() {
         
         if selectedRow != 0 {
-            //
+
             selectedRow = selectedRow - 1
             updateProgress()
-            //
+
             let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
             let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
             let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-            //
+
             var cell = tableView.cellForRow(at: indexPath as IndexPath) as! SessionTableViewCell
-            //
+
             UIView.animate(withDuration: 0.6, animations: {
-                //
-                //
+                
                 // As progress bar is contained in the table view header, scrolling back to row 0 jumps the progress bar off the screen
                 // Silly fix below seems to work
                 if self.selectedRow == 0 {
@@ -1080,7 +1082,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.movementLabel.alpha = 1
                 cell.buttonView.alpha = 1
                 cell.explanationButton.alpha = 1
-                if self.isTimedMovement() {
+                if self.isTimedMovement() && !self.fromCustom {
                     cell.timerButton.alpha = 1
                 }
                 cell.weightButton.isEnabled = true
@@ -1237,6 +1239,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             case UISwipeGestureRecognizerDirection.left:
                 //
+                // nina
                 // Check left image is displayed
                 if cell.imageState == 0 {
                     cell.imageState = 1
