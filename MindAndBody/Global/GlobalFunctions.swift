@@ -614,10 +614,10 @@ class MeditationSounds {
     let conversionDictBackgroundSound: [String: UIImage] =
         ["MountainStream": #imageLiteral(resourceName: "MountainStream"),
          "LakeTiticaca": #imageLiteral(resourceName: "LakeTiticaca"),
-         "ForestStream": #imageLiteral(resourceName: "MountainStream"),
+         "ForestStream": #imageLiteral(resourceName: "ForestStream"),
          "SwissCows": #imageLiteral(resourceName: "SwissCows")]
     
-    let backgroundSoundsImageArray: [UIImage] = [#imageLiteral(resourceName: "MountainStream"), #imageLiteral(resourceName: "LakeTiticaca") ,#imageLiteral(resourceName: "MountainStream"), #imageLiteral(resourceName: "SwissCows")]
+    let backgroundSoundsImageArray: [UIImage] = [#imageLiteral(resourceName: "MountainStream"), #imageLiteral(resourceName: "LakeTiticaca") ,#imageLiteral(resourceName: "ForestStream"), #imageLiteral(resourceName: "SwissCows")]
     
     // Get Image from backgrounds sound name
     func backgroundSoundToImage(name: String) -> UIImage {

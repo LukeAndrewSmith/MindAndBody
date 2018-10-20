@@ -21,7 +21,7 @@ class ScheduleVariables {
             "yoga": #imageLiteral(resourceName: "GroupYoga").thumbnail(),
             "meditation": #imageLiteral(resourceName: "GroupMeditation").thumbnail(),
             "endurance": #imageLiteral(resourceName: "GroupEndurance").thumbnail(),
-            "flexibility": #imageLiteral(resourceName: "LessonYoga").thumbnail(),
+            "flexibility": #imageLiteral(resourceName: "GroupFlexibility").thumbnail(),
             ]
     }()
     
@@ -602,7 +602,7 @@ extension String {
             "yoga": #imageLiteral(resourceName: "GroupYoga"),
             "meditation": #imageLiteral(resourceName: "GroupMeditation"),
             "endurance": #imageLiteral(resourceName: "GroupEndurance"),
-            "flexibility": #imageLiteral(resourceName: "LessonYoga")]
+            "flexibility": #imageLiteral(resourceName: "GroupFlexibility")]
         return groupImage[self]!
     }
 

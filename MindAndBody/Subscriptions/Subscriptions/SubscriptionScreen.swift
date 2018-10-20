@@ -176,7 +176,7 @@ class SubscriptionScreen: UIViewController {
         
 //        infoLabel.frame = CGRect(x: 16, y: beginFreeTrialButton.bounds.maxY, width: view.bounds.width - 32, height: view.frame.maxY - beginFreeTrialButton.frame.maxY)
         extraInfoLabel.text = NSLocalizedString("Buying the subscription will grant you access to the app and all its features for the selected time frame. The subscription will automatically renew within 24 hours of the end of the selected time unless cancelled. You can manage your subscriptions in Account Settings. By purchasing the subscription through in-app subscription, you agree to the Apple App Store terms and conditions. Visit our Terms of Use and Privacy Policy to learn more.", comment: "")
-        extraInfoLabel.font = UIFont(name: "SFUIDisplay-regular", size: 10)
+        extraInfoLabel.font = UIFont(name: "SFUIDisplay-regular", size: 11)
         extraInfoLabel.textColor = Colors.darkGray
         
         

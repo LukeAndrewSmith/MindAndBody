@@ -599,7 +599,7 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 let cell = UITableViewCell()
-                InfoTables.shared.setupImageCell3(cell: cell, imageL: #imageLiteral(resourceName: "TrackingTimeScales"), imageM: #imageLiteral(resourceName: "MonthTracking"), imageR: #imageLiteral(resourceName: "WeekTracking"), infoWidth: infoTable.bounds.width, rowHeight: row0Height)
+                InfoTables.shared.setupImageCell2(cell: cell, imageL: #imageLiteral(resourceName: "MonthTracking"), imageR: #imageLiteral(resourceName: "WeekTracking"), infoWidth: infoTable.bounds.width, rowHeight: row0Height)
                 return cell
             case 2:
                 let cell = UITableViewCell()
