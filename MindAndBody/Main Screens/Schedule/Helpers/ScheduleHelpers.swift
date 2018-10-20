@@ -300,7 +300,6 @@ extension ScheduleScreen {
     @objc func subscriptionCheckCompleted() {
         Loading.shared.shouldPresentLoading = false
         Loading.shared.endLoading()
-        print(SubscriptionsCheck.shared.isValid)
         if !SubscriptionsCheck.shared.isValid {
             self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
         }

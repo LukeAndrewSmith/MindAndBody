@@ -69,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Subscriptions
         UserDefaults.standard.register(defaults: ["userHasValidSubscription" : false])
+        UserDefaults.standard.register(defaults: ["userSubscriptionExpiryDate" : ""])
         // Settings
         UserDefaults.standard.register(defaults: ["userSettings" : Register.defaultSettings])
 
@@ -107,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Check if the user has a valid subscription
         // Subscription Check 1
-//        SubscriptionsCheck.shared.checkSubscription()
+        SubscriptionsCheck.shared.checkSubscription()
         
         return true
     }

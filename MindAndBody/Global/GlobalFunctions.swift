@@ -470,22 +470,20 @@ class SubscriptionsCheck {
     func checkSubscription() {
         // If internet, check subscription with apple
         // MARK: NOTE TESTING, FOR TESTERS ONLY CHECK THE USERDEAULTS
+        // NINA
         if Reachability.isConnectedToNetwork() {
-            InAppManager.shared.checkSubscriptionAvailability()
+            InAppManager.shared.checkIfUserHasSubscription()
         // If no internet, fall back to userDefaults
         } else {
             Loading.shared.shouldPresentLoading = false
-            isValid = UserDefaults.standard.object(forKey: "userHasValidSubscription") as! Bool
-            if isValid {
-                // MARK: NINA
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
-                }
+            let isValid = UserDefaults.standard.object(forKey: "userHasValidSubscription") as! Bool
+            let expiryDate = UserDefaults.standard.object(forKey: "userSubscriptionExpiryDate") as! String
+            if isValid && InAppManager.shared.isValidExpiryDate(expiryDate: expiryDate) {
+                NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
             } else {
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
-                }
+                // Call didChecksubscriptions, this calls a func which also checks the .isValid variable and present the subscription screen if not
+                NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
             }
         }
     }

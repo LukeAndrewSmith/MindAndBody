@@ -136,13 +136,50 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
 
     // MARK: TEST, TO REMOVE
     @IBAction func subscriptionsTestAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "SubscriptionSegue", sender: self)
+        self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
     }
     
     // -----------------------------------------------------------------------------------------------
-    
     //
     // MARK: - Functions
+    // viewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // set observer for UIApplicationWillEnterForeground
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+        
+        // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)
+        NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
+        
+        // Subscriptions
+        // Checking subscription is valid, (present loading during check)
+        if Loading.shared.shouldPresentLoading {
+            Loading.shared.beginLoading()
+        }
+        // Check subscription -> Present Subscription Screen (if not valid)
+        NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+
+        // Ensure week goal correct
+        Tracking.shared.updateWeekGoal()
+        
+        // Setup
+        ScheduleVariables.shared.setScheduleStyle()
+        // If week view, crete temporary week array
+        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue {
+            ScheduleVariables.shared.createTemporaryWeekViewArray()
+        }
+        setupViews()
+        layoutViews()
+        reloadView()
+        
+        // Register for receiving did enter foreground notifications
+        // check selected day
+        NotificationCenter.default.addObserver(self, selector: #selector(checkSelectedDay), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        // reload view
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+    }
+    
     // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -151,11 +188,9 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         willAppear()
     }
     
-    
     @objc func willEnterForeground() {
         willAppear()
     }
-    
     
     func willAppear() {
         
@@ -188,47 +223,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         
         reloadCompletedRow()
     }
-    
-    
-    // MARK: viewDidLoad
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // set observer for UIApplicationWillEnterForeground
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
-        
-        // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)
-        NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
-        
-        // Subscriptions
-        // Checking subscription is valid, (present loading during check)
-        if Loading.shared.shouldPresentLoading {
-            // Subscription Check 2
-//            Loading.shared.beginLoading()
-        }
-        // Check subscription -> Present Subscription Screen (if not valid)
-        NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
-        
-        // Ensure week goal correct
-        Tracking.shared.updateWeekGoal()
-        
-        // Setup
-        ScheduleVariables.shared.setScheduleStyle()
-        // If week view, crete temporary week array
-        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue {
-            ScheduleVariables.shared.createTemporaryWeekViewArray()
-        }
-        setupViews()
-        layoutViews()
-        reloadView()
-        
-        // Register for receiving did enter foreground notifications
-        // check selected day
-        NotificationCenter.default.addObserver(self, selector: #selector(checkSelectedDay), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        // reload view
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-    }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         

@@ -3115,9 +3115,12 @@
 "perWeek" = " / Week";
 "per3Months" = " / 3 Months";
 "per12Months" = " / 12 Months";
+// Purchase failed
+"purchaseFailedTitle" = "Purchase Failed";
+"purchaseFailedText" = "An unexpected error occured, please try again.";
 // Can cancel message
 "canCancelTitle" = "Are You Sure?";
-"canCancelMessage" = "\nYou can cancel at any time from your phone's settings during the trial, without having to pay anything.";
+"canCancelMessage" = "\nYou can cancel at any time from your phone's settings during the trial, without having to pay anything!";
 "ohGoOnThen" = "Oh go on then, I'll give it a go";
 "yesImSure" = "Yes I'm sure, I only like free things";
 // Subscrtioption failed to retreive
@@ -3126,8 +3129,8 @@
 "subscriptionWarningMessage" = "Please ensure that you are connected to the internet";
 "userCheckedConnection" = "I'm connected to the internet";
 // Restore failed
-"restoreWarning" = "No subscription found\n";
-"restoreWarningMessage" = "There does not seem to be a subscription associated with your Apple ID, please ensure that you are logged in to the Apple ID with which you bought the subscription";
+"restoreWarning" = "No subscription found";
+"restoreWarningMessage" = "\nThere does not seem to be a subscription associated with your Apple ID, please ensure that you are logged in to the Apple ID with which you bought the subscription";
 "ok" = "Ok";
 //
 "perYear" = " /Year";

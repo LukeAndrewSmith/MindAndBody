@@ -66,31 +66,14 @@ class SubscriptionScreen: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // If subscriptions not loaded up view appearing, continue trying by adding loading screen
-        if InAppManager.shared.products == [] {
-            addLoadingView()
-            // Give 20s to try and load, if not remove
-            DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
-                if InAppManager.shared.products == [] {
-                    self.removeLoadingPresentError()
-                }
-            })
-        } else {
-            setSubscriptionData()
-        }
-    }
-    
-    
     // -------------------------------------------------------------
     // MARK:- Setup
     
     func setupNotificationHandlers() {
         // Purchase/Restore success
         NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseRestoreAlertSuccess), name: SubscriptionNotifiations.purchaseRestoreSuccessfulNotification, object: nil)
-        // Purchase
-        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseCancelled), name: SubscriptionNotifiations.purchaseCancelledNotification, object: nil)
+        // Purchase failed
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseFailed), name: SubscriptionNotifiations.purchaseFailedNotification, object: nil)
         // Restore
         NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.failedToRestore), name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissLoadingWhatever), name: SubscriptionNotifiations.restoreFinishedNotification, object: nil)
@@ -106,7 +89,7 @@ class SubscriptionScreen: UIViewController {
         UIApplication.shared.statusBarStyle = .lightContent
         
         // BackgroundImage
-        view.backgroundColor = Colors.light
+        view.backgroundColor = Colors.dark
         tryForFreeView.backgroundColor = Colors.dark
         
         // Buttons
@@ -121,7 +104,8 @@ class SubscriptionScreen: UIViewController {
         
         // Page Control
         InfoPageControl.shared.setupPageControl(x: view.center.x, y: infoPageView.frame.maxY)
-        view.addSubview(InfoPageControl.shared.pageControl)
+        InfoPageControl.shared.pageControl.backgroundColor = Colors.light
+        view.insertSubview(InfoPageControl.shared.pageControl, belowSubview: infoPageView)
     }
     
     func setupTitleImage() {
@@ -145,7 +129,7 @@ class SubscriptionScreen: UIViewController {
         freeTrial.textColor = Colors.light
         
         freeTrialExplanation.text = NSLocalizedString("freeTrialExplanation", comment: "")
-        freeTrialExplanation.font = UIFont(name: "SFUIDisplay-regular", size: 14)
+        freeTrialExplanation.font = UIFont(name: "SFUIDisplay-regular", size: 15)
         freeTrialExplanation.textColor = UIColor.lightGray
         
         // Three Months ------------------------------
@@ -200,17 +184,20 @@ class SubscriptionScreen: UIViewController {
     
     func loadProducts() {
         InAppManager.shared.loadProducts()
+        
+        addLoadingView()
+        // Give 20s to try and load, if not remove
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
+            if InAppManager.shared.products == [] {
+                self.removeLoadingPresentError()
+            }
+        })
     }
     
     // Subscription handlers
     @objc func handleOptionsLoaded() {
-        // MARK: NINA
-//        DispatchQueue.main.async { [weak self] in
-//            self?.
         setSubscriptionData()
-//            self?.
         loadingView.removeFromSuperview()
-//        }
     }
     
     // Use Subscription data
@@ -303,19 +290,18 @@ class SubscriptionScreen: UIViewController {
     // MARK:- Purchase
     
     @IBAction func threeMonthButtonAction(_ sender: Any) {
+        addLoadingView()
         InAppManager.shared.purchaseProduct(productType: ProductType.threeMonth)
     }
     
     @IBAction func twelveMonthButtonAction(_ sender: Any) {
+        addLoadingView()
         InAppManager.shared.purchaseProduct(productType: ProductType.yearly)
     }
     
-    @objc func handlePurchaseSuccessfull() {
-        DispatchQueue.main.sync { [weak self] in
-            self?.loadingView.removeFromSuperview()
-            self?.dismiss(animated: true)
-            NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
-        }
+    @objc func handlePurchaseRestoreAlertSuccess() {
+        loadingView.removeFromSuperview()
+        self.dismiss(animated: true)
     }
     
     
@@ -324,71 +310,37 @@ class SubscriptionScreen: UIViewController {
     
     // Restore
     @IBAction func restoreButton(_ sender: Any) {
-
         addLoadingView()
-
         InAppManager.shared.restoreSubscription()
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
             if self.view.subviews.contains(self.loadingView) {
                 self.removeLoadingPresentError()
             }
         })
     }
-    
-    @objc func handlePurchaseRestoreAlertSuccess() {
-        loadingView.removeFromSuperview()
-        self.dismiss(animated: true)
-        NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
-    }
-    
-    
+
     // -------------------------------------------------------------
     // MARK:- Errors
-    
-    @objc func handlePurchaseCancelled() {
-
+    @objc func handlePurchaseFailed() {
         // Tell the user they can cancel anytime
-        let title = NSLocalizedString("canCancelTitle", comment: "")
-        let message = NSLocalizedString("canCancelMessage", comment: "")
+        let title = NSLocalizedString("purchaseFailedTitle", comment: "")
+        let message = NSLocalizedString("purchaseFailedText", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-semibold", size: 19)!]), forKey: "attributedTitle")
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-regular", size: 17)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
-        // 'Oh go on then'
-        let okAction = UIAlertAction(title:  NSLocalizedString("ohGoOnThen", comment: ""), style: UIAlertActionStyle.default) {
+        // 'Ok'
+        let okAction = UIAlertAction(title:  NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
-            //
-            if InAppManager.shared.products != [] {
-                InAppManager.shared.purchaseProduct(productType: ProductType.yearly)
-            } else {
-                InAppManager.shared.loadProducts()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
-                    if InAppManager.shared.products == [] {
-                        self.removeLoadingPresentError()
-                    }
-                })
-            }
         }
-        
-        // 'Yes im sure'
-        let cancelAction = UIAlertAction(title:  NSLocalizedString("yesImSure", comment: ""), style: UIAlertActionStyle.default) {
-            UIAlertAction in
-            //
-            self.loadingView.removeFromSuperview()
-        }
-        
-        okAction.setValue(Colors.green, forKey: "titleTextColor")
-        cancelAction.setValue(Colors.red, forKey: "titleTextColor")
         
         // Add Actions
         alert.addAction(okAction)
-        alert.addAction(cancelAction)
-
+        
         // Present Alert
         self.present(alert, animated: true, completion: nil)
     }
@@ -396,16 +348,16 @@ class SubscriptionScreen: UIViewController {
     // Loading
     func presentErrorAlert() {
         //
-        // No connectio nmessage
+        // No connection nmessage
         let title = NSLocalizedString("subscriptionWarning", comment: "")
         let message = NSLocalizedString("subscriptionWarningMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-semibold", size: 19)!]), forKey: "attributedTitle")
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-regular", size: 17)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
         
         // Reset app action
@@ -413,13 +365,7 @@ class SubscriptionScreen: UIViewController {
             UIAlertAction in
             //
             if InAppManager.shared.products == [] {
-                self.addLoadingView()
-                InAppManager.shared.loadProducts()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
-                    if InAppManager.shared.products == [] {
-                        self.removeLoadingPresentError()
-                    }
-                })
+                self.loadProducts()
             }
         }
         // Add Actions
@@ -441,11 +387,11 @@ class SubscriptionScreen: UIViewController {
         let message = NSLocalizedString("restoreWarningMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-semibold", size: 19)!]), forKey: "attributedTitle")
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-regular", size: 17)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
         // Reset app action
         let okAction = UIAlertAction(title:  NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -151,7 +152,7 @@
                         <segue destination="oWk-Ma-VKX" kind="presentation" identifier="EditScheduleSegue" id="48d-pH-vgR"/>
                         <segue destination="q4h-Je-Ynw" kind="presentation" identifier="ScheduleCreationSegue" id="b4e-57-eAb"/>
                         <segue destination="pLq-8Q-Oq5" kind="show" identifier="SessionChoiceSegue" id="SYJ-ZP-pjw"/>
-                        <segue destination="THe-fh-5DZ" kind="presentation" identifier="SubscriptionSegue" id="IQe-pc-VYw"/>
+                        <segue destination="THe-fh-5DZ" kind="presentation" identifier="SubscriptionsSegue" id="IQe-pc-VYw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dG-Jg-xiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3958,133 +3959,141 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fft-eb-zI0">
                                 <rect key="frame" x="0.0" y="200" width="375" height="396"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYP-f9-7aj">
-                                        <rect key="frame" x="16" y="316" width="343" height="72"/>
-                                        <string key="text">Buying the subscription will grant you access to the app and all its features for the selected time frame. The subscription will automatically renew within 24 hours of the end of the selected time unless cancelled. You can manage your subscriptions in Account Settings. By purchasing the subscription through in-app subscription, you agree to the Apple App Store terms and conditions. Visit our Terms of Use and Privacy Policy to learn more.</string>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="10"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 month free trial offered!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9l-m9-9QF">
-                                        <rect key="frame" x="16" y="16" width="226" height="25.5"/>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="21"/>
-                                        <color key="textColor" red="0.99479166669999997" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QNp-pn-cgu">
-                                        <rect key="frame" x="16" y="124" width="343" height="148"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacingType="standard" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yK6-ZW-jWs">
+                                        <rect key="frame" x="16" y="24" width="343" height="364"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boo-gu-gRO">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="66"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 month free trial offered!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9l-m9-9QF">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="21"/>
+                                                <color key="textColor" red="0.99479166669999997" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtA-jm-eRY">
+                                                <rect key="frame" x="0.0" y="33" width="343" height="62"/>
+                                                <string key="text">You can cancel the subscription at any time during the free trial from your Account Settings without being charged, so don't be afraid to give it a go!</string>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QNp-pn-cgu">
+                                                <rect key="frame" x="0.0" y="102" width="343" height="148"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mH9-vz-dti">
-                                                        <rect key="frame" x="16" y="8" width="90" height="25.5"/>
-                                                        <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="21"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 7 / 3 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10Y-WM-odw">
-                                                        <rect key="frame" x="193.5" y="37.5" width="133.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 0.58 / Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEj-yP-28k">
-                                                        <rect key="frame" x="201" y="8" width="126" height="20.5"/>
-                                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVb-R4-4yD">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boo-gu-gRO">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="66"/>
-                                                        <connections>
-                                                            <action selector="threeMonthButtonAction:" destination="THe-fh-5DZ" eventType="touchUpInside" id="ahG-by-f8M"/>
-                                                        </connections>
-                                                    </button>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mH9-vz-dti">
+                                                                <rect key="frame" x="16" y="8" width="90" height="25.5"/>
+                                                                <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="21"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 7 / 3 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10Y-WM-odw">
+                                                                <rect key="frame" x="193.5" y="37.5" width="133.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 0.58 / Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEj-yP-28k">
+                                                                <rect key="frame" x="201" y="8" width="126" height="20.5"/>
+                                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVb-R4-4yD">
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="66"/>
+                                                                <connections>
+                                                                    <action selector="threeMonthButtonAction:" destination="THe-fh-5DZ" eventType="touchUpInside" id="ahG-by-f8M"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="KVb-R4-4yD" secondAttribute="trailing" id="A57-xo-XM8"/>
+                                                            <constraint firstAttribute="bottom" secondItem="10Y-WM-odw" secondAttribute="bottom" constant="8" id="BPX-20-tya"/>
+                                                            <constraint firstAttribute="trailing" secondItem="GEj-yP-28k" secondAttribute="trailing" constant="16" id="F93-WE-WXt"/>
+                                                            <constraint firstItem="KVb-R4-4yD" firstAttribute="top" secondItem="boo-gu-gRO" secondAttribute="top" id="FA0-W1-w1z"/>
+                                                            <constraint firstAttribute="trailing" secondItem="10Y-WM-odw" secondAttribute="trailing" constant="16" id="LKD-mJ-Ky6"/>
+                                                            <constraint firstAttribute="height" constant="66" id="Mw5-mH-R0m"/>
+                                                            <constraint firstItem="mH9-vz-dti" firstAttribute="leading" secondItem="boo-gu-gRO" secondAttribute="leading" constant="16" id="Vf8-Fo-NDZ"/>
+                                                            <constraint firstItem="GEj-yP-28k" firstAttribute="top" secondItem="boo-gu-gRO" secondAttribute="top" constant="8" id="aH6-Vt-Z9d"/>
+                                                            <constraint firstAttribute="bottom" secondItem="KVb-R4-4yD" secondAttribute="bottom" id="g7A-7B-D8g"/>
+                                                            <constraint firstItem="mH9-vz-dti" firstAttribute="top" secondItem="boo-gu-gRO" secondAttribute="top" constant="8" id="pae-Hn-CWj"/>
+                                                            <constraint firstItem="KVb-R4-4yD" firstAttribute="leading" secondItem="boo-gu-gRO" secondAttribute="leading" id="pbw-h1-vyf"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LBq-ed-85B">
+                                                        <rect key="frame" x="0.0" y="82" width="343" height="66"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxX-Ii-fap">
+                                                                <rect key="frame" x="16" y="8" width="99" height="25.5"/>
+                                                                <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="21"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 0.38 / Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQ3-lX-vHe">
+                                                                <rect key="frame" x="197.5" y="8" width="129.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 20 / 12 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9e-8L-N73">
+                                                                <rect key="frame" x="175" y="37.5" width="152" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGU-AE-WaZ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="66"/>
+                                                                <connections>
+                                                                    <action selector="twelveMonthButtonAction:" destination="THe-fh-5DZ" eventType="touchUpInside" id="xUa-Rg-sdu"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="gGU-AE-WaZ" firstAttribute="top" secondItem="LBq-ed-85B" secondAttribute="top" id="1Sj-EB-z5Y"/>
+                                                            <constraint firstAttribute="bottom" secondItem="O9e-8L-N73" secondAttribute="bottom" constant="8" id="2Rk-yO-zvA"/>
+                                                            <constraint firstAttribute="height" constant="66" id="5AW-wi-iwa"/>
+                                                            <constraint firstItem="UxX-Ii-fap" firstAttribute="leading" secondItem="LBq-ed-85B" secondAttribute="leading" constant="16" id="6OW-qq-V6j"/>
+                                                            <constraint firstAttribute="bottom" secondItem="gGU-AE-WaZ" secondAttribute="bottom" id="IXs-AQ-j7t"/>
+                                                            <constraint firstItem="gGU-AE-WaZ" firstAttribute="leading" secondItem="LBq-ed-85B" secondAttribute="leading" id="JLg-UR-gYn"/>
+                                                            <constraint firstAttribute="trailing" secondItem="VQ3-lX-vHe" secondAttribute="trailing" constant="16" id="dJm-se-dcw"/>
+                                                            <constraint firstItem="VQ3-lX-vHe" firstAttribute="top" secondItem="LBq-ed-85B" secondAttribute="top" constant="8" id="gew-Vx-PDT"/>
+                                                            <constraint firstAttribute="trailing" secondItem="O9e-8L-N73" secondAttribute="trailing" constant="16" id="i8F-CB-L4Z"/>
+                                                            <constraint firstAttribute="trailing" secondItem="gGU-AE-WaZ" secondAttribute="trailing" id="r1d-tw-Eba"/>
+                                                            <constraint firstItem="UxX-Ii-fap" firstAttribute="top" secondItem="LBq-ed-85B" secondAttribute="top" constant="8" id="w8i-wO-ChG"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="KVb-R4-4yD" secondAttribute="trailing" id="A57-xo-XM8"/>
-                                                    <constraint firstAttribute="bottom" secondItem="10Y-WM-odw" secondAttribute="bottom" constant="8" id="BPX-20-tya"/>
-                                                    <constraint firstAttribute="trailing" secondItem="GEj-yP-28k" secondAttribute="trailing" constant="16" id="F93-WE-WXt"/>
-                                                    <constraint firstItem="KVb-R4-4yD" firstAttribute="top" secondItem="boo-gu-gRO" secondAttribute="top" id="FA0-W1-w1z"/>
-                                                    <constraint firstAttribute="trailing" secondItem="10Y-WM-odw" secondAttribute="trailing" constant="16" id="LKD-mJ-Ky6"/>
-                                                    <constraint firstAttribute="height" constant="66" id="Mw5-mH-R0m"/>
-                                                    <constraint firstItem="mH9-vz-dti" firstAttribute="leading" secondItem="boo-gu-gRO" secondAttribute="leading" constant="16" id="Vf8-Fo-NDZ"/>
-                                                    <constraint firstItem="GEj-yP-28k" firstAttribute="top" secondItem="boo-gu-gRO" secondAttribute="top" constant="8" id="aH6-Vt-Z9d"/>
-                                                    <constraint firstAttribute="bottom" secondItem="KVb-R4-4yD" secondAttribute="bottom" id="g7A-7B-D8g"/>
-                                                    <constraint firstItem="mH9-vz-dti" firstAttribute="top" secondItem="boo-gu-gRO" secondAttribute="top" constant="8" id="pae-Hn-CWj"/>
-                                                    <constraint firstItem="KVb-R4-4yD" firstAttribute="leading" secondItem="boo-gu-gRO" secondAttribute="leading" id="pbw-h1-vyf"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LBq-ed-85B">
-                                                <rect key="frame" x="0.0" y="82" width="343" height="66"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxX-Ii-fap">
-                                                        <rect key="frame" x="16" y="8" width="99" height="25.5"/>
-                                                        <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="21"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 0.38 / Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQ3-lX-vHe">
-                                                        <rect key="frame" x="197.5" y="8" width="129.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 20 / 12 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9e-8L-N73">
-                                                        <rect key="frame" x="175" y="37.5" width="152" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGU-AE-WaZ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="66"/>
-                                                        <connections>
-                                                            <action selector="twelveMonthButtonAction:" destination="THe-fh-5DZ" eventType="touchUpInside" id="xUa-Rg-sdu"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="gGU-AE-WaZ" firstAttribute="top" secondItem="LBq-ed-85B" secondAttribute="top" id="1Sj-EB-z5Y"/>
-                                                    <constraint firstAttribute="bottom" secondItem="O9e-8L-N73" secondAttribute="bottom" constant="8" id="2Rk-yO-zvA"/>
-                                                    <constraint firstAttribute="height" constant="66" id="5AW-wi-iwa"/>
-                                                    <constraint firstItem="UxX-Ii-fap" firstAttribute="leading" secondItem="LBq-ed-85B" secondAttribute="leading" constant="16" id="6OW-qq-V6j"/>
-                                                    <constraint firstAttribute="bottom" secondItem="gGU-AE-WaZ" secondAttribute="bottom" id="IXs-AQ-j7t"/>
-                                                    <constraint firstItem="gGU-AE-WaZ" firstAttribute="leading" secondItem="LBq-ed-85B" secondAttribute="leading" id="JLg-UR-gYn"/>
-                                                    <constraint firstAttribute="trailing" secondItem="VQ3-lX-vHe" secondAttribute="trailing" constant="16" id="dJm-se-dcw"/>
-                                                    <constraint firstItem="VQ3-lX-vHe" firstAttribute="top" secondItem="LBq-ed-85B" secondAttribute="top" constant="8" id="gew-Vx-PDT"/>
-                                                    <constraint firstAttribute="trailing" secondItem="O9e-8L-N73" secondAttribute="trailing" constant="16" id="i8F-CB-L4Z"/>
-                                                    <constraint firstAttribute="trailing" secondItem="gGU-AE-WaZ" secondAttribute="trailing" id="r1d-tw-Eba"/>
-                                                    <constraint firstItem="UxX-Ii-fap" firstAttribute="top" secondItem="LBq-ed-85B" secondAttribute="top" constant="8" id="w8i-wO-ChG"/>
-                                                </constraints>
-                                            </view>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYP-f9-7aj">
+                                                <rect key="frame" x="0.0" y="256.5" width="343" height="107.5"/>
+                                                <string key="text">Buying the subscription will grant you access to the app and all its features for the selected time frame. The subscription will automatically renew within 24 hours of the end of the selected time unless cancelled. You can manage your subscriptions in Account Settings. By purchasing the subscription through in-app subscription, you agree to the Apple App Store terms and conditions. Visit our Terms of Use and Privacy Policy to learn more.</string>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="10"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="gYP-f9-7aj" secondAttribute="bottom" id="2GK-Z5-ik4"/>
+                                            <constraint firstItem="E9l-m9-9QF" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="34Z-Ou-e5c"/>
+                                            <constraint firstAttribute="trailing" secondItem="QNp-pn-cgu" secondAttribute="trailing" id="Yi5-vi-gKJ"/>
+                                            <constraint firstItem="QNp-pn-cgu" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="eRe-zF-TeT"/>
+                                            <constraint firstAttribute="trailing" secondItem="gYP-f9-7aj" secondAttribute="trailing" id="iu9-bz-fjN"/>
+                                            <constraint firstItem="gYP-f9-7aj" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="l9W-1a-xPj"/>
+                                            <constraint firstItem="jtA-jm-eRY" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="oRK-jc-h3W"/>
+                                            <constraint firstAttribute="trailing" secondItem="jtA-jm-eRY" secondAttribute="trailing" id="oiM-b2-pvs"/>
+                                            <constraint firstAttribute="trailing" secondItem="E9l-m9-9QF" secondAttribute="trailing" id="qlb-Zr-Cur"/>
+                                        </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtA-jm-eRY">
-                                        <rect key="frame" x="16" y="53.5" width="343" height="50.5"/>
-                                        <string key="text">You can cancel the subscription at any time during the free trial from your Account Settings without being charged, so don't be afraid to give it a go!</string>
-                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="QNp-pn-cgu" firstAttribute="leading" secondItem="Fft-eb-zI0" secondAttribute="leading" constant="16" id="344-u7-DP5"/>
-                                    <constraint firstItem="QNp-pn-cgu" firstAttribute="centerY" secondItem="Fft-eb-zI0" secondAttribute="centerY" id="9lT-Q3-kbs"/>
-                                    <constraint firstAttribute="trailing" secondItem="QNp-pn-cgu" secondAttribute="trailing" constant="16" id="A69-bI-VeR"/>
-                                    <constraint firstAttribute="trailing" secondItem="gYP-f9-7aj" secondAttribute="trailing" constant="16" id="DWQ-Su-C8e"/>
+                                    <constraint firstItem="yK6-ZW-jWs" firstAttribute="leading" secondItem="Fft-eb-zI0" secondAttribute="leading" constant="16" id="8Zr-LQ-sfQ"/>
                                     <constraint firstAttribute="height" constant="396" id="FXq-uM-q78"/>
-                                    <constraint firstAttribute="bottom" secondItem="gYP-f9-7aj" secondAttribute="bottom" constant="8" id="TmW-S9-5Fw"/>
-                                    <constraint firstItem="QNp-pn-cgu" firstAttribute="centerX" secondItem="Fft-eb-zI0" secondAttribute="centerX" id="eWN-eg-iI8"/>
-                                    <constraint firstItem="E9l-m9-9QF" firstAttribute="leading" secondItem="Fft-eb-zI0" secondAttribute="leading" constant="16" id="mnQ-sF-vNd"/>
-                                    <constraint firstItem="E9l-m9-9QF" firstAttribute="top" secondItem="Fft-eb-zI0" secondAttribute="top" constant="16" id="nbz-Md-7Kg"/>
-                                    <constraint firstAttribute="trailing" secondItem="jtA-jm-eRY" secondAttribute="trailing" constant="16" id="nyp-OB-vND"/>
-                                    <constraint firstItem="jtA-jm-eRY" firstAttribute="top" secondItem="E9l-m9-9QF" secondAttribute="bottom" constant="12" id="pGf-gK-94F"/>
-                                    <constraint firstItem="gYP-f9-7aj" firstAttribute="leading" secondItem="Fft-eb-zI0" secondAttribute="leading" constant="16" id="sfR-2U-7rX"/>
-                                    <constraint firstItem="jtA-jm-eRY" firstAttribute="leading" secondItem="Fft-eb-zI0" secondAttribute="leading" constant="16" id="uWQ-5D-50x"/>
+                                    <constraint firstAttribute="bottom" secondItem="yK6-ZW-jWs" secondAttribute="bottom" constant="8" id="QpR-Ag-AwL"/>
+                                    <constraint firstItem="yK6-ZW-jWs" firstAttribute="top" secondItem="Fft-eb-zI0" secondAttribute="top" constant="24" id="XUB-VM-9OS"/>
+                                    <constraint firstAttribute="trailing" secondItem="yK6-ZW-jWs" secondAttribute="trailing" constant="16" id="oWb-59-O5R"/>
                                 </constraints>
                             </view>
                         </subviews>

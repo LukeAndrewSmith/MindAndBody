@@ -38,9 +38,19 @@ class InfoTables {
         //
         let imageHeight2 = rowHeight - (16*2 + 8)
         let imageWidth2 = imageHeight2 * (9/16)
-        //
+        
+//        let imageHeight11 = (UIScreen.main.bounds.width * 4/9) * (16/9)
+//        let imageHeight12 = rowHeight - 16
+//        let imageHeight = min(imageHeight11, imageHeight12)
+//        let imageWidth = imageHeight * (9/16)
+//        // Image height for outer images
+//        let imageHeight21 = (UIScreen.main.bounds.width * 1/3) * (16/9)
+//        let imageHeight22 = rowHeight - (16*2 + 8)
+//        let imageHeight2 = min(imageHeight21, imageHeight22)
+//        let imageWidth2 = imageHeight * (9/16)
+        
         let imageCenter = infoWidth / 2
-        //
+
         let middleImage = UIImageView()
         middleImage.frame = CGRect(x: imageCenter - (imageWidth / 2), y: rowHeight - imageHeight, width: imageWidth, height: imageHeight)
         middleImage.contentMode = .scaleAspectFit
@@ -52,7 +62,11 @@ class InfoTables {
         middleImage.layer.shadowOpacity = 0.72
         //
         let rightImage = UIImageView()
-        rightImage.frame = CGRect(x: middleImage.frame.maxX - (imageWidth2 * (1/18)), y: rowHeight - imageHeight2, width: imageWidth2, height: imageHeight2)
+        var xPos1 = middleImage.frame.maxX - (imageWidth2 * (1/18))
+        if xPos1 >= UIScreen.main.bounds.width - imageWidth2 {
+            xPos1 = UIScreen.main.bounds.width - imageWidth2 - 8
+        }
+        rightImage.frame = CGRect(x: xPos1, y: rowHeight - imageHeight2, width: imageWidth2, height: imageHeight2)
         rightImage.contentMode = .scaleAspectFit
         rightImage.image = imageR
         rightImage.backgroundColor = Colors.dark
@@ -62,7 +76,11 @@ class InfoTables {
         rightImage.layer.shadowOpacity = 0.72
         //
         let leftImage = UIImageView()
-        leftImage.frame = CGRect(x: middleImage.frame.minX - (imageWidth2 * (17/18)), y: rowHeight - imageHeight2, width: imageWidth2, height: imageHeight2)
+        var xPos2 = middleImage.frame.minX - (imageWidth2 * (17/18))
+        if xPos2 <= 0 {
+            xPos2 = 8
+        }
+        leftImage.frame = CGRect(x: xPos2, y: rowHeight - imageHeight2, width: imageWidth2, height: imageHeight2)
         leftImage.contentMode = .scaleAspectFit
         leftImage.image = imageL
         leftImage.backgroundColor = Colors.dark
