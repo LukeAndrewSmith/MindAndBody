@@ -11,9 +11,10 @@ import StoreKit
 
 enum ProductType: String {
     case yearly = "mind_and_body_yearly_subscription"
+    case threeMonth = "mind_and_body_3month_subscription"
 
     static var all: [ProductType] {
-        return [.yearly]
+        return [.yearly, .threeMonth]
     }
 }
 
@@ -38,7 +39,7 @@ protocol InAppManagerDelegate: class {
 //    func subscriptionStatusUpdated(value: Bool)
 }
 
-class InAppManager: NSObject {
+class InAppManager: NSObject, SKProductsRequestDelegate {
     static let shared = InAppManager()
     
     static let accountSecret = "a255263277c14664afb897c5de689810"
@@ -66,11 +67,20 @@ class InAppManager: NSObject {
         SKPaymentQueue.default().remove(self)
     }
 
+    
+    // MARK:- Request Products
     func loadProducts() {
         let productIdentifiers = Set<String>(ProductType.all.map({$0.rawValue}))
         let request = SKProductsRequest(productIdentifiers: productIdentifiers)
         request.delegate = self
         request.start()
+    }
+    // Handle request
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        guard response.products.count > 0 else {return}
+        self.products = response.products
+        // Notify that products have been loaded
+        NotificationCenter.default.post(name: SubscriptionNotifiations.productsLoadedNotification, object: products)
     }
 
     func purchaseProduct(productType: ProductType) {
@@ -88,17 +98,19 @@ class InAppManager: NSObject {
     }
 
     func checkSubscriptionAvailability() {
-        //
-        let productIdentifier = "mind_and_body_yearly_subscription"
-        //
-        // Validate receipt
-        SwiftyReceiptValidator.validate(forIdentifier: productIdentifier, sharedSecret: InAppManager.accountSecret) { (success, response) in
-            if success {
-                self.checkExpiryDateAction(response: response, action: 0)
-            } else {
-                // Timed out/ failed
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+        // Attempt to validate receipt for all subscription types
+        for i in 0..<ProductType.all.count {
+            SwiftyReceiptValidator.validate(forIdentifier: ProductType.all[i].rawValue, sharedSecret: InAppManager.accountSecret) { (success, response) in
+                if success {
+                    self.checkExpiryDateAction(response: response, action: 0)
+                    // MARK: NINA
+                    // should break somewhere here
+                } else {
+                    // Timed out/ failed
+                    DispatchQueue.main.async {
+                        // MARK: NINA
+                        NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                    }
                 }
             }
         }
@@ -160,13 +172,12 @@ class InAppManager: NSObject {
             }
         }
     }
-    //
+
     // Check if subscription is valid
     func isValidSubscription(expiryDate: String) -> Bool {
         // Comes as ms since 1970, convert to s then to date
         let expiryDateS = Double(expiryDate)! / 1000
-        //
-        return Date().timeIntervalSince1970 < expiryDateS
+        return (Date().timeIntervalSince1970 < expiryDateS)
     }
 }
 
@@ -258,14 +269,4 @@ extension InAppManager: SKPaymentTransactionObserver {
         print("Transaction Finished")
     }
 
-}
-
-//MARK: - SKProducatsRequestDelegate
-extension InAppManager: SKProductsRequestDelegate {
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        guard response.products.count > 0 else {return}
-        self.products = response.products
-        // Notify that products have been loaded
-        NotificationCenter.default.post(name: SubscriptionNotifiations.productsLoadedNotification, object: products)
-    }
 }

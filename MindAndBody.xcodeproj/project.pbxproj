@@ -1872,7 +1872,7 @@
 		07D69ABF216CE4E80007B00C /* backBicepErector@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backBicepErector@3x.png"; sourceTree = "<group>"; };
 		07D69AC0216CE4E90007B00C /* backBicepErector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backBicepErector@2x.png"; sourceTree = "<group>"; };
 		07DE23021FC0919200940567 /* Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
-		07DE23041FC0A47400940567 /* SubscriptionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScreen.swift; sourceTree = "<group>"; };
+		07DE23041FC0A47400940567 /* SubscriptionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScreen.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		07DE23061FC0AB3300940567 /* SwiftReceiptValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftReceiptValidator.swift; sourceTree = "<group>"; };
 		07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoice.swift; sourceTree = "<group>"; };
 		07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditing.swift; sourceTree = "<group>"; };

@@ -3102,10 +3102,19 @@
 
 
 //
-// MARK: Subscriptions
+// MARK:- Subscriptions
 "freeTrial" = "Try For Free";
 "subscriptionButton" = "Subscription";
 "alreadyHaveSubscription" = "I'm already subscribed";
+// Subscription view
+"threeMonthsTitle" = "3 Months";
+"twelveMonthsTitle" = "12 Months";
+"freeTrialTitle" = "1 month free trial offered!";
+"freeTrialExplanation" = "You can cancel the subscription at any time during the free trial from your Account Settings without being charged, so don't be afraid to give it a go!";
+"extraInfoSub" = "Buying the subscription will grant you access to the app and all its features for the selected time frame. The subscription will automatically renew within 24 hours of the end of the selected time unless cancelled. You can manage your subscriptions in Account Settings. By purchasing the subscription through in-app subscription, you agree to the Apple App Store terms and conditions. Visit our Terms of Use and Privacy Policy to learn more.";
+"perWeek" = " / Week";
+"per3Months" = " / 3 Months";
+"per12Months" = " / 12 Months";
 // Can cancel message
 "canCancelTitle" = "Are You Sure?";
 "canCancelMessage" = "\nYou can cancel at any time from your phone's settings during the trial, without having to pay anything.";

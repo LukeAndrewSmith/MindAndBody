@@ -469,16 +469,16 @@ class SubscriptionsCheck {
     // Check subscriptions, called from AppDelegate when first opening, to see if need to present subscription screen
     func checkSubscription() {
         // If internet, check subscription with apple
-        // NOTE TESTING, FOR TESTERS ONLY CHECK THE USERDEFAUKT
-//        if Reachability.isConnectedToNetwork() {
-//            InAppManager.shared.checkSubscriptionAvailability()
-//        // If no internet, fall back to userDefaults
-//        } else {
+        // MARK: NOTE TESTING, FOR TESTERS ONLY CHECK THE USERDEAULTS
+        if Reachability.isConnectedToNetwork() {
+            InAppManager.shared.checkSubscriptionAvailability()
+        // If no internet, fall back to userDefaults
+        } else {
             Loading.shared.shouldPresentLoading = false
             isValid = UserDefaults.standard.object(forKey: "userHasValidSubscription") as! Bool
             if isValid {
+                // MARK: NINA
                 DispatchQueue.main.async {
-                    // nina
                     NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
                     NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
                 }
@@ -487,7 +487,7 @@ class SubscriptionsCheck {
                     NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
                 }
             }
-//        }
+        }
     }
 }
 
