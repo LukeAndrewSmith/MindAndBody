@@ -37,7 +37,7 @@ extension ScheduleScreen {
         let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: headerHeight)
         let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
         snapShotHeader.center.y += pageStackHeight.constant
-        view.insertSubview(snapShotHeader, belowSubview: maskView1)
+        view.insertSubview(snapShotHeader, aboveSubview: scheduleTable)
         //
         // Slide across table
         let snapShotFrame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight - pageStackHeight.constant)
@@ -80,7 +80,7 @@ extension ScheduleScreen {
         let tableHeaderFrame = CGRect(x: 0, y: 0, width: view.bounds.width, height: headerHeight)
         let snapShotHeader = scheduleTable.resizableSnapshotView(from: tableHeaderFrame, afterScreenUpdates: false, withCapInsets: .zero)!
         snapShotHeader.center.y += pageStackHeight.constant
-        view.insertSubview(snapShotHeader, belowSubview: maskView1)
+        view.insertSubview(snapShotHeader, aboveSubview: scheduleTable)
         //
         // Slide table
         let snapShotFrame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight - pageStackHeight.constant)

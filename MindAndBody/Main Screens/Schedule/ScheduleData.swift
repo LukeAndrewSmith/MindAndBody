@@ -146,6 +146,7 @@ class ScheduleVariables {
     
     // Called upon selection of group in schedule screen
     func initializeChoice(extraSession: Bool, selectedRow: Int) {
+        TabBarChanged.shared.returningToSchedule = false
         if extraSession {
             extraSessionCompletion = [false, false, false]
             selectedGroup = Groups.extra

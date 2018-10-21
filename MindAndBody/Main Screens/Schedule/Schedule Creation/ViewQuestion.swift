@@ -40,6 +40,9 @@ class ScheduleViewQuestion: UIViewController {
         
         middleSeparator.backgroundColor = Colors.dark
         middleSeparator.alpha = 0.5
+        
+        weekViewImage.addShadow()
+        dayViewImage.addShadow()
 
         // Buttons
         dayViewButton.titleLabel?.lineBreakMode = .byWordWrapping

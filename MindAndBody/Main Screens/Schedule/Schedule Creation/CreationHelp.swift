@@ -17,6 +17,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: Outlets --------------------------------------------------------------------------------------------------------
     //
     @IBOutlet weak var questionsTable: UITableView!
+    @IBOutlet weak var previousSectionButton: UIButton!
     
     // Answer elements
     // Answer Table
@@ -55,6 +56,10 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         questionsTable.separatorStyle = .none
         questionsTable.backgroundColor = .clear
         questionsTable.isScrollEnabled = true
+        
+        //
+        previousSectionButton.tintColor = Colors.dark
+        previousSectionButton.alpha = 0
         
         // Progress Bar
         progressBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2)
@@ -313,6 +318,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 // Groups -> Questions
                 if selectedSection == 0 {
                     nextQuestion()
+                    previousSectionButton.alpha = 1
                 }
             // Goals empty, alert user
             } else {
@@ -491,6 +497,11 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    
+    @IBAction func previousSectionButtonAction(_ sender: Any) {
+        previousQuestion()
+    }
+    
     //
     @objc func previousQuestion() {
         // Questions
@@ -503,6 +514,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
             // Questions -> Goals
             } else {
+                previousSectionButton.alpha = 0
                 questionsTable.removeGestureRecognizer(downSwipe)
                 selectedSection -= 1
                 updateProgress()

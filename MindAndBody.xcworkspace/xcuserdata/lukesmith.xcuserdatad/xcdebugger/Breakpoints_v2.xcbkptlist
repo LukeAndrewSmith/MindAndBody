@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Schedule/Session Choice/SessionChoiceHelpers.swift"
-            timestampString = "561724262.241418"
+            timestampString = "561828638.2994649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1256"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Schedule/Session Choice/SessionChoiceHelpers.swift"
-            timestampString = "561724262.241504"
+            timestampString = "561828638.299547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1259"
@@ -58,29 +58,30 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Subscriptions/Subscriptions/Subscriptions Other/Subscriptions.swift"
-            timestampString = "561768280.7898051"
+            timestampString = "561830520.1207711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "checkExpiryDateAction(response:action:failedNotification:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/Subscriptions/Subscriptions/Subscriptions Other/Subscriptions.swift"
+            timestampString = "561830520.121106"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "paymentQueue(_:updatedTransactions:)"
             landmarkType = "7">
             <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MindAndBody.InAppManager.paymentQueue(_: __C.SKPaymentQueue, updatedTransactions: Swift.Array&lt;__C.SKPaymentTransaction&gt;) -&gt; ()"
-                  moduleName = "MindAndBody"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/Subscriptions/Subscriptions/Subscriptions%20Other/Subscriptions.swift"
-                  timestampString = "561767021.660872"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
-                  offsetFromSymbolStart = "2456">
-               </Location>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
@@ -89,14 +90,61 @@
                   moduleName = "MindAndBody"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/Subscriptions/Subscriptions/Subscriptions%20Other/Subscriptions.swift"
-                  timestampString = "561767021.665578"
+                  timestampString = "561817362.798368"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "133"
-                  endingLineNumber = "133"
-                  offsetFromSymbolStart = "72">
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "100">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; Swift.Bool in closure #2 (Swift.Bool, Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;) -&gt; () in MindAndBody.InAppManager.paymentQueue(_: __C.SKPaymentQueue, updatedTransactions: Swift.Array&lt;__C.SKPaymentTransaction&gt;) -&gt; ()"
+                  moduleName = "MindAndBody"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/Subscriptions/Subscriptions/Subscriptions%20Other/Subscriptions.swift"
+                  timestampString = "561817362.801165"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/Subscriptions/Subscriptions/Subscriptions Other/Subscriptions.swift"
+            timestampString = "561830520.1213109"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "paymentQueue(_:updatedTransactions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MindAndBody/Subscriptions/Subscriptions/SubscriptionScreen.swift"
+            timestampString = "561835795.819767"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
+            landmarkName = "handlePurchaseRestoreAlertSuccess()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

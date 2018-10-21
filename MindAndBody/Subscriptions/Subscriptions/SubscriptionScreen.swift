@@ -72,6 +72,8 @@ class SubscriptionScreen: UIViewController {
     func setupNotificationHandlers() {
         // Purchase/Restore success
         NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseRestoreAlertSuccess), name: SubscriptionNotifiations.purchaseRestoreSuccessfulNotification, object: nil)
+        // Dismiss loading
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissLoadingWhatever), name: SubscriptionNotifiations.dismissLoading, object: nil)
         // Purchase failed
         NotificationCenter.default.addObserver(self, selector: #selector(handlePurchaseFailed), name: SubscriptionNotifiations.purchaseFailedNotification, object: nil)
         // Restore

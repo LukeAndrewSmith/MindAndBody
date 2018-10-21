@@ -330,15 +330,9 @@ class MeditationGuided: UIViewController, UITableViewDelegate, UITableViewDataSo
             let independenceText = UILabel()
             setupText(label: independenceText, text: "introductionGEIndependenceText", previous: independenceTitle, gap: 8)
             
-            // Techniques Title
-            let techniquesTitle = UILabel()
-            setupSubtitle(titleLabel: techniquesTitle, title: "introductionGETechniquesTitle", previous: independenceText, gap: 24)
-            // Independence text
-            let techniquesBullets = UILabel()
-            setupBulletPoints(label: techniquesBullets, text: "introductionGETechniquesBullets", style: "numbers",  previous: techniquesTitle, gap: 8)
             // Relax note title
             let relaxTitle = UILabel()
-            setupSubtitle(titleLabel: relaxTitle, title: "introductionGERelaxNoteTitle", previous: techniquesBullets, gap: 8)
+            setupSubtitle(titleLabel: relaxTitle, title: "introductionGERelaxNoteTitle", previous: independenceText, gap: 24)
             // Relax note text
             let relaxText = UILabel()
             setupText(label: relaxText, text: "introductionGERelaxNoteText", previous: relaxTitle, gap: 8)

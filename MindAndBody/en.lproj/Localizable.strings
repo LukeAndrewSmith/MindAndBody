@@ -237,18 +237,18 @@
 "elbow" = "Elbow Rotations";
 "elbowEH" = "Stand upright\nHold one arm in front of you, palm facing up and your other hand touching your elbow\nGently bring your palm towards you, through the hole created by your other arm and straighten it, with your palm now facing down.\nReturn to the starting position bringing your hand back through the hole\nRepeat with the right arm for the recommended nº reps.\nRepeat with the left arm";
 // Alternative :== "Stand upright\nGently flex and extend one elbow 5-10 times, pausing when flexed and pausing when extended\nRepeat with the other\nThen with one elbow at 90º, open your palm and point it at the ceiling, then the floor, rotating your forearm 5-10 times (not shown on video)\nRepeat with the other";
-"elbowEA" = "Using momentum; make sure you pause when extended\nStraining; don't tense your muscles, gently move your hand about.";
+"elbowEA" = "Using momentum; try to make sure you pause when extended\nStraining; don't tense your muscles, gently move your hand about.";
 "elbowEF" = "Relaxing your shoulders\nMaintaining good posture";
 
 "shoulderR" = "Shoulder Rotations";
 "shoulderEH" = "Stand upright\nRelax your shoulders\nLift one arm and reach far out to the side\nSlowly rotate your arm in very small circles, increasing the size of the circle with each rotation (not shown on video)\nYou should end up rotating in slow big circles, with your shoulder reaching behind, up to the ceiling then forward\nRepeat the big circles the recommended number of rotations (1 rotation = 1 rep)\nRepeat the movement from the beginning rotating in the other direction.\nRepeat both directions with the other arm";
-"shoulderEA" = "Overextending the shoulder, rotate in a comfortable manner\nRotating too fast; a short pause between rotations helps to avoid this\nKeeping the shoulder static; allow it to move back, up then forward";
+"shoulderEA" = "Overextending the shoulder; try to rotate in a comfortable manner\nRotating too fast; a short pause between rotations helps to avoid this\nKeeping the shoulder static; allow it to move back, up then forward";
 "shoulderEF" = "Maintaining good posture\nBreathing";
 
 "neckR" = "Neck Rotations";
 "neckEH" = "Important; rotate your upper neck, keeping your head extended towards the ceiling at all times\nFlex and Extend;\nSlowly rotate your chin forward towards your chest (flex)\nRotate your head back, extending your chin up to the ceiling (extend)\nRepeat 5 - 10 times\nTilt;\nLook forwards at a point at eye level, gently tilt your head to one side (ear towards shoulder)\nBring it back up to the ceiling, then tilt to the other side\nRepeat 5-10 times\nTurn; (not on video)\nStanding tall, turn your head towards 90º to one side\nTurn your head to the other side\nRepeat 5-10 times\nNote:\nBreath in when entering the maximum stretch to help maintain good posture";
 // Extra "If you have a healthy neck, rotate your head gently in circles 5-10 times, then repeat in the other direction, keeping as tall as possible"
-"neckEA" = "Relaxing/dropping/slumping your head down, stand as tall as possible the whole time\nOverextending your neck (don't  do the rotations if you have a stiff neck), and don't tense your neck muscles to force a stretch, let gravity do the work and stop when you feel a little stretch";
+"neckEA" = "Relaxing/dropping/slumping your head down; try to stand as tall as possible the whole time\nOverextending your neck (don't  do the rotations if you have a stiff neck), and don't tense your neck muscles to force a stretch; try to let gravity do the work and stop when you feel a little stretch";
 "neckEF" = "Standing tall\nExtending your head up to the ceiling\nBeing gentle\nMaintaining good posture";
 
 "waist" = "Waist Rotations";
@@ -258,12 +258,12 @@
 
 "hip" = "Hip Rotations";
 "hipEH" = "Stand upright (holding a support if necessary)\nShift your weight to one leg\nWith your other legs' knee, smoothly draw a circle, your knee going behind you\nup and to the side\nin front\nthen returning to it's starting position\nBegin with little circles that increase in size with each rotation\nRepeat the maximum sized circles for the recommended nº reps\nRepeat rotating in the other direction\nRepeat with the other leg\nRecommended extra:\nStanding on one leg, point your toe as far to the left as possible, then as far to the right, repeat 5-10 times then with the other leg";
-"hipEA" = "Using momentum\nRotating in too big a circle (it's best to keep the circle small)\nForcing your hip into unnatural positions";
+"hipEA" = "Using momentum\nRotating in too big a circle\nForcing your hip into unnatural positions";
 "hipEF" = "Maintaining good posture and standing tall\nRelaxing and not forcing your hip";
 
 "knees" = "Knee Bends";
 "kneesEH" = "Stand upright\nShift your weight to one leg\nFlex your knee, gently bringing your heel towards your glutes\nReturn your foot back towards the ground, without putting any weight on it\nRepeat 5-10 times\nRepeat with the other leg";
-"kneesEA" = "Tensing your hamstrings too much, the aim is to warm up the knee joint not the hamstring\nUsing momentum, slowly bring your heel up, and pause at the bottom";
+"kneesEA" = "Tensing your hamstrings too much; the aim is to warm up the knee joint not the hamstring\nUsing momentum; try to slowly bring your heel up, and also to pause at the bottom";
 "kneesEF" = "Keeping your knee pointed towards the floor and your thighs parallel\nMaintaining good posture";
 
 "ankles" = "Ankle Rotations";
@@ -276,17 +276,17 @@
 
 "backf" = "Back Foam Roll";
 "backfEH" = "Place the foam roller underneath your back, around shoulder height\nBend your knees close to a little past 45º, placing your feet at hip width apart\nPut you hands behind your head with your elbows a little forward (so as to keep your shoulder a little forward)(or put your hands on your chest with your elbows up)\nKeeping your back a little tensed and straight, breath in while slowly rolling down your back by extending your legs until the roller reaches just above where your ribcage ends\nWhile breathing out, roll back up to shoulder height\nRepeat for the recommended nº reps\nNote:\nyou can pause at especially tense areas, and can rotate your whole torso to roll a specific side";
-"backfEA" = "Relaxing too much, you can easily put too much pressure on your spine, keep the muscles next to your spine tensed a little to protect it\nRolling too far (avoid the lower back and neck areas)\nLeaning back too far when the roller is at its lowest\nLifting your hips far off the ground, it's best even to keep them sliding on the ground or just above";
+"backfEA" = "Relaxing too much, you can easily put too much pressure on your spine; try to keep the muscles next to your spine tensed a little to protect it\nRolling too far (avoid the lower back and neck areas)\nLeaning back too far when the roller is at its lowest\nLifting your hips far off the ground; it's best even to keep them sliding on the ground or just above";
 "backfEF" = "Keeping tall (i.e extending your head from your pelvis)\nBreathing slowly and deeply\nTensing your back a little";
 
 "thoracicSpine" = "Thoracic Extensions";
 "thoracicSpineEH" = "Place the foam roller underneath your back, around shoulder height\nBend your knees close to a little past 45º, placing your feet at hip width apart\nPut you hands behind your head with your elbows a little forward (so as to keep your shoulder a little forward)(or put your hands on your chest with your elbows up)\nBreath in deeply while genlty extending your back backwards over the foam roller, until your upper back is a little arched\nBreath out while crunching forward, past the starting position until your upper is rounded a little forward\nRepeat for the recommended nº reps\nRepeat the recommended nº sets, moving the foam roller to a slightly different position (never on your lower back or neck, always close to the middle of your ribcage)";
-"thoracicSpineEA" = "Lifting your glutes of the ground\nLeaning your neck back, try and keep it in a constant neutral position\nRelaxing your back too much, the aim is not to relax onto the roller, but to stretch your upper back, try to keep a minimum tension in your back (this is helped by good breathing)";
+"thoracicSpineEA" = "Lifting your glutes of the ground\nLeaning your neck back; try and keep it in a constant neutral position\nRelaxing your back too much; the aim is not to relax onto the roller, but to stretch your upper back, try to keep a minimum tension in your back (good breathing helps)";
 "thoracicSpineEF" = "Breathing slowly and deeply\nTensing your back a little";
 
 "lat" = "Lat/Delt Foam Roll";
 "latEH" = "Lie on one side with your lower leg bent a little at the knee, place your upper legs foot in front of the knee of the lower for stabilization\nPlace the foam roller underneath your upper lat, just below the shoulder, with your arm extended out and palm facing up\nPlace your free hand in front of your torso to help balance\nSlowly roll down from the top of the lat to 2/3 down the ribcage while breathing in deeply\nWhile breathing out, roll back up to the starting position\nYou can lean forward and backward a little to target different areas of the lat\nRepeat for the recommended nº reps\nRepeat with the other lat\nNote: you can also work your weight forward and backward several times at the rear delt (perpendicular to the direction of the roller) to work the rotator cuff area if necessary";
-"latEA" = "Rolling too far down the lat\nRelaxing into the foam roller, keep an active core and straight back";
+"latEA" = "Rolling too far down the lat\nRelaxing into the foam roller; try to keep an active core and straight back";
 "latEF" = "Rolling slowly\nBreathing";
 
 "pecDelt" = "Pec and Delt Ball Roll";
@@ -326,7 +326,7 @@
 
 "itBand" = "IT Band Foam Roll";
 "itBandEH" = "Your it-band is the connective tissue that runs from your hip to your knee (and down to the shin), you can feel it on your outer leg if you straighten it\nWhile in a side plank position, place the foam roller underneath your lower leg, just above the knee on the side of your leg\nYour other leg should be behind you, stabilising and supporting weight as necessary (at first it will support a fair amount of weight as this can be quite painful)\nSlowly roll up to just below your hip\nSlowly roll back down to the starting position\nRepeat for the recommended nº reps\nRepeat with the other leg";
-"itBandEA" = "Applying too much pressure, make sure you are taking some weight of the it-band with your stabilising leg\nRolling to quickly\nRolling too fast";
+"itBandEA" = "Applying too much pressure; make sure you are taking some weight of the it-band with your stabilising leg\nRolling to quickly\nRolling too fast";
 "itBandEF" = "Breathing";
 
 "standOnBall" = "Foot Ball Roll";
@@ -368,17 +368,17 @@
 
 "sideLegKick" = "Side Leg Kick";
 "sideLegKickEH" = "Lie on your back with your arms outstretched and your palms facing up\nMake sure your back is straight with your head extended away from your pelvis\nLift your right foot a little and, while breathing in, bring it at reasonable speed toward your left hand keeping it close to the ground\nYou should reach a point where your leg drops a little and your foot touches the ground\nReturn to the starting position and repeat with the other leg\nRepeat for the recommended nº reps";
-"sideLegKickEA" = "Using momentum, while this movement is perform with a little speed, momentum makes it unsafe for the lower back";
+"sideLegKickEA" = "Using momentum";
 "sideLegKickEF" = "Breathing\nKeeping tall";
 
 "scorpionKick" = "Scorpion Kick";
 "scorpionKickEH" = "Lie on your front with your arms outstretched and your palms facing down\nLift your right foot up off the ground, and bring your foot to the side, attempting to reach your left hand\nThis should be done without forcing you lower back, until your foot touches the ground\nBring you leg back to the starting position and repeat with the other\nPause\nRepeat for the recommended nº reps";
-"scorpionKickEA" = "Using momentum as it makes it unsafe for the lower back";
+"scorpionKickEA" = "Using momentum";
 "scorpionKickEF" = "Breathing\nNot overextending your lower back";
 
 "sideBend" = "Side Bends";
 "sideBendEH" = "Stand upright, with good posture and your legs a little wider than your shoulders\nWhile keeping tall, and with an active core, breath in and lean to the side\nWhen you feel a stretching in your side just above you hip return upright\nRepeat on the other side\nRepeat for the recommended nº reps";
-"sideBendEA" = "Overextending, only lean till you feel a little stretch in your side\nAllowing your head to drop to the side, keep your neck in a neutral position";
+"sideBendEA" = "Overextending; try to only lean a little to each side\nAllowing your head to drop to the side; try to keep your neck in a neutral position";
 "sideBendEF" = "Breathing\nKeeping tall";
 
 "catCow" = "Cat Cow";
@@ -394,7 +394,7 @@
 // Upper Back
 "upperBackRotation" = "Upper Back Rotation";
 "EH" = "Kneel on all fours\nTouch your right shoulder with your right hand\nSlowly breath out and reach forward with your elbow, trying to touch your left hand but without rotating your lower back\nSlowly breath in and return past neutral to reach up to the sky with your elbow, again without rotating your lower back\nBreath out and return past neutral for the next rep\nRepeat for the recommended nº reps\nRepeat on the other side";
-"EA" = "Rotating your lower back, your aim is to warm up your upper back\nMoving too quickly";
+"EA" = "Rotating your lower back\nMoving too quickly";
 "EF" = "Breathing";
 
 "latStretch" = "Lat Stretch";
@@ -951,7 +951,7 @@
         "cardioType" = "Cardio Type";
         "hiit" = "HIIT";
         "regular" = "Regular";
-
+"intensity" = "Intensity";
             // Information
             //
 "purposeTextCardio" = "";
@@ -1597,8 +1597,8 @@
 "introductionGEIntro" = "Meditation brings a wide variety of benefits, ranging from contentedness to an increased ability to concentrate. With a little practice it will become natural and you will be able to explore its effects and benefits.";
 "introductionGEIndependenceTitle" = "Independence";
 "introductionGEIndependenceText" = "I consider it important to become independent in meditation in order to get the most out of it. By independent I mean to have developed a number of techniques, recognised their effects on yourself, and to have the ability to practice them without aid. The introduction section therefore serves to explain the fundamentals and to get you started, whilst the other sections present a variety of techniques to explore.";
-"introductionGETechniquesTitle" = "Presented Techniques";
-"introductionGETechniquesBullets" = "Focused Meditation:  meditation with your awareness directed towards an object (e.g breath)\nMindfulness:  meditation with your awareness being entirely in the present (perhaps on an object) whilst remaining conscious of passing thoughts and emotions.";
+//"introductionGETechniquesTitle" = "Presented Techniques";
+//"introductionGETechniquesBullets" = "Focused Meditation:  meditation with your awareness directed towards an object (e.g breath)\nMindfulness:  meditation with your awareness being entirely in the present (perhaps on an object) whilst remaining conscious of passing thoughts and emotions.";
 "introductionGERelaxNoteTitle" = "Patience";
 "introductionGERelaxNoteText" = "Don’t be daunted if at first you find it difficult to meditate, and make sure you are not too hard on yourself – this would be counter-productive; learning how to meditate takes time. It is best to relax and not to force the mind to do what you want it to, but rather to encourage it in the right direction and to keep on trying.";
 "introductionGEPostureTitle" = "Posture";
@@ -3682,9 +3682,9 @@
 "breathingWorkoutRuleImageTitle1" = "Breathe In";
 "breathingWorkoutRuleImageTitle2" = "Breathe Out";
 "breathingWorkoutRulesNoteTitle" = "Note";
-"breathingWorkoutRulesNoteText" = "The eccentric movement (lowering a weight/contracting when lengthening a muscle), is especially important as it is a main cause for muscle growth (and soreness!). Care should therefore be taken to be performed eccentric movements in a slow, controlled manner.";
+"breathingWorkoutRulesNoteText" = "The eccentric movement (lowering a weight/contracting when lengthening a muscle), is especially important as it is a main cause for muscle growth (and soreness!). Care should therefore be taken to perform eccentric movements in a slow, controlled manner.";
 "breathingWorkoutCardioTitle" = "2. Cardio/Endurance";
-"breathingWorkoutCardioText" = "Breathing correctly during cardio is especially important for maintaining good core activation (see lesson on core activation), and therefore good posture. Good posture can mean reducing wasted energy and keeping a healthier position for our muscles and joints. Again breathing also helps in giving maximum effort, we can focus our mind on the breathing and be aware of the cardio rather than focusing entirely on the cardio.";
+"breathingWorkoutCardioText" = "Breathing correctly during cardio is especially important for maintaining good core activation (see lesson on core activation), and therefore good posture. Good posture can mean reducing wasted energy and keeping a healthier position for our muscles and joints. Again breathing also helps in giving maximum effort; you can focus our mind on the breathing and be aware of the cardio rather than focusing entirely on the cardio.";
 
 
 // Breathing (Yoga)
@@ -3703,13 +3703,13 @@
 "coreActivationIntro1" = "Core activation is vital for anything from fitness to yoga to simply keeping good posture. Your core muscles and found mostly around the belly and the mid to lower back (they are not just your abs but do include them).";
 "coreActivationIntro2" = "Keeping an active core implies keeping constant tension throughout the core, but not necessarily forcefully tensing the muscles to their max.";
 "coreActivationBreathingTitle" = "Breathing & Core Activation";
-"coreActivationBreathingText" = "Breathing whilst keeping an active core is an extremely important skill in sport as they should be simultaneosly performed without effort.\n\nA good way to get an idea of what core activation feels like is to do a plank, and practicing breathing in a plank is good training.";
+"coreActivationBreathingText" = "Breathing well whilst keeping an active core is an extremely important skill in sport; it is sensible to practice this skill so that you are able to perform it without excessive concentration/effort.\n\nA good way to get an idea of what core activation feels like is to do a plank, and practicing breathing in a plank is good training.";
 "coreActivationBreathingPlankTitle" = "Exercise: Plank Breathing";
 "coreActivationBreathingPlankText" = "Get into the plank position and take deep, controlled breaths\nOn each inhale, breathe into your stomach but resist the expansion of your stomach a little with your core muscles. Try to also lift your head away from your pelvis during the inhale.\nOn each exhale, slowly activate your core muscles and push your breath out with this activation.";
 "coreActivationActivationTitle" = "Conscious Core Activation";
-"coreActivationActivationNote" = "Being able to consciously and correctly activate the core without it being a neccesity (like it was in the plank) means that you are able to control your core. This skill is useful for when you are doing sport as it will eventually become automatic and you will be able to keep an active core without effort.";
+"coreActivationActivationNote" = "Being able to consciously and correctly activate the core at will means that you are able to control your core. This skill is useful for when you are doing sport as it will eventually become automatic and you will be able to keep an active core without effort.";
 "coreActivationActivationPracticeTitle" = "Exercise: Standing Core Activation";
-"coreActivationActivationPracticeText" = "Stand tall and upright.\nBreath deeply.\nWhen exhaling, try and push the air out with your core muscles (around your torso, as if your had a corset squeezing you), but remain standing tall and upright (your lower back muscles, also part of the core, should be activated to help do so).\nWhen inhaling, breath deeply into your stomach, but resist the expansion of your stomatch/torso area a little with your core muscles.";
+"coreActivationActivationPracticeText" = "Stand tall and upright.\nBreath deeply.\nWhen exhaling, try and push the air out with your core muscles (around your torso, as if you had a corset squeezing you), but remain standing tall and upright (your lower back muscles, also part of the core, should be activated to help do so).\nWhen inhaling, breath deeply into your stomach, but resist the expansion of your stomatch/torso area a little with your core muscles.";
 "coreActivationActivationNote2" = "The two exercises above are excellent for learning core activation. It is good to practice them every now and again.";
 "coreActivationPostureTitle" = "Posture";
 "coreActivationPostureText" = "We are all guilty of sitting rather too much which can result in a weak core that doesn't support the body as it should. Learning to activate your core with the exercises above, and especially performing the second when sitting down will greatly help your posture.\n\nStrengthening the core through fitness and cardio is important, but so is keeping good posture throughout the day. Try to sit and stand upright, breathe into the stomach, and absolutely avoid excessive learning on your arms/elbows.";
@@ -3775,9 +3775,9 @@
 
         // Settings
 "settings0T" = "Profile";
-"settings0" = "Your schedule chooses sessions for you based on your profile, update it whenever you have improved to keep the sessions tailored to you.";
+"settings0" = "Your schedule chooses sessions for you based on your profile; update it whenever you have improved to keep the sessions tailored to you.";
 "settings1T" = "Automatic Sessions";
-"settings1" = "'30s' of a movement rather than '10 reps'; the app times each movement and rest for you, just watch and follow. Available for bodyweight circuit workouts, warmups and stretching sessions.\nAutomatic Yoga is the same but some extra settings need to be personalised to enable it.";
+"settings1" = "'30s' of a movement rather than '10 reps'; the app times each movement and rest for you; just watch and follow! Available for bodyweight circuit workouts, warmups and stretching sessions.\nAutomatic Yoga is the same but some extra personalisation is needed to enable it.";
 "settings2T" = "Reminders";
 "settings2" = "Notifications that let you know what you have planned. Motivating comments can be included in the notification.";
 "settings3T" = "Custom";
@@ -3785,7 +3785,7 @@
 
         // Automatic Yoga
 "automaticYoga0T" = "Average Breath Length";
-        "automaticYoga0" = "The length of your average breath when doing yoga.\nA breath is both inhale and exhale, and can be calculated by timing between 10-30 slow breaths and then dividing by the number of breaths.";
+"automaticYoga0" = "The length of your average breath when doing yoga.\n1 breath is 1 inhale and 1 exhale; it can be calculated by timing 30 slow breaths and then dividing by 30.";
 "automaticYoga1T" = "Transition Time";
         "automaticYoga1" = "The length of time you need to change pose.";
 "automaticYoga2T" = "Transition Indicator";

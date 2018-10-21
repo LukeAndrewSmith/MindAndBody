@@ -1732,19 +1732,19 @@ extension sessionData {
                 "sprintB":
                     [
                         "name": ["sprintB"],
-                        "demonstration": ["rowing"],
+                        "demonstration": ["biking"],
                         "isMovement": ["true"]
                 ],   // Bike
                 "fastB":
                     [
                         "name": ["fastB"],
-                        "demonstration": ["rowing"],
+                        "demonstration": ["biking"],
                         "isMovement": ["true"]
                 ],
                 "mediumB":
                     [
                         "name": ["mediumB"],
-                        "demonstration": ["rowing"],
+                        "demonstration": ["biking"],
                         "isMovement": ["true"]
                 ],
                 "stillB":

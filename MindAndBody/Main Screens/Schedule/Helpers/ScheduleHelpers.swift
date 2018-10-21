@@ -313,7 +313,8 @@ extension ScheduleScreen {
         if ScheduleVariables.shared.shouldReloadSchedule {
 
             ScheduleVariables.shared.shouldReloadSchedule = false
-
+            
+            ScheduleVariables.shared.setScheduleStyle()
             layoutViews()
             scheduleTable.reloadData()
             scheduleChoiceTable.reloadData()
@@ -368,9 +369,10 @@ extension ScheduleScreen {
         //
         
         // Separator
-        separator.frame = CGRect(x: tableSpacing, y: separatorY, width: view.bounds.width - 54, height: 1)
+        separatorTop.constant = separatorY
+//        separator.frame = CGRect(x: tableSpacing, y: separatorY, width: view.bounds.width - 54, height: 1)
         separator.backgroundColor = foregroundColor.withAlphaComponent(0.5)
-        view.insertSubview(separator, aboveSubview: scheduleTable)
+//        view.insertSubview(separator, aboveSubview: scheduleTable)
         
         //
         // Navigation Bar

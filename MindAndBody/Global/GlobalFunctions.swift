@@ -470,7 +470,6 @@ class SubscriptionsCheck {
     func checkSubscription() {
         // If internet, check subscription with apple
         // MARK: NOTE TESTING, FOR TESTERS ONLY CHECK THE USERDEAULTS
-        // NINA
         if Reachability.isConnectedToNetwork() {
             InAppManager.shared.checkIfUserHasSubscription()
         // If no internet, fall back to userDefaults

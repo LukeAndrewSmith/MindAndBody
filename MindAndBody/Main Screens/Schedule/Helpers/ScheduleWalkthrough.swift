@@ -56,10 +56,10 @@ extension ScheduleScreen {
 
 
             // Colour
-            walkthroughLabel.textColor = Colors.dark
-            walkthroughLabel.backgroundColor = Colors.light
-            walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
-            walkthroughHighlight.layer.borderColor = Colors.light.cgColor
+            walkthroughLabel.textColor = Colors.light
+            walkthroughLabel.backgroundColor = Colors.dark
+            walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
+            walkthroughHighlight.layer.borderColor = Colors.dark.cgColor
             // Highlight
             walkthroughHighlight.frame.size = CGSize(width: 172, height: 33)
             walkthroughHighlight.center = CGPoint(x: view.frame.size.width / 2, y: ((self.navigationController?.navigationBar.frame.height)! / 2) + ElementHeights.statusBarHeight)
@@ -70,11 +70,11 @@ extension ScheduleScreen {
             //
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
-                self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(1)
+                self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(1)
             }, completion: {(finished: Bool) -> Void in
                 UIView.animate(withDuration: 0.2, animations: {
                     //
-                    self.walkthroughHighlight.backgroundColor = Colors.light.withAlphaComponent(0.5)
+                    self.walkthroughHighlight.backgroundColor = Colors.dark.withAlphaComponent(0.5)
                 }, completion: nil)
             })
             
@@ -90,8 +90,8 @@ extension ScheduleScreen {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -108,8 +108,8 @@ extension ScheduleScreen {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
 
@@ -126,8 +126,8 @@ extension ScheduleScreen {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
 
@@ -143,8 +143,8 @@ extension ScheduleScreen {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -161,8 +161,8 @@ extension ScheduleScreen {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
             
@@ -179,8 +179,8 @@ extension ScheduleScreen {
             //
             labelFrame = 0
             //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
+            walkthroughBackgroundColor = Colors.dark
+            walkthroughTextColor = Colors.light
             //
             nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: walkthroughBackgroundColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
 

@@ -29,17 +29,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var presetCellHeight: CGFloat = 88 // 88
     var cellHeight: CGFloat = 88
     
-    
-    
-    // MARK: - Variables/Outlets
-    // Schedule Animation Helpers
-    let mask = CAGradientLayer()
-    let maskView1 = UIButton() // top
-    let maskView2 = UIButton() // bottom
-    let maskView3 = UIView() // Middle (rounded corners
-    let maskViewBackButton = UIImageView()
-    let maskViewBackToBeginningButton = UIButton()
-    
     // TableView
     let headerLabel = UILabel()
     var headerHeight: CGFloat {
@@ -50,10 +39,13 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
 //    }
     var daySwipeLeft = UISwipeGestureRecognizer()
     var daySwipeRight = UISwipeGestureRecognizer()
-    let separator = UIView()
+//    let separator = UIView()
+    @IBOutlet weak var separatorTop: NSLayoutConstraint!
+    @IBOutlet weak var separator: UIView!
+    
     var separatorY: CGFloat {
-        // (Size of schedule screen / 4) + height of pageStack
-        return pageStackHeight.constant + headerHeight
+        // (Size of schedule screen / 4) 
+        return headerHeight
     }
     //
     var okAction = UIAlertAction()

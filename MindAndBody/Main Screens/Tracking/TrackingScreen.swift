@@ -93,25 +93,25 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         var trackingDictionary = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
 
         trackingDictionary = [:]
-//        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().setToMidnightUTC())!
-//        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
+        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().setToMidnightUTC())!
+        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
 //        let firstMondayLastMonth = Date().firstMondayInMonth
-//        //
-//        trackingDictionary.updateValue(100, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
-//        trackingDictionary.updateValue(85, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
-//        trackingDictionary.updateValue(95, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
-//        trackingDictionary.updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
+        //
+        trackingDictionary.updateValue(100, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
+        trackingDictionary.updateValue(85, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
+        trackingDictionary.updateValue(95, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
+        trackingDictionary.updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
         
         
-        let possibleValues = [60,70,80,85,85,90,90,90,95,95,95,97,100,100,105,110]
-        var dateLoop = calendar.date(byAdding: .month, value: -8, to:  Date().firstMondayInMonth) // First monday in year
-        while dateLoop! < Date().firstMondayInCurrentWeek {
-            
-            let random = Int(arc4random_uniform(UInt32(possibleValues.count)))
-            let chosenValue = possibleValues[random]
-            trackingDictionary.updateValue(chosenValue, forKey: TrackingHelpers.shared.dateToString(date: dateLoop!))
-            dateLoop = calendar.date(byAdding: .weekOfYear, value: 1, to: dateLoop!)
-        }
+//        let possibleValues = [60,70,80,85,85,90,90,90,95,95,95,97,100,100,105,110]
+//        var dateLoop = calendar.date(byAdding: .month, value: -8, to:  Date().firstMondayInMonth) // First monday in year
+//        while dateLoop! < Date().firstMondayInCurrentWeek {
+//
+//            let random = Int(arc4random_uniform(UInt32(possibleValues.count)))
+//            let chosenValue = possibleValues[random]
+//            trackingDictionary.updateValue(chosenValue, forKey: TrackingHelpers.shared.dateToString(date: dateLoop!))
+//            dateLoop = calendar.date(byAdding: .weekOfYear, value: 1, to: dateLoop!)
+//        }
         
 
         UserDefaults.standard.set(trackingDictionary, forKey: "trackingDictionary")
@@ -282,93 +282,72 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         var chartDataOriginal: [(key: Date, value: Int)] = []
         var chartDataShifted: [(key: Double, value: Int)] = [] // Shift chart data so min date is 0, this allows for correct presenting of labels
         // Data points
-        switch timeScale {
-        // 1 Month
-        case 0,1,2,3:
-            //
-            chartView.xAxis.granularity = 7 // 7 days in a week
 
-            //
-            chartDataOriginal = trackingDictionaryDates.sorted(by: { $0.key < $1.key })
-            //
-            // Shift chart data so min date is 0, this allows for correct presenting of labels
-            if trackingDictionaryDates.count != 0 {
-                Tracking.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
-                for i in 0..<chartDataOriginal.count {
-                    let key = (chartDataOriginal[i].key.timeIntervalSince1970 - Tracking.shared.minTime) / (3600.0 * 24.0)
-                    let value = chartDataOriginal[i].value
-                    //
-                    let keyValue = (key: key, value: value)
-                    chartDataShifted.append(keyValue)
-                }
+        chartDataOriginal = trackingDictionaryDates.sorted(by: { $0.key < $1.key })
+
+        // Shift chart data so min date is 0, this allows for correct presenting of labels
+        if trackingDictionaryDates.count != 0 {
+            Tracking.shared.minTime = chartDataOriginal[0].key.timeIntervalSince1970
+            for i in 0..<chartDataOriginal.count {
+                let key = (chartDataOriginal[i].key.timeIntervalSince1970 - Tracking.shared.minTime) / (3600.0 * 24.0)
+                let value = chartDataOriginal[i].value
                 //
-                lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
+                let keyValue = (key: key, value: value)
+                chartDataShifted.append(keyValue)
             }
+            lineDataEntry = chartDataShifted.map{ChartDataEntry(x: $0.0, y: Double($0.1))}
+        }
+        
+        var calendar = Calendar(identifier: .iso8601)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        // Set Start and end dates for 1,3,6,12 months && set date formatter
+        switch timeScale {
+        // 1,3,6 months
+        case 0,1,2,3:
             
-            //
-            var calendar = Calendar(identifier: .iso8601)
-            calendar.timeZone = TimeZone(abbreviation: "UTC")!
-            // Set Start and end dates for 1,3,6,12 months && set date formatter
-            switch timeScale {
-            // 1,3,6 months
-            case 0,1,2:
-                
-                var startDate = Date().setToMidnightUTC()
-                let endDate = calendar.date(byAdding: .weekOfYear, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
-                
-                switch selectedTimeScale {
-                case 0:
-                    startDate = Date().firstMondayInMonth
-                    chartView.xAxis.labelCount = Date().numberOfMondaysInCurrentMonth
-                    chartView.xAxis.forceLabelsEnabled = true
-                    chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
-                case 1:
-                    startDate = calendar.date(byAdding: .month, value: -2, to: Date().setToMidnightUTC())!
-                    startDate = startDate.firstMondayInMonth
-                    // Find the number of x axis values to have
-                    var numberOfValues = 0
-                    for i in 0...2 {
-                        let month = calendar.date(byAdding: .month, value: i, to: startDate)!
-                        numberOfValues += month.numberOfMondaysInCurrentMonth
-                    }
-                    chartView.xAxis.labelCount = 3
-                    chartView.xAxis.forceLabelsEnabled = true
-                    chartView.xAxis.valueFormatter = DateValueFormatterMonth()
-                case 2:
-                    startDate = calendar.date(byAdding: .month, value: -5, to: Date().setToMidnightUTC())!
-                    startDate = startDate.firstMondayInMonth
-                    chartView.xAxis.labelCount = 6
-                    chartView.xAxis.forceLabelsEnabled = true
-                    chartView.xAxis.valueFormatter = DateValueFormatterMonth()
-                default: break
+            var startDate = Date().setToMidnightUTC()
+            var endDate = calendar.date(byAdding: .weekOfYear, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
+            
+            switch selectedTimeScale {
+            case 0:
+                startDate = Date().firstMondayInMonth
+                chartView.xAxis.labelCount = Date().numberOfMondaysInCurrentMonth
+                chartView.xAxis.forceLabelsEnabled = true
+                chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
+            case 1:
+                startDate = calendar.date(byAdding: .month, value: -2, to: Date().setToMidnightUTC())!
+                startDate = startDate.firstMondayInMonth
+                // Find the number of x axis values to have
+                var numberOfValues = 0
+                for i in 0...2 {
+                    let month = calendar.date(byAdding: .month, value: i, to: startDate)!
+                    numberOfValues += month.numberOfMondaysInCurrentMonth
                 }
-                //
-                let start = (startDate.timeIntervalSince1970 - Tracking.shared.minTime) / (3600.0 * 24.0)
-                chartView.xAxis.axisMinimum = start
-                
-                
-                let diffInDays = Calendar.current.dateComponents([.day], from: startDate, to: endDate!).day
-
-                //
-                var numberOfDays = 0
-                for i in 0...timeScale {
-                    let calendar = Calendar.current
-                    let date = calendar.date(byAdding: .month, value: i, to: startDate.firstDateInMonth)
-                    //
-                    let range = calendar.range(of: .day, in: .month, for: date!)!
-                    let numDays = range.count
-                    //
-                    numberOfDays += numDays
-                }
-                
-                chartView.xAxis.axisMaximum = start + Double(diffInDays!)
-                
+                chartView.xAxis.labelCount = 3
+                chartView.xAxis.forceLabelsEnabled = true
+                chartView.xAxis.valueFormatter = DateValueFormatterMonth()
+            case 2:
+                startDate = calendar.date(byAdding: .month, value: -5, to: Date().setToMidnightUTC())!
+                startDate = startDate.firstMondayInMonth
+                chartView.xAxis.labelCount = 6
+                chartView.xAxis.forceLabelsEnabled = true
+                chartView.xAxis.valueFormatter = DateValueFormatterMonth()
             // All
             case 3:
-                
-                chartView.xAxis.valueFormatter = DateValueFormatterDayDate()
+                startDate = trackingDictionaryDates.keys.sorted().first ?? Date().firstMondayInMonth
+                endDate = trackingDictionaryDates.keys.sorted().last ?? calendar.date(byAdding: .weekOfYear, value: Date().numberOfMondaysInCurrentMonth - 1, to: Date().firstMondayInMonth)
+                chartView.xAxis.labelCount = 0
+                chartView.xAxis.forceLabelsEnabled = true
+                chartView.xAxis.valueFormatter = DateValueFormatterMonth()
             default: break
             }
+            //
+            let start = (startDate.timeIntervalSince1970 - Tracking.shared.minTime) / (3600.0 * 24.0)
+            chartView.xAxis.axisMinimum = start
+            
+            let diffInDays = Calendar.current.dateComponents([.day], from: startDate, to: endDate!).day
+
+            chartView.xAxis.axisMaximum = start + Double(diffInDays!)
         default: break
         }
         

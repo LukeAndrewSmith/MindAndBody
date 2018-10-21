@@ -16,9 +16,9 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var groupImageHeight: NSLayoutConstraint!
     @IBOutlet weak var groupImage: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var cancelButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var backButtonTop: NSLayoutConstraint! // Used for animation going back to extra session choice
+    @IBOutlet weak var backButtonHeight: NSLayoutConstraint!
     
     var cellHeight: CGFloat = 72 // 110 // 88 // 72
     var headerHeight: CGFloat = 72
@@ -72,6 +72,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         choiceTable.isScrollEnabled = false
         cancelButton.tintColor = Colors.light
         backButton.tintColor = Colors.dark
+        backButtonHeight.constant = headerHeight
         
     }
     
@@ -84,7 +85,12 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             comingFromSchedule = false
         } else {
             self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            if TabBarChanged.shared.returningToSchedule {
+                TabBarChanged.shared.returningToSchedule = false
+                self.navigationController?.setNavigationBarHidden(true, animated: false)
+            } else {
+                self.navigationController?.setNavigationBarHidden(true, animated: true)
+            }
         }
         
         markAsCompletedAndAnimate()
@@ -92,6 +98,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        choiceTable.reloadData()
         setupGroupImage()
     }
     
@@ -213,26 +220,14 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func calculateCellHeight() {
         if ScheduleVariables.shared.selectedGroup == Groups.extra {
             cellHeight = (view.frame.height - 72) / 5
-            UIView.animate(withDuration: 0.1) {
-                self.cancelButtonHeight.constant = self.headerHeight
-                self.view.layoutIfNeeded()
-            }
         // If too many choices, reduce size of cell
-        } else if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count - 1) * 72) > (choiceTable.bounds.height + 72) {
-            let height = (choiceTable.bounds.height - 72) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress]).count - 1)
+        } else if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count - 1) * 72) > (choiceTable.bounds.height - headerHeight) {
+            let height = (choiceTable.bounds.height - headerHeight) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress]).count - 1)
             cellHeight = height
-            UIView.animate(withDuration: 0.1) {
-                self.cancelButtonHeight.constant = height
-                self.view.layoutIfNeeded()
-            }
             
         // Height 72
         } else {
             cellHeight = 72
-            UIView.animate(withDuration: 0.1) {
-                self.cancelButtonHeight.constant = self.headerHeight
-                self.view.layoutIfNeeded()
-            }
         }
     }
     

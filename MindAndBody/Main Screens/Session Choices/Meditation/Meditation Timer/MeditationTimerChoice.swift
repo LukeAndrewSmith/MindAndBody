@@ -80,8 +80,6 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         cell.durationLabel.text = duration
-//            String(hmsArray[0]) + "h " + String(hmsArray[1]) + "m " + String(hmsArray[2]) + "s"
-//        cell.durationLabel.sizeToFit()
         
         //
         cell.layoutSubviews()
@@ -93,6 +91,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         let chosenBackgroundSound = meditationArray[indexPath.row]["BackgroundSound"]?[0][0] as! Int
         // No background sound
         if chosenBackgroundSound == -1 {
+            cell.backgroundSoundImageView.image = nil
             addNothingChosenSymbol(view: cell.backgroundSoundImageView, height: height)
         // Background sound
         } else {

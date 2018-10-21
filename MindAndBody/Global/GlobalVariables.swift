@@ -221,3 +221,14 @@ class BellPlayer {
     // Meditation Timer didSetEndTime
     var didSetEndTime = false
 }
+
+//
+// Tab bar
+// Variable that check if tab bar is returning to schedule, if so and user is choosing session, remove navigation bar without animation
+class TabBarChanged {
+    static var shared = TabBarChanged()
+    private init() {}
+
+    // Name possibly misleading, as also used for background sounds in meditation timer
+    var returningToSchedule = false
+}

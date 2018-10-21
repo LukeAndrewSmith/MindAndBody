@@ -282,6 +282,7 @@
 		075D441C21406028003502B6 /* CustomElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075D441B21406028003502B6 /* CustomElements.swift */; };
 		07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */; };
 		07686A901F843A1600C278CC /* ScheduleHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */; };
+		076A9CEB217C9B50004FF398 /* SwiftReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A9CEA217C9B50004FF398 /* SwiftReceiptValidator.swift */; };
 		076C681F1ED1D35D009160C2 /* tibetanChimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680E1ED1BFAD009160C2 /* tibetanChimes.caf */; };
 		076C68201ED1D35D009160C2 /* tibetanChimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680E1ED1BFAD009160C2 /* tibetanChimes.caf */; };
 		076C68211ED1D35F009160C2 /* tibetanBowlL.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680F1ED1BFAD009160C2 /* tibetanBowlL.caf */; };
@@ -484,6 +485,7 @@
 		0782AB521FC4F0CE00D34500 /* ScheduleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782AB511FC4F0CE00D34500 /* ScheduleTableView.swift */; };
 		0782AB571FC4F1BB00D34500 /* ScheduleWalkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0782AB561FC4F1BB00D34500 /* ScheduleWalkthrough.swift */; };
 		0789ED061F79A6EA000EB739 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789ED051F79A6EA000EB739 /* Register.swift */; };
+		078A2182217CEE71006AA674 /* biking.png in Resources */ = {isa = PBXBuildFile; fileRef = 078A2181217CEE71006AA674 /* biking.png */; };
 		0791872B1E7B4E2C00E7153A /* SessionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791872A1E7B4E2C00E7153A /* SessionScreen.swift */; };
 		0794A7491FBC7F550029968D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794A7481FBC7F550029968D /* Settings.swift */; };
 		0794A74D1FBCC3D70029968D /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794A74C1FBCC3D70029968D /* ActionSheet.swift */; };
@@ -523,7 +525,6 @@
 		07D69AC2216CE4EA0007B00C /* backBicepErector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D69AC0216CE4E90007B00C /* backBicepErector@2x.png */; };
 		07DE23031FC0919200940567 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DE23021FC0919200940567 /* Subscriptions.swift */; };
 		07DE23051FC0A47500940567 /* SubscriptionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DE23041FC0A47400940567 /* SubscriptionScreen.swift */; };
-		07DE23071FC0AB3300940567 /* SwiftReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DE23061FC0AB3300940567 /* SwiftReceiptValidator.swift */; };
 		07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */; };
 		07E1D4DF1FB0DDF600B53B85 /* ScheduleEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */; };
 		07E1D4E11FB2250B00B53B85 /* CreationHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1D4E01FB2250B00B53B85 /* CreationHelp.swift */; };
@@ -1644,6 +1645,7 @@
 		075D441B21406028003502B6 /* CustomElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomElements.swift; sourceTree = "<group>"; };
 		07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAnimationHelpers.swift; sourceTree = "<group>"; };
 		07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleHelpers.swift; sourceTree = "<group>"; };
+		076A9CEA217C9B50004FF398 /* SwiftReceiptValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftReceiptValidator.swift; sourceTree = "<group>"; };
 		076C680E1ED1BFAD009160C2 /* tibetanChimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tibetanChimes.caf; sourceTree = "<group>"; };
 		076C680F1ED1BFAD009160C2 /* tibetanBowlL.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tibetanBowlL.caf; sourceTree = "<group>"; };
 		076C68101ED1BFAD009160C2 /* tibetanBowlL4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tibetanBowlL4.caf; sourceTree = "<group>"; };
@@ -1833,6 +1835,7 @@
 		0782AB511FC4F0CE00D34500 /* ScheduleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableView.swift; sourceTree = "<group>"; };
 		0782AB561FC4F1BB00D34500 /* ScheduleWalkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWalkthrough.swift; sourceTree = "<group>"; };
 		0789ED051F79A6EA000EB739 /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		078A2181217CEE71006AA674 /* biking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = biking.png; sourceTree = "<group>"; };
 		0791872A1E7B4E2C00E7153A /* SessionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScreen.swift; sourceTree = "<group>"; };
 		0794A7481FBC7F550029968D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		0794A74C1FBCC3D70029968D /* ActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheet.swift; sourceTree = "<group>"; };
@@ -1873,7 +1876,6 @@
 		07D69AC0216CE4E90007B00C /* backBicepErector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backBicepErector@2x.png"; sourceTree = "<group>"; };
 		07DE23021FC0919200940567 /* Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
 		07DE23041FC0A47400940567 /* SubscriptionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScreen.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		07DE23061FC0AB3300940567 /* SwiftReceiptValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftReceiptValidator.swift; sourceTree = "<group>"; };
 		07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoice.swift; sourceTree = "<group>"; };
 		07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditing.swift; sourceTree = "<group>"; };
 		07E1D4E01FB2250B00B53B85 /* CreationHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationHelp.swift; sourceTree = "<group>"; };
@@ -3173,6 +3175,7 @@
 			isa = PBXGroup;
 			children = (
 				07E45E621F4D9F2700A5AF49 /* Pause.png */,
+				078A2181217CEE71006AA674 /* biking.png */,
 				07702BFE1F4D7B6E000E1DB8 /* rowing.png */,
 				07702C001F4D7B78000E1DB8 /* running.png */,
 			);
@@ -4509,7 +4512,7 @@
 			children = (
 				071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */,
 				07DE23021FC0919200940567 /* Subscriptions.swift */,
-				07DE23061FC0AB3300940567 /* SwiftReceiptValidator.swift */,
+				076A9CEA217C9B50004FF398 /* SwiftReceiptValidator.swift */,
 			);
 			path = "Subscriptions Other";
 			sourceTree = "<group>";
@@ -7571,6 +7574,7 @@
 				07E464931F4DDE8300A5AF49 /* pushupHold.png in Resources */,
 				07E464271F4DDDB800A5AF49 /* bicycleCrunch2.png in Resources */,
 				07E463331F4DDB9500A5AF49 /* ropeExtensions3.png in Resources */,
+				078A2182217CEE71006AA674 /* biking.png in Resources */,
 				07E45F041F4DB49500A5AF49 /* warrior14.png in Resources */,
 				07702B9F1F4D75CC000E1DB8 /* jumpSquat2.png in Resources */,
 				07E45F511F4DB4C700A5AF49 /* revolvedSideAngle.png in Resources */,
@@ -8213,11 +8217,11 @@
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07E1D4DF1FB0DDF600B53B85 /* ScheduleEditing.swift in Sources */,
 				077DAB171FD5FE1900CF7949 /* LittleThings.swift in Sources */,
-				07DE23071FC0AB3300940567 /* SwiftReceiptValidator.swift in Sources */,
 				07BB1A31212CB225007C50CD /* MeditationTimerChoice.swift in Sources */,
 				07D5C3D91F9E32430038F143 /* ViewQuestion.swift in Sources */,
 				0794A74D1FBCC3D70029968D /* ActionSheet.swift in Sources */,
 				0798381E1F8A8DD9007C3CF5 /* TimeBasedSession.swift in Sources */,
+				076A9CEB217C9B50004FF398 /* SwiftReceiptValidator.swift in Sources */,
 				07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
 				077AC1001DA54C810026895B /* Lessons.swift in Sources */,

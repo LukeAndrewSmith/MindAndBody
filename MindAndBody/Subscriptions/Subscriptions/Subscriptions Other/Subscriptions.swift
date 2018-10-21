@@ -10,11 +10,11 @@ import Foundation
 import StoreKit
 
 enum ProductType: String {
-    case yearly = "mind_and_body_yearly_subscription"
     case threeMonth = "mind_and_body_3month_subscription"
+    case yearly = "mind_and_body_yearly_subscription"
 
     static var all: [ProductType] {
-        return [.yearly, .threeMonth]
+        return [.threeMonth, .yearly]
     }
 }
 
@@ -94,18 +94,19 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        var shouldBreak = false
         for transaction in transactions {
             guard let productType = ProductType(rawValue: transaction.payment.productIdentifier) else {fatalError()}
             switch transaction.transactionState {
             case .purchasing:
                 self.delegate?.inAppLoadingStarted()
             case .purchased:
-                SKPaymentQueue.default().finishTransaction(transaction)
+                queue.finishTransaction(transaction)
                 // check
                 let productIdentifier = transaction.payment.productIdentifier
                 SwiftyReceiptValidator.validate(forIdentifier: productIdentifier, sharedSecret: InAppManager.accountSecret) { (success, response) in
                     if success {
-                        InAppManager.shared.checkExpiryDateAction(response: response, action: 1)
+                        InAppManager.shared.checkExpiryDateAction(response: response, action: 1, failedNotification: true)
                         self.delegate?.inAppLoadingSucceded(productType: productType)
                     } else {
                         // Timed out/ failed
@@ -114,6 +115,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                     queue.finishTransaction(transaction)
                 }
             case .failed:
+                queue.finishTransaction(transaction)
                 // Failed
                 if let transactionError = transaction.error as NSError?,
                     transactionError.code != SKError.paymentCancelled.rawValue {
@@ -123,27 +125,43 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                 // Cancelled
                 } else {
                     self.delegate?.inAppLoadingFailed(error: InAppErrors.noSubscriptionPurchased)
+                    NotificationCenter.default.post(name: SubscriptionNotifiations.dismissLoading, object: nil)
                 }
-                SKPaymentQueue.default().finishTransaction(transaction)
             case .restored:
-                // Transaction was restored from user's purchase history
-                if let productIdentifier = transaction.original?.payment.productIdentifier {
-                    // Validate receipt
-                    SwiftyReceiptValidator.validate(forIdentifier: productIdentifier, sharedSecret: InAppManager.accountSecret) { (success, response) in
-                        if success {
-                            InAppManager.shared.checkExpiryDateAction(response: response, action: 1)
-                            SKPaymentQueue.default().finishTransaction(transaction)
-                            self.delegate?.inAppLoadingSucceded(productType: productType)
-                        } else {
-                            // Timed out/ failed
-                            NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+                queue.finishTransaction(transaction)
+                // Only bother checking remaining transactions if we still haven't found a valid transaction
+                print(SubscriptionsCheck.shared.isValid)
+                if !SubscriptionsCheck.shared.isValid {
+                    // Transaction was restored from user's purchase history
+                    if let productIdentifier = transaction.original?.payment.productIdentifier {
+                        // Validate receipt
+                        SwiftyReceiptValidator.validate(forIdentifier: productIdentifier, sharedSecret: InAppManager.accountSecret) { (success, response) in
+                            if success {
+                                self.delegate?.inAppLoadingSucceded(productType: productType)
+                                // If last transaction to check, present failed alert
+                                let failedAlert: Bool = {
+                                    return transactions.lastIndex(of: transaction) == (transactions.count - 1)
+                                }()
+                                InAppManager.shared.checkExpiryDateAction(response: response, action: 1, failedNotification: failedAlert)
+                                // If valid subscription found, break loop
+                                if SubscriptionsCheck.shared.isValid {
+                                    return
+                                }
+                                shouldBreak = SubscriptionsCheck.shared.isValid
+                            } else {
+                                // Timed out/ failed
+                                NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+                            }
                         }
-                        queue.finishTransaction(transaction)
                     }
                 }
             case .deferred:
                 self.delegate?.inAppLoadingSucceded(productType: productType)
                 NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+            }
+            //
+            if shouldBreak {
+                break
             }
         }
     }
@@ -151,6 +169,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     // -------------------------------------------------------------
     // MARK:- Restore Products
     func restoreSubscription() {
+        SubscriptionsCheck.shared.isValid = false
         SKPaymentQueue.default().restoreCompletedTransactions()
         self.delegate?.inAppLoadingStarted()
     }
@@ -172,17 +191,18 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     // MARK:- Check Subscription
     func checkIfUserHasSubscription() {
         // Attempt to validate receipt for all subscription types
-        for i in 0..<ProductType.all.count {
-            SwiftyReceiptValidator.validate(forIdentifier: ProductType.all[i].rawValue, sharedSecret: InAppManager.accountSecret) { (success, response) in
-                if success {
-                    self.checkExpiryDateAction(response: response, action: 0)
-                } else {
-                    // Failed
-                    // Call didChecksubscriptions, this calls a func which also checks the .isValid variable and present the subscription screen if not
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
-                }
-            }
-        }
+//        for i in 0..<ProductType.all.count {
+//            SwiftyReceiptValidator.validate(forIdentifier: ProductType.all[i].rawValue, sharedSecret: InAppManager.accountSecret) { (success, response) in
+//                if success {
+//                    self.checkExpiryDateAction(response: response, action: 0, failedNotification: false)
+//                } else {
+//                    // Failed
+//                    // Call didChecksubscriptions, this calls a func which also checks the .isValid variable and present the subscription screen if not
+//                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+//                }
+//            }
+//        }
+        restoreSubscription()
     }
 
     // MARK: Check reciept/expiry date
@@ -191,7 +211,8 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     // Note on action parameter
         // 0 == not called from subscription screen, i.e called from app delegate when first opening and checking to see wether or not to present subscription screen
         // 1 == Restore/Purchase -> dismiss subscription screen, present walkthrough
-    func checkExpiryDateAction(response: [String: AnyObject]?, action: Int) {
+    func checkExpiryDateAction(response: [String: AnyObject]?, action: Int, failedNotification: Bool) {
+        SubscriptionsCheck.shared.isValid = false
         /// Retreive the full apple receipt
         let receiptKey = SwiftyReceiptValidator.ResponseKey.receipt.rawValue
         if let receipt = response![receiptKey] {
@@ -211,8 +232,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                             UserDefaults.standard.set(expiryDate, forKey: "userSubscriptionExpiryDate")
                             SubscriptionsCheck.shared.isValid = true
                             Loading.shared.shouldPresentLoading = false
-                            // Broadcast success notification
-                            // Purchase
+                            // Broadcast success notifications
                             if action == 1 {
                                 NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseRestoreSuccessfulNotification, object: nil)
                             }
@@ -226,10 +246,13 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                 // No valid subscription
                 if !SubscriptionsCheck.shared.isValid {
                     // If no valid subscription found
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+                    if failedNotification {
+                        NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+                    }
                     UserDefaults.standard.set(false, forKey: "userHasValidSubscription")
                     SubscriptionsCheck.shared.isValid = false
                     Loading.shared.shouldPresentLoading = false
+                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
                 }
             }
         }

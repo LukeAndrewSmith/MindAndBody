@@ -20,15 +20,8 @@ class tabBar: UITabBarController {
         setTabBarItems()
     }
     
-    
     func setTabBarItems(){
-        
-        //        let myTabBarItem2 = (self.tabBar.items?[1])! as UITabBarItem
-        //        myTabBarItem2.image = UIImage(named: "Unselected")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-        //        myTabBarItem2.selectedImage = UIImage(named: "Selected")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-        //        myTabBarItem2.title = ""
-        //        myTabBarItem2.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-        
+
         let schedule = (self.tabBar.items?[0])! as UITabBarItem
         schedule.image = #imageLiteral(resourceName: "Calendar")
         schedule.title = NSLocalizedString("schedule", comment: "")
@@ -36,14 +29,9 @@ class tabBar: UITabBarController {
         let tracking = (self.tabBar.items?[1])! as UITabBarItem
         tracking.image = #imageLiteral(resourceName: "Graph")
         tracking.title = NSLocalizedString("tracking", comment: "")
-        
-//        let sessions = (self.tabBar.items?[2])! as UITabBarItem
-//        sessions.image = #imageLiteral(resourceName: "Mind&Body")
-//        sessions.title = NSLocalizedString("sessions", comment: "")
-        
+
         let lessons = (self.tabBar.items?[2])! as UITabBarItem
         lessons.image = #imageLiteral(resourceName: "Mind&Body")
-            //#imageLiteral(resourceName: "QuestionMarkMenu")
         lessons.title = NSLocalizedString("lessons", comment: "")
         
         let settings = (self.tabBar.items?[3])! as UITabBarItem
@@ -51,4 +39,10 @@ class tabBar: UITabBarController {
         settings.title = NSLocalizedString("settings", comment: "")
     }
     
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if self.tabBar.items?.firstIndex(of: item) == 0 {
+            TabBarChanged.shared.returningToSchedule = true
+
+        }
+    }
 }
