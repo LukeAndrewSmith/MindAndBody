@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Schedule/Session Choice/SessionChoiceHelpers.swift"
-            timestampString = "561828638.2994649"
+            timestampString = "562026509.0861959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1256"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Main Screens/Schedule/Session Choice/SessionChoiceHelpers.swift"
-            timestampString = "561828638.299547"
+            timestampString = "562026509.086324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1259"
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Subscriptions/Subscriptions/Subscriptions Other/Subscriptions.swift"
-            timestampString = "561830520.1207711"
+            timestampString = "562240586.886951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "checkExpiryDateAction(response:action:failedNotification:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,45 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Subscriptions/Subscriptions/Subscriptions Other/Subscriptions.swift"
-            timestampString = "561830520.121106"
+            timestampString = "562240586.8870291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "paymentQueue(_:updatedTransactions:)"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "checkExpiryDateAction(response:action:failedNotification:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Bool, Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;) -&gt; () in MindAndBody.InAppManager.paymentQueue(_: __C.SKPaymentQueue, updatedTransactions: Swift.Array&lt;__C.SKPaymentTransaction&gt;) -&gt; ()"
-                  moduleName = "MindAndBody"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/Subscriptions/Subscriptions/Subscriptions%20Other/Subscriptions.swift"
-                  timestampString = "561817362.798368"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "138"
-                  endingLineNumber = "138"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; Swift.Bool in closure #2 (Swift.Bool, Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;) -&gt; () in MindAndBody.InAppManager.paymentQueue(_: __C.SKPaymentQueue, updatedTransactions: Swift.Array&lt;__C.SKPaymentTransaction&gt;) -&gt; ()"
-                  moduleName = "MindAndBody"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/Subscriptions/Subscriptions/Subscriptions%20Other/Subscriptions.swift"
-                  timestampString = "561817362.801165"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -122,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MindAndBody/Subscriptions/Subscriptions/Subscriptions Other/Subscriptions.swift"
-            timestampString = "561830520.1213109"
+            timestampString = "562240586.8870831"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "paymentQueue(_:updatedTransactions:)"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "checkExpiryDateAction(response:action:failedNotification:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,14 +105,46 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MindAndBody/Subscriptions/Subscriptions/SubscriptionScreen.swift"
-            timestampString = "561835795.819767"
+            filePath = "MindAndBody/Main Screens/Schedule/ScheduleData.swift"
+            timestampString = "562240586.887135"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
-            landmarkName = "handlePurchaseRestoreAlertSuccess()"
-            landmarkType = "7">
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MindAndBody.ScheduleVariables.getIndexing(row: Swift.Int) -&gt; (day: Swift.Int, indexInDay: Swift.Int)"
+                  moduleName = "MindAndBody"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/Main%20Screens/Schedule/ScheduleData.swift"
+                  timestampString = "561905547.674283"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; Swift.Int in MindAndBody.ScheduleVariables.getIndexing(row: Swift.Int) -&gt; (day: Swift.Int, indexInDay: Swift.Int)"
+                  moduleName = "MindAndBody"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukesmith/Desktop/MindAndBody/MindAndBody/Main%20Screens/Schedule/ScheduleData.swift"
+                  timestampString = "561905547.678107"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "235"
+                  endingLineNumber = "235"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

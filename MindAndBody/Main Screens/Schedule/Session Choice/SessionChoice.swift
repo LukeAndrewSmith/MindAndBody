@@ -63,7 +63,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var isLessonsShowing = false // indicates if lessons view is presented
     
     var comingFromSchedule = true
-
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

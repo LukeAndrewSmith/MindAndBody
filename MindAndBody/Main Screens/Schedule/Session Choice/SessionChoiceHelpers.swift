@@ -292,9 +292,9 @@ extension SessionChoice {
                 if steadyStateChoice == 0 {
                     selectedComponent = 0
                     selectWarmup()
-                    // Stretching
+                // Stretching
                 } else if steadyStateChoice == 1 {
-                    selectedComponent = 1
+                    selectedComponent = 2
                     selectStretching()
                 }
                 performScheduleSegue()
@@ -477,7 +477,7 @@ extension SessionChoice {
             UIAlertAction in
             // Reload
             ScheduleVariables.shared.shouldReloadScheduleTracking()
-            let indexPath = NSIndexPath(row: ScheduleVariables.shared.selectedRows.final + 1, section: 0)
+            let indexPath = NSIndexPath(row: ScheduleVariables.shared.selectedRows.final, section: 0)
             // Find checkmark button and use this for markAsCompleted function
             if let cell = self.choiceTable.cellForRow(at: indexPath as IndexPath) {
                 for view in (cell.subviews) {

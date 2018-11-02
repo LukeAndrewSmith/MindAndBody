@@ -107,13 +107,10 @@ class ReminderNotifications {
         //
         if ScheduleVariables.shared.schedules.count > 0 {
             // Day view: set notifications for each day something is planned
-            let scheduleStyle = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
             if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
                 // Loop week
                 for i in 0...6 {
-                    // Check day
-//                    let dayCount = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count
-                    // Count whats left instead of .count for the day, incase something has been done in advance
+                    // Count whats left to do (incase something has been done in advance)
                     var dayCount = 0
                     for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count {
                         if !(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {

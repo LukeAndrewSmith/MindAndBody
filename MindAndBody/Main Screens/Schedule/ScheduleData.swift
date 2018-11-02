@@ -175,6 +175,15 @@ class ScheduleVariables {
         }
     }
     
+    func resetChoice() {
+        extraSessionCompletion = [false, false, false]
+        selectedGroup = Groups.none
+        isExtraSession = false
+        choiceProgress = 0
+        selectedRows.initial = 0
+        selectedRows.final = 0
+    }
+    
     // MARK: Checks
     // Checks if the group is completed
         // row: the row of the group in the initial schedule screen
@@ -232,14 +241,18 @@ class ScheduleVariables {
             // Use more apparent when week view, as finds the indexing variables
     func getIndexing(row: Int) -> (day: Int, indexInDay: Int) {
         let day: Int = {
-            if scheduleStyle == ScheduleStyle.day.rawValue {
+            if ScheduleVariables.shared.isExtraSession {
+                return 0
+            } else if scheduleStyle == ScheduleStyle.day.rawValue {
                 return selectedDay
             } else {
                 return weekArray[row]["day"] as! Int
             }
         }()
         let indexInDay: Int = {
-            if scheduleStyle == ScheduleStyle.day.rawValue {
+            if ScheduleVariables.shared.isExtraSession {
+                return 0
+            } else if scheduleStyle == ScheduleStyle.day.rawValue {
                 return row
             } else {
                 return weekArray[row]["index"] as! Int
@@ -501,7 +514,7 @@ class ScheduleVariables {
         // Use lastResetWeek in tracking progress array to reset schedule tracking bools to false and and week progress to 0
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         // Current mondays date in week (is set to midnight in func)
-        let currentMondayDate = Date().firstMondayInCurrentWeekCurrentTimeZone
+        let currentMondayDate = Date().firstMondayInCurrentWeekCurrentTimeZone.setToMidnightUTC()
         // Last Reset = monday of last week reset
         let lastReset = trackingProgressDictionary["LastResetWeek"] as! Date
         

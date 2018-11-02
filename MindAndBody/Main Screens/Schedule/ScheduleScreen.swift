@@ -208,12 +208,15 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         
         // Check if alert reminding to update profile (Once a month) should be presented
         UpdateProfile.shared.checkUpdateProfile()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         reloadCompletedRow()
+        // Reset session choice indicators
+        ScheduleVariables.shared.resetChoice()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

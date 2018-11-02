@@ -487,6 +487,7 @@ extension TimeBasedScreen {
     
     // Cancel timers and dismiss
     func dismissView() {
+        playBell(bell: 0)
         if lengthTimer.isValid {
             lengthTimer.invalidate()
         }

@@ -32,7 +32,7 @@ extension sessionData {
                     // Band/Bar/Machine Assisted
                     ["facePull", "externalRotation", "internalRotation", "shoulderDislocation", "latPullover"],
                     // General Mobility
-                    ["seatedKneeDrop", "groinStretch", "threadTheNeedle", "butterflyPose", "cossakSquat", "hipHinges", "lungeTwist", "sideLegSwings", "frontLegSwings", "spiderManHipLiftOverheadReach"],
+                    ["seatedKneeDrop", "groinStretch", "threadTheNeedle", "butterflyPose", "cossakSquat", "hipHinges", "lungeTwist", "sideLegSwings", "frontLegSwings", "hipLiftOverheadReach"],
                     // Dynamic Warmup Drills
                     ["forefootBounces", "jumpSquat", "lunge", "gluteKicks", "aSkips", "bSkips", "grapeVines", "lateralBound", "straightLegBound", "sprints"],
                     // Accessory
@@ -801,11 +801,11 @@ extension sessionData {
                             "explanation": ["frontLegSwingsEH", "frontLegSwingsEA", "frontLegSwingsEF"],
                             "targetArea": ["quadHamstringGluteStretch"]
                     ],
-                    "spiderManHipLiftOverheadReach":
+                    "hipLiftOverheadReach":
                         [
-                            "name": ["spiderManHipLiftOverheadReach"],
+                            "name": ["hipLiftOverheadReach"],
                             "demonstration": ["spiderManOverheadReach", "spiderManOverheadReach1", "spiderManOverheadReach2", "spiderManOverheadReach3", "spiderManOverheadReach4", "spiderManOverheadReach5", "spiderManOverheadReach4", "spiderManOverheadReach3", "spiderManOverheadReach6", "spiderManOverheadReach7", "spiderManOverheadReach6", "spiderManOverheadReach3", "spiderManOverheadReach2", "spiderManOverheadReach1"],
-                            "explanation": ["spiderManHipLiftOverheadReachEH", "spiderManHipLiftOverheadReachEA", "spiderManHipLiftOverheadReachEF"],
+                            "explanation": ["hipLiftOverheadReachEH", "hipLiftOverheadReachEA", "hipLiftOverheadReachEF"],
                             "targetArea": ["quadHamstringGluteStretch"]
                     ],
                     // Dynamic Warmup Drills

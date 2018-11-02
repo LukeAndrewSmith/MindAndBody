@@ -50,7 +50,6 @@ class SubscriptionScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadProducts()
         setupNotificationHandlers()
     }
     
@@ -63,6 +62,15 @@ class SubscriptionScreen: UIViewController {
             setupView()
             setupTitleImage()
             setupSubscriptionChoiceView()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Loading products
+        if InAppManager.shared.products.count == 0 {
+            addLoadingView()
         }
     }
     
@@ -182,19 +190,6 @@ class SubscriptionScreen: UIViewController {
     }
     
     // -------------------------------------------------------------
-    // MARK:- Load Subscriptions
-    
-    func loadProducts() {
-        InAppManager.shared.loadProducts()
-        
-        addLoadingView()
-        // Give 20s to try and load, if not remove
-        DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
-            if InAppManager.shared.products == [] {
-                self.removeLoadingPresentError()
-            }
-        })
-    }
     
     // Subscription handlers
     @objc func handleOptionsLoaded() {
@@ -251,11 +246,6 @@ class SubscriptionScreen: UIViewController {
         } else {
             addLoadingView()
             InAppManager.shared.loadProducts()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
-                if InAppManager.shared.products == [] {
-                    self.removeLoadingPresentError()
-                }
-            })
         }
     }
     
@@ -309,16 +299,10 @@ class SubscriptionScreen: UIViewController {
     
     // -------------------------------------------------------------
     // MARK:- Restore
-    
     // Restore
     @IBAction func restoreButton(_ sender: Any) {
         addLoadingView()
         InAppManager.shared.restoreSubscription()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: {
-            if self.view.subviews.contains(self.loadingView) {
-                self.removeLoadingPresentError()
-            }
-        })
     }
 
     // -------------------------------------------------------------
@@ -367,7 +351,8 @@ class SubscriptionScreen: UIViewController {
             UIAlertAction in
             //
             if InAppManager.shared.products == [] {
-                self.loadProducts()
+                self.addLoadingView()
+                InAppManager.shared.loadProducts()
             }
         }
         // Add Actions

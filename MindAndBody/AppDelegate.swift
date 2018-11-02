@@ -19,10 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
-        //
-        // Subscriptions
-        InAppManager.shared.startMonitoring()
-        
         // MARK: TEST!! REMOVE
         // ICloud/UserDefaults Reset
 //        let domain = Bundle.main.bundleIdentifier!
@@ -106,10 +102,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ScheduleVariables.shared.setSchedules()
         
-        // Check if the user has a valid subscription
-        // Subscription Check 1
-        SubscriptionsCheck.shared.checkSubscription()
-        
         return true
     }
 
@@ -121,6 +113,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Subscriptions
         InAppManager.shared.startMonitoring()
         InAppManager.shared.loadProducts()
+        //
+        // Check if the user has a valid subscription
+        // Subscription Check 1
+        SubscriptionsCheck.shared.checkSubscription()
         //
         NSSetUncaughtExceptionHandler { exception in
             print(exception)

@@ -284,7 +284,7 @@ class sessionData {
                          "sets": 2,
                          "reps": "0",
                          "time": 2],
-                        ["movement": "spiderManHipLiftOverheadReach",
+                        ["movement": "hipLiftOverheadReach",
                          "sets": 2,
                          "reps": "0",
                          "time": 2],
