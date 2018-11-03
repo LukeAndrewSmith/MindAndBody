@@ -342,10 +342,10 @@
 		07702B8C1F4D75C1000E1DB8 /* facePull3.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B861F4D75C1000E1DB8 /* facePull3.png */; };
 		07702B8D1F4D75C1000E1DB8 /* facePull4.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B871F4D75C1000E1DB8 /* facePull4.png */; };
 		07702B8E1F4D75C1000E1DB8 /* facePull5.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B881F4D75C1000E1DB8 /* facePull5.png */; };
-		07702B931F4D75C6000E1DB8 /* gluteBridgeW.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B8F1F4D75C6000E1DB8 /* gluteBridgeW.png */; };
-		07702B941F4D75C6000E1DB8 /* gluteBridgeW1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B901F4D75C6000E1DB8 /* gluteBridgeW1.png */; };
-		07702B951F4D75C6000E1DB8 /* gluteBridgeW2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B911F4D75C6000E1DB8 /* gluteBridgeW2.png */; };
-		07702B961F4D75C6000E1DB8 /* gluteBridgeW3.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B921F4D75C6000E1DB8 /* gluteBridgeW3.png */; };
+		07702B931F4D75C6000E1DB8 /* gluteBridge.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B8F1F4D75C6000E1DB8 /* gluteBridge.png */; };
+		07702B941F4D75C6000E1DB8 /* gluteBridge1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B901F4D75C6000E1DB8 /* gluteBridge1.png */; };
+		07702B951F4D75C6000E1DB8 /* gluteBridge2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B911F4D75C6000E1DB8 /* gluteBridge2.png */; };
+		07702B961F4D75C6000E1DB8 /* gluteBridge3.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B921F4D75C6000E1DB8 /* gluteBridge3.png */; };
 		07702B9D1F4D75CC000E1DB8 /* jumpSquat.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B971F4D75CC000E1DB8 /* jumpSquat.png */; };
 		07702B9E1F4D75CC000E1DB8 /* jumpSquat1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B981F4D75CC000E1DB8 /* jumpSquat1.png */; };
 		07702B9F1F4D75CC000E1DB8 /* jumpSquat2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702B991F4D75CC000E1DB8 /* jumpSquat2.png */; };
@@ -1059,11 +1059,6 @@
 		07E463611F4DDBE200A5AF49 /* skaterSquat2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E4635C1F4DDBE200A5AF49 /* skaterSquat2.png */; };
 		07E463621F4DDBE200A5AF49 /* skaterSquat3.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E4635D1F4DDBE200A5AF49 /* skaterSquat3.png */; };
 		07E463631F4DDBE200A5AF49 /* skaterSquat4.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E4635E1F4DDBE200A5AF49 /* skaterSquat4.png */; };
-		07E463691F4DDBE900A5AF49 /* sumoSquat.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463641F4DDBE900A5AF49 /* sumoSquat.png */; };
-		07E4636A1F4DDBE900A5AF49 /* sumoSquat1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463651F4DDBE900A5AF49 /* sumoSquat1.png */; };
-		07E4636B1F4DDBE900A5AF49 /* sumoSquat2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463661F4DDBE900A5AF49 /* sumoSquat2.png */; };
-		07E4636C1F4DDBE900A5AF49 /* sumoSquat3.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463671F4DDBE900A5AF49 /* sumoSquat3.png */; };
-		07E4636D1F4DDBE900A5AF49 /* sumoSquat4.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463681F4DDBE900A5AF49 /* sumoSquat4.png */; };
 		07E463761F4DDBF400A5AF49 /* lungeJump.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E4636E1F4DDBF400A5AF49 /* lungeJump.png */; };
 		07E463771F4DDBF400A5AF49 /* lungeJump1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E4636F1F4DDBF400A5AF49 /* lungeJump1.png */; };
 		07E463781F4DDBF400A5AF49 /* lungeJump2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463701F4DDBF400A5AF49 /* lungeJump2.png */; };
@@ -1688,10 +1683,10 @@
 		07702B861F4D75C1000E1DB8 /* facePull3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facePull3.png; sourceTree = "<group>"; };
 		07702B871F4D75C1000E1DB8 /* facePull4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facePull4.png; sourceTree = "<group>"; };
 		07702B881F4D75C1000E1DB8 /* facePull5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facePull5.png; sourceTree = "<group>"; };
-		07702B8F1F4D75C6000E1DB8 /* gluteBridgeW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gluteBridgeW.png; sourceTree = "<group>"; };
-		07702B901F4D75C6000E1DB8 /* gluteBridgeW1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gluteBridgeW1.png; sourceTree = "<group>"; };
-		07702B911F4D75C6000E1DB8 /* gluteBridgeW2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gluteBridgeW2.png; sourceTree = "<group>"; };
-		07702B921F4D75C6000E1DB8 /* gluteBridgeW3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gluteBridgeW3.png; sourceTree = "<group>"; };
+		07702B8F1F4D75C6000E1DB8 /* gluteBridge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gluteBridge.png; sourceTree = "<group>"; };
+		07702B901F4D75C6000E1DB8 /* gluteBridge1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gluteBridge1.png; sourceTree = "<group>"; };
+		07702B911F4D75C6000E1DB8 /* gluteBridge2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gluteBridge2.png; sourceTree = "<group>"; };
+		07702B921F4D75C6000E1DB8 /* gluteBridge3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gluteBridge3.png; sourceTree = "<group>"; };
 		07702B971F4D75CC000E1DB8 /* jumpSquat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpSquat.png; sourceTree = "<group>"; };
 		07702B981F4D75CC000E1DB8 /* jumpSquat1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpSquat1.png; sourceTree = "<group>"; };
 		07702B991F4D75CC000E1DB8 /* jumpSquat2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpSquat2.png; sourceTree = "<group>"; };
@@ -2410,11 +2405,6 @@
 		07E4635C1F4DDBE200A5AF49 /* skaterSquat2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skaterSquat2.png; sourceTree = "<group>"; };
 		07E4635D1F4DDBE200A5AF49 /* skaterSquat3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skaterSquat3.png; sourceTree = "<group>"; };
 		07E4635E1F4DDBE200A5AF49 /* skaterSquat4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skaterSquat4.png; sourceTree = "<group>"; };
-		07E463641F4DDBE900A5AF49 /* sumoSquat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquat.png; sourceTree = "<group>"; };
-		07E463651F4DDBE900A5AF49 /* sumoSquat1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquat1.png; sourceTree = "<group>"; };
-		07E463661F4DDBE900A5AF49 /* sumoSquat2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquat2.png; sourceTree = "<group>"; };
-		07E463671F4DDBE900A5AF49 /* sumoSquat3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquat3.png; sourceTree = "<group>"; };
-		07E463681F4DDBE900A5AF49 /* sumoSquat4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquat4.png; sourceTree = "<group>"; };
 		07E4636E1F4DDBF400A5AF49 /* lungeJump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lungeJump.png; sourceTree = "<group>"; };
 		07E4636F1F4DDBF400A5AF49 /* lungeJump1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lungeJump1.png; sourceTree = "<group>"; };
 		07E463701F4DDBF400A5AF49 /* lungeJump2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lungeJump2.png; sourceTree = "<group>"; };
@@ -2818,7 +2808,7 @@
 				07702B741F4D754C000E1DB8 /* bodyweightRow */,
 				07702B731F4D754B000E1DB8 /* bumKicks */,
 				07702B721F4D754B000E1DB8 /* facePull */,
-				07702B711F4D754A000E1DB8 /* gluteBridgeW */,
+				07702B711F4D754A000E1DB8 /* gluteBridge */,
 				07702B701F4D7549000E1DB8 /* jumpSquat */,
 				07702B6F1F4D7548000E1DB8 /* kneelingHipRotations-KickBack */,
 				07702B6E1F4D7548000E1DB8 /* latPullover */,
@@ -3126,15 +3116,15 @@
 			path = jumpSquat;
 			sourceTree = "<group>";
 		};
-		07702B711F4D754A000E1DB8 /* gluteBridgeW */ = {
+		07702B711F4D754A000E1DB8 /* gluteBridge */ = {
 			isa = PBXGroup;
 			children = (
-				07702B8F1F4D75C6000E1DB8 /* gluteBridgeW.png */,
-				07702B901F4D75C6000E1DB8 /* gluteBridgeW1.png */,
-				07702B911F4D75C6000E1DB8 /* gluteBridgeW2.png */,
-				07702B921F4D75C6000E1DB8 /* gluteBridgeW3.png */,
+				07702B8F1F4D75C6000E1DB8 /* gluteBridge.png */,
+				07702B901F4D75C6000E1DB8 /* gluteBridge1.png */,
+				07702B911F4D75C6000E1DB8 /* gluteBridge2.png */,
+				07702B921F4D75C6000E1DB8 /* gluteBridge3.png */,
 			);
-			path = gluteBridgeW;
+			path = gluteBridge;
 			sourceTree = "<group>";
 		};
 		07702B721F4D754B000E1DB8 /* facePull */ = {
@@ -5543,7 +5533,6 @@
 				07E461B71F4DD7C500A5AF49 /* skaterSquat */,
 				07E461971F4DD7AA00A5AF49 /* spiderPushup */,
 				07E461881F4DD79D00A5AF49 /* stepUp */,
-				07E461B61F4DD7C400A5AF49 /* sumoSquat */,
 				07E461AF1F4DD7C000A5AF49 /* superMan */,
 				07E461911F4DD7A600A5AF49 /* toePress */,
 				07E461AA1F4DD7BD00A5AF49 /* trianglePushup */,
@@ -6490,18 +6479,6 @@
 			path = lungeJump;
 			sourceTree = "<group>";
 		};
-		07E461B61F4DD7C400A5AF49 /* sumoSquat */ = {
-			isa = PBXGroup;
-			children = (
-				07E463641F4DDBE900A5AF49 /* sumoSquat.png */,
-				07E463651F4DDBE900A5AF49 /* sumoSquat1.png */,
-				07E463661F4DDBE900A5AF49 /* sumoSquat2.png */,
-				07E463671F4DDBE900A5AF49 /* sumoSquat3.png */,
-				07E463681F4DDBE900A5AF49 /* sumoSquat4.png */,
-			);
-			path = sumoSquat;
-			sourceTree = "<group>";
-		};
 		07E461B71F4DD7C500A5AF49 /* skaterSquat */ = {
 			isa = PBXGroup;
 			children = (
@@ -6925,7 +6902,7 @@
 				07702C791F4D941D000E1DB8 /* singleLegHamstring.png in Resources */,
 				0729003A1F4D71550048A355 /* lateralBound6.png in Resources */,
 				077AC1141DA7936E0026895B /* SF-UI-Display-Heavy.otf in Resources */,
-				07702B961F4D75C6000E1DB8 /* gluteBridgeW3.png in Resources */,
+				07702B961F4D75C6000E1DB8 /* gluteBridge3.png in Resources */,
 				07E464DF1F4ED1D000A5AF49 /* hip@2x.png in Resources */,
 				07E45FB81F4DB52900A5AF49 /* lowLunge.png in Resources */,
 				0729536F1F4ED58400B2F21C /* back@2x.png in Resources */,
@@ -6964,12 +6941,12 @@
 				07E4608E1F4DB68100A5AF49 /* halfVSideBend.png in Resources */,
 				07E460AF1F4DB69400A5AF49 /* marichi33.png in Resources */,
 				0729539A1F4ED58400B2F21C /* rearDelt@3x.png in Resources */,
-				07702B951F4D75C6000E1DB8 /* gluteBridgeW2.png in Resources */,
+				07702B951F4D75C6000E1DB8 /* gluteBridge2.png in Resources */,
 				07E4602B1F4DB5F300A5AF49 /* upwardBow1.png in Resources */,
 				077AC12C1DA793950026895B /* SF-UI-Text-Heavy.otf in Resources */,
 				07E460841F4DB67800A5AF49 /* halfVForwardBend3.png in Resources */,
 				07E460DD1F4DB6D200A5AF49 /* threadTheNeedle3.png in Resources */,
-				07702B931F4D75C6000E1DB8 /* gluteBridgeW.png in Resources */,
+				07702B931F4D75C6000E1DB8 /* gluteBridge.png in Resources */,
 				07E464E51F4ED1D000A5AF49 /* shoulderJoint@2x.png in Resources */,
 				07E461EF1F4DD9C700A5AF49 /* deadlift7.png in Resources */,
 				07E45F6F1F4DB4DA00A5AF49 /* halfForwardBend1.png in Resources */,
@@ -7037,7 +7014,6 @@
 				07702BD81F4D75EE000E1DB8 /* mountainClimber1.png in Resources */,
 				07E461EB1F4DD9C700A5AF49 /* deadlift3.png in Resources */,
 				07E462911F4DDA8700A5AF49 /* shrugDumbell1.png in Resources */,
-				07E4636B1F4DDBE900A5AF49 /* sumoSquat2.png in Resources */,
 				07E4640F1F4DDCBB00A5AF49 /* boxer2.png in Resources */,
 				07E461D01F4DD9B100A5AF49 /* legPress1.png in Resources */,
 				07FFA36B1F4C61B300E9B0C1 /* superManShoulder4.png in Resources */,
@@ -7495,7 +7471,6 @@
 				07FFA3731F4C61BE00E9B0C1 /* externalRotation2.png in Resources */,
 				0729FFD11F4D70F50048A355 /* lungeTwist14.png in Resources */,
 				07E462011F4DD9DD00A5AF49 /* legCurl1.png in Resources */,
-				07E4636A1F4DDBE900A5AF49 /* sumoSquat1.png in Resources */,
 				07FFA3721F4C61BE00E9B0C1 /* externalRotation1.png in Resources */,
 				07E4633D1F4DDB9B00A5AF49 /* cleanPress2.png in Resources */,
 				07702C6B1F4D93F1000E1DB8 /* squatHold.png in Resources */,
@@ -7511,7 +7486,6 @@
 				07E462AD1F4DDA9C00A5AF49 /* curl1.png in Resources */,
 				07E463ED1F4DDCA700A5AF49 /* walkingPushup2.png in Resources */,
 				07E45EC91F4DB47700A5AF49 /* extendedToeGrab1.png in Resources */,
-				07E463691F4DDBE900A5AF49 /* sumoSquat.png in Resources */,
 				07E463C41F4DDC8100A5AF49 /* reverseSnowAngels3.png in Resources */,
 				07E461C91F4DD9AA00A5AF49 /* frontSquat3.png in Resources */,
 				07E462A51F4DDA9500A5AF49 /* hammerCurlCable3.png in Resources */,
@@ -7553,7 +7527,6 @@
 				0729000C1F4D713F0048A355 /* aSkips2.png in Resources */,
 				072900371F4D71550048A355 /* lateralBound3.png in Resources */,
 				07038D5E1F4C605B001CC6D5 /* adductorFoam1.png in Resources */,
-				07E4636D1F4DDBE900A5AF49 /* sumoSquat4.png in Resources */,
 				07E462DD1F4DDAEC00A5AF49 /* semiInclineDumbellPress4.png in Resources */,
 				07E460781F4DB67100A5AF49 /* vSideBend4.png in Resources */,
 				07E4622B1F4DD9FE00A5AF49 /* lungeDumbell11.png in Resources */,
@@ -7937,7 +7910,7 @@
 				0729539B1F4ED58400B2F21C /* rearDelt2@2x.png in Resources */,
 				07E460DA1F4DB6D200A5AF49 /* threadTheNeedle.png in Resources */,
 				07E460031F4DB5D300A5AF49 /* catCow3.png in Resources */,
-				07702B941F4D75C6000E1DB8 /* gluteBridgeW1.png in Resources */,
+				07702B941F4D75C6000E1DB8 /* gluteBridge1.png in Resources */,
 				0729003D1F4D71550048A355 /* lateralBound9.png in Resources */,
 				07702C4D1F4D93A3000E1DB8 /* scalene.png in Resources */,
 				07E462031F4DD9DD00A5AF49 /* legCurl3.png in Resources */,
@@ -7992,7 +7965,6 @@
 				07702BFF1F4D7B6E000E1DB8 /* rowing.png in Resources */,
 				07E462BC1F4DDABB00A5AF49 /* forearmCurl1.png in Resources */,
 				07E460771F4DB67100A5AF49 /* vSideBend3.png in Resources */,
-				07E4636C1F4DDBE900A5AF49 /* sumoSquat3.png in Resources */,
 				07761ECB216902E300D4473B /* LakeTiticaca.caf in Resources */,
 				0729FFDB1F4D71020048A355 /* sideLegSwings2.png in Resources */,
 				07702BED1F4D75FD000E1DB8 /* pushUp1.png in Resources */,

@@ -22,7 +22,7 @@ extension sessionData {
                     // Foam/Ball Roll
                     ["backf", "thoracicSpine", "lat", "pecDelt", "rearDelt", "quadf", "adductorf", "hamstringf", "glutef", "calff", "itBand", "standOnBall"],
                     // Glutes
-                    ["gluteBridgewW", "kneelingKickBackW", "legsToSideSquat", "standingGluteKickback"],
+                    ["gluteBridge", "kneelingKickBackW", "legsToSideSquat", "standingGluteKickback"],
                     // Lower Back
                     ["sideLegDrop", "sideLegKick", "scorpionKick", "sideBend", "catCow", "legsToSideTwist", "plank"],
                     // Upper Back
@@ -65,13 +65,13 @@ extension sessionData {
                     ["benchPress", "benchPressDumbell", "semiInclineDumbellPress", "platePress", "barbellKneelingPress", "dips"],
                     // Push (Shoulders)
                     ["standingShoulderPressBarbell", "standingShoulderPressDumbell", "lateralRaise", "frontRaise"],
-                    // Push (Triceps) // 46: !!!
+                    // Push (Triceps) //
                     ["closeGripBench", "cableExtension", "ropeExtension"],
                     // Full Body ---------
                     ["cleanPress"],
                     // BodyWeight ------------------------------------
                     // Legs (General) ---------
-                    ["bodyweightSquat", "squatJump", "pistolSquat", "skaterSquat", "sumoSquat", "lunge", "lungeJump"],
+                    ["bodyweightSquat", "jumpSquat", "pistolSquat", "skaterSquat", "lunge", "lungeJump"],
                     // Legs (Hamstrings)
                     ["bodyweightDeadlift", "singleLegDeadlift"],
                     // Legs (Glutes)
@@ -565,11 +565,11 @@ extension sessionData {
                             "targetArea": ["foot"]
                     ],
                     // Glutes
-                    "gluteBridgewW":
+                    "gluteBridge":
                         [
-                            "name": ["gluteBridgewW"],
-                            "demonstration": ["gluteBridgeW", "gluteBridgeW1", "gluteBridgeW2", "gluteBridgeW3", "gluteBridgeW3", "gluteBridgeW2", "gluteBridgeW1", "gluteBridgeW2", "gluteBridgeW3", "gluteBridgeW3", "gluteBridgeW2", "gluteBridgeW1"],
-                            "explanation": ["gluteBridgewWEH", "gluteBridgewWEA", "gluteBridgewWEF"],
+                            "name": ["gluteBridge"],
+                            "demonstration": ["gluteBridge", "gluteBridge1", "gluteBridge2", "gluteBridge3", "gluteBridge3", "gluteBridge2", "gluteBridge1", "gluteBridge2", "gluteBridge3", "gluteBridge3", "gluteBridge2", "gluteBridge1"],
+                            "explanation": ["gluteBridgeEH", "gluteBridgeEA", "gluteBridgeEF"],
                             "targetArea": ["hamstringGlute"]
                     ], ///
                     "kneelingKickBackW":
@@ -1250,18 +1250,11 @@ extension sessionData {
                         "explanation": ["skaterSquatEH", "skaterSquatEA", "skaterSquatEF"],
                         "targetArea": ["squatBody"]
                 ],
-                "squatJump":
+                "jumpSquat":
                     [
-                        "name": ["squatJump"],
+                        "name": ["jumpSquat"],
                         "demonstration": ["jumpSquat", "jumpSquat1", "jumpSquat2", "jumpSquat3", "jumpSquat4", "jumpSquat5", "jumpSquat4", "jumpSquat3", "jumpSquat2", "jumpSquat1"],
-                        "explanation": ["squatJumpEH", "squatJumpEA", "squatJumpEF"],
-                        "targetArea": ["squatBody"]
-                ],
-                "sumoSquat":
-                    [
-                        "name": ["sumoSquat"],
-                        "demonstration": ["sumoSquat", "sumoSquat1", "sumoSquat2", "sumoSquat3", "sumoSquat4", "sumoSquat4", "sumoSquat3", "sumoSquat2"],
-                        "explanation": ["sumoSquatEH", "sumoSquatEA", "sumoSquatEF"],
+                        "explanation": ["jumpSquatEH", "jumpSquatEA", "jumpSquatEF"],
                         "targetArea": ["squatBody"]
                 ],
                 "lunge":
@@ -1297,7 +1290,7 @@ extension sessionData {
                 "gluteBridge":
                     [
                         "name": ["gluteBridge"],
-                        "demonstration": ["gluteBridgeW", "gluteBridgeW1", "gluteBridgeW2", "gluteBridgeW3", "gluteBridgeW3", "gluteBridgeW2", "gluteBridgeW1", "gluteBridgeW2", "gluteBridgeW3", "gluteBridgeW3", "gluteBridgeW2", "gluteBridgeW1"],
+                        "demonstration": ["gluteBridge", "gluteBridge1", "gluteBridge2", "gluteBridge3", "gluteBridge3", "gluteBridge2", "gluteBridge1", "gluteBridge2", "gluteBridge3", "gluteBridge3", "gluteBridge2", "gluteBridge1"],
                         "explanation": ["gluteBridgeEH", "gluteBridgeEA", "gluteBridgeEF"],
                         "targetArea": ["squatBody"]
                 ],
