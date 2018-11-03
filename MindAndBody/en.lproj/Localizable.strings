@@ -434,8 +434,8 @@
 "bandAssisted" = "Upper Body Band/Bar/Machine Assisted";
 
 "facePull" = "Face Pull";
-"facePullEH" = "Can be performed with a resistance band or a cable machine (using a rope grip)\nAttatch the band/cable at chest height and stand at a distance where tension is felt in the band/cable\nKeeping your shoulders down and back, hold the grip with straight arms and your palms facing down\nBreathe out while slowly rotating your shoulders back and bringing your elbows and hands back and up just past your head\nHold for a moment\nBreathe in and slowly extend your arms forwards again, keeping your shoulders down\nRepeat for the recommended nº reps";
-"facePullEA" = "Using a heaving weight/too much resistance\nBringing your shoulders too far back; go to just behind your head or to where you feel comfortable";
+"facePullEH" = "Can be performed with a resistance band or a cable machine (using a rope grip)\nAttatch the band/cable at chest height and stand at a distance where tension is felt in the band/cable\nHold the grip with straight arms, your shoulders down and back, your palms facing down with your thumbs towards the machine and your wrists in line with your shoulders\n-\nBreathe out while simultaneously bringing your wrists and elbows back and up, rotating your shoulders back (your wrists should keep at a constant distance and just reach above your head)\nHold for a moment when your wrists are just behind your head\nBreathe in and slowly extend your arms forwards again, keeping your shoulders down\nRepeat for the recommended nº reps";
+"facePullEA" = "Using a heaving weight/too much resistance\nBringing your shoulders too far back; go to just behind your head or to where you feel comfortable\nKeeping your elbows at the height of your shoulders; bring them up with your elbows and rotate your shoulders back";
 "facePullEF" = "Keeping your shoulders back and down\nBreathing";
 
 "externalRotation" = "External Rotation";
@@ -454,8 +454,8 @@
 "shoulderDislocationEF" = "Keeping tall\nBreathing";
 
 "latPullover" = "Lat Pullover";
-"latPulloverEH" = "Can be performed with a resistance band or a cable machine (a solid stick grip is prefferable)\nAttach the band/cable at or higher than head height\nStand with your hips back and upper body straight and 45º to the floor\nYour arms should be up and pointing towards where the cable is attatched\nWith your elbows a little bent, breathe out and bring them forward and down, towards your knees until your hands are a fist or so away from your knees\nBreathe out and bring your elbows forward and up until your hands are pointing towards the cable attatchement\nRepeat for the recommended nº reps";
-"latPulloverEA" = "Bending your back; keep your hips rotated forwards, and an active core\nShrugging your shoulder; keep them down and back";
+"latPulloverEH" = "Can be performed with a resistance band or a cable machine (a bar grip is prefferable)\nAttach the band/cable at or higher than head height\nStand back from the machine, hips back and upper body straight at 45º to the floor\nYour arms should be up and pointing towards where the cable is attatched\nWith your elbows a little bent, breathe out and pull through your elbows towards the floor then back towards your knees until your hands are a fist or so away from your knees\nBreathe out and bring your elbows forward and up until your hands are pointing towards the cable attatchement\nRepeat for the recommended nº reps";
+"latPulloverEA" = "Bending your back; keep your hips rotated forwards, and an active core\nShrugging your shoulder; keep them down and back\nFlaring your elbows out to the side; keep them tucked in";
 "latPulloverEF" = "Activating your back\nKeeping tall\nBreathing";
 
 // General Mobility
@@ -661,9 +661,9 @@
 "deadliftEF" = "Keeping your chest open\nKeeping an active core\nBreathing";
 
 "romanianDeadlift" = "Romanian Deadlift";
-"romanianDeadliftEH" = "Position your feet at shoulder width, with your hips back a tiny bit and your knees a little bent\n-\nBreathe in while pushing your hips back and letting your torso down, keeping the weight very close to your legs\nStop just below your knees (or above if your lower back starts to bend early)\nBreathe out and active your glutes and hamstrings, standing back up while keeping the weights close to your legs\nRepeat for the recommended nº reps";
-"romanianDeadliftEA" = "Using heavy weights; this movement should be done with relatively light weights\nLeaning too far forward; keep your weight back on your hips and the weights close to your legs\nBending your back; don't go too far down\nRounding your shoulders; keep your chest open;
-"romanianDeadliftEF" = "Keeping your chest open\nKeeping an active core\nBreathing";
+"romanianDeadliftEH" = "Position your feet at shoulder width, with your hips back a tiny bit and your knees a little bent\n-\nBreathe in and push your hips back, letting your torso down while keeping the weights very close to/beside your legs\nStop just below your knees (or above if your lower back starts to bend early)\nBreathe out and active your glutes and hamstrings, standing back up while keeping the weights close to/beside your legs\nRepeat for the recommended nº reps";
+"romanianDeadliftEA" = "Using heavy weights; this movement should be done with relatively light weights\nLeaning too far forward; keep your weight back on your hips and the weights close to/beside your legs\nBending your back; don't go too far down\nRounding your shoulders; keep your chest open and back active";
+"romanianDeadliftEF" = "Keeping your weight back and chest open\nKeeping an active core\nBreathing";
 
 "weightedHipThrust" = "Weighted Hip Thrust";
 "weightedHipThrustEH" = "Position your upper back on a sideways bench, with the bar above your hips and your feet at hip width in front of you\nLift the bar a little off the ground\n-\nBreathe out while activating your core and glutes until you've lifted your hips to just below your knees (which should be around 45º)\nBreathe in and slowly return to a little off the ground";
@@ -687,7 +687,7 @@
 "lungeDumbellEF" = "Activating your glutes\nKeeping upright\nBreathing";
 
 "bulgarianSplitSquat" = "Bulgarian Split Squat";
-"EH" = "Position the top of your right foot on a sideways bench and your left foot in front of you such that when you squat your left knee doesn't pass your toes\nKeep upright with an active core and neutral hips\n-\nBreathe in while squatting down, sitting into your left hip and keeping your torso upright\nStop and pause for a moment when your left knee reaches 45º\nBreathe out while pressing back up until your left leg is nearly straight\n";
+"bulgarianSplitSquatEH" = "Position the top of your right foot on a sideways bench and your left foot in front of you such that when you squat your left knee doesn't pass your toes\nKeep upright with an active core and neutral hips\n-\nBreathe in while squatting down, sitting into your left hip and keeping your torso upright\nStop and pause for a moment when your left knee reaches 45º\nBreathe out while pressing back up until your left leg is nearly straight\n";
 "bulgarianSplitSquatEA" = "Moving quickly\nLeaning your torso forward";
 "bulgarianSplitSquatEF" = "Activating your glutes\nKeeping upright\nBreathing";
 
@@ -720,58 +720,53 @@
 "kneelingPullDownEF" = "Tensing your back\nKeeping tall\nBreathing";
 
 "bentOverRowDumbell" = "Bent Over Dumbell Row";
-"bentOverRowDumbellEH" = "";
-"bentOverRowDumbellEA" = "";
-"bentOverRowDumbellEF" = "";
+"bentOverRowDumbellEH" = "Stand tall with an active core and your shoulders back and down\nPosition your feet at shoulder width\nBreathe in and push your hips back, letting your torso down while keeping the weights very close to/beside your legs\nStop when the weight is a little below your knees, your should be holding the weights beside your knees at a 45º angle\n-\nBreath out and pull the weights back through your elbows, keeping them close to your body until they just pass your torso\nPause for a moment\nBreath in and slowly lower the weights until just before your arms are nearly fully extended, tensing the core while you do so\nRepeat for the recommended nº reps\n\nAlternative:\nAs the described technique can put a lot of pressure on your lower back, I would also recommend a one handed technique\nThe only difference is that you hold a support (e.g the weight rack or a bench) with one hand while performing the exact same movement with the other, and alternate";
+"bentOverRowDumbellEA" = "Using heavy weights; be careful of your lower back, and perform the one handed technique if you have any doubts\nUsing momentum; don't pull your torso back to initiate the movement, keep it in a constant position\nLeaning too far forward; keep your weight back on your hips and the weights close to/beside your legs\nRounding your shoulders; keep your chest open and back active";
+"bentOverRowDumbellEF" = "Keeping your weight back and chest open\nKeeping an active core\nBreathing";
 
 "tBarRow" = "T-Bar Row";
-"tBarRowEH" = "";
-"tBarRowEA" = "";
-"tBarRowEF" = "";
+"tBarRowEH" = "Position the end of a back in a corner with a little weight on it for safety\nPosition your feet at shoulder width, grip the bar (one hand in front of the other) just below the end\nSquat down and breath out while lifting the weight to just below your knees using your legs\nKeep an open chest, active core and back and your weight back on your hips\n-\nBreath out and pull the weight back through your elbows, keeping them close to your body until they just pass your torso\nPause for a moment\nBreath in and slowly lower the weights until just before your arms are nearly fully extended, tensing the core while you do so\nRepeat for the recommended nº reps\n\nAlternative:\nAs the described technique can put a lot of pressure on your lower back, I would also recommend a one handed technique\nStand sideways at the end of the bar gripping just before the tip and rest your other arm on a bench placed just in front of you\nPerform the same movement as described above with one hand, then swap hands";
+"tBarRowEA" = "Using heavy weights; be careful of your lower back, and perform the one handed technique if you have any doubts\nLeaning too far forward; keep your weight back on your hips and grip close to your legs\nRounding your shoulders; keep your chest open and back active";
+"tBarRowEF" = "Keeping your weight back and chest open\nKeeping an active core\nBreathing";
 
 "rowMachine" = "Machine Row";
-"rowMachineEH" = "";
-"rowMachineEA" = "";
-"rowMachineEF" = "";
+"rowMachineEH" = "Position the top of the chest pad at or below the middle of your chest\nSit tall and grip the grips at a height such that when your arms are pulled back to beside your torso, your elbows form a 45º angle\n-\nBreathe out while pulling the weight back through your elbows, keeping them down, until they just pass your torso\nPause for a moment\nBreathe out and slowly let the weight forward until your arms are nearly straight, allowing your shoulder to move a little forward without rounding them or relaxing them\nRepeat for the recommended nº reps";
+"rowMachineEA" = "Leaning forward; keep your back tall and tensed throughout the movement\nUsing exessive weight; even if it feels like you can lift a lot with this machine, stick to weight you can keep good form with\nUsing momentum; don't pull your torso back to initiate the movement, keep your chest to the pad and pull in a controlled manner";
+"rowMachineEF" = "Keeping tall with your chest open\nKeeping an active core\nBreathing";
 
-"latPullover" = "Lat Pullover";
-"latPulloverEH" = "";
-"latPulloverEA" = "";
-"latPulloverEF" = "";
+// "latPullover" = "Lat Pullover";      warmup
 
 // Pull (Upper Back)
-"facePull" = "Face Pull";
-"facePullEH" = "";
-"facePullEA" = "";
-"facePullEF" = "";
+//"facePull" = "Face Pull";     warmup
 
 "leaningBackPullDown" = "Leaning Back Pull Down";
-"leaningBackPullDownEH" = "";
-"leaningBackPullDownEA" = "";
-"leaningBackPullDownEF" = "";
+"leaningBackPullDownEH" = "Attach a neutral (palms facing eachother) or forward (palms facing forwards) grip to the machine\nGrip at a fist wider than shoulder width and sit down\nTense your core muscles, bring your shoulders down a little, open your chest and lean back 45º\n-\nBreathe out and pull back through your elbows (imagine your pulling your elbows behind you and down a little), bringing your shoulders back and down until your elbows are a little behind you\nBreathe in and slowly extend your elbows up to the starting position (without letting your shoulders shrug far forwards)\nRepeat for the recommended nº reps";
+"leaningBackPullDownEA" = "Using momentum; don't initiate the movement by pulling your torso back, your torso should keep a constant angle and you should slowly pull the grip down\nPulling your elbows too far back; your shoulders become more vulnerable if your elbows are pulled far back\nFlaring your elbows too much; your elbows should be out but still pointing down and tucked in a little";
+"leaningBackPullDownEF" = "Activating your core\nKeeping a constant torso position\nBreathing";
 
 // Pull (Rear Delts)
 "bentOverBarbellRow" = "Wide Grip Bent Over Barbell Row";
-"bentOverBarbellRowEH" = "";
-"bentOverBarbellRowEA" = "";
-"bentOverBarbellRowEF" = "";
+"bentOverBarbellRowEH" = "Position your feet at shoulder width, and grip the bar at a fist wider than shoulder width\nBreathe in, squat down and lift through your legs until the weight is just below or at knee height with your knees bent and your weight back on your hips\n-\nBreathe out while pulling your elbows back and keeping your shoulders in a fairly constant position (try to use the shoulders no the upper back)\nStop and pause for a moment when your elbows are in line with or just behind your shoulders\nBreath in while slowly lowering the weight back to knee height";
+"Stand tall with an active core and your shoulders back and down\nPosition your feet at shoulder width\nBreathe in and push your hips back, letting your torso down while keeping the weights very close to/beside your legs\nStop when the weight is a little below your knees, your should be holding the weights beside your knees at a 45º angle\n-\nBreath out and pull the weights back through your elbows, keeping them close to your body until they just pass your torso\nPause for a moment\nBreath in and slowly lower the weights until just before your arms are nearly fully extended, tensing the core while you do so\nRepeat for the recommended nº reps\n\nAlternative:\nAs the described technique can put a lot of pressure on your lower back, I would also recommend a one handed technique\nThe only difference is that you hold a support (e.g the weight rack or a bench) with one hand while performing the exact same movement with the other, and alternate";
+"bentOverBarbellRowEA" = "Using heavy weights; be careful of your lower back\nUsing momentum; don't pull your torso back to initiate the movement, keep it in a constant position\nLeaning too far forward; keep your weight back on your hips and the weights close to/beside your legs\nRounding your shoulders; keep your chest open and back active";
+"bentOverBarbellRowEF" = "Keeping your weight back and chest open\nKeeping an active core\nBreathing";
 
 // Pull (Traps)
 "shrugDumbell" = "Dumbell Shrug";
-"shrugDumbellEH" = "";
-"shrugDumbellEA" = "";
-"shrugDumbellEF" = "";
+"shrugDumbellEH" = "Stand tall with an active core, shoulders back and down, holding the weights at 45º to your body\n-\nBreathe out and shrug your shoulders up and back a little\nPause at for a moment at maximum shrug\nBreathe in while slowly bringing your shoulders back down, make sure not to round them forward";
+"shrugDumbellEA" = "Rounding your shoulders; keep an open chest\nRelaxing your core; make sure to stand tall and breath into your stomach";
+"shrugDumbellEF" = "Keeping an active core\nKeeping an open chest\nBreathing";
 
 // Pull (Biceps)
-"hamerCurl" = "Hammer Curl";
-"hamerCurlEH" = "";
-"hamerCurlEA" = "";
-"hamerCurlEF" = "";
+"hammerCurl" = "Hammer Curl";
+"hammerCurlEH" = "Stand tall with an active core, shoulders back and down, holding the weights such that your thumbs face forward\n-\nBreath out and lift the weights forward and up with your biceps until your elbows reach 45º\nPause for a moment\nBreath in and slowly let the weights down, without letting your arms swing\nRepeat for the recommended nº reps\nNote: you can also perform this one hand at a time as in the video";
+"hammerCurlEA" = "Using momentum; don't swing your arm forward and then lift the weight, keep your upper arm static and slowly lift the weight\nBringing your elbow forward in front of your torso; keep it in line with it";
+"hammerCurlEF" = "Controlling the movement\nKeeping an active core\nKeeping an open chest\nBreathing";
 
 "hammerCurlCable" = "Cable Hammer Curl";
-"hammerCurlCableEH" = "";
-"hammerCurlCableEA" = "";
-"hammerCurlCableEF" = "";
+"hammerCurlCableEH" = "Set the cable at the lowest position\nGrip the end of the cable with one hand with the rubber stopper sitting on your fist (I don't use an attatched grip for this movement)\nStand with your hand down, just above and behind the cable\n-\nBreath out and lift the weight forward and up with your bicep until your elbow reaches 45º\nPause for a moment\nBreath in and slowly let the weight down, without letting your arm swing\nRepeat for the recommended nº reps\nRepeat with the other arm";
+"hammerCurlCableEA" = "Using momentum; don't swing your arm forward and then lift the weight, keep your upper arm static and slowly lift the weight\nBringing your elbow forward in front of your torso; keep it in line with it";
+"hammerCurlCableEF" = "Controlling the movement\nKeeping an active core\nKeeping an open chest\nBreathing";
 
 "curl" = "Curl";
 "curlEH" = "";
