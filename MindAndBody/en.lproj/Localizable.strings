@@ -567,13 +567,13 @@
 // Accessory
 "accessory" = "Accessory";
 
-"pushUp" = "Push Up";
-"pushUpEH" = "With nearly straight arms, place your hands a bit wider than your shoulders with your index fingers pointing forward, and your shoulders above your fingers\nExtended your legs out behind you on your tip toes\nKeep your hips rotated forward, your glutes and core active and your shoulders down\nBreathe in and slowly bring your shoulders towards your fingers, keeping your elbows tucked in to your body\nWhen your elbows are at 45º, breathe out and slowly press back up\nRepeat for the recommended nº reps";
-"pushUpEA" = "Pressing fast; this should be a slow controlled movement\nSplaying your elbows out to the side; keep them tucked in to your body\nChanging the angle of your forearm; always keep your forearm perpendicular to the ground\nRounding your shoulders forwards; keep your chest out a little";
-"pushUpEF" = "Slow movement\nKeeping your torso extended and core active\nBreathing";
+"pushUp" = "Push-Up";
+"pushUpEH" = "With nearly straight arms, place your hands a bit wider than your shoulders with your index fingers pointing forward, and your shoulders above your fingers\nExtended your legs out behind you on your tip toes\nKeep your hips rotated forward, your glutes and core active and your shoulders down\nBreathe in and slowly bring your shoulders towards your fingers, keeping your elbows tucked in to your body\nWhen your elbows are at 90º, breathe out and press back up\nRepeat for the recommended nº reps";
+"pushUpEA" = "Pressing fast; this should be a slow controlled movement\nSplaying your elbows out to the side; keep them tucked in to your body\nChanging the angle of your forearm; always keep your forearm perpendicular to the ground\nRounding your shoulders forwards; keep your chest open";
+"pushUpEF" = "Moving slowly and in control\nKeeping your head tall and away from your pelvis with an active core\nBreathing";
 
-"pullUp" = "Pull Up";
-"pullUpEH" = "Hang from a pull up bar with neutral grip or normal grip (palms facing eachother or forewards)\nTense your core muscles, rotate your hips forward, bring your shoulders down a little and open your chest\nBreathe out and pull up through your elbows (imagine your pulling your elbows to the floor) until your head is at the height of your hands or above\nBreathe in and slowly extend down to the starting position (without letting your shoulders shrug far up)\nRepeat for the recommended nº reps";
+"pullUp" = "Pull-Up";
+"pullUpEH" = "Hang from a Pull-Up bar with neutral grip or normal grip (palms facing eachother or forewards)\nTense your core muscles, rotate your hips forward, bring your shoulders down a little and open your chest\nBreathe out and Pull-Up through your elbows (imagine your pulling your elbows to the floor) until your head is at the height of your hands or above\nBreathe in and slowly extend down to the starting position (without letting your shoulders shrug far up)\nRepeat for the recommended nº reps";
 "pullUpEA" = "Moving quickly\nShrugging your shoulders too much; don't relax too much at the bottom";
 "pullUpEF" = "Pulling your elbows to the floor\nKeeping an active core\nBreathing";
 
@@ -698,12 +698,12 @@
 
 // Legs (Calves)
 "standingCalfRaise" = "Standing Calf Raise";
-"standingCalfRaiseEH" = "Position the edge of the step directly below the bar\nGrip the bar a little wider than your shoulders (or more if your shoulders are unflexible)\nPosition the bar at the height of or just above the bones at the top of your back, keep your shoulders back and traps tensed so that the bar will sit on the muscles (this might be uncomfortable if you are not used to it. Keep the bar on your muscles or on the scapula bones, definitely not on the spine)\nPosition your forefeet on the end of the step and take the weight onto your shoulders\n-\nBreathe out and push away from the floor with your calves, bringing your heels together as you go up\nBreathe out and go back down to maximum stretch, pausing for a moment at the bottom\nRepeat for the recommended nº reps";
+"standingCalfRaiseEH" = "Position the edge of the step directly below the bar\nGrip the bar a little wider than your shoulders (or more if your shoulders are unflexible)\nPosition the bar at the height of or just above the bones at the top of your back, keep your shoulders back and traps tensed so that the bar will sit on the muscles (this might be uncomfortable if you are not used to it. Keep the bar on your muscles or on the scapula bones, definitely not on the spine)\nPosition your forefeet on the edge of the step and take the weight onto your shoulders\n-\nBreathe out and push away from the floor with your calves, bringing your heels together as you go up\nBreathe in and go back down to maximum stretch, pausing for a moment at the bottom\nRepeat for the recommended nº reps";
 "standingCalfRaiseEA" = "Moving too quickly; this should be a slow and controlled movement";
 "standingCalfRaiseEF" = "Bringing your heels closer together on the way up\nBreathing";
 
 "seatedCalfRaise" = "Seated Calf Raise";
-"seatedCalfRaiseEH" = "Lift the ankle rest on the leg extension machine to its top position, and position the edge of the step directly below\nSit on the edge of the knee rest with your foorefoot on the edge of the step and the weight on your knee\n-\nBreathe out and push your heel away from the floor with your calves\nBreathe out and go back down to maximum stretch, pausing for a moment at the bottom\nRepeat for the recommended nº reps";
+"seatedCalfRaiseEH" = "Lift the ankle rest on the leg extension machine to its top position, and position the edge of the step directly below\nSit on the edge of the knee rest with your foorefoot on the edge of the step and the weight on your knee\n-\nBreathe out and push your heel away from the floor with your calves\nBreathe in and slowly go back down to maximum stretch, pausing for a moment at the bottom\nRepeat for the recommended nº reps";
 "seatedCalfRaiseEA" = "Moving too quickly; this should be a slow and controlled movement";
 "seatedCalfRaiseEF" = "Breathing";
 
@@ -911,54 +911,110 @@
 "singleLegGluteBridgeEF" = "Keeping your hips rotated forward\nTensing your glutes\nBreathing";
 
 "kickBack" = "Kick Back";
-"EH" = "Kneel on all fours with a straight back";
-"EA" = "";
-"EF" = "";
+"kickBackEH" = "Kneel on all fours\nLift one leg a little off the ground\n-\nBreathe out while slowly tensing your glute and extending your leg back then up as far as possible while keeping your hips rotated forward\nPause for a moment at maximum extension\nBreath in and return your knee to beneath your hip\nRepeat for the recommended nº reps\nRepeat with the other leg";
+"kickBackEA" = "Using momentum\nArching your back too far; keep your head tall and away from your pelvis";
+"kickBackEF" = "Activating your glute\nBreathing";
 
 "standingKickBack" = "Standing Kick Back";
-"EH" = "";
-"EA" = "";
-"EF" = "";
+"standingKickBackEH" = "Stand tall with an active core\nLift one leg a little off the ground\n-\nBreathe out while slowly tensing your glute and extending your leg back as far as possible while keeping your hips rotated forward\nPause for a moment at maximum extension\nBreath in and return it to be in line with the other, without placing the foot down\nRepeat for the recommended nº reps\nRepeat with the other leg";
+"standingKickBackEA" = "Using momentum\nArching your back too far";
+"standingKickBackEF" = "Activating your glute\nBreathing";
 
 // Legs (Calves)
 "calfRaise" = "Calf Raise";
-"EH" = "";
-"EA" = "";
-"EF" = "";
+"calfRaiseEH" = "Position a step next to something you can hold onto to support yourself\nPosition your forefeet on the edge of the step and hold the support, standing tall with an active core\n-\nTake your weight onto one foot\nBreathe out and push away from the floor with your calf\nBreathe in and slowly go back down to maximum stretch, pausing for a moment at the bottom\nRepeat for the recommended nº reps\nRepeat with the other foot";
+"calfRaiseEA" = "Moving too quickly; this should be a slow and controlled movement";
+"calfRaiseEF" = "Keeping your heel in line with your knee\nBreathing";
 
 
 // Pull (Back)
 "contralateralLimbRaises" = "Contralateral Limb Raise";
+"EH" = "Kneel on all fours\n-\nBreathe out and tense your glute and extending your leg back then up as far as possible while simultaneously extening your opposing arm foreward then up as far as possible. Make sure you keep your hips rotated forward\nPause for a moment at maximum extension\nBreathe in while returning your arm and leg to the starting position\nRepeat with the other arm and leg\nRepeat for the recommended nº reps";
+"EA" = "Using momentum\nArching your back too far; keep your head tall and away from your pelvis";
+"EF" = "Activating your glute\nBreathing";
+
 "superMan" = "Superman";
+"superManEH" = "Lie on your stomach with your arms straight above your head and your shoulders down away from your ears\n-\nBreathe out while pulling your arms up with your shoulders, and your legs up with your glutes\nYour hips should be rotated forward and your glutes tensed so as not to arch your lower back much, and you should be looking at the floor, tensing your upper back\nHold for the recommended nº breaths";
+"superManEA" = "Arching your back; keep your hips rotated forward and don't lift your arms or legs far off the ground\nRelaxing your core; absolutely keep it active the whole time, breathing into your stomach";
+"superManEF" = "Keeping an active core\nKeeping your hands and toes pulled away from eachother\nKeeping your hips rotated forward and head tall away from your pelvis\nBreathing";
+
 "backHyperextension" = "Back Hyperextension";
+"backHyperextensionEH" = "Lie on your stomach with your arms down by your side, your shoulders down away from your ears and your palms facing up\n-\nKeeping an active core with your hips rotated forward and tensed glutes, breathe out and slowly lift your back up\nImagine you are lifting your whole back equally and straight up rather than pulling your upper back to your bum. Keep your head tall and away from your pelvis and activate your upper back to slowly rotate your shoulders back until your palms face the floor\nPause for a moment, keeping your head away from your pelvis and glutes tensed\nBreathe out and slowly relax your back muscles simultaneously\nRepeat for the recommended nº reps";
+"backHyperextensionEA" = "Arching your lower back much; don't pull your upper back towards your bum, lift your whole back straight up as described\nRelaxing your lower before your upper back muscles when returning too the ground\nPulling your head back; keep looking towards the ground\nRelaxing your core; breath into your stomach";
+"backHyperextensionEF" = "Keeping your head tall and away from your pelvis\nKeeping your hips rotated forward with active glutes\nActivating your whole back\nBreathing";
+
 "doorFrameRow" = "Door Frame Row";
+"doorFrameRowEH" = "Position your toes against the left side of a door frame, and hold the frame with your right hand at the height of your elbow\nStand tall with an active core\n-\nBreathe in and slowly let your weight back, controlling the movement by pulling against it through your elbow to keep an active back\nPause just before your arm is straight\nBreathe out and pull back towards the frame through your elbow, image your pulling your elbow behind you\nRepeat for the recommended nº reps\nRepeat with the other arm on the other side of the door frame";
+"doorFrameRowEA" = "Misaligning you hips or your shoulders; don't let one shoulder or hip fall behind the other, keep them parrallel to the frame\nLetting your shoulder come too far forward; don't relax your back when leaning back\nFlaring your elbow; keep your elbow tucked in to your side";
+"doorFrameRowEF" = "Keeping tall\nPulling back through your elbow\nBreathing";
+
 "reverseSnowAngels" = "Reverse Snow Angels";
+"reverseSnowAngelsEH" = "Lie on your stomach with your arms straight above your head and your shoulders down away from your ears\nKeeping an active core with your hips rotated forward and tensed glutes, breathe out and slowly lift your back until your torso is a little off the ground\nImagine you are lifting your whole back equally and straight up rather than pulling your upper back to your bum. Keep your head tall and away from your pelvis\n-\nBreathe out and pull your arms back by activating your upper back, keeping them far off the ground with your shoulders down. Make sure to keep an active core and your hips rotated forward with tensed glutes\nPause for a moment when your arms are back\nBreathe in and return your arms to above your head and your torso to the starting position just off the ground, relaxing your upper back a little but still keeping your hips rotated forward with an active core and glutes\nRepeat for the recommended nº reps";
+"reverseSnowAngelsEA" = "Arching your lower back much; don't pull your upper back towards your bum and keep your hips rotated forward\nPulling your head back; keep looking towards the ground\nRelaxing your core; breath into your stomach";
+"reverseSnowAngelsEF" = "Keeping your head tall and away from your pelvis\nKeeping your hips rotated forward with active glutes\nActivating your whole back\nBreathing";
+
 // Pull (Traps)
 "handStandTrap" = "Hand Stand Trap";
+"handStandTrapEH" = "Place your hands shoulder width apart on the floor a fist away from a wall\nJump your legs up above you to perform a handstand leaning against the wall\nKeep your core active and hips rotated forward\n-\nBreathe out and press your shoulders up to your ears as far as possible\nPause for a moment\nBreathe in and relax your shoulders back down\nRepeat for the recommended nº reps";
+"handStandTrapEA" = "Relaxing your core; keep it active with your hips rotated forward\nPulling your head back when pressing up; keep it pointing towards the floor";
+"handStandTrapEF" = "Keeping tall\nBreathing";
+
 
 // Push (Chest)
-"pushup" = "Pushup";
+//"pushUp" = "pushUp";      warmup
 // Push (Tricep)
-"trianglePushup" = "Triangle Pushup";
-"dolphinPushup" = "Dolphin Pushup";
+"trianglepushUp" = "Triangle Push-Up";
+"trianglepushUpEH" = "Place your hands together on the ground, they should touch at the finger and thumb and form a triangle in between (if your elbows are sensitive, place your hands a little wider)\nExtended your legs out behind you on your tip toes\nKeep your hips rotated forward, your glutes and core active and your shoulders down\n-\nBreathe in and slowly bring your chest towards your hands, keeping your elbows a little tucked in to your body\nWhen your elbows are at 90º, breathe out and press back up\nRepeat for the recommended nº reps";
+"trianglepushUpEA" = "Pressing fast; this should be a slow controlled movement\nSplaying your elbows out to the side; keep them tucked in a little\nGoing too far down; your elbows become more vulnerable past 90º\nRounding your shoulders forwards; keep your chest open";
+"trianglepushUpEF" = "Moving slowly and in control\nKeeping your head tall and away from your pelvis with an active core\nBreathing";
+
+"dolphinpushUp" = "Dolphin Push-Up";
+"dolphinpushUpEH" = "Note: don't perform this movement if you have weak or painful elbows, perform a regular push-up instead\nPlace your hands around shoulder width with your fingers pointing forward. Your shoulders should be a little behind your hands\nExtended your legs out behind you on your tip toes\nKeep your hips rotated forward, your glutes and core active and your shoulders down\n-\nBreathe in and slowly lower your elbows to the floor, placing them behind your hands or a little out\nPause for a moment\nBreathe out and press your elbows back up until your arms are nearly straight\nRepeat for the recommended nº reps";
+"dolphinpushUpEA" = "Pressing fast; this should be a slow controlled movement\nSplaying your elbows out to the side\nPositioning yourself such that your elbows are 90º; your hands should be a little in front of your shoulders at the top to avoid this\nRounding your shoulders forwards; keep your chest open";
+"dolphinpushUpEF" = "Moving slowly and in control\nKeeping your head tall and away from your pelvis with an active core\nBreathing";
+
 "tricepExtensionsBodyweight" = "Tricep Extension";
+"tricepExtensionsBodyweightEH" = "Note: don't perform this movement if you have weak or painful elbows, perform a regular push-up instead\nPosition yourself leaning against a wall with your hands at shoulder width around the height of your eyes and your fingers pointing up\nKeep an active core with your hips rotated forward\n-\nBreathe in and lower your elbows towards the wall\nPause for a moment with your elbows against the wall, they should be below your hands\nBreathe out and press your elbows back away from the wall, stopping just before your arms are straight\nRepeat for the recommended nº reps\nNote: change the angle at which you are leaning against the wall to adjust the difficulty";
+"tricepExtensionsBodyweightEA" = "Pressing fast; this should be a slow controlled movement\nSplaying your elbows out to the side\nPositioning yourself such that your elbows pass 90º; adjust your position if this is the case\nRounding your shoulders forwards; keep your chest open";
+"tricepExtensionsBodyweightEF" = "Moving slowly and in control\nKeeping your head tall and away from your pelvis with an active core\nBreathing";
+
 // Push (Chest & Tricep)
-"walkingPushup" = "Walking Pushup";
+"walkingpushUp" = "Walking Push-Up";
+"walkingpushUpEH" = "Place your hands a bit wider than your shoulders with your index fingers pointing forward, and your shoulders above your fingers\nExtended your legs out behind you on your tip toes\nKeep your hips rotated forward, your glutes and core active and your shoulders down\n-\nPush-Up:\nBreathe in and slowly bring your shoulders towards your fingers, keeping your elbows tucked in to your body\nWhen your elbows are at 90º, breathe out and press back up\n-\nWalking Pushup:\nPerform a push-up then bring your left hand to just next to your right, then your right out to the right so they are just past shoulder width\nPerform a push-up\nStep back to the middle and perform a push-up\nStep to the left and perform a push-up\nStep back to the middle\nRepeat for the recommended nº reps (1 rep being 4 pushup: middle, right, middle, left)";
+"walkingpushUpEA" = "Pressing fast; this should be a slow controlled movement\nSplaying your elbows out to the side; keep them tucked in to your body\nChanging the angle of your forearm; always keep your forearm perpendicular to the ground\nRounding your shoulders forwards; keep your chest open";
+"walkingpushUpEF" = "Moving slowly and in control\nKeeping your head tall and away from your pelvis with an active core\nBreathing";
+
 // Push (Shoulder)
-"downwardDogPushup" = "Downward Dog Pushup";
-"wallPushup" = "Wall Pushup";
+"downwardDogpushUp" = "Downward Dog Push-Up";
+"downwardDogpushUpEH" = "Kneel on all fours\nPlace your hands a bit wider than your shoulders with your index fingers pointing forward\nPlace your feet on tip toes and bring your hips up, straightening your legs to nearly straight\nYour hips should be rotated back, your head between your arms and your core active\n-\nBreathe in and slowly bring your head towards the ground between your hands towards your fingers, keeping your elbows tucked in a little\nWhen your elbows are at 90º, breathe out and press back up through your shoulders\nRepeat for the recommended nº reps";
+"downwardDogpushUpEA" = "Pressing fast; this should be a slow controlled movement\nSplaying your elbows out to the side; keep them tucked in to your body\nRounding your shoulders forwards; keep your chest open";
+"downwardDogpushUpEF" = "Moving slowly and in control\nKeeping your head tall and away from your pelvis with an active core\nBreathing";
+
+"wallpushUp" = "Wall Push-Up";
+"wallpushUpEH" = "Place your hands shoulder width apart on the floor a fist away from a wall\nJump your legs up above you to perform a handstand leaning against the wall\nKeep your core active and hips rotated forward\n-\nBreathe out and slowly bring your head towards the ground\nPause for a moment when your head is just above/touching the ground\nBreathe out and press your body back up through your shoulders until your arms are nearly straight\nRepeat for the recommended nº reps";
+"wallpushUpEA" = "Going down too fast; control the way down\nSplaying your elbows out to the side; keep them forward a little\nRounding your shoulders forwards; keep your chest open";
+"wallpushUpEF" = "Keeping your head tall and away from your pelvis with an active core\nBreathing";
+
 "boxer" = "Boxer";
+"boxerEH" = "Stand tall with an active core\nPush your hips back and bend your torso forward to past 45º\nHang your arms in front of you and make sure to keep your weight back on your hips\n-\nSlowly lift one arm back and one arm up in front of you while keeping your shoulders back and upper back active\nPause for a moment when both arms are in line with your torso\nBring your arms back down then perform the same movement with your arms going in the other directions\nRepeat for the recommended nº reps";
+"boxerEA" = "Moving too quickly; this might feel easy at first but keep moving slowly, pausing and tensing and you'll feel it working your shoulders soon enough\nMoving your torso about much; try to keep it in a constant position";
+"boxerEF" = "Keeping your shoulders back\nSitting back on your hips with an active core\nBreathing";
+
 "armCircles" = "Arm Circles";
+"armCirclesEH" = "Stand tall with an active core and extend your arms straight out to your sides\n-\nRotate your arms forwards or backwards slowly in very small circles for the recommended amount of time";
+"armCirclesEA" = "Rotating quickly\nRotating in big circles\nLetting your arms droop";
+"armCirclesEF" = "Keeping your arms straight out\nKeeping tall with an active core\nBreathing";
+
 
 // Other ------
 // Core
-"plank" = "Plank";
+//"plank" = "Plank";        warmup
 "dynamicPlank" = "Dynamic Plank";
 "sidePlankW" = "Side Plank";
-"pushupPlank" = "Pushup Plank";
+"pushUpPlank" = "pushUp Plank";
 "lSit" = "L-Sit";
 "bicycleCrunch" = "Bicycle Crunch";
-"divingHold" = "Diving Hold";
+"divingHold" = "Low L-Sit";
 "hipRaise" = "Hip Raise";
 "legHold" = "Leg Hold";
 "sideLegDrop" = "Side Leg Drop";
@@ -968,7 +1024,7 @@
 "burpee" = "Burpee";
 "kickThroughBurpee" = "Kickthrough Burpee";
 // General (Upper Body)
-"spiderPushup" = "Spider Pushup";
+"spiderpushUp" = "Spider Push-Up";
 "crabWalk" = "Crab Walk";
 // General (Cardio)
 "jumpingJacks" = "Jumping Jacks";
@@ -980,13 +1036,13 @@
 "toePress" = "Toe Press";
 "staticLunge" = "Static Lunge";
 // Isometric (Upper Body)
-"pushupHold" = "Pushup Hold";
+"pushUpHold" = "pushUp Hold";
 "pullupHold" = "Pullup Hold";
 // Equipment (Ball)
-"ballPushup" = "Ball Pushup";
+"ballpushUp" = "Ball Push-Up";
 // Equipment (Bar)
 "bodyweightRow" = "Bodyweight Row";
-"pullup" = "Pullup";
+//"pullup" = "Pullup";      warmup
 "hangingLegRaise" = "Hanging Leg Raise";
 // Equipment (Bench/Step)
 "bodyweightBulgarianSplitSquat" = "Bulgarian Split Squat (Bodyweight)";
@@ -3483,11 +3539,11 @@
     "profileAWorkoutExperience1" = "No";
     "profileAWorkoutExperience2" = "Fairly";
     "profileAWorkoutExperience3" = "Yes";
-"profileQWorkoutPushup" = "How many slow pushups can you do?"; // Strength: Pushup
-    "profileAWorkoutPushup1" = "5 or less";
-    "profileAWorkoutPushup2" = "5 to 15";
-    "profileAWorkoutPushup3" = "15 or more";
-"profileQWorkoutPullup" = "How many slow full pullups can you do?"; // Strength: Pullup
+"profileQWorkoutpushUp" = "How many slow Push-Ups can you do?"; // Strength: Push-Up
+    "profileAWorkoutpushUp1" = "5 or less";
+    "profileAWorkoutpushUp2" = "5 to 15";
+    "profileAWorkoutpushUp3" = "15 or more";
+"profileQWorkoutPullup" = "How many slow full Pull-Ups can you do?"; // Strength: Pull-Up
     "profileAWorkoutPullup1" = "5 or less";
     "profileAWorkoutPullup2" = "5 to 10";
     "profileAWorkoutPullup3" = "10 or more";

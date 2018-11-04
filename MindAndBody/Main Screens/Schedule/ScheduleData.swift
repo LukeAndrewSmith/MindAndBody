@@ -638,8 +638,8 @@ enum scheduleDataStructures {
             "workoutExperience": ["Q": ["profileQWorkoutExperience"],
                                   "A": ["profileAWorkoutExperience1", "profileAWorkoutExperience2", "profileAWorkoutExperience3"],
                                   "image": [""]],
-            "workoutPushup": ["Q": ["profileQWorkoutPushup"],
-                              "A": ["profileAWorkoutPushup1", "profileAWorkoutPushup2", "profileAWorkoutPushup3"],
+            "workoutpushUp": ["Q": ["profileQWorkoutpushUp"],
+                              "A": ["profileAWorkoutpushUp1", "profileAWorkoutpushUp2", "profileAWorkoutpushUp3"],
                               "image": ["pushUp"]],
             "workoutPullup": ["Q": ["profileQWorkoutPullup"],
                               "A": ["profileAWorkoutPullup1", "profileAWorkoutPullup2", "profileAWorkoutPullup3"],
@@ -698,7 +698,7 @@ enum scheduleDataStructures {
     
     static let profileQASorted: [String] =
         ["gender",
-         "workoutExperience", "workoutPushup", "workoutPullup", "workoutSquat", "workoutWeights",
+         "workoutExperience", "workoutpushUp", "workoutPullup", "workoutSquat", "workoutWeights",
          "enduranceExperience", "enduranceStairs", "enduranceAbility",
          "yogaExperience",
          "flexibilityHamstrings", "flexibilityHips", "flexibilityHipsAnkles", "flexibilityKnees", "flexibilityBackBackward", "flexibilityBackSideways", "flexibilityNeck", "flexibilityBalance",
@@ -743,7 +743,7 @@ enum scheduleDataStructures {
             
             // Strength
             "workoutExperience": -1, // Workout
-            "workoutPushup": -1, // Pushup
+            "workoutpushUp": -1, // pushUp
             "workoutPullup": -1, // Pullup
             "workoutSquat": -1, // Squat
             "workoutWeights": -1, // Strength Experience

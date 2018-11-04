@@ -1130,11 +1130,6 @@
 		07E463FE1F4DDCAE00A5AF49 /* downwardDogPushup1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463F51F4DDCAE00A5AF49 /* downwardDogPushup1.png */; };
 		07E463FF1F4DDCAE00A5AF49 /* downwardDogPushup2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463F61F4DDCAE00A5AF49 /* downwardDogPushup2.png */; };
 		07E464001F4DDCAE00A5AF49 /* downwardDogPushup3.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463F71F4DDCAE00A5AF49 /* downwardDogPushup3.png */; };
-		07E464011F4DDCAE00A5AF49 /* downwardDogPushup4.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463F81F4DDCAE00A5AF49 /* downwardDogPushup4.png */; };
-		07E464021F4DDCAE00A5AF49 /* downwardDogPushup5.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463F91F4DDCAE00A5AF49 /* downwardDogPushup5.png */; };
-		07E464031F4DDCAE00A5AF49 /* downwardDogPushup6.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463FA1F4DDCAE00A5AF49 /* downwardDogPushup6.png */; };
-		07E464041F4DDCAE00A5AF49 /* downwardDogPushup7.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463FB1F4DDCAE00A5AF49 /* downwardDogPushup7.png */; };
-		07E464051F4DDCAE00A5AF49 /* downwardDogPushup8.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463FC1F4DDCAE00A5AF49 /* downwardDogPushup8.png */; };
 		07E464071F4DDCB400A5AF49 /* wallPushup.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E464061F4DDCB400A5AF49 /* wallPushup.png */; };
 		07E4640D1F4DDCBB00A5AF49 /* boxer.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E464081F4DDCBB00A5AF49 /* boxer.png */; };
 		07E4640E1F4DDCBB00A5AF49 /* boxer1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E464091F4DDCBB00A5AF49 /* boxer1.png */; };
@@ -2476,11 +2471,6 @@
 		07E463F51F4DDCAE00A5AF49 /* downwardDogPushup1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downwardDogPushup1.png; sourceTree = "<group>"; };
 		07E463F61F4DDCAE00A5AF49 /* downwardDogPushup2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downwardDogPushup2.png; sourceTree = "<group>"; };
 		07E463F71F4DDCAE00A5AF49 /* downwardDogPushup3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downwardDogPushup3.png; sourceTree = "<group>"; };
-		07E463F81F4DDCAE00A5AF49 /* downwardDogPushup4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downwardDogPushup4.png; sourceTree = "<group>"; };
-		07E463F91F4DDCAE00A5AF49 /* downwardDogPushup5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downwardDogPushup5.png; sourceTree = "<group>"; };
-		07E463FA1F4DDCAE00A5AF49 /* downwardDogPushup6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downwardDogPushup6.png; sourceTree = "<group>"; };
-		07E463FB1F4DDCAE00A5AF49 /* downwardDogPushup7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downwardDogPushup7.png; sourceTree = "<group>"; };
-		07E463FC1F4DDCAE00A5AF49 /* downwardDogPushup8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downwardDogPushup8.png; sourceTree = "<group>"; };
 		07E464061F4DDCB400A5AF49 /* wallPushup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wallPushup.png; sourceTree = "<group>"; };
 		07E464081F4DDCBB00A5AF49 /* boxer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boxer.png; sourceTree = "<group>"; };
 		07E464091F4DDCBB00A5AF49 /* boxer1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boxer1.png; sourceTree = "<group>"; };
@@ -6298,11 +6288,6 @@
 				07E463F51F4DDCAE00A5AF49 /* downwardDogPushup1.png */,
 				07E463F61F4DDCAE00A5AF49 /* downwardDogPushup2.png */,
 				07E463F71F4DDCAE00A5AF49 /* downwardDogPushup3.png */,
-				07E463F81F4DDCAE00A5AF49 /* downwardDogPushup4.png */,
-				07E463F91F4DDCAE00A5AF49 /* downwardDogPushup5.png */,
-				07E463FA1F4DDCAE00A5AF49 /* downwardDogPushup6.png */,
-				07E463FB1F4DDCAE00A5AF49 /* downwardDogPushup7.png */,
-				07E463FC1F4DDCAE00A5AF49 /* downwardDogPushup8.png */,
 			);
 			path = downwardDogPushup;
 			sourceTree = "<group>";
@@ -6951,7 +6936,6 @@
 				07E461EF1F4DD9C700A5AF49 /* deadlift7.png in Resources */,
 				07E45F6F1F4DB4DA00A5AF49 /* halfForwardBend1.png in Resources */,
 				07E4637D1F4DDBF400A5AF49 /* lungeJump7.png in Resources */,
-				07E464021F4DDCAE00A5AF49 /* downwardDogPushup5.png in Resources */,
 				07038D481F4C603B001CC6D5 /* pecDeltFoam.png in Resources */,
 				07E463281F4DDB8C00A5AF49 /* cableExtension.png in Resources */,
 				07E45EE81F4DB48600A5AF49 /* chair4.png in Resources */,
@@ -7137,7 +7121,6 @@
 				07E462DC1F4DDAEC00A5AF49 /* semiInclineDumbellPress3.png in Resources */,
 				0729FFF61F4D712F0048A355 /* spiderManOverheadReach2.png in Resources */,
 				07E462711F4DDA5B00A5AF49 /* tBarRow.png in Resources */,
-				07E464031F4DDCAE00A5AF49 /* downwardDogPushup6.png in Resources */,
 				07702C611F4D93D4000E1DB8 /* behindBackTouch.png in Resources */,
 				07D69ABE216C040F0007B00C /* backBicep@3x.png in Resources */,
 				07702C6D1F4D93F7000E1DB8 /* lungeStretch.png in Resources */,
@@ -7245,7 +7228,6 @@
 				0729FFDA1F4D71020048A355 /* sideLegSwings1.png in Resources */,
 				0729FFFA1F4D712F0048A355 /* spiderManOverheadReach6.png in Resources */,
 				07E461FB1F4DD9D700A5AF49 /* weightedHipThrust1.png in Resources */,
-				07E464051F4DDCAE00A5AF49 /* downwardDogPushup8.png in Resources */,
 				07702C011F4D7B78000E1DB8 /* running.png in Resources */,
 				07E464DD1F4ED1D000A5AF49 /* elbow@2x.png in Resources */,
 				0729FFA31F4D70E40048A355 /* cossakSquat4.png in Resources */,
@@ -7410,7 +7392,6 @@
 				07E464131F4DDCC700A5AF49 /* armCircles.png in Resources */,
 				07E461511F4DB71900A5AF49 /* forearmStand4.png in Resources */,
 				07E463A61F4DDC5500A5AF49 /* contralateralLimbRaises2.png in Resources */,
-				07E464011F4DDCAE00A5AF49 /* downwardDogPushup4.png in Resources */,
 				07E460AC1F4DB69400A5AF49 /* marichi3.png in Resources */,
 				07E464B91F4DDEBE00A5AF49 /* stepUp3.png in Resources */,
 				07E4611D1F4DB6FE00A5AF49 /* spineRolling.png in Resources */,
@@ -7776,7 +7757,6 @@
 				07E4649E1F4DDE9400A5AF49 /* hangingLegRaises1.png in Resources */,
 				07E4633B1F4DDB9B00A5AF49 /* cleanPress.png in Resources */,
 				07702C671F4D93E6000E1DB8 /* rearDeltStretch.png in Resources */,
-				07E464041F4DDCAE00A5AF49 /* downwardDogPushup7.png in Resources */,
 				07E460E91F4DB6D900A5AF49 /* shoulderStand1.png in Resources */,
 				07E4624D1F4DDA2700A5AF49 /* kneelingPullDown2.png in Resources */,
 				07E45F521F4DB4C700A5AF49 /* revolvedSideAngle1.png in Resources */,

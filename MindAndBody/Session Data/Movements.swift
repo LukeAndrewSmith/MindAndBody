@@ -83,29 +83,29 @@ extension sessionData {
                     // Pull (Traps)
                     ["handStandTrap"],
                     // Push (Chest) ---------
-                    ["pushup"],
+                    ["pushUp"],
                     // Push (Tricep)
-                    ["trianglePushup", "dolphinPushup", "tricepExtensionsBodyweight"],
+                    ["trianglepushUp", "dolphinpushUp", "tricepExtensionsBodyweight"],
                     // Push (Chest & Tricep)
-                    ["walkingPushup"],
+                    ["walkingpushUp"],
                     // Push (Shoulder)
-                    ["downwardDogPushup", "wallPushup", "boxer", "armCircles"],
+                    ["downwardDogpushUp", "wallpushUp", "boxer", "armCircles"],
                     // Core ---------
-                    ["plank", "dynamicPlank", "sidePlankW", "pushupPlank", "lSit", "bicycleCrunch", "divingHold", "hipRaise", "legHold", "sideLegDrop"],
+                    ["plank", "dynamicPlank", "sidePlankW", "pushUpPlank", "lSit", "bicycleCrunch", "divingHold", "hipRaise", "legHold", "sideLegDrop"],
                     // General (Core) ---------
                     ["mountainClimbers"],
                     // General (Full Body)
                     ["burpee", "kickThroughBurpee"],
                     // General (Upper Body)
-                    ["spiderPushup", "crabWalk"],
+                    ["spiderpushUp", "crabWalk"],
                     // General (Cardio)
                     ["jumpingJacks", "tuckJump", "bumKicks", "kneeRaises"],
                     // Isometric (Legs) ---------
                     ["wallSit", "toePress", "staticLunge"],
                     // Isometric (Upper Body)
-                    ["pushupHold", "pullupHold"],
+                    ["pushUpHold", "pullupHold"],
                     // Equipment (Ball) ---------
-                    ["ballPushup"],
+                    ["ballpushUp"],
                     // Equipment (Bar)
                     ["bodyweightRow", "pullup", "hangingLegRaise"],
                     // Equipment (Bench/Step)
@@ -1368,26 +1368,26 @@ extension sessionData {
                         "targetArea": ["trap"]
                 ],
                 // Push (Chest) ---------
-                "pushup":
+                "pushUp":
                     [
-                        "name": ["pushup"],
+                        "name": ["pushUp"],
                         "demonstration": ["pushUp", "pushUp1", "pushUp2", "pushUp3", "pushUp4", "pushUp4", "pushUp3", "pushUp2", "pushUp1"],
-                        "explanation": ["pushupEH", "pushupEA", "pushupEF"],
+                        "explanation": ["pushUpEH", "pushUpEA", "pushUpEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
                 // Push (Tricep)
-                "trianglePushup":
+                "trianglepushUp":
                     [
-                        "name": ["trianglePushup"],
-                        "demonstration": ["trianglePushup", "trianglePushup1", "trianglePushup2", "trianglePushup3", "trianglePushup4", "trianglePushup4", "trianglePushup3", "trianglePushup2", "trianglePushup1"],
-                        "explanation": ["trianglePushupEH", "trianglePushupEA", "trianglePushupEF"],
+                        "name": ["trianglepushUp"],
+                        "demonstration": ["trianglepushUp", "trianglepushUp1", "trianglepushUp2", "trianglepushUp3", "trianglepushUp4", "trianglepushUp4", "trianglepushUp3", "trianglepushUp2", "trianglepushUp1"],
+                        "explanation": ["trianglepushUpEH", "trianglepushUpEA", "trianglepushUpEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
-                "dolphinPushup":
+                "dolphinpushUp":
                     [
-                        "name": ["dolphinPushup"],
-                        "demonstration": ["dolphinPushup", "dolphinPushup1", "dolphinPushup2", "dolphinPushup3", "dolphinPushup4", "dolphinPushup3", "dolphinPushup2", "dolphinPushup1"],
-                        "explanation": ["dolphinPushupEH", "dolphinPushupEA", "dolphinPushupEF"],
+                        "name": ["dolphinpushUp"],
+                        "demonstration": ["dolphinpushUp", "dolphinpushUp1", "dolphinpushUp2", "dolphinpushUp3", "dolphinpushUp4", "dolphinpushUp3", "dolphinpushUp2", "dolphinpushUp1"],
+                        "explanation": ["dolphinpushUpEH", "dolphinpushUpEA", "dolphinpushUpEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "tricepExtensionsBodyweight":
@@ -1398,26 +1398,26 @@ extension sessionData {
                         "targetArea": ["tricep"]
                 ],
                 // Push (Chest & Tricep)
-                "walkingPushup":
+                "walkingpushUp":
                     [
-                        "name": ["walkingPushup"],
-                        "demonstration": ["walkingPushup", "walkingPushup1", "walkingPushup2", "walkingPushup1", "walkingPushup3", "walkingPushup4", "walkingPushup5", "walkingPushup4", "walkingPushup3", "walkingPushup1", "walkingPushup2", "walkingPushup1", "walkingPushup6", "walkingPushup7", "walkingPushup8", "walkingPushup7", "walkingPushup6", "walkingPushup1", "walkingPushup2", "walkingPushup1"],
-                        "explanation": ["walkingPushupEH", "walkingPushupEA", "walkingPushupEF"],
+                        "name": ["walkingpushUp"],
+                        "demonstration": ["walkingpushUp", "walkingpushUp1", "walkingpushUp2", "walkingpushUp1", "walkingpushUp3", "walkingpushUp4", "walkingpushUp5", "walkingpushUp4", "walkingpushUp3", "walkingpushUp1", "walkingpushUp2", "walkingpushUp1", "walkingpushUp6", "walkingpushUp7", "walkingpushUp8", "walkingpushUp7", "walkingpushUp6", "walkingpushUp1", "walkingpushUp2", "walkingpushUp1"],
+                        "explanation": ["walkingpushUpEH", "walkingpushUpEA", "walkingpushUpEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
                 // Push (Shoulder)
-                "downwardDogPushup":
+                "downwardDogpushUp":
                     [
-                        "name": ["downwardDogPushup"],
-                        "demonstration": ["downwardDogPushup", "downwardDogPushup1", "downwardDogPushup2", "downwardDogPushup3", "downwardDogPushup4", "downwardDogPushup5", "downwardDogPushup6", "downwardDogPushup7", "downwardDogPushup8", "downwardDogPushup1"],
-                        "explanation": ["downwardDogPushupEH", "downwardDogPushupEA", "downwardDogPushupEF"],
+                        "name": ["downwardDogpushUp"],
+                        "demonstration": ["downwardDogpushUp", "downwardDogpushUp1", "downwardDogpushUp2", "downwardDogpushUp3", "downwardDogpushUp3", "downwardDogpushUp2", "downwardDogpushUp1"],
+                        "explanation": ["downwardDogpushUpEH", "downwardDogpushUpEA", "downwardDogpushUpEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
-                "wallPushup":
+                "wallpushUp":
                     [
-                        "name": ["wallPushup"],
+                        "name": ["wallpushUp"],
                         "demonstration": ["handStandTrap1"],
-                        "explanation": ["wallPushupEH", "wallPushupEA", "wallPushupEF"],
+                        "explanation": ["wallpushUpEH", "wallpushUpEA", "wallpushUpEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "boxer":
@@ -1456,11 +1456,11 @@ extension sessionData {
                         "explanation": ["sidePlankWEH", "sidePlankWEA", "sidePlankWEF"],
                         "targetArea": ["core"]
                 ],
-                "pushupPlank":
+                "pushUpPlank":
                     [
-                        "name": ["pushupPlank"],
-                        "demonstration": ["pushupPlank"],
-                        "explanation": ["pushupPlankEH", "pushupPlankEA", "pushupPlankEF"],
+                        "name": ["pushUpPlank"],
+                        "demonstration": ["pushUpPlank"],
+                        "explanation": ["pushUpPlankEH", "pushUpPlankEA", "pushUpPlankEF"],
                         "targetArea": ["core"]
                 ],
                 "lSit":
@@ -1529,11 +1529,11 @@ extension sessionData {
                         "targetArea": ["squatBody"]
                 ],
                 // General (Upper Body)
-                "spiderPushup":
+                "spiderpushUp":
                     [
-                        "name": ["spiderPushup"],
-                        "demonstration": ["spiderPushup4", "spiderPushup", "spiderPushup1", "spiderPushup2", "spiderPushup3", "spiderPushup4", "spiderPushup3", "spiderPushup2", "spiderPushup1", "spiderPushup", "spiderPushup1", "spiderPushup2", "spiderPushup5", "spiderPushup6", "spiderPushup5", "spiderPushup2", "spiderPushup1", "spiderPushup"],
-                        "explanation": ["spiderPushupEH", "spiderPushupEA", "spiderPushupEF"],
+                        "name": ["spiderpushUp"],
+                        "demonstration": ["spiderpushUp4", "spiderpushUp", "spiderpushUp1", "spiderpushUp2", "spiderpushUp3", "spiderpushUp4", "spiderpushUp3", "spiderpushUp2", "spiderpushUp1", "spiderpushUp", "spiderpushUp1", "spiderpushUp2", "spiderpushUp5", "spiderpushUp6", "spiderpushUp5", "spiderpushUp2", "spiderpushUp1", "spiderpushUp"],
+                        "explanation": ["spiderpushUpEH", "spiderpushUpEA", "spiderpushUpEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "crabWalk":
@@ -1595,11 +1595,11 @@ extension sessionData {
                         "targetArea": ["squatBody"]
                 ],
                 // Isometric (Upper Body)
-                "pushupHold":
+                "pushUpHold":
                     [
-                        "name": ["pushupHold"],
-                        "demonstration": ["pushupHold"],
-                        "explanation": ["pushupHoldEH", "pushupHoldEA", "pushupHoldEF"],
+                        "name": ["pushUpHold"],
+                        "demonstration": ["pushUpHold"],
+                        "explanation": ["pushUpHoldEH", "pushUpHoldEA", "pushUpHoldEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "pullupHold":
@@ -1610,11 +1610,11 @@ extension sessionData {
                         "targetArea": ["backBicep"]
                 ],
                 // Equipment (Ball) ---------
-                "ballPushup":
+                "ballpushUp":
                     [
-                        "name": ["ballPushup"],
-                        "demonstration": ["ballPushup", "ballPushup1", "ballPushup", "ballPushup1"],
-                        "explanation": ["ballPushupEH", "ballPushupEA", "ballPushupEF"],
+                        "name": ["ballpushUp"],
+                        "demonstration": ["ballpushUp", "ballpushUp1", "ballpushUp", "ballpushUp1"],
+                        "explanation": ["ballpushUpEH", "ballpushUpEA", "ballpushUpEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
                 // Equipment (Bar)

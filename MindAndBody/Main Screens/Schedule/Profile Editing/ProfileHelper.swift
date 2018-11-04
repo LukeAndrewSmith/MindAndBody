@@ -46,8 +46,8 @@ class ProfileFunctions {
         let enduranceAverage = Double((profileAnswers["enduranceExperience"]! + profileAnswers["enduranceStairs"]! + profileAnswers["enduranceAbility"]!)) / 3
         difficultyLevels["endurance"]!["endurance"] = conservativeRound(toRound: enduranceAverage)
         // Strength - not set in difficultyLevels, but deduced then used below
-        // Overall Strength - average of pushup, pullup and squat and self opinion ["workoutPushup"] ["workoutPullup"] ["workoutSquat"]
-        let overallStrength = Double((profileAnswers["workoutPushup"]! + profileAnswers["workoutPullup"]! + profileAnswers["workoutSquat"]!)) / 3
+        // Overall Strength - average of pushUp, pullup and squat and self opinion ["workoutpushUp"] ["workoutPullup"] ["workoutSquat"]
+        let overallStrength = Double((profileAnswers["workoutpushUp"]! + profileAnswers["workoutPullup"]! + profileAnswers["workoutSquat"]!)) / 3
         // Balance - not set, but used later - ["flexibilityBalance"]
         let balanceAnswer = profileAnswers["flexibilityBalance"]
         // MARK: 2: Deductions that use deductions
@@ -62,8 +62,8 @@ class ProfileFunctions {
         // Workout Level Lower - Average of endurance, and experience(["workoutExperience"]), and squat(["workoutSquat"])
         let workoutAverageLower = Double((difficultyLevels["endurance"]!["endurance"]! + profileAnswers["workoutExperience"]! + profileAnswers["workoutSquat"]!)) / 3
         difficultyLevels["workout"]!["workoutLower"] = conservativeRound(toRound: workoutAverageLower)
-        // Workout Level Upper - Average of and experience(["workoutExperience"]), pushup(["workoutPushup"]) and pullup(["workoutPullup"])
-        let workoutAverageUpper = Double((profileAnswers["workoutExperience"]! + profileAnswers["workoutPushup"]! + profileAnswers["workoutPullup"]!)) / 3
+        // Workout Level Upper - Average of and experience(["workoutExperience"]), pushUp(["workoutpushUp"]) and pullup(["workoutPullup"])
+        let workoutAverageUpper = Double((profileAnswers["workoutExperience"]! + profileAnswers["workoutpushUp"]! + profileAnswers["workoutPullup"]!)) / 3
         difficultyLevels["workout"]!["workoutUpper"] = conservativeRound(toRound: workoutAverageUpper)
         
         // Set new difficulty levels
