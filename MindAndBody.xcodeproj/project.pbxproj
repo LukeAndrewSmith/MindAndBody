@@ -432,14 +432,11 @@
 		07702C6F1F4D93FE000E1DB8 /* pigeonPoseS.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C6E1F4D93FE000E1DB8 /* pigeonPoseS.png */; };
 		07702C711F4D940A000E1DB8 /* seatedGlute.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C701F4D940A000E1DB8 /* seatedGlute.png */; };
 		07702C731F4D940F000E1DB8 /* standingHamstring.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C721F4D940F000E1DB8 /* standingHamstring.png */; };
-		07702C751F4D9414000E1DB8 /* standingSingleLegHamstring.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C741F4D9414000E1DB8 /* standingSingleLegHamstring.png */; };
 		07702C771F4D9418000E1DB8 /* downWardsDogS.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C761F4D9418000E1DB8 /* downWardsDogS.png */; };
 		07702C791F4D941D000E1DB8 /* singleLegHamstring.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C781F4D941D000E1DB8 /* singleLegHamstring.png */; };
 		07702C7B1F4D9424000E1DB8 /* twoLegHamstring.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C7A1F4D9424000E1DB8 /* twoLegHamstring.png */; };
 		07702C7D1F4D942E000E1DB8 /* lungeStretchWall.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C7C1F4D942E000E1DB8 /* lungeStretchWall.png */; };
 		07702C7F1F4D9433000E1DB8 /* quadStretch.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C7E1F4D9433000E1DB8 /* quadStretch.png */; };
-		07702C811F4D9437000E1DB8 /* sumoSquatTwist.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */; };
-		07702C831F4D943B000E1DB8 /* tinyFencerStretch.png in Resources */ = {isa = PBXBuildFile; fileRef = 07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */; };
 		077206821F90C52000818088 /* TimeBasedHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077206811F90C52000818088 /* TimeBasedHelpers.swift */; };
 		07761ECA216902E300D4473B /* ForestStream.caf in Resources */ = {isa = PBXBuildFile; fileRef = 07761EC6216902E200D4473B /* ForestStream.caf */; };
 		07761ECB216902E300D4473B /* LakeTiticaca.caf in Resources */ = {isa = PBXBuildFile; fileRef = 07761EC7216902E200D4473B /* LakeTiticaca.caf */; };
@@ -1768,14 +1765,11 @@
 		07702C6E1F4D93FE000E1DB8 /* pigeonPoseS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pigeonPoseS.png; sourceTree = "<group>"; };
 		07702C701F4D940A000E1DB8 /* seatedGlute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seatedGlute.png; sourceTree = "<group>"; };
 		07702C721F4D940F000E1DB8 /* standingHamstring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = standingHamstring.png; sourceTree = "<group>"; };
-		07702C741F4D9414000E1DB8 /* standingSingleLegHamstring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = standingSingleLegHamstring.png; sourceTree = "<group>"; };
 		07702C761F4D9418000E1DB8 /* downWardsDogS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downWardsDogS.png; sourceTree = "<group>"; };
 		07702C781F4D941D000E1DB8 /* singleLegHamstring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = singleLegHamstring.png; sourceTree = "<group>"; };
 		07702C7A1F4D9424000E1DB8 /* twoLegHamstring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twoLegHamstring.png; sourceTree = "<group>"; };
 		07702C7C1F4D942E000E1DB8 /* lungeStretchWall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lungeStretchWall.png; sourceTree = "<group>"; };
 		07702C7E1F4D9433000E1DB8 /* quadStretch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quadStretch.png; sourceTree = "<group>"; };
-		07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sumoSquatTwist.png; sourceTree = "<group>"; };
-		07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tinyFencerStretch.png; sourceTree = "<group>"; };
 		077206811F90C52000818088 /* TimeBasedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedHelpers.swift; sourceTree = "<group>"; };
 		07761EC6216902E200D4473B /* ForestStream.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ForestStream.caf; sourceTree = "<group>"; };
 		07761EC7216902E200D4473B /* LakeTiticaca.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LakeTiticaca.caf; sourceTree = "<group>"; };
@@ -3198,30 +3192,11 @@
 				07702C101F4D9281000E1DB8 /* squatHold */,
 				07702C281F4D9298000E1DB8 /* staffPose */,
 				07702C0C1F4D927E000E1DB8 /* standingHamstring */,
-				07702C0B1F4D927D000E1DB8 /* standingSingleLegHamstring */,
-				07702C051F4D9271000E1DB8 /* sumoSquatTwist */,
-				07702C041F4D9270000E1DB8 /* tinyFencerStretch */,
 				07702C191F4D9288000E1DB8 /* tricepStretch */,
 				07702C081F4D927A000E1DB8 /* twoLegHamstring */,
 				07702C2B1F4D929B000E1DB8 /* upwardsDog */,
 			);
 			path = Stretching;
-			sourceTree = "<group>";
-		};
-		07702C041F4D9270000E1DB8 /* tinyFencerStretch */ = {
-			isa = PBXGroup;
-			children = (
-				07702C821F4D943B000E1DB8 /* tinyFencerStretch.png */,
-			);
-			path = tinyFencerStretch;
-			sourceTree = "<group>";
-		};
-		07702C051F4D9271000E1DB8 /* sumoSquatTwist */ = {
-			isa = PBXGroup;
-			children = (
-				07702C801F4D9437000E1DB8 /* sumoSquatTwist.png */,
-			);
-			path = sumoSquatTwist;
 			sourceTree = "<group>";
 		};
 		07702C061F4D9277000E1DB8 /* quadStretch */ = {
@@ -3262,14 +3237,6 @@
 				07702C761F4D9418000E1DB8 /* downWardsDogS.png */,
 			);
 			path = downWardsDogS;
-			sourceTree = "<group>";
-		};
-		07702C0B1F4D927D000E1DB8 /* standingSingleLegHamstring */ = {
-			isa = PBXGroup;
-			children = (
-				07702C741F4D9414000E1DB8 /* standingSingleLegHamstring.png */,
-			);
-			path = standingSingleLegHamstring;
 			sourceTree = "<group>";
 		};
 		07702C0C1F4D927E000E1DB8 /* standingHamstring */ = {
@@ -6789,7 +6756,6 @@
 			files = (
 				07E462FC1F4DDB3A00A5AF49 /* standingShoulderPressBarbell1.png in Resources */,
 				07038D731F4C6070001CC6D5 /* gluteFoam3.png in Resources */,
-				07702C751F4D9414000E1DB8 /* standingSingleLegHamstring.png in Resources */,
 				07702BBF1F4D75DE000E1DB8 /* latPullover2.png in Resources */,
 				07702C5F1F4D93C6000E1DB8 /* shoulderRoll3.png in Resources */,
 				07E463D91F4DDC9800A5AF49 /* dolphinPushup.png in Resources */,
@@ -7021,7 +6987,6 @@
 				07FFA3461F4C618B00E9B0C1 /* lyingSideWindmill1.png in Resources */,
 				0729537B1F4ED58400B2F21C /* core@2x.png in Resources */,
 				07E463571F4DDBDA00A5AF49 /* pistolSquat3.png in Resources */,
-				07702C811F4D9437000E1DB8 /* sumoSquatTwist.png in Resources */,
 				07E462D91F4DDAEC00A5AF49 /* semiInclineDumbellPress.png in Resources */,
 				07E45F2E1F4DB4B200A5AF49 /* halfMoon6.png in Resources */,
 				072953841F4ED58400B2F21C /* frontLateralDelt@3x.png in Resources */,
@@ -7589,7 +7554,6 @@
 				07E460A01F4DB68C00A5AF49 /* marichi14.png in Resources */,
 				07E45F491F4DB4C200A5AF49 /* extendedSideAngle6.png in Resources */,
 				07E45FC71F4DB52F00A5AF49 /* deepSquat2.png in Resources */,
-				07702C831F4D943B000E1DB8 /* tinyFencerStretch.png in Resources */,
 				072953801F4ED58400B2F21C /* forearm@3x.png in Resources */,
 				07E463EC1F4DDCA700A5AF49 /* walkingPushup1.png in Resources */,
 				07E45F6E1F4DB4DA00A5AF49 /* halfForwardBend.png in Resources */,
