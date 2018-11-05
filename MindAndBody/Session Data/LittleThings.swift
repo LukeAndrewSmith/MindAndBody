@@ -90,7 +90,7 @@ extension sessionData {
                     "arms",
                     "pecs",
                     "shoulders",
-                    "hipsaGlutes",
+                    "hipsGlutes",
                     "calves",
                     "hamstrings",
                     "quads",

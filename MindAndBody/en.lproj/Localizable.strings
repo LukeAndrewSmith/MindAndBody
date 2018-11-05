@@ -237,15 +237,15 @@
 "elbowEF" = "Relaxing your shoulders\nMaintaining good posture";
 
 "shoulderR" = "Shoulder Rotations";
-"shoulderEH" = "Stand upright\nRelax your shoulders\nLift your arms and reach far out to the side\nSlowly rotate your arms in small circles, increasing the size of the circle with each rotation (not shown on video)\nYou should end up rotating in slow big circles, with your shoulder reaching; behind, up to the ceiling then forward\nRepeat the big circles the recommended number of rotations (1 rotation = 1 rep)\nRepeat the movement from the beginning rotating in the other direction.";
-"shoulderEA" = "Overextending the shoulder; try to rotate in a comfortable manner\nRotating too fast; a short pause between rotations helps to avoid this\nKeeping the shoulder locked in one position; allow it to move back, up then forward with the arm";
-"shoulderEF" = "Maintaining good posture\nBreathing";
+"shoulderREH" = "Stand upright\nRelax your shoulders\nLift your arms and reach far out to the side\nSlowly rotate your arms in small circles, increasing the size of the circle with each rotation (not shown on video)\nYou should end up rotating in slow big circles, with your shoulder reaching; behind, up to the ceiling then forward\nRepeat the big circles the recommended number of rotations (1 rotation = 1 rep)\nRepeat the movement from the beginning rotating in the other direction.";
+"shoulderREA" = "Overextending the shoulder; try to rotate in a comfortable manner\nRotating too fast; a short pause between rotations helps to avoid this\nKeeping the shoulder locked in one position; allow it to move back, up then forward with the arm";
+"shoulderREF" = "Maintaining good posture\nBreathing";
 
 "neckR" = "Neck Rotations";
-"neckEH" = "Important; rotate your upper neck, keeping your head extended towards the ceiling at all times\nFlex and Extend;\nBreathe in while slowly rotating your chin forward towards your chest (flex)\nBreathe out and rotate your head back to neutral\nBreathe in whie extending your chin up to the ceiling (extend)\nBreathe out and return to neutral\nRepeat for 1/3 of the reps\nTilt;\nLook forwards to a point at eye level, gently tilt your head to one side while still breathing in and keeping tall\nBreathe out and return to neutral\nBreathe in while tilting to the other side\nBreathe out and return to neutral\nRepeat for 1/3 of the reps\nTurn; (not on video)\nBreathe in and turn your head 90º to one side\nBreathe out and return to neutral\nBreathe in and turn your head to the other side\nBreathe out and return to neutral\nRepeat for 1/3 of the reps";
+"neckREH" = "Important; rotate your upper neck, keeping your head extended towards the ceiling at all times\nFlex and Extend;\nBreathe in while slowly rotating your chin forward towards your chest (flex)\nBreathe out and rotate your head back to neutral\nBreathe in whie extending your chin up to the ceiling (extend)\nBreathe out and return to neutral\nRepeat for 1/3 of the reps\nTilt;\nLook forwards to a point at eye level, gently tilt your head to one side while still breathing in and keeping tall\nBreathe out and return to neutral\nBreathe in while tilting to the other side\nBreathe out and return to neutral\nRepeat for 1/3 of the reps\nTurn; (not on video)\nBreathe in and turn your head 90º to one side\nBreathe out and return to neutral\nBreathe in and turn your head to the other side\nBreathe out and return to neutral\nRepeat for 1/3 of the reps";
 // Extra "If you have a healthy neck, rotate your head gently in circles 5-10 times, then repeat in the other direction, keeping as tall as possible";
-"neckEA" = "Relaxing/dropping/slumping your head down; try to stand as tall as possible the whole time\nOverextending your neck; don't tense your neck muscles to force a stretch, stop when you feel a little stretch";
-"neckEF" = "Standing tall\nExtending your head up to the ceiling\nBeing gentle\nMaintaining good posture";
+"neckREA" = "Relaxing/dropping/slumping your head down; try to stand as tall as possible the whole time\nOverextending your neck; don't tense your neck muscles to force a stretch, stop when you feel a little stretch";
+"neckREF" = "Standing tall\nExtending your head up to the ceiling\nBeing gentle\nMaintaining good posture";
 
 "waist" = "Waist Rotations";
 "waistEH" = "Stand with your feet at or slightly past hip width\nPlace your hands on your hips\nWhilst mainting an active core, straight lower back and good deep breathing, slowly rotate your hips in circles for 1/2 the reps\nRepeat, rotating in the other direction";
@@ -355,10 +355,10 @@
 "lowerBack" = "Lower Back";
 
 //
-"sideLegDrop" = "Side Leg Drop";
-"sideLegDropEH" = "Lie on your back with your arms outstretched and your palms facing up\nMake sure your back is straight with your head extended away from your pelvis\nLift your knees up until your thighs are perpendicular to the ground, keeping your knees together\nSlowly drop your knees to the right side while breathing in, allowing your lower back to extend away from you\nActivate your core while breathing out and and slowly bring your knees back up\nRepeat to the left\nRepeat for the recommended nº reps\nNote: You can also perform this movement with straight legs to make it harder";
-"sideLegDropEA" = "Momentum\nPerforming the movement fast\nTwisting your lower back excessively, allowing your whole spine to move naturally will avoid this";
-"sideLegDropEF" = "Breathing\nKeeping tall";
+"legDrop" = "Leg Drop";
+"legDropEH" = "Lie on your back with your arms outstretched and your palms facing up\nMake sure your back is straight with your head extended away from your pelvis\nLift your knees up until your thighs are perpendicular to the ground, keeping your knees together\nSlowly drop your knees to the right side while breathing in, allowing your lower back to extend away from you\nActivate your core while breathing out and and slowly bring your knees back up\nRepeat to the left\nRepeat for the recommended nº reps\nNote: You can also perform this movement with straight legs to make it harder";
+"legDropEA" = "Momentum\nPerforming the movement fast\nTwisting your lower back excessively, allowing your whole spine to move naturally will avoid this";
+"legDropEF" = "Breathing\nKeeping tall";
 
 "sideLegKick" = "Side Leg Kick";
 "sideLegKickEH" = "Lie on your back with your arms outstretched and your palms facing up\nMake sure your back is straight with your head extended away from your pelvis\nLift your right foot a little and, while breathing in, bring it at reasonable speed toward your left hand keeping it close to the ground\nYou should reach a point where your leg drops a little and your foot touches the ground\nReturn to the starting position and repeat with the other leg\nRepeat for the recommended nº reps";
@@ -405,7 +405,7 @@
 "shoulder" = "Shoulder";
 
 "wallSlides" = "Wall Slides";
-"wallSlidesEH" = "Stand tall, back against a wall, with your hips rotated forward, your lower back flush to the wall and your feet in front of you a little, pushing you against the wall\nBreathe in and slide your arms up towards the ceiling until you can't go furthur without breaking posture (this might not be very far)\nBreathe out and return to the starting position/nRepeat for the recommended nº reps";
+"wallSlidesEH" = "Stand tall, back against a wall, with your hips rotated forward, your lower back flush to the wall and your feet in front of you a little, pushing you against the wall\nBreathe in and slide your arms up towards the ceiling until you can't go furthur without breaking posture (this might not be very far)\nBreathe out and return to the starting position\nRepeat for the recommended nº reps";
 "wallSlidesEA" = "Lifting too fast; the movement should be slow and controlled\nLoosing posture; keep tall the entire time, with your back flush to the wall";
 "wallSlidesEF" = "Maintaining good posture\nMaintaining total contact of your back with the wall\nBreathing";
 
@@ -439,7 +439,7 @@
 "facePullEF" = "Keeping your shoulders back and down\nBreathing";
 
 "externalRotation" = "External Rotation";
-"externalRotationEH" = "Can be performed with a resistance band or a cable machine\nAttach the band/cable at elbow height\nStand with good posture, your left shoulder facing the band/cable and gripping with your right hand, so that the your right forarm is flush to your stomach and your elbow at 90º/nBreathe out and externally rotate your shoulder, so that your hand moves in a circular path until pointing straight out in front of you\nBreathe in and bring your hand back left, until your forearm touches your stomach\nRepeat for the recommended nº reps\nRepeat with the other shoulder";
+"externalRotationEH" = "Can be performed with a resistance band or a cable machine\nAttach the band/cable at elbow height\nStand with good posture, your left shoulder facing the band/cable and gripping with your right hand, so that the your right forarm is flush to your stomach and your elbow at 90º\nBreathe out and externally rotate your shoulder, so that your hand moves in a circular path until pointing straight out in front of you\nBreathe in and bring your hand back left, until your forearm touches your stomach\nRepeat for the recommended nº reps\nRepeat with the other shoulder";
 "externalRotationEA" = "Using a heavy weight/too much resistance\nMoving quickly\nOverextending your shoulder, don't bring your hand past pointing straight in front of you";
 "externalRotationEF" = "Keeping your shoulders down and back\nBreathing";
 
@@ -450,7 +450,7 @@
 
 "shoulderDislocation" = "Shoulder Dislocations";
 "shoulderDislocationEH" = "Stand upright, holding a light bar (wood or plastic) in front of you\nGrip the bar at around twice the width of your shoulders (adjust your width once you've tried the movement until it is comfortable)\nKeeping straight arms, bring the bar forwards and up, then over your head and back and down (if you can't do this, widen your grip)\nReturn with the opposite movement\nRepeat for the recommended nº reps";
-"shoulderDislocationEA" = "Rotating quickly/nForcing your shoulders; widen your grip if it feels uncomfortable";
+"shoulderDislocationEA" = "Rotating quickly\nForcing your shoulders; widen your grip if it feels uncomfortable";
 "shoulderDislocationEF" = "Keeping tall\nBreathing";
 
 "latPullover" = "Lat Pullover";
@@ -467,12 +467,12 @@
 "seatedKneeDropEF" = "Keeping your hips rotated forward";
 
 "groinStretch" = "Groin Stretch";
-"groinStretchEH" = "Kneel on all fours (prefferably on a mat)\nPlace your elbows on the floor directly below your shoulders and bring your hands together to form a triangle\nRotate your feet out and bring your knees away from eachother until your feel a good stretch\nBreath for the recommended nº breaths";
+"groinStretchEH" = "Kneel on all fours (prefferably on a mat)\nPlace your elbows on the floor directly below your shoulders and bring your hands together to form a triangle\nRotate your feet out and bring your knees away from eachother until you feel a good stretch\nBreath for the recommended nº breaths";
 "groinStretchEA" = "Overstretching; don't go past whats comfortable";
 "groinStretchEF" = "Breathing into the stretch";
 
 "threadTheNeedle" = "Thread The Needle";
-"threadTheNeedleEH" = "Lie on your back and bend your knees\nPlace your right ankle on your left thigh just above the knee, with your right knee facing out\nLock your hands round the back of your left thigh and pull it towards you until your feel a stretch in your right glute\nHold for the recommended nº breaths\nRepeat with the other side";
+"threadTheNeedleEH" = "Lie on your back and bend your knees\nPlace your right ankle on your left thigh just above the knee, with your right knee facing out\nLock your hands round the back of your left thigh and pull it towards you until you feel a stretch in your right glute\nHold for the recommended nº breaths\nRepeat with the other side";
 "threadTheNeedleEA" = "Rounding your back; keep it flush to the floor with your shoulders back\nOverstretching; don't pull too far";
 "threadTheNeedleEF" = "Breathing into the stretch";
 
@@ -525,32 +525,32 @@
 "jumpSquatEF" = "Keeping an active core";
 
 "lunge" = "Lunge";
-"lungeEH" = "Stand tall with an active core\nWhile breathing in, step forward with your left leg, then squat down until your left knee reaches 90º or your right knee touches the ground (your left knee should above your ankle, adjust your step widths until you consistenly acheive this)\nBreathe out while putting your weight on your left leg and standing up (keep your left hip back while doing this)\nRepeat with the right leg\nRepeat both legs for the recommended nº reps\nNote: You can perform the movement on the spot by stepping back and forth as shown on the demonstration";
+"lungeEH" = "Stand tall with an active core\nWhile breathing in, step forward with your left leg, then squat down until your left knee reaches 90º or your right knee touches the ground (your left knee should be directly above your ankle, adjust your step widths until you consistenly acheive this)\nBreathe out while putting your weight on your left leg and standing up (keep your left hip back while doing this)\nRepeat with the right leg\nRepeat both legs for the recommended nº reps\nNote: You can perform the movement on the spot by stepping back and forth as shown on the demonstration";
 "lungeEA" = "Moving quickly\nLeaning your torso forward";
 "lungeEF" = "Good posture\nBreathing";
 
 "gluteKicks" = "Glute Kicks";
-"gluteKicksEH" = "Stand tall with an active core and feet shoulder width apart/nJump from leg to leg, kicking the heel of the leg your not jumping on up\nYour heel should be at it's top position when your full weight is on the other leg";
+"gluteKicksEH" = "Stand tall with an active core and feet shoulder width apart\nJump from leg to leg, kicking the heel of the leg your not jumping on up\nYour heel should be at it's top position when your full weight is on the other leg";
 "gluteKicksEA" = "Jumping too fast\nKicking too hard\nLanding flat footed, land on your foorefoot first";
 "gluteKicksEF" = "Keeping an active core";
 
 "aSkips" = "A Skips";
-"aSkipsEH" = "Stand tall with an active core and feet shoulder width apart/nJump a little while quickly lifting your right knee up as far as possible, reaching the highest point when you land from the jump on the left leg\nHop off the left leg and bring the right leg down and land with both feet\nRepeat the two jumps bringing the left leg up now\nRepeat for the recommended nº reps";
+"aSkipsEH" = "Stand tall with an active core and feet shoulder width apart\nJump a little while quickly lifting your right knee up as far as possible, reaching the highest point when you land from the jump on the left leg\nHop off the left leg and bring the right leg down and land with both feet\nRepeat the two jumps bringing the left leg up now\nRepeat for the recommended nº reps";
 "aSkipsEA" = "Stopping; keep a fluid and controlled movement, bouncing from 1 foot, to 2 to 1 per leg lift\nRounding your back; only lift your leg as far as you can without rounding your lower back, you need a nice straight lower back when jumping\nJumping too high; find a good rythm\nLanding flat footed, land on your foorefoot first";
 "aSkipsEF" = "Keeping an active core\nKeeping tall with a straight back";
 
 "bSkips" = "B Skips";
-"bSkipsEH" = "Stand tall with an active core and feet shoulder width apart/nJump a little while quickly lifting your right knee up as far as possible, reaching the highest point when you land from the jump on the left leg\nQuickly extent your right leg while hopping off the left and bring the extended right leg down to land with both feet\nRepeat the two jumps bringing the left leg up now\nRepeat for the recommended nº reps";
+"bSkipsEH" = "Stand tall with an active core and feet shoulder width apart\nJump a little while quickly lifting your right knee up as far as possible, reaching the highest point when you land from the jump on the left leg\nQuickly extent your right leg while hopping off the left and bring the extended right leg down to land with both feet\nRepeat the two jumps bringing the left leg up now\nRepeat for the recommended nº reps";
 "bSkipsEA" = "Stopping; keep a fluid and controlled movement, bouncing from 1 foot, to 2 to 1 per leg lift\nRounding your back; only lift your leg as far as you can without rounding your lower back, you need a nice straight lower back when jumping\nJumping too high; find a good rythm\nLanding flat footed, land on your foorefoot first";
 "bSkipsEF" = "Keeping an active core\nKeeping tall with a straight back";
 
 "grapeVines" = "Grapevines";
-"grapeVinesEH" = "Stand tall with an active core, feet shoulder width apart and arms lifted to your side/nGently run sideways to your left, alternating placing your right foot in front of your left, then behind it./nRepeat for 1/2 the nº reps (1 rep = 4 steps, i.e placing your right foot in front then behind your left)/nRepeat, running the other way";
+"grapeVinesEH" = "Stand tall with an active core, feet shoulder width apart and arms lifted to your side\nGently run sideways to your left, alternating placing your right foot in front of your left, then behind it.\nRepeat for 1/2 the nº reps (1 rep = 4 steps, i.e placing your right foot in front then behind your left)\nRepeat, running the other way";
 "grapeVinesEA" = "Overrotating your core; keep it active\nRun fast";
 "grapeVinesEF" = "Breathing";
 
 "lateralBound" = "Lateral Bounds";
-"lateralBoundEH" = "Stand tall with an active core, feet shoulder width apart and arms lifted to your side/nExtend your left leg up and out to the side\nPress down on the right and jump off sideways the left\nBring your feet together in the air, then open them a little and land on your right leg\nContinue to the next jump off your left leg\nRepeat for 1/2 the nº reps (1 rep = 1 jump)\nRepeat, jumping the other way";
+"lateralBoundEH" = "Stand tall with an active core, feet shoulder width apart and arms lifted to your side\nExtend your left leg up and out to the side\nPress down on the right and jump off sideways the left\nBring your feet together in the air, then open them a little and land on your right leg\nContinue to the next jump off your left leg\nRepeat for 1/2 the nº reps (1 rep = 1 jump)\nRepeat, jumping the other way";
 "lateralBoundEA" = "Pausing; this should be one continuous movement\nJumping far; little jumps are perfect for warming up\nLanding flat footed, land on your foorefoot first";
 "lateralBoundEF" = "Keep tall with an active core";
 
@@ -682,7 +682,7 @@
 
 // Legs (General)
 "lungeDumbell" = "Dumbell Lunge";
-"lungeDumbellEH" = "Stand tall with an active core and your shoulders back and down\n-\nWhile breathing in, step forward with your left leg and squat down until your left knee reaches 90º or your right knee touches the ground (your left knee should above your ankle, adjust your step widths until you consistenly acheive this)\nBreathe out while putting your weight on your left leg and standing up (keep your left hip back while doing this)\nRepeat with the right leg\nRepeat both legs for the recommended nº reps\nNote:\nYou can perform the movement on the spot by stepping back and forth as in the video";
+"lungeDumbellEH" = "Stand tall with an active core and your shoulders back and down\n-\nWhile breathing in, step forward with your left leg and squat down until your left knee reaches 90º or your right knee touches the ground (your left knee should be directly above your ankle, adjust your step widths until you consistenly acheive this)\nBreathe out while putting your weight on your left leg and standing up (keep your left hip back while doing this)\nRepeat with the right leg\nRepeat both legs for the recommended nº reps\nNote:\nYou can perform the movement on the spot by stepping back and forth as in the video";
 "lungeDumbellEA" = "Moving quickly\nLeaning your torso forward";
 "lungeDumbellEF" = "Activating your glutes\nKeeping upright\nBreathing";
 
@@ -868,7 +868,7 @@
 // Bodyweight -----------
 // Legs (General)
 "bodyweightSquat" = "Bodyweight Squat";
-"bodyweightSquatEH" = "Stand tall with an active core, your feet at or just past shoulder width\nStraighten your arms out in front of you, push hips back a tiny bit and bend your knees a little\n-\nBreathe in while slowly squatting down; break at the hips first and sit back on your hips while keeping an upright torso\nSquat down until your hips are at the height of your knees or until you can't go further without your lower back rotating or your torso leaning forward (this might be quite high but don't worry, squatting deep comes with practice)\nPause for a moment\nBreathe out, tensing the core and glutes and pressing up faster than you went down; think of it as lifting your torso up rather than pushing your hips away from the ground\nStop just before standing upright, with your hips a little back and your knees a little bent\nRepeat for the recommended nº reps";
+"bodyweightSquatEH" = "Stand tall with an active core and your feet at or just past shoulder width\nStraighten your arms out in front of you, push hips back a tiny bit and bend your knees a little\n-\nBreathe in while slowly squatting down; break at the hips first and sit back on your hips while keeping an upright torso\nSquat down until your hips are at the height of your knees or until you can't go further without your lower back rotating or your torso leaning forward (this might be quite high but don't worry, squatting deep comes with practice)\nPause for a moment\nBreathe out, tensing the core and glutes and pressing up faster than you went down; think of it as lifting your torso up rather than pushing your hips away from the ground\nStop just before standing upright, with your hips a little back and your knees a little bent\nRepeat for the recommended nº reps";
 "bodyweightSquatEA" = "Bending your lower back; don't squat too far\nRounding your shoulders; keep your upper back muscles tensed with your chest open\nStraightening your legs completely";
 "bodyweightSquatEF" = "Moving slowly on the way down\nTensing your glutes and keeping your chest out when pressing up\nBreathing deeply";
 
@@ -887,7 +887,7 @@
 //"lunge" = "Lunge";    warmup
 
 "lungeJump" = "Lunge Jump";
-"lungeJumpEH" = "Stand tall with an active core\nStep forward with your left leg and squat down until your right knee is just above the ground (your left knee should above your ankle)\n-\nJump up, pushing with both legs and swap legs in the air\nLand with the same distance between your legs, going down until your left knee is just above the ground\nJump up, pushing with both legs and swap legs in the air\nLand with the same distance between your legs, going down until your right knee is just above the ground\nRepeat for the recommended nº reps";
+"lungeJumpEH" = "Stand tall with an active core\nStep forward with your left leg and squat down until your right knee is just above the ground (your left knee should be directly above your ankle)\n-\nJump up, pushing with both legs and swap legs in the air\nLand with the same distance between your legs, going down until your left knee is just above the ground\nJump up, pushing with both legs and swap legs in the air\nLand with the same distance between your legs, going down until your right knee is just above the ground\nRepeat for the recommended nº reps";
 "lungeJumpEA" = "Stopping; this should be one fluid movement\nBringing your legs too close together; ensure your front knee is always above your ankle";
 "lungeJumpEF" = "Keeping your torso upright\nBreathing";
 
@@ -1049,7 +1049,7 @@
 "legHoldEA" = "Sitting too far back; try and keep your hips close to your arms\nRounding your lower back much (it is a little too rounded on the photo, sorry); keep your hips rotated back";
 "legHoldEF" = "Keeping your hips rotated back\nBreathing";
 
-//"sideLegDrop" = "Side Leg Drop";      warmup
+//"legDrop" = "Leg Drop";      warmup
 
 // General (Core)
 "mountainClimbers" = "Mountain Climbers";
@@ -1255,139 +1255,245 @@
 //    Rotations
 //    Foam roalling
 
-// Note: commented out movements below are already in warmup
-// Back (upper to lower)
-"backStretch" = "Back (upper to lower)"; //
-//       "catCow" = "";
+//       "catCow" = "";     warmup
 "upwardsDog" = "Upwards Dog/Sphinx";
+"upwardsDogEH" = "Lie on your front with your legs extended back and toes pointed\nPlace your hands close to your torso with your palms flat, fingers pointing forwards and wrists directly below your elbows\nKeep and active core and hips rotated forward\nBreathe out, taking your weight on your hands and feet and pressing your chest up till your arms are just about straight\n-\nPosition:\nShoulders directly above wrists\nChest open\nHips rotated forward with an active core and glutes so that your lower back isn't arched excessively and compressed\nThighs contracted to keep straight legs\nKeep a tall head and look straight forward\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"upwardsDogEA" = "Pushing the torso back; make sure your shoulders aren't behind your wrists, they should be above or a little in front\nCompressing your back; keep a minimal bend in your lower back back keeping your hips rotated forward with an active core and glutes\nRelaxing your shoulders up; keep them pressed down away from your ears";
+"upwardsDogEF" = "Keeping your hips rotated forward with an active core and glutes\nKeeping tall\nBreathing";
+
 "extendedPuppy" = "Extended Puppy";
+"extendedPuppyEH" = "Kneel on all fours with an active core\nStep your hands forwards, bringing your torso down while keeping your hips directly above your knees\nExtend your hands out in front of you with your palms flat on the floor\n-\nPosition:\nPalms pressed into the floor a litte\nChin or forehead resting on the ground while keeping a tall head\nResting your weight on your hips instead of knees\nBack with a gentle arch. Make sure your hips are rotated forward a little, your hands far in front and your core active then relax your stomach down a little to stretch your lower back\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"extendedPuppyEA" = "Arching your back too much; you should have a little curve in your lower back while relaxing it down while keeping your hips rotated forward a little\nRotating your elbows out; keep them rotated a little towards the floor\nRelaxing your neck too much; keep your head tall";
+"extendedPuppyEF" = "Relaxing your lower back\nKeeping tall\nBreathing";
+
 "childPose" = "Child Pose";
+"childPoseEH" = "Kneel down and lie your torso on your thighs\n-\nPosition:\nArms down by your side with your palms up or arms straight in front of your with your palms flat on the floor\nWeight back on your hips\nForehead on the floor without relaxing your neck, keep your head tall\nRelax your lower back\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"childPoseEA" = "Relaxing your neck; keep your head tall and away from your hips\nTaking weight on your forehead; your weight should be back on your hips, hold your arms above your head and take some weight on your palms if necessary";
+"childPoseEF" = "Relaxing your lower back\nKeeping your head tall\nBreathing";
+
 "staffPose" = "Staff Pose";
+"staffPoseEH" = "Sit tall with your legs extended in front of you and your palms flat by your hips\n-\nPosition:\nHips rotated back with and active core (as you rotate your hips back you should feel more stretch in the hamstrings)\nTall back and head\nOpen chest\nShoulders down\nThighs a little tensed to keep straight legs\nToes pointed back\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"staffPoseEA" = "Rounding your back; keep your hips rotated back and your head tall\nLeaning back; keep your shoulders above your hips, bend your legs a little if your hamstrings aren't flexible enough, keeping your hips rotated back\n";
+"staffPoseEF" = "Keeping your hips rotated back\nKeeping an active core\nKeeping your toes pointed back\nBreathing";
+
 "pelvicTilt" = "Pelvic Tilt";
+"pelvicTiltEH" = "Lie on your back with your arms down by your sides and your palms facing the floor\nBring your knees up to a 45º angle, placing your feet flat at hip width\nKeep an active core and tall head\nRelax your lower back\n-\nBreathe out and gently rotate your hips forward as far as possible by activating your glutes, bringing your lower back a little forward off the ground as a result\nPause for a moment\nBreathe in and bring your hips back to the floor and relax your lower back\nRepeat for the recommended nº reps";
+"pelvicTiltEA" = "Bringing your mid back off the ground; rotate your hips forward so that your lower back comes off the ground a little\nMoving quickly; this should be a slow, controlled movement\nForcing; gently rotate your hips forward and don't force them too far\nRounding your shoulders; keep them back and on the floor";
+"pelvicTiltEF" = "Keeping an active core and glutes\nKeeping tall\nBreathing";
+
 "kneeToChest" = "Knee to Chest";
-"legDrop" = "Knee Drop";
-"seatedTwist" = "Seated Twist (Marichi's Pose)";
+"kneeToChestEH" = "Lie on your back with your shoulders back and down and your head tall\nHold your knees in your hands at shoulder width\n-\nPosition\nShoulders down and head tall\nKeep the position by gently pulling your elbows to the floor\nNeck, hips and lower back relaxed\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"kneeToChestEA" = "Forcing your elbows down; gently pull them to maintain the position but avoid forcing into the stretch\nTensing muscles around your hips, legs, or lower back; breathe and relax\nRounding your shoulder; keep them back and down";
+"kneeToChestEF" = "Relaxing your hips and lower back with each breath\nKeeping your back tall\nBreathing";
+
+//"legDrop" = "Leg Drop";       warmup
+
+"seatedTwist" = "Seated Twist";
+"seatedTwistEH" = "Sit tall with your legs extended in front of you\n-\nPosition:\nRight foot flat to the left of your left thigh at knee height or higher\nLeft arm pressing against the right side of your right knee\nTorso tall and rotated right, resting on your right hand\nHips rotated back with and active core (as you rotate your hips back you should feel more stretch in the hamstrings)\nTall back and head\nOpen chest\nShoulders down\nWhen breathing out, rotate your torso round a little more, looking right\nWhen breathing out, lessen the rotation a little and bring your head as tall as possible with your hips rotated back\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, rotating the other direction";
+"seatedTwistEA" = "Forcing the stretch; gently rotate your torso and don't push with your arms much\nSlouching; keep your back tall and your chest open\nRotating your hips forward; it may seem you can rotate your torso more if you do so but your lower back becomes more vulnerable, keep your hips rotated back";
+"seatedTwistEF" = "Keeping an active core\nKeeping tall\nNot forcing\nBreathing";
+
 "legsWall" = "Legs Against Wall";
+"legsWallEH" = "Lie on your back with your shoulders back and down, your head tall and your bum against a wall with your legs up\n-\nPosition:\nHips rotated forward with your lower back flush to the ground and an active core\nLegs straight up and tensed a little (or legs a little bent if your hamstrings aren't flexible enough)\nToes pointed back\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"legsWallEA" = "Relaxing your neck; keep your head tall\nArching your back; keep it flush to the ground\nRotating your hips forward; keep them rotated back and on the ground";
+"legsWallEF" = "Keeping your hips rotated back\nKeeping an active core\nKeeping your toes pointed back\nBreathing";
+
 
 // Sides
 "sides" = "Sides (Obliques)"; //
+
 "sideLean" = "Side Lean";
+"sideLeanEH" = "Stand tall with an active core and your feet past shoulder width in a wide stance\n-\nPosition\nPlace your left hand just above or below your left knee and lean some weight onto it while also taking someweight with your core\nStretch your right hand over your head\nChest open\nHips rotated forward and in line with your shoulders and feet\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, leaning to your right";
+"sideLeanEA" = "Taking too much weight with your core; your lower back is vulnerable in this position, make sure to take some weight on your arm\nRelaxing the core; keep and active core and glutes with your lower back tall\nLeaning too far; keep your body inline and lean far enough to feel a stretch in your side\nLeaning forward/pushing your hips back; make sure to keep your feet, hips and shoulders in line";
+"sideLeanEF" = "Keeping your feet, hips and shoulders in line\nKeeping an active core with your lower back tall\nBreathing";
+
 "extendedSideAngle" = "Extended Side Angle";
+"extendedSideAngleEH" = "Stand tall with good posture and an active core\nStep your left leg far too the side, bending your left knee to 90º so that it is directly above your ankle\nLean down and place your hand flat on the floor next to your foot\n-\nPosition:\nBack foot pointing forward, front foot to your side\nHand flat on the floot next to your foot and pointing in the same direction\nShoulder next to your hip and directly above your writs, taking your weight\nHips in line with your feet, rotated forward and with an active core and glutes\nTorso rotated gently so your right shoulder is above and in line with your left\nRight arm extended up above you\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, leaning to your right";
+"extendedSideAngleEA" = "Forcing the stretch\nRelaxing your core or hips\nShrugging your shoulders up; keep them down away from your ears\nHolding much weight with your core; keep the majority of your weight on your hand\nLetting your head droop";
+"extendedSideAngleEF" = "Keeping your feet, hips and shoulders in line\nKeeping your core active\nKeeping your shoulders down and chest open\nBreathing";
+
 "seatedSide" = "Half-V Side Lean";
+"seatedSideEH" = "Sit tall with your legs extended out to form a 90º angle, an active core and your hips rotated back\nBend your left knee and bring your left foot to rest against your right thigh, as close to the groin as comfortable\nSit tall and rotate your torso left so that your shoulders are in line with your right leg\nBreath out, lifting your left arm over your head and and leaning sideways over your right leg\n-\nPosition:\nHips rotated back with a tall lower back, leaning into your hamstring\nActive core\nOpen chest\nReaching out and up with your left arm, resting your right hand on the floor with your palm upwards\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, leaning to your left";
+"seatedSideEA" = "Holding your weight with your side/core; keep your hips back and learn your weight onto your hamstring\nLeaning excessivily; lean with a straight torso aiming to get it 45º to the ground, focus on keeping your hips back and stretching your hamstring (it really doesn't matter how far you go down, don't try to reach your toe, try simply to lean into your hamstring)\nBending your lower back; try to keep a straight lower back and lean into your hamstring (bending your back will make it feel like you can stretch furthur but you're no longer stretching the correct muscles if you do so)";
+"seatedSideEF" = "Keeping your hips rotated back and leaning your weight into your hamstring\nKeeping your back tall and straight\nReaching as far up and away as you can with your upper arm\nBreathing";
+
 
 // Neck
 "neck" = "Neck";
+
 "rearNeck" = "Rear Neck";
+"rearNeckEH" = "Stand or sit tall with an active core\nBreathe out and rotate your upper neck forward, dropping your chin down while keeping your head as tall as possible\n-\nPosition:\nRelaxed upper rear neck\nShoulders back and down\nStand/sit tall\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"rearNeckEA" = "Drooping your whole head and neck forward; keep your lower neck in line with your spine and as tall as possible while simply rotating to top of your neck forward\nRounding your shoulders; keep them back and down\nForcing the stretch, simply relax";
+"rearNeckEF" = "Standing/sitting tall\nKeeping your head tall\nRelaxing the top part of the back of your neck\nBreathing";
+
 "rearNeckHand" = "Rear Neck (Massage)";
-"seatedLateral" = "Lateral Neck"; 
+"rearNeckHandEH" = "Stand or sit tall with an active core\nBreathe out and rotate your upper neck forward, dropping your chin down while keeping your head as tall as possible\n-\nPosition:\nRelaxed upper rear neck\nShoulders back and down\nStand/sit tall\nReach with your fingers down your trap mucles (upper back just beside spine), press the weight of your arms through your fingers into the muscle, slowly letting them slide up your trap, round the side of your neck and forward\nRepeat this movement with you hands (you can run your fingers to any point up your neck as long as they are on the muscles on the side of your spine)\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nForcing the stretch, simply relax";
+"rearNeckHandEA" = "Pressing against your spine; keep your fingers on the muscles to side of your spine\nDrooping your whole head and neck forward; keep your lower neck in line with your spine and as tall as possible while simply rotating to top of your neck forward\nRounding your shoulders; keep them back and down";
+"rearNeckHandEF" = "Standing/sitting tall\nKeeping your head tall\nRelaxing your trap and neck muscles\nBreathing";
+
+"seatedLateral" = "Lateral Neck";
+"seatedLateralEH" = "Sit tall with an active core and your legs crossed\nReach to your right side, touching your fingers on the ground slightly behind your shoulder\nBreathe out and rotate your upper neck to the left side, dropping your left ear down while keeping your head as tall as possible\n-\nPosition:\nRelaxed upper neck\nShoulders back and down\nSit tall\nReach your hand away from your shoulder\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, leaning your head to the right";
+"seatedLateralEA" = "Drooping your whole head and neck sideways; keep your lower neck in line with your spine and as tall as possible while simply rotating to top of your neck forward\nRounding your shoulders; keep them back and down\nRounding your back; keep it straight and tall\nForcing the stretch, simply relax";
+"seatedLateralEF" = "Sitting tall\nKeeping your head tall\nRelaxing the top part of your neck\nBreathing";
+
 "neckRotator" = "Neck Rotator";
+"neckRotatorEH" = "Stand or sit tall with an active core\nBreathe out and turn your head to look right while keeping as tall as possible\n-\nPosition:\nShoulders back and down\nStand/sit tall\nLook right without forcing\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat looking the other way";
+"neckRotatorEA" = "Forcing the rotation\nDrooping your head and neck forward; keep your neck in line with your spine and as tall as possible\nRounding your shoulders; keep them back and down with your chest open";
+"neckRotatorEF" = "Sitting tall\nKeeping your head tall\nBreathing";
+
 "scalene" = "Scalene";
+"scaleneEH" = "Stand or sit tall with an active core\nBreathe out and rotate your head back a until you feel a stretch in your neck, then turn your head to look right till you feel a good stretch in the left side of the front of your neck, all the while keeping as tall as possible\n-\nPosition:\nShoulders back and down\nStand/sit tall\nLook right without forcing\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat looking the other way\nNote: you can help to hold the position with your hand if it feels more comfortable";
+"scaleneEA" = "Forcing the rotation\nDrooping your head and neck back; keep your lower neck in line with your spine and as tall as possible\nRounding your shoulders; keep them back and down with your chest open";
+"scaleneEF" = "Sitting tall\nKeeping your head tall\nBreathing";
+
 "headRoll" = "Head Roll";
+"headRollEH" = "Stand or sit tall with an active core\nSlowly roll your head round your neck, rotating just the top part of your neck without drooping your lower neck foward, backwards or sideways\nKeep tall\n-\nRotate your head forward, chin down\nBreathe out whie rolling your head gently to the left until your head is sideways\nBreathe in while rolling your head gently back until your head is pointing back (make sure to keep tall)\nBreathe out while rolling your head gently to the right until your head is sideways\nBreathe in while gently rolling your head forwards until your chin is down\nBreathe deeply and slowly into your stomach for the recommended nº breaths (2 breaths per roll)";
+"headRollEA" = "Forcing the rotation\nDrooping your head and neck; keep your lower neck in line with your spine and as tall as possible\nRounding your shoulders; keep them back and down with your chest open\nRolling quickly; this should be a very slow and controlled movement";
+"headRollEF" = "Sitting tall\nKeeping your head tall\nBreathing";
+
 
 // Arms
 "arms" = "Arms";
+
 "forearmStretch" = "Forearm";
+"forearmStretchEH" = "Stand tall with an active core\nRotate your left arm so your palm points forward\nLift your left arm a little with your fingers pointing towards the ground, and hold your fingers with your right hand\nExtend your left arm straight out in front of your at shoulder height, holding you left fingers back with your right hand until you feel a stretch in the forearm\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, stretching your right arm";
+"forearmStretchEA" = "Forcing the stretch; stop extending your arm when you feel a stretch in your forearm\nRolling your shoulder forward; stand tall with an open chest";
+"forearmStretchEF" = "Standing tall\nKeeping your shoulders relaxed down\nBreathing";
+
 "tricepStretch" = "Tricep";
+"tricepStretchEH" = "Stand tall with an active core\nLift your elbows up above your shoulders, with your hands down behind your head\nHold your right wrist with your left hand and gently press your right hand a little towards your shoulder, bringing your elbow back behind your head a little until you feel a stretch in your right tricep\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, stretching your left tricep";
+"tricepStretchEA" = "Forcing the stretch; gently press your hand to your shoulder until you feel a stretch\nRounding your upper back forward; stand tall with an open chest";
+"tricepStretchEF" = "Standing tall\nKeeping your shoulders relaxed down\nBreathing";
+
 "bicepStretch" = "Bicep";
+"bicepStretchEH" = "Face a wall and stand tall with an active core\nPress your right palm against the wall to the right of your shoulder with your fingers pointing right\nSlowly turn on your feet to the left, bringing your right shoulder forwards as you do so\nStop when you feel a stretch down your bicep to your fingers\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, stretching your left arm";
+"bicepStretchEA" = "Forcing the stretch; gently rotate until you feel a stretch\nRounding your upper back forward; stand tall with an open chest";
+"bicepStretchEF" = "Standing tall\nKeeping your shoulders relaxed down\nBreathing";
+
 
 // Pecs
 "pecs" = "Pecs (Chest)";
+
 "pecStretch" = "Pec Stretch";
+"pecStretchEH" = "Face a wall and stand tall with an active core\nPress your right palm against the wall to the right of your shoulder with your wrist at eye height, your fingers pointing up and your arm bent\nSlowly turn on your feet to the left, bringing your right shoulder forwards as you do so and keeping your arm bent with your elbow pointing down\nStop when you feel a stretch in your pec\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, stretching your left arm";
+"pecStretchEA" = "Forcing the stretch; gently rotate until you feel a stretch\nRounding your upper back forward; stand tall with an open chest";
+"pecStretchEF" = "Standing tall\nKeeping your shoulders relaxed down\nBreathing";
+
 
 // Shoulders
 "shoulders" = "Shoulders";
+
 "shoulderRoll" = "Shoulder Rolls";
+"shoulderRollEH" = "Stand tall with and active core, your shoulder relaxed down and your chest open\n-\nSlowly roll your shoulders back, up then forward to your ears\nContinue rolling forward, down then back to neutral\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nNote: you can roll in the opposite direction half way through";
+"shoulderRollEA" = "Forcing your shoulders too far; roll them gently\nDrooping your head; keep standing tall";
+"shoulderRollEF" = "Standing tall\nKeeping an active core\nBreathing";
+
 "behindBackTouch" = "Hold Behind the Back";
+"behindBackTouchEH" = "Stand tall with and active core, your shoulder relaxed down and your chest open\nBring your left hand behind your back and reach your fingers up your spine, with the back of your hand against your back\nBring your right hand back over your your head, with your palm flat against your back\nTry to touch the fingers of both hands together, holding them together if you can\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat with your left hand above and your right below";
+"behindBackTouchEA" = "Forcing to try and touch; only reach so far as is comfortable\nArching your back; keep your back tall and your core active";
+"behindBackTouchEF" = "Standing tall\nKeeping an active core\nBreathing";
+
 "frontDelt" = "Front Delt";
+"frontDeltEH" = "Face a wall and stand tall with an active core\nPress your right palm against the wall to the right of your shoulder with your wrist at eye height, your fingers pointing up and left\nYour arm should be bent with your elbow at shoulder height, pointing to the right\nSlowly turn on your feet to the left, bringing your right shoulder forwards as you do so and keeping your arm bent and elbow pointing to the right\nStop when you feel a stretch in the front of your shoulder\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, stretching your left shoulder";
+"frontDeltEA" = "Forcing the stretch; gently rotate until you feel a stretch\nRounding your upper back forward; stand tall with an open chest";
+"frontDeltEF" = "Standing tall\nKeeping your shoulders relaxed down\nBreathing";
+
 "lateralDelt" = "Lateral Delt";
+"lateralDeltEH" = "Stand tall with and active core, your shoulder relaxed down and your chest open\nBring your right hand to point left with your palm facing you\nReach underneath your right arm with your left and hold the lower part of your right upper arm\nKeeping your shoulders completely back and your chest open, gently pull your right elbow to the left until you feel a stretch in the side of your right shoulder\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, stretching your left shoulder";
+"lateralDeltEA" = "Rounding your shoulders; you won't feel the stretch in the correct place unless your keep your shoulders completely back and your chest completely open\nForcing the stretch; gently pull until you can feel a stretch";
+"lateralDeltEF" = "Keeping your shoulders back with an open stretch";
+
 "rearDeltStretch" = "Rear Delt";
+"rearDeltStretchEH" = "Stand tall with and active core, your shoulder relaxed down and your chest open\nBring your right hand to point left with your palm facing up\nReach underneath your right arm with your left and cradle your elbow\nKeeping your shoulders completely back and your chest open, gently pull your right elbow to the left and up a little until you feel a stretch in the back of your right shoulder\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, stretching your left shoulder";
+"rearDeltStretchEA" = "Rounding your shoulders; you won't feel the stretch in the correct place unless your keep your shoulders completely back and your chest completely open\nForcing the stretch; gently pull until you can feel a stretch";
+"rearDeltStretchEF" = "Keeping your shoulders back with an open stretch";
+
 
 // Hip and Glutes
-"hipsaGlutes" = "Hips and Glutes";
+"hipsGlutes" = "Hips and Glutes";
+
 "squatHold" = "Squat Hold";
-//       "groinStretch" = "Groin";
-//       "butterflyPose" = "Butterfly Pose";
+"squatHoldEH" = "Stand tall with an active core, your feet at or just past shoulder width and your arms straight out in front of you\nBreathe in while slowly squatting all the way down; break at the hips first and sit back on your hips while keeping an upright torso\nHold your hands together or keep them straigh in front of you, trying to relax your shins forward and keep a straight torso\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nNote: hold onto a support if you can't balance";
+"squatHoldEA" = "Bending your lower back too much; try too keep your torso straight and hold onto a support if you have to round your back excessively to stay balanced";
+"squatHoldEF" = "Keeping your torso upright\nRelaxing your shins forward\nBreathing deeply";
+
+// "groinStretch" = "Groin";      warmup
+// "butterflyPose" = "Butterfly Pose";        warmup
 "lungeStretch" = "Lunge Stretch";
-//       "threadTheNeedle" = "Thread the Needle";
+"lungeStretchEH" = "Stand tall with an active core\nStep forward with your left leg and squat down, placing your right knee on the ground and your right foot flat with the top of it on the ground\nRelaxing your hips down as far as comfortable, keeping tall\nYour left knee should be directly above your ankle\n-\nPosition\nHands resting on your leg\nBack and head tall with an active core\nHips relaxed down and rotated forward, in line with eachother\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"lungeStretchEA" = "Arching your back; keep your torso tall with your hips rotated forward\nLetting your hips get out of line; keep them next to eachother";
+"lungeStretchEF" = "Keeping your torso tall\nKeeping your hips rotated forward with an active core\nBreathing";
+
+// "threadTheNeedle" = "Thread the Needle";       warmup
 "pigeonPose" = "Pigeon Pose";
+"pigeonPoseEH" = "Kneel on fours\nRotate your left hip to position your left heel in front of your right knee. Your left leg should be on the ground below you and nearly perpendicular to you\nMake sure your hips are rotated back and your back tall\nBreathe out and slide your right leg all the way back along the ground, keeping your hips rotated back and your weight on your left glute, until you are lying on your left thigh with your right leg extended back\n-\nPosition:\nHips rotated back and in line with one another\nArms extended up above your head with your palms flat to the ground\nWeight on the hip of your forward leg, relaxing into your glute\nTorso lying on your front thigh\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat with the other leg forward\nNote: point your front foot further back to make the stretch easier";
+"pigeonPoseEA" = "Rounding your lower back forward; keep your hips rotated back\nTaking weight with your hands or back leg; try to relax your weight into your glute\nTensing the glute your stretching; try to relax into it";
+"pigeonPoseEF" = "Keeping your hips rotated back\nRelaxing the glute you are stretching\nBreathing";
+
 "seatedGlute" = "Seated Glute Stretch";
+"seatedGluteEH" = "Sit tall with your hips rotated back, an active core, your knees at 90º and feet at hip width\nLift your left heel and place it on your thigh just above your right knee so that your left knee points out to the left\nRotate your hips back and lean forward a little (you should feel a stretch in your glute (bum))\n-\nPosition:\nHips rotated back\nTorso tall and leaning forward a little\nLeft knee relaxed down\nCore active\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat with your right heel on your left knee";
+"seatedGluteEA" = "Rounding your back and shoulders; keep your back tall and hips rotated back\nOverstretching; don't push past what feels sensible\nMisaligning your legs; keep your resting legs knee directly above your ankle";
+"seatedGluteEF" = "Keeping tall with your hips rotated back\nBreathing";
+
 
 // calves
 "calves" = "calves";
+
 "calfStretch" = "Calf Stretch";
+"calfStretchEH" = "Stand tall with your palms flat against a wall at shoulder height\nStep your right leg back and lean forward to form a straight line with your torso and right leg\nPress some weight through your right forefoot and palms, keeping your right heel a little off the ground\n-\nPosition:\nShoulders back and down\nArms slightly bent\nCore active and hips rotated forward\nRight heel slightly off the groundnBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat with your left leg back";
+"calfStretchEA" = "Pressing too much weight through your back leg; keep some weight on your front leg\nKeeping your back leg completely straight; it's best to keep your back knee a tiny bit bent";
+"calfStretchEF" = "Keeping your body straight\nKeeping your hips rotated forward\nBreathing";
 
 // Hamstrings
 "hamstrings" = "Hamstrings";
+
 "standingHamstring" = "Standing Hamstring Stretch";
-"standingOneLegHamstring" = "Standing One Leg Hamstring";
+"EH" = "";
+"EA" = "";
+"EF" = "";
+
 "singleLegStanding" = "Single Leg Standing Stretch";
+"EH" = "";
+"EA" = "";
+"EF" = "";
+
 "downWardsDog" = "Downwards Dog";
+"EH" = "";
+"EA" = "";
+"EF" = "";
+
 "singleLegHamstring" = "Single Leg Stretch";
+"EH" = "";
+"EA" = "";
+"EF" = "";
+
 "twoLegHamstring" = "Seated Hamstring Stretch";
+"EH" = "";
+"EA" = "";
+"EF" = "";
+
 
 // Quads
 "quads" = "Quads";
+
 "lungeStretchWall" = "Lunge Stretch Wall";
+"EH" = "";
+"EA" = "";
+"EF" = "";
+
 "quadStretch" = "Quad Stretch";
+"EH" = "";
+"EA" = "";
+"EF" = "";
+
 
 
 "hamstringStretchE" = "Movement:\nThis stretch can be performed standing or seated, below is described the standing method.\nStand upright with good posture, an active core and your shoulders back and down.\nRelax your head forwards allowing the back of your neck to stretch and your chin to come close to your chest (whilst keeping a straight back), you should feel the stretch in your traps as well.\nHold for 10-20s then allow your upper body to slowly fall towards the ground, your head should stay relaxed, along with your arms. shoudlers and thoracic spine, but make sure your lower back remains straight (lower back being to the bottom of the ribcage).\nWhen you reach your maximum stretch, feel the stretch in the hamstrings and traps and breathe into it, holding for the recommended amount of time, each breathe out relaxing more.\n\nNotes:\nTry not to round the lower back too much, this decreases the stretch in the hamstrings.\nAllow your head to fall towards the ground without forcing it, you should feel an uncomfortable stretch down your traps.\n\n\nPurpose:\nStretching the hamstrings increases their range of motion thus aiding movements such as the squat and deadlift.";
 "quadStretchE" = "Movement:\nStand straight, with an active core and feet and shoulder width apart.\nLift one foot behind you and hold it with the corresponding arm.\nKeeping your knees toegether, bring the foot furthur up and closer to your glute with your arm.\nHold for the recommended amount of time, then perform with the other leg.\n\nNotes:\nIf a deeper stretch is needed, pull the knee of the leg being stretched a little back from the other knee.\n\n\nPurpose:\nStretching the quads increasestheir range of motion thus aiding movements such as the squat.";
 "calfStretchE" = "Movement:\nStand upright facing a wall with your arms straight in front and hands pressed against the wall at or above shoulder height.\nExtend your left leg backwards whilst keeping your right foot flat on the floor.\nPlace your left leg straight behind you at a distance that allows your heel to be in contact with the ground whilst feeling a good stretch in the calf.\nKeep your leg straight and progressively lean into the wall a little more to increase the stretch in the calf.\nRepeat with the other leg, holding for the recommeded amount of time.\n\nNotes:\nThe heel of the leg being stretched should always be in contact with the floor.\nDon't force the stretch but keep pressure applied against the wall.\nYou can also bend the knee a little to move the stretch from the gastronemous (upper larger part of the calf) to the soleus (lower part of the calf) and hold for as long as necessary.\n\n\nPurpose:\nStretching the calves increases their range of motion, facilitating a variety of leg movements (including squats) and increasing the effectiveness of calf movements.";
 
-"upwardsDogE" = "Stretch:\nLie on your front with your legs straight and toes pointed.\nBend your elbows and place your hands flat on the floor close to your torso, between the height of your chest and your waist, making sure your forearms are perpendicular to the floor.\nPress into the floor whilst inhaling and and straighten your arms, lifting your torso and legs off the floor, whilst keeping your legs straight and weight on the tops of your feet. While pressing up imagine also that your pushing yourself forwards a little along the floor.\nKeep your elbows facing backwards (elbow creases facing forwards).\nKeep your thighs contracted and rotate your pelvis forwards a little by activating/mildy contract the glutes without tensing them (imagine your pushing your tailbone to the ground, and the front of your pelvis forwards). This  ensures your lower back isn't being overly compressed.\nKeep your shoulders down and back (push them away from your ears) and lift the torso by imagining lifting the top of your chest dircectly up. Don't push the chest forwards.\nLook straight ahead (or up a little so long as you don't compress your neck).\n\nNotes:\nDon't relax your legs or upper body, this will feel like you get a deeper stretch in the lower back (which you might), but it will compress it which is not advised. You can relax your core muscles a little so long as you are pushing up through your chest (imagine your pushing the top of your chest away from the floor), and contracting your thighs with your knees off the floor. This avoids your back compressing.\nMake sure you keep your shoulders down and back, don't allow them to rise towards your ears.\nMake sure your thighs and knees never touch the ground.\nDon't lean on your arms in such a way that pushes your chest backwards, this compresses the spine. Your weight should be pushing down your arms perpendicular to the ground.\n\nYou can stick your chest out and look upwards if you are flexible.\nBreathe into your back.";
-"extendedPuppyE" = "Stretch:\nKneel on your hands and knees, so that your hands are below your shoulders, and knees below hips.\nPoint your toes.\nBegin to walk your hands forwards whilst exhaling, bringing your forehead and chest towards the ground.\nElongate your spine gently.\nKeep your hips directly above your knees.\nPlace your forehead on the ground, relaxing your neck and allowing a slight bend in the lower back.\nRelax your shoulders towards the ground and stretch your arms, keeping some pressure on your hands.\n\nNotes:\nKeep your hips above your knees when getting into the stretch.\nYou can increase the stretch in the back by moving your hips back slightly while keeping pressure through your hands, or moving your hands forwards a little with your hips in a constant position.\nBreathe into your back.";
-"childPoseE" = "Stretch:\nKneel on the floor, with your knees hip width apart and your toes pointed.\nLie your torso on your thigs, and your forehead on the ground.\nRotate your pelvis forwards a little to elongate your spine.\nMove your tailbone away from your spine, and move the back of your head away from your neck (straighten your neck).\nYour arms can be stretched out above your head with your palms down, or straight down beside your torso with your palsm up.\nRelax your shoulders toward the ground.\n\nNotes:\nRelax the hips and core, and elongate the lower back.\nBreathe into the lower back and rear torso.";
-"staffPoseE" = "Stretch:\nSit on the floor with your legs outstretched in front of you and knees together.\nRotate your pelvis back, straightening your lower back perpendicular to the floor and put your weight on your sitting bones.\nTense your thighs to straighten your legs and straighten your torso up.\nFlex your feet, and place your hands flat on the ground next to your hips.\nMake sure your shoulders are back and down and your back straight.\n\nNotes:\nIf your hamstrings aren't flexible enough sit on a small block, rolled up towel or anything appropriate to elevate your hips and reduce the stretch in your hamstrings.\nThis stretch can be down with your back against a wall, your tailbone area and shoulder blades should be the only things in contact with the wall.\nYour torso and legs should form a 90º angle.\nBreathe into your lower back and hamstrings.";
-"pelvicTiltE" = "Stretch:\nLie on your back, with your hands resting just below your chest.\nBend your knees to a 90º angle or more and place your feet flat on the ground, maintaining the angle in your knees.\nKeep your shoulders back and down, with maximum upper back contact on the ground while relaxed.\nThere should be a gap between your lower back and the ground.\nRotate your hips forwards, so that the gap between your lower back and the ground closes, until your lower back is flat on the ground.\nHold for 1s then relax, allowing your pelvis and lower back to return to their starting positions.\nRepeat for the recommended number of reps.\n\nNotes:\nYour lower back should be curved off the ground in the resting position, a larger angle in the knees result in a greater curve in the lower back.\nThis movement shoulder be performed slowly.";
-"kneeToChestE" = "Stretch:\nLie on your back, with your shoulders down and back.\nBend your knees and lift your legs.\nHold your knees with your hands and bring them towards your chest, your knee should be at shoulder width in the maximum stretch.\nRelax your hips and lower back, keeping your lower back of the floor by keeping your knees close to your chest.\n\nNotes:\nYour can hug your arms round your chest and hold your forearms instead of holding the knees directly, it is easier to relax the lower back like this.\nBreathe into the lower back.";
-"legDropE" = "Stretch:\nLie on your back, with your shoulders relaxed.\nLift your knees up directly above your hips, keeping your lower legs parrallel to the ground.\nDrop your knees to one side gently, maintaining a 90º angle between your thighs and torso.\nYour knees and legs should be directly ontop one another.\nElongate and straighten your lower back to increase the stretch.\nPlace your hand on your top knee to hold it down, then extend the other arm out perpendicular to your body and look to that side (being the opposite side to the side the kneees are on).\nRelax your lower back into the stretch.\nHold for the recommended amount of time, then repeat on the other side.\n\nYou torso and thighs, and your thigs and lower legs should always form 90º angles during this stretch.\nKeep your pelvis rotated back, and your spine as elongated as possible.\nKeep your shoulders in constant contact with the floor, as well as as much of the upper back as possible.\n";
-"seatedTwistE" = "Stretch:\nSit with you legs together and outstretched in front of you.\nStraighten your back and rotate your pelvis back, so your torso forms a 90º angle with your legs, and your weight is on your sitting bone.\nBend your left knee and bring your heel as close to your glute as possible, then place your foot flat on the floor.\nKeep the right leg and left foot firm against the floor.\nReach over the left leg and hold the thigh or hip with the right arm, whilst maintaining an upright position of the torso with the left arm placed just behind the left hip.\nExhale and gently rotate the torso to the left.\nTry to keep an upright back, with your hips on the floor, lengthening the spine when inhaling, and rotating a little more when exhaling.\nHold for the recommended amount of time then repeat in the other direction.\n\nNotes:\nDon't force your back into the rotation, it should not be painful and should not strain the back.\nKeep a controlled position with your hand behind you and your foot of the bent leg.\nKeep your pelvis rotated back during this stretch.\nBreathe into the lower back.";
-"legsWallE" = "Stretch:\nLie on your back with your legs facing a wall.\nLift you legs up and bring your glutes to touching the wall, with your legs straight and directly up the wall.\nFlex your feet and keep your legs straight and touching the wall.\nRelax your back so your tailbone area is in contact with the ground, and relax your shoulders back and down.\n\nNotes:\nKeep a straight lower back.\nRest your hands on your stomach or by your sides.\nYou can hold this stretch for as long as feels necessary.";
-
-            // Sides
-"sideLeanE" = "Stretch:\nStand straight with your feet past shoulder width.\nLift your right arm up to your ear, then lean to the left, placing your left hand on the side of your left thigh or knee.\nReach over to your left with your right arm, and stretch the right side of your torso.\nHold for the recommended amount of time then repeat on the other side.\n\nNotes:\nThis is a stretch that can be easily performed wrong, and requires a minimum core strength.\nSupport so of your weight with the hand on your thigh so as not to strain the lower back.\nKeep the back as elongated as possible throughout, don't let your spine compress.";
-"extendedSideAngleE" = "Stretch:\nStand straight with good posture.\nStep your right leg forwards to a distance where your thigh is as close to parrallel with the ground as comfortable with your front knee at 90º and directly above your heel.\nKeep a straight back and active core whilst doing this, and turn your rear foot to 90º.\nReach down to the left side of your right foot with your right hand, holding the front of your ankle. Your shoulder should be to the left of your knee.\nTurn your torso and head to facing left, and reach over your head with your left arm.\nStretch the left side of your body from toe to finger (try to stretch the right side as well so as not to compress the spine).\nHold for the recommended amount of time then repeat on the other side.\n\nNotes:\nTry and keep your legs and torso in line.\nIncrease the twist in your torso by pushing your shoulder against your knee a little.\nYour arm upper arm should be directly above your head, with your palm facing the floor.";
-"seatedSideE" = "Stretch:\nSit down with your legs outstretched in front of you.\nBend your right knee and bring your heel as close to your crotch as possible.\nPress the sole of your foot against your inner thigh and point your right knee out to the side, allowing it to relax down towards the floor.\nEnsure that your pelvis is rotated backwards and that your weight is on your sitting bones.\nRotate your torso right trying to get your shoulders to form a straight line with your left.\nLean towards your left leg, placing your left hand/forearm to the right of it (this hand is used to stabilize and increase the stretch).\nLift your right up, next to your ear and in line with your left leg.\nMake sure you feel the stretch in the right oblique (right side of your abs) and stretch towards your left foot, trying to past it and up with your right arm.\nHold for the recommended amopunt of time then repeat on the other side.\n\nNotes:\nKeep the foot of your outstretched leg flexed.\nYou can support some your your weight with the hand on the floot, so as to avoid overstretching or pulling any muscles in the obliques.\nYou feel the best stretch in the obliques when your torso is rotated to be nearly in line with your outstretched leg.\nIt is better to remain more upright with a more rotation than to have less rotation and to stretch down furthur towards the leg, as a greater rotation lends itself to a greater stretch in the oblique.\nIf you can't feel a stretch in your oblique it's probably due to your pelvis not being rotated far enough back.\nBreathe into your obliques.";
-
-            // Neck
-"rearNeckE" = "Stretch:\nStand straight with your shoulders down and an active core.\nRotate your head forwards, moving your chin towards your chest without dropping your head down and collapsing your neck.\nIf you feel a good stretch in the rear neck and traps, remain in this position, if not, lock your hands together and place them at the base of your neck.\nDon't pull down with your arms, use at most the weight of your arms to aid the stretch but often less is required.\n\nEnsure your head doesn't drop down, try to minimise movement of the lower neck.\nMake sure your posture remains correct throughout the movement, keeping your shoulders back and down.\nBreathe into your neck.";
-"rearNeckHandE" = "Stretch:\nStand straight with your shoulders down and an active core.\nPlace your fingers at the bottom of your neck, just next to your spine and just above your upper traps.\nHook your fingers a little and press into the neck gently.\nRotate your head back and lift your chin up slowly whilst bringing your hands forwards round the base of your neck with constant pressure. Your fingers should arrive at the side of your neck when you reach the maximum stretch back.\nRepeat for the recommended number of reps.\n\nNotes:\nWhen stretching your head back, don't allow your neck to collapse, your should be trying to lift you head up as well as back, and stop when you feel a reasonable stretch in the front of your neck.\nKeep your shoulders down and back during this exercise.";
-"seatedLateralE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nHold your hands together behind your back in a comfortable manner (I clasp one wrist with the other hand).\nMake sure your shoulders don't round forwards when doing this.\nSlowly drop your head to one side whilst focusing on one point in front of your to ensure your head maintains a constant direction.\nYou should feel a stretch along the side of your neck; between a stretch of the area of the neck connected to the jaw (if your head is back a little) and a stretch of the area of the neck connected to the trap (if your head is forwards a little). Feel free to gently roll between these two positions during the stretch, or hold in one particularly tight position.\nHold for the recommended amount of time then perform the same on the other side.\n\nNotes:\nKeep your shoulders back and down during this movement.\nRelax your arms behind your back, the should be loose and comfortable.\nDon't force the stretch, the neck is a delicate area. use only the weight of your head or less.\nTo get a stretch lower to the base of the neck, rotate and drop your chin towards your shoulder a little.";
-"neckRotatorE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nRotate your head to the left, keeping your neck upright.\nPush gently on your chin with your left hand to increase the stretch, you should feel the stretch in the neck rotators (down the side of the neck).\nIf a deeper stretch is required, put your right are behind your back.\nHold for the recommended amount of time then repeat on the right side.\n\nNotes:\nKeep your shoulders back and down during this stretch.\nDon't push hard on your chin, only create a little resistance, enough to feel the stretch in the neck. It isn't always necessary, especially if your have tight neck muscles.";
-"scaleneE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nRotate your head to the left, then back, you should feel a stretch in the front right of your neck (if a line coming straight forward out of the neck is 0º, and a line coming directly out to the sides is 90º, you should feel the stretch at 45º on the neck.\nTo increase the stretch, push a little up and to the side on the chin or place your right arm behind your back.\nHold for the recommended amount of time then repeat in the other direction.\n\nNotes:\nYour shoulders should remain back and down throughout the stretch.\nDon't push hard on your chin, only create a little resistance, enough to feel the stretch in the neck.";
-"headRollE" = "Stretch:\nStand upright, with your shoulders back and down and an active core.\nGently roll your head in circles, keeping it upright by constanly imagining your pulling the top of the stretched section of the neck up towards the ceiling.\nHalf way through the recommended amount of time, switch direction or rotation.\n\nNotes:\nDon't roll your head fast, each roll should take 3-4s.\nDon't allow your neck to collapse, keep it upright so as to avoid injury.";
-
-            // Arms
-"forearmStretchE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nOutstretch your right arm straight in front of you, with your palm facing down.\nPoint your hand down and your fingers back at you, you might already feel a stretch in the front of the forearm.\nPlace the fingers of your other hand on the top of than hand being stretched, and gently pull. Don't pull directly towards you, pull parallel to your forearm.\nIncrease or decrease the stretch by pointing your fingers more towards yourself or more towards the ground.\nHold for the recommended amount of time, then release and with the same outstretched arm point your palm to the ceiling.\nWith the other hand, place your fingers perpendicular across your other fingers, and gently pull down and back.\nHold for the recommended amount of time then repeat both movements with the other arm.\n\nNotes:\nDon't pull hard as this might lead to wrist injury.\nThe second movement can be uncomfortable, in which case perform the same movement of pulling your fingers back but with your palm facing the ground.";
-"tricepStretchE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nBend your right elbow to its maximum, then lift your right arm directly up.\nPlace your palm on your back, between your traps and as far down as possible.\nWith you left hand, hold your right elbow over your head and pull it back until you feel a good stretch in your tricep (in the long head which attatches at the shoulder).\nHold for the recommended amount of time and then perform on the left arm.\n\nNotes:\nKeep your shoulder down during this stretch.\nDon't round and extend your upper back to reach into the stretch, this removes the tension from the tricep.\nIf you aren't flexible enough to get into the proper position, the stretch can be performed against";
-"bicepStretchE" = "Stretch:\nStand upright with an active core and your shoulders down and back.\nLift your right arm straight out to your side with your palm facing forwards.\nRelax your forarm so the entire weight of your arm is supported by your shoulder.\nRotate you hand back, trying to face your palm directly away from you whilst keeping your thumb facing up.\nIf your shoulders are back and down.\nYou shoulder feel a stretch in your bicep, if your can't then ensure your shoulders are back and down and try to distance your hand as far away from your torso as possible, imagine its being pulled away from your shoulder.\nHold for the recommended amount of time then repeat with the other arm.\n\nNotes:\nEnsure your forearm is totally relaxed and don't actively straighten your arm, let gravity do the work. This ensure your bicep isn't supporting the weight of your forearm which if it were would mean it couldn't be stretched properly.";
-
-            // Pecs
-"pecStretchE" = "Stretch:\nFind the corner of a wall or a free standing support of some sorts.\nStand straight with an active core, shoulders back and down and with your right shoulder in contact with the wall.\nRetratct your scapula (bring your shoulder blades back and together) and lift your right arm up to the right, so your foreram is facing up and perpendicular to the ground. Your upper arm should be parrallel to the ground.\nLean forwards past the wall to feel a stretch in your chest.\nHold for the recommended time then lift your upper arm furthur up, so it is 45º from parallel to the ground.\nHold for the recommended amount of time, then repeat both movements with the other pec.\n\nNotes:\nYou can move out a little from the wall so only your elbow and forearm are touching.\nMove around and adjust the position until you can feel a stretch in the chest, it can sometimes take a minute to find the right position.";
-
-// Shoulders
-"shoulderRollE" = "Movement:\nStand upright with an active core and your shoulders back and down.\nSimply roll your shoulders, bringing them from as far up as possible, to as far forwards, down, and back as possible.\nHalf way through the recommended amount of time switch directions of rotation.\n\nNotes:\nDon't force the stretch, it is easy to bring your shoulder furthur than the need to go.\nDon't perform the movement too fast, each rotation should last around 2s.\nKeep your upper back from excessive movement, and in a relatively constant position.";
-"behindBackTouchE" = "Movement:\nStand upright with an active core and your shoulders back and down.\nLift your right arm up and place your palm on your back between your traps.\nLift your left forearm up behind your back with your palm facing outwards.\nBring your hand close together trying to touch your fingers together to a point where you have a good stretch in both shoulders.\nHold the stretch for the recommended amount of time then repeat with your left arm above your head.\n\nNotes:\nIt is easy to push your shoulders too far in this stretch so make sure you only stretch to a point within your shoulders range of motion and don't force them.";
-"frontDeltE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nPut your hands in fists together begin your back, then raise them up the back whilst sticking the chest out and keeping your elbows back.\nStop when you feel a good stretch in the front delt (front shoulder).\n\nNotes:\nYou can hold one hand in the other instead of touching your fists together.\nDon't lift your arms too far up your back as this will impede your ability to stick your chest out.";
-"lateralDeltE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nLift your right arm across your chest with you palm facing upwards.\nHold just past your elbow with your left hand, and pull your elbow left until you feel a good stretch in the lateral delt (side shoulder).\n\nNotes:\nDon't allow the shoulder rise up much, simply pull the elbow away from the shoulder.";
-"rearDeltE" = "Stretch:\nStand upright with an active core and your shoulders back and down.\nLift your right arm across your chest with you palm facing upwards.\nHold just past your elbow with your left hand, and pull your elbow left and upwards.\nLean forwards a little and push the shoulder being stretched in front and to the floor a little until you feel a good stretch in the rear delt (rear shoulder).\n\nNotes:\nWhen lifting the elbow up try to keep the shoulder in a constant position and don't allow it to rise much.";
-
-// Hip and Glutes
-"squatHoldE" = "Stretch:\nStand upright with an active core, your feet at shoulder width apart and your toes pointing slightly outwards.\nSquat down, breaking at the hip and knees simultaneously and and holding your arms straight in front of you if necessary. Don't let your heels lift of the floor.\nSit in the deep squat position for the recommended amount of time.\nAs you perform this movement more, try to bring your feet closer together (this will take quite a while so don't try and move them together quickly).\nIf you are lacking the necessary flexibility you can widen your stance a little. If you are far off the necessary flexibility, sit in the squat position whilst holding onto a support to stop you from falling backwards.\nDon't allow your knees to collapse inwards, and keep your weight centered in the middle of your feet.";
-//       "groinStretch" = "Groin";
-//       "butterflyPose" = "Butterfly Pose";
-"lungeStretchE" = "Stretch:\nStand upright with good posture.\nStep forwards a meter or so, bend your front knee so your knee is directly over your ankle, and place your back knee on the ground.\nRest your hands on your front leg and keep your torso upright.\nAllow your hips to stretch down towards the floor, keeping your pelvis perpedicular to your legs (don't allow it to rotate so that one side is furthur forwards than the other.\nHold for the recommended amount of time then repeat with the other leg forwards.\n\nNotes:\nIf needed, move your back leg furthur back to increase the stretch.\nPoint your back foot and toes.\nKeep your front knee directly above your ankle.\nYour can furthur increase the stretch by rotating your front hip so that your knee is pointing out to the side and your foot is resting on it's outer edge. Move both hands to direclty under your chest, and next to the sole of your foot. This stretch will feel similar to 'thread the needle' or the 'pigeon pose' as it increases the stretch in the piriformis.";
-//       "threadTheNeedle" = "Thread the Needle";
-"pigeonPoseE" = "Stretch:\nKneel on all fours, with your hands directly below your shoulders, and your knees a little behind your hips.\nLift your right leg up and forwards and place the knee just below your shoulder.\nRotate your hip and walk your right foot left untill it's 45º or more from the starting position.\nSlide your left leg back, keeping your right leg in a constant position.\nMove your hips down towards the floor without allowing them to rotate (don't allow your right hip to drop).\nOnce you reach a maximum stretch, begin to slowly walk your hands forwards, stopping to become comfortable  if necessary.\nPlace your forehead on the floor with your arms outstretch in front of you.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nDon't push past your limits, if you can't rotate your leg very far to bring your foot up, don't, and if you can't walk your hands forwards far enough to put your forehead on the floor, don't. Only go far enough to feel a good stretch in the glute.\nBreathe into the glute and piriformis.";
-"seatedGluteE" = "Stretch:\nSit on the floor with your legs outstretch in front of you.\nBend your right knee until your foot is flat next to your left knee, then lift the right foot over so it is flat next to the left knee on the other side.\nPut your right hand just behind you to enable you to push your torso into an upright position.\nHold your right knee with your left hand, and pull it towards your left shoulder, you should feel a stretch in the glutes.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nDon't allow the glute being stretched to come of the ground when performing the stretch (especially not when pulling your knee back), and don't allow the hip of the side being stretched to lift up when pulling. Allowing either to happen will alleviate the stretch, so make sure your glutes stay on the ground, and your hips in the same position that they were when sitting with your legs outstretched in front of you.\nMake sure to keep your torso upright and hips rotated back by using your rear hand.\nBreathe into the glute.";
-
-// calves
-"calfStretchE" = "";
-
 // Hamstrings
 "standingHamstringE" = "Stretch:\nGenerally the standing hamstring stretch is simply to reach down to touch your toes, however this often puts excess pressure on the lower back and makes you over bend your lower back. If you are flexible enough and have a strong lower back then this can be a good stretch.\nI present an alternative that uses isomeric stretching (activate the muscle for a period of time in the stretch then relax):.\nStand upright with good posture and an active core.\nBreak at the hips and bend forwards, keeping your back perfectly straight and knees straight.\nLower yourself to the deepest stretch you can reach with a straight back, feeling your lower back with your hands to ensure it's straight.\nFor many people this won't even be close to parallel with the ground, don't fool yourself and go lower with a bent back, work to your limits.\nRelax your arms down in front of you or stretch them up above your head to increase the stretch.\nConcentrate on activating the hamstrings during the stretch, and hold for the recommended amount of time.\nReturn to standing and relax, pausing for 5s, then repeat for the recommended amount of sets.\n\nNotes:\nThis exercise can also be performed with very light weights if you want to get an even better contraction in the hamstrings.\nDon't allow your back to bend at all during the stretch, keeping it straight whilst concentrating on activating the hamstrings.\nBreathe into the hamstrings.";
-"standingOneLegHamstringE" = "Stretch:\nStand straight with good posture and an active core.\nLift your right leg behind you and lean your torso forwards, keeping your torso and back leg parallel so that they form a straight line.\nLean down forwards until your feel a good stretch in the hamstring, and keep stable.\nDon't allow your hips to rotate sideways or let one side get higher than the other, and rotate them back a little to increase the stretch.\nConcentrate on activating and tensing the hamstring during this stretch.\nHold for the recommended amount of time then gently return to standing, and repeat with the other leg.\nRepeat for the recommended amount of sets, 1 set containing 1 stretch of each hamstring.\n\nNotes:\nKeep a perfectly straight back during this stretch, which might mean that you aren't able to bend forwards far, but as long as you feel the stretch in the hamstring then your maximum is sufficient.\nThis exercise can be performed holding very light weights if a greater contraction of the hamstring is wanted.\nThis is an isomeric stretch.\nBreathe into the hamstring.";
 "singleLegStandingE" = "Stretch:\nStand upright with good posture and an active core, next to a bench or elevated surface you can put a foot on.\nLift your right foot placing your heel on the surface.\nKeeping a straight back and legs, rotate your hips back and lean forwards to get a stretch in your hamstring.\nNow lean forwards to trying and touch your toes, keeping your lower back as straight as possible, and your foot flexed.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nDon't allow the hip of the leg not being stretch to move back, keep them in line.\nDon't push past your limit.\nIf needed support a little weight with your hand pressed against the stretched leg so as not to put too much pressure on the lower back.\nBreathe into the hamstring.";
 "downWardsDogE" = "Stretch:\nKneel on all fours, with your knees directly under your hips, and your hands a little in front of your shoulders.\nYour toes should be curled under you feet.\nStraighten your legs whilst pressing through your palms, knuckles and oustretched fingers.\nTry to move your heels to the ground, whilst rotating your pelvis back to straighten your lower back and move you stomach down towards your thighs.\nPress your chest forwards through your shoulders towards the ground, and keep your head in line with your torso.\n\nNotes:\nYou can warm up for this exercise by getting in position an pedalling your feet.\nTry stretch your hamstrings, bringing your stomach towards your thighs.\nKeep a straight lower back.";
 "singleLegHamstringE" = "Stretch:\nSit down with your legs outstretched in front of you.\nBend your right knee and bring your heel as close to your crotch as possible.\nPress the sole of your foot against your inner thigh and point your right knee out to the side, allowing it to relax down towards the floor.\nEnsure that your pelvis is rotated backwards and that your weight is on your sitting bones.\nStretch your arms straight up over your head, and turn your torso so it's facing your left leg, and keeping a straight back stretch forwards as far as possible.\nBend forwards to try and touch your toes, keeping your lower back straight to enhance the stretch on the hamstring and aleviate excess pressure on the lower back.\nHold for the recommended amount of time then repeat with the other leg.\n\nNotes:\nRotate your pelvis forwards keeping a straight lower back.\nDon't force the stretch so as not to put excess pressure on the lower back.\nKeep your foot flexed during the stretch.\nBreathe into the hamstring.";

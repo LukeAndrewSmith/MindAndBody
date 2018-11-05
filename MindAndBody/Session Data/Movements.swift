@@ -24,7 +24,7 @@ extension sessionData {
                     // Glutes
                     ["gluteBridge", "kneelingKickBackW", "legsToSideSquat", "standingGluteKickback"],
                     // Lower Back
-                    ["sideLegDrop", "sideLegKick", "scorpionKick", "sideBend", "catCow", "legsToSideTwist", "plank"],
+                    ["legDrop", "sideLegKick", "scorpionKick", "sideBend", "catCow", "legsToSideTwist", "plank"],
                     // Upper Back
                     ["upperBackRotation", "latStretch"],
                     // Shoulder
@@ -91,7 +91,7 @@ extension sessionData {
                     // Push (Shoulder)
                     ["downwardDogpushUp", "wallpushUp", "boxer", "armCircles"],
                     // Core ---------
-                    ["plank", "dynamicPlank", "sidePlankW", "pushUpPlank", "lSit", "bicycleCrunch", "divingHold", "hipRaise", "legHold", "sideLegDrop"],
+                    ["plank", "dynamicPlank", "sidePlankW", "pushUpPlank", "lSit", "bicycleCrunch", "divingHold", "hipRaise", "legHold", "legDrop"],
                     // General (Core) ---------
                     ["mountainClimbers"],
                     // General (Full Body)
@@ -146,11 +146,9 @@ extension sessionData {
                     // calves
                     ["calfStretch"],
                     // Hamstrings
-                    ["standingHamstring", "standingOneLegHamstring", "downWardsDog", "singleLegHamstring", "twoLegHamstring"],
+                    ["standingHamstring", "downWardsDog", "singleLegHamstring", "twoLegHamstring"],
                     // Quads
-                    ["lungeStretchWall", "quadStretch"],
-                    // Full Body
-                    ["sumoSquatTwist", "tinyFencerStretch"]
+                    ["lungeStretchWall", "quadStretch"]
             ],
             "yoga":
                 [
@@ -305,9 +303,6 @@ extension sessionData {
                     // Quads
                     "lungeStretchWall",
                     "quadStretch",
-                    // Full Body
-                    "sumoSquatTwist",
-                    "tinyFencerStretch",
             ],
             // Yoga - Contains the images that need to be reversed
             // L/R
@@ -594,11 +589,11 @@ extension sessionData {
                             "targetArea": ["glute"]
                     ], ///
                     // Lower Back
-                    "sideLegDrop":
+                    "legDrop":
                         [
-                            "name": ["sideLegDrop"],
+                            "name": ["legDrop"],
                             "demonstration": ["legDrop", "legDrop1", "legDrop2", "legDrop1", "legDrop", "legDrop1", "legDrop2", "legDrop1"],
-                            "explanation": ["sideLegDropEH", "sideLegDropEA", "sideLegDropEF"],
+                            "explanation": ["legDropEH", "legDropEA", "legDropEF"],
                             "targetArea": ["core"]
                     ],
                     "sideLegKick":
@@ -1498,11 +1493,11 @@ extension sessionData {
                         "explanation": ["legHoldEH", "legHoldEA", "legHoldEF"],
                         "targetArea": ["core"]
                 ],
-                "sideLegDrop":
+                "legDrop":
                     [
-                        "name": ["sideLegDrop"],
+                        "name": ["legDrop"],
                         "demonstration": ["legDrop", "legDrop1", "legDrop2", "legDrop1", "legDrop", "legDrop1", "legDrop2", "legDrop1"],
-                        "explanation": ["sideLegDropEH", "sideLegDropEA", "sideLegDropEF"],
+                        "explanation": ["legDropEH", "legDropEA", "legDropEF"],
                         "targetArea": ["core"]
                 ],
                 // General (Core) ---------
@@ -2145,9 +2140,9 @@ extension sessionData {
                 ],
                 "rearDeltStretch":
                     [
-                        "name": ["rearDelt"],
+                        "name": ["rearDeltStretch"],
                         "demonstration": ["rearDeltStretch"],
-                        "explanation": ["rearDeltEH", "rearDeltEA", "rearDeltEF"],
+                        "explanation": ["rearDeltStretchEH", "rearDeltStretchEA", "rearDeltStretchEF"],
                         "targetArea": ["rearDelt"]
                 ],
                 // Hips and Glutes
@@ -2216,13 +2211,6 @@ extension sessionData {
                         "explanation": ["standingHamstringEH", "standingHamstringEA", "standingHamstringEF"],
                         "targetArea": ["hamstring"]
                 ],
-                "standingOneLegHamstring":
-                    [
-                        "name": ["standingOneLegHamstring"],
-                        "demonstration": ["standingSingleLegHamstring"],
-                        "explanation": ["standingOneLegHamstringEH", "standingOneLegHamstringEA", "standingOneLegHamstringEF"],
-                        "targetArea": ["hamstring"]
-                ],
                 "downWardsDog":
                     [
                         "name": ["downWardsDog"],
@@ -2258,21 +2246,6 @@ extension sessionData {
                         "demonstration": ["quadStretch"],
                         "explanation": ["quadStretchEH", "quadStretchEA", "quadStretchEF"],
                         "targetArea": ["quad"]
-                ],
-                // Full Body
-                "sumoSquatTwist":
-                    [
-                        "name": ["sumoSquatTwist"],
-                        "demonstration": ["sumoSquatTwist"],
-                        "explanation": ["sumoSquatTwistEH", "sumoSquatTwistEA", "sumoSquatTwistEF"],
-                        "targetArea": ["squatBody"]
-                ],
-                "tinyFencerStretch":
-                    [
-                        "name": ["tinyFencerStretch"],
-                        "demonstration": ["tinyFencerStretch"],
-                        "explanation": ["tinyFencerStretchEH", "tinyFencerStretchEA", "tinyFencerStretchEF"],
-                        "targetArea": ["squatBody"]
                 ],
             ],
             // MARK: Yoga
