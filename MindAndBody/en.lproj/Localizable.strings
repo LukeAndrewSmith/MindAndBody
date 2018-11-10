@@ -376,9 +376,9 @@
 "sideBendEF" = "Breathing\nKeeping tall";
 
 "catCow" = "Cat Cow";
-"catCowEH" = "Kneel on all fours with your wrists directly below your shoulders and your knees directly below your hips, and with equal weight distribution on your hands and knees\nSlowly breathe in while bending back, rotating your hips back, bringing your stomach towards the ground, extending your head up a little, opening your chest and bring your shoulders down and back (cow)\nSlowly breathe out returning past neutral and rounding your back, pushing your shoulders forwards, relaxing your head forward and rotating your hips forward (cat)\nReturn to the starting position while breathing in and continue on the same breath for the next rep\nRepeat for the recommended nº reps";
-"catCowEA" = "Moving too quickly, this movement should be slow and controlled with short pauses at the bent and rounded positions\nOverextending, don't force past whats comfortable";
-"catCowEF" = "Breathing";
+"catCowEH" = "Kneel on all fours with your wrists directly below your shoulders and your knees directly below your hips\nEnsure equal weight distribution to your hands and knees\nSlowly breathe in while bending back, rotating your hips back, bringing your stomach towards the ground, extending your head up a little, opening your chest and bring your shoulders down and back (cow)\nSlowly breathe out returning past neutral and rounding your back, pushing your shoulders forwards, relaxing your head down and rotating your hips forward (cat)\nReturn to the starting position while breathing in and continue on the same breath for the next breath\nRepeat for the recommended nº breaths, breathing slowly and deeply";
+"catCowEA" = "Moving too quickly, this movement should be slow and controlled with short pauses at the cat and cow positions\nOver-extending, don't force past whats comfortable and keep your torso tall";
+"catCowEF" = "Keeping your torso tall\nBreathing";
 
 "legsToSideTwist" = "Seated Twist";
 "legsToSideTwistEH" = "Sit cross legged\nRotate and bring your right leg back, so that your foot is behind you and your right knee is still touching your left foot\nRotate your core to the left while breathing out and supporting your weight on your hands\nBreathe in a rotate back\nBreathe out and rotate to the other side\nBreathe in and rotate back\nRepeat for the recommended nº reps";
@@ -386,9 +386,9 @@
 "legsToSideTwistEF" = "Breathing";
 
 "plank" = "Plank";
-"plankEH" = "Kneel on all fours\nPlace your elbows on the floor directly below your shoulders and bring your hands together to form a triangle\nExtend your legs back and take your weight on your tip toes\nMake sure that:\nyour shoulders are directly above your elbows\nyour head is tall and extended away from your shoulder\nyour back muscles are tensed a little, pulling your elbows towards your feet\nand your hips are rotated forward a little\n-\nBreathe deeply into your stomach, tensing a little harder when you breathe out and keeping your core active to counter the expansion of your stomach when you breathe in\nBreathe for the recommended nº breaths";
+"plankEH" = "Kneel on all fours\nPlace your elbows on the floor directly below your shoulders and bring your hands together to form a triangle\nExtend your legs back and take your weight on your tip toes\n-\nPosition:\nShoulders are directly above your elbows\nHead tall and extended away from your shoulders\nBack muscles tensed a little, pulling your elbows towards your feet\nHips rotated forward a little\nBreathe deeply into your stomach, tensing a little harder when you breathe out and keeping your core active to counter the expansion of your stomach when you breathe in\nBreathe deeply and slowly for the recommended nº breaths";
 "plankEA" = "Sagging in the middle, don't let your hips drop towards the ground\nLetting your shoulders cave in; keep your chest open, back tensed and head tall\nBreathing quickly, take deep slow breaths";
-"plankEF" = "Core activation\nBreathing";
+"plankEF" = "Core activation\nKeeping your hips rotated forward and at a constant height\nBreathing";
 
 // Upper Back
 "upperBackRotation" = "Upper Back Rotation";
@@ -1010,7 +1010,7 @@
 // Core
 //"plank" = "Plank";        warmup
 "dynamicPlank" = "Dynamic Plank";
-"dynamicPlankEH" = "Kneel on all fours\nPlace your elbows on the floor directly below your shoulders and bring your hands together to form a triangle\nExtend your legs back and take your weight on your tip toes\nMake sure that:\nyour shoulders are directly above your elbows\nyour head is tall and extended away from your shoulder\nyour back muscles are tensed a little, pulling your elbows towards your feet\nand your hips are rotated forward a little\n-\nBreathe out and lift your hips up, bringing your upper arms to be in line with your stomach. Attempt to do this primarily by tensing your core, without using your shoulders or other muscles much\nPause for a moment\nBreathe in and return your hips down and your shoulders above your elbows, making sure your don't dip your hips down too far\nRepeat for the recommended nº reps";
+"dynamicPlankEH" = "Kneel on all fours\nPlace your elbows on the floor directly below your shoulders and bring your hands together to form a triangle\nExtend your legs back and take your weight on your tip toes\nMake sure that:\nyour shoulders are directly above your elbows\nyour head is tall and extended away from your shoulder\nyour back muscles are tensed a little, pulling your elbows towards your feet\nand your Hips rotated forward a little\n-\nBreathe out and lift your hips up, bringing your upper arms to be in line with your stomach. Attempt to do this primarily by tensing your core, without using your shoulders or other muscles much\nPause for a moment\nBreathe in and return your hips down and your shoulders above your elbows, making sure your don't dip your hips down too far\nRepeat for the recommended nº reps";
 "dynamicPlankEA" = "Letting your shoulders cave in, keep your chest open, back tensed and head tall\nBreathing quickly, take deep slow breaths";
 "dynamicPlankEF" = "Core activation\nBreathing";
 
@@ -1020,7 +1020,7 @@
 "sidePlankWEF" = "Core activation\nBreathing";
 
 "pushUpPlank" = "Push-Up Plank";
-"pushUpPlankEH" = "Kneel on all fours with your hands directly below your shoulders\nExtend your legs back and take your weight on your tip toes\nMake sure that:\nyour head is tall and extended away from your shoulder\nyour back muscles are tensed a little, pulling your hands towards your feet\nand your hips are rotated forward a little\n-\nBreathe deeply into your stomach, tensing a little harder when you breathe out and keeping your core active to counter the expansion of your stomach when you breathe in\nBreathe for the recommended nº breaths";
+"pushUpPlankEH" = "Kneel on all fours with your hands directly below your shoulders\nExtend your legs back and take your weight on your tip toes\nMake sure that:\nyour head is tall and extended away from your shoulder\nyour back muscles are tensed a little, pulling your hands towards your feet\nand your Hips rotated forward a little\n-\nBreathe deeply into your stomach, tensing a little harder when you breathe out and keeping your core active to counter the expansion of your stomach when you breathe in\nBreathe for the recommended nº breaths";
 "pushUpPlankEA" = "Sagging in the middle, don't let your hips drop towards the ground\nLetting your shoulders cave in; keep your chest open, back tensed and head tall\nBreathing quickly, take deep slow breaths";
 "pushUpPlankEF" = "Core activation\nBreathing";
 
@@ -1053,7 +1053,7 @@
 
 // General (Core)
 "mountainClimbers" = "Mountain Climbers";
-"mountainClimbersEH" = "Kneel on all fours with your hands directly below your shoulders\nExtend your legs back and take your weight on your tip toes\nMake sure that:\nyour head is tall and extended away from your shoulder\nyour back muscles are tensed a little, pulling your hands towards your feet\nand your hips are rotated forward a little\n-\nJump your feet up a little and bring your right knee up towards your elbows, landing with your left foot when your right knee is at it's furthers point forward\nBounce off your left foot, bringing your left knee forward and extending your right leg back to land when your left knee is at it's furthers point forward\nBounce off your right foot and exchange again\nContinue bouncing and swapping your knees for the recommended nº breaths";
+"mountainClimbersEH" = "Kneel on all fours with your hands directly below your shoulders\nExtend your legs back and take your weight on your tip toes\nMake sure that:\nyour head is tall and extended away from your shoulder\nyour back muscles are tensed a little, pulling your hands towards your feet\nand your Hips rotated forward a little\n-\nJump your feet up a little and bring your right knee up towards your elbows, landing with your left foot when your right knee is at it's furthers point forward\nBounce off your left foot, bringing your left knee forward and extending your right leg back to land when your left knee is at it's furthers point forward\nBounce off your right foot and exchange again\nContinue bouncing and swapping your knees for the recommended nº breaths";
 "mountainClimbersEA" = "Pausing; this should be one fluid movement\nBouncing too high; don't jump your hips up high and minimise airtime by quickly bringing your knees up";
 "mountainClimbersEF" = "Core activation\nKeeping your back straight and head tall\nBreathing deeply";
 
@@ -1453,9 +1453,9 @@
 "standingHamstringEF" = "Keeping your hips rotated back\nKeeping your weight on your hips\nHolding your weight with your hamstrings\nBreathing";
 
 "downWardsDog" = "Downwards Dog";
-"downWardsDogEH" = "Kneel on all fours with your palms flat and feet on tip toes\nBreathe out and lift your hips up, straightening your legs a little and bringing your arms and torso in line\n-\nPosition:\nHips rotated back with your weight on your hamstrings and pull your belly button to your thighs\nLegs no straighter than necessary to feel a stretch in the hamstrings\nChest open and shoulders down, press your shoulders a little towards your feet\nHead in line with your arms\nStraight back\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"downWardsDogEH" = "Kneel on all fours with your palms flat and feet on tip toes\nBreathe out and lift your hips up, straightening your legs a little and bringing your arms and torso in line\nStop when you feel a stretch in your hamstrings, keeping your hips rotated back and your lower back straight\n-\nPosition:\nHips rotated back with your weight on your hamstrings, pulling your belly button to your thighs\nLegs no straighter than necessary to feel a stretch in the hamstrings\nChest open and shoulders down; press your shoulders towards your feet\nHead in line with your arms\nStraight back\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
 "downWardsDogEA" = "Straightening your legs further than necessary (they are a little too straight on the photo sorry); only straighten them until you feel a stretch in the hamstrings and keep your hips rotated back\nRounding your lower back; keep your hips rotated back, pulling your belly button to your thighs";
-"downWardsDogEF" = "Keeping your hips rotated back with your belly button pulled towards your thighs\nPressing your weight into your hamstrings\nBreathing ";
+"downWardsDogEF" = "Keeping your hips rotated back with your belly button pulled towards your thighs\nPressing your weight into your hamstrings\nPressing your shoulders down to your feet with your weight spread evenly through your hands\nBreathing ";
 
 "singleLegHamstring" = "Single Leg Stretch";
 "singleLegHamstringEH" = "Sit tall with your legs extended out to form a 90º angle, an active core and your hips rotated back\nBend your left knee and bring your left foot to rest against your right thigh, as close to the groin as comfortable\nStay tall and rotate your torso left so that your shoulders are in line with your right leg\nLift your arms straight up\nBreath in, rotating your hips back, leaning your torso forward while perfectly straight and putting your weight on your hamstring\nPause when you can't go any further down without rounding your back\nBreathe out and relax your upper back down a tiny bit\n-\nPosition:\nHips rotated back with a tall lower back, leaning into your hamstring\nActive core\nOpen chest\nReaching out and up over your head (don't only reach forward, primarily reach up)\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nRepeat, leaning to your left";
@@ -1668,65 +1668,96 @@
 "intenseSideREF" = "Keeping your weight back on your hips and hamstring\nKeeping your hips rotated back\nKeeping your lower back straight and relaxing your torsos' weight into your hamstring\nBreathing";
 
 "gateL" = "Gate (L)";
-"EH" = "Kneel down with a tall torso, an active core and your hips above your knees\nStretch your left leg out to the side";
-"EA" = "";
-"EF" = "";
+"gateLEH" = "Kneel down with a tall torso, an active core and your hips above your knees\nStretch your left leg out to the side and point your toes, keeping your right hip directly over your knee\nPlace your left hand on your left leg just above or below your knee\nBreathe in while lifting your right hand over your head and leaning your upper torso to the left without relaxing your lower back down to the left\nStop when you feel a stretch down your right side, and point your palm to the floor\n-\nPosition:\nLower back straight with your hips rotated forward\nRight hip above your right knee\nSome weight taken by your left arm\nChest open\nShoulders down away from your ears\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"gateLEA" = "Relaxing your lower back down; keep your core active with your lower back straight\nRelaxing your hips back; keep your glutes active and your hips in line with your knees\nBending your torso forward; keep your torso in line with your left leg and your chest open";
+"gateLEF" = "Keeping your hips in line with your knees\nKeep a straight lower back with an active core\nKeeping your shoulders down\nBreathing";
 
 "gateR" = "Gate (R)";
-"EH" = "";
-"EA" = "";
-"EF" = "";
+"gateREH" = "Kneel down with a tall torso, an active core and your hips above your knees\nStretch your right leg out to the side and point your toes, keeping your left hip directly over your knee\nPlace your right hand on your right leg just above or below your knee\nBreathe in while lifting your left hand over your head and leaning your upper torso to the right without relaxing your lower back down to the right\nStop when you feel a stretch down your left side, and point your palm to the floor\n-\nPosition:\nLower back straight with your hips rotated forward\nLeft hip above your left knee\nSome weight taken by your right arm\nChest open\nShoulders down away from your ears\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"gateREA" = "Relaxing your lower back down; keep your core active with your lower back straight\nRelaxing your hips back; keep your glutes active and your hips in line with your knees\nBending your torso forward; keep your torso in line with your right leg and your chest open";
+"gateREF" = "Keeping your hips in line with your knees\nKeep a straight lower back with an active core\nKeeping your shoulders down\nBreathing";
 
 "highLungeL" = "High Lunge (L)";
-"EH" = "";
-"EA" = "";
-"EF" = "";
+"highLungeLEH" = "Stand tall with an active core and your shoulders relaxed down\nStep your left foot forward around a metre with your right foot on tip toes\nBend your left knee so that it is directly above your ankle\nYour hips should be around the height of your knee; adjust the distance between your feet if necessary\nBreathe in while lifting your arms forwards and up, keeping them straight with your palms facing eachother\nRelax your hips down a little while keeping your lower back tall\n-\nPosition:\nTorso tall\nArms straight up with your palms facing eachother and your hands directly above your shoulders\nChest open\nHips rotated forward a little and in line with eachother\nGlutes and core active\nWeight equally distributed through your feet\nRight leg straight and tensed a little\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"highLungeLEA" = "Arching your lower back much; keep your hips rotated forward a little, your core active and your torso tall\nRounding your shoulders forward; keep your chest open\nSlouching your lower back; keep an active core\nRelaxing your hips down too far; don't overstretch";
+"highLungeLEF" = "Keeping your torso and head tall with an open chest\nKeeping your hips rotated a little forward with an active core\nBreathing";
 
 "highLungeR" = "High Lunge (R)";
-"EH" = "";
-"EA" = "";
-"EF" = "";
+"highLungeREH" = "Stand tall with an active core and your shoulders relaxed down\nStep your right foot forward around a metre with your left foot on tip toes\nBend your right knee so that it is directly above your ankle\nYour hips should be around the height of your knee; adjust the distance between your feet if necessary\nBreathe in while lifting your arms forwards and up, keeping them straight with your palms facing eachother\nRelax your hips down a little while keeping your lower back tall\n-\nPosition:\nTorso tall\nArms straight up with your palms facing eachother and your hands directly above your shoulders\nChest open\nHips rotated forward a little and in line with eachother\nGlutes and core active\nWeight equally distributed through your feet\nLeft leg straight and tensed a little\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"highLungeREA" = "Arching your lower back much; keep your hips rotated forward a little, your core active and your torso tall\nRounding your shoulders forward; keep your chest open\nSlouching your lower back; keep an active core\nRelaxing your hips down too far; don't overstretch";
+"highLungeREF" = "Keeping your torso and head tall with an open chest\nKeeping your hips rotated a little forward with an active core\nBreathing";
 
 "lowLungeL" = "Low Lunge (L)";
-"EH" = "";
-"EA" = "";
-"EF" = "";
+"lowLungeLEH" = "Stand tall with an active core and your shoulders relaxed down\nStep your left foot forward around a metre with your right foot on tip toes\nBend your left knee so that it is directly above your ankle and bring your right knee to rest on the ground (adjust the distance between your feet if necessary)\nBreathe in while lifting your arms forwards and up, keeping them straight with your palms facing eachother\nRelax your hips down a little while keeping your lower back tall\n-\nPosition:\nTorso tall\nArms straight up with your palms facing eachother and your hands directly above your shoulders\nChest open\nHips rotated forward a little and in line with eachother\nGlutes and core active\nWeight equally distributed through your feet\nRight leg straight and tensed a little\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"lowLungeLEA" = "Arching your lower back much; keep your hips rotated forward a little, your core active and your torso tall\nRounding your shoulders forward; keep your chest open\nSlouching your lower back; keep an active core\nRelaxing your hips down too far; don't overstretch";
+"lowLungeLEF" = "Keeping your torso and head tall with an open chest\nKeeping your hips rotated a little forward with an active core\nBreathing";
 
 "lowLungeR" = "Low Lunge (R)";
-"EH" = "";
-"EA" = "";
-"EF" = "";
-
-"lungeYL" = "Lunge (L)";
-"EH" = "";
-"EA" = "";
-"EF" = "";
-
-"lungeYR" = "Lunge (R)";
-"EH" = "";
-"EA" = "";
-"EF" = "";
+"lowLungeREH" = "Stand tall with an active core and your shoulders relaxed down\nStep your right foot forward around a metre with your left foot on tip toes\nBend your left knee so that it is directly above your ankle and bring your right knee to rest on the ground (adjust the distance between your feet if necessary)\nBreathe in while lifting your arms forwards and up, keeping them straight with your palms facing eachother\nRelax your hips down a little while keeping your lower back tall\n-\nPosition:\nTorso tall\nArms straight up with your palms facing eachother and your hands directly above your shoulders\nChest open\nHips rotated forward a little and in line with eachother\nGlutes and core active\nWeight equally distributed through your feet\nLeft leg straight and tensed a little\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"lowLungeREA" = "Arching your lower back much; keep your hips rotated forward a little, your core active and your torso tall\nRounding your shoulders forward; keep your chest open\nSlouching your lower back; keep an active core\nRelaxing your hips down too far; don't overstretch";
+"lowLungeREF" = "Keeping your torso and head tall with an open chest\nKeeping your hips rotated a little forward with an active core\nBreathing";
 
 "deepSquat" = "Deep Squat";
-"EH" = "";
-"EA" = "";
-"EF" = "";
+"deepSquatEH" = "Stand tall with an active core, your feet at or just past shoulder width and your hands pressed together by your chest\nBreathe in while slowly squatting all the way down; break at the hips first and sit back on your hips while keeping an upright torso\n-\nPosition:\nSitting back on your hips\nHips rotated back with an active core and a tall torso\nShins relaxed forward\nBreathe deeply and slowly into your stomach for the recommended nº breaths\nNote: hold onto a support if you can't balance";
+"deepSquatEA" = "Bending your lower back too much; try too keep your torso straight and hold onto a support if you have to round your back excessively to stay balanced";
+"deepSquatEF" = "Keeping your torso upright with an active core\nSitting your weight back on your hips, with your hips rotated back\nRelaxing your shins forward\nBreathing deeply";
 
 // Hand/Elbows and Feet/Knees
 "dolphin" = "Dolphin";
+"dolphinEH" = "Kneel on all fours\nBend forward and place your elbows on the ground below your shoulders with your hands pointing forward and your palms flat to the floor\nPosition your feet on tip toes and breath out, extending your legs and bringing your hips up\nKeep your hips rotated back and stop when you feel a good stretch in your hamstrings with your lower back straight\nPush your shoulders forward to form a line with your torso and your upper arms\n-\nPosition:\nHips rotated back with your legs with your weight on your hamstrings\nTall torso with a straight lower back\nShoulders forward and down, with your upper arms and torso forming a line\nHead relaxed down\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"dolphinEA" = "Rounding your lower back; keep your hips rotated back and your lower back straight\nStraightening your legs too much; stop when you feel a stretch, and keep your hips rotated back\nRelaxing your shoulders; keep your shoulders away from your ears with your elbows pushed back with an active upper back\nForcing the stretch; relax";
+"dolphinEF" = "Relaxing your weight back into your hamstrings\nKeeping your hips rotated back\nKeeping your elbows pushed back with your upper arms and torso in line\nBreathing";
+
 "downwardDog" = "Downward Dog";
+"downwardDogEH" = "Kneel on all fours with your palms flat and feet on tip toes\nBreathe out and lift your hips up, straightening your legs a little and bringing your arms and torso in line\nStop when you feel a stretch in your hamstrings, keeping your hips rotated back and your lower back straight\n-\nPosition:\nHips rotated back with your weight on your hamstrings, pulling your belly button to your thighs\nLegs no straighter than necessary to feel a stretch in the hamstrings\nChest open and shoulders down; press your shoulders towards your feet\nHead in line with your arms\nStraight back\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"downwardDogEA" = "Straightening your legs further than necessary; only straighten them until you feel a stretch in the hamstrings and keep your hips rotated back\nRounding your lower back; keep your hips rotated back, pulling your belly button to your thighs";
+"downwardDogEF" = "Keeping your hips rotated back with your belly button pulled towards your thighs\nRelaxing your weight back into your hamstrings\nPressing your shoulders down to your feet with your weight spread evenly through your hands\nBreathing";
+
 "halfDownwardDogL" = "Half Downward Dog (L)";
+"halfDownwardDogLEH" = "Kneel on all fours with your palms flat and feet on tip toes\nBreathe out and lift your hips up, straightening your legs a little and bringing your arms and torso in line\nStop when you feel a stretch in your hamstrings, keeping your hips rotated back and your lower back straight\nLift your right foot off the ground and extend your right leg back and up, forming a straight line with your torso\n-\nPosition:\nHips rotated back with your weight on your hamstring, pulling your belly button to your thighs\nRight leg no straighter than necessary to feel a stretch in the hamstrings\nChest open and shoulders down; press your shoulders towards your feet\nHead in line with your arms\nStraight back\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"halfDownwardDogLEA" = "Straightening your legs further than necessary; only straighten them until you feel a stretch in the hamstrings and keep your hips rotated back\nRounding your lower back; keep your hips rotated back, pulling your belly button to your thighs\nLetting your right hip back behind your left; keep your hips in line";
+"halfDownwardDogLEF" = "Keeping your hips rotated back with your belly button pulled towards your thighs\nRelaxing your weight back into your hamstrings\nPressing your shoulders down to your feet with your weight spread evenly through your hands\nBreathing";
+
 "halfDownwardDogR" = "Half Downward Dog (R)";
-"plank" = "Plank";
+"halfDownwardDogREH" = "Kneel on all fours with your palms flat and feet on tip toes\nBreathe out and lift your hips up, straightening your legs a little and bringing your arms and torso in line\nStop when you feel a stretch in your hamstrings, keeping your hips rotated back and your lower back straight\nLift your left foot off the ground and extend your left leg back and up, forming a straight line with your torso\n-\nPosition:\nHips rotated back with your weight on your hamstring, pulling your belly button to your thighs\nLeft leg no straighter than necessary to feel a stretch in the hamstrings\nChest open and shoulders down; press your shoulders towards your feet\nHead in line with your arms\nStraight back\nBreathe deeply and slowly into your stomach for the recommended nº breaths";
+"halfDownwardDogREA" = "Straightening your legs further than necessary; only straighten them until you feel a stretch in the hamstrings and keep your hips rotated back\nRounding your lower back; keep your hips rotated back, pulling your belly button to your thighs\nLetting your left hip back behind your right; keep your hips in line";
+"halfDownwardDogREF" = "Keeping your hips rotated back with your belly button pulled towards your thighs\nRelaxing your weight back into your hamstrings\nPressing your shoulders down to your feet with your weight spread evenly through your hands\nBreathing";
+
 "dolphinPlank" = "Dolphin Plank";
+"dolphinPlankEH" = "Kneel on all fours\nBend forward and place your elbows on the ground below your shoulders with your hands pointing forward and your palms flat to the floor\nExtend your legs back and take your weight on your tip toes\n-\nPosition:\nShoulders are directly above your elbows\nHead tall and extended away from your shoulders\nBack muscles tensed a little, pulling your elbows towards your feet\nHips rotated forward a little\nBreathe deeply into your stomach, tensing a little harder when you breathe out and keeping your core active to counter the expansion of your stomach when you breathe in\nBreathe deeply and slowly for the recommended nº breaths";
+"dolphinPlankEA" = "Sagging in the middle, don't let your hips drop towards the ground\nLetting your shoulders cave in; keep your chest open, back tensed and head tall\nBreathing quickly, take deep slow breaths";
+"dolphinPlankEF" = "Core activation\nKeeping your hips rotated forward and at a constant height\nBreathing";
+
 "fourLimbedStaff" = "Four Limbed Staff";
+"fourLimbedStaffEH" = "Kneel on all fours with your hands flat and pointing forward\nBend forward, positioning your elbows above your wrists your shoulders at the height of your eblows\nExtend your legs back and take your weight on your tip toes\n-\nPosition:\nElbows directly above your shoulders\nShoulders at the height of your elbows\nHead tall and extended away from your shoulders\n\nChest active to keep your torso up\nBack muscles tensed a little, pulling your elbows towards your feet\nHips rotated forward a little\nBreathe deeply into your stomach, tensing a little harder when you breathe out and keeping your core active to counter the expansion of your stomach when you breathe in\nBreathe deeply and slowly for the recommended nº breaths";
+"fourLimbedStaffEA" = "Sagging in the middle, don't let your hips drop towards the ground\nLetting your shoulders cave in; keep your chest open, back tensed and head tall\nBreathing quickly, take deep slow breaths";
+"fourLimbedStaffEF" = "Core activation\nKeeping your hips rotated forward and at a constant height\nBreathing";
+
 "sidePlankL" = "Side Plank (L)";
+"sidePlankLEH" = "Keel on all fours with your arms straight\nExtend your legs out backwards and take your weight on your tip toes\nBreathe out, rotating your feet onto the side of your left foot while rotating your torso and hips right to take your weight on your left arm\nLift your right arm directly above your right shoulder\n-\nPosition:\nLeft shoulder directly above your wrist\nShoulders down away from your ears\nCore active and hips forward, in line with your shoulders and feet\nBody forming a straight line\nBreathe deeply into your stomach, tensing a little harder when you breathe out and keeping your core active to counter the expansion of your stomach when you breathe in\nBreathe for the recommended nº breaths";
+"sidePlankLEA" = "Sagging in the middle, don't let your hips drop towards the ground\nLetting your shoulders cave in; keep your chest open, back tensed and head tall\nBreathing quickly, take deep slow breaths";
+"sidePlankLEF" = "Core activation\nKeeping your hips up\nKeeping your feet, shoulders and hips in line\nBreathing";
+
 "sidePlankR" = "Side Plank (R)";
+"sidePlankREH" = "Keel on all fours with your arms straight\nExtend your legs out backwards and take your weight on your tip toes\nBreathe out, rotating your feet onto the side of your right foot while rotating your torso and hips left to take your weight on your right arm\nLift your left arm directly above your left shoulder\n-\nPosition:\nRight shoulder directly above your wrist\nShoulders down away from your ears\nCore active and hips forward, in line with your shoulders and feet\nBody forming a straight line\nBreathe deeply into your stomach, tensing a little harder when you breathe out and keeping your core active to counter the expansion of your stomach when you breathe in\nBreathe for the recommended nº breaths";
+"sidePlankREA" = "Sagging in the middle, don't let your hips drop towards the ground\nLetting your shoulders cave in; keep your chest open, back tensed and head tall\nBreathing quickly, take deep slow breaths";
+"sidePlankREF" = "Core activation\nKeeping your hips up\nKeeping your feet, shoulders and hips in line\nBreathing";
+
 "cat" = "Cat";
+"catEH" = "Kneel on all fours with your wrists directly below your shoulders and your knees directly below your hips\nEnsure equal weight distribution to your hands and knees\nSlowly breathe out and rounding your back, pushing your shoulders forwards, relaxing your head down and rotating your hips forward\n-\nPosition:\nShoulders rounded forward with your head relaxed down\nHips rotated forward with active glutes\nMid back lifted away from the ground\nBreathe deeply and slowly for the recommended nº breaths";
+"catEA" = "Over-extending, don't force past whats comfortable and keep your torso tall";
+"catEF" = "Keeping your torso tall\nBreathing";
+
 "cow" = "Cow";
-"kowtow" = "Kowtow";
-"catBalance" = "Cat Balance";
-"dynamicTiger" = "Dynamic Tiger";
+"cowEH" = "Kneel on all fours with your wrists directly below your shoulders and your knees directly below your hips\nEnsure equal weight distribution to your hands and knees\nSlowly breathe in while bending back, rotating your hips back, bringing your stomach towards the ground, extending your head up a little, opening your chest and bring your shoulders down and back\n-\nPosition:\nHead tall and extended away from your shoulders with your chin a little up\nShoulders back and down with your chest open\nLower back straight with your hips rotated back, core active and belly button pulled towards the ground\nBreathe deeply and slowly for the recommended nº breaths";
+"cowEA" = "Over-extending, don't force past whats comfortable and keep your torso tall\nCaving in; try to keep your hips and shoulders as far away from eachother as possible with your torso tall";
+"cowEF" = "Keeping your torso tall\nBreathing";
+
+"catCow" = "Cat Cow";
+"catCowEH" = "Kneel on all fours with your wrists directly below your shoulders and your knees directly below your hips\nEnsure equal weight distribution to your hands and knees\nSlowly breathe in while bending back, rotating your hips back, bringing your stomach towards the ground, extending your head up a little, opening your chest and bring your shoulders down and back (cow)\nSlowly breathe out returning past neutral and rounding your back, pushing your shoulders forwards, relaxing your head down and rotating your hips forward (cat)\nReturn to the starting position while breathing in and continue on the same breath for the next breath\nRepeat for the recommended nº reps, breathing slowly and deeply";
+"catCowEA" = "Moving too quickly, this movement should be slow and controlled with short pauses at the cat and cow positions\nOver-extending, don't force past whats comfortable and keep your torso tall";
+"catCowEF" = "Keeping your torso tall\nBreathing";
+
 "halfMonkeyL" = "Half Monkey (L)";
 "halfMonkeyR" = "Half Monkey (R)";
 "childPose" = "Child Pose";            //
@@ -1737,7 +1768,6 @@
 "upwardPlank" = "Upward Plank";
 "extendedPuppy" = "Extended Puppy";
 "upwardsDogY" = "Upward Dog";
-"kneelingBridge" = "Kneeling Bridge";
 // Seated
 "crossLeg" = "Leg Cross";
 "lotus" = "Lotus";
@@ -1747,31 +1777,25 @@
 "cowFaceL" = "Cow Face (L)";
 "cowFaceR" = "Cow Face (R)";
 "hero" = "Hero";
-"heron" = "Heron";
 "butterfly" = "Butterfly";           //
 "staffPose" = "Staff Pose";
 "seatedForwardBend" = "Seated Forward Bend";
+"vForwardBend" = "V Forward Bend";
 "vSideBendL" = "V Side Bend (L)";
 "vSideBendR" = "V Side Bend (R)";
-"archer" = "Archer";
-"forwardBend" = "Forward Bend";
-"vForwardBend" = "V Forward Bend";
 "halfVForwardBendL" = "Half V Forward Bend (L)";
 "halfVForwardBendR" = "Half V Forward Bend (R)";
 "halfVSideBendL" = "Half V Side Bend (L)";
 "halfVSideBendR" = "Half V Side Bend (R)";
 "marichi1L" = "Marichi's Pose I (L)";
 "marichi1R" = "Marichi's Pose I (R)";
-"marichi3L" = "Marichi's Pose II (L)";
-"marichi3R" = "Marichi's Pose II (R)";
-"bharadvajaTwist" = "Bharadvaja's Twist";
-"halfLordFish" = "Half Lord of the Fishes";
+"marichi3L" = "Marichi's Pose III (L)";
+"marichi3R" = "Marichi's Pose III (R)";
 "frontSplitL" = "Front Split (L)";
 "frontSplitR" = "Front Split (R)";
 "sideSplit" = "Side Split";
 // Lying
 "corpse" = "Corpse";
-"lyingMountain" = "Lying Mountain";
 "fish" = "Fish";
 "happyBaby" = "Happy Baby";
 "lyingButterfly" = "Lying Butterfly";
@@ -1781,7 +1805,6 @@
 "threadTheNeedleYR" = "Thread The Needle (R)";
 "shoulderStand" = "Shoulder Stand";
 "plow" = "Plow";
-"frog" = "Frog";
 "cobra" = "Cobra";
 "sphinx" = "Sphinx";
 "pigeonL" = "Pigeon (L)";
@@ -1790,7 +1813,6 @@
 // Hand Stands
 "handstand" = "Handstand";
 "headstand" = "Headstand";
-"flatHandHandstand" = "Flat Hand Handstand";
 "forearmStand" = "Forearm Stand";
 
 
