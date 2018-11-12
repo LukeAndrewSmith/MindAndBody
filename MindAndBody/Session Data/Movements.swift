@@ -159,7 +159,7 @@ extension sessionData {
                     // Seated
                     ["crossLeg", "lotus", "fireLogL", "fireLogR", "boat", "cowFaceL", "cowFaceR", "hero", "butterfly", "staffPose", "seatedForwardBend", "vForwardBend", "vSideBendL", "vSideBendR", "halfVForwardBendL", "halfVForwardBendR", "halfVSideBendL", "halfVSideBendR", "marichi1L", "marichi1R", "marichi3L", "marichi3R", "frontSplitL", "frontSplitR", "sideSplit"],
                     // Lying
-                    ["corpse", "fish", "happyBaby", "lyingButterfly", "legRaiseToeL", "legRaiseToeR", "threadTheNeedleL", "threadTheNeedleR", "shoulderStand", "plow", "cobra", "sphinx", "pigeonL", "pigeonR", "spineRolling"],
+                    ["corpse", "fish", "happyBaby", "lyingButterfly", "legRaiseToeL", "legRaiseToeR", "threadTheNeedleYL", "threadTheNeedleYR", "shoulderStand", "plow", "cobra", "sphinx", "pigeonL", "pigeonR", "spineRolling"],
                     // Hand Stands
                     ["handstand", "headstand", "forearmStand"]
             ]
@@ -346,7 +346,7 @@ extension sessionData {
                     "frontSplitR",
                     // Lying
                     "legRaiseToeR",
-                    "threadTheNeedleL", //
+                    "threadTheNeedleYL", //
                     "pigeonR",
             ]
     ]
@@ -2800,15 +2800,15 @@ extension sessionData {
                         "demonstration": ["legRaiseToe"],
                         "explanation": ["legRaiseToeEH", "legRaiseToeEA", "legRaiseToeEF"],
                 ],
-                "threadTheNeedleL":
+                "threadTheNeedleYL":
                     [
-                        "name": ["threadTheNeedleL"],
+                        "name": ["threadTheNeedleYL"],
                         "demonstration": ["threadTheNeedle"], // "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
                         "explanation": ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"],
                 ], //
-                "threadTheNeedleR":
+                "threadTheNeedleYR":
                     [
-                        "name": ["threadTheNeedleR"],
+                        "name": ["threadTheNeedleYR"],
                         "demonstration": ["threadTheNeedle"], // "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
                         "explanation": ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"],
                 ],
