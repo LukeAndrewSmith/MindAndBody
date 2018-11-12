@@ -1102,11 +1102,6 @@
 		07E463C51F4DDC8100A5AF49 /* reverseSnowAngels4.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463C01F4DDC8100A5AF49 /* reverseSnowAngels4.png */; };
 		07E463C81F4DDC8C00A5AF49 /* handStandTrap.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463C61F4DDC8C00A5AF49 /* handStandTrap.png */; };
 		07E463C91F4DDC8C00A5AF49 /* handStandTrap1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463C71F4DDC8C00A5AF49 /* handStandTrap1.png */; };
-		07E463CF1F4DDC9200A5AF49 /* trianglePushup.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463CA1F4DDC9200A5AF49 /* trianglePushup.png */; };
-		07E463D01F4DDC9200A5AF49 /* trianglePushup1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463CB1F4DDC9200A5AF49 /* trianglePushup1.png */; };
-		07E463D11F4DDC9200A5AF49 /* trianglePushup2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463CC1F4DDC9200A5AF49 /* trianglePushup2.png */; };
-		07E463D21F4DDC9200A5AF49 /* trianglePushup3.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463CD1F4DDC9200A5AF49 /* trianglePushup3.png */; };
-		07E463D31F4DDC9200A5AF49 /* trianglePushup4.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463CE1F4DDC9200A5AF49 /* trianglePushup4.png */; };
 		07E463D91F4DDC9800A5AF49 /* dolphinPushup.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463D41F4DDC9800A5AF49 /* dolphinPushup.png */; };
 		07E463DA1F4DDC9800A5AF49 /* dolphinPushup1.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463D51F4DDC9800A5AF49 /* dolphinPushup1.png */; };
 		07E463DB1F4DDC9800A5AF49 /* dolphinPushup2.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E463D61F4DDC9800A5AF49 /* dolphinPushup2.png */; };
@@ -2440,11 +2435,6 @@
 		07E463C01F4DDC8100A5AF49 /* reverseSnowAngels4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reverseSnowAngels4.png; sourceTree = "<group>"; };
 		07E463C61F4DDC8C00A5AF49 /* handStandTrap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handStandTrap.png; sourceTree = "<group>"; };
 		07E463C71F4DDC8C00A5AF49 /* handStandTrap1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handStandTrap1.png; sourceTree = "<group>"; };
-		07E463CA1F4DDC9200A5AF49 /* trianglePushup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trianglePushup.png; sourceTree = "<group>"; };
-		07E463CB1F4DDC9200A5AF49 /* trianglePushup1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trianglePushup1.png; sourceTree = "<group>"; };
-		07E463CC1F4DDC9200A5AF49 /* trianglePushup2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trianglePushup2.png; sourceTree = "<group>"; };
-		07E463CD1F4DDC9200A5AF49 /* trianglePushup3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trianglePushup3.png; sourceTree = "<group>"; };
-		07E463CE1F4DDC9200A5AF49 /* trianglePushup4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trianglePushup4.png; sourceTree = "<group>"; };
 		07E463D41F4DDC9800A5AF49 /* dolphinPushup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dolphinPushup.png; sourceTree = "<group>"; };
 		07E463D51F4DDC9800A5AF49 /* dolphinPushup1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dolphinPushup1.png; sourceTree = "<group>"; };
 		07E463D61F4DDC9800A5AF49 /* dolphinPushup2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dolphinPushup2.png; sourceTree = "<group>"; };
@@ -5492,7 +5482,7 @@
 				07E461881F4DD79D00A5AF49 /* stepUp */,
 				07E461AF1F4DD7C000A5AF49 /* superMan */,
 				07E461911F4DD7A600A5AF49 /* toePress */,
-				07E461AA1F4DD7BD00A5AF49 /* trianglePushup */,
+				07E461AA1F4DD7BD00A5AF49 /* trianglePushUp */,
 				07E461A81F4DD7BC00A5AF49 /* tricepExtensionBodyweight */,
 				07E461941F4DD7A800A5AF49 /* tuckJump */,
 				07E461A71F4DD7BB00A5AF49 /* walkingPushup */,
@@ -6296,16 +6286,11 @@
 			path = dolphinPushup;
 			sourceTree = "<group>";
 		};
-		07E461AA1F4DD7BD00A5AF49 /* trianglePushup */ = {
+		07E461AA1F4DD7BD00A5AF49 /* trianglePushUp */ = {
 			isa = PBXGroup;
 			children = (
-				07E463CA1F4DDC9200A5AF49 /* trianglePushup.png */,
-				07E463CB1F4DDC9200A5AF49 /* trianglePushup1.png */,
-				07E463CC1F4DDC9200A5AF49 /* trianglePushup2.png */,
-				07E463CD1F4DDC9200A5AF49 /* trianglePushup3.png */,
-				07E463CE1F4DDC9200A5AF49 /* trianglePushup4.png */,
 			);
-			path = trianglePushup;
+			path = trianglePushUp;
 			sourceTree = "<group>";
 		};
 		07E461AB1F4DD7BE00A5AF49 /* handStandTrap */ = {
@@ -7250,7 +7235,6 @@
 				07FFA33D1F4C617B00E9B0C1 /* upperBackRotation2.png in Resources */,
 				07E4603E1F4DB61900A5AF49 /* upwardPlank.png in Resources */,
 				07038D421F4C6032001CC6D5 /* latFoam.png in Resources */,
-				07E463CF1F4DDC9200A5AF49 /* trianglePushup.png in Resources */,
 				07E460C41F4DB6B400A5AF49 /* fish4.png in Resources */,
 				07E462D31F4DDAE600A5AF49 /* benchPressDumbell4.png in Resources */,
 				07E462A31F4DDA9500A5AF49 /* hammerCurlCable1.png in Resources */,
@@ -7462,7 +7446,6 @@
 				07FFA39D1F4C997400E9B0C1 /* water.png in Resources */,
 				07E460581F4DB62B00A5AF49 /* upwardsDogY3.png in Resources */,
 				07E461171F4DB6F400A5AF49 /* pigeon8.png in Resources */,
-				07E463D21F4DDC9200A5AF49 /* trianglePushup3.png in Resources */,
 				07702BE31F4D75F5000E1DB8 /* pullUp1.png in Resources */,
 				07E462B01F4DDA9C00A5AF49 /* curl4.png in Resources */,
 				0729004D1F4D715D0048A355 /* straightLegBound6.png in Resources */,
@@ -7757,7 +7740,6 @@
 				07E463141F4DDB5900A5AF49 /* frontRaise1.png in Resources */,
 				07E460D11F4DB6C200A5AF49 /* lyingButterfly4.png in Resources */,
 				07E4605D1F4DB63B00A5AF49 /* lotus.png in Resources */,
-				07E463D01F4DDC9200A5AF49 /* trianglePushup1.png in Resources */,
 				07E4634C1F4DDBD200A5AF49 /* bodyweightSquat4.png in Resources */,
 				07E4637A1F4DDBF400A5AF49 /* lungeJump4.png in Resources */,
 				0729FFA61F4D70E40048A355 /* cossakSquat7.png in Resources */,
@@ -7801,7 +7783,6 @@
 				077AC1371DA793950026895B /* SF-UI-Text-UltrathinItalic.otf in Resources */,
 				0729000A1F4D713F0048A355 /* aSkips.png in Resources */,
 				07E45FAA1F4DB52300A5AF49 /* highLunge.png in Resources */,
-				07E463D31F4DDC9200A5AF49 /* trianglePushup4.png in Resources */,
 				07E463C21F4DDC8100A5AF49 /* reverseSnowAngels1.png in Resources */,
 				07FFA3361F4C617200E9B0C1 /* legsToSideTwist3.png in Resources */,
 				07E45F361F4DB4B900A5AF49 /* extendedTriangle.png in Resources */,
@@ -7976,7 +7957,6 @@
 				07702C491F4D9395000E1DB8 /* seatedLateral.png in Resources */,
 				07E45F371F4DB4B900A5AF49 /* extendedTriangle1.png in Resources */,
 				07E460341F4DB5FD00A5AF49 /* bridge.png in Resources */,
-				07E463D11F4DDC9200A5AF49 /* trianglePushup2.png in Resources */,
 				07E45EF71F4DB48F00A5AF49 /* lordOfDance5.png in Resources */,
 				07E464EA1F4ED1D000A5AF49 /* wrist@3x.png in Resources */,
 				07E45F431F4DB4C200A5AF49 /* extendedSideAngle.png in Resources */,

@@ -85,7 +85,7 @@ extension sessionData {
                     // Push (Chest) ---------
                     ["pushUp"],
                     // Push (Tricep)
-                    ["trianglepushUp", "dolphinpushUp", "tricepExtensionsBodyweight"],
+                    ["trianglePushUp", "dolphinpushUp", "tricepExtensionsBodyweight"],
                     // Push (Chest & Tricep)
                     ["walkingpushUp"],
                     // Push (Shoulder)
@@ -1371,11 +1371,11 @@ extension sessionData {
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
                 // Push (Tricep)
-                "trianglepushUp":
+                "trianglePushUp":
                     [
-                        "name": ["trianglepushUp"],
-                        "demonstration": ["trianglepushUp", "trianglepushUp1", "trianglepushUp2", "trianglepushUp3", "trianglepushUp4", "trianglepushUp4", "trianglepushUp3", "trianglepushUp2", "trianglepushUp1"],
-                        "explanation": ["trianglepushUpEH", "trianglepushUpEA", "trianglepushUpEF"],
+                        "name": ["trianglePushUp"],
+                        "demonstration": ["trianglePushUp", "trianglePushUp1", "trianglePushUp2", "trianglePushUp3", "trianglePushUp4", "trianglePushUp4", "trianglePushUp3", "trianglePushUp2", "trianglePushUp1"],
+                        "explanation": ["trianglePushUpEH", "trianglePushUpEA", "trianglePushUpEF"],
                         "targetArea": ["chestFrontDeltTricep"]
                 ],
                 "dolphinpushUp":

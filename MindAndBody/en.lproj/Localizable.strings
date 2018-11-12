@@ -415,7 +415,7 @@
 "wallReachesEF" = "Maintaining good posture\nMaintaining total contact of your back with the wall\nBreathing";
 
 "shoulderRotationW" = "Wall Slides";
-"shoulderRotationWEH" = "Stand tall, back against a wall, with your hips rotated forward and your lower back flush to the wall\nLift your elbows far out to the side and point your hand directly in front of you\nKeeping your upper arms horizontal to the floor, rotate your shoulder and bring the backs of your hand up to touch the wall\nRotate your shoulders back, and bring your forarm back to horizontal with the floor\nRepeat for the recommended nº reps";
+"shoulderRotationWEH" = "Stand tall, back against a wall, with your hips rotated forward and your lower back flush to the wall\nLift your elbows far out to the side and point your hand directly in front of you\nKeeping your lower arm parrallel to the floor, rotate your shoulder and bring the backs of your hand up to touch the wall\nRotate your shoulders back, and bring your forarm back to parallel with the floor\nRepeat for the recommended nº reps";
 "shoulderRotationWEA" = "Rotating too fast; the movement should be slow and controlled\nLoosing posture; keep tall the entire time";
 "shoulderRotationWEF" = "Maintaining good posture\nMaintaining total contact of your back with the wall\nBreathing";
 
@@ -963,10 +963,10 @@
 // Push (Chest)
 //"pushUp" = "pushUp";      warmup
 // Push (Tricep)
-"trianglepushUp" = "Triangle Push-Up";
-"trianglepushUpEH" = "Place your hands together on the ground, they should touch at the finger and thumb and form a triangle in between (if your elbows are sensitive, place your hands a little wider)\nExtend your legs out behind you on your tip toes\nKeep your hips rotated forward, your glutes and core active and your shoulders down\n-\nBreathe in and slowly bring your chest towards your hands, keeping your elbows a little tucked in to your body\nWhen your elbows are at 90º, breathe out and press back up\nRepeat for the recommended nº reps";
-"trianglepushUpEA" = "Pressing fast; this should be a slow, controlled movement\nSplaying your elbows out to the side; keep them tucked in a little\nGoing too far down; your elbows become more vulnerable past 90º\nRounding your shoulders forwards; keep your chest open";
-"trianglepushUpEF" = "Moving slowly and in control\nKeeping your head tall and away from your pelvis with an active core\nBreathing";
+"trianglePushUp" = "Triangle Push-Up";
+"trianglePushUpEH" = "Place your hands together on the ground, they should touch at the finger and thumb and form a triangle in between (if your elbows are sensitive, place your hands a little wider)\nExtend your legs out behind you on your tip toes\nKeep your hips rotated forward, your glutes and core active and your shoulders down\n-\nBreathe in and slowly bring your chest towards your hands, keeping your elbows a little tucked in to your body\nWhen your elbows are at 90º, breathe out and press back up\nRepeat for the recommended nº reps";
+"trianglePushUpEA" = "Pressing fast; this should be a slow, controlled movement\nSplaying your elbows out to the side; keep them tucked in a little\nGoing too far down; your elbows become more vulnerable past 90º\nRounding your shoulders forwards; keep your chest open";
+"trianglePushUpEF" = "Moving slowly and in control\nKeeping your head tall and away from your pelvis with an active core\nBreathing";
 
 "dolphinpushUp" = "Dolphin Push-Up";
 "dolphinpushUpEH" = "Note: don't perform this movement if you have weak or painful elbows, perform a regular push-up instead\nPlace your hands around shoulder width with your fingers pointing forward. Your shoulders should be a little behind your hands\nExtend your legs out behind you on your tip toes\nKeep your hips rotated forward, your glutes and core active and your shoulders down\n-\nBreathe in and slowly lower your elbows to the floor, placing them behind your hands or a little out\nPause for a moment\nBreathe out and press your elbows back up until your arms are nearly straight\nRepeat for the recommended nº reps";
