@@ -273,6 +273,12 @@
 		073BA9C71F6E7CCA005DB480 /* FinalChoiceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA9C61F6E7CCA005DB480 /* FinalChoiceDetail.swift */; };
 		073D3823215B6DB400D98134 /* SessionChoiceHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D3822215B6DB400D98134 /* SessionChoiceHelpers.swift */; };
 		074074AD1EDC0A4000DC2D0F /* YogaAutomatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */; };
+		0745106421998B7800649E99 /* trianglePushUp3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0745105F21998B7700649E99 /* trianglePushUp3.png */; };
+		0745106521998B7800649E99 /* trianglePushUp4.png in Resources */ = {isa = PBXBuildFile; fileRef = 0745106021998B7800649E99 /* trianglePushUp4.png */; };
+		0745106621998B7800649E99 /* trianglePushUp1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0745106121998B7800649E99 /* trianglePushUp1.png */; };
+		0745106721998B7800649E99 /* trianglePushUp2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0745106221998B7800649E99 /* trianglePushUp2.png */; };
+		0745106821998B7800649E99 /* trianglePushUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 0745106321998B7800649E99 /* trianglePushUp.png */; };
+		0745106A21998BA400649E99 /* frontDelt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0745106921998BA400649E99 /* frontDelt@3x.png */; };
 		0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748C2E01FC2DC4F0087992D /* InfoPageController.swift */; };
 		074EF890215ADEBD00266E5B /* SessionChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074EF88F215ADEBD00266E5B /* SessionChoice.swift */; };
 		0750DB631F86C8F7003C2AE6 /* CreatorFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750DB621F86C8F7003C2AE6 /* CreatorFunctions.swift */; };
@@ -1617,6 +1623,12 @@
 		073BA9C61F6E7CCA005DB480 /* FinalChoiceDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalChoiceDetail.swift; sourceTree = "<group>"; };
 		073D3822215B6DB400D98134 /* SessionChoiceHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionChoiceHelpers.swift; sourceTree = "<group>"; };
 		074074AC1EDC0A3F00DC2D0F /* YogaAutomatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaAutomatic.swift; sourceTree = "<group>"; };
+		0745105F21998B7700649E99 /* trianglePushUp3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trianglePushUp3.png; path = "../../../../../../../../Mind_Body_Images/Photos/Demonstration Images/Workout/Bodyweight Workout/Bodyweight Image Sequences Compressed and Reduced/91-trianglePushup/trianglePushUp3.png"; sourceTree = "<group>"; };
+		0745106021998B7800649E99 /* trianglePushUp4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trianglePushUp4.png; path = "../../../../../../../../Mind_Body_Images/Photos/Demonstration Images/Workout/Bodyweight Workout/Bodyweight Image Sequences Compressed and Reduced/91-trianglePushup/trianglePushUp4.png"; sourceTree = "<group>"; };
+		0745106121998B7800649E99 /* trianglePushUp1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trianglePushUp1.png; path = "../../../../../../../../Mind_Body_Images/Photos/Demonstration Images/Workout/Bodyweight Workout/Bodyweight Image Sequences Compressed and Reduced/91-trianglePushup/trianglePushUp1.png"; sourceTree = "<group>"; };
+		0745106221998B7800649E99 /* trianglePushUp2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trianglePushUp2.png; path = "../../../../../../../../Mind_Body_Images/Photos/Demonstration Images/Workout/Bodyweight Workout/Bodyweight Image Sequences Compressed and Reduced/91-trianglePushup/trianglePushUp2.png"; sourceTree = "<group>"; };
+		0745106321998B7800649E99 /* trianglePushUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trianglePushUp.png; path = "../../../../../../../../Mind_Body_Images/Photos/Demonstration Images/Workout/Bodyweight Workout/Bodyweight Image Sequences Compressed and Reduced/91-trianglePushup/trianglePushUp.png"; sourceTree = "<group>"; };
+		0745106921998BA400649E99 /* frontDelt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frontDelt@3x.png"; sourceTree = "<group>"; };
 		0748C2E01FC2DC4F0087992D /* InfoPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPageController.swift; sourceTree = "<group>"; };
 		074EF88F215ADEBD00266E5B /* SessionChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionChoice.swift; sourceTree = "<group>"; };
 		0750DB621F86C8F7003C2AE6 /* CreatorFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorFunctions.swift; sourceTree = "<group>"; };
@@ -6287,6 +6299,11 @@
 		07E461AA1F4DD7BD00A5AF49 /* trianglePushUp */ = {
 			isa = PBXGroup;
 			children = (
+				0745106321998B7800649E99 /* trianglePushUp.png */,
+				0745106121998B7800649E99 /* trianglePushUp1.png */,
+				0745106221998B7800649E99 /* trianglePushUp2.png */,
+				0745105F21998B7700649E99 /* trianglePushUp3.png */,
+				0745106021998B7800649E99 /* trianglePushUp4.png */,
 			);
 			path = trianglePushUp;
 			sourceTree = "<group>";
@@ -6542,6 +6559,7 @@
 				0729533D1F4ED58400B2F21C /* forearm@2x.png */,
 				0729533E1F4ED58400B2F21C /* forearm@3x.png */,
 				0729533F1F4ED58400B2F21C /* frontDelt@2x.png */,
+				0745106921998BA400649E99 /* frontDelt@3x.png */,
 				072953411F4ED58400B2F21C /* frontLateralDelt@2x.png */,
 				072953421F4ED58400B2F21C /* frontLateralDelt@3x.png */,
 				072953451F4ED58400B2F21C /* lat2@2x.png */,
@@ -7024,6 +7042,7 @@
 				07702C371F4D935F000E1DB8 /* pelvicTilt1.png in Resources */,
 				072900261F4D71460048A355 /* bSkips10.png in Resources */,
 				07E45F631F4DB4D000A5AF49 /* revolvedTriangle4.png in Resources */,
+				0745106821998B7800649E99 /* trianglePushUp.png in Resources */,
 				072953B81F4EE35400B2F21C /* deadliftBody@3x.png in Resources */,
 				076C68351ED1D37D009160C2 /* gambangWU.caf in Resources */,
 				07E465131F4ED1E400A5AF49 /* hamstring@2x.png in Resources */,
@@ -7165,6 +7184,7 @@
 				077AC1311DA793950026895B /* SF-UI-Text-MediumItalic.otf in Resources */,
 				07E460901F4DB68100A5AF49 /* halfVSideBend2.png in Resources */,
 				07E45F621F4DB4D000A5AF49 /* revolvedTriangle3.png in Resources */,
+				0745106721998B7800649E99 /* trianglePushUp2.png in Resources */,
 				07E45EBD1F4DB46B00A5AF49 /* tree2.png in Resources */,
 				07E4644F1F4DDE1A00A5AF49 /* kickThroughBurpee5.png in Resources */,
 				077AC1131DA7936E0026895B /* SF-UI-Display-Bold.otf in Resources */,
@@ -7590,6 +7610,7 @@
 				07FFA3491F4C618B00E9B0C1 /* lyingSideWindmill4.png in Resources */,
 				0729FFD21F4D70F50048A355 /* lungeTwist15.png in Resources */,
 				07E463861F4DDBFB00A5AF49 /* bodyweightDeadlift3.png in Resources */,
+				0745106621998B7800649E99 /* trianglePushUp1.png in Resources */,
 				07E4644D1F4DDE1A00A5AF49 /* kickThroughBurpee3.png in Resources */,
 				07702C7F1F4D9433000E1DB8 /* quadStretch.png in Resources */,
 				07E45F1F1F4DB4AA00A5AF49 /* warrior36.png in Resources */,
@@ -7776,6 +7797,7 @@
 				07E463981F4DDC4700A5AF49 /* singleLegGluteBridge2.png in Resources */,
 				07761ECA216902E300D4473B /* ForestStream.caf in Resources */,
 				07E460361F4DB5FD00A5AF49 /* bridge2.png in Resources */,
+				0745106421998B7800649E99 /* trianglePushUp3.png in Resources */,
 				077AC1371DA793950026895B /* SF-UI-Text-UltrathinItalic.otf in Resources */,
 				0729000A1F4D713F0048A355 /* aSkips.png in Resources */,
 				07E45FAA1F4DB52300A5AF49 /* highLunge.png in Resources */,
@@ -7842,6 +7864,7 @@
 				07E4631F1F4DDB7B00A5AF49 /* closeGripBench1.png in Resources */,
 				07E463031F4DDB4300A5AF49 /* standingShoulderPressDumbell2.png in Resources */,
 				0729FFDC1F4D71020048A355 /* sideLegSwings3.png in Resources */,
+				0745106A21998BA400649E99 /* frontDelt@3x.png in Resources */,
 				07038D3B1F4C6029001CC6D5 /* thoracicSpineFoam4.png in Resources */,
 				07E461051F4DB6EE00A5AF49 /* sphinx.png in Resources */,
 				07E460CD1F4DB6C200A5AF49 /* lyingButterfly.png in Resources */,
@@ -7947,6 +7970,7 @@
 				07E4629A1F4DDA8E00A5AF49 /* hammerCurl2.png in Resources */,
 				072953961F4ED58400B2F21C /* pec@3x.png in Resources */,
 				07E4638F1F4DDC3B00A5AF49 /* singleLegDeadlift2.png in Resources */,
+				0745106521998B7800649E99 /* trianglePushUp4.png in Resources */,
 				07E463011F4DDB4300A5AF49 /* standingShoulderPressDumbell.png in Resources */,
 				077AC12F1DA793950026895B /* SF-UI-Text-LightItalic.otf in Resources */,
 				07E4600B1F4DB5D900A5AF49 /* halfMonkey2.png in Resources */,
