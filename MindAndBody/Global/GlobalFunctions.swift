@@ -350,7 +350,7 @@ class ReminderNotifications {
         // Only update badges if notifications are on
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         // Off
-        if settings["ReminderNotifications"]![0] != -1 && settings["ReminderNotifications"]![1] == -1 {
+        if settings["ReminderNotifications"]![0] == -1 && settings["ReminderNotifications"]![1] == -1 {
             setBadgeCounter(value: 0)
         } else {
         
@@ -470,22 +470,21 @@ class SubscriptionsCheck {
     //
     // Check subscriptions, called from AppDelegate when first opening, to see if need to present subscription screen
     func checkSubscription() {
-        // If internet, check subscription with apple
-        // MARK: NOTE TESTING, FOR TESTERS ONLY CHECK THE USERDEAULTS
-        if Reachability.isConnectedToNetwork() {
-            InAppManager.shared.checkIfUserHasSubscription()
-        // If no internet, fall back to userDefaults
-        } else {
-            Loading.shared.shouldPresentLoading = false
-            let isValid = UserDefaults.standard.object(forKey: "userHasValidSubscription") as! Bool
+        // First check user defaults, then fall back on receipt validation
+        let isValid = UserDefaults.standard.object(forKey: "userHasValidSubscription") as! Bool
+        if isValid {
             let expiryDate = UserDefaults.standard.object(forKey: "userSubscriptionExpiryDate") as! String
-            if isValid && InAppManager.shared.isValidExpiryDate(expiryDate: expiryDate) {
+            if InAppManager.shared.isValidExpiryDate(expiryDate: expiryDate) {
+                Loading.shared.shouldPresentLoading = false
                 NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
                 NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
             } else {
-                // Call didChecksubscriptions, this calls a func which also checks the .isValid variable and present the subscription screen if not
-                NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                Loading.shared.shouldPresentLoading = true
+                InAppManager.shared.checkIfUserHasSubscription()
             }
+        } else {
+            Loading.shared.shouldPresentLoading = true
+            InAppManager.shared.checkIfUserHasSubscription()
         }
     }
 }

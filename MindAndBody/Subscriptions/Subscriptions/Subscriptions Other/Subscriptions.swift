@@ -96,8 +96,6 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        print(transactions.count)
-//        let transaction = transactions.last!
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchasing:
@@ -109,7 +107,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                 receiptValidator.validate(productIdentifier, sharedSecret: InAppManager.accountSecret) { result in
                     switch result {
                     case .success(let data):
-                        self.checkExpiryDateAction(response: data, action: 0, failedNotification: false)
+                        self.checkExpiryDateAction(response: data, action: 1, failedNotification: true)
                     case .failure(let code, let error):
                         print("Receipt validation failed with code \(code), error \(error.localizedDescription)")
                         // Failed

@@ -19,14 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
-        // MARK: TEST!! REMOVE
-        // ICloud/UserDefaults Reset
-//        let domain = Bundle.main.bundleIdentifier!
-//        UserDefaults.standard.removePersistentDomain(forName: domain)
-//        ReminderNotifications.shared.cancelNotifications()
-
-        
-//        //
 //        // MARK: Sessions check
 //        // Compares sessions dictionaries and sorted sessions dictionaries to see if anything missing
 //        var sessionsArray: Set<String> = []
@@ -60,9 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        // Duplicates
 //        let duplicates = Array(Set(sortedSessionsArray.filter({ (i) in sortedSessionsArray.filter({ $0 == i }).count > 1})))
         
-        //
         // Register Defaults --------------------------------------------------------------------------------
-        //
         // Subscriptions
         UserDefaults.standard.register(defaults: ["userHasValidSubscription" : false])
         UserDefaults.standard.register(defaults: ["userSubscriptionExpiryDate" : ""])
@@ -110,14 +100,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        // Subscriptions
+        
+        // Subscriptions Monitoring
         InAppManager.shared.startMonitoring()
         InAppManager.shared.loadProducts()
         //
         // Check if the user has a valid subscription
-        // Subscription Check 1
         SubscriptionsCheck.shared.checkSubscription()
-        //
+
         NSSetUncaughtExceptionHandler { exception in
             print(exception)
             print(exception.callStackSymbols)
@@ -130,6 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
         
+        // Ensure session timers invalidated (cardio, automatic session)
         rowTimer.invalidate()
         sessionTimer.invalidate()
     }
