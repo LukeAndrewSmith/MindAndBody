@@ -54,18 +54,13 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Ensure schedule reset
         ScheduleVariables.shared.resetScheduleTracking()
-        
-        testTrackingValues()
-        
         // Ensure week goal correct
         Tracking.shared.updateWeekGoal()
         // Update Tracking
         Tracking.shared.updateWeekProgress()
         Tracking.shared.updateTracking()
-        
-        // Add here incase image changed in settings
-//        addBackgroundImage(withBlur: true, fullScreen: false)
         
         // Reload data and graphs incase tracking updated
         // Create [[Date: Int]] from the stored [[String: Int]] (UserDefaults won't store [Date: Int], only [String: Int])
@@ -86,37 +81,37 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         return currentProgress
     }
     
-    func testTrackingValues() {
-        var calendar = Calendar(identifier: .iso8601)
-        calendar.timeZone = TimeZone(abbreviation: "UTC")!
-        //
-        var trackingDictionary = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
-
-        trackingDictionary = [:]
-        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().setToMidnightUTC())!
-        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
-//        let firstMondayLastMonth = Date().firstMondayInMonth
-        //
-        trackingDictionary.updateValue(100, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
-        trackingDictionary.updateValue(85, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
-        trackingDictionary.updateValue(95, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
-        trackingDictionary.updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
-        
-        
-//        let possibleValues = [60,70,80,85,85,90,90,90,95,95,95,97,100,100,105,110]
-//        var dateLoop = calendar.date(byAdding: .month, value: -8, to:  Date().firstMondayInMonth) // First monday in year
-//        while dateLoop! < Date().firstMondayInCurrentWeek {
+//    func testTrackingValues() {
+//        var calendar = Calendar(identifier: .iso8601)
+//        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+//        //
+//        var trackingDictionary = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
 //
-//            let random = Int(arc4random_uniform(UInt32(possibleValues.count)))
-//            let chosenValue = possibleValues[random]
-//            trackingDictionary.updateValue(chosenValue, forKey: TrackingHelpers.shared.dateToString(date: dateLoop!))
-//            dateLoop = calendar.date(byAdding: .weekOfYear, value: 1, to: dateLoop!)
-//        }
-        
-
-        UserDefaults.standard.set(trackingDictionary, forKey: "trackingDictionary")
-
-    }
+//        trackingDictionary = [:]
+//        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().setToMidnightUTC())!
+//        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
+////        let firstMondayLastMonth = Date().firstMondayInMonth
+//        //
+//        trackingDictionary.updateValue(100, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))
+//        trackingDictionary.updateValue(85, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 1, to: firstMondayLastMonth)!))
+//        trackingDictionary.updateValue(95, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 2, to: firstMondayLastMonth)!))
+//        trackingDictionary.updateValue(90, forKey: TrackingHelpers.shared.dateToString(date: calendar.date(byAdding: .weekOfMonth, value: 3, to: firstMondayLastMonth)!))
+//
+//
+////        let possibleValues = [60,70,80,85,85,90,90,90,95,95,95,97,100,100,105,110]
+////        var dateLoop = calendar.date(byAdding: .month, value: -8, to:  Date().firstMondayInMonth) // First monday in year
+////        while dateLoop! < Date().firstMondayInCurrentWeek {
+////
+////            let random = Int(arc4random_uniform(UInt32(possibleValues.count)))
+////            let chosenValue = possibleValues[random]
+////            trackingDictionary.updateValue(chosenValue, forKey: TrackingHelpers.shared.dateToString(date: dateLoop!))
+////            dateLoop = calendar.date(byAdding: .weekOfYear, value: 1, to: dateLoop!)
+////        }
+//
+//
+//        UserDefaults.standard.set(trackingDictionary, forKey: "trackingDictionary")
+//
+//    }
     
     //
     // MARK: View did load

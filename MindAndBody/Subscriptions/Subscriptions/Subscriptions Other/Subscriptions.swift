@@ -8,6 +8,7 @@
 
 import Foundation
 import StoreKit
+import SwiftyReceiptValidator
 
 enum ProductType: String {
     case threeMonth = "mind_and_body_3month_subscription"
@@ -42,6 +43,9 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     var isTrialPurchased: Bool?
     var expirationDate: Date?
     var purchasedProduct: ProductType?
+    
+    // Receipt validator
+    let receiptValidator = SwiftyReceiptValidator()
 
     func startMonitoring() {
         SKPaymentQueue.default().add(self)
@@ -92,6 +96,8 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        print(transactions.count)
+//        let transaction = transactions.last!
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchasing:
@@ -100,12 +106,15 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                 queue.finishTransaction(transaction)
                 // check
                 let productIdentifier = transaction.payment.productIdentifier
-                SwiftyReceiptValidator.validate(forIdentifier: productIdentifier, sharedSecret: InAppManager.accountSecret) { (success, response) in
-                    if success {
-                        InAppManager.shared.checkExpiryDateAction(response: response, action: 1, failedNotification: true)
-                    } else {
-                        // Timed out/ failed
+                receiptValidator.validate(productIdentifier, sharedSecret: InAppManager.accountSecret) { result in
+                    switch result {
+                    case .success(let data):
+                        self.checkExpiryDateAction(response: data, action: 0, failedNotification: false)
+                    case .failure(let code, let error):
+                        print("Receipt validation failed with code \(code), error \(error.localizedDescription)")
+                        // Failed
                         NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseFailedNotification, object: nil)
+
                     }
                 }
             case .failed:
@@ -121,28 +130,6 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                 }
             case .restored:
                 queue.finishTransaction(transaction)
-                // Transaction was restored from user's purchase history
-                // Check the receipt is still valid
-                if let productIdentifier = transaction.original?.payment.productIdentifier {
-                    // Validate receipt
-                    SwiftyReceiptValidator.validate(forIdentifier: productIdentifier, sharedSecret: InAppManager.accountSecret) { (success, response) in
-                        if success {
-                            // If last transaction to check, present failed alert
-                            // This is incase there are many transactions returned for some reason (seems to do that with sandbox testing...)
-                            let failedAlert: Bool = {
-                                return transactions.lastIndex(of: transaction) == (transactions.count - 1)
-                            }()
-                            InAppManager.shared.checkExpiryDateAction(response: response, action: 1, failedNotification: failedAlert)
-                            // If valid subscription found, break loop
-                            if SubscriptionsCheck.shared.isValid {
-                                return
-                            }
-                        } else {
-                            // Timed out/ failed
-                            NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
-                        }
-                    }
-                }
             case .deferred:
                 NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
             }
@@ -161,9 +148,24 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
         NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
     }
     
-    // Restore transaction finished -- failed?
+    // Restore transaction finished
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         print("Transaction Finished")
+        // Attempt to validate receipt for all subscription types
+        for i in 0..<ProductType.all.count {
+            receiptValidator.validate(ProductType.all[i].rawValue, sharedSecret: InAppManager.accountSecret) { result in
+                switch result {
+                case .success(let data):
+                    self.checkExpiryDateAction(response: data, action: 1, failedNotification: true)
+                case .failure(let code, let error):
+                    print("Receipt validation failed with code \(code), error \(error.localizedDescription)")
+                    // Failed
+                    // Call didChecksubscriptions, this calls a func which also checks the .isValid variable and present the subscription screen if not
+                    NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+                    
+                }
+            }
+        }
     }
 
     // -------------------------------------------------------------
@@ -171,13 +173,16 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     func checkIfUserHasSubscription() {
         // Attempt to validate receipt for all subscription types
         for i in 0..<ProductType.all.count {
-            SwiftyReceiptValidator.validate(forIdentifier: ProductType.all[i].rawValue, sharedSecret: InAppManager.accountSecret) { (success, response) in
-                if success {
-                    self.checkExpiryDateAction(response: response, action: 0, failedNotification: false)
-                } else {
+            receiptValidator.validate(ProductType.all[i].rawValue, sharedSecret: InAppManager.accountSecret) { result in
+                switch result {
+                case .success(let data):
+                    self.checkExpiryDateAction(response: data, action: 0, failedNotification: false)
+                case .failure(let code, let error):
+                    print("Receipt validation failed with code \(code), error \(error.localizedDescription)")
                     // Failed
                     // Call didChecksubscriptions, this calls a func which also checks the .isValid variable and present the subscription screen if not
                     NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+
                 }
             }
         }
@@ -195,13 +200,14 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
         let receiptKey = SwiftyReceiptValidator.ResponseKey.receipt.rawValue
         if let receipt = response![receiptKey] {
             // Retreive the array of in-app purchase receipts
-            let inAppKey = SwiftyReceiptValidator.InfoKey.in_app.rawValue
+            let inAppKey = SwiftyReceiptValidator.InfoKey.inApp.rawValue
             if let inApp = receipt[inAppKey] as? [AnyObject] {
                 // Loop all in-app purchase receipts
                 for receiptInApp in inApp {
                     // Find the expiry date of the in-app purchase receipt
-                    let expiryDateKey = SwiftyReceiptValidator.InfoKey.InApp.expires_date_ms.rawValue
-                    if let expiryDate = receiptInApp[expiryDateKey] as? String {
+//                    let expiryDateKey = SwiftyReceiptValidator.InfoKey.InApp.expiresDate.rawValue
+                    // Using expires_date_ms, i beleive that I'm allowed to
+                    if let expiryDate = receiptInApp["expires_date_ms"] as? String {
                         // Check expiry date
                         // Valid subscription
                         if isValidExpiryDate(expiryDate: expiryDate) {

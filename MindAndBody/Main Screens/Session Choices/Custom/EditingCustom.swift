@@ -634,8 +634,8 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
-            let keyIndex = (customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["movements"]! as! [String])[indexPath.row]
-            cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]!["name"]![0] as String, comment: "")
+            let movement = (customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["movements"]! as! [String])[indexPath.row]
+            cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![movement]!["name"]![0] as String, comment: "")
             //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             //            cell.textLabel?.numberOfLines = 0
@@ -687,10 +687,10 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             // Cell Image
             // Flip asymmetric images for yoga
-            let movementImage = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]!["demonstration"]![0]))
+            let movementImage = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![movement]!["demonstration"]![0]))
             if SelectedSession.shared.selectedSession[0] == "yoga" {
-                // If asymmetric array contains image, flip image
-                if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(keyIndex))! {
+                // If asymmetric movement, flip image that has attribute "a"
+                if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[movement]?["attributes"]?[0].contains("a") ?? false {
                     let flippedImage = UIImage(cgImage: (movementImage?.cgImage!)!, scale: (movementImage?.scale)!, orientation: .upMirrored)
                     cell.imageView?.image = flippedImage
                 } else {
@@ -714,8 +714,8 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             //
-            let keyIndex = sessionData.fullKeyArrays[SelectedSession.shared.selectedSession[0]]![indexPath.section][indexPath.row]
-            cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]!["name"]![0] as String, comment: "")
+            let movement = sessionData.fullKeyArrays[SelectedSession.shared.selectedSession[0]]![indexPath.section][indexPath.row]
+            cell.textLabel?.text = NSLocalizedString(sessionData.movements[SelectedSession.shared.selectedSession[0]]![movement]!["name"]![0] as String, comment: "")
             //
             cell.textLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 20)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -724,10 +724,10 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.textLabel?.textColor = .black
             cell.tintColor = .black
             // Cell Image
-            let movementImage = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]!["demonstration"]![0]))
+            let movementImage = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![movement]!["demonstration"]![0]))
             if SelectedSession.shared.selectedSession[0] == "yoga" {
-                // If asymmetric array contains image, flip image
-                if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(keyIndex))! {
+                // If asymmetric movement, flip image that has attribute "a"
+                if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[movement]?["attributes"]?[0].contains("a") ?? false {
                     let flippedImage = UIImage(cgImage: (movementImage?.cgImage!)!, scale: (movementImage?.scale)!, orientation: .upMirrored)
                     cell.imageView?.image = flippedImage
                 } else {
@@ -738,7 +738,6 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             } else {
                 cell.imageView?.image = movementImage
             }
-//            cell.imageView?.image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![keyIndex]?["demonstration"]![0])!)
             cell.imageView?.isUserInteractionEnabled = true
             // Image Tap
             let imageTap = UITapGestureRecognizer()

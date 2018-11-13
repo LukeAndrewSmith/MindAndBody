@@ -114,6 +114,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         self.navigationController?.navigationBar.layer.shadowColor = Colors.dark.cgColor
         UIApplication.shared.isStatusBarHidden = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+
     }
     
     func setupGroupImage() {
@@ -366,7 +367,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             ScheduleVariables.shared.shouldPop = false
             
-        case "scheduleSegueFinalChoice":
+        case "scheduleSegueFinalChoice": // User chooses sessions
             let destinationVC = segue.destination as? FinalChoiceChoice
             destinationVC?.selectedComponent = selectedComponent
             // Remove back button text

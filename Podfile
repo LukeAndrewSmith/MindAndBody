@@ -7,6 +7,7 @@ target 'MindAndBody' do
 
   # Pods for MindAndBody
   pod 'Charts'
+  pod 'SwiftyReceiptValidator'
 
   target 'MindAndBodyTests' do
     inherit! :search_paths

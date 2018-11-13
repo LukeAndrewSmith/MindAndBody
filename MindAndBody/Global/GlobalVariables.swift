@@ -115,6 +115,7 @@ enum Fonts {
     
     // Explanations
     static let explanationTitle = UIFont(name: "SFUIDisplay-bold", size: 21)
+    static let explanationSubHeader = UIFont(name: "SFUIDisplay-semibold", size: 19)
     
     // Guided meditation
     static let meditationTitle = UIFont(name: "SFUIDisplay-bold", size: 21)

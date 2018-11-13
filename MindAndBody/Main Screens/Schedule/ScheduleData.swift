@@ -434,7 +434,7 @@ class ScheduleVariables {
     
     func createSchedule() {
         // Append new schedule array to schedules
-        schedules.append(scheduleDataStructures.emptyWeek)
+        schedules.append(scheduleDataStructures.emptySchedule)
         
         // Update selected Schedule
         // Set selected schedule to newly created schedule (last schedule in schedules)
@@ -830,7 +830,7 @@ enum scheduleDataStructures {
     
     
     // Custom schedules insert this into schedules array
-    static let emptyWeek: [String: [[[String: Any]]]] =
+    static let emptySchedule: [String: [[[String: Any]]]] =
         [
             // [0] Schedule --------------------
             "schedule": [

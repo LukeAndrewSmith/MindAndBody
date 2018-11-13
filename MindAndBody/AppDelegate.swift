@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughDictionary])
         
         ScheduleVariables.shared.setSchedules()
-        
+                
         return true
     }
 

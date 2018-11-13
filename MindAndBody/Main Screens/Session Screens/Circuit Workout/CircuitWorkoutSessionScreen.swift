@@ -302,6 +302,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
             }
             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+            cell.leftImageIndicator.tintColor = Colors.light
+            cell.rightImageIndicator.tintColor = Colors.light
             
             //
             cell.imageViewCell.tag = indexPath.row
@@ -334,7 +336,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             var setsRepsString = String()
             // Weighted
             print(SelectedSession.shared.selectedSession)
-            if sessionData.weightedWorkoutMovements.contains(movement) && SelectedSession.shared.selectedSession[1] != "bodyweight" {
+            // If weighted i.e attributes contains "w"
+            if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[key]?["attributes"]?[0].contains("w") ?? false {
                 // Units
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 let units = settings["Units"]![0]
@@ -381,8 +384,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             var repsString = repsArray[indexRow]
             //
             // Indicate asymmetric exercises to the user
-            // If asymmetric movement array contains the current movement
-            if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! {
+            // If asymmetric movement i.e attributes contains "a"
+            if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[key]?["attributes"]?[0].contains("a") ?? false {
                 // Append indicator
                 let length = repsString.count
                 let stringToAdd = NSLocalizedString(") per side", comment: "")
@@ -565,7 +568,8 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let key = keyArray[selectedRow]
         let movement = sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["name"]![0]
         //
-        if sessionData.weightedWorkoutMovements.contains(movement) && SelectedSession.shared.selectedSession[0].contains("Gym")  {
+        // If weighted i.e attributes contains "w"
+        if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[key]?["attributes"]?[0].contains("w") ?? false {
             //
             actionSheetView.addSubview(weightPicker)
             actionSheetView.addSubview(unitIndicatorLabel)

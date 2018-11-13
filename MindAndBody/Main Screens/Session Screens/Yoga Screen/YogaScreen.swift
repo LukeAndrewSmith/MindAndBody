@@ -67,12 +67,12 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Table view
     @IBOutlet weak var tableView: UITableView!
     
-    //
     var soundPlayer: AVAudioPlayer?
-    
 
-    //
     @IBOutlet weak var finishEarly: UIButton!
+    
+    var canSwipe = true
+    var shouldPresentPauseAlert = true
     
     
     
@@ -128,17 +128,20 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        // MARK: Walkthrough
-        let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
-        // Walkthrough if not automatic yoga
-        if walkthroughs["Session2"] == false && self.automaticYogaArray[0] != 1 {
-            self.walkthroughSession()
-        } else {
-            if automaticYogaArray[0] == 1 {
-                automaticYoga()
+        // Perform the action only once
+        if self.isBeingPresented || self.isMovingToParentViewController {
+            // MARK: Walkthrough
+            let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
+            // Walkthrough if not automatic yoga
+            if walkthroughs["Session2"] == false && self.automaticYogaArray[0] != 1 {
+                self.walkthroughSession()
+            } else {
+                if automaticYogaArray[0] == 1 {
+                    automaticYoga()
+                }
             }
         }
     }
@@ -240,8 +243,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // Image
             // [key] = key, [0] = first image
             let image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
-            // If asymmetric array contains image, flip imageview
-            if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! {
+            // If asymmetric movement i.e attributes contains "a", flip image
+            if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[key]?["attributes"]?[0].contains("a") ?? false {
                 let flippedImage = UIImage(cgImage: (image?.cgImage!)!, scale: (image?.scale)!, orientation: .upMirrored)
                 cell.demonstrationImageView.image =  flippedImage
             } else {
@@ -271,13 +274,13 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // Next Swipe
             let nextSwipe = UISwipeGestureRecognizer()
             nextSwipe.direction = .up
-            nextSwipe.addTarget(self, action: #selector(nextButtonAction))
+            nextSwipe.addTarget(self, action: #selector(upSwipeAction))
             cell.addGestureRecognizer(nextSwipe)
         
             // Back Swipe
             let backSwipe = UISwipeGestureRecognizer()
             backSwipe.direction = .down
-            backSwipe.addTarget(self, action: #selector(backButtonAction))
+            backSwipe.addTarget(self, action: #selector(downSwipeAction))
             cell.addGestureRecognizer(backSwipe)
             
             // Explanation
@@ -386,9 +389,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 // Cancel Dispatch
-                if task != nil {
-                    task?.cancel()
-                }
+                cancelTask()
                 //
                 UIApplication.shared.isIdleTimerDisabled = false
             }
@@ -461,71 +462,79 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+    //
+    @IBAction func upSwipeAction() {
+        // Cancel Dispatch
+        cancelTask()
+        nextButtonAction()
+    }
+    
+    @IBAction func downSwipeAction() {
+        // Cancel Dispatch
+        cancelTask()
+        backButtonAction()
+    }
     
     // Next Button
     @IBAction func nextButtonAction() {
-        //
-        //
-        if selectedRow < keyArray.count - 1 {
-            
-            selectedRow = selectedRow + 1
+        if canSwipe {
+            if selectedRow < keyArray.count - 1 {
+                
+                selectedRow = selectedRow + 1
 
-            // If automatic yoga, ensure dispatch cancelled, this is incase user is swiping to skip, then start next movement
-            if automaticYogaArray[0] == 1 {
-                // Bell
-                let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
-                //
-                do {
-                    let bell = try AVAudioPlayer(contentsOf: url)
-                    self.soundPlayer = bell
-                    bell.play()
-                } catch {
-                    // couldn't load file :(
+                // If automatic yoga, ensure dispatch cancelled, this is incase user is swiping to skip, then start next movement
+                if automaticYogaArray[0] == 1 {
+                    // Bell
+                    let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
+                    //
+                    do {
+                        let bell = try AVAudioPlayer(contentsOf: url)
+                        self.soundPlayer = bell
+                        bell.play()
+                    } catch {
+                        // couldn't load file :(
+                    }
+                    //
+                    automaticYoga()
                 }
-                // Cancel Dispatch
-                if task != nil {
-                    task?.cancel()
+                updateProgress()
+                //
+                //
+                let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
+                let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
+                //
+                let cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
+                //
+                UIView.animate(withDuration: 0.6, animations: {
+                    //
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                    // 1
+                    cell.poseLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 33)
+                    cell.imageIndicator.alpha = 1
+                    cell.breathsLabel.alpha = 1
+                    cell.poseLabel.alpha = 1
+                    cell.explanationButton.alpha = 1
+                    cell.explanationButton.isEnabled = true
+                    cell.demonstrationImageView.isUserInteractionEnabled = true
+                    //
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                }, completion: {finished in
+    //                self.playAnimation(row: self.selectedRow)
+                })
+                    // + 1
+                    if selectedRow < keyArray.count - 1 {
+                        tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+                    }
+            } else {
+                //
+                if automaticYogaArray[0] == 1 {
+                    UIApplication.shared.isIdleTimerDisabled = false
+                    // Tracking
+                    ScheduleVariables.shared.shouldReloadScheduleTracking()
+                    //
+                    self.dismiss(animated: true)
                 }
-                //
-                automaticYoga()
-            }
-            updateProgress()
-            //
-            //
-            let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-            let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-            //
-            let cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
-            //
-            UIView.animate(withDuration: 0.6, animations: {
-                //
-                self.tableView.beginUpdates()
-                self.tableView.endUpdates()
-                // 1
-                cell.poseLabel?.font = UIFont(name: "SFUIDisplay-Light", size: 33)
-                cell.imageIndicator.alpha = 1
-                cell.breathsLabel.alpha = 1
-                cell.poseLabel.alpha = 1
-                cell.explanationButton.alpha = 1
-                cell.explanationButton.isEnabled = true
-                cell.demonstrationImageView.isUserInteractionEnabled = true
-                //
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-            }, completion: {finished in
-//                self.playAnimation(row: self.selectedRow)
-            })
-                // + 1
-                if selectedRow < keyArray.count - 1 {
-                    tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
-                }
-        } else {
-            //
-            if automaticYogaArray[0] == 1 {
-                UIApplication.shared.isIdleTimerDisabled = false
-                // Tracking
-                ScheduleVariables.shared.shouldReloadScheduleTracking()
-                //
-                self.dismiss(animated: true)
             }
         }
     }
@@ -533,76 +542,76 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Back Button
     @IBAction func backButtonAction() {
         
-        if selectedRow != 0 {
-            
-            selectedRow = selectedRow - 1
-            // If automatic yoga, ensure dispatch cancelled, this is incase user is swiping to skip, then start next movement
-            if automaticYogaArray[0] == 1 {
-                // Bell
-                let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
-                //
-                do {
-                    let bell = try AVAudioPlayer(contentsOf: url)
-                    self.soundPlayer = bell
-                    bell.play()
-                } catch {
-                    // couldn't load file :(
+        if canSwipe {
+            if selectedRow != 0 {
+                
+                selectedRow = selectedRow - 1
+                // If automatic yoga, ensure dispatch cancelled, this is incase user is swiping to skip, then start next movement
+                if automaticYogaArray[0] == 1 {
+                    // Bell
+                    let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
+                    //
+                    do {
+                        let bell = try AVAudioPlayer(contentsOf: url)
+                        self.soundPlayer = bell
+                        bell.play()
+                    } catch {
+                        // couldn't load file :(
+                    }
+                    // Cancel Dispatch
+                    cancelTask()
+                    //
+                    automaticYoga()
                 }
-                // Cancel Dispatch
-                if task != nil {
-                    task?.cancel()
-                }
                 //
-                automaticYoga()
-            }
-            //
-            updateProgress()
-            //
-            let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-            let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
-            let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
-            //
-            var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
-            //
-            UIView.animate(withDuration: 0.6, animations: {
+                updateProgress()
                 //
-                // As progress bar is contained in the table view header, scrolling back to row 0 jumps the progress bar off the screen
-                // Silly fix below seems to work
-                if self.selectedRow == 0 {
-                    self.tableView.beginUpdates()
-                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                    self.tableView.endUpdates()
-                } else {
-                    self.tableView.beginUpdates()
-                    self.tableView.endUpdates()
-                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
-                }
+                let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
+                let indexPath2 = NSIndexPath(row: selectedRow - 1, section: 0)
+                let indexPath3 = NSIndexPath(row: selectedRow + 1, section: 0)
+                //
+                var cell = tableView.cellForRow(at: indexPath as IndexPath) as! YogaOverviewTableViewCell
+                //
+                UIView.animate(withDuration: 0.6, animations: {
+                    //
+                    // As progress bar is contained in the table view header, scrolling back to row 0 jumps the progress bar off the screen
+                    // Silly fix below seems to work
+                    if self.selectedRow == 0 {
+                        self.tableView.beginUpdates()
+                        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                        self.tableView.endUpdates()
+                    } else {
+                        self.tableView.beginUpdates()
+                        self.tableView.endUpdates()
+                        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    }
 
-                // 1
-                cell.imageIndicator.alpha = 1
-                cell.breathsLabel.alpha = 1
-                cell.poseLabel.alpha = 1
-                cell.explanationButton.alpha = 1
-                cell.explanationButton.isEnabled = true
-                cell.demonstrationImageView.isUserInteractionEnabled = true
-                // - 1
-                if self.selectedRow > 0 {
-                    cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! YogaOverviewTableViewCell
+                    // 1
+                    cell.imageIndicator.alpha = 1
+                    cell.breathsLabel.alpha = 1
+                    cell.poseLabel.alpha = 1
+                    cell.explanationButton.alpha = 1
+                    cell.explanationButton.isEnabled = true
+                    cell.demonstrationImageView.isUserInteractionEnabled = true
+                    // - 1
+                    if self.selectedRow > 0 {
+                        cell = self.tableView.cellForRow(at: indexPath2 as IndexPath) as! YogaOverviewTableViewCell
+                        cell.imageIndicator.alpha = 0
+                        cell.breathsLabel.alpha = 0
+                        cell.poseLabel.alpha = 0
+                    }
+                    // + 1
+                    cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! YogaOverviewTableViewCell
+                    cell.poseLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
                     cell.imageIndicator.alpha = 0
                     cell.breathsLabel.alpha = 0
-                    cell.poseLabel.alpha = 0
-                }
-                // + 1
-                cell = self.tableView.cellForRow(at: indexPath3 as IndexPath) as! YogaOverviewTableViewCell
-                cell.poseLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 27)
-                cell.imageIndicator.alpha = 0
-                cell.breathsLabel.alpha = 0
-                cell.poseLabel.alpha = 1
-                cell.explanationButton.alpha = 0
-                cell.explanationButton.isEnabled = false
-                cell.demonstrationImageView.isUserInteractionEnabled = false
-            //
-            })
+                    cell.poseLabel.alpha = 1
+                    cell.explanationButton.alpha = 0
+                    cell.explanationButton.isEnabled = false
+                    cell.demonstrationImageView.isUserInteractionEnabled = false
+                //
+                })
+            }
         }
     }
     
@@ -615,9 +624,13 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let explanationLabel = UILabel()
     // Expand
     @IBAction func expandExplanation() {
+        // Pause running if automatic yoga
+        shouldPresentPauseAlert = false
+        pauseButtonAction()
+
+        //
         let bounds = UIScreen.main.bounds
         // View
-        //
         scrollViewExplanation.frame = CGRect(x: 0, y: 0, width: bounds.width, height: (bounds.height - 20) / 2)
         scrollViewExplanation.center.x = bounds.width/2
         scrollViewExplanation.center.y = (((bounds.height - 20)/2) * 2.5) + 20
@@ -663,6 +676,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Retract Explanation
     @IBAction func retractExplanation(_ sender: Any) {
+        // Continue running
+        continuePracticeFunc()
+        
+        //
         let bounds = UIScreen.main.bounds
         //
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
@@ -701,28 +718,28 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     //
-    // Automatic Yoga Functions ---------------------------------------------------------
-    //
+    // MARK: Automatic Yoga Functions ---------------------------------------------------------
     //
     var task: DispatchWorkItem?
     
     func createDispatch() {
 
         task = DispatchWorkItem {
-            //
-            if self.automaticYogaArray[3] != -1 {
-                let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
-                //
-                do {
-                    let bell = try AVAudioPlayer(contentsOf: url)
-                    self.soundPlayer = bell
-                    bell.play()
-                } catch {
-                    // couldn't load file :(
+            print(self.task?.isCancelled)
+            if !(self.task?.isCancelled ?? false) {
+                if self.automaticYogaArray[3] != -1 {
+                    let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
+                    //
+                    do {
+                        let bell = try AVAudioPlayer(contentsOf: url)
+                        self.soundPlayer = bell
+                        bell.play()
+                    } catch {
+                        // couldn't load file :(
+                    }
                 }
+                self.nextButtonAction()
             }
-            //
-            self.nextButtonAction()
         }
         
         //
@@ -736,12 +753,22 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func cancelTask() {
+        
+        DispatchQueue.main.async {
+            if !(self.task?.isCancelled ?? false) {
+                self.task?.cancel()
+            }
+        }
+    }
+    
     
     // Play Pause
     func pauseButtonAction() {
         //
         if finishEarly.image(for: .normal) == #imageLiteral(resourceName: "Pause") {
             //
+            canSwipe = false
             finishEarly.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
             finishEarly.tintColor = Colors.green
             //
@@ -752,9 +779,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             //
             // Cancel Dispatch
-            if task != nil {
-                task?.cancel()
-            }
+            cancelTask()
             
             // Alert View
             let title = NSLocalizedString("pauseYoga", comment: "")
@@ -783,8 +808,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             alert.addAction(pauseAction)
             alert.addAction(continuePracticeAction)
             //
-            self.present(alert, animated: true, completion: nil)
-        
+            if shouldPresentPauseAlert {
+                self.present(alert, animated: true, completion: nil)
+            }
             
         // Play / Continue Practice
         } else {
@@ -795,6 +821,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Continue practice
     func continuePracticeFunc() {
         //
+        canSwipe = true
+        shouldPresentPauseAlert = true
         finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
         finishEarly.tintColor = Colors.red
         //
@@ -823,7 +851,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // App needs to stay on even when nothing is being touched (users watch the screen and follow the yoga poses)
             UIApplication.shared.isIdleTimerDisabled = true
 
-            //
             if automaticYogaArray[3] != -1 {
                 // Play Initial Bell
                 let url = Bundle.main.url(forResource: bellsArray[automaticYogaArray[3]], withExtension: "caf")!
@@ -838,9 +865,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        //
         createDispatch()
-        //
     }
     
     
@@ -880,7 +905,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             pauseButtonAction()
         }
     }
-    
     
     //
     // MARK: Walkthrough ------------------------------------------------------------------------------------------------------------------

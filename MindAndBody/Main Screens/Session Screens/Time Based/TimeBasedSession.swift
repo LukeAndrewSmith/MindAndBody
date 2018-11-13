@@ -68,6 +68,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     // Is paused
     var isPaused = false
+    var shouldPresentPauseAlert = true
     
     var isCircuit = false
     
@@ -301,6 +302,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
             }
             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+            cell.leftImageIndicator.tintColor = Colors.light
+            cell.rightImageIndicator.tintColor = Colors.light
             
             //
             cell.imageViewCell.tag = indexPath.row
@@ -402,7 +405,6 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             // Hide question mark and image indicators if not paused
             if isPaused == false {
                 cell.indicatorStack.alpha = 0
-                cell.explanationButton.alpha = 0
             }
             
             // Reset image state
@@ -558,41 +560,6 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    // Play Image
-    func playAnimationReversed(row: Int) {
-        //
-        // Get Cell
-        let indexPath = NSIndexPath(row: row, section: 0)
-        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
-        let key = keyArray[indexPath.row]
-        // Reverse image
-        //
-        // Image
-        // [key] = key, [0] = first image
-        let image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
-        // If asymmetric array contains image, flip imageview
-        if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! {
-            let flippedImage = UIImage(cgImage: (image?.cgImage!)!, scale: (image?.scale)!, orientation: .upMirrored)
-            cell.imageViewCell.image =  flippedImage
-        }
-        //
-        let imageCount = ((sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"])?.count)!
-        //
-        // Image Array
-        if imageCount > 1 && cell.imageViewCell.isAnimating == false {
-            var animationArray: [UIImage] = []
-            for i in 1...imageCount - 1 {
-                animationArray.append(getUncachedImage(named: sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]!["demonstration"]![i])!)
-            }
-            //
-            cell.imageViewCell.animationImages = animationArray
-            cell.imageViewCell.animationDuration = Double(imageCount - 1) * 0.5
-            cell.imageViewCell.animationRepeatCount = 1
-            //
-            cell.imageViewCell.startAnimating()
-        }
-    }
-    
     // Next Button
     @IBAction func nextButtonAction() {
         //
@@ -724,6 +691,10 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     let explanationLabel = UILabel()
     // Expand
     @IBAction func expandExplanation() {
+        // Pause
+        shouldPresentPauseAlert = false
+        pauseButtonAction(self)
+        
         let bounds = UIScreen.main.bounds
         // View
         //
@@ -772,6 +743,9 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     // Retract Explanation
     @IBAction func retractExplanation(_ sender: Any) {
+        //
+        continueSession()
+        
         let bounds = UIScreen.main.bounds
         //
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {
@@ -919,7 +893,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     //
     
     //
-    @IBAction func finishEarlyAction(_ sender: Any) {
+    @IBAction func pauseButtonAction(_ sender: Any) {
         // Cell Detail
         let indexPath = NSIndexPath(row: selectedRow, section: 0)
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeBasedTableViewCell
@@ -929,6 +903,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             lengthTimer.invalidate()
             removeCircle()
             isPaused = true
+            canSwipeMovement = false
             finishEarly.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
             finishEarly.tintColor = Colors.green
             switch movementProgress {
@@ -960,7 +935,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
             // Actions
             // Dismiss
-            let finishEarlyAction = UIAlertAction(title: NSLocalizedString("finishEarly", comment: ""), style: .default) { _ in
+            let pauseButtonAction = UIAlertAction(title: NSLocalizedString("finishEarly", comment: ""), style: .default) { _ in
                 self.dismissView()
             }
             // Dismiss alert
@@ -975,11 +950,13 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             // Add actions
-            alert.addAction(finishEarlyAction)
+            alert.addAction(pauseButtonAction)
             alert.addAction(pauseAction)
             alert.addAction(continuePracticeAction)
             //
-            self.present(alert, animated: true, completion: nil)
+            if shouldPresentPauseAlert {
+                self.present(alert, animated: true, completion: nil)
+            }
             
         // Play
         } else {
@@ -998,6 +975,8 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         handleSwipes(extraSwipe: rightSwipe)
         //
         isPaused = false
+        canSwipeMovement = true
+        shouldPresentPauseAlert = true
         finishEarly.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
         finishEarly.tintColor = Colors.red
         indicateMovementProgress()

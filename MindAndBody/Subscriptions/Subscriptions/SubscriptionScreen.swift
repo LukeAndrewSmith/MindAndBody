@@ -322,6 +322,7 @@ class SubscriptionScreen: UIViewController {
         // 'Ok'
         let okAction = UIAlertAction(title:  NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
+            
         }
         
         // Add Actions
@@ -383,6 +384,7 @@ class SubscriptionScreen: UIViewController {
         // Reset app action
         let okAction = UIAlertAction(title:  NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
             UIAlertAction in
+            print("Dismiss")
         }
         // Add Actions
         alert.addAction(okAction)

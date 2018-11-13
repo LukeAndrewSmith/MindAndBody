@@ -190,7 +190,7 @@ extension TimeBasedScreen {
         //
         if timerValue <= 0 {
             // Movement is not asymmetric (or is aysmmetric but rest or prepare)
-            if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! == false || movementProgress != 2 {
+            if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[key]?["attributes"]?[0].contains("a") ?? false == false || movementProgress != 2 {
                 movementProgress += 1
                 removeCircle()
                 lengthTimer.invalidate()
@@ -268,7 +268,7 @@ extension TimeBasedScreen {
             let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[selectedRow]["movement"] as! String
             // Title
             // Movement is not asymmetric
-            if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key) == false {
+            if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[key]?["attributes"]?[0].contains("a") ?? false == false {
                 cell.timeLabel.text = NSLocalizedString("beginMovement", comment: "")
                 // Asymmetric and first side, left
             } else if asymmetricProgress == 0 {
@@ -284,12 +284,6 @@ extension TimeBasedScreen {
                 self.startTimer()
                 self.finishEarly.isEnabled = true
                 self.playBell(bell: 1)
-                // Reverse image if second side of asymmetric exersize
-                if sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]!.contains(key) && self.asymmetricProgress == 1 {
-                    //                        self.playAnimationReversed(row: self.selectedRow)
-                } else {
-                    //                        self.playAnimation(row: self.selectedRow)
-                }
             })
         case 3:
             if !isCircuit && selectedRow != keyArray.count - 1 || isCircuit && (selectedRow + (sessionScreenRoundIndex * nMovementsInRound)) != keyArray.count - 1 {

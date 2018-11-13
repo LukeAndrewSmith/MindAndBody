@@ -81,7 +81,7 @@ class ScheduleViewQuestion: UIViewController {
         if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             
             // Ensure that the schedule is clean
-            ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"] = scheduleDataStructures.emptyWeek["schedule"]
+            ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"] = scheduleDataStructures.emptySchedule["schedule"]
             // Loop sessions array - therefore loop groups
             for i in 0..<ScheduleVariables.shared.temporarySessionsArray.count {
                 // If n session not 0 for a group

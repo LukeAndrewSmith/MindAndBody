@@ -326,8 +326,8 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
             // Image
             cell.imageView?.tag = indexPath.row
             let image = getUncachedImage(named: (sessionData.movements[SelectedSession.shared.selectedSession[0]]![key]?["demonstration"]![0])!)
-            // If asymmetric array contains image, flip imageview
-            if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! {
+            // If asymmetric movement, flip image that has attribute "a"
+            if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[key]?["attributes"]?[0].contains("a") ?? false {
                 let flippedImage = UIImage(cgImage: (image?.cgImage!)!, scale: (image?.scale)!, orientation: .upMirrored)
                 cell.imageView?.image =  flippedImage
             } else {

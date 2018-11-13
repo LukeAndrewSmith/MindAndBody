@@ -47,7 +47,11 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fillImageArray()
+        DispatchQueue.main.async {
+            self.fillImageArray()
+        }
+        Loading.shared.beginLoading(type: 1) // Creating thumbnail images takes a while, shoulder preprocess or find better method
+
         
         // Navigation
         var navTitle = String()
@@ -311,13 +315,15 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
                     
                     // Add images
                     for k in 0..<numberOfMovements  {
+                        // Get Movement
                         let key = sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![sessionIndex!]?[k][movementIndex] as! String
+                        // Get Image name
                         let movementImage = possibleImages[key]
                         
                         // Flip asymmetric images for yoga
                         if SelectedSession.shared.selectedSession[0] == "yoga" {
-                            // If asymmetric array contains image, flip image
-                            if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(key))! {
+                            // If asymmetric movement, flip image that has attribute "a"
+                            if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[key]?["attributes"]?[0].contains("a") ?? false {
                                 let flippedImage = UIImage(cgImage: movementImage!.cgImage!, scale: movementImage!.scale, orientation: .upMirrored)
                                 imageArray[i][j].append(flippedImage)
                             } else {
@@ -333,6 +339,11 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
                 }
             }
         }
+        // Cancel loading screen if loading images (type == 1)
+        if Loading.shared.selectedType == 1 {
+            Loading.shared.endLoading()
+        }
+        finalChoiceTable.reloadData()
     }
     
     //

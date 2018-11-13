@@ -345,46 +345,51 @@ class ReminderNotifications {
     }
     
     // Update badges func
-        // Note
-            // Current Bool = False if False -> True, True if True -> False
     func updateBadges() {
         
-        
-        // Get schedule style
-        var scheduleStyle = Int()
-        if ScheduleVariables.shared.schedules.count > 0 {
-            scheduleStyle = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+        // Only update badges if notifications are on
+        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
+        // Off
+        if settings["ReminderNotifications"]![0] != -1 && settings["ReminderNotifications"]![1] == -1 {
+            setBadgeCounter(value: 0)
         } else {
-            scheduleStyle = 0
-        }
         
-        // Get current day
-        let day = Date().weekDayFromMonday
-        
-        // Day view
-        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-            var dayCount = 0
-            // Loop day counting whats left
-            for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![day].count {
-                if !(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![day][j]["isGroupCompleted"] as! Bool) {
-                    dayCount += 1
-                }
+            // Get schedule style
+            var scheduleStyle = Int()
+            if ScheduleVariables.shared.schedules.count > 0 {
+                scheduleStyle = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+            } else {
+                scheduleStyle = 0
             }
-            setBadgeCounter(value: dayCount)
             
-        // Week view
-        } else {
-            var weekCount = 0
-            // Loop week counting whats left
-            for i in 0..<6 {
-                for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count {
-                    if !(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
-                        weekCount += 1
+            // Get current day
+            let day = Date().weekDayFromMonday
+            
+            // Day view
+            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+                var dayCount = 0
+                // Loop day counting whats left
+                for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![day].count {
+                    if !(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![day][j]["isGroupCompleted"] as! Bool) {
+                        dayCount += 1
                     }
                 }
+                setBadgeCounter(value: dayCount)
+                
+            // Week view
+            } else {
+                var weekCount = 0
+                // Loop week counting whats left
+                for i in 0..<6 {
+                    for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count {
+                        if !(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
+                            weekCount += 1
+                        }
+                    }
+                }
+                setBadgeCounter(value: weekCount)
+                
             }
-            setBadgeCounter(value: weekCount)
-            
         }
     }
    
@@ -494,32 +499,57 @@ class Loading {
     var shouldPresentLoading = true
     
     var loadingView = UIView()
+    let loadingImage = UIImageView()
+    let loadingIndicator = UIActivityIndicatorView()
+    var selectedType = 0
     //
-    func beginLoading() {
-        // Setup Alert
-        loadingView.frame = UIScreen.main.bounds
-        loadingView.backgroundColor = Colors.light
-        let loadingImage = UIImageView()
-        loadingImage.image = #imageLiteral(resourceName: "Loading")
-        loadingImage.sizeToFit()
-        loadingImage.center = loadingView.center
-        loadingView.addSubview(loadingImage)
-        
-        // Setup indicator
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: (UIScreen.main.bounds.width / 2) - 25, y: loadingImage.frame.maxY, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.color = Colors.dark
-        loadingIndicator.startAnimating()
-        loadingView.addSubview(loadingIndicator)
-        
+    // type:
+        // 0 == white background with icon
+        // 1 == see through dark background with no icon
+    func beginLoading(type: Int) {
+        if type == 0 {
+            selectedType = 0
+            // Setup view
+            loadingView.frame = UIScreen.main.bounds
+            loadingView.backgroundColor = Colors.light
+            loadingImage.image = #imageLiteral(resourceName: "Loading")
+            loadingImage.sizeToFit()
+            loadingImage.center = loadingView.center
+            loadingView.addSubview(loadingImage)
+            
+            // Setup indicator
+            loadingIndicator.frame = CGRect(x: (UIScreen.main.bounds.width / 2) - 25, y: loadingImage.frame.maxY, width: 50, height: 50)
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.color = Colors.dark
+            loadingIndicator.startAnimating()
+            loadingView.addSubview(loadingIndicator)
+        } else if type == 1 {
+            selectedType = 1
+            
+            loadingImage.removeFromSuperview()
+    
+            // Setup view
+            loadingView.backgroundColor = UIColor.black.withAlphaComponent(0.72)
+            loadingView.frame = UIScreen.main.bounds
+            
+            // Setup indicator
+            loadingIndicator.center = loadingView.center
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+            loadingIndicator.color = Colors.light
+            loadingIndicator.startAnimating()
+            loadingView.addSubview(loadingIndicator)
+        }
         // Present Alert
         UIApplication.shared.keyWindow?.addSubview(loadingView)
     }
     
     func endLoading() {
+        selectedType = 0 // Reset type
         loadingView.removeFromSuperview()
     }
 }
+
 
 // Thanks to RAJAMOHAN-S on stack overflow
 public class Reachability {
@@ -872,7 +902,9 @@ extension UIViewController {
         
         //
         // Title Attributes
-        let subTitleFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : Fonts.explanationTitle as Any]
+        let headerFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : Fonts.explanationTitle as Any]
+        //
+        let subHeaderFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : Fonts.explanationSubHeader as Any]
         //
         // Bullet Point Attributes
         let bulletPointFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : Fonts.lessonText as Any]
@@ -883,11 +915,18 @@ extension UIViewController {
         paragraphStyle.defaultTabInterval = 15
         paragraphStyle.firstLineHeadIndent = 0
         paragraphStyle.headIndent = 15
+        //
+        let paragraphStyleSubHeader: NSMutableParagraphStyle
+        paragraphStyleSubHeader = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        paragraphStyleSubHeader.tabStops = [NSTextTab(textAlignment: .left, location: 0, options: [:])]
+        paragraphStyleSubHeader.defaultTabInterval = 0
+        paragraphStyleSubHeader.firstLineHeadIndent = 0
+        paragraphStyleSubHeader.headIndent = 0
         
         //
         // How To
         let howToTitle = NSMutableAttributedString(string: NSLocalizedString("howTo", comment: ""))
-        howToTitle.addAttributes(subTitleFont, range: NSMakeRange(0, howToTitle.length))
+        howToTitle.addAttributes(headerFont, range: NSMakeRange(0, howToTitle.length))
         //
         howToTitle.append(return1)
         //
@@ -896,26 +935,40 @@ extension UIViewController {
         //
         let howToPoints = howTo.components(separatedBy: .newlines)
         for string in howToPoints {
-            let bulletPoint: String = "\u{2022}"
-            let formattedString: String = "\(bulletPoint) \(string)\n"
-            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: formattedString)
+            let isSubHeader = string == "" || string.contains("Setup:") || string.contains("Movement:") || string.contains("Position:") || string.contains("Note:") || string.contains("Notes:")
             
-            attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+            var bulletPoint: String = ""
+            var formattedString: String = ""
+            if isSubHeader {
+                formattedString = "\(string)\n"
+            } else {
+                bulletPoint = "\u{2022}"
+                formattedString = "\(bulletPoint) \(string)\n"
+            }
+            
+            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: formattedString)
+            if isSubHeader {
+                attributedString.addAttributes(subHeaderFont, range: NSMakeRange(0, attributedString.length))
+                
+                attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyleSubHeader], range: NSMakeRange(0, attributedString.length))
+            } else {
+                attributedString.addAttributes(bulletPointFont, range: NSMakeRange(0, attributedString.length))
+                attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+            }
             
             howToString.append(attributedString)
         }
         //
-        howToString.addAttributes(bulletPointFont, range: NSMakeRange(0, howToString.length))
+//        howToString.addAttributes(bulletPointFont, range: NSMakeRange(0, howToString.length))
         //
         howToString.append(return1)
         
         //
         // Avoid
         let toAvoidTitle = NSMutableAttributedString(string: NSLocalizedString("toAvoid", comment: ""))
-        toAvoidTitle.addAttributes(subTitleFont, range: NSMakeRange(0, toAvoidTitle.length))
+        toAvoidTitle.addAttributes(headerFont, range: NSMakeRange(0, toAvoidTitle.length))
         //
         toAvoidTitle.append(return1)
-        //
         //
         let toAvoidString = NSMutableAttributedString(string: "")
         //
@@ -937,7 +990,7 @@ extension UIViewController {
         //
         // Focus on
         let focusOnTitle = NSMutableAttributedString(string: NSLocalizedString("focusOn", comment: ""))
-        focusOnTitle.addAttributes(subTitleFont, range: NSMakeRange(0, focusOnTitle.length))
+        focusOnTitle.addAttributes(headerFont, range: NSMakeRange(0, focusOnTitle.length))
         //
         focusOnTitle.append(return1)
         //

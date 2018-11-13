@@ -450,10 +450,9 @@ extension SessionChoice {
         if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
             performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
             
-            // User chooses sessions
+        // User chooses sessions
         } else {
             performSegue(withIdentifier: "scheduleSegueFinalChoice", sender: self)
-            
         }
     }
     

@@ -287,7 +287,6 @@
 		075D441C21406028003502B6 /* CustomElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075D441B21406028003502B6 /* CustomElements.swift */; };
 		07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */; };
 		07686A901F843A1600C278CC /* ScheduleHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */; };
-		076A9CEB217C9B50004FF398 /* SwiftReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A9CEA217C9B50004FF398 /* SwiftReceiptValidator.swift */; };
 		076C681F1ED1D35D009160C2 /* tibetanChimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680E1ED1BFAD009160C2 /* tibetanChimes.caf */; };
 		076C68201ED1D35D009160C2 /* tibetanChimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680E1ED1BFAD009160C2 /* tibetanChimes.caf */; };
 		076C68211ED1D35F009160C2 /* tibetanBowlL.caf in Resources */ = {isa = PBXBuildFile; fileRef = 076C680F1ED1BFAD009160C2 /* tibetanBowlL.caf */; };
@@ -1637,7 +1636,6 @@
 		075D441B21406028003502B6 /* CustomElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomElements.swift; sourceTree = "<group>"; };
 		07686A8D1F84399A00C278CC /* ScheduleAnimationHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAnimationHelpers.swift; sourceTree = "<group>"; };
 		07686A8F1F843A1600C278CC /* ScheduleHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleHelpers.swift; sourceTree = "<group>"; };
-		076A9CEA217C9B50004FF398 /* SwiftReceiptValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftReceiptValidator.swift; sourceTree = "<group>"; };
 		076C680E1ED1BFAD009160C2 /* tibetanChimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tibetanChimes.caf; sourceTree = "<group>"; };
 		076C680F1ED1BFAD009160C2 /* tibetanBowlL.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tibetanBowlL.caf; sourceTree = "<group>"; };
 		076C68101ED1BFAD009160C2 /* tibetanBowlL4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tibetanBowlL4.caf; sourceTree = "<group>"; };
@@ -4459,7 +4457,6 @@
 			children = (
 				071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */,
 				07DE23021FC0919200940567 /* Subscriptions.swift */,
-				076A9CEA217C9B50004FF398 /* SwiftReceiptValidator.swift */,
 			);
 			path = "Subscriptions Other";
 			sourceTree = "<group>";
@@ -8031,10 +8028,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MindAndBody/Pods-MindAndBody-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyReceiptValidator/SwiftyReceiptValidator.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyReceiptValidator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8137,7 +8136,6 @@
 				07D5C3D91F9E32430038F143 /* ViewQuestion.swift in Sources */,
 				0794A74D1FBCC3D70029968D /* ActionSheet.swift in Sources */,
 				0798381E1F8A8DD9007C3CF5 /* TimeBasedSession.swift in Sources */,
-				076A9CEB217C9B50004FF398 /* SwiftReceiptValidator.swift in Sources */,
 				07BEAE901F36055600EEC088 /* GlobalFunctions.swift in Sources */,
 				077AC0DB1DA535830026895B /* AppDelegate.swift in Sources */,
 				077AC1001DA54C810026895B /* Lessons.swift in Sources */,

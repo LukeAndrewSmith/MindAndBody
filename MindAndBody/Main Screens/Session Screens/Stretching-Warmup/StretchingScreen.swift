@@ -240,6 +240,8 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.leftImageIndicator.image = #imageLiteral(resourceName: "ImageDot")
             }
             cell.rightImageIndicator.image = #imageLiteral(resourceName: "ImageDotDeselected")
+            cell.leftImageIndicator.tintColor = Colors.light
+            cell.rightImageIndicator.tintColor = Colors.light
             
             //
             cell.imageViewCell.tag = indexPath.row
@@ -279,8 +281,8 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
             //
             // Indicate asymmetric exercises to the user
-            // If asymmetric movement array contains the current movement
-            if (sessionData.asymmetricMovements[SelectedSession.shared.selectedSession[0]]?.contains(keyArray[indexPath.row]))! {
+            // If asymmetric movement i.e attributes contains "a"
+            if sessionData.movements[SelectedSession.shared.selectedSession[0]]?[keyArray[indexPath.row]]?["attributes"]?[0].contains("a") ?? false {
                 // Append indicator
                 let length = setsRepsString.count
                 let stringToAdd = NSLocalizedString(") per side", comment: "")
