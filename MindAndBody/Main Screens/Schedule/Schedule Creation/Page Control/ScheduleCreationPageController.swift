@@ -86,16 +86,16 @@ class ScheduleCreationPageController: UIPageViewController, UIPageViewController
         // Set initial view controller
         if appChoosesSessions {
             if !isProfileCompleted {
-                setViewControllers([profile], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
+                setViewControllers([profile], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
             } else {
-                setViewControllers([scheduleEquipment], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
+                setViewControllers([scheduleEquipment], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
             }
 
         } else if !appChoosesSessions && appHelpsCreateSchedule {
-            setViewControllers([scheduleCreationHelp], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
+            setViewControllers([scheduleCreationHelp], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
 
         } else if !appChoosesSessions && !appHelpsCreateSchedule {
-            setViewControllers([scheduleViewQuestion], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
+            setViewControllers([scheduleViewQuestion], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
         }
         
         // Pass arrays and indicators
@@ -134,7 +134,7 @@ class ScheduleCreationPageController: UIPageViewController, UIPageViewController
     func nextViewController() {
         if currentIndex != pages.count - 1 {
             currentIndex += 1
-            setViewControllers([pages[currentIndex]], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+            setViewControllers([pages[currentIndex]], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
             if let parentVC = self.parent as? ScheduleCreationController {
                 parentVC.currentPage = currentIndex
                 parentVC.updateIndicator()
@@ -147,7 +147,7 @@ class ScheduleCreationPageController: UIPageViewController, UIPageViewController
     func previousViewController() {
         if currentIndex > 0 {
             currentIndex -= 1
-            setViewControllers([pages[currentIndex]], direction: UIPageViewControllerNavigationDirection.reverse, animated: true, completion: nil)
+            setViewControllers([pages[currentIndex]], direction: UIPageViewController.NavigationDirection.reverse, animated: true, completion: nil)
             if let parentVC = self.parent as? ScheduleCreationController {
                 parentVC.currentPage = currentIndex
                 parentVC.updateIndicator()

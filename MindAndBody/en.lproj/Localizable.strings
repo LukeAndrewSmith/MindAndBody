@@ -3650,18 +3650,17 @@
 "twelveMonthsTitle" = "12 Months";
 "freeTrialTitle" = "1 month free trial offered!";
 "freeTrialExplanation" = "You can cancel the subscription at any time during the free trial from your Account Settings without being charged, so don't be afraid to give it a go!";
-"extraInfoSub" = "Buying the subscription will grant you access to the app and all its features for the selected time frame. The subscription will automatically renew within 24 hours of the end of the selected time unless cancelled. You can manage your subscriptions in Account Settings. By purchasing the subscription through in-app subscription, you agree to the Apple App Store terms and conditions. Visit our Terms of Use and Privacy Policy to learn more.";
+"extraInfoSub" = "Buying the subscription will grant you access to the app and all its features for the selected time frame. The subscription will automatically renew within 24 hours of the end of the selected time unless cancelled. You can manage your subscriptions in Account Settings. By purchasing the subscription through in-app subscription, you agree to the Apple App Store terms and conditions. By using the app, you agree to our Terms & Conditions and Privacy Policy, click the link below to learn more.";
+"termsAndPrivacyLink" = "Terms & Conditions and Privacy Policy";
 "perWeek" = " / Week";
 "per3Months" = " / 3 Months";
 "per12Months" = " / 12 Months";
 // Purchase failed
 "purchaseFailedTitle" = "Purchase Failed";
 "purchaseFailedText" = "An unexpected error occured, please try again.";
-// Can cancel message
-"canCancelTitle" = "Are You Sure?";
-"canCancelMessage" = "\nYou can cancel at any time from your phone's settings during the trial, without having to pay anything!";
-"ohGoOnThen" = "Oh go on then, I'll give it a go";
-"yesImSure" = "Yes I'm sure, I only like free things";
+// Purchase failed
+"purchaseDeniedTitle" = "Purchase Denied";
+"purchaseDeniedText" = "Please ensure that you are connected to the internet and that you are allowed to purchase products with your Apple ID.";
 // Subscrtioption failed to retreive
 "retreivalFailed" = "Can't retreive subscription";
 "subscriptionWarning" = "Connection Error\n";

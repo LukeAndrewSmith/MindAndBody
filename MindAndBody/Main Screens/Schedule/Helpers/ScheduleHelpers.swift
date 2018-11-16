@@ -118,11 +118,11 @@ extension ScheduleScreen {
             snapShot2?.center.y += pageStackHeight.constant
             //
             view.addSubview(snapShot1!)
-            view.bringSubview(toFront: snapShot1!)
+            view.bringSubviewToFront(snapShot1!)
             //
             snapShot2?.center.x = view.center.x + self.view.frame.size.width
             view.addSubview(snapShot2!)
-            view.bringSubview(toFront: snapShot2!)
+            view.bringSubviewToFront(snapShot2!)
             //
             scheduleTable.alpha = 0
             //
@@ -161,11 +161,11 @@ extension ScheduleScreen {
             snapShot2?.center.y += pageStackHeight.constant
             //
             view.addSubview(snapShot1!)
-            view.bringSubview(toFront: snapShot1!)
+            view.bringSubviewToFront(snapShot1!)
             //
             snapShot2?.center.x = view.center.x - self.view.frame.size.width
             view.addSubview(snapShot2!)
-            view.bringSubview(toFront: snapShot2!)
+            view.bringSubviewToFront(snapShot2!)
             //
             scheduleTable.alpha = 0
             //
@@ -477,11 +477,11 @@ extension ScheduleScreen {
         
         // Day Swipes (also used for swipe back in choices)
         daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        daySwipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        daySwipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         scheduleTable.addGestureRecognizer(daySwipeLeft)
         //
         daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        daySwipeRight.direction = UISwipeGestureRecognizerDirection.right
+        daySwipeRight.direction = UISwipeGestureRecognizer.Direction.right
         scheduleTable.addGestureRecognizer(daySwipeRight)
         
         // Select Today
@@ -502,7 +502,7 @@ extension ScheduleScreen {
         dayIndicator.backgroundColor = Colors.light
         if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             view.addSubview(dayIndicator)
-            view.bringSubview(toFront: dayIndicator)
+            view.bringSubviewToFront(dayIndicator)
         }
         
         updateDayIndicatorColours()
@@ -513,8 +513,8 @@ extension ScheduleScreen {
     @objc func checkSelectedDay() {
         // If see each day
         if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-            //
-            if ScheduleVariables.shared.lastDayOpened != Date().weekDayFromMonday {
+            // Only go to new day if initialchoice isn't waiting to be reloaded (as this means coming back from completing a session on a different day)
+            if ScheduleVariables.shared.lastDayOpened != Date().weekDayFromMonday && !ScheduleVariables.shared.shouldReloadInitialChoice {
                 // Reload
                 ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
                 ScheduleVariables.shared.shouldReloadSchedule = true

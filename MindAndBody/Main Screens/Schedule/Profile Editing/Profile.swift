@@ -159,7 +159,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
 //            default:
             
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
+            let cell: ProfileCell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
             cell.row = indexPath.row
             cell.selectedQuestion = selectedQuestion
             cell.answerTableView.reloadData()
@@ -241,10 +241,10 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
         let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
         let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: Fonts.smallElementRegular!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: Fonts.smallElementRegular!]), forKey: "attributedTitle")
         
         // Reset app action
-        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
+        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
         }
         // Add Actions
@@ -275,7 +275,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             selectedQuestion += 1
             updateProgress()
             let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
-            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
+            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: true)
         }
     }
     
@@ -295,7 +295,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, Nex
             selectedQuestion -= 1
             updateProgress()
             let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
-            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
+            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: true)
         }
     }
     

@@ -100,7 +100,7 @@ class ScheduleEquipment: UIViewController, UITableViewDelegate, UITableViewDataS
     // ScheduleCreationHelpCell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomScheduleEquipmentCell", for: indexPath) as! CustomScheduleEquipmentCell
+        let cell: CustomScheduleEquipmentCell = tableView.dequeueReusableCell(withIdentifier: "CustomScheduleEquipmentCell", for: indexPath) as! CustomScheduleEquipmentCell
         //
         cell.row = indexPath.row
         cell.selectionStyle = .none

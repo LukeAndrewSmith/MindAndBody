@@ -467,21 +467,18 @@ class SubscriptionsCheck {
     private init() {}
     
     var isValid = false
-    //
+
     // Check subscriptions, called from AppDelegate when first opening, to see if need to present subscription screen
     func checkSubscription() {
-        // First check user defaults, then fall back on receipt validation
-        let expiryDate = UserDefaults.standard.object(forKey: "userSubscriptionExpiryDate") as! String
-        if InAppManager.shared.isValidExpiryDate(expiryDate: expiryDate) {
-            print("validexpiry")
-            SubscriptionsCheck.shared.isValid = true
+        // Check user defaults saved expiry date
+        if let expiryDate = UserDefaults.standard.object(forKey: "userSubscriptionExpiryDate") as? String, InAppManager.shared.isValidExpiryDate(expiryDate: expiryDate) {
+            isValid = true
             Loading.shared.shouldPresentLoading = false
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
                 NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
             }
         } else {
-            print("Checking")
             Loading.shared.shouldPresentLoading = true
             InAppManager.shared.validateLocalReceipt(action: 0)
         }

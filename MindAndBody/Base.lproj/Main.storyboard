@@ -3989,20 +3989,20 @@
                                         <rect key="frame" x="16" y="24" width="343" height="364"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 month free trial offered!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9l-m9-9QF">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="26.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="21"/>
                                                 <color key="textColor" red="0.99479166669999997" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtA-jm-eRY">
-                                                <rect key="frame" x="0.0" y="33" width="343" height="62"/>
+                                                <rect key="frame" x="0.0" y="28" width="343" height="53"/>
                                                 <string key="text">You can cancel the subscription at any time during the free trial from your Account Settings without being charged, so don't be afraid to give it a go!</string>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QNp-pn-cgu">
-                                                <rect key="frame" x="0.0" y="102" width="343" height="148"/>
+                                                <rect key="frame" x="0.0" y="88" width="343" height="148"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boo-gu-gRO">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="66"/>
@@ -4092,8 +4092,14 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Terms &amp; Conditions and Privacy Policy" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="f8Y-3J-ScZ">
+                                                <rect key="frame" x="0.0" y="253.5" width="240" height="54.5"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="11"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="url"/>
+                                            </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYP-f9-7aj">
-                                                <rect key="frame" x="0.0" y="256.5" width="343" height="107.5"/>
+                                                <rect key="frame" x="0.0" y="314.5" width="343" height="49.5"/>
                                                 <string key="text">Buying the subscription will grant you access to the app and all its features for the selected time frame. The subscription will automatically renew within 24 hours of the end of the selected time unless cancelled. You can manage your subscriptions in Account Settings. By purchasing the subscription through in-app subscription, you agree to the Apple App Store terms and conditions. Visit our Terms of Use and Privacy Policy to learn more.</string>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="10"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4101,7 +4107,6 @@
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="gYP-f9-7aj" secondAttribute="bottom" id="2GK-Z5-ik4"/>
                                             <constraint firstItem="E9l-m9-9QF" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="34Z-Ou-e5c"/>
                                             <constraint firstAttribute="trailing" secondItem="QNp-pn-cgu" secondAttribute="trailing" id="Yi5-vi-gKJ"/>
                                             <constraint firstItem="QNp-pn-cgu" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="eRe-zF-TeT"/>
@@ -4147,6 +4152,7 @@
                         <outlet property="freeTrial" destination="E9l-m9-9QF" id="HRs-Rn-rcy"/>
                         <outlet property="freeTrialExplanation" destination="jtA-jm-eRY" id="PTP-wh-szn"/>
                         <outlet property="infoPageView" destination="imG-dX-jdU" id="yge-te-aQx"/>
+                        <outlet property="linkView" destination="f8Y-3J-ScZ" id="dkd-ZN-Joe"/>
                         <outlet property="subscriptionButton" destination="hPo-H9-2JR" id="FKb-o7-gF9"/>
                         <outlet property="subscriptionChoiceView" destination="Fft-eb-zI0" id="mAg-Jc-AZX"/>
                         <outlet property="subscriptionChoiceViewTop" destination="tSG-Jl-bFZ" id="UEg-bp-h2I"/>

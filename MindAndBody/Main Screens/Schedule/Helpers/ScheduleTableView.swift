@@ -428,16 +428,16 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     }
     
     // Commit editing style
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         //
         // Delete if not plus row
-        if tableView == scheduleChoiceTable && editingStyle == UITableViewCellEditingStyle.delete {
+        if tableView == scheduleChoiceTable && editingStyle == UITableViewCell.EditingStyle.delete {
 
             ScheduleVariables.shared.deleteSchedule(at: indexPath.row)
             
             // Reload table
             layoutViews()
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             
             scheduleTable.reloadData()
             scheduleChoiceTable.reloadData()

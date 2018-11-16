@@ -87,7 +87,7 @@ class ActionSheet {
         actionSheetBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0)
         actionSheet.frame = CGRect(x: xPos, y: UIScreen.main.bounds.height, width: actionSheet.bounds.width, height: actionSheet.bounds.height)
         UIApplication.shared.keyWindow?.addSubview(actionSheetBackgroundView)
-        UIApplication.shared.keyWindow?.bringSubview(toFront: actionSheetBackgroundView)
+        UIApplication.shared.keyWindow?.bringSubviewToFront(actionSheetBackgroundView)
         //
         // Animate
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {

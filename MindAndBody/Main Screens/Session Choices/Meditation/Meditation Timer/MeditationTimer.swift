@@ -138,7 +138,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Done button
         navigationBar.leftBarButtonItem?.tintColor = Colors.light
         navigationBar.leftBarButtonItem?.title = NSLocalizedString("done", comment: "")
-        navigationBar.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
+        navigationBar.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: Colors.light, NSAttributedString.Key.font: Fonts.navigationBarButton!], for: .normal)
         
         
         // BackgroundImage
@@ -407,7 +407,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)), mode: .default)
             do {
                 try AVAudioSession.sharedInstance().setActive(true)
             } catch let error as NSError {
@@ -899,7 +899,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     var isDeleting = Bool()
     // Delete Swipe
     @IBAction func deleteSwipeAction(sender: UISwipeGestureRecognizer) {
-        if sender.direction == UISwipeGestureRecognizerDirection.left {
+        if sender.direction == UISwipeGestureRecognizer.Direction.left {
             //
             isDeleting = true
             buttonArray = [startingBell, intervalBells, endingBell, backgroundSound]
@@ -1101,7 +1101,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //2. Add the text field
         alert.addTextField { (textField: UITextField) in
             textField.text = meditationArray[self.selectedPreset]["Name"]![0][0] as? String
@@ -1123,7 +1123,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
         okAction.isEnabled = false
         alert.addAction(okAction)
         // Cancel reset action
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
         }
         alert.addAction(cancelAction)
@@ -1888,7 +1888,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 
                 // View
                 UIApplication.shared.keyWindow?.addSubview(selectionView2)
-                UIApplication.shared.keyWindow?.bringSubview(toFront: selectionView2)
+                UIApplication.shared.keyWindow?.bringSubviewToFront(selectionView2)
                 
                 let toMinus = 10 + ElementHeights.bottomSafeAreaInset
                  
@@ -1902,7 +1902,7 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
                 backgroundViewSelection2.backgroundColor = UIColor.black.withAlphaComponent(0.5)
                 backgroundViewSelection2.center.x = view.center.x + view.bounds.width
                 UIApplication.shared.keyWindow?.addSubview(backgroundViewSelection2)
-                UIApplication.shared.keyWindow?.bringSubview(toFront: backgroundViewSelection2)
+                UIApplication.shared.keyWindow?.bringSubviewToFront(backgroundViewSelection2)
                 
                 //
                 UIApplication.shared.keyWindow?.insertSubview(selectionView2, aboveSubview: backgroundViewSelection2)
@@ -2002,11 +2002,11 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     // Delete
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let defaults = UserDefaults.standard
         var meditationArray = defaults.object(forKey: "meditationTimer") as! [[String: [[Any]]]]
         //
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
+        if (editingStyle == UITableViewCell.EditingStyle.delete) {
             //
             switch tableView{
             case tableViewIntervalBells:
@@ -2207,4 +2207,9 @@ class MeditationTimer: UIViewController, UITableViewDelegate, UITableViewDataSou
 
 class MeditationTimerEditingNavigation: UINavigationController {
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
 }

@@ -329,10 +329,10 @@ class LessonsScreen: UIViewController, UIScrollViewDelegate {
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2
-        let attributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: Fonts.lessonText!,
-            NSAttributedStringKey.paragraphStyle: paragraphStyle,
-            NSAttributedStringKey.foregroundColor: Colors.dark
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: Fonts.lessonText!,
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.foregroundColor: Colors.dark
         ]
         let attributedString = NSMutableAttributedString(string: plainString, attributes: attributes)
         
@@ -355,10 +355,10 @@ class LessonsScreen: UIViewController, UIScrollViewDelegate {
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2
-        let attributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: Fonts.lessonText!,
-            NSAttributedStringKey.paragraphStyle: paragraphStyle,
-            NSAttributedStringKey.foregroundColor: Colors.dark
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: Fonts.lessonText!,
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.foregroundColor: Colors.dark
         ]
         let attributedString = NSMutableAttributedString(string: plainString, attributes: attributes)
         
@@ -391,10 +391,10 @@ class LessonsScreen: UIViewController, UIScrollViewDelegate {
         paragraphStyle.headIndent = 15
         paragraphStyle.lineSpacing = 2
         // Attributes
-        let attributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: Fonts.lessonText!,
-            NSAttributedStringKey.paragraphStyle: paragraphStyle,
-            NSAttributedStringKey.foregroundColor: Colors.dark
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: Fonts.lessonText!,
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.foregroundColor: Colors.dark
         ]
         
         // Apply

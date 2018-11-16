@@ -217,7 +217,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         //
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "StretchingTableViewCell", for: indexPath) as! StretchingTableViewCell
+            let cell: StretchingTableViewCell = tableView.dequeueReusableCell(withIdentifier: "StretchingTableViewCell", for: indexPath) as! StretchingTableViewCell
             
             //
             let key = keyArray[indexPath.row]
@@ -288,12 +288,12 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 let stringToAdd = NSLocalizedString(") per side", comment: "")
                 let length2 = stringToAdd.count
                 setsRepsString = "(" + setsRepsString + stringToAdd
-                let attributedString = NSMutableAttributedString(string: setsRepsString, attributes: [NSAttributedStringKey.font:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
+                let attributedString = NSMutableAttributedString(string: setsRepsString, attributes: [NSAttributedString.Key.font:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
                 // Change indicator to red
                 let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
-                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colors.red, range: range)
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colors.red, range: range)
                 let range2 = NSRange(location: 1 + length,length: length2)
-                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colors.red, range: range2)
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colors.red, range: range2)
                 cell.setsRepsLabel?.textColor = Colors.light
                 cell.setsRepsLabel?.attributedText = attributedString
             } else {
@@ -341,13 +341,13 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             // Left Image Swift
             let imageSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-            imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
+            imageSwipeLeft.direction = UISwipeGestureRecognizer.Direction.left
             cell.imageViewCell.addGestureRecognizer(imageSwipeLeft)
             cell.imageViewCell.isUserInteractionEnabled = true
             
             // Right Image Swipe
             let imageSwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-            imageSwipeRight.direction = UISwipeGestureRecognizerDirection.right
+            imageSwipeRight.direction = UISwipeGestureRecognizer.Direction.right
             cell.imageViewCell.addGestureRecognizer(imageSwipeRight)
             cell.imageViewCell.isUserInteractionEnabled = true
             
@@ -418,7 +418,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             //
-            cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
+            cell.separatorInset =  UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
             //
             cell.layer.borderWidth = 2
             cell.layer.borderColor = Colors.light.cgColor
@@ -565,13 +565,13 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.explanationButton.alpha = 0
                 cell.timerButton.alpha = 0
                 //
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
             }, completion: { finished in
                 //                self.playAnimation(row: self.selectedRow)
             })
             // + 1
             if selectedRow < keyArray.count - 1 {
-                tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+                tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableView.RowAnimation.none)
             }
         }
     }
@@ -596,12 +596,12 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     // Silly fix below seems to work
                 if self.selectedRow == 0 {
                     self.tableView.beginUpdates()
-                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
                     self.tableView.endUpdates()
                 } else {
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
-                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
                 }
 
                 // 1
@@ -731,7 +731,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
             //
             switch extraSwipe.direction {
             //
-            case UISwipeGestureRecognizerDirection.left:
+            case UISwipeGestureRecognizer.Direction.left:
                 //
                 // Check left image is displayed
                 if cell.imageState == 0 {
@@ -769,7 +769,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
                     //
                 }
             //
-            case UISwipeGestureRecognizerDirection.right:
+            case UISwipeGestureRecognizer.Direction.right:
                 //
                 if cell.imageState == 1 {
                     cell.imageState = 0
@@ -856,21 +856,21 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
         //
         // Action
-        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) {
             UIAlertAction in
             //
             //
             self.dismiss(animated: true)
         }
-        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.default) {
             UIAlertAction in
         }
         //

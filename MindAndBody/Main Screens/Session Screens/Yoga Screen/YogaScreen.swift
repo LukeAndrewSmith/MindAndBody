@@ -132,7 +132,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidAppear(animated)
         
         // Perform the action only once
-        if self.isBeingPresented || self.isMovingToParentViewController {
+        if self.isBeingPresented || self.isMovingToParent {
             // MARK: Walkthrough
             let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
             // Walkthrough if not automatic yoga
@@ -205,7 +205,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "YogaOverviewTableViewCell", for: indexPath) as! YogaOverviewTableViewCell
+            let cell: YogaOverviewTableViewCell = tableView.dequeueReusableCell(withIdentifier: "YogaOverviewTableViewCell", for: indexPath) as! YogaOverviewTableViewCell
             //
             let key = keyArray[indexPath.row]
             
@@ -331,7 +331,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //
             cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             //
-            cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
+            cell.separatorInset =  UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
             //
             cell.layer.borderWidth = 2
             cell.layer.borderColor = Colors.light.cgColor
@@ -441,7 +441,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //
         // Get Cell
         let indexPath = NSIndexPath(row: row, section: 0)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "YogaOverviewTableViewCell", for: indexPath as IndexPath) as! YogaOverviewTableViewCell
+        let cell: YogaOverviewTableViewCell = tableView.dequeueReusableCell(withIdentifier: "YogaOverviewTableViewCell", for: indexPath as IndexPath) as! YogaOverviewTableViewCell
         //
         let key = keyArray[indexPath.row]
         //
@@ -518,13 +518,13 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     cell.explanationButton.isEnabled = true
                     cell.demonstrationImageView.isUserInteractionEnabled = true
                     //
-                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
                 }, completion: {finished in
     //                self.playAnimation(row: self.selectedRow)
                 })
                     // + 1
                     if selectedRow < keyArray.count - 1 {
-                        tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+                        tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableView.RowAnimation.none)
                     }
             } else {
                 //
@@ -578,12 +578,12 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     // Silly fix below seems to work
                     if self.selectedRow == 0 {
                         self.tableView.beginUpdates()
-                        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
                         self.tableView.endUpdates()
                     } else {
                         self.tableView.beginUpdates()
                         self.tableView.endUpdates()
-                        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                        self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
                     }
 
                     // 1
@@ -786,11 +786,11 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let message = NSLocalizedString("pauseMessageYoga", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.view.tintColor = Colors.dark
-            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             //
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
             // Actions
             // Dismiss
             let finishEarlyAction = UIAlertAction(title: NSLocalizedString("finishEarly", comment: ""), style: .default) { _ in
@@ -880,20 +880,20 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let message = NSLocalizedString("finishEarlyMessage", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.view.tintColor = Colors.dark
-            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             //
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
             
             //
             // Action
-            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+            let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) {
                 UIAlertAction in
                 //
                 self.dismiss(animated: true)
             }
-            let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+            let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.default) {
                 UIAlertAction in
             }
             //

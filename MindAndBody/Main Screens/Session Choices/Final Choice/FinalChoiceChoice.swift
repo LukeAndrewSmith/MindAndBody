@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FinalChoiceChoice: UIViewController {
     
     //scheduleSegueFinalChoice
     //finalChoiceDetailSegue
@@ -64,7 +64,6 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         case 1:
             navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[2], comment: "")
 
-            print(ScheduleVariables.shared.selectedChoiceSession)
         // Stretching
         case 2:
             navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[2], comment: "")
@@ -72,14 +71,10 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         default: break
         }
         navigationBar.title = navTitle
-        print(navTitle)
         navigationBar.rightBarButtonItem?.tintColor = Colors.light
         
         
-        // Table View
-        finalChoiceTable.tableFooterView = UIView()
-        finalChoiceTable.dataSource = self
-        finalChoiceTable.delegate = self
+        tableViewSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,107 +86,7 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    // MARK: Table View
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return imageArray.count
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        // If only on section => 1 difficulty which is "average"
-            // see 'Session Data' -> 'SortedSessionsSchedule'
-        var keys = ["level1", "level2", "level3"]
-        if imageArray.count == 1 {
-            return NSLocalizedString(keys[1], comment: "")
-        } else {
-            return NSLocalizedString(keys[section], comment: "")
-        }
-    }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 17)!
-        header.textLabel?.textAlignment = .left
-        header.textLabel?.textColor = Colors.light
-        header.contentView.backgroundColor = Colors.dark
-        header.contentView.tintColor = Colors.light
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return imageArray[section].count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FinalChoiceChoiceCell", for: indexPath) as! FinalChoiceChoiceCell
-        cell.backgroundColor = Colors.light
-        
-        // Retreive Preset Sessions
-        cell.nameLabel?.text = NSLocalizedString(sessionsArray[keys[indexPath.section]]![indexPath.row], comment: "")
-        
-        cell.layoutSubviews()
-        
-        // Images
-        // Remove any images
-        cell.imageStack.subviews.forEach({ $0.removeFromSuperview() })
-        
-        // Sizes
-        let height = cell.imageStack.bounds.height
-        let gap = CGFloat(4)
-        let numberOfImages = imageArray[indexPath.section][indexPath.row].count
-        
-        // Add images
-        for i in 0..<numberOfImages {
-            let imageView = UIImageView()
-            
-            imageView.image = imageArray[indexPath.section][indexPath.row][i]
-            
-            imageView.contentMode = .scaleAspectFit
-            imageView.frame.size = CGSize(width: height, height: height)
-            imageView.widthAnchor.constraint(equalToConstant: height).isActive = true
-            cell.imageStack.addArrangedSubview(imageView)
-        }
-        
-        var width2 = CGFloat()
-        width2 = (CGFloat(numberOfImages) * height) + (CGFloat(numberOfImages - 1) * gap)
-        cell.imageStack.spacing = gap
-        cell.imageStack.frame = CGRect(x: 0, y: 0, width: width2, height: height)
-        cell.imageScroll.contentSize = CGSize(width: width2, height: height)
-        
-        cell.imageStack.tag = indexPath.row
-        cell.stackTap.addTarget(self, action: #selector(stackTapAction))
-        cell.stackPress.addTarget(self, action: #selector(stackPressAction))
-        cell.imageScroll.tag = indexPath.row
-        cell.scrollTap.addTarget(self, action: #selector(stackTapAction))
-        cell.scrollPress.addTarget(self, action: #selector(stackPressAction))
-        
-        cell.imageStack.tag = indexPath.row
-        cell.imageScroll.tag = indexPath.row
-        
-        return cell
-    }
-    
-    @objc func stackTapAction(sender: UITapGestureRecognizer) {
-        let index = IndexPath(row: (sender.view?.tag)!, section: 0)
-        finalChoiceTable.selectRow(at: index, animated: false, scrollPosition: .none)
-        finalChoiceTable.delegate?.tableView!(finalChoiceTable, didSelectRowAt: index)
-    }
-    @objc func stackPressAction(sender: UILongPressGestureRecognizer) {
-        let index = IndexPath(row: (sender.view?.tag)!, section: 0)
-        let cell = finalChoiceTable.cellForRow(at: index)
-        if sender.state == .began {
-            finalChoiceTable.selectRow(at: index, animated: false, scrollPosition: .none)
-        } else if sender.state == .changed {
-            if !(cell?.frame.contains(sender.location(in: self.view)))! {
-                finalChoiceTable.deselectRow(at: index, animated: false)
-            } else {
-                finalChoiceTable.selectRow(at: index, animated: false, scrollPosition: .none)
-            }
-        } else if sender.state == .ended {
-            if (cell?.frame.contains(sender.location(in: self.finalChoiceTable)))! {
-                finalChoiceTable.delegate?.tableView!(finalChoiceTable, didSelectRowAt: index)
-            }
-        }
-    }
     
     // Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -208,7 +103,6 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // Select session
-        print(keys)
         let selectedSessionKey: String = sessionsArray[keys[indexPath.section]]![indexPath.row]
         SelectedSession.shared.selectedSession[2] = selectedSessionKey
         
@@ -362,6 +256,113 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
     }
 }
 
+extension FinalChoiceChoice: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableViewSetup() {
+        // Table View
+        finalChoiceTable.tableFooterView = UIView()
+        finalChoiceTable.dataSource = self
+        finalChoiceTable.delegate = self
+    }
+    
+    // MARK: Table View
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return imageArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // If only on section => 1 difficulty which is "average"
+        // see 'Session Data' -> 'SortedSessionsSchedule'
+        var keys = ["level1", "level2", "level3"]
+        if imageArray.count == 1 {
+            return NSLocalizedString(keys[1], comment: "")
+        } else {
+            return NSLocalizedString(keys[section], comment: "")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 17)!
+        header.textLabel?.textAlignment = .left
+        header.textLabel?.textColor = Colors.light
+        header.contentView.backgroundColor = Colors.dark
+        header.contentView.tintColor = Colors.light
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return imageArray[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "FinalChoiceChoiceCell",
+            for: indexPath) as! FinalChoiceChoiceCell
+        cell.backgroundColor = Colors.light
+        
+        // Retreive Preset Sessions
+        cell.nameLabel?.text = NSLocalizedString(sessionsArray[keys[indexPath.section]]![indexPath.row], comment: "")
+
+        cell.layoutSubviews()
+
+        // Images
+        // Remove any images
+        cell.imageStack.subviews.forEach({ $0.removeFromSuperview() })
+
+        // Sizes
+        let height = cell.imageStack.bounds.height
+        let gap = CGFloat(4)
+        let numberOfImages = imageArray[indexPath.section][indexPath.row].count
+
+        // Add images
+        for i in 0..<numberOfImages {
+            let imageView = UIImageView()
+
+            imageView.image = imageArray[indexPath.section][indexPath.row][i]
+
+            imageView.contentMode = .scaleAspectFit
+            imageView.frame.size = CGSize(width: height, height: height)
+            imageView.widthAnchor.constraint(equalToConstant: height).isActive = true
+            cell.imageStack.addArrangedSubview(imageView)
+        }
+
+        var width2 = CGFloat()
+        width2 = (CGFloat(numberOfImages) * height) + (CGFloat(numberOfImages - 1) * gap)
+        cell.imageStack.spacing = gap
+        cell.imageStack.frame = CGRect(x: 0, y: 0, width: width2, height: height)
+        cell.imageScroll.contentSize = CGSize(width: width2, height: height)
+        cell.imageScroll.contentOffset = CGPoint(x: 0, y: 0)
+
+        // Setup image elements to tap/press like the tableview so that you can press the tableview anywhere but still scroll the images
+        // Set closures here so that they can access the indexPath property
+        cell.tapAction = { sender in
+            self.finalChoiceTable.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            self.finalChoiceTable.delegate?.tableView!(self.finalChoiceTable, didSelectRowAt: indexPath)
+        }
+        cell.pressAction = { sender in
+            if sender.state == .began {
+                self.finalChoiceTable.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            } else if sender.state == .changed {
+                if !(cell.frame.contains(sender.location(in: self.view))) {
+                    self.finalChoiceTable.deselectRow(at: indexPath, animated: false)
+                } else {
+                    self.finalChoiceTable.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+                }
+            } else if sender.state == .ended {
+                if (cell.frame.contains(sender.location(in: self.finalChoiceTable))) {
+                    self.finalChoiceTable.delegate?.tableView!(self.finalChoiceTable, didSelectRowAt: indexPath)
+                }
+            }
+        }
+
+        cell.imageStack.tag = indexPath.row
+        cell.imageScroll.tag = indexPath.row
+
+        return cell
+    }
+}
+
 // MARK: Custom Cell
 class FinalChoiceChoiceCell: UITableViewCell {
     
@@ -373,6 +374,22 @@ class FinalChoiceChoiceCell: UITableViewCell {
     let stackPress = UILongPressGestureRecognizer()
     let scrollTap = UITapGestureRecognizer()
     let scrollPress = UILongPressGestureRecognizer()
+    
+    var tapAction: ((UITapGestureRecognizer) -> Void)?
+    var pressAction: ((UILongPressGestureRecognizer) -> Void)?
+    
+    @objc func stackTapActivated(_ sender: UITapGestureRecognizer) {
+        self.tapAction?(sender)
+    }
+    @objc func stackPressActivated(_ sender: UILongPressGestureRecognizer) {
+        self.pressAction?(sender)
+    }
+    @objc func scrollTapActivated(_ sender: UITapGestureRecognizer) {
+        self.tapAction?(sender)
+    }
+    @objc func scrollPressActivated(_ sender: UILongPressGestureRecognizer) {
+        self.pressAction?(sender)
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -388,5 +405,10 @@ class FinalChoiceChoiceCell: UITableViewCell {
         scrollPress.minimumPressDuration = 0.1
         imageScroll.addGestureRecognizer(scrollTap)
         imageScroll.addGestureRecognizer(scrollPress)
+        
+        stackTap.addTarget(self, action: #selector(stackTapActivated(_:)))
+        stackPress.addTarget(self, action: #selector(stackPressActivated(_:)))
+        scrollTap.addTarget(self, action: #selector(scrollTapActivated(_:)))
+        scrollPress.addTarget(self, action: #selector(scrollPressActivated(_:)))
     }
 }

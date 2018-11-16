@@ -262,7 +262,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                     switch indexPath.row {
                     // Answer Table with image (flexibility questions)
                     default:
-                        let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleCreationHelpCell", for: indexPath) as! ScheduleCreationHelpCell
+                        let cell: ScheduleCreationHelpCell = tableView.dequeueReusableCell(withIdentifier: "ScheduleCreationHelpCell", for: indexPath) as! ScheduleCreationHelpCell
                         cell.row = indexPath.row
                         cell.selectedQuestion = selectedQuestion
                         cell.selectedSection = selectedSection
@@ -327,10 +327,10 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 let title = NSLocalizedString("noGoalsChosenWarning", comment: "")
                 let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
                 alert.view.tintColor = Colors.dark
-                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 20)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 20)!]), forKey: "attributedTitle")
                 
                 // Reset app action
-                let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
+                let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
                 }
                 // Add Actions
@@ -371,10 +371,10 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 let title = NSLocalizedString("profileNotCompleteWarning", comment: "")
                 let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
                 alert.view.tintColor = Colors.dark
-                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 21)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 21)!]), forKey: "attributedTitle")
                 
                 // Reset app action
-                let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default) {
+                let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
                 }
                 // Add Actions
@@ -453,12 +453,12 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 questionsTable.reloadData()
                 let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
                 questionsTable.reloadRows(at: [indexPath as IndexPath], with: .automatic)
-                questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
 
             // Reload
             questionsTable.reloadData()
             let indexPath2 = NSIndexPath(row: 0, section: 0)
-            questionsTable.scrollToRow(at: indexPath2 as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+            questionsTable.scrollToRow(at: indexPath2 as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
             let snapShot2 = questionsTable.snapshotView(afterScreenUpdates: true)
             questionsTable.alpha = 0
             snapShot2?.center.y = questionsTable.center.y + questionsTable.bounds.height
@@ -477,7 +477,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             selectedQuestion += 1
             updateProgress()
             let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
-            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
+            questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: true)
         }
     }
     
@@ -511,7 +511,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 selectedQuestion -= 1
                 updateProgress()
                 let indexPath = NSIndexPath(row: selectedQuestion, section: 0)
-                questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
+                questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: true)
             // Questions -> Goals
             } else {
                 previousSectionButton.alpha = 0
@@ -528,7 +528,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 // Reload
                 questionsTable.reloadData()
                 let indexPath = NSIndexPath(row: 0, section: 0)
-                questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                questionsTable.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
                 let snapShot2 = questionsTable.snapshotView(afterScreenUpdates: true)
                 questionsTable.alpha = 0
                 snapShot2?.center.y = questionsTable.center.y - questionsTable.bounds.height

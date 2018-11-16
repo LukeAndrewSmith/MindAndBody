@@ -104,7 +104,7 @@ class StopClock {
             // Notification
             let content = UNMutableNotificationContent()
             content.title = NSLocalizedString("setOver", comment: "")
-            content.sound = UNNotificationSound.default()
+            content.sound = UNNotificationSound.default
             //
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(length), repeats: false)
             let request = UNNotificationRequest(identifier: "stopClock", content: content, trigger: trigger)
@@ -120,7 +120,7 @@ class StopClock {
                 rowTimer.invalidate()
             }
             //
-            NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: UIApplication.willEnterForegroundNotification, object: nil)
             //
             startTime = Date().timeIntervalSinceReferenceDate
             //
@@ -166,7 +166,7 @@ class StopClock {
         stopClockBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0)
         stopClock.frame = CGRect(x: 10, y: UIScreen.main.bounds.height, width: stopClock.bounds.width, height: stopClock.bounds.height)
         UIApplication.shared.keyWindow?.addSubview(stopClockBackgroundView)
-        UIApplication.shared.keyWindow?.bringSubview(toFront: stopClockBackgroundView)
+        UIApplication.shared.keyWindow?.bringSubviewToFront(stopClockBackgroundView)
         //
         // Animate
         UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
@@ -259,9 +259,9 @@ class StopClock {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
         animation.toValue = 1
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = Double(timerValue)
-        animation.fillMode = kCAFillModeForwards
+        animation.fillMode = CAMediaTimingFillMode.forwards
         animation.isRemovedOnCompletion = false
         timerShapeLayer.strokeEnd = 1.0
         //

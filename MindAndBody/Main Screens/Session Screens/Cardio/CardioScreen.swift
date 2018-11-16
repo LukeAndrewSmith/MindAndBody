@@ -119,7 +119,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         cancelButton.tintColor = Colors.red
         
         // Watch for enter foreground
-        NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     
@@ -183,7 +183,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         switch indexPath.section {
         case 0:
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CardioTableViewCell", for: indexPath) as! CardioTableViewCell
+            let cell: CardioTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CardioTableViewCell", for: indexPath) as! CardioTableViewCell
             let key = keyArray[indexPath.row]
             
             // Cell
@@ -233,7 +233,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 
             cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
-            cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
+            cell.separatorInset =  UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
             cell.layer.borderWidth = 2
             cell.layer.borderColor = Colors.light.cgColor
             cell.textLabel?.text = NSLocalizedString("end", comment: "")
@@ -448,16 +448,16 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
                     // All high intensity is even
                     if i % 2 == 0 {
                         // High == doing something
-                        content.sound = UNNotificationSound(named: "tibetanBowlH.caf")
+                        content.sound = UNNotificationSound(named: convertToUNNotificationSoundName("tibetanBowlH.caf"))
                         // All low intensity is odd
                     } else {
                         // Low == rest
-                        content.sound = UNNotificationSound(named: "tibetanBowlL.caf")
+                        content.sound = UNNotificationSound(named: convertToUNNotificationSoundName("tibetanBowlL.caf"))
                     }
                 } else {
                     content.title = NSLocalizedString("cardioEnd", comment: "")
                     // Sound
-                    content.sound = UNNotificationSound(named: "tibetanBowlL4.caf")
+                    content.sound = UNNotificationSound(named: convertToUNNotificationSoundName("tibetanBowlL4.caf"))
                 }
                 content.body = " "
                 
@@ -497,7 +497,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             UIView.animate(withDuration: 0.6, animations: {
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
             }, completion: { finished in})
         }
     }
@@ -565,9 +565,9 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
         animation.toValue = 1
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = Double(timerValueRow)
-        animation.fillMode = kCAFillModeForwards
+        animation.fillMode = CAMediaTimingFillMode.forwards
         animation.isRemovedOnCompletion = false
         timerShapeLayer.strokeEnd = 1.0
 
@@ -584,17 +584,17 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
         // Action
-        let okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertActionStyle.default) { UIAlertAction in
+        let okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertAction.Style.default) { UIAlertAction in
             self.cancelAll()
             self.dismiss(animated: true)
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("no", comment: ""), style: UIAlertActionStyle.default) {UIAlertAction in}
+        let cancelAction = UIAlertAction(title: NSLocalizedString("no", comment: ""), style: UIAlertAction.Style.default) {UIAlertAction in}
 
         alert.addAction(okAction)
         alert.addAction(cancelAction)
@@ -623,3 +623,8 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUNNotificationSoundName(_ input: String) -> UNNotificationSoundName {
+	return UNNotificationSoundName(rawValue: input)
+}

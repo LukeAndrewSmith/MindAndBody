@@ -41,22 +41,22 @@ class MeditationChoice: UIViewController, UIScrollViewDelegate  {
         
         // Button Titles
         //
-        guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControlState.normal)
+        guided.setTitle(NSLocalizedString("guided", comment: ""), for: UIControl.State.normal)
         guided.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         guided.setTitleColor(Colors.dark, for: .normal)
         guided.layer.borderWidth = 5
         guided.layer.borderColor = Colors.dark.cgColor
         guided.titleLabel?.adjustsFontSizeToFitWidth = true
-        guided.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        guided.titleEdgeInsets = UIEdgeInsets.init(top: 0,left: 8,bottom: 0,right: 8)
         guided.titleLabel?.textAlignment = .center
         //
-        meditationTimer.setTitle(NSLocalizedString("meditationTimer", comment: ""), for: UIControlState.normal)
+        meditationTimer.setTitle(NSLocalizedString("meditationTimer", comment: ""), for: UIControl.State.normal)
         meditationTimer.titleLabel!.font = UIFont(name: "SFUIDisplay-light", size: 21)
         meditationTimer.setTitleColor(Colors.dark, for: .normal)
         meditationTimer.layer.borderWidth = 5
         meditationTimer.layer.borderColor = Colors.dark.cgColor
         meditationTimer.titleLabel?.adjustsFontSizeToFitWidth = true
-        meditationTimer.titleEdgeInsets = UIEdgeInsetsMake(0,8,0,8)
+        meditationTimer.titleEdgeInsets = UIEdgeInsets.init(top: 0,left: 8,bottom: 0,right: 8)
         meditationTimer.titleLabel?.textAlignment = .center
         
         

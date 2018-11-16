@@ -169,7 +169,7 @@ class ScheduleTypeQuestion: UIViewController {
         //
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: Fonts.mediumElementLight!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: Fonts.mediumElementLight!]), forKey: "attributedTitle")
         //2. Add the text field
         alert.addTextField { (textField: UITextField) in
             textField.text = ""
@@ -211,7 +211,7 @@ class ScheduleTypeQuestion: UIViewController {
         okAction.isEnabled = false
         alert.addAction(okAction)
         // Cancel action
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
         }
         alert.addAction(cancelAction)

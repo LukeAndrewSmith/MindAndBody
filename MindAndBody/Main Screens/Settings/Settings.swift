@@ -691,7 +691,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             //
             actionSheetView.addSubview(restTimePicker)
             actionSheetView.addSubview(secondIndicatorLabel)
-            actionSheetView.bringSubview(toFront: secondIndicatorLabel)
+            actionSheetView.bringSubviewToFront(secondIndicatorLabel)
             //
             selectedRow = indexPath.row
             //
@@ -742,15 +742,15 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let message = NSLocalizedString("resetWalkthroughWarningMessage", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alert.view.tintColor = Colors.dark
-                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = .natural
-                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
                 
                 
                 // Reset app action
-                let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
+                let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
                     
                     // Walkthrough
@@ -769,17 +769,17 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     let message = NSLocalizedString("resetMessage", comment: "")
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                     alert.view.tintColor = Colors.light
-                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                     
                     let paragraphStyle = NSMutableParagraphStyle()
                     paragraphStyle.alignment = .natural
-                    alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                    alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
                     
                     // Present alert
                     self.present(alert, animated: true, completion: nil)
                 }
                 // Cancel reset action
-                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
                 }
                 // Add Actions
@@ -799,15 +799,15 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 let message = NSLocalizedString("resetWarningMessage", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alert.view.tintColor = Colors.dark
-                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = .natural
-                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
                 
                 
                 // Reset app action
-                let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
+                let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
                     
                     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
@@ -818,16 +818,16 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                     let message = NSLocalizedString("resetMessage", comment: "")
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                     alert.view.tintColor = Colors.dark
-                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                     
                     let paragraphStyle = NSMutableParagraphStyle()
                     paragraphStyle.alignment = .natural
-                    alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                    alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
                     
                     self.present(alert, animated: true, completion: nil)
                 }
                 // Cancel reset action
-                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
                 }
                 // Add Actions

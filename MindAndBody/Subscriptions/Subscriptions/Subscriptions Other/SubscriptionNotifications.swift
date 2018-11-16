@@ -21,9 +21,8 @@ class SubscriptionNotifiations: NSObject {
     static let purchaseRestoreSuccessfulNotification = Notification.Name("PurchaseRestoreSuccessfulNotification")
     static let purchaseFailedNotification = Notification.Name("PurchaseFailedNotification")
     //
-    static let didCheckSubscription = Notification.Name("DidCheckSubscriptionNotification")
-    //
     static let connectionTimedOutNotification = Notification.Name("ConnectionTimedOutNotification")
     //
+    static let didCheckSubscription = Notification.Name("DidCheckSubscriptionNotification")
     static let canPresentWalkthrough = Notification.Name("CanPresentWalkthrough")
 }

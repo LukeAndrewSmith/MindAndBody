@@ -42,14 +42,14 @@ class ScheduleCreationController: UIViewController {
         view.backgroundColor = Colors.light
         
         leftItem.title = NSLocalizedString("back", comment: "")
-        leftItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
+        leftItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: Colors.light, NSAttributedString.Key.font: Fonts.navigationBarButton!], for: .normal)
         leftItem.tintColor = Colors.light
         
         setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("scheduleOptions", comment: ""), separator: false, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: false)
 
         enableBackButton()
         // Pass information to child
-        if let childVC = self.childViewControllers.first as? ScheduleCreationPageController {
+        if let childVC = self.children.first as? ScheduleCreationPageController {
             childVC.appChoosesSessions = appChoosesSessions
             childVC.appHelpsCreateSchedule = appHelpsCreateSchedule
             childVC.isProfileCompleted = isProfileCompleted
@@ -161,7 +161,7 @@ class ScheduleCreationController: UIViewController {
     func updateIndicator() {
         
         // Update pages if needed
-        if let childVC = self.childViewControllers.first as? ScheduleCreationPageController {
+        if let childVC = self.children.first as? ScheduleCreationPageController {
             childVC.updatePagesOfParent()
         }
         
@@ -223,7 +223,7 @@ class ScheduleCreationController: UIViewController {
         if currentPage == 0 {
             // popup saying going back will delete newly created schedule
             self.navigationController?.popToRootViewController(animated: true)
-        } else if let childVC = self.childViewControllers.first as? ScheduleCreationPageController {
+        } else if let childVC = self.children.first as? ScheduleCreationPageController {
             childVC.updatePagesOfParent()
             childVC.previousViewController()
         }

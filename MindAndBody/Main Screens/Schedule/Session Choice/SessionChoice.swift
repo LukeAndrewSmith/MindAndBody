@@ -365,8 +365,6 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             backItem.tintColor = Colors.light
             navigationItem.backBarButtonItem = backItem
             
-            ScheduleVariables.shared.shouldPop = false
-            
         case "scheduleSegueFinalChoice": // User chooses sessions
             let destinationVC = segue.destination as? FinalChoiceChoice
             destinationVC?.selectedComponent = selectedComponent
@@ -375,9 +373,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             backItem.title = ""
             backItem.tintColor = Colors.light
             navigationItem.backBarButtonItem = backItem
-            
-            ScheduleVariables.shared.shouldPop = false
-            
+                        
         case "scheduleMeditationSegueTimer":
             let destinationVC = segue.destination as? MeditationTimer
             destinationVC?.comingFromSchedule = true

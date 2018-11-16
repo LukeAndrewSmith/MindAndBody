@@ -224,7 +224,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath) as! DayCell
+        let cell: DayCell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath) as! DayCell
         cell.selectionStyle = .none
         //
         // Iphone 5/SE layout

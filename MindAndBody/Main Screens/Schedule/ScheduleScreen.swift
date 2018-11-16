@@ -139,7 +139,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         super.viewDidLoad()
         
         // set observer for UIApplicationWillEnterForeground
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         // Walkthrough (for after subscriptions, normal handled by subscriptionCheckComplete)
         NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
@@ -152,6 +152,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         // Check subscription -> Present Subscription Screen (if not valid)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
 
+        
         // Ensure week goal correct
         Tracking.shared.updateWeekGoal()
         
@@ -166,10 +167,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         reloadView()
         
         // Register for receiving did enter foreground notifications
-        // check selected day
-        NotificationCenter.default.addObserver(self, selector: #selector(checkSelectedDay), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        // reload view
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     // MARK: viewWillAppear
@@ -209,6 +207,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         // Check if alert reminding to update profile (Once a month) should be presented
         UpdateProfile.shared.checkUpdateProfile()
         
+        let calendar = Calendar.current
+        ScheduleVariables.shared.lastDayOpened = 2
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -226,11 +226,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         if goingToSessionChoice {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             goingToSessionChoice = false
-        }
-        //
-        NotificationCenter.default.removeObserver(self)
-        if goingToSubscriptionsScreen {
-            NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
         }
     }
 
@@ -255,14 +250,13 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     // Begin walkthrough
     @objc func beginWalkthrough() {
-        // Valid subscription and walkthrough hasn't already been called
-        if SubscriptionsCheck.shared.isValid && walkthroughProgress == 0 {
+        // If walkthrough hasn't already been called
+        if walkthroughProgress == 0 {
             // Register for notifications
             let center = UNUserNotificationCenter.current()
             center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
                 // Enable or disable features based on authorization.
             }
-            //
             // Present schedule walkthrough
             let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
             if walkthroughs["Schedule"] == false {
@@ -291,15 +285,15 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             let message = NSLocalizedString("scheduleEditMessage", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.view.tintColor = Colors.dark
-            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             //
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
             
             //
             // Action
-            let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
+            let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertAction.Style.default) {
                 UIAlertAction in
                 ActionSheet.shared.actionSheet.alpha = 1
                 ActionSheet.shared.actionSheetBackgroundView.alpha = 1

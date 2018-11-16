@@ -113,7 +113,7 @@ class MeditationScreen: UIViewController {
         //
         // Enable audio in background for Meditation Bells/Sounds
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: .mixWithOthers)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)), mode: .default)
             print("Playback OK")
             try AVAudioSession.sharedInstance().setActive(true)
             print("Session is Active")
@@ -135,7 +135,7 @@ class MeditationScreen: UIViewController {
         checkMark.tintColor = Colors.red
         
         // Watch for enter foreground
-        NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     //
@@ -470,13 +470,13 @@ class MeditationScreen: UIViewController {
         let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         // Action
-        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) {
             UIAlertAction in
             // Cancel Timer
             rowTimer.invalidate()
@@ -515,7 +515,7 @@ class MeditationScreen: UIViewController {
             }
             self.dismiss(animated: true)
         }
-        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.default) {
             UIAlertAction in
         }
         //
@@ -527,3 +527,8 @@ class MeditationScreen: UIViewController {
     //
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
+}

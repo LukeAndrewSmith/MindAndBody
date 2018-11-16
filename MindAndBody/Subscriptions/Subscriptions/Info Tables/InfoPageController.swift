@@ -50,7 +50,7 @@ class InfoPageViewController: UIPageViewController, UIPageViewControllerDataSour
         pages.append(page4)
         pages.append(page5)
         
-        setViewControllers([page0], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
+        setViewControllers([page0], direction: UIPageViewController.NavigationDirection.forward, animated: false, completion: nil)
         
         
         //

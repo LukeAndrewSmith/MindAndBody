@@ -503,6 +503,7 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // MARK: Begin Button
     @IBAction func beginButton(_ sender: Any) {
+        ScheduleVariables.shared.shouldPop = true // Indicates to FinalChoiceChoice to pop (incase first pop from current screen goes there) as we want to pop to ChoiceScreen
         // timed schedule sessions
         var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
         let timedSession = settings["TimeBasedSessions"]![0]
@@ -585,7 +586,6 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
         super.viewDidDisappear(animated)
         
         self.navigationController?.popViewController(animated: false)
-        ScheduleVariables.shared.shouldPop = true
     }
     
     // MARK: Cardio helpers

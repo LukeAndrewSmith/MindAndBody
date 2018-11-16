@@ -147,7 +147,7 @@ class MeditationChoiceGuided: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if images.count != 0 {
-            tableView.sendSubview(toBack: images[indexPath.section])
+            tableView.sendSubviewToBack(images[indexPath.section])
         }
     }
     

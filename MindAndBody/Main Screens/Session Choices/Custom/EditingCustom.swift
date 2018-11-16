@@ -164,7 +164,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         navigationBar.leftBarButtonItem?.tintColor = Colors.light
         navigationBar.leftBarButtonItem?.title = NSLocalizedString("done", comment: "")
-        navigationBar.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
+        navigationBar.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: Colors.light, NSAttributedString.Key.font: Fonts.navigationBarButton!], for: .normal)
         
         
         // TableView
@@ -208,7 +208,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         setsRepsView.addSubview(setsRepsPicker)
         setsRepsView.addSubview(okButton)
         setsRepsView.addSubview(setsIndicatorLabel)
-        setsRepsView.bringSubview(toFront: setsIndicatorLabel)
+        setsRepsView.bringSubviewToFront(setsIndicatorLabel)
         //
         // Colour
         self.view.backgroundColor = Colors.light
@@ -1034,11 +1034,11 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     // Commit editing style
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         //
         var customSessionsArray = UserDefaults.standard.object(forKey: "customSessions") as! [String: [[String: [Any]]]]
         //
-        if editingStyle == UITableViewCellEditingStyle.delete {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
             
             switch tableView {
             case customTableView:
@@ -1089,7 +1089,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 //
                 switch SelectedSession.shared.selectedSession[0] {
                 case "warmup", "cardio", "stretching", "yoga":
-                    tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                    tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
                 case "workout":
                     if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]![1] as! Int == -1 {
                         var indexArray: [IndexPath] = []
@@ -1099,9 +1099,9 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                             let indexPathToRemove = NSIndexPath(row: row, section: section)
                             indexArray.append(indexPathToRemove as IndexPath)
                         }
-                        tableView.deleteRows(at: indexArray, with: UITableViewRowAnimation.automatic)
+                        tableView.deleteRows(at: indexArray, with: UITableView.RowAnimation.automatic)
                     } else {
-                        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                        tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
                     }
                 default: break
                 }
@@ -1132,7 +1132,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         //
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         // 2. Add the text field
         alert.addTextField { (textField: UITextField) in
             textField.text = customSessionsArray[SelectedSession.shared.selectedSession[0]]![self.selectedSession]["name"]![0] as? String
@@ -1155,7 +1155,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         okAction.isEnabled = false
         alert.addAction(okAction)
         // Cancel reset action
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
             //
             ActionSheet.shared.actionSheetBackgroundView.isHidden = false
@@ -1583,7 +1583,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let inputTitle = NSLocalizedString("nRoundsAlert", comment: "")
             let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
             alert.view.tintColor = Colors.dark
-            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
             
             // Ok action
             okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { UIAlertAction in

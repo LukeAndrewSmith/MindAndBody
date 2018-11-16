@@ -63,7 +63,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomMeditationChoiceCell", for: indexPath) as! CustomMeditationChoiceCell
+        let cell: CustomMeditationChoiceCell = tableView.dequeueReusableCell(withIdentifier: "CustomMeditationChoiceCell", for: indexPath) as! CustomMeditationChoiceCell
         cell.backgroundColor = Colors.light
         
         // Retreive Preset Sessions
@@ -246,8 +246,8 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
             //
             let alert = UIAlertController(title: inputTitle, message: inputMessage, preferredStyle: .alert)
             alert.view.tintColor = Colors.dark
-            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Light", size: 20)!]), forKey: "attributedTitle")
-            alert.setValue(NSAttributedString(string: inputMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-thin", size: 17)!]), forKey: "attributedMessage")
+            alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-Light", size: 20)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: inputMessage, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-thin", size: 17)!]), forKey: "attributedMessage")
             
             //
             okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) {
@@ -291,8 +291,8 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     // Commit editing style
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
             deleteSessionAction(session: indexPath.row)
         }
     }
@@ -305,7 +305,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         let inputTitle = NSLocalizedString("areYouSureDelete", comment: "")
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
         
         // Ok action
         okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { UIAlertAction in
@@ -314,7 +314,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         alert.addAction(okAction)
         
         // Cancel  action
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {UIAlertAction in}
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {UIAlertAction in}
         alert.addAction(cancelAction)
         
         // Present the alert
@@ -350,7 +350,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         //
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //2. Add the text field
         alert.addTextField { (textField: UITextField) in
             textField.text = ""
@@ -384,7 +384,7 @@ class MeditationTimerChoice: UIViewController, UITableViewDelegate, UITableViewD
         okAction.isEnabled = false
         alert.addAction(okAction)
         // Cancel reset action
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
         }
         alert.addAction(cancelAction)

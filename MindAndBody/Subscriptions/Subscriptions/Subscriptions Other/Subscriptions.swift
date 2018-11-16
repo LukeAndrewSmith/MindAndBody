@@ -85,17 +85,19 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     
     // -------------------------------------------------------------
     // MARK:- Purchase Products
-    func purchaseProduct(productType: ProductType) {
+    func purchaseProduct(productType: ProductType) -> Bool {
         guard let product = self.products.filter({$0.productIdentifier == productType.rawValue}).first else {
             // No products available
-            return
+            return false
         }
         if SKPaymentQueue.canMakePayments() {
+            print("Beginning Purchase")
             let payment = SKMutablePayment(product: product)
             SKPaymentQueue.default().add(payment)
+            return true
         } else {
-            // TODO: Popup
             print("Payments disabled")
+            return false
         }
     }
     
@@ -105,6 +107,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
             case .purchasing:
                 print("Purchasing")
             case .purchased:
+                print("Purchased")
                 queue.finishTransaction(transaction)
                 // check
                 let productIdentifier = transaction.payment.productIdentifier
@@ -170,7 +173,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     func validateLocalReceipt(action: Int) {
         // Attempt to validate receipt for all subscription types
         print("Validating")
-        var failures = 0
+        var failures = 0 // Only fail if all products fail
         for i in 0..<ProductType.all.count {
             receiptValidator.validate(ProductType.all[i].rawValue, sharedSecret: InAppManager.accountSecret) { result in
                 switch result {
@@ -211,7 +214,6 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
         // 0 == not called from subscription screen, i.e called from app delegate when first opening and checking to see wether or not to present subscription screen
         // 1 == Restore/Purchase -> dismiss subscription screen, present walkthrough
     func checkExpiryDateAction(response: [String: AnyObject]?, action: Int, failedNotification: Bool) {
-        SubscriptionsCheck.shared.isValid = false
         /// Retreive the full apple receipt
         let receiptKey = SwiftyReceiptValidator.ResponseKey.receipt.rawValue
         if let receipt = response![receiptKey] {
@@ -230,7 +232,6 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                             // Valid subscription found
                             UserDefaults.standard.set(expiryDate, forKey: "userSubscriptionExpiryDate")
                             SubscriptionsCheck.shared.isValid = true
-                            Loading.shared.shouldPresentLoading = false
                             // Broadcast success notifications
                             if action == 1 {
                                 DispatchQueue.main.async {
@@ -246,7 +247,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                     }
                 }
                 
-                // No valid subscription
+                // No valid subscription -> Post failed notification
                 if !SubscriptionsCheck.shared.isValid {
                     // If no valid subscription found
                     if failedNotification {

@@ -75,7 +75,7 @@ extension TimeBasedScreen {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
         animation.toValue = 1
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         // Rest Time
         if movementProgress == 0 {
             let settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -112,7 +112,7 @@ extension TimeBasedScreen {
                 animation.duration = Double(lengthArray[selectedRow])
             }
         }
-        animation.fillMode = kCAFillModeForwards
+        animation.fillMode = CAMediaTimingFillMode.forwards
         animation.isRemovedOnCompletion = false
         timerShapeLayer.strokeEnd = 1.0
         //
@@ -340,7 +340,7 @@ extension TimeBasedScreen {
             //
         } else {
             restTime -= 1
-            restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+            restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
         }
     }
     
@@ -374,7 +374,7 @@ extension TimeBasedScreen {
 
         // Set Timer
         // Set initial time
-        restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+        restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
         
         // Begin Timer or dismiss view
         rowTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateRestTimer), userInfo: nil, repeats: true)
@@ -400,7 +400,7 @@ extension TimeBasedScreen {
         self.selectedRow = 0
         //
         let indexPath0 = NSIndexPath(row: 0, section: 0)
-        self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: false)
+        self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableView.ScrollPosition.bottom, animated: false)
         //
         let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! TimeBasedTableViewCell
         //
@@ -424,7 +424,7 @@ extension TimeBasedScreen {
         //let message = NSLocalizedString("resetMessage", comment: "")
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.view.tintColor = Colors.light
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
         self.present(alert, animated: true, completion: {
             //
             let delayInSeconds = 0.7
@@ -452,7 +452,7 @@ extension TimeBasedScreen {
         let content = UNMutableNotificationContent()
         content.title = NSLocalizedString("timerEnd", comment: "")
         content.body = " "
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
         //
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTime), repeats: false)
         let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
@@ -465,9 +465,9 @@ extension TimeBasedScreen {
         // Rest Alert
         restAlert = UIAlertController()
         restAlert.view.tintColor = Colors.dark
-        restAlert.setValue(NSAttributedString(string: restTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
-        restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
-        let skipAction = UIAlertAction(title: NSLocalizedString("skip", comment: ""), style: UIAlertActionStyle.default) {
+        restAlert.setValue(NSAttributedString(string: restTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+        let skipAction = UIAlertAction(title: NSLocalizedString("skip", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
             //
             self.endRest()

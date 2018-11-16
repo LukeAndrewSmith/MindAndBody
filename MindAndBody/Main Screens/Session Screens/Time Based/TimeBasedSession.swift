@@ -279,7 +279,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TimeBasedTableViewCell", for: indexPath) as! TimeBasedTableViewCell
+            let cell: TimeBasedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TimeBasedTableViewCell", for: indexPath) as! TimeBasedTableViewCell
             
             //
             let key = keyArray[indexPath.row]
@@ -358,13 +358,13 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             // Left Image Swift
             let imageSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-            imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
+            imageSwipeLeft.direction = UISwipeGestureRecognizer.Direction.left
             cell.imageViewCell.addGestureRecognizer(imageSwipeLeft)
             cell.imageViewCell.isUserInteractionEnabled = true
             
             // Right Image Swipe
             let imageSwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-            imageSwipeRight.direction = UISwipeGestureRecognizerDirection.right
+            imageSwipeRight.direction = UISwipeGestureRecognizer.Direction.right
             cell.imageViewCell.addGestureRecognizer(imageSwipeRight)
             cell.imageViewCell.isUserInteractionEnabled = true
             
@@ -419,7 +419,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             //
-            cell.separatorInset =  UIEdgeInsetsMake(0, 0, 0, 0)
+            cell.separatorInset =  UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
             //
             cell.layer.borderWidth = 2
             cell.layer.borderColor = Colors.light.cgColor
@@ -591,11 +591,11 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.movementLabel.alpha = 0
                 cell.explanationButton.alpha = 0
                 //
-                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
             })
             // + 1
             if !isCircuit && selectedRow < keyArray.count - 1 || isCircuit && selectedRow < nMovementsInRound - 1 {
-                tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+                tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableView.RowAnimation.none)
             }
             
             // Next Round
@@ -606,7 +606,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 UIView.animate(withDuration: 0.6, animations: {
                     let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: true)
                 })
             }
             //
@@ -646,12 +646,12 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Silly fix below seems to work
                 if self.selectedRow == 0 {
                     self.tableView.beginUpdates()
-                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
                     self.tableView.endUpdates()
                 } else {
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
-                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: false)
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: false)
                 }
                 
                 // 1
@@ -776,7 +776,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             //
             switch extraSwipe.direction {
             //
-            case UISwipeGestureRecognizerDirection.left:
+            case UISwipeGestureRecognizer.Direction.left:
                 //
                 // Check left image is displayed
                 if cell.imageState == 0 {
@@ -815,7 +815,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                 }
             //
-            case UISwipeGestureRecognizerDirection.right:
+            case UISwipeGestureRecognizer.Direction.right:
                 //
                 if cell.imageState == 1 {
                     cell.imageState = 0
@@ -928,11 +928,11 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             let message = NSLocalizedString("pauseMessageSession", comment: "")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.view.tintColor = Colors.dark
-            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
             //
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
             // Actions
             // Dismiss
             let pauseButtonAction = UIAlertAction(title: NSLocalizedString("finishEarly", comment: ""), style: .default) { _ in

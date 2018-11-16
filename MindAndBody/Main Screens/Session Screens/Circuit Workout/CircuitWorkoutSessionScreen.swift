@@ -182,7 +182,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         
         //
         // Watch for enter foreground
-        NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         //
         // Weight (Action Sheet)
@@ -278,7 +278,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         //
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutOverviewTableViewCell", for: indexPath) as! WorkoutOverviewTableViewCell
+            let cell: WorkoutOverviewTableViewCell = tableView.dequeueReusableCell(withIdentifier: "WorkoutOverviewTableViewCell", for: indexPath) as! WorkoutOverviewTableViewCell
             
             //
             let key = keyArray[indexPath.row]
@@ -391,12 +391,12 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 let stringToAdd = NSLocalizedString(") per side", comment: "")
                 let length2 = stringToAdd.count
                 repsString = "(" + repsString + stringToAdd
-                let attributedString = NSMutableAttributedString(string: repsString, attributes: [NSAttributedStringKey.font:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
+                let attributedString = NSMutableAttributedString(string: repsString, attributes: [NSAttributedString.Key.font:UIFont(name: "SFUIDisplay-thin", size: 23.0)!])
                 // Change indicator to red
                 let range = NSRange(location:0,length:1) // specific location. This means "range" handle 1 character at location 2
-                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colors.red, range: range)
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colors.red, range: range)
                 let range2 = NSRange(location: 1 + length,length: length2)
-                attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colors.red, range: range2)
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colors.red, range: range2)
                 cell.setsRepsLabel?.textColor = Colors.light
                 cell.setsRepsLabel?.attributedText = attributedString
             } else {
@@ -443,13 +443,13 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             // Left Image Swift
             let imageSwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-            imageSwipeLeft.direction = UISwipeGestureRecognizerDirection.left
+            imageSwipeLeft.direction = UISwipeGestureRecognizer.Direction.left
             cell.imageViewCell.addGestureRecognizer(imageSwipeLeft)
             cell.imageViewCell.isUserInteractionEnabled = true
             
             // Right Image Swipe
             let imageSwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-            imageSwipeRight.direction = UISwipeGestureRecognizerDirection.right
+            imageSwipeRight.direction = UISwipeGestureRecognizer.Direction.right
             cell.imageViewCell.addGestureRecognizer(imageSwipeRight)
             cell.imageViewCell.isUserInteractionEnabled = true
             
@@ -488,7 +488,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             cell.backgroundColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.0)
             //
-            cell.separatorInset =  UIEdgeInsetsMake(0.0, 0.0, 0.0, -cell.bounds.size.width)
+            cell.separatorInset =  UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 0.0, right: -cell.bounds.size.width)
             //
             cell.layer.borderWidth = 2
             cell.layer.borderColor = Colors.light.cgColor
@@ -573,7 +573,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             actionSheetView.addSubview(weightPicker)
             actionSheetView.addSubview(unitIndicatorLabel)
-            actionSheetView.bringSubview(toFront: unitIndicatorLabel)
+            actionSheetView.bringSubviewToFront(unitIndicatorLabel)
             //
             var movementWeights = UserDefaults.standard.object(forKey: "movementWeights") as! [String: Int]
             // View
@@ -702,7 +702,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             self.tableView.endUpdates()
             //
             let indexPath0 = NSIndexPath(row: 0, section: 0)
-            self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
             //
             let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! WorkoutOverviewTableViewCell
             //
@@ -728,7 +728,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //let message = NSLocalizedString("resetMessage", comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
             alert.view.tintColor = Colors.light
-            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
             self.present(alert, animated: true, completion: {
                 //
                 let delayInSeconds = 0.7
@@ -740,7 +740,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
         } else {
             restTime -= 1
-            restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+            restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
         }
     }
     
@@ -782,7 +782,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             self.tableView.endUpdates()
             //
             let indexPath0 = NSIndexPath(row: 0, section: 0)
-            self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
             //
             let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! WorkoutOverviewTableViewCell
             //
@@ -808,7 +808,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //let message = NSLocalizedString("resetMessage", comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
             alert.view.tintColor = Colors.light
-            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
             self.present(alert, animated: true, completion: {
                 //
                 let delayInSeconds = 0.7
@@ -820,7 +820,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         
         // Set Timer
         // Set initial time
-        restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+        restAlert.setValue(NSAttributedString(string: "\n" + String(describing: restTime), attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
         
         // Begin Timer or dismiss view
         rowTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
@@ -844,7 +844,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let content = UNMutableNotificationContent()
         content.title = NSLocalizedString("timerEnd", comment: "")
         content.body = " "
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
         //
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(restTime), repeats: false)
         let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
@@ -857,9 +857,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         // Rest Alert
         restAlert = UIAlertController()
         restAlert.view.tintColor = Colors.dark
-        restAlert.setValue(NSAttributedString(string: restTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
-        restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
-        let skipAction = UIAlertAction(title: NSLocalizedString("skip", comment: ""), style: UIAlertActionStyle.default) {
+        restAlert.setValue(NSAttributedString(string: restTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+        restAlert.setValue(NSAttributedString(string: restMessage, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-Thin", size: 23)!]), forKey: "attributedMessage")
+        let skipAction = UIAlertAction(title: NSLocalizedString("skip", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
             
             //
@@ -879,7 +879,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             self.selectedRow = 0
             //
             let indexPath0 = NSIndexPath(row: 0, section: 0)
-            self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            self.tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
             //
             let cell = self.tableView.cellForRow(at: indexPath0 as IndexPath) as! WorkoutOverviewTableViewCell
             //
@@ -906,7 +906,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //let message = NSLocalizedString("resetMessage", comment: "")
             let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
             alert.view.tintColor = Colors.light
-            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 23)!]), forKey: "attributedTitle")
             self.present(alert, animated: true, completion: {
                 //
                 let delayInSeconds = 0.7
@@ -989,7 +989,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         if selectedRow < numberOfMovementsInRound - 1 {
             //
             let indexPath0 = NSIndexPath(row: 0, section: 0)
-            tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
             //
             selectedRow = selectedRow + 1
             updateProgress()
@@ -1029,7 +1029,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             })
             // + 1
             if selectedRow < numberOfMovementsInRound - 1 {
-                tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableViewRowAnimation.none)
+                tableView.reloadRows(at: [indexPath3 as IndexPath], with: UITableView.RowAnimation.none)
             }
             
             // Next Round
@@ -1040,7 +1040,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 //
                 UIView.animate(withDuration: 0.6, animations: {
                     let indexPath = NSIndexPath(row: self.selectedRow, section: 0)
-                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.top, animated: true)
+                    self.tableView.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.top, animated: true)
                 })
             }
         }
@@ -1095,7 +1095,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             //
             let indexPath0 = NSIndexPath(row: 0, section: 0)
-            tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            tableView.scrollToRow(at: indexPath0 as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
         }
     }
     
@@ -1188,15 +1188,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 let message = NSLocalizedString("setTimerWarning", comment: "")
                 let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                 alert.view.tintColor = Colors.dark
-                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
                 //
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = .natural
-                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
                 
                 //
                 // Action
-                let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
+                let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
                     //
                 }
@@ -1222,7 +1222,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             switch extraSwipe.direction {
             //
-            case UISwipeGestureRecognizerDirection.left:
+            case UISwipeGestureRecognizer.Direction.left:
                 //
                 // Check left image is displayed
                 if cell.imageState == 0 {
@@ -1260,7 +1260,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                     //
                 }
             //
-            case UISwipeGestureRecognizerDirection.right:
+            case UISwipeGestureRecognizer.Direction.right:
                 //
                 if cell.imageState == 1 {
                     cell.imageState = 0
@@ -1336,15 +1336,15 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         let message = NSLocalizedString("finishEarlyMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
         //
         // Action
-        let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) {
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) {
             UIAlertAction in
             //
             //
@@ -1353,7 +1353,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             //
             self.dismiss(animated: true)
         }
-        let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.default) {
             UIAlertAction in
         }
         //

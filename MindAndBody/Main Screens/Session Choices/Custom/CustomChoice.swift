@@ -73,7 +73,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
     // Cell for row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomSessionsChoiceCell", for: indexPath) as! CustomSessionsChoiceCell
+        let cell: CustomSessionsChoiceCell = tableView.dequeueReusableCell(withIdentifier: "CustomSessionsChoiceCell", for: indexPath) as! CustomSessionsChoiceCell
         cell.backgroundColor = Colors.light
 
         // Retreive Preset Sessions
@@ -232,8 +232,8 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     // Commit editing style
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
             deleteSessionAction(session: indexPath.row)
         }
     }
@@ -246,7 +246,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         let inputTitle = NSLocalizedString("areYouSureDelete", comment: "")
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 17)!]), forKey: "attributedTitle")
         
         // Ok action
         okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { UIAlertAction in
@@ -255,7 +255,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         alert.addAction(okAction)
         
         // Cancel  action
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {UIAlertAction in}
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {UIAlertAction in}
         alert.addAction(cancelAction)
         
         // Present the alert
@@ -325,7 +325,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         //
         let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
         //2. Add the text field
         alert.addTextField { (textField: UITextField) in
             textField.text = ""
@@ -370,7 +370,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
         okAction.isEnabled = false
         alert.addAction(okAction)
         // Cancel reset action
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
         }
         alert.addAction(cancelAction)

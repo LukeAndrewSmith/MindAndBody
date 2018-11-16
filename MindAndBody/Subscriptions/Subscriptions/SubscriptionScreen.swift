@@ -41,6 +41,7 @@ class SubscriptionScreen: UIViewController {
     @IBOutlet weak var twelveMonthsTotal: UILabel!
     
     @IBOutlet weak var extraInfoLabel: UILabel!
+    @IBOutlet weak var linkView: UITextView!
     
     var loadingView = UIView()
     var didSetup = false
@@ -183,6 +184,19 @@ class SubscriptionScreen: UIViewController {
         extraInfoLabel.font = UIFont(name: "SFUIDisplay-regular", size: 11)
         extraInfoLabel.textColor = Colors.darkGray
         
+        // Link ---------------------
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("termsAndPrivacyLink", comment: ""))
+        let url = URL(string: "https://mind-and-body.info")!
+        attributedString.setAttributes([.link: url], range: NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(.foregroundColor, value: Colors.light , range: NSMakeRange(0, attributedString.length))
+        linkView.attributedText = attributedString
+        linkView.textColor = Colors.light
+        linkView.backgroundColor = Colors.light
+        linkView.linkTextAttributes = [
+            .foregroundColor: Colors.light,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        
         // Background Button -------------------------
         subscriptionChoiceBackground.frame = UIScreen.main.bounds
         subscriptionChoiceBackground.backgroundColor = Colors.dark.withAlphaComponent(0)
@@ -283,12 +297,18 @@ class SubscriptionScreen: UIViewController {
     
     @IBAction func threeMonthButtonAction(_ sender: Any) {
         addLoadingView()
-        InAppManager.shared.purchaseProduct(productType: ProductType.threeMonth)
+        if !InAppManager.shared.purchaseProduct(productType: ProductType.threeMonth) {
+            dismissLoadingWhatever()
+            purchaseDenied()
+        }
     }
     
     @IBAction func twelveMonthButtonAction(_ sender: Any) {
         addLoadingView()
-        InAppManager.shared.purchaseProduct(productType: ProductType.yearly)
+        if !InAppManager.shared.purchaseProduct(productType: ProductType.yearly) {
+            dismissLoadingWhatever()
+            purchaseDenied()
+        }
     }
     
     @objc func handlePurchaseRestoreAlertSuccess() {
@@ -311,6 +331,31 @@ class SubscriptionScreen: UIViewController {
         // Tell the user they can cancel anytime
         let title = NSLocalizedString("purchaseFailedTitle", comment: "")
         let message = NSLocalizedString("purchaseFailedText", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = Colors.dark
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-semibold", size: 19)!]), forKey: "attributedTitle")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-regular", size: 17)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        
+        // 'Ok'
+        let okAction = UIAlertAction(title:  NSLocalizedString("ok", comment: ""), style: UIAlertAction.Style.default) {
+            UIAlertAction in
+            
+        }
+        
+        // Add Actions
+        alert.addAction(okAction)
+        
+        // Present Alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func purchaseDenied() {
+        // Tell the user they can cancel anytime
+        let title = NSLocalizedString("purchaseDeniedTitle", comment: "")
+        let message = NSLocalizedString("purchaseDeniedText", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-semibold", size: 19)!]), forKey: "attributedTitle")
