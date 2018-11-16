@@ -1,7 +1,7 @@
 PODS:
-  - Charts (3.1.1):
-    - Charts/Core (= 3.1.1)
-  - Charts/Core (3.1.1)
+  - Charts (3.2.1):
+    - Charts/Core (= 3.2.1)
+  - Charts/Core (3.2.1)
   - SwiftyReceiptValidator (3.2.0)
 
 DEPENDENCIES:
@@ -9,14 +9,14 @@ DEPENDENCIES:
   - SwiftyReceiptValidator
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Charts
     - SwiftyReceiptValidator
 
 SPEC CHECKSUMS:
-  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
+  Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
   SwiftyReceiptValidator: 7eb541caed98cc0bfbf90d892cbce8e2dc52ea13
 
 PODFILE CHECKSUM: a0d387c24dda00d83bc380be2d68a47550aacb97
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.0

@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
 
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
 //        // MARK: Sessions check
 //        // Compares sessions dictionaries and sorted sessions dictionaries to see if anything missing
@@ -54,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Register Defaults --------------------------------------------------------------------------------
         // Subscriptions
-        UserDefaults.standard.register(defaults: ["userHasValidSubscription" : false])
         UserDefaults.standard.register(defaults: ["userSubscriptionExpiryDate" : ""])
         // Settings
         UserDefaults.standard.register(defaults: ["userSettings" : Register.defaultSettings])
@@ -98,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //
     // Did finish launching ----------------------------------------------------------------------------------------------
     //
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // Subscriptions Monitoring

@@ -138,7 +138,7 @@ class ReminderNotifications {
                                 morningContent.body = NSLocalizedString("morningNotification1", comment: "") + String(dayCount) + NSLocalizedString("morningNotification2", comment: "") + motivatingComment
                             }
                             // Sound
-                            morningContent.sound = UNNotificationSound.default()
+                            morningContent.sound = UNNotificationSound.default
                             // App Badge Counter
                             morningContent.badge = dayCount as NSNumber
                             // Get day of week
@@ -201,7 +201,7 @@ class ReminderNotifications {
                             // Present
                             if shouldPresentNotification {
                                 // Sound
-                                afternoonContent.sound = UNNotificationSound.default()
+                                afternoonContent.sound = UNNotificationSound.default
                                 // App Badge Counter
                                 afternoonContent.badge = dayCount as NSNumber
                                 // Get day of week
@@ -228,7 +228,7 @@ class ReminderNotifications {
                     let sundayContent = UNMutableNotificationContent()
                     sundayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
                     sundayContent.body = NSLocalizedString("sundayNotification", comment: "")
-                    sundayContent.sound = UNNotificationSound.default()
+                    sundayContent.sound = UNNotificationSound.default
                     // Get day of week
                     let mondayDate = Date().firstMondayInCurrentWeek
                     let sundayDateToSchedule = cal.date(byAdding: .day, value: 6, to: mondayDate)
@@ -255,7 +255,7 @@ class ReminderNotifications {
                     count += ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count
                 }
                 mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(count) + NSLocalizedString("weekNotification2", comment: "")
-                mondayContent.sound = UNNotificationSound.default()
+                mondayContent.sound = UNNotificationSound.default
                 
                 // App Badge Counter
                 mondayContent.badge = count as NSNumber
@@ -280,7 +280,7 @@ class ReminderNotifications {
                 sundayContent.title = NSLocalizedString("mindBodySchedule", comment: "")
                 sundayContent.body = NSLocalizedString("sundayNotification", comment: "")
                 
-                sundayContent.sound = UNNotificationSound.default()
+                sundayContent.sound = UNNotificationSound.default
                 mondayContent.badge = 0
 
                 // Get day of week
@@ -471,20 +471,19 @@ class SubscriptionsCheck {
     // Check subscriptions, called from AppDelegate when first opening, to see if need to present subscription screen
     func checkSubscription() {
         // First check user defaults, then fall back on receipt validation
-        let isValid = UserDefaults.standard.object(forKey: "userHasValidSubscription") as! Bool
-        if isValid {
-            let expiryDate = UserDefaults.standard.object(forKey: "userSubscriptionExpiryDate") as! String
-            if InAppManager.shared.isValidExpiryDate(expiryDate: expiryDate) {
-                Loading.shared.shouldPresentLoading = false
+        let expiryDate = UserDefaults.standard.object(forKey: "userSubscriptionExpiryDate") as! String
+        if InAppManager.shared.isValidExpiryDate(expiryDate: expiryDate) {
+            print("validexpiry")
+            SubscriptionsCheck.shared.isValid = true
+            Loading.shared.shouldPresentLoading = false
+            DispatchQueue.main.async {
                 NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
                 NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
-            } else {
-                Loading.shared.shouldPresentLoading = true
-                InAppManager.shared.checkIfUserHasSubscription()
             }
         } else {
+            print("Checking")
             Loading.shared.shouldPresentLoading = true
-            InAppManager.shared.checkIfUserHasSubscription()
+            InAppManager.shared.validateLocalReceipt(action: 0)
         }
     }
 }
@@ -534,7 +533,7 @@ class Loading {
             // Setup indicator
             loadingIndicator.center = loadingView.center
             loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+            loadingIndicator.style = UIActivityIndicatorView.Style.whiteLarge
             loadingIndicator.color = Colors.light
             loadingIndicator.startAnimating()
             loadingView.addSubview(loadingIndicator)
@@ -672,14 +671,14 @@ class UpdateProfile {
         let message = NSLocalizedString("updateProfileNotificationMessage", comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
-        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
         
         // Action
-        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
+        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
             UserDefaults.standard.set(Date().setToMidnightUTC(), forKey: "lastProfileUpdateAlert")
         }
@@ -705,7 +704,7 @@ extension UIViewController {
         self.navigationController?.navigationBar.barTintColor = tintColor
         self.navigationController?.navigationBar.backgroundColor = tintColor
         self.navigationController?.view.backgroundColor = tintColor
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, NSAttributedStringKey.font: font]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor, NSAttributedString.Key.font: font]
 
         if !separator {
             self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -890,23 +889,23 @@ extension UIViewController {
         //
         // Title
         let titleString = NSMutableAttributedString(string: title)
-        titleString.addAttribute(NSAttributedStringKey.font, value: Fonts.explanationTitle!, range: NSMakeRange(0, titleString.length))
+        titleString.addAttribute(NSAttributedString.Key.font, value: Fonts.explanationTitle!, range: NSMakeRange(0, titleString.length))
         //
         let centering = NSMutableParagraphStyle()
         centering.alignment = .left
-        titleString.addAttribute(NSAttributedStringKey.paragraphStyle, value: centering, range: NSMakeRange(0, titleString.length))
+        titleString.addAttribute(NSAttributedString.Key.paragraphStyle, value: centering, range: NSMakeRange(0, titleString.length))
         
         //
         titleString.append(return2)
         
         //
         // Title Attributes
-        let headerFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : Fonts.explanationTitle as Any]
+        let headerFont: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font : Fonts.explanationTitle as Any]
         //
-        let subHeaderFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : Fonts.explanationSubHeader as Any]
+        let subHeaderFont: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font : Fonts.explanationSubHeader as Any]
         //
         // Bullet Point Attributes
-        let bulletPointFont: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font : Fonts.lessonText as Any]
+        let bulletPointFont: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font : Fonts.lessonText as Any]
         //
         let paragraphStyle: NSMutableParagraphStyle
         paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
@@ -949,10 +948,10 @@ extension UIViewController {
             if isSubHeader {
                 attributedString.addAttributes(subHeaderFont, range: NSMakeRange(0, attributedString.length))
                 
-                attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyleSubHeader], range: NSMakeRange(0, attributedString.length))
+                attributedString.addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyleSubHeader], range: NSMakeRange(0, attributedString.length))
             } else {
                 attributedString.addAttributes(bulletPointFont, range: NSMakeRange(0, attributedString.length))
-                attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+                attributedString.addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
             }
             
             howToString.append(attributedString)
@@ -977,7 +976,7 @@ extension UIViewController {
             let formattedString: String = "\(bulletPoint) \(string)\n"
             let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: formattedString)
             
-            attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+            attributedString.addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
             
             toAvoidString.append(attributedString)
         }
@@ -1002,7 +1001,7 @@ extension UIViewController {
             let formattedString: String = "\(bulletPoint) \(string)\n"
             let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: formattedString)
             
-            attributedString.addAttributes([NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+            attributedString.addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
             
             focusOnString.append(attributedString)
         }
@@ -1360,7 +1359,7 @@ extension UIView {
 extension UIImage {
     
     func thumbnail() -> UIImage {
-        let imageData = UIImagePNGRepresentation(self)!
+        let imageData = self.pngData()!
         let options = [
             kCGImageSourceCreateThumbnailWithTransform: true,
             kCGImageSourceCreateThumbnailFromImageAlways: true,

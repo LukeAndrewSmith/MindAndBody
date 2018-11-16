@@ -102,7 +102,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Items
         leftItem.tintColor = Colors.light
         leftItem.title = NSLocalizedString("done", comment: "")
-        leftItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Colors.light, NSAttributedStringKey.font: Fonts.navigationBarButton!], for: .normal)
+        leftItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: Colors.light, NSAttributedString.Key.font: Fonts.navigationBarButton!], for: .normal)
         rightItem.tintColor = Colors.red
         rightItem.image = #imageLiteral(resourceName: "Bin")
 
@@ -134,7 +134,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         appChoosesSessionsSwitch.backgroundColor = Colors.red
         appChoosesSessionsSwitch.layer.cornerRadius = appChoosesSessionsSwitch.bounds.height / 2
         appChoosesSessionsSwitch.clipsToBounds = true
-        appChoosesSessionsSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControlEvents.valueChanged)
+        appChoosesSessionsSwitch.addTarget(self, action: #selector(switchValueChanged), for: UIControl.Event.valueChanged)
         // Set initial value
         
         // On
@@ -150,7 +150,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let day = NSLocalizedString("dayStyle", comment: "")
         let items = [week, day]
         scheduleStyleSegment = UISegmentedControl(items: items)
-        scheduleStyleSegment.setTitleTextAttributes([NSAttributedStringKey.font : Fonts.regularCell!, NSAttributedStringKey.foregroundColor: Colors.dark], for: .normal)
+        scheduleStyleSegment.setTitleTextAttributes([NSAttributedString.Key.font : Fonts.regularCell!, NSAttributedString.Key.foregroundColor: Colors.dark], for: .normal)
         scheduleStyleSegment.layer.borderWidth = 1
         scheduleStyleSegment.layer.borderColor = Colors.dark.withAlphaComponent(0.93).cgColor
         scheduleStyleSegment.clipsToBounds = true
@@ -327,7 +327,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 //
                 let alert = UIAlertController(title: inputTitle, message: "", preferredStyle: .alert)
                 alert.view.tintColor = Colors.dark
-                alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+                alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 //2. Add the text field
                 alert.addTextField { (textField: UITextField) in
                     textField.text = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] as? String
@@ -348,7 +348,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                     cell?.detailTextLabel?.text = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] as? String
                 })
                 // Cancel action
-                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {
                     UIAlertAction in
                 }
                 alert.addAction(okAction)
@@ -407,13 +407,13 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let message = NSLocalizedString("appChoosesSessionsWarning", comment: "")
                     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
                     alert.view.tintColor = Colors.dark
-                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
+                    alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
                     //
                     let paragraphStyle = NSMutableParagraphStyle()
                     paragraphStyle.alignment = .natural
-                    alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+                    alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
                     // Action
-                    let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.default) {
+                    let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertAction.Style.default) {
                         UIAlertAction in
                         // Go to profile
                         self.performSegue(withIdentifier: "OverviewProfileSegue", sender: self)
@@ -468,10 +468,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let title = NSLocalizedString("deleteScheduleWarning", comment: "")
         let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
-        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: Fonts.navigationBar]), forKey: "attributedTitle")
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: Fonts.navigationBar!]), forKey: "attributedTitle")
         
         // Delete schedule action
-        let okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertActionStyle.default) {
+        let okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
             
             ScheduleVariables.shared.deleteSchedule(at: ScheduleVariables.shared.selectedScheduleIndex)
@@ -481,7 +481,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.dismiss(animated: true)
         }
         // Cancel reset action
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default) {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
         }
         // Add Actions

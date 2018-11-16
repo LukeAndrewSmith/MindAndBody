@@ -68,14 +68,18 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
         guard response.products.count > 0 else {return}
         self.products = response.products
         // Notify that products have been loaded
-        NotificationCenter.default.post(name: SubscriptionNotifiations.productsLoadedNotification, object: products)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: SubscriptionNotifiations.productsLoadedNotification, object: self.products)
+        }
     }
     // Error
     func request(_ request: SKRequest, didFailWithError error: Error) {
         if request is SKProductsRequest {
             print("Subscription Options Failed Loading: \(error.localizedDescription)")
             // TODO: TRY AND LOAD AGAIN
-            NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+            }
         }
     }
     
@@ -111,8 +115,9 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                     case .failure(let code, let error):
                         print("Receipt validation failed with code \(code), error \(error.localizedDescription)")
                         // Failed
-                        NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseFailedNotification, object: nil)
-
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseFailedNotification, object: nil)
+                        }
                     }
                 }
             case .failed:
@@ -121,15 +126,21 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                 if let transactionError = transaction.error as NSError?,
                     transactionError.code != SKError.paymentCancelled.rawValue {
                     // Timed out/ failed
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseFailedNotification, object: nil)
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseFailedNotification, object: nil)
+                    }
                     // Cancelled
                 } else {
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.dismissLoading, object: nil)
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: SubscriptionNotifiations.dismissLoading, object: nil)
+                    }
                 }
             case .restored:
                 queue.finishTransaction(transaction)
             case .deferred:
-                NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+                }
             }
         }
     }
@@ -143,44 +154,51 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     // Restore failed with error
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Swift.Error) {
         // Cancel transaction
-        NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+        }
     }
     
     // Restore transaction finished
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         print("Transaction Finished")
-        // Attempt to validate receipt for all subscription types
-        for i in 0..<ProductType.all.count {
-            receiptValidator.validate(ProductType.all[i].rawValue, sharedSecret: InAppManager.accountSecret) { result in
-                switch result {
-                case .success(let data):
-                    self.checkExpiryDateAction(response: data, action: 1, failedNotification: true)
-                case .failure(let code, let error):
-                    print("Receipt validation failed with code \(code), error \(error.localizedDescription)")
-                    // Failed
-                    // Call didChecksubscriptions, this calls a func which also checks the .isValid variable and present the subscription screen if not
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
-                    
-                }
-            }
-        }
+        validateLocalReceipt(action: 1)
     }
 
     // -------------------------------------------------------------
     // MARK:- Check Subscription
-    func checkIfUserHasSubscription() {
+    func validateLocalReceipt(action: Int) {
         // Attempt to validate receipt for all subscription types
+        print("Validating")
+        var failures = 0
         for i in 0..<ProductType.all.count {
             receiptValidator.validate(ProductType.all[i].rawValue, sharedSecret: InAppManager.accountSecret) { result in
                 switch result {
                 case .success(let data):
-                    self.checkExpiryDateAction(response: data, action: 0, failedNotification: false)
+                    print("Success")
+                    if action == 0 {
+                        self.checkExpiryDateAction(response: data, action: 0, failedNotification: false)
+                    } else if action == 1 {
+                        self.checkExpiryDateAction(response: data, action: 1, failedNotification: true)
+                    }
                 case .failure(let code, let error):
                     print("Receipt validation failed with code \(code), error \(error.localizedDescription)")
-                    // Failed
-                    // Call didChecksubscriptions, this calls a func which also checks the .isValid variable and present the subscription screen if not
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
-
+                    // Only indicate if all products failed
+                    failures += 1
+                    print(failures)
+                    if failures == self.products.count {
+                        if action == 0 {
+                            // Call didChecksubscriptions, this calls a func which also checks the .isValid variable and present the subscription screen if not
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                            }
+                        } else if action == 1 {
+                            // Indicate no subscription associated with apple id
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -210,16 +228,19 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                         // Valid subscription
                         if isValidExpiryDate(expiryDate: expiryDate) {
                             // Valid subscription found
-                            UserDefaults.standard.set(true, forKey: "userHasValidSubscription")
                             UserDefaults.standard.set(expiryDate, forKey: "userSubscriptionExpiryDate")
                             SubscriptionsCheck.shared.isValid = true
                             Loading.shared.shouldPresentLoading = false
                             // Broadcast success notifications
                             if action == 1 {
-                                NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseRestoreSuccessfulNotification, object: nil)
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: SubscriptionNotifiations.purchaseRestoreSuccessfulNotification, object: nil)
+                                }
                             }
-                            NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
-                            NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                                NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
+                            }
                             break
                         }
                     }
@@ -229,12 +250,15 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                 if !SubscriptionsCheck.shared.isValid {
                     // If no valid subscription found
                     if failedNotification {
-                        NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
+                        }
                     }
-                    UserDefaults.standard.set(false, forKey: "userHasValidSubscription")
                     SubscriptionsCheck.shared.isValid = false
                     Loading.shared.shouldPresentLoading = false
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
+                    }
                 }
             }
         }

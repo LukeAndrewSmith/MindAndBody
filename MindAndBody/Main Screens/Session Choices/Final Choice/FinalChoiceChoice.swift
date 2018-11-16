@@ -208,6 +208,7 @@ class FinalChoiceChoice: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // Select session
+        print(keys)
         let selectedSessionKey: String = sessionsArray[keys[indexPath.section]]![indexPath.row]
         SelectedSession.shared.selectedSession[2] = selectedSessionKey
         
