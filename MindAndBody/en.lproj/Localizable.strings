@@ -173,7 +173,7 @@
 "warmup" = "Warm-Up";
 "workout" = "Workout";
 "stretching" = "Stretching";
-"cardio" = "Cardio";
+"endurance" = "Endurance";
 "yoga" = "Yoga";
 "meditation" = "Meditation";
 
@@ -203,7 +203,6 @@
 "select" = "Select";
 
 "fullBody" = "Full Body";
-"cardio" = "Cardio";
 
 "movements" = "Movements";
 
@@ -613,7 +612,6 @@
 "generalC" = "General (Core)";
 "generalF" = "General (Full Body)";
 "generalU" = "General (Upper Body)";
-"cardio" = "Cardio";
 // Isometric
 "isometricL" = "Isometric (Legs)";
 "isometricC" = "Isometric (Push)";
@@ -3649,7 +3647,7 @@
 "threeMonthsTitle" = "3 Months";
 "twelveMonthsTitle" = "12 Months";
 "freeTrialTitle" = "1 month free trial offered!";
-"freeTrialExplanation" = "You can cancel the subscription at any time during the free trial from your Account Settings without being charged, so don't be afraid to give it a go!";
+"freeTrialExplanation" = "You can cancel the subscription at any time during the free trial from your Account Settings without being charged, don't be afraid to give it a go!";
 "extraInfoSub" = "Buying the subscription will grant you access to the app and all its features for the selected time frame. The subscription will automatically renew within 24 hours of the end of the selected time unless cancelled. You can manage your subscriptions in Account Settings. By purchasing the subscription through in-app subscription, you agree to the Apple App Store terms and conditions. By using the app, you agree to our Terms & Conditions and Privacy Policy, click the link below to learn more.";
 "termsAndPrivacyLink" = "Terms & Conditions and Privacy Policy";
 "perWeek" = " / Week";
@@ -3689,23 +3687,31 @@
 // Idea of App
 "ideaAim" = "Idea";
 //"infoTable1" = "The idea of Mind & Body is to provide a simple, sensible and effective approach to a healthy mind and body. It aims to do this through a weekly routine (schedule), and avoids potential monotony by giving choice as to how to achieve a goal on any given day (see next section). The app provides sessions for a number of activities:\n\nMind:\n• Meditation\n• Yoga\n\nBody:\n• Workouts (Gym/Bodyweight)\n• Cardio (HIIT/Bodyweight workouts)\n• Warm-up/Stretching sessions for workout/cardio\n• Stretching for flexibility\n• Yoga";
-"infoTable1" = "A simple, sensible, effective approach to a healthy mind and body.\nCreate a weekly schedule and achieve your goals through:\n• Meditation\n• Yoga\n• Workouts (Gym/Bodyweight)\n• Cardio (HIIT/Bodyweight workouts)\n• Stretching";
+"infoTable1" = "A simple, sensible, effective approach to a healthy mind and body.\nCreate and follow a weekly schedule, achieving your goals through:\n• Meditation\n• Yoga\n• Workouts (Gym/Bodyweight)\n• Cardio (HIIT/Bodyweight Workouts)\n• Stretching";
 
 
 //"Aim:\nDo your mind & body justice\nHow:\nProvide you the aid needed, leave you the responsibility required\nMethods:\nPlans, schedules, tracking, customisation";
 // Schedule
-"infoTable2" = "Get into a routine. The app can help you create weekly schedules in line with your goals, abilities and time (or you can create custom ones). The schedule can be split into a plan for each day, or a plan for the whole week (i.e have a number of sessions to be achieved whenever possible). The schedule presents several manners in which to work towards a goal, therefore allowing you to do so in the best way depending on your feeling (e.g Workout\n→ Gym/Bodyweight\n→ Classic/Circuit\n→ Full/Upper/Lower Body\n→ Short/Medium/Long). This allows you to enjoy the many benefits of a routine, whilst avoiding the potential monotony.\n";
+//"infoTable2" = "Get into a routine. The app can help you create weekly schedules in line with your goals, abilities and time (or you can create custom ones). The schedule can be split into a plan for each day, or a plan for the whole week (i.e have a number of sessions to be achieved whenever possible). The schedule presents several manners in which to work towards a goal, therefore allowing you to do so in the best way depending on your feeling (e.g Workout\n→ Gym/Bodyweight\n→ Classic/Circuit\n→ Full/Upper/Lower Body\n→ Short/Medium/Long). This allows you to enjoy the many benefits of a routine, whilst avoiding the potential monotony.\n";
+//"infoTable2" = "The app can help you create weekly schedules in line with your goals, abilities and time, or you can create custom ones. The schedule can be split into a plan for each day or for the whole week. The schedule presents several manners in which to work towards a goal, therefore allowing you to do so in the best way depending on your feeling (e.g Workout\n→ Gym/Bodyweight\n→ Classic/Circuit\n→ Full/Upper/Lower Body\n→ Short/Medium/Long). This allows you to enjoy the many benefits of a routine, whilst avoiding the potential monotony.\n";
+"infoTable2" = "Get help creating weekly schedules or create custom ones (schedule = daily or weekly plan).\nEnjoy the many benifits of a routine without the monotony by choosing how best to acheive each goal each time, e.g:\n→ Workout\n→ Gym/Bodyweight/Custom\n→ Classic/Circuit\n→ Full/Upper/Lower Body\n→ Short/Medium/Long.";
+
 
 //
 // Fitness
 "fitness" = "Fitness";
-"infoTable3" = "The app provides sets, reps and weight suggestions, demonstrations, explanations, timers and fully timed sessions (so you can avoid touching your phone). A wide variety of gym/bodyweight workouts (circuit and classic) and endurance sessions of different lengths, difficulties and aims means it has something for everyone. Warm-Up and stretching sessions are also presented to ensure optimum results.";
+//"infoTable3" = "The app provides sets, reps and weight suggestions, demonstrations, explanations, timers and fully timed sessions (so you can avoid touching your phone). A wide variety of gym/bodyweight workouts (circuit and classic) and endurance sessions of different lengths, difficulties and aims means it has something for everyone. Warm-Up and stretching sessions are also presented to ensure optimum results.";
+"infoTable3" = "Keep fit with a wide variety of gym/bodyweight workouts and endurance sessions of different lengths, difficulties and aims.\nGet suggestions for sets, reps and weight.\nGet help with demonstrations, explanations and timers.\nKeep a healthy body through warm-up and stretching session.\nYou can also create custom sessions.";
+
 // Yoga
-"infoTable4" = "The app has yoga sessions of varying difficulty that are split into three main categories: relaxing, neutral and stimulating. The sessions are logical and flow nicely, and can all be followed without touching the phone, using 'automatic yoga': you set your average breath length and let the app do the rest. Explanations and demonstrations are also given for all poses.";
+//"infoTable4" = "The app has yoga sessions of varying difficulty that are split into three main categories: relaxing, neutral and stimulating. The sessions are logical and flow nicely, and can all be followed without touching the phone, using 'automatic yoga': you set your average breath length and let the app do the rest. Explanations and demonstrations are also given for all poses.";
+"infoTable4" = "Practice yoga for all occassion through the apps 'Relaxing', 'Neutral' and 'Stimulating' practices.\nUnderstand the poses better through demonstration images and detailed explanations.\nFollow the practices without touching your phone using 'automatic yoga': you set your average breath length and let the app do the rest.\nYou can also create custom practices.";
+
 // Meditation
-"infoTable5" = "The app has a meditation timer in which you set duration, bells and background sounds. It also has 'guided' meditation. The guided meditation provides detailed written explanations, thereby putting the emphasis on independence in meditation. There is an introduction section and some other sections presenting various techniques to explore.";
+//"infoTable5" = "The app has a meditation timer in which you set duration, bells and background sounds. It also has 'guided' meditation. The guided meditation provides detailed written explanations, thereby putting the emphasis on independence in meditation. There is an introduction section and some other sections presenting various techniques to explore.";
+"infoTable5" = "Use an intuitive meditation timer in which you set duration, bells and background sounds.\nLearn more about meditation with a series of 'guided' sessions. The guided meditation provides detailed written explanations, thereby putting the emphasis on independence in meditation, the most important factor in actually benefitting from meditation and integrating it into your life.";
 // Tracking
-"infoTable6" = "Simple tracking will help you in keeping to your goals, and keeping you motivated. The app records how much you achieve of what you planned as a percentage and presents graphs to this effect.";
+"infoTable6" = "Simple tracking will help you stick to your goals and keep you motivated. The app records how much you achieve as a percentage of what you planned and presents this in graphs of varying time scales.\nThe idea is to only record the essential data, so that one quick look will give you all the information you need.";
 
 
 //
@@ -4267,7 +4273,7 @@
 
         // Schedule
 "schedule0T" = "Walkthrough";
-        "schedule0" = "A few important features are highlighted (e.g here the title) and explained.";
+        "schedule0" = "A few important features are highlighted and explained (the title is highlighted in the top bar).";
 "schedule1T" = "Current Schedule";
         "schedule1" = "Your current schedule, once made, is found on this screen.";
 "schedule2T" = "Schedules";

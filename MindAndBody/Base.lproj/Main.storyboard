@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -99,16 +98,6 @@
                                     <constraint firstAttribute="height" constant="44" id="Kl1-8H-nBg"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JtG-RC-auO">
-                                <rect key="frame" x="258" y="505" width="101" height="33"/>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
-                                <state key="normal" title="Subscriptions">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="subscriptionsTestAction:" destination="oDd-SZ-o1F" eventType="touchUpInside" id="r4V-ZK-4bs"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Re-ak-yPa">
                                 <rect key="frame" x="27" y="116.5" width="321" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -120,7 +109,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="JtG-RC-auO" secondAttribute="trailing" constant="16" id="2UF-lD-Nb2"/>
                             <constraint firstAttribute="trailing" secondItem="Uk6-xI-8tD" secondAttribute="trailing" id="3Se-J5-JNI"/>
                             <constraint firstAttribute="trailing" secondItem="UAO-fk-NJD" secondAttribute="trailing" id="3fY-kx-pWg"/>
                             <constraint firstItem="bzt-Zq-NOh" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="6iG-BJ-b9Y"/>
@@ -136,7 +124,6 @@
                             <constraint firstItem="UAO-fk-NJD" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" id="eoa-ps-WDo"/>
                             <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="oPE-Kh-Caj" secondAttribute="bottom" id="hvm-Og-oex"/>
                             <constraint firstItem="1Re-ak-yPa" firstAttribute="leading" secondItem="ANf-Xe-L7P" secondAttribute="leading" constant="27" id="jfm-2N-Miz"/>
-                            <constraint firstItem="g2u-Qj-5jU" firstAttribute="top" secondItem="JtG-RC-auO" secondAttribute="bottom" constant="16" id="ni0-EF-cK1"/>
                             <constraint firstItem="1Re-ak-yPa" firstAttribute="top" secondItem="UAO-fk-NJD" secondAttribute="bottom" constant="72" id="ouz-6D-Ubr"/>
                         </constraints>
                     </view>
@@ -3983,26 +3970,31 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fft-eb-zI0">
-                                <rect key="frame" x="0.0" y="200" width="375" height="396"/>
+                                <rect key="frame" x="0.0" y="200" width="375" height="550"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacingType="standard" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yK6-ZW-jWs">
-                                        <rect key="frame" x="16" y="24" width="343" height="364"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="yK6-ZW-jWs">
+                                        <rect key="frame" x="16" y="24" width="343" height="336"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 month free trial offered!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9l-m9-9QF">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="26.5"/>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="21"/>
-                                                <color key="textColor" red="0.99479166669999997" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtA-jm-eRY">
-                                                <rect key="frame" x="0.0" y="28" width="343" height="53"/>
-                                                <string key="text">You can cancel the subscription at any time during the free trial from your Account Settings without being charged, so don't be afraid to give it a go!</string>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VAg-fw-yoC">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="84"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 month free trial offered!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9l-m9-9QF">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="25.5"/>
+                                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="21"/>
+                                                        <color key="textColor" red="0.99607843137254903" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtA-jm-eRY">
+                                                        <rect key="frame" x="0.0" y="33.5" width="343" height="50.5"/>
+                                                        <string key="text">You can cancel the subscription at any time during the free trial from your Account Settings without being charged, so don't be afraid to give it a go!</string>
+                                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="14"/>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QNp-pn-cgu">
-                                                <rect key="frame" x="0.0" y="88" width="343" height="148"/>
+                                                <rect key="frame" x="0.0" y="100" width="343" height="148"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boo-gu-gRO">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="66"/>
@@ -4092,14 +4084,8 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Terms &amp; Conditions and Privacy Policy" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="f8Y-3J-ScZ">
-                                                <rect key="frame" x="0.0" y="253.5" width="240" height="54.5"/>
-                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="11"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="url"/>
-                                            </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYP-f9-7aj">
-                                                <rect key="frame" x="0.0" y="314.5" width="343" height="49.5"/>
+                                                <rect key="frame" x="0.0" y="264" width="343" height="72"/>
                                                 <string key="text">Buying the subscription will grant you access to the app and all its features for the selected time frame. The subscription will automatically renew within 24 hours of the end of the selected time unless cancelled. You can manage your subscriptions in Account Settings. By purchasing the subscription through in-app subscription, you agree to the Apple App Store terms and conditions. Visit our Terms of Use and Privacy Policy to learn more.</string>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="10"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4107,24 +4093,33 @@
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="E9l-m9-9QF" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="34Z-Ou-e5c"/>
+                                            <constraint firstAttribute="trailing" secondItem="VAg-fw-yoC" secondAttribute="trailing" id="7Kl-Mq-JTO"/>
                                             <constraint firstAttribute="trailing" secondItem="QNp-pn-cgu" secondAttribute="trailing" id="Yi5-vi-gKJ"/>
                                             <constraint firstItem="QNp-pn-cgu" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="eRe-zF-TeT"/>
+                                            <constraint firstItem="VAg-fw-yoC" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="hkY-vx-gKF"/>
                                             <constraint firstAttribute="trailing" secondItem="gYP-f9-7aj" secondAttribute="trailing" id="iu9-bz-fjN"/>
                                             <constraint firstItem="gYP-f9-7aj" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="l9W-1a-xPj"/>
-                                            <constraint firstItem="jtA-jm-eRY" firstAttribute="leading" secondItem="yK6-ZW-jWs" secondAttribute="leading" id="oRK-jc-h3W"/>
-                                            <constraint firstAttribute="trailing" secondItem="jtA-jm-eRY" secondAttribute="trailing" id="oiM-b2-pvs"/>
-                                            <constraint firstAttribute="trailing" secondItem="E9l-m9-9QF" secondAttribute="trailing" id="qlb-Zr-Cur"/>
                                         </constraints>
                                     </stackView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Terms &amp; Conditions and Privacy Policy" translatesAutoresizingMaskIntoConstraints="NO" id="f8Y-3J-ScZ">
+                                        <rect key="frame" x="16" y="360" width="343" height="24.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24.5" id="AS1-qk-oEx"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="11"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="url"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="yK6-ZW-jWs" firstAttribute="leading" secondItem="Fft-eb-zI0" secondAttribute="leading" constant="16" id="8Zr-LQ-sfQ"/>
-                                    <constraint firstAttribute="height" constant="396" id="FXq-uM-q78"/>
-                                    <constraint firstAttribute="bottom" secondItem="yK6-ZW-jWs" secondAttribute="bottom" constant="8" id="QpR-Ag-AwL"/>
+                                    <constraint firstAttribute="height" constant="550" id="FXq-uM-q78"/>
                                     <constraint firstItem="yK6-ZW-jWs" firstAttribute="top" secondItem="Fft-eb-zI0" secondAttribute="top" constant="24" id="XUB-VM-9OS"/>
+                                    <constraint firstItem="f8Y-3J-ScZ" firstAttribute="top" secondItem="yK6-ZW-jWs" secondAttribute="bottom" id="c7d-EK-53L"/>
+                                    <constraint firstItem="f8Y-3J-ScZ" firstAttribute="width" secondItem="yK6-ZW-jWs" secondAttribute="width" id="k21-p8-mqs"/>
                                     <constraint firstAttribute="trailing" secondItem="yK6-ZW-jWs" secondAttribute="trailing" constant="16" id="oWb-59-O5R"/>
+                                    <constraint firstItem="f8Y-3J-ScZ" firstAttribute="leading" secondItem="Fft-eb-zI0" secondAttribute="leading" constant="16" id="yfh-aa-r2d"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -4155,7 +4150,9 @@
                         <outlet property="linkView" destination="f8Y-3J-ScZ" id="dkd-ZN-Joe"/>
                         <outlet property="subscriptionButton" destination="hPo-H9-2JR" id="FKb-o7-gF9"/>
                         <outlet property="subscriptionChoiceView" destination="Fft-eb-zI0" id="mAg-Jc-AZX"/>
+                        <outlet property="subscriptionChoiceViewHeight" destination="FXq-uM-q78" id="HOb-LL-9cb"/>
                         <outlet property="subscriptionChoiceViewTop" destination="tSG-Jl-bFZ" id="UEg-bp-h2I"/>
+                        <outlet property="subscriptionsViewStack" destination="yK6-ZW-jWs" id="I2S-Jh-oHK"/>
                         <outlet property="threeMonthButton" destination="KVb-R4-4yD" id="vDX-38-Rpg"/>
                         <outlet property="threeMonthsTitle" destination="mH9-vz-dti" id="enz-M3-dwr"/>
                         <outlet property="threeMonthsTotal" destination="10Y-WM-odw" id="WES-Lq-OKS"/>

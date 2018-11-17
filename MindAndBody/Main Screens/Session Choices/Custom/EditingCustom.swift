@@ -119,7 +119,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
         switch SelectedSession.shared.selectedSession[0] {
         case "warmup", "workout":
             newMovementButton.setTitle(NSLocalizedString("addMovement", comment: ""), for: .normal)
-        case "cardio":
+        case "endurance":
             newMovementButton.setTitle(NSLocalizedString("addInterval", comment: ""), for: .normal)
         case "stretching":
             newMovementButton.setTitle(NSLocalizedString("addStretch", comment: ""), for: .normal)
@@ -252,7 +252,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 } else {
                     return 2
                 }
-            case "cardio", "stretching", "yoga":
+            case "endurance", "stretching", "yoga":
                 return 1
             default:
                 break
@@ -287,7 +287,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         return repsPickerArray.count
                     }
                 }
-            case "cardio":
+            case "endurance":
                 return timePickerArray.count
             case "stretching", "yoga":
                 return breathsPickerArray.count
@@ -391,7 +391,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     }
                 }
             // Cardio
-            case "cardio":
+            case "endurance":
                 //
                 let timeLabel = UILabel()
                 timeLabel.text = String(timePickerArray[row])
@@ -448,7 +448,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         return (setsRepsPicker.frame.size.width / 3)
                     }
                 }
-            case "cardio", "stretching", "yoga":
+            case "endurance", "stretching", "yoga":
                 return setsRepsPicker.frame.size.width
             default: break
             }
@@ -672,7 +672,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     cell.detailTextLabel?.text = sets + " x " + reps
                 }
             // Cardio
-            case "cardio":
+            case "endurance":
                 let timeInt = (customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]! as! [Int])[indexPath.row]
                 let time = String(timeInt)
                 cell.detailTextLabel?.text = time + NSLocalizedString("s", comment: "")
@@ -842,7 +842,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     setsRepsPicker.selectRow(repsIndex!, inComponent: 1, animated: true)
                 }
             // Cardio
-            case "cardio":
+            case "endurance":
                 self.setsRepsPicker.frame = CGRect(x: 0, y: 0, width: self.setsRepsView.frame.size.width, height: 147)
                 self.setsIndicatorLabel.frame = CGRect(x: (self.setsRepsPicker.frame.size.width / 2) * 1.13, y: (self.setsRepsPicker.frame.size.height / 2) - 15, width: 70, height: 30)
                 self.setsIndicatorLabel.text = NSLocalizedString("s", comment: "")
@@ -900,7 +900,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["reps"]!.append("1")
                 }
             // Cardio
-            case "cardio":
+            case "endurance":
                 customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]!.append(30)
             // Stretching/Yoga
             case "stretching", "yoga":
@@ -1077,7 +1077,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["reps"]!.remove(at: indexPath.row)
                     }
                 // Cardio/Stretching/Yoga
-                case "cardio", "stretching", "yoga":
+                case "endurance", "stretching", "yoga":
                     customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]!.remove(at: indexPath.row)
                 default:
                     break
@@ -1088,7 +1088,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 UserDefaults.standard.set(customSessionsArray, forKey: "customSessions")
                 //
                 switch SelectedSession.shared.selectedSession[0] {
-                case "warmup", "cardio", "stretching", "yoga":
+                case "warmup", "endurance", "stretching", "yoga":
                     tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
                 case "workout":
                     if customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]!.count == 2 && customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]![1] as! Int == -1 {
@@ -1313,7 +1313,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["reps"]![selectedRow] = repsPickerArray[setsRepsPicker.selectedRow(inComponent: 1)]
                 }
             // Cardio
-            case "cardio":
+            case "endurance":
                 customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]![selectedRow] = timePickerArray[setsRepsPicker.selectedRow(inComponent: 0)]
             // Stretching/Yoga - Breaths
             case "stretching", "yoga":
@@ -1462,7 +1462,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["reps"]!.swapAt((indexPath?.row)!, (Path.initialIndexPath?.row)!)
                     }
                 // Cardio/Stretching/Yoga
-                case "cardio", "stretching", "yoga":
+                case "endurance", "stretching", "yoga":
                     customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["movements"]!.swapAt((indexPath?.row)!, (Path.initialIndexPath?.row)!)
                     customSessionsArray[SelectedSession.shared.selectedSession[0]]![selectedSession]["setsBreathsTime"]!.swapAt((indexPath?.row)!, (Path.initialIndexPath?.row)!)
                 default:

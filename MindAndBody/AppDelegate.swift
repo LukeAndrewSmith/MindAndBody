@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Register Defaults --------------------------------------------------------------------------------
         // Subscriptions
-        UserDefaults.standard.register(defaults: ["userSubscriptionExpiryDate" : ""])
+        UserDefaults.standard.register(defaults: ["userSubscriptionExpiryDate" : "0"])
         // Settings
         UserDefaults.standard.register(defaults: ["userSettings" : Register.defaultSettings])
 
@@ -105,7 +105,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InAppManager.shared.loadProducts()
         //
         // Check if the user has a valid subscription
-        SubscriptionsCheck.shared.checkSubscription()
+        Loading.shared.shouldPresentLoading = false
+        SubscriptionsCheck.shared.isValid = true
+//        SubscriptionsCheck.shared.checkSubscription()
 
         NSSetUncaughtExceptionHandler { exception in
             print(exception)

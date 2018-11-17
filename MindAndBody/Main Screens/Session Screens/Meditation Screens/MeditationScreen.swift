@@ -82,8 +82,12 @@ class MeditationScreen: UIViewController {
         
         //
         // BackgroundImage
-        if let backgroundSound = meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as? Int, backgroundSound != -1 {
-            addBackgroundImage(withBlur: false, fullScreen: true, image: MeditationSounds.shared.backgroundSoundsArray[backgroundSound])
+        if selectedPreset != -1 {
+            if let backgroundSound = meditationArray[selectedPreset]["BackgroundSound"]?[0][0] as? Int, backgroundSound != -1 {
+                addBackgroundImage(withBlur: false, fullScreen: true, image: MeditationSounds.shared.backgroundSoundsArray[backgroundSound])
+            } else {
+                addBackgroundImage(withBlur: true, fullScreen: true, image: "")
+            }
         } else {
             addBackgroundImage(withBlur: true, fullScreen: true, image: "")
         }

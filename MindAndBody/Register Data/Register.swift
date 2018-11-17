@@ -45,7 +45,7 @@ enum Register {
     static let registerWalkthroughDictionary: [String: Bool] =
         [
             // Session -- Workout (if workout walkthrough seen first, this is good enough for all other session screens, so sets session2 to true as well)
-            "Sessions": false,
+            "Session": false,
             // Session 2 -- Circuit, Stratching, Yoga - Workout -- (session2 not quite good enough for sessions, and workout screen has extra important note on weights not seen on other screens)
             "Session2": false,
             // Schedule
@@ -54,8 +54,6 @@ enum Register {
             "Settings": false,
             // Automatic Yoga
             "AutomaticYoga": false,
-            // Custom Session (i.e on sessions screen, first choice is where you access custom workouts etc)
-            "CustomSessions": false,
     ]
     
     // --------------------------------------------------------
@@ -92,7 +90,7 @@ enum Register {
             // [name] - string, [movements] - int, [rounds] - int, [reps] - string
             // Cardio -
             // [name] - string, [movements] - int, [time/distance] - int
-            "cardio": [],
+            "endurance": [],
             // Stretching -
             // [name] - string, [stretches] - int, [breaths] - int
             "stretching": [],

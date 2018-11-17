@@ -2838,15 +2838,6 @@
 			path = frontLegSwings;
 			sourceTree = "<group>";
 		};
-		074EF88E215ADEAC00266E5B /* Session Choice */ = {
-			isa = PBXGroup;
-			children = (
-				074EF88F215ADEBD00266E5B /* SessionChoice.swift */,
-				073D3822215B6DB400D98134 /* SessionChoiceHelpers.swift */,
-			);
-			path = "Session Choice";
-			sourceTree = "<group>";
-		};
 		07520BB51E9FB80C00FA682E /* Meditation Timer */ = {
 			isa = PBXGroup;
 			children = (
@@ -2879,7 +2870,6 @@
 				07F8EDD81FA5DB4900C452F4 /* Profile Editing */,
 				07D5C3D31F9E31B20038F143 /* Schedule Creation */,
 				07E1D4DD1FB0DDE100B53B85 /* Schedule Editing */,
-				074EF88E215ADEAC00266E5B /* Session Choice */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -4430,6 +4420,8 @@
 		07C45C0221383D200038018A /* Session Choices */ = {
 			isa = PBXGroup;
 			children = (
+				074EF88F215ADEBD00266E5B /* SessionChoice.swift */,
+				073D3822215B6DB400D98134 /* SessionChoiceHelpers.swift */,
 				0729F6721F8C118C00C9F810 /* Custom */,
 				076A9D0E1E23B20300DC8F42 /* Meditation */,
 				076A9D0D1E23B1FF00DC8F42 /* Final Choice */,

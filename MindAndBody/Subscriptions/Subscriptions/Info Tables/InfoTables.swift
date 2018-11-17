@@ -190,21 +190,51 @@ class InfoTables {
     
     // Setup explanation cell
     func setupExplanationCellBullets(cell: UITableViewCell, explanation: String, infoWidth: CGFloat, cellHeight: CGFloat) {
-        //
+
         cell.backgroundColor = Colors.light
         cell.selectionStyle = .none
+        
+//        let bulletPointFont: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font : Fonts.lessonText as Any]
+        let bulletPointFont: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font : UIFont(name: "SFUIDisplay-light", size: 19) as Any]
+        let paragraphStyle: NSMutableParagraphStyle
+        paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        paragraphStyle.tabStops = [NSTextTab(textAlignment: .left, location: 16, options: [:])]
+        paragraphStyle.defaultTabInterval = 16
+        paragraphStyle.firstLineHeadIndent = 0
+        paragraphStyle.headIndent = 16
+        
+        let explanationString = NSMutableAttributedString(string: "")
+        let explanationPoints = explanation.components(separatedBy: .newlines)
+        for string in explanationPoints {
+            let bulletPoint: String = {
+                if string.first == "→" {
+                    return "   "
+                } else {
+                    return "\u{2022}"
+                }
+            }()
+            let formattedString: String = " \(bulletPoint) \(string)\n"
+            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: formattedString)
+            
+            attributedString.addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
+            
+            explanationString.append(attributedString)
+        }
+
+        explanationString.addAttributes(bulletPointFont, range: NSMakeRange(0, explanationString.length))
+        explanationString.append(NSMutableAttributedString(string: "\n"))
         
         let explanationLabel = UILabel()
         explanationLabel.font = UIFont(name: "SFUIDisplay-light", size: 19)
         explanationLabel.numberOfLines = 0
         explanationLabel.lineBreakMode = .byWordWrapping
         explanationLabel.frame.size = CGSize(width: infoWidth - 32, height: 0)
-        explanationLabel.text = explanation
+        explanationLabel.attributedText = explanationString
         explanationLabel.sizeToFit()
         
         //
         let infoScroll = UIScrollView()
-        infoScroll.frame = CGRect(x: 16, y: 8, width: infoWidth - 32, height: cellHeight - 16)
+        infoScroll.frame = CGRect(x: 0, y: 8, width: infoWidth - 32, height: cellHeight - 16)
         infoScroll.backgroundColor = Colors.light
         infoScroll.addSubview(explanationLabel)
         infoScroll.contentSize = CGSize(width: infoWidth - 32, height: explanationLabel.bounds.height)
@@ -353,7 +383,8 @@ class InfoTable1: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = UITableViewCell()
-            InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable2", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+            InfoTables.shared.setupExplanationCellBullets(cell: cell, explanation: NSLocalizedString("infoTable2", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+//            InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable2", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
             return cell
         default:
             let cell = UITableViewCell()
@@ -421,7 +452,8 @@ class InfoTable2: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = UITableViewCell()
-            InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable3", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+            InfoTables.shared.setupExplanationCellBullets(cell: cell, explanation: NSLocalizedString("infoTable3", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+//            InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable3", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
             return cell
         default:
             let cell = UITableViewCell()
@@ -489,7 +521,8 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = UITableViewCell()
-            InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable4", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+            InfoTables.shared.setupExplanationCellBullets(cell: cell, explanation: NSLocalizedString("infoTable4", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+//            InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable4", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
             return cell
         default:
             let cell = UITableViewCell()
@@ -555,7 +588,8 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 return cell
             case 3:
                 let cell = UITableViewCell()
-                InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable5", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+                InfoTables.shared.setupExplanationCellBullets(cell: cell, explanation: NSLocalizedString("infoTable5", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+//                InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable5", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
                 return cell
             default:
                 let cell = UITableViewCell()
@@ -625,7 +659,8 @@ class InfoTable3: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 return cell
             case 3:
                 let cell = UITableViewCell()
-                InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable6", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+                InfoTables.shared.setupExplanationCellBullets(cell: cell, explanation: NSLocalizedString("infoTable6", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
+//                InfoTables.shared.setupExplanationCell(cell: cell, explanation: NSLocalizedString("infoTable6", comment: ""), infoWidth: infoTable.bounds.width, cellHeight: explanationRowHeight)
                 return cell
             default:
                 let cell = UITableViewCell()

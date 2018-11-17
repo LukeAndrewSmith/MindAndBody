@@ -88,8 +88,9 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
 //        var trackingDictionary = UserDefaults.standard.object(forKey: "trackingDictionary") as! [String: Int]
 //
 //        trackingDictionary = [:]
-//        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().setToMidnightUTC())!
-//        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
+////        var firstMondayLastMonth = calendar.date(byAdding: .month, value: -1, to: Date().setToMidnightUTC())!
+////        firstMondayLastMonth = firstMondayLastMonth.firstMondayInMonth
+//        let firstMondayLastMonth = Date().firstMondayInMonth.setToMidnightUTC()
 ////        let firstMondayLastMonth = Date().firstMondayInMonth
 //        //
 //        trackingDictionary.updateValue(100, forKey: TrackingHelpers.shared.dateToString(date: firstMondayLastMonth))

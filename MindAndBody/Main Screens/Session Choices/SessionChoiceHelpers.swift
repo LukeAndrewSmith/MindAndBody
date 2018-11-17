@@ -315,23 +315,33 @@ extension SessionChoice {
                         selectedComponent = 0
                         selectWarmup()
                         performScheduleSegue()
-                        // Practice
+                    // Session
                     } else if row == 1 {
                         // Select workout
-                        SelectedSession.shared.selectedSession[0] = "cardio"
+                        SelectedSession.shared.selectedSession[0] = "endurance"
                         performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                    
+                    } else if row == 2 {
+                        selectedComponent = 2
+                        selectStretching()
+                        performScheduleSegue()
                     }
                     // If custom warmup/stretching
                 } else if settings["CustomWarmupStretching"]![0] == 1 {
                     // Warmup
                     if row == 0 {
-                        // Select workout
+                        // Select warmup
                         SelectedSession.shared.selectedSession[0] = "warmup"
                         performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
-                        // Practice
+                    // Session
                     } else if row == 1 {
                         // Select workout
-                        SelectedSession.shared.selectedSession[0] = "cardio"
+                        SelectedSession.shared.selectedSession[0] = "endurance"
+                        performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
+                    // Stretching
+                    } else if row == 2 {
+                        // Select stretching
+                        SelectedSession.shared.selectedSession[0] = "stretching"
                         performSegue(withIdentifier: "scheduleSegueCustom", sender: self)
                     }
                 }
@@ -518,7 +528,7 @@ extension SessionChoice {
             selectedWarmup.append("stretching")
         // Endurance
         case Groups.endurance:
-            selectedWarmup.append("cardio")
+            selectedWarmup.append("endurance")
         default: break
         }
         
@@ -549,7 +559,7 @@ extension SessionChoice {
             selectedSession.append(ScheduleVariables.shared.indicator) // relaxing, neutral, stimulating
         // Endurance
         case Groups.endurance:
-            selectedSession.append("cardio")
+            selectedSession.append("endurance")
             selectedSession.append(ScheduleVariables.shared.indicator) // hiit or bodyweight
         // Flexibility
         case Groups.flexibility:
@@ -586,7 +596,7 @@ extension SessionChoice {
             ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["yoga"]!]
         // Endurance
         case Groups.endurance:
-            // HIIT is not indexed through difficulty, but rather two levels of length (session and interval)
+            // HIIT is not indexed through difficulty, but rather two levels of length (session and interval) which have already been set by updateSelectedChoice
             if ScheduleVariables.shared.indicator == "hiit" {
                 break
             } else {

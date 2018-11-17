@@ -11,6 +11,7 @@ import Foundation
 extension sessionData {
 
     static let indexArray3 = ["easy", "average", "hard"]
+    static let indexArray3Endurance = ["short", "medium", "long"]
     static let indexArray1 = ["average"]
     
     // MARK:- Sorted Sessions for Schedule

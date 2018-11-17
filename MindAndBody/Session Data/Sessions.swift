@@ -31,7 +31,7 @@ class sessionData {
     static var sessions: [String: [String: [String: [[String: Any]]]]] =
         [
             "warmup": ["workout": sessionData.WaW,
-                       "cardio": sessionData.WaE, // E = endurance
+                       "endurance": sessionData.WaE, // E = endurance
                        "stretching": sessionData.WaF], // F = flexibility
             "workout": ["classicGymFull": sessionData.WoCsGF,
                         "classicGymUpper": sessionData.WoCsGU,
@@ -46,7 +46,7 @@ class sessionData {
                         "circuitBodyweightUpper": sessionData.WoCcBU,
                         "circuitBodyweightLower": sessionData.WoCcBL,
             ],
-            "cardio": ["hiit": sessionData.CH,
+            "endurance": ["hiit": sessionData.CH,
                        "bodyweight": sessionData.CB,],
             "stretching": ["general": sessionData.SG,
                            "postWorkout": sessionData.SPw,

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class SubscriptionScreen: UIViewController {
+class SubscriptionScreen: UIViewController, UITextViewDelegate {
     
     // Outlets
     @IBOutlet weak var titleImage: UIImageView!
@@ -26,7 +26,10 @@ class SubscriptionScreen: UIViewController {
     let subscriptionChoiceBackground = UIButton()
     @IBOutlet weak var subscriptionChoiceViewTop: NSLayoutConstraint!
     @IBOutlet weak var subscriptionChoiceView: UIView!
-
+    @IBOutlet weak var subscriptionChoiceViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var subscriptionsViewStack: UIStackView!
+    
     @IBOutlet weak var freeTrial: UILabel!
     @IBOutlet weak var freeTrialExplanation: UILabel!
     
@@ -45,6 +48,8 @@ class SubscriptionScreen: UIViewController {
     
     var loadingView = UIView()
     var didSetup = false
+    
+    let url = URL(string: "https://mind-and-body.info")!
 
     // -------------------------------------------------------------
     // MARK:
@@ -141,12 +146,12 @@ class SubscriptionScreen: UIViewController {
         
         freeTrialExplanation.text = NSLocalizedString("freeTrialExplanation", comment: "")
         freeTrialExplanation.font = UIFont(name: "SFUIDisplay-regular", size: 15)
-        freeTrialExplanation.textColor = UIColor.lightGray
+        freeTrialExplanation.textColor = Colors.light
         
         // Three Months ------------------------------
         threeMonthsView.backgroundColor = Colors.dark
         threeMonthsView.layer.borderColor = Colors.darkGray.cgColor
-        threeMonthsView.layer.borderWidth = 1
+        threeMonthsView.layer.borderWidth = 2
         threeMonthsView.layer.cornerRadius = 4
         threeMonthsView.addShadow()
         threeMonthsView.layer.shadowColor = UIColor.black.cgColor
@@ -164,7 +169,7 @@ class SubscriptionScreen: UIViewController {
         // Twelve Months ------------------------------
         twelveMonthsView.backgroundColor = Colors.dark
         twelveMonthsView.layer.borderColor = Colors.green.cgColor
-        twelveMonthsView.layer.borderWidth = 1
+        twelveMonthsView.layer.borderWidth = 2
         twelveMonthsView.layer.cornerRadius = 4
         twelveMonthsView.addShadow()
         twelveMonthsView.layer.shadowColor = UIColor.black.cgColor
@@ -185,22 +190,38 @@ class SubscriptionScreen: UIViewController {
         extraInfoLabel.textColor = Colors.darkGray
         
         // Link ---------------------
-        let attributedString = NSMutableAttributedString(string: NSLocalizedString("termsAndPrivacyLink", comment: ""))
-        let url = URL(string: "https://mind-and-body.info")!
-        attributedString.setAttributes([.link: url], range: NSMakeRange(0, attributedString.length))
-        attributedString.addAttribute(.foregroundColor, value: Colors.light , range: NSMakeRange(0, attributedString.length))
-        linkView.attributedText = attributedString
-        linkView.textColor = Colors.light
-        linkView.backgroundColor = Colors.light
-        linkView.linkTextAttributes = [
+        let linkAttributes = [
+            .link: url,
+            .font: UIFont(name: "SFUIDisplay-regular", size: 11)!,
             .foregroundColor: Colors.light,
             .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
+        ] as [NSAttributedString.Key : Any]
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("termsAndPrivacyLink", comment: ""))
+        let count = NSLocalizedString("termsAndPrivacyLink", comment: "").count
+        attributedString.addAttribute(.foregroundColor, value: Colors.light , range: NSMakeRange(0, count))
+        attributedString.setAttributes(linkAttributes, range: NSMakeRange(0, count))
+        linkView.attributedText = attributedString
+        linkView.isEditable = false
+        linkView.dataDetectorTypes = .link
+        linkView.delegate = self
         
+        // Height -------------------------
+//        var totalHeight = freeTrial.bounds.height + freeTrialExplanation.bounds.height + threeMonthsView.bounds.height
+//        totalHeight += twelveMonthsView.bounds.height + extraInfoLabel.bounds.height + linkView.bounds.height + (24 + 8)
+        subscriptionsViewStack.layoutIfNeeded()
+        subscriptionChoiceViewHeight.constant = 24 + subscriptionsViewStack.bounds.height + linkView.bounds.height + 8
+            
         // Background Button -------------------------
         subscriptionChoiceBackground.frame = UIScreen.main.bounds
         subscriptionChoiceBackground.backgroundColor = Colors.dark.withAlphaComponent(0)
         subscriptionChoiceBackground.addTarget(self, action: #selector(cancelSubscriptionChoice), for: .touchUpInside)
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if (URL == url) {
+            UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+        }
+        return false
     }
     
     // -------------------------------------------------------------

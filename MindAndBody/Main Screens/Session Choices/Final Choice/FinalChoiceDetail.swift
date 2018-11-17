@@ -36,7 +36,7 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
     let navigationBarTitles: [String: String] = [
         "warmup": "warmup",
         "workout": "workout",
-        "cardio": "cardio",
+        "endurance": "endurance",
         "stretching": "stretching",
         "yoga": "yoga"]
     
@@ -244,7 +244,7 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
                 cell.imageView?.tag = indexPath.row
             }
             
-        case "cardio":
+        case "endurance":
             // Bodyweight workouts for cardio are stored in cardio in sessions, but the movements are not duplicated into cardio in movements, therefore we need to access the workouts movements array
             if SelectedSession.shared.selectedSession[1] == "bodyweight" {
                 // Movement key
@@ -359,7 +359,7 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
         } else {
             switch SelectedSession.shared.selectedSession[0] {
             // Warmup, Cardio, Stretching, Yoga
-            case "warmup", "cardio", "stretching", "yoga":
+            case "warmup", "endurance", "stretching", "yoga":
                 // Cardio - Bodyweight workout
                 if SelectedSession.shared.selectedSession[1] == "bodyweight" {
                     return sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int
@@ -405,7 +405,7 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
             }
             
         // Cardio, Yoga
-        case "cardio", "yoga":
+        case "endurance", "yoga":
             if SelectedSession.shared.selectedSession[1] == "bodyweight" {
                 return NSLocalizedString("round", comment: "") + String(section + 1)  + NSLocalizedString("of", comment: "") + String(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]![0]["rounds"] as! Int)
             } else {
@@ -549,7 +549,7 @@ class FinalChoiceDetail: UIViewController, UITableViewDelegate, UITableViewDataS
                 performSegue(withIdentifier: "sessionSegue", sender: self)
             }
         // Cardio
-        case "cardio":
+        case "endurance":
             // Bodyweight circuit workout
             if SelectedSession.shared.selectedSession[1] == "bodyweight" {
                 // Timed Session off

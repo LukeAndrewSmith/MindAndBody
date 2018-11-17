@@ -125,11 +125,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     //
     var walkthroughBackgroundColor = UIColor()
     var walkthroughTextColor = UIColor()
-
-    // MARK: TEST, TO REMOVE
-    @IBAction func subscriptionsTestAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "SubscriptionsSegue", sender: self)
-    }
     
     // -----------------------------------------------------------------------------------------------
     //
@@ -206,9 +201,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         
         // Check if alert reminding to update profile (Once a month) should be presented
         UpdateProfile.shared.checkUpdateProfile()
-        
-        let calendar = Calendar.current
-        ScheduleVariables.shared.lastDayOpened = 2
     }
     
     override func viewDidAppear(_ animated: Bool) {

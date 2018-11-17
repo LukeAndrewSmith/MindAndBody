@@ -132,7 +132,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             
             //
             // Cardio bodyweight workouts uses this screen, but accesses movements from the workout section, so this switch is necessary but ok, as all the session information has just been transferred to temporary arrays
-            if SelectedSession.shared.selectedSession[0] == "cardio" {
+            if SelectedSession.shared.selectedSession[0] == "endurance" {
                 SelectedSession.shared.selectedSession[0] = "workout"
             }
         }

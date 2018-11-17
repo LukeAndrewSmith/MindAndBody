@@ -18,7 +18,7 @@ class FinalChoiceChoice: UIViewController {
     let navigationBarTitles: [String: String] = [
         "warmup": "warmup",
         "workout": "workout",
-        "cardio": "cardio",
+        "endurance": "endurance",
         "stretching": "stretching",
         "yoga": "yoga"]
     
@@ -107,7 +107,7 @@ class FinalChoiceChoice: UIViewController {
         SelectedSession.shared.selectedSession[2] = selectedSessionKey
         
         // Cardio Type
-        if SelectedSession.shared.selectedSession[0] == "cardio" {
+        if SelectedSession.shared.selectedSession[0] == "endurance" {
             cardioType = indexPath.section
         }
 
@@ -148,16 +148,20 @@ class FinalChoiceChoice: UIViewController {
         // If only on section => 1 difficulty which is indexed by "average"
             // see 'Session Data' -> 'SortedSessionsSchedule'
         if numberOfSections == 3 {
-            keys = sessionData.indexArray3
+            if SelectedSession.shared.selectedSession[0] == "endurance" {
+                keys = sessionData.indexArray3Endurance
+            } else {
+                keys = sessionData.indexArray3
+            }
         } else if numberOfSections == 1 {
             keys = sessionData.indexArray1
         }
         
-        // If cardio, uses workout images, so need to change for cardio
+        // If cardio, uses workout images, so need selectedSession0 to indicate this
         var selectedSession0 = SelectedSession.shared.selectedSession[0]
-        // Only weights if gym workout
-        if SelectedSession.shared.selectedSession[0] == "cardio" && SelectedSession.shared.selectedSession[0].contains("Gym") {
+        if SelectedSession.shared.selectedSession[0] == "endurance" && SelectedSession.shared.selectedSession[1].contains("bodyweight") {
             selectedSession0 = "workout"
+            keys = sessionData.indexArray3
         }
         
         

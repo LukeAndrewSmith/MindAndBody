@@ -111,7 +111,7 @@ extension sessionData {
                     // Equipment (Bench/Step)
                     ["bulgarianSplitSquat", "boxJump", "hipThrusts", "stepUp"]
             ],
-            "cardio":
+            "endurance":
                 [
                     ["highIntensity", "lowIntensity"],
                     // Running
@@ -1621,7 +1621,7 @@ extension sessionData {
                 ]
             ],
             // MARK: Cardio
-            "cardio": [
+            "endurance": [
                 // All
                 "highIntensity":
                     [

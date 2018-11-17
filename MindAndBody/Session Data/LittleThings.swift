@@ -18,7 +18,7 @@ extension sessionData {
     static let tableViewSectionArrays: [String: [String]] = [
             // Warmup
             "warmup": [
-                    "cardio",
+                    "endurance",
                     "jointRotation",
                     "foamRoll",
                     "glutes",
@@ -63,7 +63,7 @@ extension sessionData {
                     "generalC",
                     "generalF",
                     "generalU",
-                    "cardio",
+                    "endurance",
                     // Isometric
                     "isometricL",
                     "isometricU", //!!!!!!!!!
@@ -73,7 +73,7 @@ extension sessionData {
                     "equipmentBe"
             ],
             // Cardio
-            "cardio": [
+            "endurance": [
                     "intensity",
                     "running",
                     "biking",
@@ -81,7 +81,7 @@ extension sessionData {
             ],
             // Stretching
             "stretching": [
-                    "cardio",
+                    "endurance",
                     "jointRotation",
                     "foamRoll",
                     "backStretch",
@@ -112,7 +112,7 @@ extension sessionData {
             // Warmup
             "warmup": [
                 "workout": "workout",
-                "cardio": "cardio",
+                "endurance": "endurance",
                 "stretching": "stretchingYoga2"],
             // Workout
             "workout": [
@@ -134,7 +134,7 @@ extension sessionData {
                 "circuitBodyweightLower": "lowerBody"
             ],
             // Cardio
-            "cardio": [
+            "endurance": [
                 "bodyweight": "bodyweightCardio2",
                 "hiit": "HIIT",
                 "rowing": "rowing",
@@ -158,7 +158,7 @@ extension sessionData {
             // Warmup
             "warmup": [
                 "workout": ["fullBody", "upperBody", "lowerBody"],
-                "cardio": [""],
+                "endurance": [""],
                 "stretching": [""]],
             // Workout
             "workout": [
@@ -180,7 +180,7 @@ extension sessionData {
                 "circuitBodyweightLower": ["level1", "level2", "level3"]
             ],
             // Cardio
-            "cardio": [
+            "endurance": [
                 "bodyweight": ["level1", "level2", "level3"],
                 "hiit": ["shortSession", "mediumSession", "longSession"],
                 "rowing": [""],

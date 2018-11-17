@@ -29,7 +29,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
     let navigationBarTitles: [String: String] = [
         "warmup": "customWarmup",
         "workout": "customWorkout",
-        "cardio": "customHIITCardioSession",
+        "endurance": "customHIITCardioSession",
         "stretching": "customStretchingSession",
         "yoga": "customYogaPractice"
     ]
@@ -183,7 +183,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
                     performSegue(withIdentifier: "customSessionSegue", sender: self)
                 }
             // Cardio
-            case "cardio":
+            case "endurance":
                 performSegue(withIdentifier: "customSessionSegueCardio", sender: self)
             // Stretching
             case "stretching":
@@ -340,7 +340,7 @@ class CustomChoice: UIViewController, UITableViewDelegate, UITableViewDataSource
             // Warmup, Workout,
             case "warmup", "workout":
                 customSessionsArray[SelectedSession.shared.selectedSession[0]]!.append(Register.emptySessionFour)
-            case "cardio", "stretching", "yoga":
+            case "endurance", "stretching", "yoga":
                 customSessionsArray[SelectedSession.shared.selectedSession[0]]!.append(Register.emptySessionThree)
             //
             default:
