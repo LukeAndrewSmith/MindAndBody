@@ -305,7 +305,7 @@ class EditingCustom: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let roundLabel = UILabel()
             roundLabel.text = String(roundsPickerArray[row])
             if row == 0 {
-                roundLabel.text = String(roundsPickerArray[row]) + NSLocalizedString("notCircuitWorkout", comment: "")
+                roundLabel.text = String(roundsPickerArray[row]) + " " + NSLocalizedString("notCircuitWorkout", comment: "")
             }
             roundLabel.font = UIFont(name: "SFUIDisplay-light", size: 24)
             roundLabel.textColor = Colors.light

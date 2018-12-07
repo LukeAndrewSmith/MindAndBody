@@ -21,10 +21,21 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var backButtonHeight: NSLayoutConstraint!
     
     var cellHeight: CGFloat = 72 // 110 // 88 // 72
-    var headerHeight: CGFloat = 72
+    var tableHeaderHeight: CGFloat = 72 // 110 // 88 // 72
+    var viewHeaderHeight: CGFloat = { // The image at the top
+        var divisor: CGFloat = 3.5
+        print(IPhoneType.shared.iPhoneType())
+        if IPhoneType.shared.iPhoneType() == IPhone.big || IPhoneType.shared.iPhoneType() == IPhone.pad {
+            divisor = 3
+        }
+        return (UIScreen.main.bounds.height - ElementHeights.tabBarHeight - ElementHeights.bottomSafeAreaInset) / divisor // - ElementHeights.statusBarHeight
+    }() // 72
     let tableSpacing: CGFloat = 16
     let foregroundColor = Colors.dark
     var scheduleStyle = 0
+    
+    var extraSessionMask = UIView() /// Extra sessions choice needs a white view above table to hide group image once an session
+                                    /// in chosen
     
     // Passed to finalChoiceChoice
     // 0 == warmup, 1 == session, 2 == stretching
@@ -72,7 +83,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         choiceTable.isScrollEnabled = false
         cancelButton.tintColor = Colors.light
         backButton.tintColor = Colors.dark
-        backButtonHeight.constant = headerHeight
+        backButtonHeight.constant = tableHeaderHeight
         
     }
     
@@ -123,20 +134,18 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             backButtonTop.constant = 0
         }
         if ScheduleVariables.shared.selectedGroup == Groups.extra {
+            extraSessionMask.frame = CGRect(x: 0, y: 0, width: choiceTable.bounds.width, height: choiceTable.frame.minY)
+            extraSessionMask.backgroundColor = Colors.light
+            self.view.addSubview(extraSessionMask)
             groupImageHeight.constant = 0
             self.view.layoutIfNeeded()
         } else {
             let groupString = ScheduleVariables.shared.selectedGroup.rawValue
-            // Image
+            /// Image
             groupImage.image = groupString.groupImageFromString()
             groupImage.contentMode = .scaleAspectFill
             groupImage.clipsToBounds = true
-            //
-            if IPhoneType.shared.iPhoneType() == IPhone.big || IPhoneType.shared.iPhoneType() == IPhone.pad {
-                groupImageHeight.constant = 176 + 44
-            } else {
-                groupImageHeight.constant = 176
-            }
+            groupImageHeight.constant = viewHeaderHeight
             self.view.layoutIfNeeded()
         }
     }
@@ -158,7 +167,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return headerHeight
+        return tableHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -171,12 +180,12 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         titleLabel.textColor = foregroundColor
         titleLabel.text = NSLocalizedString(title, comment: "")
         titleLabel.textAlignment = .center
-        titleLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: headerHeight)
+        titleLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: tableHeaderHeight)
         header.addSubview(titleLabel)
         
         // Title Underline
         let separator = CALayer()
-        separator.frame = CGRect(x: 0, y: headerHeight - 1, width: view.bounds.width, height: 1)
+        separator.frame = CGRect(x: 0, y: tableHeaderHeight - 1, width: view.bounds.width, height: 1)
         separator.backgroundColor = foregroundColor.cgColor
         separator.opacity = 1
         header.layer.addSublayer(separator)
@@ -187,8 +196,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if needsExplanation() {
             
             let explanationButton = UIButton()
-//            explanationButton.frame = CGRect(x: view.bounds.width * (3/4), y: 0, width: view.bounds.width / 4, height: headerHeight)
-            explanationButton.frame = CGRect(x: view.bounds.width - headerHeight, y: 0, width: headerHeight, height: headerHeight)
+            explanationButton.frame = CGRect(x: view.bounds.width - tableHeaderHeight, y: 0, width: tableHeaderHeight, height: tableHeaderHeight)
             explanationButton.setImage(#imageLiteral(resourceName: "QuestionMarkMenu"), for: .normal)
             explanationButton.tintColor = foregroundColor
             explanationButton.addTarget(self, action: #selector(presentExplanation), for: .touchUpInside)
@@ -220,10 +228,11 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func calculateCellHeight() {
         if ScheduleVariables.shared.selectedGroup == Groups.extra {
-            cellHeight = (view.frame.height - 72) / 5
+            let nRows: CGFloat = CGFloat(sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count - 1)
+            cellHeight = (choiceTable.frame.size.height - tableHeaderHeight) / nRows
         // If too many choices, reduce size of cell
-        } else if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count - 1) * 72) > (choiceTable.bounds.height - headerHeight) {
-            let height = (choiceTable.bounds.height - headerHeight) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress]).count - 1)
+        } else if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count - 1) * 72) > (choiceTable.bounds.height - tableHeaderHeight) {
+            let height = (choiceTable.bounds.height - tableHeaderHeight) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress]).count - 1)
             cellHeight = height
             
         // Height 72

@@ -19,95 +19,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
-//        // MARK: Sessions check
-//        // Compares sessions dictionaries and sorted sessions dictionaries to see if anything missing
-//        var sessionsArray: Set<String> = []
-//        // warmup, workout...
-//        for key1 in sessionData.sessions.keys {
-//            // classic, upper ,lower...
-//            for key2 in (sessionData.sessions[key1]?.keys)! {
-//                // Append Sessions
-//                for key3 in (sessionData.sessions[key1]![key2]?.keys)! {
-//                    sessionsArray.insert(key3)
-//                }
-//            }
-//        }
-//        var sortedSessionsArray: Set<String> = []
-//        // warmup, workout...
-//        for key1 in sessionData.sortedSessions.keys {
-//            // classic, upper ,lower...
-//            for key2 in (sessionData.sortedSessions[key1]?.keys)! {
-//                for key3 in (sessionData.sortedSessions[key1]?[key2]?.keys)! {
-//                    for key4 in (sessionData.sortedSessions[key1]?[key2]?[key3]?.keys)! {
-//                        // Append Sessions
-//                        for key5 in (sessionData.sortedSessions[key1]?[key2]?[key3]?[key4])! {
-//                            sortedSessionsArray.insert(key5)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        let notInSortedSessions = sortedSessionsArray.subtracting(sessionsArray)
-//        let notInSessions = sessionsArray.subtracting(sortedSessionsArray)
-//        // Duplicates
-//        let duplicates = Array(Set(sortedSessionsArray.filter({ (i) in sortedSessionsArray.filter({ $0 == i }).count > 1})))
+        UserData.shared.registerDefaults()
         
-        // Register Defaults --------------------------------------------------------------------------------
-        // Subscriptions
-        UserDefaults.standard.register(defaults: ["userSubscriptionExpiryDate" : "0"])
-        // Settings
-        UserDefaults.standard.register(defaults: ["userSettings" : Register.defaultSettings])
-
-        // Profile/Schedules
-        // Selected Schedule
-        UserDefaults.standard.register(defaults: ["selectedScheduleIndex" : 0])
-        // Schedules
-        UserDefaults.standard.register(defaults: ["schedules" : scheduleDataStructures.registerSchedules])
-        // Difficulty Levels
-        UserDefaults.standard.register(defaults: ["difficultyLevels" : scheduleDataStructures.defaultDifficultyLevels])
-        // Profile Answers
-        UserDefaults.standard.register(defaults: ["profileAnswers" : scheduleDataStructures.defaultProfileAnswers])
-        UserDefaults.standard.register(defaults: ["lastProfileUpdateAlert" : Date().setToMidnightUTC()])
-        // Lessons
-        UserDefaults.standard.register(defaults: ["scheduleLessons" : scheduleDataStructures.defaultScheduleLessons])
-
-        // Tracking
-        // Tracking arrays [weekTracking, tracking]
-        UserDefaults.standard.register(defaults: ["trackingDictionary" : Register.registerTrackingDictionary])
-        // Progress, [currentProgress, lastResetWeek/Month]
-        UserDefaults.standard.register(defaults: ["trackingProgress" : Register.registertrackingProgressDictionary])
-
-        // Custom
-        // Custom Sessions
-        UserDefaults.standard.register(defaults: ["customSessions" : Register.customSessionsRegister])
-        // Meditation Array
-        UserDefaults.standard.register(defaults: ["meditationTimer" : Register.meditationArrayRegister])
-        // Weights
-        UserDefaults.standard.register(defaults: ["movementWeights" : Register.weightRegister()])
-
-        //
-        // Walkthroughs
-        UserDefaults.standard.register(defaults: ["walkthroughs" : Register.registerWalkthroughDictionary])
+        UserData.shared.checkDefaults()
         
         ScheduleVariables.shared.setSchedules()
                 
         return true
     }
 
-    //
-    // Did finish launching ----------------------------------------------------------------------------------------------
-    //
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // Subscriptions Monitoring
         InAppManager.shared.startMonitoring()
         InAppManager.shared.loadProducts()
-        //
+
         // Check if the user has a valid subscription
-        Loading.shared.shouldPresentLoading = false
-        SubscriptionsCheck.shared.isValid = true
-//        SubscriptionsCheck.shared.checkSubscription()
+/// FOR TESTING ON SIMULATOR AS SUBS DON'T WORK
+// {
+//        Loading.shared.shouldPresentLoading = false
+//        SubscriptionsCheck.shared.isValid = true
+// }
+        SubscriptionsCheck.shared.checkSubscription()
 
         NSSetUncaughtExceptionHandler { exception in
             print(exception)

@@ -268,7 +268,6 @@
 		0729FFF91F4D712F0048A355 /* spiderManOverheadReach5.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FFF11F4D712F0048A355 /* spiderManOverheadReach5.png */; };
 		0729FFFA1F4D712F0048A355 /* spiderManOverheadReach6.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FFF21F4D712F0048A355 /* spiderManOverheadReach6.png */; };
 		0729FFFB1F4D712F0048A355 /* spiderManOverheadReach7.png in Resources */ = {isa = PBXBuildFile; fileRef = 0729FFF31F4D712F0048A355 /* spiderManOverheadReach7.png */; };
-		07308E39209E11DF00A4B292 /* SuggestedWeights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07308E38209E11DF00A4B292 /* SuggestedWeights.swift */; };
 		073734221FD2DE42009F5B54 /* TrackingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073734211FD2DE42009F5B54 /* TrackingScreen.swift */; };
 		073BA9C71F6E7CCA005DB480 /* FinalChoiceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BA9C61F6E7CCA005DB480 /* FinalChoiceDetail.swift */; };
 		073D3823215B6DB400D98134 /* SessionChoiceHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D3822215B6DB400D98134 /* SessionChoiceHelpers.swift */; };
@@ -282,6 +281,7 @@
 		0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748C2E01FC2DC4F0087992D /* InfoPageController.swift */; };
 		074EF890215ADEBD00266E5B /* SessionChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074EF88F215ADEBD00266E5B /* SessionChoice.swift */; };
 		0750DB631F86C8F7003C2AE6 /* CreatorFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750DB621F86C8F7003C2AE6 /* CreatorFunctions.swift */; };
+		075120E221A5783000B306E0 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075120E121A5783000B306E0 /* UserData.swift */; };
 		07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07520BB31E9F894C00FA682E /* MeditationScreen.swift */; };
 		0757326B1E64D8A3003DA77E /* LessonsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0757326A1E64D8A3003DA77E /* LessonsScreen.swift */; };
 		075D441C21406028003502B6 /* CustomElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075D441B21406028003502B6 /* CustomElements.swift */; };
@@ -1617,7 +1617,6 @@
 		0729FFFD1F4D713A0048A355 /* forefootBounces1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forefootBounces1.png; sourceTree = "<group>"; };
 		0729FFFE1F4D713A0048A355 /* forefootBounces2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forefootBounces2.png; sourceTree = "<group>"; };
 		0729FFFF1F4D713A0048A355 /* forefootBounces3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forefootBounces3.png; sourceTree = "<group>"; };
-		07308E38209E11DF00A4B292 /* SuggestedWeights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedWeights.swift; sourceTree = "<group>"; };
 		073734211FD2DE42009F5B54 /* TrackingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingScreen.swift; sourceTree = "<group>"; };
 		073BA9C61F6E7CCA005DB480 /* FinalChoiceDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalChoiceDetail.swift; sourceTree = "<group>"; };
 		073D3822215B6DB400D98134 /* SessionChoiceHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionChoiceHelpers.swift; sourceTree = "<group>"; };
@@ -1631,6 +1630,7 @@
 		0748C2E01FC2DC4F0087992D /* InfoPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPageController.swift; sourceTree = "<group>"; };
 		074EF88F215ADEBD00266E5B /* SessionChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionChoice.swift; sourceTree = "<group>"; };
 		0750DB621F86C8F7003C2AE6 /* CreatorFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorFunctions.swift; sourceTree = "<group>"; };
+		075120E121A5783000B306E0 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		07520BB31E9F894C00FA682E /* MeditationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationScreen.swift; sourceTree = "<group>"; };
 		0757326A1E64D8A3003DA77E /* LessonsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonsScreen.swift; sourceTree = "<group>"; };
 		075D441B21406028003502B6 /* CustomElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomElements.swift; sourceTree = "<group>"; };
@@ -3537,7 +3537,7 @@
 				077AC0E01DA535840026895B /* Main.storyboard */,
 				07094BE71FB0D129003DB553 /* Main Screens */,
 				0789ED091F79A71E000EB739 /* Global */,
-				0789ED0A1F79A725000EB739 /* Register Data */,
+				0789ED0A1F79A725000EB739 /* User Data */,
 				077DAB0E1FD5FCC200CF7949 /* Session Data */,
 				0778761C1F92A44B005CE68A /* Subscriptions */,
 				077E47151EB9DC54005B0B22 /* Tab Bar */,
@@ -3654,13 +3654,13 @@
 			path = Global;
 			sourceTree = "<group>";
 		};
-		0789ED0A1F79A725000EB739 /* Register Data */ = {
+		0789ED0A1F79A725000EB739 /* User Data */ = {
 			isa = PBXGroup;
 			children = (
 				0789ED051F79A6EA000EB739 /* Register.swift */,
-				07308E38209E11DF00A4B292 /* SuggestedWeights.swift */,
+				075120E121A5783000B306E0 /* UserData.swift */,
 			);
-			path = "Register Data";
+			path = "User Data";
 			sourceTree = "<group>";
 		};
 		078C59541EC893EA00FA1890 /* Sounds */ = {
@@ -8105,6 +8105,7 @@
 				0789ED061F79A6EA000EB739 /* Register.swift in Sources */,
 				072941F4215E6D92007F2D4B /* Tracking.swift in Sources */,
 				07A6346F208C999000712EE2 /* Equipment.swift in Sources */,
+				075120E221A5783000B306E0 /* UserData.swift in Sources */,
 				075D441C21406028003502B6 /* CustomElements.swift in Sources */,
 				0748C2E11FC2DC4F0087992D /* InfoPageController.swift in Sources */,
 				07520BB41E9F894C00FA682E /* MeditationScreen.swift in Sources */,
@@ -8133,7 +8134,6 @@
 				077AC1001DA54C810026895B /* Lessons.swift in Sources */,
 				073D3823215B6DB400D98134 /* SessionChoiceHelpers.swift in Sources */,
 				07EFC0AC1F66CCEF0030DCE6 /* Creator.swift in Sources */,
-				07308E39209E11DF00A4B292 /* SuggestedWeights.swift in Sources */,
 				0719D52C212886B0003BA353 /* CustomChoice.swift in Sources */,
 				0719D528210DDC86003BA353 /* TabBar.swift in Sources */,
 				07D127F61FD6FB1F00C88352 /* SortedSessionsSchedule.swift in Sources */,

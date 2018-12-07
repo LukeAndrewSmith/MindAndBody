@@ -1,14 +1,145 @@
 //
-//  SuggestedWeights.swift
+//  UserData.swift
 //  MindAndBody
 //
-//  Created by Luke Smith on 05.05.18.
-//  Copyright © 2018 Luke Smith. All rights reserved.
+//  Created by Luke Smith on 25.09.17.
+//  Copyright © 2017 Luke Smith. All rights reserved.
 //
 
 import Foundation
 
 
+//
+// MARK: User Data
+
+// Register to user defaults
+enum Register {
+    // --------------------------------------------------------
+    // Settings
+    static let defaultSettings: [String: [Int]] = [
+        // Background image index - 0
+        "BackgroundImage": [1],
+        // Metric/Imperial - 6
+        "Units": [0], // == "kg" (0), "lb" (1)
+        // Time Based Sessions - 2
+        "TimeBasedSessions": [0], // 0 == Off, 1 = on
+        // Yoga Automatic - 3
+        "AutomaticYoga": [0, 50, 5, 0], // [0], 0 == off, 1 == on, [1] = breath length, [2] = transition time, [3] = transition indicator
+            // Defaults: 5.0s breaths, 5.0s transition, tibet singing bowl transition
+            // Note numbers for breaths is stored as an int but represent a double with 1 decimal place, therefore stored is *10 the desired value
+            // NOT THE BEST WAY TO STORE BREATH LENGTH!!!!
+        // Rest times - 4
+        "RestTimes": [0, 45, 0],
+        // Notifications
+        "ReminderNotifications": [420,-1,1], // [0]: morning, [1]: evening, [2]: motivational comments
+        // [0]: -1 == off, 420 == 7:00 am (number of minutes), [1]: same, [3]: 0 == off, 1 == on (motivating comments)
+        "CustomWarmupStretching": [0], // 0 == off (app chooses), 1 == on (custom)
+        // Is icloud enabled, 0 == false, 1 == true
+        "iCloud": [0],
+    ]
+    
+    // --------------------------------------------------------
+    // Walkthroughs
+    //
+    // Walkthrough
+    static let registerWalkthroughDictionary: [String: Bool] =
+        [
+            // Session -- Workout (if workout walkthrough seen first, this is good enough for all other session screens, so sets session2 to true as well)
+            "Session": false,
+            // Session 2 -- Circuit, Stratching, Yoga - Workout -- (session2 not quite good enough for sessions, and workout screen has extra important note on weights not seen on other screens)
+            "Session2": false,
+            // Schedule
+            "Schedule": false,
+            // Settings
+            "Settings": false,
+            // Automatic Yoga
+            "AutomaticYoga": false,
+    ]
+    
+    // --------------------------------------------------------
+    // Meditation array Register
+        // Array because order matters
+    static let meditationArrayRegister: [[String: [[Any]]]] = []
+    //
+    static let meditationEmptySession: [String: [[Any]]] =
+        [
+            // Name - String
+            "Name": [[""]],
+            // Duration - Int
+            "Duration": [[0]],
+            // Bells, starting and ending bells go at first and last, interval bells in the middle
+            // [Bell, Time] - [Int]
+            "Bells": [[-1,0],[-1,0]],
+            // Background Sound - Int
+            "BackgroundSound": [[-1]]
+    ]
+    
+    // --------------------------------------------------------
+    // Custom Sessions
+    // Warmup, Workout, Cardio, Stretching, Yoga
+        // Array because indexe with ints
+    static let customSessionsRegister: [String: [[String: [Any]]]] =
+        [
+            // Warmup -
+            // [name] - string, [movements] - int, [sets] - int, [reps] - string
+            "warmup": [],
+            // Workout - 1
+            // [name] - string, [movements] - int, [sets] - int, [reps] - string
+            "workout": [],
+            // Workout - Circuit - stored in workout
+            // [name] - string, [movements] - int, [rounds] - int, [reps] - string
+            // Cardio -
+            // [name] - string, [movements] - int, [time/distance] - int
+            "endurance": [],
+            // Stretching -
+            // [name] - string, [stretches] - int, [breaths] - int
+            "stretching": [],
+            // Yoga -
+            // [name] - string, [stretches] - int, [poses] - int
+            "yoga": []
+    ]
+    // Empty Session, Warmup, Workout, Workout - circuit - [string],[int],[int],[int]
+    static let emptySessionFour: [String: [Any]] =
+        [
+            // Name - String - 0
+            "name": [""],
+            // Movements - Int - 1
+            "movements": [],
+            // Sets - Int - 2
+            "setsBreathsTime": [],
+            // Reps - String? - 3
+            "reps": []
+    ]
+    // Empty Session, Cardio, Stretching, Yoga, - [string],[int][int]
+    static let emptySessionThree: [String: [Any]] =
+        [
+            // Name - String - 0
+            "name": [""],
+            // Movements - Int - 1
+            "movements": [],
+            // Breaths/Time - Int  (called sets for simplicity in code)
+            "setsBreathsTime": []
+    ]
+    
+    // --------------------------------------------------------
+    // Tracking
+    static let registertrackingProgressDictionary: [String: Any] =
+        // Update progress (first monday of last week completed (lastResetWeek) is used to check if progress needs to be reset to 0 for first entry of new week)
+        [
+            "WeekProgress": 0,
+            "WeekGoal": 1,
+            "ExtraSessions": 0,
+            "LastResetWeek": Date().firstMondayInCurrentWeek
+        ]
+    
+    // Tracking percentages
+        // % = completed / planned
+                // Note kept as array not dictionary as nicer to convert to and fro Date: String
+    static let registerTrackingDictionary: [String: Int] = [:]
+}
+
+
+// MARK: Suggested Weights
 extension Register {
     // Note saved as index for weight array, weight array goes from 0 to 300kg, in steps of 2.5
     // Conversion of index to weight is index * 2.5
@@ -40,7 +171,7 @@ extension Register {
             // Legs (calves)
             "standingCalfRaise": 8,
             "seatedCalfRaise": 8,
-        ]
+            ]
     static let WRWU1: [String: Int] =
         [
             // Pull (Back) ---------
@@ -62,6 +193,7 @@ extension Register {
             "hammerCurlCable": 1,
             "curl": 1,
             // Pull (Forearms)
+            "forearmCurl": 4,
             "farmersCarry": 2,
             "reverseBarbellCurl": 4,
             // Push (Chest) ---------
@@ -81,7 +213,7 @@ extension Register {
             "ropeExtension": 3,
             // Full Body ---------
             "cleanPress": 4,
-        ]
+            ]
     // Level 2
     static let WRWL2: [String: Int] =
         [
@@ -105,7 +237,7 @@ extension Register {
             // Legs (calves)
             "standingCalfRaise": 12,
             "seatedCalfRaise": 12,
-        ]
+            ]
     static let WRWU2: [String: Int] =
         [
             // Pull (Back) ---------
@@ -127,6 +259,7 @@ extension Register {
             "hammerCurlCable": 2,
             "curl": 2,
             // Pull (Forearms)
+            "forearmCurl": 5,
             "farmersCarry": 3,
             "reverseBarbellCurl": 5,
             // Push (Chest) ---------
@@ -146,7 +279,7 @@ extension Register {
             "ropeExtension": 4,
             // Full Body ---------
             "cleanPress": 6,
-        ]
+            ]
     // Level 3
     static let WRWL3: [String: Int] =
         [
@@ -170,7 +303,7 @@ extension Register {
             // Legs (calves)
             "standingCalfRaise": 16,
             "seatedCalfRaise": 16,
-        ]
+            ]
     static let WRWU3: [String: Int] =
         [
             // Pull (Back) ---------
@@ -192,6 +325,7 @@ extension Register {
             "hammerCurlCable": 3,
             "curl": 3,
             // Pull (Forearms)
+            "forearmCurl": 7,
             "farmersCarry": 4,
             "reverseBarbellCurl": 6,
             // Push (Chest) ---------
@@ -211,7 +345,7 @@ extension Register {
             "ropeExtension": 6,
             // Full Body ---------
             "cleanPress": 8,
-        ]
+            ]
     // MARK: Men
     // Level 1
     static let WRML1: [String: Int] =
@@ -258,6 +392,7 @@ extension Register {
             "hammerCurlCable": 2,
             "curl": 2,
             // Pull (Forearms)
+            "forearmCurl": 5,
             "farmersCarry": 3,
             "reverseBarbellCurl": 5,
             // Push (Chest) ---------
@@ -277,7 +412,7 @@ extension Register {
             "ropeExtension": 4,
             // Full Body ---------
             "cleanPress": 6,
-        ]
+            ]
     // Level 2
     static let WRML2: [String: Int] =
         [
@@ -301,7 +436,7 @@ extension Register {
             // Legs (calves)
             "standingCalfRaise": 12,
             "seatedCalfRaise": 12,
-        ]
+            ]
     static let WRMU2: [String: Int] =
         [
             // Pull (Back) ---------
@@ -323,6 +458,7 @@ extension Register {
             "hammerCurlCable": 3,
             "curl": 3,
             // Pull (Forearms)
+            "forearmCurl": 6,
             "farmersCarry": 4,
             "reverseBarbellCurl": 6,
             // Push (Chest) ---------
@@ -342,7 +478,7 @@ extension Register {
             "ropeExtension": 6,
             // Full Body ---------
             "cleanPress": 8,
-        ]
+            ]
     // Level 3
     static let WRML3: [String: Int] =
         [
@@ -388,6 +524,7 @@ extension Register {
             "hammerCurlCable": 4,
             "curl": 4,
             // Pull (Forearms)
+            "forearmCurl": 8,
             "farmersCarry": 6,
             "reverseBarbellCurl": 8,
             // Push (Chest) ---------
@@ -407,7 +544,7 @@ extension Register {
             "ropeExtension": 8,
             // Full Body ---------
             "cleanPress": 12,
-        ]
+            ]
     
     static let weightRegister = { () -> [String : Int] in
         let weightDictUpper = Register.WRWL1

@@ -19,7 +19,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     static var shared = ScheduleScreen()
     
     
-    // Currently testing which values are best
+    // Layout padding
     let foregroundColor = Colors.dark
     let tableSpacing: CGFloat = 27 // 27
     let headerSpacing: CGFloat = 0 // 16
@@ -34,9 +34,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var headerHeight: CGFloat {
         return (UIScreen.main.bounds.height - ElementHeights.combinedHeight - ElementHeights.tabBarHeight - pageStackHeight.constant - ElementHeights.bottomSafeAreaInset) / 4
     }
-//    var headerHeight: CGFloat {
-//        return 88 * 1.5
-//    }
+    
     var daySwipeLeft = UISwipeGestureRecognizer()
     var daySwipeRight = UISwipeGestureRecognizer()
 //    let separator = UIView()

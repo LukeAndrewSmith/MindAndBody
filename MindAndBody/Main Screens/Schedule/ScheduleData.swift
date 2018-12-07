@@ -777,12 +777,6 @@ enum scheduleDataStructures {
     static let defaultScheduleHelpAnswers: [[Int]] =
         []
     
-    // Schedule lessons, stores date of first open of app
-        // [0] == timeinteravalsince1970 of first date of app opening
-        // [1] : 0 == lessons have not been present, 1 == lessons have been presented (i.e is after a week from first monday)
-    static let defaultScheduleLessons: [Int] = [0, 0]
-
-    
     // Layer 4: Final
         // Every session has! an average difficulty, and those with only one difficulty call it average, so having the default at 1 (average) should never crash
     // Difficulty:
@@ -881,9 +875,7 @@ enum scheduleDataStructures {
                         "meditationG": 0,
                         "enduranceG": 0,
                         "flexibilityG": 0,
-                    ],
-                    // Question answers
-                    
+                    ],                    
                     // Time & Commitment
                     ["scheduleQTime": -1,
                      "scheduleQPriority": -1],

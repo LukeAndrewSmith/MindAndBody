@@ -1531,7 +1531,7 @@ extension sessionData {
                     [
                         "name": ["staticLunge"],
                         "demonstration": ["lungeJump"],
-                        "explanation": ["staticLungeE"],
+                        "explanation": ["staticLungeEH", "staticLungeEA", "staticLungeEF"],
                         "targetArea": ["squatBody"],
                         "attributes": [""]
                 ],
@@ -2288,42 +2288,42 @@ extension sessionData {
                     [
                         "name": ["treeL"],
                         "demonstration": ["tree"], // "tree1", "tree2", "tree3", "tree4", "tree5", "tree6"],
-                        "explanation": ["treeEH", "treeEA", "treeEF"],
+                        "explanation": ["treeLEH", "treeLEA", "treeLEF"],
                         "attributes": [""]
                 ], //
                 "treeR":
                     [
                         "name": ["treeR"],
                         "demonstration": ["tree"], //, "tree1", "tree2", "tree3", "tree4", "tree5", "tree6"],
-                        "explanation": ["treeEH", "treeEA", "treeEF"],
+                        "explanation": ["treeREH", "treeREA", "treeREF"],
                         "attributes": ["a"]
                 ],
                 "extendedToeGrabL":
                     [
                         "name": ["extendedToeGrabL"],
                         "demonstration": ["extendedToeGrab"],// "extendedToeGrab1", "extendedToeGrab2", "extendedToeGrab3", "extendedToeGrab4", "extendedToeGrab5"],
-                        "explanation": ["extendedToeGrabEH", "extendedToeGrabEA", "extendedToeGrabEF"],
+                        "explanation": ["extendedToeGrabLEH", "extendedToeGrabLEA", "extendedToeGrabLEF"],
                         "attributes": ["a"]
                 ], //
                 "extendedToeGrabR":
                     [
                         "name": ["extendedToeGrabR"],
                         "demonstration": ["extendedToeGrab"],// "extendedToeGrab1", "extendedToeGrab2", "extendedToeGrab3", "extendedToeGrab4", "extendedToeGrab5"],
-                        "explanation": ["extendedToeGrabEH", "extendedToeGrabEA", "extendedToeGrabEF"],
+                        "explanation": ["extendedToeGrabREH", "extendedToeGrabREA", "extendedToeGrabREF"],
                         "attributes": [""]
                 ],
                 "eagleL":
                     [
                         "name": ["eagleL"],
                         "demonstration": ["eagle"], // "eagle1", "eagle2", "eagle3", "eagle4", "eagle5", "eagle6", "eagle7"],
-                        "explanation": ["eagleEH", "eagleEA", "eagleEF"],
+                        "explanation": ["eagleLEH", "eagleLEA", "eagleLEF"],
                         "attributes": ["a"]
                 ], //
                 "eagleR":
                     [
                         "name": ["eagleR"],
                         "demonstration": ["eagle"], // "eagle1", "eagle2", "eagle3", "eagle4", "eagle5", "eagle6", "eagle7"],
-                        "explanation": ["eagleEH", "eagleEA", "eagleEF"],
+                        "explanation": ["eagleREH", "eagleREA", "eagleREF"],
                         "attributes": [""]
                 ],
                 "chair":
@@ -2337,126 +2337,126 @@ extension sessionData {
                     [
                         "name": ["lordOfDanceL"],
                         "demonstration": ["lordOfDance"], // "lordOfDance1", "lordOfDance2", "lordOfDance3", "lordOfDance4", "lordOfDance5", "lordOfDance6", "lordOfDance7"],
-                        "explanation": ["lordOfDanceEH", "lordOfDanceEA", "lordOfDanceEF"],
+                        "explanation": ["lordOfDanceLEH", "lordOfDanceLEA", "lordOfDanceLEF"],
                         "attributes": [""]
                 ], //
                 "lordOfDanceR":
                     [
                         "name": ["lordOfDanceR"],
                         "demonstration": ["lordOfDance"], // "lordOfDance1", "lordOfDance2", "lordOfDance3", "lordOfDance4", "lordOfDance5", "lordOfDance6", "lordOfDance7"],
-                        "explanation": ["lordOfDanceEH", "lordOfDanceEA", "lordOfDanceEF"],
+                        "explanation": ["lordOfDanceREH", "lordOfDanceREA", "lordOfDanceREF"],
                         "attributes": ["a"]
                 ],
                 "warrior1L":
                     [
                         "name": ["warrior1L"],
                         "demonstration": ["warrior1"], // "warrior11", "warrior12", "warrior13", "warrior14", "warrior15"],
-                        "explanation": ["warrior1EH", "warrior1EA", "warrior1EF"],
+                        "explanation": ["warrior1LEH", "warrior1LEA", "warrior1LEF"],
                         "attributes": [""]
                 ], //
                 "warrior1R":
                     [
                         "name": ["warrior1R"],
                         "demonstration": ["warrior1"], // "warrior11", "warrior12", "warrior13", "warrior14", "warrior15"],
-                        "explanation": ["warrior1EH", "warrior1EA", "warrior1EF"],
+                        "explanation": ["warrior1REH", "warrior1REA", "warrior1REF"],
                         "attributes": ["a"]
                 ],
                 "warrior2L":
                     [
                         "name": ["warrior2L"],
                         "demonstration": ["warrior2"], // "warrior21", "warrior22", "warrior23", "warrior24", "warrior25"],
-                        "explanation": ["warrior2EH", "warrior2EA", "warrior2EF"],
+                        "explanation": ["warrior2LEH", "warrior2LEA", "warrior2LEF"],
                         "attributes": [""]
                 ], //
                 "warrior2R":
                     [
                         "name": ["warrior2R"],
                         "demonstration": ["warrior2"], // "warrior21", "warrior22", "warrior23", "warrior24", "warrior25"],
-                        "explanation": ["warrior2EH", "warrior2EA", "warrior2EF"],
+                        "explanation": ["warrior2REH", "warrior2REA", "warrior2REF"],
                         "attributes": ["a"]
                 ],
                 "warrior3L":
                     [
                         "name": ["warrior3L"],
                         "demonstration": ["warrior3"], // "warrior31", "warrior32", "warrior33", "warrior34", "warrior35", "warrior36"],
-                        "explanation": ["warrior3EH", "warrior3EA", "warrior3EF"],
+                        "explanation": ["warrior3LEH", "warrior3LEA", "warrior3LEF"],
                         "attributes": ["a"]
                 ], //
                 "warrior3R":
                     [
                         "name": ["warrior3R"],
                         "demonstration": ["warrior3"], // "warrior31", "warrior32", "warrior33", "warrior34", "warrior35", "warrior36"],
-                        "explanation": ["warrior3EH", "warrior3EA", "warrior3EF"],
+                        "explanation": ["warrior3REH", "warrior3REA", "warrior3REF"],
                         "attributes": [""]
                 ],
                 "halfMoonL":
                     [
                         "name": ["halfMoonL"],
                         "demonstration": ["halfMoon"], // "halfMoon1", "halfMoon2", "halfMoon3", "halfMoon4", "halfMoon5", "halfMoon6", "halfMoon7"],
-                        "explanation": ["halfMoonEH", "halfMoonEA", "halfMoonEF"],
+                        "explanation": ["halfMoonLEH", "halfMoonLEA", "halfMoonLEF"],
                         "attributes": [""]
                 ], //
                 "halfMoonR":
                     [
                         "name": ["halfMoonR"],
                         "demonstration": ["halfMoon"], // "halfMoon1", "halfMoon2", "halfMoon3", "halfMoon4", "halfMoon5", "halfMoon6", "halfMoon7"],
-                        "explanation": ["halfMoonEH", "halfMoonEA", "halfMoonEF"],
+                        "explanation": ["halfMoonREH", "halfMoonREA", "halfMoonREF"],
                         "attributes": ["a"]
                 ],
                 "extendedTriangleL":
                     [
                         "name": ["extendedTriangleL"],
                         "demonstration": ["extendedTriangle"], // "extendedTriangle1", "extendedTriangle2", "extendedTriangle3", "extendedTriangle4", "extendedTriangle5"],
-                        "explanation": ["extendedTriangleEH", "extendedTriangleEA", "extendedTriangleEF"],
+                        "explanation": ["extendedTriangleLEH", "extendedTriangleLEA", "extendedTriangleLEF"],
                         "attributes": [""]
                 ], //
                 "extendedTriangleR":
                     [
                         "name": ["extendedTriangleR"],
                         "demonstration": ["extendedTriangle"], // "extendedTriangle1", "extendedTriangle2", "extendedTriangle3", "extendedTriangle4", "extendedTriangle5"],
-                        "explanation": ["extendedTriangleEH", "extendedTriangleEA", "extendedTriangleEF"],
+                        "explanation": ["extendedTriangleREH", "extendedTriangleREA", "extendedTriangleREF"],
                         "attributes": ["a"]
                 ],
                 "extendedSideAngleYL":
                     [
                         "name": ["extendedSideAngleYL"],
                         "demonstration": ["extendedSideAngle"], // "extendedSideAngle1", "extendedSideAngle2", "extendedSideAngle3", "extendedSideAngle4", "extendedSideAngle5", "extendedSideAngle6"],
-                        "explanation": ["extendedSideAngleYEH", "extendedSideAngleYEA", "extendedSideAngleYEF"],
+                        "explanation": ["extendedSideAngleYLEH", "extendedSideAngleYLEA", "extendedSideAngleYLEF"],
                         "attributes": [""]
                 ], //
                 "extendedSideAngleYR":
                     [
                         "name": ["extendedSideAngleYR"],
                         "demonstration": ["extendedSideAngle"], // "extendedSideAngle1", "extendedSideAngle2", "extendedSideAngle3", "extendedSideAngle4", "extendedSideAngle5", "extendedSideAngle6"],
-                        "explanation": ["extendedSideAngleYEH", "extendedSideAngleYEA", "extendedSideAngleYEF"],
+                        "explanation": ["extendedSideAngleYREH", "extendedSideAngleYREA", "extendedSideAngleYREF"],
                         "attributes": ["a"]
                 ],
                 "revolvedSideAngleL":
                     [
                         "name": ["revolvedSideAngleL"],
                         "demonstration": ["revolvedSideAngle"], // "revolvedSideAngle1", "revolvedSideAngle2", "revolvedSideAngle3", "revolvedSideAngle4", "revolvedSideAngle5", "revolvedSideAngle6"],
-                        "explanation": ["revolvedSideAngleEH", "revolvedSideAngleEA", "revolvedSideAngleEF"],
+                        "explanation": ["revolvedSideAngleLEH", "revolvedSideAngleLEA", "revolvedSideAngleLEF"],
                         "attributes": [""]
                 ], //
                 "revolvedSideAngleR":
                     [
                         "name": ["revolvedSideAngleR"],
                         "demonstration": ["revolvedSideAngle"], // "revolvedSideAngle1", "revolvedSideAngle2", "revolvedSideAngle3", "revolvedSideAngle4", "revolvedSideAngle5", "revolvedSideAngle6"],
-                        "explanation": ["revolvedSideAngleEH", "revolvedSideAngleEA", "revolvedSideAngleEF"],
+                        "explanation": ["revolvedSideAngleREH", "revolvedSideAngleREA", "revolvedSideAngleREF"],
                         "attributes": ["a"]
                 ],
                 "revolvedTriangleL":
                     [
                         "name": ["revolvedTriangleL"],
                         "demonstration": ["revolvedTriangle"], // "revolvedTriangle1", "revolvedTriangle2", "revolvedTriangle3", "revolvedTriangle4", "revolvedTriangle5", "revolvedTriangle6"],
-                        "explanation": ["revolvedTriangleEH", "revolvedTriangleEA", "revolvedTriangleEF"],
+                        "explanation": ["revolvedTriangleLEH", "revolvedTriangleLEA", "revolvedTriangleLEF"],
                         "attributes": ["a"]
                 ], //
                 "revolvedTriangleR":
                     [
                         "name": ["revolvedTriangleR"],
                         "demonstration": ["revolvedTriangle"], // "revolvedTriangle1", "revolvedTriangle2", "revolvedTriangle3", "revolvedTriangle4", "revolvedTriangle5", "revolvedTriangle6"],
-                        "explanation": ["revolvedTriangleEH", "revolvedTriangleEA", "revolvedTriangleEF"],
+                        "explanation": ["revolvedTriangleREH", "revolvedTriangleREA", "revolvedTriangleREF"],
                         "attributes": [""]
                 ],
                 "halfForwardBend":
@@ -2484,56 +2484,56 @@ extension sessionData {
                     [
                         "name": ["intenseSideL"],
                         "demonstration": ["intenseSide"], // "intenseSide1", "intenseSide2", "intenseSide3", "intenseSide4", "intenseSide5"],
-                        "explanation": ["intenseSideEH", "intenseSideEA", "intenseSideEF"],
+                        "explanation": ["intenseSideLEH", "intenseSideLEA", "intenseSideLEF"],
                         "attributes": [""]
                 ], //
                 "intenseSideR":
                     [
                         "name": ["intenseSideR"],
                         "demonstration": ["intenseSide"], // "intenseSide1", "intenseSide2", "intenseSide3", "intenseSide4", "intenseSide5"],
-                        "explanation": ["intenseSideEH", "intenseSideEA", "intenseSideEF"],
+                        "explanation": ["intenseSideREH", "intenseSideREA", "intenseSideREF"],
                         "attributes": ["a"]
                 ],
                 "gateL":
                     [
                         "name": ["gateL"],
                         "demonstration": ["gate"],
-                        "explanation": ["gateEH", "gateEA", "gateEF"],
+                        "explanation": ["gateLEH", "gateLEA", "gateLEF"],
                         "attributes": [""]
                 ], //
                 "gateR":
                     [
                         "name": ["gateR"],
                         "demonstration": ["gate"],
-                        "explanation": ["gateEH", "gateEA", "gateEF"],
+                        "explanation": ["gateREH", "gateREA", "gateREF"],
                         "attributes": ["a"]
                 ],
                 "highLungeL":
                     [
                         "name": ["highLungeL"],
                         "demonstration": ["highLunge"], // "highLunge1", "highLunge2", "highLunge3", "highLunge4", "highLunge5", "highLunge6"],
-                        "explanation": ["highLungeEH", "highLungeEA", "highLungeEF"],
+                        "explanation": ["highLungeLEH", "highLungeLEA", "highLungeLEF"],
                         "attributes": [""]
                 ], //
                 "highLungeR":
                     [
                         "name": ["highLungeR"],
                         "demonstration": ["highLunge"], // "highLunge1", "highLunge2", "highLunge3", "highLunge4", "highLunge5", "highLunge6"],
-                        "explanation": ["highLungeEH", "highLungeEA", "highLungeEF"],
+                        "explanation": ["highLungeREH", "highLungeREA", "highLungeREF"],
                         "attributes": ["a"]
                 ],
                 "lowLungeYL":
                     [
                         "name": ["lowLungeYL"],
                         "demonstration": ["lowLunge"], // "lowLunge1", "lowLunge2", "lowLunge3", "lowLunge4", "lowLunge5", "lowLunge6"],
-                        "explanation": ["lowLungeYEH", "lowLungeYEA", "lowLungeYEF"],
+                        "explanation": ["lowLungeYLEH", "lowLungeYLEA", "lowLungeYLEF"],
                         "attributes": [""]
                 ], //
                 "lowLungeYR":
                     [
                         "name": ["lowLungeYR"],
                         "demonstration": ["lowLunge"], // "lowLunge1", "lowLunge2", "lowLunge3", "lowLunge4", "lowLunge5", "lowLunge6"],
-                        "explanation": ["lowLungeYEH", "lowLungeYEA", "lowLungeYEF"],
+                        "explanation": ["lowLungeYREH", "lowLungeYREA", "lowLungeYREF"],
                         "attributes": ["a"]
                 ],
                 "deepSquat":
@@ -2562,14 +2562,14 @@ extension sessionData {
                     [
                         "name": ["halfDownwardDogL"],
                         "demonstration": ["halfDownwardDog"], // "halfDownwardDog1", "halfDownwardDog2", "halfDownwardDog3", "halfDownwardDog4"],
-                        "explanation": ["halfDownwardDogEH", "halfDownwardDogEA", "halfDownwardDogEF"],
+                        "explanation": ["halfDownwardDogLEH", "halfDownwardDogLEA", "halfDownwardDogLEF"],
                         "attributes": [""]
                 ], //
                 "halfDownwardDogR":
                     [
                         "name": ["halfDownwardDogR"],
                         "demonstration": ["halfDownwardDog"], // "halfDownwardDog1", "halfDownwardDog2", "halfDownwardDog3", "halfDownwardDog4"],
-                        "explanation": ["halfDownwardDogEH", "halfDownwardDogEA", "halfDownwardDogEF"],
+                        "explanation": ["halfDownwardDogREH", "halfDownwardDogREA", "halfDownwardDogREF"],
                         "attributes": ["a"]
                 ],
                 "dolphinPlank":
@@ -2590,14 +2590,14 @@ extension sessionData {
                     [
                         "name": ["sidePlankL"],
                         "demonstration": ["sidePlank"], // "sidePlank1", "sidePlank2", "sidePlank3", "sidePlank4"],
-                        "explanation": ["sidePlankEH", "sidePlankEA", "sidePlankEF"],
+                        "explanation": ["sidePlankLEH", "sidePlankLEA", "sidePlankLEF"],
                         "attributes": [""]
                 ], //
                 "sidePlankR":
                     [
                         "name": ["sidePlankR"],
                         "demonstration": ["sidePlank"], // "sidePlank1", "sidePlank2", "sidePlank3", "sidePlank4"],
-                        "explanation": ["sidePlankEH", "sidePlankEA", "sidePlankEF"],
+                        "explanation": ["sidePlankREH", "sidePlankREA", "sidePlankREF"],
                         "attributes": ["a"]
                 ],
                 "cat":
@@ -2625,14 +2625,14 @@ extension sessionData {
                     [
                         "name": ["halfMonkeyL"],
                         "demonstration": ["halfMonkey"], // "halfMonkey1", "halfMonkey2", "halfMonkey3", "halfMonkey4"],
-                        "explanation": ["halfMonkeyEH", "halfMonkeyEA", "halfMonkeyEF"],
+                        "explanation": ["halfMonkeyLEH", "halfMonkeyLEA", "halfMonkeyLEF"],
                         "attributes": [""]
                 ], //
                 "halfMonkeyR":
                     [
                         "name": ["halfMonkeyR"],
                         "demonstration": ["halfMonkey"], // "halfMonkey1", "halfMonkey2", "halfMonkey3", "halfMonkey4"],
-                        "explanation": ["halfMonkeyEH", "halfMonkeyEA", "halfMonkeyEF"],
+                        "explanation": ["halfMonkeyREH", "halfMonkeyREA", "halfMonkeyREF"],
                         "attributes": ["a"]
                 ],
                 "childPose":
@@ -2646,14 +2646,14 @@ extension sessionData {
                     [
                         "name": ["wildThingL"],
                         "demonstration": ["wildThing"], // "wildThing1", "wildThing2", "wildThing3", "wildThing4", "wildThing5", "wildThing6"],
-                        "explanation": ["wildThingEH", "wildThingEA", "wildThingEF"],
+                        "explanation": ["wildThingLEH", "wildThingLEA", "wildThingLEF"],
                         "attributes": ["a"]
                 ], //
                 "wildThingR":
                     [
                         "name": ["wildThingR"],
                         "demonstration": ["wildThing"], // "wildThing1", "wildThing2", "wildThing3", "wildThing4", "wildThing5", "wildThing6"],
-                        "explanation": ["wildThingEH", "wildThingEA", "wildThingEF"],
+                        "explanation": ["wildThingREH", "wildThingREA", "wildThingREF"],
                         "attributes": [""]
                 ],
                 "upwardBow":
@@ -2710,14 +2710,14 @@ extension sessionData {
                     [
                         "name": ["fireLogL"],
                         "demonstration": ["fireLog"],
-                        "explanation": ["fireLogEH", "fireLogEA", "fireLogEF"],
+                        "explanation": ["fireLogLEH", "fireLogLEA", "fireLogLEF"],
                         "attributes": [""]
                 ], //
                 "fireLogR":
                     [
                         "name": ["fireLogR"],
                         "demonstration": ["fireLog"],
-                        "explanation": ["fireLogEH", "fireLogEA", "fireLogEF"],
+                        "explanation": ["fireLogREH", "fireLogREA", "fireLogREF"],
                         "attributes": ["a"]
                 ],
                 "boat":
@@ -2731,14 +2731,14 @@ extension sessionData {
                     [
                         "name": ["cowFaceL"],
                         "demonstration": ["cowFace"],
-                        "explanation": ["cowFaceEH", "cowFaceEA", "cowFaceEF"],
+                        "explanation": ["cowFaceLEH", "cowFaceLEA", "cowFaceLEF"],
                         "attributes": ["a"]
                 ], //
                 "cowFaceR":
                     [
                         "name": ["cowFaceR"],
                         "demonstration": ["cowFace"],
-                        "explanation": ["cowFaceEH", "cowFaceEA", "cowFaceEF"],
+                        "explanation": ["cowFaceREH", "cowFaceREA", "cowFaceREF"],
                         "attributes": [""]
                 ],
                 "hero":
@@ -2780,84 +2780,84 @@ extension sessionData {
                     [
                         "name": ["vSideBendL"],
                         "demonstration": ["vSideBend"], // "vSideBend1", "vSideBend2", "vSideBend3", "vSideBend4", "vSideBend5"],
-                        "explanation": ["vSideBendH", "vSideBendA", "vSideBendF"],
+                        "explanation": ["vSideBendLEH", "vSideBendLEA", "vSideBendLEF"],
                         "attributes": [""]
                 ], //
                 "vSideBendR":
                     [
                         "name": ["vSideBendR"],
                         "demonstration": ["vSideBend"], //, "vSideBend1", "vSideBend2", "vSideBend3", "vSideBend4", "vSideBend5"],
-                        "explanation": ["vSideBendH", "vSideBendA", "vSideBendF"],
+                        "explanation": ["vSideBendREH", "vSideBendREA", "vSideBendREF"],
                         "attributes": ["a"]
                 ],
                 "halfVForwardBendL":
                     [
                         "name": ["halfVForwardBendL"],
                         "demonstration": ["halfVForwardBend"], // "halfVForwardBend1", "halfVForwardBend2", "halfVForwardBend3", "halfVForwardBend4", "halfVForwardBend5", "halfVForwardBend6"],
-                        "explanation": ["halfVForwardBendEH", "halfVForwardBendEA", "halfVForwardBendEF"],
+                        "explanation": ["halfVForwardBendLEH", "halfVForwardBendLEA", "halfVForwardBendLEF"],
                         "attributes": [""]
                 ], //
                 "halfVForwardBendR":
                     [
                         "name": ["halfVForwardBendR"],
                         "demonstration": ["halfVForwardBend"], // "halfVForwardBend1", "halfVForwardBend2", "halfVForwardBend3", "halfVForwardBend4", "halfVForwardBend5", "halfVForwardBend6"],
-                        "explanation": ["halfVForwardBendEH", "halfVForwardBendEA", "halfVForwardBendEF"],
+                        "explanation": ["halfVForwardBendREH", "halfVForwardBendREA", "halfVForwardBendREF"],
                         "attributes": ["a"]
                 ],
                 "halfVSideBendL":
                     [
                         "name": ["halfVSideBendL"],
                         "demonstration": ["halfVSideBend"], // "halfVSideBend1", "halfVSideBend2", "halfVSideBend3", "halfVSideBend4", "halfVSideBend5"],
-                        "explanation": ["halfVSideBendEH", "halfVSideBendEA", "halfVSideBendEF"],
+                        "explanation": ["halfVSideBendLEH", "halfVSideBendLEA", "halfVSideBendLEF"],
                         "attributes": [""]
                 ],
                 "halfVSideBendR":
                     [
                         "name": ["halfVSideBendR"],
                         "demonstration": ["halfVSideBend"], // "halfVSideBend1", "halfVSideBend2", "halfVSideBend3", "halfVSideBend4", "halfVSideBend5"],
-                        "explanation": ["halfVSideBendEH", "halfVSideBendEA", "halfVSideBendEF"],
+                        "explanation": ["halfVSideBendREH", "halfVSideBendREA", "halfVSideBendREF"],
                         "attributes": ["a"]
                 ],
                 "marichi1L":
                     [
                         "name": ["marichi1L"],
                         "demonstration": ["marichi1"], // "marichi11", "marichi12", "marichi13", "marichi14", "marichi15", "marichi16", "marichi17"],
-                        "explanation": ["marichi1EH", "marichi1EA", "marichi1EF"],
+                        "explanation": ["marichi1LEH", "marichi1LEA", "marichi1LEF"],
                         "attributes": ["a"]
                 ], //
                 "marichi1R":
                     [
                         "name": ["marichi1R"],
                         "demonstration": ["marichi1"], // "marichi11", "marichi12", "marichi13", "marichi14", "marichi15", "marichi16", "marichi17"],
-                        "explanation": ["marichi1EH", "marichi1EA", "marichi1EF"],
+                        "explanation": ["marichi1REH", "marichi1REA", "marichi1REF"],
                         "attributes": [""]
                 ],
                 "marichi3L":
                     [
                         "name": ["marichi3L"],
                         "demonstration": ["marichi3"], // "marichi31", "marichi32", "marichi33", "marichi34", "marichi35", "marichi36", "marichi37"],
-                        "explanation": ["marichi3EH", "marichi3EA", "marichi3EF"],
+                        "explanation": ["marichi3LEH", "marichi3LEA", "marichi3LEF"],
                         "attributes": ["a"]
                 ], //
                 "marichi3R":
                     [
                         "name": ["marichi3R"],
                         "demonstration": ["marichi3"], // "marichi31", "marichi32", "marichi33", "marichi34", "marichi35", "marichi36", "marichi37"],
-                        "explanation": ["marichi3EH", "marichi3EA", "marichi3EF"],
+                        "explanation": ["marichi3REH", "marichi3REA", "marichi3REF"],
                         "attributes": [""]
                 ],
                 "frontSplitL":
                     [
                         "name": ["frontSplitL"],
                         "demonstration": ["frontSplit"],
-                        "explanation": ["frontSplitEH", "frontSplitEA", "frontSplitEF"],
+                        "explanation": ["frontSplitLEH", "frontSplitLEA", "frontSplitLEF"],
                         "attributes": [""]
                 ], //
                 "frontSplitR":
                     [
                         "name": ["frontSplitR"],
                         "demonstration": ["frontSplit"],
-                        "explanation": ["frontSplitEH", "frontSplitEA", "frontSplitEF"],
+                        "explanation": ["frontSplitREH", "frontSplitREA", "frontSplitREF"],
                         "attributes": ["a"]
                 ],
                 "sideSplit":
@@ -2900,28 +2900,28 @@ extension sessionData {
                     [
                         "name": ["legRaiseToeL"],
                         "demonstration": ["legRaiseToe"],
-                        "explanation": ["legRaiseToeEH", "legRaiseToeEA", "legRaiseToeEF"],
+                        "explanation": ["legRaiseToeLEH", "legRaiseToeLEA", "legRaiseToeLEF"],
                         "attributes": ["a"]
                 ], //
                 "legRaiseToeR":
                     [
                         "name": ["legRaiseToeR"],
                         "demonstration": ["legRaiseToe"],
-                        "explanation": ["legRaiseToeEH", "legRaiseToeEA", "legRaiseToeEF"],
+                        "explanation": ["legRaiseToeREH", "legRaiseToeREA", "legRaiseToeREF"],
                         "attributes": [""]
                 ],
                 "threadTheNeedleYL":
                     [
                         "name": ["threadTheNeedleYL"],
                         "demonstration": ["threadTheNeedle"], // "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
-                        "explanation": ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"],
+                        "explanation": ["threadTheNeedleYLEH", "threadTheNeedleyLEA", "threadTheNeedleYLEF"],
                         "attributes": ["a"]
                 ], //
                 "threadTheNeedleYR":
                     [
                         "name": ["threadTheNeedleYR"],
                         "demonstration": ["threadTheNeedle"], // "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
-                        "explanation": ["threadTheNeedleEH", "threadTheNeedleEA", "threadTheNeedleEF"],
+                        "explanation": ["threadTheNeedleYREH", "threadTheNeedleYREA", "threadTheNeedleYREF"],
                         "attributes": [""]
                 ],
                 "shoulderStand":
@@ -2956,14 +2956,14 @@ extension sessionData {
                     [
                         "name": ["pigeonL"],
                         "demonstration": ["pigeon"], // "pigeon1", "pigeon2", "pigeon3", "pigeon4", "pigeon5", "pigeon6", "pigeon7", "pigeon8"],
-                        "explanation": ["pigeonEH", "pigeonEA", "pigeonEF"],
+                        "explanation": ["pigeonLEH", "pigeonLEA", "pigeonLEF"],
                         "attributes": [""]
                 ], //
                 "pigeonR":
                     [
                         "name": ["pigeonR"],
                         "demonstration": ["pigeon"], // "pigeon1", "pigeon2", "pigeon3", "pigeon4", "pigeon5", "pigeon6", "pigeon7", "pigeon8"],
-                        "explanation": ["pigeonEH", "pigeonEA", "pigeonEF"],
+                        "explanation": ["pigeonREH", "pigeonREA", "pigeonREF"],
                         "attributes": ["a"]
                 ],
                 "spineRolling":

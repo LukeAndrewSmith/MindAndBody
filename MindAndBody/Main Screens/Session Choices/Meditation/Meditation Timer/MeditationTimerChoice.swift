@@ -460,12 +460,5 @@ class CustomMeditationChoiceCell: UITableViewCell {
         durationLabel.font = UIFont(name: "SFUIDisplay-light", size: 23)
         durationLabel.textColor = Colors.dark
         
-//        // Iphone 5/SE layout, smaller text for endurance
-//        if IPhoneType.shared.iPhoneType() == IPhone.little {
-//            constraint1.constant = 12
-//            constraint2.constant = 12
-//            constraint3.constant = 6
-//            constraint4.constant = 6
-//        }
     }
 }

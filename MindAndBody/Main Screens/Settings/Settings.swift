@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MessageUI
 
 
 //
@@ -240,26 +241,29 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     //
     // MARK: Settings TableView --------------------------------------------------------------------------------------------------------------------------
     //
-    let sectionsArray = [["title": "profile",
-                          "rows": 1],
-                         ["title": "general",
-                          "rows": 2],
-                         ["title": "automaticSessions",
-                          "rows": 2],
-                         ["title": "reminders",
-                          "rows": 3],
-                         ["title": "restTimes",
-                          "rows": 3],
-                         ["title": "custom",
-                          "rows": 1],
-                         ["title": "reset",
-                          "rows": 2],
-                         ]
+    let sectionsArray = [
+        ["title": "profile",
+         "rows": 1],
+        ["title": "general",
+         "rows": 2],
+        ["title": "automaticSessions",
+         "rows": 2],
+        ["title": "reminders",
+         "rows": 3],
+        ["title": "restTimes",
+         "rows": 3],
+        ["title": "custom",
+         "rows": 1],
+        ["title": "reset",
+         "rows": 1], // 2 if reset app included
+        ["title": "contact",
+        "rows": 1],
+    ]
     
     // Sections
     // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionsArray.count
+        return sectionsArray.count + 1
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -271,7 +275,12 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         label.backgroundColor = .clear
         label.font = Fonts.tinyElementLight!
         label.textColor = UIColor.gray
-        label.text = NSLocalizedString(sectionsArray[section]["title"] as! String, comment: "").uppercased()
+        if section != sectionsArray.count {
+            label.text = NSLocalizedString(sectionsArray[section]["title"] as! String, comment: "").uppercased()
+        } else {
+            let appVersion = Bundle.main.infoDictionary!["CFBundleVersion"] as! String ?? "Build Number Not Available"
+            label.text = ("Mind & Body v" + appVersion)
+        }
         label.sizeToFit()
         label.frame = CGRect(x: 16, y: 0, width: label.bounds.width, height: headerHeight)
         header.addSubview(label)
@@ -318,7 +327,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     // Number of rows per section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
-        return sectionsArray[section]["rows"] as! Int
+        if section == sectionsArray.count {
+            return 0
+        } else {
+            return sectionsArray[section]["rows"] as! Int
+        }
     }
     
     // Row cell customization
@@ -566,6 +579,16 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 cell.textLabel?.font = Fonts.regularCell
                 return cell
             }
+            
+        case 7:
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            //
+            cell.textLabel?.text = "support@mind-and-body.info"
+            cell.textLabel?.textAlignment = NSTextAlignment.left
+            cell.backgroundColor = Colors.light
+            cell.textLabel?.font = Fonts.regularCell
+            return cell
+            
         //
         default: break
         }
@@ -838,10 +861,16 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 self.present(alert, animated: true, completion: nil)
                 tableView.deselectRow(at: indexPath, animated: true)
             }
+        
+        /// Support
+        case 7:
+            sendEmail()
+            tableView.deselectRow(at: indexPath, animated: true)
         //
         default: break
         }
     }
+    
     
     //
     // MARK: Switch handlers
@@ -1263,6 +1292,46 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
                 UserDefaults.standard.set(walkthroughs, forKey: "walkthroughs")
             })
         }
+    }
+}
+
+/// MARK: Send email
+extension Settings: MFMailComposeViewControllerDelegate {
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["support@mind-and-body.info"])
+            mail.setMessageBody("<p></p>", isHTML: true)
+            
+            present(mail, animated: true)
+        } else { // Failure
+            // Alert
+            let title = NSLocalizedString("noEmail", comment: "")
+            let message = NSLocalizedString("noEmailMessage", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.view.tintColor = Colors.dark
+            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .natural
+            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 19)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+            
+            
+            // Reset app action
+            let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertAction.Style.default) {
+                UIAlertAction in
+            }
+            // Add Actions
+            alert.addAction(okAction)
+            
+            // Present Alert
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }
 

@@ -212,20 +212,21 @@
                             <constraint firstItem="vci-rP-y7J" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" id="0kT-uF-O1a"/>
                             <constraint firstAttribute="trailing" secondItem="mbq-ii-X2T" secondAttribute="trailing" id="8VV-UW-KwH"/>
                             <constraint firstItem="mbq-ii-X2T" firstAttribute="top" secondItem="96v-hP-GAm" secondAttribute="top" id="9ia-Eu-roI"/>
-                            <constraint firstItem="2mZ-8b-7jP" firstAttribute="top" secondItem="mbq-ii-X2T" secondAttribute="bottom" id="Q5T-n8-7rl"/>
                             <constraint firstItem="2mZ-8b-7jP" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" constant="8" id="QlL-qy-9tv"/>
                             <constraint firstItem="nYW-oD-8ex" firstAttribute="top" secondItem="tlE-Ad-BgG" secondAttribute="bottom" constant="8" id="Qy2-B9-cv0"/>
                             <constraint firstItem="vci-rP-y7J" firstAttribute="top" secondItem="mbq-ii-X2T" secondAttribute="bottom" id="WMQ-5f-RcP"/>
                             <constraint firstItem="mbq-ii-X2T" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" id="c8M-nH-nK3"/>
                             <constraint firstAttribute="trailing" secondItem="vci-rP-y7J" secondAttribute="trailing" id="e3g-2D-Rdf"/>
+                            <constraint firstItem="2mZ-8b-7jP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tlE-Ad-BgG" secondAttribute="bottom" constant="8" id="hr8-y3-I1Y"/>
                             <constraint firstItem="JGZ-Ex-BjH" firstAttribute="top" secondItem="vci-rP-y7J" secondAttribute="bottom" id="jJr-FP-6ag"/>
                             <constraint firstItem="nYW-oD-8ex" firstAttribute="leading" secondItem="96v-hP-GAm" secondAttribute="leading" constant="8" id="mQ8-TT-4BD"/>
+                            <constraint firstItem="2mZ-8b-7jP" firstAttribute="top" secondItem="vci-rP-y7J" secondAttribute="top" id="stf-sY-KVx"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="2mZ-8b-7jP" id="s0O-5h-FGt"/>
                         <outlet property="backButtonHeight" destination="RTt-rN-iVF" id="Nzk-qA-atL"/>
-                        <outlet property="backButtonTop" destination="Q5T-n8-7rl" id="GYy-Sp-73b"/>
+                        <outlet property="backButtonTop" destination="stf-sY-KVx" id="Tfh-1D-3fB"/>
                         <outlet property="cancelButton" destination="nYW-oD-8ex" id="VBS-EG-eEc"/>
                         <outlet property="choiceTable" destination="vci-rP-y7J" id="pnR-ti-c1H"/>
                         <outlet property="groupImage" destination="mbq-ii-X2T" id="03V-4X-stK"/>
@@ -3619,17 +3620,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FWW-Vw-Jjs">
-                                                    <rect key="frame" x="10" y="162.5" width="355" height="271.5"/>
+                                                    <rect key="frame" x="10" y="163" width="355" height="270.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8m-kj-mXU">
-                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="32.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="31.5"/>
                                                             <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="27"/>
                                                             <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mlO-hU-Qwz">
-                                                            <rect key="frame" x="141.5" y="42.5" width="72" height="72"/>
+                                                            <rect key="frame" x="141.5" y="41.5" width="72" height="72"/>
                                                             <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="mlO-hU-Qwz" secondAttribute="height" id="aHT-EF-aOP"/>
@@ -3637,7 +3638,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Js-eP-ghN">
-                                                            <rect key="frame" x="0.0" y="124.5" width="355" height="147"/>
+                                                            <rect key="frame" x="0.0" y="123.5" width="355" height="147"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="147" id="bdQ-or-bYo"/>
@@ -3652,7 +3653,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="glO-Kt-GM1">
-                                                    <rect key="frame" x="10" y="197" width="355" height="2"/>
+                                                    <rect key="frame" x="10" y="196.5" width="355" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="4oX-ho-ngs"/>
@@ -4005,14 +4006,14 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 7 / 3 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10Y-WM-odw">
-                                                                <rect key="frame" x="193.5" y="37.5" width="133.5" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" / 3 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10Y-WM-odw">
+                                                                <rect key="frame" x="240.5" y="37.5" width="86.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 0.58 / Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEj-yP-28k">
-                                                                <rect key="frame" x="201" y="8" width="126" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" / Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEj-yP-28k">
+                                                                <rect key="frame" x="272" y="8" width="55" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -4048,14 +4049,14 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 0.38 / Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQ3-lX-vHe">
-                                                                <rect key="frame" x="197.5" y="8" width="129.5" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" / Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQ3-lX-vHe">
+                                                                <rect key="frame" x="270" y="8" width="57" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF 20 / 12 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9e-8L-N73">
-                                                                <rect key="frame" x="175" y="37.5" width="152" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" / 12 Months" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9e-8L-N73">
+                                                                <rect key="frame" x="233" y="37.5" width="94" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>

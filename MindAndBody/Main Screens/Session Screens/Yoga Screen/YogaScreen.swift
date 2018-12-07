@@ -625,8 +625,10 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Expand
     @IBAction func expandExplanation() {
         // Pause running if automatic yoga
-        shouldPresentPauseAlert = false
-        pauseButtonAction()
+        if automaticYogaArray[0] == 1 {
+            shouldPresentPauseAlert = false
+            pauseButtonAction()
+        }
 
         //
         let bounds = UIScreen.main.bounds
@@ -677,7 +679,9 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Retract Explanation
     @IBAction func retractExplanation(_ sender: Any) {
         // Continue running
-        continuePracticeFunc()
+        if automaticYogaArray[0] == 1 {
+            continuePracticeFunc()
+        }
         
         //
         let bounds = UIScreen.main.bounds
@@ -754,7 +758,6 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func cancelTask() {
-        
         DispatchQueue.main.async {
             if !(self.task?.isCancelled ?? false) {
                 self.task?.cancel()

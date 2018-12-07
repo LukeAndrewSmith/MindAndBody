@@ -39,6 +39,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     static let accountSecret = "a255263277c14664afb897c5de689810"
 
     var products: [SKProduct] = []
+    var request: SKProductsRequest?
 
     var isTrialPurchased: Bool?
     var expirationDate: Date?
@@ -59,13 +60,14 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     // MARK:- Load Products
     func loadProducts() {
         let productIdentifiers = Set<String>(ProductType.all.map({$0.rawValue}))
-        let request = SKProductsRequest(productIdentifiers: productIdentifiers)
-        request.delegate = self
-        request.start()
+        self.request = SKProductsRequest(productIdentifiers: productIdentifiers)
+        request?.delegate = self
+        request?.start()
     }
     // Handle request
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         guard response.products.count > 0 else {return}
+        print("Received response")
         self.products = response.products
         // Notify that products have been loaded
         DispatchQueue.main.async {
@@ -76,9 +78,10 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     func request(_ request: SKRequest, didFailWithError error: Error) {
         if request is SKProductsRequest {
             print("Subscription Options Failed Loading: \(error.localizedDescription)")
+            SubscriptionsCheck.shared.productsFailedError = error.localizedDescription
             // TODO: TRY AND LOAD AGAIN
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+                NotificationCenter.default.post(name: SubscriptionNotifiations.productsFailedToLoad, object: nil)
             }
         }
     }
@@ -115,7 +118,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                     switch result {
                     case .success(let data):
                         self.checkExpiryDateAction(response: data, action: 1, failedNotification: true)
-                    case .failure(let code, let error):
+                    case .failure(let code, let error): // Not sure if right notification posted
                         print("Receipt validation failed with code \(code), error \(error.localizedDescription)")
                         // Failed
                         DispatchQueue.main.async {
@@ -141,9 +144,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
             case .restored:
                 queue.finishTransaction(transaction)
             case .deferred:
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
-                }
+                print("Deferred")
             }
         }
     }
@@ -157,6 +158,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     // Restore failed with error
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Swift.Error) {
         // Cancel transaction
+        SubscriptionsCheck.shared.restoreFailedError = error.localizedDescription
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
         }
@@ -165,7 +167,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     // Restore transaction finished
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         print("Transaction Finished")
-        validateLocalReceipt(action: 1)
+        validateLocalReceipt(action: 1) // Restored all purchases and updated receipt, attempt to validate it
     }
 
     // -------------------------------------------------------------
@@ -198,7 +200,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                         } else if action == 1 {
                             // Indicate no subscription associated with apple id
                             DispatchQueue.main.async {
-                                NotificationCenter.default.post(name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
+                                NotificationCenter.default.post(name: SubscriptionNotifiations.restoreFailedNotification, object: nil)
                             }
                         }
                     }

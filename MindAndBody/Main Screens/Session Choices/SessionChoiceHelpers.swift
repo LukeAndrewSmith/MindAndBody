@@ -1184,12 +1184,21 @@ extension SessionChoice {
 
             snapShot1?.center.x = self.view.center.x - self.view.frame.size.width
             snapShot2?.center.x = self.view.center.x
+            
+            /// Extra session has a mask at the top to hide the image, animate it off with the table if leaving extra session choice
+            if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.choiceProgress == 1 {
+                self.extraSessionMask.center.x = self.view.center.x - self.view.frame.size.width
+            }
 
         }, completion: { finished in
             snapShot1?.removeFromSuperview()
             snapShot2?.removeFromSuperview()
             self.choiceTable.isHidden = false
             self.view.isUserInteractionEnabled = true
+            
+            if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.choiceProgress == 1 {
+                self.extraSessionMask.removeFromSuperview()
+            }
         })
         //
     }
@@ -1218,9 +1227,12 @@ extension SessionChoice {
 
         let snapShot2 = choiceTable.snapshotView(afterScreenUpdates: true)
         if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.selectedGroup == Groups.extra {
-            backButtonTop.constant = -176 // Image height isn't changed till after animation, this puts the back button in the correct posisiton as anchored to image
+            // Image height isn't changed till after animation, this puts the back button in the correct posisiton as anchored to image
+            backButtonTop.constant = -groupImageHeight.constant + ElementHeights.topSafeAreaInset // -176
             self.view.layoutIfNeeded()
-            snapShot2?.frame.origin = CGPoint(x: view.frame.minX - view.frame.size.width, y: 0)
+            snapShot2?.frame.origin = CGPoint(x: view.frame.minX - view.frame.size.width, y: backButton.frame.minY)
+            self.extraSessionMask.center.x = self.view.center.x - self.view.frame.size.width
+            self.view.addSubview(self.extraSessionMask)
         } else {
             snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
         }
@@ -1237,6 +1249,10 @@ extension SessionChoice {
 
             snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
             snapShot2?.center.x = self.view.center.x
+            
+            if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.selectedGroup == Groups.extra {
+                self.extraSessionMask.center.x = self.view.center.x
+            }
 
         }, completion: { finished in
             self.backButtonTop.constant = 0

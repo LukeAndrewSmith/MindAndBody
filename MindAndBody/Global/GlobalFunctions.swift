@@ -14,27 +14,6 @@ import SystemConfiguration
 import UserNotifications
 
 //
-//
-class UserData {
-    static var shared = UserData()
-    private init() {}
-    
-    // Updates if necessary
-    func checkStoredDefaults() {
-        var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
-        let keys = settings.keys.sorted()
-        for i in 0..<settings.keys.count {
-            let key = keys[i]
-            if settings[key] != Register.defaultSettings[key] {
-                settings[key] = Register.defaultSettings[key]
-            }
-        }
-        UserDefaults.standard.set(settings, forKey: "userSettings")
-    }
-    
-}
-
-//
 // iPhone
 class IPhoneType {
     static var shared = IPhoneType()
@@ -45,11 +24,27 @@ class IPhoneType {
         switch UIDevice.current.userInterfaceIdiom {
         // Phone
         case .phone:
+//            switch UIScreen.main.nativeBounds.height {
+//            case 1136:
+//                return .iPhone_5_5S_5C
+//            case 1334:
+//                return .iPhone_6_6S_7_8
+//            case 1920, 2208:
+//                return .iPhone_6_6S_7_8_PLUS
+//            case 2436:
+//                return .iPhone_X_Xs
+//            case 2688:
+//                return .iPhone_Xs_Max
+//            case 1792:
+//                return .iPhone_Xr
+//            default:
+//                return .iPhone_unknown
+//            }
             // 0 == iPhone5
             if UIScreen.main.nativeBounds.height < 1334 {
                 return IPhone.little
             // 2 == iPhoneX
-            } else if UIScreen.main.nativeBounds.height == 2436 {
+            } else if UIScreen.main.nativeBounds.height > 1334 {
                 return IPhone.big
             // 1 == normal
             } else {
@@ -66,6 +61,15 @@ class IPhoneType {
 }
 
 enum IPhone {
+    case iPad
+    case iPhone_unknown
+    case iPhone_5_5S_5C
+    case iPhone_6_6S_7_8
+    case iPhone_6_6S_7_8_PLUS
+    case iPhone_X_Xs
+    case iPhone_Xs_Max
+    case iPhone_Xr
+    
     case average
     case little
     case big
@@ -483,6 +487,10 @@ class SubscriptionsCheck {
             InAppManager.shared.validateLocalReceipt(action: 0)
         }
     }
+    
+    /// Note extra variable for products failed to load error
+    var productsFailedError = "productsFailedText"
+    var restoreFailedError = "restoreWarningMessage"
 }
 
 //
@@ -953,9 +961,6 @@ extension UIViewController {
             
             howToString.append(attributedString)
         }
-        //
-//        howToString.addAttributes(bulletPointFont, range: NSMakeRange(0, howToString.length))
-        //
         howToString.append(return1)
         
         //

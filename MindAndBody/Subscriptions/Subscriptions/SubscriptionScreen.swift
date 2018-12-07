@@ -95,6 +95,7 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(SubscriptionScreen.dismissLoadingWhatever), name: SubscriptionNotifiations.restoreFinishedNotification, object: nil)
         // Load options
         NotificationCenter.default.addObserver(self, selector: #selector(handleOptionsLoaded), name: SubscriptionNotifiations.productsLoadedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleProductsFailed), name: SubscriptionNotifiations.productsFailedToLoad, object: nil)
         // Connection error
         NotificationCenter.default.addObserver(self, selector: #selector(removeLoadingPresentError), name: SubscriptionNotifiations.connectionTimedOutNotification, object: nil)
     }
@@ -134,6 +135,9 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
     
     func setupSubscriptionChoiceView() {
         
+        /// Ensure data is set
+        setSubscriptionData()
+        
         subscriptionChoiceView.backgroundColor = Colors.dark
         subscriptionChoiceView.frame.size = CGSize(width: view.bounds.width, height: 88 * 3)
         subscriptionChoiceViewTop.constant = tryForFreeView.frame.maxY + ElementHeights.bottomSafeAreaInset
@@ -163,7 +167,7 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
         threeMonthsWeek.font = UIFont(name: "SFUIDisplay-semibold", size: 18)
         threeMonthsWeek.textColor = Colors.light
         
-        threeMonthsTotal.font = UIFont(name: "SFUIDisplay-regular", size: 17)
+        threeMonthsTotal.font = UIFont(name: "SFUIDisplay-regular", size: 15)
         threeMonthsTotal.textColor = Colors.gray
         
         // Twelve Months ------------------------------
@@ -181,7 +185,7 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
         twelveMonthsWeek.font = UIFont(name: "SFUIDisplay-semibold", size: 18)
         twelveMonthsWeek.textColor = Colors.light
         
-        twelveMonthsTotal.font = UIFont(name: "SFUIDisplay-regular", size: 17)
+        twelveMonthsTotal.font = UIFont(name: "SFUIDisplay-regular", size: 15)
         twelveMonthsTotal.textColor = Colors.gray
         
         // Extra Info ---------------------
@@ -235,6 +239,8 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
     // Use Subscription data
     func setSubscriptionData() {
 
+        guard InAppManager.shared.products.count == ProductType.all.count else { return }
+        
         var threeMonth = InAppManager.shared.products[0]
         var yearly = InAppManager.shared.products[1]
         
@@ -264,10 +270,10 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
         let yearlyPriceWeekly = formatter.string(from: yearlyWeeklyPrice) ?? "\(yearlyWeeklyPrice)"
         
         threeMonthsWeek.text = threeMonthPriceWeekly + NSLocalizedString("perWeek", comment: "")
-        threeMonthsTotal.text = threeMonthPrice + NSLocalizedString("per3Months", comment: "")
+        threeMonthsTotal.text = NSLocalizedString("billedAs", comment: "") + threeMonthPrice + NSLocalizedString("per3Months", comment: "")
         
         twelveMonthsWeek.text = yearlyPriceWeekly + NSLocalizedString("perWeek", comment: "")
-        twelveMonthsTotal.text = yearlyPrice + NSLocalizedString("per12Months", comment: "")
+        twelveMonthsTotal.text = NSLocalizedString("billedAs", comment: "") + yearlyPrice + NSLocalizedString("per12Months", comment: "")
     }
     
     
@@ -277,10 +283,12 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
     // Present Subscriptions button
     @IBAction func subscriptionButtonAction(_ sender: Any) {
         if InAppManager.shared.products != [] {
+            setupSubscriptionChoiceView()
             animateSubscriptionChoice(up: true)
         } else {
             addLoadingView()
             InAppManager.shared.loadProducts()
+            print("Loading Products")
         }
     }
     
@@ -290,10 +298,10 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
     
     func animateSubscriptionChoice(up: Bool) {
         
-        let viewMaxY = tryForFreeView.frame.maxY + ElementHeights.bottomSafeAreaInset
+        let viewMaxY = tryForFreeView.frame.maxY // ElementHeights.bottomSafeAreaInset
         
         if up {
-            subscriptionChoiceViewTop.constant = viewMaxY - self.subscriptionChoiceView.frame.height
+            subscriptionChoiceViewTop.constant = viewMaxY - subscriptionChoiceViewHeight.constant
             view.insertSubview(subscriptionChoiceBackground, belowSubview: subscriptionChoiceView)
             UIView.animate(withDuration: AnimationTimes.animationTime1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.5, options: .curveEaseOut, animations: {
                 
@@ -348,7 +356,33 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
 
     // -------------------------------------------------------------
     // MARK:- Errors
+    @objc func handleProductsFailed() {
+        // Tell the user the products failed to load with the given apple error message,
+        let title = NSLocalizedString("productsFailedTitle", comment: "")
+        let message = NSLocalizedString(SubscriptionsCheck.shared.productsFailedError, comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = Colors.dark
+        alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-semibold", size: 19)!]), forKey: "attributedTitle")
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-regular", size: 17)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
+        
+        // 'Ok'
+        let okAction = UIAlertAction(title:  NSLocalizedString("retry", comment: ""), style: UIAlertAction.Style.default) {
+            UIAlertAction in
+            InAppManager.shared.loadProducts()
+        }
+        
+        // Add Actions
+        alert.addAction(okAction)
+        
+        // Present Alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @objc func handlePurchaseFailed() {
+        dismissLoadingWhatever()
         // Tell the user they can cancel anytime
         let title = NSLocalizedString("purchaseFailedTitle", comment: "")
         let message = NSLocalizedString("purchaseFailedText", comment: "")
@@ -438,7 +472,7 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
     func presentFailedToRestoreAlert() {
         // Alert View indicating meaning of resetting the app
         let title = NSLocalizedString("restoreWarning", comment: "")
-        let message = NSLocalizedString("restoreWarningMessage", comment: "")
+        let message = NSLocalizedString(SubscriptionsCheck.shared.restoreFailedError, comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-semibold", size: 19)!]), forKey: "attributedTitle")
