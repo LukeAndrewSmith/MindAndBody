@@ -2914,7 +2914,7 @@ extension sessionData {
                     [
                         "name": ["threadTheNeedleYL"],
                         "demonstration": ["threadTheNeedle"], // "threadTheNeedle1", "threadTheNeedle2", "threadTheNeedle3", "threadTheNeedle4", "threadTheNeedle5"],
-                        "explanation": ["threadTheNeedleYLEH", "threadTheNeedleyLEA", "threadTheNeedleYLEF"],
+                        "explanation": ["threadTheNeedleYLEH", "threadTheNeedleYLEA", "threadTheNeedleYLEF"],
                         "attributes": ["a"]
                 ], //
                 "threadTheNeedleYR":
