@@ -73,13 +73,13 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
     
     
     
-    func testCurrentProgress(total: Int, current: Int) -> Int {
-        let weekProgress: Double = Double(current)
-        let weekGoal: Double = Double(total)
-        let currentProgressDivision: Double = (weekProgress / weekGoal) * 100.0
-        let currentProgress = Int(currentProgressDivision)
-        return currentProgress
-    }
+//    func testCurrentProgress(total: Int, current: Int) -> Int {
+//        let weekProgress: Double = Double(current)
+//        let weekGoal: Double = Double(total)
+//        let currentProgressDivision: Double = (weekProgress / weekGoal) * 100.0
+//        let currentProgress = Int(currentProgressDivision)
+//        return currentProgress
+//    }
     
 //    func testTrackingValues() {
 //        var calendar = Calendar(identifier: .iso8601)

@@ -1854,20 +1854,20 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ph9-9z-aWa">
-                                                    <rect key="frame" x="140" y="303.5" width="95" height="25.5"/>
+                                                    <rect key="frame" x="55" y="303.5" width="265" height="25.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="012-1d-8yV">
-                                                    <rect key="frame" x="142.5" y="330" width="90" height="23"/>
+                                                    <rect key="frame" x="55" y="330" width="265" height="23"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMc-AE-wXL">
-                                                    <rect key="frame" x="142.5" y="303.5" width="90" height="49.5"/>
+                                                    <rect key="frame" x="55" y="303.5" width="265" height="49.5"/>
                                                     <connections>
                                                         <action selector="weightButton:" destination="bTr-Zb-a1u" eventType="touchUpInside" id="ElF-7e-92U"/>
                                                     </connections>
@@ -1928,6 +1928,8 @@
                                                 <constraint firstItem="Ph9-9z-aWa" firstAttribute="centerY" secondItem="CWE-s5-9gl" secondAttribute="centerY" multiplier="25/16" id="WnQ-IX-BGB"/>
                                                 <constraint firstItem="sMc-AE-wXL" firstAttribute="width" secondItem="012-1d-8yV" secondAttribute="width" id="Y8e-nl-kXF"/>
                                                 <constraint firstItem="Ujc-DX-HXP" firstAttribute="top" secondItem="sWj-bk-xv2" secondAttribute="bottom" id="cGa-GN-18G"/>
+                                                <constraint firstItem="sWj-bk-xv2" firstAttribute="leading" secondItem="sMc-AE-wXL" secondAttribute="trailing" id="dMc-Vt-Dwp"/>
+                                                <constraint firstItem="Ph9-9z-aWa" firstAttribute="width" secondItem="sMc-AE-wXL" secondAttribute="width" id="ePK-w2-dDn"/>
                                                 <constraint firstItem="HRs-0d-j9h" firstAttribute="centerY" secondItem="CWE-s5-9gl" secondAttribute="centerY" multiplier="30/16" id="fUE-kH-qo4"/>
                                                 <constraint firstItem="aYQ-8x-smf" firstAttribute="centerX" secondItem="CWE-s5-9gl" secondAttribute="centerX" id="g2L-mH-crG"/>
                                                 <constraint firstItem="aYQ-8x-smf" firstAttribute="top" secondItem="CWE-s5-9gl" secondAttribute="top" id="gOx-MB-6mb"/>
@@ -2302,8 +2304,8 @@
                                                         <constraint firstAttribute="width" secondItem="5tM-Fs-tkx" secondAttribute="height" id="FFz-qW-O3f"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
-                                                    <rect key="frame" x="142.5" y="368.5" width="90" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOR-jO-oQj">
+                                                    <rect key="frame" x="55" y="368.5" width="265" height="23"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2317,7 +2319,7 @@
                                                     <state key="normal" image="QuestionMarkM"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NB9-03-fUy">
-                                                    <rect key="frame" x="140" y="342" width="95" height="25.5"/>
+                                                    <rect key="frame" x="55" y="342" width="265" height="25.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2350,7 +2352,7 @@
                                                     <state key="normal" image="Timer"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcq-Kh-Ru8">
-                                                    <rect key="frame" x="142.5" y="342" width="90" height="49.5"/>
+                                                    <rect key="frame" x="55" y="342" width="265" height="49.5"/>
                                                     <connections>
                                                         <action selector="weightButton:" destination="tIh-Sp-rUW" eventType="touchUpInside" id="jbh-bN-6oe"/>
                                                     </connections>
@@ -2358,6 +2360,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="pB9-i1-d5Y" firstAttribute="top" secondItem="5tM-Fs-tkx" secondAttribute="bottom" constant="-15" id="0Q2-xu-McQ"/>
+                                                <constraint firstItem="NB9-03-fUy" firstAttribute="width" secondItem="Wcq-Kh-Ru8" secondAttribute="width" id="C3h-n1-azH"/>
                                                 <constraint firstItem="NB9-03-fUy" firstAttribute="centerY" secondItem="v8f-f7-OK1" secondAttribute="centerY" multiplier="28/16" id="D4I-53-FXI"/>
                                                 <constraint firstAttribute="bottom" secondItem="u08-q7-MDY" secondAttribute="bottom" id="FNC-IN-Rxd"/>
                                                 <constraint firstItem="Wcq-Kh-Ru8" firstAttribute="centerX" secondItem="v8f-f7-OK1" secondAttribute="centerX" id="HGI-fc-p1r"/>
@@ -2372,6 +2375,7 @@
                                                 <constraint firstItem="pB9-i1-d5Y" firstAttribute="centerX" secondItem="v8f-f7-OK1" secondAttribute="centerX" id="hPc-hU-RJS"/>
                                                 <constraint firstItem="AOR-jO-oQj" firstAttribute="centerX" secondItem="v8f-f7-OK1" secondAttribute="centerX" id="i3M-lY-7Vw"/>
                                                 <constraint firstItem="Wcq-Kh-Ru8" firstAttribute="bottom" secondItem="AOR-jO-oQj" secondAttribute="bottom" id="kT7-gA-Pd8"/>
+                                                <constraint firstItem="u08-q7-MDY" firstAttribute="leading" secondItem="Wcq-Kh-Ru8" secondAttribute="trailing" id="lGS-Rl-aVb"/>
                                                 <constraint firstAttribute="trailing" secondItem="u08-q7-MDY" secondAttribute="trailing" id="rlx-8c-BTE"/>
                                                 <constraint firstItem="Wcq-Kh-Ru8" firstAttribute="width" secondItem="AOR-jO-oQj" secondAttribute="width" id="uPK-f8-ubg"/>
                                                 <constraint firstItem="Wcq-Kh-Ru8" firstAttribute="top" secondItem="NB9-03-fUy" secondAttribute="top" id="xTe-ij-bSU"/>
@@ -2478,13 +2482,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movement" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kz8-mk-fSQ">
-                                                    <rect key="frame" x="140" y="341" width="95" height="25.5"/>
+                                                    <rect key="frame" x="55" y="341" width="265" height="25.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets x Reps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5O-yZ-uLf">
-                                                    <rect key="frame" x="142.5" y="367.5" width="90" height="23"/>
+                                                    <rect key="frame" x="55" y="367.5" width="265" height="23"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2538,7 +2542,9 @@
                                                 <constraint firstItem="POy-oA-8ma" firstAttribute="height" secondItem="d0d-1U-YoD" secondAttribute="height" multiplier="13/16" id="Tcn-bk-TZB"/>
                                                 <constraint firstItem="EdY-jj-zVA" firstAttribute="top" secondItem="UIY-cl-Hpc" secondAttribute="bottom" id="UTc-bu-e1F"/>
                                                 <constraint firstItem="Yay-Qc-P2r" firstAttribute="top" secondItem="POy-oA-8ma" secondAttribute="bottom" constant="-15" id="WdE-qm-ZAe"/>
+                                                <constraint firstItem="EdY-jj-zVA" firstAttribute="leading" secondItem="r5O-yZ-uLf" secondAttribute="trailing" id="b2p-c7-jt8"/>
                                                 <constraint firstItem="Kz8-mk-fSQ" firstAttribute="centerX" secondItem="d0d-1U-YoD" secondAttribute="centerX" id="oNp-dW-GIE"/>
+                                                <constraint firstItem="EdY-jj-zVA" firstAttribute="leading" secondItem="Kz8-mk-fSQ" secondAttribute="trailing" id="ujw-a8-xeW"/>
                                                 <constraint firstAttribute="trailing" secondItem="EdY-jj-zVA" secondAttribute="trailing" id="vqG-yW-wgj"/>
                                                 <constraint firstItem="Kz8-mk-fSQ" firstAttribute="centerY" secondItem="d0d-1U-YoD" secondAttribute="centerY" multiplier="28/16" id="w6k-bV-ygO"/>
                                             </constraints>
@@ -2638,7 +2644,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pose" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqj-bh-qKL">
-                                                    <rect key="frame" x="44" y="278.5" width="287" height="27"/>
+                                                    <rect key="frame" x="8" y="278.5" width="359" height="27"/>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="23"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2652,8 +2658,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="tD2-Ad-c9U" firstAttribute="centerY" secondItem="RU3-GG-eIc" secondAttribute="centerY" multiplier="11/12" id="9h4-Ye-Y0b"/>
+                                                <constraint firstItem="mqj-bh-qKL" firstAttribute="leading" secondItem="RU3-GG-eIc" secondAttribute="leading" constant="8" id="Fav-DX-0t5"/>
                                                 <constraint firstItem="mqj-bh-qKL" firstAttribute="centerX" secondItem="RU3-GG-eIc" secondAttribute="centerX" id="ZRz-JZ-j7Z"/>
-                                                <constraint firstAttribute="trailing" secondItem="mqj-bh-qKL" secondAttribute="trailing" constant="44" id="ocf-yd-tgZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="mqj-bh-qKL" secondAttribute="trailing" constant="8" id="ocf-yd-tgZ"/>
                                                 <constraint firstItem="tD2-Ad-c9U" firstAttribute="centerX" secondItem="RU3-GG-eIc" secondAttribute="centerX" id="xxD-Ko-DEb"/>
                                                 <constraint firstItem="mqj-bh-qKL" firstAttribute="centerY" secondItem="RU3-GG-eIc" secondAttribute="centerY" multiplier="21/12" id="ykK-OI-rb1"/>
                                             </constraints>
@@ -3620,17 +3627,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FWW-Vw-Jjs">
-                                                    <rect key="frame" x="10" y="163" width="355" height="270.5"/>
+                                                    <rect key="frame" x="10" y="162.5" width="355" height="271.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8m-kj-mXU">
-                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="31.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="32.5"/>
                                                             <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="27"/>
                                                             <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mlO-hU-Qwz">
-                                                            <rect key="frame" x="141.5" y="41.5" width="72" height="72"/>
+                                                            <rect key="frame" x="141.5" y="42.5" width="72" height="72"/>
                                                             <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="mlO-hU-Qwz" secondAttribute="height" id="aHT-EF-aOP"/>
@@ -3638,7 +3645,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Js-eP-ghN">
-                                                            <rect key="frame" x="0.0" y="123.5" width="355" height="147"/>
+                                                            <rect key="frame" x="0.0" y="124.5" width="355" height="147"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="147" id="bdQ-or-bYo"/>
@@ -3653,7 +3660,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="glO-Kt-GM1">
-                                                    <rect key="frame" x="10" y="196.5" width="355" height="2"/>
+                                                    <rect key="frame" x="10" y="197" width="355" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="4oX-ho-ngs"/>

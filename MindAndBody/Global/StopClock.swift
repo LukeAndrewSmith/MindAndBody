@@ -53,7 +53,7 @@ class StopClock {
         cancelButton.backgroundColor = Colors.light
         cancelButton.setTitleColor(Colors.red, for: .normal)
         cancelButton.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
-        cancelButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        cancelButton.titleLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 21)
         cancelButton.frame = CGRect(x: 0, y: stopClock.bounds.height - 10, width: stopClock.bounds.width, height: 49)
         cancelButton.layer.cornerRadius = cancelButton.bounds.height / 2
         cancelButton.clipsToBounds = true
@@ -64,7 +64,7 @@ class StopClock {
         startButton.backgroundColor = Colors.light
         startButton.setTitleColor(Colors.green, for: .normal)
         startButton.setTitle(NSLocalizedString("start", comment: ""), for: .normal)
-        startButton.titleLabel?.font = UIFont(name: "SFUIDisplay-thin", size: 23)
+        startButton.titleLabel?.font = UIFont(name: "SFUIDisplay-regular", size: 21)
         startButton.frame = CGRect(x: 0, y: stopClock.bounds.height - 40, width: stopClock.bounds.width, height: 49)
         startButton.layer.cornerRadius = startButton.bounds.height / 2
         startButton.clipsToBounds = true
