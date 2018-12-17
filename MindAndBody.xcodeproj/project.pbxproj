@@ -2594,7 +2594,6 @@
 		07EFC0AB1F66CCEF0030DCE6 /* Creator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		07F8EDD41FA5DB3700C452F4 /* ScheduleTypeQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeQuestion.swift; sourceTree = "<group>"; };
 		07FE380D1DF9B3A200E7EA20 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		07FE380F1DF9B3C700E7EA20 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.storyboard; sourceTree = "<group>"; };
 		07FFA30E1F4C614B00E9B0C1 /* cardioWarmup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardioWarmup.png; sourceTree = "<group>"; };
 		07FFA3121F4C615400E9B0C1 /* legsToSideSquat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = legsToSideSquat.png; sourceTree = "<group>"; };
 		07FFA3131F4C615400E9B0C1 /* legsToSideSquat1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = legsToSideSquat1.png; sourceTree = "<group>"; };
@@ -6725,7 +6724,6 @@
 			knownRegions = (
 				en,
 				Base,
-				fr,
 			);
 			mainGroup = 077AC0CE1DA535830026895B;
 			productRefGroup = 077AC0D81DA535830026895B /* Products */;
@@ -8164,7 +8162,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				077AC0E11DA535840026895B /* Base */,
-				07FE380F1DF9B3C700E7EA20 /* fr */,
 			);
 			name = Main.storyboard;
 			path = .;

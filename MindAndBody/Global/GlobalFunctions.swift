@@ -553,6 +553,33 @@ class Loading {
     }
 }
 
+//
+// Ratings prompt
+public class RatingsPrompt {
+    
+    /// Ask the user to rate the app
+    /// Called after user completes group in: ScheduleHelpers -> reloadCompletedRow()
+    class func promptRating() {
+        
+        guard let lastPrompt = UserDefaults.standard.object(forKey: "lastRatingsPrompt") as? Date else
+            { return }
+        
+        // Ask each month
+        var calendar = Calendar(identifier: .iso8601)
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+        guard let newPrompt = calendar.date(byAdding: .month, value: 1, to: lastPrompt) else
+            { return }
+        // If new month
+        if newPrompt < Date().setToMidnightUTC() {
+            // Note: Apple only asks if user hasn't already rated
+            if #available(iOS 10.3, *) {
+                SKStoreReviewController.requestReview()
+                UserDefaults.standard.setValue(Date().setToMidnightUTC(), forKey: "lastRatingsPrompt")
+            }
+        }
+    }
+}
+
 
 // Thanks to RAJAMOHAN-S on stack overflow
 public class Reachability {

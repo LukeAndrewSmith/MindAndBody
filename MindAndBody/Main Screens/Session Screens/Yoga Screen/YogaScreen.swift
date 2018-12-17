@@ -467,18 +467,18 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //
     @IBAction func upSwipeAction() {
         // Cancel Dispatch
-        if canSwipe && selectedRow != keyArray.count-1 {
+        if canSwipe && selectedRow != keyArray.count-1 && automaticYogaArray[0] == 1 {
             cancelTimer()
-            nextButtonAction()
         }
+        nextButtonAction()
     }
     
     @IBAction func downSwipeAction() {
         // Cancel Dispatch
-        if canSwipe && selectedRow != 0 {
+        if canSwipe && selectedRow != 0 && automaticYogaArray[0] == 1 {
             cancelTimer()
-            backButtonAction()
         }
+        backButtonAction()
     }
     
     // Next Button
@@ -491,7 +491,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 updateProgress()
 
                 // Play bell and start next timer
-                if self.automaticYogaArray[3] != -1 {
+                if self.automaticYogaArray[3] != -1 && automaticYogaArray[0] == 1 {
                     let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
                     //
                     do {
@@ -565,7 +565,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 updateProgress()
                 
                 // Play bell and start next timer
-                if self.automaticYogaArray[3] != -1 {
+                if self.automaticYogaArray[3] != -1 && automaticYogaArray[0] == 1 {
                     let url = Bundle.main.url(forResource: self.bellsArray[self.automaticYogaArray[3]], withExtension: "caf")!
                     //
                     do {

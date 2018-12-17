@@ -194,7 +194,22 @@ class ScheduleVariables {
         
         // Extra session
         if isLastChoice() && isExtraSession {
-            return !extraSessionCompletion.contains(false)
+            switch ScheduleVariables.shared.selectedGroup {
+            case Groups.yoga:   /// 2nd thing needs to be completed
+                return extraSessionCompletion[1]
+            case Groups.flexibility: /// 2 things need to be completed
+                var count = 0
+                for bool in extraSessionCompletion {
+                    if bool {
+                        count += 1
+                    }
+                }
+                return (count >= 2)
+            case Groups.meditation:                 /// 1 thing needs to be completed
+                return extraSessionCompletion.contains(true)
+            default: /// Groups.workout && Groups.endurance /// 3 things need to be completed
+                return !extraSessionCompletion.contains(false)
+            }
             
         // Normal
         } else {

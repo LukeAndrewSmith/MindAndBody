@@ -337,71 +337,78 @@ extension ScheduleScreen: UITableViewDelegate, UITableViewDataSource {
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // Silly highlighting issue
-        // Highlight affects checkBox background colors, therefore find the button through the image, and set the background color to green if the border is green as implies that it is selected
-        if tableView == scheduleTable {
-            let cell = tableView.cellForRow(at: indexPath)
-            for view in (cell?.subviews)! {
-                if view is UIButton {
-                    if let image = (view as! UIButton).imageView?.image, image == #imageLiteral(resourceName: "CheckMark") {
-                        view.backgroundColor = Colors.green
+        if ScheduleVariables.shared.schedules.count > 0 {
+
+            // Silly highlighting issue
+            // Highlight affects checkBox background colors, therefore find the button through the image, and set the background color to green if the border is green as implies that it is selected
+            if tableView == scheduleTable {
+                let cell = tableView.cellForRow(at: indexPath)
+                for view in (cell?.subviews)! {
+                    if view is UIButton {
+                        if let image = (view as! UIButton).imageView?.image, image == #imageLiteral(resourceName: "CheckMark") {
+                            view.backgroundColor = Colors.green
+                        }
                     }
                 }
             }
-        }
-        
-        //
-        // Session choice
-        switch tableView {
-        case scheduleTable:
             
-            // Extra Session
-            // (day view last cell || week view last cell)
-            if  (ScheduleVariables.shared.scheduleStyle == "day" && indexPath.row == ScheduleVariables.shared.currentDayCount() ||  ScheduleVariables.shared.scheduleStyle == "week" && indexPath.row == ScheduleVariables.shared.weekArray.count) {
+            //
+            // Session choice
+            switch tableView {
+            case scheduleTable:
                 
-                ScheduleVariables.shared.initializeChoice(extraSession: true, selectedRow: indexPath.row)
-                performSegue(withIdentifier: "SessionChoiceSegue", sender: self)
-                goingToSessionChoice = true
-            } else {
-                
-                let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: indexPath.row)
-                // If group is not completed, do something
-                if !ScheduleVariables.shared.isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: false) {
-                    ScheduleVariables.shared.initializeChoice(extraSession: false, selectedRow: indexPath.row)
+                // Extra Session
+                // (day view last cell || week view last cell)
+                if  (ScheduleVariables.shared.scheduleStyle == "day" && indexPath.row == ScheduleVariables.shared.currentDayCount() ||  ScheduleVariables.shared.scheduleStyle == "week" && indexPath.row == ScheduleVariables.shared.weekArray.count) {
+                    
+                    ScheduleVariables.shared.initializeChoice(extraSession: true, selectedRow: indexPath.row)
                     performSegue(withIdentifier: "SessionChoiceSegue", sender: self)
                     goingToSessionChoice = true
+                } else {
+                    
+                    let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: indexPath.row)
+                    // If group is not completed, do something
+                    if !ScheduleVariables.shared.isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: false) {
+                        ScheduleVariables.shared.initializeChoice(extraSession: false, selectedRow: indexPath.row)
+                        performSegue(withIdentifier: "SessionChoiceSegue", sender: self)
+                        goingToSessionChoice = true
+                    }
+                   
                 }
-               
+                
+                tableView.deselectRow(at: indexPath, animated: true)
+                
+            // Select schedule
+            case scheduleChoiceTable:
+            
+                ScheduleVariables.shared.selectedScheduleIndex = indexPath.row
+                ScheduleVariables.shared.saveSelectedScheduleIndex()
+                ScheduleVariables.shared.scheduleStyle = (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
+                
+                // If week view, create temporary week array
+                ScheduleVariables.shared.createTemporaryWeekViewArray()
+                
+                // Reload table
+                layoutViews()
+                // nina
+                scheduleChoiceTable.reloadData()
+                self.scheduleTable.reloadData()
+                
+                // Tracking
+                Tracking.shared.updateWeekGoal()
+                Tracking.shared.updateWeekProgress()
+                Tracking.shared.updateTracking()
+                
+                // Notifications
+                ReminderNotifications.shared.setNotifications()
+                tableView.deselectRow(at: indexPath, animated: true)
+                
+            default:
+                tableView.deselectRow(at: indexPath, animated: true)
             }
             
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-        // Select schedule
-        case scheduleChoiceTable:
-        
-            ScheduleVariables.shared.selectedScheduleIndex = indexPath.row
-            ScheduleVariables.shared.saveSelectedScheduleIndex()
-            ScheduleVariables.shared.scheduleStyle = (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
-            
-            // If week view, create temporary week array
-            ScheduleVariables.shared.createTemporaryWeekViewArray()
-            
-            // Reload table
-            layoutViews()
-            // nina
-            scheduleChoiceTable.reloadData()
-            self.scheduleTable.reloadData()
-            
-            // Tracking
-            Tracking.shared.updateWeekGoal()
-            Tracking.shared.updateWeekProgress()
-            Tracking.shared.updateTracking()
-            
-            // Notifications
-            ReminderNotifications.shared.setNotifications()
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-        default:
+        // No schedules
+        } else {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }

@@ -241,6 +241,9 @@ extension ScheduleScreen {
             if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
                 updateDayIndicatorColours()
             }
+            
+            /// Ask user to rate
+            RatingsPrompt.promptRating()
         }
     }
     

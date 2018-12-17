@@ -45,8 +45,13 @@ class UserData {
     
     func registerDefaults() {
         // Register Defaults --------------------------------------------------------------------------------
+        
+        // Rating
+        UserDefaults.standard.register(defaults: ["lastRatingsPrompt" : Date().setToMidnightUTC()])
+
         // Subscriptions
         UserDefaults.standard.register(defaults: ["userSubscriptionExpiryDate" : "0"])
+        
         // Settings
         UserDefaults.standard.register(defaults: ["userSettings" : Register.defaultSettings])
         
