@@ -379,7 +379,7 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
             case selectedRow:
                 cell.indicatorStack.alpha = 1
                 cell.movementLabel.alpha = 1
-                cell.explanationButton.alpha = 1
+                cell.explanationButton.alpha = 0
                 cell.timeLabel.alpha = 1
             //
             case selectedRow + 1:
@@ -692,9 +692,6 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Expand
     @IBAction func expandExplanation() {
         // Pause
-        shouldPresentPauseAlert = false
-        pauseButtonAction(self)
-        
         let bounds = UIScreen.main.bounds
         // View
         //
@@ -744,8 +741,6 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
     // Retract Explanation
     @IBAction func retractExplanation(_ sender: Any) {
         //
-        continueSession()
-        
         let bounds = UIScreen.main.bounds
         //
         UIView.animate(withDuration: AnimationTimes.animationTime2, animations: {

@@ -134,7 +134,7 @@ class TrackingScreen: UIViewController, ChartViewDelegate {
         setupChart()
         
         if !view.subviews.contains(percentageLabel) {
-            percentageLabel.text = NSLocalizedString("%acheived", comment: "")
+            percentageLabel.text = NSLocalizedString("%achieved", comment: "")
             percentageLabel.font = Fonts.smallElementLight!
             percentageLabel.sizeToFit()
             percentageLabel.center = CGPoint(x: percentageLabel.bounds.height/2, y: chartView.center.y)

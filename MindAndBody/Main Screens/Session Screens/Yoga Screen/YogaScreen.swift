@@ -138,7 +138,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // MARK: Walkthrough
             let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
             // Walkthrough if not automatic yoga
-            if walkthroughs["Session2"] == false && self.automaticYogaArray[0] != 1 {
+            if walkthroughs["Session2"] == false {
                 self.walkthroughSession()
             } else {
                 if automaticYogaArray[0] == 1 {
@@ -929,7 +929,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //
     // Components
-    var walkthroughTexts = ["yogaPractice0", "yogaPractice1", "yogaPractice2", "yogaPractice3", "yogaPractice4"]
+    var walkthroughTexts = ["yogaPractice0", "yogaPractice1", "yogaPractice2", "yogaPractice3"]
     var highlightSize: CGSize? = nil
     var highlightCenter: CGPoint? = nil
     // Corner radius, 0 = height / 2 && 1 = width / 2
@@ -1019,30 +1019,8 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             walkthroughProgress = self.walkthroughProgress + 1
             
-        // Demonstration (+ target area)
-        case 1:
-            //
-            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
-            highlightSize = cell.imageIndicator.frame.size
-            highlightCenter = cell.imageIndicator.center
-            highlightCenter?.y += toAdd
-            //
-            highlightCornerRadius = 0
-            // Top of view
-            labelFrame = 1
-            //
-            walkthroughBackgroundColor = Colors.light
-            walkthroughTextColor = Colors.dark
-            highlightColor = Colors.light
-            //
-            nextWalkthroughViewTest(walkthroughView: walkthroughView, labelView: walkthroughLabelView, label: walkthroughLabel, title: walkthroughLabelTitle, highlight: walkthroughHighlight, walkthroughTexts: walkthroughTexts, walkthroughLabelFrame: labelFrame, highlightSize: highlightSize!, highlightCenter: highlightCenter!, highlightCornerRadius: highlightCornerRadius, backgroundColor: walkthroughBackgroundColor, textColor: walkthroughTextColor, highlightColor: highlightColor, animationTime: 0.4, walkthroughProgress: walkthroughProgress)
-            
-            //
-            walkthroughProgress = self.walkthroughProgress + 1
-            
-            
         // Explanation
-        case 2:
+        case 1:
             //
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
             highlightSize = cell.explanationButton.frame.size
@@ -1064,7 +1042,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             walkthroughProgress = self.walkthroughProgress + 1
             
         // Next Movement
-        case 3:
+        case 2:
             //
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! YogaOverviewTableViewCell
             highlightSize = cell.explanationButton.frame.size
@@ -1086,7 +1064,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             walkthroughProgress = self.walkthroughProgress + 1
             
         // Next movement demonstration and then go to finish early
-        case 4:
+        case 3:
             //
             walkthroughLabelView.alpha = 0
             //

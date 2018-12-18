@@ -4371,15 +4371,13 @@
 
         // Yoga
 "yogaPractice0T" = "Breaths";
-        "yogaPractice0" = "The number of breaths to hold a pose for.";
-"yogaPractice1T" = "Demonstration";
-        "yogaPractice1" = "If the left indicator under the image is a green arrow, then tapping the image presents a demonstration.";
-"yogaPractice2T" = "Explanation";
-        "yogaPractice2" = "Explanations are very important for understanding the details of each pose, and help you to perform them optimally.";
-"yogaPractice3T" = "Next Movement";
-        "yogaPractice3" = "Your progress through the session is indicated in the bar at the top.\nSwipe up to go to the next movement.";
-"yogaPractice4T" = "Breaths";
-        "yogaPractice4" = "Finish Early:\nNote: The schedule will not track the practice unless you finish it and press 'End Practice' at the bottom ('End Practice' appears after the last movement).";
+    "yogaPractice0" = "The number of breaths to hold a pose for.\nNote: 'Automatic Yoga' is on by default, the app times the poses for you so you don't have to touch your phone, change your average breath length/turn this option off in the app settings.";
+"yogaPractice1T" = "Explanation";
+        "yogaPractice1" = "Explanations are very important for understanding the details of each pose, and help you to perform them optimally.";
+"yogaPractice2T" = "Next Movement";
+        "yogaPractice2" = "Your progress through the session is indicated in the bar at the top.\nSwipe up to go to the next movement.";
+"yogaPractice3T" = "Breaths";
+        "yogaPractice3" = "Finish Early:\nNote: The schedule will not track the practice unless you finish it and press 'End Practice' at the bottom ('End Practice' appears after the last movement).";
 
 
 
