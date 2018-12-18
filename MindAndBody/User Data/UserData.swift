@@ -222,7 +222,12 @@ class Tests {
         let notInSessions = sessionsArray.subtracting(sortedSessionsArray)
         // Duplicates
         let duplicates = Array(Set(sortedSessionsArray.filter({ (i) in sortedSessionsArray.filter({ $0 == i }).count > 1})))
-        
+        print("notInSortedSessions")
+        print(notInSortedSessions)
+        print("notInSessions")
+        print(notInSessions)
+        print("duplicates")
+        print(duplicates)
     }
     
 }
