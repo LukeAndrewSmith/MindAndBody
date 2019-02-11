@@ -33,7 +33,7 @@ extension sessionData {
                 "short": [
                     // Average
                     "average": [
-                                "allMovements",
+//                                "allMovements",
                                 "WaWS-F-1",
                                 "WaWS-F-2",
                                 "WaWS-F-3",
@@ -87,7 +87,7 @@ extension sessionData {
                 "short": [
                     // Easy
                     "easy": [
-                            "allMovements",
+//                            "allMovements",
                             "WGES-CsF-1-W",
                              "WGES-CsF-2-W",
                              "WGES-CsF-3-W",
@@ -1013,7 +1013,7 @@ extension sessionData {
                 "veryShort": [
                     // Easy
                     "easy": [
-                            "allMovements",
+//                            "allMovements",
                             "YREVs-1",
                              "YREVs-2",
                              "YREVs-3",
@@ -1463,7 +1463,7 @@ extension sessionData {
                 "short": [
                     // Easy
                     "easy": [
-                            "allMovements",
+//                            "allMovements",
                             "SGES-1",
                              "SGES-2",
                              "SGES-3",],

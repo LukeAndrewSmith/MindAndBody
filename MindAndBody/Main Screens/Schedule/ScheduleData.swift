@@ -377,6 +377,7 @@ class ScheduleVariables {
                 }
                 
                 ReminderNotifications.shared.updateBadges()
+                ReminderNotifications.shared.setNotifications()
                 Tracking.shared.updateWeekProgress()
                 Tracking.shared.updateTracking()
             }
@@ -393,6 +394,7 @@ class ScheduleVariables {
             updateGroupForOtherSchedule(markAs: !currentBool, group: group)
             
             ReminderNotifications.shared.updateBadges()
+            ReminderNotifications.shared.setNotifications()
             Tracking.shared.updateWeekProgress()
             Tracking.shared.updateTracking()
 

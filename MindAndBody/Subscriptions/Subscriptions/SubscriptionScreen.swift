@@ -359,7 +359,7 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
     @objc func handleProductsFailed() {
         // Tell the user the products failed to load with the given apple error message,
         let title = NSLocalizedString("productsFailedTitle", comment: "")
-        let message = NSLocalizedString(SubscriptionsCheck.shared.productsFailedError, comment: "")
+        let message = NSLocalizedString(InAppManager.shared.productsFailedError, comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-semibold", size: 19)!]), forKey: "attributedTitle")
@@ -472,7 +472,7 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
     func presentFailedToRestoreAlert() {
         // Alert View indicating meaning of resetting the app
         let title = NSLocalizedString("restoreWarning", comment: "")
-        let message = NSLocalizedString(SubscriptionsCheck.shared.restoreFailedError, comment: "")
+        let message = NSLocalizedString(InAppManager.shared.restoreFailedError, comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.view.tintColor = Colors.dark
         alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-semibold", size: 19)!]), forKey: "attributedTitle")

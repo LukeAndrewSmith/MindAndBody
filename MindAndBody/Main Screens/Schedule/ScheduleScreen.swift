@@ -141,6 +141,13 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         // Checking subscription is valid, (present loading during check)
         if Loading.shared.shouldPresentLoading {
             Loading.shared.beginLoading(type: 0)
+            // Let user in whatever if the loading is taking too long
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 30, execute: {
+                if Loading.shared.isLoading {
+                    print("Loading too long")
+                    Loading.shared.endLoading()
+                }
+            })
         }
         // Check subscription -> Present Subscription Screen (if not valid)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)

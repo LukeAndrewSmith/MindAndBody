@@ -39,9 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 /// FOR TESTING ON SIMULATOR AS SUBS DON'T WORK
 // {
 //        Loading.shared.shouldPresentLoading = false
-//        SubscriptionsCheck.shared.isValid = true
+//        hasValidSubscription = true
 // }
-        SubscriptionsCheck.shared.checkSubscription()
+        InAppManager.shared.checkSubscription()
 
         NSSetUncaughtExceptionHandler { exception in
             print(exception)

@@ -465,35 +465,6 @@ class TrackingHelpers {
 }
 
 //
-// Subscriptions check
-class SubscriptionsCheck {
-    static var shared = SubscriptionsCheck()
-    private init() {}
-    
-    var isValid = false
-
-    // Check subscriptions, called from AppDelegate when first opening, to see if need to present subscription screen
-    func checkSubscription() {
-        // Check user defaults saved expiry date
-        if let expiryDate = UserDefaults.standard.object(forKey: "userSubscriptionExpiryDate") as? String, InAppManager.shared.isValidExpiryDate(expiryDate: expiryDate) {
-            isValid = true
-            Loading.shared.shouldPresentLoading = false
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: SubscriptionNotifiations.didCheckSubscription, object: nil)
-                NotificationCenter.default.post(name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
-            }
-        } else {
-            Loading.shared.shouldPresentLoading = true
-            InAppManager.shared.validateLocalReceipt(action: 0)
-        }
-    }
-    
-    /// Note extra variable for products failed to load error
-    var productsFailedError = "productsFailedText"
-    var restoreFailedError = "restoreWarningMessage"
-}
-
-//
 // Loading
 class Loading {
     static var shared = Loading()
@@ -505,11 +476,13 @@ class Loading {
     let loadingImage = UIImageView()
     let loadingIndicator = UIActivityIndicatorView()
     var selectedType = 0
+    var isLoading = false
     //
     // type:
         // 0 == white background with icon
         // 1 == see through dark background with no icon
     func beginLoading(type: Int) {
+        isLoading = true
         if type == 0 {
             selectedType = 0
             // Setup view
@@ -548,6 +521,7 @@ class Loading {
     }
     
     func endLoading() {
+        isLoading = false
         selectedType = 0 // Reset type
         loadingView.removeFromSuperview()
     }
