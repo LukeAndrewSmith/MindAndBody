@@ -398,7 +398,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             //
             // Schedule Tracking
-            ScheduleVariables.shared.shouldReloadScheduleTracking()
+            ScheduleManager.shared.shouldReloadScheduleTracking()
             // Dismiss
             self.dismissPractice()
             //
@@ -535,7 +535,7 @@ class YogaScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 if automaticYogaArray[0] == 1 {
                     UIApplication.shared.isIdleTimerDisabled = false
                     // Tracking
-                    ScheduleVariables.shared.shouldReloadScheduleTracking()
+                    ScheduleManager.shared.shouldReloadScheduleTracking()
                     
                     // Play bell and start next timer
                     if self.automaticYogaArray[3] != -1 {

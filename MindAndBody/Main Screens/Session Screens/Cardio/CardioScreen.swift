@@ -274,14 +274,14 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
         switch indexPath.section {
         case 0: break
         case 1:
-            ScheduleVariables.shared.shouldReloadScheduleTracking()
+            ScheduleManager.shared.shouldReloadScheduleTracking()
             
             // Cancel notificaitons
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: self.arrayOfNotifications)
                 
             // Dismiss
             cancelAll()
-            ScheduleVariables.shared.shouldReloadScheduleTracking()
+            ScheduleManager.shared.shouldReloadScheduleTracking()
             self.dismiss(animated: true)
 
         default: break
@@ -367,7 +367,7 @@ class CardioScreen: UIViewController, UITableViewDelegate, UITableViewDataSource
             sessionTime -= 1
         } else {
             cancelAll()
-            ScheduleVariables.shared.shouldReloadScheduleTracking()
+            ScheduleManager.shared.shouldReloadScheduleTracking()
             self.dismiss(animated: true)
         }
         

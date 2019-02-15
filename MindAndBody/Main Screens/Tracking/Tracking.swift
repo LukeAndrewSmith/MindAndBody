@@ -12,10 +12,7 @@ import UIKit
 class Tracking {
     static var shared = Tracking()
     private init() {}
-    
-    // Used in tracking screen
-    var minTime = Double()
-    
+
     func beginNewWeek() {
         
     }
@@ -91,15 +88,15 @@ class Tracking {
         // Recalculate progress each time to be absolutely sure!!!
         
         var completedCount: Int = 0
-        if ScheduleVariables.shared.schedules.count > 0 {
+        if ScheduleManager.shared.schedules.count > 0 {
             // Loop week
             for i in 0...6 {
                 // If day isn't empty
-                if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count != 0 {
+                if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count != 0 {
                     // Loop day
-                    for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count {
+                    for j in 0..<ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count {
                         //
-                        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool == true {
+                        if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool == true {
                             completedCount += 1
                         }
                     }
@@ -119,10 +116,10 @@ class Tracking {
         var trackingProgressDictionary = UserDefaults.standard.object(forKey: "trackingProgress") as! [String: Any]
         // Find goal = number of groups planned = fullWeekArray.count
         var goal = Int()
-        if ScheduleVariables.shared.schedules.count > 0 {
+        if ScheduleManager.shared.schedules.count > 0 {
             // Loop week
             for i in 0...6 {
-                goal += ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count
+                goal += ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count
             }
         } else {
             goal = 1

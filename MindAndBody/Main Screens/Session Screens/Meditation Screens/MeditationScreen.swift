@@ -259,7 +259,7 @@ class MeditationScreen: UIViewController {
             NotificationCenter.default.removeObserver(self)
             //
             // Schedule Tracking
-            ScheduleVariables.shared.shouldReloadScheduleTracking()
+            ScheduleManager.shared.shouldReloadScheduleTracking()
             //
             if view.subviews.contains(hideScreenView) {
                 UIApplication.shared.isStatusBarHidden = false

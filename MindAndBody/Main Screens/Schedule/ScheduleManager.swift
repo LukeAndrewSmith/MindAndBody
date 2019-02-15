@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 
-class ScheduleVariables {
-    static var shared = ScheduleVariables()
+class ScheduleManager {
+    static var shared = ScheduleManager()
     private init() {}
     
     // Images
@@ -194,7 +194,7 @@ class ScheduleVariables {
         
         // Extra session
         if isLastChoice() && isExtraSession {
-            switch ScheduleVariables.shared.selectedGroup {
+            switch ScheduleManager.shared.selectedGroup {
             case Groups.yoga:   /// 2nd thing needs to be completed
                 return extraSessionCompletion[1]
             case Groups.flexibility: /// 2 things need to be completed
@@ -256,7 +256,7 @@ class ScheduleVariables {
             // Use more apparent when week view, as finds the indexing variables
     func getIndexing(row: Int) -> (day: Int, indexInDay: Int) {
         let day: Int = {
-            if ScheduleVariables.shared.isExtraSession {
+            if ScheduleManager.shared.isExtraSession {
                 return 0
             } else if scheduleStyle == ScheduleStyle.day.rawValue {
                 return selectedDay
@@ -265,7 +265,7 @@ class ScheduleVariables {
             }
         }()
         let indexInDay: Int = {
-            if ScheduleVariables.shared.isExtraSession {
+            if ScheduleManager.shared.isExtraSession {
                 return 0
             } else if scheduleStyle == ScheduleStyle.day.rawValue {
                 return row

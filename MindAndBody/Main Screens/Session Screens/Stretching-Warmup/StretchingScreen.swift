@@ -461,7 +461,7 @@ class StretchingScreen: UIViewController, UITableViewDelegate, UITableViewDataSo
         case 1:
             //
             // Schedule Tracking
-            ScheduleVariables.shared.shouldReloadScheduleTracking()
+            ScheduleManager.shared.shouldReloadScheduleTracking()
             //
             self.dismiss(animated: true)
         //

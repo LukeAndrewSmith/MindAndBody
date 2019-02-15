@@ -63,11 +63,11 @@ class ScheduleTypeQuestion: UIViewController {
         super.viewWillAppear(animated)
         //
         // If going back to this screen, delete schedule that has just been created
-        if ScheduleVariables.shared.didCreateNewSchedule {
-            ScheduleVariables.shared.didCreateNewSchedule = false
+        if ScheduleManager.shared.didCreateNewSchedule {
+            ScheduleManager.shared.didCreateNewSchedule = false
 
             // Delete Schedule
-            ScheduleVariables.shared.deleteLastSchedule()
+            ScheduleManager.shared.deleteLastSchedule()
         }
         
     }
@@ -179,32 +179,32 @@ class ScheduleTypeQuestion: UIViewController {
         // 3. Get the value from the text field, and perform actions upon OK press
         okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
             
-            ScheduleVariables.shared.createSchedule()
+            ScheduleManager.shared.createSchedule()
             
             // Update Title
             let textField = alert?.textFields![0]
             let title = textField?.text!
-            ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] = title
+            ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] = title
             //
             // Update schedule settings settings based on switches
             // Schedule type option option
             if self.scheduleOptionSwitch.isOn {
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] = 0
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] = 0
             } else if self.scheduleOptionSwitch.isOn == false {
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] = 1
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] = 1
             }
             // Sessions choice option
             if self.sessionOptionSwitch.isOn {
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] = 0
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] = 0
             } else if self.sessionOptionSwitch.isOn == false {
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
             }
 
             // Update new schedule
-            ScheduleVariables.shared.saveSchedules()
+            ScheduleManager.shared.saveSchedules()
 
             // Indicate that new schedule has been created
-            ScheduleVariables.shared.didCreateNewSchedule = true
+            ScheduleManager.shared.didCreateNewSchedule = true
 
             self.performSegueFunction()
         })
@@ -257,13 +257,13 @@ class ScheduleTypeQuestion: UIViewController {
             var appHelpsCreateSchedule = false
             
             // App helps create schedule
-            print(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int)
-            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
+            print(ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int)
+            if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
                 appHelpsCreateSchedule = true
             }
-            print(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int)
+            print(ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int)
             // App chooses sessions
-            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+            if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
                 appChoosesSessions = true
             }
             destinationVC.appChoosesSessions = appChoosesSessions

@@ -29,34 +29,34 @@ extension SessionChoice {
         updateSelectedChoice(row: row)
 
         // Present next choice or present session
-        switch ScheduleVariables.shared.selectedGroup {
+        switch ScheduleManager.shared.selectedGroup {
         case Groups.workout:
             // Session Choice
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             // Custom
             case 1:
                 // Custom
                 if row == 2 {
-                    ScheduleVariables.shared.choiceProgress = 7
+                    ScheduleManager.shared.choiceProgress = 7
                     nextChoice()
                 } else {
-                    ScheduleVariables.shared.choiceProgress += 1
+                    ScheduleManager.shared.choiceProgress += 1
                     nextChoice()
                 }
             // Go to length 1 or length 2 choice
             case 3:
                 //
-                if ScheduleVariables.shared.indicator == "gym" && ScheduleVariables.shared.indicator2 == "classic" {
-                    ScheduleVariables.shared.choiceProgress = 4
+                if ScheduleManager.shared.indicator == "gym" && ScheduleManager.shared.indicator2 == "classic" {
+                    ScheduleManager.shared.choiceProgress = 4
                     nextChoice()
                     //
                 } else {
-                    ScheduleVariables.shared.choiceProgress = 5
+                    ScheduleManager.shared.choiceProgress = 5
                     nextChoice()
                 }
             // Length 1 - Go to final choice
             case 4:
-                ScheduleVariables.shared.choiceProgress = 6
+                ScheduleManager.shared.choiceProgress = 6
                 nextChoice()
             // Final Choice
             case 6:
@@ -73,12 +73,12 @@ extension SessionChoice {
                     selectedComponent = 2
                     selectStretching()
                 }
-                ScheduleVariables.shared.selectedRows.final = row
+                ScheduleManager.shared.selectedRows.final = row
                 performScheduleSegue()
             // Custom Choice
             case 7:
                 // Indicate selected row
-                ScheduleVariables.shared.selectedRows.final = row
+                ScheduleManager.shared.selectedRows.final = row
                 
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 // If app chooses warmup/stretching
@@ -121,35 +121,35 @@ extension SessionChoice {
                 // }
             // Normal next choice
             default:
-                ScheduleVariables.shared.choiceProgress += 1
+                ScheduleManager.shared.choiceProgress += 1
                 nextChoice()
             }
             
         case Groups.yoga:
             // Session Choice
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             // Go to correct length choice
             case 1:
-                switch ScheduleVariables.shared.indicator {
+                switch ScheduleManager.shared.indicator {
                 case "relaxing":
-                    ScheduleVariables.shared.choiceProgress = 2
+                    ScheduleManager.shared.choiceProgress = 2
                     nextChoice()
                 case "neutral":
-                    ScheduleVariables.shared.choiceProgress = 3
+                    ScheduleManager.shared.choiceProgress = 3
                     nextChoice()
                 case "stimulating":
-                    ScheduleVariables.shared.choiceProgress = 4
+                    ScheduleManager.shared.choiceProgress = 4
                     nextChoice()
                 default: break
                 }
                 // Custom
                 if row == 3 {
-                    ScheduleVariables.shared.choiceProgress = 6
+                    ScheduleManager.shared.choiceProgress = 6
                     nextChoice()
                 }
             // Go from length to final choice
             case 2,3:
-                ScheduleVariables.shared.choiceProgress = 5
+                ScheduleManager.shared.choiceProgress = 5
                 nextChoice()
             // Final Choice
             case 5:
@@ -163,12 +163,12 @@ extension SessionChoice {
                     selectSession()
                     // Stretching
                 }
-                ScheduleVariables.shared.selectedRows.final = row
+                ScheduleManager.shared.selectedRows.final = row
                 performScheduleSegue()
             // Custom
             case 6:
                 // Indicate selected row
-                ScheduleVariables.shared.selectedRows.final = row
+                ScheduleManager.shared.selectedRows.final = row
                 
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 // If app chooses warmup/stretching
@@ -177,7 +177,7 @@ extension SessionChoice {
                     if row == 0 {
                         selectedComponent = 0
                         selectWarmup()
-                        ScheduleVariables.shared.selectedRows.final = row
+                        ScheduleManager.shared.selectedRows.final = row
                         performScheduleSegue()
                         // Practice
                     } else if row == 1 {
@@ -202,17 +202,17 @@ extension SessionChoice {
                 
             // Normal next choice
             default:
-                ScheduleVariables.shared.choiceProgress += 1
+                ScheduleManager.shared.choiceProgress += 1
                 nextChoice()
             }
             
         // Meditation
         case Groups.meditation:
             // Session Choice
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             // Select meditation style - timer, 'guided'
             case 1:
-                ScheduleVariables.shared.selectedRows.final = row // used to be 72 NINA
+                ScheduleManager.shared.selectedRows.final = row // used to be 72 NINA
                 // Timer
                 if row == 0 {
                     performSegue(withIdentifier: "scheduleMeditationSegueTimer", sender: self)
@@ -221,36 +221,36 @@ extension SessionChoice {
                     performSegue(withIdentifier: "scheduleMeditationSegueGuided", sender: self)
                 }
             default:
-                ScheduleVariables.shared.choiceProgress += 1
+                ScheduleManager.shared.choiceProgress += 1
                 nextChoice()
             }
             
             // ------------------------------------------------------------------------------------------------
         // Endurance
         case Groups.endurance:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             // Type 1, hiit vs steady state
             case 1:
                 // HIIT
                 if row == 0 {
-                    ScheduleVariables.shared.choiceProgress += 1
+                    ScheduleManager.shared.choiceProgress += 1
                     nextChoice()
                     // Workout
                 } else if row == 1 {
-                    ScheduleVariables.shared.choiceProgress = 5
+                    ScheduleManager.shared.choiceProgress = 5
                     nextChoice()
                     // Steady state cardio
                 } else if row == 2 {
-                    ScheduleVariables.shared.choiceProgress = 7
+                    ScheduleManager.shared.choiceProgress = 7
                     nextChoice()
                     // Custom
                 } else if row == 3 {
-                    ScheduleVariables.shared.choiceProgress = 9
+                    ScheduleManager.shared.choiceProgress = 9
                     nextChoice()
                 }
             // Go straight to final choice from hiit length
             case 4:
-                ScheduleVariables.shared.choiceProgress = 6
+                ScheduleManager.shared.choiceProgress = 6
                 nextChoice()
             // Session Choice, To Do
             case 6:
@@ -267,13 +267,13 @@ extension SessionChoice {
                     selectedComponent = 2
                     selectStretching()
                 }
-                ScheduleVariables.shared.selectedRows.final = row
+                ScheduleManager.shared.selectedRows.final = row
                 performScheduleSegue()
                 
             // Final choice steady state
             case 7:
                 // Select now as this choice is final choice (even if you choose the length afterwards)
-                ScheduleVariables.shared.selectedRows.final = row
+                ScheduleManager.shared.selectedRows.final = row
                 if row == 1 {
                     endurancePopup()
                 } else {
@@ -283,7 +283,7 @@ extension SessionChoice {
                         steadyStateChoice = 1
                     }
                     //
-                    ScheduleVariables.shared.choiceProgress += 1
+                    ScheduleManager.shared.choiceProgress += 1
                     nextChoice()
                 }
             // Session Choice , To do
@@ -300,12 +300,12 @@ extension SessionChoice {
                 performScheduleSegue()
                 //
                 // Return to final choice without user seeing, as this is extra choice for length of warmup/stretching, need to get back to final choice
-                ScheduleVariables.shared.choiceProgress -= 1
+                ScheduleManager.shared.choiceProgress -= 1
                 nextChoice()
             // Custom
             case 9:
                 // Indicate selected row
-                ScheduleVariables.shared.selectedRows.final = row
+                ScheduleManager.shared.selectedRows.final = row
                 
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 // If app chooses warmup/stretching
@@ -347,23 +347,23 @@ extension SessionChoice {
                 }
                 
             default:
-                ScheduleVariables.shared.choiceProgress += 1
+                ScheduleManager.shared.choiceProgress += 1
                 nextChoice()
             }
             
             // ------------------------------------------------------------------------------------------------
         // Flexibility
         case Groups.flexibility:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             //
             case 1:
                 switch row {
                 // Custom
                 case 5:
-                    ScheduleVariables.shared.choiceProgress = 4
+                    ScheduleManager.shared.choiceProgress = 4
                     nextChoice()
                 default:
-                    ScheduleVariables.shared.choiceProgress += 1
+                    ScheduleManager.shared.choiceProgress += 1
                     nextChoice()
                 }
             // Final choice -> session
@@ -378,12 +378,12 @@ extension SessionChoice {
                     selectSession()
                 }
                 //
-                ScheduleVariables.shared.selectedRows.final = row
+                ScheduleManager.shared.selectedRows.final = row
                 performScheduleSegue()
             // Custom
             case 4:
                 // Indicate selected row
-                ScheduleVariables.shared.selectedRows.final = row
+                ScheduleManager.shared.selectedRows.final = row
                 
                 var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
                 // If app chooses warmup/stretching
@@ -416,28 +416,28 @@ extension SessionChoice {
                 
             // Choice
             default:
-                ScheduleVariables.shared.choiceProgress += 1
+                ScheduleManager.shared.choiceProgress += 1
                 nextChoice()
             }
             
         // Extra Session
         case Groups.extra:
             
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             //
             case 1:
                 
                 let groupString = row.groupFromInt()
 
                 // Select correct session type
-                ScheduleVariables.shared.selectedGroup = Groups(rawValue: groupString) ?? Groups.none
+                ScheduleManager.shared.selectedGroup = Groups(rawValue: groupString) ?? Groups.none
                 
                 // Update selected choice
                 // selectedChoice...[0] to group
-                ScheduleVariables.shared.selectedChoiceWarmup[0] = groupString
-                ScheduleVariables.shared.selectedChoiceSession[0] = groupString
+                ScheduleManager.shared.selectedChoiceWarmup[0] = groupString
+                ScheduleManager.shared.selectedChoiceSession[0] = groupString
                 // Notes ScheduleVariables.shared.selectedChoiceStretching not always used but set anyway for all, no harm done
-                ScheduleVariables.shared.selectedChoiceStretching[0] = groupString
+                ScheduleManager.shared.selectedChoiceStretching[0] = groupString
                 
                 nextChoice()
                 
@@ -445,7 +445,7 @@ extension SessionChoice {
                 
             // Choice
             default:
-                ScheduleVariables.shared.choiceProgress += 1
+                ScheduleManager.shared.choiceProgress += 1
                 nextChoice()
             }
             
@@ -457,7 +457,7 @@ extension SessionChoice {
     // MARK: Perform schedule Segue
     func performScheduleSegue() {
         // App chooses session
-        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+        if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
             performSegue(withIdentifier: "scheduleSegueOverview", sender: self)
             
         // User chooses sessions
@@ -485,8 +485,8 @@ extension SessionChoice {
         let okAction = UIAlertAction(title: NSLocalizedString("done", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
             // Reload
-            ScheduleVariables.shared.shouldReloadScheduleTracking()
-            let indexPath = NSIndexPath(row: ScheduleVariables.shared.selectedRows.final, section: 0)
+            ScheduleManager.shared.shouldReloadScheduleTracking()
+            let indexPath = NSIndexPath(row: ScheduleManager.shared.selectedRows.final, section: 0)
             // Find checkmark button and use this for markAsCompleted function
             if let cell = self.choiceTable.cellForRow(at: indexPath as IndexPath) {
                 for view in (cell.subviews) {
@@ -519,7 +519,7 @@ extension SessionChoice {
         selectedWarmup.append("warmup")
         
         // Cases for session types
-        switch ScheduleVariables.shared.selectedGroup {
+        switch ScheduleManager.shared.selectedGroup {
         // Workout
         case Groups.workout:
             selectedWarmup.append("workout")
@@ -533,10 +533,10 @@ extension SessionChoice {
         }
         
         // No difficulty level for warmup so default is average
-        ScheduleVariables.shared.selectedChoiceWarmup[3] = "average"
+        ScheduleManager.shared.selectedChoiceWarmup[3] = "average"
         
         // Select Random Session
-        let choices = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceWarmup[0]]![ScheduleVariables.shared.selectedChoiceWarmup[1]]![ScheduleVariables.shared.selectedChoiceWarmup[2]]![ScheduleVariables.shared.selectedChoiceWarmup[3]]!
+        let choices = sessionData.sortedSessions[ScheduleManager.shared.selectedChoiceWarmup[0]]![ScheduleManager.shared.selectedChoiceWarmup[1]]![ScheduleManager.shared.selectedChoiceWarmup[2]]![ScheduleManager.shared.selectedChoiceWarmup[3]]!
         let random = Int(arc4random_uniform(UInt32(choices.count)))
         selectedWarmup.append(choices[random])
         //
@@ -548,19 +548,19 @@ extension SessionChoice {
         var selectedSession: [String] = []
         
         // Cases for session types
-        switch ScheduleVariables.shared.selectedGroup {
+        switch ScheduleManager.shared.selectedGroup {
         // Workout
         case Groups.workout:
             selectedSession.append("workout")
-            selectedSession.append(ScheduleVariables.shared.selectedChoiceSession[1]) // Workout type
+            selectedSession.append(ScheduleManager.shared.selectedChoiceSession[1]) // Workout type
         // Yoga
         case Groups.yoga:
             selectedSession.append("yoga")
-            selectedSession.append(ScheduleVariables.shared.indicator) // relaxing, neutral, stimulating
+            selectedSession.append(ScheduleManager.shared.indicator) // relaxing, neutral, stimulating
         // Endurance
         case Groups.endurance:
             selectedSession.append("endurance")
-            selectedSession.append(ScheduleVariables.shared.indicator) // hiit or bodyweight
+            selectedSession.append(ScheduleManager.shared.indicator) // hiit or bodyweight
         // Flexibility
         case Groups.flexibility:
             selectedSession.append("stretching")
@@ -572,87 +572,87 @@ extension SessionChoice {
         // Get difficulty levels
         let difficultyLevels = UserDefaults.standard.object(forKey: "difficultyLevels") as! [String: [String: Int]]
         let difficultyArray = scheduleDataStructures.difficultyArray
-        let group = ScheduleVariables.shared.selectedGroup.rawValue
+        let group = ScheduleManager.shared.selectedGroup.rawValue
         
         // Cases for session types
-        switch ScheduleVariables.shared.selectedGroup {
+        switch ScheduleManager.shared.selectedGroup {
         // Workout
         case Groups.workout:
-            switch ScheduleVariables.shared.selectedChoiceSession[1] {
+            switch ScheduleManager.shared.selectedChoiceSession[1] {
             // Full
             case "classicGymFull", "circuitGymFull", "classicBodyweightFull", "circuitBodyweightFull":
-                ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["workout"]!]
+                ScheduleManager.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["workout"]!]
             // Upper
             case "classicGymUpper", "circuitGymUpper", "classicBodyweightUpper", "circuitBodyweightUpper":
-                ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["workoutUpper"]!]
+                ScheduleManager.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["workoutUpper"]!]
             // Lower
             case "classicGymLower", "circuitGymLower", "classicBodyweightLower", "circuitBodyweightLower":
-                ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["workoutLower"]!]
+                ScheduleManager.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["workoutLower"]!]
                 
             default: break
             }
         // Yoga
         case Groups.yoga:
-            ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["yoga"]!]
+            ScheduleManager.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["yoga"]!]
         // Endurance
         case Groups.endurance:
             // HIIT is not indexed through difficulty, but rather two levels of length (session and interval) which have already been set by updateSelectedChoice
-            if ScheduleVariables.shared.indicator == "hiit" {
+            if ScheduleManager.shared.indicator == "hiit" {
                 break
             } else {
-                ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["endurance"]!]
+                ScheduleManager.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["endurance"]!]
             }
             
         // Flexibility
         case Groups.flexibility:
-            switch ScheduleVariables.shared.selectedChoiceSession[1] {
+            switch ScheduleManager.shared.selectedChoiceSession[1] {
             case "full":
-                ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["overall"]!]
+                ScheduleManager.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["overall"]!]
             case "hamstrings":
-                ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["hamstrings"]!]
+                ScheduleManager.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["hamstrings"]!]
             case "hips":
-                ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["hips"]!]
+                ScheduleManager.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["hips"]!]
             case "backNeck":
-                ScheduleVariables.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["backNeck"]!]
+                ScheduleManager.shared.selectedChoiceSession[3] = difficultyArray[difficultyLevels[group]!["backNeck"]!]
             case "foamRoll":
                 // only one difficulty
-                ScheduleVariables.shared.selectedChoiceSession[3] = "average"
+                ScheduleManager.shared.selectedChoiceSession[3] = "average"
             default: break
             }
         default: break
         }
         
         // Select Random Session
-        var randomSessionString = randomSession(selectedChoice: ScheduleVariables.shared.selectedChoiceSession)
+        var randomSessionString = randomSession(selectedChoice: ScheduleManager.shared.selectedChoiceSession)
         
         // WORKOUT - Checks for Women, and bodyweight pullup bar
         let profileAnswers = UserDefaults.standard.object(forKey: "profileAnswers") as! [String: Int]
         
         //
-        if ScheduleVariables.shared.selectedGroup == Groups.workout {
+        if ScheduleManager.shared.selectedGroup == Groups.workout {
             // Women - only applies for gym workouts
-            if ScheduleVariables.shared.selectedChoiceSession[1].contains("Gym") {
+            if ScheduleManager.shared.selectedChoiceSession[1].contains("Gym") {
                 // User is a woman
                 // Gender is second question, female or other == 1 or 2 (we give 'other' female workouts for now)
                 if profileAnswers["gender"]! > 0 {
                     // Avoid sessions that are for men
                     while randomSessionString.contains("-M") {
-                        randomSessionString = randomSession(selectedChoice: ScheduleVariables.shared.selectedChoiceSession)
+                        randomSessionString = randomSession(selectedChoice: ScheduleManager.shared.selectedChoiceSession)
                     }
                     // User is a man
                 } else {
                     // Avoid sessions that are for women
                     while randomSessionString.contains("-W") {
-                        randomSessionString = randomSession(selectedChoice: ScheduleVariables.shared.selectedChoiceSession)
+                        randomSessionString = randomSession(selectedChoice: ScheduleManager.shared.selectedChoiceSession)
                     }
                 }
                 
                 // Equipment - only applies for bodyweight workouts
             } else {
                 // No equipment (currently just a pullup bar)
-                if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] as! Int == 0 {
+                if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] as! Int == 0 {
                     while randomSessionString.contains("-E") {
-                        randomSessionString = randomSession(selectedChoice: ScheduleVariables.shared.selectedChoiceSession)
+                        randomSessionString = randomSession(selectedChoice: ScheduleManager.shared.selectedChoiceSession)
                     }
                 }
                 // no need for other case, any session goes
@@ -670,7 +670,7 @@ extension SessionChoice {
         selectedStretching.append("stretching")
         
         // Cases for session types
-        switch ScheduleVariables.shared.selectedGroup {
+        switch ScheduleManager.shared.selectedGroup {
         // Workout
         case Groups.workout:
             selectedStretching.append("postWorkout")
@@ -681,21 +681,21 @@ extension SessionChoice {
         }
         
         // No difficulty level for warmup so default is average
-        ScheduleVariables.shared.selectedChoiceStretching[3] = "average"
+        ScheduleManager.shared.selectedChoiceStretching[3] = "average"
         
         // Select Random Session
-        var randomSessionString = randomSession(selectedChoice: ScheduleVariables.shared.selectedChoiceStretching)
+        var randomSessionString = randomSession(selectedChoice: ScheduleManager.shared.selectedChoiceStretching)
         // Not foam rolling (if foam rolling on, can include non foam rolling sessions)
         
-        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 0 {
+        if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 0 {
             // NOT Foam rolling (avoid a stretching session that ends in -F)
             while randomSessionString.suffix(2) == "-F" {
-                randomSessionString = randomSession(selectedChoice: ScheduleVariables.shared.selectedChoiceStretching)
+                randomSessionString = randomSession(selectedChoice: ScheduleManager.shared.selectedChoiceStretching)
             }
-        } else if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 1 {
+        } else if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 1 {
             // Foam rolling (get only stretching session that end in -F)
             while randomSessionString.suffix(2) != "-F" {
-                randomSessionString = randomSession(selectedChoice: ScheduleVariables.shared.selectedChoiceStretching)
+                randomSessionString = randomSession(selectedChoice: ScheduleManager.shared.selectedChoiceStretching)
             }
         }
         selectedStretching.append(randomSessionString)
@@ -716,44 +716,44 @@ extension SessionChoice {
     func updateSelectedChoice(row: Int) {
         //
         // Present next choice or present session
-        switch ScheduleVariables.shared.selectedGroup {
+        switch ScheduleManager.shared.selectedGroup {
             // ------------------------------------------------------------------------------------------------
         // Workout
         case Groups.workout:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             // Gym/Bodyweight
             case 1:
                 // Reset ScheduleVariables.shared.indicator
-                ScheduleVariables.shared.indicator = ""
+                ScheduleManager.shared.indicator = ""
                 
                 switch row {
                 // Gym
                 case 0:
-                    ScheduleVariables.shared.indicator = "gym"
+                    ScheduleManager.shared.indicator = "gym"
                 // Bodyweight
                 case 1:
-                    ScheduleVariables.shared.indicator = "bodyweight"
+                    ScheduleManager.shared.indicator = "bodyweight"
                 // Custom - just set to bodyweight short,
                 case 2:
-                    ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaF"
-                    ScheduleVariables.shared.selectedChoiceStretching[1] = "SF"
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                    ScheduleManager.shared.selectedChoiceWarmup[1] = "WaF"
+                    ScheduleManager.shared.selectedChoiceStretching[1] = "SF"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                 default: break
                 }
                 
             // Circuit/Classic
             case 2:
                 // Reset ScheduleVariables.shared.indicator
-                ScheduleVariables.shared.indicator2 = ""
+                ScheduleManager.shared.indicator2 = ""
                 
                 switch row {
                 // Classic
                 case 0:
-                    ScheduleVariables.shared.indicator2 = "classic"
+                    ScheduleManager.shared.indicator2 = "classic"
                 // Circuit
                 case 1:
-                    ScheduleVariables.shared.indicator2 = "circuit"
+                    ScheduleManager.shared.indicator2 = "circuit"
                 default: break
                 }
                 
@@ -761,76 +761,76 @@ extension SessionChoice {
             case 3:
                 // Note only session different for now
                 // Gym
-                if ScheduleVariables.shared.indicator == "gym" {
+                if ScheduleManager.shared.indicator == "gym" {
                     // Classic
-                    if ScheduleVariables.shared.indicator2 == "classic" {
+                    if ScheduleManager.shared.indicator2 == "classic" {
                         switch row {
                         case 0:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaF"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "classicGymFull"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SF"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaF"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "classicGymFull"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SF"
                         case 1:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaU"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "classicGymUpper"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SU"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaU"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "classicGymUpper"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SU"
                         case 2:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaL"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "classicGymLower"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SL"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaL"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "classicGymLower"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SL"
                         default: break
                         }
                         // Circuit
-                    } else if ScheduleVariables.shared.indicator2 == "circuit" {
+                    } else if ScheduleManager.shared.indicator2 == "circuit" {
                         switch row {
                         case 0:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaF"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "circuitGymFull"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SF"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaF"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "circuitGymFull"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SF"
                         case 1:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaU"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "circuitGymUpper"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SU"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaU"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "circuitGymUpper"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SU"
                         case 2:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaL"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "circuitGymLower"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SL"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaL"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "circuitGymLower"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SL"
                         default: break
                         }
                     }
                     // Bodyweight
-                } else if ScheduleVariables.shared.indicator == "bodyweight" {
+                } else if ScheduleManager.shared.indicator == "bodyweight" {
                     // Classic
-                    if ScheduleVariables.shared.indicator2 == "classic" {
+                    if ScheduleManager.shared.indicator2 == "classic" {
                         switch row {
                         case 0:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaF"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "classicBodyweightFull"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SF"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaF"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "classicBodyweightFull"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SF"
                         case 1:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaU"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "classicBodyweightUpper"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SU"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaU"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "classicBodyweightUpper"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SU"
                         case 2:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaL"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "classicBodyweightLower"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SL"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaL"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "classicBodyweightLower"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SL"
                         default: break
                         }
                         // Circuit
-                    } else if ScheduleVariables.shared.indicator2 == "circuit" {
+                    } else if ScheduleManager.shared.indicator2 == "circuit" {
                         switch row {
                         case 0:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaF"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "circuitBodyweightFull"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SF"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaF"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "circuitBodyweightFull"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SF"
                         case 1:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaU"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "circuitBodyweightUpper"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SU"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaU"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "circuitBodyweightUpper"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SU"
                         case 2:
-                            ScheduleVariables.shared.selectedChoiceWarmup[1] = "WaL"
-                            ScheduleVariables.shared.selectedChoiceSession[1] = "circuitBodyweightLower"
-                            ScheduleVariables.shared.selectedChoiceStretching[1] = "SL"
+                            ScheduleManager.shared.selectedChoiceWarmup[1] = "WaL"
+                            ScheduleManager.shared.selectedChoiceSession[1] = "circuitBodyweightLower"
+                            ScheduleManager.shared.selectedChoiceStretching[1] = "SL"
                         default: break
                         }
                     }
@@ -839,64 +839,64 @@ extension SessionChoice {
             case 4,5:
                 // Note, currently all the same
                 // Gym
-                if ScheduleVariables.shared.indicator == "gym" {
+                if ScheduleManager.shared.indicator == "gym" {
                     // Classic
-                    if ScheduleVariables.shared.indicator2 == "classic" {
+                    if ScheduleManager.shared.indicator2 == "classic" {
                         switch row {
                         case 0:
-                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                            ScheduleVariables.shared.selectedChoiceSession[2] = "short"
-                            ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                            ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                            ScheduleManager.shared.selectedChoiceSession[2] = "short"
+                            ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                         case 1:
-                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                            ScheduleVariables.shared.selectedChoiceSession[2] = "medium"
-                            ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                            ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                            ScheduleManager.shared.selectedChoiceSession[2] = "medium"
+                            ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                         case 2:
-                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
-                            ScheduleVariables.shared.selectedChoiceSession[2] = "long"
-                            ScheduleVariables.shared.selectedChoiceStretching[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceWarmup[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceSession[2] = "long"
+                            ScheduleManager.shared.selectedChoiceStretching[2] = "normal"
                         default: break
                         }
                         // Circuit
-                    } else if ScheduleVariables.shared.indicator2 == "circuit" {
+                    } else if ScheduleManager.shared.indicator2 == "circuit" {
                         switch row {
                         case 0:
-                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                            ScheduleVariables.shared.selectedChoiceSession[2] = "short"
-                            ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                            ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                            ScheduleManager.shared.selectedChoiceSession[2] = "short"
+                            ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                         case 1:
-                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
-                            ScheduleVariables.shared.selectedChoiceSession[2] = "normal"
-                            ScheduleVariables.shared.selectedChoiceStretching[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceWarmup[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceSession[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceStretching[2] = "normal"
                         default: break
                         }
                     }
                     // Bodyweight
-                } else if ScheduleVariables.shared.indicator == "bodyweight" {
+                } else if ScheduleManager.shared.indicator == "bodyweight" {
                     // Classic
-                    if ScheduleVariables.shared.indicator2 == "classic" {
+                    if ScheduleManager.shared.indicator2 == "classic" {
                         switch row {
                         case 0:
-                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                            ScheduleVariables.shared.selectedChoiceSession[2] = "short"
-                            ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                            ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                            ScheduleManager.shared.selectedChoiceSession[2] = "short"
+                            ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                         case 1:
-                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
-                            ScheduleVariables.shared.selectedChoiceSession[2] = "normal"
-                            ScheduleVariables.shared.selectedChoiceStretching[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceWarmup[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceSession[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceStretching[2] = "normal"
                         default: break
                         }
                         // Circuit
-                    } else if ScheduleVariables.shared.indicator2 == "circuit" {
+                    } else if ScheduleManager.shared.indicator2 == "circuit" {
                         switch row {
                         case 0:
-                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                            ScheduleVariables.shared.selectedChoiceSession[2] = "short"
-                            ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                            ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                            ScheduleManager.shared.selectedChoiceSession[2] = "short"
+                            ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                         case 1:
-                            ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
-                            ScheduleVariables.shared.selectedChoiceSession[2] = "normal"
-                            ScheduleVariables.shared.selectedChoiceStretching[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceWarmup[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceSession[2] = "normal"
+                            ScheduleManager.shared.selectedChoiceStretching[2] = "normal"
                         default: break
                         }
                     }
@@ -908,34 +908,34 @@ extension SessionChoice {
             // ------------------------------------------------------------------------------------------------
         // Yoga
         case Groups.yoga:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             // Yoga Type
             case 1:
                 // Reset ScheduleVariables.shared.indicator
-                ScheduleVariables.shared.indicator = ""
+                ScheduleManager.shared.indicator = ""
                 
                 switch row {
                 // Relaxing
                 case 0:
-                    ScheduleVariables.shared.indicator = "relaxing"
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "relaxing"
+                    ScheduleManager.shared.indicator = "relaxing"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "relaxing"
                 // Neutral
                 case 1:
-                    ScheduleVariables.shared.indicator = "neutral"
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "neutral"
+                    ScheduleManager.shared.indicator = "neutral"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "neutral"
                 // Stimulating
                 case 2:
-                    ScheduleVariables.shared.indicator = "stimulating"
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "stimulating"
+                    ScheduleManager.shared.indicator = "stimulating"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "stimulating"
                 // Custom
                 case 3:
                     // Length
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
                 default: break
                 }
                 
                 // Warmup
-                ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
+                ScheduleManager.shared.selectedChoiceWarmup[1] = "warmup"
                 
                 
             // Length 1 - Relaxing
@@ -943,17 +943,17 @@ extension SessionChoice {
                 //
                 switch row {
                 case 0:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "veryShort"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "veryShort"
                 case 1:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "short"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "short"
                 case 2:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "medium"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "medium"
                 case 3:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "long"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "normal"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "long"
                 default: break
                 }
             // Length 2 - Neutral
@@ -961,14 +961,14 @@ extension SessionChoice {
                 //
                 switch row {
                 case 0:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "short"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "short"
                 case 1:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "medium"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "medium"
                 case 2:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "long"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "long"
                 default: break
                 }
             // Length 3 - Stimulating
@@ -976,11 +976,11 @@ extension SessionChoice {
                 //
                 switch row {
                 case 0:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "short"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "short"
                 case 1:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "normal"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "normal"
                 default: break
                 }
             default:
@@ -994,29 +994,29 @@ extension SessionChoice {
             // ------------------------------------------------------------------------------------------------
         // Endurance
         case Groups.endurance:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             // Cardio Type
             case 1:
                 // Reset indication
-                ScheduleVariables.shared.indicator = ""
+                ScheduleManager.shared.indicator = ""
                 //
                 switch row {
                 case 0:
                     // Indicate to choice 3
-                    ScheduleVariables.shared.indicator = "hiit"
+                    ScheduleManager.shared.indicator = "hiit"
                 case 1:
-                    ScheduleVariables.shared.indicator = "bodyweight"
-                    ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "bodyweight"
-                    ScheduleVariables.shared.selectedChoiceStretching[1] = "stretching"
+                    ScheduleManager.shared.indicator = "bodyweight"
+                    ScheduleManager.shared.selectedChoiceWarmup[1] = "warmup"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "bodyweight"
+                    ScheduleManager.shared.selectedChoiceStretching[1] = "stretching"
                 case 2:
-                    ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
-                    ScheduleVariables.shared.selectedChoiceStretching[1] = "stretching"
+                    ScheduleManager.shared.selectedChoiceWarmup[1] = "warmup"
+                    ScheduleManager.shared.selectedChoiceStretching[1] = "stretching"
                 case 3:
-                    ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceStretching[1] = "stretching"
-                    ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                    ScheduleManager.shared.selectedChoiceWarmup[1] = "warmup"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceStretching[1] = "stretching"
+                    ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                 default: break
                 }
                 //
@@ -1026,51 +1026,51 @@ extension SessionChoice {
                 switch row {
                 // Running
                 case 0:
-                    ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "hiit"
-                    ScheduleVariables.shared.selectedChoiceStretching[1] = "stretching"
+                    ScheduleManager.shared.selectedChoiceWarmup[1] = "warmup"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "hiit"
+                    ScheduleManager.shared.selectedChoiceStretching[1] = "stretching"
                 // Biking
                 case 1:
-                    ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "hiit"
-                    ScheduleVariables.shared.selectedChoiceStretching[1] = "stretching"
+                    ScheduleManager.shared.selectedChoiceWarmup[1] = "warmup"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "hiit"
+                    ScheduleManager.shared.selectedChoiceStretching[1] = "stretching"
                 // Rowing
                 case 2:
-                    ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "hiit"
-                    ScheduleVariables.shared.selectedChoiceStretching[1] = "stretching"
+                    ScheduleManager.shared.selectedChoiceWarmup[1] = "warmup"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "hiit"
+                    ScheduleManager.shared.selectedChoiceStretching[1] = "stretching"
                 default: break
                 }
             // Length: HIIT&Bodyweight
             case 3,5:
                 // HIIT
-                if ScheduleVariables.shared.indicator == "hiit" {
+                if ScheduleManager.shared.indicator == "hiit" {
                     switch row {
                     case 0:
-                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                        ScheduleVariables.shared.selectedChoiceSession[2] = "short"
-                        ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                        ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                        ScheduleManager.shared.selectedChoiceSession[2] = "short"
+                        ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                     case 1:
-                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                        ScheduleVariables.shared.selectedChoiceSession[2] = "medium"
-                        ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                        ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                        ScheduleManager.shared.selectedChoiceSession[2] = "medium"
+                        ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                     case 2:
-                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
-                        ScheduleVariables.shared.selectedChoiceSession[2] = "long"
-                        ScheduleVariables.shared.selectedChoiceStretching[2] = "normal"
+                        ScheduleManager.shared.selectedChoiceWarmup[2] = "normal"
+                        ScheduleManager.shared.selectedChoiceSession[2] = "long"
+                        ScheduleManager.shared.selectedChoiceStretching[2] = "normal"
                     default: break
                     }
                     // Workout
                 } else {
                     switch row {
                     case 0:
-                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                        ScheduleVariables.shared.selectedChoiceSession[2] = "short"
-                        ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                        ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                        ScheduleManager.shared.selectedChoiceSession[2] = "short"
+                        ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                     case 1:
-                        ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
-                        ScheduleVariables.shared.selectedChoiceSession[2] = "normal"
-                        ScheduleVariables.shared.selectedChoiceStretching[2] = "normal"
+                        ScheduleManager.shared.selectedChoiceWarmup[2] = "normal"
+                        ScheduleManager.shared.selectedChoiceSession[2] = "normal"
+                        ScheduleManager.shared.selectedChoiceStretching[2] = "normal"
                     default: break
                     }
                 }
@@ -1080,11 +1080,11 @@ extension SessionChoice {
                 // HIIT
                 switch row {
                 case 0:
-                    ScheduleVariables.shared.selectedChoiceSession[3] = "short"
+                    ScheduleManager.shared.selectedChoiceSession[3] = "short"
                 case 1:
-                    ScheduleVariables.shared.selectedChoiceSession[3] = "medium"
+                    ScheduleManager.shared.selectedChoiceSession[3] = "medium"
                 case 2:
-                    ScheduleVariables.shared.selectedChoiceSession[3] = "long"
+                    ScheduleManager.shared.selectedChoiceSession[3] = "long"
                 default: break
                 }
                 
@@ -1093,11 +1093,11 @@ extension SessionChoice {
             case 8:
                 switch row {
                 case 0:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceStretching[2] = "short"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceStretching[2] = "short"
                 case 1:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
-                    ScheduleVariables.shared.selectedChoiceStretching[2] = "normal"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "normal"
+                    ScheduleManager.shared.selectedChoiceStretching[2] = "normal"
                 default: break
                 }
             default:
@@ -1106,37 +1106,37 @@ extension SessionChoice {
             // ------------------------------------------------------------------------------------------------
         // Flexibility
         case Groups.flexibility:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             // Focus
             case 1:
                 // Note warmups the same for now
                 switch row {
                 case 0:
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "full"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "full"
                 case 1:
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "hamstrings"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "hamstrings"
                 case 2:
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "hips"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "hips"
                 case 3:
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "backNeck"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "backNeck"
                 case 4:
-                    ScheduleVariables.shared.selectedChoiceSession[1] = "foamRoll"
+                    ScheduleManager.shared.selectedChoiceSession[1] = "foamRoll"
                 // Custom
                 case 5:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
                 default: break
                 }
-                ScheduleVariables.shared.selectedChoiceWarmup[1] = "warmup"
+                ScheduleManager.shared.selectedChoiceWarmup[1] = "warmup"
                 
             // Length
             case 2:
                 switch row {
                 case 0:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "short"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "short"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "short"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "short"
                 case 1:
-                    ScheduleVariables.shared.selectedChoiceWarmup[2] = "normal"
-                    ScheduleVariables.shared.selectedChoiceSession[2] = "normal"
+                    ScheduleManager.shared.selectedChoiceWarmup[2] = "normal"
+                    ScheduleManager.shared.selectedChoiceSession[2] = "normal"
                 default: break
                 }
             default:
@@ -1186,7 +1186,7 @@ extension SessionChoice {
             snapShot2?.center.x = self.view.center.x
             
             /// Extra session has a mask at the top to hide the image, animate it off with the table if leaving extra session choice
-            if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.choiceProgress == 1 {
+            if ScheduleManager.shared.isExtraSession && ScheduleManager.shared.choiceProgress == 1 {
                 self.extraSessionMask.center.x = self.view.center.x - self.view.frame.size.width
             }
 
@@ -1196,7 +1196,7 @@ extension SessionChoice {
             self.choiceTable.isHidden = false
             self.view.isUserInteractionEnabled = true
             
-            if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.choiceProgress == 1 {
+            if ScheduleManager.shared.isExtraSession && ScheduleManager.shared.choiceProgress == 1 {
                 self.extraSessionMask.removeFromSuperview()
             }
         })
@@ -1219,14 +1219,14 @@ extension SessionChoice {
         choiceTable.reloadData()
         // If going back to first choice of
         let snapShotImage = groupImage.snapshotView(afterScreenUpdates: false)
-        if ScheduleVariables.shared.selectedGroup == Groups.extra {
+        if ScheduleManager.shared.selectedGroup == Groups.extra {
             // nina
             view.insertSubview(snapShotImage!, belowSubview: snapShot1!)
             self.setupGroupImage()
         }
 
         let snapShot2 = choiceTable.snapshotView(afterScreenUpdates: true)
-        if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.selectedGroup == Groups.extra {
+        if ScheduleManager.shared.isExtraSession && ScheduleManager.shared.selectedGroup == Groups.extra {
             // Image height isn't changed till after animation, this puts the back button in the correct posisiton as anchored to image
             backButtonTop.constant = -groupImageHeight.constant + ElementHeights.topSafeAreaInset // -176
             self.view.layoutIfNeeded()
@@ -1236,7 +1236,7 @@ extension SessionChoice {
         } else {
             snapShot2?.center = CGPoint(x: view.center.x - view.frame.size.width, y: snapShotY)
         }
-        if ScheduleVariables.shared.selectedGroup == Groups.extra {
+        if ScheduleManager.shared.selectedGroup == Groups.extra {
             view.insertSubview((snapShot2)!, aboveSubview: snapShotImage!)
         } else {
             view.insertSubview((snapShot2)!, belowSubview: snapShot1!)
@@ -1250,7 +1250,7 @@ extension SessionChoice {
             snapShot1?.center.x = self.view.center.x + self.view.frame.size.width
             snapShot2?.center.x = self.view.center.x
             
-            if ScheduleVariables.shared.isExtraSession && ScheduleVariables.shared.selectedGroup == Groups.extra {
+            if ScheduleManager.shared.isExtraSession && ScheduleManager.shared.selectedGroup == Groups.extra {
                 self.extraSessionMask.center.x = self.view.center.x
             }
 
@@ -1272,17 +1272,17 @@ extension SessionChoice {
     @IBAction func markAsCompleted(_ sender: UIButton) {
         
         // Get indexPath.row
-        let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: ScheduleVariables.shared.selectedRows.initial)
+        let (day, indexInDay) = ScheduleManager.shared.getIndexing(row: ScheduleManager.shared.selectedRows.initial)
         let row = sender.tag
-        ScheduleVariables.shared.updateCompletion(day: day, indexInDay: indexInDay, row: row)
+        ScheduleManager.shared.updateCompletion(day: day, indexInDay: indexInDay, row: row)
         
         let indexPathToReload = NSIndexPath(row: row, section: 0)
         choiceTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
         
         // Return to schedule screen
         DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
-            if ScheduleVariables.shared.isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: true) {
-                ScheduleVariables.shared.shouldReloadInitialChoice = true
+            if ScheduleManager.shared.isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: true) {
+                ScheduleManager.shared.shouldReloadInitialChoice = true
                 self.popToRootView()
             }
         })
@@ -1294,27 +1294,27 @@ extension SessionChoice {
     // Once having completed a session from the schedule, this function gets called upon return to the schedule, it reloads the necessary rows and animates back to initial screen if necessary
     func markAsCompletedAndAnimate() {
         // MARK AS COMPLETED
-        if ScheduleVariables.shared.shouldReloadFinalChoice {
-            ScheduleVariables.shared.shouldReloadFinalChoice = false
+        if ScheduleManager.shared.shouldReloadFinalChoice {
+            ScheduleManager.shared.shouldReloadFinalChoice = false
             
             // Get indexPath.row
-            let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: ScheduleVariables.shared.selectedRows.initial)
-            let row = ScheduleVariables.shared.selectedRows.final
-            ScheduleVariables.shared.updateCompletion(day: day, indexInDay: indexInDay, row: row)
+            let (day, indexInDay) = ScheduleManager.shared.getIndexing(row: ScheduleManager.shared.selectedRows.initial)
+            let row = ScheduleManager.shared.selectedRows.final
+            ScheduleManager.shared.updateCompletion(day: day, indexInDay: indexInDay, row: row)
             
             // Animations
             // Delay so looks nice
             DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                 
                 // Reload the finalChoiceScreen Session after a delay
-                let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows.final, section: 0)
+                let indexPathToReload = NSIndexPath(row: ScheduleManager.shared.selectedRows.final, section: 0)
                 self.choiceTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
                 self.choiceTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
                 self.ensureCheckMarkGreen(indexPath: indexPathToReload as IndexPath)
                 self.choiceTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
 
                 // Pop if completed
-                if ScheduleVariables.shared.isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: true) {
+                if ScheduleManager.shared.isGroupCompleted(day: day, indexInDay: indexInDay, checkAll: true) {
                     // Return to schedule screen
                     DispatchQueue.main.asyncAfter(deadline: .now() + AnimationTimes.animationTime2, execute: {
                         self.popToRootView()
@@ -1337,7 +1337,7 @@ extension SessionChoice {
     }
     
     func popToRootView() {
-        ScheduleVariables.shared.choiceProgress = 0
+        ScheduleManager.shared.choiceProgress = 0
         self.navigationController?.popToRootViewController(animated: true)
         
     }
@@ -1346,44 +1346,44 @@ extension SessionChoice {
     // MARK:- Explanation of choices
     // Check if session choice needs an explanation
     func needsExplanation() -> Bool {
-        switch ScheduleVariables.shared.selectedGroup {
+        switch ScheduleManager.shared.selectedGroup {
             
         // Workout
         case Groups.workout:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             case 2: return true
             default: return false
             }
             
         // Yoga
         case Groups.yoga:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             case 1: return true
             default: return false
             }
             
         // Meditation
         case Groups.meditation:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             default: return false
             }
             
         // Endurance
         case Groups.endurance:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             case 1,4: return true
             default: return false
             }
             
         // Flexibility
         case Groups.flexibility:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             default: return false
             }
             
         // Extra Sessions
         case Groups.extra:
-            switch ScheduleVariables.shared.choiceProgress {
+            switch ScheduleManager.shared.choiceProgress {
             case 1: return true
             default: return false
             }
@@ -1394,7 +1394,7 @@ extension SessionChoice {
     
     @objc func presentExplanation() {
         
-        let text = sessionData.sessionChoiceExplanations[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress]!
+        let text = sessionData.sessionChoiceExplanations[ScheduleManager.shared.selectedGroup]![ScheduleManager.shared.choiceProgress]!
         
         // Setup
         walkthroughNextButton.addTarget(self, action: #selector(explanationNextAction), for: .touchUpInside)
@@ -1444,97 +1444,97 @@ extension SessionChoice {
     func backAction() {
         // Table Counter
         // Return to choice 1 (sessions)
-        if ScheduleVariables.shared.choiceProgress > 1 {
-            switch ScheduleVariables.shared.selectedGroup {
+        if ScheduleManager.shared.choiceProgress > 1 {
+            switch ScheduleManager.shared.selectedGroup {
             // Workout has 2 choice paths for the length + Custom
             case Groups.workout:
-                switch ScheduleVariables.shared.choiceProgress {
+                switch ScheduleManager.shared.choiceProgress {
                 // Go back from custom
                 case 7:
-                    ScheduleVariables.shared.choiceProgress = 1
+                    ScheduleManager.shared.choiceProgress = 1
                 // Go back from final choice
                 case 6:
                     // Go back to length 1
-                    if ScheduleVariables.shared.indicator == "gym" && ScheduleVariables.shared.indicator2 == "classic" {
-                        ScheduleVariables.shared.choiceProgress = 4
+                    if ScheduleManager.shared.indicator == "gym" && ScheduleManager.shared.indicator2 == "classic" {
+                        ScheduleManager.shared.choiceProgress = 4
                         // Go back to length 2
                     } else {
-                        ScheduleVariables.shared.choiceProgress = 5
+                        ScheduleManager.shared.choiceProgress = 5
                     }
                 // Go back from length choice
                 case 5:
                     // Go back to chioce 3
-                    ScheduleVariables.shared.choiceProgress = 3
+                    ScheduleManager.shared.choiceProgress = 3
                 default:
-                    ScheduleVariables.shared.choiceProgress -= 1
+                    ScheduleManager.shared.choiceProgress -= 1
                 }
             // Yoga has 3 choice paths for the length
             case Groups.yoga:
-                switch ScheduleVariables.shared.choiceProgress {
+                switch ScheduleManager.shared.choiceProgress {
                 // Custom
                 case 6:
-                    ScheduleVariables.shared.choiceProgress = 1
+                    ScheduleManager.shared.choiceProgress = 1
                 // Go back from final choice
                 case 5:
                     // Go back to length 1
-                    switch ScheduleVariables.shared.indicator {
+                    switch ScheduleManager.shared.indicator {
                     case "relaxing":
-                        ScheduleVariables.shared.choiceProgress = 2
+                        ScheduleManager.shared.choiceProgress = 2
                     case "neutral":
-                        ScheduleVariables.shared.choiceProgress = 3
+                        ScheduleManager.shared.choiceProgress = 3
                     case "stimulating":
-                        ScheduleVariables.shared.choiceProgress = 4
+                        ScheduleManager.shared.choiceProgress = 4
                     default: break
                     }
                 // Go back from length choice
                 case 4,3:
                     // Go back to chioce 3
-                    ScheduleVariables.shared.choiceProgress = 1
+                    ScheduleManager.shared.choiceProgress = 1
                 default:
-                    ScheduleVariables.shared.choiceProgress -= 1
+                    ScheduleManager.shared.choiceProgress -= 1
                 }
             // Endurance has 3 choice paths
             case Groups.endurance:
-                switch ScheduleVariables.shared.choiceProgress {
+                switch ScheduleManager.shared.choiceProgress {
                 // Custom
                 case 9:
-                    ScheduleVariables.shared.choiceProgress = 1
+                    ScheduleManager.shared.choiceProgress = 1
                 case 6:
-                    switch ScheduleVariables.shared.indicator {
+                    switch ScheduleManager.shared.indicator {
                     case "bodyweight":
-                        ScheduleVariables.shared.choiceProgress -= 1
+                        ScheduleManager.shared.choiceProgress -= 1
                     case "hiit":
-                        ScheduleVariables.shared.choiceProgress = 4
+                        ScheduleManager.shared.choiceProgress = 4
                     default: break
                     }
                     //
                 // Steady State/Bodyweight skip back to first choice
                 case 5,7:
-                    ScheduleVariables.shared.choiceProgress = 1
+                    ScheduleManager.shared.choiceProgress = 1
                     
                 default:
-                    ScheduleVariables.shared.choiceProgress -= 1
+                    ScheduleManager.shared.choiceProgress -= 1
                 }
             // Stretching
             case Groups.flexibility:
-                switch ScheduleVariables.shared.choiceProgress {
+                switch ScheduleManager.shared.choiceProgress {
                 // Custom
                 case 4:
-                    ScheduleVariables.shared.choiceProgress = 1
+                    ScheduleManager.shared.choiceProgress = 1
                 default:
-                    ScheduleVariables.shared.choiceProgress -= 1
+                    ScheduleManager.shared.choiceProgress -= 1
                 }
             // Normal
             default:
-                ScheduleVariables.shared.choiceProgress -= 1
+                ScheduleManager.shared.choiceProgress -= 1
             }
             slideRight()
         // Return to choice 0 (groups)
-        } else if ScheduleVariables.shared.choiceProgress == 1 {
+        } else if ScheduleManager.shared.choiceProgress == 1 {
             
             // If extra session, return to extra session choice
-            if ScheduleVariables.shared.selectedGroup != Groups.extra && ScheduleVariables.shared.isExtraSession {
-                ScheduleVariables.shared.selectedGroup = Groups.extra
+            if ScheduleManager.shared.selectedGroup != Groups.extra && ScheduleManager.shared.isExtraSession {
+                ScheduleManager.shared.selectedGroup = Groups.extra
                 slideRight()
                 
             // Normal

@@ -58,15 +58,15 @@ class FinalChoiceChoice: UIViewController {
         switch selectedComponent {
         // Warmup
         case 0:
-            navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceWarmup[2], comment: "")
+            navTitle = NSLocalizedString(ScheduleManager.shared.selectedChoiceWarmup[0], comment: "") + ": " + NSLocalizedString(ScheduleManager.shared.selectedChoiceWarmup[1], comment: "") + ", " + NSLocalizedString(ScheduleManager.shared.selectedChoiceWarmup[2], comment: "")
 
         // Session
         case 1:
-            navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceSession[2], comment: "")
+            navTitle = NSLocalizedString(ScheduleManager.shared.selectedChoiceSession[0], comment: "") + ": " + NSLocalizedString(ScheduleManager.shared.selectedChoiceSession[1], comment: "") + ", " + NSLocalizedString(ScheduleManager.shared.selectedChoiceSession[2], comment: "")
 
         // Stretching
         case 2:
-            navTitle = NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[0], comment: "") + ": " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[1], comment: "") + ", " + NSLocalizedString(ScheduleVariables.shared.selectedChoiceStretching[2], comment: "")
+            navTitle = NSLocalizedString(ScheduleManager.shared.selectedChoiceStretching[0], comment: "") + ": " + NSLocalizedString(ScheduleManager.shared.selectedChoiceStretching[1], comment: "") + ", " + NSLocalizedString(ScheduleManager.shared.selectedChoiceStretching[2], comment: "")
 
         default: break
         }
@@ -80,9 +80,9 @@ class FinalChoiceChoice: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if ScheduleVariables.shared.shouldPop {
+        if ScheduleManager.shared.shouldPop {
             self.navigationController?.popViewController(animated: false)
-            ScheduleVariables.shared.shouldPop = false
+            ScheduleManager.shared.shouldPop = false
         }
     }
     
@@ -133,13 +133,13 @@ class FinalChoiceChoice: UIViewController {
         switch selectedComponent {
         // Warmup
         case 0:
-            sessionsArray = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceWarmup[0]]![ScheduleVariables.shared.selectedChoiceWarmup[1]]![ScheduleVariables.shared.selectedChoiceWarmup[2]]!
+            sessionsArray = sessionData.sortedSessions[ScheduleManager.shared.selectedChoiceWarmup[0]]![ScheduleManager.shared.selectedChoiceWarmup[1]]![ScheduleManager.shared.selectedChoiceWarmup[2]]!
         // Session
         case 1:
-            sessionsArray = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceSession[0]]![ScheduleVariables.shared.selectedChoiceSession[1]]![ScheduleVariables.shared.selectedChoiceSession[2]]!
+            sessionsArray = sessionData.sortedSessions[ScheduleManager.shared.selectedChoiceSession[0]]![ScheduleManager.shared.selectedChoiceSession[1]]![ScheduleManager.shared.selectedChoiceSession[2]]!
         // Stretching
         case 2:
-            sessionsArray = sessionData.sortedSessions[ScheduleVariables.shared.selectedChoiceStretching[0]]![ScheduleVariables.shared.selectedChoiceStretching[1]]![ScheduleVariables.shared.selectedChoiceStretching[2]]!
+            sessionsArray = sessionData.sortedSessions[ScheduleManager.shared.selectedChoiceStretching[0]]![ScheduleManager.shared.selectedChoiceStretching[1]]![ScheduleManager.shared.selectedChoiceStretching[2]]!
         default: break
         }
         

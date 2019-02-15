@@ -235,7 +235,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
                 //
                 
                 let indexString = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][indexPath.section][0]
-                let value = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][indexString] as! Int
+                let value = ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][indexString] as! Int
                 slider.value = Float(value)
                 
                 //
@@ -309,8 +309,8 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             //
             // Count goals, making sure that there are actually some goals set
             var count = 0
-            for i in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection].count {
-                count += ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][i][0]] as! Int
+            for i in 0..<ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection].count {
+                count += ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][i][0]] as! Int
             }
             
             // If goals not empty
@@ -346,8 +346,8 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
             // Make sure no question is unanswered
             
             var allAnswered = true
-            for i in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection].count {
-                if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][i][0]] as! Int == -1 {
+            for i in 0..<ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection].count {
+                if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][i][0]] as! Int == -1 {
                     allAnswered = false
                     break
                 }
@@ -408,9 +408,9 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         // Goals
         // Find question string to index schedules, as questions saved to schedules are index by the title of the question
         let question = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][sender.tag][0]
-        ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][question] = Int(roundedInt)
+        ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][question] = Int(roundedInt)
         
-        ScheduleVariables.shared.saveSchedules()
+        ScheduleManager.shared.saveSchedules()
     }
     
     
@@ -488,7 +488,7 @@ class ScheduleCreationHelp: UIViewController, UITableViewDelegate, UITableViewDa
         // Questions
         if selectedSection > 0 {
             // If question has been answered
-            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][0]] as! Int != -1 {
+            if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][0]] as! Int != -1 {
                 // If not last question, go to next question
                 if selectedQuestion != scheduleDataStructures.scheduleCreationHelpSorted[selectedSection].count - 1 {
                     nextQuestion()
@@ -732,7 +732,7 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         cell.textLabel?.font = Fonts.mediumElementRegular
         // Select answer
             // If answer not -1, and row is correct
-        if indexPath.row == ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][row][0]] as! Int {
+        if indexPath.row == ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][row][0]] as! Int {
             cell.textLabel?.textColor = Colors.green
         }
         // If last cell hide separator
@@ -749,8 +749,8 @@ class ScheduleCreationHelpCell: UITableViewCell, UITableViewDataSource, UITableV
         
         // Find question string to index schedules, as questions saved to schedules are index by the title of the question
         let question = scheduleDataStructures.scheduleCreationHelpSorted[selectedSection][selectedQuestion][0]
-        ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][question] = indexPath.row
-        ScheduleVariables.shared.saveSchedules()
+        ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][selectedSection][question] = indexPath.row
+        ScheduleManager.shared.saveSchedules()
         //
         tableView.deselectRow(at: indexPath, animated: true)
         answerTableView.reloadData()

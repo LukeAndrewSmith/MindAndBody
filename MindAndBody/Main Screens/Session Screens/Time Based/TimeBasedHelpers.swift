@@ -310,7 +310,7 @@ extension TimeBasedScreen {
                 }
             } else {
                 // Schedule Tracking
-                ScheduleVariables.shared.shouldReloadScheduleTracking()
+                ScheduleManager.shared.shouldReloadScheduleTracking()
                 dismissView()
             }
         default:

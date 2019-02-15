@@ -21,7 +21,7 @@ extension UIViewController {
         
         // Initialise arrays
         // [workout, yoga, meditation, endurance, flexibility]
-        ScheduleVariables.shared.temporarySessionsArray = [0,0,0,0,0]
+        ScheduleManager.shared.temporarySessionsArray = [0,0,0,0,0]
         // ratios of goal (weighting/importance)
         // ratios indexing == [workout, yoga, meditation, endurance, flexibility]
         var ratios: [Double] = [0,0,0,0,0]
@@ -30,7 +30,7 @@ extension UIViewController {
         
         // Create goals
         for i in 0..<goals.count {
-            goals[i] = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][i][0]] as! Int
+            goals[i] = ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][0][scheduleDataStructures.scheduleCreationHelpSorted[0][i][0]] as! Int
         }
        
         // MARK: Determind ratios: goal answer / total goals
@@ -77,110 +77,110 @@ extension UIViewController {
         }
         
         
-        switch ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][1]["scheduleQTime"] as! Int {
+        switch ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][1]["scheduleQTime"] as! Int {
         // 1 - 2 days
         case 0:
-            switch ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
+            switch ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
             // Do a little 1 - 2
             case 0:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 2
+                    ScheduleManager.shared.temporaryNSessions = 2
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 1
+                    ScheduleManager.shared.temporaryNSessions = 1
                 }
                 // Take it easy, 1 - 3 sessions
             case 1:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 3
+                    ScheduleManager.shared.temporaryNSessions = 3
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 2
+                    ScheduleManager.shared.temporaryNSessions = 2
                 }
             // Routine, 2 - 4 sessions
             case 2:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 4
+                    ScheduleManager.shared.temporaryNSessions = 4
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 3
+                    ScheduleManager.shared.temporaryNSessions = 3
                 }
             default: break
             }
         // 2 - 3 days
         case 1:
-            switch ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
+            switch ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
             // Do a little 2 - 4
             case 0:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 4
+                    ScheduleManager.shared.temporaryNSessions = 4
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 3
+                    ScheduleManager.shared.temporaryNSessions = 3
                 }
             // Take it easy, 3 - 5 sessions
             case 1:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 4
+                    ScheduleManager.shared.temporaryNSessions = 4
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 3
+                    ScheduleManager.shared.temporaryNSessions = 3
                 }
             // Routine, 4 - 6 sessions
             case 2:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 5
+                    ScheduleManager.shared.temporaryNSessions = 5
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 4
+                    ScheduleManager.shared.temporaryNSessions = 4
                 }
             default: break
             }
             
         // 3 - 5 days
         case 2:
-            switch ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
+            switch ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
             // Do a little 2 - 4
             case 0:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 4
+                    ScheduleManager.shared.temporaryNSessions = 4
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 3
+                    ScheduleManager.shared.temporaryNSessions = 3
                 }
             // Take it easy, 3 - 5 sessions
             case 1:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 5
+                    ScheduleManager.shared.temporaryNSessions = 5
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 4
+                    ScheduleManager.shared.temporaryNSessions = 4
                 }
             // Routine, 4 - 6 sessions
             case 2:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 6
+                    ScheduleManager.shared.temporaryNSessions = 6
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 5
+                    ScheduleManager.shared.temporaryNSessions = 5
                 }
             default: break
             }
             
         // 5 - 7 days
         case 3:
-            switch ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
+            switch ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleCreationHelp"]![0][1]["scheduleQPriority"] as! Int {
             // Do a little 5
             case 0:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 6
+                    ScheduleManager.shared.temporaryNSessions = 6
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 5
+                    ScheduleManager.shared.temporaryNSessions = 5
                 }
             // Take it easy, 7 sessions
             case 1:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 8
+                    ScheduleManager.shared.temporaryNSessions = 8
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 6
+                    ScheduleManager.shared.temporaryNSessions = 6
                 }
             // Routine, 10 sessions
             case 2:
                 if lotsOfGoals {
-                    ScheduleVariables.shared.temporaryNSessions = 10
+                    ScheduleManager.shared.temporaryNSessions = 10
                 } else {
-                    ScheduleVariables.shared.temporaryNSessions = 8
+                    ScheduleManager.shared.temporaryNSessions = 8
                 }
             default: break
             }
@@ -192,13 +192,13 @@ extension UIViewController {
         // Now we have a preliminary total number of session, we can create n sessions for each goal
         // Encorporating age, gender, and last two 'Me' questions ------ not done yet
         
-        ScheduleVariables.shared.temporarySessionsArray = [0,0,0,0,0]
+        ScheduleManager.shared.temporarySessionsArray = [0,0,0,0,0]
         var temporaryTemporaySessionsArray: [Double] = [0,0,0,0,0]
         
         // Number of sessions is equal to the total number of sessions * the ratio, then rounded to a sensible number
         for i in 0..<ratios.count {
             // Avoid /0
-            temporaryTemporaySessionsArray[i] = Double(ScheduleVariables.shared.temporaryNSessions) * ratios[i]
+            temporaryTemporaySessionsArray[i] = Double(ScheduleManager.shared.temporaryNSessions) * ratios[i]
         }
         
         
@@ -208,9 +208,9 @@ extension UIViewController {
         for i in 0..<temporaryTemporaySessionsArray.count {
             // Round up for yoga or flexibility, from .25
             if (i == 1 || i == 4) && temporaryTemporaySessionsArray[i].truncatingRemainder(dividingBy: 1) >= 0.25 {
-                ScheduleVariables.shared.temporarySessionsArray[i] = Int(ceil(temporaryTemporaySessionsArray[i]))
+                ScheduleManager.shared.temporarySessionsArray[i] = Int(ceil(temporaryTemporaySessionsArray[i]))
             } else {
-                ScheduleVariables.shared.temporarySessionsArray[i] = Int(temporaryTemporaySessionsArray[i].rounded())
+                ScheduleManager.shared.temporarySessionsArray[i] = Int(temporaryTemporaySessionsArray[i].rounded())
             }
         }
     }

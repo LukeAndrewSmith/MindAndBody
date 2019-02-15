@@ -19,23 +19,23 @@ extension ScheduleScreen {
         
         // Swipe should only be enabled if schedule style is day view, or if swiping back from choices
         let swipeEnabled: Bool = {
-            return ScheduleVariables.shared.scheduleStyle == "day"
+            return ScheduleManager.shared.scheduleStyle == "day"
         }()
 
         //
         if swipeEnabled {
             //
             // Forward 1 day
-            if (extraSwipe.direction == .left) && ScheduleVariables.shared.selectedDay != 6{
+            if (extraSwipe.direction == .left) && ScheduleManager.shared.selectedDay != 6{
                 // Update selected day
-                ScheduleVariables.shared.selectedDay += 1
+                ScheduleManager.shared.selectedDay += 1
                 
                 // Deselect all ScheduleVariables.shared.indicators
                 for i in 0...(stackArray.count - 1) {
                     stackArray[i].font = stackFontUnselected
                 }
                 // Select ScheduleVariables.shared.indicator
-                stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
+                stackArray[ScheduleManager.shared.selectedDay].font = stackFontSelected
                 animateDayIndicatorToDay()
                 
                 // Animate
@@ -56,17 +56,17 @@ extension ScheduleScreen {
                 
                 //
                 // Back 1 day
-            } else if extraSwipe.direction == .right && ScheduleVariables.shared.selectedDay != 0 {
+            } else if extraSwipe.direction == .right && ScheduleManager.shared.selectedDay != 0 {
                 // Update selected day
-                ScheduleVariables.shared.selectedDay -= 1
+                ScheduleManager.shared.selectedDay -= 1
                 
                 // Deselect all indicators
                 for i in 0...(stackArray.count - 1) {
                     stackArray[i].font = stackFontUnselected
                 }
                 // Select indicator
-                stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
-                selectDay(day: ScheduleVariables.shared.selectedDay)
+                stackArray[ScheduleManager.shared.selectedDay].font = stackFontSelected
+                selectDay(day: ScheduleManager.shared.selectedDay)
                 animateDayIndicatorToDay()
                 
                 // Animate
@@ -98,16 +98,16 @@ extension ScheduleScreen {
         let index = dayLabel.tag
         //
         // Forward
-        if index > ScheduleVariables.shared.selectedDay {
+        if index > ScheduleManager.shared.selectedDay {
             // Update selected day
-            ScheduleVariables.shared.selectedDay = index
+            ScheduleManager.shared.selectedDay = index
             
             // Deselect all indicators
             for i in 0...(stackArray.count - 1) {
                 stackArray[i].font = stackFontUnselected
             }
             // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
+            stackArray[ScheduleManager.shared.selectedDay].font = stackFontSelected
             animateDayIndicatorToDay()
             
             // Animate
@@ -140,16 +140,16 @@ extension ScheduleScreen {
             
             //
             // Back
-        } else if index < ScheduleVariables.shared.selectedDay {
+        } else if index < ScheduleManager.shared.selectedDay {
             // Update selected day
-            ScheduleVariables.shared.selectedDay = index
+            ScheduleManager.shared.selectedDay = index
             
             // Deselect all indicators
             for i in 0...(stackArray.count - 1) {
                 stackArray[i].font = stackFontUnselected
             }
             // Select indicator
-            stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
+            stackArray[ScheduleManager.shared.selectedDay].font = stackFontSelected
             //selectDay(day: ScheduleVariables.shared.selectedDay)
             animateDayIndicatorToDay()
             
@@ -205,13 +205,13 @@ extension ScheduleScreen {
         // Get indexPath.row
         let row = sender.tag
         // ScheduleVariables.shared.getIndexingVariables uses the selectedRows.initial to find the riw, therefore
-        let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: row)
-        ScheduleVariables.shared.updateCompletion(day: day, indexInDay: indexInDay, row: nil)
+        let (day, indexInDay) = ScheduleManager.shared.getIndexing(row: row)
+        ScheduleManager.shared.updateCompletion(day: day, indexInDay: indexInDay, row: nil)
         
         let indexPathToReload = NSIndexPath(row: row, section: 0)
         scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
         
-        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+        if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             updateDayIndicatorColours()
         }
     }
@@ -229,16 +229,16 @@ extension ScheduleScreen {
     }
     
     func reloadCompletedRow() {
-        if ScheduleVariables.shared.shouldReloadInitialChoice {
-            ScheduleVariables.shared.shouldReloadInitialChoice = false
+        if ScheduleManager.shared.shouldReloadInitialChoice {
+            ScheduleManager.shared.shouldReloadInitialChoice = false
             
-            let indexPathToReload = NSIndexPath(row: ScheduleVariables.shared.selectedRows.initial, section: 0)
+            let indexPathToReload = NSIndexPath(row: ScheduleManager.shared.selectedRows.initial, section: 0)
             scheduleTable.reloadRows(at: [indexPathToReload as IndexPath], with: .automatic)
             scheduleTable.selectRow(at: indexPathToReload as IndexPath, animated: true, scrollPosition: .none)
             ensureCheckMarkGreen(indexPath: indexPathToReload as IndexPath)
             scheduleTable.deselectRow(at: indexPathToReload as IndexPath, animated: true)
             
-            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+            if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
                 updateDayIndicatorColours()
             }
             
@@ -252,9 +252,9 @@ extension ScheduleScreen {
     func updateDayIndicatorColours() {
         //
         // If scheduleStyle == day update pageStack, if not do nothing
-        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+        if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             for i in 0...6 {
-                if ScheduleVariables.shared.isDayEmpty(day: i) {
+                if ScheduleManager.shared.isDayEmpty(day: i) {
                     
                     // Nothing on day, White
                     (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.light
@@ -262,7 +262,7 @@ extension ScheduleScreen {
                 } else {
                     
                     // Complete, green
-                    if ScheduleVariables.shared.isDayCompleted(day: i) {
+                    if ScheduleManager.shared.isDayCompleted(day: i) {
                         (pageStack.arrangedSubviews[i] as! UILabel).textColor = Colors.green
                         
                     // Incomplete, red
@@ -280,11 +280,11 @@ extension ScheduleScreen {
         
         var nRows = 0
         // Note: +1 for extra sessions cell
-        if ScheduleVariables.shared.schedules.count > 0 {
-            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-                nRows = (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]?[ScheduleVariables.shared.selectedDay].count)! + 1
+        if ScheduleManager.shared.schedules.count > 0 {
+            if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+                nRows = (ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]?[ScheduleManager.shared.selectedDay].count)! + 1
             } else {
-                nRows = ScheduleVariables.shared.weekArray.count + 1
+                nRows = ScheduleManager.shared.weekArray.count + 1
             }
         }
         
@@ -313,11 +313,11 @@ extension ScheduleScreen {
     // shouldReloadSchedule
     @objc func reloadView() {
         // RELOAD VIEW
-        if ScheduleVariables.shared.shouldReloadSchedule {
+        if ScheduleManager.shared.shouldReloadSchedule {
 
-            ScheduleVariables.shared.shouldReloadSchedule = false
+            ScheduleManager.shared.shouldReloadSchedule = false
             
-            ScheduleVariables.shared.setScheduleStyle()
+            ScheduleManager.shared.setScheduleStyle()
             layoutViews()
             scheduleTable.reloadData()
             scheduleChoiceTable.reloadData()
@@ -396,7 +396,7 @@ extension ScheduleScreen {
         //
         // Present as days or as week
         // days
-        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+        if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             pageStack.alpha = 1
             pageStack.isUserInteractionEnabled = true
             pageStackHeight.constant = 44
@@ -404,7 +404,7 @@ extension ScheduleScreen {
             scheduleTableTopConstraint.constant = pageStackHeight.constant
             separator.center.y = separatorY
         // week
-        } else if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue {
+        } else if ScheduleManager.shared.scheduleStyle == ScheduleStyle.week.rawValue {
             pageStack.alpha = 0
             pageStack.isUserInteractionEnabled = false
             pageStackHeight.constant = 0
@@ -414,7 +414,7 @@ extension ScheduleScreen {
         }
         
         // Day indicator
-        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+        if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             dayIndicator.alpha = 1
         } else {
             dayIndicator.alpha = 0
@@ -447,7 +447,7 @@ extension ScheduleScreen {
         //
         // Custom 'Page Control' m,t,w,t,f,s,s for bottom
         // If week is being presented as days, style 1
-        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue && pageStack.arrangedSubviews.count == 0 {
+        if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue && pageStack.arrangedSubviews.count == 0 {
             
             for i in 0...(dayArray.count - 1) {
                 let dayLabel = UILabel()
@@ -489,21 +489,21 @@ extension ScheduleScreen {
         
         // Select Today
         // Get current day as index
-        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+        if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             
-            ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
-            stackArray[ScheduleVariables.shared.selectedDay].font = stackFontSelected
-            dayIndicatorLeading.constant = stackArray[ScheduleVariables.shared.selectedDay].frame.minX
+            ScheduleManager.shared.selectedDay = Date().weekDayFromMonday
+            stackArray[ScheduleManager.shared.selectedDay].font = stackFontSelected
+            dayIndicatorLeading.constant = stackArray[ScheduleManager.shared.selectedDay].frame.minX
             self.view.layoutIfNeeded()
             
         } else {
             // 7 implies week view
-            ScheduleVariables.shared.selectedDay = 7
+            ScheduleManager.shared.selectedDay = 7
         }
         
         dayIndicator.frame.size = CGSize(width: view.bounds.width / 7, height: 2)
         dayIndicator.backgroundColor = Colors.light
-        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+        if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             view.addSubview(dayIndicator)
             view.bringSubviewToFront(dayIndicator)
         }
@@ -515,14 +515,14 @@ extension ScheduleScreen {
     //
     @objc func checkSelectedDay() {
         // If see each day
-        if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+        if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             // Only go to new day if initialchoice isn't waiting to be reloaded (as this means coming back from completing a session on a different day)
-            if ScheduleVariables.shared.lastDayOpened != Date().weekDayFromMonday && !ScheduleVariables.shared.shouldReloadInitialChoice {
+            if ScheduleManager.shared.lastDayOpened != Date().weekDayFromMonday && !ScheduleManager.shared.shouldReloadInitialChoice {
                 // Reload
-                ScheduleVariables.shared.selectedDay = Date().weekDayFromMonday
-                ScheduleVariables.shared.shouldReloadSchedule = true
+                ScheduleManager.shared.selectedDay = Date().weekDayFromMonday
+                ScheduleManager.shared.shouldReloadSchedule = true
                 reloadView()
-                ScheduleVariables.shared.lastDayOpened = Date().weekDayFromMonday
+                ScheduleManager.shared.lastDayOpened = Date().weekDayFromMonday
             }
         }
     }

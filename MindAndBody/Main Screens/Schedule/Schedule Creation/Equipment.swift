@@ -167,19 +167,19 @@ class CustomScheduleEquipmentCell: UITableViewCell {
         // Foam Roller
         case 0:
             // Off
-            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 0 {
+            if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 0 {
                 equipmentSwitch.isOn = false
                 // On
-            } else if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 1 {
+            } else if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] as! Int == 1 {
                 equipmentSwitch.isOn = true
             }
         // Pullup Bar
         case 1:
             // Off
-            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] as! Int == 0 {
+            if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] as! Int == 0 {
                 equipmentSwitch.isOn = false
                 // On
-            } else if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] as! Int == 1 {
+            } else if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] as! Int == 1 {
                 equipmentSwitch.isOn = true
             }
         default: break
@@ -194,25 +194,25 @@ class CustomScheduleEquipmentCell: UITableViewCell {
         case 0:
             // Use
             if sender.isOn {
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] = 1
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] = 1
             // Don't Use
             } else {
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] = 0
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["foamRoller"] = 0
             }
         // Pullup Bar
         case 1:
             // Use
             if sender.isOn {
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] = 1
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] = 1
             // Don't Use
             } else {
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] = 0
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["pullupBar"] = 0
             }
         default: break
         }
         
         // Save
-        ScheduleVariables.shared.saveSchedules()
+        ScheduleManager.shared.saveSchedules()
     }
     
     

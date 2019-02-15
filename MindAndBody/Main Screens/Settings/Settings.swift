@@ -257,7 +257,7 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         ["title": "reset",
          "rows": 1], // 2 if reset app included
         ["title": "contact",
-        "rows": 1],
+        "rows": 2],
     ]
     
     // Sections
@@ -582,8 +582,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             
         case 7:
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            //
-            cell.textLabel?.text = "support@mind-and-body.info"
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "support@mind-and-body.info"
+            } else if indexPath.row == 1 {
+                cell.textLabel?.text = "feedback@mind-and-body.info"
+            }
             cell.textLabel?.textAlignment = NSTextAlignment.left
             cell.backgroundColor = Colors.light
             cell.textLabel?.font = Fonts.regularCell
@@ -864,7 +867,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         /// Support
         case 7:
-            sendEmail()
+            if indexPath.row == 0 {
+                sendEmail(to: "support")
+            } else {
+                sendEmail(to: "feedback")
+            }
             tableView.deselectRow(at: indexPath, animated: true)
         //
         default: break
@@ -1297,11 +1304,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
 
 /// MARK: Send email
 extension Settings: MFMailComposeViewControllerDelegate {
-    func sendEmail() {
+    func sendEmail(to recipient: String) {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["support@mind-and-body.info"])
+            mail.setToRecipients(["\(recipient)@mind-and-body.info"])
             mail.setMessageBody("<p></p>", isHTML: true)
             
             present(mail, animated: true)

@@ -50,10 +50,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             // If app chooses sessions, revert
             if appChoosesSessionsSwitch.isOn {
                 
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
                 appChoosesSessionsSwitch.isOn = false
                 // Update
-                ScheduleVariables.shared.saveSchedules()
+                ScheduleManager.shared.saveSchedules()
             }
         }
     }
@@ -89,7 +89,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
     func setVariables() {
         // Schedule Type
         
-        scheduleType = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int
+        scheduleType = ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int
     }
     
     // Layout
@@ -138,10 +138,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Set initial value
         
         // On
-        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
+        if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 0 {
             appChoosesSessionsSwitch.isOn = true
         // Off
-        } else if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 1 {
+        } else if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] as! Int == 1 {
             appChoosesSessionsSwitch.isOn = false
         }
     
@@ -164,10 +164,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         scheduleStyleSegment.addTarget(self, action: #selector(segmentHandler), for: .valueChanged)
         //
         // Schedule style = Day
-        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+        if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
             scheduleStyleSegment.selectedSegmentIndex = 1
         // Schedule style = Week
-        } else if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
+        } else if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 1 {
             scheduleStyleSegment.selectedSegmentIndex = 0
         }
     }
@@ -262,7 +262,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         switch indexPath.section {
         // Name
         case 0:
-            cell.detailTextLabel?.text = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] as? String
+            cell.detailTextLabel?.text = ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] as? String
         // View
         case 1:
             switch indexPath.row {
@@ -330,7 +330,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 alert.setValue(NSAttributedString(string: inputTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 22)!]), forKey: "attributedTitle")
                 //2. Add the text field
                 alert.addTextField { (textField: UITextField) in
-                    textField.text = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] as? String
+                    textField.text = ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] as? String
                     textField.font = UIFont(name: "SFUIDisplay-light", size: 17)
                     textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
                 }
@@ -339,13 +339,13 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     // Update Title
                     let textField = alert?.textFields![0]
-                    ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] = textField?.text! ?? ""
+                    ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] = textField?.text! ?? ""
                     //
                     // SET NEW ARRAY
-                    ScheduleVariables.shared.saveSchedules()
+                    ScheduleManager.shared.saveSchedules()
                     
                     // Update name in table
-                    cell?.detailTextLabel?.text = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] as? String
+                    cell?.detailTextLabel?.text = ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["title"] as? String
                 })
                 // Cancel action
                 let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.default) {
@@ -367,7 +367,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             // N Sessions / Schedule
             case 1:
                 // View each day
-                if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+                if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
                     self.performSegue(withIdentifier: "OverviewScheduleSegue", sender: self)
                 // View full week
                 } else {
@@ -398,7 +398,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         if sender == appChoosesSessionsSwitch {
             // App chooses sessions
             if sender.isOn {
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] = 0
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] = 0
                 // If profile is not completed, go to profile
                 // Profile not complete if one of the answers is still the default -1
                 if !isProfileComplete() {
@@ -424,10 +424,10 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             // User chooses sessions
             } else {
-                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
+                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSessionChoice"] = 1
             }
         }
-        ScheduleVariables.shared.saveSchedules()
+        ScheduleManager.shared.saveSchedules()
     }
     
     @objc func segmentHandler(sender: UISegmentedControl) {
@@ -436,15 +436,15 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
             switch sender.selectedSegmentIndex {
                 // Week selected
                 case 0:
-                    ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
+                    ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
                 // Day selected
                 case 1:
-                    ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
+                    ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
                 default:
                     break
             }
-            ScheduleVariables.shared.saveSchedules()
-            ScheduleVariables.shared.setScheduleStyle()
+            ScheduleManager.shared.saveSchedules()
+            ScheduleManager.shared.setScheduleStyle()
             
             // Reset notifications
             ReminderNotifications.shared.setNotifications()
@@ -474,7 +474,7 @@ class ScheduleEditing: UIViewController, UITableViewDelegate, UITableViewDataSou
         let okAction = UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertAction.Style.default) {
             UIAlertAction in
             
-            ScheduleVariables.shared.deleteSchedule(at: ScheduleVariables.shared.selectedScheduleIndex)
+            ScheduleManager.shared.deleteSchedule(at: ScheduleManager.shared.selectedScheduleIndex)
             
             Tracking.shared.updateWeekProgress()
             Tracking.shared.updateTracking()

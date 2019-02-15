@@ -236,7 +236,7 @@ class InAppManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                 for receiptInApp in inApp {
                     // Find the expiry date of the in-app purchase receipt
 //                    let expiryDateKey = SwiftyReceiptValidator.InfoKey.InApp.expiresDate.rawValue
-                    // Using expires_date_ms, i beleive that I'm allowed to
+                    // Using expires_date_ms, I beleive that I'm allowed to
                     if let expiryDate = receiptInApp["expires_date_ms"] as? String {
                         // Check expiry date
                         // Valid subscription

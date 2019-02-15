@@ -247,8 +247,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         // add relevant groups if they are there
-        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![indexPath.row].count != 0 {
-            for i in 0...ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![indexPath.row].count - 1 {
+        if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![indexPath.row].count != 0 {
+            for i in 0...ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![indexPath.row].count - 1 {
                 cell.groupLabelArray[i].tag = 1
                 cell.groupLabelArray[i].alpha = 1
                 cell.groupLabelArray[i].layer.borderWidth = 2
@@ -257,7 +257,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.groupLabelArray[i].clipsToBounds = true
                 //
                 // Get group as int
-                let group = (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![indexPath.row][i]["group"] as! String).groupFromString()
+                let group = (ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![indexPath.row][i]["group"] as! String).groupFromString()
                 cell.groupLabelArray[i].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[group], comment: "")
                 cell.dayLabel.font = Fonts.mediumElementRegular
             }
@@ -290,18 +290,18 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
         //
         // week
         // If app schedule, find out
-        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
+        if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             for i in 0...6 {
-                if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count != 0 {
-                    for j in 0...ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count - 1 {
-                        let indexOfGroupInLoop = (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["group"] as! String).groupFromString()
+                if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count != 0 {
+                    for j in 0...ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count - 1 {
+                        let indexOfGroupInLoop = (ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i][j]["group"] as! String).groupFromString()
                         dayTableGroupArray[indexOfGroupInLoop] += 1
                     }
                 }
             }
         }
         
-        ScheduleVariables.shared.saveSchedules()
+        ScheduleManager.shared.saveSchedules()
     }
     
     func setGroupLabels() {
@@ -330,18 +330,18 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
 
             //
             // App helps create schedule
-            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 && !fromScheduleEditing {
+            if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 && !fromScheduleEditing {
                 // Indicate suggestion in group label
                     // If user selects more than selected, leave button green
-                if groupIndexes.contains(i) && dayTableGroupArray[i] < ScheduleVariables.shared.temporarySessionsArray[i] {
+                if groupIndexes.contains(i) && dayTableGroupArray[i] < ScheduleManager.shared.temporarySessionsArray[i] {
                     // Group
                     var nGroupsString = String()
                     // None dragged
                     if dayTableGroupArray[i] == 0 {
-                        nGroupsString = "\n" + String(ScheduleVariables.shared.temporarySessionsArray[i]) + "x"
+                        nGroupsString = "\n" + String(ScheduleManager.shared.temporarySessionsArray[i]) + "x"
                     // Some selected already
-                    } else if dayTableGroupArray[i] != ScheduleVariables.shared.temporarySessionsArray[i] {
-                        let number = ScheduleVariables.shared.temporarySessionsArray[i] - dayTableGroupArray[i]
+                    } else if dayTableGroupArray[i] != ScheduleManager.shared.temporarySessionsArray[i] {
+                        let number = ScheduleManager.shared.temporarySessionsArray[i] - dayTableGroupArray[i]
                         nGroupsString = "\n" + String(number) + "x"
                     } else {
                         nGroupsString = ""
@@ -544,8 +544,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         // update dayTableGroupArray
                     dayTableGroupArray[indexOfDraggedGroup] += 1
                     // update schedules
-                    ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
-                    ScheduleVariables.shared.saveSchedules()
+                    ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
+                    ScheduleManager.shared.saveSchedules()
                     // update label
                     setGroupLabels()
                 }
@@ -599,20 +599,20 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                     //
                     // Get index of the group being dragged using the schedules array
                         // i.e find out which group being dragged
-                    indexOfDraggedGroup = (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![indexPathForRow!.row][indexOfDrag]["group"] as! String).groupFromString()
+                    indexOfDraggedGroup = (ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![indexPathForRow!.row][indexOfDrag]["group"] as! String).groupFromString()
                     //
                     previousIndexPath = indexPathForRow
                     
                     // Remove from schedules array and update userdefaults
-                    ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!].remove(at: indexOfDrag)
+                    ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!].remove(at: indexOfDrag)
                     //
-                    ScheduleVariables.shared.saveSchedules()
+                    ScheduleManager.shared.saveSchedules()
                     // Remove the label being dragged
                     cell.groupLabelArray[indexOfDrag].tag = 0
                     cell.groupLabelArray[indexOfDrag].alpha = 0
 
                     //reload cell
-                    if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!].count != 0 {
+                    if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!].count != 0 {
                         cell.layoutSubviews()
                         // Remove all groups
                         for j in 0...cell.groupLabelArray.count - 1 {
@@ -621,7 +621,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                         
                         // Add all relevant groups
-                        for k in 0...ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!].count - 1 {
+                        for k in 0...ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!].count - 1 {
                             cell.groupLabelArray[k].tag = 1
                             cell.groupLabelArray[k].alpha = 1
                             cell.groupLabelArray[k].layer.borderWidth = 2
@@ -629,7 +629,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                             cell.groupLabelArray[k].layer.cornerRadius = 15 / 2
                             cell.groupLabelArray[k].clipsToBounds = true
                             //
-                            let groupIndex =  (ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!][k]["group"] as! String).groupFromString()
+                            let groupIndex =  (ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!][k]["group"] as! String).groupFromString()
                             cell.groupLabelArray[k].text = NSLocalizedString(scheduleDataStructures.shortenedGroupNames[groupIndex], comment: "")
                             cell.dayLabel.font = Fonts.mediumElementRegular
                         }
@@ -719,7 +719,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 //
                 
-                if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!].count != 5 {
+                if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!].count != 5 {
                     // Clear old cell
                     // CLEAR INDICATOR
                     if previousIndexPath != nil {
@@ -812,7 +812,7 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                 // Note: no need to remove from any arrays as already been removed when the label was picked up
                 
                 // Update group labels for session suggestion if app helps create schedule
-                if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
+                if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
                     dayTableGroupArray[indexOfDraggedGroup] -= 1
                     setGroupLabels()
                 }
@@ -880,11 +880,11 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 // update schedules
                             // Do a check, if the user is dragging off the top of the teable (indexpathforrow == nil, set to previous indexpath(always monday))
                         if indexPathForRow != nil {
-                            ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
+                            ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![(indexPathForRow?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
                         } else {
-                            ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
+                            ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
                         }
-                        ScheduleVariables.shared.saveSchedules()
+                        ScheduleManager.shared.saveSchedules()
                     } else {
                         let cell = dayTable.cellForRow(at: previousIndexPath!) as! DayCell
 
@@ -913,8 +913,8 @@ class ScheduleCreator: UIViewController, UITableViewDelegate, UITableViewDataSou
                         //
                         
                                 // update schedules
-                        ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
-                        ScheduleVariables.shared.saveSchedules()
+                        ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![(previousIndexPath?.row)!].append(scheduleDataStructures.scheduleGroups[indexOfDraggedGroup]!)
+                        ScheduleManager.shared.saveSchedules()
                 }
                 
                     draggingLabel.removeFromSuperview()

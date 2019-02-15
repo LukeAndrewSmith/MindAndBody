@@ -109,15 +109,15 @@ class ReminderNotifications {
         let cal: Calendar = Calendar.current
         
         //
-        if ScheduleVariables.shared.schedules.count > 0 {
+        if ScheduleManager.shared.schedules.count > 0 {
             // Day view: set notifications for each day something is planned
-            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+            if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
                 // Loop week
                 for i in 0...6 {
                     // Count whats left to do (incase something has been done in advance)
                     var dayCount = 0
-                    for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count {
-                        if !(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
+                    for j in 0..<ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count {
+                        if !(ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
                             dayCount += 1
                         }
                     }
@@ -167,8 +167,8 @@ class ReminderNotifications {
                             var shouldPresentNotification = false
                             // See whats left
                             var unfinishedCount = 0
-                            for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count {
-                                if !(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
+                            for j in 0..<ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count {
+                                if !(ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
                                     unfinishedCount += 1
                                 }
                             }
@@ -256,7 +256,7 @@ class ReminderNotifications {
                 var count = Int()
                 // Loop week
                 for i in 0...6 {
-                    count += ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count
+                    count += ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count
                 }
                 mondayContent.body = NSLocalizedString("morningNotification1", comment: "") + String(count) + NSLocalizedString("weekNotification2", comment: "")
                 mondayContent.sound = UNNotificationSound.default
@@ -305,13 +305,13 @@ class ReminderNotifications {
             
             // Update current badge count, only useful if user switches between scheduleStyles, i.e from view full week to view each day and vice versa, or for when this gets reset in the middle of a day
             // View each day
-            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+            if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
                 let currentDay = Date().weekDayFromMonday
                 var currentCount: Int = 0
                 // Loop current day counting how much has been done
-                if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![currentDay].count != 0 {
-                    for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![currentDay].count {
-                        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![currentDay][j]["isGroupCompleted"] as! Bool == false {
+                if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![currentDay].count != 0 {
+                    for j in 0..<ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![currentDay].count {
+                        if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![currentDay][j]["isGroupCompleted"] as! Bool == false {
                             currentCount += 1
                         }
 
@@ -324,10 +324,10 @@ class ReminderNotifications {
                 // Loop week
                 for i in 0...6 {
                     // If day not empty
-                    if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count != 0 {
+                    if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count != 0 {
                         // Loop day counting how much has been done
-                        for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count {
-                            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool == false {
+                        for j in 0..<ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count {
+                            if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool == false {
                                 currentCount += 1
                             }
                             
@@ -360,8 +360,8 @@ class ReminderNotifications {
         
             // Get schedule style
             var scheduleStyle = Int()
-            if ScheduleVariables.shared.schedules.count > 0 {
-                scheduleStyle = ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
+            if ScheduleManager.shared.schedules.count > 0 {
+                scheduleStyle = ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int
             } else {
                 scheduleStyle = 0
             }
@@ -370,11 +370,11 @@ class ReminderNotifications {
             let day = Date().weekDayFromMonday
             
             // Day view
-            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.day.rawValue {
+            if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
                 var dayCount = 0
                 // Loop day counting whats left
-                for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![day].count {
-                    if !(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![day][j]["isGroupCompleted"] as! Bool) {
+                for j in 0..<ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![day].count {
+                    if !(ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![day][j]["isGroupCompleted"] as! Bool) {
                         dayCount += 1
                     }
                 }
@@ -385,8 +385,8 @@ class ReminderNotifications {
                 var weekCount = 0
                 // Loop week counting whats left
                 for i in 0..<6 {
-                    for j in 0..<ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i].count {
-                        if !(ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
+                    for j in 0..<ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i].count {
+                        if !(ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![i][j]["isGroupCompleted"] as! Bool) {
                             weekCount += 1
                         }
                     }
@@ -1054,19 +1054,19 @@ extension UIViewController {
         //
         var selectedDay = Int()
         // Nina
-        index0 = ScheduleVariables.shared.selectedRows.initial
+        index0 = ScheduleManager.shared.selectedRows.initial
         // Day view - index is simply row
-        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
-            index0 = ScheduleVariables.shared.selectedRows.initial
-            selectedDay = ScheduleVariables.shared.selectedDay
+        if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int == 0 {
+            index0 = ScheduleManager.shared.selectedRows.initial
+            selectedDay = ScheduleManager.shared.selectedDay
         // Week view -  find stored index to schedule week using temporary full week array
         } else {
-            index0 = ScheduleVariables.shared.weekArray[ScheduleVariables.shared.selectedRows.initial]["index"] as! Int
-            selectedDay = ScheduleVariables.shared.weekArray[ScheduleVariables.shared.selectedRows.initial]["day"] as! Int
+            index0 = ScheduleManager.shared.weekArray[ScheduleManager.shared.selectedRows.initial]["index"] as! Int
+            selectedDay = ScheduleManager.shared.weekArray[ScheduleManager.shared.selectedRows.initial]["day"] as! Int
         }
         print(index0)
         //
-        index1 = String(ScheduleVariables.shared.selectedRows.final)
+        index1 = String(ScheduleManager.shared.selectedRows.final)
         return (index0, index1, selectedDay)
     }
     

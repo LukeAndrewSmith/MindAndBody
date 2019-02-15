@@ -620,7 +620,7 @@ class SessionScreen: UIViewController, UITableViewDelegate, UITableViewDataSourc
         case 1:
             //
             // Schedule Tracking
-            ScheduleVariables.shared.shouldReloadScheduleTracking()
+            ScheduleManager.shared.shouldReloadScheduleTracking()
             //
             self.dismiss(animated: true)
             

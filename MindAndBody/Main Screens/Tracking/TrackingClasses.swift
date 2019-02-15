@@ -22,9 +22,8 @@ public class DateValueFormatterDay: NSObject, IAxisValueFormatter {
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let timeIntervalDeShifted = (value * 3600 * 24) + Tracking.shared.minTime
-        let date2 = Date(timeIntervalSince1970: timeIntervalDeShifted)
-        return dateFormatter.string(from: date2)
+        let date = Date(timeIntervalSince1970: value)
+        return dateFormatter.string(from: date)
     }
 }
 // Day Date
@@ -37,10 +36,8 @@ public class DateValueFormatterDayDate: NSObject, IAxisValueFormatter {
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let timeIntervalDeShifted = (value * 3600 * 24) + Tracking.shared.minTime
-        let date2 = Date(timeIntervalSince1970: timeIntervalDeShifted)
-        return dateFormatter.string(from: date2)
-//        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+        let date = Date(timeIntervalSince1970: value)
+        return dateFormatter.string(from: date)
     }
 }
 // Month Name
@@ -53,10 +50,8 @@ public class DateValueFormatterMonth: NSObject, IAxisValueFormatter {
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let timeIntervalDeShifted = (value * 3600 * 24) + Tracking.shared.minTime
-        let date2 = Date(timeIntervalSince1970: timeIntervalDeShifted)
-        return dateFormatter.string(from: date2)
-//        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+        let date = Date(timeIntervalSince1970: value)
+        return dateFormatter.string(from: date)
     }
 }
 // Month Letter
@@ -69,10 +64,8 @@ public class DateValueFormatterMonthLetter: NSObject, IAxisValueFormatter {
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let timeIntervalDeShifted = (value * 3600 * 24) + Tracking.shared.minTime
-        let date2 = Date(timeIntervalSince1970: timeIntervalDeShifted)
-        return dateFormatter.string(from: date2)
-        //        return dateFormatter.string(from: Date(timeIntervalSince1970: value))
+        let date = Date(timeIntervalSince1970: value)
+        return dateFormatter.string(from: date)
     }
 }
 //
@@ -300,7 +293,7 @@ public class XYMarkerView: BalloonMarker {
     // MARK: Label content
     public override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         // De shift x value time
-        let timeIntervalDeShifted = (entry.x * 3600 * 24) + Tracking.shared.minTime
+        let xValue = entry.x
         var yValue = entry.y
         // Descale
         if yValue > 100 {
@@ -310,7 +303,7 @@ public class XYMarkerView: BalloonMarker {
         }
         
         let string = ""
-            + xAxisValueFormatter.stringForValue(timeIntervalDeShifted, axis: XAxis())
+            + xAxisValueFormatter.stringForValue(xValue, axis: XAxis())
             + " - "
             + yFormatter.string(from: NSNumber(floatLiteral: yValue))!
             + "%"

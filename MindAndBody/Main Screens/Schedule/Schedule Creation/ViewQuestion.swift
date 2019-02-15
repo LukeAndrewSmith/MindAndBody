@@ -62,8 +62,8 @@ class ScheduleViewQuestion: UIViewController {
         
         
         // Set user settings for schedule style to week
-        ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
-        ScheduleVariables.shared.saveSchedules()
+        ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] = 0
+        ScheduleManager.shared.saveSchedules()
         
         selectedStyle = 0
         nextAndUpdate()
@@ -74,26 +74,26 @@ class ScheduleViewQuestion: UIViewController {
         // If app schedule, go to week
         
         // Set user settings for schedule style to week
-        ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
-        ScheduleVariables.shared.saveSchedules()
+        ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] = 1
+        ScheduleManager.shared.saveSchedules()
         //
         // App helps create schedule, fill suggested sessions into week creator
-        if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
+        if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["scheduleInformation"]![0][0]["customSchedule"] as! Int == 0 {
             
             // Ensure that the schedule is clean
-            ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"] = scheduleDataStructures.emptySchedule["schedule"]
+            ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"] = scheduleDataStructures.emptySchedule["schedule"]
             // Loop sessions array - therefore loop groups
-            for i in 0..<ScheduleVariables.shared.temporarySessionsArray.count {
+            for i in 0..<ScheduleManager.shared.temporarySessionsArray.count {
                 // If n session not 0 for a group
-                if ScheduleVariables.shared.temporarySessionsArray[i] != 0 {
+                if ScheduleManager.shared.temporarySessionsArray[i] != 0 {
                     // Loop number of sessions, appending to week
-                    for _ in 0..<ScheduleVariables.shared.temporarySessionsArray[i] {
+                    for _ in 0..<ScheduleManager.shared.temporarySessionsArray[i] {
                         // Add to first available day in the week
                         for j in 0...6 {
                             // If day not full (max 5 things per day in week)
                                 // Note, i is the group
-                            if ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![j].count < 5 {
-                                ScheduleVariables.shared.schedules[ScheduleVariables.shared.selectedScheduleIndex]["schedule"]![j].append(scheduleDataStructures.scheduleGroups[i]!)
+                            if ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![j].count < 5 {
+                                ScheduleManager.shared.schedules[ScheduleManager.shared.selectedScheduleIndex]["schedule"]![j].append(scheduleDataStructures.scheduleGroups[i]!)
                                 break
                             }
                         }
@@ -101,10 +101,10 @@ class ScheduleViewQuestion: UIViewController {
                 }
             }
             //
-            ScheduleVariables.shared.saveSchedules()
+            ScheduleManager.shared.saveSchedules()
             
             // Create temporary week view array, as week is viewed as full week
-            ScheduleVariables.shared.createTemporaryWeekViewArray()
+            ScheduleManager.shared.createTemporaryWeekViewArray()
 
             // Then go to schedule editor to let them finalise the schedule
             

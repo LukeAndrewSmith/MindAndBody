@@ -484,14 +484,14 @@ class TimeBasedScreen: UIViewController, UITableViewDelegate, UITableViewDataSou
                 } else {
                     if canSwipeMovement {
                         // Schedule Tracking
-                        ScheduleVariables.shared.shouldReloadScheduleTracking()
+                        ScheduleManager.shared.shouldReloadScheduleTracking()
                         dismissView()
                     }
                 }
             } else {
                 if canSwipeMovement {
                     // Schedule Tracking
-                    ScheduleVariables.shared.shouldReloadScheduleTracking()
+                    ScheduleManager.shared.shouldReloadScheduleTracking()
                     dismissView()
                 }
             }

@@ -496,7 +496,7 @@
 		07995A391E893E590009C9B1 /* ScheduleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07995A381E893E590009C9B1 /* ScheduleScreen.swift */; };
 		07A42E4C1EDDFDEA0047E8F1 /* CardioScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */; };
 		07A6346F208C999000712EE2 /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6346E208C999000712EE2 /* Equipment.swift */; };
-		07B852621F83756C005F3781 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B852611F83756C005F3781 /* ScheduleData.swift */; };
+		07B852621F83756C005F3781 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B852611F83756C005F3781 /* ScheduleManager.swift */; };
 		07BB1A2F212C463D007C50CD /* FinalChoiceChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB1A2E212C463D007C50CD /* FinalChoiceChoice.swift */; };
 		07BB1A31212CB225007C50CD /* MeditationTimerChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BB1A30212CB225007C50CD /* MeditationTimerChoice.swift */; };
 		07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BE8C081E8BDF9500A851EF /* YogaScreen.swift */; };
@@ -524,7 +524,7 @@
 		07D69ABE216C040F0007B00C /* backBicep@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D69ABA216C040F0007B00C /* backBicep@3x.png */; };
 		07D69AC1216CE4EA0007B00C /* backBicepErector@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D69ABF216CE4E80007B00C /* backBicepErector@3x.png */; };
 		07D69AC2216CE4EA0007B00C /* backBicepErector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D69AC0216CE4E90007B00C /* backBicepErector@2x.png */; };
-		07DE23031FC0919200940567 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DE23021FC0919200940567 /* Subscriptions.swift */; };
+		07DE23031FC0919200940567 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DE23021FC0919200940567 /* SubscriptionManager.swift */; };
 		07DE23051FC0A47500940567 /* SubscriptionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DE23041FC0A47400940567 /* SubscriptionScreen.swift */; };
 		07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */; };
 		07E1D4DF1FB0DDF600B53B85 /* ScheduleEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */; };
@@ -1833,7 +1833,7 @@
 		07A42E4B1EDDFDEA0047E8F1 /* CardioScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardioScreen.swift; sourceTree = "<group>"; };
 		07A464231FB88C3F00139DCD /* MindAndBody.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindAndBody.entitlements; sourceTree = "<group>"; };
 		07A6346E208C999000712EE2 /* Equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment.swift; sourceTree = "<group>"; };
-		07B852611F83756C005F3781 /* ScheduleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
+		07B852611F83756C005F3781 /* ScheduleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleManager.swift; sourceTree = "<group>"; };
 		07BB1A2E212C463D007C50CD /* FinalChoiceChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalChoiceChoice.swift; sourceTree = "<group>"; };
 		07BB1A30212CB225007C50CD /* MeditationTimerChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationTimerChoice.swift; sourceTree = "<group>"; };
 		07BE8C081E8BDF9500A851EF /* YogaScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YogaScreen.swift; sourceTree = "<group>"; };
@@ -1861,7 +1861,7 @@
 		07D69ABA216C040F0007B00C /* backBicep@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backBicep@3x.png"; sourceTree = "<group>"; };
 		07D69ABF216CE4E80007B00C /* backBicepErector@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backBicepErector@3x.png"; sourceTree = "<group>"; };
 		07D69AC0216CE4E90007B00C /* backBicepErector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backBicepErector@2x.png"; sourceTree = "<group>"; };
-		07DE23021FC0919200940567 /* Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
+		07DE23021FC0919200940567 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		07DE23041FC0A47400940567 /* SubscriptionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScreen.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		07DEE6F81E0AADF2003B89AB /* MeditationChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationChoice.swift; sourceTree = "<group>"; };
 		07E1D4DE1FB0DDF600B53B85 /* ScheduleEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditing.swift; sourceTree = "<group>"; };
@@ -2863,7 +2863,7 @@
 		075A0DB91E8D68800008E014 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				07B852611F83756C005F3781 /* ScheduleData.swift */,
+				07B852611F83756C005F3781 /* ScheduleManager.swift */,
 				07995A381E893E590009C9B1 /* ScheduleScreen.swift */,
 				07686A8C1F84398000C278CC /* Helpers */,
 				07F8EDD81FA5DB4900C452F4 /* Profile Editing */,
@@ -3492,17 +3492,8 @@
 		0778761C1F92A44B005CE68A /* Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
-				0778761F1F92A45A005CE68A /* Subscriptions */,
-			);
-			path = Subscriptions;
-			sourceTree = "<group>";
-		};
-		0778761F1F92A45A005CE68A /* Subscriptions */ = {
-			isa = PBXGroup;
-			children = (
-				077B0EDD1FC2C349008F3503 /* Info Tables */,
-				07DE23011FC0916F00940567 /* Subscriptions Other */,
-				07DE23041FC0A47400940567 /* SubscriptionScreen.swift */,
+				077B0EDD1FC2C349008F3503 /* Subscriptions Screen */,
+				07DE23011FC0916F00940567 /* Subscriptions Manager */,
 			);
 			path = Subscriptions;
 			sourceTree = "<group>";
@@ -3613,13 +3604,14 @@
 			path = "SF-UI-Text";
 			sourceTree = "<group>";
 		};
-		077B0EDD1FC2C349008F3503 /* Info Tables */ = {
+		077B0EDD1FC2C349008F3503 /* Subscriptions Screen */ = {
 			isa = PBXGroup;
 			children = (
+				07DE23041FC0A47400940567 /* SubscriptionScreen.swift */,
 				0748C2E01FC2DC4F0087992D /* InfoPageController.swift */,
 				077B0EE01FC2C35A008F3503 /* InfoTables.swift */,
 			);
-			path = "Info Tables";
+			path = "Subscriptions Screen";
 			sourceTree = "<group>";
 		};
 		077DAB0E1FD5FCC200CF7949 /* Session Data */ = {
@@ -4443,13 +4435,13 @@
 			path = "Schedule Creation";
 			sourceTree = "<group>";
 		};
-		07DE23011FC0916F00940567 /* Subscriptions Other */ = {
+		07DE23011FC0916F00940567 /* Subscriptions Manager */ = {
 			isa = PBXGroup;
 			children = (
 				071D4A321FC0CD1600ED779B /* SubscriptionNotifications.swift */,
-				07DE23021FC0919200940567 /* Subscriptions.swift */,
+				07DE23021FC0919200940567 /* SubscriptionManager.swift */,
 			);
-			path = "Subscriptions Other";
+			path = "Subscriptions Manager";
 			sourceTree = "<group>";
 		};
 		07E1D4DD1FB0DDE100B53B85 /* Schedule Editing */ = {
@@ -8084,7 +8076,7 @@
 				07BE8C091E8BDF9500A851EF /* YogaScreen.swift in Sources */,
 				0778FAA720A34F390032698A /* StopClock.swift in Sources */,
 				073734221FD2DE42009F5B54 /* TrackingScreen.swift in Sources */,
-				07DE23031FC0919200940567 /* Subscriptions.swift in Sources */,
+				07DE23031FC0919200940567 /* SubscriptionManager.swift in Sources */,
 				07686A8E1F84399A00C278CC /* ScheduleAnimationHelpers.swift in Sources */,
 				07DEE6F91E0AADF2003B89AB /* MeditationChoice.swift in Sources */,
 				077BC6951F725DCB00B9E798 /* EditingCustom.swift in Sources */,
@@ -8118,7 +8110,7 @@
 				076C68461ED58D65009160C2 /* StretchingScreen.swift in Sources */,
 				0782AB571FC4F1BB00D34500 /* ScheduleWalkthrough.swift in Sources */,
 				077DAB131FD5FCD500CF7949 /* Sessions.swift in Sources */,
-				07B852621F83756C005F3781 /* ScheduleData.swift in Sources */,
+				07B852621F83756C005F3781 /* ScheduleManager.swift in Sources */,
 				07E1D4E11FB2250B00B53B85 /* CreationHelp.swift in Sources */,
 				07248E071F31CB5100230EAF /* GlobalVariables.swift in Sources */,
 				07E1D4DF1FB0DDF600B53B85 /* ScheduleEditing.swift in Sources */,

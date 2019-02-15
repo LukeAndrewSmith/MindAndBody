@@ -549,7 +549,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             } else {
                 //
                 // Schedule Tracking
-                ScheduleVariables.shared.shouldReloadScheduleTracking()
+                ScheduleManager.shared.shouldReloadScheduleTracking()
                 //
                 self.dismiss(animated: true)
             }

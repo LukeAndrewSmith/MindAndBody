@@ -133,14 +133,14 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if backButtonTop.constant != 0 {
             backButtonTop.constant = 0
         }
-        if ScheduleVariables.shared.selectedGroup == Groups.extra {
+        if ScheduleManager.shared.selectedGroup == Groups.extra {
             extraSessionMask.frame = CGRect(x: 0, y: 0, width: choiceTable.bounds.width, height: choiceTable.frame.minY)
             extraSessionMask.backgroundColor = Colors.light
             self.view.addSubview(extraSessionMask)
             groupImageHeight.constant = 0
             self.view.layoutIfNeeded()
         } else {
-            let groupString = ScheduleVariables.shared.selectedGroup.rawValue
+            let groupString = ScheduleManager.shared.selectedGroup.rawValue
             /// Image
             groupImage.image = groupString.groupImageFromString()
             groupImage.contentMode = .scaleAspectFill
@@ -174,7 +174,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         let header = UIView()
         
-        let title = sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress][0]
+        let title = sessionData.sortedGroups[ScheduleManager.shared.selectedGroup]![ScheduleManager.shared.choiceProgress][0]
         let titleLabel = UILabel()
         titleLabel.font = Fonts.scheduleTitle
         titleLabel.textColor = foregroundColor
@@ -217,7 +217,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count - 1
+        return sessionData.sortedGroups[ScheduleManager.shared.selectedGroup]![ScheduleManager.shared.choiceProgress].count - 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -227,12 +227,12 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func calculateCellHeight() {
-        if ScheduleVariables.shared.selectedGroup == Groups.extra {
-            let nRows: CGFloat = CGFloat(sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count - 1)
+        if ScheduleManager.shared.selectedGroup == Groups.extra {
+            let nRows: CGFloat = CGFloat(sessionData.sortedGroups[ScheduleManager.shared.selectedGroup]![ScheduleManager.shared.choiceProgress].count - 1)
             cellHeight = (choiceTable.frame.size.height - tableHeaderHeight) / nRows
         // If too many choices, reduce size of cell
-        } else if CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress].count - 1) * 72) > (choiceTable.bounds.height - tableHeaderHeight) {
-            let height = (choiceTable.bounds.height - tableHeaderHeight) / CGFloat((sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress]).count - 1)
+        } else if CGFloat((sessionData.sortedGroups[ScheduleManager.shared.selectedGroup]![ScheduleManager.shared.choiceProgress].count - 1) * 72) > (choiceTable.bounds.height - tableHeaderHeight) {
+            let height = (choiceTable.bounds.height - tableHeaderHeight) / CGFloat((sessionData.sortedGroups[ScheduleManager.shared.selectedGroup]![ScheduleManager.shared.choiceProgress]).count - 1)
             cellHeight = height
             
         // Height 72
@@ -254,7 +254,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         choiceLabel.textColor = foregroundColor
         
         // indexPath.row + 1  as title included in array
-        let groupString = sessionData.sortedGroups[ScheduleVariables.shared.selectedGroup]![ScheduleVariables.shared.choiceProgress][indexPath.row + 1]
+        let groupString = sessionData.sortedGroups[ScheduleManager.shared.selectedGroup]![ScheduleManager.shared.choiceProgress][indexPath.row + 1]
         choiceLabel.text = NSLocalizedString(groupString, comment: "")
         choiceLabel.numberOfLines = 2
         choiceLabel.sizeToFit()
@@ -262,7 +262,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
         cell.addSubview(choiceLabel)
         
         // Add images if extra session
-        if ScheduleVariables.shared.selectedGroup == Groups.extra {
+        if ScheduleManager.shared.selectedGroup == Groups.extra {
 
             let gap: CGFloat = 8
             let imageHeight = cellHeight - (2*gap)
@@ -273,13 +273,13 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             groupImage.frame = CGRect(x: 16, y: gap, width: imageHeight, height: imageHeight)
             groupImage.contentMode = .scaleAspectFill
             groupImage.clipsToBounds = true
-            groupImage.image = ScheduleVariables.shared.groupImageThumbnails[groupString]
+            groupImage.image = ScheduleManager.shared.groupImageThumbnails[groupString]
             groupImage.layer.cornerRadius = 4
             cell.addSubview(groupImage)
             
         }
         
-        if ScheduleVariables.shared.isLastChoice() {
+        if ScheduleManager.shared.isLastChoice() {
             
             // Checkmark box
             let checkBox = UIButton()
@@ -299,7 +299,7 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let checkBoxExtraButton = UIButton()
             checkBoxExtraButton.tag = indexPath.row
             var height = 72
-            if ScheduleVariables.shared.scheduleStyle == ScheduleStyle.week.rawValue && ScheduleVariables.shared.selectedGroup == .none {
+            if ScheduleManager.shared.scheduleStyle == ScheduleStyle.week.rawValue && ScheduleManager.shared.selectedGroup == .none {
                 height = 49
             }
             checkBoxExtraButton.frame = CGRect(x: 0, y: 0, width: height, height: height)
@@ -308,8 +308,8 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.addSubview(checkBoxExtraButton)
             
             // CheckMark if completed
-            let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: ScheduleVariables.shared.selectedRows.initial)
-            if ScheduleVariables.shared.isComponentCompleted(day: day, indexInDay: indexInDay, row: indexPath.row) {
+            let (day, indexInDay) = ScheduleManager.shared.getIndexing(row: ScheduleManager.shared.selectedRows.initial)
+            if ScheduleManager.shared.isComponentCompleted(day: day, indexInDay: indexInDay, row: indexPath.row) {
                 checkButton(button: checkBox)
             }
         }
@@ -333,14 +333,14 @@ class SessionChoice: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Did select row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-        let (day, indexInDay) = ScheduleVariables.shared.getIndexing(row: ScheduleVariables.shared.selectedRows.initial)
+        let (day, indexInDay) = ScheduleManager.shared.getIndexing(row: ScheduleManager.shared.selectedRows.initial)
         
         // Normal
-        if !ScheduleVariables.shared.isLastChoice() {
+        if !ScheduleManager.shared.isLastChoice() {
             didSelectRowHandler(row: indexPath.row)
             
         // If last choice and not completed, do something
-        } else if !ScheduleVariables.shared.isComponentCompleted(day: day, indexInDay: indexInDay, row: indexPath.row) {
+        } else if !ScheduleManager.shared.isComponentCompleted(day: day, indexInDay: indexInDay, row: indexPath.row) {
             // Silly highlighting issue
             // Highlight affects checkBox background colors, therefore find the button through the image, and set the background color to green if the border is green as implies that it is selected
             let cell = tableView.cellForRow(at: indexPath)
