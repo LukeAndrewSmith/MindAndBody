@@ -10,10 +10,6 @@ import Foundation
 import UIKit
 import UserNotifications
 
-
-//
-// Schedule Class -----------------------------------------------------------------------------------------------------------------------------
-//
 class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     ///---------------------------------------------------------------------------------
@@ -22,18 +18,21 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     /// TableView
     @IBOutlet weak var scheduleTable: UITableView!
     @IBOutlet weak var scheduleTableBottom: NSLayoutConstraint!
-    @IBOutlet weak var pageStack: UIStackView!
+    /// TableView header separator
+    @IBOutlet weak var separatorTop: NSLayoutConstraint!
+    @IBOutlet weak var separator: UIView! // TODO: RENAME to headerSeparator
+    /// Constraints
     @IBOutlet weak var navigationSeparatorTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var scheduleTableTopConstraint: NSLayoutConstraint!
-    ///
+    /// Week stack (at top of screen)
+    @IBOutlet weak var pageStack: UIStackView!
+    @IBOutlet weak var pageStackHeight: NSLayoutConstraint!
     @IBOutlet weak var dayIndicator: UIView!
     @IBOutlet weak var dayIndicatorLeading: NSLayoutConstraint!
     
-    @IBOutlet weak var pageStackHeight: NSLayoutConstraint!
-    
     ///---------------------------------------------------------------------------------
-    /// MARK: Variables
-
+    /// MARK: Variables etc...
+    
     ///------------------------------------
     /// Week stack (letters at top of screen)
     /// Day arrays
@@ -41,13 +40,13 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
     let dayArrayChar = ["mondayLetter","tuesdayLetter","wednesdayLetter","thursdayLetter","fridayLetter","saturdayLetter","sundayLetter"]
     /// StackView
-    var stackArray: [UILabel] = []
+    var stackArray: [UILabel] = [] // TODO: Rename to weekStackArray
     var stackFontUnselected = UIFont(name: "SFUIDisplay-regular", size: 17)
     var stackFontSelected = UIFont(name: "SFUIDisplay-bold", size: 17)
 
     ///------------------------------------
     /// Schedule Creation and choices
-    /// Schedule creation and choices ACTION SHEET
+        /// Action sheet elements
     let scheduleChoiceTable = UITableView()
     let scheduleView = UIView()
     let createScheduleButton = UIButton()
@@ -66,10 +65,6 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         /// If so - hide navigation bar
     var goingToSessionChoice = false
     
-    // Variable that is set to current day, if app is opened and current day is different to this variabe then the schedule goes to the current day, if not then stays on whatever day it was on
-        // Ensures that upon opening the app for the first time on a day, the schedule presents the current day
-    var currentDay = 0
-    
     ///------------------------------------
     /// Session variables
     
@@ -80,7 +75,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     // TODO: ???
     // Important variables selected choices in other class - ScheduleVariables
     
-    ///---------------------------------------------------------------------------------
+    ///------------------------------------
     /// Layout
     
     /// Color
@@ -90,7 +85,7 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     let tableSpacing: CGFloat = 27
     let headerSpacing: CGFloat = 0
     
-    ///---------------------------------------------------------------------------------
+    ///------------------------------------
     /// TableView
     
     /// Cell heights
@@ -110,14 +105,12 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var daySwipeRight = UISwipeGestureRecognizer()
     
     /// Header separator
-    @IBOutlet weak var separatorTop: NSLayoutConstraint!
-    @IBOutlet weak var separator: UIView!
     var separatorY: CGFloat {
         /// (Size of schedule screen / 4)
         return headerHeight
     }
     
-    ///---------------------------------------------------------------------------------
+    ///------------------------------------
     /// Walkthrough
     var walkthroughProgress = 0
     var walkthroughView = UIView()
@@ -140,10 +133,25 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var walkthroughBackgroundColor = UIColor()
     var walkthroughTextColor = UIColor()
     
+    ///------------------------------------
+    /// MARK: Testing
+    var subscriptionButton = UIButton()
+    @objc func subs() {
+        self.performSegue(withIdentifier: "SubscriptionSegue", sender: Any?)
+    }
+    
     ///---------------------------------------------------------------------------------
-    /// MARK: - Functions
+    /// MARK: View lifecycle functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ///------------------------------------
+        /// MARK: Testing
+        subscriptionButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        subscriptionButton.titleLabel?.text = "Subscriptions"
+        subscriptionButton.addTarget(self, action: #selector(subs), for: .touchUpInside)
+        view.addSubview(subscriptionButton)
         
         /// Observe willEnterForeground
             /// Upon entering foreground, various checks are performed (reset, selected day etc..)
@@ -153,8 +161,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             /// When subscriptions screen is dismissed, walkthrough can be presented
         NotificationCenter.default.addObserver(self, selector: #selector(beginWalkthrough), name: SubscriptionNotifiations.canPresentWalkthrough, object: nil)
         
-        /// Subscriptions
-        /// Checking for valid subscription --> present loading during check
+        /// Subscriptions Check
+            /// Checking for valid subscription --> present loading during check
             /// Check initiated in app delegate
         if Loading.shared.shouldPresentLoading {
             Loading.shared.beginLoading(type: 0)
@@ -166,33 +174,31 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
                 }
             })
         }
+        
         /// Observe checkSubscription outcome
             /// End Loading
             /// Present Subscription Screen (no valid sub)
         NotificationCenter.default.addObserver(self, selector: #selector(subscriptionCheckCompleted), name: SubscriptionNotifiations.didCheckSubscription, object: nil)
 
+        // TODO: ??? not sure it's necessary
         /// Ensure week goal correct
         Tracking.shared.updateWeekGoal()
         
-        // Setup
+        /// Setup
         ScheduleManager.shared.setScheduleStyle()
-        // If week view, crete temporary week array
-        if ScheduleManager.shared.scheduleStyle == ScheduleStyle.week.rawValue {
-            ScheduleManager.shared.createTemporaryWeekViewArray()
-        }
-        setupViews()
-        layoutViews()
-        reloadView()
-        
-        // Register for receiving did enter foreground notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        setupView() /// Setups up tables, actions sheets, navigation bar etc...
+        layoutViews() /// Lays out the week stack
+        reloadView() /// Ensure schedule table presenting the correct information
     }
     
-    // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        /// Ensure the navigation controller is visible
+            /// Not visible in session choice
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        /// To do whenever view appears - checks etc...
         willAppear()
     }
     
@@ -202,77 +208,76 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     func willAppear() {
         
-        // Check if reset necessary
+        /// Check if reset necessary
         ScheduleManager.shared.resetScheduleTracking()
 
-        // Check if necessary to go to current day
+        /// Check if necessary to go to current day
         checkSelectedDay()
         
-        // Ensure dayIndicator in correct position / not visible && if week view, update temporary full week array
+        /// Ensure dayIndicator in correct position / not visible && if week view, update temporary full week array
         if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             self.view.layoutIfNeeded()
-            // Week view
         } else {
             dayIndicator.alpha = 0
             ScheduleManager.shared.createTemporaryWeekViewArray()
         }
         
-        // Reload the view if requested by previous view
+        /// Reload the view if requested by previous view
         reloadView()
         
+        /// Check if scrolling should be enabled
         scheduleTableScrollCheck()
         
-        // Check if alert reminding to update profile (Once a month) should be presented
+        /// Check if alert reminding to update profile (Once a month) should be presented
         UpdateProfile.shared.checkUpdateProfile()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        /// Reloads row if necessary marking as completed
         reloadCompletedRow()
-        // Reset session choice indicators
+        
+        /// Reset session choice indicators && extra session completion
         ScheduleManager.shared.resetChoice()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Hide navigation bar
+        /// Hide navigation bar
         if goingToSessionChoice {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             goingToSessionChoice = false
         }
     }
 
-    // MARK: viewDidLayoutSubviews
     override func viewDidLayoutSubviews() {
-        //
+        
+        /// Ensure that the week stack day indicator is in the correct position
         if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             pageStack.layoutSubviews()
             dayIndicatorLeading.constant = self.stackArray[ScheduleManager.shared.selectedDay].frame.minX
         }
-        //
-        // Schedule Tableview top view (set here so it's layed out correctly)
-        let topView = UIVisualEffectView()
-        let topViewE = UIBlurEffect(style: .dark)
-        topView.effect = topViewE
-        topView.isUserInteractionEnabled = false
-        //
-        topView.frame = CGRect(x: 0, y: scheduleTable.frame.minY - scheduleTable.bounds.height, width: scheduleTable.bounds.width, height: scheduleTable.bounds.height)
-        //
+        
+        /// Check if scrolling should be enabled
+            /// This is the case if the are more sessions planned than can be displayed on the screen
         scheduleTableScrollCheck()
     }
     
-    // Begin walkthrough
+    
+    ///---------------------------------------------------------------------------------
+    /// MARK: Main functions
+    
+    ///------------------
+    /// Begin walkthrough
     @objc func beginWalkthrough() {
-        // If walkthrough hasn't already been called
+        /// If walkthrough hasn't already been called
         if walkthroughProgress == 0 {
-            // Register for notifications
+            /// Request notification authorization
             let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-                // Enable or disable features based on authorization.
-            }
-            // Present schedule walkthrough
+            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
+            /// Present schedule walkthrough
             let walkthroughs = UserDefaults.standard.object(forKey: "walkthroughs") as! [String: Bool]
             if walkthroughs["Schedule"] == false {
                 self.walkthroughSchedule()
@@ -280,92 +285,53 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
         }
     }
     
-    //
-    // Schedule Selection (Bar Button Item (Top Right))
-    // Edit Schedule
-    @objc func editScheduleAction() {
-        
-        // There is a schedule to edit
-        if ScheduleManager.shared.schedules.count > 0 {
-            self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
-            ActionSheet.shared.animateActionSheetDown()
-        // There is no schedule to edit - popup indicating so
-        } else {
-            ActionSheet.shared.actionSheet.alpha = 0
-            ActionSheet.shared.actionSheetBackgroundView.alpha = 0
-            ActionSheet.shared.actionSheetBackgroundView.isEnabled = false
-            //
-            // Alert View
-            let title = NSLocalizedString("scheduleEditTitle", comment: "")
-            let message = NSLocalizedString("scheduleEditMessage", comment: "")
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.view.tintColor = Colors.dark
-            alert.setValue(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-medium", size: 20)!]), forKey: "attributedTitle")
-            //
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .natural
-            alert.setValue(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: UIFont(name: "SFUIDisplay-light", size: 18)!, NSAttributedString.Key.paragraphStyle: paragraphStyle]), forKey: "attributedMessage")
-            
-            //
-            // Action
-            let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertAction.Style.default) {
-                UIAlertAction in
-                ActionSheet.shared.actionSheet.alpha = 1
-                ActionSheet.shared.actionSheetBackgroundView.alpha = 1
-                ActionSheet.shared.actionSheetBackgroundView.isEnabled = true
-            }
-            //
-            alert.addAction(okAction)
-            //
-            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-            //self.present(alert, animated: true, completion: nil)
-        }
+    ///------------------------------------
+    /// Schedule Selection functions (Bar Button Item (Top Right))
+    ///------------------
+    /// Schedule Button (Bar button item)
+        /// Present schedule choice action sheet
+    @IBAction func scheduleButton(_ sender: Any) {
+
+        /// Setup
+        ActionSheet.shared.setupActionSheet()
+        ActionSheet.shared.actionSheet.addSubview(scheduleView)
+        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + scheduleView.bounds.height)
+        ActionSheet.shared.resetCancelFrame()
+        /// Cancel button is a done button for this case
+        ActionSheet.shared.cancelButton.setTitleColor(Colors.green, for: .normal)
+        ActionSheet.shared.cancelButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
+
+        /// Present
+        ActionSheet.shared.animateActionSheetUp()
     }
-    
-    @objc func createScheduleAction()  {
-        // Dismiss action sheet
+    ///------------------
+    /// Edit
+    @objc func editScheduleAction() {
         ActionSheet.shared.animateActionSheetDown()
-        //
+        self.performSegue(withIdentifier: "EditScheduleSegue", sender: self)
+    }
+    ///------------------
+    /// Create
+    @objc func createScheduleAction()  {
+        ActionSheet.shared.animateActionSheetDown()
         self.performSegue(withIdentifier: "ScheduleCreationSegue", sender: self)
     }
     
-    // Schedule Button (Bar button item)
-    @IBAction func scheduleButton(_ sender: Any) {
-        // Local
-        let actionSheet = UIView()
-        //
-        let height = scheduleChoiceTable.bounds.height + createScheduleButton.bounds.height
-            //+ 10
-        actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionWidth, height: height)
-        actionSheet.layer.cornerRadius = createScheduleButton.bounds.height / 2
-        actionSheet.addSubview(scheduleView)
-        //
-        ActionSheet.shared.setupActionSheet()
-        ActionSheet.shared.actionSheet.addSubview(actionSheet)
-        let heightToAdd = height
-        ActionSheet.shared.actionSheet.frame.size = CGSize(width: ActionSheet.shared.actionSheet.bounds.width, height: ActionSheet.shared.actionSheet.bounds.height + heightToAdd)
-        ActionSheet.shared.resetCancelFrame()
-        // Cancel button is a done button for this case
-        ActionSheet.shared.cancelButton.setTitleColor(Colors.green, for: .normal)
-        ActionSheet.shared.cancelButton.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
-        //
-        ActionSheet.shared.animateActionSheetUp()
-        //
-    }
     
-    //
-    // MARK: Prepare for segue
+    ///---------------------------------------------------------------------------------
+    /// MARK: Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       //
+
         switch segue.identifier {
             
         case "EditScheduleSegue":
+            /// Reloads the schedule when returning in case changes made
             ScheduleManager.shared.shouldReloadSchedule = true
             
-        // Create Schedule
         case "ScheduleCreationSegue":
             ScheduleManager.shared.didCreateNewSchedule = false
             ScheduleManager.shared.shouldReloadSchedule = true
+            /// Indicate source
             let destinationNC = segue.destination as? ScheduleTypeQuestionNavigation
             let destinationVC = destinationNC?.viewControllers.first as? ScheduleTypeQuestion
             destinationVC?.comingFromSchedule = true
@@ -374,9 +340,8 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
             break
             
         case "SessionChoiceSegue":
-            // Hide shadow otherwise animation is strange
+            /// Hide shadow otherwise animation is strange
             self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
-
             
         default:
             let backItem = UIBarButtonItem()
@@ -387,12 +352,15 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     }
 }
 
-//
+///---------------------------------------------------------------------------------
+/// MARK:- Schedule navigation
 class ScheduleNavigation: UINavigationController, UIGestureRecognizerDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         interactivePopGestureRecognizer?.delegate = self
     }
+    
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return viewControllers.count > 1
     }

@@ -63,10 +63,9 @@ class ScheduleManager {
     }
     
     func setScheduleStyle() {
-        
         if schedules.count > 0 {
             scheduleStyle = (schedules[selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
-            if scheduleStyle == ScheduleStyle.day.rawValue {
+            if scheduleStyle == ScheduleStyle.week.rawValue {
                 createTemporaryWeekViewArray()
             }
         } else {
@@ -185,11 +184,12 @@ class ScheduleManager {
     }
     
     // MARK: Checks
-    // Checks if the group is completed
-        // row: the row of the group in the initial schedule screen
-        // checkAll:
-            // True: checks if all components of group
-            // False: checks if parameter "isGroupCompleted" of group in schedule
+    /// Checks if the group is completed
+        /// - parameter day: The day in which the group to check is found
+        /// - parameter indexInDay: The row of the group in the initial schedule screen
+        /// - parameter checkAll:
+            /// True: checks if all components of group //
+            /// False: checks if parameter "isGroupCompleted" of group in schedule
     func isGroupCompleted(day: Int, indexInDay: Int, checkAll: Bool) -> Bool {
         
         // Extra session

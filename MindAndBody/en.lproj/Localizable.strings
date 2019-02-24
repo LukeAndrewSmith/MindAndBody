@@ -3740,8 +3740,6 @@
 "chooseCreateSchedule" = "Choose/Create Schedule";
 "mySchedules" = "My Schedules";
 "editSchedule" = "Edit Schedule";
-    "scheduleEditTitle" = "No Schedule to edit!";
-    "scheduleEditMessage" = "\nCreate a schedule first, press the plus in the table just above the 'Edit Schedule' button";
 "editProfile" = "Edit Profile";
 "scheduleInputTitle" = "Schedule Title";
 "appSchedule" = "App Schedule";

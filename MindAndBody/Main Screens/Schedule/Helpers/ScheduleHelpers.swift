@@ -11,9 +11,8 @@ import UIKit
 
 extension ScheduleScreen {
     
-    // MARK: Schedule Helper Functions
-    
-    // MARK:- Navigation through days
+    ///---------------------------------------------------------------------------------
+    /// MARK:- Navigation through days
     // Handle Swipes
     @IBAction func handleSwipes(extraSwipe:UISwipeGestureRecognizer) {
         
@@ -308,15 +307,13 @@ extension ScheduleScreen {
         }
     }
     
-    // MARK:- View Setup/Layout
-    // MARK: Reload View
-    // shouldReloadSchedule
+    ///---------------------------------------------------------------------------------
+    /// MARK:- View Setup/Layout
+    /// MARK: Reload View
     @objc func reloadView() {
-        // RELOAD VIEW
+        // Reload schedule
         if ScheduleManager.shared.shouldReloadSchedule {
-
             ScheduleManager.shared.shouldReloadSchedule = false
-            
             ScheduleManager.shared.setScheduleStyle()
             layoutViews()
             scheduleTable.reloadData()
@@ -324,29 +321,34 @@ extension ScheduleScreen {
             scheduleTableScrollCheck()
         }
     }
-    // MARK: Setup views
-    func setupViews() {
-        // Set status bar to light
-        UIApplication.shared.statusBarStyle = .lightContent
-        //
-        // table   // buttons // spaces
+    
+    /// MARK: Setup views
+    func setupView() {
+
+        ///------------------------------------
+        /// Schedule Choice Action Sheet
         
-        let tableHeight: CGFloat = (47*4.5) + 49 // 47 is height of a row in the table - 49 for the header
-        let buttonHeight: CGFloat = 49
-        
+        ///------------------
+        /// Heights
+        let tableHeight: CGFloat = (47*4.5) + 49 /// 47: height of a row, 49: header
+        let buttonHeight: CGFloat = 49 /// Create schedule button
         let elementWidth = ActionSheet.shared.actionWidth
         
-        // Schedule View
+        ///------------------
+        /// Schedule View
         scheduleView.backgroundColor = Colors.dark
         scheduleView.frame = CGRect(x: 0, y: 0, width: elementWidth, height: tableHeight + buttonHeight)
         scheduleView.layer.cornerRadius = CGFloat(buttonHeight / 2)
         scheduleView.clipsToBounds = true
         scheduleView.layer.borderWidth = 1
         scheduleView.layer.borderColor = Colors.light.cgColor
-        // Important order for the shadow on editSchedule button to be in front of scheduleChoiceTable but behind editScheduleButton
+        /// Important order:
+            /// Shadow on editSchedule button in front of scheduleChoiceTable but behind editScheduleButton
         scheduleView.addSubview(scheduleChoiceTable)
         scheduleView.addSubview(createScheduleButton)
-        // Schedule choice
+        
+        ///------------------
+        /// Schedule choice table
         scheduleChoiceTable.backgroundColor = Colors.dark
         scheduleChoiceTable.delegate = self
         scheduleChoiceTable.dataSource = self
@@ -356,7 +358,8 @@ extension ScheduleScreen {
         scheduleChoiceTable.layer.borderWidth = 1
         scheduleChoiceTable.layer.borderColor = Colors.light.cgColor
         
-        // Create Schedule
+        ///------------------
+        /// Create Schedule Button
         createScheduleButton.addTarget(self, action: #selector(createScheduleAction), for: .touchUpInside)
         createScheduleButton.setTitle(NSLocalizedString("createSchedule", comment: ""), for: .normal)
         createScheduleButton.titleLabel?.font = UIFont(name: "SFUIDisplay-light", size: 23)
@@ -369,33 +372,33 @@ extension ScheduleScreen {
         createScheduleButton.layer.shadowOpacity = 0.72
         createScheduleButton.layer.shadowRadius = 8
         createScheduleButton.layer.shadowOffset = CGSize.zero
-        //
         
-        // Separator
+        ///------------------------------------
+        /// Header Separator
         separatorTop.constant = separatorY
-//        separator.frame = CGRect(x: tableSpacing, y: separatorY, width: view.bounds.width - 54, height: 1)
         separator.backgroundColor = foregroundColor.withAlphaComponent(0.5)
-//        view.insertSubview(separator, aboveSubview: scheduleTable)
         
-        //
-        // Navigation Bar
+        ///------------------------------------
+        /// Navigation Bar
         setupNavigationBar(navBar: navigationBar, title: NSLocalizedString("schedule", comment: ""), separator: false, tintColor: Colors.dark, textColor: Colors.light, font: Fonts.navigationBar!, shadow: true)
         
-        //
-        // TableView
+        ///------------------------------------
+        /// Status Bar
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        ///------------------------------------
+        /// Schedule TableView
         scheduleTable.backgroundView = UIView()
         scheduleTable.backgroundColor = .clear
         scheduleTable.tableFooterView = UIView()
-//        scheduleTable.separatorStyle = .none
         scheduleTable.separatorInset = UIEdgeInsets(top: 0, left: tableSpacing, bottom: 0, right: tableSpacing)
-        
     }
     
-    // Layout views
     func layoutViews() {
-        //
-        // Present as days or as week
-        // days
+
+        ///------------------------------------
+        /// Days or Week schedule layout
+        /// Days
         if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
             pageStack.alpha = 1
             pageStack.isUserInteractionEnabled = true
@@ -403,7 +406,8 @@ extension ScheduleScreen {
             navigationSeparatorTopConstraint.constant = pageStackHeight.constant
             scheduleTableTopConstraint.constant = pageStackHeight.constant
             separator.center.y = separatorY
-        // week
+            dayIndicator.alpha = 1
+        /// Week
         } else if ScheduleManager.shared.scheduleStyle == ScheduleStyle.week.rawValue {
             pageStack.alpha = 0
             pageStack.isUserInteractionEnabled = false
@@ -411,45 +415,19 @@ extension ScheduleScreen {
             navigationSeparatorTopConstraint.constant = 0
             scheduleTableTopConstraint.constant = 0
             separator.center.y = separatorY
-        }
-        
-        // Day indicator
-        if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-            dayIndicator.alpha = 1
-        } else {
             dayIndicator.alpha = 0
         }
         
+        ///------------------------------------
+        /// Week stack setup
         
-        // Shadow to page stack
-        var shouldAdd = true
-        for view in pageStack.subviews {
-            if view.tag == 723 {
-                shouldAdd = false
-            }
-        }
-        if shouldAdd {
-            let backgroundStackView = UIView(frame: pageStack.bounds)
-            backgroundStackView.tag = 723
-            backgroundStackView.backgroundColor = Colors.dark
-            backgroundStackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            pageStack.insertSubview(backgroundStackView, at: 0)
-            
-            backgroundStackView.layer.shadowColor = Colors.dark.cgColor
-            backgroundStackView.layer.shadowOpacity = 1
-            backgroundStackView.layer.shadowOffset = CGSize.zero
-            backgroundStackView.layer.shadowRadius = 7
-        }
-        
-        // Set status bar to light
-        UIApplication.shared.statusBarStyle = .lightContent
-                
-        //
-        // Custom 'Page Control' m,t,w,t,f,s,s for bottom
-        // If week is being presented as days, style 1
+        ///------------------
+        /// Setup
+            /// Week stack == Custom 'Page Control' (m,t,w,t,f,s,s) at top of screen
+            /// Setup if not already setup (i.e if arrangedSubviews.count == 0)
         if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue && pageStack.arrangedSubviews.count == 0 {
-            
-            for i in 0...(dayArray.count - 1) {
+
+            for i in 0..<dayArray.count {
                 let dayLabel = UILabel()
                 dayLabel.textColor = Colors.light
                 dayLabel.textAlignment = .center
@@ -457,7 +435,7 @@ extension ScheduleScreen {
                 dayLabel.text = NSLocalizedString(dayArrayChar[i], comment: "")
                 dayLabel.sizeToFit()
                 dayLabel.tag = i
-                //
+
                 let dayTap = UITapGestureRecognizer()
                 dayTap.numberOfTapsRequired = 1
                 dayTap.addTarget(self, action: #selector(dayTapHandler))
@@ -469,46 +447,81 @@ extension ScheduleScreen {
                 pageStack.addArrangedSubview(stackArray[i])
             }
             pageStack.isUserInteractionEnabled = true
-            //
-            // Add background color to stack view
+
+            /// Add background color
             let backgroundStackView = UIView(frame: pageStack.bounds)
             backgroundStackView.backgroundColor = Colors.dark
             backgroundStackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             pageStack.insertSubview(backgroundStackView, at: 0)
-            
         }
         
-        // Day Swipes (also used for swipe back in choices)
-        daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        daySwipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-        scheduleTable.addGestureRecognizer(daySwipeLeft)
-        //
-        daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
-        daySwipeRight.direction = UISwipeGestureRecognizer.Direction.right
-        scheduleTable.addGestureRecognizer(daySwipeRight)
+        ///------------------
+        /// Shadow
+            /// Done by adding subview that will have the shadow
+            /// Shadow subview tag == 723
+            /// Add if shadow subview not present
+        var shouldAdd = true
+        for view in pageStack.subviews {
+            if view.tag == 723 { /// Shadow subview present
+                shouldAdd = false
+            }
+        }
+        if shouldAdd {
+            let backgroundStackView = UIView(frame: pageStack.bounds)
+            backgroundStackView.tag = 723
+            backgroundStackView.backgroundColor = Colors.dark
+            backgroundStackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            pageStack.insertSubview(backgroundStackView, at: 0)
+            backgroundStackView.layer.shadowColor = Colors.dark.cgColor
+            backgroundStackView.layer.shadowOpacity = 1
+            backgroundStackView.layer.shadowOffset = CGSize.zero
+            backgroundStackView.layer.shadowRadius = 7
+        }
         
-        // Select Today
-        // Get current day as index
+        ///------------------
+        /// Indicator
+            /// move day indicator to correct position
         if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-            
             ScheduleManager.shared.selectedDay = Date().weekDayFromMonday
             stackArray[ScheduleManager.shared.selectedDay].font = stackFontSelected
+            pageStack.layoutSubviews()
             dayIndicatorLeading.constant = stackArray[ScheduleManager.shared.selectedDay].frame.minX
             self.view.layoutIfNeeded()
             
         } else {
-            // 7 implies week view
+            /// 7 indicates week view
             ScheduleManager.shared.selectedDay = 7
         }
         
+        /// Ensure day indicator setup
         dayIndicator.frame.size = CGSize(width: view.bounds.width / 7, height: 2)
         dayIndicator.backgroundColor = Colors.light
+        /// and added
         if ScheduleManager.shared.scheduleStyle == ScheduleStyle.day.rawValue {
-            view.addSubview(dayIndicator)
+            if !view.subviews.contains(dayIndicator) {
+                view.addSubview(dayIndicator)
+            }
             view.bringSubviewToFront(dayIndicator)
         }
         
+        ///------------------------------------
+        /// Day Swipes
+        daySwipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        daySwipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        scheduleTable.addGestureRecognizer(daySwipeLeft)
+
+        daySwipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
+        daySwipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        scheduleTable.addGestureRecognizer(daySwipeRight)
+        
+        ///------------------------------------
+        /// Checks
+        
+        /// Week stack colours
         updateDayIndicatorColours()
+        
+        /// Check if scroll needs to be enabled
+            /// i.e if there are more sessions planned than fit on the screen
         scheduleTableScrollCheck()
     }
     
