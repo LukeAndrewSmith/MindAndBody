@@ -351,9 +351,9 @@ extension TimeBasedScreen {
         // Dates and Times
         startTime = Date().timeIntervalSinceReferenceDate
         //
-        if didSetEndTime == false {
-            //
-            didSetEndTime = true
+//        if didSetEndTime == false {
+//            //
+//            didSetEndTime = true
             //
             // Rest Timer
             var settings = UserDefaults.standard.object(forKey: "userSettings") as! [String: [Int]]
@@ -362,7 +362,7 @@ extension TimeBasedScreen {
             let endingTime = Int(startTime) + duration
             //
             endTime = Double(endingTime)
-        }
+//        }
         
         // Set timer value
         restTime = Int(endTime - startTime) - 1
@@ -460,6 +460,7 @@ extension TimeBasedScreen {
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
         // Timer
+//        didSetEndTime = false
         startRestTimer()
         
         // Rest Alert

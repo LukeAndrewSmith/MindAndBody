@@ -258,6 +258,8 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
          "rows": 1], // 2 if reset app included
         ["title": "contact",
         "rows": 2],
+        ["title": "supportMindBody",
+         "rows": 1],
     ]
     
     // Sections
@@ -592,6 +594,14 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             cell.textLabel?.font = Fonts.regularCell
             return cell
             
+        case 8:
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            cell.textLabel?.text = NSLocalizedString("supportMindBody", comment: "")
+            cell.textLabel?.textAlignment = NSTextAlignment.left
+            cell.backgroundColor = Colors.light
+            cell.textLabel?.font = Fonts.regularCell
+            return cell
+            
         //
         default: break
         }
@@ -872,6 +882,11 @@ class Settings: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
             } else {
                 sendEmail(to: "feedback")
             }
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+        /// Support Mind & Body
+        case 8:
+            self.performSegue(withIdentifier: "SubscriptionsSegueSettings", sender: self)
             tableView.deselectRow(at: indexPath, animated: true)
         //
         default: break

@@ -15,12 +15,18 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
     // Outlets
     @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var titleImageHeight: NSLayoutConstraint!
-    @IBOutlet weak var infoPageView: UIView!
-    @IBOutlet weak var tryForFreeView: UIView!
+    
     @IBOutlet weak var subscriptionButton: UIButton!
+    @IBOutlet weak var noSubscriptionButton: UIButton!
     @IBOutlet weak var checkSubscriptionButton: UIButton!
-    @IBOutlet weak var threeMonthButton: UIButton!
-    @IBOutlet weak var twelveMonthButton: UIButton!
+    @IBOutlet weak var subscriptionButtonsBackground: UIView!
+    
+    @IBOutlet weak var subscriptionTitle: UILabel!
+    @IBOutlet weak var separatorView: UIView!
+    var subscriptionText = UILabel()
+    @IBOutlet weak var subscriptionTextScroll: UIScrollView!
+    
+    
     
     // Subscription purchase popup
     let subscriptionChoiceBackground = UIButton()
@@ -30,14 +36,13 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var subscriptionsViewStack: UIStackView!
     
-    @IBOutlet weak var freeTrial: UILabel!
-    @IBOutlet weak var freeTrialExplanation: UILabel!
-    
+    @IBOutlet weak var threeMonthButton: UIButton!
     @IBOutlet weak var threeMonthsView: UIView!
     @IBOutlet weak var threeMonthsTitle: UILabel!
     @IBOutlet weak var threeMonthsWeek: UILabel!
     @IBOutlet weak var threeMonthsTotal: UILabel!
 
+    @IBOutlet weak var twelveMonthButton: UIButton!
     @IBOutlet weak var twelveMonthsView: UIView!
     @IBOutlet weak var twelveMonthsTitle: UILabel!
     @IBOutlet weak var twelveMonthsWeek: UILabel!
@@ -67,6 +72,7 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
             didSetup = true
             setupView()
             setupTitleImage()
+            setupSubscriptionInfo()
             setupSubscriptionChoiceView()
         }
     }
@@ -106,31 +112,57 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         
         // BackgroundImage
-        view.backgroundColor = Colors.dark
-        tryForFreeView.backgroundColor = Colors.dark
+        view.backgroundColor = Colors.light
         
-        // Buttons
-        // Profile
-        subscriptionButton.setTitle(NSLocalizedString(NSLocalizedString("freeTrial", comment: ""), comment: ""), for: .normal)
+        /// Subscription
+        subscriptionButton.setTitle(NSLocalizedString(NSLocalizedString("supportMindBody", comment: ""), comment: ""), for: .normal)
+        subscriptionButton.titleLabel?.font = UIFont(name: "SFUIDisplay-bold", size: 27)
         subscriptionButton.titleLabel?.lineBreakMode = .byWordWrapping
         subscriptionButton.titleLabel?.numberOfLines = 0
         subscriptionButton.titleLabel?.textAlignment = .center
-        subscriptionButton.backgroundColor = Colors.green.withAlphaComponent(0.43)
-        checkSubscriptionButton.setTitle(NSLocalizedString("alreadyHaveSubscription", comment: ""), for: .normal)
-        checkSubscriptionButton.backgroundColor = .clear
+        subscriptionButton.setTitleColor(Colors.light, for: .normal)
+        subscriptionButton.backgroundColor = Colors.green.withAlphaComponent(0.72)
         
-        // Page Control
-        InfoPageControl.shared.setupPageControl(x: view.center.x, y: infoPageView.frame.maxY)
-        InfoPageControl.shared.pageControl.backgroundColor = Colors.light
-        view.insertSubview(InfoPageControl.shared.pageControl, belowSubview: infoPageView)
+        /// No Subscription
+        noSubscriptionButton.setTitle(NSLocalizedString(NSLocalizedString("noThanks", comment: ""), comment: ""), for: .normal)
+        noSubscriptionButton.titleLabel?.font = UIFont(name: "SFUIDisplay-bold", size: 23)
+        noSubscriptionButton.titleLabel?.lineBreakMode = .byWordWrapping
+        noSubscriptionButton.titleLabel?.numberOfLines = 0
+        noSubscriptionButton.titleLabel?.textAlignment = .center
+        noSubscriptionButton.setTitleColor(Colors.light, for: .normal)
+        noSubscriptionButton.backgroundColor = Colors.red.withAlphaComponent(0.72)
+        
+        /// Check Subscription
+        checkSubscriptionButton.setTitle(NSLocalizedString("alreadyHaveSubscription", comment: ""), for: .normal)
+        checkSubscriptionButton.backgroundColor = Colors.dark
     }
     
     func setupTitleImage() {
-        infoPageView.backgroundColor = .clear
-        titleImageHeight.constant = (infoPageView.frame.height * (4/9)) + ElementHeights.statusBarHeight
+        titleImageHeight.constant = (view.bounds.height  * (1/4)) + ElementHeights.statusBarHeight
         titleImage.image = #imageLiteral(resourceName: "GroupMeditation")
         titleImage.contentMode = .scaleAspectFill
         titleImage.clipsToBounds = true
+    }
+    
+    func setupSubscriptionInfo() {
+        subscriptionTitle.font = UIFont(name: "SFUIDisplay-regular", size: 30)
+        subscriptionTitle.text = NSLocalizedString("supportMindBody", comment: "")
+        subscriptionTitle.contentMode = .bottomLeft
+        
+        subscriptionText.font = UIFont(name: "SFUIDisplay-light", size: 19)
+        subscriptionText.text = NSLocalizedString("supportMindBodyText", comment: "")
+        subscriptionText.lineBreakMode = .byWordWrapping
+        subscriptionText.contentMode = .topLeft
+        subscriptionText.numberOfLines = 0
+        subscriptionText.frame = CGRect(x: 0, y: 0, width: subscriptionTextScroll.bounds.width, height: 0)
+        subscriptionText.sizeToFit()
+        
+        subscriptionTextScroll.addSubview(subscriptionText)
+        subscriptionTextScroll.contentSize = CGSize(width: subscriptionTextScroll.bounds.width, height: subscriptionText.bounds.height + 20)
+        subscriptionTextScroll.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        
+        separatorView.backgroundColor = Colors.dark.withAlphaComponent(0.27)
+        subscriptionButtonsBackground.backgroundColor = Colors.dark
     }
     
     func setupSubscriptionChoiceView() {
@@ -140,17 +172,8 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
         
         subscriptionChoiceView.backgroundColor = Colors.dark
         subscriptionChoiceView.frame.size = CGSize(width: view.bounds.width, height: 88 * 3)
-        subscriptionChoiceViewTop.constant = tryForFreeView.frame.maxY + ElementHeights.bottomSafeAreaInset
+        subscriptionChoiceViewTop.constant = checkSubscriptionButton.frame.maxY + ElementHeights.bottomSafeAreaInset
         self.view.layoutIfNeeded()
-        
-        // Free Trial --------------------------------
-        freeTrial.text = NSLocalizedString("freeTrialTitle", comment: "")
-        freeTrial.font = UIFont(name: "SFUIDisplay-regular", size: 21)
-        freeTrial.textColor = Colors.light
-        
-        freeTrialExplanation.text = NSLocalizedString("freeTrialExplanation", comment: "")
-        freeTrialExplanation.font = UIFont(name: "SFUIDisplay-regular", size: 15)
-        freeTrialExplanation.textColor = Colors.light
         
         // Three Months ------------------------------
         threeMonthsView.backgroundColor = Colors.dark
@@ -210,8 +233,6 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
         linkView.delegate = self
         
         // Height -------------------------
-//        var totalHeight = freeTrial.bounds.height + freeTrialExplanation.bounds.height + threeMonthsView.bounds.height
-//        totalHeight += twelveMonthsView.bounds.height + extraInfoLabel.bounds.height + linkView.bounds.height + (24 + 8)
         subscriptionsViewStack.layoutIfNeeded()
         subscriptionChoiceViewHeight.constant = 24 + subscriptionsViewStack.bounds.height + linkView.bounds.height + 8
             
@@ -298,7 +319,7 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
     
     func animateSubscriptionChoice(up: Bool) {
         
-        let viewMaxY = tryForFreeView.frame.maxY // ElementHeights.bottomSafeAreaInset
+        let viewMaxY = checkSubscriptionButton.frame.maxY // ElementHeights.bottomSafeAreaInset
         
         if up {
             subscriptionChoiceViewTop.constant = viewMaxY - subscriptionChoiceViewHeight.constant
@@ -320,6 +341,11 @@ class SubscriptionScreen: UIViewController, UITextViewDelegate {
             })
         }
     }
+    
+    @IBAction func noSubscriptionButtonAction(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
     
     // -------------------------------------------------------------
     // MARK:- Purchase

@@ -121,7 +121,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         
         // If not from custom, retreive data
-        if fromCustom == false && keyArray == [] {
+        if !fromCustom && keyArray == [] {
             // Loop session
             for i in 0..<(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?.count)! {
                 keyArray.append(sessionData.sessions[SelectedSession.shared.selectedSession[0]]![SelectedSession.shared.selectedSession[1]]![SelectedSession.shared.selectedSession[2]]?[i]["movement"] as! String)
@@ -462,7 +462,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
-                if isTimedMovement() {
+                if isTimedMovement() && !fromCustom {
                     cell.timerButton.alpha = 1
                 } else {
                     cell.timerButton.alpha = 0
@@ -711,7 +711,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
-                if self.self.isTimedMovement() {
+                if self.self.isTimedMovement() && !self.fromCustom {
                     cell.timerButton.alpha = 1
                 }
                 //
@@ -791,7 +791,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
-                if self.isTimedMovement() {
+                if self.isTimedMovement() && !self.fromCustom {
                     cell.timerButton.alpha = 1
                 }
                 //
@@ -888,7 +888,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
-                if self.isTimedMovement() {
+                if self.isTimedMovement() && !self.fromCustom {
                     cell.timerButton.alpha = 1
                 }
                 //
@@ -1010,7 +1010,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
-                if self.isTimedMovement() {
+                if self.isTimedMovement() && !self.fromCustom {
                     cell.timerButton.alpha = 1
                 }
                 //
@@ -1071,7 +1071,7 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
                 cell.setsRepsLabel.alpha = 1
                 cell.movementLabel.alpha = 1
                 cell.explanationButton.alpha = 1
-                if self.isTimedMovement() {
+                if self.isTimedMovement() && !self.fromCustom {
                     cell.timerButton.alpha = 1
                 }
                 // - 1
@@ -1138,10 +1138,9 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
         explanationLabel.sizeToFit()
         
         
-        // Scroll View
+        /// Scroll View
         scrollViewExplanation.addSubview(explanationLabel)
         scrollViewExplanation.contentSize = CGSize(width: bounds.width, height: explanationLabel.frame.size.height + 20)
-        //
         scrollViewExplanation.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         
         // Add Views
@@ -1403,6 +1402,13 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
     
     // Walkthrough
     @objc func walkthroughSession() {
+        
+        /// To speed up compile times
+        var x = CGFloat()
+        var y = CGFloat()
+        var width = CGFloat()
+        var height = CGFloat()
+        
         //
         let toAdd = ElementHeights.statusBarHeight + 2
         let toMinus: CGFloat = ElementHeights.statusBarHeight + 2 + ElementHeights.bottomSafeAreaInset
@@ -1430,18 +1436,22 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             walkthroughLabelTitle.text = NSLocalizedString(walkthroughTexts[walkthroughProgress] + "T", comment: "")
             
             walkthroughLabel.text = NSLocalizedString(walkthroughTexts[walkthroughProgress], comment: "")
-            walkthroughLabel.frame.size = walkthroughLabel.sizeThatFits(CGSize(width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding, height: .greatestFiniteMagnitude))
             
-            walkthroughLabel.frame = CGRect(
-                x: WalkthroughVariables.padding,
-                y: WalkthroughVariables.topHeight + WalkthroughVariables.padding,
-                width: walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding,
-                height: walkthroughLabel.frame.size.height)
-            walkthroughLabelView.frame = CGRect(
-                x: 13,
-                y: tableView.frame.maxY - WalkthroughVariables.topHeight - walkthroughLabel.frame.size.height - 13 - WalkthroughVariables.twicePadding,
-                width: view.frame.size.width - 26,
-                height: WalkthroughVariables.topHeight + walkthroughLabel.frame.size.height + WalkthroughVariables.twicePadding)
+            width = walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding
+            height = .greatestFiniteMagnitude
+            walkthroughLabel.frame.size = walkthroughLabel.sizeThatFits(CGSize(width: width, height: height))
+            
+            x = WalkthroughVariables.padding
+            y = WalkthroughVariables.topHeight + WalkthroughVariables.padding
+            width = walkthroughLabelView.bounds.width - WalkthroughVariables.twicePadding
+            height = walkthroughLabel.frame.size.height
+            walkthroughLabel.frame = CGRect(x: x, y: y, width: width, height: height)
+            
+            x = 13
+            y = tableView.frame.maxY - WalkthroughVariables.topHeight - walkthroughLabel.frame.size.height - 13 - WalkthroughVariables.twicePadding
+            width = view.frame.size.width - 26
+            height = WalkthroughVariables.topHeight + walkthroughLabel.frame.size.height + WalkthroughVariables.twicePadding
+            walkthroughLabelView.frame = CGRect(x: x, y: y, width: width, height: height)
             
             // Colour
             walkthroughLabelView.backgroundColor = Colors.light
@@ -1457,7 +1467,10 @@ class CircuitWorkoutScreen: UIViewController, UITableViewDataSource, UITableView
             UIView.animate(withDuration: 0.2, delay: 0.2, animations: {
                 //
                 let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! WorkoutOverviewTableViewCell
-                self.walkthroughHighlight.frame.size = CGSize(width: cell.setsRepsLabel.frame.width + 16, height: cell.setsRepsLabel.frame.height + 4)
+                
+                width = cell.setsRepsLabel.frame.width + 16
+                height = cell.setsRepsLabel.frame.height + 4
+                self.walkthroughHighlight.frame.size = CGSize(width: width, height: height)
                 self.walkthroughHighlight.center = cell.setsRepsLabel.center
                 self.walkthroughHighlight.center.y += toAdd
                 self.walkthroughHighlight.layer.cornerRadius = self.walkthroughHighlight.bounds.height / 2

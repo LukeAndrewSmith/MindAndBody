@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserData.shared.checkDefaults()
         
         /// Retreives the current schedule
-        ScheduleManager.shared.setSchedules()
+        ScheduleManager.shared.retreiveSchedules()
                 
         return true
     }

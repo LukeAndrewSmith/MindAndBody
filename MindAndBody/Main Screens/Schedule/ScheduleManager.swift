@@ -9,13 +9,23 @@
 import Foundation
 import UIKit
 
+///---------------------------------------------------------------------------------
+/// MARK: Schedule Screen
+/// A class that contains the methods necessary for maintaining the users weekly schedule
+/// All handling of the schedule should be done with functions in this class
+/// Includes functions to create/update/delete the schedules etc...
+
 
 class ScheduleManager {
     static var shared = ScheduleManager()
     private init() {}
     
-    // Images
-    var groupImageThumbnails: [String: UIImage] = {
+    ///---------------------------------------------------------------------------------
+    /// MARK:- Variables
+    
+    ///------------------------------------
+    /// Images
+    let groupImageThumbnails: [String: UIImage] = {
         return [
             "workout": #imageLiteral(resourceName: "GroupWorkout").thumbnail(),
             "yoga": #imageLiteral(resourceName: "GroupYoga").thumbnail(),
@@ -25,36 +35,42 @@ class ScheduleManager {
             ]
     }()
     
-    // -------------------------------------------
-    // MARK: Schedule Screen
+    ///------------------------------------
+    /// Schedule Screen
     var selectedDay: Int = 0
-    var scheduleStyle = ScheduleStyle.day.rawValue // week or day
+    var scheduleStyle = ScheduleStyle.day.rawValue /// week or day
     
-    // -------------------------------------------
-    // MARK: Current Schedule && Functions
+    ///------------------------------------
+    /// Current Schedule
     
-    // Current Schedule
-    var selectedScheduleIndex = Int()
-    var schedules: [[String: [[[String: Any]]]]] = []
+    /// Day view
+    var selectedScheduleIndex = Int()   /// Which schedule is chosen
+    var schedules: [[String: [[[String: Any]]]]] = []   /// All the schedules
     
-    // Temporary week array
-    // If viewed as week, then creates a temporary array of the full week from the schedules sorted to user defaults
-        // This array contains dictionaries with fields: group, day, index, so that the relevant group in the schedulesTracking array can be found and updated
-        // This avoids the need to store two seperate arrays for week view and day view
+    /// Week view: Temporary week array
+    /// If the schedule is viewed as weekly not daily plan, then creates a temporary array of the full week from the schedules sorted to user defaults
+        /// This array contains dictionaries with fields: group, day, index, so that the relevant group in the schedulesTracking array can be found and updated
+        /// This avoids the need to store two seperate arrays for week view and day view
+        /// Each entry in the week will be of the form
+            /// "group": ""
+            /// "index0": Int // for indexing in week
+            /// "index1": Int
     var weekArray: [[String: Any]] = []
-    // "group": ""
-    // "index0": Int // for indexing in week
-    // "index1": Int
     
-    // -------------------------------------------
-    // MARK:- Initial retreival of data
     
-    func setSchedules() {
+    ///---------------------------------------------------------------------------------
+    /// MARK:- Initial retreival of data
+    
+    /// retreiveSchedules
+    /// Retreive the schedules from userDefaults
+    func retreiveSchedules() {
         schedules = UserDefaults.standard.object(forKey: "schedules") as? [[String: [[[String: Any]]]]] ?? []
         setSelectedScheduleIndex()
         setScheduleStyle()
     }
     
+    /// retreiveSchedules
+    /// Indicate the currently selected schedule
     func setSelectedScheduleIndex() {
         selectedScheduleIndex = UserDefaults.standard.integer(forKey: "selectedScheduleIndex")
         if selectedScheduleIndex >= schedules.count {
@@ -62,6 +78,8 @@ class ScheduleManager {
         }
     }
     
+    /// retreiveSchedules
+    /// Indicate the style of the currently selected schedule
     func setScheduleStyle() {
         if schedules.count > 0 {
             scheduleStyle = (schedules[selectedScheduleIndex]["scheduleInformation"]![0][0]["scheduleStyle"] as! Int).scheduleStyleFromInt()
@@ -73,7 +91,7 @@ class ScheduleManager {
         }
     }
     
-    // All sessions are stored in schedule week, if schedule is viewed as! full week, temporary array is made to stor them in the correct order to present, saves having extra array in schedule
+    /// All sessions are stored in schedule week, if schedule is viewed as full week, a temporary array is made to store them in the correct order to present, saves having extra array in stored schedule array that
     func createTemporaryWeekViewArray() {
         
         // Ensure empty

@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import UserNotifications
 
+///---------------------------------------------------------------------------------
+/// MARK: Schedule Screen
+/// The main screen of the app that contains the users weekly schedule
+
 class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     
     ///---------------------------------------------------------------------------------
@@ -133,25 +137,11 @@ class ScheduleScreen: UIViewController, UNUserNotificationCenterDelegate {
     var walkthroughBackgroundColor = UIColor()
     var walkthroughTextColor = UIColor()
     
-    ///------------------------------------
-    /// MARK: Testing
-    var subscriptionButton = UIButton()
-    @objc func subs() {
-        self.performSegue(withIdentifier: "SubscriptionSegue", sender: Any?)
-    }
-    
     ///---------------------------------------------------------------------------------
     /// MARK: View lifecycle functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ///------------------------------------
-        /// MARK: Testing
-        subscriptionButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        subscriptionButton.titleLabel?.text = "Subscriptions"
-        subscriptionButton.addTarget(self, action: #selector(subs), for: .touchUpInside)
-        view.addSubview(subscriptionButton)
         
         /// Observe willEnterForeground
             /// Upon entering foreground, various checks are performed (reset, selected day etc..)

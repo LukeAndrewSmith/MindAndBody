@@ -3648,6 +3648,10 @@
 
 //
 // MARK: - Subscriptions
+"supportMindBody" = "Support Mind & Body";
+"supportMindBodyText" = "Dear user,\nI have made Mind & Body free to use as I believe in the importance of a healthy mind and body and am aware of the difficulty of finding reliable information online.\nThe Mind & Body app does however take time and effort to maintain and update and so support will always be appreciated.\nIf you enjoy the Mind & Body app, please consider helping by buying a subscription.\nThanks\nLuke";
+"noThanks" = "No Thanks";
+
 "freeTrial" = "Try For Free";
 "subscriptionButton" = "Subscription";
 "alreadyHaveSubscription" = "I'm already subscribed (restore subscription)";
